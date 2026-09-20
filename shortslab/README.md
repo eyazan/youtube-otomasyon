@@ -45,3 +45,25 @@ arastirmasi degildir ve kanal seciminde nihai veri olarak kullanilmamalidir.
 `trend-ara.js` ve `viral-analiz.js` ciktisini ortak JSON olay semasina almak;
 ardindan sinyalleri son 30/90 gunluk gercek veriden hesaplayip bu scorer'a
 beslemek.
+
+## Canli Shorts kesfi (Python 3.10+)
+
+VIDIQ_KEY ortam degiskeni gereklidir. Anahtari sohbet, CLI argumani veya git
+icerisine yazmayin. Mevcut panelin .env dosyasi bu Python araci tarafindan
+otomatik okunmaz. Ek Python paketi gerekmez.
+
+```bash
+python3 -m shortslab.discovery \
+  --query 'engineering facts' --query 'AI infrastructure' \
+  --language en --limit 12 --output shortslab/output/discovery-001.json
+```
+
+Her sorgu icin kaynak, UTC toplama zamani, tekillestirilmis video kayitlari,
+provider VPH ortancasi ve veri eksikleri kaydedilir. Bos sonuc ile servis hatasi
+ayridir. Bir sorgu hata verirse digerleri korunur ve komut exit code 1 doner.
+Mevcut raporun uzerine yazilmaz. Her istek en fazla 60 saniye bekler.
+
+Bu rapor `rank` girdisi **degildir**. Trend listesindeki 12 video tum pazari
+ve rekabeti temsil etmez. Gelir, retention ve izleyici ulkesi bu servisten
+olculmus sayilmaz. Canli raporu demo puanlara otomatik donusturmuyoruz.
+Nis karari icin farkli zamanlarda tekrar olcum ve insan degerlendirmesi gerekir.
