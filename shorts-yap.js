@@ -85,6 +85,25 @@ const assKacis = (s) => String(s).replace(/[{}]/g, "").replace(/\\/g, "");
   let acc = 0;
   for (const s of sahneler) { s.dur = VODUR * kelime(s.metin) / toplamK; s.start = acc; acc += s.dur; }
 
+  // baslangic: elle verilmemisse kaynak boyunca otomatik dagit; her zaman
+  // kaynak suresine gore kirp (trim kaynak sonunu asmasin).
+  const gruplar = {};
+  sahneler.forEach((s, i) => { (gruplar[s.kaynak] = gruplar[s.kaynak] || []).push(i); });
+  for (const [k, idxs] of Object.entries(gruplar)) {
+    const kaynakYol = path.join(BASE, k);
+    if (!fs.existsSync(kaynakYol)) continue;
+    const kDur = sure(kaynakYol) || 0;
+    idxs.forEach((idx, n) => {
+      const s = sahneler[idx];
+      const ust = Math.max(0, kDur - s.dur - 0.1);
+      if (s.baslangic == null) {
+        // ayni kaynagi paylasan sahneleri kaynak boyunca esit dagit (cesitlilik)
+        s.baslangic = idxs.length > 1 ? ust * (n + 0.05) / idxs.length : Math.min(1.5, ust);
+      }
+      s.baslangic = Math.max(0, Math.min(s.baslangic, ust));
+    });
+  }
+
   // --- 2) her sahne icin dikey bulanik-dolgu klip ---
   const vf =
     "[0:v]scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,boxblur=26:2,eq=brightness=-0.20:contrast=1.05[bg];" +

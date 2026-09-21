@@ -1,11 +1,11 @@
-name: Shorts uretim (3 gunde bir)
+name: Shorts uretim (gunluk)
 
-# 3 gunde bir 06:00 UTC. Cron ayin gunlerine gore calisir (1,4,7,...,28,31),
-# bu yuzden ay sonunda tek seferlik 2 gunluk bosluk olur — kabul edilebilir.
-# Elle de tetiklenebilir (Actions sekmesi > Run workflow).
+# Her gun 06:00 UTC bir Shorts uretir (profesyonel tempo: gunde 1).
+# Elle de tetiklenebilir (Actions sekmesi > Run workflow) veya --hepsi ile
+# uretilmemis tum konular tek seferde uretilir.
 on:
   schedule:
-    - cron: '0 6 */3 * *'
+    - cron: '0 6 * * *'
   workflow_dispatch:
     inputs:
       hepsi:
@@ -63,7 +63,7 @@ jobs:
         run: |
           git config user.name  "uretim-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add icerik/uretilenler.json || true
+          git add icerik/uretilenler.json icerik/basarisiz.json || true
           if ! git diff --cached --quiet; then
             git commit -m "chore: uretim ilerlemesi (otomatik)"
             git push

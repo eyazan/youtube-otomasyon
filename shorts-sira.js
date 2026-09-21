@@ -20,16 +20,16 @@ const cp = require("child_process");
 const KOK = __dirname;
 const KONULAR = path.join(KOK, "icerik", "konular");
 const DURUM = path.join(KOK, "icerik", "uretilenler.json");
+const BASARISIZ = path.join(KOK, "icerik", "basarisiz.json");
 
 function slugGecerli(s) { return /^[a-z0-9][a-z0-9-]{0,79}$/.test(s); }
 
-function uretilenler() {
-  try { return JSON.parse(fs.readFileSync(DURUM, "utf8")); } catch (e) { return []; }
-}
-function isaretle(slug) {
-  const u = uretilenler();
-  if (!u.includes(slug)) { u.push(slug); fs.mkdirSync(path.dirname(DURUM), { recursive: true }); fs.writeFileSync(DURUM, JSON.stringify(u, null, 2) + "\n"); }
-}
+const oku = (p) => { try { return JSON.parse(fs.readFileSync(p, "utf8")); } catch (e) { return []; } };
+const yaz = (p, v) => { fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, JSON.stringify(v, null, 2) + "\n"); };
+const uretilenler = () => oku(DURUM);
+const basarisizlar = () => oku(BASARISIZ);
+function isaretle(slug) { const u = uretilenler(); if (!u.includes(slug)) { u.push(slug); yaz(DURUM, u); } }
+function basarisizIsaretle(slug) { const b = basarisizlar(); if (!b.includes(slug)) { b.push(slug); yaz(BASARISIZ, b); } }
 
 function konuListesi() {
   if (!fs.existsSync(KONULAR)) return [];
@@ -78,12 +78,27 @@ function main() {
   const tum = konuListesi();
   if (!tum.length) { console.log("icerik/konular/ bos. Once konu ekle."); return 0; }
 
+  // Belirli slug: dogrudan uret (hata firlatir).
   if (acikSlug) { uretBir(acikSlug); return 0; }
 
-  const kalan = tum.filter(s => !uretilenler().includes(s));
-  if (!kalan.length) { console.log("Tum konular uretildi (" + tum.length + "). Yeni konu ekle."); return 0; }
-  const hedef = hepsi ? kalan : [kalan[0]];
-  for (const s of hedef) uretBir(s);
+  // Uretilmemis ve daha once kalici basarisiz olmamis konular.
+  const atla = new Set([...uretilenler(), ...basarisizlar()]);
+  const kalan = tum.filter(s => !atla.has(s));
+  if (!kalan.length) { console.log("Uretilecek yeni konu yok (" + tum.length + " toplam). Konu ekle."); return 0; }
+
+  // Gunluk: ilk BASARILI konuyu uret; biri patlarsa sonrakine gec (gun bosa gitmesin).
+  // --hepsi: hepsini dene, basarisizlari atla.
+  const hedefSayi = hepsi ? kalan.length : 1;
+  let basari = 0;
+  for (const slug of kalan) {
+    if (basari >= hedefSayi) break;
+    try { uretBir(slug); basari++; }
+    catch (e) {
+      console.error(`  ✗ ${slug} basarisiz: ${e.message} — atlaniyor`);
+      basarisizIsaretle(slug);
+    }
+  }
+  if (!basari) { console.error("Hicbir konu uretilemedi."); return 1; }
   return 0;
 }
 
