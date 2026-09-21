@@ -74,6 +74,11 @@ function synth(tts, text) {
   fs.mkdirSync(PARTS, { recursive: true });
   const raw = fs.readFileSync(TXT, "utf8").replace(/\r\n/g, "\n");
   const paras = raw.split(/\n\s*\n/).map(s => s.trim()).filter(Boolean);
+  if (!paras.length) throw new Error('Senaryo bos.');
+  // Regenerate this job's numbered fragments so shortened scripts cannot retain old audio.
+  for (const name of fs.readdirSync(PARTS)) {
+    if (/^\d+\.mp3$/.test(name)) fs.unlinkSync(path.join(PARTS, name));
+  }
   console.log(`${paras.length} paragraf, ses: ${VOICE}, hiz: ${RATE}`);
 
   const tts = new MsEdgeTTS();
@@ -92,7 +97,7 @@ function synth(tts, text) {
       try { out = await synth(tts, paras[i]); }
       catch (e) { console.log(`  ! ${i+1} deneme ${a+1} hata: ${e.message}`); await new Promise(r => setTimeout(r, 1500)); }
     }
-    if (!out || !out.buf.length) { console.log(`  !! paragraf ${i+1} atlandi`); continue; }
+    if (!out || !out.buf.length) throw new Error(`Paragraf ${i+1} seslendirilemedi; uretim durduruldu.`);
 
     const f = path.join(PARTS, String(i).padStart(3, "0") + ".mp3");
     fs.writeFileSync(f, out.buf);
@@ -131,4 +136,4 @@ function synth(tts, text) {
 
   console.log(`SRT: ${lines.length} altyazi satiri`);
   console.log("Sonraki: ffmpeg ile parcalari birlestir");
-})();
+})().catch(() => { console.error('Seslendirme tamamlanamadi. Uretim durduruldu.'); process.exit(1); });

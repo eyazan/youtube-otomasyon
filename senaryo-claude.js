@@ -30,6 +30,8 @@ function env(ad) {
 }
 
 const ANAHTAR = env("ANTHROPIC_API_KEY") || process.env.ANTHROPIC_API_KEY;
+const MODEL = process.env.ANTHROPIC_MODEL || env("ANTHROPIC_MODEL");
+if (!MODEL) { console.error('ANTHROPIC_MODEL ayarlanmali.'); process.exit(1); }
 if (!ANAHTAR) {
   console.error("✗ ANTHROPIC_API_KEY yok.");
   console.error("  Panel > Kaynaklar sekmesine yapistir.");
@@ -84,7 +86,7 @@ function temizle(ham) {
                  : konu.format === "short" ? "YouTube Shorts" : "YouTube uzun video";
   console.log("hedef   : " + formatAd + " · " +
     (hedefSn < 60 ? hedefSn + " sn" : hedefDk.toFixed(1) + " dk") + " (~" + hedefKelime + " kelime)");
-  console.log("model   : claude-opus-5");
+  console.log("model   : " + MODEL);
   console.log("");
 
   const client = new Anthropic({ apiKey: ANAHTAR });
@@ -147,7 +149,7 @@ function temizle(ham) {
   process.stdout.write("Claude yaziyor");
   let ham = "";
   const akis = client.messages.stream({
-    model: "claude-opus-5",
+    model: MODEL,
     max_tokens: 32000,
     system: sistem,
     output_config: { effort: "high" },
@@ -189,13 +191,12 @@ function temizle(ham) {
   fs.writeFileSync(hedefDosya, metin + "\n", "utf8");
 
   const u = sonuc.usage || {};
-  const maliyet = ((u.input_tokens || 0) / 1e6 * 5) + ((u.output_tokens || 0) / 1e6 * 25);
 
   console.log("");
   console.log("✓ senaryo yazildi: Voice/SESLENDIRME-TAM-METIN.txt");
   console.log("  " + k + " kelime · ~" + Math.floor(sn / 60) + " dk " + (sn % 60) + " sn · " +
               metin.split(/\n\s*\n/).length + " paragraf");
-  console.log("  maliyet: ~$" + maliyet.toFixed(3));
+  console.log("  token: " + (u.input_tokens || 0) + " giris / " + (u.output_tokens || 0) + " cikis; fiyat modele baglidir.");
   if (sn > hedefSn * 1.15) console.log("  ⚠ hedefi asiyor (" + hedefSn + " sn) — kisalt");
   if (konu.format === "reels" && sn > 180)
     console.log("  ⓘ 3 dakikayi asiyor: Instagram bunu takipcin olmayanlara onermez.");

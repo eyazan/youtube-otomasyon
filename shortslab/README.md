@@ -67,3 +67,7 @@ Bu rapor `rank` girdisi **degildir**. Trend listesindeki 12 video tum pazari
 ve rekabeti temsil etmez. Gelir, retention ve izleyici ulkesi bu servisten
 olculmus sayilmaz. Canli raporu demo puanlara otomatik donusturmuyoruz.
 Nis karari icin farkli zamanlarda tekrar olcum ve insan degerlendirmesi gerekir.
+# Production runner
+
+See [PRODUCTION.md](PRODUCTION.md) for the resumable local pipeline, prerequisites,
+commands and current limitations (archival stills; no 3D or YouTube upload yet).
