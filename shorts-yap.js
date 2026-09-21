@@ -26,6 +26,7 @@ const os = require("os");
 const cp = require("child_process");
 const { MsEdgeTTS, OUTPUT_FORMAT } = require("msedge-tts");
 const FF = require("./ff-yol.js");
+const font = require("./font-yol.js");
 
 const KOK = __dirname;
 const IS = process.argv.find((a, i) => i >= 2 && !a.startsWith("--"));
@@ -38,6 +39,10 @@ const W = 1080, H = 1920, FPS = 30;
 const SES = konu.ses || "en-US-AndrewNeural";
 const HIZ = konu.sesHizi || "+6%";
 const FONT = konu.altyaziFont || process.env.SHORTS_FONT || "Arial Black";
+const KANAL = (konu.kanal || "Failure Reconstructed");
+const HANDLE = konu.handle || ("@" + KANAL.replace(/[^A-Za-z0-9]/g, ""));
+const ENDCARD = 2.4;   // saniye — markali kapanis karti
+const DFONT = font(true);   // drawtext icin acik font yolu
 const sahneler = konu.sahneler || [];
 if (!sahneler.length) { console.error("konu.json'da sahneler[] yok."); process.exit(1); }
 
@@ -123,11 +128,48 @@ const assKacis = (s) => String(s).replace(/[{}]/g, "").replace(/\\/g, "");
   }
   console.log("");
 
-  // --- 3) birlestir ---
+  // --- 3) markali kapanis karti (prosedurel) ---
+  const kelimeler = KANAL.toUpperCase().split(/\s+/);
+  const satir1 = (kelimeler.length > 1 ? kelimeler[0] : KANAL.toUpperCase()).replace(/'/g, "");
+  const satir2 = (kelimeler.length > 1 ? kelimeler.slice(1).join(" ") : "").replace(/'/g, "");
+  const wmFs = Math.round(W * 0.078);
+  const y1 = Math.round(H * (satir2 ? 0.38 : 0.42));
+  const y2 = y1 + Math.round(wmFs * 1.02);
+  const followY = (satir2 ? y2 : y1) + Math.round(wmFs * 1.45);
+  const wmDraw = (txt, y, delay) =>
+    `drawtext=fontfile='${DFONT}':text='${txt}':fontcolor=white:fontsize=${wmFs}:x=(w-tw)/2:y=${y}:alpha='clip((t-${delay})/0.5\\,0\\,1)':shadowcolor=black@0.5:shadowy=3`;
+  const endcard = path.join(TMP, "endcard.mp4");
+  run(["-hide_banner", "-loglevel", "error",
+    "-f", "lavfi", "-i", `color=c=0x0b1a2e:s=${W}x${H}:d=${ENDCARD}:r=${FPS}`,
+    "-f", "lavfi", "-i", `gradients=s=${W}x${H}:c0=0x1d4e74:c1=0x00000000:type=radial:x0=${W/2}:y0=${H*0.4}:nb_colors=2:d=${ENDCARD}`,
+    "-filter_complex",
+      `[1]format=rgba,colorchannelmixer=aa=0.5[g];[0][g]overlay,vignette=angle=PI/4.2,noise=alls=5:allf=t+u,` +
+      wmDraw(satir1, y1, 0) + "," +
+      (satir2 ? wmDraw(satir2, y2, 0.12) + "," : "") +
+      `drawtext=fontfile='${DFONT}':text='FOLLOW FOR MORE':fontcolor=0xd9a441:fontsize=${Math.round(W * 0.040)}:x=(w-tw)/2:y=${followY}:alpha='clip((t-0.5)/0.5\\,0\\,1)',format=yuv420p[v]`,
+    "-map", "[v]", "-t", String(ENDCARD),
+    "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p", "-r", String(FPS), "-an", "-y", endcard]);
+
+  // --- birlestir (sahneler + kapanis karti) ---
   const liste = path.join(TMP, "l.txt");
-  fs.writeFileSync(liste, klipler.map(f => `file '${f}'`).join("\n"));
+  fs.writeFileSync(liste, klipler.concat([endcard]).map(f => `file '${f}'`).join("\n"));
   const vid = path.join(TMP, "vid.mp4");
   run(["-hide_banner", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", liste, "-c", "copy", "-y", vid]);
+  const TOPLAM = sure(vid);
+
+  // --- muzik yatagi (prosedurel, telifsiz, konuya gore hafif farkli) ---
+  const bed = path.join(TMP, "bed.wav");
+  const kok = 50 + (IS.length % 6) * 4;                 // 50..70 Hz — konuya gore
+  run(["-hide_banner", "-loglevel", "error",
+    "-f", "lavfi", "-i", `sine=frequency=${kok}:duration=${TOPLAM.toFixed(2)}`,
+    "-f", "lavfi", "-i", `sine=frequency=${(kok * 1.5).toFixed(2)}:duration=${TOPLAM.toFixed(2)}`,
+    "-f", "lavfi", "-i", `anoisesrc=d=${TOPLAM.toFixed(2)}:c=pink:a=0.04`,
+    "-filter_complex",
+      `[0]volume=0.55,tremolo=f=0.12:d=0.5[a];[1]volume=0.26[b];` +
+      `[2]highpass=f=180,lowpass=f=1100,volume=0.6[c];` +
+      `[a][b][c]amix=inputs=3:normalize=0,lowpass=f=850,aecho=0.8:0.9:550|850:0.28|0.2,` +
+      `afade=t=in:st=0:d=1.6,afade=t=out:st=${(TOPLAM - 1.6).toFixed(2)}:d=1.6[m]`,
+    "-map", "[m]", "-t", TOPLAM.toFixed(2), "-y", bed]);
 
   // --- 4) ASS altyazi (2-3 kelimelik gruplar, orantisal zaman) ---
   const events = [];
@@ -163,12 +205,22 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
   const assPath = path.join(TMP, "cap.ass");
   fs.writeFileSync(assPath, ass);
 
-  // --- 5) altyazi yak + ses mux ---
+  // --- 5) handle filigrani + altyazi + ses (loudnorm konusma + ducking'li muzik) ---
   const cikti = path.join(VID, IS + ".mp4");
-  run(["-hide_banner", "-loglevel", "error", "-i", vid, "-i", vo,
-    "-filter_complex", `[0:v]subtitles='${assPath.replace(/:/g, "\\:")}',format=yuv420p[v]`,
-    "-map", "[v]", "-map", "1:a", "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p",
-    "-c:a", "aac", "-b:a", "160k", "-shortest", "-movflags", "+faststart", "-y", cikti]);
+  const hy = Math.round(H * 0.052);
+  const vFilter =
+    `[0:v]drawtext=fontfile='${DFONT}':text='${HANDLE.replace(/'/g, "")}':fontcolor=white@0.72:` +
+    `fontsize=${Math.round(W * 0.030)}:x=(w-tw)/2:y=${hy}:shadowcolor=black@0.5:shadowx=0:shadowy=2,` +
+    `subtitles='${assPath.replace(/:/g, "\\:")}',format=yuv420p[v]`;
+  const aFilter =
+    `[1:a]loudnorm=I=-16:TP=-1.5:LRA=11,apad,asplit=2[vo1][vo2];` +
+    `[2:a]volume=1.0[mus];` +
+    `[mus][vo1]sidechaincompress=threshold=0.035:ratio=6:attack=6:release=340[duck];` +
+    `[duck][vo2]amix=inputs=2:duration=first:dropout_transition=0,alimiter=limit=0.95[a]`;
+  run(["-hide_banner", "-loglevel", "error", "-i", vid, "-i", vo, "-i", bed,
+    "-filter_complex", vFilter + ";" + aFilter,
+    "-map", "[v]", "-map", "[a]", "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p",
+    "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", "-y", cikti]);
 
   console.log(`✓ Bitti: ${path.relative(KOK, cikti)}  (${sure(cikti).toFixed(1)}s, ${W}x${H})`);
   try { fs.rmSync(TMP, { recursive: true, force: true }); } catch (e) {}
