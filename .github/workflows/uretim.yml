@@ -1,4 +1,4 @@
-name: Uretim (3 gunde bir)
+name: Shorts uretim (3 gunde bir)
 
 # 3 gunde bir 06:00 UTC. Cron ayin gunlerine gore calisir (1,4,7,...,28,31),
 # bu yuzden ay sonunda tek seferlik 2 gunluk bosluk olur — kabul edilebilir.
@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
     inputs:
       hepsi:
-        description: 'Kuyrugun tamamini uret (yoksa sadece en eski is)'
+        description: 'Tum uretilmemis konulari uret (yoksa sadece sonraki)'
         type: boolean
         default: false
 
@@ -19,22 +19,21 @@ concurrency:
   cancel-in-progress: false
 
 permissions:
-  contents: write   # islenen kuyruk dosyalarini geri commit etmek icin
+  contents: write   # uretilenler.json'u geri commit etmek icin
 
 jobs:
   uret:
     runs-on: ubuntu-latest
-    timeout-minutes: 330
+    timeout-minutes: 120
     env:
-      # Yukleme kimlik bilgileri — repo Secrets'tan gelir (yoksa yukleme atlanir).
+      # Yukleme kimlik bilgileri — repo Secrets (yoksa yukleme atlanir).
       YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
       YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
       YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
-      # Ucretli senaryo uretimi — sadece narration verilmeyen isler icin gerekir.
-      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-      ANTHROPIC_MODEL: ${{ vars.ANTHROPIC_MODEL }}
-      # Yukleme yalnizca PUBLISH=1 iken yapilir (repo Variables). Varsayilan: yukleme.
+      # Yukleme yalnizca PUBLISH=1 iken (repo Variables). Yoksa uretir, yuklemez.
       PUBLISH: ${{ vars.PUBLISH }}
+      # Altyazi fontu (ubuntu'da kurulu bir font).
+      SHORTS_FONT: 'DejaVu Sans'
     steps:
       - uses: actions/checkout@v4
 
@@ -42,12 +41,8 @@ jobs:
         with:
           node-version: '20'
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: ffmpeg kur
-        run: sudo apt-get update && sudo apt-get install -y ffmpeg fonts-dejavu-core
+      - name: ffmpeg + font kur
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg fonts-dejavu-core fonts-liberation
 
       - name: Bagimliliklar
         run: npm install --no-audit --no-fund
@@ -55,23 +50,23 @@ jobs:
       - name: Ortami dogrula
         run: node youtube-yukle.js dummy --dogrula || true
 
-      - name: Kuyrugu isle
+      - name: Sonraki Shorts'u uret
         run: |
           if [ "${{ github.event.inputs.hepsi }}" = "true" ]; then
-            python3 -m shortslab.kuyruk --hepsi
+            node shorts-sira.js --hepsi
           else
-            python3 -m shortslab.kuyruk
+            node shorts-sira.js
           fi
 
-      - name: Islenen kuyrugu geri commit et
+      - name: Uretim durumunu geri commit et
         if: always()
         run: |
           git config user.name  "uretim-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add kuyruk/ || true
+          git add icerik/uretilenler.json || true
           if ! git diff --cached --quiet; then
-            git commit -m "chore: kuyruk ilerlemesi (otomatik)"
+            git commit -m "chore: uretim ilerlemesi (otomatik)"
             git push
           else
-            echo "Kuyrukta degisiklik yok."
+            echo "Uretimde degisiklik yok."
           fi
