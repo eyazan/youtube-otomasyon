@@ -60,7 +60,10 @@ const VOICE_DIR = path.join(BASE, "Voice");
 const PARTS = path.join(VOICE_DIR, "parts");
 const VIS = path.join(BASE, "Visuals");
 const VID = path.join(BASE, "Videos");
-const TMP = path.join(BASE, "_tmp");
+// Each render owns fresh intermediates; an interrupted or revised job must not
+// reuse truncated MP4s or clips made from an older narration/visual set.
+fs.mkdirSync(path.join(BASE, '_tmp'), { recursive: true });
+const TMP = fs.mkdtempSync(path.join(BASE, '_tmp', 'render-'));
 
 // konu.json varsa en-boy oranini oradan al (16:9 varsayilan, 9:16 = Shorts)
 // MUSIC_VOL 0.11 cok kisikti (duyulmuyordu) -> 0.30
@@ -115,8 +118,8 @@ if (OUTRO_D === null) OUTRO_D = DIKEY ? 3 : 12;
 if (CD_D === null) CD_D = DIKEY ? 0 : 5;
 if (CF_OZEL !== null) CF = CF_OZEL;   // film lideri geri sayimi (Shorts'ta yok)
 const OFFSET = CD_D + INTRO_D + TOPIC_D;   // seslendirme bu kadar gec baslar
-const BD = "C\\:/Windows/Fonts/arialbd.ttf";
-const RG = "C\\:/Windows/Fonts/arial.ttf";
+const BD = require('./font-yol')(true);
+const RG = require('./font-yol')(false);
 const sp = s => s.split("").join(" ");     // harf arasi bosluk
 
 // Intro marka yazisi. Kanal adi ve slogan konu.json'dan gelir:
@@ -352,6 +355,7 @@ function wrap(text, max) {
   for (let g = 0; g*GROUP < N; g++) {
     const part = clips.slice(g*GROUP, (g+1)*GROUP);
     const out = path.join(TMP, "grp" + String(g).padStart(2,"0") + ".mp4");
+    if (part.length === 1) { groups.push(part[0]); continue; }
     if (!fs.existsSync(out)) {
       const { args, fcFile } = xfadeMerge(part, out);
       run([...args,FILTRE_BAYRAK,fcFile,"-map","[vm]",

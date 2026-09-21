@@ -1,5 +1,8 @@
 # Otomasyon Paneli — konudan bitmiş videoya
 
+> **ShortsLab gelistirmesi:** Veriyle niche secimi ve deney katmaninin ilk
+> surumu [`shortslab/README.md`](shortslab/README.md) altindadir.
+
 Bir konu yaz, başlık yaz, **ÜRET**'e bas. Senaryoyu yazar, görselleri bulur, seslendirir, videoyu kurar. Bitmiş MP4 çıkar.
 
 Kurgu programı yok. Abonelik yok. Her şey kendi bilgisayarında çalışır.
