@@ -294,19 +294,30 @@ function wrap(text, max) {
     if (fs.existsSync(out)) return { out, argv: null };
       const zin = i % 2 === 0;
       // hareket efekti — konu.json "efekt" alanindan
-      let z, xIf;
+      let z, xIf, yIf;
       if (EFEKT === "yok")          { z = "1"; }
       else if (EFEKT === "yavas")   { z = zin ? `min(1+0.00022*on,1.08)` : `if(lte(on,1),1.08,max(1.08-0.00022*on,1.0))`; }
       else if (EFEKT === "hizli")   { z = zin ? `min(1+0.0009*on,1.30)`  : `if(lte(on,1),1.30,max(1.30-0.0009*on,1.0))`; }
       else if (EFEKT === "kaydir")  { z = "1.14"; xIf = zin ? `(iw-iw/zoom)*on/${Lf}` : `(iw-iw/zoom)*(1-on/${Lf})`; }
+      else if (EFEKT === "sinematik") {
+        // 2.5D sinematik kamera: yavas zoom + capraz kaydirma. Yon, ardisik
+        // sahneler ayni yone kaymasin diye tek/cift sahnede ters cevrilir.
+        // Kaydirma miktari (iw-iw/zoom) marjina bagli — daima kare icinde kalir,
+        // bu yuzden siyah kenar cikmaz. Ayni zoompan mekanizmasi (bkz. render testi).
+        const yon = zin ? 1 : -1;
+        z   = `min(1+0.12*on/${Lf},1.13)`;
+        xIf = `iw/2-(iw/zoom/2)+(${yon})*(iw-iw/zoom)*0.34*sin(PI*on/${Lf})`;
+        yIf = `ih/2-(ih/zoom/2)-(${yon})*(ih-ih/zoom)*0.30*(on/${Lf}-0.5)`;
+      }
       else                          { z = zin ? `min(1+0.00045*on,1.16)` : `if(lte(on,1),1.16,max(1.16-0.00045*on,1.0))`; }
     const xIfade = xIf || `iw/2-(iw/zoom/2)`;
+    const yIfade = yIf || `ih/2-(ih/zoom/2)`;
     const renk = RENKLER[RENK] || RENKLER.sinematik;
     // TEK kare besle (-loop YOK): zoompan d=Lf ile tam Lf kare uretir
     return { out, argv: ["-y","-i",imgs[i],
       "-vf",`scale=${SW}:${SH2}:force_original_aspect_ratio=increase,crop=${SW}:${SH2},`+
             `${renk},`+
-            `zoompan=z='${z}':d=${Lf}:x='${xIfade}':y='ih/2-(ih/zoom/2)':s=${W}x${H}:fps=${FPS},setsar=1,format=yuv420p`,
+            `zoompan=z='${z}':d=${Lf}:x='${xIfade}':y='${yIfade}':s=${W}x${H}:fps=${FPS},setsar=1,format=yuv420p`,
       "-frames:v",String(Lf),
       // Paralel calisirken her ffmpeg kendi basina cekirdek sayisi kadar
       // is parcacigi aciyor; 4 ornek birden sistemi tuketip

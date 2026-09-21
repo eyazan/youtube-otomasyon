@@ -80,6 +80,7 @@ def initialize(slug, title, brief, script=None):
         'ses': 'en-US-ChristopherNeural', 'sesHizi': '+0%',
         'geriSayim': 0, 'intro': 0, 'konuKarti': 0, 'outro': 3,
         'muzikSeviyesi': 0, 'renk': 'sinematik', 'gecis': 'fade',
+        'efekt': 'sinematik',  # 2.5D sinematik kamera (zoom + capraz kaydirma)
     })
     if script:
         shutil.copyfile(script, outputs(job, 'script')[0])
@@ -141,14 +142,43 @@ def run(job, until='render', runner=subprocess.run):
         lock.unlink()
 
 
+def upload_ready():
+    """True only when all three YouTube OAuth credentials are present."""
+    return all(os.environ.get(name) for name in
+               ('YT_CLIENT_ID', 'YT_CLIENT_SECRET', 'YT_REFRESH_TOKEN'))
+
+
+def publish(job, verify=False, visibility='private', runner=subprocess.run):
+    """Explicit, opt-in upload. Never called by run(); never auto-publishes.
+
+    Defaults to a private upload the human reviews before making it public.
+    Delegates to youtube-yukle.js, which itself refuses without credentials.
+    """
+    if not valid(outputs(job, 'render')):
+        raise ValueError('No finished render to publish. Run the job first.')
+    argv = ['node', 'youtube-yukle.js', job.name]
+    if verify:
+        argv.append('--dogrula')
+    elif visibility == 'public':
+        argv.append('--herkese-acik')
+    elif visibility == 'unlisted':
+        argv.append('--liste-disi')
+    result = runner(argv, cwd=ROOT, check=False)
+    return result.returncode
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('command', choices=('init', 'doctor', 'run', 'status'))
+    parser.add_argument('command', choices=('init', 'doctor', 'run', 'status', 'publish'))
     parser.add_argument('job')
     parser.add_argument('--title')
     parser.add_argument('--brief')
     parser.add_argument('--script', type=Path)
     parser.add_argument('--until', choices=STAGES, default='render')
+    parser.add_argument('--verify', action='store_true',
+                        help='publish: dry run, show metadata, upload nothing')
+    parser.add_argument('--visibility', choices=('private', 'unlisted', 'public'),
+                        default='private', help='publish: privacy status (default private)')
     args = parser.parse_args(argv)
     try:
         if args.command == 'init':
@@ -167,9 +197,14 @@ def main(argv=None):
             return 0
         if args.command == 'doctor':
             missing = doctor(job)
-            print(json.dumps({'missing': missing, 'upload': 'not implemented',
-                              'visual_mode': 'archival stills, not 3D animation'}, indent=2))
+            print(json.dumps({
+                'missing': missing,
+                'upload': 'ready (opt-in)' if upload_ready() else 'implemented; credentials not set',
+                'visual_mode': '2.5D parallax available; falls back to archival stills',
+            }, indent=2))
             return 1 if missing else 0
+        if args.command == 'publish':
+            return publish(job, verify=args.verify, visibility=args.visibility)
         run(job, args.until)
         print('Requested stages complete. Nothing uploaded or published.')
         return 0

@@ -1,9 +1,22 @@
 # Failure Reconstructed production runner
 
-Current scope: local narration → voice → archival stills → MP4. This is **not**
-the completed cinematic 3D documentary pipeline. 3D scenes, factual review,
-automatic research selection, YouTube OAuth/upload and hosted scheduling remain
-unimplemented. A completed render is never automatically published.
+Scope: local narration → voice → visuals → MP4, with an opt-in YouTube upload
+and every-3-days GitHub Actions scheduling. Visuals default to a **2.5D
+cinematic camera** (zoom + diagonal drift via the render's zoompan path;
+`efekt: sinematik`) and fall back to archival stills. Still open: real
+depth-based parallax (needs an ML depth model), factual review and automatic
+research selection.
+
+A completed render is **never** auto-published. `run` never uploads. `publish`
+is a separate, explicit command; it uploads as **private** by default and
+refuses without credentials. See `../MALIYET-VE-YETKILER.md` for the account
+permissions and costs of live operation.
+
+```sh
+python3 -m shortslab.production run first-documentary          # produce only, no upload
+python3 -m shortslab.production publish first-documentary --verify   # dry run
+python3 -m shortslab.production publish first-documentary      # upload PRIVATE (needs YT_* creds)
+```
 
 Requires Python 3.10+, Node 18+, `npm install`, ffmpeg and ffprobe on PATH.
 macOS: `brew install ffmpeg`; Linux also needs DejaVu fonts; custom fonts can
