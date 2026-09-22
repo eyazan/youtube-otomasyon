@@ -56,6 +56,20 @@ function indir(url, hedef, yonlendirmeKalan = 5) {
   });
 }
 
+// archive.org: identifier verilirse metadata API ile en buyuk video dosyasini
+// bulur; "identifier/dosya.mp4" verilirse dogrudan kullanir.
+async function archiveUrl(idVeyaYol) {
+  if (idVeyaYol.includes("/")) return "https://archive.org/download/" + idVeyaYol;
+  const meta = await getJSON("https://archive.org/metadata/" + encodeURIComponent(idVeyaYol));
+  const vids = (meta.files || []).filter(f => /\.(mp4|webm|ogv|ogg|m4v|mpe?g|mov)$/i.test(f.name || ""));
+  if (!vids.length) throw new Error("archive.org video dosyasi yok: " + idVeyaYol);
+  // Web-dostu format oncelikli (mp4/webm/ogv), sonra buyukluge gore.
+  const oncelik = (n) => { const e = (n.split(".").pop() || "").toLowerCase();
+    return { mp4: 0, webm: 1, ogv: 2, ogg: 2, m4v: 3 }[e] ?? 5; };
+  vids.sort((a, b) => oncelik(a.name) - oncelik(b.name) || Number(b.size || 0) - Number(a.size || 0));
+  return "https://archive.org/download/" + idVeyaYol + "/" + encodeURIComponent(vids[0].name);
+}
+
 async function wikimediaUrl(baslik) {
   const api = "https://commons.wikimedia.org/w/api.php?action=query&titles=" +
     encodeURIComponent("File:" + baslik) + "&prop=imageinfo&iiprop=url|mime|extmetadata&format=json";
@@ -77,7 +91,7 @@ async function wikimediaUrl(baslik) {
     if (fs.existsSync(hedef) && fs.statSync(hedef).size > 0) { console.log("  var, atlandi: " + k.ad); continue; }
     let url = k.url, lisans = k.lisans || "belirtilmemis";
     if (k.wikimedia) { const w = await wikimediaUrl(k.wikimedia); url = w.url; lisans = w.lisans; }
-    else if (k.archive) { url = "https://archive.org/download/" + k.archive; }
+    else if (k.archive) { url = await archiveUrl(k.archive); if (lisans === "belirtilmemis") lisans = "archive.org (kaynagi dogrula)"; }
     if (!url) throw new Error("kaynak icin url/wikimedia/archive yok: " + k.ad);
     process.stdout.write("  indiriliyor: " + k.ad + " ... ");
     // 429/503/aglar icin backoff'lu tekrar

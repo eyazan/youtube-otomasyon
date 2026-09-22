@@ -48,7 +48,11 @@ GitHub Actions bunu **3 günde bir** otomatik çalıştırır (`.github/workflow
 - `kaynaklar` — indirilecek gerçek görüntü. Telifsiz olmalı:
   - `wikimedia`: Commons dosya adı (çoğu kamu malı/CC — `arsiv-bul` lisansı `GORSEL-KAYNAKLARI.txt`'e yazar)
   - `url`: doğrudan kamu malı bağlantı
-  - `archive`: archive.org `identifier/dosya`
+  - `archive`: archive.org — sadece `identifier` (en iyi video dosyası otomatik
+    seçilir) ya da `identifier/dosya.mp4`. archive.org devasa bir kamu malı film
+    arşivi (Prelinger, Universal Newsreels) — kütüphaneyi büyütmenin ana kaynağı.
+    Not: bazı arşiv filmlerinin kendi anlatımı/müziği vardır; konu eklemeden önce
+    görüntüyü önizle (bizim seslendirmemizle çakışmasın).
 - `sahneler` — her biri bir anlatı cümlesi + hangi kaynağın hangi saniyesinden (`baslangic`) alınacağı. Sahne süresi kelime payına göre otomatik hesaplanır.
 
 ## Yeni konu eklerken (kalite + doğruluk kuralı)
