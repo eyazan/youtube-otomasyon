@@ -28,11 +28,17 @@ const konu = JSON.parse(fs.readFileSync(path.join(BASE, "konu.json"), "utf8"));
 const FOOT = path.join(BASE, "Footage");
 fs.mkdirSync(FOOT, { recursive: true });
 
-const UA = "youtube-otomasyon/1.0 (public-domain archival fetch)";
+// Wikimedia CDN'i Accept/Accept-Encoding olmayan istekleri bot sanip 429/403
+// dondurur. Uyumlu User-Agent (iletisim URL'li) + bu basliklar sart.
+const BASLIK = {
+  "User-Agent": "FailureReconstructedBot/1.0 (+https://github.com/eyazan/youtube-otomasyon)",
+  "Accept": "*/*",
+  "Accept-Encoding": "identity",
+};
 
 function getJSON(url) {
   return new Promise((coz, red) => {
-    https.get(url, { headers: { "User-Agent": UA } }, (res) => {
+    https.get(url, { headers: BASLIK }, (res) => {
       const p = []; res.on("data", d => p.push(d));
       res.on("end", () => { try { coz(JSON.parse(Buffer.concat(p).toString("utf8"))); } catch (e) { red(e); } });
     }).on("error", red);
@@ -41,7 +47,7 @@ function getJSON(url) {
 
 function indir(url, hedef, yonlendirmeKalan = 5) {
   return new Promise((coz, red) => {
-    https.get(url, { headers: { "User-Agent": UA } }, (res) => {
+    https.get(url, { headers: BASLIK }, (res) => {
       if ([301, 302, 303, 307, 308].includes(res.statusCode) && res.headers.location) {
         if (yonlendirmeKalan <= 0) return red(new Error("cok fazla yonlendirme"));
         res.resume();
