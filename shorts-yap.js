@@ -71,6 +71,22 @@ function seslendir(metin, dosya) {
   });
 }
 
+// Edge TTS ara sira baglantiyi dusurur ("Stream closed..."). Tekrar dene.
+async function seslendirGuvenli(metin, dosya, deneme = 4) {
+  for (let i = 1; ; i++) {
+    try {
+      await seslendir(metin, dosya);
+      if (fs.existsSync(dosya) && fs.statSync(dosya).size > 2000) return;
+      throw new Error("ses cikti cok kisa/bos");
+    } catch (e) {
+      try { fs.unlinkSync(dosya); } catch (_) {}
+      if (i >= deneme) throw new Error("Seslendirme " + deneme + " denemede basarisiz: " + e.message);
+      process.stdout.write(`  (ses tekrar ${i}/${deneme}) `);
+      await new Promise(r => setTimeout(r, 1500 * i));
+    }
+  }
+}
+
 // --- ASS zaman bicimi + kacis ------------------------------------------
 const assTime = (t) => { const h = Math.floor(t / 3600), m = Math.floor(t % 3600 / 60), s = t % 60;
   return `${h}:${String(m).padStart(2, "0")}:${s.toFixed(2).padStart(5, "0")}`; };
@@ -80,7 +96,7 @@ const assKacis = (s) => String(s).replace(/[{}]/g, "").replace(/\\/g, "");
   console.log(`Shorts: ${IS}  (${W}x${H}, ${sahneler.length} sahne, ses ${SES})`);
   const vo = path.join(TMP, "vo.mp3");
   const anlati = sahneler.map(s => s.metin.trim()).join(" ");
-  await seslendir(anlati, vo);
+  await seslendirGuvenli(anlati, vo);
   if (!fs.existsSync(vo) || fs.statSync(vo).size < 1000) throw new Error("Seslendirme uretilemedi.");
   const VODUR = sure(vo);
 
