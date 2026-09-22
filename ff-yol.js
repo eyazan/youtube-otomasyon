@@ -27,7 +27,11 @@ function calisiyorMu(yol) {
 }
 
 function bul(ad) {
-  for (const y of adaylar(ad)) if (fs.existsSync(y)) return y;
+  // Env ile acik yol: FFMPEG_YOL / FFPROBE_YOL. CI, tasinabilir/statik kurulum
+  // ya da sistemdeki bozuk bir surumu atlamak icin. Calistigi dogrulanir.
+  const ov = process.env[ad.toUpperCase() + "_YOL"];
+  if (ov && fs.existsSync(ov) && calisiyorMu(ov)) return ov;
+  for (const y of adaylar(ad)) if (fs.existsSync(y) && calisiyorMu(y)) return y;
   if (calisiyorMu(ad)) return ad;            // PATH'te varsa dogrudan adiyla cagir
   console.error("");
   console.error("✗ " + ad + " bulunamadi.");
