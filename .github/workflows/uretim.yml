@@ -58,6 +58,15 @@ jobs:
             node shorts-sira.js
           fi
 
+      - name: Uretilen videoyu artifact olarak yukle (onizleme)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: shorts-video
+          path: uretim/*/Videos/*.mp4
+          if-no-files-found: ignore
+          retention-days: 7
+
       - name: Uretim durumunu geri commit et
         if: always()
         run: |
