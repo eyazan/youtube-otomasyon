@@ -99,9 +99,10 @@ function yuklemeMetni(BASE) {
     };
   }
   const konu = JSON.parse(fs.readFileSync(path.join(BASE, "konu.json"), "utf8"));
-  const baslik = String(konu.baslik_en || konu.baslik || path.basename(BASE)).slice(0, 100);
-  const aciklama = String(konu._not || "");
-  return { baslik, aciklama, etiketler: [] };
+  const baslik = String(konu.baslik || konu.baslik_en || path.basename(BASE)).slice(0, 100);
+  const aciklama = String(konu.aciklama || konu._not || "");
+  const etiketler = Array.isArray(konu.etiketler) ? konu.etiketler.map(String) : [];
+  return { baslik, aciklama, etiketler };
 }
 
 // YouTube baslik/aciklamada '<' ve '>' reddedilir.

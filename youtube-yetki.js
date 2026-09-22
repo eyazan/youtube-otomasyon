@@ -92,11 +92,22 @@ const sunucu = http.createServer(async (req, res) => {
   if (y.durum === 200 && j.refresh_token) {
     res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
     res.end("<h2>Tamam. Terminale don, jetonu kopyala.</h2>");
-    console.log("\n✓ Basarili. Bunu .env dosyana ekle (ya da GitHub Secret olarak kaydet):\n");
-    console.log("YT_REFRESH_TOKEN=" + j.refresh_token + "\n");
-    console.log("Not: OAuth 'onay ekrani' Test modundaysa jeton 7 gunde bir");
-    console.log("gecersiz olur. Zamanlanmis calisma icin ekrani 'Uretim/Production'");
-    console.log("moduna al (MALIYET-VE-YETKILER.md).");
+    // Jetonu dogrudan .env'e yaz (terminalden kopyalamaya gerek kalmasin).
+    try {
+      const envYol = path.join(KOK, ".env");
+      let icerik = "";
+      try { icerik = fs.readFileSync(envYol, "utf8"); } catch (e) {}
+      if (/^YT_REFRESH_TOKEN=.*$/m.test(icerik)) {
+        icerik = icerik.replace(/^YT_REFRESH_TOKEN=.*$/m, "YT_REFRESH_TOKEN=" + j.refresh_token);
+      } else {
+        icerik += (icerik && !icerik.endsWith("\n") ? "\n" : "") + "YT_REFRESH_TOKEN=" + j.refresh_token + "\n";
+      }
+      fs.writeFileSync(envYol, icerik);
+      console.log("\n✓ Basarili. YT_REFRESH_TOKEN .env dosyasina yazildi.");
+    } catch (e) {
+      console.log("\n✓ Basarili. .env'e yazilamadi, elle ekle:\nYT_REFRESH_TOKEN=" + j.refresh_token);
+    }
+    console.log("Not: OAuth onay ekrani Production modunda olmali (Test'te jeton 7 gunde olur).");
   } else {
     res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
     res.end("<h2>Jeton alinamadi. Terminale bak.</h2>");
