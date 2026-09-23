@@ -56,7 +56,8 @@ function uretBir(slug) {
   konu.slug = slug;
   fs.writeFileSync(path.join(job, "konu.json"), JSON.stringify(konu, null, 2));
   console.log(`\n=== ${slug} ===`);
-  calistir("arsiv-bul.js", slug);
+  // Goruntu kaynagi: "stok" (Pexels) ya da arsiv (kamu mali).
+  calistir(konu.tur === "stok" ? "stok-bul.js" : "arsiv-bul.js", slug);
   calistir("shorts-yap.js", slug);
 
   // Yukleme: yalnizca PUBLISH=1 ve kimlik varsa; her zaman private.
