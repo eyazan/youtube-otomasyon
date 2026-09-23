@@ -148,31 +148,12 @@ const assKacis = (s) => String(s).replace(/[{}]/g, "").replace(/\\/g, "");
   }
   console.log("");
 
-  // --- 3) markali kapanis karti (prosedurel) ---
-  const kelimeler = KANAL.toUpperCase().split(/\s+/);
-  const satir1 = (kelimeler.length > 1 ? kelimeler[0] : KANAL.toUpperCase()).replace(/'/g, "");
-  const satir2 = (kelimeler.length > 1 ? kelimeler.slice(1).join(" ") : "").replace(/'/g, "");
-  const wmFs = Math.round(W * 0.078);
-  const y1 = Math.round(H * (satir2 ? 0.38 : 0.42));
-  const y2 = y1 + Math.round(wmFs * 1.02);
-  const followY = (satir2 ? y2 : y1) + Math.round(wmFs * 1.45);
-  const wmDraw = (txt, y, delay) =>
-    `drawtext=fontfile='${DFONT}':text='${txt}':fontcolor=white:fontsize=${wmFs}:x=(w-tw)/2:y=${y}:alpha='clip((t-${delay})/0.5\\,0\\,1)':shadowcolor=black@0.5:shadowy=3`;
-  const endcard = path.join(TMP, "endcard.mp4");
-  run(["-hide_banner", "-loglevel", "error",
-    "-f", "lavfi", "-i", `color=c=0x0b1a2e:s=${W}x${H}:d=${ENDCARD}:r=${FPS}`,
-    "-f", "lavfi", "-i", `gradients=s=${W}x${H}:c0=0x1d4e74:c1=0x00000000:type=radial:x0=${W/2}:y0=${H*0.4}:nb_colors=2:d=${ENDCARD}`,
-    "-filter_complex",
-      `[1]format=rgba,colorchannelmixer=aa=0.5[g];[0][g]overlay,vignette=angle=PI/4.2,noise=alls=5:allf=t+u,` +
-      wmDraw(satir1, y1, 0) + "," +
-      (satir2 ? wmDraw(satir2, y2, 0.12) + "," : "") +
-      `drawtext=fontfile='${DFONT}':text='FOLLOW FOR MORE':fontcolor=0xd9a441:fontsize=${Math.round(W * 0.040)}:x=(w-tw)/2:y=${followY}:alpha='clip((t-0.5)/0.5\\,0\\,1)',format=yuv420p[v]`,
-    "-map", "[v]", "-t", String(ENDCARD),
-    "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p", "-r", String(FPS), "-an", "-y", endcard]);
-
-  // --- birlestir (sahneler + kapanis karti) ---
+  // --- 3) sahneleri birlestir ---
+  // Loop icin AYRI kapanis karti YOK — video canli goruntude biter, boylece
+  // Shorts akici loop yapar (tekrar izleme = algoritma ödülü). Marka kalici
+  // ust @handle ile, abone CTA'si aciklama + sabit yorumla korunur.
   const liste = path.join(TMP, "l.txt");
-  fs.writeFileSync(liste, klipler.concat([endcard]).map(f => `file '${f}'`).join("\n"));
+  fs.writeFileSync(liste, klipler.map(f => `file '${f}'`).join("\n"));
   const vid = path.join(TMP, "vid.mp4");
   run(["-hide_banner", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", liste, "-c", "copy", "-y", vid]);
   const TOPLAM = sure(vid);

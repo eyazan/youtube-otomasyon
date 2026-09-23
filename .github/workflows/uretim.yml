@@ -1,11 +1,12 @@
 name: Shorts uretim (gunluk)
 
-# Her gun 06:00 UTC bir Shorts uretir (profesyonel tempo: gunde 1).
-# Elle de tetiklenebilir (Actions sekmesi > Run workflow) veya --hepsi ile
-# uretilmemis tum konular tek seferde uretilir.
+# Her gun bir Shorts uretir (profesyonel tempo: gunde 1).
+# Saat: 16:00 UTC = ABD ogleden sonra + Avrupa aksami (yuksek izlenme saati,
+# ilk saatlerdeki hiz/velocity algoritmayi tetikler). Analitik olustukca
+# kitlenin en aktif oldugu saate cek. Elle de tetiklenebilir (Run workflow).
 on:
   schedule:
-    - cron: '0 6 * * *'
+    - cron: '0 16 * * *'
   workflow_dispatch:
     inputs:
       hepsi:
