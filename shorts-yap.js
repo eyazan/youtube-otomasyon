@@ -41,8 +41,12 @@ const HIZ = konu.sesHizi || "+6%";
 const FONT = konu.altyaziFont || process.env.SHORTS_FONT || "Arial Black";
 const KANAL = (konu.kanal || "Failure Reconstructed");
 const HANDLE = konu.handle || ("@" + KANAL.replace(/[^A-Za-z0-9]/g, ""));
-const ENDCARD = 2.4;   // saniye — markali kapanis karti
+const ENDCARD = 1.8;   // saniye — markali kapanis karti (kisa = daha iyi retention)
 const DFONT = font(true);   // drawtext icin acik font yolu
+// Buyume: ekranda kanca (ilk ~2.5s) + sona etkilesim sorusu (yorum icin)
+const cleanTxt = (s) => String(s || "").replace(/[{}]/g, "").replace(/\\/g, "").replace(/[<>]/g, "");
+const HOOK = cleanTxt(konu.hook).toUpperCase();
+const SORU = cleanTxt(konu.soru);
 const sahneler = konu.sahneler || [];
 if (!sahneler.length) { console.error("konu.json'da sahneler[] yok."); process.exit(1); }
 
@@ -217,7 +221,26 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 ` + events.map(e => {
     const eff = "{\\fad(70,60)\\t(0,120,\\fscx116\\fscy116)\\t(120,220,\\fscx100\\fscy100)}";
     return `Dialogue: 0,${assTime(e.st)},${assTime(e.en)},Pop,,0,0,0,,${eff}${assKacis(e.txt)}`;
-  }).join("\n") + "\n";
+  }).join("\n") + "\n" + (() => {
+    // BUYUME: ekranda kanca (ilk ~2.5s, ust-orta, iri) + sona etkilesim sorusu.
+    const cx = Math.round(W / 2);
+    const ekstra = [];
+    if (HOOK) {
+      const fs = Math.round(W * 0.062), bord = Math.max(4, Math.round(W * 0.005));
+      const y = Math.round(H * 0.40);
+      const hookSon = Math.min(2.7, VODUR * 0.4);
+      ekstra.push(`Dialogue: 0,${assTime(0.15)},${assTime(hookSon)},Pop,,0,0,0,,` +
+        `{\\an5\\pos(${cx},${y})\\fs${fs}\\bord${bord}\\shad3\\fad(160,220)}${assKacis(HOOK.toUpperCase())}`);
+    }
+    if (SORU) {
+      const fs = Math.round(W * 0.040), bord = Math.max(3, Math.round(W * 0.004));
+      const y = Math.round(H * 0.30);
+      const bas = Math.max(0, VODUR - 2.8);
+      ekstra.push(`Dialogue: 0,${assTime(bas)},${assTime(VODUR)},Pop,,0,0,0,,` +
+        `{\\an5\\pos(${cx},${y})\\fs${fs}\\bord${bord}\\1c&H41A4D9&\\fad(200,160)}${assKacis(SORU)}`);
+    }
+    return ekstra.join("\n") + (ekstra.length ? "\n" : "");
+  })();
   const assPath = path.join(TMP, "cap.ass");
   fs.writeFileSync(assPath, ass);
 

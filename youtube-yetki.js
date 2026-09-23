@@ -22,7 +22,9 @@ const { URL } = require("url");
 const KOK = __dirname;
 const PORT = 53682;
 const REDIRECT = "http://localhost:" + PORT;
-const SCOPE = "https://www.googleapis.com/auth/youtube.upload";
+// force-ssl = yukleme + metadata guncelleme (youtube-guncelle.js icin gerekli).
+// Not: bu scope'un etkili olmasi icin bir kez yeniden yetkilendirme gerekir.
+const SCOPE = "https://www.googleapis.com/auth/youtube.force-ssl";
 
 function env(ad) {
   if (process.env[ad]) return String(process.env[ad]).trim();
