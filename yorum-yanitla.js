@@ -101,7 +101,10 @@ async function main() {
       const yazar = top.snippet.authorChannelId?.value;
       const metin = top.snippet.textOriginal || "";
       if (yanitlanan.has(cid)) continue;
-      // kendi yorumumuza cevap verme
+      // Kanalin KENDI yorumuna (or. sabit tartisma yorumu) asla cevap verme —
+      // yazar kimligi video sahibinin kanal kimligiyle karsilastirilir.
+      if (yazar && yazar === th.snippet.channelId) { yanitlanan.add(cid); continue; }
+      // zaten cevaplanmis konusmaya tekrar girme
       if (th.snippet.totalReplyCount > 0) { yanitlanan.add(cid); continue; }
       const kat = kategori(metin);
       if (kat === "atla") { yanitlanan.add(cid); continue; }
