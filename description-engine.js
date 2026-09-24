@@ -73,7 +73,14 @@ function olustur(konu, ops = {}) {
   const b = require("./channel-plan").baglanti(plan, konu.slug) || {};
   const bl = [];
   bl.push(ozet(konu));
-  if (Array.isArray(v.zincir) && v.zincir.length >= 3) bl.push("Failure chain: " + v.zincir.map((x) => x.charAt(0) + x.slice(1).toLowerCase()).join(" → "));
+  if (Array.isArray(v.zincir) && v.zincir.length >= 3) {
+    // Cumle bicimi; rakamli kelimeler (M7.9, B-25s) ve metinde buyuk harfle gecen ozel isimler korunur
+    const kaynakMetin = [K.anlati(konu), v.ad, v.kisa].join(" ");
+    const kelime = (w, i) => /\d/.test(w) ? w.replace(/[A-Z]{3,}/g, (m) => m.toLowerCase())
+      : new RegExp("\\b" + w.charAt(0) + w.slice(1).toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\b").test(kaynakMetin) && i > 0 ? w.charAt(0) + w.slice(1).toLowerCase()
+      : i === 0 ? w.charAt(0) + w.slice(1).toLowerCase() : w.toLowerCase();
+    bl.push("Failure chain: " + v.zincir.map((x) => x.split(" ").map(kelime).join(" ")).join(" → "));
+  }
   const ilgili = b.aciklamaVideo && b.aciklamaVideo.url ? b.aciklamaVideo : null;
   // Ayni kumedense "Related episode", degilse kanalin baska bir yeniden kurgusu
   const ayniKume = ilgili && [b.onceki, b.sonraki].some((x) => x && x.slug === ilgili.slug);
