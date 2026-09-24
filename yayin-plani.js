@@ -14,7 +14,10 @@
 const { ayar } = require("./lib/ayar");
 const K = require("./lib/kutuphane");
 
-const TOLERANS_SAAT = 3;   // cron gecikmesi: 16:05'teki dunku yukleme bugunku 16:00'i bloklamasin
+// GitHub zamanlanmis isleri saatlerce gecikebilir (olculen: 16:00 cron 19:46'da basladi).
+// Dunku gec calisma bugunku zamaninda calismayi bloklamasin: aralik yarisi kadar
+// tolerans (gunluk yayinda 12 sa). Gunde tek cron oldugu icin ayni gun cift yayin olmaz.
+const toleransSaat = (gun) => Math.min(12, gun * 24 / 2);
 
 function durum(format, simdi = new Date(), kayit = K.yayinlananlar(), kalite = K.kaliteKayitlari()) {
   const p = ayar().publishing;
@@ -25,14 +28,14 @@ function durum(format, simdi = new Date(), kayit = K.yayinlananlar(), kalite = K
   const sorunlu = sonKararlar.filter((k) => k === "BLOCK" || (p.stretchOnReview && k === "REVIEW")).length;
   const esnetme = sorunlu >= (p.stretchWhenRecentBlocks || 2) ? Math.min(f.maxStretchDays - f.everyDays, sorunlu - 1) : 0;
   const aralik = f.everyDays + Math.max(0, esnetme);
-  const sonraki = son ? new Date(son.getTime() + aralik * 86400000 - TOLERANS_SAAT * 3600000) : simdi;
+  const sonraki = son ? new Date(son.getTime() + aralik * 86400000 - toleransSaat(aralik) * 3600000) : simdi;
   const uygun = !son || simdi >= sonraki;
   return { format, sonYayin: son ? son.toISOString() : null, aralikGun: aralik, taban: f.everyDays, esnetme,
     sonKararlar, uygun, sonrakiUygun: sonraki.toISOString(),
     neden: uygun ? "due" : `next slot ${sonraki.toISOString().slice(0, 16)}Z` + (esnetme ? ` (stretched +${esnetme}d: recent gate results ${sonKararlar.join(", ")})` : "") };
 }
 
-module.exports = { durum, TOLERANS_SAAT };
+module.exports = { durum, toleransSaat };
 
 if (require.main === module) {
   const i = process.argv.indexOf("--kontrol");

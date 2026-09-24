@@ -135,6 +135,9 @@ test("yayin plani: tolerans + yalnizca gercek BLOCK'lar aralik esnetir", () => {
   const simdi = new Date("2026-09-25T16:00:00Z");
   const kayit = [{ format: "short", tarih: "2026-09-24T16:05:00Z" }];
   assert.equal(YP.durum("short", simdi, kayit, []).uygun, true, "cron gecikmesi toleransi");
+  const gecKalmis = [{ format: "short", tarih: "2026-09-24T19:50:00Z" }];   // dunku cron 3s50dk gecikti
+  assert.equal(YP.durum("short", simdi, gecKalmis, []).uygun, true, "gec calisma ertesi gunu atlatmaz");
+  assert.equal(YP.durum("short", new Date("2026-09-25T02:00:00Z"), gecKalmis, []).uygun, false, "ayni gece ikinci yayin yok");
   const tarama = [{ asama: "pre", karar: "REVIEW" }, { asama: "pre", karar: "REVIEW" }, { asama: "pre", karar: "REVIEW" }];
   assert.equal(YP.durum("short", simdi, kayit, tarama).esnetme, 0, "kutuphane taramalari sayilmaz");
   const bloklar = [{ asama: "final", karar: "BLOCK" }, { asama: "final", karar: "BLOCK" }];
