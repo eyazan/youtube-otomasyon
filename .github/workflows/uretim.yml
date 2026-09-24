@@ -5,12 +5,16 @@ name: Shorts uretim (gunluk)
 # uygular; BLOCK olan video yuklenmez. Ardindan yayin sonrasi analiz, sabit
 # yorumlar, ic baglanti plani ve deneyler guncellenir; haftada bir (Pazartesi)
 # mevcut videolar icin optimizasyon raporlari yenilenir.
-# Saat: 16:00 UTC = ABD ogleden sonra + Avrupa aksami (yuksek izlenme saati,
-# ilk saatlerdeki hiz/velocity algoritmayi tetikler). Analitik olustukca
-# kitlenin en aktif oldugu saate cek. Elle de tetiklenebilir (Run workflow).
+# Saat: uretim 10:00 UTC'de (TR 13:00) baslar; video private yuklenir ve
+# config/growth.json > publishing.schedule.hourUTC saatinde (18:00 UTC = 21:00 TR
+# = 14:00 ABD dogu) YouTube tarafindan otomatik Public yapilir. Kitlenin ~%93'u
+# ABD (analytics, 2026-09-25). Arada kalan saatler inceleme penceresidir;
+# GitHub zamanlanmis isleri saatlerce geciktirebildigi icin erken baslatiliyor.
+# Her yeni video icin GitHub issue bildirimi acilir (bildirim.js). Elle de
+# tetiklenebilir (Run workflow).
 on:
   schedule:
-    - cron: '0 16 * * *'
+    - cron: '0 10 * * *'
   workflow_dispatch:
     inputs:
       hepsi:
@@ -25,6 +29,7 @@ concurrency:
 
 permissions:
   contents: write   # uretilenler.json'u geri commit etmek icin
+  issues: write     # yeni video bildirimi (bildirim.js)
 
 jobs:
   uret:
@@ -65,6 +70,12 @@ jobs:
             node shorts-sira.js
           fi
 
+      - name: Bildirim (yeni video / kalite engeli -> GitHub issue)
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node bildirim.js || echo "bildirim atlandi"
+
       - name: Yorumlara olculu yanit ver (etkilesim)
         if: always()
         run: node yorum-yanitla.js || echo "yorum yaniti atlandi (yorum yok / izin yok)"
@@ -84,7 +95,7 @@ jobs:
           node experiments.js degerlendir || echo "deneyler atlandi"
 
       - name: Haftalik mevcut video optimizasyonu (Pazartesi)
-        if: always() && github.event.schedule == '0 16 * * *'
+        if: always() && github.event.schedule == '0 10 * * *'
         run: |
           if [ "$(date -u +%u)" = "1" ]; then
             node existing-video-optimizer.js --all || echo "optimizer atlandi"

@@ -145,6 +145,16 @@ test("yayin plani: tolerans + yalnizca gercek BLOCK'lar aralik esnetir", () => {
   assert.ok(d.esnetme >= 1 && !d.uygun);
 });
 
+test("zamanlama: sabit saat, en az 1 saat once; bildirim metni", () => {
+  const z = require("../../lib/zamanlama");
+  assert.equal(z.sonrakiSlot(new Date("2026-09-25T10:05:00Z"), 18, 1).toISOString(), "2026-09-25T18:00:00.000Z");
+  assert.equal(z.sonrakiSlot(new Date("2026-09-25T17:30:00Z"), 18, 1).toISOString(), "2026-09-26T18:00:00.000Z");
+  assert.equal(z.trSaat(new Date("2026-09-25T18:00:00Z")), "25 Eylül 21:00 (TR)");
+  const m = require("../../bildirim").videoMesaji({ slug: "x", videoId: "abcdefghijk", baslik: "T", kalite: "REVIEW", publishAt: "2026-09-25T18:00:00Z" });
+  assert.match(m.baslik, /21:00/);
+  assert.ok(m.etiket.includes("review"));
+});
+
 test("muzik profili: deterministik ve videolar arasi farkli", () => {
   assert.deepEqual(muzik.profil("a", "bridge-failures"), muzik.profil("a", "bridge-failures"));
   assert.ok(muzik.benzerlik(muzik.profil("a", "bridge-failures"), muzik.profil("b", "nuclear-accidents")) < 0.95);

@@ -40,7 +40,7 @@ function topla() {
     const th = y.slug ? jsonOku(K.paketYolu(y.slug, "thumbnails.json"), null) : null;
     const kon = y.slug ? K.konuOku(y.slug) : null;
     const tr = o && o.trafik ? Object.fromEntries(o.trafik.map((t) => [t.kaynak, Math.round(t.oran * 1000) / 10])) : null;
-    const d = new Date(y.tarih);
+    const d = new Date(y.publishAt || y.tarih);      // yayin ani (zamanlanmissa publishAt)
     return {
       videoId: y.videoId, slug: y.slug, baslik: y.baslik, format: y.format, tarih: y.tarih, gun: GUNLER[d.getUTCDay()], saatUTC: d.getUTCHours(),
       sureSn: o ? o.sureSn : null, olcum: o ? o.checkpoint || "optimizer" : null, olcumTarihi: o ? o.toplandi : null,

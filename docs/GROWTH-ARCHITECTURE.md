@@ -67,6 +67,14 @@ Everything shares the same packaging engines and the same registry.
 
 `yayin-plani.js` + `config/growth.json → publishing`: Shorts every 1 day, long-form every 5 days, with a 3 h cron tolerance. Two BLOCKs in the last three real productions stretch the interval (Shorts up to 3 days, long-form up to 10). REVIEW does not slow the cadence (`stretchOnReview: false`): it already means "private upload, a human publishes".
 
+### Fixed publish time + notification
+
+- Production starts at **10:00 UTC** (13:00 TR). GitHub may delay scheduled jobs by hours, so it starts early.
+- The video is uploaded private with `status.publishAt`. YouTube makes it public at **18:00 UTC**: 21:00 TR, 14:00 ET, 11:00 PT. The audience was ~93 % US on 2026-09-25.
+- Which gate verdicts are scheduled is set in `config/growth.json → publishing.schedule` (default PUBLISH + REVIEW). Anything else stays private, and BLOCK is never uploaded.
+- `bildirim.js` opens a GitHub issue that @mentions the owner (email + GitHub mobile push). It gives the title, gate verdict, publish time, Studio link and how to cancel. Older "yeni-video" issues are closed automatically; blocked topics get a "kalite-engeli" issue.
+- Once enough data exists, re-tune `hourUTC` from the dashboard's "Publish hour" pattern and the analytics country mix.
+
 ## 7. Configuration & state
 
 | File | Role |

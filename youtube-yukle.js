@@ -211,9 +211,24 @@ async function main() {
   try { sentetik = (JSON.parse(fs.readFileSync(path.join(BASE, "konu.json"), "utf8")).sahneler || []).some((x) => x.sentetik); } catch (e) {}
   const status = { privacyStatus: gizlilik, selfDeclaredMadeForKids: false, ...(sentetik ? { containsSyntheticMedia: true } : {}) };
 
+  // Zamanlanmis yayin: kalite kapisi karari listedeyse video private yuklenir ve
+  // belirlenen saatte YouTube tarafindan otomatik Public yapilir (publishAt).
+  // BLOCK zaten yuklenmez; listede olmayan karar private kalir (elle inceleme).
+  let publishAt = null, kapiKarari = null;
+  try {
+    const plan = require("./lib/ayar").ayar().publishing.schedule || {};
+    const kapi = require("./lib/ortak").jsonOku(require("./lib/kutuphane").paketYolu(IS, "quality-gate.json"), null);
+    kapiKarari = kapi ? kapi.karar : null;
+    if (plan.enabled && gizlilik === "private" && !argv.includes("--zamanlama-yok") && kapiKarari && (plan.gates || []).includes(kapiKarari)) {
+      publishAt = require("./lib/zamanlama").sonrakiSlot(new Date(), plan.hourUTC, plan.minLeadHours).toISOString();
+      status.publishAt = publishAt;
+    }
+  } catch (e) { console.log("  (zamanlama atlandi: " + e.message + ")"); }
+
   console.log("Dosya      : " + path.relative(KOK, dosya) + "  (" + (boyut / 1e6).toFixed(1) + " MB)");
   console.log("Baslik     : " + snippet.title);
-  console.log("Gizlilik   : " + gizlilik + (gizlilik === "public" ? "  ⚠ HERKESE ACIK" : ""));
+  console.log("Gizlilik   : " + gizlilik + (gizlilik === "public" ? "  ⚠ HERKESE ACIK" : "") +
+    (publishAt ? "  → otomatik Public: " + require("./lib/zamanlama").trSaat(new Date(publishAt)) : ""));
   console.log("Etiket     : " + (snippet.tags.join(", ") || "(yok)"));
 
   const clientId = env("YT_CLIENT_ID");
@@ -256,7 +271,10 @@ async function main() {
     try {
       require("./lib/kutuphane").yayinKaydet({ slug: IS, videoId: j.id, baslik: snippet.title, tarih: new Date().toISOString(),
         format: JSON.parse(fs.readFileSync(path.join(BASE, "konu.json"), "utf8")).format === "long" ? "long" : "short",
-        gizlilik, kaynak: "upload" });
+        gizlilik, publishAt, kalite: kapiKarari, kaynak: "upload" });
+      // Bildirim (GitHub issue) icin ozet — bildirim.js okur
+      fs.writeFileSync(path.join(BASE, "BILDIRIM.json"), JSON.stringify({ slug: IS, videoId: j.id, baslik: snippet.title,
+        kalite: kapiKarari, publishAt, tarih: new Date().toISOString() }, null, 2));
     } catch (e) { console.log("  (yayin kaydi yazilamadi: " + e.message + ")"); }
     try { const kol = require("./experiments").otomatikAta(j.id, snippet.title); if (kol) console.log("  deney: title-style / " + kol); } catch (e) {}
     // Seriye (playlist) ekle — binge/oturum suresi icin. Hata yuklemeyi bozmaz.
