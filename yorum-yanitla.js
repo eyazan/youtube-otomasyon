@@ -56,6 +56,13 @@ const OVGU_YANIT = [
   "Thank you! History is wild, right?",
   "Means a lot — more coming every single day. 🌊",
 ];
+const BILGI_YANIT = [
+  "Great context — thanks for adding that!",
+  "Really good point, that's a big part of the story.",
+  "Love this detail. Thanks for sharing it!",
+  "Exactly — history is full of these turning points.",
+  "Great addition. This is why the comments are the best part. 🙌",
+];
 const rasgele = (a) => a[Math.floor(Math.random() * a.length)];
 
 function kategori(metin) {
@@ -66,6 +73,8 @@ function kategori(metin) {
   if (harf.length < 6) return "atla";
   // olumsuz/troll isaretleri -> atla (guvenli taraf)
   if (/\b(fake|stupid|trash|hate|boring|bot)\b/i.test(t)) return "atla";
+  // uzun, bilgi ekleyen yorum -> "bilgi" (ovgu cevabi tonu kaydirir)
+  if (t.length > 60) return "bilgi";
   return "ovgu";
 }
 
@@ -96,7 +105,8 @@ async function main() {
       if (th.snippet.totalReplyCount > 0) { yanitlanan.add(cid); continue; }
       const kat = kategori(metin);
       if (kat === "atla") { yanitlanan.add(cid); continue; }
-      const cevap = kat === "soru" ? rasgele(SORU_YANIT) : rasgele(OVGU_YANIT);
+      const cevap = kat === "soru" ? rasgele(SORU_YANIT)
+        : kat === "bilgi" ? rasgele(BILGI_YANIT) : rasgele(OVGU_YANIT);
       const body = JSON.stringify({ snippet: { parentId: cid, textOriginal: cevap } });
       const r = await istek({ hostname: "www.googleapis.com", path: "/youtube/v3/comments?part=snippet",
         method: "POST", headers: { Authorization: "Bearer " + tok, "Content-Type": "application/json",

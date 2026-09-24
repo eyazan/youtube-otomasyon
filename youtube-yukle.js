@@ -232,6 +232,14 @@ async function main() {
     if (gizlilik !== "public") {
       console.log("  Herkese acmak icin YouTube Studio'dan inceleyip yayinla.");
     }
+    // Seriye (playlist) ekle — binge/oturum suresi icin. Hata yuklemeyi bozmaz.
+    try {
+      const pl = require("./youtube-playlist");
+      const konu = JSON.parse(fs.readFileSync(path.join(BASE, "konu.json"), "utf8"));
+      await pl.ekle(token, j.id, pl.seriAdi(konu));
+    } catch (e) {
+      console.log("  (seriye eklenemedi: " + e.message + ")");
+    }
   } else {
     console.error("\nYukleme basarisiz (HTTP " + son.durum + "): " + son.govde.slice(0, 600));
     process.exit(1);
