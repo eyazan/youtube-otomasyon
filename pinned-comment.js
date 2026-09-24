@@ -57,6 +57,20 @@ async function bekleyenleriYaz() {
   for (const y of kayit) {
     const v = vids.find((x) => x.id === y.videoId);
     if (!v || v.status.privacyStatus !== "public") { console.log(`  - ${y.slug}: henuz public degil, bekliyor`); continue; }
+    // Yerel durum dosyasi eski olabilir (baska bir calisma yazmis olabilir): YouTube'da
+    // kanalin bu videoda zaten ust duzey yorumu varsa ASLA ikinci yorum yazma.
+    const mevcut = await api.data("commentThreads?part=snippet&maxResults=100&videoId=" + y.videoId);
+    const kendi = mevcut.ok ? (mevcut.veri.items || []).find((t) => {
+      const a = t.snippet.topLevelComment.snippet.authorChannelId;
+      return a && a.value === t.snippet.channelId;
+    }) : null;
+    if (!mevcut.ok) { console.log(`  - ${y.slug}: yorumlar okunamadi (${mevcut.neden}) — guvenlik icin atlandi`); continue; }
+    if (kendi) {
+      durum[y.videoId] = { slug: y.slug, commentId: kendi.id, tarih: kendi.snippet.topLevelComment.snippet.publishedAt, sabitlendi: false, kaynak: "existing" };
+      jsonYaz(DURUM, durum);
+      console.log(`  = ${y.slug}: kanalin yorumu zaten var — yazilmadi`);
+      continue;
+    }
     const metin = calistir(y.slug);
     const r = await api.post("commentThreads?part=snippet", { snippet: { videoId: y.videoId, topLevelComment: { snippet: { textOriginal: metin } } } });
     if (r.ok) {
