@@ -1,7 +1,7 @@
 # Optimization report — Why San Francisco Burned for Three Days
 
 Video: https://youtu.be/X0jw78mIGdk · short · 35s · published 2026-09-23 (1 days ago) · public
-Production slug: `san-francisco-1906` · Analytics: unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js) · Generated 2026-09-24T16:23:55.975Z
+Production slug: `san-francisco-1906` · Analytics: ok · Generated 2026-09-24T21:02:25.969Z
 
 > Nothing here is applied automatically. No video is deleted or re-uploaded. Metrics marked *unavailable* were not invented.
 
@@ -20,35 +20,47 @@ _Shorts: the feed shows a frame from the video; the opening frame and on-screen 
 ## CURRENT DESCRIPTION
 
 ```
-In 1906, one of America’s great cities burned for three days. The fire, not the earthquake, did most of the killing.
+In 1906, one of America’s great cities burned for three days. The fire that followed the earthquake caused most of the destruction.
 
-#shorts #history #earthquake #sanfrancisco #disaster
+Failure chain: Fault slips — M7.9 → Water mains rupture → Gas lines & stoves ignite → No water to fight fires → 80% of city destroyed
+
+Another reconstruction: The Disaster That Ended the Age of the Airship — https://youtu.be/PGOKZhPYo7c
+
+Footage & sources:
+• Archival film: "San Francisco earthquake and fire, April 18, 1906" — Wikimedia Commons (public domain / free licence): https://commons.wikimedia.org/wiki/File:San_Francisco_earthquake_and_fire%2C_April_18%2C_1906.webm
+
+Technical references:
+• Wikipedia — 1906 San Francisco earthquake — https://en.wikipedia.org/wiki/1906_San_Francisco_earthquake
+
+Narration uses a synthetic voice. Footage is real archival film or licensed stock; anything reconstructed is labelled on screen.
+
+#shorts #engineering #disaster
 ```
 
 ## CURRENT PERFORMANCE
 
 | Metric | Value | Source / reason |
 |---|---|---|
-| Views | 113 | Data API |
+| Views | 110 | Data API |
 | Likes | 4 | Data API |
-| Comments | 0 | Data API |
+| Comments | 1 | Data API |
 | Impressions | unavailable | not exposed by YouTube APIs — export from Studio into studio-manual.json |
 | CTR | unavailable | not exposed by YouTube APIs — export from Studio into studio-manual.json |
-| Watch time | unavailable | unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js) |
-| Average view duration | unavailable | unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js) |
-| Average % viewed | unavailable | unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js) |
-| Subscribers gained (net) | unavailable | unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js) |
-| Shares | unavailable | unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js) |
+| Watch time | unavailable | analytics unavailable |
+| Average view duration | unavailable | analytics unavailable |
+| Average % viewed | unavailable | analytics unavailable |
+| Subscribers gained (net) | unavailable | analytics unavailable |
+| Shares | unavailable | analytics unavailable |
 | Returning viewers | unavailable | not exposed per video by the public API |
-| Retention at 30 s | unavailable | unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js) |
+| Retention at 30 s | unavailable | analytics unavailable |
 
-Traffic sources: unavailable (unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js))
+Traffic sources: 
 
-Derived: subsPer1000 = unavailable · likeRate = 3.5 · commentRate = 0
+Derived: subsPer1000 = unavailable · likeRate = 3.6 · commentRate = 0.91
 
 ## PROBLEM DIAGNOSIS
 
-- **INSUFFICIENT_DATA** (confidence: high) — 113 views after 1 days — too early/small for rate-based conclusions.
+- **INSUFFICIENT_DATA** (confidence: high) — 110 views after 1 days — too early/small for rate-based conclusions.
   → Do not change packaging yet unless something is objectively broken (missing sources, typo). Re-check at 7 days.
 - **WEAK_TOPIC_PACKAGING** (confidence: low) — Current title scores 47.4/100 in the title engine; best editorial option scores 54.
   → Heuristic only — test the stronger title as a logged experiment rather than switching silently.
@@ -78,18 +90,14 @@ _For a published Short, pick the frame in the YouTube app (Edit → Thumbnail) t
 
 ## DESCRIPTION IMPROVEMENT
 
-Issues in the current description:
-- no footage/source attribution
-- no technical references
-- no related-episode or playlist link (session growth)
-- no synthetic-voice disclosure line
+Current description covers the essentials.
 
 Proposed description:
 
 ```
-In 1906, one of America’s great cities burned for three days. The fire, not the earthquake, did most of the killing.
+In 1906, one of America’s great cities burned for three days. The fire that followed the earthquake caused most of the destruction.
 
-Failure chain: Fault slips — m7.9 → Water mains rupture → Gas lines & stoves ignite → No water to fight fires → 80% of city destroyed
+Failure chain: Fault slips — M7.9 → Water mains rupture → Gas lines & stoves ignite → No water to fight fires → 80% of city destroyed
 
 Another reconstruction: The Disaster That Ended the Age of the Airship — https://youtu.be/PGOKZhPYo7c
 
@@ -160,7 +168,6 @@ Shorts: no spoken CTA (it costs retention). Convert through the series: pinned c
 
 **P4** — low-data video: fix objective gaps only, then wait for data
 
-- `REDESCRIBE` — no footage/source attribution; no technical references; no related-episode or playlist link (session growth); no synthetic-voice disclosure line
 - `REVIEW_MANUALLY` — Published narration says the fire, not the quake, did most of the killing. Sources agree fire caused most of the DESTRUCTION; the split of deaths is uncertain. Clarify in the pinned comment/description rather than re-uploading.
 
 Apply (manual, reversible — review first):

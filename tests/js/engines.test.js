@@ -122,6 +122,15 @@ test("analitik: veri uydurulmaz, kucuk orneklemde yetersiz veri", () => {
   assert.ok(ustun.some((x) => x.kod === "OUTPERFORMER"));
 });
 
+test("analitik: bos trafik ve kucuk orneklemde abone teshisi konmaz", () => {
+  const v = { videoId: "x", format: "short", yasGun: 3, metrikler: {
+    views: A.ok(178, "t"), likes: A.ok(5, "t"), comments: A.ok(0, "t"), impressions: A.yok("n"), ctr: A.yok("n"),
+    averageViewPercentage: A.ok(68, "t"), subscribersGained: A.ok(0, "t"), returningViewers: A.yok("n") }, trafik: [], tutma: null };
+  const t = A.teshis(v, {}, { minViewsForRates: 100 }).map((x) => x.kod);
+  assert.ok(!t.includes("SHORTS_FEED_NOT_PICKED_UP"), "bos trafik = veri yok");
+  assert.ok(!t.includes("HIGH_VIEWS_LOW_SUB_CONVERSION"), "178 izlenmede abone teshisi yok");
+});
+
 test("yayin plani: tolerans + yalnizca gercek BLOCK'lar aralik esnetir", () => {
   const simdi = new Date("2026-09-25T16:00:00Z");
   const kayit = [{ format: "short", tarih: "2026-09-24T16:05:00Z" }];

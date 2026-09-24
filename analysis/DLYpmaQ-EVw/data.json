@@ -8,7 +8,7 @@
   "gizlilik": "public",
   "metrikler": {
     "views": {
-      "deger": 52,
+      "deger": 88,
       "durum": "ok",
       "kaynak": "Data API"
     },
@@ -18,7 +18,7 @@
       "kaynak": "Data API"
     },
     "comments": {
-      "deger": 0,
+      "deger": 1,
       "durum": "ok",
       "kaynak": "Data API"
     },
@@ -40,32 +40,32 @@
     "watchTimeMinutes": {
       "deger": null,
       "durum": "unavailable",
-      "neden": "unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js)"
+      "neden": "analytics unavailable"
     },
     "averageViewDuration": {
       "deger": null,
       "durum": "unavailable",
-      "neden": "unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js)"
+      "neden": "analytics unavailable"
     },
     "averageViewPercentage": {
       "deger": null,
       "durum": "unavailable",
-      "neden": "unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js)"
+      "neden": "analytics unavailable"
     },
     "subscribersGained": {
       "deger": null,
       "durum": "unavailable",
-      "neden": "unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js)"
+      "neden": "analytics unavailable"
     },
     "shares": {
       "deger": null,
       "durum": "unavailable",
-      "neden": "unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js)"
+      "neden": "analytics unavailable"
     },
     "first30sRetention": {
       "deger": null,
       "durum": "unavailable",
-      "neden": "unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js)"
+      "neden": "analytics unavailable"
     }
   },
   "turetilmis": {
@@ -80,23 +80,23 @@
       "kaynak": "derived (% of views)"
     },
     "commentRate": {
-      "deger": 0,
+      "deger": 1.14,
       "durum": "ok",
       "kaynak": "derived (% of views)"
     }
   },
-  "trafik": null,
-  "tutma": null,
-  "analitikDurumu": "unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js)",
-  "toplandi": "2026-09-24T16:23:55.888Z",
-  "aciklama": "In 1946 the US detonated an atomic bomb underwater at Bikini Atoll - the test that contaminated an entire fleet and left a paradise uninhabitable to this day.\n\n#shorts #history #nuclear #disaster #coldwar",
+  "trafik": [],
+  "tutma": [],
+  "analitikDurumu": "ok",
+  "toplandi": "2026-09-24T21:02:25.446Z",
+  "aciklama": "In 1946 the US detonated an atomic bomb underwater at Bikini Atoll - the test that contaminated an entire fleet and left a paradise uninhabitable to this day. The failure mechanism: radioactive base surge and spray.\n\nFailure chain: 23-kiloton underwater blast → 2 million tons of water lifted → Radioactive base surge → Fleet coated in fallout → Decontamination fails\n\nAnother reconstruction: The Disaster That Ended the Age of the Airship — https://youtu.be/PGOKZhPYo7c\n\nFootage & sources:\n• Archival film: \"Baker Shot\" — Wikimedia Commons (public domain / free licence): https://commons.wikimedia.org/wiki/File:Baker_Shot.ogv\n\nTechnical references:\n• Wikipedia — Operation Crossroads — https://en.wikipedia.org/wiki/Operation_Crossroads\n\nNarration uses a synthetic voice. Footage is real archival film or licensed stock; anything reconstructed is labelled on screen.\n\n#shorts #engineering #nuclear",
   "thumb": "https://i.ytimg.com/vi/DLYpmaQ-EVw/maxresdefault.jpg",
   "slug": "bikini-baker",
   "teshis": [
     {
       "kod": "INSUFFICIENT_DATA",
       "guven": "high",
-      "aciklama": "52 views after 0 days — too early/small for rate-based conclusions.",
+      "aciklama": "88 views after 0 days — too early/small for rate-based conclusions.",
       "oneri": "Do not change packaging yet unless something is objectively broken (missing sources, typo). Re-check at 7 days."
     },
     {
@@ -110,8 +110,8 @@
     "oncelik": "P4",
     "siniflar": [
       {
-        "sinif": "REDESCRIBE",
-        "neden": "no footage/source attribution; no technical references; no related-episode or playlist link (session growth); no synthetic-voice disclosure line"
+        "sinif": "KEEP",
+        "neden": "no action needed with the data available"
       }
     ]
   }

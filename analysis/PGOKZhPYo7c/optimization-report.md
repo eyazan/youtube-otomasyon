@@ -1,7 +1,7 @@
 # Optimization report — The Disaster That Ended the Age of the Airship
 
 Video: https://youtu.be/PGOKZhPYo7c · short · 38s · published 2026-09-22 (2 days ago) · public
-Production slug: `hindenburg` · Analytics: unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js) · Generated 2026-09-24T16:23:56.001Z
+Production slug: `hindenburg` · Analytics: ok · Generated 2026-09-24T21:02:27.239Z
 
 > Nothing here is applied automatically. No video is deleted or re-uploaded. Metrics marked *unavailable* were not invented.
 
@@ -20,35 +20,47 @@ _Shorts: the feed shows a frame from the video; the opening frame and on-screen 
 ## CURRENT DESCRIPTION
 
 ```
-May 6, 1937: the Hindenburg airship burned in just 34 seconds, ending the age of the zeppelin forever.
+May 6, 1937: the Hindenburg airship burned in just 34 seconds, ending the age of the zeppelin forever. The failure mechanism: hydrogen ignition, most likely from static discharge.
 
-#shorts #history #hindenburg #disaster #aviation
+Failure chain: Hydrogen leak near tail → Static charge In stormy air → Spark ignites gas → Fire races through gas cells → Ship lost In ~34 seconds
+
+Another reconstruction: Why the Tacoma Narrows Bridge Tore Itself Apart — https://youtu.be/qkzRUqlEy5I
+
+Footage & sources:
+• Archival film: "1937-05-10 Special Release - Zeppelin Explodes Scores Dead" — Wikimedia Commons (public domain / free licence): https://commons.wikimedia.org/wiki/File:1937-05-10_Special_Release_-_Zeppelin_Explodes_Scores_Dead.ogv
+
+Technical references:
+• Wikipedia — Hindenburg disaster — https://en.wikipedia.org/wiki/Hindenburg_disaster
+
+Narration uses a synthetic voice. Footage is real archival film or licensed stock; anything reconstructed is labelled on screen.
+
+#shorts #engineering #aviation
 ```
 
 ## CURRENT PERFORMANCE
 
 | Metric | Value | Source / reason |
 |---|---|---|
-| Views | 978 | Data API |
-| Likes | 32 | Data API |
-| Comments | 2 | Data API |
+| Views | 981 | Data API |
+| Likes | 33 | Data API |
+| Comments | 3 | Data API |
 | Impressions | unavailable | not exposed by YouTube APIs — export from Studio into studio-manual.json |
 | CTR | unavailable | not exposed by YouTube APIs — export from Studio into studio-manual.json |
-| Watch time | unavailable | unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js) |
-| Average view duration | unavailable | unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js) |
-| Average % viewed | unavailable | unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js) |
-| Subscribers gained (net) | unavailable | unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js) |
-| Shares | unavailable | unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js) |
+| Watch time | 187 min | Analytics API |
+| Average view duration | 29 s | Analytics API |
+| Average % viewed | 76.97% | Analytics API |
+| Subscribers gained (net) | 2 | Analytics API (net) |
+| Shares | 1 | Analytics API |
 | Returning viewers | unavailable | not exposed per video by the public API |
-| Retention at 30 s | unavailable | unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js) |
+| Retention at 30 s | 0.6351 | Analytics API (retention at 79% of video) |
 
-Traffic sources: unavailable (unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js))
+Traffic sources: Shorts feed 93% · Search 5% · Browse/other YouTube 1% · External 0% · Direct/unknown 0%
 
-Derived: subsPer1000 = unavailable · likeRate = 3.3 · commentRate = 0.2
+Derived: subsPer1000 = 2 · likeRate = 3.4 · commentRate = 0.31
 
 ## PROBLEM DIAGNOSIS
 
-- **OUTPERFORMER** (confidence: low) — 978 views vs channel median 144.5 (n=4 videos).
+- **OUTPERFORMER** (confidence: low) — 981 views vs channel median 144 (n=4 videos).
   → Keep the title and opening as they are. Reuse what worked (subject, hook shape) in the next episode of this cluster.
 
 ## TITLE OPTIONS
@@ -76,18 +88,14 @@ _For a published Short, pick the frame in the YouTube app (Edit → Thumbnail) t
 
 ## DESCRIPTION IMPROVEMENT
 
-Issues in the current description:
-- no footage/source attribution
-- no technical references
-- no related-episode or playlist link (session growth)
-- no synthetic-voice disclosure line
+Current description covers the essentials.
 
 Proposed description:
 
 ```
 May 6, 1937: the Hindenburg airship burned in just 34 seconds, ending the age of the zeppelin forever. The failure mechanism: hydrogen ignition, most likely from static discharge.
 
-Failure chain: Hydrogen leak near tail → Static charge in stormy air → Spark ignites gas → Fire races through gas cells → Ship lost in ~34 seconds
+Failure chain: Hydrogen leak near tail → Static charge In stormy air → Spark ignites gas → Fire races through gas cells → Ship lost In ~34 seconds
 
 Another reconstruction: Why the Tacoma Narrows Bridge Tore Itself Apart — https://youtu.be/qkzRUqlEy5I
 
@@ -151,7 +159,7 @@ _Post with `node pinned-comment.js --post-pending`, then pin it in Studio (the A
 
 ## SUBSCRIBER CONVERSION OPPORTUNITY
 
-Subscribers per 1,000 views: unavailable (needs Analytics scope).
+Subscribers per 1,000 views: **2**.
 Shorts: no spoken CTA (it costs retention). Convert through the series: pinned comment → related episode, and a cluster playlist once it has 3+ videos.
 
 ## ACTION PRIORITY
@@ -159,7 +167,6 @@ Shorts: no spoken CTA (it costs retention). Convert through the series: pinned c
 **P4** — low-data video: fix objective gaps only, then wait for data
 
 - `KEEP` — outperforming the channel — keep title and thumbnail; only fix objective gaps below
-- `REDESCRIBE` — no footage/source attribution; no technical references; no related-episode or playlist link (session growth); no synthetic-voice disclosure line
 - `REVIEW_MANUALLY` — Published narration states a spark ignited leaking gas as fact; it is the leading theory (static discharge), not proven. The pinned comment/description should say "most likely".
 
 Apply (manual, reversible — review first):

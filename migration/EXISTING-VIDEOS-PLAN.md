@@ -21,29 +21,27 @@ _none_
 ## P4
 
 ### The Disaster That Ended the Age of the Airship
-https://youtu.be/PGOKZhPYo7c · 978 views · diagnosis: OUTPERFORMER
+https://youtu.be/PGOKZhPYo7c · 981 views · diagnosis: OUTPERFORMER
 
 - `KEEP` — outperforming the channel — keep title and thumbnail; only fix objective gaps below
-- `REDESCRIBE` — no footage/source attribution; no technical references; no related-episode or playlist link (session growth); no synthetic-voice disclosure line
 - `REVIEW_MANUALLY` — Published narration states a spark ignited leaking gas as fact; it is the leading theory (static discharge), not proven. The pinned comment/description should say "most likely".
 
 ### Why the Tacoma Narrows Bridge Tore Itself Apart
-https://youtu.be/qkzRUqlEy5I · 176 views · diagnosis: HEALTHY
+https://youtu.be/qkzRUqlEy5I · 178 views · diagnosis: HEALTHY
 
-- `REDESCRIBE` — no footage/source attribution; no technical references; no related-episode or playlist link (session growth); no synthetic-voice disclosure line
+- `KEEP` — no action needed with the data available
 - Title to test later (as a logged experiment): "Filmed as It Fell: The Tacoma Narrows Collapse"
 
 ### Why San Francisco Burned for Three Days
-https://youtu.be/X0jw78mIGdk · 113 views · diagnosis: INSUFFICIENT_DATA, WEAK_TOPIC_PACKAGING
+https://youtu.be/X0jw78mIGdk · 110 views · diagnosis: INSUFFICIENT_DATA, WEAK_TOPIC_PACKAGING
 
-- `REDESCRIBE` — no footage/source attribution; no technical references; no related-episode or playlist link (session growth); no synthetic-voice disclosure line
 - `REVIEW_MANUALLY` — Published narration says the fire, not the quake, did most of the killing. Sources agree fire caused most of the DESTRUCTION; the split of deaths is uncertain. Clarify in the pinned comment/description rather than re-uploading.
 - Title to test later (as a logged experiment): "No Water, Three Days of Fire: San Francisco 1906"
 
 ### The Nuclear Test That Poisoned a Paradise Forever
-https://youtu.be/DLYpmaQ-EVw · 52 views · diagnosis: INSUFFICIENT_DATA, WEAK_TOPIC_PACKAGING
+https://youtu.be/DLYpmaQ-EVw · 88 views · diagnosis: INSUFFICIENT_DATA, WEAK_TOPIC_PACKAGING
 
-- `REDESCRIBE` — no footage/source attribution; no technical references; no related-episode or playlist link (session growth); no synthetic-voice disclosure line
+- `KEEP` — no action needed with the data available
 
 ## Order of work
 

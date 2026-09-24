@@ -1,7 +1,7 @@
 # Optimization report — The Nuclear Test That Poisoned a Paradise Forever
 
 Video: https://youtu.be/DLYpmaQ-EVw · short · 38s · published 2026-09-24 (0 days ago) · public
-Production slug: `bikini-baker` · Analytics: unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js) · Generated 2026-09-24T16:23:55.960Z
+Production slug: `bikini-baker` · Analytics: ok · Generated 2026-09-24T21:02:25.515Z
 
 > Nothing here is applied automatically. No video is deleted or re-uploaded. Metrics marked *unavailable* were not invented.
 
@@ -20,35 +20,47 @@ _Shorts: the feed shows a frame from the video; the opening frame and on-screen 
 ## CURRENT DESCRIPTION
 
 ```
-In 1946 the US detonated an atomic bomb underwater at Bikini Atoll - the test that contaminated an entire fleet and left a paradise uninhabitable to this day.
+In 1946 the US detonated an atomic bomb underwater at Bikini Atoll - the test that contaminated an entire fleet and left a paradise uninhabitable to this day. The failure mechanism: radioactive base surge and spray.
 
-#shorts #history #nuclear #disaster #coldwar
+Failure chain: 23-kiloton underwater blast → 2 million tons of water lifted → Radioactive base surge → Fleet coated in fallout → Decontamination fails
+
+Another reconstruction: The Disaster That Ended the Age of the Airship — https://youtu.be/PGOKZhPYo7c
+
+Footage & sources:
+• Archival film: "Baker Shot" — Wikimedia Commons (public domain / free licence): https://commons.wikimedia.org/wiki/File:Baker_Shot.ogv
+
+Technical references:
+• Wikipedia — Operation Crossroads — https://en.wikipedia.org/wiki/Operation_Crossroads
+
+Narration uses a synthetic voice. Footage is real archival film or licensed stock; anything reconstructed is labelled on screen.
+
+#shorts #engineering #nuclear
 ```
 
 ## CURRENT PERFORMANCE
 
 | Metric | Value | Source / reason |
 |---|---|---|
-| Views | 52 | Data API |
+| Views | 88 | Data API |
 | Likes | 0 | Data API |
-| Comments | 0 | Data API |
+| Comments | 1 | Data API |
 | Impressions | unavailable | not exposed by YouTube APIs — export from Studio into studio-manual.json |
 | CTR | unavailable | not exposed by YouTube APIs — export from Studio into studio-manual.json |
-| Watch time | unavailable | unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js) |
-| Average view duration | unavailable | unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js) |
-| Average % viewed | unavailable | unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js) |
-| Subscribers gained (net) | unavailable | unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js) |
-| Shares | unavailable | unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js) |
+| Watch time | unavailable | analytics unavailable |
+| Average view duration | unavailable | analytics unavailable |
+| Average % viewed | unavailable | analytics unavailable |
+| Subscribers gained (net) | unavailable | analytics unavailable |
+| Shares | unavailable | analytics unavailable |
 | Returning viewers | unavailable | not exposed per video by the public API |
-| Retention at 30 s | unavailable | unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js) |
+| Retention at 30 s | unavailable | analytics unavailable |
 
-Traffic sources: unavailable (unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js))
+Traffic sources: 
 
-Derived: subsPer1000 = unavailable · likeRate = 0 · commentRate = 0
+Derived: subsPer1000 = unavailable · likeRate = 0 · commentRate = 1.14
 
 ## PROBLEM DIAGNOSIS
 
-- **INSUFFICIENT_DATA** (confidence: high) — 52 views after 0 days — too early/small for rate-based conclusions.
+- **INSUFFICIENT_DATA** (confidence: high) — 88 views after 0 days — too early/small for rate-based conclusions.
   → Do not change packaging yet unless something is objectively broken (missing sources, typo). Re-check at 7 days.
 - **WEAK_TOPIC_PACKAGING** (confidence: low) — Current title scores 45.6/100 in the title engine; best editorial option scores 45.6.
   → Heuristic only — test the stronger title as a logged experiment rather than switching silently.
@@ -78,11 +90,7 @@ _For a published Short, pick the frame in the YouTube app (Edit → Thumbnail) t
 
 ## DESCRIPTION IMPROVEMENT
 
-Issues in the current description:
-- no footage/source attribution
-- no technical references
-- no related-episode or playlist link (session growth)
-- no synthetic-voice disclosure line
+Current description covers the essentials.
 
 Proposed description:
 
@@ -159,7 +167,7 @@ Shorts: no spoken CTA (it costs retention). Convert through the series: pinned c
 
 **P4** — low-data video: fix objective gaps only, then wait for data
 
-- `REDESCRIBE` — no footage/source attribution; no technical references; no related-episode or playlist link (session growth); no synthetic-voice disclosure line
+- `KEEP` — no action needed with the data available
 
 Apply (manual, reversible — review first):
 

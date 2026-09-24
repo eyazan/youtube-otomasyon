@@ -1,7 +1,7 @@
 # Optimization report — Why the Tacoma Narrows Bridge Tore Itself Apart
 
 Video: https://youtu.be/qkzRUqlEy5I · short · 33s · published 2026-09-22 (2 days ago) · public
-Production slug: `tacoma-narrows` · Analytics: unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js) · Generated 2026-09-24T16:23:55.989Z
+Production slug: `tacoma-narrows` · Analytics: ok · Generated 2026-09-24T21:02:26.635Z
 
 > Nothing here is applied automatically. No video is deleted or re-uploaded. Metrics marked *unavailable* were not invented.
 
@@ -20,31 +20,44 @@ _Shorts: the feed shows a frame from the video; the opening frame and on-screen 
 ## CURRENT DESCRIPTION
 
 ```
-In 1940, the Tacoma Narrows Bridge twisted itself apart in a 40 mph wind — the most famous engineering failure ever caught on film. This is why it happened.
+In 1940, the Tacoma Narrows Bridge twisted itself apart in a 40 mph wind — the most famous engineering failure ever caught on film. This is why it happened. The failure mechanism: aeroelastic flutter.
 
-#shorts #history #engineering #disaster #bridge
+Failure chain: Steady 40 mph wind → Deck begins to twist → Aeroelastic flutter → Twist feeds on itself → Center span fails
+
+Another reconstruction: The Disaster That Ended the Age of the Airship — https://youtu.be/PGOKZhPYo7c
+
+Footage & sources:
+• Archival film: "Tacoma Narrows Bridge destruction" — Wikimedia Commons (public domain / free licence): https://commons.wikimedia.org/wiki/File:Tacoma_Narrows_Bridge_destruction.ogv
+
+Technical references:
+• Wikipedia — Tacoma Narrows Bridge (1940) — https://en.wikipedia.org/wiki/Tacoma_Narrows_Bridge_(1940)
+• Wikipedia — Aeroelastic flutter — https://en.wikipedia.org/wiki/Aeroelastic_flutter
+
+Narration uses a synthetic voice. Footage is real archival film or licensed stock; anything reconstructed is labelled on screen.
+
+#shorts #engineering #bridges
 ```
 
 ## CURRENT PERFORMANCE
 
 | Metric | Value | Source / reason |
 |---|---|---|
-| Views | 176 | Data API |
+| Views | 178 | Data API |
 | Likes | 5 | Data API |
-| Comments | 0 | Data API |
+| Comments | 1 | Data API |
 | Impressions | unavailable | not exposed by YouTube APIs — export from Studio into studio-manual.json |
 | CTR | unavailable | not exposed by YouTube APIs — export from Studio into studio-manual.json |
-| Watch time | unavailable | unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js) |
-| Average view duration | unavailable | unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js) |
-| Average % viewed | unavailable | unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js) |
-| Subscribers gained (net) | unavailable | unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js) |
-| Shares | unavailable | unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js) |
+| Watch time | 23 min | Analytics API |
+| Average view duration | 22 s | Analytics API |
+| Average % viewed | 67.76% | Analytics API |
+| Subscribers gained (net) | 0 | Analytics API (net) |
+| Shares | 0 | Analytics API |
 | Returning viewers | unavailable | not exposed per video by the public API |
-| Retention at 30 s | unavailable | unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js) |
+| Retention at 30 s | 0.4167 | Analytics API (retention at 91% of video) |
 
-Traffic sources: unavailable (unavailable (OAuth scope lacks yt-analytics.readonly — re-run youtube-yetki.js))
+Traffic sources: Shorts feed 68% · Search 30% · Direct/unknown 1% · Browse/other YouTube 1%
 
-Derived: subsPer1000 = unavailable · likeRate = 2.8 · commentRate = 0
+Derived: subsPer1000 = 0 · likeRate = 2.8 · commentRate = 0.56
 
 ## PROBLEM DIAGNOSIS
 
@@ -76,11 +89,7 @@ _For a published Short, pick the frame in the YouTube app (Edit → Thumbnail) t
 
 ## DESCRIPTION IMPROVEMENT
 
-Issues in the current description:
-- no footage/source attribution
-- no technical references
-- no related-episode or playlist link (session growth)
-- no synthetic-voice disclosure line
+Current description covers the essentials.
 
 Proposed description:
 
@@ -152,14 +161,14 @@ _Post with `node pinned-comment.js --post-pending`, then pin it in Studio (the A
 
 ## SUBSCRIBER CONVERSION OPPORTUNITY
 
-Subscribers per 1,000 views: unavailable (needs Analytics scope).
+Subscribers per 1,000 views: **0**.
 Shorts: no spoken CTA (it costs retention). Convert through the series: pinned comment → related episode, and a cluster playlist once it has 3+ videos.
 
 ## ACTION PRIORITY
 
 **P4** — low-data video: fix objective gaps only, then wait for data
 
-- `REDESCRIBE` — no footage/source attribution; no technical references; no related-episode or playlist link (session growth); no synthetic-voice disclosure line
+- `KEEP` — no action needed with the data available
 
 Apply (manual, reversible — review first):
 
