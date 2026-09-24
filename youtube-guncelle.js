@@ -2,12 +2,17 @@
 // gunceller (videos.update). Zaten yuklenmis videolarda eksik metni tamamlamak
 // icin. Video dosyasini DEGISTIRMEZ, sadece metni.
 //
-// Metin kaynagi: uretim/<is>/YUKLEME.json ya da uretim/<is>/konu.json
-// (baslik/aciklama/etiketler) — youtube-yukle.js ile ayni.
+// Metin kaynagi: uretim/<is>/YUKLEME.json varsa o; yoksa description-engine.js
+// (ozet + kaynaklar + teknik referanslar + ilgili bolum + aciklama notu) ve
+// ilgili etiketler. BASLIK VARSAYILAN OLARAK DEGISMEZ (canli baslik korunur);
+// baslik degisikligi bilincli bir deney olmali: --baslik "<yeni>" ya da
+// --baslik-spec (konu spec'indeki baslik).
+//
+// Geri alinabilir: eski snippet analysis/<video-id>/snippet-before-<zaman>.json'a yazilir.
 //
 // Kullanim:
-//   node youtube-guncelle.js <video-id> <is-adi>
-//   ornek: node youtube-guncelle.js qkzRUqlEy5I tacoma-narrows
+//   node youtube-guncelle.js <video-id> <is-adi> [--dogrula] [--baslik "<yeni>" | --baslik-spec]
+//   ornek: node youtube-guncelle.js qkzRUqlEy5I tacoma-narrows --dogrula
 
 const fs = require("fs");
 const path = require("path");
@@ -48,20 +53,25 @@ async function erisimJetonu() {
 
 const temizle = (s) => String(s).replace(/[<>]/g, "");
 
-function metniAl(BASE) {
+function metniAl(BASE, is) {
   const oz = path.join(BASE, "YUKLEME.json");
   if (fs.existsSync(oz)) { const j = JSON.parse(fs.readFileSync(oz, "utf8"));
     return { baslik: j.baslik, aciklama: j.aciklama, etiketler: j.etiketler || [] }; }
-  const k = JSON.parse(fs.readFileSync(path.join(BASE, "konu.json"), "utf8"));
-  return { baslik: k.baslik || k.baslik_en, aciklama: k.aciklama || k._not || "", etiketler: k.etiketler || [] };
+  const konu = require("./lib/kutuphane").uretimKonusu(is);
+  if (!konu) throw new Error("Konu bulunamadi: " + is);
+  const d = require("./description-engine").olustur(konu);
+  return { baslik: konu.baslik || konu.baslik_en, aciklama: d.metin, etiketler: d.etiketler };
 }
 
 async function main() {
-  const [id, is] = process.argv.slice(2);
-  if (!id || !is) { console.error("Kullanim: node youtube-guncelle.js <video-id> <is-adi>"); process.exit(1); }
+  const argv = process.argv.slice(2);
+  const [id, is] = argv.filter((a, i) => !a.startsWith("--") && argv[i - 1] !== "--baslik");
+  const kuru = argv.includes("--dogrula");
+  const bi = argv.indexOf("--baslik");
+  if (!id || !is) { console.error("Kullanim: node youtube-guncelle.js <video-id> <is-adi> [--dogrula] [--baslik \"<yeni>\" | --baslik-spec]"); process.exit(1); }
+  if (!/^[A-Za-z0-9_-]{11}$/.test(id)) { console.error("Gecersiz video kimligi: " + id); process.exit(1); }
   const BASE = path.join(KOK, "uretim", is);
-  if (!fs.existsSync(path.join(BASE, "konu.json"))) { console.error("Is yok: " + BASE); process.exit(1); }
-  const m = metniAl(BASE);
+  const m = metniAl(BASE, is);
   const token = await erisimJetonu();
 
   // Mevcut snippet'i al (categoryId gerekli).
@@ -71,16 +81,24 @@ async function main() {
   const items = JSON.parse(mevcut.govde).items || [];
   if (!items.length) throw new Error("Video bulunamadi (senin kanalinda mi?): " + id);
   const snip = items[0].snippet;
+  const baslik = bi >= 0 ? argv[bi + 1] : argv.includes("--baslik-spec") ? m.baslik : snip.title;
 
   const yeni = {
     id,
     snippet: {
-      title: temizle(m.baslik || snip.title).slice(0, 100),
+      title: temizle(baslik || snip.title).slice(0, 100),
       description: temizle(m.aciklama || snip.description || ""),
       tags: (m.etiketler && m.etiketler.length ? m.etiketler : snip.tags || []).map(String).slice(0, 30),
       categoryId: snip.categoryId || "27",
     },
   };
+  console.log("Baslik : " + (yeni.snippet.title === snip.title ? "(degismiyor) " : snip.title + "  ->  ") + yeni.snippet.title);
+  console.log("Aciklama:\n" + yeni.snippet.description.split("\n").map((l) => "  | " + l).join("\n"));
+  if (kuru) { console.log("\n[--dogrula] Hicbir sey gonderilmedi."); return; }
+  const yedek = path.join(KOK, "analysis", id, "snippet-before-" + new Date().toISOString().replace(/[:.]/g, "-") + ".json");
+  fs.mkdirSync(path.dirname(yedek), { recursive: true });
+  fs.writeFileSync(yedek, JSON.stringify(snip, null, 2));
+  console.log("Yedek  : " + path.relative(KOK, yedek));
   const body = JSON.stringify(yeni);
   const y = await istek({ hostname: "www.googleapis.com",
     path: "/youtube/v3/videos?part=snippet", method: "PUT",

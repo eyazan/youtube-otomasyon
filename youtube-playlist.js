@@ -56,17 +56,27 @@ async function post(tok, yol, obj) {
   return JSON.parse(r.govde);
 }
 
+// Playlist kimlikleri kaydi (ic baglanti / aciklama linkleri icin)
+const PL_KAYIT = path.join(KOK, "icerik", "playlistler.json");
+function kaydet(ad, id) {
+  let k = {}; try { k = JSON.parse(fs.readFileSync(PL_KAYIT, "utf8")); } catch (e) {}
+  if (k[ad] === id) return;
+  k[ad] = id; fs.mkdirSync(path.dirname(PL_KAYIT), { recursive: true }); fs.writeFileSync(PL_KAYIT, JSON.stringify(k, null, 2) + "\n");
+}
+
 // Adi verilen listeyi bul; yoksa herkese acik olarak olustur.
 async function listeBulYaDaOlustur(tok, ad) {
   const d = await get(tok, "playlists?part=snippet&mine=true&maxResults=50");
   const var_ = (d.items || []).find(p => p.snippet.title === ad);
-  if (var_) return var_.id;
-  const bilgi = Object.values(SERILER).find(s => s.ad === ad);
+  if (var_) { kaydet(ad, var_.id); return var_.id; }
+  const kume = Object.values(require("./lib/kutuphane").KUMELER).find(k => k.ad === ad);
+  const bilgi = Object.values(SERILER).find(s => s.ad === ad) || (kume && { aciklama: kume.aciklama + " A Failure Reconstructed series." });
   const yeni = await post(tok, "playlists?part=snippet,status", {
     snippet: { title: ad, description: bilgi ? bilgi.aciklama : "" },
     status: { privacyStatus: "public" },
   });
   console.log("  + yeni seri olusturuldu: " + ad);
+  kaydet(ad, yeni.id);
   return yeni.id;
 }
 
@@ -83,7 +93,20 @@ async function ekle(tok, videoId, ad) {
   console.log("  ✓ seriye eklendi: " + ad);
 }
 
-module.exports = { ekle, seriAdi, token, SERILER };
+// Kume (konu ailesi) playlist'i: yalnizca kumede yeterli yayinlanmis video varsa
+// (config clusters.minVideosForPlaylist) — tek videolu bos listeler acilmaz.
+// Esik ilk asildiginda kumenin onceki videolari da listeye eklenir.
+async function kumeyeEkle(tok, videoId, konu) {
+  const K = require("./lib/kutuphane");
+  const min = require("./lib/ayar").ayar().clusters.minVideosForPlaylist;
+  const kumeId = K.kumeBul(konu);
+  const ad = K.KUMELER[kumeId].ad;
+  const ayni = K.yayinlananlar().filter(y => y.slug && (K.konuOku(y.slug) ? K.kumeBul(K.konuOku(y.slug)) === kumeId : false));
+  if (ayni.length < min) { console.log(`  · kume "${ad}": ${ayni.length}/${min} video — playlist henuz acilmiyor`); return; }
+  for (const y of ayni) await ekle(tok, y.videoId, ad);
+}
+
+module.exports = { ekle, kumeyeEkle, seriAdi, token, SERILER };
 
 // --- CLI ---
 if (require.main === module) {

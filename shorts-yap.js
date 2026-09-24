@@ -17,6 +17,15 @@
 // Kaynak klipler once indirilir (arsiv-bul.js). "baslangic" = kaynaktaki saniye.
 //
 // Cikti: uretim/<is>/Videos/<is>.mp4  (1080x1920)
+//        uretim/<is>/Videos/sahne-zamanlari.json  (kapak karesi / analiz icin)
+//
+// Belgesel katmani (lib + motorlar):
+//   - telaffuz sozlugu TTS'e uygulanir (config/pronunciation.json; altyazi orijinal kalir)
+//   - scene-pacing: sahnenin anlatidaki rolune gore alt cekim kesmeleri + hareket
+//     (olay = hizli kesme/punch-in, teknik = yavas surukleme) — kare hassasiyetinde zamanlama
+//   - engineering-visuals: teknik sahnede "FAILURE CHAIN" ust katmani (~3 sn)
+//   - vaka videolarinda tarih/yer damgasi; sentetik sahnelerde RECONSTRUCTION etiketi
+//   - muzik profili kumeye gore (lib/muzik.js) — her video ayni yatagi calmaz
 //
 // Kullanim: node shorts-yap.js <is-adi>
 
@@ -27,6 +36,11 @@ const cp = require("child_process");
 const { MsEdgeTTS, OUTPUT_FORMAT } = require("msedge-tts");
 const FF = require("./ff-yol.js");
 const font = require("./font-yol.js");
+const pacing = require("./scene-pacing");
+const telaffuz = require("./pronunciation-check");
+const muzik = require("./lib/muzik");
+const K = require("./lib/kutuphane");
+const { ayar } = require("./lib/ayar");
 
 const KOK = __dirname;
 const IS = process.argv.find((a, i) => i >= 2 && !a.startsWith("--"));
@@ -41,7 +55,6 @@ const HIZ = konu.sesHizi || "+6%";
 const FONT = konu.altyaziFont || process.env.SHORTS_FONT || "Arial Black";
 const KANAL = (konu.kanal || "Failure Reconstructed");
 const HANDLE = konu.handle || ("@" + KANAL.replace(/[^A-Za-z0-9]/g, ""));
-const ENDCARD = 1.8;   // saniye — markali kapanis karti (kisa = daha iyi retention)
 const DFONT = font(true);   // drawtext icin acik font yolu
 // Buyume: ekranda kanca (ilk ~2.5s) + sona etkilesim sorusu (yorum icin)
 const cleanTxt = (s) => String(s || "").replace(/[{}]/g, "").replace(/\\/g, "").replace(/[<>]/g, "");
@@ -100,7 +113,8 @@ const assKacis = (s) => String(s).replace(/[{}]/g, "").replace(/\\/g, "");
   console.log(`Shorts: ${IS}  (${W}x${H}, ${sahneler.length} sahne, ses ${SES})`);
   const vo = path.join(TMP, "vo.mp3");
   const anlati = sahneler.map(s => s.metin.trim()).join(" ");
-  await seslendirGuvenli(anlati, vo);
+  // Ses sozluk karsiliklariyla okunur (O-ring -> "O ring"); altyazi orijinal yazimi korur.
+  await seslendirGuvenli(telaffuz.ttsMetni(anlati), vo);
   if (!fs.existsSync(vo) || fs.statSync(vo).size < 1000) throw new Error("Seslendirme uretilemedi.");
   const VODUR = sure(vo);
 
@@ -129,24 +143,54 @@ const assKacis = (s) => String(s).replace(/[{}]/g, "").replace(/\\/g, "");
     });
   }
 
-  // --- 2) her sahne icin dikey bulanik-dolgu klip ---
-  const vf =
+  // --- 2) sahne plani (anlatidaki role gore) + dikey bulanik-dolgu alt cekimler ---
+  const planlar = pacing.planKisa(konu, sahneler.map(s => s.dur));
+  const taban =
     "[0:v]scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,boxblur=26:2,eq=brightness=-0.20:contrast=1.05[bg];" +
     "[0:v]scale=1080:-2[fg];" +
-    "[bg][fg]overlay=(W-w)/2:(H-h)/2:shortest=1,noise=alls=6:allf=t+u,vignette=angle=PI/4.5,fps=30,format=yuv420p[v]";
+    "[bg][fg]overlay=(W-w)/2:(H-h)/2:shortest=1,noise=alls=6:allf=t+u,vignette=angle=PI/4.5,fps=30,format=yuv420p";
+  // Hareket: punch = tek sayili alt cekimde anlik %7 yakinlasma (kurgu ritmi);
+  // push/drift = 2x ara olcekte zoompan (alt-piksel titreme olmasin).
+  const hareketFiltre = (h, j, n) => {
+    if (h === "punch") return j % 2 ? "crop=iw/1.07:ih/1.07,scale=1080:1920,setsar=1" : "";
+    if (h === "push") return `scale=2160:3840,zoompan=z='1+0.045*on/${n}':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s=1080x1920:fps=30`;
+    if (h === "drift") return `scale=2160:3840,zoompan=z='1.04':x='(iw-iw/zoom)*(0.5+0.35*(on/${n}-0.5))':y='ih/2-(ih/zoom/2)':d=1:s=1080x1920:fps=30`;
+    return "";
+  };
+  const kaynakSure = {};
   const klipler = [];
+  const zamanlar = [];
+  const ATLA = 0.6;          // alt cekimler arasi kaynakta ileri atlama (jump cut)
+  let n = 0;
   for (let i = 0; i < sahneler.length; i++) {
-    const s = sahneler[i];
+    const s = sahneler[i], p = planlar[i];
     const kaynak = path.join(BASE, s.kaynak);
     if (!fs.existsSync(kaynak)) throw new Error("Kaynak klip yok: " + s.kaynak + " (once: node arsiv-bul.js " + IS + ")");
-    const out = path.join(TMP, "s" + String(i).padStart(2, "0") + ".mp4");
-    run(["-hide_banner", "-loglevel", "error", "-ss", String(s.baslangic || 0), "-t", s.dur.toFixed(3),
-      "-i", kaynak, "-filter_complex", vf, "-map", "[v]", "-r", String(FPS),
-      "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p", "-an", "-y", out]);
-    klipler.push(out);
-    process.stdout.write(`\r  sahne ${i + 1}/${sahneler.length}   `);
+    if (kaynakSure[s.kaynak] == null) kaynakSure[s.kaynak] = sure(kaynak) || 0;
+    // Kare hassasiyetli sinirlar: yuvarlama hatasi sahneler boyunca birikmesin (ses senkronu)
+    const f0 = Math.round(s.start * FPS), f1 = Math.round((s.start + s.dur) * FPS);
+    const kareler = Math.max(1, f1 - f0);
+    const k = Math.max(1, Math.min(p.cekimSayisi || 1, Math.floor(kareler / (1.2 * FPS))));
+    const bol = Array.from({ length: k }, (_, j) => Math.round(kareler * (j + 1) / k) - Math.round(kareler * j / k));
+    const kalan = Math.max(0, kaynakSure[s.kaynak] - (s.baslangic || 0) - kareler / FPS - 0.1);
+    const atla = k > 1 ? Math.min(ATLA, kalan / (k - 1)) : 0;
+    let t = s.baslangic || 0;
+    zamanlar.push({ sahne: i, bas: f0 / FPS, son: f1 / FPS, rol: p.rol, tempo: p.tempo, cekim: k, hareket: p.hareket });
+    for (let j = 0; j < k; j++) {
+      const out = path.join(TMP, "s" + String(n++).padStart(3, "0") + ".mp4");
+      const hf = hareketFiltre(p.hareket, j, bol[j]);
+      const vf = taban + (hf ? "[v0];[v0]" + hf + ",format=yuv420p[v]" : "[v]");
+      const ss = Math.max(0, Math.min(t, kaynakSure[s.kaynak] - bol[j] / FPS - 0.05));
+      run(["-hide_banner", "-loglevel", "error", "-ss", ss.toFixed(3), "-i", kaynak, "-filter_complex", vf, "-map", "[v]",
+        "-frames:v", String(bol[j]), "-r", String(FPS),
+        "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p", "-an", "-y", out]);
+      klipler.push(out);
+      t = ss + bol[j] / FPS + atla;
+    }
+    process.stdout.write(`\r  sahne ${i + 1}/${sahneler.length} (${p.rol}, ${k} cekim)   `);
   }
   console.log("");
+  fs.writeFileSync(path.join(VID, "sahne-zamanlari.json"), JSON.stringify(zamanlar, null, 2));
 
   // --- 3) sahneleri birlestir ---
   // Loop icin AYRI kapanis karti YOK — video canli goruntude biter, boylece
@@ -158,17 +202,17 @@ const assKacis = (s) => String(s).replace(/[{}]/g, "").replace(/\\/g, "");
   run(["-hide_banner", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", liste, "-c", "copy", "-y", vid]);
   const TOPLAM = sure(vid);
 
-  // --- muzik yatagi (prosedurel, telifsiz, konuya gore hafif farkli) ---
+  // --- muzik yatagi (prosedurel, telifsiz) — profil kumeye + slug'a gore (lib/muzik.js) ---
   const bed = path.join(TMP, "bed.wav");
-  const kok = 50 + (IS.length % 6) * 4;                 // 50..70 Hz — konuya gore
+  const mp = muzik.profil(IS, K.kumeBul(konu));
   run(["-hide_banner", "-loglevel", "error",
-    "-f", "lavfi", "-i", `sine=frequency=${kok}:duration=${TOPLAM.toFixed(2)}`,
-    "-f", "lavfi", "-i", `sine=frequency=${(kok * 1.5).toFixed(2)}:duration=${TOPLAM.toFixed(2)}`,
-    "-f", "lavfi", "-i", `anoisesrc=d=${TOPLAM.toFixed(2)}:c=pink:a=0.04`,
+    "-f", "lavfi", "-i", `sine=frequency=${mp.kok}:duration=${TOPLAM.toFixed(2)}`,
+    "-f", "lavfi", "-i", `sine=frequency=${(mp.kok * mp.oran).toFixed(2)}:duration=${TOPLAM.toFixed(2)}`,
+    "-f", "lavfi", "-i", `anoisesrc=d=${TOPLAM.toFixed(2)}:c=${mp.renk}:a=0.04`,
     "-filter_complex",
-      `[0]volume=0.55,tremolo=f=0.12:d=0.5[a];[1]volume=0.26[b];` +
+      `[0]volume=0.55,tremolo=f=${mp.trem}:d=0.5[a];[1]volume=0.26[b];` +
       `[2]highpass=f=180,lowpass=f=1100,volume=0.6[c];` +
-      `[a][b][c]amix=inputs=3:normalize=0,lowpass=f=850,aecho=0.8:0.9:550|850:0.28|0.2,` +
+      `[a][b][c]amix=inputs=3:normalize=0,lowpass=f=${mp.alcak},aecho=0.8:0.9:${mp.yanki[0]}|${mp.yanki[1]}:0.28|0.2,` +
       `afade=t=in:st=0:d=1.6,afade=t=out:st=${(TOPLAM - 1.6).toFixed(2)}:d=1.6[m]`,
     "-map", "[m]", "-t", TOPLAM.toFixed(2), "-y", bed]);
 
@@ -213,6 +257,24 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
       ekstra.push(`Dialogue: 0,${assTime(0.15)},${assTime(hookSon)},Pop,,0,0,0,,` +
         `{\\an5\\pos(${cx},${y})\\fs${fs}\\bord${bord}\\shad3\\fad(160,220)}${assKacis(HOOK.toUpperCase())}`);
     }
+    // Tarih/yer damgasi (yalnizca belirli bir olay/vaka ise) — baglam sahnesinde
+    const v = konu.vaka || {};
+    if (v.tip === "vaka" && v.yil) {
+      const bi = Math.max(1, planlar.findIndex((p) => p.rol === "context"));
+      const z = zamanlar[Math.min(bi, zamanlar.length - 1)];
+      const son = Math.min(z.son, z.bas + 3.2);
+      if (z.bas >= 2.7) ekstra.push(`Dialogue: 0,${assTime(z.bas + 0.1)},${assTime(son)},Pop,,0,0,0,,` +
+        `{\\an7\\pos(64,${Math.round(H * 0.105)})\\fs${Math.round(W * 0.036)}\\bord3\\shad2\\1c&H41A4D9&\\fad(180,180)}` +
+        assKacis(`${v.yil} · ${(v.kisa || "").toUpperCase()}`));
+    }
+    // Sentetik (AI) sahne etiketi — gizlenmez (config/growth.json disclosure)
+    const ds = ayar().disclosure;
+    if (ds.enabled) sahneler.forEach((sh, i) => {
+      if (!sh.sentetik) return;
+      const z = zamanlar[i];
+      ekstra.push(`Dialogue: 1,${assTime(z.bas)},${assTime(z.son)},Pop,,0,0,0,,` +
+        `{\\an9\\pos(${W - 50},${Math.round(H * 0.105)})\\fs${Math.round(W * 0.028)}\\bord2\\shad0}` + assKacis(ds.label || "RECONSTRUCTION"));
+    });
     if (SORU) {
       const fs = Math.round(W * 0.040), bord = Math.max(3, Math.round(W * 0.004));
       const y = Math.round(H * 0.30);
@@ -228,20 +290,40 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
   // --- 5) handle filigrani + altyazi + ses (loudnorm konusma + ducking'li muzik) ---
   const cikti = path.join(VID, IS + ".mp4");
   const hy = Math.round(H * 0.052);
-  const vFilter =
-    `[0:v]drawtext=fontfile='${DFONT}':text='${HANDLE.replace(/'/g, "")}':fontcolor=white@0.72:` +
-    `fontsize=${Math.round(W * 0.030)}:x=(w-tw)/2:y=${hy}:shadowcolor=black@0.5:shadowx=0:shadowy=2,` +
-    `subtitles='${assPath.replace(/:/g, "\\:")}',format=yuv420p[v]`;
+  // Muhendislik ust katmani: ilk teknik/kesif sahnesinde ~3 sn FAILURE CHAIN paneli
+  // (kanca ve kapanis sorusu pencereleriyle cakismaz).
+  let ustKatman = null;
+  const ti = planlar.findIndex((p, i) => ["technical", "discovery"].includes(p.rol) && zamanlar[i].bas >= 3 && zamanlar[i].bas + 3 <= VODUR - 3);
+  if (ti >= 0) {
+    try {
+      const png = require("./engineering-visuals").kisaUstKatman(konu, path.join(TMP, "zincir.png"));
+      if (png) {
+        const a = zamanlar[ti].bas + 0.15, b = Math.min(a + 3.4, VODUR - 3);
+        ustKatman = { png, a, b };
+        fs.writeFileSync(path.join(VID, "muhendislik-katmani.json"), JSON.stringify({ tip: "failure-chain", sahne: ti, bas: a, son: b }, null, 2));
+      }
+    } catch (e) { console.log("  (muhendislik katmani atlandi: " + e.message.slice(0, 120) + ")"); }
+  }
+  const handleF = `drawtext=fontfile='${DFONT}':text='${HANDLE.replace(/'/g, "")}':fontcolor=white@0.72:` +
+    `fontsize=${Math.round(W * 0.030)}:x=(w-tw)/2:y=${hy}:shadowcolor=black@0.5:shadowx=0:shadowy=2`;
+  const altyaziF = `subtitles='${assPath.replace(/:/g, "\\:")}',format=yuv420p[v]`;
+  const vFilter = ustKatman
+    ? `[0:v]${handleF}[b0];[3:v]format=rgba,fade=t=in:st=${ustKatman.a.toFixed(2)}:d=0.3:alpha=1,fade=t=out:st=${(ustKatman.b - 0.3).toFixed(2)}:d=0.3:alpha=1[ov];` +
+      `[b0][ov]overlay=0:0:enable='between(t,${ustKatman.a.toFixed(2)},${ustKatman.b.toFixed(2)})'[b1];[b1]${altyaziF}`
+    : `[0:v]${handleF},${altyaziF}`;
   const aFilter =
     `[1:a]loudnorm=I=-16:TP=-1.5:LRA=11,apad,asplit=2[vo1][vo2];` +
     `[2:a]volume=1.0[mus];` +
     `[mus][vo1]sidechaincompress=threshold=0.035:ratio=6:attack=6:release=340[duck];` +
     `[duck][vo2]amix=inputs=2:duration=first:dropout_transition=0,alimiter=limit=0.95[a]`;
   run(["-hide_banner", "-loglevel", "error", "-i", vid, "-i", vo, "-i", bed,
+    ...(ustKatman ? ["-loop", "1", "-t", TOPLAM.toFixed(2), "-i", ustKatman.png] : []),
     "-filter_complex", vFilter + ";" + aFilter,
     "-map", "[v]", "-map", "[a]", "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p",
     "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", "-y", cikti]);
 
-  console.log(`✓ Bitti: ${path.relative(KOK, cikti)}  (${sure(cikti).toFixed(1)}s, ${W}x${H})`);
+  try { K.defterYaz(IS, { muzik: mp, render: { sure: sure(cikti), tarih: new Date().toISOString(), ustKatman: !!ustKatman } }); }
+  catch (e) { console.log("  (kaynak defteri yazilamadi: " + e.message + ")"); }
+  console.log(`✓ Bitti: ${path.relative(KOK, cikti)}  (${sure(cikti).toFixed(1)}s, ${W}x${H}${ustKatman ? ", failure-chain katmani" : ""})`);
   try { fs.rmSync(TMP, { recursive: true, force: true }); } catch (e) {}
 })().catch(e => { console.error("\nHata: " + e.message); try { fs.rmSync(TMP, { recursive: true, force: true }); } catch (_) {} process.exit(1); });

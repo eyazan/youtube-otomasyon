@@ -24,7 +24,13 @@
 //
 // Yukleme metni oncelik sirasi:
 //   uretim/<is>/YUKLEME.json  ({ "baslik":"", "aciklama":"", "etiketler":[] })
-//   -> yoksa konu.json'dan (baslik_en, _not) turetilir.
+//   -> yoksa paketleme motorlari: baslik = title-engine secimi (icerik/paket/<is>/titles.json,
+//      yoksa konu.baslik), aciklama + etiketler = description-engine.js.
+//   -> motor calismazsa konu.json (baslik/aciklama/etiketler) — eski davranis.
+//
+// Yukleme sonrasi: icerik/yayinlananlar.json kaydi (slug <-> videoId), format serisi +
+// (yeterli video varsa) kume playlist'i, uzun formatta kapak (thumbnails.set).
+// Sentetik/yeniden kurgu goruntu iceren videolarda status.containsSyntheticMedia=true.
 
 const fs = require("fs");
 const path = require("path");
@@ -98,6 +104,17 @@ function yuklemeMetni(BASE) {
       etiketler: Array.isArray(j.etiketler) ? j.etiketler.map(String) : [],
     };
   }
+  const slug = path.basename(BASE);
+  try {
+    const K = require("./lib/kutuphane");
+    const konuP = K.uretimKonusu(slug);
+    if (konuP && konuP.vaka) {
+      const t = K.paketYolu(slug, "titles.json");
+      const secilen = fs.existsSync(t) ? JSON.parse(fs.readFileSync(t, "utf8")).secilen : null;
+      const d = require("./description-engine").olustur(konuP);
+      return { baslik: String(secilen || konuP.baslik).slice(0, 100), aciklama: d.metin, etiketler: d.etiketler };
+    }
+  } catch (e) { console.log("  (paketleme motoru kullanilamadi, konu.json metni: " + e.message + ")"); }
   const konu = JSON.parse(fs.readFileSync(path.join(BASE, "konu.json"), "utf8"));
   const baslik = String(konu.baslik || konu.baslik_en || path.basename(BASE)).slice(0, 100);
   const aciklama = String(konu.aciklama || konu._not || "");
@@ -189,7 +206,10 @@ async function main() {
     tags: metin.etiketler.slice(0, 30),
     categoryId: env("YT_CATEGORY_ID") || "27",
   };
-  const status = { privacyStatus: gizlilik, selfDeclaredMadeForKids: false };
+  // Gercekci sentetik/yeniden kurgu goruntu varsa YouTube'a beyan edilir (gizlenmez).
+  let sentetik = false;
+  try { sentetik = (JSON.parse(fs.readFileSync(path.join(BASE, "konu.json"), "utf8")).sahneler || []).some((x) => x.sentetik); } catch (e) {}
+  const status = { privacyStatus: gizlilik, selfDeclaredMadeForKids: false, ...(sentetik ? { containsSyntheticMedia: true } : {}) };
 
   console.log("Dosya      : " + path.relative(KOK, dosya) + "  (" + (boyut / 1e6).toFixed(1) + " MB)");
   console.log("Baslik     : " + snippet.title);
@@ -232,14 +252,33 @@ async function main() {
     if (gizlilik !== "public") {
       console.log("  Herkese acmak icin YouTube Studio'dan inceleyip yayinla.");
     }
+    // Kayit: slug <-> videoId (analiz, ic baglanti ve takvim bunu kullanir)
+    try {
+      require("./lib/kutuphane").yayinKaydet({ slug: IS, videoId: j.id, baslik: snippet.title, tarih: new Date().toISOString(),
+        format: JSON.parse(fs.readFileSync(path.join(BASE, "konu.json"), "utf8")).format === "long" ? "long" : "short",
+        gizlilik, kaynak: "upload" });
+    } catch (e) { console.log("  (yayin kaydi yazilamadi: " + e.message + ")"); }
+    try { const kol = require("./experiments").otomatikAta(j.id, snippet.title); if (kol) console.log("  deney: title-style / " + kol); } catch (e) {}
     // Seriye (playlist) ekle — binge/oturum suresi icin. Hata yuklemeyi bozmaz.
     try {
       const pl = require("./youtube-playlist");
-      const konu = JSON.parse(fs.readFileSync(path.join(BASE, "konu.json"), "utf8"));
+      const konu = require("./lib/kutuphane").uretimKonusu(IS) || JSON.parse(fs.readFileSync(path.join(BASE, "konu.json"), "utf8"));
       await pl.ekle(token, j.id, pl.seriAdi(konu));
+      await pl.kumeyeEkle(token, j.id, konu);
     } catch (e) {
       console.log("  (seriye eklenemedi: " + e.message + ")");
     }
+    // Uzun formatta ozel kapak (Shorts akisi video karesini kullanir)
+    try {
+      const td = path.join(BASE, "thumbnails");
+      const jpg = fs.existsSync(td) ? fs.readdirSync(td).filter((f) => /^concept-1.*\.jpg$/.test(f))[0] : null;
+      if (jpg && (JSON.parse(fs.readFileSync(path.join(BASE, "konu.json"), "utf8")).format === "long")) {
+        const veri = fs.readFileSync(path.join(td, jpg));
+        const r = await istek({ hostname: "www.googleapis.com", path: "/upload/youtube/v3/thumbnails/set?videoId=" + j.id, method: "POST",
+          headers: { Authorization: "Bearer " + token, "Content-Type": "image/jpeg", "Content-Length": veri.length } }, veri);
+        console.log(r.durum === 200 ? "  ✓ kapak yuklendi: " + jpg : "  (kapak yuklenemedi HTTP " + r.durum + " — kanal dogrulamasi gerekebilir)");
+      }
+    } catch (e) { console.log("  (kapak: " + e.message + ")"); }
   } else {
     console.error("\nYukleme basarisiz (HTTP " + son.durum + "): " + son.govde.slice(0, 600));
     process.exit(1);

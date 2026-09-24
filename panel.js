@@ -231,6 +231,13 @@ const server = http.createServer(async (req, res) => {
     });
   }
 
+  // Kanal buyume paneli verisi (panel-public/buyume.html). Yalnizca olculmus veri.
+  if (yol === "/api/buyume") {
+    try { delete require.cache[require.resolve("./dashboard-veri")]; return json(res, 200, require("./dashboard-veri").topla()); }
+    catch (e) { return json(res, 500, { hata: e.message }); }
+  }
+  if (yol === "/buyume") { res.writeHead(302, { Location: "/buyume.html" }); return res.end(); }
+
   if (yol === "/api/isler") {
     let liste = [];
     try {

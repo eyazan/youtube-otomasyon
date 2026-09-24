@@ -71,7 +71,7 @@ const TMP = fs.mkdtempSync(path.join(BASE, '_tmp', 'render-'));
 // orta bandi -29 dB. Yani sesin 6.5 dB altinda — duyulur ama bogmaz.
 let ASPECT = "16:9", MUSIC_VOL = 0.40, KONU_BASLIK = "", KANAL = "", SLOGAN = "";
 let INTRO_D = null, TOPIC_D = null, OUTRO_D = null, SUNUCU = false, CD_D = null;
-let GECIS = "fade", CF_OZEL = null, EFEKT = "zoom", RENK = "sinematik";
+let GECIS = "fade", CF_OZEL = null, EFEKT_VARSAYILAN = "zoom", RENK = "sinematik";
 
 // --- renk tonlari ---
 const RENKLER = {
@@ -97,7 +97,7 @@ if (fs.existsSync(KONU)) {
     if (typeof k.geriSayim === "number") CD_D = k.geriSayim;
     if (k.gecis) GECIS = k.gecis;                 // xfade tipi
     if (typeof k.gecisSure === "number") CF_OZEL = k.gecisSure;
-    if (k.efekt) EFEKT = k.efekt;                 // hareket stili
+    if (k.efekt) EFEKT_VARSAYILAN = k.efekt;      // hareket stili (cekim plani yoksa)
     if (k.renk) RENK = k.renk;                    // renk tonu
     // sunucu figuru KALDIRILDI (altyaziyi engelliyordu)
   } catch (e) { console.log("konu.json okunamadi:", e.message); }
@@ -111,11 +111,15 @@ let CF = DIKEY ? 0.4 : 0.8;
 // MarginV=75 -> 75/288 * kare yuksekligi kadar alttan bosluk.
 const SUB_SIZE = DIKEY ? 13 : 22, SUB_MARGIN = DIKEY ? 75 : 55;
 
-// Intro / konu karti / outro sureleri (Shorts'ta kisa, uzun videoda tam)
-if (INTRO_D === null) INTRO_D = DIKEY ? 1.5 : 8;
-if (TOPIC_D === null) TOPIC_D = DIKEY ? 0 : 2.5;
-if (OUTRO_D === null) OUTRO_D = DIKEY ? 3 : 12;
-if (CD_D === null) CD_D = DIKEY ? 0 : 5;
+// Intro / konu karti / outro sureleri.
+// SOGUK ACILIS: belgesel ilk saniyede olayla baslar — logo animasyonu, film
+// lideri geri sayimi ya da konu karti VARSAYILAN DEGIL (izleyici ilk 5 sn'de
+// karar verir). konu.json ile acikca istenirse hala kullanilabilir.
+// Outro 10 sn: end screen ogeleri icin alan (sonraki bolum + abone karti).
+if (INTRO_D === null) INTRO_D = 0;
+if (TOPIC_D === null) TOPIC_D = 0;
+if (OUTRO_D === null) OUTRO_D = DIKEY ? 3 : 10;
+if (CD_D === null) CD_D = 0;
 if (CF_OZEL !== null) CF = CF_OZEL;   // film lideri geri sayimi (Shorts'ta yok)
 const OFFSET = CD_D + INTRO_D + TOPIC_D;   // seslendirme bu kadar gec baslar
 const BD = require('./font-yol')(true);
@@ -165,7 +169,9 @@ const srtTime = ms => {
 };
 
 // gecisli birlestirme: N girdi -> tek cikti
-function xfadeMerge(files, outFile, extra = []) {
+// cfs[i] = files[i] ile files[i+1] arasindaki gecis suresi (yoksa global CF).
+// Hizli sahnelerde neredeyse kesme (0.15 sn), yavas sahnelerde cozulme (0.8 sn).
+function xfadeMerge(files, outFile, extra = [], cfs = null) {
   const inputs = [];
   files.forEach(f => inputs.push("-i", f));
   const ds = files.map(dur);
@@ -173,9 +179,10 @@ function xfadeMerge(files, outFile, extra = []) {
   files.forEach((_, i) => fc.push(`[${i}:v]settb=AVTB,fps=${FPS},format=yuv420p[c${i}]`));
   let last = "c0", acc = ds[0];
   for (let i = 1; i < files.length; i++) {
-    const off = acc - CF;
+    const cf = cfs && cfs[i - 1] != null ? cfs[i - 1] : CF;
+    const off = acc - cf;
     const out = i === files.length - 1 ? "vm" : `m${i}`;
-    fc.push(`[${last}][c${i}]xfade=transition=${GECIS}:duration=${CF}:offset=${off.toFixed(3)}[${out}]`);
+    fc.push(`[${last}][c${i}]xfade=transition=${GECIS}:duration=${cf.toFixed(3)}:offset=${off.toFixed(3)}[${out}]`);
     last = out; acc = off + CF + ds[i] - CF + CF;   // acc = off + ds[i]
     acc = off + ds[i];
   }
@@ -236,9 +243,10 @@ function wrap(text, max) {
   const trPath = path.join(VOICE_DIR, "ALTYAZI-TR.txt");
   const altPath = fs.existsSync(trPath) ? trPath : enPath;
   const txt = fs.readFileSync(altPath, "utf8").replace(/\r\n/g,"\n");
-  const paras = txt.split(/\n\s*\n/).map(s=>s.trim()).filter(Boolean);
+  const SAHNE = require("./lib/sahne");
+  const paras = SAHNE.bolumAyir(txt).paragraflar;
   if (altPath === trPath) {
-    const enN = fs.readFileSync(enPath,"utf8").replace(/\r\n/g,"\n").split(/\n\s*\n/).map(s=>s.trim()).filter(Boolean).length;
+    const enN = SAHNE.bolumAyir(fs.readFileSync(enPath,"utf8")).paragraflar.length;
     console.log(`ALTYAZI KAYNAGI: ALTYAZI-TR.txt (${paras.length} paragraf / seslendirme ${enN} paragraf)`);
     if (paras.length !== enN) console.log("  !!! UYARI: paragraf sayilari farkli, altyazi kayabilir.");
   }
@@ -258,23 +266,73 @@ function wrap(text, max) {
     subs.map((x,i)=>`${i+1}\n${srtTime(x.s)} --> ${srtTime(x.e)}\n${x.t}\n`).join("\n"), "utf8");
   console.log(`ALTYAZI: ${subs.length} satir`);
 
-  // ---------- 3) GORSEL LISTESI ----------
-  let imgs = [];
-  for (const d of fs.readdirSync(VIS).filter(x=>fs.statSync(path.join(VIS,x)).isDirectory()).sort())
-    for (const f of fs.readdirSync(path.join(VIS,d)).filter(x=>/\.(jpg|png)$/i.test(x)).sort())
-      imgs.push(path.join(VIS,d,f));
-  if (!imgs.length) throw new Error("Gorsel yok.");
-  // Gorsel basina sure cok uzun kaliyorsa listeyi tekrarla (izleyici sabit kareden sikilir).
-  // Tekrar eden gorsel farkli zoom yonuyle gelir, ayni durmaz.
-  const MAX_L = DIKEY ? 6 : 11;
-  const ozgun = imgs.length;
-  while ((TOTAL + (imgs.length-1)*CF) / imgs.length > MAX_L && imgs.length < ozgun * 4) {
-    imgs = imgs.concat(imgs.slice(0, ozgun));
+  // ---------- 2b) BOLUMLER (YouTube chapters) ----------
+  // Senaryodaki "## BOLUM" basliklarindan: ilk bolum 0:00, en az 3 bolum, her biri >=10 sn.
+  const parcaBas = []; { let c = 0; durations.forEach((d, i) => { parcaBas.push(c); c += d + (i < durations.length - 1 ? GAP : 0); }); }
+  const harita = SAHNE.bolumAyir(fs.readFileSync(enPath, "utf8")).harita;
+  const bolumler = harita.map((h) => ({ t: Math.round(OFFSET + (parcaBas[h.paragraf] || 0)), baslik: h.baslik.charAt(0) + h.baslik.slice(1).toLowerCase() }))
+    .filter((b, i, a) => i === 0 || b.t - a[i - 1].t >= 10);
+  if (bolumler.length) bolumler[0].t = 0;
+  if (bolumler.length >= 3) {
+    fs.mkdirSync(VID, { recursive: true });
+    fs.writeFileSync(path.join(VID, "bolumler.json"), JSON.stringify(bolumler, null, 2));
+    console.log(`BOLUMLER: ${bolumler.length} (aciklamaya zaman damgasi olarak girer)`);
   }
-  const N = imgs.length;
-  const L = (TOTAL + (N-1)*CF) / N;
-  const Lf = Math.round(L*FPS);
-  console.log(`GORSEL: ${ozgun} ozgun -> ${N} kare, her biri ${L.toFixed(2)} sn (gecis ${CF} sn)`);
+
+  // ---------- 3) CEKIM PLANI ----------
+  // Eski davranis: tum gorseller esit surede (TOTAL/N) — anlatidan bagimsiz, mekanik.
+  // Yeni: Visuals/NN-* klasoru = sahne NN (lib/sahne.js kurali). Sahnenin anlatidaki
+  // zamani seslendirmeden olculur; cekim uzunlugu/hareket/gecis scene-pacing.js'in
+  // role gore planindan gelir (olay 2-3 sn, teknik 7-10 sn, diyagram 10-15 sn).
+  // Klasorler sahnelerle eslesmezse eski esit dagilima dusulur.
+  const pacing = require("./scene-pacing");
+  const gorselMeta = (() => { try { return JSON.parse(fs.readFileSync(path.join(VIS, "kaynaklar.json"), "utf8")); } catch (e) { return []; } })();
+  const sentetikMi = (klasor, dosya) => gorselMeta.some((m) => m.sahne === klasor && m.dosya === dosya && m.sentetik);
+  const klasorler = fs.readdirSync(VIS).filter(x=>fs.statSync(path.join(VIS,x)).isDirectory()).sort();
+  const klasorGorsel = (d) => fs.readdirSync(path.join(VIS,d)).filter(x=>/\.(jpg|png)$/i.test(x)).sort();
+  const sahneMetin = SAHNE.sahneParagraflari(fs.readFileSync(enPath, "utf8"));
+  const cekimler = [];
+  const HAREKET = { fast: "hizli", medium: "sinematik", slow: "yavas", diagram: "yok" };
+  if (sahneMetin.length && sahneMetin.length === klasorler.length) {
+    const zam = pacing.sahneZamanlari(sahneMetin, paras.length ? SAHNE.bolumAyir(fs.readFileSync(enPath, "utf8")).paragraflar : paras, durations, GAP);
+    klasorler.forEach((d, k) => {
+      const bas = k === 0 ? 0 : zam[k].bas;
+      const son = k === klasorler.length - 1 ? TOTAL : zam[k + 1].bas;
+      const slot = Math.max(1, son - bas);
+      const dosyalar = klasorGorsel(d);
+      const foto = dosyalar.filter((f) => !/^eng-/.test(f)), diy = dosyalar.filter((f) => /^eng-/.test(f));
+      const plan = pacing.sahnePlani(sahneMetin[k], k, klasorler.length, slot, "long", diy.length > 0);
+      const fotoPlan = diy.length ? pacing.sahnePlani(sahneMetin[k], k, klasorler.length, slot, "long", false) : plan;
+      const dSlot = foto.length ? Math.min(slot * 0.6, 12 * diy.length) : slot;
+      const pSlot = slot - (diy.length ? dSlot : 0);
+      const maks = fotoPlan.cekimAraligi[1];
+      let m = foto.length ? Math.max(1, Math.ceil(pSlot / maks)) : 0;
+      while (m > 1 && pSlot / m < 1.5) m--;
+      const cf = (p) => Math.min(p.gecis.sure || 0.15, 0.8);
+      const fotoCekim = Array.from({ length: m }, (_, j) => ({ img: path.join(VIS, d, foto[j % foto.length]), sure: pSlot / m,
+        hareket: HAREKET[fotoPlan.tempo], cfSonra: cf(fotoPlan), diyagram: false, sentetik: sentetikMi(d, foto[j % foto.length]), rol: fotoPlan.rol }));
+      const diyCekim = diy.map((f) => ({ img: path.join(VIS, d, f), sure: dSlot / diy.length, hareket: "yok", cfSonra: 0.8, diyagram: true, sentetik: false, rol: "diagram" }));
+      const orta = Math.ceil(fotoCekim.length / 2);
+      cekimler.push(...fotoCekim.slice(0, orta), ...diyCekim, ...fotoCekim.slice(orta));
+    });
+    console.log(`CEKIM PLANI: ${klasorler.length} sahne -> ${cekimler.length} cekim (anlatiya senkron, role gore tempo)`);
+  } else {
+    let imgs = [];
+    for (const d of klasorler) for (const f of klasorGorsel(d)) imgs.push(path.join(VIS,d,f));
+    if (!imgs.length) throw new Error("Gorsel yok.");
+    // Gorsel basina sure cok uzun kaliyorsa listeyi tekrarla (izleyici sabit kareden sikilir).
+    const MAX_L = DIKEY ? 6 : 11;
+    const ozgun = imgs.length;
+    while ((TOTAL + (imgs.length-1)*CF) / imgs.length > MAX_L && imgs.length < ozgun * 4) imgs = imgs.concat(imgs.slice(0, ozgun));
+    const L = (TOTAL + (imgs.length-1)*CF) / imgs.length;
+    imgs.forEach((img, i) => cekimler.push({ img, sure: i === imgs.length - 1 ? L : L - CF, hareket: null, cfSonra: CF,
+      diyagram: /[\\/]eng-[^\\/]+$/.test(img), sentetik: false }));
+    console.log(`GORSEL: esit dagilim (${sahneMetin.length} sahne / ${klasorler.length} klasor eslesmedi) -> ${cekimler.length} kare`);
+  }
+  // Son cekim cikis gecisi (outro'ya) — toplam gorsel suresi = seslendirme suresi
+  if (cekimler.length) cekimler[cekimler.length - 1].cfSonra = CF;
+  const N = cekimler.length;
+  const imgs = cekimler.map((c) => c.img);
 
   // ---------- 4) KLIPLER (paralel) ----------
   // OLCULEN: render toplam surenin %83'u. Klipler tek tek uretilirken
@@ -292,8 +350,12 @@ function wrap(text, max) {
   function klipArgv(i) {
     const out = path.join(TMP, "clip" + String(i).padStart(3,"0") + ".mp4");
     if (fs.existsSync(out)) return { out, argv: null };
+      const c = cekimler[i];
+      // Cekim suresi = gorunen yuva + sonraki gecisle ortusme (kare hassasiyetinde)
+      const Lf = Math.max(2, Math.round((c.sure + (i < N - 1 ? c.cfSonra : 0)) * FPS));
       const zin = i % 2 === 0;
-      // hareket efekti — konu.json "efekt" alanindan
+      // hareket: cekim planindan (anlatidaki rol) — yoksa konu.json "efekt"
+      const EFEKT = c.hareket || EFEKT_VARSAYILAN;
       let z, xIf, yIf;
       if (EFEKT === "yok")          { z = "1"; }
       else if (EFEKT === "yavas")   { z = zin ? `min(1+0.00022*on,1.08)` : `if(lte(on,1),1.08,max(1.08-0.00022*on,1.0))`; }
@@ -312,12 +374,17 @@ function wrap(text, max) {
       else                          { z = zin ? `min(1+0.00045*on,1.16)` : `if(lte(on,1),1.16,max(1.16-0.00045*on,1.0))`; }
     const xIfade = xIf || `iw/2-(iw/zoom/2)`;
     const yIfade = yIf || `ih/2-(ih/zoom/2)`;
-    const renk = RENKLER[RENK] || RENKLER.sinematik;
+    // Diyagramlar renk tonlamasi/vinyet almaz (okunurluk); sentetik gorsele etiket (gizlenmez).
+    const renk = c.diyagram ? "null" : (RENKLER[RENK] || RENKLER.sinematik);
+    const ds = require("./lib/ayar").ayar().disclosure;
+    const etiket = c.sentetik && ds.enabled
+      ? `,drawtext=fontfile='${BD}':text='${String(ds.label || "RECONSTRUCTION").replace(/[':\\]/g, "")}':fontcolor=white@0.92:fontsize=${Math.round(H * 0.028)}:x=w-tw-${Math.round(W * 0.03)}:y=${Math.round(H * 0.04)}:box=1:boxcolor=black@0.55:boxborderw=${Math.round(H * 0.01)}`
+      : "";
     // TEK kare besle (-loop YOK): zoompan d=Lf ile tam Lf kare uretir
     return { out, argv: ["-y","-i",imgs[i],
       "-vf",`scale=${SW}:${SH2}:force_original_aspect_ratio=increase,crop=${SW}:${SH2},`+
             `${renk},`+
-            `zoompan=z='${z}':d=${Lf}:x='${xIfade}':y='${yIfade}':s=${W}x${H}:fps=${FPS},setsar=1,format=yuv420p`,
+            `zoompan=z='${z}':d=${Lf}:x='${xIfade}':y='${yIfade}':s=${W}x${H}:fps=${FPS},setsar=1,format=yuv420p${etiket}`,
       "-frames:v",String(Lf),
       // Paralel calisirken her ffmpeg kendi basina cekirdek sayisi kadar
       // is parcacigi aciyor; 4 ornek birden sistemi tuketip
@@ -363,12 +430,15 @@ function wrap(text, max) {
   // ---------- 5) GRUPLAR (gecisli) ----------
   console.log("2/3 Gruplar birlestiriliyor...");
   const groups = [];
+  const grupCf = [];            // grupCf[i] = groups[i] ile sonraki arasindaki gecis
   for (let g = 0; g*GROUP < N; g++) {
     const part = clips.slice(g*GROUP, (g+1)*GROUP);
     const out = path.join(TMP, "grp" + String(g).padStart(2,"0") + ".mp4");
+    const ic = cekimler.slice(g*GROUP, (g+1)*GROUP).map((c) => c.cfSonra);
+    grupCf.push(ic[ic.length - 1] != null ? ic[ic.length - 1] : CF);
     if (part.length === 1) { groups.push(part[0]); continue; }
     if (!fs.existsSync(out)) {
-      const { args, fcFile } = xfadeMerge(part, out);
+      const { args, fcFile } = xfadeMerge(part, out, [], ic.slice(0, -1));
       run([...args,FILTRE_BAYRAK,fcFile,"-map","[vm]",
            ...VIDEO_KODEK,"-an",out], TMP);
     }
@@ -421,15 +491,26 @@ function wrap(text, max) {
     cards.push(topicMp4);
   }
 
-  // --- OUTRO: abone ol + bildirim ---
+  // --- OUTRO: sonraki bolum + marka (end screen ogeleri bu alana yerlestirilir) ---
+  // Her videoda ayni "SUBSCRIBE / TURN ON NOTIFICATIONS" karti yerine: kumedeki
+  // bir sonraki yeniden kurgu. Abone cagrisi anlatida, degeri verdikten sonra ve
+  // baglamli yapilir (story-structure.js ctaStrategy).
+  let sonraki = "";
+  try {
+    const cp = require("./channel-plan");
+    const b = cp.baglanti(cp.kur(), JOB) || {};
+    sonraki = (b.sonraki && b.sonraki.baslik) || (b.aciklamaVideo && b.aciklamaVideo.baslik) || "";
+  } catch (e) {}
+  const temizT = (t) => String(t).replace(/[':\\%]/g, "").replace(/—/g, "-");
   const outroPng = path.join(TMP, "outro.png");
   run(["-y","-f","lavfi","-i",`color=c=0x04060B:s=${W}x${H}`,"-vf",
     `format=rgb24,${markaGeq(cx, Math.round(H*0.30), scI)},`+
-    `drawtext=fontfile='${BD}':text='SUBSCRIBE':fontcolor=white:fontsize=${TS(170)}:x=(w-text_w)/2:y=${Math.round(H*0.40)}:shadowcolor=black:shadowx=5:shadowy=5,`+
-    `drawbox=x=(iw-${TS(760)})/2:y=${Math.round(H*0.40)+TS(200)}:w=${TS(760)}:h=${TS(9)}:color=0x6FD8FF@0.95:t=fill,`+
-    `drawtext=fontfile='${BD}':text='${sp("TURN ON NOTIFICATIONS")}':fontcolor=0x6FD8FF:fontsize=${TS(52)}:x=(w-text_w)/2:y=${Math.round(H*0.40)+TS(270)},`+
-    `drawtext=fontfile='${RG}':text='New documentaries every week':fontcolor=0xAAB8C4:fontsize=${TS(46)}:x=(w-text_w)/2:y=${Math.round(H*0.40)+TS(370)},`+
-    `drawtext=fontfile='${BD}':text='${sp(KANAL)}':fontcolor=white:fontsize=${TS(44)}:x=(w-text_w)/2:y=${Math.round(H*0.83)}`,
+    (sonraki
+      ? `drawtext=fontfile='${RG}':text='${sp("NEXT RECONSTRUCTION")}':fontcolor=0xD9A441:fontsize=${TS(46)}:x=(w-text_w)/2:y=${Math.round(H*0.40)},`+
+        wrap(temizT(sonraki), 34).slice(0, 2).map((l, i) => `drawtext=fontfile='${BD}':text='${l}':fontcolor=white:fontsize=${TS(92)}:x=(w-text_w)/2:y=${Math.round(H*0.47) + i*TS(110)}:shadowcolor=black:shadowx=4:shadowy=4`).join(",") + ","
+      : "") +
+    `drawtext=fontfile='${BD}':text='${sp(KANAL || "FAILURE RECONSTRUCTED")}':fontcolor=white:fontsize=${TS(44)}:x=(w-text_w)/2:y=${Math.round(H*0.80)},`+
+    `drawtext=fontfile='${RG}':text='${temizT(SLOGAN || "Forensic Engineering Documentaries")}':fontcolor=0xAAB8C4:fontsize=${TS(36)}:x=(w-text_w)/2:y=${Math.round(H*0.86)}`,
     "-frames:v","1",outroPng]);
   const outroMp4 = OUTRO_D > 0 ? path.join(TMP, "zz-outro.mp4") : null;
   if (outroMp4) run(["-y","-i",outroPng,"-vf",
@@ -451,8 +532,10 @@ function wrap(text, max) {
     console.log(`GERI SAYIM: ${CD_D} sn film lideri eklendi`);
   }
 
-  groups.unshift(...(cdMp4 ? [cdMp4] : []), ...(introMp4 ? [introMp4] : []), ...cards);
-  if (outroMp4) groups.push(outroMp4);
+  const onKartlar = [...(cdMp4 ? [cdMp4] : []), ...(introMp4 ? [introMp4] : []), ...cards];
+  groups.unshift(...onKartlar);
+  grupCf.unshift(...onKartlar.map(() => CF));
+  if (outroMp4) { groups.push(outroMp4); grupCf.push(CF); }
   console.log(`  intro ${INTRO_D}sn + konu ${TOPIC_D}sn + outro ${OUTRO_D}sn eklendi`);
 
   // ---------- 5d) COK GRUP VARSA ARA KADEME ----------
@@ -466,13 +549,15 @@ function wrap(text, max) {
   while (groups.length > FINAL_MAX) {
     kademe++;
     console.log(`  ara kademe ${kademe}: ${groups.length} parca -> ${Math.ceil(groups.length / GROUP)}`);
-    const ust = [];
+    const ust = [], ustCf = [];
     for (let g = 0; g * GROUP < groups.length; g++) {
       const part = groups.slice(g * GROUP, (g + 1) * GROUP);
+      const pcf = grupCf.slice(g * GROUP, (g + 1) * GROUP);
+      ustCf.push(pcf[pcf.length - 1]);
       if (part.length === 1) { ust.push(part[0]); continue; }
       const out = path.join(TMP, `ust${kademe}_${String(g).padStart(2, "0")}.mp4`);
       if (!fs.existsSync(out)) {
-        const { args, fcFile } = xfadeMerge(part, out);
+        const { args, fcFile } = xfadeMerge(part, out, [], pcf.slice(0, -1));
         run([...args, FILTRE_BAYRAK, fcFile, "-map", "[vm]",
              ...VIDEO_KODEK, "-an", out], TMP);
       }
@@ -482,6 +567,8 @@ function wrap(text, max) {
     console.log("");
     groups.length = 0;
     groups.push(...ust);
+    grupCf.length = 0;
+    grupCf.push(...ustCf);
   }
 
   // ---------- 5c) SESI KAYDIR (intro kadar geciktir) ----------
@@ -537,12 +624,16 @@ function wrap(text, max) {
   const musicFile = path.join(TMP, "muzik.mp3");
   const fo = Math.max(0, FULL - 5).toFixed(2);
 
+  // Her video ayni tonda calmasin: ilerleme is adina gore deterministik olarak
+  // -3..+3 yarim ton kaydirilir (ayni video her zaman ayni muzigi alir).
+  const YARIM = Math.floor(require("./lib/ortak").hash01(JOB + ":ton") * 7) - 3;
+  const T = (f) => +(f * Math.pow(2, YARIM / 12)).toFixed(2);
   const AKORLAR = [
     { sub: 110.00, kok: 220.00, uc: 261.63, bes: 329.63, par: 659.25 }, // Am
     { sub:  87.31, kok: 174.61, uc: 220.00, bes: 261.63, par: 523.25 }, // F
     { sub: 130.81, kok: 261.63, uc: 329.63, bes: 392.00, par: 783.99 }, // C
     { sub:  98.00, kok: 196.00, uc: 246.94, bes: 293.66, par: 587.33 }, // G
-  ];
+  ].map((a) => Object.fromEntries(Object.entries(a).map(([k, v]) => [k, T(v)])));
   const AKOR_SN = 8;
   const akorDosyalari = AKORLAR.map((a, i) => {
     const o = path.join(TMP, "akor" + i + ".wav");
@@ -580,7 +671,7 @@ function wrap(text, max) {
     "-af", `loudnorm=I=-18:TP=-2:LRA=6,`+
            `afade=t=in:st=${CD_D.toFixed(2)}:d=3,afade=t=out:st=${fo}:d=5`,
     "-c:a","libmp3lame","-q:a","3", musicFile]);
-  console.log(`MUZIK: Am-F-C-G yatagi uretildi (seviye ${MUSIC_VOL}, ${tur} tur)`);
+  console.log(`MUZIK: Am-F-C-G yatagi (${YARIM >= 0 ? "+" : ""}${YARIM} yarim ton, seviye ${MUSIC_VOL}, ${tur} tur)`);
   const inputs = [];
   groups.forEach(f => inputs.push("-i", f));
   const ds = groups.map(dur);
@@ -588,9 +679,10 @@ function wrap(text, max) {
   groups.forEach((_,i)=>fc.push(`[${i}:v]settb=AVTB,fps=${FPS},format=yuv420p[c${i}]`));
   let last="c0", acc=ds[0];
   for (let i=1;i<groups.length;i++){
-    const off = acc - CF;
+    const cf = grupCf[i-1] != null ? grupCf[i-1] : CF;
+    const off = acc - cf;
     const o = i===groups.length-1 ? "vm" : `m${i}`;
-    fc.push(`[${last}][c${i}]xfade=transition=${GECIS}:duration=${CF}:offset=${off.toFixed(3)}[${o}]`);
+    fc.push(`[${last}][c${i}]xfade=transition=${GECIS}:duration=${cf.toFixed(3)}:offset=${off.toFixed(3)}[${o}]`);
     last=o; acc = off + ds[i];
   }
   if (groups.length===1) fc.push(`[c0]null[vm]`);

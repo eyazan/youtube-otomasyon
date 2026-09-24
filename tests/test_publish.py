@@ -67,6 +67,16 @@ class PublishTests(unittest.TestCase):
         p.publish(self.job, visibility='public', runner=runner)
         self.assertIn('--herkese-acik', seen['argv'])
 
+    def test_quality_gate_block_stops_upload(self):
+        self._make_render()
+        calls = []
+        def runner(argv, **kwargs):
+            calls.append(argv)
+            return SimpleNamespace(returncode=4 if 'quality-gate.js' in argv else 0)
+        with self.assertRaisesRegex(ValueError, 'Quality gate BLOCK'):
+            p.publish(self.job, runner=runner)
+        self.assertFalse(any('youtube-yukle.js' in a for a in calls))
+
     def test_upload_ready_needs_all_three(self):
         keys = ('YT_CLIENT_ID', 'YT_CLIENT_SECRET', 'YT_REFRESH_TOKEN')
         with patch.dict(os.environ, {k: '' for k in keys}, clear=False):

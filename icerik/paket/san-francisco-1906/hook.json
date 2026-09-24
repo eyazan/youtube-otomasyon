@@ -1,0 +1,50 @@
+{
+  "slug": "san-francisco-1906",
+  "format": "short",
+  "olusturuldu": "2026-09-24T16:22:41.736Z",
+  "ekranHook": "It burned for 3 days",
+  "mevcut": {
+    "puan": 55,
+    "pencereler": {
+      "0-5": "In 1906, one of Americas greatest cities burned for three straight days. April eighteenth,",
+      "5-12": "twelve minutes past five in the morning. The San Andreas fault slips, and the ground rolls like the sea.",
+      "12-20": "But the earthquake is only the beginning of the nightmare. Broken gas lines and toppled stoves start hundreds of fires. The water",
+      "20-30": "mains have shattered, so there is nothing to fight them with. The flames go on to destroy eighty percent of the city. Three thousand people are gone, and"
+    },
+    "bulgular": [
+      "starts with background/history instead of the event",
+      "0-5s: lands the event/result immediately",
+      "5-12s: missing an unexpected detail",
+      "12-20s: no central mystery or problem is posed",
+      "on-screen hook is 5 words (readable in <1s)"
+    ],
+    "engelleyici": false
+  },
+  "oneri": {
+    "segmentler": [
+      {
+        "pencere": "0-5s",
+        "rol": "event/result",
+        "metin": "San Francisco burned for three days."
+      },
+      {
+        "pencere": "5-12s",
+        "rol": "unexpected detail",
+        "metin": "It took only a magnitude 7.9 earthquake."
+      },
+      {
+        "pencere": "12-20s",
+        "rol": "central problem",
+        "metin": "So how could a magnitude 7.9 earthquake do this?"
+      },
+      {
+        "pencere": "20-30s",
+        "rol": "viewer promise",
+        "metin": "The answer is fire following earthquake with broken water mains — and it is why cities now plan for fire after earthquakes, with independent emergency water supplies."
+      }
+    ],
+    "metin": "San Francisco burned for three days. It took only a magnitude 7.9 earthquake. So how could a magnitude 7.9 earthquake do this? The answer is fire following earthquake with broken water mains — and it is why cities now plan for fire after earthquakes, with independent emergency water supplies.",
+    "puan": 100
+  },
+  "not": "Suggestions are drafts built from the case file; narration stays editorial — never auto-replaced."
+}

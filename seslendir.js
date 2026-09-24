@@ -20,7 +20,8 @@ try {
   if (k.sesHizi) K_HIZ = k.sesHizi;
 } catch (e) {}
 
-const VOICE = process.argv[3] || K_SES || "en-US-ChristopherNeural";
+// Varsayilan ses Andrew: kanalin dogal anlatici sesi (Christopher robotik bulundu).
+const VOICE = process.argv[3] || K_SES || "en-US-AndrewNeural";
 const RATE = process.argv[4] || K_HIZ || "+7%";   // -10%'dan %19 daha akici
 
 const VOICE_DIR = path.join(BASE, "Voice");
@@ -73,7 +74,10 @@ function synth(tts, text) {
 (async () => {
   fs.mkdirSync(PARTS, { recursive: true });
   const raw = fs.readFileSync(TXT, "utf8").replace(/\r\n/g, "\n");
-  const paras = raw.split(/\n\s*\n/).map(s => s.trim()).filter(Boolean);
+  // "## BOLUM" basliklari seslendirilmez; bolum haritasi video-yap'a (chapters) kalir.
+  const { paragraflar: paras, harita } = require("./lib/sahne").bolumAyir(raw);
+  fs.writeFileSync(path.join(VOICE_DIR, "bolumler-harita.json"), JSON.stringify(harita, null, 2));
+  const telaffuz = require("./pronunciation-check");
   if (!paras.length) throw new Error('Senaryo bos.');
   // Regenerate this job's numbered fragments so shortened scripts cannot retain old audio.
   for (const name of fs.readdirSync(PARTS)) {
@@ -94,7 +98,7 @@ function synth(tts, text) {
   for (let i = 0; i < paras.length; i++) {
     let out = null;
     for (let a = 0; a < 3 && !out; a++) {
-      try { out = await synth(tts, paras[i]); }
+      try { out = await synth(tts, telaffuz.ttsMetni(paras[i])); }
       catch (e) { console.log(`  ! ${i+1} deneme ${a+1} hata: ${e.message}`); await new Promise(r => setTimeout(r, 1500)); }
     }
     if (!out || !out.buf.length) throw new Error(`Paragraf ${i+1} seslendirilemedi; uretim durduruldu.`);

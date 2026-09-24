@@ -216,6 +216,12 @@ const ortanca = a => {
   y("");
   y("Kalibi kopyala, icerigi kendin uret: ayni format, ayni sure, ayni hook yapisi.");
 
+  // Failure Reconstructed konu puani (11 olcut; ucretsiz sinyaller + varsa YouTube arama)
+  if (KONU) {
+    try { y(""); y(require("./konu-puan").mdBolum(await require("./konu-puan").konuPuanla(KONU))); }
+    catch (e) { y("_topic score unavailable: " + e.message + "_"); }
+  }
+
   const klasor = path.join(KOK, "trend");
   fs.mkdirSync(klasor, { recursive: true });
   const ad = new Date().toISOString().slice(0, 10) +
