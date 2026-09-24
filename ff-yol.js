@@ -21,8 +21,10 @@ function adaylar(ad) {
   ].filter(Boolean);
 }
 
-function calisiyorMu(yol) {
-  try { execFileSync(yol, ["-version"], { stdio: "ignore", timeout: 8000 }); return true; }
+// Acik verilen yolda (env) ilk calistirma isletim sistemi taramasi yuzunden
+// yavas olabilir (macOS'ta imzasiz statik ikili) — ona daha uzun sure taniyoruz.
+function calisiyorMu(yol, sure = 8000) {
+  try { execFileSync(yol, ["-version"], { stdio: "ignore", timeout: sure }); return true; }
   catch (e) { return false; }
 }
 
@@ -30,7 +32,7 @@ function bul(ad) {
   // Env ile acik yol: FFMPEG_YOL / FFPROBE_YOL. CI, tasinabilir/statik kurulum
   // ya da sistemdeki bozuk bir surumu atlamak icin. Calistigi dogrulanir.
   const ov = process.env[ad.toUpperCase() + "_YOL"];
-  if (ov && fs.existsSync(ov) && calisiyorMu(ov)) return ov;
+  if (ov && fs.existsSync(ov) && calisiyorMu(ov, 45000)) return ov;
   for (const y of adaylar(ad)) if (fs.existsSync(y) && calisiyorMu(y)) return y;
   if (calisiyorMu(ad)) return ad;            // PATH'te varsa dogrudan adiyla cagir
   console.error("");

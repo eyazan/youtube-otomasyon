@@ -23,8 +23,14 @@ const KOK = __dirname;
 const PORT = 53682;
 const REDIRECT = "http://localhost:" + PORT;
 // force-ssl = yukleme + metadata guncelleme (youtube-guncelle.js icin gerekli).
-// Not: bu scope'un etkili olmasi icin bir kez yeniden yetkilendirme gerekir.
-const SCOPE = "https://www.googleapis.com/auth/youtube.force-ssl";
+// yt-analytics.readonly = izlenme suresi, tutma egrisi, trafik kaynaklari
+// (existing-video-optimizer.js / post-publish-analyzer.js). Salt-okunur.
+// Not: yeni scope'un etkili olmasi icin bir kez yeniden yetkilendirme gerekir;
+// Google Cloud > OAuth consent > Data access'e "yt-analytics.readonly" eklenmeli.
+const SCOPE = [
+  "https://www.googleapis.com/auth/youtube.force-ssl",
+  "https://www.googleapis.com/auth/yt-analytics.readonly",
+].join(" ");
 
 function env(ad) {
   if (process.env[ad]) return String(process.env[ad]).trim();

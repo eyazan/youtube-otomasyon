@@ -4,6 +4,14 @@
 //   konu spec -> uretim/<slug>/konu.json -> arsiv-bul (goruntu) ->
 //   shorts-yap (render) -> (istege bagli) youtube-yukle (private).
 //
+// Kalite once gelir (quality-gate.js):
+//   pre-gate  (render oncesi: baslik/hook/senaryo/ozgunluk/muhendislik/kaynak)
+//   final-gate (render sonrasi: ses yuksekligi, cozunurluk, sure, kaynak kaydi)
+//   BLOCK -> render/yukleme YOK, konu icerik/engellenen.json'a yazilir (spec
+//            degisince otomatik yeniden denenir), sonraki konuya gecilir.
+//   REVIEW -> private yuklenir, rapor icerik/paket/<slug>/quality-gate.md.
+// Takvim (yayin-plani.js): gunluk modda slot dolmamissa hicbir sey uretilmez.
+//
 // Uretilenler icerik/uretilenler.json'a yazilir; sonraki calisma sonrakini alir.
 // Hicbir sey elle yapilmaz. Tek istisna: YouTube'a yukleme kimlik bilgileri
 // (bir kerelik OAuth) ve PUBLISH=1 varsa yukler; yoksa sadece uretir.
@@ -21,6 +29,8 @@ const KOK = __dirname;
 const KONULAR = path.join(KOK, "icerik", "konular");
 const DURUM = path.join(KOK, "icerik", "uretilenler.json");
 const BASARISIZ = path.join(KOK, "icerik", "basarisiz.json");
+const ENGELLENEN = path.join(KOK, "icerik", "engellenen.json");
+const crypto = require("crypto");
 
 function slugGecerli(s) { return /^[a-z0-9][a-z0-9-]{0,79}$/.test(s); }
 
@@ -30,6 +40,19 @@ const uretilenler = () => oku(DURUM);
 const basarisizlar = () => oku(BASARISIZ);
 function isaretle(slug) { const u = uretilenler(); if (!u.includes(slug)) { u.push(slug); yaz(DURUM, u); } }
 function basarisizIsaretle(slug) { const b = basarisizlar(); if (!b.includes(slug)) { b.push(slug); yaz(BASARISIZ, b); } }
+// Engellenen: { slug: { hash, neden, tarih } } — spec degisirse (hash farkli) tekrar denenir
+const specHash = (slug) => crypto.createHash("sha1").update(fs.readFileSync(path.join(KONULAR, slug + ".json"))).digest("hex").slice(0, 12);
+const engellenenler = () => { try { return JSON.parse(fs.readFileSync(ENGELLENEN, "utf8")); } catch (e) { return {}; } };
+function engelle(slug, neden) { const e = engellenenler(); e[slug] = { hash: specHash(slug), neden, tarih: new Date().toISOString() }; yaz(ENGELLENEN, e); }
+const engelliMi = (slug) => { const e = engellenenler()[slug]; return !!(e && e.hash === specHash(slug)); };
+
+class Engellendi extends Error {}
+function kapi(slug, final) {
+  const r = require("./quality-gate").degerlendir(slug, { final });
+  console.log(`  kalite kapisi (${final ? "final" : "pre"}): ${r.karar} ${r.toplam}/100` + (r.engelleyen.length ? " — " + r.engelleyen.join("; ") : ""));
+  if (r.karar === "BLOCK") { engelle(slug, `${final ? "final" : "pre"} gate ${r.toplam}: ${r.engelleyen.join("; ") || "below threshold"}`); throw new Engellendi("kalite kapisi BLOCK"); }
+  return r;
+}
 
 function konuListesi() {
   if (!fs.existsSync(KONULAR)) return [];
@@ -56,15 +79,18 @@ function uretBir(slug) {
   konu.slug = slug;
   fs.writeFileSync(path.join(job, "konu.json"), JSON.stringify(konu, null, 2));
   console.log(`\n=== ${slug} ===`);
+  kapi(slug, false);
   // Goruntu kaynagi: "stok" (Pexels) ya da arsiv (kamu mali).
   calistir(konu.tur === "stok" ? "stok-bul.js" : "arsiv-bul.js", slug);
   calistir("shorts-yap.js", slug);
+  const son = kapi(slug, true);
+  try { require("./description-engine").calistir(slug); require("./pinned-comment").calistir(slug); } catch (e) { console.log("  (paket metni: " + e.message + ")"); }
 
   // Yukleme: yalnizca PUBLISH=1 ve kimlik varsa; her zaman private.
   const publish = process.env.PUBLISH === "1";
   if (publish && uploadHazir()) {
     const r = cp.spawnSync("node", ["youtube-yukle.js", slug], { cwd: KOK, stdio: "inherit" });
-    console.log(r.status === 0 ? "yukleme: private (yayindan once incele)" : "yukleme basarisiz");
+    console.log(r.status === 0 ? `yukleme: private (kalite: ${son.karar} — yayindan once incele)` : "yukleme basarisiz");
   } else {
     console.log("yukleme atlandi (" + (publish ? "kimlik yok" : "PUBLISH!=1") + "); video: uretim/" + slug + "/Videos/");
   }
@@ -82,8 +108,16 @@ function main() {
   // Belirli slug: dogrudan uret (hata firlatir).
   if (acikSlug) { uretBir(acikSlug); return 0; }
 
-  // Uretilmemis ve daha once kalici basarisiz olmamis konular.
-  const atla = new Set([...uretilenler(), ...basarisizlar()]);
+  // Takvim: gunluk (varsayilan) modda slot dolmadiysa uretme (kalite > siklik).
+  if (!hepsi && process.env.PUBLISH === "1") {
+    const d = require("./yayin-plani").durum("short");
+    if (!d.uygun) { console.log("Takvim: henuz degil — " + d.neden); return 0; }
+  }
+  // Uretilmemis, kalici basarisiz olmamis ve (ayni spec ile) engellenmemis konular.
+  // Yayin kaydindaki (icerik/yayinlananlar.json) slug'lar da atlanir: elle yuklenmis bir
+  // video uretilenler listesinde olmasa bile IKINCI KEZ yuklenmez.
+  const yuklenmis = require("./lib/kutuphane").yayinlananlar().map((y) => y.slug).filter(Boolean);
+  const atla = new Set([...uretilenler(), ...basarisizlar(), ...yuklenmis, ...Object.keys(engellenenler()).filter(engelliMi)]);
   const kalan = tum.filter(s => !atla.has(s));
   if (!kalan.length) { console.log("Uretilecek yeni konu yok (" + tum.length + " toplam). Konu ekle."); return 0; }
 
@@ -95,6 +129,7 @@ function main() {
     if (basari >= hedefSayi) break;
     try { uretBir(slug); basari++; }
     catch (e) {
+      if (e instanceof Engellendi) { console.error(`  ⛔ ${slug} kalite kapisinda engellendi — rapor: icerik/paket/${slug}/quality-gate.md`); continue; }
       console.error(`  ✗ ${slug} basarisiz: ${e.message} — atlaniyor`);
       basarisizIsaretle(slug);
     }

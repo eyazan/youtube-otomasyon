@@ -34,9 +34,16 @@ function env(ad) {
 }
 const ANAHTAR = env("VIDIQ_KEY");
 if (!ANAHTAR) {
-  console.log("— vidIQ anahtari yok. Kaynaklar sekmesinden ekle:");
+  console.log("— vidIQ anahtari yok (viral Shorts listesi atlandi). Kaynaklar sekmesinden ekle:");
   console.log("  app.vidiq.com/account/settings/mcp");
-  process.exit(0);
+  // Anahtarsiz da calisan kisim: Failure Reconstructed konu puani (ucretsiz sinyaller)
+  if (KONU) {
+    require("./konu-puan").konuPuanla(KONU).then((r) => {
+      console.log("\n" + require("./konu-puan").mdBolum(r));
+      process.exit(0);
+    }).catch(() => process.exit(0));
+  } else process.exit(0);
+  return;
 }
 
 // ---------- minik MCP istemcisi ----------
@@ -219,6 +226,9 @@ function kumeleV(videolar) {
   }
   y("");
   y("Baslıklara tiklayip izle — ilk 2 saniyede ne yaptigina bak. Kalip orada.");
+
+  // Failure Reconstructed konu puani: muhendislik derinligi + kitle merakı + arsiv
+  if (KONU) { try { y(""); y(require("./konu-puan").mdBolum(await require("./konu-puan").konuPuanla(KONU))); } catch (e) { y("_topic score unavailable: " + e.message + "_"); } }
 
   const klasor = path.join(KOK, "viral-analiz");
   fs.mkdirSync(klasor, { recursive: true });

@@ -45,7 +45,9 @@ def outputs(job, stage):
         return [job / 'Voice/SESLENDIRME-TAM-METIN.txt']
     if stage == 'voice':
         text = (job / 'Voice/SESLENDIRME-TAM-METIN.txt').read_text()
-        count = len([p for p in re.split(r'\n\s*\n', text.strip()) if p.strip()])
+        # "## BOLUM" basliklari seslendirilmez (lib/sahne.js ile ayni kural)
+        count = len([p for p in re.split(r'\n\s*\n', text.strip())
+                     if any(l.strip() and not re.match(r'^\s*##\s+', l) for l in p.splitlines())])
         return [job / f'Voice/parts/{i:03d}.mp3' for i in range(count)]
     if stage == 'visuals':
         return sorted(p for p in (job / 'Visuals').glob('*/*')
@@ -77,7 +79,7 @@ def initialize(slug, title, brief, script=None):
     save(job / 'konu.json', {
         'kanal': 'Failure Reconstructed', 'baslik_en': title, '_not': brief,
         'format': 'long', 'aspect': '16:9', 'hedefSaniye': 480,
-        'ses': 'en-US-ChristopherNeural', 'sesHizi': '+0%',
+        'ses': 'en-US-AndrewNeural', 'sesHizi': '+0%',
         'geriSayim': 0, 'intro': 0, 'konuKarti': 0, 'outro': 3,
         'muzikSeviyesi': 0, 'renk': 'sinematik', 'gecis': 'fade',
         'efekt': 'sinematik',  # 2.5D sinematik kamera (zoom + capraz kaydirma)
@@ -156,6 +158,13 @@ def publish(job, verify=False, visibility='private', runner=subprocess.run):
     """
     if not valid(outputs(job, 'render')):
         raise ValueError('No finished render to publish. Run the job first.')
+    if not verify:
+        # Packaging + final quality gate before any upload. Thumbnails are rendered
+        # from the finished video; a BLOCK verdict (exit code 4) stops publishing.
+        runner(['node', 'thumbnail-strategy.js', job.name, '--render'], cwd=ROOT, check=False)
+        gate = runner(['node', 'quality-gate.js', job.name, '--final'], cwd=ROOT, check=False)
+        if getattr(gate, 'returncode', 0) == 4:
+            raise ValueError('Quality gate BLOCK - see icerik/paket/%s/quality-gate.md' % job.name)
     argv = ['node', 'youtube-yukle.js', job.name]
     if verify:
         argv.append('--dogrula')

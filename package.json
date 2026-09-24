@@ -5,7 +5,12 @@
   "private": true,
   "scripts": {
     "start": "node panel.js",
-    "panel": "node panel.js"
+    "panel": "node panel.js",
+    "test": "node --test tests/js/*.test.js && python3 -m unittest discover -s tests",
+    "test:js": "node --test tests/js/*.test.js",
+    "gate": "node quality-gate.js --all",
+    "optimize": "node existing-video-optimizer.js --all",
+    "dashboard": "node panel.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.115.0",

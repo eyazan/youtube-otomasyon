@@ -10,6 +10,12 @@
 //
 // Anahtar: PEXELS_KEY (.env ya da ortam). Ucretsiz: pexels.com/api
 //
+// Kaynak metadatasi: her sahneye kaynakMeta { kurum, url, lisans, arama, alaka, id }
+// yazilir. alaka = arama teriminin kelimelerinin Pexels sayfa adresinde (aciklayici
+// slug) gecme orani — yedek aramaya dusen sahneler dusuk alakali isaretlenir.
+// Kanal genelinde tekrar yok: baska videolarda kullanilmis Pexels klipleri
+// (icerik/kaynak-defteri.json) bu videoda secilmez.
+//
 // Kullanim: node stok-bul.js <is-adi>
 
 const fs = require("fs");
@@ -72,7 +78,7 @@ async function klipSec(terim, kullanilan) {
     const dosyalar = (v.video_files || [])
       .filter(f => f.height >= f.width && f.height >= 960 && /mp4/i.test(f.file_type || "mp4"))
       .sort((a, b) => (a.height - 1920) ** 2 - (b.height - 1920) ** 2 > 0 ? 1 : -1);
-    if (dosyalar.length) return { id: v.id, url: dosyalar[0].link, sure: v.duration, kaynak: v.url };
+    if (dosyalar.length) return { id: v.id, url: dosyalar[0].link, sure: v.duration, kaynak: v.url, yazar: (v.user || {}).name || "" };
   }
   return null;
 }
@@ -81,17 +87,29 @@ async function klipSec(terim, kullanilan) {
   const sahneler = konu.sahneler || [];
   if (!sahneler.length) { console.error("konu.json'da sahneler yok."); process.exit(1); }
   console.log(`Stok video (Pexels): ${IS}  (${sahneler.length} sahne)`);
+  // Kanalin diger videolarinda kullanilmis Pexels kimlikleri (gorsel tekrar onleme)
+  const K = require("./lib/kutuphane");
   const kullanilan = new Set();
-  const kayit = [];
+  for (const [slug, d] of Object.entries(K.defter())) {
+    if (slug === IS) continue;
+    for (const id of d.kaynakKimlikleri || []) if (/^pexels:/.test(id)) kullanilan.add(Number(id.slice(7)));
+  }
+  const alakaOlc = (terim, sayfa) => {
+    const w = String(terim).toLowerCase().split(/\W+/).filter((x) => x.length > 2);
+    const slug = String(sayfa || "").toLowerCase();
+    return w.length ? Math.round(w.filter((x) => slug.includes(x.slice(0, 5))).length / w.length * 100) / 100 : 0;
+  };
+  const kayit = [], kimlikler = [], krediler = [];
   for (let i = 0; i < sahneler.length; i++) {
     const s = sahneler[i];
     const terim = s.arama || s.metin.split(/\s+/).slice(0, 3).join(" ");
     const ad = "s-" + String(i).padStart(2, "0") + ".mp4";
     const hedef = path.join(FOOT, ad);
     process.stdout.write(`  sahne ${i + 1}/${sahneler.length}: "${terim}" ... `);
-    let sec = await klipSec(terim, kullanilan);
+    let sec = await klipSec(terim, kullanilan), yedek = false;
     if (!sec) { // yedek: konunun genel temasi
       sec = await klipSec(konu.arama_yedek || konu.baslik || "engineering", kullanilan);
+      yedek = true;
     }
     if (!sec) throw new Error("Pexels klip bulunamadi: " + terim);
     kullanilan.add(sec.id);
@@ -101,10 +119,15 @@ async function klipSec(terim, kullanilan) {
     }
     s.kaynak = "Footage/" + ad;
     s.baslangic = 0;
+    s.kaynakMeta = { kurum: "Pexels", url: sec.kaynak, lisans: "Pexels License", arama: yedek ? (konu.arama_yedek || konu.baslik) : terim,
+      alaka: yedek ? Math.min(0.3, alakaOlc(terim, sec.kaynak)) : alakaOlc(terim, sec.kaynak), yedek, id: "pexels:" + sec.id, yazar: sec.yazar };
+    kimlikler.push("pexels:" + sec.id);
+    krediler.push(`Stock footage: Pexels${sec.yazar ? " / " + sec.yazar : ""} (Pexels License) — ${sec.kaynak}`);
     console.log((fs.statSync(hedef).size / 1e6).toFixed(1) + " MB");
     kayit.push(ad + "  <=  Pexels " + sec.kaynak);
   }
   fs.writeFileSync(konuYol, JSON.stringify(konu, null, 2));
+  K.defterYaz(IS, { kaynakKimlikleri: kimlikler, krediler, tarih: new Date().toISOString() });
   fs.writeFileSync(path.join(BASE, "GORSEL-KAYNAKLARI.txt"),
     kayit.join("\n") + "\n\nPexels License (free, commercial use OK).\n");
   console.log("✓ Bitti. Klipler indi + konu.json guncellendi.");

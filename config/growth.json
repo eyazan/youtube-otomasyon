@@ -1,0 +1,32 @@
+{
+  "_comment": "Failure Reconstructed growth & quality settings. Missing keys fall back to lib/ayar.js defaults. No secrets here — secrets live in .env.",
+  "brand": {
+    "name": "Failure Reconstructed",
+    "tagline": "Forensic Engineering Documentaries",
+    "handle": "@FailureReconstructed"
+  },
+  "ctaStrategy": "adaptive",
+  "disclosure": {
+    "enabled": true,
+    "label": "AI RECONSTRUCTION",
+    "labelDiagrams": false,
+    "descriptionNote": true,
+    "voiceNote": "Narration uses a synthetic voice. Footage is real archival film or licensed stock; anything reconstructed is labelled on screen."
+  },
+  "qualityGate": {
+    "publish": 85,
+    "review": 70,
+    "weights": { "title": 1, "thumbnail": 0.8, "hook": 1.2, "script": 1.2, "originality": 1.2, "visual": 1, "engineering": 1.1, "source": 1, "audio": 0.8 },
+    "hardBlocks": { "originality": 40, "source": 40, "audio": 30 },
+    "blockOnReview": false
+  },
+  "publishing": {
+    "short": { "everyDays": 1, "maxStretchDays": 3 },
+    "long": { "everyDays": 5, "maxStretchDays": 10 },
+    "stretchWhenRecentBlocks": 2,
+    "stretchOnReview": false
+  },
+  "clusters": { "minVideosForPlaylist": 3 },
+  "pinnedComment": { "post": true },
+  "analytics": { "checkpoints": [1, 3, 7, 14, 30], "minSampleForInsight": 5, "minViewsForRates": 100 }
+}

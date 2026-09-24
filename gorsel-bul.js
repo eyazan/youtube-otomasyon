@@ -10,6 +10,14 @@
 //
 // LISANS: kanal para kazandigi icin NC (ticari degil) ve ND (turetilemez)
 // lisanslar HIC alinmaz. Once CC0/kamu mali, yetmezse ticari-kullanima-acik CC-BY.
+//
+// KAYNAK ONCELIGI (adli muhendislik kanali — gercek kanit once gelir):
+//   1 orijinal tarihi/arsiv (archive.org, kamu mali/1929 oncesi)  2 devlet/kamu mali (Wikimedia PD)
+//   3 NASA  4 NTSB  5 Wikimedia Commons (CC)  6 teknik diyagram  7 Openverse CC
+//   8 stok (Pexels/Pixabay)  9 AI yeniden kurgu (yalnizca "uret:" ile, ekranda etiketli)
+// Belirli bir olay varken genel aramalar ("bridge", "rocket") olay adiyla daraltilir.
+// Her gorsel icin Visuals/kaynaklar.json: kaynak URL, kurum, lisans, arama terimi,
+// alaka puani, oncelik katmani, sentetik mi.
 
 const https = require("https");
 const fs = require("fs");
@@ -28,7 +36,7 @@ const VIS = path.join(BASE, "Visuals");
 const bekle = ms => new Promise(r => setTimeout(r, ms));
 
 // Wikimedia politikasi: aciklayici User-Agent sart, yoksa engelliyor.
-const UA = "OtomasyonPaneli/1.0 (kisisel video uretimi; node " + process.versions.node + ")";
+const UA = "FailureReconstructedBot/1.0 (+https://github.com/eyazan/youtube-otomasyon; node " + process.versions.node + ")";
 
 function tekGetir(url, ikili, derinlik) {
   derinlik = derinlik || 0;
@@ -316,8 +324,11 @@ async function wikimedia(q) {
     return Object.values(s).map(p => {
       const i = p.imageinfo && p.imageinfo[0];
       if (!i || !i.thumburl) return null;
-      if ((i.width || 0) < 800) return null;
-      if (!/\.(jpe?g|png)$/i.test(i.url || "")) return null;
+      // Tarihi kamu mali fotograflar cogu zaman kucuk: 640px'e kadar kabul.
+      if ((i.width || 0) < 640) return null;
+      // Wikimedia URL'lere "?utm_source=..." ekliyor — uzanti kontrolu sorgu disinda yapilmali
+      // (aksi halde TUM Wikimedia sonuclari sessizce eleniyordu).
+      if (!/\.(jpe?g|png)$/i.test(String(i.url || "").split("?")[0])) return null;
       const m = i.extmetadata || {};
       const lis = (m.LicenseShortName && m.LicenseShortName.value) || "";
       return {
@@ -352,6 +363,53 @@ async function nasa(q) {
   } catch (e) { return []; }
 }
 
+// 0) archive.org — tarihi arsiv gorselleri. Yalnizca kamu mali isaretli ya da 1929
+// oncesi (ABD'de sure dolmus) ogeler alinir; hak durumu belirsiz olan ALINMAZ.
+async function arsivOrg(q) {
+  const u = "https://archive.org/advancedsearch.php?q=" + encodeURIComponent("(" + q + ") AND mediatype:(image)") +
+    "&fl[]=identifier&fl[]=title&fl[]=licenseurl&fl[]=year&rows=8&output=json";
+  try {
+    const d = await jsonGetir(u);
+    const cikti = [];
+    for (const o of ((d.response || {}).docs || [])) {
+      const pd = /publicdomain|\/zero\//i.test(o.licenseurl || "") || (o.year && +o.year < 1929);
+      if (!pd) continue;
+      const meta = await jsonGetir("https://archive.org/metadata/" + encodeURIComponent(o.identifier)).catch(() => null);
+      const f = ((meta && meta.files) || []).filter((x) => /\.(jpe?g|png)$/i.test(x.name || "") && +(x.size || 0) > 150000)
+        .sort((a, b) => +b.size - +a.size)[0];
+      if (!f) continue;
+      cikti.push({ url: "https://archive.org/download/" + o.identifier + "/" + encodeURIComponent(f.name), baslik: String(o.title || q),
+        lisans: /publicdomain|\/zero\//i.test(o.licenseurl || "") ? "Public domain (archive.org)" : "Public domain (published before 1929)",
+        kaynak: "archive.org", atif: "", nereden: "https://archive.org/details/" + o.identifier, en: 1600, boy: 1200 });
+      await bekle(300);
+    }
+    return cikti;
+  } catch (e) { return []; }
+}
+
+const PD = /public domain|^pd|cc0|pdm|no restrictions|us-?gov/i;
+const GENEL = new Set("engineer engineers rocket rockets bridge bridges factory plant building buildings ship ships plane planes dam dams fire explosion disaster ruins city".split(" "));
+
+// Oncelik katmanlari — ust katman yeterli gorsel verirse alttakilere inilmez.
+function katmanlar(ctx) {
+  return [
+    { ad: "archive", kurum: "Internet Archive", fn: (q) => arsivOrg(q) },
+    { ad: "gov-pd", kurum: "Wikimedia Commons (public domain)", fn: async (q) => (await ctx.wiki(q)).filter((g) => PD.test(g.lisans)) },
+    { ad: "nasa", kurum: "NASA", fn: (q) => ctx.kozmik ? nasa(q) : [] },
+    { ad: "ntsb", kurum: "NTSB (via Wikimedia)", fn: async (q) => ctx.ulasim ? (await wikimedia(q + " NTSB")).filter((g) => PD.test(g.lisans)) : [] },
+    { ad: "wikimedia", kurum: "Wikimedia Commons", fn: async (q) => (await ctx.wiki(q)).filter((g) => !PD.test(g.lisans)) },
+    { ad: "diagram", kurum: "Wikimedia Commons (diagram)", fn: (q) => ctx.teknik ? wikimedia(q + " diagram") : [] },
+    { ad: "openverse", kurum: "Openverse (CC)", fn: (q) => openverse(q) },
+    { ad: "stock", kurum: "Pexels/Pixabay", fn: async (q) => (await pexels(q, ctx.kisa)).concat(ctx.azMi() ? await pixabay(q, ctx.kisa) : []) },
+  ];
+}
+
+function alaka(q, g) {
+  const w = String(q).toLowerCase().split(/\W+/).filter((x) => x.length > 2);
+  const t = (String(g.baslik || "") + " " + String(g.nereden || "")).toLowerCase();
+  return w.length ? Math.round(w.filter((x) => t.includes(x.slice(0, 5))).length / w.length * 100) / 100 : 0;
+}
+
 // ---------------- ana akis ----------------
 (async () => {
   const senaryoYolu = path.join(BASE, "Voice", "SESLENDIRME-TAM-METIN.txt");
@@ -369,16 +427,9 @@ async function nasa(q) {
   // Paragraf = sahne kurali kisa paragraflarda cok fazla sahne uretiyor
   // (230 paragraf -> 690 gorsel). Kisa paragraflari birlestirip her sahnenin
   // en az ~10 saniyelik anlatim tasimasini sagliyoruz.
+  // Sahne kurali lib/sahne.js'te tek kaynak (video-yap.js ayni kurala gore zamanlar).
   const hamParagraflar = senaryo.split(/\n\s*\n/).map(p => p.trim()).filter(p => p.length > 25);
-  const SAHNE_MIN_KELIME = 22;          // ~10 sn (Turkce 113, Ingilizce 151 kel/dk ortasi)
-  const paragraflar = [];
-  for (const p of hamParagraflar) {
-    const son = paragraflar[paragraflar.length - 1];
-    if (son && son.split(/\s+/).length < SAHNE_MIN_KELIME)
-      paragraflar[paragraflar.length - 1] = son + " " + p;
-    else
-      paragraflar.push(p);
-  }
+  const paragraflar = require("./lib/sahne").sahneParagraflari(senaryo);
   if (hamParagraflar.length !== paragraflar.length)
     console.log("sahne     : " + hamParagraflar.length + " paragraf -> " + paragraflar.length + " sahne (kisalar birlestirildi)");
   const toplamKelime = kelimeler(senaryo).length;        // SUZULMUS (tf-idf icin)
@@ -412,8 +463,15 @@ async function nasa(q) {
   fs.mkdirSync(VIS, { recursive: true });
 
   const kunye = [];
+  const meta = [];                 // Visuals/kaynaklar.json
   let toplamIndirilen = 0;
   const gorulen = new Set();
+  const vaka = konu.vaka || {};
+  const kumeId = (() => { try { return require("./lib/kutuphane").kumeBul(konu); } catch (e) { return ""; } })();
+  const wikiOnbellek = new Map();
+  const ctx = { kozmik, kisa, ulasim: /aviation|spaceflight|maritime/.test(kumeId), teknik: true, azMi: () => true,
+    wiki: async (q) => { if (!wikiOnbellek.has(q)) { wikiOnbellek.set(q, await wikimedia(q)); await bekle(1200); } return wikiOnbellek.get(q); } };
+  const KATMAN = katmanlar(ctx);
 
   for (let i = 0; i < paragraflar.length; i++) {
     const no = String(i + 1).padStart(2, "0");
@@ -445,7 +503,9 @@ async function nasa(q) {
                                                   i * 100 + s + 1, true);
           fs.writeFileSync(hedef, govde);
           n++; toplamIndirilen++;
-          kunye.push({ sahne: sahneAd, dosya: path.basename(hedef), kaynak: "AI uretimi", istem });
+          kunye.push(`${sahneAd}/${path.basename(hedef)}  —  AI reconstruction (${istem.slice(0, 80)}) · labelled on screen`);
+          meta.push({ sahne: sahneAd, dosya: path.basename(hedef), url: null, kurum: "AI generation", lisans: "generated", arama: adaylar[0],
+            alaka: null, katman: "ai", sentetik: true });
         } catch (e) { /* uretilemezse sahne bos kalir, asagida uyari veriyoruz */ }
         await bekle(400);
       }
@@ -454,22 +514,21 @@ async function nasa(q) {
       continue;
     }
 
-    // aday ifadeleri sirayla dene, yeterli gorsel bulana kadar
+    // Belirli bir olay varsa genel tek kelimelik aramalari olay adiyla daralt
+    // ("bridge" -> "Tacoma Narrows bridge") — generic stok yerine tarihi kanit.
+    const sorgular = adaylar.map((q) => (vaka.tip === "vaka" && vaka.kisa && q.split(/\s+/).every((w) => GENEL.has(w.toLowerCase())))
+      ? vaka.kisa + " " + q : q);
+    // Oncelik katmanlari: ust katman yeterli gorsel verirse alta inilmez.
     let havuz = [], kullanilan = null;
-    for (const q of adaylar) {
+    for (const katman of KATMAN) {
       if (havuz.length >= sahneBasina * 2) break;
-      const onceki = havuz.length;
-
-      havuz = havuz.concat(await pexels(q, kisa));              // 1. Pexels (anahtar varsa) — en kaliteli
-      if (havuz.length < sahneBasina * 2) havuz = havuz.concat(await pixabay(q, kisa));
-      if (havuz.length < sahneBasina * 2) {
-        havuz = havuz.concat(await wikimedia(q));               // 2. Wikimedia — anahtarsiz, genis
-        await bekle(1200);                                      //    hiz sinirina saygi
+      for (const q of sorgular) {
+        if (havuz.length >= sahneBasina * 2) break;
+        const onceki = havuz.length;
+        const bulunan = (await katman.fn(q)) || [];
+        havuz = havuz.concat(bulunan.map((g) => ({ ...g, katman: katman.ad, kurum: katman.kurum, arama: q, alaka: alaka(q, g) })));
+        if (havuz.length > onceki && !kullanilan) kullanilan = q;
       }
-      if (havuz.length < sahneBasina * 2) havuz = havuz.concat(await openverse(q));
-      if (kozmik && havuz.length < sahneBasina) havuz = havuz.concat(await nasa(q));
-
-      if (havuz.length > onceki && !kullanilan) kullanilan = q;
     }
 
     // Ayni gorseli iki sahnede kullanma — AMA sahneyi bos birakma pahasina degil.
@@ -478,8 +537,9 @@ async function nasa(q) {
     const tazeler = havuz.filter(g => !gorulen.has(g.url.split("?")[0]));
     if (tazeler.length >= Math.min(2, sahneBasina)) havuz = tazeler;
     for (const g of havuz.slice(0, sahneBasina)) gorulen.add(g.url.split("?")[0]);
-    // buyuk gorsel once
-    havuz.sort((a, b) => (b.en * b.boy) - (a.en * a.boy));
+    // Sira: oncelik katmani (kanit once) > alaka > cozunurluk
+    const kSira = Object.fromEntries(KATMAN.map((k, i) => [k.ad, i]));
+    havuz.sort((a, b) => (kSira[a.katman] - kSira[b.katman]) || (b.alaka - a.alaka) || ((b.en * b.boy) - (a.en * a.boy)));
 
     let n = 0;
     for (const g of havuz) {
@@ -490,8 +550,9 @@ async function nasa(q) {
         const uzanti = /\.png(\?|$)/i.test(g.url) ? ".png" : ".jpg";
         fs.writeFileSync(path.join(klasor, String(++n).padStart(2, "0") + uzanti), veri);
         toplamIndirilen++;
-        if (!/^(cc0|pdm)$/i.test(g.lisans) && g.kaynak !== "nasa")
-          kunye.push(`${sahneAd}/${String(n).padStart(2, "0")}${uzanti}  —  "${g.baslik}" ${g.atif ? "· " + g.atif : ""} · ${g.lisans} · ${g.nereden}`);
+        kunye.push(`${sahneAd}/${String(n).padStart(2, "0")}${uzanti}  —  "${g.baslik}" ${g.atif ? "· " + g.atif : ""} · ${g.lisans} · ${g.kurum} · ${g.nereden || g.url}`);
+        meta.push({ sahne: sahneAd, dosya: String(n).padStart(2, "0") + uzanti, url: g.nereden || g.url, kurum: g.kurum, lisans: g.lisans,
+          yazar: g.atif || "", arama: g.arama, alaka: g.alaka, katman: g.katman, sentetik: false });
       } catch (e) { /* bu gorsel olmadi, sonrakine gec */ }
       await bekle(450);
     }
@@ -500,9 +561,21 @@ async function nasa(q) {
     if (n === 0) console.log(`     ⚠ bulunamadi — denenen: ${adaylar.join(" / ")}`);
   }
 
-  // kaynak listesi dosyaya yazilir, isteyen kullanir — zorunlu degil
+  // Atif (insan okur) + sahne basina kaynak metadatasi (video-yap etiketleri, aciklama, kalite kapisi)
   if (kunye.length) {
     fs.writeFileSync(path.join(BASE, "GORSEL-KAYNAKLARI.txt"), kunye.join("\n") + "\n", "utf8");
+  }
+  fs.writeFileSync(path.join(VIS, "kaynaklar.json"), JSON.stringify(meta, null, 2) + "\n", "utf8");
+  const katmanSay = meta.reduce((o, m) => (o[m.katman] = (o[m.katman] || 0) + 1, o), {});
+  console.log("kaynak katmanlari: " + Object.entries(katmanSay).map(([k, v]) => k + "=" + v).join(" · "));
+
+  // Uzun format: vaka dosyasi varsa adli muhendislik gorselleri (zaman cizelgesi, ariza
+  // zinciri, kok neden...) ayni asamada sahne klasorlerine eklenir (hedef 4-8).
+  if (!kisa && konu.vaka) {
+    try {
+      const m = require("./engineering-visuals").uzunIcinUret(is);
+      console.log("muhendislik gorselleri: " + m.map((x) => x.tip).join(", "));
+    } catch (e) { console.log("  (muhendislik gorselleri atlandi: " + e.message.slice(0, 120) + ")"); }
   }
 
   console.log("");

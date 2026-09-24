@@ -1,5 +1,37 @@
 # Otomasyon Paneli — konudan bitmiş videoya
 
+## Failure Reconstructed — Forensic Engineering Documentaries
+
+Bu depo artık **veriye dayalı bir adli mühendislik belgeseli üretim ve büyüme sistemi**. Yapay zekâ yalnızca bir üretim aracı; neyin yayınlanacağına kalite ve editoryal değer karar verir.
+
+| Ne | Nasıl | Belge |
+|---|---|---|
+| Günlük Shorts (otomatik, GitHub Actions) | `shorts-sira.js` → takvim → ön kalite kapısı → arşiv/stok → `shorts-yap.js` → final kapı → private yükleme | [docs/GROWTH-ARCHITECTURE.md](docs/GROWTH-ARCHITECTURE.md) |
+| Uzun belgesel (5 günde bir) | `python -m shortslab run <iş>` → senaryo brifi → kanıt öncelikli görseller + mühendislik diyagramları → `video-yap.js` | aynı |
+| Paketleme | başlık · kapak · hook · tempo · hikâye yapısı · açıklama · sabit yorum · telaffuz | `icerik/paket/<slug>/` |
+| Kalite | `quality-gate.js`: 9 bileşen, PUBLISH ≥85 / REVIEW 70–84 / BLOCK <70 · `originality-check.js` | [config/growth.json](config/growth.json) |
+| Mevcut videolar | `node existing-video-optimizer.js --all` → `analysis/<id>/` + `migration/` | [migration/EXISTING-VIDEOS-PLAN.md](migration/EXISTING-VIDEOS-PLAN.md) |
+| Yayın sonrası | `post-publish-analyzer.js --due` (24 s/72 s/7 g/14 g/30 g) · panel → **📈 Büyüme** · `experiments.js` | [docs/GROWTH-ARCHITECTURE.md](docs/GROWTH-ARCHITECTURE.md) |
+| Konu seçimi | `node konu-puan.js "<konu>"` / `--adaylar` (11 ölçüt, ücretsiz sinyaller) | [icerik/aday-konular-puan.md](icerik/aday-konular-puan.md) |
+| Kurallar | sahte etkileşim yok, yanıltıcı başlık/kapak yok, kopya yükleme yok, sentetik içerik beyan edilir | [docs/YOUTUBE-CONTENT-QUALITY.md](docs/YOUTUBE-CONTENT-QUALITY.md) |
+
+Denetim bulguları: [docs/CHANNEL-AUDIT.md](docs/CHANNEL-AUDIT.md) · Değişiklik raporu: [docs/IMPLEMENTATION-REPORT.md](docs/IMPLEMENTATION-REPORT.md) · Marka: [channel/BRAND.md](channel/BRAND.md)
+
+Sık kullanılan komutlar:
+
+```bash
+npm test                                   # JS + Python testleri
+node quality-gate.js <slug> [--final]      # kalite kapısı raporu
+node title-engine.js <slug>                # 10+ başlık adayı ve puanları
+node existing-video-optimizer.js --all     # kanal videoları için optimizasyon raporları
+node youtube-guncelle.js <id> <slug> --dogrula   # açıklama güncellemesinin kuru çalıştırması
+node yayin-plani.js                        # yayın takvimi durumu
+```
+
+Sırlar yalnızca `.env` ve GitHub Secrets'ta durur, depoya girmez. YouTube Analytics verisi için `node youtube-yetki.js` ile yeniden yetki gerekir (`yt-analytics.readonly`).
+
+---
+
 > **ShortsLab gelistirmesi:** Veriyle niche secimi ve deney katmaninin ilk
 > surumu [`shortslab/README.md`](shortslab/README.md) altindadir.
 

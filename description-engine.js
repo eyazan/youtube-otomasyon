@@ -1,0 +1,111 @@
+// DESCRIPTION ENGINE — anahtar kelime yigini olmayan belgesel aciklamasi.
+//
+//   2-3 cumlelik ozet · arizanin zinciri · goruntu kaynaklari (lisansli) ·
+//   ilgili Failure Reconstructed bolumu · seri/playlist · teknik kaynaklar ·
+//   bolum zaman damgalari (uzun format) · sentetik ses aciklamasi · en fazla 3 hashtag
+//
+// Etiketler: yalnizca konuyla ilgili, tekrar yok, <=12 adet, <=400 karakter.
+//
+// Kullanim: node description-engine.js <slug>   ->  icerik/paket/<slug>/description.txt (+ tags.json)
+"use strict";
+const fs = require("fs");
+const path = require("path");
+const { KOK, jsonOku, jsonYaz, metinYaz } = require("./lib/ortak");
+const { ayar } = require("./lib/ayar");
+const K = require("./lib/kutuphane");
+
+const HASHTAG = { "bridge-failures": "#bridges", "structural-failures": "#structuralengineering", "aviation-failures": "#aviation",
+  "spaceflight-disasters": "#spaceflight", "maritime-disasters": "#maritime", "nuclear-accidents": "#nuclear",
+  "fire-and-explosions": "#firesafety", "industrial-disasters": "#industrial", "infrastructure-failures": "#infrastructure",
+  "materials-failures": "#materials", "natural-hazards": "#disaster" };
+
+const zaman = (s) => { s = Math.max(0, Math.round(s)); const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), x = s % 60;
+  return (h ? h + ":" + String(m).padStart(2, "0") : m) + ":" + String(x).padStart(2, "0"); };
+
+// Goruntu kaynaklari: konu.kaynaklar (arsiv) + uretimdeki GORSEL-KAYNAKLARI.txt + kaynak defteri
+function goruntuKaynaklari(konu) {
+  const l = [];
+  for (const k of konu.kaynaklar || []) {
+    if (k.wikimedia) l.push(`Archival film: "${k.wikimedia.replace(/\.(ogv|webm|mp4)$/i, "")}" — Wikimedia Commons (public domain / free licence): https://commons.wikimedia.org/wiki/File:${encodeURIComponent(k.wikimedia.replace(/ /g, "_"))}`);
+    else if (k.archive) l.push(`Archival film: Internet Archive — https://archive.org/details/${k.archive}`);
+    else if (k.url) l.push(`Footage: ${k.url}`);
+  }
+  const d = K.defter()[konu.slug];
+  if (d && Array.isArray(d.krediler)) for (const c of d.krediler) if (!l.includes(c)) l.push(c);
+  const dosya = path.join(KOK, "uretim", konu.slug, "GORSEL-KAYNAKLARI.txt");
+  if (!l.length && fs.existsSync(dosya)) {
+    for (const satir of fs.readFileSync(dosya, "utf8").split(/\r?\n/).filter(Boolean).slice(0, 12)) l.push(satir.replace(/^\S+\s+—\s+/, ""));
+  }
+  if (konu.tur === "stok" && !l.some((x) => /pexels/i.test(x))) l.push("Stock footage: Pexels (Pexels License) — https://www.pexels.com/license/");
+  return [...new Set(l)];
+}
+
+function ozet(konu) {
+  const v = konu.vaka || {};
+  const ham = String(konu.aciklama || "").replace(/#\w+/g, "").trim().split(/\n\s*\n/)[0] || "";
+  const cumleler = ham.split(/(?<=[.!?])\s+/).filter(Boolean).slice(0, 2);
+  if (v.mekanizma && !ham.toLowerCase().includes(v.mekanizma.toLowerCase().split(" ")[0]))
+    cumleler.push(`The failure mechanism: ${v.mekanizma}.`);
+  return cumleler.slice(0, 3).join(" ");
+}
+
+function etiketler(konu) {
+  const v = konu.vaka || {};
+  const kume = K.KUMELER[K.kumeBul(konu)];
+  const aday = [...(konu.etiketler || []), v.kisa, v.mekanizma && v.mekanizma.replace(/\s*\(.*\)/, ""), kume && kume.ad.toLowerCase(),
+    "engineering failure", "forensic engineering"].filter(Boolean).map((x) => String(x).trim());
+  const out = []; let uz = 0;
+  for (const t of aday) {
+    const k = t.toLowerCase();
+    if (out.some((o) => o.toLowerCase() === k) || /^(shorts|viral|fyp|trending)$/.test(k)) continue;   // alakasiz/spam etiket yok
+    if (out.length >= 12 || uz + t.length > 400) break;
+    out.push(t); uz += t.length + 1;
+  }
+  return out;
+}
+
+function olustur(konu, ops = {}) {
+  const a = ayar();
+  const v = konu.vaka || {};
+  const format = ops.format || K.formatBul(konu);
+  const kumeId = K.kumeBul(konu);
+  const plan = ops.plan || require("./channel-plan").kur();
+  const b = require("./channel-plan").baglanti(plan, konu.slug) || {};
+  const bl = [];
+  bl.push(ozet(konu));
+  if (Array.isArray(v.zincir) && v.zincir.length >= 3) bl.push("Failure chain: " + v.zincir.map((x) => x.charAt(0) + x.slice(1).toLowerCase()).join(" → "));
+  const ilgili = b.aciklamaVideo && b.aciklamaVideo.url ? b.aciklamaVideo : null;
+  // Ayni kumedense "Related episode", degilse kanalin baska bir yeniden kurgusu
+  const ayniKume = ilgili && [b.onceki, b.sonraki].some((x) => x && x.slug === ilgili.slug);
+  if (ilgili) bl.push(`${ayniKume ? "Related episode" : "Another reconstruction"}: ${ilgili.baslik} — ${ilgili.url}`);
+  if (b.playlist && b.playlist.id) bl.push(`Series — ${b.playlist.ad}: https://www.youtube.com/playlist?list=${b.playlist.id}`);
+  const kaynak = goruntuKaynaklari(konu);
+  if (kaynak.length) bl.push("Footage & sources:\n" + kaynak.map((x) => "• " + x).join("\n"));
+  if (Array.isArray(v.kaynakca) && v.kaynakca.length) bl.push("Technical references:\n" + v.kaynakca.map((r) => `• ${r.ad} — ${r.url}`).join("\n"));
+  const bolumler = ops.bolumler || jsonOku(path.join(KOK, "uretim", konu.slug, "Videos", "bolumler.json"), null);
+  if (format === "long" && Array.isArray(bolumler) && bolumler.length >= 3 && bolumler[0].t === 0)
+    bl.push("Chapters:\n" + bolumler.map((c) => `${zaman(c.t)} ${c.baslik}`).join("\n"));
+  if (a.disclosure.descriptionNote && a.disclosure.voiceNote) bl.push(a.disclosure.voiceNote);
+  const tags = format === "short" ? ["#shorts", "#engineering", HASHTAG[kumeId] || "#disaster"] : ["#engineering", HASHTAG[kumeId] || "#disaster"];
+  bl.push([...new Set(tags)].join(" "));
+  const metin = bl.filter(Boolean).join("\n\n").replace(/[<>]/g, "");
+  return { metin: metin.slice(0, 4900), etiketler: etiketler(konu) };
+}
+
+function calistir(slug) {
+  const konu = K.uretimKonusu(slug);
+  if (!konu) throw new Error("konu yok: " + slug);
+  const r = olustur(konu);
+  metinYaz(K.paketYolu(slug, "description.txt"), r.metin);
+  jsonYaz(K.paketYolu(slug, "tags.json"), r.etiketler);
+  return r;
+}
+
+module.exports = { olustur, calistir, etiketler, goruntuKaynaklari, zaman };
+
+if (require.main === module) {
+  const slug = process.argv[2];
+  if (!slug) { console.error("Kullanim: node description-engine.js <slug>"); process.exit(1); }
+  const r = calistir(slug);
+  console.log(r.metin + "\n\nTAGS: " + r.etiketler.join(", "));
+}

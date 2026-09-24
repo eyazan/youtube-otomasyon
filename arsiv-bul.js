@@ -115,6 +115,22 @@ async function wikimediaUrl(baslik) {
     console.log(mb + " MB  [lisans: " + lisans + "]");
     kayit.push({ ad: k.ad, kaynak: k.wikimedia || k.archive || url, lisans });
   }
+  // Sahne basina kaynak metadatasi + kanal kaynak defteri (ozgunluk/atif icin)
+  const meta = {};
+  for (const k of kaynaklar) {
+    const r = kayit.find((x) => x.ad === k.ad) || { lisans: k.lisans || "see source" };
+    meta["Footage/" + k.ad] = k.wikimedia
+      ? { kurum: "Wikimedia Commons", url: "https://commons.wikimedia.org/wiki/File:" + encodeURIComponent(k.wikimedia.replace(/ /g, "_")), lisans: r.lisans, id: "wikimedia:" + k.wikimedia }
+      : k.archive ? { kurum: "Internet Archive", url: "https://archive.org/details/" + k.archive.split("/")[0], lisans: r.lisans, id: "archive:" + k.archive }
+      : { kurum: "direct URL", url: k.url, lisans: r.lisans, id: "url:" + k.url };
+  }
+  for (const s of konu.sahneler || []) if (meta[s.kaynak]) s.kaynakMeta = { ...meta[s.kaynak], arama: null, alaka: 1, secim: "curated timestamp" };
+  fs.writeFileSync(path.join(BASE, "konu.json"), JSON.stringify(konu, null, 2));
+  try {
+    require("./lib/kutuphane").defterYaz(IS, { kaynakKimlikleri: Object.values(meta).map((m) => m.id),
+      krediler: Object.values(meta).map((m) => `Archival film: ${m.kurum} (${m.lisans}) — ${m.url}`), tarih: new Date().toISOString() });
+  } catch (e) { console.log("  (kaynak defteri yazilamadi: " + e.message + ")"); }
+
   // Telif/atif kaydi — yayinlamadan once incelenebilir
   fs.writeFileSync(path.join(BASE, "GORSEL-KAYNAKLARI.txt"),
     kayit.map(r => `${r.ad}  <=  ${r.kaynak}  [${r.lisans}]`).join("\n") + "\n");

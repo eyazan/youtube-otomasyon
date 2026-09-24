@@ -1,0 +1,49 @@
+{
+  "slug": "how-avalanches-start",
+  "format": "short",
+  "olusturuldu": "2026-09-24T16:22:41.508Z",
+  "ekranHook": "One step, a moving mountain",
+  "mevcut": {
+    "puan": 50,
+    "pencereler": {
+      "0-5": "An avalanche can start with a single footstep. Snow falls in layers over a",
+      "5-12": "whole winter. Buried between them can be a weak, sugary layer of crystals. It holds a heavy slab of",
+      "12-20": "snow like a house of cards. One extra load - new snow, or a skier - snaps that bond. The whole slab",
+      "20-30": "releases at once and starts to slide. It picks up snow and speed, hitting eighty miles an hour. Slopes around thirty eight degrees are the most dangerous. The"
+    },
+    "bulgular": [
+      "0-5s: no event or result in the first sentence",
+      "5-12s: missing an unexpected detail",
+      "12-20s: no central mystery or problem is posed",
+      "on-screen hook is 5 words (readable in <1s)"
+    ],
+    "engelleyici": false
+  },
+  "oneri": {
+    "segmentler": [
+      {
+        "pencere": "0-5s",
+        "rol": "event/result",
+        "metin": "An avalanche can start with a single footstep."
+      },
+      {
+        "pencere": "5-12s",
+        "rol": "unexpected detail",
+        "metin": "It took only a single skier."
+      },
+      {
+        "pencere": "12-20s",
+        "rol": "central problem",
+        "metin": "So what actually happens inside?"
+      },
+      {
+        "pencere": "20-30s",
+        "rol": "viewer promise",
+        "metin": "The answer is weak-layer collapse under a snow slab — and it is why avalanche forecasting tracks buried weak layers all winter."
+      }
+    ],
+    "metin": "An avalanche can start with a single footstep. It took only a single skier. So what actually happens inside? The answer is weak-layer collapse under a snow slab — and it is why avalanche forecasting tracks buried weak layers all winter.",
+    "puan": 90
+  },
+  "not": "Suggestions are drafts built from the case file; narration stays editorial — never auto-replaced."
+}
