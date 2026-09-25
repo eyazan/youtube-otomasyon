@@ -1,21 +1,35 @@
-// BILDIRIM — yeni video / engellenen video icin GitHub bildirimi (issue).
+// BILDIRIM — otomasyonun HER ADIMI icin GitHub bildirimi (issue + yorum).
 //
-// Ek servis yok: GitHub Actions'in kendi GITHUB_TOKEN'i ile depoya bir issue
-// acilir ve depo sahibi @etiketlenir -> GitHub e-postasi + mobil uygulama bildirimi.
-// Onceki "yeni-video" bildirimleri otomatik kapatilir (liste temiz kalsin).
+// Ek servis yok: GitHub Actions'in kendi GITHUB_TOKEN'i ile depoya issue/yorum yazilir
+// ve depo sahibi @etiketlenir -> GitHub e-postasi + GitHub mobil uygulamasi bildirimi.
 //
-// Okunan: uretim/*/BILDIRIM.json (youtube-yukle.js yazar), icerik/engellenen.json (bugunkuler)
-// Kullanim (Actions): node bildirim.js      — token yoksa yalnizca konsola yazar
+// Bir videonun yasam dongusu TEK issue'da toplanir (bildirim kalabaligi olmasin):
+//   🎬 uretildi + zamanlandi (issue acilir: onizleme, denetim, kalite)
+//   ✅ yayina girdi (yorum: saat + ilk izlenme)          — --yayin-kontrol / gunluk is
+//   📈 24 sa / 3 gun / 7 gun / 14 gun / 30 gun sonuclari   (yorum: izlenme, izlenme orani,
+//      izleyicinin ayrildigi saniye, teshis)
+// Ayrica:
+//   ❌ yukleme hatasi (issue; yetki bittiyse adim adim cozum)
+//   ⛔ kalite kapisi engeli (issue)
+//   🩺 sistem sagligi (tek issue: yetki bitmek uzere / Pexels / kutuphane azaldi; duzelince kapanir)
+//   🚨 otomasyon hatasi (--is-hatasi <url>: is akisi coktu)
+//   📊 haftalik ozet (Pazartesi: abone/izlenme degisimi, haftanin videolari, siradaki konular)
+//
+// Tekrar gonderim yok: icerik/bildirim-durum.json neyin bildirildigini tutar.
+// Kullanim: node bildirim.js [--yayin-kontrol] [--is-hatasi <url>] [--kuru]
+//   --kuru: GitHub'a hicbir sey yazmaz, mesajlari konsola basar (uctan uca test).
 "use strict";
 const fs = require("fs");
 const path = require("path");
 const https = require("https");
-const { KOK, jsonOku, bugun } = require("./lib/ortak");
+const { KOK, jsonOku, jsonYaz, bugun } = require("./lib/ortak");
 const { trSaat } = require("./lib/zamanlama");
 
-const TOKEN = process.env.GITHUB_TOKEN || "";
+const KURU = process.argv.includes("--kuru");
+const TOKEN = KURU ? "" : process.env.GITHUB_TOKEN || "";
 const REPO = process.env.GITHUB_REPOSITORY || "eyazan/youtube-otomasyon";
 const SAHIP = process.env.GITHUB_REPOSITORY_OWNER || REPO.split("/")[0];
+const DURUM = path.join(KOK, "icerik", "bildirim-durum.json");
 
 function gh(yontem, yol, govde) {
   return new Promise((coz) => {
@@ -32,7 +46,35 @@ function gh(yontem, yol, govde) {
   });
 }
 
-// Yayin oncesi gorsel denetim ozeti (shorts-yap.js -> denetim.json)
+// ---------------- mesaj metinleri (saf fonksiyonlar, test edilir) ----------------
+const TESHIS_TR = {
+  INSUFFICIENT_DATA: "Henüz yeterli veri yok — bekleniyor.",
+  LOW_IMPRESSIONS_GOOD_RETENTION: "İzleyenler videoyu tutuyor ama YouTube henüz az kişiye gösterdi.",
+  HIGH_IMPRESSIONS_LOW_CTR: "Çok gösterildi, az tıklandı.",
+  GOOD_CTR_LOW_RETENTION: "İzleyici erken ayrılıyor — sonraki senaryolarda açılış güçlendirilir.",
+  GOOD_HOOK_WEAK_MIDDLE: "Açılış iyi, orta kısım zayıf.",
+  HIGH_VIEWS_LOW_SUB_CONVERSION: "Çok izlendi ama az abone getirdi.",
+  SEARCH_DEPENDENT: "İzlenmelerin çoğu aramadan geliyor.",
+  NO_SUGGESTED_TRAFFIC: "Önerilen videolardan trafik yok.",
+  HIGH_SUGGESTED: "Önerilenlerden güçlü trafik geliyor.",
+  SHORTS_FEED_NOT_PICKED_UP: "Shorts akışına henüz girmedi.",
+  WEAK_TOPIC_PACKAGING: "Başlık/konu paketi zayıf olabilir.",
+  OUTPERFORMER: "Kanal ortalamasının üstünde 🎉",
+  HEALTHY: "Sağlıklı.",
+};
+
+// Izleyici tutma egrisinde en sert dusus (hangi saniyede ve ne kadar)
+function dususNoktasi(tutma, sureSn) {
+  if (!Array.isArray(tutma) || tutma.length < 5 || !sureSn) return null;
+  let en = null;
+  for (let i = 1; i < tutma.length; i++) {
+    const a = tutma[Math.max(0, i - 3)], b = tutma[i];
+    const kayip = a.izleme - b.izleme;
+    if (!en || kayip > en.kayip) en = { sn: Math.round(b.oran * sureSn), kayip };
+  }
+  return en && en.kayip > 0.05 ? en : null;
+}
+
 function denetimOzeti(slug) {
   const d = jsonOku(path.join(KOK, "icerik", "paket", slug, "denetim.json"), null);
   if (!d) return ["- ⚠️ Görsel denetim verisi yok"];
@@ -52,43 +94,233 @@ function videoMesaji(b) {
   const inceleme = b.kalite === "REVIEW";
   const baslik = zaman ? `🎬 ${b.baslik} — ${zaman} yayında` : `🎬 ${b.baslik} — private (elle yayınla)`;
   const govde = [
-    `@${SAHIP} yeni Short yüklendi.`, "",
+    `<!-- video:${b.videoId} -->`,
+    `@${SAHIP} yeni Short hazır ve YouTube'a yüklendi.`, "",
     `**${b.baslik}**`, "",
-    zaman ? `⏰ **${zaman}** otomatik olarak Public olacak (${new Date(b.publishAt).toISOString().slice(11, 16)} UTC).`
+    zaman ? `⏰ **${zaman}** otomatik olarak Public olacak (${new Date(b.publishAt).toISOString().slice(11, 16)} UTC). Senin bir şey yapmana gerek yok.`
       : "🔒 Private yüklendi — otomatik yayın planlanmadı. Studio'dan Public yap.",
-    `🧪 Kalite kapısı: **${b.kalite || "?"}**` + (inceleme ? " — bakmanı öneririm (rapor aşağıda)." : ""), "",
+    `🧪 Kalite kapısı: **${b.kalite || "?"}**` + (inceleme ? " (yayınlanır; rapor aşağıda)" : ""), "",
     "**Yayın öncesi otomatik kontrol:**", ...denetimOzeti(b.slug), "",
     `![önizleme](https://raw.githubusercontent.com/${REPO}/main/icerik/paket/${b.slug}/onizleme.jpg)`, "",
-    `- İzle / kontrol et: https://studio.youtube.com/video/${b.videoId}/edit`,
     `- Video: https://youtu.be/${b.videoId}`,
-    `- Kalite raporu: https://github.com/${REPO}/blob/main/icerik/paket/${b.slug}/quality-gate.md`,
-    `- Sabit yorum metni: https://github.com/${REPO}/blob/main/icerik/paket/${b.slug}/pinned-comment.txt`, "",
-    zaman ? "**Yayınlanmasını istemiyorsan:** Studio → video → Visibility → *Schedule*'ı kaldırıp **Private** bırak (yayın saatinden önce)." : "",
-    "**Yayından sonra:** Studio → Comments → kanalın tartışma yorumunu ⋮ → **Pin**.",
-  ].filter((x) => x !== undefined).join("\n");
+    `- Studio: https://studio.youtube.com/video/${b.videoId}/edit`,
+    `- Kalite raporu: https://github.com/${REPO}/blob/main/icerik/paket/${b.slug}/quality-gate.md`, "",
+    "Bu issue videonun tüm yolculuğunu takip eder: yayına girince ve 24 saat / 3 gün / 7 gün sonuçları geldikçe buraya yorum düşer.",
+    zaman ? "_İstemezsen: yayın saatinden önce Studio → Visibility → Schedule'ı kaldır._" : "",
+  ].join("\n");
   return { baslik, govde, etiket: inceleme ? ["yeni-video", "review"] : ["yeni-video"] };
 }
 
-async function main() {
+function hataMesaji(h) {
+  const adimlar = h.yetki ? [
+    "**Çözüm (2 dakika):**",
+    "1. Bilgisayarda proje klasöründe: `node youtube-yetki.js`",
+    "2. Açılan tarayıcıda kanal hesabıyla giriş yap → izin ver",
+    "3. `.env` dosyasındaki yeni `YT_REFRESH_TOKEN` değerini GitHub → Settings → Secrets → Actions → `YT_REFRESH_TOKEN`'a yapıştır",
+    "4. Actions → *Shorts uretim* → Run workflow (ya da bir sonraki otomatik çalışmayı bekle)", "",
+    "Kalıcı çözüm: Google Cloud → OAuth consent screen → **Publish app** (Production). Test modunda yetki 7 günde biter.",
+  ] : ["Otomasyon bir sonraki çalışmada tekrar deneyecek. Tekrarlarsa bu issue'ya bak."];
+  return { baslik: `❌ Yükleme başarısız: ${h.slug}`, etiket: ["hata"], govde: [
+    `@${SAHIP} video üretildi ama YouTube'a **yüklenemedi**. Konu harcanmadı; kuyrukta bekliyor.`, "",
+    "Neden: `" + String(h.neden).replace(/`/g, "'").slice(0, 400) + "`", "", ...adimlar].join("\n") };
+}
+
+function saglikMesaji(s) {
+  const sorun = (s.bulgular || []).filter((b) => b.durum !== "ok");
+  if (!sorun.length) return null;
+  const ikon = { uyari: "⚠️", kritik: "❌" };
+  return { baslik: sorun.some((b) => b.durum === "kritik") ? "🩺 Sistem uyarısı — müdahale gerekiyor" : "🩺 Sistem uyarısı",
+    etiket: ["saglik"], ozet: sorun.map((b) => b.ad + ":" + b.durum + ":" + b.mesaj).join("|"),
+    govde: [`@${SAHIP} otomatik sağlık kontrolü (${trSaat(new Date(s.tarih))}):`, "",
+      ...(s.bulgular || []).map((b) => `- ${ikon[b.durum] || "✅"} **${b.ad}** — ${b.mesaj}` + (b.cozum ? `\n  - Yapılacak: ${b.cozum}` : "")), "",
+      "Sorun giderilince bu issue otomatik kapanır."].join("\n") };
+}
+
+function checkpointYorumu(o) {
+  const m = o.metrikler || {};
+  const d = (x, son = "") => (x && x.durum === "ok" ? x.deger + son : "—");
+  const shorts = (o.trafik || []).find((t) => t.kaynak === "SHORTS");
+  const dusus = dususNoktasi(o.tutma, o.sureSn);
+  const etiket = { "1d": "24 saat", "3d": "3 gün", "7d": "7 gün", "14d": "14 gün", "30d": "30 gün" }[o.checkpoint] || o.checkpoint;
+  return [`@${SAHIP} 📈 **${etiket} sonucu**`, "",
+    `| İzlenme | Beğeni | Yorum | Ort. izlenme oranı | Net abone | Shorts akışı payı |`, "|---:|---:|---:|---:|---:|---:|",
+    `| ${d(m.views)} | ${d(m.likes)} | ${d(m.comments)} | ${m.averageViewPercentage && m.averageViewPercentage.durum === "ok" ? "%" + Math.round(m.averageViewPercentage.deger) : "—"} | ${d(m.subscribersGained)} | ${shorts ? "%" + Math.round(shorts.oran * 100) : "—"} |`, "",
+    ...(dusus ? [`📉 İzleyicilerin en çok ayrıldığı an: **${dusus.sn}. saniye** (izleyicinin ~%${Math.round(dusus.kayip * 100)}'i).`, ""] : []),
+    "Teşhis: " + (o.teshis || []).map((t) => TESHIS_TR[t.kod] || t.kod).join(" · "), "",
+    "_“—” = YouTube henüz vermedi (Analytics verisi ~2 gün gecikmeli); uydurulmaz._"].join("\n");
+}
+
+function yayindaYorumu(v) {
+  const st = v.statistics || {};
+  return `@${SAHIP} ✅ **Yayına girdi** — ${trSaat(new Date(v.snippet.publishedAt))}. Şu an ${st.viewCount ?? "?"} izlenme. https://youtu.be/${v.id}\n\n_İlk saatlerde az izlenme normaldir; Shorts dalgalar halinde dağıtılır. 24 saat sonucu buraya gelecek._`;
+}
+
+function haftalikMesaj(v) {
+  const fark = (a, b) => (a != null && b != null ? (a - b >= 0 ? "+" : "") + (a - b) : "?");
+  return { baslik: `📊 Haftalık özet — ${v.tarih}`, etiket: ["haftalik"], govde: [
+    `@${SAHIP} geçen haftanın özeti:`, "",
+    `- Abone: **${v.simdi?.subscribers ?? "?"}** (${fark(v.simdi?.subscribers, v.once?.subscribers)} bu hafta)`,
+    `- Toplam izlenme: **${v.simdi?.views ?? "?"}** (${fark(v.simdi?.views, v.once?.views)} bu hafta)`, "",
+    "**Bu haftanın videoları:**", ...(v.videolar.length ? v.videolar.map((x) => `- ${x.baslik} — ${x.izlenme ?? "?"} izlenme — https://youtu.be/${x.videoId}`) : ["- (yok)"]), "",
+    "**Sıradaki konular:**", ...v.sira.map((s, i) => `${i + 1}. ${s}`), "",
+    `🩺 Sistem: ${v.saglik}`, "",
+    "Her şey otomatik. Sadece sorun olduğunda ayrı bir issue açılır."].join("\n") };
+}
+
+// ---------------- GitHub islemleri ----------------
+const durumOku = () => jsonOku(DURUM, { gonderilen: {} });
+function isaretle(d, anahtar) { d.gonderilen[anahtar] = new Date().toISOString(); }
+
+async function issueAc(m) {
+  if (!TOKEN) { console.log(`[bildirim] ${m.baslik}\n${m.govde}\n`); return { number: 0 }; }
+  const r = await gh("POST", `/repos/${REPO}/issues`, { title: m.baslik, body: m.govde, labels: m.etiket });
+  console.log(r.durum === 201 ? `✓ issue: ${r.j.html_url}` : `✗ issue acilamadi (HTTP ${r.durum})`);
+  return r.j || {};
+}
+async function yorumYaz(no, metin) {
+  if (!TOKEN || !no) { console.log(`[yorum #${no}] ${metin}\n`); return true; }
+  const r = await gh("POST", `/repos/${REPO}/issues/${no}/comments`, { body: metin });
+  console.log(r.durum === 201 ? `✓ yorum #${no}` : `✗ yorum yazilamadi #${no} (HTTP ${r.durum})`);
+  return r.durum === 201;
+}
+async function etiketliIssuelar(etiket, durum = "open") {
+  if (!TOKEN) return [];
+  const r = await gh("GET", `/repos/${REPO}/issues?state=${durum}&labels=${etiket}&per_page=100`);
+  return Array.isArray(r.j) ? r.j : [];
+}
+async function videoIssue(videoId) {
+  const l = await etiketliIssuelar("yeni-video", "all");
+  const i = l.find((x) => String(x.body || "").includes(videoId));
+  return i ? i.number : null;
+}
+
+// ---------------- adimlar ----------------
+async function yeniVideolar(d) {
   const uretim = path.join(KOK, "uretim");
-  const bildirimler = fs.existsSync(uretim) ? fs.readdirSync(uretim).map((s) => jsonOku(path.join(uretim, s, "BILDIRIM.json"), null)).filter(Boolean) : [];
-  const engel = Object.entries(jsonOku(path.join(KOK, "icerik", "engellenen.json"), {})).filter(([, e]) => String(e.tarih || "").startsWith(bugun()));
-  const mesajlar = bildirimler.map(videoMesaji);
-  for (const [slug, e] of engel) mesajlar.push({ baslik: `⛔ Kalite kapısı engelledi: ${slug}`, etiket: ["kalite-engeli"],
-    govde: `@${SAHIP} bu konu yüklenmedi.\n\nNeden: ${e.neden}\n\nRapor: https://github.com/${REPO}/blob/main/icerik/paket/${slug}/quality-gate.md\n\nKonu dosyası düzeltilince otomatik tekrar denenir.` });
-  if (!mesajlar.length) { console.log("Bildirim yok (bugun yeni video/engel yok)."); return; }
-  if (!TOKEN) { for (const m of mesajlar) console.log("[bildirim]\n" + m.baslik + "\n" + m.govde + "\n"); return; }
-  // Onceki video bildirimlerini kapat
-  if (bildirimler.length) {
-    const acik = await gh("GET", `/repos/${REPO}/issues?state=open&labels=yeni-video&per_page=50`);
-    for (const i of (acik.j || [])) await gh("PATCH", `/repos/${REPO}/issues/${i.number}`, { state: "closed" });
-  }
-  for (const m of mesajlar) {
-    const r = await gh("POST", `/repos/${REPO}/issues`, { title: m.baslik, body: m.govde, labels: m.etiket });
-    console.log(r.durum === 201 ? `✓ bildirim: ${r.j.html_url}` : `✗ bildirim acilamadi (HTTP ${r.durum})`);
+  const liste = fs.existsSync(uretim) ? fs.readdirSync(uretim).map((s) => jsonOku(path.join(uretim, s, "BILDIRIM.json"), null)).filter(Boolean) : [];
+  for (const b of liste) {
+    if (d.gonderilen["video:" + b.videoId]) continue;
+    // Eski video issue'lari kapanir (yorumlar kapali issue'ya da duser ve bildirim gider)
+    for (const i of await etiketliIssuelar("yeni-video")) if (TOKEN) await gh("PATCH", `/repos/${REPO}/issues/${i.number}`, { state: "closed" });
+    await issueAc(videoMesaji(b));
+    isaretle(d, "video:" + b.videoId);
   }
 }
 
-module.exports = { videoMesaji };
+async function hatalar(d) {
+  const uretim = path.join(KOK, "uretim");
+  const liste = fs.existsSync(uretim) ? fs.readdirSync(uretim).map((s) => jsonOku(path.join(uretim, s, "YUKLEME-HATASI.json"), null)).filter(Boolean) : [];
+  for (const h of liste) {
+    const k = "hata:" + h.slug + ":" + bugun();
+    if (d.gonderilen[k]) continue;
+    await issueAc(hataMesaji(h));
+    isaretle(d, k);
+  }
+  const engel = Object.entries(jsonOku(path.join(KOK, "icerik", "engellenen.json"), {})).filter(([, e]) => String(e.tarih || "").startsWith(bugun()));
+  for (const [slug, e] of engel) {
+    const k = "engel:" + slug + ":" + bugun();
+    if (d.gonderilen[k]) continue;
+    await issueAc({ baslik: `⛔ Kalite kapısı engelledi: ${slug}`, etiket: ["kalite-engeli"],
+      govde: `@${SAHIP} bu konu yüklenmedi (kalite yetersiz). Sistem sıradaki konuya geçti; bugünkü video etkilenmez.\n\nNeden: ${e.neden}\n\nRapor: https://github.com/${REPO}/blob/main/icerik/paket/${slug}/quality-gate.md` });
+    isaretle(d, k);
+  }
+}
+
+async function saglik(d) {
+  const s = jsonOku(path.join(KOK, "icerik", "saglik.json"), null);
+  if (!s) return;
+  const m = saglikMesaji(s);
+  const acik = await etiketliIssuelar("saglik");
+  if (!m) {
+    for (const i of acik) { await yorumYaz(i.number, "✅ Sorun giderildi — tüm kontroller geçti."); await gh("PATCH", `/repos/${REPO}/issues/${i.number}`, { state: "closed" }); }
+    d.saglikOzet = null;
+    return;
+  }
+  if (d.saglikOzet === m.ozet && acik.length) return;   // ayni durum: tekrar bildirme
+  if (acik.length && TOKEN) {
+    await gh("PATCH", `/repos/${REPO}/issues/${acik[0].number}`, { title: m.baslik, body: m.govde });
+    await yorumYaz(acik[0].number, `@${SAHIP} sağlık durumu değişti:\n\n` + m.govde.split("\n").filter((x) => /^- /.test(x)).join("\n"));
+  } else await issueAc(m);
+  d.saglikOzet = m.ozet;
+}
+
+async function checkpointler(d) {
+  const K = require("./lib/kutuphane");
+  for (const y of K.yayinlananlar()) {
+    const dir = path.join(KOK, "analytics", y.videoId);
+    if (!fs.existsSync(dir)) continue;
+    for (const f of fs.readdirSync(dir).filter((x) => /^\d+d\.json$/.test(x))) {
+      const k = "cp:" + y.videoId + ":" + f;
+      if (d.gonderilen[k]) continue;
+      const no = await videoIssue(y.videoId);
+      if (no || !TOKEN) await yorumYaz(no, checkpointYorumu(jsonOku(path.join(dir, f), {})));
+      isaretle(d, k);   // issue'su olmayan eski videolar haftalik ozette
+    }
+  }
+}
+
+async function yayinKontrol(d) {
+  const K = require("./lib/kutuphane");
+  const yt = require("./lib/yt");
+  const bekleyen = K.yayinlananlar().filter((y) => y.publishAt && Date.parse(y.publishAt) <= Date.now() - 5 * 60000
+    && Date.now() - Date.parse(y.publishAt) < 4 * 86400000 && !d.gonderilen["yayin:" + y.videoId]);
+  if (!bekleyen.length || !yt.kimlikVar()) return;
+  const api = yt.istemci(await yt.token());
+  const vids = await yt.videolar(api, bekleyen.map((y) => y.videoId));
+  for (const y of bekleyen) {
+    const v = vids.find((x) => x.id === y.videoId);
+    const no = await videoIssue(y.videoId);
+    if (v && v.status.privacyStatus === "public") { await yorumYaz(no, yayindaYorumu(v)); isaretle(d, "yayin:" + y.videoId); }
+    else if (Date.now() - Date.parse(y.publishAt) > 60 * 60000) {
+      await issueAc({ baslik: `❌ Otomatik yayın gerçekleşmedi: ${y.baslik}`, etiket: ["hata"], govde:
+        `@${SAHIP} video ${trSaat(new Date(y.publishAt))} saatinde Public olmalıydı ama durumu: **${v ? v.status.privacyStatus : "bulunamadı"}**.\n\nStudio'dan kontrol et: https://studio.youtube.com/video/${y.videoId}/edit` });
+      isaretle(d, "yayin:" + y.videoId);
+    }
+  }
+}
+
+async function haftalik(d) {
+  const hafta = (() => { const t = new Date(); const p = new Date(Date.UTC(t.getUTCFullYear(), t.getUTCMonth(), t.getUTCDate() - ((t.getUTCDay() + 6) % 7))); return p.toISOString().slice(0, 10); })();
+  if (new Date().getUTCDay() !== 1 || d.gonderilen["hafta:" + hafta]) return;
+  const K = require("./lib/kutuphane");
+  const kd = path.join(KOK, "analytics", "kanal");
+  const anlik = fs.existsSync(kd) ? fs.readdirSync(kd).filter((f) => /\.json$/.test(f)).sort() : [];
+  const simdi = anlik.length ? jsonOku(path.join(kd, anlik[anlik.length - 1]), null) : null;
+  const esik = new Date(Date.now() - 7 * 86400000).toISOString().slice(0, 10);
+  const once = anlik.filter((f) => f.slice(0, 10) <= esik).map((f) => jsonOku(path.join(kd, f), null)).pop() || (anlik.length ? jsonOku(path.join(kd, anlik[0]), null) : null);
+  const hafta7 = K.yayinlananlar().filter((y) => Date.parse(y.publishAt || y.tarih) >= Date.now() - 7 * 86400000);
+  let izl = {};
+  try { const yt = require("./lib/yt"); if (yt.kimlikVar() && hafta7.length) { const api = yt.istemci(await yt.token());
+    for (const v of await yt.videolar(api, hafta7.map((y) => y.videoId))) izl[v.id] = v.statistics.viewCount; } } catch (e) {}
+  const s = jsonOku(path.join(KOK, "icerik", "saglik.json"), null);
+  const m = haftalikMesaj({ tarih: bugun(), simdi, once, videolar: hafta7.map((y) => ({ ...y, izlenme: izl[y.videoId] })),
+    sira: K.kuyruk().slice(0, 7).map((k) => k.baslik),
+    saglik: s ? (s.bulgular.every((b) => b.durum === "ok") ? "tüm kontroller geçti ✅" : s.bulgular.filter((b) => b.durum !== "ok").map((b) => b.mesaj).join("; ")) : "bilinmiyor" });
+  for (const i of await etiketliIssuelar("haftalik")) if (TOKEN) await gh("PATCH", `/repos/${REPO}/issues/${i.number}`, { state: "closed" });
+  await issueAc(m);
+  isaretle(d, "hafta:" + hafta);
+}
+
+async function main() {
+  const d = durumOku();
+  const i = process.argv.indexOf("--is-hatasi");
+  if (i > 0) {
+    await issueAc({ baslik: `🚨 Otomasyon hata verdi — ${bugun()}`, etiket: ["hata"],
+      govde: `@${SAHIP} günlük iş akışı hata ile bitti.\n\nKayıt: ${process.argv[i + 1] || "(bağlantı yok)"}\n\nKonu harcanmadı; bir sonraki çalışma tekrar dener. Tekrarlarsa bu kaydı incele.` });
+    return;
+  }
+  const adimlar = process.argv.includes("--yayin-kontrol") ? [yayinKontrol] : [saglik, yeniVideolar, hatalar, yayinKontrol, checkpointler, haftalik];
+  for (const f of adimlar) {
+    try { await f(d); } catch (e) { console.log(`  (${f.name} atlandi: ${String(e.message).slice(0, 160)})`); }
+  }
+  // Durum yalnizca gercekten gonderildiyse yazilir (kuru calisma durumu kirletmez)
+  if (TOKEN) {
+    const kes = Date.now() - 120 * 86400000;
+    for (const [k, t] of Object.entries(d.gonderilen)) if (Date.parse(t) < kes) delete d.gonderilen[k];
+    jsonYaz(DURUM, d);
+  }
+}
+
+module.exports = { videoMesaji, hataMesaji, saglikMesaji, checkpointYorumu, yayindaYorumu, haftalikMesaj, dususNoktasi, TESHIS_TR };
 
 if (require.main === module) main().catch((e) => { console.error("Hata: " + e.message); process.exit(0); });

@@ -22,7 +22,9 @@ const toleransSaat = (gun) => Math.min(12, gun * 24 / 2);
 function durum(format, simdi = new Date(), kayit = K.yayinlananlar(), kalite = K.kaliteKayitlari()) {
   const p = ayar().publishing;
   const f = p[format] || { everyDays: 1, maxStretchDays: 3 };
-  const son = kayit.filter((y) => (y.format || "short") === format).map((y) => new Date(y.tarih)).sort((a, b) => b - a)[0] || null;
+  // Zamanlanmis videoda "yayin ani" publishAt'tir (yukleme ani degil): gec kalan bir
+  // calisma videoyu ertesi gunun slotuna koyduysa o gun ikinci video uretilmez.
+  const son = kayit.filter((y) => (y.format || "short") === format).map((y) => new Date(y.publishAt || y.tarih)).sort((a, b) => b - a)[0] || null;
   // Son 3 GERCEK uretimin final kapi karari (kutuphane taramalari sayilmaz)
   const sonKararlar = kalite.filter((k) => k.asama === "final").slice(-3).map((k) => k.karar);
   const sorunlu = sonKararlar.filter((k) => k === "BLOCK" || (p.stretchOnReview && k === "REVIEW")).length;

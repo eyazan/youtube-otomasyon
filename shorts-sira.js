@@ -47,6 +47,7 @@ function engelle(slug, neden) { const e = engellenenler(); e[slug] = { hash: spe
 const engelliMi = (slug) => { const e = engellenenler()[slug]; return !!(e && e.hash === specHash(slug)); };
 
 class Engellendi extends Error {}
+class YuklemeHatasi extends Error {}
 function kapi(slug, final) {
   const r = require("./quality-gate").degerlendir(slug, { final });
   console.log(`  kalite kapisi (${final ? "final" : "pre"}): ${r.karar} ${r.toplam}/100` + (r.engelleyen.length ? " — " + r.engelleyen.join("; ") : ""));
@@ -100,7 +101,14 @@ function uretBir(slug) {
   const publish = process.env.PUBLISH === "1";
   if (publish && uploadHazir()) {
     const r = cp.spawnSync("node", ["youtube-yukle.js", slug], { cwd: KOK, stdio: "inherit" });
-    console.log(r.status === 0 ? `yukleme: private (kalite: ${son.karar} — yayindan once incele)` : "yukleme basarisiz");
+    if (r.status !== 0) {
+      // Yukleme olmadiysa konu HARCANMAZ: "uretildi" isaretlenmez, sonraki calisma tekrar dener.
+      // Neden uretim/<slug>/YUKLEME-HATASI.json'da; bildirim.js issue acar.
+      const h = path.join(job, "YUKLEME-HATASI.json");
+      if (!fs.existsSync(h)) fs.writeFileSync(h, JSON.stringify({ slug, neden: "youtube-yukle.js cikis kodu " + r.status, tarih: new Date().toISOString() }, null, 2));
+      throw new YuklemeHatasi("yukleme basarisiz (konu kuyrukta kaldi)");
+    }
+    console.log(`yukleme: tamam (kalite: ${son.karar})`);
   } else {
     console.log("yukleme atlandi (" + (publish ? "kimlik yok" : "PUBLISH!=1") + "); video: uretim/" + slug + "/Videos/");
   }
@@ -128,11 +136,16 @@ function main() {
   // video uretilenler listesinde olmasa bile IKINCI KEZ yuklenmez.
   const yuklenmis = require("./lib/kutuphane").yayinlananlar().map((y) => y.slug).filter(Boolean);
   const atla = new Set([...uretilenler(), ...basarisizlar(), ...yuklenmis, ...Object.keys(engellenenler()).filter(engelliMi)]);
-  // Siralama: once gercek arsiv filmi olan konular (kanalin en guclu videolari arsiv
-  // goruntulu olanlar), sonra stok aciklayicilar; grup icinde alfabetik.
-  const arsivMi = (s) => { try { return JSON.parse(fs.readFileSync(path.join(KONULAR, s + ".json"), "utf8")).tur !== "stok"; } catch (e) { return false; } };
-  const kalan = tum.filter(s => !atla.has(s)).sort((a, b) => (arsivMi(b) - arsivMi(a)) || a.localeCompare(b));
+  // Siralama lib/kutuphane.kuyruk(): once gercek arsiv filmi olan konular, sonra stok.
+  const kalan = require("./lib/kutuphane").kuyruk().map((k) => k.slug).filter((s) => !atla.has(s));
   if (!kalan.length) { console.log("Uretilecek yeni konu yok (" + tum.length + " toplam). Konu ekle."); return 0; }
+
+  // Saglik: yukleme yapilacaksa once YouTube yetkisi dogrulanir. Yetki yoksa hicbir konu
+  // uretilmez (eskiden konu uretilip yuklenemeden "uretildi" sayiliyordu).
+  if (!hepsi && process.env.PUBLISH === "1" && !process.env.SAGLIK_ATLA) {
+    const sg = cp.spawnSync("node", ["saglik.js"], { cwd: KOK, stdio: "inherit" });
+    if (sg.status === 5) { console.error("⛔ Saglik kontrolu: YouTube'a yukleme yapilamaz — uretim atlandi, konu harcanmadi (bkz. icerik/saglik.json)."); return 0; }
+  }
 
   // Gunluk: ilk BASARILI konuyu uret; biri patlarsa sonrakine gec (gun bosa gitmesin).
   // --hepsi: hepsini dene, basarisizlari atla.
@@ -143,6 +156,8 @@ function main() {
     try { uretBir(slug); basari++; }
     catch (e) {
       if (e instanceof Engellendi) { console.error(`  ⛔ ${slug} kalite kapisinda engellendi — rapor: icerik/paket/${slug}/quality-gate.md`); continue; }
+      // Yukleme hatasi konuya ait degildir (yetki/ag): baska konuyu da harcamamak icin dur.
+      if (e instanceof YuklemeHatasi) { console.error(`  ✗ ${slug}: ${e.message}`); return 1; }
       console.error(`  ✗ ${slug} basarisiz: ${e.message} — atlaniyor`);
       basarisizIsaretle(slug);
     }

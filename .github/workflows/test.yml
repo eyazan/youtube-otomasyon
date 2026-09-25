@@ -28,15 +28,43 @@ jobs:
       - name: Python testleri
         run: python -m unittest discover -s tests
 
-  # PR'larda gercek render testi: GitHub'in Ubuntu + ffmpeg ortaminda bir arsiv Short'u
-  # uretir (YUKLEME YOK) ve yayin oncesi denetimin temiz oldugunu dogrular:
-  # yazi tasmasi 0, ses/goruntu uyumlu, final kalite kapisi BLOCK degil.
-  render-testi:
+  # PR'larda UCTAN UCA uretim testi (YOUTUBE'A YUKLEME YOK): GitHub'in Ubuntu + ffmpeg
+  # ortaminda gunluk is akisinin aynisi (shorts-sira: kalite kapilari -> goruntu indirme ->
+  # render -> denetim -> paket) kosulur, ardindan e2e-kontrol.js 25 maddeyi dogrular
+  # (video/ses/denetim/kalite/aciklama/etiket/yukleme metasi/bildirim metni).
+  # Kapsam: sabit iki ornek (arsiv + stok) + bu PR'da eklenen/degisen TUM konular (paralel).
+  hazirla:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    outputs:
+      slugs: ${{ steps.s.outputs.slugs }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - id: s
+        run: |
+          DEGISEN=$(git diff --name-only "origin/${{ github.base_ref }}...HEAD" -- 'icerik/konular/*.json' | sed -E 's#icerik/konular/(.*)\.json#\1#')
+          SLUGS=$(node -e '
+            const fs=require("fs");const bitti=new Set(JSON.parse(fs.readFileSync("icerik/uretilenler.json","utf8")));
+            const l=["vesuvius-1944","why-ships-sink",...process.argv[1].split(/\s+/).filter(Boolean)]
+              .filter((s,i,a)=>a.indexOf(s)===i && fs.existsSync("icerik/konular/"+s+".json") && (i<2 || !bitti.has(s)));
+            console.log(JSON.stringify(l.slice(0,16)));' "$DEGISEN")
+          echo "slugs=$SLUGS" >> "$GITHUB_OUTPUT"
+          echo "Uctan uca test edilecek: $SLUGS"
+
+  uctan-uca:
+    needs: hazirla
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        slug: ${{ fromJson(needs.hazirla.outputs.slugs) }}
     env:
       SHORTS_FONT: 'DejaVu Sans'
+      PEXELS_KEY: ${{ secrets.PEXELS_KEY }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -46,47 +74,38 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y ffmpeg fonts-dejavu-core fonts-liberation
       - name: Bagimliliklar
         run: npm install --no-audit --no-fund
-      - name: Ornek Short uret (tacoma-narrows, arsiv)
+      - name: Gunluk is akisi (yuklemesiz) — ${{ matrix.slug }}
         run: |
-          node -e 'const fs=require("fs");const k=JSON.parse(fs.readFileSync("icerik/konular/tacoma-narrows.json"));k.slug="tacoma-narrows";fs.mkdirSync("uretim/tacoma-narrows",{recursive:true});fs.writeFileSync("uretim/tacoma-narrows/konu.json",JSON.stringify(k,null,2))'
-          node arsiv-bul.js tacoma-narrows
-          node shorts-yap.js tacoma-narrows
-      - name: Yayin oncesi denetim + final kalite kapisi
+          if [ -z "$PEXELS_KEY" ] && grep -q '"tur": "stok"' "icerik/konular/${{ matrix.slug }}.json"; then echo "PEXELS_KEY yok (fork PR) — stok konu atlandi"; exit 0; fi
+          node shorts-sira.js "${{ matrix.slug }}"
+      - name: Uctan uca kontrol (25 madde)
         run: |
-          node quality-gate.js tacoma-narrows --final
-          node -e '
-            const d=require("./uretim/tacoma-narrows/Videos/denetim.json"); console.log(d);
-            if (d.yaziTasmasi !== 0) throw new Error("yazi tasmasi: " + d.yaziTasmasi);
-            if (!(d.sureFarki <= 0.5)) throw new Error("ses/goruntu uyumsuz: " + d.videoSure + " / " + d.sesSure);
-            if (d.siyahToplam > 1.5) throw new Error("siyah kare: " + d.siyahToplam);'
-      - name: Ornek stok Short uret (kanal tonu dahil) + denetim
-        env:
-          PEXELS_KEY: ${{ secrets.PEXELS_KEY }}
-        run: |
-          if [ -z "$PEXELS_KEY" ]; then echo "PEXELS_KEY yok (fork PR) — stok render atlandi"; exit 0; fi
-          node -e 'const fs=require("fs");const k=JSON.parse(fs.readFileSync("icerik/konular/why-ships-sink.json"));k.slug="why-ships-sink";fs.mkdirSync("uretim/why-ships-sink",{recursive:true});fs.writeFileSync("uretim/why-ships-sink/konu.json",JSON.stringify(k,null,2))'
-          node stok-bul.js why-ships-sink
-          node shorts-yap.js why-ships-sink
-          node quality-gate.js why-ships-sink --final
-          node -e '
-            const d=require("./uretim/why-ships-sink/Videos/denetim.json"); console.log(d);
-            if (d.ton !== "stok-belgesel") throw new Error("kanal tonu uygulanmadi");
-            if (d.yaziTasmasi !== 0) throw new Error("yazi tasmasi: " + d.yaziTasmasi);
-            if (!(d.sureFarki <= 0.5)) throw new Error("ses/goruntu uyumsuz");
-            if (d.siyahToplam > 1.5) throw new Error("siyah kare: " + d.siyahToplam);'
-
-      - name: Denetim testi (gercek ffmpeg)
-        run: node --test tests/js/denetim.test.js
-      - name: Onizleme ve videoyu artifact olarak sakla
+          if [ ! -f "uretim/${{ matrix.slug }}/Videos/${{ matrix.slug }}.mp4" ] && [ -z "$PEXELS_KEY" ]; then exit 0; fi
+          node e2e-kontrol.js "${{ matrix.slug }}"
+      - name: Bildirim metinleri (kuru — GitHub'a yazilmaz)
+        run: node bildirim.js --kuru
+      - name: Onizlemeyi artifact olarak sakla
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: render-testi
+          name: e2e-${{ matrix.slug }}
           path: |
-            uretim/tacoma-narrows/Videos/*.mp4
-            uretim/tacoma-narrows/Videos/onizleme.jpg
-            uretim/tacoma-narrows/Videos/denetim.json
-            uretim/why-ships-sink/Videos/onizleme.jpg
-            uretim/why-ships-sink/Videos/denetim.json
+            uretim/${{ matrix.slug }}/Videos/*.mp4
+            uretim/${{ matrix.slug }}/Videos/onizleme.jpg
+            uretim/${{ matrix.slug }}/Videos/denetim.json
+            icerik/paket/${{ matrix.slug }}/description.txt
           if-no-files-found: ignore
           retention-days: 7
+
+  denetim-testi:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: ffmpeg kur
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg fonts-dejavu-core
+      - name: Denetim testi (gercek ffmpeg)
+        run: node --test tests/js/denetim.test.js
