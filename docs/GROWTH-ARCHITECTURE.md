@@ -109,12 +109,52 @@ Any critical finding (text still overflowing, A/V mismatch, >1.5 s of black) mak
 
 ## 8. Daily GitHub Actions run (`.github/workflows/uretim.yml`)
 
-1. `shorts-sira.js`: cadence → pre gate → footage → render → final gate → private upload (registry, playlists, experiment log).
-2. `yorum-yanitla.js`: measured comment replies.
-3. `post-publish-analyzer.js --due`: checkpoints.
-4. `pinned-comment.js --post-pending`: debate comment on videos that became public.
-5. `channel-plan.js`, then `experiments.js degerlendir`.
-6. Mondays: `existing-video-optimizer.js --all`.
-7. Commit state and reports back (`icerik channel analysis analytics experiments migration`).
+1. `saglik.js` (health check): YouTube token works, scopes present, token age in Testing mode (`config/yetki.json`: warning on day 5, critical on day 7), Pexels key, days of library left. Output: `icerik/saglik.json`.
+2. `shorts-sira.js`: cadence → health gate → pre gate → footage (licence-checked) → render → final gate → private upload with `publishAt`.
+   - If the upload is impossible (token expired), **no topic is consumed**.
+   - A failed upload leaves the topic in the queue and writes `YUKLEME-HATASI.json`.
+3. `bildirim.js`: notifications (see §9).
+4. `yorum-yanitla.js`, `post-publish-analyzer.js --due`, `pinned-comment.js --post-pending`, `channel-plan.js`, `experiments.js degerlendir`, and on Mondays `existing-video-optimizer.js --all`.
+5. State is committed back with a 5-attempt pull/rebase/push loop.
+6. On failure, a "🚨" issue is opened.
 
-`.github/workflows/test.yml` runs the JS and Python tests on every push and PR.
+**Queue order** (`lib/kutuphane.kuyruk()`): real archive film before stock explainers, then the editorial `oncelik` (higher first), then alphabetical.
+
+**Scheduling safety:**
+- `lib/zamanlama.sonrakiSlot` never puts two videos on the same day. A delayed run that already filled tomorrow's 18:00 slot pushes the next video on.
+- `yayin-plani` counts `publishAt` as the publish moment.
+
+**Duplicate guard:** before uploading, `youtube-yukle.js` looks for the same title among the channel's uploads. If it finds one, it records it and skips the upload.
+
+**Upload validation:** `metaDogrula` checks YouTube's limits before sending (title ≤ 100, description ≤ 5000 bytes, tags ≤ 500, no `<>`, `publishAt` only on private and in the future).
+
+**Licence guard:** `arsiv-bul.js` only accepts Public domain / CC0 / CC BY. It rejects SA, NC, ND and unknown licences.
+
+**Dry run on the real infrastructure:** Actions → *Shorts uretim* → Run workflow → `kuru: true` (optional `slug`). This runs the full production with the real secrets and real downloads, then `e2e-kontrol.js`. Nothing is uploaded, committed or notified.
+
+`.github/workflows/yayin-kontrol.yml` runs at 18:25 and 19:40 UTC and confirms that the scheduled video actually went Public.
+
+## 9. Notifications (`bildirim.js`, GitHub issues → e-mail + GitHub mobile app)
+
+Each video has **one** issue that follows its whole life:
+
+| When | What |
+|---|---|
+| Produced + scheduled | issue 🎬: preview contact sheet, pre-publish check, quality gate, publish time |
+| Went Public | comment ✅ with first views (`--yayin-kontrol`); separate ❌ issue if it did not go public within 1 h |
+| 24 h / 3 d / 7 d / 14 d / 30 d | comment 📈: views, likes, comments, average % viewed, net subs, Shorts-feed share, **the second where most viewers leave** (retention curve), diagnosis |
+
+Other notifications:
+
+- ❌ upload failed, with step-by-step re-authorisation instructions when the token expired
+- ⛔ quality-gate block
+- 🩺 **system health**: a single issue that is updated when the state changes and closed automatically when resolved
+- 🚨 workflow crash
+- 📊 weekly summary every Monday: subscriber/view change, the week's videos, the next 7 topics, health
+
+`icerik/bildirim-durum.json` prevents duplicates.
+
+## 10. Tests
+
+- `test.yml`, on every push/PR: JS + Python unit tests. These include the retention rules for every unproduced topic, scheduling, upload validation, health and notification text.
+- `test.yml`, on every PR: **end-to-end production in parallel** for two fixed samples (archive + stock) and **every topic added or changed in the PR**. It runs `shorts-sira.js` with no upload, then `e2e-kontrol.js`, which checks 25 items: video/audio format, loudness, overflow/black/freeze, final gate, retention rules, description/tags/pinned comment, upload metadata, notification text.

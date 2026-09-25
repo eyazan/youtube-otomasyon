@@ -76,6 +76,7 @@ async function archiveUrl(idVeyaYol) {
   return "https://archive.org/download/" + idVeyaYol + "/" + encodeURIComponent(vids[0].name);
 }
 
+const lisansUygun = (l) => /^(public domain|pd\b|pd-|cc0|cc by(?!-?(sa|nc|nd))\b)/i.test(String(l).trim()) && !/\b(sa|nc|nd)\b/i.test(String(l));
 async function wikimediaUrl(baslik) {
   const api = "https://commons.wikimedia.org/w/api.php?action=query&titles=" +
     encodeURIComponent("File:" + baslik) + "&prop=imageinfo&iiprop=url|mime|extmetadata&format=json";
@@ -96,7 +97,12 @@ async function wikimediaUrl(baslik) {
     const hedef = path.join(FOOT, k.ad);
     if (fs.existsSync(hedef) && fs.statSync(hedef).size > 0) { console.log("  var, atlandi: " + k.ad); continue; }
     let url = k.url, lisans = k.lisans || "belirtilmemis";
-    if (k.wikimedia) { const w = await wikimediaUrl(k.wikimedia); url = w.url; lisans = w.lisans; }
+    if (k.wikimedia) {
+      const w = await wikimediaUrl(k.wikimedia); url = w.url; lisans = w.lisans;
+      // Lisans korumasi: yalnizca kamu mali / CC0 / CC BY. Paylasim-benzer (SA), ticari
+      // olmayan (NC), turetilemez (ND) ya da bilinmeyen lisansli film KULLANILMAZ.
+      if (!lisansUygun(lisans)) throw new Error(`lisans uygun degil (${lisans}): ${k.wikimedia} — yalnizca Public domain / CC0 / CC BY`);
+    }
     else if (k.archive) { url = await archiveUrl(k.archive); if (lisans === "belirtilmemis") lisans = "archive.org (kaynagi dogrula)"; }
     if (!url) throw new Error("kaynak icin url/wikimedia/archive yok: " + k.ad);
     process.stdout.write("  indiriliyor: " + k.ad + " ... ");

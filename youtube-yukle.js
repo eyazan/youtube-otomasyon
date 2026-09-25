@@ -85,8 +85,10 @@ async function erisimJetonu(clientId, clientSecret, refreshToken) {
     },
   }, govde);
   if (y.durum !== 200) {
-    throw new Error("OAuth jetonu alinamadi (HTTP " + y.durum + "). "
-      + "YT_CLIENT_ID / YT_CLIENT_SECRET / YT_REFRESH_TOKEN dogru mu?");
+    // invalid_grant = refresh token suresi dolmus/iptal (Test modunda 7 gun) -> yeniden yetki
+    const gecersiz = /invalid_grant/.test(y.govde);
+    throw new Error((gecersiz ? "YETKI_GECERSIZ: YouTube yetkisinin suresi dolmus ya da iptal edilmis (invalid_grant) — node youtube-yetki.js ile yenile. "
+      : "OAuth jetonu alinamadi (HTTP " + y.durum + "). ") + "YT_CLIENT_ID / YT_CLIENT_SECRET / YT_REFRESH_TOKEN dogru mu?");
   }
   const j = JSON.parse(y.govde);
   if (!j.access_token) throw new Error("OAuth yaniti access_token icermiyor.");
@@ -124,6 +126,42 @@ function yuklemeMetni(BASE) {
 
 // YouTube baslik/aciklamada '<' ve '>' reddedilir.
 const temizle = (s) => String(s).replace(/[<>]/g, "");
+
+// YouTube Data API sinirlari — yuklemeden ONCE dogrulanir (API hatasi yerine acik mesaj).
+function metaDogrula(snippet, status) {
+  const h = [];
+  if (!snippet.title || !snippet.title.trim()) h.push("baslik bos");
+  if ([...snippet.title].length > 100) h.push("baslik 100 karakteri asiyor");
+  if (/[<>]/.test(snippet.title + snippet.description)) h.push("baslik/aciklamada < veya > var");
+  if (Buffer.byteLength(snippet.description || "", "utf8") > 5000) h.push("aciklama 5000 bayti asiyor");
+  // Etiketlerin toplam uzunlugu (bosluklu etiket tirnakla sayilir) <= 500
+  const etiketUz = (snippet.tags || []).reduce((a, t) => a + t.length + (/\s/.test(t) ? 2 : 0), 0) + Math.max(0, (snippet.tags || []).length - 1);
+  if (etiketUz > 500) h.push("etiketler toplam 500 karakteri asiyor (" + etiketUz + ")");
+  if ((snippet.tags || []).some((t) => /[<>,]/.test(t))) h.push("etikette gecersiz karakter");
+  if (status.publishAt) {
+    if (status.privacyStatus !== "private") h.push("publishAt yalnizca private videoda kullanilabilir");
+    if (Date.parse(status.publishAt) <= Date.now()) h.push("publishAt gecmiste");
+  }
+  return h;
+}
+
+// Ayni baslikta video kanalda zaten var mi? (commit-back yarisi / tekrar calisma -> cift yukleme olmasin)
+async function kanaldaVarMi(token, baslik) {
+  const bas = { Authorization: "Bearer " + token };
+  const ch = await istek({ hostname: "www.googleapis.com", path: "/youtube/v3/channels?part=contentDetails&mine=true", headers: bas });
+  const up = JSON.parse(ch.govde).items?.[0]?.contentDetails?.relatedPlaylists?.uploads;
+  if (!up) return null;
+  const pl = await istek({ hostname: "www.googleapis.com", path: "/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=" + up, headers: bas });
+  const norm = (x) => String(x).toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+  const bul = (JSON.parse(pl.govde).items || []).find((i) => norm(i.snippet.title) === norm(baslik));
+  return bul ? bul.snippet.resourceId.videoId : null;
+}
+
+// Yukleme hatasi kaydi — shorts-sira konuyu harcamaz, bildirim.js issue acar
+function hataYaz(BASE, IS, neden) {
+  try { fs.writeFileSync(path.join(BASE, "YUKLEME-HATASI.json"), JSON.stringify({ slug: IS, neden: String(neden).slice(0, 600),
+    yetki: /YETKI_GECERSIZ|invalid_grant/.test(neden), tarih: new Date().toISOString() }, null, 2)); } catch (e) {}
+}
 
 // --- Resumable upload -----------------------------------------------------
 async function yuklemeOturumu(token, snippet, status) {
@@ -220,7 +258,8 @@ async function main() {
     const kapi = require("./lib/ortak").jsonOku(require("./lib/kutuphane").paketYolu(IS, "quality-gate.json"), null);
     kapiKarari = kapi ? kapi.karar : null;
     if (plan.enabled && gizlilik === "private" && !argv.includes("--zamanlama-yok") && kapiKarari && (plan.gates || []).includes(kapiKarari)) {
-      publishAt = require("./lib/zamanlama").sonrakiSlot(new Date(), plan.hourUTC, plan.minLeadHours).toISOString();
+      const dolu = require("./lib/kutuphane").yayinlananlar().map((y) => y.publishAt);
+      publishAt = require("./lib/zamanlama").sonrakiSlot(new Date(), plan.hourUTC, plan.minLeadHours, dolu).toISOString();
       status.publishAt = publishAt;
     }
   } catch (e) { console.log("  (zamanlama atlandi: " + e.message + ")"); }
@@ -236,8 +275,11 @@ async function main() {
   const refreshToken = env("YT_REFRESH_TOKEN");
   const kimlikVar = clientId && clientSecret && refreshToken;
 
+  const metaHata = metaDogrula(snippet, status);
   if (kuru) {
     console.log("\n[--dogrula] KURU CALISMA. Hicbir sey yuklenmedi.");
+    console.log("Meta dogrulama: " + (metaHata.length ? "HATA — " + metaHata.join("; ") : "gecti (baslik, aciklama, etiket, publishAt)"));
+    if (metaHata.length) process.exitCode = 6;
     console.log("Kimlik bilgileri: " + (kimlikVar ? "hazir (yukleme yapilabilir)" : "EKSIK"));
     if (!kimlikVar) {
       console.log("  Gereken: YT_CLIENT_ID, YT_CLIENT_SECRET, YT_REFRESH_TOKEN");
@@ -254,12 +296,34 @@ async function main() {
     process.exit(2);
   }
 
+  if (metaHata.length) { hataYaz(BASE, IS, "meta dogrulama: " + metaHata.join("; ")); console.error("Meta dogrulama hatasi: " + metaHata.join("; ")); process.exit(6); }
+
   console.log("\nOAuth jetonu aliniyor...");
-  const token = await erisimJetonu(clientId, clientSecret, refreshToken);
-  console.log("Yukleme oturumu aciliyor...");
-  const yuklemeUrl = await yuklemeOturumu(token, snippet, status);
-  console.log("Video gonderiliyor (" + (boyut / 1e6).toFixed(1) + " MB)...");
-  const son = await govdeyiGonder(yuklemeUrl, dosya, boyut);
+  let token;
+  try { token = await erisimJetonu(clientId, clientSecret, refreshToken); }
+  catch (e) { hataYaz(BASE, IS, e.message); throw e; }
+  // Cift yukleme korumasi: ayni baslik kanalda varsa yukleme yapilmaz, kayit tamamlanir.
+  try {
+    const varOlan = await kanaldaVarMi(token, snippet.title);
+    if (varOlan) {
+      console.log("✓ Bu baslikta video kanalda zaten var (" + varOlan + ") — tekrar YUKLENMEDI, kayit tamamlandi.");
+      require("./lib/kutuphane").yayinKaydet({ slug: IS, videoId: varOlan, baslik: snippet.title, tarih: new Date().toISOString(),
+        format: "short", kaynak: "duplicate-guard" });
+      return;
+    }
+  } catch (e) { console.log("  (cift yukleme kontrolu yapilamadi: " + e.message + ")"); }
+  // Gecici ag/sunucu hatalarinda (5xx) oturum yenilenip 3 kez denenir.
+  let son;
+  for (let deneme = 1; deneme <= 3; deneme++) {
+    try {
+      console.log("Yukleme oturumu aciliyor..." + (deneme > 1 ? ` (deneme ${deneme}/3)` : ""));
+      const yuklemeUrl = await yuklemeOturumu(token, snippet, status);
+      console.log("Video gonderiliyor (" + (boyut / 1e6).toFixed(1) + " MB)...");
+      son = await govdeyiGonder(yuklemeUrl, dosya, boyut);
+      if (son.durum < 500) break;
+    } catch (e) { son = { durum: 0, govde: e.message }; }
+    if (deneme < 3) await new Promise((r) => setTimeout(r, 10000 * deneme));
+  }
   if (son.durum === 200 || son.durum === 201) {
     const j = JSON.parse(son.govde);
     console.log("\n✓ Yuklendi. Video kimligi: " + j.id);
@@ -299,8 +363,11 @@ async function main() {
     } catch (e) { console.log("  (kapak: " + e.message + ")"); }
   } else {
     console.error("\nYukleme basarisiz (HTTP " + son.durum + "): " + son.govde.slice(0, 600));
+    hataYaz(BASE, IS, "HTTP " + son.durum + ": " + son.govde.slice(0, 400));
     process.exit(1);
   }
 }
 
-main().catch((e) => { console.error("Hata: " + e.message); process.exit(1); });
+module.exports = { metaDogrula, yuklemeMetni };
+
+if (require.main === module) main().catch((e) => { console.error("Hata: " + e.message); process.exit(1); });

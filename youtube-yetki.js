@@ -98,6 +98,13 @@ const sunucu = http.createServer(async (req, res) => {
   const y = await jetonDegistir(clientId, clientSecret, code);
   const j = JSON.parse(y.govde || "{}");
   if (y.durum === 200 && j.refresh_token) {
+    // Yetki ani kaydedilir: saglik.js Test modunda 5. gunde uyarir (config/yetki.json)
+    try {
+      const yp = path.join(KOK, "config", "yetki.json");
+      const eski = fs.existsSync(yp) ? JSON.parse(fs.readFileSync(yp, "utf8")) : {};
+      fs.writeFileSync(yp, JSON.stringify({ ...eski, yetkiTarihi: new Date().toISOString(), mod: eski.mod || "testing" }, null, 2) + "\n");
+      console.log("  config/yetki.json guncellendi (commit et ki saglik kontrolu yeni tarihi bilsin).");
+    } catch (e) {}
     res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
     res.end("<h2>Tamam. Terminale don, jetonu kopyala.</h2>");
     // Jetonu dogrudan .env'e yaz (terminalden kopyalamaya gerek kalmasin).

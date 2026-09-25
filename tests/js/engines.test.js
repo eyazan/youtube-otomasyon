@@ -234,3 +234,59 @@ test("tutunma: henuz uretilmemis tum Shorts konulari kurallara uyar", () => {
     .map((x) => [x.slug, T.denetle(x).map((b) => b.mesaj)]).filter(([, b]) => b.length);
   assert.deepEqual(hatali, []);
 });
+
+test("zamanlama: dolu gun atlanir, plan publishAt'i yayin ani sayar (cron gecikmesi = cift yayin yok)", () => {
+  const z = require("../../lib/zamanlama");
+  // Dun 17:30'da calisan gec is videoyu bugunun 18:00'ine koydu -> bugunku is yarina koyar
+  assert.equal(z.sonrakiSlot(new Date("2026-09-26T10:00:00Z"), 18, 1, ["2026-09-26T18:00:00.000Z"]).toISOString(), "2026-09-27T18:00:00.000Z");
+  const kayit = [{ format: "short", tarih: "2026-09-25T17:30:00Z", publishAt: "2026-09-26T18:00:00.000Z" }];
+  assert.equal(YP.durum("short", new Date("2026-09-26T10:00:00Z"), kayit, []).uygun, false, "o gun icin video zaten planli");
+  assert.equal(YP.durum("short", new Date("2026-09-27T10:00:00Z"), kayit, []).uygun, true);
+});
+
+test("yukleme meta dogrulama: YouTube sinirlari", () => {
+  const { metaDogrula } = require("../../youtube-yukle");
+  const iyi = { title: "Why the Bridge Fell", description: "x", tags: ["bridge", "engineering failure"] };
+  assert.deepEqual(metaDogrula(iyi, { privacyStatus: "private", publishAt: new Date(Date.now() + 3600e3).toISOString() }), []);
+  assert.ok(metaDogrula({ ...iyi, title: "x".repeat(101) }, { privacyStatus: "private" }).length);
+  assert.ok(metaDogrula({ ...iyi, description: "a<b" }, { privacyStatus: "private" }).length);
+  assert.ok(metaDogrula({ ...iyi, tags: Array(60).fill("engineering failure") }, { privacyStatus: "private" }).length);
+  assert.ok(metaDogrula(iyi, { privacyStatus: "public", publishAt: new Date(Date.now() + 3600e3).toISOString() }).length);
+  assert.ok(metaDogrula(iyi, { privacyStatus: "private", publishAt: "2020-01-01T00:00:00Z" }).length);
+});
+
+test("saglik: gecersiz yetki kritik (konu harcanmaz), yetki yasi uyarisi", async () => {
+  const S = require("../../saglik");
+  const env = { YT_CLIENT_ID: process.env.YT_CLIENT_ID, YT_CLIENT_SECRET: process.env.YT_CLIENT_SECRET, YT_REFRESH_TOKEN: process.env.YT_REFRESH_TOKEN };
+  process.env.YT_CLIENT_ID = "a"; process.env.YT_CLIENT_SECRET = "b"; process.env.YT_REFRESH_TOKEN = "c";
+  try {
+    const kotu = await S.denetle({ publish: "1", token: async () => { throw new Error("invalid_grant"); }, pexels: async () => 200, kalan: 20 });
+    assert.equal(kotu.yuklemeUygun, false);
+    assert.equal(kotu.bulgular.find((b) => b.ad === "youtube-yetki").durum, "kritik");
+    const iyi = await S.denetle({ publish: "1", token: async () => ({ kapsam: S.GEREKLI_KAPSAM.join(" ") }), pexels: async () => 200, kalan: 3 });
+    assert.equal(iyi.yuklemeUygun, true);
+    assert.equal(iyi.bulgular.find((b) => b.ad === "kutuphane").durum, "uyari");
+  } finally { for (const [k, v] of Object.entries(env)) { if (v === undefined) delete process.env[k]; else process.env[k] = v; } }
+});
+
+test("bildirim: yasam dongusu mesajlari eksiksiz, dusus noktasi dogru", () => {
+  const B = require("../../bildirim");
+  const h = B.hataMesaji({ slug: "x", neden: "YETKI_GECERSIZ: invalid_grant", yetki: true });
+  assert.match(h.govde, /youtube-yetki\.js/);
+  assert.match(h.govde, /Konu harcanmadı/);
+  assert.equal(B.saglikMesaji({ tarih: "2026-09-26T10:00:00Z", bulgular: [{ ad: "a", durum: "ok", mesaj: "x" }] }), null);
+  const s = B.saglikMesaji({ tarih: "2026-09-26T10:00:00Z", bulgular: [{ ad: "yetki-yasi", durum: "uyari", mesaj: "2 gün kaldı", cozum: "yenile" }] });
+  assert.match(s.govde, /2 gün kaldı/);
+  const t = [0, 0.05, 0.1, 0.15, 0.2, 0.3, 0.5].map((o, i) => ({ oran: o, izleme: [1.3, 1.25, 1.2, 1.0, 0.85, 0.8, 0.7][i] }));
+  assert.equal(B.dususNoktasi(t, 38).sn, 8);
+  const y = B.checkpointYorumu({ checkpoint: "3d", metrikler: { views: { durum: "ok", deger: 10 } }, teshis: [{ kod: "HEALTHY" }], tutma: t, sureSn: 38 });
+  assert.match(y, /3 gün/);
+  assert.match(y, /8\. saniye/);
+  assert.doesNotMatch(y, /undefined|NaN/);
+});
+
+test("kuyruk: once gercek arsiv filmi olan konular", () => {
+  const l = K.kuyruk();
+  const ilkStok = l.findIndex((k) => k.tur === "stok");
+  assert.ok(ilkStok === -1 || l.slice(ilkStok).every((k) => k.tur === "stok"));
+});
