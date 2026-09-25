@@ -85,7 +85,7 @@ Everything shares the same packaging engines and the same registry.
 - **Loudness:** measured at the final gate. The mix is normalised to −14 LUFS; it was −22 before.
 - **Preview:** an 8-frame contact sheet (`icerik/paket/<slug>/onizleme.jpg`) is embedded in the GitHub notification, so you can check the video from your phone before the 21:00 publish.
 
-Any critical finding (text still overflowing, A/V mismatch, >1.5 s of black) makes the final gate **BLOCK**. The video is not uploaded and you get a "kalite-engeli" notification. Stock footage gets the channel's documentary grade (`config/growth.json → renk.stok`); archival film keeps its original tone.
+Any critical finding (text still overflowing, A/V mismatch, >1.5 s of black) makes the final gate **BLOCK**. The video is not uploaded and you get a "kalite-engeli" notification. Stock footage gets the channel's **strong documentary grade** (`config/growth.json → renk.stok`: colour halved, cool steel shadows). It sits with the archival films but stays clearly colour: modern stock is never disguised as historical black-and-white film. Archival film keeps its original tone.
 
 ## 7. Configuration & state
 
