@@ -122,7 +122,21 @@ function gorsel(konu, final, format) {
   if (stokTekrar) { p -= 10 * stokTekrar; not.push(`${stokTekrar} stock clip(s) reused within the video`); }
   const eng = fs.existsSync(path.join(KOK, "uretim", konu.slug, "Videos", "muhendislik-katmani.json"));
   if (!eng) { p -= 5; not.push("no engineering overlay rendered"); }
-  return { puan: sinirla(p), notlar: not, olcum: pr };
+  // Yayin oncesi gorsel denetim (shorts-yap.js olcer): yazi tasmasi, siyah kare, donmus goruntu
+  const d = jsonOku(path.join(KOK, "uretim", konu.slug, "Videos", "denetim.json"), null);
+  let kritik = null;
+  if (!d) { p -= 10; not.push("no pre-publish visual check (denetim.json missing)"); }
+  else {
+    if (d.yaziTasmasi === "olculemedi") { p -= 10; not.push("text overflow could not be measured"); }
+    else if (d.yaziTasmasi > 0) { p -= 60; kritik = `TEXT OVERFLOW in ${d.yaziTasmasi} frame(s) even after shrinking`; not.push(kritik); }
+    if (d.sureFarki == null) { p -= 10; not.push("audio/video duration not measured"); }
+    else if (d.sureFarki > 0.5) { p -= 60; kritik = kritik || `AUDIO/VIDEO LENGTH MISMATCH ${d.videoSure}s vs ${d.sesSure}s`; not.push(`audio/video mismatch ${d.sureFarki}s`); }
+    if (d.siyahToplam > 1.5) { p -= 40; kritik = kritik || `BLACK FRAMES ${d.siyahToplam}s`; not.push(`black frames ${d.siyahToplam}s`); }
+    else if (d.siyahToplam > 0.4) { p -= 15; not.push(`black frames ${d.siyahToplam}s`); }
+    if (d.donukEnUzun > 4) { p -= 15; not.push(`frozen picture ${d.donukEnUzun}s`); }
+    if (d.yaziOlcegi && d.yaziOlcegi < 1) not.push(`text auto-shrunk to ${Math.round(d.yaziOlcegi * 100)}% to fit`);
+  }
+  return { puan: sinirla(p), notlar: not, olcum: pr, kritik };
 }
 
 function ses(konu, final) {
@@ -177,6 +191,8 @@ function degerlendir(slug, ops = {}) {
   if (hook.mevcut.engelleyici) engel.push("HOOK: forbidden opening");
   if (org.aksiyon === "BLOCK") engel.push("ORIGINALITY: near-duplicate of " + org.engelleyen.join(", "));
   for (const [k, esik] of Object.entries(g.hardBlocks || {})) if (b[k] && !b[k].olculmedi && b[k].puan < esik) engel.push(`${EN[k]} ${b[k].puan} < ${esik}`);
+  // Gorsel denetimde kritik hata (tasan yazi, uzun siyah kare) = yayinlanmaz
+  if (b.visual.kritik) engel.push("VISUAL CHECK: " + b.visual.kritik);
   let karar = engel.length ? "BLOCK" : toplam >= g.publish ? "PUBLISH" : toplam >= g.review ? "REVIEW" : "BLOCK";
   if (karar === "PUBLISH" && org.aksiyon === "REVIEW") karar = "REVIEW";      // tekrar isareti varsa insan baksin
   const r = { slug, asama: final ? "final" : "pre", format, karar, toplam, esikler: { publish: g.publish, review: g.review },

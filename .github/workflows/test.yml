@@ -27,3 +27,48 @@ jobs:
         run: node --test tests/js/*.test.js
       - name: Python testleri
         run: python -m unittest discover -s tests
+
+  # PR'larda gercek render testi: GitHub'in Ubuntu + ffmpeg ortaminda bir arsiv Short'u
+  # uretir (YUKLEME YOK) ve yayin oncesi denetimin temiz oldugunu dogrular:
+  # yazi tasmasi 0, ses/goruntu uyumlu, final kalite kapisi BLOCK degil.
+  render-testi:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      SHORTS_FONT: 'DejaVu Sans'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: ffmpeg + font kur
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg fonts-dejavu-core fonts-liberation
+      - name: Bagimliliklar
+        run: npm install --no-audit --no-fund
+      - name: Ornek Short uret (tacoma-narrows, arsiv)
+        run: |
+          node -e 'const fs=require("fs");const k=JSON.parse(fs.readFileSync("icerik/konular/tacoma-narrows.json"));k.slug="tacoma-narrows";fs.mkdirSync("uretim/tacoma-narrows",{recursive:true});fs.writeFileSync("uretim/tacoma-narrows/konu.json",JSON.stringify(k,null,2))'
+          node arsiv-bul.js tacoma-narrows
+          node shorts-yap.js tacoma-narrows
+      - name: Yayin oncesi denetim + final kalite kapisi
+        run: |
+          node quality-gate.js tacoma-narrows --final
+          node -e '
+            const d=require("./uretim/tacoma-narrows/Videos/denetim.json"); console.log(d);
+            if (d.yaziTasmasi !== 0) throw new Error("yazi tasmasi: " + d.yaziTasmasi);
+            if (!(d.sureFarki <= 0.5)) throw new Error("ses/goruntu uyumsuz: " + d.videoSure + " / " + d.sesSure);
+            if (d.siyahToplam > 1.5) throw new Error("siyah kare: " + d.siyahToplam);'
+      - name: Denetim testi (gercek ffmpeg)
+        run: node --test tests/js/denetim.test.js
+      - name: Onizleme ve videoyu artifact olarak sakla
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: render-testi
+          path: |
+            uretim/tacoma-narrows/Videos/*.mp4
+            uretim/tacoma-narrows/Videos/onizleme.jpg
+            uretim/tacoma-narrows/Videos/denetim.json
+          if-no-files-found: ignore
+          retention-days: 7

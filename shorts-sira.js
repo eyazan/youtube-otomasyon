@@ -84,6 +84,16 @@ function uretBir(slug) {
   calistir(konu.tur === "stok" ? "stok-bul.js" : "arsiv-bul.js", slug);
   calistir("shorts-yap.js", slug);
   const son = kapi(slug, true);
+  // Onizleme gorseli (8 kare) + denetim ozeti depoya kopyalanir; bildirimde gosterilir.
+  try {
+    const vd = path.join(job, "Videos");
+    const K = require("./lib/kutuphane");
+    if (fs.existsSync(path.join(vd, "onizleme.jpg"))) {
+      fs.mkdirSync(K.paketYolu(slug), { recursive: true });
+      fs.copyFileSync(path.join(vd, "onizleme.jpg"), K.paketYolu(slug, "onizleme.jpg"));
+    }
+    if (fs.existsSync(path.join(vd, "denetim.json"))) fs.copyFileSync(path.join(vd, "denetim.json"), K.paketYolu(slug, "denetim.json"));
+  } catch (e) { console.log("  (onizleme kopyalanamadi: " + e.message + ")"); }
   try { require("./description-engine").calistir(slug); require("./pinned-comment").calistir(slug); } catch (e) { console.log("  (paket metni: " + e.message + ")"); }
 
   // Yukleme: yalnizca PUBLISH=1 ve kimlik varsa; her zaman private.

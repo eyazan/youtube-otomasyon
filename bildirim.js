@@ -32,6 +32,21 @@ function gh(yontem, yol, govde) {
   });
 }
 
+// Yayin oncesi gorsel denetim ozeti (shorts-yap.js -> denetim.json)
+function denetimOzeti(slug) {
+  const d = jsonOku(path.join(KOK, "icerik", "paket", slug, "denetim.json"), null);
+  if (!d) return ["- ⚠️ Görsel denetim verisi yok"];
+  const t = d.yaziTasmasi;
+  return [
+    t === 0 ? "- ✅ Yazı taşması yok" + (d.yaziOlcegi < 1 ? ` (yazılar %${Math.round(d.yaziOlcegi * 100)}'e küçültülerek sığdırıldı)` : "")
+      : t === "olculemedi" ? "- ⚠️ Yazı taşması ölçülemedi" : `- ❌ Yazı taşması: ${t} karede`,
+    d.sureFarki != null && d.sureFarki <= 0.5 ? `- ✅ Ses ve görüntü uyumlu (${d.videoSure?.toFixed(1)} sn)` : `- ❌ Ses/görüntü süresi uyumsuz (${d.videoSure} / ${d.sesSure} sn)`,
+    (d.siyahToplam || 0) <= 0.4 ? "- ✅ Siyah kare yok" : `- ⚠️ Siyah kare: ${d.siyahToplam} sn`,
+    (d.donukEnUzun || 0) <= 4 ? "- ✅ Donmuş görüntü yok" : `- ⚠️ Donmuş görüntü: ${d.donukEnUzun} sn`,
+    d.ton === "stok-belgesel" ? "- 🎨 Kanal tonu uygulandı (stok görüntü)" : "- 🎞️ Arşiv görüntüsü (orijinal ton)",
+  ];
+}
+
 function videoMesaji(b) {
   const zaman = b.publishAt ? trSaat(new Date(b.publishAt)) : null;
   const inceleme = b.kalite === "REVIEW";
@@ -42,6 +57,8 @@ function videoMesaji(b) {
     zaman ? `⏰ **${zaman}** otomatik olarak Public olacak (${new Date(b.publishAt).toISOString().slice(11, 16)} UTC).`
       : "🔒 Private yüklendi — otomatik yayın planlanmadı. Studio'dan Public yap.",
     `🧪 Kalite kapısı: **${b.kalite || "?"}**` + (inceleme ? " — bakmanı öneririm (rapor aşağıda)." : ""), "",
+    "**Yayın öncesi otomatik kontrol:**", ...denetimOzeti(b.slug), "",
+    `![önizleme](https://raw.githubusercontent.com/${REPO}/main/icerik/paket/${b.slug}/onizleme.jpg)`, "",
     `- İzle / kontrol et: https://studio.youtube.com/video/${b.videoId}/edit`,
     `- Video: https://youtu.be/${b.videoId}`,
     `- Kalite raporu: https://github.com/${REPO}/blob/main/icerik/paket/${b.slug}/quality-gate.md`,

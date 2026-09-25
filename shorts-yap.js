@@ -145,10 +145,14 @@ const assKacis = (s) => String(s).replace(/[{}]/g, "").replace(/\\/g, "");
 
   // --- 2) sahne plani (anlatidaki role gore) + dikey bulanik-dolgu alt cekimler ---
   const planlar = pacing.planKisa(konu, sahneler.map(s => s.dur));
+  // Kanal tonu: stok (modern, renkli) goruntuye tek tip "belgesel tonu" — hafif
+  // solgun renk, biraz kontrast, celik/soguk golgeler. Arsiv filmleri oldugu gibi kalir.
+  // config/growth.json > renk.stok ile ayarlanir ("" = kapali).
+  const TON = konu.tur === "stok" ? (ayar().renk && ayar().renk.stok) || "" : "";
   const taban =
     "[0:v]scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,boxblur=26:2,eq=brightness=-0.20:contrast=1.05[bg];" +
     "[0:v]scale=1080:-2[fg];" +
-    "[bg][fg]overlay=(W-w)/2:(H-h)/2:shortest=1,noise=alls=6:allf=t+u,vignette=angle=PI/4.5,fps=30,format=yuv420p";
+    "[bg][fg]overlay=(W-w)/2:(H-h)/2:shortest=1," + (TON ? TON + "," : "") + "noise=alls=6:allf=t+u,vignette=angle=PI/4.5,fps=30,format=yuv420p";
   // Hareket: punch = tek sayili alt cekimde anlik %7 yakinlasma (kurgu ritmi);
   // push/drift = 2x ara olcekte zoompan (alt-piksel titreme olmasin).
   const hareketFiltre = (h, j, n) => {
@@ -231,7 +235,10 @@ const assKacis = (s) => String(s).replace(/[{}]/g, "").replace(/\\/g, "");
   }
   for (let i = 0; i < events.length - 1; i++) if (events[i + 1].st - events[i].en < 0.12) events[i].en = events[i + 1].st;
 
-  const ass = `[Script Info]
+  // ASS kurucu: k = tum yazi boyutlarina uygulanan olcek (tasma denetimi basarisizsa kuculur).
+  // Her yazi once ekrana sigacak boyuta ayarlanir (gorsel-denetim.sigdir).
+  const DEN = require("./lib/gorsel-denetim");
+  const assKur = (k) => `[Script Info]
 ScriptType: v4.00+
 PlayResX: ${W}
 PlayResY: ${H}
@@ -244,7 +251,7 @@ Style: Pop,${FONT},90,&H00FFFFFF,&H00000000,&H64000000,1,1,7,3,2,60,60,470,1
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 ` + events.map(e => {
-    const eff = "{\\fad(70,60)\\t(0,120,\\fscx116\\fscy116)\\t(120,220,\\fscx100\\fscy100)}";
+    const eff = `{\\fs${Math.round(DEN.sigdir(e.txt, 90, W, 0.76) * k)}\\fad(70,60)\\t(0,120,\\fscx116\\fscy116)\\t(120,220,\\fscx100\\fscy100)}`;
     return `Dialogue: 0,${assTime(e.st)},${assTime(e.en)},Pop,,0,0,0,,${eff}${assKacis(e.txt)}`;
   }).join("\n") + "\n" + (() => {
     // BUYUME: ekranda kanca (ilk ~2.5s, ust-orta, iri) + sona etkilesim sorusu.
@@ -252,7 +259,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     const ekstra = [];
     if (HOOK) {
       // Uzun hook (>18 harf) iki satira bolunur; yazi boyutu en uzun satira gore
-      // kucultulur ki ekran kenarlarina tasmasin (kalin fontta harf ~0.72 em).
+      // kucultulur ki ekran kenarlarina tasmasin.
       const H_UP = HOOK.toUpperCase();
       const w = H_UP.split(/\s+/);
       let satirlar = [H_UP];
@@ -265,8 +272,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         }
         satirlar = [en.a, en.b];
       }
-      const enUzun = Math.max(...satirlar.map((x) => x.length));
-      const fs = Math.round(Math.min(W * 0.062, (W * 0.86) / (enUzun * 0.72))), bord = Math.max(4, Math.round(W * 0.005));
+      const fs = Math.round(DEN.sigdir(satirlar.join("\\N"), W * 0.062, W) * k), bord = Math.max(4, Math.round(W * 0.005));
       const y = Math.round(H * 0.40);
       const hookSon = Math.min(2.7, VODUR * 0.4);
       ekstra.push(`Dialogue: 0,${assTime(0.15)},${assTime(hookSon)},Pop,,0,0,0,,` +
@@ -278,9 +284,10 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
       const bi = Math.max(1, planlar.findIndex((p) => p.rol === "context"));
       const z = zamanlar[Math.min(bi, zamanlar.length - 1)];
       const son = Math.min(z.son, z.bas + 3.2);
+      const dmg = `${v.yil} · ${(v.kisa || "").toUpperCase()}`;
       if (z.bas >= 2.7) ekstra.push(`Dialogue: 0,${assTime(z.bas + 0.1)},${assTime(son)},Pop,,0,0,0,,` +
-        `{\\an7\\pos(64,${Math.round(H * 0.105)})\\fs${Math.round(W * 0.036)}\\bord3\\shad2\\1c&H41A4D9&\\fad(180,180)}` +
-        assKacis(`${v.yil} · ${(v.kisa || "").toUpperCase()}`));
+        `{\\an7\\pos(64,${Math.round(H * 0.105)})\\fs${Math.round(DEN.sigdir(dmg, W * 0.036, W, 0.8) * k)}\\bord3\\shad2\\1c&H41A4D9&\\fad(180,180)}` +
+        assKacis(dmg));
     }
     // Sentetik (AI) sahne etiketi — gizlenmez (config/growth.json disclosure)
     const ds = ayar().disclosure;
@@ -288,10 +295,10 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
       if (!sh.sentetik) return;
       const z = zamanlar[i];
       ekstra.push(`Dialogue: 1,${assTime(z.bas)},${assTime(z.son)},Pop,,0,0,0,,` +
-        `{\\an9\\pos(${W - 50},${Math.round(H * 0.105)})\\fs${Math.round(W * 0.028)}\\bord2\\shad0}` + assKacis(ds.label || "RECONSTRUCTION"));
+        `{\\an9\\pos(${W - 50},${Math.round(H * 0.105)})\\fs${Math.round(W * 0.028 * k)}\\bord2\\shad0}` + assKacis(ds.label || "RECONSTRUCTION"));
     });
     if (SORU) {
-      const fs = Math.round(W * 0.040), bord = Math.max(3, Math.round(W * 0.004));
+      const fs = Math.round(DEN.sigdir(SORU, W * 0.040, W, 0.84) * k), bord = Math.max(3, Math.round(W * 0.004));
       const y = Math.round(H * 0.30);
       const bas = Math.max(0, VODUR - 2.8);
       ekstra.push(`Dialogue: 0,${assTime(bas)},${assTime(VODUR)},Pop,,0,0,0,,` +
@@ -300,7 +307,17 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     return ekstra.join("\n") + (ekstra.length ? "\n" : "");
   })();
   const assPath = path.join(TMP, "cap.ass");
-  fs.writeFileSync(assPath, ass);
+  // YAYIN ONCESI DENETIM 1: yazilar gercek fontla render edilip kenar tasmasi olculur.
+  // Tasma varsa tum yazilar %10 kucultulup tekrar denenir (en fazla 3 kez).
+  let olcek = 1, tasma = [];
+  for (let deneme = 0; deneme < 4; deneme++) {
+    fs.writeFileSync(assPath, assKur(olcek));
+    try { tasma = DEN.metinTasmasi(assPath, VODUR + 0.5, W, H); }
+    catch (e) { console.log("  (tasma denetimi calismadi: " + String(e.message).slice(0, 120) + ")"); tasma = null; break; }
+    if (!tasma.length) break;
+    console.log(`  ⚠ yazi tasmasi (${tasma.length} kare, ornek t=${tasma[0].t}s ${tasma[0].taraf}) — yazilar kucultuluyor`);
+    olcek = +(olcek * 0.9).toFixed(3);
+  }
 
   // --- 5) handle filigrani + altyazi + ses (loudnorm konusma + ducking'li muzik) ---
   const cikti = path.join(VID, IS + ".mp4");
@@ -323,22 +340,42 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     `fontsize=${Math.round(W * 0.030)}:x=(w-tw)/2:y=${hy}:shadowcolor=black@0.5:shadowx=0:shadowy=2`;
   const altyaziF = `subtitles='${assPath.replace(/:/g, "\\:")}',format=yuv420p[v]`;
   const vFilter = ustKatman
-    ? `[0:v]${handleF}[b0];[3:v]format=rgba,fade=t=in:st=${ustKatman.a.toFixed(2)}:d=0.3:alpha=1,fade=t=out:st=${(ustKatman.b - 0.3).toFixed(2)}:d=0.3:alpha=1[ov];` +
-      `[b0][ov]overlay=0:0:enable='between(t,${ustKatman.a.toFixed(2)},${ustKatman.b.toFixed(2)})'[b1];[b1]${altyaziF}`
+    ? `[0:v]${handleF}[b0];[2:v]format=rgba,fade=t=in:st=${ustKatman.a.toFixed(2)}:d=0.3:alpha=1,fade=t=out:st=${(ustKatman.b - 0.3).toFixed(2)}:d=0.3:alpha=1[ov];` +
+      `[b0][ov]overlay=0:0:enable='between(t,${ustKatman.a.toFixed(2)},${ustKatman.b.toFixed(2)})':shortest=1:eof_action=pass[b1];[b1]${altyaziF}`
     : `[0:v]${handleF},${altyaziF}`;
-  const aFilter =
-    `[1:a]loudnorm=I=-16:TP=-1.5:LRA=11,apad,asplit=2[vo1][vo2];` +
-    `[2:a]volume=1.0[mus];` +
+  // SES AYRI ADIMDA karistirilir: ducking zinciri (sidechaincompress + amix) video
+  // filtreleriyle ayni grafikte calisinca ffmpeg is siralamasi yuzunden bazi videolarda
+  // erken bitiyordu (olculen: goruntu 31.5 sn, ses 19.3 sn). Ayri adimda sure tamdir.
+  const karisim = path.join(TMP, "mix.wav");
+  run(["-hide_banner", "-loglevel", "error", "-i", vo, "-i", bed, "-filter_complex",
+    `[0:a]loudnorm=I=-16:TP=-1.5:LRA=11,aresample=48000,apad,asplit=2[vo1][vo2];` +
+    `[1:a]aresample=48000,volume=1.0[mus];` +
     `[mus][vo1]sidechaincompress=threshold=0.035:ratio=6:attack=6:release=340[duck];` +
-    `[duck][vo2]amix=inputs=2:duration=first:dropout_transition=0,alimiter=limit=0.95[a]`;
-  run(["-hide_banner", "-loglevel", "error", "-i", vid, "-i", vo, "-i", bed,
-    ...(ustKatman ? ["-loop", "1", "-t", TOPLAM.toFixed(2), "-i", ustKatman.png] : []),
-    "-filter_complex", vFilter + ";" + aFilter,
-    "-map", "[v]", "-map", "[a]", "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p",
+    // Son karisim YouTube seviyesine (-14 LUFS) getirilir: olculen eski cikti -22 LUFS'ti ve
+    // YouTube kisik videolari yukseltmedigi icin akista digerlerinden kisik caliyordu.
+    `[duck][vo2]amix=inputs=2:duration=first:dropout_transition=0,alimiter=limit=0.95,loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000[a]`,
+    "-map", "[a]", "-t", TOPLAM.toFixed(3), "-ar", "48000", "-y", karisim]);
+  const karisimSure = sure(karisim);
+  if (Math.abs(karisimSure - TOPLAM) > 0.3) throw new Error(`ses karisimi eksik: ${karisimSure.toFixed(2)} sn / goruntu ${TOPLAM.toFixed(2)} sn`);
+  run(["-hide_banner", "-loglevel", "error", "-i", vid, "-i", karisim,
+    // PNG katmani videoyla AYNI kare hizinda (30) beslenir; aksi halde (varsayilan 25 fps)
+    // bazi kaynak kombinasyonlarinda cikti suresi sisiyordu (31 sn -> 57 sn).
+    ...(ustKatman ? ["-loop", "1", "-framerate", String(FPS), "-t", TOPLAM.toFixed(2), "-i", ustKatman.png] : []),
+    "-filter_complex", vFilter,
+    "-map", "[v]", "-map", "1:a", "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p",
     "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", "-y", cikti]);
+
+  // YAYIN ONCESI DENETIM 2: siyah kare / donmus goruntu + onizleme gorseli.
+  const denetim = { tarih: new Date().toISOString(), yaziOlcegi: olcek, yaziTasmasi: tasma === null ? "olculemedi" : tasma.length,
+    tasmaOrnek: tasma && tasma.length ? tasma.slice(0, 5) : [], ton: TON ? "stok-belgesel" : "yok" };
+  try { Object.assign(denetim, DEN.videoDenetim(cikti)); } catch (e) { denetim.videoDenetimHata = String(e.message).slice(0, 160); }
+  try { DEN.onizleme(cikti, path.join(VID, "onizleme.jpg"), sure(cikti)); denetim.onizleme = "Videos/onizleme.jpg"; }
+  catch (e) { denetim.onizlemeHata = String(e.message).slice(0, 160); }
+  fs.writeFileSync(path.join(VID, "denetim.json"), JSON.stringify(denetim, null, 2));
+  console.log(`  denetim: yazi tasmasi ${denetim.yaziTasmasi} · siyah ${denetim.siyahToplam ?? "?"} sn · en uzun donuk ${denetim.donukEnUzun ?? "?"} sn`);
 
   try { K.defterYaz(IS, { muzik: mp, render: { sure: sure(cikti), tarih: new Date().toISOString(), ustKatman: !!ustKatman } }); }
   catch (e) { console.log("  (kaynak defteri yazilamadi: " + e.message + ")"); }
   console.log(`✓ Bitti: ${path.relative(KOK, cikti)}  (${sure(cikti).toFixed(1)}s, ${W}x${H}${ustKatman ? ", failure-chain katmani" : ""})`);
-  try { fs.rmSync(TMP, { recursive: true, force: true }); } catch (e) {}
+  if (!process.env.SHORTS_TMP_SAKLA) { try { fs.rmSync(TMP, { recursive: true, force: true }); } catch (e) {} } else console.log("  (ara dosyalar: " + TMP + ")");
 })().catch(e => { console.error("\nHata: " + e.message); try { fs.rmSync(TMP, { recursive: true, force: true }); } catch (_) {} process.exit(1); });
