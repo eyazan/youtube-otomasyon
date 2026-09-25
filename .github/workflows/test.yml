@@ -59,6 +59,22 @@ jobs:
             if (d.yaziTasmasi !== 0) throw new Error("yazi tasmasi: " + d.yaziTasmasi);
             if (!(d.sureFarki <= 0.5)) throw new Error("ses/goruntu uyumsuz: " + d.videoSure + " / " + d.sesSure);
             if (d.siyahToplam > 1.5) throw new Error("siyah kare: " + d.siyahToplam);'
+      - name: Ornek stok Short uret (kanal tonu dahil) + denetim
+        env:
+          PEXELS_KEY: ${{ secrets.PEXELS_KEY }}
+        run: |
+          if [ -z "$PEXELS_KEY" ]; then echo "PEXELS_KEY yok (fork PR) — stok render atlandi"; exit 0; fi
+          node -e 'const fs=require("fs");const k=JSON.parse(fs.readFileSync("icerik/konular/why-ships-sink.json"));k.slug="why-ships-sink";fs.mkdirSync("uretim/why-ships-sink",{recursive:true});fs.writeFileSync("uretim/why-ships-sink/konu.json",JSON.stringify(k,null,2))'
+          node stok-bul.js why-ships-sink
+          node shorts-yap.js why-ships-sink
+          node quality-gate.js why-ships-sink --final
+          node -e '
+            const d=require("./uretim/why-ships-sink/Videos/denetim.json"); console.log(d);
+            if (d.ton !== "stok-belgesel") throw new Error("kanal tonu uygulanmadi");
+            if (d.yaziTasmasi !== 0) throw new Error("yazi tasmasi: " + d.yaziTasmasi);
+            if (!(d.sureFarki <= 0.5)) throw new Error("ses/goruntu uyumsuz");
+            if (d.siyahToplam > 1.5) throw new Error("siyah kare: " + d.siyahToplam);'
+
       - name: Denetim testi (gercek ffmpeg)
         run: node --test tests/js/denetim.test.js
       - name: Onizleme ve videoyu artifact olarak sakla
@@ -70,5 +86,7 @@ jobs:
             uretim/tacoma-narrows/Videos/*.mp4
             uretim/tacoma-narrows/Videos/onizleme.jpg
             uretim/tacoma-narrows/Videos/denetim.json
+            uretim/why-ships-sink/Videos/onizleme.jpg
+            uretim/why-ships-sink/Videos/denetim.json
           if-no-files-found: ignore
           retention-days: 7

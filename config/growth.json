@@ -74,7 +74,7 @@
     "minViewsForRates": 100
   },
   "renk": {
-    "_comment": "Channel colour grade. 'stok' is applied to modern stock footage so it sits with the archival films (muted colour, a little contrast, cool steel shadows). Empty string disables it.",
-    "stok": "eq=saturation=0.78:contrast=1.07:brightness=-0.015,colorbalance=rs=-0.03:gs=-0.005:bs=0.045:rm=-0.02:bm=0.02:rh=-0.02:bh=0.03"
+    "_comment": "Channel colour grade for modern stock footage ('strong documentary', chosen 2026-09-25): colour halved, cooler steel shadows, slightly lifted blacks and softened highlights, so stock sits with the archival films while staying clearly colour (never faked as B&W archive). Archival film is untouched. Empty string disables it.",
+    "stok": "eq=saturation=0.5:contrast=1.12:brightness=-0.04:gamma=0.95,colorbalance=rs=-0.06:gs=-0.01:bs=0.07:rm=-0.03:bm=0.03:rh=-0.02:bh=0.02,curves=all='0/0.03 0.5/0.47 1/0.95'"
   }
 }
