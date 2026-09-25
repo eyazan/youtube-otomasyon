@@ -30,8 +30,16 @@ function goruntuKaynaklari(konu) {
     else if (k.archive) l.push(`Archival film: Internet Archive — https://archive.org/details/${k.archive}`);
     else if (k.url) l.push(`Footage: ${k.url}`);
   }
+  // Kaynak defterinden: arsiv satirlari konu.kaynaklar'dan zaten yazildi (tekrar yok);
+  // stok klipler tek satirda ozetlenir (Pexels atif zorunlu tutmaz; tam liste depoda
+  // GORSEL-KAYNAKLARI.txt ve kaynak-defteri.json'da kalir).
   const d = K.defter()[konu.slug];
-  if (d && Array.isArray(d.krediler)) for (const c of d.krediler) if (!l.includes(c)) l.push(c);
+  const krediler = d && Array.isArray(d.krediler) ? d.krediler : [];
+  if (!l.length) for (const c of krediler) if (/^Archival film:/.test(c) && !l.includes(c)) l.push(c);
+  const yazarlar = [...new Set(krediler.map((c) => (c.match(/^Stock footage: Pexels \/ (.+?) \(Pexels License\)/) || [])[1]).filter(Boolean)
+    .map((x) => x.replace(/[^\p{L}\p{N} .'-]/gu, "").trim()).filter(Boolean))];
+  if (yazarlar.length) l.push(`Stock footage: Pexels (Pexels License) — clips by ${yazarlar.slice(0, 6).join(", ")}` +
+    (yazarlar.length > 6 ? ` and ${yazarlar.length - 6} more` : "") + " — https://www.pexels.com/license/");
   const dosya = path.join(KOK, "uretim", konu.slug, "GORSEL-KAYNAKLARI.txt");
   if (!l.length && fs.existsSync(dosya)) {
     for (const satir of fs.readFileSync(dosya, "utf8").split(/\r?\n/).filter(Boolean).slice(0, 12)) l.push(satir.replace(/^\S+\s+—\s+/, ""));
@@ -75,9 +83,17 @@ function olustur(konu, ops = {}) {
   bl.push(ozet(konu));
   if (Array.isArray(v.zincir) && v.zincir.length >= 3) {
     // Cumle bicimi; rakamli kelimeler (M7.9, B-25s) ve metinde buyuk harfle gecen ozel isimler korunur
-    const kaynakMetin = [K.anlati(konu), v.ad, v.kisa].join(" ");
+    // Ozel isimler: vaka adindaki kelimeler + anlatida CUMLE ORTASINDA buyuk harfle
+    // gecenler (cumle basindaki "Snow falls..." ozel isim sayilmaz).
+    const ozel = new Set([...String(v.ad || "").split(/\s+/), ...String(v.kisa || "").split(/\s+/)]
+      .filter((w) => /^[A-Z][a-z]/.test(w) && w !== "The"));
+    for (const m of K.anlati(konu).matchAll(/[a-z,;] ([A-Z][a-z]+)/g)) ozel.add(m[1]);
+    // Telaffuz sozlugundeki yer/arac/sirket adlari da ozel isimdir (Mont-Blanc, Imo...)
+    const sozluk = require("./pronunciation-check").sozluk().terms || {};
+    for (const [t, x] of Object.entries(sozluk)) if (["place", "vehicle", "company"].includes(x.type)) ozel.add(t);
+    const ozelMap = new Map([...ozel].map((w) => [w.toLowerCase(), w]));
     const kelime = (w, i) => /\d/.test(w) ? w.replace(/[A-Z]{3,}/g, (m) => m.toLowerCase())
-      : new RegExp("\\b" + w.charAt(0) + w.slice(1).toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\b").test(kaynakMetin) && i > 0 ? w.charAt(0) + w.slice(1).toLowerCase()
+      : ozelMap.has(w.toLowerCase()) && i > 0 ? ozelMap.get(w.toLowerCase())
       : i === 0 ? w.charAt(0) + w.slice(1).toLowerCase() : w.toLowerCase();
     bl.push("Failure chain: " + v.zincir.map((x) => x.split(" ").map(kelime).join(" ")).join(" → "));
   }
