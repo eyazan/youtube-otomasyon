@@ -14,7 +14,12 @@ name: Shorts uretim (gunluk)
 # tetiklenebilir (Run workflow).
 on:
   schedule:
+    # GitHub zamanlanmis isleri saatlerce geciktirebilir ya da atlayabilir
+    # (olculen: 3s46dk gecikme; 25 Eylul'de 10:00 hic calismadi). Yedek saatler:
+    # yayin-plani.js gunde en fazla bir video uretir, sonrakiler "henuz degil" der.
     - cron: '0 10 * * *'
+    - cron: '0 13 * * *'
+    - cron: '30 15 * * *'
   workflow_dispatch:
     inputs:
       hepsi:
