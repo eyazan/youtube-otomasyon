@@ -46,6 +46,8 @@ function senaryo(konu, telaffuz, format) {
   if (format === "short") {
     if (n > 165) { p -= 20; not.push(`${n} words — likely over 60 s`); }
     else if (n < 55) { p -= 10; not.push(`${n} words — thin`); }
+    // Kanalin izleyici tutma verisinden cikan kurallar (lib/tutunma.js)
+    for (const x of require("./lib/tutunma").denetle(konu)) { p -= 12; not.push("retention: " + x.mesaj); }
   }
   if (v.mekanizma) {
     if (!mekanizmaGeciyor(v.mekanizma, metin)) { p -= 12; not.push("the script never names the mechanism (" + v.mekanizma + ")"); }
