@@ -192,6 +192,19 @@ test("konu puani: erisilemeyen sinyal 'unavailable', guven dusuk", () => {
   assert.match(r.oncelik, /PRIORITY/);
 });
 
+test("aciklama: zincir bicimi (cumle basi ozel isim sayilmaz) ve tek satir stok atfi", () => {
+  const D = require("../../description-engine");
+  const av = D.olustur(K.konuOku("how-avalanches-start")).metin;
+  assert.match(av, /Weak layer buried → .* new snow/);
+  const hx = D.olustur(K.konuOku("halifax-explosion")).metin;
+  assert.match(hx, /Imo & Mont-Blanc collide/);
+  assert.match(D.olustur(K.konuOku("san-francisco-1906")).metin, /M7\.9/);
+  const kaynakSatiri = (m) => m.split("\n").filter((l) => /^• (Stock footage|Archival film)/.test(l)).length;
+  assert.ok(kaynakSatiri(av) <= 1, "stok kaynaklari tek satir");
+  assert.equal(kaynakSatiri(hx), 1, "arsiv kaynagi tekrar etmez");
+  assert.ok((av.match(/#\w+/g) || []).length <= 3, "en fazla 3 hashtag");
+});
+
 test("ayar birlestirme ve ISO sure", () => {
   assert.deepEqual(birlestir({ a: 1, b: { c: 2 } }, { b: { d: 3 } }), { a: 1, b: { c: 2, d: 3 } });
   assert.equal(yt.sureSn("PT1M5S"), 65);
