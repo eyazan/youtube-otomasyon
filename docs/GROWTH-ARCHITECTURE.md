@@ -75,6 +75,18 @@ Everything shares the same packaging engines and the same registry.
 - `bildirim.js` opens a GitHub issue that @mentions the owner (email + GitHub mobile push). It gives the title, gate verdict, publish time, Studio link and how to cancel. Older "yeni-video" issues are closed automatically; blocked topics get a "kalite-engeli" issue.
 - Once enough data exists, re-tune `hourUTC` from the dashboard's "Publish hour" pattern and the analytics country mix.
 
+### Pre-publish visual check (every Short, before it is scheduled)
+
+`shorts-yap.js` measures the rendered output with `lib/gorsel-denetim.js`. These are measurements, not guesses:
+
+- **Text fit:** every on-screen text (hook, captions, question, date stamp) is sized to fit. The whole text layer is then rendered with the real font on black, and the left and right edge strips are measured frame by frame. If any text touches an edge, all text is shrunk 10 % and re-measured (up to 3 times).
+- **Audio/video length:** a mismatch over 0.5 s is critical. On 2026-09-25 this caught a mux bug that produced 57 s of video with 19 s of audio.
+- **Black frames and frozen picture:** blackdetect / freezedetect.
+- **Loudness:** measured at the final gate. The mix is normalised to −14 LUFS; it was −22 before.
+- **Preview:** an 8-frame contact sheet (`icerik/paket/<slug>/onizleme.jpg`) is embedded in the GitHub notification, so you can check the video from your phone before the 21:00 publish.
+
+Any critical finding (text still overflowing, A/V mismatch, >1.5 s of black) makes the final gate **BLOCK**. The video is not uploaded and you get a "kalite-engeli" notification. Stock footage gets the channel's documentary grade (`config/growth.json → renk.stok`); archival film keeps its original tone.
+
 ## 7. Configuration & state
 
 | File | Role |

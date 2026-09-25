@@ -72,5 +72,9 @@
     ],
     "minSampleForInsight": 5,
     "minViewsForRates": 100
+  },
+  "renk": {
+    "_comment": "Channel colour grade. 'stok' is applied to modern stock footage so it sits with the archival films (muted colour, a little contrast, cool steel shadows). Empty string disables it.",
+    "stok": "eq=saturation=0.78:contrast=1.07:brightness=-0.015,colorbalance=rs=-0.03:gs=-0.005:bs=0.045:rm=-0.02:bm=0.02:rh=-0.02:bh=0.03"
   }
 }

@@ -160,6 +160,22 @@ test("muzik profili: deterministik ve videolar arasi farkli", () => {
   assert.ok(muzik.benzerlik(muzik.profil("a", "bridge-failures"), muzik.profil("b", "nuclear-accidents")) < 0.95);
 });
 
+test("muzik profili: tum konularda ffmpeg sinirlari icinde (tremolo >= 0.1 Hz)", () => {
+  for (const k of K.konular()) {
+    const p = muzik.profil(k.slug, K.kumeBul(k));
+    assert.ok(p.trem >= 0.1 && p.trem <= 20, `${k.slug}: tremolo ${p.trem}`);
+    assert.ok(p.kok > 20 && p.alcak > p.kok, `${k.slug}: frekans`);
+    assert.ok(["white", "pink", "brown"].includes(p.renk), `${k.slug}: gurultu rengi`);
+  }
+});
+
+test("gorsel denetim: sigdir uzun metni kucultur, kisa metni tavanda birakir", () => {
+  const D = require("../../lib/gorsel-denetim");
+  assert.equal(D.sigdir("CAN START", 90, 1080, 0.76), 90);
+  assert.ok(D.sigdir("WAS AEROELASTIC FLUTTER", 90, 1080, 0.76) < 70);
+  assert.ok(D.sigdir("ONE STEP, A\\NMOVING MOUNTAIN", 67, 1080) <= 67);
+});
+
 test("kapak: mobil okunabilirlik ve 3 farkli konsept", () => {
   assert.equal(TS.mobilKontrol("40 MPH", "long").gecti, true);
   assert.equal(TS.mobilKontrol("THIS IS WAY TOO MANY WORDS", "long").gecti, false);
