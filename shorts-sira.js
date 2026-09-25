@@ -128,7 +128,10 @@ function main() {
   // video uretilenler listesinde olmasa bile IKINCI KEZ yuklenmez.
   const yuklenmis = require("./lib/kutuphane").yayinlananlar().map((y) => y.slug).filter(Boolean);
   const atla = new Set([...uretilenler(), ...basarisizlar(), ...yuklenmis, ...Object.keys(engellenenler()).filter(engelliMi)]);
-  const kalan = tum.filter(s => !atla.has(s));
+  // Siralama: once gercek arsiv filmi olan konular (kanalin en guclu videolari arsiv
+  // goruntulu olanlar), sonra stok aciklayicilar; grup icinde alfabetik.
+  const arsivMi = (s) => { try { return JSON.parse(fs.readFileSync(path.join(KONULAR, s + ".json"), "utf8")).tur !== "stok"; } catch (e) { return false; } };
+  const kalan = tum.filter(s => !atla.has(s)).sort((a, b) => (arsivMi(b) - arsivMi(a)) || a.localeCompare(b));
   if (!kalan.length) { console.log("Uretilecek yeni konu yok (" + tum.length + " toplam). Konu ekle."); return 0; }
 
   // Gunluk: ilk BASARILI konuyu uret; biri patlarsa sonrakine gec (gun bosa gitmesin).

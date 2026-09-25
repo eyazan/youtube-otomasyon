@@ -284,7 +284,9 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
       const bi = Math.max(1, planlar.findIndex((p) => p.rol === "context"));
       const z = zamanlar[Math.min(bi, zamanlar.length - 1)];
       const son = Math.min(z.son, z.bas + 3.2);
-      const dmg = `${v.yil} · ${(v.kisa || "").toUpperCase()}`;
+      // kisa ad yili zaten iceriyorsa ("Vesuvius 1944") yil tekrar yazilmaz
+      const kisa = (v.kisa || "").toUpperCase();
+      const dmg = kisa.includes(String(v.yil)) ? kisa : `${v.yil} · ${kisa}`;
       if (z.bas >= 2.7) ekstra.push(`Dialogue: 0,${assTime(z.bas + 0.1)},${assTime(son)},Pop,,0,0,0,,` +
         `{\\an7\\pos(64,${Math.round(H * 0.105)})\\fs${Math.round(DEN.sigdir(dmg, W * 0.036, W, 0.8) * k)}\\bord3\\shad2\\1c&H41A4D9&\\fad(180,180)}` +
         assKacis(dmg));

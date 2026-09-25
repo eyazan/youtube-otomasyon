@@ -59,6 +59,16 @@ Everything shares the same packaging engines and the same registry.
 - Sources: YouTube Data API (public counters), YouTube Analytics API (`yt-analytics.readonly`: watch time, % viewed, subscribers, traffic sources, retention curve) and optional manual Studio entries (impressions/CTR). The API does not expose these; manual entries are labelled as such.
 - Diagnoses: `INSUFFICIENT_DATA`, `LOW_IMPRESSIONS_GOOD_RETENTION`, `HIGH_IMPRESSIONS_LOW_CTR`, `GOOD_CTR_LOW_RETENTION`, `GOOD_HOOK_WEAK_MIDDLE`, `HIGH_VIEWS_LOW_SUB_CONVERSION`, `SEARCH_DEPENDENT`, `NO_SUGGESTED_TRAFFIC`, `HIGH_SUGGESTED`, `SHORTS_FEED_NOT_PICKED_UP`, `WEAK_TOPIC_PACKAGING`, `OUTPERFORMER`, `HEALTHY`. Measured performance always outranks heuristic scores: an outperformer is never "repackaged".
 
+### Retention rules learned from the channel (`lib/tutunma.js`)
+
+Measured on 2026-09-25 from the YouTube Analytics audience-retention curves of the first four Shorts: the steepest drop is at 11–21 % of the video (~4–7 s), exactly the second sentence, which was a date/setting setup every time. The longest video (38 s) had the lowest average view percentage (47 %); the video with 75.6 % got the only large Shorts-feed push. Rules for every new Short, scored in the quality gate (SCRIPT −12 each) and enforced by a test for every unproduced topic:
+
+1. **Second beat** — scene 2 is an event, escalation, countdown or casualty line, never a date/setting setup (the date stamp already shows it on screen).
+2. **Length** — ≤ 80 words (~28–30 s).
+3. **Archive opening** — scene 1 of an archive film has an explicit `baslangic` at the most striking moment of the film.
+
+The production queue takes topics with real archive film first, then stock explainers.
+
 ## 5. Topic selection
 
 `konu-puan.js` scores a topic on 11 criteria from free signals: Wikipedia pageviews and full text, Commons/NASA/archive.org counts, and YouTube search when authorised. `PRIORITY` = engineering depth ≥ 6 **and** audience appeal ≥ 6. It is used by `trend-ara.js`, `viral-analiz.js` and `node konu-puan.js --adaylar` (`icerik/aday-konular-puan.md`).

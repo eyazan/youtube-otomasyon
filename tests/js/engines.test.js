@@ -209,3 +209,28 @@ test("ayar birlestirme ve ISO sure", () => {
   assert.deepEqual(birlestir({ a: 1, b: { c: 2 } }, { b: { d: 3 } }), { a: 1, b: { c: 2, d: 3 } });
   assert.equal(yt.sureSn("PT1M5S"), 65);
 });
+
+test("tutunma: ikinci vurus / uzunluk / arsiv acilisi kurallari", () => {
+  const T = require("../../lib/tutunma");
+  const k = (metinler, ek = {}) => ({ tur: "stok", sahneler: metinler.map((m) => ({ metin: m })), ...ek });
+  // olculen hata: ikinci cumle tarih kurulumu
+  assert.equal(T.denetle(k(["This ended the age of the airship.", "May sixth, 1937. The zeppelin arrives over New Jersey."]))[0].kural, "ikinci-vurus");
+  assert.equal(T.denetle(k(["A ship can sink in minutes.", "The power grid is one giant connected machine."]))[0].kural, "ikinci-vurus");
+  assert.deepEqual(T.denetle(k(["A dam holds back a lake.", "If it breaks, the water races downstream faster than a car."])), []);
+  assert.equal(T.denetle(k(Array(9).fill("one two three four five six seven eight nine ten")))
+    .filter((x) => x.kural === "uzunluk").length, 1);
+  const arsiv = { sahneler: [{ metin: "It burned.", kaynak: "Footage/x.ogv" }, { metin: "The city collapses in seconds." }] };
+  assert.equal(T.denetle(arsiv)[0].kural, "arsiv-acilis");
+  arsiv.sahneler[0].baslangic = 12;
+  assert.deepEqual(T.denetle(arsiv), []);
+});
+
+test("tutunma: henuz uretilmemis tum Shorts konulari kurallara uyar", () => {
+  const T = require("../../lib/tutunma");
+  const { KOK, jsonOku } = require("../../lib/ortak");
+  const path = require("path");
+  const bitti = new Set([...jsonOku(path.join(KOK, "icerik", "uretilenler.json"), []), ...jsonOku(path.join(KOK, "icerik", "basarisiz.json"), [])]);
+  const hatali = K.konular().filter((x) => !bitti.has(x.slug) && K.formatBul(x) === "short")
+    .map((x) => [x.slug, T.denetle(x).map((b) => b.mesaj)]).filter(([, b]) => b.length);
+  assert.deepEqual(hatali, []);
+});
