@@ -251,11 +251,26 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     const cx = Math.round(W / 2);
     const ekstra = [];
     if (HOOK) {
-      const fs = Math.round(W * 0.062), bord = Math.max(4, Math.round(W * 0.005));
+      // Uzun hook (>18 harf) iki satira bolunur; yazi boyutu en uzun satira gore
+      // kucultulur ki ekran kenarlarina tasmasin (kalin fontta harf ~0.72 em).
+      const H_UP = HOOK.toUpperCase();
+      const w = H_UP.split(/\s+/);
+      let satirlar = [H_UP];
+      if (H_UP.length > 18 && w.length > 1) {
+        let en = null;
+        for (let i = 1; i < w.length; i++) {
+          const a = w.slice(0, i).join(" "), b = w.slice(i).join(" ");
+          const m = Math.max(a.length, b.length);
+          if (!en || m < en.m) en = { a, b, m };
+        }
+        satirlar = [en.a, en.b];
+      }
+      const enUzun = Math.max(...satirlar.map((x) => x.length));
+      const fs = Math.round(Math.min(W * 0.062, (W * 0.86) / (enUzun * 0.72))), bord = Math.max(4, Math.round(W * 0.005));
       const y = Math.round(H * 0.40);
       const hookSon = Math.min(2.7, VODUR * 0.4);
       ekstra.push(`Dialogue: 0,${assTime(0.15)},${assTime(hookSon)},Pop,,0,0,0,,` +
-        `{\\an5\\pos(${cx},${y})\\fs${fs}\\bord${bord}\\shad3\\fad(160,220)}${assKacis(HOOK.toUpperCase())}`);
+        `{\\an5\\pos(${cx},${y})\\fs${fs}\\bord${bord}\\shad3\\fad(160,220)}${satirlar.map(assKacis).join("\\N")}`);
     }
     // Tarih/yer damgasi (yalnizca belirli bir olay/vaka ise) — baglam sahnesinde
     const v = konu.vaka || {};
