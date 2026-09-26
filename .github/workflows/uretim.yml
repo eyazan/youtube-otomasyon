@@ -99,6 +99,10 @@ jobs:
       YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
       YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
       YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+      # TikTok (istege bagli): yoksa TikTok adimi sessizce atlanir, YouTube etkilenmez.
+      TT_CLIENT_KEY: ${{ secrets.TT_CLIENT_KEY }}
+      TT_CLIENT_SECRET: ${{ secrets.TT_CLIENT_SECRET }}
+      TT_REFRESH_TOKEN: ${{ secrets.TT_REFRESH_TOKEN }}
       # Stok konular (tur: stok) icin Pexels anahtari — yoksa stok-bul.js calismaz.
       PEXELS_KEY: ${{ secrets.PEXELS_KEY }}
       # Yukleme yalnizca PUBLISH=1 iken (repo Variables). Yoksa uretir, yuklemez.

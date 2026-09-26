@@ -109,6 +109,10 @@ function uretBir(slug) {
       throw new YuklemeHatasi("yukleme basarisiz (konu kuyrukta kaldi)");
     }
     console.log(`yukleme: tamam (kalite: ${son.karar})`);
+    // TikTok (varsa): ayni videoyu gelen kutusuna gonderir. BASARISIZLIK GUNU BOZMAZ —
+    // YouTube yayini zaten tamam; TikTok bir sonraki calismada tekrar denenir.
+    const t = cp.spawnSync("node", ["tiktok-yukle.js", slug], { cwd: KOK, stdio: "inherit" });
+    if (t.status !== 0) console.log("  (TikTok gonderimi atlandi/basarisiz — YouTube etkilenmedi)");
   } else {
     console.log("yukleme atlandi (" + (publish ? "kimlik yok" : "PUBLISH!=1") + "); video: uretim/" + slug + "/Videos/");
   }

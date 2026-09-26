@@ -75,6 +75,32 @@ async function denetle(ops = {}) {
     else ekle("yetki-yasi", "ok", `yetki ${tr} tarihine kadar geçerli`);
   }
 
+  // 2b) TikTok (istege bagli — kimlik yoksa hic bahsedilmez)
+  if (["TT_CLIENT_KEY", "TT_CLIENT_SECRET", "TT_REFRESH_TOKEN"].some((k) => env(k))) {
+    const TT = require("./lib/tiktok");
+    if (!TT.kimlikVar()) ekle("tiktok", "uyari", "TikTok kimlik bilgileri eksik (TT_CLIENT_KEY/TT_CLIENT_SECRET/TT_REFRESH_TOKEN)",
+      "Eksik secret'i GitHub → Settings → Secrets → Actions altina ekle.");
+    else {
+      try {
+        const t = await (ops.ttToken || TT.token)();
+        ekle("tiktok", /video\.upload/.test(t.kapsam) || !t.kapsam ? "ok" : "uyari",
+          /video\.upload/.test(t.kapsam) || !t.kapsam ? "TikTok yetkisi çalışıyor" : "TikTok yetkisinde video.upload kapsamı yok",
+          /video\.upload/.test(t.kapsam) || !t.kapsam ? null : "Yerelde `node tiktok-yetki.js` çalıştır.");
+      } catch (e) {
+        ekle("tiktok", "uyari", "TikTok yetkisi geçersiz: " + String(e.message).slice(0, 140),
+          "Yerelde `node tiktok-yetki.js` → yeni TT_REFRESH_TOKEN'ı GitHub secret'ına koy. (YouTube yayını bundan etkilenmez.)");
+      }
+    }
+    // Jeton yasi: TikTok refresh token 365 gun; 30 gun kala haber ver
+    const y2 = jsonOku(path.join(KOK, "config", "yetki.json"), null);
+    if (y2 && y2.tiktokYetkiTarihi) {
+      const kalan = 365 - (Date.now() - Date.parse(y2.tiktokYetkiTarihi)) / 86400000;
+      if (kalan <= 30) ekle("tiktok-yasi", kalan <= 0 ? "uyari" : "uyari",
+        kalan <= 0 ? "TikTok yetkisinin süresi doldu" : `TikTok yetkisi ${Math.round(kalan)} gün sonra bitiyor`,
+        "`node tiktok-yetki.js` ile yenile.");
+    }
+  }
+
   // 3) Pexels (stok konular)
   const pk = env("PEXELS_KEY");
   if (!pk) ekle("pexels", "uyari", "PEXELS_KEY yok — stok konular üretilemez", "GitHub secret PEXELS_KEY ekle.");

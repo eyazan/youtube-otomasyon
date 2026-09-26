@@ -106,6 +106,8 @@ Any critical finding (text still overflowing, A/V mismatch, >1.5 s of black) mak
 | `config/pronunciation.json` | pronunciation dictionary, known words, banned clichés |
 | `icerik/konular/*.json` | scripts + case files (`vaka`: cluster, mechanism, chain, timeline, misconception, debate, editorial titles, thumbnail text, references) |
 | `icerik/yayinlananlar.json`, `kaynak-defteri.json`, `kalite-kayitlari.json`, `engellenen.json`, `playlistler.json`, `sabit-yorumlar.json` | durable state (committed back by Actions) |
+| `icerik/tiktok.json` | which videos were sent to the TikTok inbox (no video is sent twice) |
+| `config/yetki.json` | when YouTube/TikTok were authorised, so the health check can warn before expiry |
 | `.env` | secrets only (never committed) |
 
 ## 8. Daily GitHub Actions run (`.github/workflows/uretim.yml`)
@@ -115,9 +117,10 @@ Any critical finding (text still overflowing, A/V mismatch, >1.5 s of black) mak
    - If the upload is impossible (token expired), **no topic is consumed**.
    - A failed upload leaves the topic in the queue and writes `YUKLEME-HATASI.json`.
 3. `bildirim.js`: notifications (see §9).
-4. `yorum-yanitla.js`, `post-publish-analyzer.js --due`, `pinned-comment.js --post-pending`, `channel-plan.js`, `experiments.js degerlendir`, and on Mondays `existing-video-optimizer.js --all`.
-5. State is committed back with a 5-attempt pull/rebase/push loop.
-6. On failure, a "🚨" issue is opened.
+4. `tiktok-yukle.js` (optional): sends the same MP4 to the TikTok inbox. Without TikTok credentials the step is silently skipped, and a TikTok failure never breaks the day — YouTube is already published. See `docs/TIKTOK.md`.
+5. `yorum-yanitla.js`, `post-publish-analyzer.js --due`, `pinned-comment.js --post-pending`, `channel-plan.js`, `experiments.js degerlendir`, and on Mondays `existing-video-optimizer.js --all`.
+6. State is committed back with a 5-attempt pull/rebase/push loop.
+7. On failure, a "🚨" issue is opened.
 
 **Queue order** (`lib/kutuphane.kuyruk()`): real archive film before stock explainers, then the editorial `oncelik` (higher first), then alphabetical.
 
