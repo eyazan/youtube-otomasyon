@@ -54,6 +54,10 @@ if (den) {
   kontrol("denetim", "yazi tasmasi yok", den.yaziTasmasi === 0, String(den.yaziTasmasi));
   kontrol("denetim", "siyah kare yok", (den.siyahToplam || 0) <= 0.4, (den.siyahToplam || 0) + " sn");
   kontrol("denetim", "donuk goruntu yok", (den.donukEnUzun || 0) <= 4, (den.donukEnUzun || 0) + " sn");
+  // Sol ustteki iki oge (tarih damgasi + FAILURE CHAIN paneli) ayni anda ekranda olmamali
+  const d = den.damga, kt = den.katman;
+  kontrol("denetim", "damga ile panel ust uste binmiyor", !(d && kt && d.bas < kt.son && d.son > kt.bas),
+    d && kt ? `damga ${d.bas}-${d.son} sn, panel ${kt.bas}-${kt.son} sn` : "tek oge");
 }
 kontrol("denetim", "onizleme gorseli var", fs.existsSync(paket("onizleme.jpg")));
 

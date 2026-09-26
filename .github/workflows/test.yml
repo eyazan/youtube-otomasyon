@@ -30,7 +30,7 @@ jobs:
 
   # PR'larda UCTAN UCA uretim testi (YOUTUBE'A YUKLEME YOK): GitHub'in Ubuntu + ffmpeg
   # ortaminda gunluk is akisinin aynisi (shorts-sira: kalite kapilari -> goruntu indirme ->
-  # render -> denetim -> paket) kosulur, ardindan e2e-kontrol.js 25 maddeyi dogrular
+  # render -> denetim -> paket) kosulur, ardindan e2e-kontrol.js 26 maddeyi dogrular
   # (video/ses/denetim/kalite/aciklama/etiket/yukleme metasi/bildirim metni).
   # Kapsam: sabit iki ornek (arsiv + stok) + bu PR'da eklenen/degisen TUM konular (paralel).
   hazirla:
@@ -49,7 +49,7 @@ jobs:
             const fs=require("fs");const bitti=new Set(JSON.parse(fs.readFileSync("icerik/uretilenler.json","utf8")));
             const l=["vesuvius-1944","why-ships-sink",...process.argv[1].split(/\s+/).filter(Boolean)]
               .filter((s,i,a)=>a.indexOf(s)===i && fs.existsSync("icerik/konular/"+s+".json") && (i<2 || !bitti.has(s)));
-            console.log(JSON.stringify(l.slice(0,16)));' "$DEGISEN")
+            console.log(JSON.stringify(l.slice(0,24)));' "$DEGISEN")
           echo "slugs=$SLUGS" >> "$GITHUB_OUTPUT"
           echo "Uctan uca test edilecek: $SLUGS"
 
@@ -78,7 +78,7 @@ jobs:
         run: |
           if [ -z "$PEXELS_KEY" ] && grep -q '"tur": "stok"' "icerik/konular/${{ matrix.slug }}.json"; then echo "PEXELS_KEY yok (fork PR) — stok konu atlandi"; exit 0; fi
           node shorts-sira.js "${{ matrix.slug }}"
-      - name: Uctan uca kontrol (25 madde)
+      - name: Uctan uca kontrol (26 madde)
         run: |
           if [ ! -f "uretim/${{ matrix.slug }}/Videos/${{ matrix.slug }}.mp4" ] && [ -z "$PEXELS_KEY" ]; then exit 0; fi
           node e2e-kontrol.js "${{ matrix.slug }}"

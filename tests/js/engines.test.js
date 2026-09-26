@@ -290,3 +290,18 @@ test("kuyruk: once gercek arsiv filmi olan konular", () => {
   const ilkStok = l.findIndex((k) => k.tur === "stok");
   assert.ok(ilkStok === -1 || l.slice(ilkStok).every((k) => k.tur === "stok"));
 });
+
+test("etiketler: hicbir konuda virgul/<> yok, YouTube meta dogrulamasini gecer", () => {
+  const D = require("../../description-engine");
+  const { metaDogrula } = require("../../youtube-yukle");
+  for (const k of K.konular()) {
+    const t = D.etiketler(k);
+    assert.ok(!t.some((x) => /[,<>]/.test(x)), k.slug + ": " + t.join(" | "));
+    assert.deepEqual(metaDogrula({ title: k.baslik, description: "x", tags: t }, { privacyStatus: "private" }), [], k.slug);
+  }
+});
+
+test("altyazi: rakam icindeki nokta/virgul korunur", () => {
+  assert.deepEqual(M.altyaziKelimeleri("A 1.4 billion dollar bomber."), ["A", "1.4", "billion", "dollar", "bomber"]);
+  assert.deepEqual(M.altyaziKelimeleri("As 2,500 passengers crowded, it tipped."), ["As", "2,500", "passengers", "crowded", "it", "tipped"]);
+});

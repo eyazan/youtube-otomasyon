@@ -10,6 +10,7 @@
 // konu.json:
 //   "kaynaklar": [
 //     { "ad": "tacoma.ogv", "wikimedia": "Tacoma Narrows Bridge destruction.ogv" },
+//     { "ad": "b.webm", "wikimedia": "Buyuk belgesel.webm", "kalite": "480p" },   // hazir 480p kopya
 //     { "ad": "b.mp4", "url": "https://.../public-domain.mp4" },
 //     { "ad": "c.mp4", "archive": "identifier/filename.mp4" }
 //   ]
@@ -77,14 +78,23 @@ async function archiveUrl(idVeyaYol) {
 }
 
 const lisansUygun = (l) => /^(public domain|pd\b|pd-|cc0|cc by(?!-?(sa|nc|nd))\b)/i.test(String(l).trim()) && !/\b(sa|nc|nd)\b/i.test(String(l));
-async function wikimediaUrl(baslik) {
+// kalite ("480p" gibi) verilirse Commons'un hazir donusturulmus kopyasi indirilir:
+// yuzlerce MB'lik 1080p belgeseller her gunluk calismada tam boyutuyla inmesin
+// (dikey Shorts'ta arka plan zaten bulaniklastirilir; 480p yeterli). Kopya yoksa orijinal.
+async function wikimediaUrl(baslik, kalite) {
   const api = "https://commons.wikimedia.org/w/api.php?action=query&titles=" +
-    encodeURIComponent("File:" + baslik) + "&prop=imageinfo&iiprop=url|mime|extmetadata&format=json";
+    encodeURIComponent("File:" + baslik) + "&prop=imageinfo|videoinfo&iiprop=url|mime|extmetadata&viprop=derivatives&format=json";
   const d = await getJSON(api);
   const page = Object.values(d.query.pages)[0];
   const ii = (page.imageinfo || [])[0];
   if (!ii || !ii.url) throw new Error("Wikimedia dosyasi bulunamadi: " + baslik);
   const lisans = (ii.extmetadata && ii.extmetadata.LicenseShortName && ii.extmetadata.LicenseShortName.value) || "?";
+  if (kalite) {
+    const der = ((page.videoinfo || [])[0] || {}).derivatives || [];
+    const uygun = der.filter((x) => String(x.transcodekey || "").startsWith(kalite));
+    const k = uygun.find((x) => /webm$/.test(x.transcodekey)) || uygun[0];   // webm yoksa mov (ffmpeg ikisini de okur)
+    if (k && k.src) return { url: k.src, lisans, kopya: k.transcodekey };
+  }
   return { url: ii.url, lisans };
 }
 
@@ -98,7 +108,8 @@ async function wikimediaUrl(baslik) {
     if (fs.existsSync(hedef) && fs.statSync(hedef).size > 0) { console.log("  var, atlandi: " + k.ad); continue; }
     let url = k.url, lisans = k.lisans || "belirtilmemis";
     if (k.wikimedia) {
-      const w = await wikimediaUrl(k.wikimedia); url = w.url; lisans = w.lisans;
+      const w = await wikimediaUrl(k.wikimedia, k.kalite); url = w.url; lisans = w.lisans;
+      if (w.kopya) console.log("  (Commons kopyasi: " + w.kopya + ")");
       // Lisans korumasi: yalnizca kamu mali / CC0 / CC BY. Paylasim-benzer (SA), ticari
       // olmayan (NC), turetilemez (ND) ya da bilinmeyen lisansli film KULLANILMAZ.
       if (!lisansUygun(lisans)) throw new Error(`lisans uygun degil (${lisans}): ${k.wikimedia} — yalnizca Public domain / CC0 / CC BY`);
