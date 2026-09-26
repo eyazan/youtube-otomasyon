@@ -223,7 +223,8 @@ const assKacis = (s) => String(s).replace(/[{}]/g, "").replace(/\\/g, "");
   // --- 4) ASS altyazi (2-3 kelimelik gruplar, orantisal zaman) ---
   const events = [];
   for (const s of sahneler) {
-    const words = s.metin.replace(/[.,;:!?]/g, "").split(/\s+/).filter(Boolean);
+    // Noktalama silinir AMA rakamlar arasindaki nokta/virgul korunur ("1.4" -> "14" olmasin, "2,500" kalsin)
+    const words = require("./lib/metin").altyaziKelimeleri(s.metin);
     const wt = words.map(w => w.length + 1); const tw = wt.reduce((a, b) => a + b, 0);
     let c = 0; const bounds = words.map((w, i) => { const st = s.start + s.dur * c / tw; c += wt[i]; return { w, st, en: s.start + s.dur * c / tw }; });
     for (let i = 0; i < bounds.length;) {
@@ -238,6 +239,13 @@ const assKacis = (s) => String(s).replace(/[{}]/g, "").replace(/\\/g, "");
   // ASS kurucu: k = tum yazi boyutlarina uygulanan olcek (tasma denetimi basarisizsa kuculur).
   // Her yazi once ekrana sigacak boyuta ayarlanir (gorsel-denetim.sigdir).
   const DEN = require("./lib/gorsel-denetim");
+  // Muhendislik paneli penceresi (FAILURE CHAIN, sol ust) ASS'ten ONCE bilinir: tarih
+  // damgasi da sol ustte durdugu icin ayni saniyelere dusmemeli (ust uste binme olculdu).
+  const katmanSahne = planlar.findIndex((p, i) => ["technical", "discovery"].includes(p.rol) && zamanlar[i].bas >= 3 && zamanlar[i].bas + 3 <= VODUR - 3);
+  const katmanA = katmanSahne >= 0 ? zamanlar[katmanSahne].bas + 0.15 : null;
+  const katmanB = katmanSahne >= 0 ? Math.min(katmanA + 3.4, VODUR - 3) : null;
+  const katmanlaCakisir = (a, b) => katmanA != null && a < katmanB + 0.3 && b > katmanA - 0.3;
+  let damgaPencere = null;
   const assKur = (k) => `[Script Info]
 ScriptType: v4.00+
 PlayResX: ${W}
@@ -281,13 +289,16 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     // Tarih/yer damgasi (yalnizca belirli bir olay/vaka ise) — baglam sahnesinde
     const v = konu.vaka || {};
     if (v.tip === "vaka" && v.yil) {
-      const bi = Math.max(1, planlar.findIndex((p) => p.rol === "context"));
-      const z = zamanlar[Math.min(bi, zamanlar.length - 1)];
+      // Once baglam sahneleri, sonra diger sahneler: kancadan sonra ve panelle cakismayan ilk pencere
+      const sira = [...planlar.map((p, i) => i).filter((i) => planlar[i].rol === "context"), ...planlar.map((p, i) => i)];
+      const bi = sira.find((i) => i >= 1 && zamanlar[i].bas >= 2.7 && !katmanlaCakisir(zamanlar[i].bas + 0.1, Math.min(zamanlar[i].son, zamanlar[i].bas + 3.2)));
+      const z = zamanlar[bi == null ? 0 : bi];
       const son = Math.min(z.son, z.bas + 3.2);
+      if (bi != null && k === 1) damgaPencere = { bas: +(z.bas + 0.1).toFixed(2), son: +son.toFixed(2) };
       // kisa ad yili zaten iceriyorsa ("Vesuvius 1944") yil tekrar yazilmaz
       const kisa = (v.kisa || "").toUpperCase();
       const dmg = kisa.includes(String(v.yil)) ? kisa : `${v.yil} · ${kisa}`;
-      if (z.bas >= 2.7) ekstra.push(`Dialogue: 0,${assTime(z.bas + 0.1)},${assTime(son)},Pop,,0,0,0,,` +
+      if (bi != null) ekstra.push(`Dialogue: 0,${assTime(z.bas + 0.1)},${assTime(son)},Pop,,0,0,0,,` +
         `{\\an7\\pos(64,${Math.round(H * 0.105)})\\fs${Math.round(DEN.sigdir(dmg, W * 0.036, W, 0.8) * k)}\\bord3\\shad2\\1c&H41A4D9&\\fad(180,180)}` +
         assKacis(dmg));
     }
@@ -327,12 +338,12 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
   // Muhendislik ust katmani: ilk teknik/kesif sahnesinde ~3 sn FAILURE CHAIN paneli
   // (kanca ve kapanis sorusu pencereleriyle cakismaz).
   let ustKatman = null;
-  const ti = planlar.findIndex((p, i) => ["technical", "discovery"].includes(p.rol) && zamanlar[i].bas >= 3 && zamanlar[i].bas + 3 <= VODUR - 3);
+  const ti = katmanSahne;
   if (ti >= 0) {
     try {
       const png = require("./engineering-visuals").kisaUstKatman(konu, path.join(TMP, "zincir.png"));
       if (png) {
-        const a = zamanlar[ti].bas + 0.15, b = Math.min(a + 3.4, VODUR - 3);
+        const a = katmanA, b = katmanB;
         ustKatman = { png, a, b };
         fs.writeFileSync(path.join(VID, "muhendislik-katmani.json"), JSON.stringify({ tip: "failure-chain", sahne: ti, bas: a, son: b }, null, 2));
       }
@@ -368,7 +379,8 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", "-y", cikti]);
 
   // YAYIN ONCESI DENETIM 2: siyah kare / donmus goruntu + onizleme gorseli.
-  const denetim = { tarih: new Date().toISOString(), yaziOlcegi: olcek, yaziTasmasi: tasma === null ? "olculemedi" : tasma.length,
+  const denetim = { tarih: new Date().toISOString(), damga: damgaPencere, katman: ustKatman ? { bas: +ustKatman.a.toFixed(2), son: +ustKatman.b.toFixed(2) } : null,
+    yaziOlcegi: olcek, yaziTasmasi: tasma === null ? "olculemedi" : tasma.length,
     tasmaOrnek: tasma && tasma.length ? tasma.slice(0, 5) : [], ton: TON ? "stok-belgesel" : "yok" };
   try { Object.assign(denetim, DEN.videoDenetim(cikti)); } catch (e) { denetim.videoDenetimHata = String(e.message).slice(0, 160); }
   try { DEN.onizleme(cikti, path.join(VID, "onizleme.jpg"), sure(cikti)); denetim.onizleme = "Videos/onizleme.jpg"; }

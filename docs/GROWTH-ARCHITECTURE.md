@@ -128,7 +128,11 @@ Any critical finding (text still overflowing, A/V mismatch, >1.5 s of black) mak
 
 **Upload validation:** `metaDogrula` checks YouTube's limits before sending (title ≤ 100, description ≤ 5000 bytes, tags ≤ 500, no `<>`, `publishAt` only on private and in the future).
 
-**Licence guard:** `arsiv-bul.js` only accepts Public domain / CC0 / CC BY. It rejects SA, NC, ND and unknown licences.
+**Licence guard:** `arsiv-bul.js` only accepts Public domain / CC0 / CC BY. It rejects SA, NC, ND and unknown licences. With `"kalite": "480p"` on a source, it downloads Commons' ready-made transcoded copy instead of a multi-hundred-MB original. Check the size first, because a transcoded copy can be larger than a low-resolution original.
+
+**Tags:** tags never contain `,`, `<` or `>`, since a comma would make YouTube reject the upload; a test covers every topic.
+
+**Captions:** captions keep decimal points and thousands separators inside numbers (`1.4`, `2,500`).
 
 **Dry run on the real infrastructure:** Actions → *Shorts uretim* → Run workflow → `kuru: true` (optional `slug`). This runs the full production with the real secrets and real downloads, then `e2e-kontrol.js`. Nothing is uploaded, committed or notified.
 
@@ -157,4 +161,4 @@ Other notifications:
 ## 10. Tests
 
 - `test.yml`, on every push/PR: JS + Python unit tests. These include the retention rules for every unproduced topic, scheduling, upload validation, health and notification text.
-- `test.yml`, on every PR: **end-to-end production in parallel** for two fixed samples (archive + stock) and **every topic added or changed in the PR**. It runs `shorts-sira.js` with no upload, then `e2e-kontrol.js`, which checks 25 items: video/audio format, loudness, overflow/black/freeze, final gate, retention rules, description/tags/pinned comment, upload metadata, notification text.
+- `test.yml`, on every PR: **end-to-end production in parallel** for two fixed samples (archive + stock) and **every topic added or changed in the PR**. It runs `shorts-sira.js` with no upload, then `e2e-kontrol.js`, which checks 26 items: video/audio format, loudness, overflow/black/freeze, stamp/panel overlap, final gate, retention rules, description/tags/pinned comment, upload metadata, notification text.

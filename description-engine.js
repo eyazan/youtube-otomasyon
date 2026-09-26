@@ -60,8 +60,11 @@ function ozet(konu) {
 function etiketler(konu) {
   const v = konu.vaka || {};
   const kume = K.KUMELER[K.kumeBul(konu)];
-  const aday = [...(konu.etiketler || []), v.kisa, v.mekanizma && v.mekanizma.replace(/\s*\(.*\)/, ""), kume && kume.ad.toLowerCase(),
-    "engineering failure", "forensic engineering"].filter(Boolean).map((x) => String(x).trim());
+  // YouTube etiketi virgul/<> iceremez (virgul etiketi boler, yukleme reddedilir); mekanizma
+  // cumlesinin yalnizca ilk bolumu alinir ve cok uzun etiketler atlanir.
+  const aday = [...(konu.etiketler || []), v.kisa, v.mekanizma && v.mekanizma.replace(/\s*\(.*\)/, "").split(/[,;:]/)[0], kume && kume.ad.toLowerCase(),
+    "engineering failure", "forensic engineering"].filter(Boolean).map((x) => String(x).replace(/[,<>"]/g, " ").replace(/\s+/g, " ").trim())
+    .filter((x) => x && x.length <= 60);
   const out = []; let uz = 0;
   for (const t of aday) {
     const k = t.toLowerCase();
