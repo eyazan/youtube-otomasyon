@@ -34,18 +34,27 @@ Playlist: **Aviation Failures** — waiting (1/3 published)
 
 | Video | Status | Previous | Next | End screen / Related video | Description link |
 |---|---|---|---|---|---|
-| The Disaster That Ended the Age of the Airship ([PGOKZhPYo7c](https://youtu.be/PGOKZhPYo7c)) | published | — | _queued: What Actually Makes Planes Crash_ | [Why the Tacoma Narrows Bridge Tore Itself Apart](https://youtu.be/qkzRUqlEy5I) | [Why the Tacoma Narrows Bridge Tore Itself Apart](https://youtu.be/qkzRUqlEy5I) |
+| The Disaster That Ended the Age of the Airship ([PGOKZhPYo7c](https://youtu.be/PGOKZhPYo7c)) | published | — | _queued: How Water Destroyed a $1.4 Billion Stealth Bomber_ | [Why the Tacoma Narrows Bridge Tore Itself Apart](https://youtu.be/qkzRUqlEy5I) | [Why the Tacoma Narrows Bridge Tore Itself Apart](https://youtu.be/qkzRUqlEy5I) |
+| How Water Destroyed a $1.4 Billion Stealth Bomber | queued | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) | _queued: NASA Crashed a Boeing 720 on Purpose — Then It Exploded_ | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) |
+| NASA Crashed a Boeing 720 on Purpose — Then It Exploded | queued | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) | _queued: 208 Seconds: How Geese Took Out Both Engines of Flight 1549_ | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) |
+| 208 Seconds: How Geese Took Out Both Engines of Flight 1549 | queued | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) | _queued: Munich 1958: The Slush That Brought Down Manchester United's Plane_ | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) |
+| Munich 1958: The Slush That Brought Down Manchester United's Plane | queued | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) | _queued: What Actually Makes Planes Crash_ | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) |
 | What Actually Makes Planes Crash | queued | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) | — | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) |
 
 ## Spaceflight Disasters
 
 _Launch and spaceflight failures — the engineering behind the fireball._
 
-Playlist: **Spaceflight Disasters** — waiting (0/3 published)
+Playlist: **Spaceflight Disasters** — waiting (1/3 published)
 
 | Video | Status | Previous | Next | End screen / Related video | Description link |
 |---|---|---|---|---|---|
-| The Stuck Valve That Destroys a Rocket | queued | — | — | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) |
+| Why Challenger Broke Apart 73 Seconds After Launch ([bqTpdauhlHo](https://youtu.be/bqTpdauhlHo)) | published | — | _queued: Apollo 1: The Fire That Happened on the Ground_ | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) |
+| Apollo 1: The Fire That Happened on the Ground | queued | [Why Challenger Broke Apart 73 Seconds After Launch](https://youtu.be/bqTpdauhlHo) | _queued: The Wrong Voltage That Nearly Killed Apollo 13_ | [Why Challenger Broke Apart 73 Seconds After Launch](https://youtu.be/bqTpdauhlHo) | [Why Challenger Broke Apart 73 Seconds After Launch](https://youtu.be/bqTpdauhlHo) |
+| The Wrong Voltage That Nearly Killed Apollo 13 | queued | [Why Challenger Broke Apart 73 Seconds After Launch](https://youtu.be/bqTpdauhlHo) | _queued: How Skylab Lost Its Heat Shield 63 Seconds After Launch_ | [Why Challenger Broke Apart 73 Seconds After Launch](https://youtu.be/bqTpdauhlHo) | [Why Challenger Broke Apart 73 Seconds After Launch](https://youtu.be/bqTpdauhlHo) |
+| How Skylab Lost Its Heat Shield 63 Seconds After Launch | queued | [Why Challenger Broke Apart 73 Seconds After Launch](https://youtu.be/bqTpdauhlHo) | _queued: Flopnik: Why America's Answer to Sputnik Failed Twice_ | [Why Challenger Broke Apart 73 Seconds After Launch](https://youtu.be/bqTpdauhlHo) | [Why Challenger Broke Apart 73 Seconds After Launch](https://youtu.be/bqTpdauhlHo) |
+| Flopnik: Why America's Answer to Sputnik Failed Twice | queued | [Why Challenger Broke Apart 73 Seconds After Launch](https://youtu.be/bqTpdauhlHo) | _queued: The Stuck Valve That Destroys a Rocket_ | [Why Challenger Broke Apart 73 Seconds After Launch](https://youtu.be/bqTpdauhlHo) | [Why Challenger Broke Apart 73 Seconds After Launch](https://youtu.be/bqTpdauhlHo) |
+| The Stuck Valve That Destroys a Rocket | queued | [Why Challenger Broke Apart 73 Seconds After Launch](https://youtu.be/bqTpdauhlHo) | — | [Why Challenger Broke Apart 73 Seconds After Launch](https://youtu.be/bqTpdauhlHo) | [Why Challenger Broke Apart 73 Seconds After Launch](https://youtu.be/bqTpdauhlHo) |
 
 ## Maritime Disasters
 
@@ -55,6 +64,8 @@ Playlist: **Maritime Disasters** — waiting (0/3 published)
 
 | Video | Status | Previous | Next | End screen / Related video | Description link |
 |---|---|---|---|---|---|
+| The Ship That Capsized at the Dock — Because of a Safety Rule | queued | — | _queued: The 94-Second Fuse That Burned the USS Forrestal_ | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) |
+| The 94-Second Fuse That Burned the USS Forrestal | queued | — | _queued: Ships Don't Just Sink — Many Roll Over_ | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) |
 | Ships Don't Just Sink — Many Roll Over | queued | — | — | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) |
 
 ## Nuclear Accidents
@@ -65,7 +76,8 @@ Playlist: **Nuclear Accidents** — waiting (1/3 published)
 
 | Video | Status | Previous | Next | End screen / Related video | Description link |
 |---|---|---|---|---|---|
-| The Nuclear Test That Poisoned a Paradise Forever ([DLYpmaQ-EVw](https://youtu.be/DLYpmaQ-EVw)) | published | — | — | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) |
+| The Nuclear Test That Poisoned a Paradise Forever ([DLYpmaQ-EVw](https://youtu.be/DLYpmaQ-EVw)) | published | — | _queued: Castle Bravo: The Bomb That Came Out 2.5 Times Too Big_ | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) |
+| Castle Bravo: The Bomb That Came Out 2.5 Times Too Big | queued | [The Nuclear Test That Poisoned a Paradise Forever](https://youtu.be/DLYpmaQ-EVw) | — | [The Nuclear Test That Poisoned a Paradise Forever](https://youtu.be/DLYpmaQ-EVw) | [The Nuclear Test That Poisoned a Paradise Forever](https://youtu.be/DLYpmaQ-EVw) |
 
 ## Fires & Explosions
 
@@ -78,7 +90,8 @@ Playlist: **Fires & Explosions** — waiting (0/3 published)
 | The Harbor Collision That Flattened a City | queued | — | _queued: Why Carbon Monoxide Kills People in Their Sleep_ | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) |
 | Why Carbon Monoxide Kills People in Their Sleep | queued | — | _queued: Why House Fires Turn Deadly in Minutes_ | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) |
 | Why House Fires Turn Deadly in Minutes | queued | — | _queued: The Pressure Blast Hidden in a Gas Leak_ | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) |
-| The Pressure Blast Hidden in a Gas Leak | queued | — | _queued: It's Not the Fire That Kills in an Explosion_ | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) |
+| The Pressure Blast Hidden in a Gas Leak | queued | — | _queued: The New London School Explosion That Gave Gas Its Smell_ | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) |
+| The New London School Explosion That Gave Gas Its Smell | queued | — | _queued: It's Not the Fire That Kills in an Explosion_ | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) |
 | It's Not the Fire That Kills in an Explosion | queued | — | — | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) |
 
 ## Industrial Disasters
@@ -89,6 +102,7 @@ Playlist: **Industrial Disasters** — waiting (0/3 published)
 
 | Video | Status | Previous | Next | End screen / Related video | Description link |
 |---|---|---|---|---|---|
+| Deepwater Horizon: The Test Result Nobody Believed | queued | — | _queued: The Chain Collapse Miners Fear Most_ | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) |
 | The Chain Collapse Miners Fear Most | queued | — | — | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) | [The Disaster That Ended the Age of the Airship](https://youtu.be/PGOKZhPYo7c) |
 
 ## Infrastructure Failures
@@ -125,9 +139,9 @@ Playlist: **Natural Hazards vs. Engineering** — waiting (2/3 published)
 | Why San Francisco Burned for Three Days ([X0jw78mIGdk](https://youtu.be/X0jw78mIGdk)) | published | — | [How a Single Step Triggers an Avalanche](https://youtu.be/ODZ7y6r1o6o) | [How a Single Step Triggers an Avalanche](https://youtu.be/ODZ7y6r1o6o) | [How a Single Step Triggers an Avalanche](https://youtu.be/ODZ7y6r1o6o) |
 | How a Single Step Triggers an Avalanche ([ODZ7y6r1o6o](https://youtu.be/ODZ7y6r1o6o)) | published | [Why San Francisco Burned for Three Days](https://youtu.be/X0jw78mIGdk) | _queued: The Flood Danger You Can't See_ | [Why San Francisco Burned for Three Days](https://youtu.be/X0jw78mIGdk) | [Why San Francisco Burned for Three Days](https://youtu.be/X0jw78mIGdk) |
 | The Flood Danger You Can't See | queued | [How a Single Step Triggers an Avalanche](https://youtu.be/ODZ7y6r1o6o) | _queued: How Earthquakes Turn Solid Ground to Liquid_ | [How a Single Step Triggers an Avalanche](https://youtu.be/ODZ7y6r1o6o) | [How a Single Step Triggers an Avalanche](https://youtu.be/ODZ7y6r1o6o) |
-| How Earthquakes Turn Solid Ground to Liquid | queued | [How a Single Step Triggers an Avalanche](https://youtu.be/ODZ7y6r1o6o) | _queued: What a Lightning Strike Does Inside a Wall_ | [How a Single Step Triggers an Avalanche](https://youtu.be/ODZ7y6r1o6o) | [How a Single Step Triggers an Avalanche](https://youtu.be/ODZ7y6r1o6o) |
-| What a Lightning Strike Does Inside a Wall | queued | [How a Single Step Triggers an Avalanche](https://youtu.be/ODZ7y6r1o6o) | _queued: How Tsunamis Grow Into 100-Foot Walls_ | [How a Single Step Triggers an Avalanche](https://youtu.be/ODZ7y6r1o6o) | [How a Single Step Triggers an Avalanche](https://youtu.be/ODZ7y6r1o6o) |
+| How Earthquakes Turn Solid Ground to Liquid | queued | [How a Single Step Triggers an Avalanche](https://youtu.be/ODZ7y6r1o6o) | _queued: How Tsunamis Grow Into 100-Foot Walls_ | [How a Single Step Triggers an Avalanche](https://youtu.be/ODZ7y6r1o6o) | [How a Single Step Triggers an Avalanche](https://youtu.be/ODZ7y6r1o6o) |
 | How Tsunamis Grow Into 100-Foot Walls | queued | [How a Single Step Triggers an Avalanche](https://youtu.be/ODZ7y6r1o6o) | _queued: What Actually Makes a Volcano Explode_ | [How a Single Step Triggers an Avalanche](https://youtu.be/ODZ7y6r1o6o) | [How a Single Step Triggers an Avalanche](https://youtu.be/ODZ7y6r1o6o) |
-| What Actually Makes a Volcano Explode | queued | [How a Single Step Triggers an Avalanche](https://youtu.be/ODZ7y6r1o6o) | _queued: Sinkholes Look Sudden. They Took Centuries._ | [How a Single Step Triggers an Avalanche](https://youtu.be/ODZ7y6r1o6o) | [How a Single Step Triggers an Avalanche](https://youtu.be/ODZ7y6r1o6o) |
+| What Actually Makes a Volcano Explode | queued | [How a Single Step Triggers an Avalanche](https://youtu.be/ODZ7y6r1o6o) | _queued: The Day Mount St. Helens Blew Out Sideways_ | [How a Single Step Triggers an Avalanche](https://youtu.be/ODZ7y6r1o6o) | [How a Single Step Triggers an Avalanche](https://youtu.be/ODZ7y6r1o6o) |
+| The Day Mount St. Helens Blew Out Sideways | queued | [How a Single Step Triggers an Avalanche](https://youtu.be/ODZ7y6r1o6o) | _queued: Sinkholes Look Sudden. They Took Centuries._ | [How a Single Step Triggers an Avalanche](https://youtu.be/ODZ7y6r1o6o) | [How a Single Step Triggers an Avalanche](https://youtu.be/ODZ7y6r1o6o) |
 | Sinkholes Look Sudden. They Took Centuries. | queued | [How a Single Step Triggers an Avalanche](https://youtu.be/ODZ7y6r1o6o) | _queued: Vesuvius 1944: An Eruption in the Middle of a War_ | [How a Single Step Triggers an Avalanche](https://youtu.be/ODZ7y6r1o6o) | [How a Single Step Triggers an Avalanche](https://youtu.be/ODZ7y6r1o6o) |
 | Vesuvius 1944: An Eruption in the Middle of a War | queued | [How a Single Step Triggers an Avalanche](https://youtu.be/ODZ7y6r1o6o) | — | [How a Single Step Triggers an Avalanche](https://youtu.be/ODZ7y6r1o6o) | [How a Single Step Triggers an Avalanche](https://youtu.be/ODZ7y6r1o6o) |

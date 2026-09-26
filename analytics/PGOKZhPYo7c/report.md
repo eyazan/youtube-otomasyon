@@ -7,11 +7,14 @@ https://youtu.be/PGOKZhPYo7c
 | Checkpoint | Collected | Views | Likes | Comments | Avg % viewed | Subs (net) | Top traffic |
 |---|---|---:|---:|---:|---:|---:|---|
 | 1d | 2026-09-24 | 978 | 32 | 2 | — | — | unavailable |
+| 3d | 2026-09-26 | 1012 | 33 | 4 | 75.58 | 2 | Shorts feed 90%, Search 8% |
 
-## Diagnosis at 1d
+## Diagnosis at 3d
 
-- **OUTPERFORMER** (low) — 978 views vs channel median 113 (n=4 videos).
+- **WEAK_TOPIC_PACKAGING** (low) — Current title scores 42.8/100 in the title engine; best editorial option scores 54.8.
 
 ## Suggested interventions
 
-- OUTPERFORMER → keep as is; reuse its subject/hook shape in the next episode.
+- WEAK PACKAGING (heuristic) → candidate for a logged title experiment once data exists.
+
+Views gained between 1d and 3d: 34.
