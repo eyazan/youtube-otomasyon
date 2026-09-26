@@ -79,7 +79,7 @@ The production queue takes topics with real archive film first, then stock expla
 
 ### Fixed publish time + notification
 
-- Production starts at **10:00 UTC** (13:00 TR). GitHub may delay scheduled jobs by hours, so it starts early.
+- Production starts at **08:23 UTC** (11:23 TR), with backups at 10:47, 13:17 and 15:41. GitHub may delay or skip scheduled jobs, especially on the hour (10:00 was skipped on 25 and 26 September), so the times sit off the hour.
 - The video is uploaded private with `status.publishAt`. YouTube makes it public at **18:00 UTC**: 21:00 TR, 14:00 ET, 11:00 PT. The audience was ~93 % US on 2026-09-25.
 - Which gate verdicts are scheduled is set in `config/growth.json → publishing.schedule` (default PUBLISH + REVIEW). Anything else stays private, and BLOCK is never uploaded.
 - `bildirim.js` opens a GitHub issue that @mentions the owner (email + GitHub mobile push). It gives the title, gate verdict, publish time, Studio link and how to cancel. Older "yeni-video" issues are closed automatically; blocked topics get a "kalite-engeli" issue.

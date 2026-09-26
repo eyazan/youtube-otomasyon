@@ -5,7 +5,7 @@ name: Shorts uretim (gunluk)
 # uygular; BLOCK olan video yuklenmez. Ardindan yayin sonrasi analiz, sabit
 # yorumlar, ic baglanti plani ve deneyler guncellenir; haftada bir (Pazartesi)
 # mevcut videolar icin optimizasyon raporlari yenilenir.
-# Saat: uretim 10:00 UTC'de (TR 13:00) baslar; video private yuklenir ve
+# Saat: uretim 08:23 UTC'de (TR 11:23) baslar (yedekler 10:47, 13:17, 15:41); video private yuklenir ve
 # config/growth.json > publishing.schedule.hourUTC saatinde (18:00 UTC = 21:00 TR
 # = 14:00 ABD dogu) YouTube tarafindan otomatik Public yapilir. Kitlenin ~%93'u
 # ABD (analytics, 2026-09-25). Arada kalan saatler inceleme penceresidir;
@@ -15,11 +15,13 @@ name: Shorts uretim (gunluk)
 on:
   schedule:
     # GitHub zamanlanmis isleri saatlerce geciktirebilir ya da atlayabilir
-    # (olculen: 3s46dk gecikme; 25 Eylul'de 10:00 hic calismadi). Yedek saatler:
-    # yayin-plani.js gunde en fazla bir video uretir, sonrakiler "henuz degil" der.
-    - cron: '0 10 * * *'
-    - cron: '0 13 * * *'
-    - cron: '30 15 * * *'
+    # (olculen: 3s46dk gecikme; 25 ve 26 Eylul'de 10:00 hic calismadi). Tam saat
+    # (:00) en yogun an oldugu icin dakikalar kaydirildi + 4 yedek. yayin-plani.js
+    # gunde en fazla bir video uretir; sonrakiler "henuz degil" der (cift video yok).
+    - cron: '23 8 * * *'
+    - cron: '47 10 * * *'
+    - cron: '17 13 * * *'
+    - cron: '41 15 * * *'
   workflow_dispatch:
     inputs:
       hepsi:
@@ -128,7 +130,7 @@ jobs:
           node experiments.js degerlendir || echo "deneyler atlandi"
 
       - name: Haftalik mevcut video optimizasyonu (Pazartesi)
-        if: always() && github.event.schedule == '0 10 * * *'
+        if: always() && github.event.schedule == '47 10 * * *'
         run: |
           if [ "$(date -u +%u)" = "1" ]; then
             node existing-video-optimizer.js --all || echo "optimizer atlandi"
