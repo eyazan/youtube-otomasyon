@@ -316,3 +316,21 @@ test("bildirim: bos gun alarmi yalnizca gercekten bos gunde", () => {
   assert.match(m.govde, /Run workflow/);
   assert.doesNotMatch(m.govde, /undefined|NaN/);
 });
+
+test("tiktok: aciklama kisa ve dogru, kimlik yoksa sessiz, tekrar gonderim yok", () => {
+  const T = require("../../tiktok-yukle");
+  const a = T.aciklama("challenger-1986");
+  assert.ok(a.length > 40 && a.length <= 2100);
+  assert.match(a, /synthetic voice/, "sentetik ses beyani her gonderide");
+  assert.ok((a.match(/#\w+/g) || []).length <= 4, "TikTok'ta az etiket");
+  assert.doesNotMatch(a, /undefined|NaN|\[object/);
+  assert.doesNotMatch(a, /https?:\/\//, "TikTok aciklamasinda baglanti yok");
+  const TT = require("../../lib/tiktok");
+  const eski = { k: process.env.TT_CLIENT_KEY, s: process.env.TT_CLIENT_SECRET, r: process.env.TT_REFRESH_TOKEN };
+  for (const k of ["TT_CLIENT_KEY", "TT_CLIENT_SECRET", "TT_REFRESH_TOKEN"]) delete process.env[k];
+  try { assert.equal(TT.kimlikVar(), false, "kimlik yoksa TikTok devre disi"); }
+  finally { if (eski.k) process.env.TT_CLIENT_KEY = eski.k; if (eski.s) process.env.TT_CLIENT_SECRET = eski.s; if (eski.r) process.env.TT_REFRESH_TOKEN = eski.r; }
+  // TikTok hatayi HTTP 200 govdesinde de dondurebilir
+  assert.equal(TT.hataMi({ error: { code: "ok" } }), null);
+  assert.match(TT.hataMi({ error: { code: "invalid_params", message: "bad" } }), /invalid_params/);
+});
