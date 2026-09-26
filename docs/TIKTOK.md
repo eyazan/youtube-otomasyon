@@ -23,15 +23,20 @@ Hesap açmayı ve şartları kabul etmeyi ben yapamam — bu adımlar sende.
 1. **TikTok hesabı aç** (telefondan, `tiktok.com`). Kullanıcı adı olarak kanal adıyla
    uyumlu bir şey seç, örn. `failurereconstructed`. Profil fotoğrafı ve açıklamayı
    YouTube kanalıyla aynı yap.
-2. **developers.tiktok.com** adresine aynı hesapla giriş yap → **Manage apps** →
-   **Connect an app**. Uygulama adı: `Failure Reconstructed uploader`.
-3. Uygulamada **Content Posting API** ürününü ekle ve **Upload to inbox** (scope
+2. **developers.tiktok.com** → **Sign up**. Burası TikTok uygulama hesabından
+   **tamamen ayrı** bir hesaptır: sadece bir e‑posta adresi ister, e‑postaya PIN
+   gönderir. TikTok hesabına e‑posta eklemene gerek yok; telefonla açılmış hesap
+   olduğu gibi kalır. Videonun hangi hesaba gideceği 4. adımda (`tiktok-yetki.js`
+   çalışırken tarayıcıda "izin ver" dediğin hesapla) belirlenir.
+3. Portalda **Manage apps** → **Connect an app**. Uygulama adı:
+   `Failure Reconstructed uploader`.
+4. Uygulamada **Content Posting API** ürününü ekle ve **Upload to inbox** (scope
    `video.upload`) iznini seç. *Direct Post'u işaretleme.*
-4. **Redirect URI** olarak sahibi olduğun bir HTTPS adresi gir. TikTok `http://localhost`
+5. **Redirect URI** olarak sahibi olduğun bir HTTPS adresi gir. TikTok `http://localhost`
    kabul etmez. Elinde bir şey yoksa şunu kullan:
    `https://eyazan.github.io/youtube-otomasyon/`
    Sayfanın var olması gerekmiyor; 404 verse de olur, tarayıcının adres çubuğu yeterli.
-5. Uygulamadan **Client key** ve **Client secret** değerlerini al.
+6. Uygulamadan **Client key** ve **Client secret** değerlerini al.
 
 ## Sonra (bunu birlikte yaparız)
 
