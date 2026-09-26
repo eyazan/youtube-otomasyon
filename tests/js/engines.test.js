@@ -305,3 +305,14 @@ test("altyazi: rakam icindeki nokta/virgul korunur", () => {
   assert.deepEqual(M.altyaziKelimeleri("A 1.4 billion dollar bomber."), ["A", "1.4", "billion", "dollar", "bomber"]);
   assert.deepEqual(M.altyaziKelimeleri("As 2,500 passengers crowded, it tipped."), ["As", "2,500", "passengers", "crowded", "it", "tipped"]);
 });
+
+test("bildirim: bos gun alarmi yalnizca gercekten bos gunde", () => {
+  const B = require("../../bildirim");
+  const t = { tarih: "2026-09-27", kalanKonu: 38, sunucu: "https://github.com" };
+  assert.equal(B.bosGunMesaji({ ...t, bugunVar: true }), null, "video uretildiyse alarm yok");
+  assert.equal(B.bosGunMesaji({ ...t, bugunVar: false, kalanKonu: 0 }), null, "kuyruk bossa alarm yok");
+  const m = B.bosGunMesaji({ ...t, bugunVar: false });
+  assert.match(m.baslik, /2026-09-27/);
+  assert.match(m.govde, /Run workflow/);
+  assert.doesNotMatch(m.govde, /undefined|NaN/);
+});
