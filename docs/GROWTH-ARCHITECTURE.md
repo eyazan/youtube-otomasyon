@@ -79,7 +79,8 @@ The production queue takes topics with real archive film first, then stock expla
 
 ### Fixed publish time + notification
 
-- Production starts at **10:00 UTC** (13:00 TR). GitHub may delay scheduled jobs by hours, so it starts early.
+- Production is attempted **every hour from 07:23 to 16:23 UTC** (10:23–19:23 TR). GitHub runs scheduled jobs on a best-effort basis and may delay them for hours or skip them entirely (10:00 was skipped on both 25 and 26 September), so the system never depends on a single time. The first run that succeeds produces the day's video; the rest stop in the cheap `takvim` job in about 20 seconds, because `yayin-plani.js` allows one video per day. Minutes sit off the hour, since `:00` is GitHub's busiest moment.
+- If GitHub skips **all ten** attempts, `yayin-kontrol.yml` opens a "🚨 Bugün video üretilmedi" issue at 16:47 UTC with a one-click *Run workflow* link. It only fires when the queue is not empty and nothing was produced or scheduled for that day.
 - The video is uploaded private with `status.publishAt`. YouTube makes it public at **18:00 UTC**: 21:00 TR, 14:00 ET, 11:00 PT. The audience was ~93 % US on 2026-09-25.
 - Which gate verdicts are scheduled is set in `config/growth.json → publishing.schedule` (default PUBLISH + REVIEW). Anything else stays private, and BLOCK is never uploaded.
 - `bildirim.js` opens a GitHub issue that @mentions the owner (email + GitHub mobile push). It gives the title, gate verdict, publish time, Studio link and how to cancel. Older "yeni-video" issues are closed automatically; blocked topics get a "kalite-engeli" issue.
@@ -136,7 +137,7 @@ Any critical finding (text still overflowing, A/V mismatch, >1.5 s of black) mak
 
 **Dry run on the real infrastructure:** Actions → *Shorts uretim* → Run workflow → `kuru: true` (optional `slug`). This runs the full production with the real secrets and real downloads, then `e2e-kontrol.js`. Nothing is uploaded, committed or notified.
 
-`.github/workflows/yayin-kontrol.yml` runs at 18:25 and 19:40 UTC and confirms that the scheduled video actually went Public.
+`.github/workflows/yayin-kontrol.yml` runs at 16:47, 18:27 and 19:53 UTC. It raises the empty-day alarm and confirms that the scheduled video actually went Public.
 
 ## 9. Notifications (`bildirim.js`, GitHub issues → e-mail + GitHub mobile app)
 

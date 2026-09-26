@@ -1,13 +1,17 @@
-name: Yayin kontrolu
+name: Gunluk kontrol (yayin + bos gun)
 
-# Zamanlanmis video (publishAt 18:00 UTC) gercekten Public oldu mu? Olduysa videonun
-# bildirim issue'suna "✅ Yayina girdi" yorumu duser; bir saat gectigi halde olmadiysa
-# "❌ Otomatik yayin gerceklesmedi" issue'su acilir. Sadece OKUR; videoya dokunmaz.
-# GitHub zamanlanmis isleri geciktirebildigi icin iki saat.
+# Iki soruyu yanitlar, ikisi de sadece OKUR (videoya dokunmaz):
+#   1) Bugun hic video uretildi mi? Uretilmediyse (GitHub gunun 10 zamanlanmis
+#      denemesini de atladiysa) "🚨 Bugün video üretilmedi" issue'su acilir. 16:47'de.
+#   2) Zamanlanmis video (publishAt 18:00 UTC) gercekten Public oldu mu? Olduysa
+#      videonun bildirim issue'suna "✅ Yayina girdi" yorumu duser; bir saat gectigi
+#      halde olmadiysa "❌ Otomatik yayin gerceklesmedi" issue'su acilir.
+# GitHub zamanlanmis isleri geciktirebildigi/atlayabildigi icin ucer saat.
 on:
   schedule:
-    - cron: '25 18 * * *'
-    - cron: '40 19 * * *'
+    - cron: '47 16 * * *'
+    - cron: '27 18 * * *'
+    - cron: '53 19 * * *'
   workflow_dispatch:
 
 # Uretimle ayni grup: ayni anda iki is depoya yazmasin.
@@ -33,14 +37,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Yayin durumunu kontrol et ve bildir
-        run: node bildirim.js --yayin-kontrol
+      - name: Yayin + bos gun kontrolu
+        run: node bildirim.js --gun-kontrol
       - name: Bildirim durumunu kaydet
         run: |
           git config user.name  "uretim-bot"
           git config user.email "actions@users.noreply.github.com"
           git add icerik/bildirim-durum.json 2>/dev/null || true
           if git diff --cached --quiet; then echo "degisiklik yok"; exit 0; fi
-          git commit -m "chore: yayin kontrolu (otomatik)"
+          git commit -m "chore: gunluk kontrol (otomatik)"
           for i in 1 2 3 4 5; do git pull --rebase --autostash origin main && git push && exit 0; sleep $((i * 5)); done
           exit 1

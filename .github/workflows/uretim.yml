@@ -5,7 +5,8 @@ name: Shorts uretim (gunluk)
 # uygular; BLOCK olan video yuklenmez. Ardindan yayin sonrasi analiz, sabit
 # yorumlar, ic baglanti plani ve deneyler guncellenir; haftada bir (Pazartesi)
 # mevcut videolar icin optimizasyon raporlari yenilenir.
-# Saat: uretim 10:00 UTC'de (TR 13:00) baslar; video private yuklenir ve
+# Saat: uretim 07:23-16:23 UTC arasi HER SAAT dener (ilk calisan gunun videosunu
+# uretir; sonrakiler takvim adiminda ~20 sn'de durur). Video private yuklenir ve
 # config/growth.json > publishing.schedule.hourUTC saatinde (18:00 UTC = 21:00 TR
 # = 14:00 ABD dogu) YouTube tarafindan otomatik Public yapilir. Kitlenin ~%93'u
 # ABD (analytics, 2026-09-25). Arada kalan saatler inceleme penceresidir;
@@ -14,12 +15,23 @@ name: Shorts uretim (gunluk)
 # tetiklenebilir (Run workflow).
 on:
   schedule:
-    # GitHub zamanlanmis isleri saatlerce geciktirebilir ya da atlayabilir
-    # (olculen: 3s46dk gecikme; 25 Eylul'de 10:00 hic calismadi). Yedek saatler:
-    # yayin-plani.js gunde en fazla bir video uretir, sonrakiler "henuz degil" der.
-    - cron: '0 10 * * *'
-    - cron: '0 13 * * *'
-    - cron: '30 15 * * *'
+    # GitHub zamanlanmis isleri "en iyi caba" ile calistirir: yogun anlarda
+    # saatlerce gecikebilir ya da TAMAMEN ATLAYABILIR (olculen: 25 ve 26 Eylul'de
+    # 10:00 hic calismadi; 16:00 -> 19:46). Cozum tek saate guvenmemek: 07:23-16:23
+    # arasi her saat bir deneme (tam saatten kaydirilmis dakika, cunku :00 en yogun an).
+    # Ilk calisan gunun videosunu uretir; kalan denemeler "takvim" adiminda ~20 sn'de
+    # durur (yayin-plani.js gunde tek video). 10 denemenin hepsinin atlanmasi pratikte
+    # gorulmez; yine de olursa 16:45'te "gun bos gecti" alarmi acilir (yayin-kontrol.yml).
+    - cron: '23 7 * * *'
+    - cron: '23 8 * * *'
+    - cron: '23 9 * * *'
+    - cron: '23 10 * * *'
+    - cron: '23 11 * * *'
+    - cron: '23 12 * * *'
+    - cron: '23 13 * * *'
+    - cron: '23 14 * * *'
+    - cron: '23 15 * * *'
+    - cron: '23 16 * * *'
   workflow_dispatch:
     inputs:
       hepsi:
@@ -45,7 +57,32 @@ permissions:
   issues: write     # yeni video bildirimi (bildirim.js)
 
 jobs:
+  # UCUZ TAKVIM ADIMI: gunun videosu zaten uretildiyse (ya da vakti gelmediyse)
+  # burada durulur. Boylece gunde 9 bosa deneme ~20 sn surer (ffmpeg/npm kurulmaz).
+  takvim:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      uygun: ${{ steps.k.outputs.uygun }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - id: k
+        run: |
+          if [ "${{ github.event_name }}" != "schedule" ]; then
+            echo "Elle tetiklendi — takvim atlandi."; echo "uygun=true" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          if node yayin-plani.js --kontrol short; then
+            echo "uygun=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "uygun=false" >> "$GITHUB_OUTPUT"
+          fi
+
   uret:
+    needs: takvim
+    if: needs.takvim.outputs.uygun == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 120
     env:
@@ -128,7 +165,7 @@ jobs:
           node experiments.js degerlendir || echo "deneyler atlandi"
 
       - name: Haftalik mevcut video optimizasyonu (Pazartesi)
-        if: always() && github.event.schedule == '0 10 * * *'
+        if: always() && github.event_name == 'schedule'
         run: |
           if [ "$(date -u +%u)" = "1" ]; then
             node existing-video-optimizer.js --all || echo "optimizer atlandi"

@@ -13,10 +13,11 @@
 //   ⛔ kalite kapisi engeli (issue)
 //   🩺 sistem sagligi (tek issue: yetki bitmek uzere / Pexels / kutuphane azaldi; duzelince kapanir)
 //   🚨 otomasyon hatasi (--is-hatasi <url>: is akisi coktu)
+//   🚨 gun bos gecti (--gun-kontrol: GitHub gunun TUM zamanlanmis denemelerini atladi)
 //   📊 haftalik ozet (Pazartesi: abone/izlenme degisimi, haftanin videolari, siradaki konular)
 //
 // Tekrar gonderim yok: icerik/bildirim-durum.json neyin bildirildigini tutar.
-// Kullanim: node bildirim.js [--yayin-kontrol] [--is-hatasi <url>] [--kuru]
+// Kullanim: node bildirim.js [--yayin-kontrol] [--gun-kontrol] [--is-hatasi <url>] [--kuru]
 //   --kuru: GitHub'a hicbir sey yazmaz, mesajlari konsola basar (uctan uca test).
 "use strict";
 const fs = require("fs");
@@ -155,6 +156,19 @@ function yayindaYorumu(v) {
   return `@${SAHIP} ✅ **Yayına girdi** — ${trSaat(new Date(v.snippet.publishedAt))}. Şu an ${st.viewCount ?? "?"} izlenme. https://youtu.be/${v.id}\n\n_İlk saatlerde az izlenme normaldir; Shorts dalgalar halinde dağıtılır. 24 saat sonucu buraya gelecek._`;
 }
 
+// Bugun video uretilmediyse mesaj (yoksa null). Kalite engeli ayri bildirilir; burada
+// amac GitHub'in gunun TUM zamanlanmis denemelerini atladigi durumu yakalamak.
+function bosGunMesaji(v) {
+  if (v.bugunVar || !v.kalanKonu) return null;
+  return { baslik: `🚨 Bugün video üretilmedi — ${v.tarih}`, etiket: ["hata"], govde: [
+    `@${SAHIP} bugün (${v.tarih}) hiç video üretilmedi ve kuyrukta ${v.kalanKonu} konu bekliyor.`, "",
+    "Bunun tek bilinen nedeni: GitHub günün **tüm** zamanlanmış denemelerini atlamış olması (07:23–16:23 UTC arası 10 deneme).", "",
+    "**Yapılacak:** Actions → *Shorts uretim* → **Run workflow**. Video üretilir ve bir sonraki 21:00 (TR) yayınına planlanır.",
+    `${v.sunucu}/${REPO}/actions/workflows/uretim.yml`, "",
+    "Yarınki otomatik çalışma bundan etkilenmez.",
+  ].join("\n") };
+}
+
 function haftalikMesaj(v) {
   const fark = (a, b) => (a != null && b != null ? (a - b >= 0 ? "+" : "") + (a - b) : "?");
   return { baslik: `📊 Haftalık özet — ${v.tarih}`, etiket: ["haftalik"], govde: [
@@ -279,6 +293,18 @@ async function yayinKontrol(d) {
   }
 }
 
+async function gunKontrol(d) {
+  const K = require("./lib/kutuphane");
+  const g = bugun();
+  if (d.gonderilen["bosgun:" + g]) return;
+  // Bugun URETILDI mi (yukleme ani) ya da bugune PLANLANDI mi — ikisi de "gun dolu" sayilir
+  const bugunVar = K.yayinlananlar().some((y) => String(y.tarih || "").startsWith(g) || String(y.publishAt || "").startsWith(g));
+  const m = bosGunMesaji({ tarih: g, bugunVar, kalanKonu: K.kuyruk().length, sunucu: process.env.GITHUB_SERVER_URL || "https://github.com" });
+  if (!m) { console.log(bugunVar ? "Bugun video uretildi — alarm yok." : "Kuyruk bos — alarm yok."); return; }
+  await issueAc(m);
+  isaretle(d, "bosgun:" + g);
+}
+
 async function haftalik(d) {
   const hafta = (() => { const t = new Date(); const p = new Date(Date.UTC(t.getUTCFullYear(), t.getUTCMonth(), t.getUTCDate() - ((t.getUTCDay() + 6) % 7))); return p.toISOString().slice(0, 10); })();
   if (new Date().getUTCDay() !== 1 || d.gonderilen["hafta:" + hafta]) return;
@@ -309,7 +335,9 @@ async function main() {
       govde: `@${SAHIP} günlük iş akışı hata ile bitti.\n\nKayıt: ${process.argv[i + 1] || "(bağlantı yok)"}\n\nKonu harcanmadı; bir sonraki çalışma tekrar dener. Tekrarlarsa bu kaydı incele.` });
     return;
   }
-  const adimlar = process.argv.includes("--yayin-kontrol") ? [yayinKontrol] : [saglik, yeniVideolar, hatalar, yayinKontrol, checkpointler, haftalik];
+  const adimlar = process.argv.includes("--gun-kontrol") ? [yayinKontrol, gunKontrol]
+    : process.argv.includes("--yayin-kontrol") ? [yayinKontrol]
+    : [saglik, yeniVideolar, hatalar, yayinKontrol, checkpointler, haftalik];
   for (const f of adimlar) {
     try { await f(d); } catch (e) { console.log(`  (${f.name} atlandi: ${String(e.message).slice(0, 160)})`); }
   }
@@ -321,6 +349,6 @@ async function main() {
   }
 }
 
-module.exports = { videoMesaji, hataMesaji, saglikMesaji, checkpointYorumu, yayindaYorumu, haftalikMesaj, dususNoktasi, TESHIS_TR };
+module.exports = { videoMesaji, hataMesaji, saglikMesaji, checkpointYorumu, yayindaYorumu, haftalikMesaj, bosGunMesaji, dususNoktasi, TESHIS_TR };
 
 if (require.main === module) main().catch((e) => { console.error("Hata: " + e.message); process.exit(0); });
