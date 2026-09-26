@@ -67,6 +67,22 @@ function indir(url, hedef, kalan = 5) {
   });
 }
 
+// Karanlik klip korumasi: gece gokyuzu / karanlik sehir klipleri Shorts'ta simsiyah ekran
+// gibi gorunur ve final kalite kapisi (siyah kare) videoyu engeller (olculdu: elektrik
+// kesintisi, gaz patlamasi, patlama fizigi). Klibin kullanilacak ilk 6 saniyesinden
+// 2 kare/sn ornek alinir; ortalama parlaklik (YAVG, 0-255) 45'in altinda olan kare orani
+// %30'u gecerse klip reddedilir ve siradaki aday denenir.
+const cp = require("child_process");
+function karanlikOran(dosya) {
+  try {
+    const FF = require("./ff-yol.js");
+    const r = cp.spawnSync(FF.ffmpeg, ["-hide_banner", "-t", "6", "-i", dosya, "-vf", "fps=2,signalstats,metadata=print:key=lavfi.signalstats.YAVG",
+      "-an", "-f", "null", "-"], { encoding: "utf8", maxBuffer: 1 << 24 });
+    const y = [...String(r.stderr).matchAll(/YAVG=([\d.]+)/g)].map((m) => +m[1]);
+    return y.length ? y.filter((v) => v < 45).length / y.length : 0;
+  } catch (e) { return 0; }
+}
+
 // Bir arama terimi icin en iyi dikey klibi sec (kullanilan id'leri atla).
 async function klipSec(terim, kullanilan) {
   const url = "https://api.pexels.com/videos/search?query=" + encodeURIComponent(terim) +
@@ -106,17 +122,23 @@ async function klipSec(terim, kullanilan) {
     const ad = "s-" + String(i).padStart(2, "0") + ".mp4";
     const hedef = path.join(FOOT, ad);
     process.stdout.write(`  sahne ${i + 1}/${sahneler.length}: "${terim}" ... `);
-    let sec = await klipSec(terim, kullanilan), yedek = false;
-    if (!sec) { // yedek: konunun genel temasi
-      sec = await klipSec(konu.arama_yedek || konu.baslik || "engineering", kullanilan);
-      yedek = true;
+    let sec = null, yedek = false, reddedilen = 0;
+    // En fazla 5 aday: karanlik klip reddedilir, siradaki denenir
+    for (let aday = 0; aday < 5; aday++) {
+      let s2 = await klipSec(terim, kullanilan), y2 = false;
+      if (!s2) { s2 = await klipSec(konu.arama_yedek || konu.baslik || "engineering", kullanilan); y2 = true; }   // yedek: genel tema
+      if (!s2) break;
+      kullanilan.add(s2.id);
+      for (let d = 1; ; d++) {
+        try { await indir(s2.url, hedef); break; }
+        catch (e) { if (d >= 3) throw e; await new Promise(r => setTimeout(r, d * 2000)); }
+      }
+      const oran = karanlikOran(hedef);
+      if (oran <= 0.3) { sec = s2; yedek = y2; break; }
+      reddedilen++;
+      process.stdout.write(`(karanlik klip reddedildi: %${Math.round(oran * 100)}) `);
     }
-    if (!sec) throw new Error("Pexels klip bulunamadi: " + terim);
-    kullanilan.add(sec.id);
-    for (let d = 1; ; d++) {
-      try { await indir(sec.url, hedef); break; }
-      catch (e) { if (d >= 3) throw e; await new Promise(r => setTimeout(r, d * 2000)); }
-    }
+    if (!sec) throw new Error("Pexels'te uygun (karanlik olmayan) klip bulunamadi: " + terim);
     s.kaynak = "Footage/" + ad;
     s.baslangic = 0;
     s.kaynakMeta = { kurum: "Pexels", url: sec.kaynak, lisans: "Pexels License", arama: yedek ? (konu.arama_yedek || konu.baslik) : terim,
