@@ -54,6 +54,23 @@ jobs:
         run: |
           set -euo pipefail
           node growth.js dry-run --channel "${{ inputs.channel }}"
+      - name: Enforce evidence-backed script readiness
+        shell: bash
+        run: |
+          set -euo pipefail
+          node -e '
+          const fs = require("fs");
+          const channel = process.argv[1];
+          const raw = JSON.parse(fs.readFileSync("reports/dry-runs/summary.json", "utf8"));
+          const rows = (raw.results || []).filter(r => r.channel === channel);
+          if (rows.length !== 1 || !rows[0].long) throw Error("Missing unique long-form result for " + channel);
+          const item = rows[0].long;
+          console.log("LONGFORM_GATE: " + channel + " " + item.decision + " score=" + item.score + " minutes=" + item.minutes);
+          if (item.decision !== "PUBLISH" || !Number.isFinite(item.minutes) || item.minutes < 8 || (item.hardFails || []).length) {
+            console.error("LONGFORM_NOT_READY: quality gate blocked; no render or upload attempted");
+            process.exit(1);
+          }
+          ' "${{ inputs.channel }}"
       - name: Publish audit summaries only
         if: always()
         run: |
