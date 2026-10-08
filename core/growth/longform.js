@@ -152,12 +152,16 @@ const SECTION_QUESTION = {
 const MAX_DEEP_CLAIMS_PER_SECTION = 14;
 const DEEP_HEADING_SECTIONS = {
   "failure-reconstructed": [
+    // Order matters: "Cause and time of death" is about the crew, not the
+    // engineering cause; memorials are aftermath, not the takeaway.
+    [/time of death|death|casualt|victim|funeral|memorial|tribute|recovery|search|salvage|rescue|dialogue|response|media|litigation/i, "AFTERMATH"],
+    [/case study|lesson|significance|ethic/i, "FINAL_TAKEAWAY"],
+    [/escape|abort/i, "SYSTEM"],
     [/concern|warning|erosion|defect|flaw|problem|issue|prior|previous|earlier|known|deficien|maintenance|inspection/i, "HIDDEN_WEAKNESS"],
     [/decision|pre-?launch|preparation|countdown|weather|teleconference|meeting|approval|go\/no|launch (?:delay|schedule)/i, "CRITICAL_MOMENT"],
     [/breakup|plume|sequence|chain|propagat|progression|structural failure/i, "FAILURE_CHAIN"],
     [/cause|investigat|commission|inquiry|report|analysis|finding|technical|probable|mechanism/i, "ENGINEERING_EXPLANATION"],
-    [/death|casualt|victim|crew|recovery|search|salvage|aftermath|response|funeral|memorial|litigation|dialogue|rescue/i, "AFTERMATH"],
-    [/legacy|lesson|case study|significance/i, "FINAL_TAKEAWAY"],
+    [/aftermath|legacy|crew/i, "AFTERMATH"],
     [/change|reform|recommendation|safety|regulation|return to flight|redesign|modification|impact on|influence/i, "WHAT_CHANGED"],
     [/background|design|vehicle|construction|history|development|description|overview|operation|technology|structure|specification|mission|shuttle|system|ship|aircraft|bridge|dam|plant|reactor/i, "SYSTEM"],
     [/liftoff|ascent|launch|flight|disaster|accident|collapse|sinking|crash|explosion|fire|event|timeline|incident|eruption|flood|impact/i, "WHAT_HAPPENED"],
@@ -383,7 +387,7 @@ function continuityAndRetention(sections, plan, config) {
 // topic, research evidence, section plan, model, prompt version and schema.
 // Anything else starts fresh (the old file is kept as <slug>.stale.json).
 const GENERATION_SCHEMA = "longform-generation/3";
-const PROMPT_VERSION = "lf-prompts-2026-10-09.1";
+const PROMPT_VERSION = "lf-prompts-2026-10-09.2";
 const sha = (value) => crypto.createHash("sha1").update(typeof value === "string" ? value : JSON.stringify(value)).digest("hex").slice(0, 16);
 
 function generationKey(channel, topic, pkg, plan, model) {
@@ -418,6 +422,19 @@ function sectionSchema(ids) {
     },
   };
 }
+
+const COLD_OPEN_SCHEMA = {
+  type: "object", additionalProperties: false, required: ["lines"],
+  properties: { lines: { type: "array", items: { type: "object", additionalProperties: false, required: ["text", "claims"],
+    properties: { text: { type: "string" }, claims: { type: "array", items: { type: "string" } } } } } },
+};
+
+// Spoken-documentary voice shared by every section request.
+const VOICE_RULES = [
+  "Write for the ear: a narrator talking to one viewer. Vary sentence length; no lists, headings or bullet-like sentences.",
+  "Open with a sentence that follows from the previous section's last line, using only the cited facts. Do not restate facts the previous section already narrated.",
+  "Every paragraph must answer the section question. Leave out claims that do not serve it rather than forcing them in.",
+].join("\n");
 
 const CHANNEL_WRITING = {
   "failure-reconstructed": "Forensic engineering documentary. Explain the verified mechanism, the order of events, the root causes and what changed. Precise, sober, no dramatisation beyond the evidence.",
@@ -489,10 +506,39 @@ async function llmScript(channel, topic, pkg, plan, cold, config, options = {}) 
       state.stages.blueprint = { status: "COMPLETE", at: now() };
       save("blueprint");
     }
-    // 2) Cold open: the selected claim-derived opening (no model call).
+    // 2) Cold open: 2-4 sourced sentences that open on the unresolved
+    // consequence and the tension before it. Falls back to the selected
+    // claim-derived hook when the model's lines are not supported.
     if (!state.sections.some((item) => item.section === "COLD_OPEN") && plan.sections.some((section) => section.section === "COLD_OPEN")) {
-      state.sections.push({ section: "COLD_OPEN", paragraphs: cold.selected ? [{ text: finish(cold.selected.text), claims: [], role: "cold-open" }] : [] });
-      state.stages.coldOpen = { status: "COMPLETE", at: now(), text: cold.selected ? cold.selected.text : null };
+      const openSection = plan.sections.find((section) => section.section === "COLD_OPEN");
+      const tension = plan.sections.find((section) => /CRITICAL_MOMENT|HIDDEN_WEAKNESS|IMPOSSIBLE_QUESTION|INITIAL_CONDITIONS/.test(section.section) && section.claimIds.length);
+      const ids = [...new Set([...(openSection.claimIds || []), ...((tension && tension.claimIds) || []).slice(0, 4)])].filter((id) => claimsById.has(id)).slice(0, 12);
+      let paragraphs = cold.selected ? [{ text: finish(cold.selected.text), claims: [], role: "cold-open" }] : [];
+      let source = "selected-hook";
+      if (ids.length) {
+        const json = await call({
+          stage: "cold-open",
+          schema: { ...COLD_OPEN_SCHEMA, properties: { lines: { ...COLD_OPEN_SCHEMA.properties.lines, items: { ...COLD_OPEN_SCHEMA.properties.lines.items, properties: { text: { type: "string" }, claims: { type: "array", items: { type: "string", enum: ids } } } } } } },
+          schemaName: "cold_open",
+          maxTokens: 700,
+          system: [
+            `Write the cold open of a ${channel.name} long-form documentary (${config.identity}).`,
+            CHANNEL_WRITING[channel.slug] || "",
+            "2-4 short spoken sentences, at most 55 words in total. Open on the outcome or the strangest verified detail, then the tension that leads into the story. Do not reveal the full explanation.",
+            "Use ONLY the cited claims; every line lists the claim ids it states. No question to the audience, no 'in this video', no invented detail.",
+          ].filter(Boolean).join("\n"),
+          user: JSON.stringify({ topic: topic.title, question: state.blueprint.central_question, claims: ids.map((id) => ({ id, text: String(claimsById.get(id).text).slice(0, 260) })) }),
+        });
+        const lines = (json && Array.isArray(json.lines) ? json.lines : []).map((line) => ({ text: finish(line && line.text), claims: [...new Set((line && line.claims || []).filter((id) => ids.includes(id)))] }))
+          .filter((line) => line.text && line.claims.length && paragraphSupport(line.text, line.claims.map((id) => claimsById.get(id)), minimumOverlap).supported);
+        const text = lines.map((line) => line.text).join(" ");
+        if (lines.length >= 2 && words(text) <= 55) {
+          paragraphs = [{ text, claims: [...new Set(lines.flatMap((line) => line.claims))], role: "cold-open" }];
+          source = "llm";
+        }
+      }
+      state.sections.push({ section: "COLD_OPEN", paragraphs });
+      state.stages.coldOpen = { status: "COMPLETE", at: now(), source, words: paragraphs.length ? words(paragraphs[0].text) : 0 };
       save("cold-open");
     }
     // 3) Sections, one request each; a completed section is never regenerated.
@@ -524,6 +570,8 @@ async function llmScript(channel, topic, pkg, plan, cold, config, options = {}) 
         CHANNEL_WRITING[channel.slug] || "",
         "Use ONLY the claims provided. Every paragraph lists the ids of the claims it states. Never add a fact, number, date, name, quote, cause or purpose that is not in those claims.",
         "Claims marked rewrite:true must be paraphrased (never copy 8+ consecutive words). Keep MODEL/SPECULATION/INTERPRETATION claims labelled as such.",
+        VOICE_RULES,
+        `Section question: ${section.question || section.section}`,
         `Spoken narration, 2-4 paragraphs, about ${targetWords} words — fewer if the claims are thin. No filler, recap, call to action or invented transition fact.`,
         "depth_note: one short sentence on what evidence was missing, or an empty string.",
       ].filter(Boolean).join("\n");

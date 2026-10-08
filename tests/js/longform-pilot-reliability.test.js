@@ -146,9 +146,10 @@ function fakeGroq(options = {}) {
     const body = JSON.parse(request.body);
     const input = JSON.parse(body.messages[1].content);
     const name = body.response_format.json_schema && body.response_format.json_schema.name;
-    stages.push(name === "narrative_blueprint" ? "blueprint" : `section:${input.section && input.section.section || input.section}`);
+    stages.push(name === "narrative_blueprint" ? "blueprint" : name === "cold_open" ? "cold-open" : `section:${input.section && input.section.section || input.section}`);
     if (options.failAt && calls === options.failAt) return response(429, {}, { "retry-after": "3600" });
     if (name === "narrative_blueprint") return response(200, groqBody({ central_question: "Why?", audience_promise: "Answer.", narrative_angle: "Follow the evidence.", hook_candidates: [], retention_beats: [], uncertain_claims: [] }));
+    if (name === "cold_open") return response(200, groqBody({ lines: (input.claims || []).slice(0, 2).map((claim) => ({ text: claim.text.split(" ").slice(0, 12).join(" "), claims: [claim.id] })) }));
     const claims = input.claims || [];
     const paragraphs = claims.slice(0, 3).map((claim) => ({ text: claim.text, claims: [claim.id] }));
     return response(200, groqBody({ paragraphs, depth_note: "" }));
@@ -234,6 +235,7 @@ test("checkpoint survives a separate process (like a later GitHub Actions run)",
       const pkg=L.researchPackage(ch,t,{write:true});const plan=L.outline(ch,t,pkg,cfg);const cold=L.coldOpens(t,cfg,[]);const stages=[];
       const fetch=async(u,r)=>{const b=JSON.parse(r.body);const i=JSON.parse(b.messages[1].content);const n=b.response_format.json_schema&&b.response_format.json_schema.name;
         stages.push(n==="narrative_blueprint"?"blueprint":"section");
+        if(n==="cold_open")return{ok:true,status:200,headers:{get:()=>null},json:async()=>({choices:[{message:{content:JSON.stringify({lines:[]})}}]})};
         if(n==="narrative_blueprint")return{ok:true,status:200,headers:{get:()=>null},json:async()=>({choices:[{message:{content:JSON.stringify({central_question:"q",audience_promise:"p",narrative_angle:"a",hook_candidates:[],retention_beats:[],uncertain_claims:[]})}}]})};
         const ps=(i.claims||[]).slice(0,2).map(c=>({text:c.text,claims:[c.id]}));
         return{ok:true,status:200,headers:{get:()=>null},json:async()=>({choices:[{message:{content:JSON.stringify({paragraphs:ps,depth_note:""})}}]})};};

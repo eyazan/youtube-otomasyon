@@ -133,7 +133,7 @@ test("long-form checkpoints a 429-deferred section and resumes without regenerat
       const checkpoint = Store.readState(channel, "longform", `generation/${topic.slug}.json`, null);
       assert.equal(checkpoint.status, "DEFERRED");
       assert.ok(checkpoint.blueprint);
-      assert.equal(checkpoint.sections[0].section, "COLD_OPEN");
+      assert.equal(checkpoint.error.stage, "cold-open", "the stage after the saved blueprint is the one that is retried");
       assert.equal(checkpoint.error.code, "RATE_LIMIT");
       assert.doesNotMatch(JSON.stringify(checkpoint), /checkpoint-secret/);
 
@@ -143,6 +143,9 @@ test("long-form checkpoints a 429-deferred section and resumes without regenerat
         resumedSystems.push(request.messages[0].content);
         const input = JSON.parse(request.messages[1].content);
         const claim = input.claims && input.claims[0];
+        if (request.response_format.json_schema && request.response_format.json_schema.name === "cold_open") {
+          return response(200, groqBody({ lines: (input.claims || []).slice(0, 2).map((item) => ({ text: item.text, claims: [item.id] })) }));
+        }
         return response(200, groqBody({ section: { name: input.section.section, paragraphs: claim ? [{ text: claim.text, claims: [claim.id] }] : [] }, depth_note: "Evidence-limited section." }));
       };
       const resumed = await Longform.llmScript(channel, topic, pkg, plan, cold, config, { write: true, providerDependencies: { fetch: resumeFetch, sleep: async () => {} } });
