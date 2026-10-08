@@ -7,7 +7,11 @@ const path = require("path");
 const file = process.argv[2] || "reports/dry-runs/summary.json";
 if (!fs.existsSync(file)) { console.error("Missing dry-run summary: " + file); process.exit(1); }
 const files = fs.statSync(file).isDirectory() ? ["fr-summary.json", "ib-summary.json"].map(name => path.join(file, name)) : [file];
-const allResults = files.flatMap(filename => JSON.parse(fs.readFileSync(filename, "utf8")).results || []);
+const allResults = files.flatMap(filename => {
+  const result = JSON.parse(fs.readFileSync(filename, "utf8"));
+  if (!Array.isArray(result.results)) throw new Error(`Invalid dry-run results in ${filename}`);
+  return result.results;
+});
 const target = new Set(["failure-reconstructed", "impossible-brief"]);
 const rows = allResults.filter(r => target.has(r.channel));
 if (rows.length !== 2 || new Set(rows.map(r => r.channel)).size !== 2) {
