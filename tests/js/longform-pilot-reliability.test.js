@@ -499,3 +499,21 @@ test("a truncated answer is retried once with more completion room, within the r
     fs.rmSync(sandbox, { recursive: true, force: true });
   }
 });
+
+test("IB packaging: no Earth-survival titles for an exploration, no fake countdown, exponents restored", () => {
+  const Titles = require("../../core/growth/titles");
+  const Research = require("../../core/growth/research");
+  const channel = Channel.getChannel("impossible-brief");
+  const inventory = Context.build(channel).inventory;
+  const europa = inventory.find((item) => item.slug === "what-if-we-swam-in-europas-ocean");
+  const titles = Titles.longCandidates(europa).map((item) => item.title || item.text);
+  assert.equal(titles.some((title) => /Earth Last|Humanity Survive|Day After|Minute by Minute|Breaks First/.test(title)), false);
+  const vanished = inventory.find((item) => /vanished|disappeared/i.test(item.event || ""));
+  assert.ok(Titles.longCandidates(vanished).map((item) => item.title || item.text).some((title) => /How Long Would Earth Last/.test(title)), "real threat scenarios keep them");
+  const concepts = Longform.thumbnails(channel, europa, Config.forChannel(channel));
+  const list = concepts.concepts || concepts;
+  assert.equal(list.some((concept) => concept.id === "countdown"), false);
+  assert.equal(list.some((concept) => concept.text === "1018"), false);
+  assert.equal(Research.restoreExponents("a volume of 3×1018m3, between"), "a volume of 3×10^18m3, between");
+  assert.equal(Research.restoreExponents("about 2×100 m"), "about 2×100 m");
+});

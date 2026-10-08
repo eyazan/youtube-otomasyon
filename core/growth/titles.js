@@ -178,14 +178,20 @@ function longCandidates(topic, extra = []) {
     add(list, `Could ${S} Have Been Prevented?`, "prevented");
   } else if (topic.channel === "impossible-brief") {
     const E = topic.event || S;
+    // Survival, countdown and "day after" framings only fit scenarios that
+    // threaten Earth or people, not a visit or an exploration ("we swam in
+    // Europa's ocean" must never become "How long would Earth last…").
+    const scenarioText = [E, topic.scenario, topic.consequence].filter(Boolean).join(" ");
+    const visit = /\b(?:we|you|i|explorers?|astronauts?|humans?) (?:swam|swim|visited|visit|walked|walk|stood|stand|landed|land|lived|live|fell|fall|travel(?:l?ed)?|went|go|dived?|reached|reach)\b/i.test(scenarioText);
+    const threat = !visit && /\b(?:stopp?(?:ed|s)?|vanish(?:ed|es)?|disappear(?:ed|s)?|collid\w*|impact\w*|explod\w*|hit|struck|slamm?(?:ed|s)?|lost|destroy\w*|froze|boil\w*|swallow\w*|crash\w*|extinct\w*|collaps\w*)\b/i.test(scenarioText);
     add(list, `What Would Really Happen If ${E}?`, "what-would-happen");
     add(list, `If ${E}: The Complete Scientific Timeline`, "timeline");
     add(list, `What If ${cap(topic.scenario || E)}? The Full Scenario`, "full-scenario");
-    add(list, `If ${E}, Minute by Minute`, "minute-by-minute");
+    if (threat) add(list, `If ${E}, Minute by Minute`, "minute-by-minute");
     add(list, `If ${E}: First Effect to Final Outcome`, "first-to-final");
-    add(list, `How Long Would Earth Last If ${E}?`, "how-long");
+    if (threat) add(list, `How Long Would Earth Last If ${E}?`, "how-long");
     add(list, `If ${E} — What Physics Says Happens Next`, "physics-next");
-    add(list, `Could Humanity Survive If ${E}?`, "survive");
+    if (threat) add(list, `Could Humanity Survive If ${E}?`, "survive");
     add(list, `If ${E}: Known Science, Estimates and Speculation`, "known-estimates");
     add(list, `The Chain Reaction That Follows If ${E}`, "chain-reaction");
     add(list, `Every Consequence If ${E}, Explained`, "every-consequence");
@@ -193,10 +199,10 @@ function longCandidates(topic, extra = []) {
     add(list, `What Scientists Can and Can't Predict If ${E}`, "can-cant-predict");
     add(list, `The Second-Order Effects If ${E}`, "second-order");
     add(list, `If ${E}: The Full Breakdown`, "full-breakdown");
-    add(list, `If ${E}: What Breaks First, and What Breaks Last`, "first-last");
+    if (threat) add(list, `If ${E}: What Breaks First, and What Breaks Last`, "first-last");
     add(list, `The Real Physics If ${E}`, "real-physics");
     add(list, `If ${E} — Simulated With Real Science`, "simulated");
-    add(list, `The Day After ${cap(E)}`, "day-after");
+    if (threat) add(list, `The Day After ${cap(E)}`, "day-after");
     add(list, `What Changes — and What Doesn't — If ${E}`, "change-everything");
   } else if (topic.channel === "behind-the-ordinary") {
     const detail = topic.designDetail || "This Detail";

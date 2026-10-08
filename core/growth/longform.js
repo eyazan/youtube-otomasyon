@@ -1019,7 +1019,11 @@ function thumbnails(channel, topic, config) {
     base.push({ id: "scale", primarySubject: topic.subject, background: "Earth for scale", visualHierarchy: "tiny Earth, huge subject", emotion: "scale", text: "" });
     base.push({ id: "before-after", primarySubject: topic.subject, background: "split normal vs changed (labelled illustration)", visualHierarchy: "50/50 split", emotion: "unease", text: "WHAT CHANGES?" });
     base.push({ id: "first-effect", primarySubject: "first measurable effect", background: "labelled diagram", visualHierarchy: "arrow from cause to effect", emotion: "curiosity", text: "FIRST EFFECT" });
-    base.push({ id: "countdown", primarySubject: topic.subject, background: "dark field with timer", visualHierarchy: "timer top-right", emotion: "urgency", text: number || "T+1s" });
+    // A timer only makes sense for a figure that is a time; otherwise show the
+    // topic's own key figure (a volume, a distance) as a scale contrast.
+    const timed = Model.numbersIn([topic.number, ...(topic.evidence || []).map((item) => item.claim)].join(" ")).find((value) => /\d\s*(?:s|sec|seconds?|min|minutes?|h|hours?|days?|years?)$/i.test(value));
+    if (timed) base.push({ id: "countdown", primarySubject: topic.subject, background: "dark field with timer", visualHierarchy: "timer top-right", emotion: "urgency", text: timed });
+    else base.push({ id: "key-figure", primarySubject: topic.subject, background: "dark field, subject silhouette", visualHierarchy: "large figure left, subject right", emotion: "scale", text: String(topic.number || texts[1] || "UNDER THE SURFACE").toUpperCase() });
   }
   const concepts = base.map((concept) => {
     const textWords = words(concept.text);

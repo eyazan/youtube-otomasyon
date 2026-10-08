@@ -123,6 +123,13 @@ function roleFor(heading, index) {
 // Sections are sampled round-robin, so the claim limit is spread over the
 // whole article (investigation, aftermath, lessons) instead of being used up
 // by the first few sections. Output stays in article order.
+// Wikipedia's plain-text extract drops superscripts, so "3×10¹⁸ m³" arrives
+// as "3×1018 m3" and would be narrated (and shown) as 1,018. A "×10" directly
+// followed by a two-digit exponent of 3 or more is restored as a power of ten.
+function restoreExponents(sentence) {
+  return String(sentence).replace(/(\d)\s?[×x]\s?10(\d{1,2})(?=\s|[A-Za-z]|[.,;)]|$)/g, (match, lead, exponent) => (Number(exponent) >= 3 ? `${lead}×10^${Number(exponent)}` : match));
+}
+
 function claimsFromExtract(extract, article, options = {}) {
   const limit = options.maxClaims || 160;
   const perSection = options.maxPerSection || 28;
@@ -136,7 +143,7 @@ function claimsFromExtract(extract, article, options = {}) {
       const key = sentence.toLowerCase();
       if (seen.has(key) || pool.length >= perSection) continue;
       seen.add(key);
-      pool.push({ sectionIndex, index, sentence, heading: section.heading });
+      pool.push({ sectionIndex, index, sentence: restoreExponents(sentence), heading: section.heading });
     }
     if (pool.length) pools.push(pool);
   }
@@ -213,4 +220,5 @@ function copyRisk(paragraph, sourceClaims, n = 9) {
   return null;
 }
 
-module.exports = { articleFor, sectionsOf, sentences, claimsFromExtract, deepen, copyRisk, wikiTitleFromUrl };
+module.exports = {
+  restoreExponents, articleFor, sectionsOf, sentences, claimsFromExtract, deepen, copyRisk, wikiTitleFromUrl };
