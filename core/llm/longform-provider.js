@@ -113,7 +113,24 @@ async function groq(input, dependencies = {}) {
   } catch (error) {
     throw new LongformProviderError("NETWORK", "groq network request failed; long-form generation deferred", { provider: "groq", stage: input.stage, retryable: true, defer: true });
   }
-  if (!response.ok) throw classifyHttp("groq", response.status, response.headers, input.stage);
+  if (!response.ok) {
+    const failure = classifyHttp("groq", response.status, response.headers, input.stage);
+    // Groq may return a precise request-size or token-limit reason on HTTP 413.
+    // Only retain a short allowlisted diagnostic; do not log raw body or credentials.
+    if (response.status === 413) {
+      let reason = "";
+      try {
+        const body = await response.json();
+        const message = body && body.error && body.error.message;
+        if (typeof message === "string") {
+          reason = message.replace(/[\\r\\n]/g, " ").slice(0, 240)
+            .replace(/(?:gsk_[A-Za-z0-9_-]+|Bearer\\s+\\S+)/gi, "[REDACTED]");
+        }
+      } catch (_) { /* diagnostic body is optional */ }
+      failure.message = `groq request too large (HTTP 413) at ${input.stage}; ${reason || "check provider request/token limits"}`;
+    }
+    throw failure;
+  }
   let body;
   try { body = await response.json(); }
   catch (error) { throw new LongformProviderError("INVALID_RESPONSE", "groq returned an unreadable response", { provider: "groq", stage: input.stage }); }
