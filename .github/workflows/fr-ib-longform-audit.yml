@@ -36,6 +36,10 @@ jobs:
         run: npm run test:growth
       - name: Verify pilot report regression tests
         run: node --test tests/js/fr-ib-longform-readiness.test.js
+      - name: Verify provider preflight regression tests
+        run: node --test tests/js/fr-ib-writer-preflight.test.js
+      - name: Read-only provider preflight
+        run: node scripts/fr-ib-writer-preflight.js reports/dry-runs/WRITER-PREFLIGHT.md
       - name: Prepare isolated non-publishing dry-run
         run: mkdir -p reports/dry-runs
       - name: Failure Reconstructed — package dry-run
