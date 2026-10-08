@@ -6,9 +6,10 @@ const fs = require("fs");
 const path = require("path");
 const file = process.argv[2] || "reports/dry-runs/summary.json";
 if (!fs.existsSync(file)) { console.error("Missing dry-run summary: " + file); process.exit(1); }
-const raw = JSON.parse(fs.readFileSync(file, "utf8"));
+const files = fs.statSync(file).isDirectory() ? ["fr-summary.json", "ib-summary.json"].map(name => path.join(file, name)) : [file];
+const allResults = files.flatMap(filename => JSON.parse(fs.readFileSync(filename, "utf8")).results || []);
 const target = new Set(["failure-reconstructed", "impossible-brief"]);
-const rows = (raw.results || []).filter(r => target.has(r.channel));
+const rows = allResults.filter(r => target.has(r.channel));
 if (rows.length !== 2 || new Set(rows.map(r => r.channel)).size !== 2) {
   console.error("Expected exactly one result for Failure Reconstructed and ImpossibleBrief");
   process.exit(1);
