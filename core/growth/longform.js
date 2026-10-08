@@ -130,7 +130,7 @@ const SECTION_ROLES = {
 const SECTION_QUESTION = {
   COLD_OPEN: "What is the unresolved consequence the viewer sees first?", CONSEQUENCE: "What was lost?", WHAT_HAPPENED: "In what order did it happen?",
   SYSTEM: "How was the machine/structure supposed to work?", HIDDEN_WEAKNESS: "Where was the weakness hiding?", FAILURE_CHAIN: "Which step led to which?",
-  CRITICAL_MOMENT: "What was the point of no return?", ENGINEERING_EXPLANATION: "What is the physical mechanism?", AFTERMATH: "What happened next?",
+  CRITICAL_MOMENT: "What was the point of no return?", ENGINEERING_EXPLANATION: "What did the investigation establish about the cause and the physical mechanism?", AFTERMATH: "What happened next?",
   WHAT_CHANGED: "What do engineers do differently now?", FINAL_TAKEAWAY: "What should the viewer remember?",
   IMPOSSIBLE_QUESTION: "What exactly is being asked?", INITIAL_CONDITIONS: "What do we assume?", FIRST_EFFECT: "What changes first?",
   SECOND_ORDER_EFFECT: "What does that trigger?", SYSTEM_WIDE_CONSEQUENCE: "How far does it spread?", SCIENCE_EXPLANATION: "What physics governs it?",
@@ -370,6 +370,7 @@ function validateGeneratedSection(json, section, claimsById = new Map(), options
     if (!support.supported) { rejected.push({ text: text.slice(0, 120), reasons: support.reasons }); continue; }
     accepted.push({ text, claims: ids, role: "evidence", support: support.overlap });
   }
+  if (!accepted.length && !rejected.length) rejected.push({ text: "", reasons: ["model returned no paragraphs"] });
   if (section.claimIds.length && !accepted.length) {
     throw Object.assign(new Provider.LongformProviderError("INVALID_SECTION", `no supported, claim-mapped paragraphs for ${section.section}`, { stage: `section:${section.section}` }), { rejected });
   }
@@ -419,7 +420,7 @@ function continuityAndRetention(sections, plan, config) {
 // topic, research evidence, section plan, model, prompt version and schema.
 // Anything else starts fresh (the old file is kept as <slug>.stale.json).
 const GENERATION_SCHEMA = "longform-generation/3";
-const PROMPT_VERSION = "lf-prompts-2026-10-09.3";
+const PROMPT_VERSION = "lf-prompts-2026-10-09.4";
 const sha = (value) => crypto.createHash("sha1").update(typeof value === "string" ? value : JSON.stringify(value)).digest("hex").slice(0, 16);
 
 function generationKey(channel, topic, pkg, plan, model) {
@@ -644,7 +645,8 @@ async function llmScript(channel, topic, pkg, plan, cold, config, options = {}) 
         }
       }
       state.sections.push({ section: section.section, paragraphs: validated.paragraphs });
-      state.stages.sections[section.section] = { status: "COMPLETE", at: now(), paragraphs: validated.paragraphs.length, rejected: validated.rejected.length, words: validated.paragraphs.reduce((sum, item) => sum + words(item.text), 0) };
+      state.stages.sections[section.section] = { status: "COMPLETE", at: now(), paragraphs: validated.paragraphs.length, rejected: validated.rejected.length,
+        rejectedReasons: validated.rejected.slice(0, 4).map((row) => row.reasons.join("; ")), words: validated.paragraphs.reduce((sum, item) => sum + words(item.text), 0) };
       if (json.depth_note) state.depthNote = [state.depthNote, String(json.depth_note)].filter(Boolean).join(" ");
       save(`section:${section.section}`);
     }
