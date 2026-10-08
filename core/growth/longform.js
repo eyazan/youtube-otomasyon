@@ -327,13 +327,22 @@ async function llmScript(channel, topic, pkg, plan, cold, config, options = {}) 
     if (!state.blueprint) {
       const json = await call({
         stage: "narrative-angle",
-        maxTokens: 3000,
+        maxTokens: 1200,
         system: [
           `You plan evidence-led narration for ${channel.name}, a ${config.identity}.`,
           "Use only the supplied claims. Do not answer with outside knowledge. Put anything unsupported in uncertain_claims.",
           "Return JSON only with central_question, audience_promise, narrative_angle, hook_candidates, retention_beats, uncertain_claims.",
         ].join("\n"),
-        user: JSON.stringify({ fact_pack: state.factPack, outline: plan.sections, selected_cold_open: cold.selected && cold.selected.text }),
+        // Narrative planning needs identifiers and short evidence statements, not
+        // whole source objects/visual metadata. Full citations remain in pkg
+        // and are supplied to later claim-mapped writing/review stages.
+        user: JSON.stringify({
+          question: state.factPack.central_question,
+          verified_facts: state.factPack.verified_facts.slice(0, 24).map(x => ({ id: x.id, text: String(x.text).slice(0, 260) })),
+          interpretations: state.factPack.bounded_interpretations.slice(0, 8).map(x => ({ id: x.id, text: String(x.text).slice(0, 180) })),
+          outline: plan.sections.map(x => ({ section: x.section, question: x.question, claimIds: x.claimIds })),
+          selected_cold_open: cold.selected && String(cold.selected.text).slice(0, 360),
+        }),
       });
       state.blueprint = validateBlueprint(json, plan, cold, topic);
       state.updatedAt = (options.now || new Date()).toISOString();
