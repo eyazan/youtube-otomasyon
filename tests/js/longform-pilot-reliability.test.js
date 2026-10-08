@@ -288,6 +288,15 @@ test("names in a paragraph must come from the cited claims", () => {
   assert.match(reasons("During the teleconference, Richard Feynman dismissed the analysis from Thiokol engineers."), /names not in cited claims: Richard, Feynman/);
 });
 
+test("the topic's own name is allowed even when the cited claim omits it", () => {
+  const claims = [{ id: "C1", text: "The moon's ice shell is estimated to be 15 to 25 kilometres thick over a salty ocean.", verbatim: false }];
+  const text = "Beneath the surface of Europa lies a salty ocean under an ice shell estimated at 15 to 25 kilometres thick.";
+  assert.match(Longform.paragraphSupport(text, claims, 0.2).reasons.join(" "), /names not in cited claims: Europa/);
+  assert.equal(Longform.paragraphSupport(text, claims, 0.2, "What If We Swam in Europa's Ocean?").reasons.join(" "), "");
+  // Other names still need the cited claims.
+  assert.match(Longform.paragraphSupport(`${text} Data from Juno confirmed it.`, claims, 0.2, "What If We Swam in Europa's Ocean?").reasons.join(" "), /names not in cited claims: Juno/);
+});
+
 test("retry_unsupported re-asks only the sections that ended UNSUPPORTED", async () => {
   const sandbox = fs.mkdtempSync(path.join(os.tmpdir(), "lf-retry-"));
   const saved = process.env.GROWTH_STATE_ROOT;

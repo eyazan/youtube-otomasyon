@@ -336,7 +336,7 @@ const numbersIn = (text) => [...new Set([...digitNumbers(text), ...spelledNumber
 const VAGUE_QUANTITY = /\b(?:low|mid|high|upper|lower)?-?(?:teens|twenties|thirties|forties|fifties|sixties|seventies|eighties|nineties)\b|\bdozens?\b|\bscores of\b|\b(?:a|one|two)[ -](?:third|quarter|fifth|tenth)s?\b|\bthree[ -]quarters\b|\bhalf an?\b|\bdouble\b|\btriple\b|\bfold\b/gi;
 const stems = (text) => (String(text || "").toLowerCase().match(/[a-z][a-z'-]{3,}/g) || []).filter((word) => !SUPPORT_STOP.has(word)).map((word) => word.slice(0, 6));
 
-function paragraphSupport(text, claims, minimumOverlap) {
+function paragraphSupport(text, claims, minimumOverlap, allowedNames = "") {
   const evidence = claims.map((claim) => claim.text).join(" ");
   const evidenceNumbers = new Set(numbersIn(evidence));
   const unsupportedNumbers = numbersIn(text).filter((value) => !evidenceNumbers.has(value));
@@ -349,7 +349,8 @@ function paragraphSupport(text, claims, minimumOverlap) {
   // Names are where an invented fact hides most easily: every proper noun or
   // acronym in the paragraph (not the first word of a sentence) must occur in
   // the cited claims.
-  const evidenceLower = evidence.toLowerCase();
+  // The topic's own names (its title and subject) are always allowed.
+  const evidenceLower = `${evidence} ${allowedNames}`.toLowerCase();
   const names = [...new Set((String(text).match(/(?<![.!?]\s|^)\b(?:[A-Z][a-z]+(?:-[A-Za-z]+)?|[A-Z]{2,}[a-z]?)\b/g) || [])
     .filter((name) => !SUPPORT_STOP.has(name.toLowerCase()) && !/^(?:The|A|An|In|On|At|By|For|But|And|Yet|When|While|After|Before|During|Within|That|This|These|Those|It|Its|They|Their|Even|Only|Then|Now|So|Once|Because|Although|Though|As|With|From|Instead)$/.test(name)))];
   const unknownNames = names.filter((name) => !evidenceLower.includes(name.toLowerCase().replace(/['’]s$/, "")));
@@ -374,7 +375,7 @@ function validateGeneratedSection(json, section, claimsById = new Map(), options
     if (!text) continue;
     if (!ids.length) { rejected.push({ text: text.slice(0, 120), reasons: ["no valid claim ids"] }); continue; }
     const cited = ids.map((id) => claimsById.get(id)).filter(Boolean);
-    const support = claimsById.size ? paragraphSupport(text, cited, minimumOverlap) : { supported: true, overlap: null, reasons: [] };
+    const support = claimsById.size ? paragraphSupport(text, cited, minimumOverlap, options.allowedNames || "") : { supported: true, overlap: null, reasons: [] };
     if (!support.supported) { rejected.push({ text: text.slice(0, 120), reasons: support.reasons }); continue; }
     accepted.push({ text, claims: ids, role: "evidence", support: support.overlap });
   }
@@ -519,6 +520,7 @@ async function llmScript(channel, topic, pkg, plan, cold, config, options = {}) 
   const save = (stage) => { if (stage) state.lastCompletedStage = stage; state.updatedAt = now(); writeGeneration(channel, topic, state, options); };
   const onEvent = (event) => providerEvent(channel, event, options);
   const claimsById = new Map(pkg.claims.map((claim) => [claim.id, claim]));
+  const topicNames = [topic.title, topic.topic, topic.subject].filter(Boolean).join(" ");
   // Paraphrase must avoid copied wording, so word overlap is a weak signal;
   // numbers and names are checked exactly and carry most of the burden.
   const minimumOverlap = config.longform.minimumSupportOverlap != null ? config.longform.minimumSupportOverlap : 0.2;
@@ -580,7 +582,7 @@ async function llmScript(channel, topic, pkg, plan, cold, config, options = {}) 
           user: JSON.stringify({ topic: topic.title, question: state.blueprint.central_question, claims: ids.map((id) => ({ id, text: String(claimsById.get(id).text).slice(0, 260) })) }),
         });
         const lines = (json && Array.isArray(json.lines) ? json.lines : []).map((line) => ({ text: finish(line && line.text), claims: [...new Set((line && line.claims || []).filter((id) => ids.includes(id)))] }))
-          .filter((line) => line.text && line.claims.length && paragraphSupport(line.text, line.claims.map((id) => claimsById.get(id)), minimumOverlap).supported);
+          .filter((line) => line.text && line.claims.length && paragraphSupport(line.text, line.claims.map((id) => claimsById.get(id)), minimumOverlap, topicNames).supported);
         const text = lines.map((line) => line.text).join(" ");
         if (lines.length >= 2 && words(text) <= 55) {
           paragraphs = [{ text, claims: [...new Set(lines.flatMap((line) => line.claims))], role: "cold-open" }];
@@ -637,7 +639,7 @@ async function llmScript(channel, topic, pkg, plan, cold, config, options = {}) 
       const json = await call({ stage: `section:${section.section}`, schema: sectionSchema(ids), schemaName: "documentary_section", maxTokens, system, user: user() });
       let validated;
       try {
-        validated = validateGeneratedSection(json, scoped, claimsById, { minimumOverlap });
+        validated = validateGeneratedSection(json, scoped, claimsById, { minimumOverlap, allowedNames: topicNames });
         // Mostly rejected output gets the one repair attempt as well.
         const kept = validated.paragraphs.reduce((sum, item) => sum + words(item.text), 0);
         const lost = validated.rejected.length;
@@ -656,7 +658,7 @@ async function llmScript(channel, topic, pkg, plan, cold, config, options = {}) 
             // while avoiding the source's sentence wording.
             keep_terms: [...new Set(claims.flatMap((claim) => (claim.text.match(/\b[A-Za-z][A-Za-z-]{4,}\b/g) || [])).map((word) => word.toLowerCase()).filter((word) => !SUPPORT_STOP.has(word)))].slice(0, 30) }),
         });
-        try { validated = validateGeneratedSection(repaired, scoped, claimsById, { minimumOverlap }); }
+        try { validated = validateGeneratedSection(repaired, scoped, claimsById, { minimumOverlap, allowedNames: topicNames }); }
         catch (repairError) {
           if (repairError.code !== "INVALID_SECTION") throw repairError;
           state.sectionAttempts[section.section] = unsupportedRuns + 1;
