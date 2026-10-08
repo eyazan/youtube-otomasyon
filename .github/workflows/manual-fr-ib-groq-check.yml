@@ -27,6 +27,10 @@ on:
         required: false
         type: boolean
         default: false
+      max_wait_seconds:
+        description: Longest provider wait (Retry-After) to sit out inside this run, in seconds (blank = 70). Use ~330 when the daily token allowance is nearly used.
+        required: false
+        type: string
       stop_after_requests:
         description: Verification only — simulate a rate limit after N requests (blank = off)
         required: false
@@ -58,7 +62,7 @@ jobs:
       LONGFORM_LLM_PROVIDER: groq
       GROQ_API_KEY: ${{ secrets.GROQ_API_KEY2 }}
       LONGFORM_LLM_MAX_ATTEMPTS: '3'
-      LONGFORM_LLM_MAX_WAIT_MS: '70000'
+      LONGFORM_LLM_MAX_WAIT_MS: ${{ inputs.max_wait_seconds && format('{0}000', inputs.max_wait_seconds) || '70000' }}
       LONGFORM_REQUEST_TOKEN_BUDGET: ${{ vars.LONGFORM_REQUEST_TOKEN_BUDGET || '7000' }}
       GH_TOKEN: ${{ github.token }}
       LONGFORM_TEST_STOP_AFTER_REQUESTS: ${{ inputs.stop_after_requests }}
@@ -106,6 +110,8 @@ jobs:
         if: always()
         run: node scripts/fr-ib-checkpoint-report.js "${{ inputs.channel }}" restored
       - name: Build one script in sandbox only
+        # Step-level limit so the checkpoint archive below always runs.
+        timeout-minutes: 35
         run: |
           set -euo pipefail
           node growth.js dry-run --channel "${{ inputs.channel }}"

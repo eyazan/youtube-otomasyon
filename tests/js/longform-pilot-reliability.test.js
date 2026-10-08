@@ -517,3 +517,33 @@ test("IB packaging: no Earth-survival titles for an exploration, no fake countdo
   assert.equal(Research.restoreExponents("a volume of 3×1018m3, between"), "a volume of 3×10^18m3, between");
   assert.equal(Research.restoreExponents("about 2×100 m"), "about 2×100 m");
 });
+
+test("fact-check findings survive a rate limit during the repair; resume does not pay for the check again", async () => {
+  const sandbox = fs.mkdtempSync(path.join(os.tmpdir(), "lf-factcheck-flagged-"));
+  const saved = process.env.GROWTH_STATE_ROOT;
+  try {
+    await withEnv({ LONGFORM_LLM_PROVIDER: "groq", GROQ_API_KEY: "k", LONGFORM_LLM_MAX_ATTEMPTS: "1" }, async () => {
+      const { channel, topic, config, pkg, plan, cold } = await setup(sandbox);
+      const target = plan.sections.find((section) => section.section !== "COLD_OPEN" && section.claimIds.length > 1).section;
+      const firstClaim = pkg.claims.find((claim) => claim.id === plan.sections.find((s) => s.section === target).claimIds[0]);
+      const first = fakeChecker(target, { repairText: firstClaim.text, recheckFlags: false });
+      const limited = async (url, request) => {
+        const body = JSON.parse(request.body);
+        if (/Correct paragraphs/.test(body.messages[0].content)) return response(429, {}, { "retry-after": "3600" });
+        return first.fetch(url, request);
+      };
+      await assert.rejects(() => Longform.llmScript(channel, topic, pkg, plan, cold, config, { write: true, providerDependencies: { fetch: limited, sleep: async () => {} } }), (error) => error.code === "RATE_LIMIT");
+      const checkpoint = Store.readState(channel, "longform", `generation/${topic.slug}.json`, null);
+      assert.equal(checkpoint.stages.factcheck[target].status, "FLAGGED");
+      assert.equal(checkpoint.stages.factcheck[target].issues.length, 1);
+      const second = fakeChecker(target, { repairText: firstClaim.text, recheckFlags: false });
+      const result = await Longform.llmScript(channel, topic, pkg, plan, cold, config, { write: true, providerDependencies: { fetch: second.fetch, sleep: async () => {} } });
+      assert.equal(second.stages.includes(`check:${target}`), false, "the saved findings are reused");
+      assert.equal(second.stages[0], `repair:${target}`);
+      assert.equal(result.stages.factcheck[target].status, "REPAIRED");
+    });
+  } finally {
+    if (saved === undefined) delete process.env.GROWTH_STATE_ROOT; else process.env.GROWTH_STATE_ROOT = saved;
+    fs.rmSync(sandbox, { recursive: true, force: true });
+  }
+});

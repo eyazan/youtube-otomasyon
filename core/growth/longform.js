@@ -807,10 +807,13 @@ async function llmScript(channel, topic, pkg, plan, cold, config, options = {}) 
     for (const section of state.sections) {
       if (section.section === "COLD_OPEN" || !(section.paragraphs || []).length) continue;
       const prior = state.stages.factcheck[section.section];
-      if (prior && prior.version === FACT_CHECK_VERSION && prior.status !== "UNCHECKED") continue;
-      const issues = await checkParagraphs(`factcheck:${section.section}`, section.paragraphs);
+      if (prior && prior.version === FACT_CHECK_VERSION && !["UNCHECKED", "FLAGGED"].includes(prior.status)) continue;
+      // Findings are saved before the repair, so a rate limit during the
+      // repair does not pay for the same check again on resume.
+      const issues = prior && prior.version === FACT_CHECK_VERSION && prior.status === "FLAGGED" ? prior.issues : await checkParagraphs(`factcheck:${section.section}`, section.paragraphs);
       if (!issues) { state.stages.factcheck[section.section] = { status: "UNCHECKED", version: FACT_CHECK_VERSION, at: now() }; save(); continue; }
       if (!issues.length) { state.stages.factcheck[section.section] = { status: "PASSED", version: FACT_CHECK_VERSION, at: now() }; save(`factcheck:${section.section}`); continue; }
+      if (!(prior && prior.status === "FLAGGED")) { state.stages.factcheck[section.section] = { status: "FLAGGED", version: FACT_CHECK_VERSION, at: now(), issues }; save(); }
       const flagged = [...new Set(issues.map((issue) => issue.paragraph))].sort((a, b) => a - b);
       const ids = [...new Set(flagged.flatMap((index) => section.paragraphs[index].claims || []))].filter((id) => claimsById.has(id));
       let replacements = [];
