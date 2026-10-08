@@ -1,0 +1,62 @@
+name: FR + IB long-form pilot audit (no publish)
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - '.github/workflows/fr-ib-longform-audit.yml'
+      - 'docs/FR-IB-LONGFORM-PILOT.md'
+      - 'core/growth/**'
+      - 'growth.js'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: fr-ib-longform-audit-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      FR_LONGFORM_PUBLISH: '0'
+      IB_LONGFORM_PUBLISH: '0'
+      PUBLISH: '0'
+      GROWTH_GATE_MODE: shadow
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Run growth engine tests
+        run: npm run test:growth
+      - name: Prepare isolated non-publishing dry-run
+        run: mkdir -p reports/dry-runs
+      - name: Failure Reconstructed — package dry-run
+        run: node growth.js dry-run --channel failure-reconstructed | tee reports/dry-runs/fr-console.txt
+      - name: ImpossibleBrief — package dry-run
+        run: node growth.js dry-run --channel impossible-brief | tee reports/dry-runs/ib-console.txt
+      - name: Save pilot summary
+        if: always()
+        run: |
+          {
+            echo '# FR + IB long-form pilot audit'
+            echo ''
+            echo 'No videos were rendered, uploaded or published by this workflow.'
+            echo ''
+            echo 'Inspect the attached reports/dry-runs files for actual selected topics, readiness scores and hard fails.'
+            echo ''
+            echo 'Before live production: obtain primary references, review original assets and full video, then explicitly approve release.'
+          } > reports/dry-runs/PILOT-SUMMARY.md
+      - name: Upload audit artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fr-ib-longform-pilot-audit
+          path: reports/dry-runs/
+          if-no-files-found: warn
+          retention-days: 14
