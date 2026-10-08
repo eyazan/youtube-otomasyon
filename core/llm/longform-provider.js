@@ -105,8 +105,12 @@ async function groq(input, dependencies = {}) {
       body: JSON.stringify({
         model: input.model,
         messages: [{ role: "system", content: input.system }, { role: "user", content: input.user }],
+        // GPT-OSS on Groq can reject JSON-mode sampling with failed_generation.
+        // Disable reasoning output for this structured extraction and request
+        // only the required JSON object, without changing evidence validation.
         response_format: { type: "json_object" },
-        temperature: 0.25,
+        reasoning_effort: "none",
+        temperature: 0.1,
         max_completion_tokens: input.maxTokens || 4096,
       }),
     });
