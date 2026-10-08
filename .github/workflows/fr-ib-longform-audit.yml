@@ -40,6 +40,37 @@ jobs:
         run: node growth.js dry-run --channel failure-reconstructed | tee reports/dry-runs/fr-console.txt
       - name: ImpossibleBrief — package dry-run
         run: node growth.js dry-run --channel impossible-brief | tee reports/dry-runs/ib-console.txt
+      - name: Report actual long-form readiness to job summary
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo '## FR + IB long-form readiness'
+            echo ''
+            echo '| Channel | Proposed long-form candidate | Score | Gate |'
+            echo '|---|---|---:|---|'
+            for pair in 'fr-console.txt|Failure Reconstructed' 'ib-console.txt|ImpossibleBrief'; do
+              file="${pair%%|*}"
+              channel="${pair#*|}"
+              if [ -f "reports/dry-runs/$file" ]; then
+                line="$(grep -E 'long-form ' "reports/dry-runs/$file" | tail -n 1 || true)"
+                if [ -n "$line" ]; then
+                  candidate="$(printf '%s' "$line" | sed -E 's/.*long-form ([^ ]+) ([0-9]+) ([A-Z_]+).*/\1/')"
+                  score="$(printf '%s' "$line" | sed -E 's/.*long-form ([^ ]+) ([0-9]+) ([A-Z_]+).*/\2/')"
+                  gate="$(printf '%s' "$line" | sed -E 's/.*long-form ([^ ]+) ([0-9]+) ([A-Z_]+).*/\3/')"
+                  echo "| $channel | $candidate | $score | $gate |"
+                else
+                  echo "| $channel | not available | — | NOT_COLLECTED |"
+                fi
+              else
+                echo "| $channel | dry-run missing | — | NOT_COLLECTED |"
+              fi
+            done
+            echo ''
+            echo 'BLOCK/REVIEW means **not production-ready**, even when the CI tests are green.'
+            echo 'Do not enable long-form publishing without a subsequent PUBLISH verdict, source/asset review and human approval.'
+            echo 'Download fr-ib-longform-pilot-audit artifact for the underlying report.'
+          } >> "$GITHUB_STEP_SUMMARY"
       - name: Save pilot summary
         if: always()
         run: |
