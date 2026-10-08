@@ -117,7 +117,7 @@ async function groq(input, dependencies = {}) {
     const failure = classifyHttp("groq", response.status, response.headers, input.stage);
     // Groq may return a precise request-size or token-limit reason on HTTP 413.
     // Only retain a short allowlisted diagnostic; do not log raw body or credentials.
-    if (response.status === 413) {
+    if (response.status === 400 || response.status === 413 || response.status === 422) {
       let reason = "";
       try {
         const body = await response.json();
@@ -127,7 +127,7 @@ async function groq(input, dependencies = {}) {
             .replace(/(?:gsk_[A-Za-z0-9_-]+|Bearer\\s+\\S+)/gi, "[REDACTED]");
         }
       } catch (_) { /* diagnostic body is optional */ }
-      failure.message = `groq request too large (HTTP 413) at ${input.stage}; ${reason || "check provider request/token limits"}`;
+      failure.message = `groq request rejected (HTTP ${response.status}) at ${input.stage}; ${reason || "check model parameters and token limits"}`;
     }
     throw failure;
   }
