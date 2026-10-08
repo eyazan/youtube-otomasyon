@@ -346,7 +346,15 @@ function paragraphSupport(text, claims, minimumOverlap) {
   const available = new Set(stems(evidence));
   const overlap = own.length ? own.filter((stem) => available.has(stem)).length / own.length : 0;
   const copied = Research.copyRisk(text, claims);
+  // Names are where an invented fact hides most easily: every proper noun or
+  // acronym in the paragraph (not the first word of a sentence) must occur in
+  // the cited claims.
+  const evidenceLower = evidence.toLowerCase();
+  const names = [...new Set((String(text).match(/(?<![.!?]\s|^)\b(?:[A-Z][a-z]+(?:[-'’][A-Za-z]+)?|[A-Z]{2,}[a-z]?)\b/g) || [])
+    .filter((name) => !SUPPORT_STOP.has(name.toLowerCase()) && !/^(?:The|A|An|In|On|At|By|For|But|And|Yet|When|While|After|Before|During|Within|That|This|These|Those|It|Its|They|Their|Even|Only|Then|Now|So|Once|Because|Although|Though|As|With|From|Instead)$/.test(name)))];
+  const unknownNames = names.filter((name) => !evidenceLower.includes(name.toLowerCase()));
   const reasons = [];
+  if (unknownNames.length) reasons.push(`names not in cited claims: ${unknownNames.slice(0, 5).join(", ")}`);
   if (unsupportedNumbers.length) reasons.push(`numbers not in cited claims: ${unsupportedNumbers.join(", ")}`);
   if (vague.length) reasons.push(`approximate quantity not in cited claims: ${vague.join(", ")}`);
   if (overlap < minimumOverlap) reasons.push(`only ${Math.round(overlap * 100)}% of content words are in the cited claims`);
@@ -356,7 +364,7 @@ function paragraphSupport(text, claims, minimumOverlap) {
 
 function validateGeneratedSection(json, section, claimsById = new Map(), options = {}) {
   const allowed = new Set(section.claimIds || []);
-  const minimumOverlap = options.minimumOverlap != null ? options.minimumOverlap : 0.3;
+  const minimumOverlap = options.minimumOverlap != null ? options.minimumOverlap : 0.2;
   const body = json && json.section && typeof json.section === "object" ? json.section : json;
   const accepted = [];
   const rejected = [];
@@ -504,7 +512,9 @@ async function llmScript(channel, topic, pkg, plan, cold, config, options = {}) 
   const save = (stage) => { if (stage) state.lastCompletedStage = stage; state.updatedAt = now(); writeGeneration(channel, topic, state, options); };
   const onEvent = (event) => providerEvent(channel, event, options);
   const claimsById = new Map(pkg.claims.map((claim) => [claim.id, claim]));
-  const minimumOverlap = config.longform.minimumSupportOverlap != null ? config.longform.minimumSupportOverlap : 0.3;
+  // Paraphrase must avoid copied wording, so word overlap is a weak signal;
+  // numbers and names are checked exactly and carry most of the burden.
+  const minimumOverlap = config.longform.minimumSupportOverlap != null ? config.longform.minimumSupportOverlap : 0.2;
   const call = async (input) => {
     const response = await Provider.generateJson(input, { config: configured, onEvent, dependencies: options.providerDependencies || {} });
     state.providerUsed = response.provider;

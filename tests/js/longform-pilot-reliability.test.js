@@ -280,3 +280,10 @@ test("copy risk ignores exact figures, units and official names but catches copi
   assert.equal(Research.copyRisk("Two weeks later the Presidential Commission on the Space Shuttle Challenger Accident began hearings.", source("President Reagan created the Presidential Commission on the Space Shuttle Challenger Accident on February 3.")), null);
   assert.ok(Research.copyRisk("Engineers said investigators found the chord members were undersized for the actual dead load.", source("Investigators found the chord members were undersized for the actual dead load of the bridge.")));
 });
+
+test("names in a paragraph must come from the cited claims", () => {
+  const claims = [{ id: "C1", text: "NASA SRB project manager Lawrence Mulloy rejected the Thiokol engineers' analysis during the teleconference.", verbatim: false }];
+  const reasons = (text) => Longform.paragraphSupport(text, claims, 0.2).reasons.join(" ");
+  assert.equal(reasons("During the teleconference, Lawrence Mulloy, who ran NASA's SRB project, dismissed the analysis from Thiokol engineers."), "");
+  assert.match(reasons("During the teleconference, Richard Feynman dismissed the analysis from Thiokol engineers."), /names not in cited claims: Richard, Feynman/);
+});
