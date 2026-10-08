@@ -110,6 +110,7 @@ async function groq(input, dependencies = {}) {
         // keep evidence validation and JSON shape checks unchanged.
         response_format: { type: "json_object" },
         reasoning_effort: "low",
+        reasoning_format: "hidden",
         temperature: 0.1,
         max_completion_tokens: input.maxTokens || 4096,
       }),
