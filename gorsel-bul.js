@@ -531,6 +531,13 @@ function alaka(q, g) {
       }
     }
 
+    // konu.minAlaka (yalnizca uzun video hatti verir): baslik/kaynak aramayla
+    // ilgisiz gorseller elenir; hic eslesen yoksa havuz oldugu gibi kalir.
+    if (Number(konu.minAlaka) > 0) {
+      const ilgili = havuz.filter((g) => g.alaka >= Number(konu.minAlaka));
+      if (ilgili.length) havuz = ilgili;
+    }
+
     // Ayni gorseli iki sahnede kullanma — AMA sahneyi bos birakma pahasina degil.
     // Ayni arama kelimesi iki sahnede gecerse (ornegin "MRI scanner"), tum
     // sonuclar ilk sahnede tukeniyor ve ikincisi bos kaliyordu.

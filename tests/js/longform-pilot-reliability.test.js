@@ -569,3 +569,18 @@ test("render-only CLI refuses a package that is not an approved LLM script", () 
     assert.equal(typeof require("../../core/growth/lane").renderLongform, "function");
   } finally { fs.rmSync(dir, { recursive: true, force: true }); }
 });
+
+test("long-form visual searches are anchored to the subject, never bare generic words", () => {
+  const Lane = require("../../core/growth/lane");
+  const pkg = { topic: { subject: "Challenger" }, researchPackage: { deepResearch: { article: "Space Shuttle Challenger disaster" } } };
+  const text = Lane.plainText("An O‑ring seal failure occurred in a solid rocket booster field joint, and the joint let hot gas reach the external tank.\n\nThe Rogers Commission, working with Morton Thiokol engineers, traced the seal failure to cold temperatures at launch and the joint design.");
+  assert.doesNotMatch(text, /‑/);
+  const queries = Lane.sceneQueries(text, pkg);
+  assert.ok(queries.length >= 1);
+  for (const list of queries) {
+    assert.ok(list.includes("Space Shuttle Challenger"), "the subject itself is always a fallback");
+    for (const query of list) assert.ok(query.split(/\s+/).length >= 2, `no bare single-word search: ${query}`);
+  }
+  assert.ok(queries.flat().includes("Rogers Commission"));
+  assert.equal(queries.flat().some((query) => /^(?:joint|tank|seal)$/i.test(query)), false);
+});
