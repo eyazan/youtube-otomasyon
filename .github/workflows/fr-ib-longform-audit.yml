@@ -37,9 +37,17 @@ jobs:
       - name: Prepare isolated non-publishing dry-run
         run: mkdir -p reports/dry-runs
       - name: Failure Reconstructed — package dry-run
-        run: node growth.js dry-run --channel failure-reconstructed | tee reports/dry-runs/fr-console.txt
+        run: set -o pipefail
+          node growth.js dry-run --channel failure-reconstructed | tee reports/dry-runs/fr-console.txt
+          cp reports/dry-runs/summary.json reports/dry-runs/fr-summary.json
       - name: ImpossibleBrief — package dry-run
-        run: node growth.js dry-run --channel impossible-brief | tee reports/dry-runs/ib-console.txt
+        run: set -o pipefail
+          node growth.js dry-run --channel impossible-brief | tee reports/dry-runs/ib-console.txt
+          cp reports/dry-runs/summary.json reports/dry-runs/ib-summary.json
+      - name: Build actionable readiness report
+        run: |
+          node scripts/fr-ib-longform-readiness.js reports/dry-runs
+          cat reports/dry-runs/LONGFORM-READINESS.md >> "$GITHUB_STEP_SUMMARY"
       - name: Report actual long-form readiness to job summary
         if: always()
         shell: bash
