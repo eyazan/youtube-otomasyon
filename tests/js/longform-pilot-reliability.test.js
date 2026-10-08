@@ -272,3 +272,11 @@ test("verification stop simulates a deferred rate limit after N requests, before
     Provider.resetRequestCount();
   });
 });
+
+test("copy risk ignores exact figures, units and official names but catches copied prose", () => {
+  const Research = require("../../core/growth/research");
+  const source = (text) => [{ id: "X", text, verbatim: false }];
+  assert.equal(Research.copyRisk("Temperatures ranged from 40 to 90 °F (4 to 32 °C) and the seals held.", source("Previous launches occurred at 40 to 90 °F (4 to 32 °C) and no seal failed.")), null);
+  assert.equal(Research.copyRisk("Two weeks later the Presidential Commission on the Space Shuttle Challenger Accident began hearings.", source("President Reagan created the Presidential Commission on the Space Shuttle Challenger Accident on February 3.")), null);
+  assert.ok(Research.copyRisk("Engineers said investigators found the chord members were undersized for the actual dead load.", source("Investigators found the chord members were undersized for the actual dead load of the bridge.")));
+});

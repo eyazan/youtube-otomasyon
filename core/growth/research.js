@@ -181,12 +181,25 @@ async function deepen(channel, topic, options = {}) {
   return value;
 }
 
-// COPY_RISK: a paragraph that reproduces ≥ `n` consecutive words of any
-// verbatim:false source sentence is not a rewrite.
-function shingles(text, n) {
-  const w = String(text).toLowerCase().replace(/[^a-z0-9\s]/g, " ").split(/\s+/).filter(Boolean);
+// COPY_RISK: a paragraph that reproduces ≥ `n` consecutive ordinary words of
+// any verbatim:false source sentence is not a rewrite. Figures, units and
+// official names are facts that must be stated exactly, so they are not
+// counted: "40 to 90 °F (4 to 32 °C)" or "the Presidential Commission on the
+// Space Shuttle Challenger Accident" is not copied prose.
+const UNIT_WORDS = new Set("f c k mn kn n km m cm mm mi ft feet foot inch inches in lb lbs pounds pound kg g t ton tons tonnes mph kmh kph s sec seconds second min minutes hours h percent pct psi kpa mpa bar".split(" "));
+function words(text) {
+  return String(text).replace(/[^A-Za-z0-9\s]/g, " ").split(/\s+/).filter(Boolean)
+    .filter((word) => !/\d/.test(word) && !UNIT_WORDS.has(word.toLowerCase()));
+}
+function shingles(text, n, skipNames = false) {
+  const w = words(text);
   const out = new Set();
-  for (let i = 0; i + n <= w.length; i++) out.add(w.slice(i, i + n).join(" "));
+  for (let i = 0; i + n <= w.length; i++) {
+    const gram = w.slice(i, i + n);
+    // A run that is mostly capitalised words (after the first) is a name.
+    if (skipNames && gram.slice(1).filter((word) => /^[A-Z]/.test(word)).length >= Math.ceil((n - 1) * 0.5)) continue;
+    out.add(gram.join(" ").toLowerCase());
+  }
   return out;
 }
 
@@ -195,7 +208,7 @@ function copyRisk(paragraph, sourceClaims, n = 9) {
   if (!mine.size) return null;
   for (const claim of sourceClaims) {
     if (claim.verbatim !== false) continue;
-    for (const gram of shingles(claim.text, n)) if (mine.has(gram)) return { claim: claim.id || null, overlap: gram };
+    for (const gram of shingles(claim.text, n, true)) if (mine.has(gram)) return { claim: claim.id || null, overlap: gram };
   }
   return null;
 }
