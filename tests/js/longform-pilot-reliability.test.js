@@ -467,3 +467,35 @@ test("a completed checkpoint without fact-check is checked on resume without reg
     fs.rmSync(sandbox, { recursive: true, force: true });
   }
 });
+
+test("a truncated answer is retried once with more completion room, within the request budget", async () => {
+  const sandbox = fs.mkdtempSync(path.join(os.tmpdir(), "lf-truncated-"));
+  const saved = process.env.GROWTH_STATE_ROOT;
+  try {
+    await withEnv({ LONGFORM_LLM_PROVIDER: "groq", GROQ_API_KEY: "k", LONGFORM_LLM_MAX_ATTEMPTS: "1" }, async () => {
+      const { channel, topic, config, pkg, plan, cold } = await setup(sandbox);
+      const base = fakeGroq();
+      const limits = [];
+      let truncated = false;
+      const fetch = async (url, request) => {
+        const body = JSON.parse(request.body);
+        const input = JSON.parse(body.messages[1].content);
+        if (!truncated && body.response_format.json_schema.name === "documentary_section" && input.section && input.section.section) {
+          truncated = true;
+          limits.push(body.max_completion_tokens);
+          return response(200, { model: "openai/gpt-oss-120b", choices: [{ finish_reason: "length", message: { content: "{\"paragraphs\": [" } }], usage: { prompt_tokens: 100, completion_tokens: 50 } });
+        }
+        if (truncated && limits.length === 1) limits.push(body.max_completion_tokens);
+        return base.fetch(url, request);
+      };
+      const result = await Longform.llmScript(channel, topic, pkg, plan, cold, config, { write: true, providerDependencies: { fetch, sleep: async () => {} } });
+      assert.ok(["COMPLETE", "QUALITY_REVIEW"].includes(result.status));
+      assert.equal(limits.length, 2);
+      assert.ok(limits[1] > limits[0], "the retry has more completion room");
+      assert.ok(limits[1] <= Provider.requestBudget());
+    });
+  } finally {
+    if (saved === undefined) delete process.env.GROWTH_STATE_ROOT; else process.env.GROWTH_STATE_ROOT = saved;
+    fs.rmSync(sandbox, { recursive: true, force: true });
+  }
+});

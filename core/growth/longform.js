@@ -612,8 +612,20 @@ async function llmScript(channel, topic, pkg, plan, cold, config, options = {}) 
   // Paraphrase must avoid copied wording, so word overlap is a weak signal;
   // numbers and names are checked exactly and carry most of the burden.
   const minimumOverlap = config.longform.minimumSupportOverlap != null ? config.longform.minimumSupportOverlap : 0.2;
+  const generate = (input) => Provider.generateJson(input, { config: configured, onEvent, dependencies: options.providerDependencies || {} });
   const call = async (input) => {
-    const response = await Provider.generateJson(input, { config: configured, onEvent, dependencies: options.providerDependencies || {} });
+    let response;
+    try { response = await generate(input); }
+    catch (error) {
+      // GPT-OSS spends part of max_completion_tokens on (hidden) reasoning, so
+      // an answer can be cut off even when the visible text is short. Retry
+      // once with more room, as far as the per-request budget allows.
+      if (error.code !== "TRUNCATED" || !input.maxTokens) throw error;
+      const inputTokens = Provider.estimateTokens(input.system) + Provider.estimateTokens(input.user) + (input.schema ? Provider.estimateTokens(JSON.stringify(input.schema)) : 0);
+      const roomier = Math.min(3200, Math.round(input.maxTokens * 1.6), Provider.requestBudget() - inputTokens);
+      if (roomier <= input.maxTokens) throw error;
+      response = await generate({ ...input, maxTokens: roomier, stage: `${input.stage}:longer` });
+    }
     state.providerUsed = response.provider;
     state.model = response.model;
     state.usage.input_tokens += response.usage && response.usage.input_tokens || 0;
