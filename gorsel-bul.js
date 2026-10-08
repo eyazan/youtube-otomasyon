@@ -477,7 +477,7 @@ function alaka(q, g) {
   // birinin TUM kelimeleri gecmeli. Tek kelimelik genel aramalarin getirdigi
   // ilgisiz gorseller (sigara, askeri tank) havuza hic girmez.
   const capaKelime = String(konu.capaKelime || "").toLowerCase();
-  const ozelAdlar = (konu.ozelAdlar || []).map((ad) => String(ad).toLowerCase().split(/\s+/));
+  const ozelAdlar = (konu.ozelAdlar || []).map((ad) => String(ad).toLowerCase().replace(/[_%+-]+/g, " ").split(/\s+/).filter(Boolean));
   const gorselMetni = (g) => { let u = String(g.nereden || g.url || ""); try { u = decodeURIComponent(u); } catch (e) {} return (String(g.baslik || "") + " " + u).toLowerCase().replace(/[_%+-]+/g, " "); };
   const uygunMu = (g) => !capaKelime || (() => { const t = gorselMetni(g); return t.includes(capaKelime) || ozelAdlar.some((ad) => ad.every((w) => t.includes(w))); })();
 

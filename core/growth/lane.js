@@ -224,7 +224,9 @@ function sceneQueries(text, pkg, articleImages = []) {
 // must appear in the image title or source, or every word of a named
 // institution, place, vessel or instrument from the script. Person names are
 // not enough on their own (a namesake's portrait must never appear).
-const INSTITUTION = /\b(?:Commission|Committee|Center|Centre|Complex|Comet|Star|Telescope|Agency|Institute|Laboratory|Station|Mission|Lander|Probe|Spacecraft|Rover|Horizons|Thiokol|Corporation|Company|University|Bridge|Dam|Reactor|Plant|Ship|MV|USS|HMS|Observatory|Program|Programme)\b/;
+// Not places or programmes ("Kennedy Space Center" also shows unrelated
+// launches decades later); the subject's own word covers those.
+const INSTITUTION = /\b(?:Commission|Committee|Comet|Star|Telescope|Agency|Institute|Laboratory|Lander|Probe|Spacecraft|Rover|Horizons|Thiokol|Corporation|Company|University|Bridge|Dam|Reactor|Ship|MV|USS|HMS|Observatory)\b/;
 function visualGuard(pkg, text, articleImages = []) {
   const anchor = subjectAnchor(pkg);
   const words = anchor.split(/\s+/).filter((word) => word.length >= 4 && !/^(?:space|shuttle|moon|planet|the)$/i.test(word));
