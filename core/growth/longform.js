@@ -304,19 +304,51 @@ function validateBlueprint(json, plan, cold, topic) {
 // in them, and a meaningful share of its content words does. A paragraph that
 // fails is rejected, never kept "with a warning".
 const SUPPORT_STOP = new Set(("this that with from were was have has had they them their there which what when where while would could should about into than then also because these those every only just more most some such very been being over under after before other its it's your you are the and for but not can could did does just even still again during through without within across between against among later early first finally however although though however").split(/\s+/));
-const numbersIn = (text) => [...new Set((String(text || "").match(/\d[\d,]*(?:\.\d+)?/g) || []).map((value) => value.replace(/,/g, "")))];
+const digitNumbers = (text) => (String(text || "").match(/\d[\d,]*(?:\.\d+)?/g) || []).map((value) => value.replace(/,/g, ""));
+// Spelled-out numbers count as numbers ("seventy-three" is 73, "eighteen" is
+// 18): a model must not slip an unsupported figure past the check in words.
+const NUMBER_WORDS = { two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10, eleven: 11, twelve: 12, thirteen: 13, fourteen: 14, fifteen: 15,
+  sixteen: 16, seventeen: 17, eighteen: 18, nineteen: 19, twenty: 20, thirty: 30, forty: 40, fifty: 50, sixty: 60, seventy: 70, eighty: 80, ninety: 90 };
+const SCALE_WORDS = { hundred: 100, thousand: 1000, million: 1000000, billion: 1000000000 };
+function spelledNumbers(text) {
+  const out = [];
+  const tokens = String(text || "").toLowerCase().replace(/[\u2010-\u2015-]/g, " ").split(/[^a-z0-9.]+/).filter(Boolean);
+  let current = null;
+  let total = 0;
+  const flush = () => { if (current != null || total) out.push(String(total + (current || 0))); current = null; total = 0; };
+  for (const token of tokens) {
+    if (NUMBER_WORDS[token] != null) {
+      const value = NUMBER_WORDS[token];
+      // "seventy three" combines; "eleven thirty-eight" is two numbers (11, 38).
+      const combines = current != null && value < 10 && current >= 20 && current < 100 && current % 10 === 0;
+      if (current != null && !combines) flush();
+      current = (current || 0) + value;
+    }
+    else if (SCALE_WORDS[token] && (current != null || /^\d+(?:\.\d+)?$/.test(String(current)))) { current = (current || 1) * SCALE_WORDS[token]; if (SCALE_WORDS[token] >= 1000) { total += current; current = null; } }
+    else if (token === "and" && current != null) continue;
+    else flush();
+  }
+  flush();
+  return out;
+}
+const numbersIn = (text) => [...new Set([...digitNumbers(text), ...spelledNumbers(text)])];
+// Vague quantities and fractions are only allowed when a cited claim uses them.
+const VAGUE_QUANTITY = /\b(?:low|mid|high|upper|lower)?-?(?:teens|twenties|thirties|forties|fifties|sixties|seventies|eighties|nineties)\b|\bdozens?\b|\bscores of\b|\b(?:a|one|two)[ -](?:third|quarter|fifth|tenth)s?\b|\bthree[ -]quarters\b|\bhalf an?\b|\bdouble\b|\btriple\b|\bfold\b/gi;
 const stems = (text) => (String(text || "").toLowerCase().match(/[a-z][a-z'-]{3,}/g) || []).filter((word) => !SUPPORT_STOP.has(word)).map((word) => word.slice(0, 6));
 
 function paragraphSupport(text, claims, minimumOverlap) {
   const evidence = claims.map((claim) => claim.text).join(" ");
   const evidenceNumbers = new Set(numbersIn(evidence));
   const unsupportedNumbers = numbersIn(text).filter((value) => !evidenceNumbers.has(value));
+  const evidenceVague = new Set((evidence.match(VAGUE_QUANTITY) || []).map((value) => value.toLowerCase()));
+  const vague = [...new Set((String(text).match(VAGUE_QUANTITY) || []).map((value) => value.toLowerCase()))].filter((value) => !evidenceVague.has(value));
   const own = [...new Set(stems(text))];
   const available = new Set(stems(evidence));
   const overlap = own.length ? own.filter((stem) => available.has(stem)).length / own.length : 0;
   const copied = Research.copyRisk(text, claims);
   const reasons = [];
   if (unsupportedNumbers.length) reasons.push(`numbers not in cited claims: ${unsupportedNumbers.join(", ")}`);
+  if (vague.length) reasons.push(`approximate quantity not in cited claims: ${vague.join(", ")}`);
   if (overlap < minimumOverlap) reasons.push(`only ${Math.round(overlap * 100)}% of content words are in the cited claims`);
   if (copied) reasons.push(`copies source wording ("${copied.overlap}")`);
   return { supported: !reasons.length, overlap: Math.round(overlap * 100) / 100, reasons };
@@ -387,7 +419,7 @@ function continuityAndRetention(sections, plan, config) {
 // topic, research evidence, section plan, model, prompt version and schema.
 // Anything else starts fresh (the old file is kept as <slug>.stale.json).
 const GENERATION_SCHEMA = "longform-generation/3";
-const PROMPT_VERSION = "lf-prompts-2026-10-09.2";
+const PROMPT_VERSION = "lf-prompts-2026-10-09.3";
 const sha = (value) => crypto.createHash("sha1").update(typeof value === "string" ? value : JSON.stringify(value)).digest("hex").slice(0, 16);
 
 function generationKey(channel, topic, pkg, plan, model) {
@@ -570,6 +602,7 @@ async function llmScript(channel, topic, pkg, plan, cold, config, options = {}) 
         CHANNEL_WRITING[channel.slug] || "",
         "Use ONLY the claims provided. Every paragraph lists the ids of the claims it states. Never add a fact, number, date, name, quote, cause or purpose that is not in those claims.",
         "Claims marked rewrite:true must be paraphrased (never copy 8+ consecutive words). Keep MODEL/SPECULATION/INTERPRETATION claims labelled as such.",
+        "Numbers: state every number, date, time and unit exactly as the claim writes it. Never convert units, round, estimate, or describe a figure loosely (no 'a third', 'low teens', 'dozens').",
         VOICE_RULES,
         `Section question: ${section.question || section.section}`,
         `Spoken narration, 2-4 paragraphs, about ${targetWords} words — fewer if the claims are thin. No filler, recap, call to action or invented transition fact.`,

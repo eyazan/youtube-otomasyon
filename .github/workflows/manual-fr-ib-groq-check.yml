@@ -22,6 +22,10 @@ on:
         required: false
         type: boolean
         default: false
+      stop_after_requests:
+        description: Verification only — simulate a rate limit after N requests (blank = off)
+        required: false
+        type: string
       approval:
         description: Type RUN_NO_PUBLISH to authorize Groq API usage
         required: true
@@ -52,6 +56,7 @@ jobs:
       LONGFORM_LLM_MAX_WAIT_MS: '70000'
       LONGFORM_REQUEST_TOKEN_BUDGET: ${{ vars.LONGFORM_REQUEST_TOKEN_BUDGET || '7000' }}
       GH_TOKEN: ${{ github.token }}
+      LONGFORM_TEST_STOP_AFTER_REQUESTS: ${{ inputs.stop_after_requests }}
     steps:
       - name: Checkout the dispatched commit (not main production)
         uses: actions/checkout@v4

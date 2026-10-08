@@ -14,7 +14,7 @@ const Context = require("../../core/growth/context");
 const Config = require("../../core/growth/config");
 
 const ENV_KEYS = ["LONGFORM_LLM", "LONGFORM_LLM_PROVIDER", "LONGFORM_LLM_FALLBACK_PROVIDER", "LONGFORM_LLM_MAX_ATTEMPTS", "LONGFORM_LLM_MAX_RETRY_MS",
-  "LONGFORM_LLM_MAX_WAIT_MS", "LONGFORM_REQUEST_TOKEN_BUDGET", "GROQ_API_KEY", "GROQ_MODEL", "ANTHROPIC_API_KEY"];
+  "LONGFORM_LLM_MAX_WAIT_MS", "LONGFORM_REQUEST_TOKEN_BUDGET", "LONGFORM_TEST_STOP_AFTER_REQUESTS", "GROQ_API_KEY", "GROQ_MODEL", "ANTHROPIC_API_KEY"];
 async function withEnv(values, fn) {
   const saved = Object.fromEntries(ENV_KEYS.map((key) => [key, process.env[key]]));
   for (const key of ENV_KEYS) delete process.env[key];
@@ -250,4 +250,25 @@ test("checkpoint survives a separate process (like a later GitHub Actions run)",
     if (saved === undefined) delete process.env.GROWTH_STATE_ROOT; else process.env.GROWTH_STATE_ROOT = saved;
     fs.rmSync(sandbox, { recursive: true, force: true });
   }
+});
+
+test("spelled-out and approximate quantities need the same support as digits", () => {
+  const claims = [{ id: "C1", text: "Challenger broke apart 73 seconds after launch at 11:38 a.m., and the cabin peaked at 65,000 feet.", verbatim: true },
+    { id: "C2", text: "A 1977 test showed up to 0.052 inches of joint rotation.", verbatim: true }];
+  const reasons = (text) => Longform.paragraphSupport(text, claims, 0.3).reasons.join(" ");
+  assert.equal(reasons("Seventy-three seconds after its eleven thirty-eight launch, Challenger broke apart and the cabin peaked at sixty-five thousand feet."), "");
+  assert.match(reasons("Challenger broke apart ninety seconds after launch."), /numbers not in cited claims: 90/);
+  assert.match(reasons("A 1977 test showed nearly a third of a millimetre of joint rotation."), /approximate quantity.*a third/);
+});
+
+test("verification stop simulates a deferred rate limit after N requests, before sending", async () => {
+  await withEnv({ LONGFORM_LLM_PROVIDER: "groq", GROQ_API_KEY: "k", LONGFORM_TEST_STOP_AFTER_REQUESTS: "1" }, async () => {
+    Provider.resetRequestCount();
+    let calls = 0;
+    const fetch = async () => { calls += 1; return response(200, groqBody({ a: "x" })); };
+    await Provider.generateJson({ stage: "one", system: "s", user: "u", maxTokens: 50 }, { dependencies: { fetch } });
+    await assert.rejects(() => Provider.generateJson({ stage: "two", system: "s", user: "u", maxTokens: 50 }, { dependencies: { fetch } }), (e) => e.code === "RATE_LIMIT" && e.defer);
+    assert.equal(calls, 1);
+    Provider.resetRequestCount();
+  });
 });

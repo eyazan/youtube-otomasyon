@@ -291,11 +291,24 @@ function delayFor(error, attempt) {
   return Math.min(maximum, Math.max(exponential, error.retryAfterMs || 0));
 }
 
+// Verification only: LONGFORM_TEST_STOP_AFTER_REQUESTS=N makes the (N+1)th
+// request in this process fail as a deferred rate limit before anything is
+// sent, so cross-run checkpoint resume can be proven on demand. Unset = off.
+let requestsThisProcess = 0;
+function testStop(spec, input) {
+  const limit = Number(envValue("LONGFORM_TEST_STOP_AFTER_REQUESTS"));
+  if (!(Number.isFinite(limit) && limit > 0) || requestsThisProcess < limit) return null;
+  return new LongformProviderError("RATE_LIMIT", `verification stop after ${limit} requests (simulated rate limit)`, { provider: spec.name, stage: input.stage, retryable: false, defer: true });
+}
+
 async function withRetry(spec, input, dependencies = {}, onEvent = () => {}) {
   const attempts = Math.max(1, Math.min(4, Number(envValue("LONGFORM_LLM_MAX_ATTEMPTS")) || 2));
   const sleep = dependencies.sleep || ((ms) => new Promise((resolve) => setTimeout(resolve, ms)));
   for (let attempt = 0; attempt < attempts; attempt += 1) {
+    const stop = testStop(spec, input);
+    if (stop) { onEvent({ event: "deferred", provider: spec.name, model: spec.model, stage: input.stage, attempt: attempt + 1, code: stop.code, message: stop.message }); throw stop; }
     onEvent({ event: "request", provider: spec.name, model: spec.model, stage: input.stage, attempt: attempt + 1 });
+    requestsThisProcess += 1;
     try {
       const result = await once(spec, input, { ...dependencies, onEvent });
       onEvent({ event: "success", provider: result.provider, model: result.model, stage: input.stage, attempt: attempt + 1, usage: result.usage,
@@ -336,4 +349,5 @@ module.exports = {
   LongformProviderError, envValue, providerSpec, configuration, available, retryAfterMs, classifyHttp,
   parseJsonText, groq, anthropic, delayFor, withRetry, generateJson,
   estimateTokens, requestBudget, maxWaitMs, durationMs, observeRate, rateWindow, sanitizeReason,
+  resetRequestCount: () => { requestsThisProcess = 0; },
 };
