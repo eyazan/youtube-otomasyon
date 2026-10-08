@@ -3,7 +3,6 @@
 // Read-only preflight. Never prints credentials, sends network requests, or changes publication flags.
 const fs = require("node:fs");
 const path = require("node:path");
-const Provider = require("../core/llm/longform-provider");
 function inspect(env = process.env) {
   const name = (env.LONGFORM_LLM_PROVIDER || "").trim().toLowerCase();
   const disabled = String(env.LONGFORM_LLM || "") === "0";
