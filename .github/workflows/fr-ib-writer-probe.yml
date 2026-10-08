@@ -1,0 +1,68 @@
+name: FR + IB manual long-form writer probe (no publish)
+# Manually dispatched only, on a deliberately selected branch; no schedule.
+on:
+  workflow_dispatch:
+    inputs:
+      channel:
+        description: Channel to test
+        required: true
+        type: choice
+        options: [failure-reconstructed, impossible-brief]
+      acknowledge_cost:
+        description: Enter RUN_NO_PUBLISH to explicitly approve provider API calls
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    if: ${{ inputs.acknowledge_cost == 'RUN_NO_PUBLISH' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      PUBLISH: '0'
+      FR_LONGFORM_PUBLISH: '0'
+      IB_LONGFORM_PUBLISH: '0'
+      GROWTH_GATE_MODE: shadow
+      GROWTH_STATE_ROOT: ${{ runner.temp }}/fr-ib-writer-sandbox
+      LONGFORM_LLM_PROVIDER: ${{ vars.LONGFORM_LLM_PROVIDER }}
+      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: npm install --package-lock=false --ignore-scripts --no-audit --no-fund
+      - name: Enforce non-publishing mode and configured writer
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$PUBLISH" = "0"
+          test "$FR_LONGFORM_PUBLISH" = "0"
+          test "$IB_LONGFORM_PUBLISH" = "0"
+          test "${{ inputs.acknowledge_cost }}" = "RUN_NO_PUBLISH"
+          node scripts/fr-ib-writer-preflight.js reports/dry-runs/WRITER-PREFLIGHT.md
+          node -e 'const p=require("./core/llm/longform-provider");if(!p.available()){console.error("Provider missing: configure an explicit provider and matching GitHub Actions Secret before this smoke test.");process.exit(1)}'
+      - name: Validate growth tests before provider call
+        run: npm run test:growth
+      - name: Build one non-publishing LLM-backed package
+        shell: bash
+        run: |
+          set -euo pipefail
+          node growth.js dry-run --channel "${{ inputs.channel }}"
+      - name: Publish audit summaries only
+        if: always()
+        run: |
+          echo 'No YouTube credentials are provided. This workflow never invokes an upload or renderer.' >> "$GITHUB_STEP_SUMMARY"
+          if test -f reports/dry-runs/summary.json; then cat reports/dry-runs/summary.json >> "$GITHUB_STEP_SUMMARY"; fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: writer-probe-${{ inputs.channel }}
+          path: reports/dry-runs/
+          retention-days: 7
+          if-no-files-found: warn
