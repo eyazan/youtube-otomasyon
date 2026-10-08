@@ -158,9 +158,9 @@ async function runCycle(channel, options = {}) {
   return { channel: channel.slug, ran: true, cycle, summary, status: state };
 }
 
-// Hands the approved package to the existing long-video chain. Failures are
-// contained to the long-form lane.
-function renderAndUpload(channel, pkg) {
+// Renders an approved package with the existing long-video chain (voice,
+// licensed visuals, ffmpeg) into uretim/<job>/. Never uploads.
+function renderLongform(channel, pkg) {
   const job = `lf-${pkg.topic.slug}`.slice(0, 80);
   const renderDir = path.join(Channel.ROOT, "uretim", job);
   try {
@@ -174,8 +174,22 @@ function renderAndUpload(channel, pkg) {
     }, null, 2));
     for (const script of ["seslendir.js", "gorsel-bul.js", "video-yap.js"]) {
       const run = cp.spawnSync(process.execPath, [script, job], { cwd: Channel.ROOT, stdio: "inherit", timeout: 3 * 3600 * 1000 });
-      if (run.status !== 0) return { ok: false, stage: script, reason: `${script} exit ${run.status}` };
+      if (run.status !== 0) return { ok: false, job, stage: script, reason: `${script} exit ${run.status}` };
     }
+    const mp4 = path.join(renderDir, "Videos", `${job}.mp4`);
+    return fs.existsSync(mp4) ? { ok: true, job, renderDir, mp4 } : { ok: false, job, stage: "video-yap.js", reason: "no mp4 written" };
+  } catch (error) {
+    return { ok: false, job, stage: "handoff", reason: error.message };
+  }
+}
+
+// Hands the approved package to the existing long-video chain, then uploads.
+// Failures are contained to the long-form lane.
+function renderAndUpload(channel, pkg) {
+  const rendered = renderLongform(channel, pkg);
+  if (!rendered.ok) return rendered;
+  const { job, renderDir } = rendered;
+  try {
     const productionDir = path.join(channel.paths.production, job);
     if (productionDir !== renderDir) fs.cpSync(renderDir, productionDir, { recursive: true });
     const upload = cp.spawnSync(process.execPath, ["youtube-yukle.js", "--channel", channel.slug, job], { cwd: Channel.ROOT, stdio: "inherit", env: process.env });
@@ -205,4 +219,4 @@ function registerEpisode(channel, pkg, result, options = {}) {
   return row;
 }
 
-module.exports = { isoWeek, status, candidates, runCycle, renderAndUpload, registerEpisode, episodes, shortsEvidence, TERMINAL };
+module.exports = { isoWeek, status, candidates, runCycle, renderLongform, renderAndUpload, registerEpisode, episodes, shortsEvidence, TERMINAL };

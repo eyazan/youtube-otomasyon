@@ -557,3 +557,15 @@ test("a Retry-After within the wait limit is waited out in full, not cut to the 
     assert.ok(slept.includes(124000), `slept ${slept}`);
   });
 });
+
+test("render-only CLI refuses a package that is not an approved LLM script", () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "lf-render-"));
+  try {
+    const file = path.join(dir, "pkg.json");
+    fs.writeFileSync(file, JSON.stringify({ topic: { slug: "x" }, script: { generator: "deterministic", status: "COMPLETE" }, readiness: { decision: "BLOCK" } }));
+    const run = cp.spawnSync(process.execPath, [path.join(__dirname, "../../scripts/longform-render.js"), "failure-reconstructed", file], { encoding: "utf8" });
+    assert.equal(run.status, 1);
+    assert.match(run.stderr, /refusing to render/);
+    assert.equal(typeof require("../../core/growth/lane").renderLongform, "function");
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+});
