@@ -17,8 +17,9 @@
 const https = require("https");
 const Store = require("./store");
 
+const DEEP_SCHEMA = "research-deep/2";
 const UA = "FailureReconstructedBot/1.0 (+https://github.com/eyazan/youtube-otomasyon)";
-const SKIP_SECTIONS = /^(see also|references|notes|external links|further reading|bibliography|citations|sources|gallery|in popular culture|popular culture|media|footnotes|explanatory notes)$/i;
+const SKIP_SECTIONS = /^(see also|references|notes|external links|further reading|bibliography|citations|sources|gallery|in popular culture|popular culture|media|footnotes|explanatory notes|books|film|films|film and television|television|in fiction|dramatizations?|documentaries|music|video games|works cited)$/i;
 const ROLE_BY_HEADING = [
   [/cause|investigat|analysis|finding|probable|report|inquiry|commission|technical|mechanism|physics|science|how it works|design flaw|failure/i, "cause"],
   [/aftermath|legacy|consequence|response|recommendation|change|reform|impact|effect|litigation|trial|memorial|safety|regulation/i, "aftermath"],
@@ -58,6 +59,18 @@ function articleFor(topic) {
   for (const source of topic.sources || []) {
     const title = wikiTitleFromUrl(source.url);
     if (title) return { title, via: "cited source" };
+  }
+  // The article the topic's own verified evidence already quotes (most cited
+  // first) — an exact URL, not a search. "What If We Swam in Europa's Ocean?"
+  // cites "Europa (moon)", while its subject is a phrase that names no article.
+  const cited = new Map();
+  for (const item of [...(topic.evidence || []), ...(topic.facts || []), ...((topic.raw && topic.raw.facts) || [])]) {
+    const title = wikiTitleFromUrl(item && item.url);
+    if (title) cited.set(title, (cited.get(title) || 0) + 1);
+  }
+  if (cited.size) {
+    const titles = [...cited.entries()].sort((a, b) => b[1] - a[1]).map(([title]) => title);
+    return { title: titles[0], titles, via: "article cited by the topic's verified evidence" };
   }
   const subject = String(topic.subject || "").replace(/^(the|a|an)\s+/i, "").trim();
   if (!subject) return null;
@@ -107,30 +120,42 @@ function roleFor(heading, index) {
 }
 
 // Pure transformation (unit-testable offline).
+// Sections are sampled round-robin, so the claim limit is spread over the
+// whole article (investigation, aftermath, lessons) instead of being used up
+// by the first few sections. Output stays in article order.
 function claimsFromExtract(extract, article, options = {}) {
   const limit = options.maxClaims || 160;
   const perSection = options.maxPerSection || 28;
   const url = `https://en.wikipedia.org/wiki/${encodeURIComponent(article.replace(/ /g, "_"))}`;
-  const claims = [];
   const seen = new Set();
-  for (const section of sectionsOf(extract)) {
+  const pools = [];
+  for (const [sectionIndex, section] of sectionsOf(extract).entries()) {
     if (SKIP_SECTIONS.test(section.heading)) continue;
-    let taken = 0;
+    const pool = [];
     for (const [index, sentence] of sentences(section.text).entries()) {
       const key = sentence.toLowerCase();
-      if (seen.has(key) || taken >= perSection || claims.length >= limit) continue;
+      if (seen.has(key) || pool.length >= perSection) continue;
       seen.add(key);
-      taken += 1;
-      claims.push({ text: sentence, role: roleFor(section.heading, index), section: section.heading, source: `Wikipedia — ${article}`, url, layer: "SECONDARY SOURCE (encyclopedia)", verbatim: false, licence: "CC BY-SA 4.0" });
+      pool.push({ sectionIndex, index, sentence, heading: section.heading });
+    }
+    if (pool.length) pools.push(pool);
+  }
+  const picked = [];
+  for (let round = 0; picked.length < limit && pools.some((pool) => pool.length > round); round += 1) {
+    for (const pool of pools) {
+      if (picked.length >= limit) break;
+      if (pool[round]) picked.push(pool[round]);
     }
   }
-  return claims;
+  picked.sort((a, b) => a.sectionIndex - b.sectionIndex || a.index - b.index);
+  return picked.map((item) => ({ text: item.sentence, role: roleFor(item.heading, item.index), section: item.heading, source: `Wikipedia — ${article}`, url, layer: "SECONDARY SOURCE (encyclopedia)", verbatim: false, licence: "CC BY-SA 4.0" }));
 }
 
 async function deepen(channel, topic, options = {}) {
   const cacheName = `research/${topic.slug}.deep.json`;
   const cached = options.fresh ? null : Store.readState(channel, "longform", cacheName, null);
-  if (cached && cached.channel === channel.slug && cached.claims && cached.claims.length) return cached;
+  // research-deep/2: balanced section sampling; older caches are rebuilt.
+  if (cached && cached.schema === DEEP_SCHEMA && cached.channel === channel.slug && cached.claims && cached.claims.length) return cached;
   if (options.offline) return { channel: channel.slug, slug: topic.slug, article: null, claims: [], status: "OFFLINE" };
   const choice = articleFor(topic);
   if (!choice) return { channel: channel.slug, slug: topic.slug, article: null, claims: [], status: "NO_ARTICLE" };
@@ -151,7 +176,7 @@ async function deepen(channel, topic, options = {}) {
   const imagePage = imagesRes.body && imagesRes.body.query ? Object.values(imagesRes.body.query.pages)[0] : null;
   const images = ((imagePage && imagePage.images) || []).map((image) => image.title.replace(/^File:/, ""))
     .filter((file) => /\.(jpe?g|png)$/i.test(file) && !/(logo|icon|flag|symbol|seal|coat of arms|question book|commons-|wiktionary|edit-clear|padlock|red pog|location map|locator)/i.test(file));
-  const value = { schema: "research-deep/1", channel: channel.slug, slug: topic.slug, article: page.title, via: choice.via, fetchedAt: (options.now || new Date()).toISOString(), licence: "CC BY-SA 4.0 — facts only; never narrate verbatim", claims, images, status: claims.length ? "OK" : "EMPTY" };
+  const value = { schema: DEEP_SCHEMA, channel: channel.slug, slug: topic.slug, article: page.title, via: choice.via, fetchedAt: (options.now || new Date()).toISOString(), licence: "CC BY-SA 4.0 — facts only; never narrate verbatim", claims, images, status: claims.length ? "OK" : "EMPTY" };
   if (options.write !== false) Store.writeState(channel, "longform", cacheName, value);
   return value;
 }

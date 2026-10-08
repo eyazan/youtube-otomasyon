@@ -22,3 +22,17 @@ Current FR/IB CI evidence: 46 growth tests + 2 report tests + 2 writer-preflight
 - Preflight says `CONFIGURED_NOT_TESTED`: credentials exist but model calls, text depth, accuracy and cost remain unverified.
 - Research fetch fails: check connectivity, content licence and whether primary-source enrichment is sufficient; do not pad Wikipedia paraphrases.
 - Long-form remains blocked: examine actual per-channel `LONGFORM-READINESS.md` and the two long-form dry-run reports, not the CI success badge.
+
+## Generation reliability (2026-10-09)
+
+Root causes found in runs #1–#8 and how they are handled now:
+
+| Symptom | Root cause | Fix |
+|---|---|---|
+| HTTP 413 / HTTP 429 at `section:*` | Outline put up to 105 claims in one section; sections were sent back-to-back with `max_completion_tokens: 5000` against an ~8K tokens-per-minute allowance | Deep claims placed by article heading, ≤ 14 per section; every request sized before sending (`LONGFORM_REQUEST_TOKEN_BUDGET`, default 7000); requests paced with `x-ratelimit-*` headers; `Retry-After` honoured up to `LONGFORM_LLM_MAX_WAIT_MS`, longer waits defer at once |
+| HTTP 400 "Failed to generate JSON" | `json_object` mode does not enforce a schema; `reasoning_format` is not supported for GPT-OSS | `json_schema` + `strict: true` (constrained decoding) per stage, claim ids as an `enum`; `include_reasoning: false`, `reasoning_effort: low` |
+| INVALID_SECTION | Model could cite ids loosely; any cited id was accepted | Paragraph support check: numbers must appear in the cited claims, ≥ 30% content-word overlap, no copied encyclopedia wording; one bounded repair; unsupported sections block the script |
+| Checkpoint not restored | Run #8 used `include-hidden-files: false`; key ignored model/prompt | Hidden sandbox archived (`if-no-files-found: error`) and restored automatically from the latest artifact; key = channel + topic + research hash + outline hash + model + prompt version + schema |
+| ImpossibleBrief had no depth | Subject phrase named no article | Article taken from the topic's own cited evidence URLs (exact, no search) |
+
+Stages persisted: research package → narrative blueprint → cold open → each section → citation validation → quality review → final script. A rate-limited run stops, records the failing stage and resumes from it on the next dispatch.

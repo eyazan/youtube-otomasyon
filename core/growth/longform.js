@@ -143,12 +143,61 @@ const SECTION_QUESTION = {
   FINAL_PAYOFF: "What is the precise answer to the opening question?", NEXT_CURIOSITY_BRIDGE: "Which related ordinary detail follows naturally?",
 };
 
+// Deep (encyclopedia) claims are placed by the article heading they came from
+// — "O-ring concerns" belongs to the hidden weakness, "Decision to launch" to
+// the critical moment — not by a coarse role, which had put 105 claims in one
+// section and none in others. Each section receives at most
+// MAX_DEEP_CLAIMS_PER_SECTION of them (in article order), which also keeps
+// every section request small enough for the provider's per-minute budget.
+const MAX_DEEP_CLAIMS_PER_SECTION = 14;
+const DEEP_HEADING_SECTIONS = {
+  "failure-reconstructed": [
+    [/concern|warning|erosion|defect|flaw|problem|issue|prior|previous|earlier|known|deficien|maintenance|inspection/i, "HIDDEN_WEAKNESS"],
+    [/decision|pre-?launch|preparation|countdown|weather|teleconference|meeting|approval|go\/no|launch (?:delay|schedule)/i, "CRITICAL_MOMENT"],
+    [/breakup|plume|sequence|chain|propagat|progression|structural failure/i, "FAILURE_CHAIN"],
+    [/cause|investigat|commission|inquiry|report|analysis|finding|technical|probable|mechanism/i, "ENGINEERING_EXPLANATION"],
+    [/death|casualt|victim|crew|recovery|search|salvage|aftermath|response|funeral|memorial|litigation|dialogue|rescue/i, "AFTERMATH"],
+    [/legacy|lesson|case study|significance/i, "FINAL_TAKEAWAY"],
+    [/change|reform|recommendation|safety|regulation|return to flight|redesign|modification|impact on|influence/i, "WHAT_CHANGED"],
+    [/background|design|vehicle|construction|history|development|description|overview|operation|technology|structure|specification|mission|shuttle|system|ship|aircraft|bridge|dam|plant|reactor/i, "SYSTEM"],
+    [/liftoff|ascent|launch|flight|disaster|accident|collapse|sinking|crash|explosion|fire|event|timeline|incident|eruption|flood|impact/i, "WHAT_HAPPENED"],
+  ],
+  "impossible-brief": [
+    [/far future|significance|implications|summary|fate/i, "FINAL_SCIENTIFIC_PAYOFF"],
+    [/uncertain|debate|hypothes|controvers|unknown|speculat|limit|open question|future/i, "LIMITS_UNCERTAINTIES"],
+    [/physic|mechanism|dynamics|theory|model|science|chemistry|thermodynamic|gravity|orbit|energy/i, "SCIENCE_EXPLANATION"],
+    [/formation|origin|properties|physical characteristics|structure|composition|overview|description|background|history|size|mass/i, "INITIAL_CONDITIONS"],
+    [/life|biolog|ecolog|human|society|culture|civiliz|agricultur|economy|habitab/i, "SYSTEM_WIDE_CONSEQUENCE"],
+    [/climate|atmosphere|weather|ocean|tide|surface|temperature|season|day|rotation/i, "SECOND_ORDER_EFFECT"],
+    [/effect|influence|impact|consequence|interaction|observation/i, "FIRST_EFFECT"],
+  ],
+};
+
+function deepSectionFor(channelSlug, claim, structure) {
+  if (claim.verbatim !== false || !claim.section) return null;
+  if (claim.section === "Lead") return structure.includes("CONSEQUENCE") ? "CONSEQUENCE" : structure.includes("IMPOSSIBLE_QUESTION") ? "IMPOSSIBLE_QUESTION" : null;
+  for (const [pattern, section] of DEEP_HEADING_SECTIONS[channelSlug] || []) if (pattern.test(claim.section) && structure.includes(section)) return section;
+  return null;
+}
+
 function outline(channel, topic, pkg, config) {
   const structure = (config.story && config.story.longform) || [];
   const used = new Set();
+  const deepBySection = new Map();
+  for (const claim of pkg.claims) {
+    const section = deepSectionFor(channel.slug, claim, structure);
+    if (!section) continue;
+    const list = deepBySection.get(section) || [];
+    if (list.length < MAX_DEEP_CLAIMS_PER_SECTION) { list.push(claim); used.add(claim.id); }
+    deepBySection.set(section, list);
+  }
   const sections = structure.map((name, index) => {
     const roles = SECTION_ROLES[name] || [];
-    const claims = pkg.claims.filter((claim) => roles.includes(claim.role) && (!used.has(claim.id) || name === "COLD_OPEN"));
+    const deep = deepBySection.get(name) || [];
+    const byRole = pkg.claims.filter((claim) => roles.includes(claim.role) && (!used.has(claim.id) || name === "COLD_OPEN")
+      && !(claim.verbatim === false && (deepSectionFor(channel.slug, claim, structure) || deep.length >= MAX_DEEP_CLAIMS_PER_SECTION)));
+    const roleDeep = byRole.filter((claim) => claim.verbatim === false).slice(0, Math.max(0, MAX_DEEP_CLAIMS_PER_SECTION - deep.length));
+    const claims = [...byRole.filter((claim) => claim.verbatim !== false), ...deep, ...roleDeep];
     if (name !== "COLD_OPEN") claims.forEach((claim) => used.add(claim.id));
     return { order: index + 1, section: name, question: SECTION_QUESTION[name] || null, claimIds: claims.map((claim) => claim.id), evidence: claims.length ? "available" : "MISSING" };
   });
@@ -245,16 +294,50 @@ function validateBlueprint(json, plan, cold, topic) {
   };
 }
 
-function validateGeneratedSection(json, section) {
+// ---------------------------------------------------------------------------
+// SUPPORT CHECK. A cited claim id is not proof: every paragraph must also be
+// carried by the text of the claims it cites — every number it states appears
+// in them, and a meaningful share of its content words does. A paragraph that
+// fails is rejected, never kept "with a warning".
+const SUPPORT_STOP = new Set(("this that with from were was have has had they them their there which what when where while would could should about into than then also because these those every only just more most some such very been being over under after before other its it's your you are the and for but not can could did does just even still again during through without within across between against among later early first finally however although though however").split(/\s+/));
+const numbersIn = (text) => [...new Set((String(text || "").match(/\d[\d,]*(?:\.\d+)?/g) || []).map((value) => value.replace(/,/g, "")))];
+const stems = (text) => (String(text || "").toLowerCase().match(/[a-z][a-z'-]{3,}/g) || []).filter((word) => !SUPPORT_STOP.has(word)).map((word) => word.slice(0, 6));
+
+function paragraphSupport(text, claims, minimumOverlap) {
+  const evidence = claims.map((claim) => claim.text).join(" ");
+  const evidenceNumbers = new Set(numbersIn(evidence));
+  const unsupportedNumbers = numbersIn(text).filter((value) => !evidenceNumbers.has(value));
+  const own = [...new Set(stems(text))];
+  const available = new Set(stems(evidence));
+  const overlap = own.length ? own.filter((stem) => available.has(stem)).length / own.length : 0;
+  const copied = Research.copyRisk(text, claims);
+  const reasons = [];
+  if (unsupportedNumbers.length) reasons.push(`numbers not in cited claims: ${unsupportedNumbers.join(", ")}`);
+  if (overlap < minimumOverlap) reasons.push(`only ${Math.round(overlap * 100)}% of content words are in the cited claims`);
+  if (copied) reasons.push(`copies source wording ("${copied.overlap}")`);
+  return { supported: !reasons.length, overlap: Math.round(overlap * 100) / 100, reasons };
+}
+
+function validateGeneratedSection(json, section, claimsById = new Map(), options = {}) {
   const allowed = new Set(section.claimIds || []);
+  const minimumOverlap = options.minimumOverlap != null ? options.minimumOverlap : 0.3;
   const body = json && json.section && typeof json.section === "object" ? json.section : json;
-  const paragraphs = (body && Array.isArray(body.paragraphs) ? body.paragraphs : []).map((paragraph) => ({
-    text: finish(paragraph && paragraph.text),
-    claims: [...new Set((paragraph && Array.isArray(paragraph.claims) ? paragraph.claims : []).filter((id) => allowed.has(id)))],
-    role: "evidence",
-  })).filter((paragraph) => paragraph.text && paragraph.claims.length);
-  if (section.claimIds.length && !paragraphs.length) throw new Provider.LongformProviderError("INVALID_SECTION", `provider returned no claim-mapped paragraphs for ${section.section}`, { stage: `section:${section.section}`, retryable: true, defer: true });
-  return { section: section.section, paragraphs };
+  const accepted = [];
+  const rejected = [];
+  for (const paragraph of body && Array.isArray(body.paragraphs) ? body.paragraphs : []) {
+    const text = finish(paragraph && paragraph.text);
+    const ids = [...new Set((paragraph && Array.isArray(paragraph.claims) ? paragraph.claims : []).filter((id) => allowed.has(id)))];
+    if (!text) continue;
+    if (!ids.length) { rejected.push({ text: text.slice(0, 120), reasons: ["no valid claim ids"] }); continue; }
+    const cited = ids.map((id) => claimsById.get(id)).filter(Boolean);
+    const support = claimsById.size ? paragraphSupport(text, cited, minimumOverlap) : { supported: true, overlap: null, reasons: [] };
+    if (!support.supported) { rejected.push({ text: text.slice(0, 120), reasons: support.reasons }); continue; }
+    accepted.push({ text, claims: ids, role: "evidence", support: support.overlap });
+  }
+  if (section.claimIds.length && !accepted.length) {
+    throw Object.assign(new Provider.LongformProviderError("INVALID_SECTION", `no supported, claim-mapped paragraphs for ${section.section}`, { stage: `section:${section.section}` }), { rejected });
+  }
+  return { section: section.section, paragraphs: accepted, rejected };
 }
 
 function continuityAndRetention(sections, plan, config) {
@@ -296,116 +379,224 @@ function continuityAndRetention(sections, plan, config) {
   return { sections: cleaned, quality: { duplicateSections, repeatedPhrases, weakHook, payoff, filler, introShare: wordsTotal ? Math.round(introWords / wordsTotal * 100) / 100 : 0, missingPlanSections, hardFails, notes } };
 }
 
-async function llmScript(channel, topic, pkg, plan, cold, config, options = {}) {
-  const configured = Provider.configuration();
-  const hash = topicHash(topic) + `:${pkg.claims.length}`;
-  const existing = Store.readState(channel, "longform", generationFile(topic), null);
-  const state = existing && existing.channel === channel.slug && existing.topicHash === hash ? existing : {
-    schema: "longform-generation/2",
+// Checkpoint compatibility: a checkpoint is resumed only for the same channel,
+// topic, research evidence, section plan, model, prompt version and schema.
+// Anything else starts fresh (the old file is kept as <slug>.stale.json).
+const GENERATION_SCHEMA = "longform-generation/3";
+const PROMPT_VERSION = "lf-prompts-2026-10-09.1";
+const sha = (value) => crypto.createHash("sha1").update(typeof value === "string" ? value : JSON.stringify(value)).digest("hex").slice(0, 16);
+
+function generationKey(channel, topic, pkg, plan, model) {
+  return {
+    schema: GENERATION_SCHEMA,
+    promptVersion: PROMPT_VERSION,
     channel: channel.slug,
     slug: topic.slug,
-    topicHash: hash,
+    researchHash: sha(pkg.claims.map((claim) => [claim.id, claim.text, claim.source])),
+    outlineHash: sha(plan.sections.map((section) => [section.section, section.claimIds])),
+    model,
+  };
+}
+
+const BLUEPRINT_SCHEMA = {
+  type: "object", additionalProperties: false,
+  required: ["central_question", "audience_promise", "narrative_angle", "hook_candidates", "retention_beats", "uncertain_claims"],
+  properties: {
+    central_question: { type: "string" }, audience_promise: { type: "string" }, narrative_angle: { type: "string" },
+    hook_candidates: { type: "array", items: { type: "string" } }, retention_beats: { type: "array", items: { type: "string" } },
+    uncertain_claims: { type: "array", items: { type: "string" } },
+  },
+};
+
+function sectionSchema(ids) {
+  return {
+    type: "object", additionalProperties: false, required: ["paragraphs", "depth_note"],
+    properties: {
+      paragraphs: { type: "array", items: { type: "object", additionalProperties: false, required: ["text", "claims"],
+        properties: { text: { type: "string" }, claims: { type: "array", items: { type: "string", enum: ids } } } } },
+      depth_note: { type: "string" },
+    },
+  };
+}
+
+const CHANNEL_WRITING = {
+  "failure-reconstructed": "Forensic engineering documentary. Explain the verified mechanism, the order of events, the root causes and what changed. Precise, sober, no dramatisation beyond the evidence.",
+  "impossible-brief": "Cinematic scientific what-if. Physically consistent assumptions, explicit uncertainty, quantities only when a claim states them. Label modelled or speculative steps as such.",
+};
+
+async function llmScript(channel, topic, pkg, plan, cold, config, options = {}) {
+  const configured = Provider.configuration();
+  const now = () => (options.now || new Date()).toISOString();
+  const key = generationKey(channel, topic, pkg, plan, configured.primary.model);
+  const existing = Store.readState(channel, "longform", generationFile(topic), null);
+  const compatible = existing && existing.key && JSON.stringify(existing.key) === JSON.stringify(key);
+  if (existing && !compatible && options.write !== false) Store.writeState(channel, "longform", `generation/${topic.slug}.stale.json`, existing);
+  const state = compatible ? existing : {
+    schema: GENERATION_SCHEMA,
+    key,
+    channel: channel.slug,
+    slug: topic.slug,
     status: "RUNNING",
-    createdAt: (options.now || new Date()).toISOString(),
-    updatedAt: (options.now || new Date()).toISOString(),
+    createdAt: now(),
+    updatedAt: now(),
     provider: { primary: configured.primary.name, fallback: configured.fallback && configured.fallback.name || null },
     factPack: factPack(topic, pkg),
+    stages: { research: { status: "COMPLETE", at: now(), claims: pkg.claims.length, researchHash: key.researchHash } },
     blueprint: null,
     sections: [],
-    usage: { input_tokens: 0, output_tokens: 0 },
+    sectionAttempts: {},
+    usage: { input_tokens: 0, output_tokens: 0, requests: 0 },
   };
+  state.runs = (state.runs || 0) + 1;
+  state.resumedFrom = compatible ? (existing.status || null) : null;
+  state.status = "RUNNING";
+  delete state.error;
+  const save = (stage) => { if (stage) state.lastCompletedStage = stage; state.updatedAt = now(); writeGeneration(channel, topic, state, options); };
   const onEvent = (event) => providerEvent(channel, event, options);
+  const claimsById = new Map(pkg.claims.map((claim) => [claim.id, claim]));
+  const minimumOverlap = config.longform.minimumSupportOverlap != null ? config.longform.minimumSupportOverlap : 0.3;
   const call = async (input) => {
     const response = await Provider.generateJson(input, { config: configured, onEvent, dependencies: options.providerDependencies || {} });
     state.providerUsed = response.provider;
     state.model = response.model;
     state.usage.input_tokens += response.usage && response.usage.input_tokens || 0;
     state.usage.output_tokens += response.usage && response.usage.output_tokens || 0;
+    state.usage.requests += 1;
     return response.json;
   };
   try {
+    // 1) Narrative blueprint (one small request).
     if (!state.blueprint) {
       const json = await call({
         stage: "narrative-angle",
-        maxTokens: 1200,
+        schema: BLUEPRINT_SCHEMA,
+        schemaName: "narrative_blueprint",
+        maxTokens: 900,
         system: [
           `You plan evidence-led narration for ${channel.name}, a ${config.identity}.`,
-          "Use only the supplied claims. Do not answer with outside knowledge. Put anything unsupported in uncertain_claims.",
-          "Return JSON only with central_question, audience_promise, narrative_angle, hook_candidates, retention_beats, uncertain_claims.",
-        ].join("\n"),
-        // Narrative planning needs identifiers and short evidence statements, not
-        // whole source objects/visual metadata. Full citations remain in pkg
-        // and are supplied to later claim-mapped writing/review stages.
+          CHANNEL_WRITING[channel.slug] || "",
+          "Use only the supplied claims; do not add outside knowledge. List anything the claims do not support in uncertain_claims.",
+          "Return central_question, audience_promise, narrative_angle (2 sentences), up to 5 hook_candidates, up to 8 retention_beats.",
+        ].filter(Boolean).join("\n"),
         user: JSON.stringify({
           question: state.factPack.central_question,
-          verified_facts: state.factPack.verified_facts.slice(0, 24).map(x => ({ id: x.id, text: String(x.text).slice(0, 260) })),
-          interpretations: state.factPack.bounded_interpretations.slice(0, 8).map(x => ({ id: x.id, text: String(x.text).slice(0, 180) })),
-          outline: plan.sections.map(x => ({ section: x.section, question: x.question, claimIds: x.claimIds })),
-          selected_cold_open: cold.selected && String(cold.selected.text).slice(0, 360),
+          facts: state.factPack.verified_facts.slice(0, 30).map((fact) => ({ id: fact.id, text: String(fact.text).slice(0, 170) })),
+          interpretations: state.factPack.bounded_interpretations.slice(0, 6).map((fact) => ({ id: fact.id, text: String(fact.text).slice(0, 150) })),
+          sections: plan.sections.map((section) => section.section),
         }),
       });
       state.blueprint = validateBlueprint(json, plan, cold, topic);
-      state.updatedAt = (options.now || new Date()).toISOString();
-      writeGeneration(channel, topic, state, options);
+      state.stages.blueprint = { status: "COMPLETE", at: now() };
+      save("blueprint");
     }
+    // 2) Cold open: the selected claim-derived opening (no model call).
+    if (!state.sections.some((item) => item.section === "COLD_OPEN") && plan.sections.some((section) => section.section === "COLD_OPEN")) {
+      state.sections.push({ section: "COLD_OPEN", paragraphs: cold.selected ? [{ text: finish(cold.selected.text), claims: [], role: "cold-open" }] : [] });
+      state.stages.coldOpen = { status: "COMPLETE", at: now(), text: cold.selected ? cold.selected.text : null };
+      save("cold-open");
+    }
+    // 3) Sections, one request each; a completed section is never regenerated.
+    state.stages.sections = state.stages.sections || {};
+    const evidenceSections = plan.sections.filter((item) => item.claimIds.length && item.section !== "COLD_OPEN").length || 1;
     for (const section of plan.sections) {
-      if (state.sections.some((item) => item.section === section.section)) continue;
-      if (section.section === "COLD_OPEN") {
-        state.sections.push({ section: section.section, paragraphs: cold.selected ? [{ text: finish(cold.selected.text), claims: [], role: "cold-open" }] : [] });
-      } else if (!section.claimIds.length) state.sections.push({ section: section.section, paragraphs: [] });
-      else {
-        const claims = pkg.claims.filter((claim) => section.claimIds.includes(claim.id)).map((claim) => ({ id: claim.id, text: claim.text, class: claim.class, rewrite: claim.verbatim === false, source: claim.source }));
-        const targetWords = Math.max(90, Math.round(config.longform.targetMinutes[0] * config.longform.wordsPerMinute / Math.max(1, plan.sections.filter((item) => item.claimIds.length).length)));
-        const json = await call({
-          stage: `section:${section.section}`,
-          maxTokens: 5000,
-          system: [
-            `Write one section for ${channel.name}. Use only the claim IDs provided for this section.`,
-            "Every paragraph must list the claim IDs that support it. Never add an unsupported fact, number, date, quote, cause, or purpose.",
-            "Rewrite claims marked rewrite:true; do not copy an eight-word phrase. Preserve MODEL/SPECULATION labels. No filler, recap, CTA, or invented connective fact.",
-            `Aim for at most ${targetWords} words, and write less when evidence is thin.`,
-            'Return JSON only: {"section":{"name":"SECTION_NAME","paragraphs":[{"text":"...","claims":["C1"]}]},"depth_note":"..."}',
-          ].join("\n"),
-          user: JSON.stringify({ topic: topic.title, narrative_angle: state.blueprint.narrative_angle, section, claims, previous_section: state.sections[state.sections.length - 1] || null }),
-        });
-        let validated;
-        try {
-          validated = validateGeneratedSection(json, section);
-        } catch (error) {
-          if (error.code !== "INVALID_SECTION") throw error;
-          // One bounded repair attempt: preserve strict claim mapping; never
-          // accept uncited output or fabricate paragraphs.
-          const repaired = await call({
-            stage: `section:${section.section}:repair`,
-            maxTokens: 2400,
-            system: [
-              "Repair the JSON section using ONLY the supplied claim IDs.",
-              "Each paragraph must have non-empty text and a non-empty claims array with exact provided IDs.",
-              "Do not add new facts or use unsupported statements. If evidence is thin, be concise.",
-              'Return JSON only: {"section":{"paragraphs":[{"text":"...","claims":["EXACT_ID"]}]}}',
-            ].join("\n"),
-            user: JSON.stringify({ section: section.section, claims, previous_output: json }),
-          });
-          validated = validateGeneratedSection(repaired, section);
-        }
-        state.sections.push(validated);
-        if (json.depth_note) state.depthNote = [state.depthNote, String(json.depth_note)].filter(Boolean).join(" ");
+      if (section.section === "COLD_OPEN") continue;
+      const done = state.sections.find((item) => item.section === section.section);
+      if (done) continue;
+      if (!section.claimIds.length) {
+        state.sections.push({ section: section.section, paragraphs: [] });
+        state.stages.sections[section.section] = { status: "NO_EVIDENCE", at: now() };
+        save(`section:${section.section}`);
+        continue;
       }
-      state.updatedAt = (options.now || new Date()).toISOString();
-      writeGeneration(channel, topic, state, options);
+      // A section the model could not support twice (two runs, each with one
+      // repair) is not retried again; the review blocks the script. Rate
+      // limits and network errors never count as attempts.
+      const unsupportedRuns = state.sectionAttempts[section.section] || 0;
+      if (unsupportedRuns >= 2) continue;
+      const all = section.claimIds.map((id) => claimsById.get(id)).filter(Boolean);
+      const evidenceWords = all.reduce((sum, claim) => sum + words(claim.text), 0);
+      const fairShare = Math.round(config.longform.targetMinutes[1] * config.longform.wordsPerMinute / evidenceSections);
+      const targetWords = Math.max(60, Math.min(fairShare, Math.round(evidenceWords * 0.6)));
+      const maxTokens = Math.min(2000, Math.round(targetWords * 1.6) + 500);
+      let claims = all.map((claim) => ({ id: claim.id, text: String(claim.text).slice(0, 300), class: claim.class, rewrite: claim.verbatim === false }));
+      const system = [
+        `Write the ${section.section} section of a ${channel.name} long-form documentary (${config.identity}).`,
+        CHANNEL_WRITING[channel.slug] || "",
+        "Use ONLY the claims provided. Every paragraph lists the ids of the claims it states. Never add a fact, number, date, name, quote, cause or purpose that is not in those claims.",
+        "Claims marked rewrite:true must be paraphrased (never copy 8+ consecutive words). Keep MODEL/SPECULATION/INTERPRETATION claims labelled as such.",
+        `Spoken narration, 2-4 paragraphs, about ${targetWords} words — fewer if the claims are thin. No filler, recap, call to action or invented transition fact.`,
+        "depth_note: one short sentence on what evidence was missing, or an empty string.",
+      ].filter(Boolean).join("\n");
+      const user = () => JSON.stringify({ topic: topic.title, angle: state.blueprint.narrative_angle, section: { section: section.section, question: section.question },
+        claims, previous: (() => { const last = state.sections[state.sections.length - 1]; const paragraph = last && last.paragraphs[last.paragraphs.length - 1]; return paragraph ? paragraph.text.slice(0, 300) : null; })() });
+      // Keep the request inside the per-request budget by dropping the last
+      // (lowest-priority) claims, never by truncating the instructions.
+      const budget = Provider.requestBudget();
+      while (claims.length > 4 && Provider.estimateTokens(system) + Provider.estimateTokens(user()) + Provider.estimateTokens(JSON.stringify(sectionSchema(claims.map((claim) => claim.id)))) + maxTokens > budget) claims = claims.slice(0, -1);
+      const ids = claims.map((claim) => claim.id);
+      const scoped = { ...section, claimIds: ids };
+      const json = await call({ stage: `section:${section.section}`, schema: sectionSchema(ids), schemaName: "documentary_section", maxTokens, system, user: user() });
+      let validated;
+      try {
+        validated = validateGeneratedSection(json, scoped, claimsById, { minimumOverlap });
+        // Mostly rejected output gets the one repair attempt as well.
+        const kept = validated.paragraphs.reduce((sum, item) => sum + words(item.text), 0);
+        const lost = validated.rejected.length;
+        if (lost && kept < targetWords * 0.5) throw Object.assign(new Provider.LongformProviderError("INVALID_SECTION", `most of ${section.section} was unsupported`, { stage: `section:${section.section}` }), { rejected: validated.rejected });
+      } catch (error) {
+        if (error.code !== "INVALID_SECTION") throw error;
+        const repaired = await call({
+          stage: `section:${section.section}:repair`,
+          schema: sectionSchema(ids),
+          schemaName: "documentary_section",
+          maxTokens,
+          system: [system, "Your previous paragraphs were rejected for the reasons listed. Rewrite them so that every statement, name and number comes from the cited claims."].join("\n"),
+          user: JSON.stringify({ section: section.section, claims, rejected: (error.rejected || []).slice(0, 6) }),
+        });
+        try { validated = validateGeneratedSection(repaired, scoped, claimsById, { minimumOverlap }); }
+        catch (repairError) {
+          if (repairError.code !== "INVALID_SECTION") throw repairError;
+          state.sectionAttempts[section.section] = unsupportedRuns + 1;
+          state.stages.sections[section.section] = { status: "UNSUPPORTED", at: now(), unsupportedRuns: state.sectionAttempts[section.section], rejected: (repairError.rejected || []).slice(0, 6) };
+          save();
+          continue;
+        }
+      }
+      state.sections.push({ section: section.section, paragraphs: validated.paragraphs });
+      state.stages.sections[section.section] = { status: "COMPLETE", at: now(), paragraphs: validated.paragraphs.length, rejected: validated.rejected.length, words: validated.paragraphs.reduce((sum, item) => sum + words(item.text), 0) };
+      if (json.depth_note) state.depthNote = [state.depthNote, String(json.depth_note)].filter(Boolean).join(" ");
+      save(`section:${section.section}`);
     }
+    // Sections are stored in completion order; present them in plan order.
+    const order = new Map(plan.sections.map((section, index) => [section.section, index]));
+    state.sections.sort((a, b) => order.get(a.section) - order.get(b.section));
+    // 4) Citation validation (deterministic).
+    const citations = claimSourceMap({ sections: state.sections }, pkg, topic);
+    state.stages.citations = { status: citations.unsupportedParagraphs || citations.unsupportedNumbers.length || citations.copyRisks.length ? "FAILED" : "COMPLETE", at: now(),
+      unsupportedParagraphs: citations.unsupportedParagraphs, unsupportedNumbers: citations.unsupportedNumbers, copyRisks: citations.copyRisks.length };
+    save("citations");
+    // 5) Quality review (deterministic): continuity, repetition, payoff, depth.
     const checked = continuityAndRetention(state.sections, plan, config);
+    const text = checked.sections.flatMap((section) => section.paragraphs.map((paragraph) => paragraph.text)).join(" ");
+    const minutes = Math.round(words(text) / config.longform.wordsPerMinute * 10) / 10;
+    const unsupportedSections = Object.entries(state.stages.sections).filter(([, value]) => value.status === "UNSUPPORTED").map(([name]) => name);
+    if (unsupportedSections.length) checked.quality.hardFails.push(`unsupported sections after repair: ${unsupportedSections.join(", ")}`);
+    if (state.stages.citations.status === "FAILED") checked.quality.hardFails.push("citation validation failed");
     state.sections = checked.sections;
-    state.quality = checked.quality;
+    state.quality = { ...checked.quality, minutes, words: words(text) };
+    state.stages.review = { status: checked.quality.hardFails.length ? "BLOCKED" : "COMPLETE", at: now(), minutes, hardFails: checked.quality.hardFails };
+    save("review");
+    // 6) Final script.
     state.status = checked.quality.hardFails.length ? "QUALITY_REVIEW" : "COMPLETE";
-    state.updatedAt = (options.now || new Date()).toISOString();
-    writeGeneration(channel, topic, state, options);
+    state.stages.final = { status: state.status, at: now(), words: words(text), minutes };
+    save("final");
     return {
       generator: `llm:${state.providerUsed || configured.primary.name}:${state.model || configured.primary.model}`,
       provider: state.providerUsed || configured.primary.name,
       model: state.model || configured.primary.model,
       status: state.status,
-      pipeline: ["TOPIC", "RESEARCH_EVIDENCE", "FACT_PACK", "NARRATIVE_ANGLE", "OUTLINE", "SECTION_PLAN", "SECTION_GENERATION", "CONTINUITY_PASS", "RETENTION_PASS", "FACTUAL_CONSISTENCY_CHECK", "FINAL_VOICEOVER_SCRIPT"],
+      pipeline: ["RESEARCH_PACKAGE", "NARRATIVE_BLUEPRINT", "COLD_OPEN", "SECTIONS", "CITATION_VALIDATION", "QUALITY_REVIEW", "FINAL_SCRIPT"],
+      stages: state.stages,
       factPack: state.factPack,
       blueprint: state.blueprint,
       sections: state.sections,
@@ -413,12 +604,12 @@ async function llmScript(channel, topic, pkg, plan, cold, config, options = {}) 
       depthNote: state.depthNote || null,
       usage: state.usage,
       checkpoint: generationFile(topic),
+      resumedFrom: state.resumedFrom,
     };
   } catch (error) {
     state.status = error.defer ? "DEFERRED" : "FAILED";
-    state.error = { code: error.code || "UNKNOWN", provider: error.provider || configured.primary.name, stage: error.stage || null, retryable: !!error.retryable, retryAfterMs: error.retryAfterMs || null };
-    state.updatedAt = (options.now || new Date()).toISOString();
-    writeGeneration(channel, topic, state, options);
+    state.error = { code: error.code || "UNKNOWN", provider: error.provider || configured.primary.name, stage: error.stage || null, retryable: !!error.retryable, retryAfterMs: error.retryAfterMs || null, message: error.message ? Provider.sanitizeReason(error.message) : null };
+    save();
     throw error;
   }
 }
@@ -665,6 +856,7 @@ function gate(inputs, config) {
     notes.push(`LLM generation safely deferred at ${script.llmErrorStage || "an intermediate stage"}; resume from ${script.checkpoint || "the channel checkpoint"}`);
   }
   if (script.llmStatus === "FAILED") hardFails.push(`LLM generation failed safely (${script.llmErrorCode || "UNKNOWN"}); deterministic evidence draft retained`);
+  if (script.quality && Array.isArray(script.quality.hardFails) && script.quality.hardFails.length) hardFails.push(...script.quality.hardFails.map((item) => `script review: ${item}`));
   if (!endScreen.primary_next_video) notes.push("no same-channel next episode yet; end screen points to playlist + subscribe");
   return Readiness.longform({ dimensions: d, hardFails, notes }, config);
 }
@@ -799,4 +991,5 @@ function summary(pkg) {
 module.exports = {
   researchPackage, outline, coldOpens, deterministicScript, llmScript, claimSourceMap, scriptStats, scenePlan,
   thumbnails, derivedShorts, costEstimate, gate, buildPackage, summary, topicHash, SECTION_ROLES, llmAvailable,
+  validateGeneratedSection, paragraphSupport, generationKey, GENERATION_SCHEMA, PROMPT_VERSION, MAX_DEEP_CLAIMS_PER_SECTION,
 };
