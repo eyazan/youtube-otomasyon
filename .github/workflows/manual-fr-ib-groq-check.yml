@@ -22,6 +22,11 @@ on:
         required: false
         type: boolean
         default: false
+      retry_unsupported:
+        description: Retry sections that ended UNSUPPORTED (completed sections are kept)
+        required: false
+        type: boolean
+        default: false
       stop_after_requests:
         description: Verification only — simulate a rate limit after N requests (blank = off)
         required: false
@@ -57,6 +62,7 @@ jobs:
       LONGFORM_REQUEST_TOKEN_BUDGET: ${{ vars.LONGFORM_REQUEST_TOKEN_BUDGET || '7000' }}
       GH_TOKEN: ${{ github.token }}
       LONGFORM_TEST_STOP_AFTER_REQUESTS: ${{ inputs.stop_after_requests }}
+      LONGFORM_RETRY_UNSUPPORTED: ${{ inputs.retry_unsupported && '1' || '0' }}
     steps:
       - name: Checkout the dispatched commit (not main production)
         uses: actions/checkout@v4

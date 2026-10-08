@@ -350,9 +350,9 @@ function paragraphSupport(text, claims, minimumOverlap) {
   // acronym in the paragraph (not the first word of a sentence) must occur in
   // the cited claims.
   const evidenceLower = evidence.toLowerCase();
-  const names = [...new Set((String(text).match(/(?<![.!?]\s|^)\b(?:[A-Z][a-z]+(?:[-'’][A-Za-z]+)?|[A-Z]{2,}[a-z]?)\b/g) || [])
+  const names = [...new Set((String(text).match(/(?<![.!?]\s|^)\b(?:[A-Z][a-z]+(?:-[A-Za-z]+)?|[A-Z]{2,}[a-z]?)\b/g) || [])
     .filter((name) => !SUPPORT_STOP.has(name.toLowerCase()) && !/^(?:The|A|An|In|On|At|By|For|But|And|Yet|When|While|After|Before|During|Within|That|This|These|Those|It|Its|They|Their|Even|Only|Then|Now|So|Once|Because|Although|Though|As|With|From|Instead)$/.test(name)))];
-  const unknownNames = names.filter((name) => !evidenceLower.includes(name.toLowerCase()));
+  const unknownNames = names.filter((name) => !evidenceLower.includes(name.toLowerCase().replace(/['’]s$/, "")));
   const reasons = [];
   if (unknownNames.length) reasons.push(`names not in cited claims: ${unknownNames.slice(0, 5).join(", ")}`);
   if (unsupportedNumbers.length) reasons.push(`numbers not in cited claims: ${unsupportedNumbers.join(", ")}`);
@@ -506,6 +506,13 @@ async function llmScript(channel, topic, pkg, plan, cold, config, options = {}) 
     usage: { input_tokens: 0, output_tokens: 0, requests: 0 },
   };
   state.runs = (state.runs || 0) + 1;
+  // Operator option: give sections that ended UNSUPPORTED one more chance
+  // without regenerating the completed ones (LONGFORM_RETRY_UNSUPPORTED=1).
+  if (compatible && Provider.envValue("LONGFORM_RETRY_UNSUPPORTED") === "1") {
+    for (const [name, value] of Object.entries((state.stages && state.stages.sections) || {})) {
+      if (value.status === "UNSUPPORTED") { state.sectionAttempts[name] = 0; value.status = "RETRY"; }
+    }
+  }
   state.resumedFrom = compatible ? (existing.status || null) : null;
   state.status = "RUNNING";
   delete state.error;
@@ -642,8 +649,12 @@ async function llmScript(channel, topic, pkg, plan, cold, config, options = {}) 
           schema: sectionSchema(ids),
           schemaName: "documentary_section",
           maxTokens,
-          system: [system, "Your previous paragraphs were rejected for the reasons listed. Rewrite them so that every statement, name and number comes from the cited claims."].join("\n"),
-          user: JSON.stringify({ section: section.section, claims, rejected: (error.rejected || []).slice(0, 6) }),
+          system: [system, "Your previous paragraphs were rejected for the reasons listed. Rewrite them so that every statement, name and number comes from the cited claims.",
+            "Keep the evidence terms in keep_terms, but build new sentences around them: never reuse a run of 8+ words from a claim."].join("\n"),
+          user: JSON.stringify({ section: section.section, claims, rejected: (error.rejected || []).slice(0, 6),
+            // Terms the rewrite should keep so it stays anchored to the evidence
+            // while avoiding the source's sentence wording.
+            keep_terms: [...new Set(claims.flatMap((claim) => (claim.text.match(/\b[A-Za-z][A-Za-z-]{4,}\b/g) || [])).map((word) => word.toLowerCase()).filter((word) => !SUPPORT_STOP.has(word)))].slice(0, 30) }),
         });
         try { validated = validateGeneratedSection(repaired, scoped, claimsById, { minimumOverlap }); }
         catch (repairError) {

@@ -287,3 +287,44 @@ test("names in a paragraph must come from the cited claims", () => {
   assert.equal(reasons("During the teleconference, Lawrence Mulloy, who ran NASA's SRB project, dismissed the analysis from Thiokol engineers."), "");
   assert.match(reasons("During the teleconference, Richard Feynman dismissed the analysis from Thiokol engineers."), /names not in cited claims: Richard, Feynman/);
 });
+
+test("retry_unsupported re-asks only the sections that ended UNSUPPORTED", async () => {
+  const sandbox = fs.mkdtempSync(path.join(os.tmpdir(), "lf-retry-"));
+  const saved = process.env.GROWTH_STATE_ROOT;
+  try {
+    await withEnv({ LONGFORM_LLM_PROVIDER: "groq", GROQ_API_KEY: "k", LONGFORM_LLM_MAX_ATTEMPTS: "1" }, async () => {
+      const { channel, topic, config, pkg, plan, cold } = await setup(sandbox);
+      const target = plan.sections.find((section) => section.section !== "COLD_OPEN" && section.claimIds.length).section;
+      const make = (bad) => {
+        const stages = [];
+        const fetch = async (url, request) => {
+          const body = JSON.parse(request.body);
+          const input = JSON.parse(body.messages[1].content);
+          const name = body.response_format.json_schema && body.response_format.json_schema.name;
+          const sec = input.section && (input.section.section || input.section);
+          stages.push(name === "narrative_blueprint" ? "blueprint" : name === "cold_open" ? "cold-open" : `section:${sec}`);
+          if (name === "narrative_blueprint") return response(200, groqBody({ central_question: "Why?", audience_promise: "A.", narrative_angle: "B.", hook_candidates: [], retention_beats: [], uncertain_claims: [] }));
+          if (name === "cold_open") return response(200, groqBody({ lines: [] }));
+          const claims = input.claims || [];
+          const paragraphs = bad && sec === target ? [{ text: "Martian pirates invented this in 3021.", claims: [claims[0].id] }] : claims.slice(0, 2).map((claim) => ({ text: claim.text, claims: [claim.id] }));
+          return response(200, groqBody({ paragraphs, depth_note: "" }));
+        };
+        return { fetch, stages };
+      };
+      for (let i = 0; i < 2; i += 1) await Longform.llmScript(channel, topic, pkg, plan, cold, config, { write: true, providerDependencies: { fetch: make(true).fetch, sleep: async () => {} } });
+      const skipped = make(false);
+      await Longform.llmScript(channel, topic, pkg, plan, cold, config, { write: true, providerDependencies: { fetch: skipped.fetch, sleep: async () => {} } });
+      assert.deepEqual(skipped.stages, [], "two unsupported runs: the section is not asked again by default");
+      process.env.LONGFORM_RETRY_UNSUPPORTED = "1";
+      const retried = make(false);
+      const result = await Longform.llmScript(channel, topic, pkg, plan, cold, config, { write: true, providerDependencies: { fetch: retried.fetch, sleep: async () => {} } });
+      delete process.env.LONGFORM_RETRY_UNSUPPORTED;
+      assert.deepEqual(retried.stages, [`section:${target}`]);
+      assert.ok(result.sections.some((section) => section.section === target && section.paragraphs.length));
+    });
+  } finally {
+    delete process.env.LONGFORM_RETRY_UNSUPPORTED;
+    if (saved === undefined) delete process.env.GROWTH_STATE_ROOT; else process.env.GROWTH_STATE_ROOT = saved;
+    fs.rmSync(sandbox, { recursive: true, force: true });
+  }
+});
