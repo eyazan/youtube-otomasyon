@@ -143,6 +143,7 @@ test("long-form checkpoints a 429-deferred section and resumes without regenerat
         resumedSystems.push(request.messages[0].content);
         const input = JSON.parse(request.messages[1].content);
         const claim = input.claims && input.claims[0];
+        if (request.response_format.json_schema && request.response_format.json_schema.name === "fact_check") return response(200, groqBody({ issues: [] }));
         if (request.response_format.json_schema && request.response_format.json_schema.name === "cold_open") {
           return response(200, groqBody({ lines: (input.claims || []).slice(0, 2).map((item) => ({ text: item.text, claims: [item.id] })) }));
         }

@@ -146,8 +146,9 @@ function fakeGroq(options = {}) {
     const body = JSON.parse(request.body);
     const input = JSON.parse(body.messages[1].content);
     const name = body.response_format.json_schema && body.response_format.json_schema.name;
-    stages.push(name === "narrative_blueprint" ? "blueprint" : name === "cold_open" ? "cold-open" : `section:${input.section && input.section.section || input.section}`);
+    stages.push(name === "narrative_blueprint" ? "blueprint" : name === "cold_open" ? "cold-open" : name === "fact_check" ? "factcheck" : `section:${input.section && input.section.section || input.section}`);
     if (options.failAt && calls === options.failAt) return response(429, {}, { "retry-after": "3600" });
+    if (name === "fact_check") return response(200, groqBody({ issues: [] }));
     if (name === "narrative_blueprint") return response(200, groqBody({ central_question: "Why?", audience_promise: "Answer.", narrative_angle: "Follow the evidence.", hook_candidates: [], retention_beats: [], uncertain_claims: [] }));
     if (name === "cold_open") return response(200, groqBody({ lines: (input.claims || []).slice(0, 2).map((claim) => ({ text: claim.text.split(" ").slice(0, 12).join(" "), claims: [claim.id] })) }));
     const claims = input.claims || [];
@@ -234,7 +235,8 @@ test("checkpoint survives a separate process (like a later GitHub Actions run)",
       (async()=>{const ch=C.getChannel("behind-the-ordinary");const ctx=X.build(ch);const t=ctx.inventory.find(i=>i.slug==="why-jeans-have-a-tiny-pocket");const cfg=G.forChannel(ch);
       const pkg=L.researchPackage(ch,t,{write:true});const plan=L.outline(ch,t,pkg,cfg);const cold=L.coldOpens(t,cfg,[]);const stages=[];
       const fetch=async(u,r)=>{const b=JSON.parse(r.body);const i=JSON.parse(b.messages[1].content);const n=b.response_format.json_schema&&b.response_format.json_schema.name;
-        stages.push(n==="narrative_blueprint"?"blueprint":"section");
+        stages.push(n==="narrative_blueprint"?"blueprint":n==="fact_check"?"factcheck":"section");
+        if(n==="fact_check")return{ok:true,status:200,headers:{get:()=>null},json:async()=>({choices:[{message:{content:JSON.stringify({issues:[]})}}]})};
         if(n==="cold_open")return{ok:true,status:200,headers:{get:()=>null},json:async()=>({choices:[{message:{content:JSON.stringify({lines:[]})}}]})};
         if(n==="narrative_blueprint")return{ok:true,status:200,headers:{get:()=>null},json:async()=>({choices:[{message:{content:JSON.stringify({central_question:"q",audience_promise:"p",narrative_angle:"a",hook_candidates:[],retention_beats:[],uncertain_claims:[]})}}]})};
         const ps=(i.claims||[]).slice(0,2).map(c=>({text:c.text,claims:[c.id]}));
@@ -311,7 +313,8 @@ test("retry_unsupported re-asks only the sections that ended UNSUPPORTED", async
           const input = JSON.parse(body.messages[1].content);
           const name = body.response_format.json_schema && body.response_format.json_schema.name;
           const sec = input.section && (input.section.section || input.section);
-          stages.push(name === "narrative_blueprint" ? "blueprint" : name === "cold_open" ? "cold-open" : `section:${sec}`);
+          stages.push(name === "narrative_blueprint" ? "blueprint" : name === "cold_open" ? "cold-open" : name === "fact_check" ? "factcheck" : `section:${sec}`);
+          if (name === "fact_check") return response(200, groqBody({ issues: [] }));
           if (name === "narrative_blueprint") return response(200, groqBody({ central_question: "Why?", audience_promise: "A.", narrative_angle: "B.", hook_candidates: [], retention_beats: [], uncertain_claims: [] }));
           if (name === "cold_open") return response(200, groqBody({ lines: [] }));
           const claims = input.claims || [];
@@ -328,11 +331,138 @@ test("retry_unsupported re-asks only the sections that ended UNSUPPORTED", async
       const retried = make(false);
       const result = await Longform.llmScript(channel, topic, pkg, plan, cold, config, { write: true, providerDependencies: { fetch: retried.fetch, sleep: async () => {} } });
       delete process.env.LONGFORM_RETRY_UNSUPPORTED;
-      assert.deepEqual(retried.stages, [`section:${target}`]);
+      assert.deepEqual(retried.stages, [`section:${target}`, "factcheck"], "only the retried section is generated and fact-checked");
       assert.ok(result.sections.some((section) => section.section === target && section.paragraphs.length));
     });
   } finally {
     delete process.env.LONGFORM_RETRY_UNSUPPORTED;
+    if (saved === undefined) delete process.env.GROWTH_STATE_ROOT; else process.env.GROWTH_STATE_ROOT = saved;
+    fs.rmSync(sandbox, { recursive: true, force: true });
+  }
+});
+
+test("ImpossibleBrief outline follows the scenario: journey routing, skipped asides, scenario questions", () => {
+  const sandbox = fs.mkdtempSync(path.join(os.tmpdir(), "lf-ib-outline-"));
+  const saved = process.env.GROWTH_STATE_ROOT;
+  process.env.GROWTH_STATE_ROOT = sandbox;
+  try {
+    const channel = Channel.getChannel("impossible-brief");
+    const ctx = Context.build(channel);
+    const topic = ctx.inventory.find((item) => item.slug === "what-if-we-swam-in-europas-ocean");
+    assert.ok(topic, "Europa topic exists");
+    const claim = (section, text) => ({ text, role: "evidence", section, source: "Wikipedia — Europa (moon)", verbatim: false });
+    const deep = { article: "Europa (moon)", claims: [
+      claim("Discovery and naming", "Galileo Galilei discovered the moon in January 1610."),
+      claim("Far future", "When the Sun becomes a red giant the moon's crust may melt."),
+      claim("Ice shell and surface", "The outer ice shell may be as thin as 200 metres in places."),
+      claim("Subsurface ocean", "A salty liquid ocean is thought to lie beneath the ice shell."),
+      claim("Habitability", "The hidden ocean is considered one of the best places to look for life."),
+      claim("Tidal flexing", "Tidal flexing by Jupiter keeps the ocean liquid."),
+      claim("Future missions", "Europa Clipper will study whether the ocean could host life."),
+    ] };
+    const pkg = Longform.researchPackage(channel, topic, { write: false, deep });
+    const plan = Longform.outline(channel, topic, pkg, Config.forChannel(channel));
+    const sectionOf = (text) => (plan.sections.find((s) => s.section !== "FINAL_SCIENTIFIC_PAYOFF" && s.claimIds.some((id) => pkg.claims.find((c) => c.id === id).text === text)) || {}).section;
+    assert.equal(sectionOf("The outer ice shell may be as thin as 200 metres in places."), "FIRST_EFFECT");
+    assert.equal(sectionOf("A salty liquid ocean is thought to lie beneath the ice shell."), "SECOND_ORDER_EFFECT");
+    assert.equal(sectionOf("The hidden ocean is considered one of the best places to look for life."), "SYSTEM_WIDE_CONSEQUENCE");
+    assert.equal(sectionOf("Tidal flexing by Jupiter keeps the ocean liquid."), "SCIENCE_EXPLANATION");
+    assert.equal(sectionOf("Europa Clipper will study whether the ocean could host life."), "LIMITS_UNCERTAINTIES");
+    const everywhere = plan.sections.flatMap((s) => s.claimIds).map((id) => pkg.claims.find((c) => c.id === id).text);
+    assert.equal(everywhere.some((text) => /Galilei|red giant/.test(text)), false, "naming and far-future asides are not narrated");
+    const question = (name) => plan.sections.find((s) => s.section === name).question;
+    assert.match(question("FIRST_EFFECT"), /explorers reached Europa's buried ocean/);
+    assert.match(question("FINAL_SCIENTIFIC_PAYOFF"), /what would we find under the ice/);
+  } finally {
+    if (saved === undefined) delete process.env.GROWTH_STATE_ROOT; else process.env.GROWTH_STATE_ROOT = saved;
+    fs.rmSync(sandbox, { recursive: true, force: true });
+  }
+});
+
+// Fake Groq with a fact-checker: flags the first paragraph of `target`, and
+// answers the repair with `repairText` (null = repeat the flagged paragraph).
+function fakeChecker(target, { repairText, recheckFlags }) {
+  const base = fakeGroq();
+  const stages = [];
+  const fetch = async (url, request) => {
+    const body = JSON.parse(request.body);
+    const input = JSON.parse(body.messages[1].content);
+    const name = body.response_format.json_schema && body.response_format.json_schema.name;
+    const system = body.messages[0].content;
+    if (name === "fact_check") {
+      const recheck = !input.paragraphs.some((paragraph) => paragraph.issues) && stages.includes(`repair:${target}`) && !stages.includes(`recheck:${target}`) && input.paragraphs.every((p) => p.text === repairText);
+      if (recheck) { stages.push(`recheck:${target}`); return response(200, groqBody({ issues: recheckFlags ? [{ paragraph: 0, kind: "NOT_STATED", statement: "still wrong", reason: "x" }] : [] })); }
+      const isTarget = input.paragraphs.some((paragraph) => paragraph.text.includes("[target]"));
+      stages.push(isTarget ? `check:${target}` : "check");
+      return response(200, groqBody({ issues: isTarget ? [{ paragraph: 0, kind: "CONTRADICTED", statement: "the wrong connection", reason: "the claim says otherwise" }] : [] }));
+    }
+    if (name === "documentary_section" && /Correct paragraphs/.test(system)) {
+      stages.push(`repair:${target}`);
+      const claim = input.paragraphs[0].claims[0];
+      return response(200, groqBody({ paragraphs: [{ text: repairText || claim.text, claims: [claim.id] }], depth_note: "" }));
+    }
+    const result = await base.fetch(url, request);
+    if (name === "documentary_section" && input.section && input.section.section === target) {
+      const json = JSON.parse((await result.json()).choices[0].message.content);
+      json.paragraphs[0].text = `${json.paragraphs[0].text} [target]`;
+      return response(200, groqBody(json));
+    }
+    return result;
+  };
+  return { fetch, stages };
+}
+
+for (const [label, recheckFlags, expected] of [["repairs", false, "REPAIRED"], ["drops", true, "DROPPED"]]) {
+  test(`fact-check ${label} a paragraph that contradicts its cited claims`, async () => {
+    const sandbox = fs.mkdtempSync(path.join(os.tmpdir(), "lf-factcheck-"));
+    const saved = process.env.GROWTH_STATE_ROOT;
+    try {
+      await withEnv({ LONGFORM_LLM_PROVIDER: "groq", GROQ_API_KEY: "k", LONGFORM_LLM_MAX_ATTEMPTS: "1" }, async () => {
+        const { channel, topic, config, pkg, plan, cold } = await setup(sandbox);
+        const target = plan.sections.find((section) => section.section !== "COLD_OPEN" && section.claimIds.length > 1).section;
+        const firstClaim = pkg.claims.find((claim) => claim.id === plan.sections.find((s) => s.section === target).claimIds[0]);
+        const fake = fakeChecker(target, { repairText: firstClaim.text, recheckFlags });
+        const result = await Longform.llmScript(channel, topic, pkg, plan, cold, config, { write: true, providerDependencies: { fetch: fake.fetch, sleep: async () => {} } });
+        const record = result.stages.factcheck[target];
+        assert.equal(record.status, expected);
+        assert.equal(record.flagged, 1);
+        assert.equal(record.issues[0].kind, "CONTRADICTED");
+        const text = result.sections.find((section) => section.section === target).paragraphs.map((p) => p.text).join(" ");
+        assert.doesNotMatch(text, /\[target\]/, "the flagged paragraph never survives");
+        if (expected === "REPAIRED") assert.match(text, new RegExp(firstClaim.text.slice(0, 20).replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+        assert.ok(result.quality.notes.some((note) => /fact-check corrected/.test(note)));
+        assert.ok(result.pipeline.includes("FACT_CHECK"));
+      });
+    } finally {
+      if (saved === undefined) delete process.env.GROWTH_STATE_ROOT; else process.env.GROWTH_STATE_ROOT = saved;
+      fs.rmSync(sandbox, { recursive: true, force: true });
+    }
+  });
+}
+
+test("a completed checkpoint without fact-check is checked on resume without regenerating sections; a failed check blocks", async () => {
+  const sandbox = fs.mkdtempSync(path.join(os.tmpdir(), "lf-factcheck-resume-"));
+  const saved = process.env.GROWTH_STATE_ROOT;
+  try {
+    await withEnv({ LONGFORM_LLM_PROVIDER: "groq", GROQ_API_KEY: "k", LONGFORM_LLM_MAX_ATTEMPTS: "1" }, async () => {
+      const { channel, topic, config, pkg, plan, cold } = await setup(sandbox);
+      await Longform.llmScript(channel, topic, pkg, plan, cold, config, { write: true, providerDependencies: { fetch: fakeGroq().fetch, sleep: async () => {} } });
+      const file = `generation/${topic.slug}.json`;
+      const checkpoint = Store.readState(channel, "longform", file, null);
+      delete checkpoint.stages.factcheck;
+      Store.writeState(channel, "longform", file, checkpoint);
+      // The checker answers without an issues list: the check is incomplete.
+      const broken = { stages: [], fetch: async (url, request) => { broken.stages.push(JSON.parse(request.body).response_format.json_schema.name); return response(200, groqBody({ verdict: "ok" })); } };
+      const blocked = await Longform.llmScript(channel, topic, pkg, plan, cold, config, { write: true, providerDependencies: { fetch: broken.fetch, sleep: async () => {} } });
+      assert.ok(broken.stages.length > 0 && broken.stages.every((name) => name === "fact_check"), "only the fact-check runs on resume");
+      assert.equal(blocked.status, "QUALITY_REVIEW");
+      assert.ok(blocked.quality.hardFails.some((fail) => /fact-check incomplete/.test(fail)));
+      const fixed = fakeGroq();
+      const result = await Longform.llmScript(channel, topic, pkg, plan, cold, config, { write: true, providerDependencies: { fetch: fixed.fetch, sleep: async () => {} } });
+      assert.ok(fixed.stages.every((stage) => stage === "factcheck"));
+      assert.equal(result.quality.hardFails.some((fail) => /fact-check/.test(fail)), false);
+    });
+  } finally {
     if (saved === undefined) delete process.env.GROWTH_STATE_ROOT; else process.env.GROWTH_STATE_ROOT = saved;
     fs.rmSync(sandbox, { recursive: true, force: true });
   }

@@ -150,6 +150,7 @@ const SECTION_QUESTION = {
 // MAX_DEEP_CLAIMS_PER_SECTION of them (in article order), which also keeps
 // every section request small enough for the provider's per-minute budget.
 const MAX_DEEP_CLAIMS_PER_SECTION = 14;
+const SKIP_SECTION = "SKIP";
 const DEEP_HEADING_SECTIONS = {
   "failure-reconstructed": [
     // Order matters: "Cause and time of death" is about the crew, not the
@@ -166,21 +167,62 @@ const DEEP_HEADING_SECTIONS = {
     [/background|design|vehicle|construction|history|development|description|overview|operation|technology|structure|specification|mission|shuttle|system|ship|aircraft|bridge|dam|plant|reactor/i, "SYSTEM"],
     [/liftoff|ascent|launch|flight|disaster|accident|collapse|sinking|crash|explosion|fire|event|timeline|incident|eruption|flood|impact/i, "WHAT_HAPPENED"],
   ],
+  // A what-if follows the scenario's journey: the setting, what is met first,
+  // what follows, the larger consequence, the physics, the limits. Naming,
+  // discovery history and far-future asides do not answer the question.
   "impossible-brief": [
-    [/far future|significance|implications|summary|fate/i, "FINAL_SCIENTIFIC_PAYOFF"],
-    [/uncertain|debate|hypothes|controvers|unknown|speculat|limit|open question|future/i, "LIMITS_UNCERTAINTIES"],
-    [/physic|mechanism|dynamics|theory|model|science|chemistry|thermodynamic|gravity|orbit|energy/i, "SCIENCE_EXPLANATION"],
-    [/formation|origin|properties|physical characteristics|structure|composition|overview|description|background|history|size|mass/i, "INITIAL_CONDITIONS"],
-    [/life|biolog|ecolog|human|society|culture|civiliz|agricultur|economy|habitab/i, "SYSTEM_WIDE_CONSEQUENCE"],
-    [/climate|atmosphere|weather|ocean|tide|surface|temperature|season|day|rotation/i, "SECOND_ORDER_EFFECT"],
+    [/naming|etymolog|nomenclature|discovery|far future|fate|old proposals|in (?:popular )?culture|in fiction/i, SKIP_SECTION],
+    [/significance|implications|summary/i, "FINAL_SCIENTIFIC_PAYOFF"],
+    [/uncertain|debate|hypothes|controvers|unknown|speculat|limit|open question|future|exploration|mission|probe/i, "LIMITS_UNCERTAINTIES"],
+    [/habitab|astrobiolog|\blife\b|biolog|ecolog|human|society|culture|civiliz|agricultur|economy/i, "SYSTEM_WIDE_CONSEQUENCE"],
+    [/radiation|\bsurface|\bice\b|crust|shell|lineae|chaos|terrain|crater|plume|geyser|landing/i, "FIRST_EFFECT"],
+    [/physic|mechanism|dynamics|theory|model|science|tidal|heat|decay|thermodynamic|gravity|orbit|energy/i, "SCIENCE_EXPLANATION"],
+    [/formation|origin|properties|physical characteristics|internal|structure|overview|description|background|history|size|mass/i, "INITIAL_CONDITIONS"],
+    [/ocean|\bsea|water|liquid|composition|chemistry|salt|climate|atmosphere|weather|tide|temperature|season|\bday|rotation/i, "SECOND_ORDER_EFFECT"],
     [/effect|influence|impact|consequence|interaction|observation/i, "FIRST_EFFECT"],
   ],
 };
 
+// ImpossibleBrief section questions are asked about the scenario itself, so
+// a section answers "what would the explorers meet first?" rather than
+// describing the subject in general.
+function scenarioQuestion(channelSlug, name, topic) {
+  if (channelSlug !== "impossible-brief" || !topic) return null;
+  const scenario = topic.scenarioChange || topic.scenario || null;
+  const question = topic.coreQuestion || topic.question || topic.title || null;
+  if (!scenario && !question) return null;
+  const s = scenario || question;
+  const consequence = topic.expectedConsequence || topic.consequence || null;
+  const mechanism = topic.scientificMechanism || topic.mechanism || null;
+  const questions = {
+    IMPOSSIBLE_QUESTION: question && `Pose the scenario precisely — ${question} — and show from the evidence why it is extraordinary or hard.`,
+    INITIAL_CONDITIONS: `Assume ${s}. What must already be true of the place or system, according to the evidence? Say plainly which part is our assumption.`,
+    FIRST_EFFECT: `Assume ${s}. What would be met or changed first, according to the evidence?`,
+    SECOND_ORDER_EFFECT: "What would that lead to next, step by step, according to the evidence?",
+    SYSTEM_WIDE_CONSEQUENCE: consequence ? `How far does it reach? Weigh the evidence for: ${consequence}.` : null,
+    SCIENCE_EXPLANATION: mechanism ? `How does the governing mechanism work: ${mechanism}?` : null,
+    LIMITS_UNCERTAINTIES: "What is measured, what is only modelled or estimated, and what remains unknown about this scenario?",
+    FINAL_SCIENTIFIC_PAYOFF: question && `Answer the opening question directly — ${question} — drawing the evidence together.`,
+  };
+  return questions[name] || null;
+}
+
+// How strongly a claim speaks to the topic's own scenario: distinct scenario
+// terms it contains, ignoring terms that appear in most claims of the package
+// (the subject's name, its planet) because they do not discriminate.
+function scenarioRelevance(topic, claims) {
+  const terms = new Set(stems([topic.coreQuestion, topic.question, topic.scenarioChange, topic.scenario, topic.expectedConsequence, topic.consequence,
+    topic.scientificMechanism, topic.mechanism, topic.hook, topic.hookText, topic.secondBeat].filter(Boolean).join(" ")));
+  const counts = new Map();
+  for (const claim of claims) for (const stem of new Set(stems(claim.text))) counts.set(stem, (counts.get(stem) || 0) + 1);
+  const generic = new Set([...counts].filter(([, count]) => count > claims.length * 0.25).map(([stem]) => stem));
+  return (claim) => new Set(stems(claim.text).filter((stem) => terms.has(stem) && !generic.has(stem))).size;
+}
+
 function deepSectionFor(channelSlug, claim, structure) {
   if (claim.verbatim !== false || !claim.section) return null;
   if (claim.section === "Lead") return structure.includes("CONSEQUENCE") ? "CONSEQUENCE" : structure.includes("IMPOSSIBLE_QUESTION") ? "IMPOSSIBLE_QUESTION" : null;
-  for (const [pattern, section] of DEEP_HEADING_SECTIONS[channelSlug] || []) if (pattern.test(claim.section) && structure.includes(section)) return section;
+  for (const [pattern, section] of DEEP_HEADING_SECTIONS[channelSlug] || []) if (pattern.test(claim.section) && (section === SKIP_SECTION || structure.includes(section))) return section;
   return null;
 }
 
@@ -188,22 +230,48 @@ function outline(channel, topic, pkg, config) {
   const structure = (config.story && config.story.longform) || [];
   const used = new Set();
   const deepBySection = new Map();
-  for (const claim of pkg.claims) {
+  const scenario = channel.slug === "impossible-brief";
+  const relevance = scenario ? scenarioRelevance(topic || {}, pkg.claims) : () => 0;
+  // ImpossibleBrief keeps, per section, the claims that speak most to the
+  // scenario (article order breaks ties); other channels keep article order.
+  const ranked = scenario ? pkg.claims.map((claim, index) => ({ claim, index, score: relevance(claim) })).sort((a, b) => b.score - a.score || a.index - b.index).map((row) => row.claim) : pkg.claims;
+  for (const claim of ranked) {
     const section = deepSectionFor(channel.slug, claim, structure);
     if (!section) continue;
+    if (section === SKIP_SECTION) { used.add(claim.id); continue; }
     const list = deepBySection.get(section) || [];
     if (list.length < MAX_DEEP_CLAIMS_PER_SECTION) { list.push(claim); used.add(claim.id); }
     deepBySection.set(section, list);
   }
+  const position = new Map(pkg.claims.map((claim, index) => [claim.id, index]));
+  for (const list of deepBySection.values()) list.sort((a, b) => position.get(a.id) - position.get(b.id));
   const sections = structure.map((name, index) => {
     const roles = SECTION_ROLES[name] || [];
     const deep = deepBySection.get(name) || [];
     const byRole = pkg.claims.filter((claim) => roles.includes(claim.role) && (!used.has(claim.id) || name === "COLD_OPEN")
       && !(claim.verbatim === false && (deepSectionFor(channel.slug, claim, structure) || deep.length >= MAX_DEEP_CLAIMS_PER_SECTION)));
     const roleDeep = byRole.filter((claim) => claim.verbatim === false).slice(0, Math.max(0, MAX_DEEP_CLAIMS_PER_SECTION - deep.length));
-    const claims = [...byRole.filter((claim) => claim.verbatim !== false), ...deep, ...roleDeep];
+    let claims = [...byRole.filter((claim) => claim.verbatim !== false), ...deep, ...roleDeep];
+    // The ImpossibleBrief payoff answers the opening question, so it may draw
+    // on the claims that speak most to the scenario even when an earlier
+    // section has narrated them (it synthesises; it does not re-narrate).
+    let synthesis = false;
+    if (scenario && name === "FINAL_SCIENTIFIC_PAYOFF") {
+      const have = new Set(claims.map((claim) => claim.id));
+      // Only established facts, never the scenario premise itself, and no
+      // near-duplicates of a claim already chosen.
+      const extra = [];
+      const similar = (a, b) => { const x = new Set(stems(a.text)); const y = stems(b.text); return y.length && y.filter((stem) => x.has(stem)).length / y.length >= 0.7; };
+      for (const claim of ranked) {
+        if (claims.length + extra.length >= 10) break;
+        if (have.has(claim.id) || claim.class !== "CONFIRMED_FACT" || relevance(claim) < 2 || deepSectionFor(channel.slug, claim, structure) === SKIP_SECTION) continue;
+        if ([...claims, ...extra].some((chosen) => similar(chosen, claim) || similar(claim, chosen))) continue;
+        extra.push(claim);
+      }
+      if (extra.length) { claims = [...claims, ...extra]; synthesis = true; }
+    }
     if (name !== "COLD_OPEN") claims.forEach((claim) => used.add(claim.id));
-    return { order: index + 1, section: name, question: SECTION_QUESTION[name] || null, claimIds: claims.map((claim) => claim.id), evidence: claims.length ? "available" : "MISSING" };
+    return { order: index + 1, section: name, question: scenarioQuestion(channel.slug, name, topic) || SECTION_QUESTION[name] || null, claimIds: claims.map((claim) => claim.id), evidence: claims.length ? "available" : "MISSING", ...(synthesis ? { synthesis: true } : {}) };
   });
   const missing = sections.filter((section) => section.evidence === "MISSING" && section.section !== "COLD_OPEN");
   return { structure, sections, missingSections: missing.map((section) => section.section), coverage: Math.round((sections.length - missing.length) / Math.max(1, sections.length) * 100) };
@@ -430,16 +498,22 @@ function continuityAndRetention(sections, plan, config) {
 // Anything else starts fresh (the old file is kept as <slug>.stale.json).
 const GENERATION_SCHEMA = "longform-generation/3";
 const PROMPT_VERSION = "lf-prompts-2026-10-09.4";
+// A channel whose section prompts changed on their own gets its own suffix,
+// so other channels' completed checkpoints stay resumable.
+const CHANNEL_PROMPT_VERSION = { "impossible-brief": "ib-scenario-1" };
+// The fact-check stage is versioned per section record: a new version re-runs
+// the check on resumed scripts without regenerating the sections.
+const FACT_CHECK_VERSION = "fact-check-1";
 const sha = (value) => crypto.createHash("sha1").update(typeof value === "string" ? value : JSON.stringify(value)).digest("hex").slice(0, 16);
 
 function generationKey(channel, topic, pkg, plan, model) {
   return {
     schema: GENERATION_SCHEMA,
-    promptVersion: PROMPT_VERSION,
+    promptVersion: [PROMPT_VERSION, CHANNEL_PROMPT_VERSION[channel.slug]].filter(Boolean).join("+"),
     channel: channel.slug,
     slug: topic.slug,
     researchHash: sha(pkg.claims.map((claim) => [claim.id, claim.text, claim.source])),
-    outlineHash: sha(plan.sections.map((section) => [section.section, section.claimIds])),
+    outlineHash: sha(plan.sections.map((section) => CHANNEL_PROMPT_VERSION[channel.slug] ? [section.section, section.claimIds, section.question] : [section.section, section.claimIds])),
     model,
   };
 }
@@ -465,6 +539,12 @@ function sectionSchema(ids) {
   };
 }
 
+const FACT_CHECK_SCHEMA = {
+  type: "object", additionalProperties: false, required: ["issues"],
+  properties: { issues: { type: "array", items: { type: "object", additionalProperties: false, required: ["paragraph", "kind", "statement", "reason"],
+    properties: { paragraph: { type: "integer" }, kind: { type: "string", enum: ["CONTRADICTED", "NOT_STATED"] }, statement: { type: "string" }, reason: { type: "string" } } } } },
+};
+
 const COLD_OPEN_SCHEMA = {
   type: "object", additionalProperties: false, required: ["lines"],
   properties: { lines: { type: "array", items: { type: "object", additionalProperties: false, required: ["text", "claims"],
@@ -482,6 +562,14 @@ const CHANNEL_WRITING = {
   "failure-reconstructed": "Forensic engineering documentary. Explain the verified mechanism, the order of events, the root causes and what changed. Precise, sober, no dramatisation beyond the evidence.",
   "impossible-brief": "Cinematic scientific what-if. Physically consistent assumptions, explicit uncertainty, quantities only when a claim states them. Label modelled or speculative steps as such.",
 };
+
+// ImpossibleBrief's scenario layer: the evidence is about the real subject,
+// the question is hypothetical, so the narration may take ONE explicit step
+// of reasoning from the cited facts into the scenario. It may not add facts.
+const SCENARIO_REASONING = [
+  "Scenario reasoning: after stating what the cited claims establish, you may reason one step into the scenario — what it would mean for the people or probe in it — using would/could/might and marking it as reasoning ('that means', 'if so', 'in our scenario').",
+  "That reasoning must follow directly from the cited claims and must not introduce any number, name, measurement, organism, event or mechanism the claims do not contain. Never present it as observed fact.",
+].join("\n");
 
 async function llmScript(channel, topic, pkg, plan, cold, config, options = {}) {
   const configured = Provider.configuration();
@@ -624,6 +712,8 @@ async function llmScript(channel, topic, pkg, plan, cold, config, options = {}) 
         "Claims marked rewrite:true must be paraphrased (never copy 8+ consecutive words). Keep MODEL/SPECULATION/INTERPRETATION claims labelled as such.",
         "Numbers: state every number, date, time and unit exactly as the claim writes it. Never convert units, round, estimate, or describe a figure loosely (no 'a third', 'low teens', 'dozens').",
         VOICE_RULES,
+        channel.slug === "impossible-brief" ? SCENARIO_REASONING : "",
+        section.synthesis ? "This section answers the central question by drawing the evidence together: give the answer and why, without re-narrating earlier sections sentence by sentence." : "",
         `Section question: ${section.question || section.section}`,
         `Spoken narration, 2-4 paragraphs, about ${targetWords} words — fewer if the claims are thin. No filler, recap, call to action or invented transition fact.`,
         "depth_note: one short sentence on what evidence was missing, or an empty string.",
@@ -676,23 +766,92 @@ async function llmScript(channel, topic, pkg, plan, cold, config, options = {}) 
     // Sections are stored in completion order; present them in plan order.
     const order = new Map(plan.sections.map((section, index) => [section.section, index]));
     state.sections.sort((a, b) => order.get(a.section) - order.get(b.section));
-    // 4) Citation validation (deterministic).
+    // 4) Fact-check (LLM entailment). The deterministic support check cannot
+    // see a statement that uses the claims' own words to say something they
+    // do not ("the field joint attached the booster to the tank"). Each
+    // section's paragraphs are compared with exactly the claims they cite;
+    // a flagged paragraph gets one rewrite, is checked again, and is dropped
+    // if it still fails. Sections are never padded to replace what is dropped.
+    state.stages.factcheck = state.stages.factcheck || {};
+    const checkParagraphs = async (stage, paragraphs) => {
+      const json = await call({
+        stage,
+        schema: FACT_CHECK_SCHEMA,
+        schemaName: "fact_check",
+        maxTokens: 900,
+        system: [
+          "You are a strict fact-checker for a documentary script. Compare every factual statement in each paragraph with ONLY the claims that paragraph cites.",
+          "Report CONTRADICTED when the claims say something different, and NOT_STATED when the paragraph asserts a specific fact — what a part is or connects to, a cause, a sequence, a number, a name, an event — that the cited claims do not state.",
+          "Faithful paraphrase and summary are fine. Reasoning that is explicitly conditional (would/could/might, 'that means') and follows directly from the cited claims is fine; reasoning that adds a new fact is NOT_STATED.",
+          "Do not report style, tone or omissions. Return an empty issues list when every statement is supported. paragraph is the paragraph's index.",
+        ].join("\n"),
+        user: JSON.stringify({ paragraphs: paragraphs.map((paragraph, index) => ({ index, text: paragraph.text,
+          claims: (paragraph.claims || []).map((id) => claimsById.get(id)).filter(Boolean).map((claim) => ({ id: claim.id, text: String(claim.text).slice(0, 300) })) })) }),
+      });
+      if (!json || !Array.isArray(json.issues)) return null;
+      return json.issues.filter((issue) => issue && Number.isInteger(issue.paragraph) && issue.paragraph >= 0 && issue.paragraph < paragraphs.length)
+        .map((issue) => ({ paragraph: issue.paragraph, kind: issue.kind === "CONTRADICTED" ? "CONTRADICTED" : "NOT_STATED", statement: String(issue.statement || "").slice(0, 200), reason: String(issue.reason || "").slice(0, 200) }));
+    };
+    for (const section of state.sections) {
+      if (section.section === "COLD_OPEN" || !(section.paragraphs || []).length) continue;
+      const prior = state.stages.factcheck[section.section];
+      if (prior && prior.version === FACT_CHECK_VERSION && prior.status !== "UNCHECKED") continue;
+      const issues = await checkParagraphs(`factcheck:${section.section}`, section.paragraphs);
+      if (!issues) { state.stages.factcheck[section.section] = { status: "UNCHECKED", version: FACT_CHECK_VERSION, at: now() }; save(); continue; }
+      if (!issues.length) { state.stages.factcheck[section.section] = { status: "PASSED", version: FACT_CHECK_VERSION, at: now() }; save(`factcheck:${section.section}`); continue; }
+      const flagged = [...new Set(issues.map((issue) => issue.paragraph))].sort((a, b) => a - b);
+      const ids = [...new Set(flagged.flatMap((index) => section.paragraphs[index].claims || []))].filter((id) => claimsById.has(id));
+      let replacements = [];
+      if (ids.length) {
+        const repaired = await call({
+          stage: `factcheck:${section.section}:repair`,
+          schema: sectionSchema(ids),
+          schemaName: "documentary_section",
+          maxTokens: Math.min(2000, flagged.reduce((sum, index) => sum + words(section.paragraphs[index].text), 0) * 2 + 400),
+          system: [
+            `Correct paragraphs of the ${section.section} section of a ${channel.name} long-form documentary.`,
+            CHANNEL_WRITING[channel.slug] || "",
+            "Rewrite each paragraph so that it states only what its cited claims say. Remove or correct every statement listed in its issues; add nothing new. Keep the spoken narration voice and the claim ids each paragraph uses.",
+            "Numbers: exactly as the claim writes them. Never copy 8+ consecutive words from a claim.",
+          ].filter(Boolean).join("\n"),
+          user: JSON.stringify({ paragraphs: flagged.map((index) => ({ text: section.paragraphs[index].text, issues: issues.filter((issue) => issue.paragraph === index).map((issue) => `${issue.kind}: ${issue.statement} — ${issue.reason}`),
+            claims: (section.paragraphs[index].claims || []).map((id) => claimsById.get(id)).filter(Boolean).map((claim) => ({ id: claim.id, text: String(claim.text).slice(0, 300) })) })) }),
+        });
+        try { replacements = validateGeneratedSection(repaired, { section: section.section, claimIds: ids }, claimsById, { minimumOverlap, allowedNames: topicNames }).paragraphs; }
+        catch (error) { if (error.code !== "INVALID_SECTION") throw error; replacements = []; }
+        if (replacements.length) {
+          const again = await checkParagraphs(`factcheck:${section.section}:recheck`, replacements);
+          const still = new Set((again || replacements.map((_, index) => ({ paragraph: index }))).map((issue) => issue.paragraph));
+          replacements = replacements.filter((_, index) => !still.has(index));
+        }
+      }
+      const kept = section.paragraphs.flatMap((paragraph, index) => !flagged.includes(index) ? [paragraph] : index === flagged[0] ? replacements : []);
+      const dropped = Math.max(0, flagged.length - replacements.length);
+      state.stages.factcheck[section.section] = { status: dropped ? "DROPPED" : "REPAIRED", version: FACT_CHECK_VERSION, at: now(), flagged: flagged.length, repaired: replacements.length, dropped, issues: issues.slice(0, 6) };
+      section.paragraphs = kept;
+      save(`factcheck:${section.section}`);
+    }
+    // 5) Citation validation (deterministic).
     const citations = claimSourceMap({ sections: state.sections }, pkg, topic);
     state.stages.citations = { status: citations.unsupportedParagraphs || citations.unsupportedNumbers.length || citations.copyRisks.length ? "FAILED" : "COMPLETE", at: now(),
       unsupportedParagraphs: citations.unsupportedParagraphs, unsupportedNumbers: citations.unsupportedNumbers, copyRisks: citations.copyRisks.length };
     save("citations");
-    // 5) Quality review (deterministic): continuity, repetition, payoff, depth.
+    // 6) Quality review (deterministic): continuity, repetition, payoff, depth.
     const checked = continuityAndRetention(state.sections, plan, config);
     const text = checked.sections.flatMap((section) => section.paragraphs.map((paragraph) => paragraph.text)).join(" ");
     const minutes = Math.round(words(text) / config.longform.wordsPerMinute * 10) / 10;
     const unsupportedSections = Object.entries(state.stages.sections).filter(([, value]) => value.status === "UNSUPPORTED").map(([name]) => name);
     if (unsupportedSections.length) checked.quality.hardFails.push(`unsupported sections after repair: ${unsupportedSections.join(", ")}`);
     if (state.stages.citations.status === "FAILED") checked.quality.hardFails.push("citation validation failed");
+    const unchecked = Object.entries(state.stages.factcheck).filter(([, value]) => value.status === "UNCHECKED").map(([name]) => name);
+    if (unchecked.length) checked.quality.hardFails.push(`fact-check incomplete: ${unchecked.join(", ")}`);
+    const corrected = Object.entries(state.stages.factcheck).filter(([, value]) => value.flagged).map(([name, value]) => `${name} (${value.repaired} repaired, ${value.dropped} dropped)`);
+    if (corrected.length) checked.quality.notes.push(`fact-check corrected: ${corrected.join(", ")}`);
     state.sections = checked.sections;
     state.quality = { ...checked.quality, minutes, words: words(text) };
     state.stages.review = { status: checked.quality.hardFails.length ? "BLOCKED" : "COMPLETE", at: now(), minutes, hardFails: checked.quality.hardFails };
     save("review");
-    // 6) Final script.
+    // 7) Final script.
     state.status = checked.quality.hardFails.length ? "QUALITY_REVIEW" : "COMPLETE";
     state.stages.final = { status: state.status, at: now(), words: words(text), minutes };
     save("final");
@@ -701,7 +860,7 @@ async function llmScript(channel, topic, pkg, plan, cold, config, options = {}) 
       provider: state.providerUsed || configured.primary.name,
       model: state.model || configured.primary.model,
       status: state.status,
-      pipeline: ["RESEARCH_PACKAGE", "NARRATIVE_BLUEPRINT", "COLD_OPEN", "SECTIONS", "CITATION_VALIDATION", "QUALITY_REVIEW", "FINAL_SCRIPT"],
+      pipeline: ["RESEARCH_PACKAGE", "NARRATIVE_BLUEPRINT", "COLD_OPEN", "SECTIONS", "FACT_CHECK", "CITATION_VALIDATION", "QUALITY_REVIEW", "FINAL_SCRIPT"],
       stages: state.stages,
       factPack: state.factPack,
       blueprint: state.blueprint,
