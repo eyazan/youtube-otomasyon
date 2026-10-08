@@ -368,7 +368,27 @@ async function llmScript(channel, topic, pkg, plan, cold, config, options = {}) 
           ].join("\n"),
           user: JSON.stringify({ topic: topic.title, narrative_angle: state.blueprint.narrative_angle, section, claims, previous_section: state.sections[state.sections.length - 1] || null }),
         });
-        state.sections.push(validateGeneratedSection(json, section));
+        let validated;
+        try {
+          validated = validateGeneratedSection(json, section);
+        } catch (error) {
+          if (error.code !== "INVALID_SECTION") throw error;
+          // One bounded repair attempt: preserve strict claim mapping; never
+          // accept uncited output or fabricate paragraphs.
+          const repaired = await call({
+            stage: `section:${section.section}:repair`,
+            maxTokens: 2400,
+            system: [
+              "Repair the JSON section using ONLY the supplied claim IDs.",
+              "Each paragraph must have non-empty text and a non-empty claims array with exact provided IDs.",
+              "Do not add new facts or use unsupported statements. If evidence is thin, be concise.",
+              'Return JSON only: {"section":{"paragraphs":[{"text":"...","claims":["EXACT_ID"]}]}}',
+            ].join("\\n"),
+            user: JSON.stringify({ section: section.section, claims, previous_output: json }),
+          });
+          validated = validateGeneratedSection(repaired, section);
+        }
+        state.sections.push(validated);
         if (json.depth_note) state.depthNote = [state.depthNote, String(json.depth_note)].filter(Boolean).join(" ");
       }
       state.updatedAt = (options.now || new Date()).toISOString();
