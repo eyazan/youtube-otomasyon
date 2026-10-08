@@ -50,6 +50,7 @@ jobs:
         run: |
           node scripts/fr-ib-longform-readiness.js reports/dry-runs
           cat reports/dry-runs/LONGFORM-READINESS.md >> "$GITHUB_STEP_SUMMARY"
+          cat reports/dry-runs/LONGFORM-READINESS.md
       - name: Report actual long-form readiness to job summary
         if: always()
         shell: bash
