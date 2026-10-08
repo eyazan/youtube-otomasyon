@@ -177,7 +177,23 @@ function subjectAnchor(pkg) {
   const base = article || (pkg.topic && (pkg.topic.subject || pkg.topic.title)) || "";
   return base.replace(/[()]/g, " ").replace(/\b(?:disaster|accident|collapse|explosion|crash|sinking|incident|failure)\b/gi, " ").replace(/\s+/g, " ").trim();
 }
-function sceneQueries(text, pkg) {
+// The research article's own illustrations, each given to the one scene that
+// shares most words with its title (no shared word: not used).
+function articleImagesByScene(scenes, images = []) {
+  const wordsOf = (value) => new Set((String(value).toLowerCase().replace(/\.(?:jpe?g|png|svg|gif|tiff?)$/i, "").match(/[a-z][a-z-]{3,}/g) || []).filter((word) => !SCENE_STOP.has(word)));
+  const sceneWords = scenes.map(wordsOf);
+  const byScene = scenes.map(() => []);
+  for (const image of images) {
+    const title = String(image).replace(/\.(?:jpe?g|png|svg|gif|tiff?)$/i, "").replace(/[_()]/g, " ").replace(/\s+/g, " ").trim();
+    const own = wordsOf(title);
+    let best = -1, bestScore = 0;
+    sceneWords.forEach((words, index) => { const score = [...own].filter((word) => words.has(word)).length; if (score > bestScore && byScene[index].length < 2) { best = index; bestScore = score; } });
+    if (best >= 0) byScene[best].push(title);
+  }
+  return byScene;
+}
+
+function sceneQueries(text, pkg, articleImages = []) {
   const anchor = subjectAnchor(pkg);
   const anchorWords = new Set(anchor.toLowerCase().split(/\s+/));
   const scenes = require("../../lib/sahne").sahneParagraflari(text);
@@ -189,14 +205,18 @@ function sceneQueries(text, pkg) {
   const total = new Map();
   const spread = new Map();
   for (const scene of scenes) { const seen = new Set(termsOf(scene)); for (const word of termsOf(scene)) total.set(word, (total.get(word) || 0) + 1); for (const word of seen) spread.set(word, (spread.get(word) || 0) + 1); }
-  return scenes.map((scene) => {
+  const fromArticle = articleImagesByScene(scenes, articleImages);
+  // Script-wide domain terms, rotated across scenes so fallbacks differ.
+  const global = [...total].filter(([word]) => spread.get(word) < scenes.length).sort((a, b) => b[1] - a[1]).slice(0, 12).map(([word]) => `${anchor} ${word}`);
+  return scenes.map((scene, index) => {
     const names = [...new Set((scene.match(/\b[A-Z][a-zA-Z'’-]+(?:\s+(?:of\s+|the\s+)?[A-Z][a-zA-Z'’-]+)+\b/g) || [])
       .map((name) => name.replace(LEADING, "").replace(/['’]s$/, "").trim()).filter((name) => name.split(/\s+/).length >= 2 && !GENERIC_NAMES.test(name) && name.toLowerCase() !== anchor.toLowerCase()))];
     const counts = new Map();
     for (const word of termsOf(scene)) counts.set(word, (counts.get(word) || 0) + 1);
     const score = (word, count) => (total.get(word) >= 2 ? count * Math.log(1 + scenes.length / spread.get(word)) : 0);
     const nouns = [...counts].map(([word, count]) => [word, score(word, count)]).filter(([, value]) => value > 0).sort((a, b) => b[1] - a[1]).slice(0, 2).map(([word]) => `${anchor} ${word}`);
-    return [...[...new Set([...names.slice(0, 2), ...nouns])].filter((query) => query && query !== anchor).slice(0, 3), anchor].filter(Boolean);
+    const rotating = global.length ? [global[index % global.length], global[(index + 5) % global.length]] : [];
+    return [...fromArticle[index], ...[...new Set([...names.slice(0, 2), ...nouns, ...rotating])].filter((query) => query && query !== anchor).slice(0, 4), anchor].filter(Boolean);
   });
 }
 
@@ -205,18 +225,23 @@ function sceneQueries(text, pkg) {
 // institution, place, vessel or instrument from the script. Person names are
 // not enough on their own (a namesake's portrait must never appear).
 const INSTITUTION = /\b(?:Commission|Committee|Center|Centre|Complex|Comet|Star|Telescope|Agency|Institute|Laboratory|Station|Mission|Lander|Probe|Spacecraft|Rover|Horizons|Thiokol|Corporation|Company|University|Bridge|Dam|Reactor|Plant|Ship|MV|USS|HMS|Observatory|Program|Programme)\b/;
-function visualGuard(pkg, text) {
+function visualGuard(pkg, text, articleImages = []) {
   const anchor = subjectAnchor(pkg);
   const words = anchor.split(/\s+/).filter((word) => word.length >= 4 && !/^(?:space|shuttle|moon|planet|the)$/i.test(word));
   const capaKelime = (words[words.length - 1] || words[0] || anchor).toLowerCase();
   const names = [...new Set((String(text).match(/\b[A-Z][a-zA-Z'’-]+(?:\s+(?:of\s+|the\s+)?[A-Z][a-zA-Z'’-]+)+\b/g) || []).map((name) => name.replace(LEADING, "").replace(/['’]s$/, "").trim()))]
     .filter((name) => name.split(/\s+/).length >= 2 && INSTITUTION.test(name));
-  return { capaKelime, ozelAdlar: names };
+  // An article illustration is admitted by its own title words.
+  const titles = articleImages.map((image) => String(image).replace(/\.(?:jpe?g|png|svg|gif|tiff?)$/i, "").replace(/[_()]/g, " ").replace(/\s+/g, " ").trim());
+  return { capaKelime, ozelAdlar: [...names, ...titles] };
 }
 
 // Renders an approved package with the existing long-video chain (voice,
 // licensed visuals, ffmpeg) into uretim/<job>/. Never uploads.
-function renderLongform(channel, pkg) {
+function renderLongform(channel, pkg, options = {}) {
+  const articleImages = options.articleImages || (() => {
+    try { return (Store.readState(channel, "longform", `research/${pkg.topic.slug}.deep.json`, null) || {}).images || []; } catch (error) { return []; }
+  })();
   const job = `lf-${pkg.topic.slug}`.slice(0, 80);
   const renderDir = path.join(Channel.ROOT, "uretim", job);
   try {
@@ -227,7 +252,7 @@ function renderLongform(channel, pkg) {
       channel: channel.slug, format: "long", aspect: "16:9", baslik: pkg.titles.selected.title, baslik_en: pkg.titles.selected.title,
       aciklama: `${pkg.topic.title}\n\nSources:\n${pkg.researchPackage.sources.map((source) => `- ${source.name}: ${source.url}`).join("\n")}\n\nReconstructions and illustrations are labelled on screen. Narration uses a synthetic voice.`,
       etiketler: [pkg.topic.subject, pkg.topic.cluster].filter(Boolean), ses: Channel.getChannel(channel.slug).config.voice.voice, growthPackage: pkg.topic.slug,
-      sahneKelimeleri: sceneQueries(text, pkg), ...visualGuard(pkg, text),
+      sahneKelimeleri: sceneQueries(text, pkg, articleImages), ...visualGuard(pkg, text, articleImages),
     }, null, 2));
     for (const script of ["seslendir.js", "gorsel-bul.js", "video-yap.js"]) {
       const run = cp.spawnSync(process.execPath, [script, job], { cwd: Channel.ROOT, stdio: "inherit", timeout: 3 * 3600 * 1000 });
