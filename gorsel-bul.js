@@ -472,6 +472,14 @@ function alaka(q, g) {
   const ctx = { kozmik, kisa, ulasim: /aviation|spaceflight|maritime/.test(kumeId), teknik: true, azMi: () => true,
     wiki: async (q) => { if (!wikiOnbellek.has(q)) { wikiOnbellek.set(q, await wikimedia(q)); await bekle(1200); } return wikiOnbellek.get(q); } };
   const KATMAN = katmanlar(ctx);
+  // konu.capaKelime (yalnizca uzun video hatti verir): gorselin basliginda ya
+  // da kaynak adresinde konunun adi ("challenger") ya da konu.ozelAdlar'dan
+  // birinin TUM kelimeleri gecmeli. Tek kelimelik genel aramalarin getirdigi
+  // ilgisiz gorseller (sigara, askeri tank) havuza hic girmez.
+  const capaKelime = String(konu.capaKelime || "").toLowerCase();
+  const ozelAdlar = (konu.ozelAdlar || []).map((ad) => String(ad).toLowerCase().split(/\s+/));
+  const gorselMetni = (g) => { let u = String(g.nereden || g.url || ""); try { u = decodeURIComponent(u); } catch (e) {} return (String(g.baslik || "") + " " + u).toLowerCase().replace(/[_%+-]+/g, " "); };
+  const uygunMu = (g) => !capaKelime || (() => { const t = gorselMetni(g); return t.includes(capaKelime) || ozelAdlar.some((ad) => ad.every((w) => t.includes(w))); })();
 
   for (let i = 0; i < paragraflar.length; i++) {
     const no = String(i + 1).padStart(2, "0");
@@ -525,17 +533,10 @@ function alaka(q, g) {
       for (const q of sorgular) {
         if (havuz.length >= sahneBasina * 2) break;
         const onceki = havuz.length;
-        const bulunan = (await katman.fn(q)) || [];
+        const bulunan = ((await katman.fn(q)) || []).filter(uygunMu);
         havuz = havuz.concat(bulunan.map((g) => ({ ...g, katman: katman.ad, kurum: katman.kurum, arama: q, alaka: alaka(q, g) })));
         if (havuz.length > onceki && !kullanilan) kullanilan = q;
       }
-    }
-
-    // konu.minAlaka (yalnizca uzun video hatti verir): baslik/kaynak aramayla
-    // ilgisiz gorseller elenir; hic eslesen yoksa havuz oldugu gibi kalir.
-    if (Number(konu.minAlaka) > 0) {
-      const ilgili = havuz.filter((g) => g.alaka >= Number(konu.minAlaka));
-      if (ilgili.length) havuz = ilgili;
     }
 
     // Ayni gorseli iki sahnede kullanma — AMA sahneyi bos birakma pahasina degil.

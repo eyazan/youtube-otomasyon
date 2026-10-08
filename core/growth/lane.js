@@ -200,6 +200,20 @@ function sceneQueries(text, pkg) {
   });
 }
 
+// Which images the visual finder may keep: the subject's distinctive word
+// must appear in the image title or source, or every word of a named
+// institution, place, vessel or instrument from the script. Person names are
+// not enough on their own (a namesake's portrait must never appear).
+const INSTITUTION = /\b(?:Commission|Committee|Center|Centre|Complex|Comet|Star|Telescope|Agency|Institute|Laboratory|Station|Mission|Lander|Probe|Spacecraft|Rover|Horizons|Thiokol|Corporation|Company|University|Bridge|Dam|Reactor|Plant|Ship|MV|USS|HMS|Observatory|Program|Programme)\b/;
+function visualGuard(pkg, text) {
+  const anchor = subjectAnchor(pkg);
+  const words = anchor.split(/\s+/).filter((word) => word.length >= 4 && !/^(?:space|shuttle|moon|planet|the)$/i.test(word));
+  const capaKelime = (words[words.length - 1] || words[0] || anchor).toLowerCase();
+  const names = [...new Set((String(text).match(/\b[A-Z][a-zA-Z'’-]+(?:\s+(?:of\s+|the\s+)?[A-Z][a-zA-Z'’-]+)+\b/g) || []).map((name) => name.replace(LEADING, "").replace(/['’]s$/, "").trim()))]
+    .filter((name) => name.split(/\s+/).length >= 2 && INSTITUTION.test(name));
+  return { capaKelime, ozelAdlar: names };
+}
+
 // Renders an approved package with the existing long-video chain (voice,
 // licensed visuals, ffmpeg) into uretim/<job>/. Never uploads.
 function renderLongform(channel, pkg) {
@@ -213,7 +227,7 @@ function renderLongform(channel, pkg) {
       channel: channel.slug, format: "long", aspect: "16:9", baslik: pkg.titles.selected.title, baslik_en: pkg.titles.selected.title,
       aciklama: `${pkg.topic.title}\n\nSources:\n${pkg.researchPackage.sources.map((source) => `- ${source.name}: ${source.url}`).join("\n")}\n\nReconstructions and illustrations are labelled on screen. Narration uses a synthetic voice.`,
       etiketler: [pkg.topic.subject, pkg.topic.cluster].filter(Boolean), ses: Channel.getChannel(channel.slug).config.voice.voice, growthPackage: pkg.topic.slug,
-      sahneKelimeleri: sceneQueries(text, pkg), minAlaka: 0.25,
+      sahneKelimeleri: sceneQueries(text, pkg), ...visualGuard(pkg, text),
     }, null, 2));
     for (const script of ["seslendir.js", "gorsel-bul.js", "video-yap.js"]) {
       const run = cp.spawnSync(process.execPath, [script, job], { cwd: Channel.ROOT, stdio: "inherit", timeout: 3 * 3600 * 1000 });
@@ -262,4 +276,4 @@ function registerEpisode(channel, pkg, result, options = {}) {
   return row;
 }
 
-module.exports = { isoWeek, status, candidates, runCycle, renderLongform, renderAndUpload, sceneQueries, plainText, registerEpisode, episodes, shortsEvidence, TERMINAL };
+module.exports = { isoWeek, status, candidates, runCycle, renderLongform, renderAndUpload, sceneQueries, plainText, visualGuard, registerEpisode, episodes, shortsEvidence, TERMINAL };

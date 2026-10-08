@@ -584,3 +584,13 @@ test("long-form visual searches are anchored to the subject, never bare generic 
   assert.ok(queries.flat().includes("Rogers Commission"));
   assert.equal(queries.flat().some((query) => /^(?:joint|tank|seal)$/i.test(query)), false);
 });
+
+test("long-form visual guard keeps subject or institution images only, never a bare person name", () => {
+  const Lane = require("../../core/growth/lane");
+  const pkg = { topic: { subject: "Challenger" }, researchPackage: { deepResearch: { article: "Space Shuttle Challenger disaster" } } };
+  const guard = Lane.visualGuard(pkg, "The Rogers Commission questioned Roger Boisjoly and Morton Thiokol managers about the seal.");
+  assert.equal(guard.capaKelime, "challenger");
+  assert.ok(guard.ozelAdlar.includes("Rogers Commission"));
+  assert.ok(guard.ozelAdlar.includes("Morton Thiokol"));
+  assert.equal(guard.ozelAdlar.includes("Roger Boisjoly"), false, "a person's name alone could match a namesake");
+});
