@@ -34,6 +34,8 @@ jobs:
         run: npm install --package-lock=false --ignore-scripts --no-audit --no-fund
       - name: Run growth engine tests
         run: npm run test:growth
+      - name: Verify pilot report regression tests
+        run: node --test tests/js/fr-ib-longform-readiness.test.js
       - name: Prepare isolated non-publishing dry-run
         run: mkdir -p reports/dry-runs
       - name: Failure Reconstructed — package dry-run
