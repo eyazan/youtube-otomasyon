@@ -383,7 +383,7 @@ async function llmScript(channel, topic, pkg, plan, cold, config, options = {}) 
               "Each paragraph must have non-empty text and a non-empty claims array with exact provided IDs.",
               "Do not add new facts or use unsupported statements. If evidence is thin, be concise.",
               'Return JSON only: {"section":{"paragraphs":[{"text":"...","claims":["EXACT_ID"]}]}}',
-            ].join("\\n"),
+            ].join("\n"),
             user: JSON.stringify({ section: section.section, claims, previous_output: json }),
           });
           validated = validateGeneratedSection(repaired, section);
