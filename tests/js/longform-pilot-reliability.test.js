@@ -547,3 +547,13 @@ test("fact-check findings survive a rate limit during the repair; resume does no
     fs.rmSync(sandbox, { recursive: true, force: true });
   }
 });
+
+test("a Retry-After within the wait limit is waited out in full, not cut to the backoff cap", async () => {
+  await withEnv({ LONGFORM_LLM_PROVIDER: "groq", GROQ_API_KEY: "k", LONGFORM_LLM_MAX_ATTEMPTS: "2", LONGFORM_LLM_MAX_WAIT_MS: "600000" }, async () => {
+    const slept = [];
+    let calls = 0;
+    const fetch = async () => (++calls === 1 ? response(429, {}, { "retry-after": "124" }) : response(200, groqBody({ a: "ok" })));
+    await Provider.generateJson({ stage: "s", system: "s", user: "u", schema: SCHEMA, schemaName: "x", maxTokens: 50 }, { dependencies: { fetch, sleep: async (ms) => { slept.push(ms); } } });
+    assert.ok(slept.includes(124000), `slept ${slept}`);
+  });
+});

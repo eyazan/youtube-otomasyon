@@ -288,7 +288,9 @@ function delayFor(error, attempt) {
   const configuredMax = Number(envValue("LONGFORM_LLM_MAX_RETRY_MS"));
   const maximum = Number.isFinite(configuredMax) && configuredMax >= 1000 ? configuredMax : 30000;
   const exponential = Math.min(maximum, 1000 * 2 ** attempt);
-  return Math.min(maximum, Math.max(exponential, error.retryAfterMs || 0));
+  // The provider's Retry-After is honoured in full (up to the wait limit,
+  // checked by the caller); retrying earlier only spends the attempt.
+  return Math.max(exponential, Math.min(error.retryAfterMs || 0, maxWaitMs()));
 }
 
 // Verification only: LONGFORM_TEST_STOP_AFTER_REQUESTS=N makes the (N+1)th
