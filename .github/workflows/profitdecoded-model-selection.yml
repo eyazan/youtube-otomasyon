@@ -1,0 +1,49 @@
+name: ProfitDecoded model selection (one-off benchmark)
+# Throwaway branch only; never merged. Free-tier Gemini (generation) and Groq (judging) only; no paid provider.
+# Keys are never printed.
+on:
+  push:
+    branches: [bench/profitdecoded-model-selection]
+    paths: ['bench/model-selection/**', '.github/workflows/profitdecoded-model-selection.yml']
+permissions:
+  contents: read
+concurrency:
+  group: profitdecoded-model-selection
+  cancel-in-progress: false
+jobs:
+  bench:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm install --no-audit --no-fund
+      - name: Stage cache (resume after a pause)
+        uses: actions/cache/restore@v4
+        with:
+          path: bench/model-selection/cache
+          key: pd-model-selection-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: pd-model-selection-
+      - name: Benchmark step
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+        run: |
+          if [ -f bench/model-selection/STEP ]; then STEP=$(cat bench/model-selection/STEP); else STEP=generate; fi
+          echo "step: $STEP"
+          node bench/model-selection/$STEP.js
+      - name: Save stage cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: bench/model-selection/cache
+          key: pd-model-selection-${{ github.run_id }}-${{ github.run_attempt }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: model-selection
+          path: bench/model-selection/out/
