@@ -1,7 +1,15 @@
 {
  "schema": "ProfitDecoded paid-API budget policy. Read by core/profitdecoded/budget.js before every paid call. Enabling paid calls is a reviewed change to this file (paidEnabled: true), never a runtime flag.",
- "paidEnabled": false,
- "paidApproval": null,
+ "paidEnabled": true,
+ "paidApproval": {
+  "id": "exp-2026-10-haiku55-gift-cards-1",
+  "scriptId": "hbm-073-how-gift-cards-make-money-for-retailers:long:haiku55-v1",
+  "pool": "experiment",
+  "model": "claude-haiku-5-5",
+  "maxUsd": 0.5,
+  "expiresAt": "2026-10-12T18:00:00Z",
+  "approvedBy": "eyazan (owner approval 2026-10-09; effective when this PR is merged)"
+ },
  "targetPerScriptUsd": 1.0,
  "maxPerScriptUsd": 2.0,
  "monthlyUsd": {
