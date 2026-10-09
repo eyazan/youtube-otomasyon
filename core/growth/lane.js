@@ -255,6 +255,8 @@ function renderLongform(channel, pkg, options = {}) {
       aciklama: `${pkg.topic.title}\n\nSources:\n${pkg.researchPackage.sources.map((source) => `- ${source.name}: ${source.url}`).join("\n")}\n\nReconstructions and illustrations are labelled on screen. Narration uses a synthetic voice.`,
       etiketler: [pkg.topic.subject, pkg.topic.cluster].filter(Boolean), ses: Channel.getChannel(channel.slug).config.voice.voice, growthPackage: pkg.topic.slug,
       sahneKelimeleri: sceneQueries(text, pkg, articleImages), ...visualGuard(pkg, text, articleImages),
+      // Documented sources only: Wikimedia Commons, NASA, NTSB, diagrams.
+      haricKatmanlar: ["archive", "openverse", "stock"],
     }, null, 2));
     for (const script of ["seslendir.js", "gorsel-bul.js", "video-yap.js"]) {
       const run = cp.spawnSync(process.execPath, [script, job], { cwd: Channel.ROOT, stdio: "inherit", timeout: 3 * 3600 * 1000 });

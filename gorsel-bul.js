@@ -471,7 +471,11 @@ function alaka(q, g) {
   const wikiOnbellek = new Map();
   const ctx = { kozmik, kisa, ulasim: /aviation|spaceflight|maritime/.test(kumeId), teknik: true, azMi: () => true,
     wiki: async (q) => { if (!wikiOnbellek.has(q)) { wikiOnbellek.set(q, await wikimedia(q)); await bekle(1200); } return wikiOnbellek.get(q); } };
-  const KATMAN = katmanlar(ctx);
+  // konu.haricKatmanlar (uzun video hatti): basliklari guvenilmez kaynaklar
+  // atlanir — Internet Archive "Europa" icin Avrupa haritalari ve bir
+  // bilimkurgu filmi getirmisti.
+  const haric = new Set(konu.haricKatmanlar || []);
+  const KATMAN = katmanlar(ctx).filter((k) => !haric.has(k.ad));
   // konu.capaKelime (yalnizca uzun video hatti verir): gorselin basliginda ya
   // da kaynak adresinde konunun adi ("challenger") ya da konu.ozelAdlar'dan
   // birinin TUM kelimeleri gecmeli. Tek kelimelik genel aramalarin getirdigi
