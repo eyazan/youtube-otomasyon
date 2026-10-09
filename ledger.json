@@ -16,9 +16,22 @@
    "provider": "anthropic",
    "model": "claude-haiku-5-5",
    "estimateUsd": 0.006634,
-   "status": "reserved",
-   "actualUsd": null,
-   "createdAt": "2026-10-09T20:48:13.216Z"
+   "status": "settled",
+   "actualUsd": 0.007,
+   "createdAt": "2026-10-09T20:48:13.216Z",
+   "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 5864,
+    "cache_read_input_tokens": 0,
+    "cache_creation": {
+     "ephemeral_5m_input_tokens": 5864,
+     "ephemeral_1h_input_tokens": 0
+    },
+    "output_tokens": 12000,
+    "service_tier": "standard",
+    "inference_geo": "global"
+   },
+   "settledAt": "2026-10-09T20:49:17.834Z"
   }
  ]
 }
