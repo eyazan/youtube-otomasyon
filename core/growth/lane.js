@@ -257,6 +257,10 @@ function renderLongform(channel, pkg, options = {}) {
       // The channel's own documentary pace (seslendir.js otherwise uses the
       // Shorts default of +7%, which cut the Europa render to 7.4 minutes).
       sesHizi: Channel.getChannel(channel.slug).config.voice.rate || "+0%",
+      // Branding of THIS channel (the video tool otherwise brands every
+      // video "Failure Reconstructed").
+      kanal: String(Channel.getChannel(channel.slug).config.name || channel.slug).toUpperCase(),
+      slogan: Channel.getChannel(channel.slug).config.tagline || (channel.slug === "failure-reconstructed" ? "Forensic Engineering Documentaries" : ""),
       sahneKelimeleri: sceneQueries(text, pkg, articleImages), ...visualGuard(pkg, text, articleImages),
       // Documented sources only: Wikimedia Commons, NASA, NTSB, diagrams.
       haricKatmanlar: ["archive", "openverse", "stock"],
