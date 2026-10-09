@@ -254,6 +254,9 @@ function renderLongform(channel, pkg, options = {}) {
       channel: channel.slug, format: "long", aspect: "16:9", baslik: pkg.titles.selected.title, baslik_en: pkg.titles.selected.title,
       aciklama: `${pkg.topic.title}\n\nSources:\n${pkg.researchPackage.sources.map((source) => `- ${source.name}: ${source.url}`).join("\n")}\n\nReconstructions and illustrations are labelled on screen. Narration uses a synthetic voice.`,
       etiketler: [pkg.topic.subject, pkg.topic.cluster].filter(Boolean), ses: Channel.getChannel(channel.slug).config.voice.voice, growthPackage: pkg.topic.slug,
+      // The channel's own documentary pace (seslendir.js otherwise uses the
+      // Shorts default of +7%, which cut the Europa render to 7.4 minutes).
+      sesHizi: Channel.getChannel(channel.slug).config.voice.rate || "+0%",
       sahneKelimeleri: sceneQueries(text, pkg, articleImages), ...visualGuard(pkg, text, articleImages),
       // Documented sources only: Wikimedia Commons, NASA, NTSB, diagrams.
       haricKatmanlar: ["archive", "openverse", "stock"],
