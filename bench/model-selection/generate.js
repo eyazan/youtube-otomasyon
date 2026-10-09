@@ -10,6 +10,8 @@ const W = require(path.join(ROOT, "core/profitdecoded/auto/script-agent"));
 const L = require(path.join(ROOT, "core/profitdecoded/auto/llm"));
 const P = require(path.join(ROOT, "core/profitdecoded/auto/produce"));
 const Gm = require(path.join(ROOT, "core/profitdecoded/auto/gemini"));
+// Benchmark only: at most 2 retries per request, so a demand spike cannot burn the small free daily quota.
+const chat0 = Gm.chat; Gm.chat = (o) => chat0({ ...o, maxRetries: 2 });
 const OUT = path.join(__dirname, "out"); fs.mkdirSync(OUT, { recursive: true });
 const key = process.env.GEMINI_API_KEY;
 (async () => {
