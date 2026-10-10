@@ -509,8 +509,12 @@ function wrap(text, max) {
       ? `drawtext=fontfile='${RG}':text='${sp("NEXT RECONSTRUCTION")}':fontcolor=0xD9A441:fontsize=${TS(46)}:x=(w-text_w)/2:y=${Math.round(H*0.40)},`+
         wrap(temizT(sonraki), 34).slice(0, 2).map((l, i) => `drawtext=fontfile='${BD}':text='${l}':fontcolor=white:fontsize=${TS(92)}:x=(w-text_w)/2:y=${Math.round(H*0.47) + i*TS(110)}:shadowcolor=black:shadowx=4:shadowy=4`).join(",") + ","
       : "") +
-    `drawtext=fontfile='${BD}':text='${sp(KANAL || "FAILURE RECONSTRUCTED")}':fontcolor=white:fontsize=${TS(44)}:x=(w-text_w)/2:y=${Math.round(H*0.80)},`+
-    `drawtext=fontfile='${RG}':text='${temizT(SLOGAN || "Forensic Engineering Documentaries")}':fontcolor=0xAAB8C4:fontsize=${TS(36)}:x=(w-text_w)/2:y=${Math.round(H*0.86)}`,
+    // Kanal konu.json'da verilmisse onun adi/slogani kullanilir (slogan yoksa
+    // satir cizilmez); verilmemisse eski Failure Reconstructed varsayilani.
+    `drawtext=fontfile='${BD}':text='${sp(KANAL || "FAILURE RECONSTRUCTED")}':fontcolor=white:fontsize=${TS(44)}:x=(w-text_w)/2:y=${Math.round(H*0.80)}`+
+    ((KANAL ? SLOGAN : (SLOGAN || "Forensic Engineering Documentaries"))
+      ? `,drawtext=fontfile='${RG}':text='${temizT(KANAL ? SLOGAN : (SLOGAN || "Forensic Engineering Documentaries"))}':fontcolor=0xAAB8C4:fontsize=${TS(36)}:x=(w-text_w)/2:y=${Math.round(H*0.86)}`
+      : ""),
     "-frames:v","1",outroPng]);
   const outroMp4 = OUTRO_D > 0 ? path.join(TMP, "zz-outro.mp4") : null;
   if (outroMp4) run(["-y","-i",outroPng,"-vf",

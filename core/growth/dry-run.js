@@ -139,7 +139,7 @@ async function run(options = {}) {
     results.push({
       channel: slug,
       short: short.plan ? { topic: short.plan.topic.slug, qualified: !!short.selection.selected, score: short.plan.readiness.ProductionReadinessScore, decision: short.plan.readiness.decision, hook: short.plan.hooks.selected && short.plan.hooks.selected.spoken } : null,
-      long: long.pkg ? { topic: long.pkg.topic.slug, potential: long.pkg.LongFormPotential.LongFormPotentialScore, score: long.pkg.readiness.LongFormProductionReadinessScore, decision: long.pkg.readiness.decision, hardFails: long.pkg.readiness.hardFails, minutes: long.pkg.script.estimatedMinutes, deepClaims: long.pkg.researchPackage.deepResearch ? long.pkg.researchPackage.deepResearch.claims : 0 } : null,
+      long: long.pkg ? { topic: long.pkg.topic.slug, potential: long.pkg.LongFormPotential.LongFormPotentialScore, score: long.pkg.readiness.LongFormProductionReadinessScore, decision: long.pkg.readiness.decision, hardFails: long.pkg.readiness.hardFails, minutes: long.pkg.script.estimatedMinutes, generator: long.pkg.script.generator, generationStatus: long.pkg.script.status || long.pkg.script.llmStatus || null, llmErrorCode: long.pkg.script.llmErrorCode || null, llmErrorStage: long.pkg.script.llmErrorStage || null, llmErrorMessage: long.pkg.script.llmError || null, deepClaims: long.pkg.researchPackage.deepResearch ? long.pkg.researchPackage.deepResearch.claims : 0 } : null,
     });
   }
   fs.writeFileSync(path.join(dir, "summary.json"), JSON.stringify({ generatedAt: new Date().toISOString(), sandbox: "GROWTH_STATE_ROOT (temporary)", results }, null, 2) + "\n");
