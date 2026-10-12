@@ -1,0 +1,110 @@
+name: FR + IB long-form pilot audit (no publish)
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - '.github/workflows/fr-ib-longform-audit.yml'
+      - 'docs/FR-IB-LONGFORM-PILOT.md'
+      - 'core/growth/**'
+      - 'growth.js'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: fr-ib-longform-audit-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      FR_LONGFORM_PUBLISH: '0'
+      IB_LONGFORM_PUBLISH: '0'
+      PUBLISH: '0'
+      GROWTH_GATE_MODE: shadow
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: npm install --package-lock=false --ignore-scripts --no-audit --no-fund
+      - name: Run growth engine tests
+        run: npm run test:growth
+      - name: Verify pilot report regression tests
+        run: node --test tests/js/fr-ib-longform-readiness.test.js
+      - name: Verify provider preflight regression tests
+        run: node --test tests/js/fr-ib-writer-preflight.test.js
+      - name: Read-only provider preflight
+        run: node scripts/fr-ib-writer-preflight.js reports/dry-runs/WRITER-PREFLIGHT.md
+      - name: Prepare isolated non-publishing dry-run
+        run: mkdir -p reports/dry-runs
+      - name: Failure Reconstructed — package dry-run
+        run: |
+          set -euo pipefail
+          node growth.js dry-run --channel failure-reconstructed | tee reports/dry-runs/fr-console.txt
+          cp reports/dry-runs/summary.json reports/dry-runs/fr-summary.json
+      - name: ImpossibleBrief — package dry-run
+        run: |
+          set -euo pipefail
+          node growth.js dry-run --channel impossible-brief | tee reports/dry-runs/ib-console.txt
+          cp reports/dry-runs/summary.json reports/dry-runs/ib-summary.json
+      - name: Build actionable readiness report
+        run: |
+          node scripts/fr-ib-longform-readiness.js reports/dry-runs
+          cat reports/dry-runs/LONGFORM-READINESS.md >> "$GITHUB_STEP_SUMMARY"
+          cat reports/dry-runs/LONGFORM-READINESS.md
+      - name: Report actual long-form readiness to job summary
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo '## FR + IB long-form readiness'
+            echo ''
+            echo '| Channel | Proposed long-form candidate | Score | Gate |'
+            echo '|---|---|---:|---|'
+            for pair in 'fr-console.txt|Failure Reconstructed' 'ib-console.txt|ImpossibleBrief'; do
+              file="${pair%%|*}"
+              channel="${pair#*|}"
+              if [ -f "reports/dry-runs/$file" ]; then
+                line="$(grep -E 'long-form ' "reports/dry-runs/$file" | tail -n 1 || true)"
+                if [ -n "$line" ]; then
+                  candidate="$(printf '%s' "$line" | sed -E 's/.*long-form ([^ ]+) ([0-9]+) ([A-Z_]+).*/\1/')"
+                  score="$(printf '%s' "$line" | sed -E 's/.*long-form ([^ ]+) ([0-9]+) ([A-Z_]+).*/\2/')"
+                  gate="$(printf '%s' "$line" | sed -E 's/.*long-form ([^ ]+) ([0-9]+) ([A-Z_]+).*/\3/')"
+                  echo "| $channel | $candidate | $score | $gate |"
+                else
+                  echo "| $channel | not available | — | NOT_COLLECTED |"
+                fi
+              else
+                echo "| $channel | dry-run missing | — | NOT_COLLECTED |"
+              fi
+            done
+            echo ''
+            echo 'BLOCK/REVIEW means **not production-ready**, even when the CI tests are green.'
+            echo 'Do not enable long-form publishing without a subsequent PUBLISH verdict, source/asset review and human approval.'
+            echo 'Download fr-ib-longform-pilot-audit artifact for the underlying report.'
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Save pilot summary
+        if: always()
+        run: |
+          {
+            echo '# FR + IB long-form pilot audit'
+            echo ''
+            echo 'No videos were rendered, uploaded or published by this workflow.'
+            echo ''
+            echo 'Inspect the attached reports/dry-runs files for actual selected topics, readiness scores and hard fails.'
+            echo ''
+            echo 'Before live production: obtain primary references, review original assets and full video, then explicitly approve release.'
+          } > reports/dry-runs/PILOT-SUMMARY.md
+      - name: Upload audit artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fr-ib-longform-pilot-audit
+          path: reports/dry-runs/
+          if-no-files-found: warn
+          retention-days: 14

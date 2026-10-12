@@ -158,24 +158,131 @@ async function runCycle(channel, options = {}) {
   return { channel: channel.slug, ran: true, cycle, summary, status: state };
 }
 
-// Hands the approved package to the existing long-video chain. Failures are
-// contained to the long-form lane.
-function renderAndUpload(channel, pkg) {
+// Characters the subtitle font cannot draw (non-breaking hyphens, narrow
+// no-break spaces) become plain ones; the words are unchanged.
+const plainText = (text) => String(text).replace(/[\u2010\u2011]/g, "-").replace(/[\u00a0\u202f\u2007]/g, " ");
+
+// Visual search terms per scene, always tied to the topic. Left to itself the
+// visual finder searched single words ("joint", "tank", "Smith") and returned
+// a cigarette, an army tank and a draft card for the Challenger disaster.
+// Each scene searches its own multi-word names first ("Morton Thiokol",
+// "Rogers Commission"), then its key nouns anchored to the subject
+// ("Space Shuttle Challenger seal"), then the subject itself.
+const SCENE_STOP = new Set(("about after again against along also although among another around because before being below between both cannot could during each either every first from further their there these those though through under until where whether which while would should other since still such than that them then they this were what when with within without into onto over some most more much many only very just even ever across later early since perhaps itself become became thing things people really might seems point times years another").split(/\s+/));
+const LEADING = /^(?:(?:The|A|An|In|On|At|By|For|But|And|Yet|When|While|After|Before|During|That|This|These|Those|It|Its|If|As|So|Once|Even|Only|Then|Now|Our|We|You|Although|However|Because|Since|Meanwhile|Later|Despite)\s+)+/;
+const GENERIC_NAMES = /^(?:United States|NASA|NASA['’]s .*)$/i;
+const NUMBER_WORDS = /^(?:one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety|hundred|thousand|million|billion|seconds?|minutes?|hours?|days?|years?)(?:-[a-z]+)?$/;
+function subjectAnchor(pkg) {
+  const article = pkg.researchPackage && pkg.researchPackage.deepResearch && pkg.researchPackage.deepResearch.article;
+  const base = article || (pkg.topic && (pkg.topic.subject || pkg.topic.title)) || "";
+  return base.replace(/[()]/g, " ").replace(/\b(?:disaster|accident|collapse|explosion|crash|sinking|incident|failure)\b/gi, " ").replace(/\s+/g, " ").trim();
+}
+// The research article's own illustrations, each given to the one scene that
+// shares most words with its title (no shared word: not used).
+function articleImagesByScene(scenes, images = []) {
+  const wordsOf = (value) => new Set((String(value).toLowerCase().replace(/\.(?:jpe?g|png|svg|gif|tiff?)$/i, "").match(/[a-z][a-z-]{3,}/g) || []).filter((word) => !SCENE_STOP.has(word)));
+  const sceneWords = scenes.map(wordsOf);
+  const byScene = scenes.map(() => []);
+  for (const image of images) {
+    const title = String(image).replace(/\.(?:jpe?g|png|svg|gif|tiff?)$/i, "").replace(/[_()]/g, " ").replace(/\s+/g, " ").trim();
+    const own = wordsOf(title);
+    let best = -1, bestScore = 0;
+    sceneWords.forEach((words, index) => { const score = [...own].filter((word) => words.has(word)).length; if (score > bestScore && byScene[index].length < 2) { best = index; bestScore = score; } });
+    if (best >= 0) byScene[best].push(title);
+  }
+  return byScene;
+}
+
+function sceneQueries(text, pkg, articleImages = []) {
+  const anchor = subjectAnchor(pkg);
+  const anchorWords = new Set(anchor.toLowerCase().split(/\s+/));
+  const scenes = require("../../lib/sahne").sahneParagraflari(text);
+  // Domain terms: content nouns that recur in the script but not everywhere
+  // (o-ring, booster, plume, ocean), ranked per scene by tf-idf. Verbs and
+  // adverbs (-ed, -ly, -ing), numbers and time words are not searchable.
+  const termsOf = (value) => (value.toLowerCase().match(/\b[a-z][a-z-]{3,}\b/g) || [])
+    .filter((word) => !SCENE_STOP.has(word) && !anchorWords.has(word) && !NUMBER_WORDS.test(word) && (word.includes("-") || !/(?:ed|ly|ing)$/.test(word)));
+  const total = new Map();
+  const spread = new Map();
+  for (const scene of scenes) { const seen = new Set(termsOf(scene)); for (const word of termsOf(scene)) total.set(word, (total.get(word) || 0) + 1); for (const word of seen) spread.set(word, (spread.get(word) || 0) + 1); }
+  const fromArticle = articleImagesByScene(scenes, articleImages);
+  // Script-wide domain terms, rotated across scenes so fallbacks differ.
+  const global = [...total].filter(([word]) => spread.get(word) < scenes.length).sort((a, b) => b[1] - a[1]).slice(0, 12).map(([word]) => `${anchor} ${word}`);
+  return scenes.map((scene, index) => {
+    const names = [...new Set((scene.match(/\b[A-Z][a-zA-Z'’-]+(?:\s+(?:of\s+|the\s+)?[A-Z][a-zA-Z'’-]+)+\b/g) || [])
+      .map((name) => name.replace(LEADING, "").replace(/['’]s$/, "").trim()).filter((name) => name.split(/\s+/).length >= 2 && !GENERIC_NAMES.test(name) && name.toLowerCase() !== anchor.toLowerCase()))];
+    const counts = new Map();
+    for (const word of termsOf(scene)) counts.set(word, (counts.get(word) || 0) + 1);
+    const score = (word, count) => (total.get(word) >= 2 ? count * Math.log(1 + scenes.length / spread.get(word)) : 0);
+    const nouns = [...counts].map(([word, count]) => [word, score(word, count)]).filter(([, value]) => value > 0).sort((a, b) => b[1] - a[1]).slice(0, 2).map(([word]) => `${anchor} ${word}`);
+    const rotating = global.length ? [global[index % global.length], global[(index + 5) % global.length]] : [];
+    return [...fromArticle[index], ...[...new Set([...names.slice(0, 2), ...nouns, ...rotating])].filter((query) => query && query !== anchor).slice(0, 4), anchor].filter(Boolean);
+  });
+}
+
+// Which images the visual finder may keep: the subject's distinctive word
+// must appear in the image title or source, or every word of a named
+// institution, place, vessel or instrument from the script. Person names are
+// not enough on their own (a namesake's portrait must never appear).
+// Not places or programmes ("Kennedy Space Center" also shows unrelated
+// launches decades later); the subject's own word covers those.
+const INSTITUTION = /\b(?:Commission|Committee|Comet|Star|Telescope|Agency|Institute|Laboratory|Lander|Probe|Spacecraft|Rover|Horizons|Thiokol|Corporation|Company|University|Bridge|Dam|Reactor|Ship|MV|USS|HMS|Observatory)\b/;
+function visualGuard(pkg, text, articleImages = []) {
+  const anchor = subjectAnchor(pkg);
+  const words = anchor.split(/\s+/).filter((word) => word.length >= 4 && !/^(?:space|shuttle|moon|planet|the)$/i.test(word));
+  const capaKelime = (words[words.length - 1] || words[0] || anchor).toLowerCase();
+  const names = [...new Set((String(text).match(/\b[A-Z][a-zA-Z'’-]+(?:\s+(?:of\s+|the\s+)?[A-Z][a-zA-Z'’-]+)+\b/g) || []).map((name) => name.replace(LEADING, "").replace(/['’]s$/, "").trim()))]
+    .filter((name) => name.split(/\s+/).length >= 2 && INSTITUTION.test(name));
+  // An article illustration is admitted by its own title words.
+  const titles = articleImages.map((image) => String(image).replace(/\.(?:jpe?g|png|svg|gif|tiff?)$/i, "").replace(/[_()]/g, " ").replace(/\s+/g, " ").trim());
+  return { capaKelime, ozelAdlar: [...names, ...titles] };
+}
+
+// Renders an approved package with the existing long-video chain (voice,
+// licensed visuals, ffmpeg) into uretim/<job>/. Never uploads.
+function renderLongform(channel, pkg, options = {}) {
+  const articleImages = options.articleImages || (() => {
+    try { return (Store.readState(channel, "longform", `research/${pkg.topic.slug}.deep.json`, null) || {}).images || []; } catch (error) { return []; }
+  })();
   const job = `lf-${pkg.topic.slug}`.slice(0, 80);
   const renderDir = path.join(Channel.ROOT, "uretim", job);
   try {
     fs.mkdirSync(path.join(renderDir, "Voice"), { recursive: true });
-    const text = pkg.script.sections.flatMap((section) => (section.paragraphs || []).map((paragraph) => paragraph.text)).join("\n\n");
+    const text = plainText(pkg.script.sections.flatMap((section) => (section.paragraphs || []).map((paragraph) => paragraph.text)).join("\n\n"));
     fs.writeFileSync(path.join(renderDir, "Voice", "SESLENDIRME-TAM-METIN.txt"), text + "\n");
     fs.writeFileSync(path.join(renderDir, "konu.json"), JSON.stringify({
       channel: channel.slug, format: "long", aspect: "16:9", baslik: pkg.titles.selected.title, baslik_en: pkg.titles.selected.title,
       aciklama: `${pkg.topic.title}\n\nSources:\n${pkg.researchPackage.sources.map((source) => `- ${source.name}: ${source.url}`).join("\n")}\n\nReconstructions and illustrations are labelled on screen. Narration uses a synthetic voice.`,
       etiketler: [pkg.topic.subject, pkg.topic.cluster].filter(Boolean), ses: Channel.getChannel(channel.slug).config.voice.voice, growthPackage: pkg.topic.slug,
+      // The channel's own documentary pace (seslendir.js otherwise uses the
+      // Shorts default of +7%, which cut the Europa render to 7.4 minutes).
+      sesHizi: Channel.getChannel(channel.slug).config.voice.rate || "+0%",
+      // Branding of THIS channel (the video tool otherwise brands every
+      // video "Failure Reconstructed").
+      kanal: String(Channel.getChannel(channel.slug).config.name || channel.slug).toUpperCase(),
+      slogan: Channel.getChannel(channel.slug).config.tagline || (channel.slug === "failure-reconstructed" ? "Forensic Engineering Documentaries" : ""),
+      sahneKelimeleri: sceneQueries(text, pkg, articleImages), ...visualGuard(pkg, text, articleImages),
+      // Documented sources only: Wikimedia Commons, NASA, NTSB, diagrams.
+      haricKatmanlar: ["archive", "openverse", "stock"],
     }, null, 2));
     for (const script of ["seslendir.js", "gorsel-bul.js", "video-yap.js"]) {
       const run = cp.spawnSync(process.execPath, [script, job], { cwd: Channel.ROOT, stdio: "inherit", timeout: 3 * 3600 * 1000 });
-      if (run.status !== 0) return { ok: false, stage: script, reason: `${script} exit ${run.status}` };
+      if (run.status !== 0) return { ok: false, job, stage: script, reason: `${script} exit ${run.status}` };
     }
+    const mp4 = path.join(renderDir, "Videos", `${job}.mp4`);
+    return fs.existsSync(mp4) ? { ok: true, job, renderDir, mp4 } : { ok: false, job, stage: "video-yap.js", reason: "no mp4 written" };
+  } catch (error) {
+    return { ok: false, job, stage: "handoff", reason: error.message };
+  }
+}
+
+// Hands the approved package to the existing long-video chain, then uploads.
+// Failures are contained to the long-form lane.
+function renderAndUpload(channel, pkg) {
+  const rendered = renderLongform(channel, pkg);
+  if (!rendered.ok) return rendered;
+  const { job, renderDir } = rendered;
+  try {
     const productionDir = path.join(channel.paths.production, job);
     if (productionDir !== renderDir) fs.cpSync(renderDir, productionDir, { recursive: true });
     const upload = cp.spawnSync(process.execPath, ["youtube-yukle.js", "--channel", channel.slug, job], { cwd: Channel.ROOT, stdio: "inherit", env: process.env });
@@ -205,4 +312,4 @@ function registerEpisode(channel, pkg, result, options = {}) {
   return row;
 }
 
-module.exports = { isoWeek, status, candidates, runCycle, renderAndUpload, registerEpisode, episodes, shortsEvidence, TERMINAL };
+module.exports = { isoWeek, status, candidates, runCycle, renderLongform, renderAndUpload, sceneQueries, plainText, visualGuard, registerEpisode, episodes, shortsEvidence, TERMINAL };

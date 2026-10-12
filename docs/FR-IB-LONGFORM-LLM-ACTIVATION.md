@@ -1,0 +1,45 @@
+# Long-form LLM activation: safe operator checklist
+
+Current FR/IB CI evidence: 46 growth tests + 2 report tests + 2 writer-preflight tests passed; both documentary candidates are **BLOCK** due to insufficient script depth. The CI preflight reports `UNCONFIGURED`. This is a missing long-form writer configuration, **not** a reason to lower quality gates.
+
+## What an authorized operator must do
+1. Pick one explicitly approved provider supported by `core/llm/longform-provider.js`: `groq` or `anthropic`. Review rate limits, data handling, model accuracy and price. Set a modest budget/limit before using paid generation.
+2. Add the provider's API key to GitHub Actions repository **Secrets** (not a plain-text variable or a commit): `GROQ_API_KEY` or `ANTHROPIC_API_KEY`. The key must never be committed or printed.
+3. Set repository **Variables** `LONGFORM_LLM_PROVIDER` to `groq` or `anthropic`, with an explicitly selected model if required. A variable does **not** automatically become an environment variable in Actions: the workflow must map `vars.LONGFORM_LLM_PROVIDER` and `secrets.GROQ_API_KEY` (or `ANTHROPIC_API_KEY`) into the specific opt-in job's `env`.
+4. Do **not** add these credentials to the existing scheduled production workflow. Use an independently approved, manually dispatched `dry_run` job with `PUBLISH=0`, `FR_LONGFORM_PUBLISH=0`, `IB_LONGFORM_PUBLISH=0` and no YouTube OAuth credentials or upload command. Never rely on a hidden default or paid fallback.
+5. Run a single-topic FR test first. Inspect source-to-claim citations, model JSON validity, human-readable opening, section originality, factual assertions, `COPY_RISK`, `INSUFFICIENT_DEPTH` and generated words/minutes; then run a single-topic IB test and audit speculative assumptions.
+6. Only when the generated script is long enough **because of evidenced content**, review full audio/visual rendering in a separate non-publishing sandbox. Sign off footage licences and thumbnails manually.
+7. Merge PR #195 only after all branch test workflows pass and production Shorts regression tests pass. **Merging code does not authorize publishing long-form.** Keep `FR_LONGFORM_PUBLISH` and `IB_LONGFORM_PUBLISH` off until a separate release decision.
+
+## Verified blocker
+- FR Challenger: ~2.2 minutes from deterministic preview.
+- IB Europa: ~1.8 minutes from deterministic preview.
+- Both fail `INSUFFICIENT_DEPTH`; green CI tests do not lift those blocks.
+- The workflow currently doesn't map or configure a long-form LLM provider, therefore *a full LLM long-form production test has not yet happened*.
+
+## Troubleshooting
+- Preflight says `UNCONFIGURED`: review both provider **variable** and **secret**, in the actual job environment.
+- Preflight says `CONFIGURED_NOT_TESTED`: credentials exist but model calls, text depth, accuracy and cost remain unverified.
+- Research fetch fails: check connectivity, content licence and whether primary-source enrichment is sufficient; do not pad Wikipedia paraphrases.
+- Long-form remains blocked: examine actual per-channel `LONGFORM-READINESS.md` and the two long-form dry-run reports, not the CI success badge.
+
+## Generation reliability (2026-10-09)
+
+Root causes found in runs #1–#8 and how they are handled now:
+
+| Symptom | Root cause | Fix |
+|---|---|---|
+| HTTP 413 / HTTP 429 at `section:*` | Outline put up to 105 claims in one section; sections were sent back-to-back with `max_completion_tokens: 5000` against an ~8K tokens-per-minute allowance | Deep claims placed by article heading, ≤ 14 per section; every request sized before sending (`LONGFORM_REQUEST_TOKEN_BUDGET`, default 7000); requests paced with `x-ratelimit-*` headers; `Retry-After` honoured up to `LONGFORM_LLM_MAX_WAIT_MS`, longer waits defer at once |
+| HTTP 400 "Failed to generate JSON" | `json_object` mode does not enforce a schema; `reasoning_format` is not supported for GPT-OSS | `json_schema` + `strict: true` (constrained decoding) per stage, claim ids as an `enum`; `include_reasoning: false`, `reasoning_effort: low` |
+| INVALID_SECTION | Model could cite ids loosely; any cited id was accepted | Paragraph support check: digit, spelled-out and approximate quantities and proper names must appear in the cited claims (the topic's own name excepted), ≥ 20% content-word overlap, no copied encyclopedia prose (exact figures, units and official names are not counted as copying); one bounded repair; unsupported sections block the script |
+| Checkpoint not restored | Run #8 used `include-hidden-files: false`; key ignored model/prompt | Hidden sandbox archived (`if-no-files-found: error`) and restored automatically from the latest artifact; key = channel + topic + research hash + outline hash + model + prompt version + schema |
+| ImpossibleBrief had no depth | Subject phrase named no article | Article taken from the topic's own cited evidence URLs (exact, no search) |
+
+Stages persisted: research package → narrative blueprint → cold open → each section → fact-check → citation validation → quality review → final script. A rate-limited run stops, records the failing stage and resumes from it on the next dispatch.
+
+### Fact-check stage and ImpossibleBrief scenario layer (2026-10-09)
+
+| Symptom | Root cause | Fix |
+|---|---|---|
+| FR Challenger passed every check but said the field joint attached the booster to the external tank | The support check compares words, numbers and names; a sentence built from the claims' own words can still state something they do not | **Fact-check stage** (`fact_check`, strict schema): each section's paragraphs are compared with exactly the claims they cite; CONTRADICTED / NOT_STATED statements get one rewrite, are checked again and are dropped if still unsupported. Never padded. An incomplete check is a hard fail. Versioned per section (`FACT_CHECK_VERSION`), so a completed checkpoint is checked on resume without regenerating sections. |
+| IB Europa: 5.6 min, an encyclopedia tour instead of the what-if | Generic section questions ("What changes first?") and article-heading routing that sent naming history and the red-giant far future into the script | IB section questions are asked about the topic's own scenario (`scenario`, `coreQuestion`, `consequence`, `mechanism`); deep claims follow the scenario journey (surface/ice/plumes → ocean/composition → habitability → mechanism → exploration limits), ranked by scenario relevance; naming, discovery history and far-future asides are skipped; the payoff draws the strongest established facts together to answer the question. The narration may take one explicitly marked step of reasoning (would/could, "in our scenario") from the cited facts; it may not add any fact, which the fact-check enforces. IB checkpoints use prompt version `+ib-scenario-1`; FR checkpoints stay resumable. |

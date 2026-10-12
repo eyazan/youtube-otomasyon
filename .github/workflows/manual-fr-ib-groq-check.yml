@@ -1,4 +1,8 @@
 name: Manual FR/IB long-form Groq check (NO PUBLISH)
+# Manually dispatched only. Generates ONE long-form script in an isolated
+# sandbox with GROQ_API_KEY2, never renders, never touches YouTube. The
+# generation checkpoint is archived after every run and restored by the next
+# run of the same channel, so a rate-limited run resumes instead of restarting.
 on:
   workflow_dispatch:
     inputs:
@@ -10,7 +14,25 @@ on:
           - failure-reconstructed
           - impossible-brief
       resume_run_id:
-        description: Optional previous run ID for same-channel checkpoint (leave blank for fresh run)
+        description: Optional run ID to resume from (blank = latest checkpoint of this channel)
+        required: false
+        type: string
+      fresh:
+        description: Ignore any earlier checkpoint
+        required: false
+        type: boolean
+        default: false
+      retry_unsupported:
+        description: Retry sections that ended UNSUPPORTED (completed sections are kept)
+        required: false
+        type: boolean
+        default: false
+      max_wait_seconds:
+        description: Longest provider wait (Retry-After) to sit out inside this run, in seconds (blank = 70). Use ~330 when the daily token allowance is nearly used.
+        required: false
+        type: string
+      stop_after_requests:
+        description: Verification only — simulate a rate limit after N requests (blank = off)
         required: false
         type: string
       approval:
@@ -20,12 +42,17 @@ on:
 
 permissions:
   contents: read
+  actions: read
+
+concurrency:
+  group: manual-fr-ib-groq-check-${{ inputs.channel }}
+  cancel-in-progress: false
 
 jobs:
   test-script:
     if: ${{ inputs.approval == 'RUN_NO_PUBLISH' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     env:
       PUBLISH: '0'
       FR_LONGFORM_PUBLISH: '0'
@@ -34,12 +61,17 @@ jobs:
       GROWTH_STATE_ROOT: ${{ github.workspace }}/.fr-ib-writer-sandbox
       LONGFORM_LLM_PROVIDER: groq
       GROQ_API_KEY: ${{ secrets.GROQ_API_KEY2 }}
-      LONGFORM_LLM_MAX_ATTEMPTS: '1'
+      LONGFORM_LLM_MAX_ATTEMPTS: '3'
+      LONGFORM_LLM_MAX_WAIT_MS: ${{ inputs.max_wait_seconds && format('{0}000', inputs.max_wait_seconds) || '70000' }}
+      LONGFORM_REQUEST_TOKEN_BUDGET: ${{ vars.LONGFORM_REQUEST_TOKEN_BUDGET || '7000' }}
+      GH_TOKEN: ${{ github.token }}
+      LONGFORM_TEST_STOP_AFTER_REQUESTS: ${{ inputs.stop_after_requests }}
+      LONGFORM_RETRY_UNSUPPORTED: ${{ inputs.retry_unsupported && '1' || '0' }}
     steps:
-      - name: Checkout reviewed pilot commit (not main production)
+      - name: Checkout the dispatched commit (not main production)
         uses: actions/checkout@v4
         with:
-          ref: ad519d4a7dce919bc6535c7b36332f2b5fe2de84
+          ref: ${{ github.sha }}
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:
@@ -52,19 +84,40 @@ jobs:
           test "$PUBLISH" = "0"
           test "$FR_LONGFORM_PUBLISH" = "0"
           test "$IB_LONGFORM_PUBLISH" = "0"
-          node -e 'const p=require("./core/llm/longform-provider");if(!p.available()){console.error("Long-form Groq is not configured");process.exit(1)}'
-      - name: Restore previous same-channel checkpoint (optional)
-        if: ${{ inputs.resume_run_id != '' }}
+          node -e 'const p=require("./core/llm/longform-provider");if(!p.available()){console.error("Long-form Groq is not configured (GROQ_API_KEY2)");process.exit(1)}'
+      - name: Find the checkpoint to resume
+        id: resume
+        if: ${{ !inputs.fresh }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          run_id="${{ inputs.resume_run_id }}"
+          if [ -z "$run_id" ]; then
+            run_id=$(gh api "repos/$GITHUB_REPOSITORY/actions/artifacts?name=longform-resume-${{ inputs.channel }}&per_page=20" \
+              --jq '[.artifacts[] | select(.expired == false and .size_in_bytes > 0)] | sort_by(.created_at) | reverse | .[0].workflow_run.id // empty')
+          fi
+          echo "run_id=$run_id" >> "$GITHUB_OUTPUT"
+          echo "Resume source run: ${run_id:-none (fresh start)}"
+      - name: Restore checkpoint
+        if: ${{ !inputs.fresh && steps.resume.outputs.run_id != '' }}
         uses: actions/download-artifact@v4
         with:
           name: longform-resume-${{ inputs.channel }}
-          run-id: ${{ inputs.resume_run_id }}
+          run-id: ${{ steps.resume.outputs.run_id }}
           github-token: ${{ github.token }}
           path: .fr-ib-writer-sandbox/
+      - name: Show restored checkpoint (stages only)
+        if: always()
+        run: node scripts/fr-ib-checkpoint-report.js "${{ inputs.channel }}" restored
       - name: Build one script in sandbox only
+        # Step-level limit so the checkpoint archive below always runs.
+        timeout-minutes: 35
         run: |
           set -euo pipefail
           node growth.js dry-run --channel "${{ inputs.channel }}"
+      - name: Checkpoint and provider usage after this run
+        if: always()
+        run: node scripts/fr-ib-checkpoint-report.js "${{ inputs.channel }}" after
       - name: Verify generated script is complete, sourced and long enough
         run: |
           node -e '
@@ -84,13 +137,13 @@ jobs:
           name: longform-resume-${{ inputs.channel }}
           path: .fr-ib-writer-sandbox/
           include-hidden-files: true
-          retention-days: 7
-          if-no-files-found: warn
+          retention-days: 14
+          if-no-files-found: error
       - name: Upload script diagnostic reports (no video / no upload)
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: longform-groq-check-${{ inputs.channel }}
           path: reports/dry-runs/
-          retention-days: 7
+          retention-days: 14
           if-no-files-found: warn
