@@ -33,8 +33,10 @@ window.SCENES = function (FR) {
       return { under: `<rect width="${W}" height="${H}" fill="${C.ink}"/>`, media: [ph],
         svg: `<rect width="${W}" height="640" fill="url(#topShade)"/><rect y="1120" width="${W}" height="290" fill="url(#botShade)"/><rect y="1400" width="${W}" height="520" fill="${C.ink}"/>
           ${ring(s.x, s.y, 86, rk)}${lk > 0 ? `<line x1="${s.x - 64}" y1="${s.y - 58}" x2="${lerp(s.x - 64, 330, E.out(lk))}" y2="${lerp(s.y - 58, s.y - 200, E.out(lk))}" stroke="${C.hot2}" stroke-width="5" opacity="${lk}"/>` : ""}`,
-        hud: headline("CHALLENGER · JAN 28, 1986", "Already<br>leaking", 330) + FR.clock(0.678, 1) + FR.chip("NASA photo", "archival")
-          + `<div style="position:absolute;left:60px;top:${s.y - 280}px;opacity:${lk};padding:12px 20px;border-radius:12px;background:rgba(6,9,13,.78);border:2px solid ${C.hot2};font:800 36px/1.18 ${F.sans};letter-spacing:1px;color:${C.text}">SMOKE AT THE<br>RIGHT BOOSTER JOINT</div>` };
+        // Review v1.1: frame 0 carries only the photo, the subject kicker and the headline; the time moves
+        // into the evidence label, which arrives with the ring (no separate clock box competing at frame 0).
+        hud: headline("CHALLENGER · 1986", "Already<br>leaking", 330) + FR.chip("NASA photo", "archival")
+          + `<div style="position:absolute;left:60px;top:${s.y - 300}px;opacity:${lk};padding:12px 20px;border-radius:12px;background:rgba(6,9,13,.8);border:2px solid ${C.hot2};font:800 38px/1.18 ${F.sans};letter-spacing:1px;color:${C.text}">SMOKE AT THE<br>RIGHT BOOSTER JOINT<div style="font:600 30px ${F.num};color:${C.hot2};margin-top:6px;letter-spacing:.5px">0.678 s after liftoff</div></div>` };
     } });
 
   // S02 — explanatory diagram: the stack, the right booster, its lowest field joint.
@@ -53,16 +55,21 @@ window.SCENES = function (FR) {
   // S03 — the Commission's own drawing (Rogers Report Vol. 1, Fig. 14), O-ring labels marked.
   FR.shot({ id: "S03", start: T.s03, end: T.s04, kind: "document", label: "Commission record", subject: "Rogers Commission Fig. 14 field joint cross-section",
     source: "fig14", evidence: ["E2"], render: (t) => {
-      const a = T.s03, b = T.s04; const m = FR.media.fig14; const bw = 620, bh = bw * m.ih / m.iw; const zx = lerp(1, 1.05, ease(t, a, b));
-      const box = { x: (W - bw * zx) / 2, y: 300 - (bh * (zx - 1)) / 2, w: bw * zx, h: bh * zx };
-      const ph = FR.photo("fig14", { crop: { x: 0, y: 0, w: m.iw, h: m.ih }, box });
+      // Review v1.1: the whole figure was unreadable on a phone. Show the joint detail (original px
+      // x 150-500, y 140-370) at about 2.9x: the Commission's own labels read at about 40 px, and the
+      // two O-rings it labels (measured at 242,305 and 242,337) are ringed.
+      const a = T.s03, b = T.s04; const zx = lerp(1, 1.05, ease(t, a, b));
+      const cw = 350 / zx, chh = 230 / zx, cx0 = 150 + (350 - cw) * 0.3, cy0 = 140 + (230 - chh) * 0.7;
+      const box = { x: 40, y: 380, w: 1000, h: 657 };
+      const [x0, y0] = P("fig14", cx0, cy0), [x1, y1] = P("fig14", cx0 + cw, cy0 + chh);
+      const ph = FR.photo("fig14", { crop: { x: x0, y: y0, w: x1 - x0, h: y1 - y0 }, box });
       const map = (x, y) => FR.toScreen(ph.crop, box, ...P("fig14", x, y));
-      // label positions measured on the figure (original px): "Primary O-Ring", "Secondary O-Ring" (two lines)
-      const r1 = map(338, 172), r2 = map(372, 222); const sc = box.w / m.iw / FR.media.fig14.scale;
-      const mk = (q, k, w, h) => k <= 0 ? "" : `<rect x="${q.x - 8}" y="${q.y - 6}" width="${w * sc * E.out(clamp(k))}" height="${h * sc}" fill="${C.hot2}" opacity="0.42" rx="4"/>`;
-      return { under: `<rect width="${W}" height="${H}" fill="${C.ink}"/><rect x="${box.x - 30}" y="${box.y - 30}" width="${box.w + 60}" height="${box.h + 60}" fill="#ffffff" rx="6" filter="url(#soft)"/>`,
-        media: [ph], hud: `<svg style="position:absolute;left:0;top:0" width="${W}" height="${H}">${mk(r1, p(t, a + 0.15, a + 0.55), 130, 20)}${mk(r2, p(t, a + 0.45, a + 0.85), 96, 38)}</svg>`
-          + FR.source("Rogers Commission Report, Vol. 1, Figure 14", 1, box.y + box.h + 44) + FR.chip("Commission record", "document") };
+      const l1 = map(352, 172), l2 = map(390, 218), o1 = map(242, 305), o2 = map(242, 337); const sc = box.w / (x1 - x0) * FR.media.fig14.scale;
+      const mk = (q, k, w, h) => k <= 0 ? "" : `<rect x="${q.x}" y="${q.y}" width="${w * sc * E.out(clamp(k))}" height="${h * sc}" fill="${C.hot2}" opacity="0.45" rx="4"/>`;
+      return { under: `<rect width="${W}" height="${H}" fill="${C.ink}"/><rect x="${box.x - 16}" y="${box.y - 16}" width="${box.w + 32}" height="${box.h + 32}" fill="#ffffff" rx="8" filter="url(#soft)"/>`,
+        media: [ph], hud: `<svg style="position:absolute;left:0;top:0" width="${W}" height="${H}">${mk(l1, p(t, a + 0.1, a + 0.5), 132, 22)}${mk(l2, p(t, a + 0.4, a + 0.8), 96, 40)}
+            ${ring(o1.x, o1.y, 30, p(t, a + 0.2, a + 0.6), C.hot, 6)}${ring(o2.x, o2.y, 30, p(t, a + 0.5, a + 0.9), C.hot, 6)}</svg>`
+          + FR.source("Rogers Commission Report, Vol. 1, Figure 14 (detail)", 1, box.y + box.h + 40) + FR.chip("Commission record", "document") };
     } });
 
   // S04 — authentic NASA photo: icicles on the launch tower that morning.
@@ -78,16 +85,23 @@ window.SCENES = function (FR) {
 
   // S05 — explanatory animation: warm vs cold rubber recovering after a squeeze.
   FR.shot({ id: "S05", drift: [1.0, 1.05], start: T.s05, end: T.s06, kind: "explanatory", label: "Explanatory animation", subject: "O-ring resilience: warm vs cold", evidence: ["E2"],
-    render: (t) => { const a = T.s05; const rel = a + 0.25; // the press lifts
-      const lift = ease(t, rel, rel + 0.3, E.out);
-      const warm = 0.55 + 0.45 * E.out(p(t, rel, rel + 0.35)); const cold = 0.55 + 0.45 * (1 - Math.exp(-p(t, rel, rel + 9) * 2.2));
-      const panel = (cx, sq, col, title, sub) => { const r = 120, cy = 820, ry = r * sq, rx = r * (1 + (1 - sq) * 0.6);
-        const plateY = cy - ry - 34 - lift * 40;
-        return `<g><rect x="${cx - 210}" y="${plateY}" width="420" height="34" rx="6" fill="url(#steelGrad)"/><rect x="${cx - 210}" y="${cy + r * 0.55}" width="420" height="34" rx="6" fill="url(#steelGrad)"/>
-          <ellipse cx="${cx}" cy="${cy + r * 0.55 - ry}" rx="${rx}" ry="${ry}" fill="#26292e" stroke="${col}" stroke-width="7"/>
-          ${text(cx, 560, title, { size: 46, weight: 800, fill: col, ls: 2 })}${text(cx, 1090, sub, { size: 34, weight: 600, fill: C.text, op: p(t, rel + 0.2, rel + 0.6) })}</g>`; };
-      return { svg: FR.blueprint() + panel(290, warm, C.hot2, "WARM", "springs back") + panel(790, cold, C.cold, "COLD", "stays deformed")
-          + `<line x1="540" y1="520" x2="540" y2="1140" stroke="${C.line}" stroke-width="3"/>` + text(540, 1200, "O-ring cross-section · illustration", { size: 26, weight: 500, fill: C.muted }),
+    // Review v1.1: "springs back" was abstract. Each panel now shows the sealing job itself: the ring sits
+    // in its groove against a wall; the wall moves away (as the joint does at ignition); warm rubber
+    // expands to follow and keeps the seal, cold rubber lags and leaves an open gap.
+    render: (t) => { const a = T.s05, b = T.s06; const rel = a + 0.3;
+      const wall = 70 * ease(t, rel, rel + 0.45, E.out);
+      const warmF = wall * E.out(p(t, rel + 0.05, rel + 0.5)); const coldF = wall * 0.18 * (1 - Math.exp(-p(t, rel, rel + 6) * 2));
+      const panel = (cx, follow, col, title, ok) => { const gx = cx - 150, cy = 830, r = 70;
+        const wx = gx + 2 * r + wall; const rx = r + follow / 2, ringCx = gx + rx; const gap = wx - (gx + 2 * rx);
+        const res = p(t, rel + 0.55, rel + 0.9);
+        return `<g><rect x="${gx - 120}" y="${cy - 170}" width="120" height="340" fill="url(#steelGrad)"/>
+          <rect x="${wx}" y="${cy - 170}" width="90" height="340" fill="url(#steelGrad)"/>
+          <ellipse cx="${ringCx}" cy="${cy}" rx="${rx}" ry="${r * (1 - follow / 400)}" fill="#26292e" stroke="${col}" stroke-width="8"/>
+          ${gap > 6 ? `<rect x="${gx + 2 * rx + 4}" y="${cy - 60}" width="${gap - 8}" height="120" fill="${C.hot}" opacity="${0.7 * res}"/>` : ""}
+          ${text(cx, 590, title, { size: 50, weight: 800, fill: col, ls: 2 })}
+          ${text(cx, 1080, ok ? "follows: still sealed" : "lags: gap left open", { size: 36, weight: 800, fill: ok ? "#7be0a0" : C.hot, op: res })}</g>`; };
+      return { svg: FR.blueprint() + panel(290, warmF, C.hot2, "WARM", true) + panel(790, coldF, C.cold, "COLD", false)
+          + `<line x1="540" y1="560" x2="540" y2="1120" stroke="${C.line}" stroke-width="3"/>` + text(540, 1190, "O-ring cross-section · illustration, not to scale", { size: 26, weight: 500, fill: C.muted }),
         hud: FR.chip("Explanatory animation", "explanatory") };
     } });
 
@@ -130,7 +144,10 @@ window.SCENES = function (FR) {
           + lab(452, 930, 180, 1110, "SECONDARY O-RING", p(t, T.s06 + 0.4, T.s06 + 0.9), "start")
           + (g > 4 ? lab(tangX - 4, 990, 740, 990, "GAP", p(t, tIgn + 0.2, tIgn + 0.6), "start") : ""))
           + text(150, 330, "INSIDE", { size: 32, weight: 800, fill: C.hot2, ls: 3 }) + text(930, 330, "OUTSIDE", { size: 32, weight: 800, fill: C.steel, ls: 3 })
-          + (flowK > 0.25 ? text(540, 405, "HOT GAS BLOWS PAST BOTH SEALS", { size: 38, weight: 800, fill: C.hot2, ls: 1, op: p(t, tHot + 0.25, tHot + 0.6), extra: `paint-order="stroke" stroke="#000" stroke-width="8"` }) : ""),
+          // Review v1.1: one numbered step at a time, each landing on its spoken words.
+          + (() => { const steps = [[tIgn - 0.05, "1  Ignition flexes the joint open"], [Wd("L5", "couldn't") - 0.05, "2  Cold O-rings can't follow"], [tHot - 0.05, "3  Hot gas blows past both seals"]];
+              let cur = null; for (const st of steps) if (t >= st[0]) cur = st; if (!cur) return "";
+              return text(540, 410, cur[1].toUpperCase(), { size: 38, weight: 800, fill: C.hot2, ls: 1, op: p(t, cur[0], cur[0] + 0.2), extra: `paint-order="stroke" stroke="#000" stroke-width="8"` }); })(),
         hud: FR.chip("Animation · not to scale", "explanatory") };
     } });
 
@@ -145,7 +162,9 @@ window.SCENES = function (FR) {
     render: (t) => { const a = T.s08, b = T.s09; const lt = t - a; const fl = FR.clip("e207", lt, { box: filmBox, radius: 6 });
       // flame position inside the 1000 px panel (measured on the extracted frames)
       const fx = filmBox.x + 515, fy = filmBox.y + 458; const sec = 58.788 + lt * 0.95;
-      return { under: FR.blueprint(), media: [fl], hud: `<svg style="position:absolute;left:0;top:0" width="${W}" height="${H}">${ring(fx, fy, 70, p(t, a + 0.3, a + 0.9))}${callout(fx + 55, fy + 45, 600, 1150, "FLAME AT THE JOINT", p(t, a + 0.6, a + 1.1), { size: 36 })}</svg>`
+      return { under: FR.blueprint(), media: [fl], // Review v1.1: the ring arrives by 0.5 s (was 0.9 s), has a dark outline for contrast on the bright
+          // plume, pulses gently, and stays to the end of the shot; the label follows at 0.6 s.
+          hud: `<svg style="position:absolute;left:0;top:0" width="${W}" height="${H}">${ring(fx, fy, 78 + 4 * Math.sin(lt * 6), p(t, a + 0.1, a + 0.5), "#000", 15)}${ring(fx, fy, 78 + 4 * Math.sin(lt * 6), p(t, a + 0.1, a + 0.5), C.hot2, 9)}${callout(fx + 60, fy + 50, 600, 1150, "FLAME AT THE JOINT", p(t, a + 0.3, a + 0.7), { size: 40 })}</svg>`
           + FR.clock(sec, 1) + FR.chip("NASA tracking film E-207", "archival") }; } });
 
   // S09 — reconstruction: the plume swings onto the External Tank; the tank fails at 73 s. No explosion is drawn.
@@ -176,17 +195,18 @@ window.SCENES = function (FR) {
 
   // S12 — the engineers' position, typeset from the Commission's record (not a facsimile).
   FR.shot({ id: "S12", drift: [1.0, 1.035], start: T.s12, end: T.s13, kind: "document", label: "Commission record · typeset", subject: "Thiokol engineering recommendation, 27 Jan 1986", evidence: ["E3"], fade: 0.3,
-    render: (t) => { const a = T.s12; const t53 = Wd("L10", "fifty-three"); const q = "“The engineering people would not recommend a launch below 53 degrees Fahrenheit.”";
-      const shown = Math.round(q.length * E.out(p(t, a + 0.15, t53 + 0.2)));
-      const bar = ease(t, t53 - 0.2, t53 + 0.6); const ty = (f) => 1250 - (f - 30) / 30 * 280 * bar; const y53 = ty(53), y36 = ty(36);
-      return { svg: `<rect width="${W}" height="${H}" fill="${C.ink}"/><rect x="70" y="300" width="940" height="600" rx="10" fill="${C.paper}" filter="url(#soft)"/>`
-          + (bar > 0 ? `<g opacity="${bar}"><line x1="180" y1="1250" x2="900" y2="1250" stroke="${C.line}" stroke-width="3"/>
-            <line x1="180" y1="${y53}" x2="900" y2="${y53}" stroke="${C.hot2}" stroke-width="6"/>${text(190, y53 - 16, "53°F · ENGINEERS’ LOWER LIMIT", { size: 32, weight: 800, fill: C.hot2, anchor: "start" })}
-            <line x1="180" y1="${y36}" x2="900" y2="${y36}" stroke="${C.cold}" stroke-width="6" stroke-dasharray="18 12"/>${text(190, y36 + 44, "36°F · LAUNCH MORNING", { size: 32, weight: 800, fill: C.cold, anchor: "start" })}</g>` : ""),
-        hud: `<div style="position:absolute;left:120px;right:120px;top:350px;color:#1b1f25">
-            <div style="font:700 24px ${F.sans};letter-spacing:3px;color:#6b5e49">THE NIGHT BEFORE · JAN 27, 1986</div>
-            <div style="font:700 56px/1.22 ${F.serif};margin-top:22px;min-height:350px">${FR.esc(q.slice(0, shown))}</div>
-            <div style="font:500 24px/1.4 ${F.sans};color:#5c5446">Thiokol engineers’ charts, quoted in the Rogers Commission Report, Vol. 1, Ch. V</div></div>` + FR.chip("Commission record · typeset", "document") }; } });
+    // Review v1.1: text-heavy. Now one comparison (53 vs 36) carries the point, with a short exact
+    // fragment of the quote and no typing animation; about 15 words on screen instead of about 40.
+    render: (t) => { const a = T.s12; const t53 = Wd("L10", "fifty-three");
+      const k = p(t, a + 0.1, a + 0.4), bar = ease(t, a + 1.2, a + 1.8); // both columns on screen for about 3 s
+      const col = (x, f, label, c, kk) => { const h = 560 * (f / 60) * kk; return `<g opacity="${clamp(kk * 2)}"><rect x="${x}" y="${1200 - h}" width="300" height="${h}" rx="8" fill="${c}" opacity="0.9"/>
+          ${text(x + 150, 1200 - h - 30, f + "°F", { size: 96, weight: 600, family: F.num, fill: c })}${text(x + 150, 1250, label, { size: 32, weight: 800, fill: C.text, ls: 1.5 })}</g>`; };
+      return { svg: FR.blueprint() + `<line x1="120" y1="1200" x2="960" y2="1200" stroke="${C.line}" stroke-width="3"/>`
+          + col(160, 53, "ENGINEERS’ LIMIT", C.hot2, k) + col(620, 36, "LAUNCH MORNING", C.cold, bar),
+        hud: `<div style="position:absolute;left:90px;right:90px;top:300px;opacity:${k};text-align:center">
+            <div style="font:700 26px ${F.sans};letter-spacing:3px;color:${C.steel}">THE NIGHT BEFORE · THIOKOL ENGINEERS</div>
+            <div style="font:700 50px/1.2 ${F.serif};color:${C.paper};margin-top:16px">“would not recommend a launch below 53 degrees”</div>
+            <div style="font:500 22px ${F.sans};color:${C.muted};margin-top:12px">quoted in the Rogers Commission Report, Vol. 1, Ch. V</div></div>` + FR.chip("Commission record", "document") }; } });
 
   // S13 — explanatory diagram: where the warning stopped.
   FR.shot({ id: "S13", drift: [1.0, 1.04], start: T.s13, end: T.s14, kind: "explanatory", label: "Explanatory diagram", subject: "decision chain: engineers, managers, top launch officials", evidence: ["E3"],
@@ -196,10 +216,10 @@ window.SCENES = function (FR) {
       const k1 = p(t, a, a + 0.4), k2 = p(t, tRev - 0.3, tRev + 0.1), k3 = p(t, tNever - 0.5, tNever - 0.1);
       const dash = k3 > 0 ? `<g opacity="${k3}"><line x1="540" y1="840" x2="540" y2="980" stroke="${C.steel2}" stroke-width="6" stroke-dasharray="14 14"/>
         <g transform="translate(540 910)"><circle r="40" fill="${C.ink}" stroke="${C.red}" stroke-width="5"/><path d="M-16 -16L16 16M16 -16L-16 16" stroke="${C.red}" stroke-width="7" stroke-linecap="round"/></g></g>` : "";
-      const link = k2 > 0 ? `<line x1="540" y1="530" x2="540" y2="${530 + 110 * E.out(k2)}" stroke="${C.steel}" stroke-width="6"/>${text(560, 600, "at NASA Marshall’s urging", { size: 26, weight: 600, fill: C.steel, anchor: "start", op: k2 })}` : "";
-      return { svg: FR.blueprint() + node(380, "THIOKOL ENGINEERS", "Don’t launch below 53°F", C.hot2, k1, 0) + link
-          + node(690, "THEIR MANAGERS", "Reversed: recommend launch", C.steel, k2, p(t, tRev + 0.1, tRev + 0.5) * 0) + dash
-          + node(1000, "TOP NASA LAUNCH OFFICIALS", "Never heard the objection", C.red, k3, 0)
+      const link = k2 > 0 ? `<line x1="540" y1="530" x2="540" y2="${530 + 110 * E.out(k2)}" stroke="${C.steel}" stroke-width="6"/>` : "";
+      return { svg: FR.blueprint() + node(380, "ENGINEERS", "Don’t launch below 53°F", C.hot2, k1, 0) + link
+          + node(690, "THEIR MANAGERS", "Reversed it", C.steel, k2, 0) + dash
+          + node(1000, "TOP NASA OFFICIALS", "Never heard it", C.red, k3, 0)
           + text(540, 1220, "Source: Rogers Commission Report, Vol. 1, Ch. V", { size: 24, weight: 500, fill: C.muted, op: k1 }),
         hud: FR.chip("Explanatory diagram", "explanatory") }; } });
 
@@ -212,10 +232,14 @@ window.SCENES = function (FR) {
   // S15 — back to the opening photograph, pulling out to the whole vehicle (the loop returns to frame 0).
   FR.shot({ id: "S15", start: T.s15, end: T.end, kind: "archival", label: "NASA photo", subject: "liftoff close-up, pull back", source: "liftoff", evidence: ["E3"], // hard cut: a crossfade would overlap two headlines
     render: (t) => { const a = T.s15, b = T.end; const e = ease(t, a, b);
-      const [fx1, fy1] = P("liftoff", 1350, 2000), [fx0, fy0] = P("liftoff", SMOKE[0] - 120, SMOKE[1] - 200);
-      const ph = FR.photo("liftoff", { fx: lerp(fx0, fx1, e), fy: lerp(fy0, fy1, e), z: lerp(1.42, 1.0, e) });
-      return { media: [ph], svg: `<rect width="${W}" height="${H}" fill="#000" opacity="0.25"/><rect width="${W}" height="900" fill="url(#topShade)"/><rect y="1180" width="${W}" height="740" fill="url(#botShade)"/>`,
-        hud: `<div style="position:absolute;left:60px;right:60px;top:330px;text-align:center;text-shadow:0 3px 18px rgba(0,0,0,.9)">
+      // Review v1.1: end on the exact frame-0 framing (1080x1400 box, same focus, zoom 1.0) so the loop
+      // does not jump; the payoff fades out over the last 0.35 s.
+      const box = { x: 0, y: 0, w: W, h: 1400 };
+      const [fx1, fy1] = P("liftoff", 1300, 2200), [fx0, fy0] = P("liftoff", SMOKE[0] - 260, SMOKE[1] - 150);
+      const ph = FR.photo("liftoff", { fx: lerp(fx0, fx1, e), fy: lerp(fy0, fy1, e), z: lerp(1.38, 1.0, e), box });
+      const out = 1 - p(t, b - 0.35, b - 0.02);
+      return { under: `<rect width="${W}" height="${H}" fill="${C.ink}"/>`, media: [ph], svg: `<rect width="${W}" height="${H}" fill="#000" opacity="${0.25 * out}"/><rect width="${W}" height="640" fill="url(#topShade)"/><rect y="1120" width="${W}" height="290" fill="url(#botShade)"/><rect y="1400" width="${W}" height="520" fill="${C.ink}"/>`,
+        hud: `<div style="position:absolute;left:60px;right:60px;top:330px;text-align:center;opacity:${out};text-shadow:0 3px 18px rgba(0,0,0,.9)">
             <div style="font:800 64px/1.1 ${F.sans};color:rgba(245,242,236,.55)">The seal failed in the cold.</div>
             <div style="font:800 76px/1.08 ${F.sans};letter-spacing:-1px;color:${C.hot2};margin-top:26px;opacity:${p(t, a, a + 0.35)}">But the warning failed<br>the night before.</div></div>`
           + FR.chip("NASA photo", "archival") }; } });
