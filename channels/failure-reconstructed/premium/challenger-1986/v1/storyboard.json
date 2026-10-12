@@ -1,0 +1,794 @@
+{
+ "schema": "fr-premium.storyboard.v1",
+ "film": "challenger-premium-v1",
+ "format": {
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "codec": "H.264"
+ },
+ "narration": {
+  "voice": "en-US-AndrewNeural",
+  "provider": "Microsoft Edge neural TTS (free endpoint, msedge-tts)",
+  "durationSec": 50.889
+ },
+ "evidence": {
+  "E1": {
+   "title": "Rogers Commission Report, Vol. 1, Ch. III: The Accident",
+   "url": "https://www.nasa.gov/history/rogersrep/v1ch3.htm"
+  },
+  "E2": {
+   "title": "Rogers Commission Report, Vol. 1, Ch. IV: The Cause of the Accident",
+   "url": "https://www.nasa.gov/history/rogersrep/v1ch4.htm"
+  },
+  "E3": {
+   "title": "Rogers Commission Report, Vol. 1, Ch. V: The Contributing Cause of the Accident",
+   "url": "https://www.nasa.gov/history/rogersrep/v1ch5.htm"
+  },
+  "E4": {
+   "title": "NASA photo GPN-2000-001347 caption (smoke at right SRB, liftoff)",
+   "url": "https://commons.wikimedia.org/wiki/File:Challenger_-_GPN-2000-001347.jpg"
+  },
+  "E5": {
+   "title": "NASA photo GPN-2004-00004 caption (scorched hole in right Solid Rocket Motor)",
+   "url": "https://commons.wikimedia.org/wiki/File:STS-51-L_Recovered_Debris_(Burn_Marks_on_the_SRM)_-_GPN-2004-00004.jpg"
+  }
+ },
+ "hookAlternatives": [
+  {
+   "id": "H1",
+   "text": "Less than a second after liftoff, Challenger was already leaking.",
+   "type": "engineering mystery",
+   "evidence": [
+    "E1",
+    "E2",
+    "E4"
+   ],
+   "for": "Opens on the cause, not the outcome; raises the question the film answers (how could it fly 73 s with a leak?). Matches an authentic NASA photo of the smoke at frame 0. Not the title read aloud.",
+   "against": "Needs the viewer to accept 'leaking' before the mechanism is shown; the photo's smoke is small on a phone, so it needs a marker."
+  },
+  {
+   "id": "H2",
+   "text": "Seventy-three seconds after launch, Challenger broke apart.",
+   "type": "consequence first",
+   "evidence": [
+    "E1"
+   ],
+   "for": "Instantly recognisable event.",
+   "against": "It is the published title and the published opening (Version A) - repeats what the viewer already read; leads with the loss of the crew, which pulls the opening toward the breakup footage the original looped."
+  },
+  {
+   "id": "H3",
+   "text": "The night before launch, engineers said: not below fifty-three degrees. Challenger launched at thirty-six.",
+   "type": "decision first",
+   "evidence": [
+    "E1",
+    "E3"
+   ],
+   "for": "Strong human stakes.",
+   "against": "Two numbers in the first 3 s; risks implying every decision maker heard the warning (the Commission found Levels I and II did not); spends the payoff before the mechanism is understood."
+  }
+ ],
+ "chosenHook": "H1",
+ "chosenHookReason": "H1 is the only opening that is (a) new to a viewer who read the title, (b) answerable by the film's own causal chain, (c) supported by an authentic NASA photograph that can fill the first frame, and (d) not built on the moment of the crew's death. H3's decision material is kept for the payoff, where the mechanism has been explained and the Commission's nuance (the objection never reached top officials) fits.",
+ "shots": [
+  {
+   "sceneId": "S01",
+   "start": 0,
+   "end": 3.946,
+   "duration": 3.946,
+   "narration": "Less than a second after liftoff, Challenger was already leaking.",
+   "lines": [
+    "L1"
+   ],
+   "evidence": [
+    "E1",
+    "E2",
+    "E2 Finding 15",
+    "E4"
+   ],
+   "evidenceNotes": [
+    "E1: first smoke at 0.678 s at the right SRB aft field joint",
+    "E2 Finding 15: the smoke was the first sign of the O-ring seal failure"
+   ],
+   "mediaType": "archival",
+   "onScreenLabel": "NASA photo",
+   "visualSubject": "liftoff close-up with smoke at the right SRB aft field joint",
+   "sourceAsset": {
+    "key": "liftoff",
+    "file": "liftoff-smoke-closeup.jpg",
+    "commons": "File:Challenger - GPN-2000-001347.jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:Challenger_-_GPN-2000-001347.jpg",
+    "license": "Public domain",
+    "author": "NASA",
+    "clipRange": null
+   },
+   "camera": "push-in 1.0x -> 1.38x from the whole orbiter toward the smoke (eased)",
+   "animation": "orange ring draws around the smoke at 0.5 s; leader line and boxed label at 0.95 s",
+   "typography": "headline 'Already leaking' 96 px + 'CHALLENGER · JAN 28, 1986' 30 px; clock T+0.678 s; chip NASA PHOTO",
+   "captionPlacement": "centred, top of text at y=1318 px (band 1318-1460), at most 2 lines x 24 chars, current word highlighted; hidden for L12 (set as typography)",
+   "sound": "low impact on frame 0; marker tick at 0.5 s; drone fades in",
+   "transition": "cut",
+   "fallback": "if the photo is unavailable: GPN-2000-001347 is mirrored by NASA Image and Video Library; never substitute a different launch"
+  },
+  {
+   "sceneId": "S02",
+   "start": 3.946,
+   "end": 6.766,
+   "duration": 2.82,
+   "narration": "Smoke was puffing from a joint on the right booster,",
+   "lines": [
+    "L2"
+   ],
+   "evidence": [
+    "E1",
+    "E2"
+   ],
+   "evidenceNotes": [
+    "E1: puffs of increasingly blacker smoke 0.836-2.500 s, right SRB aft field joint",
+    "E2: joint sealed by a primary and a secondary O-ring"
+   ],
+   "mediaType": "explanatory",
+   "onScreenLabel": "Explanatory diagram",
+   "visualSubject": "shuttle stack, right SRB aft field joint highlighted",
+   "sourceAsset": {
+    "original": "SVG drawn in scenes.js / fr-lib.js (no external asset)"
+   },
+   "camera": "stack drawn whole, then 2.1x zoom onto the right booster's lowest field joint",
+   "animation": "joint band pulses; ring draws; callouts RIGHT BOOSTER / LOWEST JOINT",
+   "typography": "36 px callouts; chip EXPLANATORY DIAGRAM",
+   "captionPlacement": "centred, top of text at y=1318 px (band 1318-1460), at most 2 lines x 24 chars, current word highlighted; hidden for L12 (set as typography)",
+   "sound": "mechanical clunk on cut",
+   "transition": "cut on 'Smoke'",
+   "fallback": "static stack with highlighted joint"
+  },
+  {
+   "sceneId": "S03",
+   "start": 6.766,
+   "end": 9.056,
+   "duration": 2.29,
+   "narration": "sealed by two rubber O-rings.",
+   "lines": [
+    "L2"
+   ],
+   "evidence": [
+    "E1",
+    "E2"
+   ],
+   "evidenceNotes": [
+    "E1: puffs of increasingly blacker smoke 0.836-2.500 s, right SRB aft field joint",
+    "E2: joint sealed by a primary and a secondary O-ring"
+   ],
+   "mediaType": "document",
+   "onScreenLabel": "Commission record",
+   "visualSubject": "Rogers Commission Fig. 14 field joint cross-section",
+   "sourceAsset": {
+    "key": "fig14",
+    "file": "rogers-v1p57-field-joint.jpg",
+    "commons": "File:RogersCommission-v1p57.jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:RogersCommission-v1p57.jpg",
+    "license": "Public domain",
+    "author": "Rogers Commission into the loss of the Space Shuttle Challenger",
+    "clipRange": null
+   },
+   "camera": "slow 1.0 -> 1.05 push on the figure",
+   "animation": "highlighter sweeps over 'Primary O-Ring' then 'Secondary O-Ring' labels",
+   "typography": "source line under the figure; chip COMMISSION RECORD",
+   "captionPlacement": "centred, top of text at y=1318 px (band 1318-1460), at most 2 lines x 24 chars, current word highlighted; hidden for L12 (set as typography)",
+   "sound": "marker tick",
+   "transition": "cut on 'sealed'",
+   "fallback": "skip to S05 schematic labels"
+  },
+  {
+   "sceneId": "S04",
+   "start": 9.056,
+   "end": 12.733,
+   "duration": 3.677,
+   "narration": "That morning was fifteen degrees colder than any launch before.",
+   "lines": [
+    "L3"
+   ],
+   "evidence": [
+    "E1"
+   ],
+   "evidenceNotes": [
+    "E1: 36 F at launch, 15 degrees colder than any previous launch"
+   ],
+   "mediaType": "archival",
+   "onScreenLabel": "NASA photo",
+   "visualSubject": "icicles on the launch tower, launch morning",
+   "sourceAsset": {
+    "key": "icicles",
+    "file": "icicles-tower.jpg",
+    "commons": "File:Icicles on the Launch Tower - GPN-2000-001348.jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:Icicles_on_the_Launch_Tower_-_GPN-2000-001348.jpg",
+    "license": "Public domain",
+    "author": "NASA",
+    "clipRange": null
+   },
+   "camera": "push 1.04 -> 1.16 with a slow tilt down the icicles",
+   "animation": "36°F number rises in",
+   "typography": "36°F 220 px (cold blue) + one-line context 38 px; chip NASA PHOTO · LAUNCH MORNING",
+   "captionPlacement": "centred, top of text at y=1318 px (band 1318-1460), at most 2 lines x 24 chars, current word highlighted; hidden for L12 (set as typography)",
+   "sound": "drone only",
+   "transition": "cut",
+   "fallback": "Ice on the Pad (GPN-2004-00011)"
+  },
+  {
+   "sceneId": "S05",
+   "start": 12.733,
+   "end": 14.926,
+   "duration": 2.193,
+   "narration": "And cold rubber springs back slowly.",
+   "lines": [
+    "L4"
+   ],
+   "evidence": [
+    "E2",
+    "E2 Finding 9"
+   ],
+   "evidenceNotes": [
+    "E2 Finding 9: O-ring resiliency is directly related to its temperature; cold O-rings return to shape more slowly"
+   ],
+   "mediaType": "explanatory",
+   "onScreenLabel": "Explanatory animation",
+   "visualSubject": "O-ring resilience: warm vs cold",
+   "sourceAsset": {
+    "original": "SVG drawn in scenes.js / fr-lib.js (no external asset)"
+   },
+   "camera": "locked",
+   "animation": "press lifts; warm ring recovers in 0.35 s, cold ring recovers slowly (exponential, still deformed at cut)",
+   "typography": "WARM / COLD 46 px; 'springs back' / 'stays deformed' 34 px; 'illustration' note",
+   "captionPlacement": "centred, top of text at y=1318 px (band 1318-1460), at most 2 lines x 24 chars, current word highlighted; hidden for L12 (set as typography)",
+   "sound": "drone",
+   "transition": "cut",
+   "fallback": "two still panels"
+  },
+  {
+   "sceneId": "S06",
+   "start": 14.926,
+   "end": 20.625,
+   "duration": 5.699,
+   "narration": "So when ignition flexed the joint open, the O-rings couldn't keep up, and hot gas blew past them.",
+   "lines": [
+    "L5"
+   ],
+   "evidence": [
+    "E2",
+    "E2 Finding 1",
+    "E2 Finding 9"
+   ],
+   "evidenceNotes": [
+    "E2: gap opening begins upon ignition",
+    "E2 Finding 9: may not follow the opening of the tang-to-clevis gap",
+    "E2 Finding 1: combustion gas leak initiated at or shortly after ignition"
+   ],
+   "mediaType": "explanatory",
+   "onScreenLabel": "Explanatory animation · not to scale",
+   "visualSubject": "field joint rotation, O-ring lag and hot-gas blow-by",
+   "sourceAsset": {
+    "original": "SVG drawn in scenes.js / fr-lib.js (no external asset)"
+   },
+   "camera": "locked, diagram enlarged 1.45x around the joint",
+   "animation": "pressure arrows at 'ignition'; tang moves away (gap exaggerated); cold O-rings barely follow; hot-gas particles flow past both seals from 'hot'; soot puffs exit outside",
+   "typography": "PRIMARY / SECONDARY O-RING, GAP callouts 46 px; INSIDE / OUTSIDE; 'HOT GAS BLOWS PAST BOTH SEALS'; chip ANIMATION · NOT TO SCALE",
+   "captionPlacement": "centred, top of text at y=1318 px (band 1318-1460), at most 2 lines x 24 chars, current word highlighted; hidden for L12 (set as typography)",
+   "sound": "low thump at 'ignition'; band-passed hiss under the blow-by",
+   "transition": "cut",
+   "fallback": "Rogers Fig. 14 with drawn gas arrow"
+  },
+  {
+   "sceneId": "S07",
+   "start": 20.625,
+   "end": 23.419,
+   "duration": 2.794,
+   "narration": "Then the smoke stopped, and Challenger flew on.",
+   "lines": [
+    "L6"
+   ],
+   "evidence": [
+    "E1"
+   ],
+   "evidenceNotes": [
+    "E1: last smoke above the joint at 2.733 s; flight continued"
+   ],
+   "mediaType": "archival",
+   "onScreenLabel": "NASA film",
+   "visualSubject": "Challenger climbing normally",
+   "sourceAsset": {
+    "key": "climb",
+    "file": "launch-breakup.ogv",
+    "commons": "File:Challenger Launch and Breakup.ogv",
+    "url": "https://commons.wikimedia.org/wiki/File:Challenger_Launch_and_Breakup.ogv",
+    "license": "Public domain",
+    "author": "NASA STI Program·",
+    "clipRange": [
+     29.5,
+     33
+    ]
+   },
+   "camera": "archival film, documentary panel 1000x1000 (crop inside the film's letterbox)",
+   "animation": "mission clock accelerates T+2.7 -> T+58 s",
+   "typography": "clock; chip NASA FILM",
+   "captionPlacement": "centred, top of text at y=1318 px (band 1318-1460), at most 2 lines x 24 chars, current word highlighted; hidden for L12 (set as typography)",
+   "sound": "drone tension rising",
+   "transition": "cut",
+   "fallback": "liftoff-wide still with slow push"
+  },
+  {
+   "sceneId": "S08",
+   "start": 23.419,
+   "end": 26.226,
+   "duration": 2.807,
+   "narration": "Fifty-eight seconds in, a flame broke through and",
+   "lines": [
+    "L7"
+   ],
+   "evidence": [
+    "E1"
+   ],
+   "evidenceNotes": [
+    "E1: first flame at 58.788 s; plume deflected onto the External Tank from 60.238 s"
+   ],
+   "mediaType": "archival",
+   "onScreenLabel": "NASA tracking film E-207",
+   "visualSubject": "flame at the right SRB aft field joint",
+   "sourceAsset": {
+    "key": "e207",
+    "file": "e207.webm",
+    "commons": "File:STS-51L Challenger Engineering Camera E-207.webm",
+    "url": "https://commons.wikimedia.org/wiki/File:STS-51L_Challenger_Engineering_Camera_E-207.webm",
+    "license": "Public domain",
+    "author": "NASA",
+    "clipRange": [
+     18.6,
+     22.4
+    ]
+   },
+   "camera": "archival E-207 tracking film, panel 1000x1000",
+   "animation": "ring on the flame at the joint (measured position), callout FLAME AT THE JOINT; clock T+58.788 s running",
+   "typography": "clock; chip NASA TRACKING FILM E-207",
+   "captionPlacement": "centred, top of text at y=1318 px (band 1318-1460), at most 2 lines x 24 chars, current word highlighted; hidden for L12 (set as typography)",
+   "sound": "marker tick",
+   "transition": "cut on 'Fifty-eight'",
+   "fallback": "Challenger Rocket Booster still GPN-2000-001422 is NOT a substitute (it shows breakup); use S09 only"
+  },
+  {
+   "sceneId": "S09",
+   "start": 26.226,
+   "end": 32.297,
+   "duration": 6.071,
+   "narration": "swept onto the external fuel tank. At seventy-three seconds, the tank failed, and Challenger",
+   "lines": [
+    "L7",
+    "L8"
+   ],
+   "evidence": [
+    "E1"
+   ],
+   "evidenceNotes": [
+    "E1: first flame at 58.788 s; plume deflected onto the External Tank from 60.238 s",
+    "E1: External Tank structural failure 73.124 s; structural breakup of the vehicle began at approximately 73 s"
+   ],
+   "mediaType": "reconstruction",
+   "onScreenLabel": "Reconstruction",
+   "visualSubject": "plume deflected onto the External Tank; tank failure",
+   "sourceAsset": {
+    "original": "SVG drawn in scenes.js / fr-lib.js (no external asset)"
+   },
+   "camera": "stack framed on the lower right booster and tank, 1.3x -> 1.5x",
+   "animation": "plume grows from the joint and swings onto the External Tank; glow on the tank; orbiter ghosted; clock 60.2 -> 64.66, then 73 s; frame darkens - no explosion is drawn",
+   "typography": "FLAME REACHES THE TANK, then THE TANK FAILS; chip RECONSTRUCTION",
+   "captionPlacement": "centred, top of text at y=1318 px (band 1318-1460), at most 2 lines x 24 chars, current word highlighted; hidden for L12 (set as typography)",
+   "sound": "drone at its highest level, then cut to silence",
+   "transition": "cut on 'swept'",
+   "fallback": "text card with the Commission timeline"
+  },
+  {
+   "sceneId": "S10",
+   "start": 32.297,
+   "end": 33.74,
+   "duration": 1.443,
+   "narration": "broke apart.",
+   "lines": [
+    "L8"
+   ],
+   "evidence": [
+    "E1"
+   ],
+   "evidenceNotes": [
+    "E1: External Tank structural failure 73.124 s; structural breakup of the vehicle began at approximately 73 s"
+   ],
+   "mediaType": "archival",
+   "onScreenLabel": "NASA photo",
+   "visualSubject": "breakup, about 76 s after launch",
+   "sourceAsset": {
+    "key": "breakup",
+    "file": "breakup-still.jpg",
+    "commons": "File:Challenger breakup.jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:Challenger_breakup.jpg",
+    "license": "Public domain",
+    "author": "National Aeronautics and Space Administration",
+    "clipRange": null
+   },
+   "camera": "1.0 -> 1.04, held once, no slow motion, no replay",
+   "animation": "none",
+   "typography": "chip NASA PHOTO · ABOUT 76 s AFTER LAUNCH",
+   "captionPlacement": "centred, top of text at y=1318 px (band 1318-1460), at most 2 lines x 24 chars, current word highlighted; hidden for L12 (set as typography)",
+   "sound": "purposeful silence (room tone only)",
+   "transition": "0.25 s crossfade on 'broke'",
+   "fallback": "omit the image and hold black with the line"
+  },
+  {
+   "sceneId": "S11",
+   "start": 33.74,
+   "end": 36.676,
+   "duration": 2.936,
+   "narration": "All seven crew members were lost.",
+   "lines": [
+    "L9"
+   ],
+   "evidence": [
+    "E1"
+   ],
+   "evidenceNotes": [
+    "E1: all seven crew members perished"
+   ],
+   "mediaType": "archival",
+   "onScreenLabel": "NASA portrait",
+   "visualSubject": "STS-51-L crew official portrait",
+   "sourceAsset": {
+    "key": "crew",
+    "file": "crew-portrait.jpg",
+    "commons": "File:Challenger flight 51-l crew.jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:Challenger_flight_51-l_crew.jpg",
+    "license": "Public domain",
+    "author": "NASA",
+    "clipRange": null
+   },
+   "camera": "whole portrait, 1.0 -> 1.05 centred push; nobody cropped out",
+   "animation": "none",
+   "typography": "'THE STS-51-L CREW' 28 px; chip NASA PORTRAIT · 1985",
+   "captionPlacement": "centred, top of text at y=1318 px (band 1318-1460), at most 2 lines x 24 chars, current word highlighted; hidden for L12 (set as typography)",
+   "sound": "silence",
+   "transition": "0.35 s crossfade",
+   "fallback": "none - do not substitute other crew imagery"
+  },
+  {
+   "sceneId": "S12",
+   "start": 36.676,
+   "end": 41.774,
+   "duration": 5.098,
+   "narration": "The night before, engineers had recommended not launching below fifty-three degrees.",
+   "lines": [
+    "L10"
+   ],
+   "evidence": [
+    "E3"
+   ],
+   "evidenceNotes": [
+    "E3: 'the engineering people would not recommend a launch below 53 degrees Fahrenheit' (Thiokol charts, 27 Jan 1986 teleconference)"
+   ],
+   "mediaType": "document",
+   "onScreenLabel": "Commission record · typeset",
+   "visualSubject": "Thiokol engineering recommendation, 27 Jan 1986",
+   "sourceAsset": {
+    "original": "SVG drawn in scenes.js / fr-lib.js (no external asset)"
+   },
+   "camera": "locked",
+   "animation": "quote types on; 53°F and 36°F lines draw at 'fifty-three'",
+   "typography": "Source Serif 56 px quote; attribution 24 px; chart labels 32 px; chip COMMISSION RECORD · TYPESET",
+   "captionPlacement": "centred, top of text at y=1318 px (band 1318-1460), at most 2 lines x 24 chars, current word highlighted; hidden for L12 (set as typography)",
+   "sound": "soft pad enters",
+   "transition": "0.3 s crossfade",
+   "fallback": "quote alone"
+  },
+  {
+   "sceneId": "S13",
+   "start": 41.774,
+   "end": 46.753,
+   "duration": 4.979,
+   "narration": "Their managers reversed that advice, and NASA's top launch officials never heard it.",
+   "lines": [
+    "L11"
+   ],
+   "evidence": [
+    "E3"
+   ],
+   "evidenceNotes": [
+    "E3: Thiokol management reversed its position at the urging of Marshall",
+    "E3: the objections never reached Jesse Moore or Arnold Aldrich, the Levels I and II program officials"
+   ],
+   "mediaType": "explanatory",
+   "onScreenLabel": "Explanatory diagram",
+   "visualSubject": "decision chain: engineers, managers, top launch officials",
+   "sourceAsset": {
+    "original": "SVG drawn in scenes.js / fr-lib.js (no external asset)"
+   },
+   "camera": "locked",
+   "animation": "node 1, link with 'at NASA Marshall's urging' at 'reversed', broken dashed link with red X and node 3 at 'never'",
+   "typography": "44 px node titles, 32 px subtitles; source line; chip EXPLANATORY DIAGRAM",
+   "captionPlacement": "centred, top of text at y=1318 px (band 1318-1460), at most 2 lines x 24 chars, current word highlighted; hidden for L12 (set as typography)",
+   "sound": "mechanical clunk in; low note at the broken link",
+   "transition": "cut",
+   "fallback": "two-line text card"
+  },
+  {
+   "sceneId": "S14",
+   "start": 46.753,
+   "end": 48.691,
+   "duration": 1.938,
+   "narration": "The seal failed in the cold.",
+   "lines": [
+    "L12"
+   ],
+   "evidence": [
+    "E2",
+    "E2 conclusion",
+    "E3",
+    "E5"
+   ],
+   "evidenceNotes": [
+    "E2 conclusion: failure of the pressure seal; design unacceptably sensitive to temperature",
+    "E3: 'a serious flaw in the decision making process' (editorial summary of E2+E3, not a quote)"
+   ],
+   "mediaType": "archival",
+   "onScreenLabel": "NASA photo · recovered hardware",
+   "visualSubject": "scorched hole in the recovered right Solid Rocket Motor segment",
+   "sourceAsset": {
+    "key": "burn",
+    "file": "debris-burn-marks.jpg",
+    "commons": "File:STS-51-L Recovered Debris (Burn Marks on the SRM) - GPN-2004-00004.jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:STS-51-L_Recovered_Debris_(Burn_Marks_on_the_SRM)_-_GPN-2004-00004.jpg",
+    "license": "Public domain",
+    "author": "NASA",
+    "clipRange": null
+   },
+   "camera": "1.0 -> 1.08 on the scorched hole",
+   "animation": "headline fades in",
+   "typography": "'The seal failed in the cold.' 96 px; NASA caption line; chip NASA PHOTO · RECOVERED",
+   "captionPlacement": "centred, top of text at y=1318 px (band 1318-1460), at most 2 lines x 24 chars, current word highlighted; hidden for L12 (set as typography)",
+   "sound": "pad",
+   "transition": "0.2 s crossfade",
+   "fallback": "stay on S13"
+  },
+  {
+   "sceneId": "S15",
+   "start": 48.691,
+   "end": 51.689,
+   "duration": 2.998,
+   "narration": "But the warning failed the night before.",
+   "lines": [
+    "L12"
+   ],
+   "evidence": [
+    "E2 conclusion",
+    "E3"
+   ],
+   "evidenceNotes": [
+    "E2 conclusion: failure of the pressure seal; design unacceptably sensitive to temperature",
+    "E3: 'a serious flaw in the decision making process' (editorial summary of E2+E3, not a quote)"
+   ],
+   "mediaType": "archival",
+   "onScreenLabel": "NASA photo",
+   "visualSubject": "liftoff close-up, pull back",
+   "sourceAsset": {
+    "key": "liftoff",
+    "file": "liftoff-smoke-closeup.jpg",
+    "commons": "File:Challenger - GPN-2000-001347.jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:Challenger_-_GPN-2000-001347.jpg",
+    "license": "Public domain",
+    "author": "NASA",
+    "clipRange": null
+   },
+   "camera": "pull back 1.42x -> 1.0x to the opening framing (loops into frame 0)",
+   "animation": "second line fades in",
+   "typography": "dimmed first line 64 px + 'But the warning failed the night before.' 76 px amber",
+   "captionPlacement": "centred, top of text at y=1318 px (band 1318-1460), at most 2 lines x 24 chars, current word highlighted; hidden for L12 (set as typography)",
+   "sound": "low payoff note, pad resolves and fades",
+   "transition": "cut on 'But' (a crossfade overlapped the two headlines in QA)",
+   "fallback": "black card with both lines"
+  }
+ ],
+ "captions": [
+  {
+   "start": 0.06,
+   "end": 1.948,
+   "lines": [
+    "Less than a second",
+    "after liftoff,"
+   ]
+  },
+  {
+   "start": 1.948,
+   "end": 3.9160000000000004,
+   "lines": [
+    "Challenger was",
+    "already leaking."
+   ]
+  },
+  {
+   "start": 4.046,
+   "end": 5.578,
+   "lines": [
+    "Smoke was puffing",
+    "from a joint"
+   ]
+  },
+  {
+   "start": 5.578,
+   "end": 6.816,
+   "lines": [
+    "on the right booster,"
+   ]
+  },
+  {
+   "start": 6.816,
+   "end": 9.156,
+   "lines": [
+    "sealed by two",
+    "rubber O-rings."
+   ]
+  },
+  {
+   "start": 9.156,
+   "end": 11.203,
+   "lines": [
+    "That morning was",
+    "fifteen degrees colder"
+   ]
+  },
+  {
+   "start": 11.203,
+   "end": 12.833,
+   "lines": [
+    "than any launch before."
+   ]
+  },
+  {
+   "start": 12.833,
+   "end": 15.026,
+   "lines": [
+    "And cold rubber",
+    "springs back slowly."
+   ]
+  },
+  {
+   "start": 15.026,
+   "end": 16.485,
+   "lines": [
+    "So when ignition",
+    "flexed the joint"
+   ]
+  },
+  {
+   "start": 16.485,
+   "end": 18.825,
+   "lines": [
+    "open, the O-rings",
+    "couldn't keep up,"
+   ]
+  },
+  {
+   "start": 18.825,
+   "end": 20.725,
+   "lines": [
+    "and hot gas",
+    "blew past them."
+   ]
+  },
+  {
+   "start": 20.725,
+   "end": 21.975,
+   "lines": [
+    "Then the smoke stopped,"
+   ]
+  },
+  {
+   "start": 21.975,
+   "end": 23.503,
+   "lines": [
+    "and Challenger flew on."
+   ]
+  },
+  {
+   "start": 23.519,
+   "end": 24.99,
+   "lines": [
+    "Fifty-eight seconds in,"
+   ]
+  },
+  {
+   "start": 24.99,
+   "end": 26.73,
+   "lines": [
+    "a flame broke",
+    "through and swept"
+   ]
+  },
+  {
+   "start": 26.73,
+   "end": 28.773,
+   "lines": [
+    "onto the external",
+    "fuel tank."
+   ]
+  },
+  {
+   "start": 29.043,
+   "end": 30.637,
+   "lines": [
+    "At seventy-three",
+    "seconds,"
+   ]
+  },
+  {
+   "start": 30.637,
+   "end": 31.798,
+   "lines": [
+    "the tank failed,"
+   ]
+  },
+  {
+   "start": 31.798,
+   "end": 33.46,
+   "lines": [
+    "and Challenger",
+    "broke apart."
+   ]
+  },
+  {
+   "start": 33.89,
+   "end": 36.297000000000004,
+   "lines": [
+    "All seven crew",
+    "members were lost."
+   ]
+  },
+  {
+   "start": 36.776,
+   "end": 37.928,
+   "lines": [
+    "The night before,"
+   ]
+  },
+  {
+   "start": 37.928,
+   "end": 40.354,
+   "lines": [
+    "engineers had recommended",
+    "not launching below"
+   ]
+  },
+  {
+   "start": 40.354,
+   "end": 41.874,
+   "lines": [
+    "fifty-three degrees."
+   ]
+  },
+  {
+   "start": 41.874,
+   "end": 43.761,
+   "lines": [
+    "Their managers",
+    "reversed that advice,"
+   ]
+  },
+  {
+   "start": 43.761,
+   "end": 45.661,
+   "lines": [
+    "and NASA's top launch",
+    "officials never"
+   ]
+  },
+  {
+   "start": 45.661,
+   "end": 46.503,
+   "lines": [
+    "heard it."
+   ]
+  }
+ ]
+}
