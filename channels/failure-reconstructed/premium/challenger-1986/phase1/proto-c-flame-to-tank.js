@@ -50,7 +50,11 @@
       const cam0 = { fx: st0.joint.inner, fy: st0.joint.y, z: (FILM.srbWidthPx * f.s) / (DIMS.srb.dia * 24), rot: FILM.axisDeg };
       const cam1 = { fx: 540, fy: st0.et.top + (st0.srb.bot - st0.et.top) * 0.845, z: 1.9, rot: 0 }; // Phase 1b: the aft ~22 m, where every documented event happens (was z 1.32: 58% empty ground)
       const k = ease(t, T.s09, T.s09 + 1.0, E.inOut);
-      const cam = X.mix(cam0, cam1, k); const sx = lerp(f.x, 540, k), sy = lerp(f.y, 760, k);
+      // V3 (phone-scale check): from the strut event on, a localized push onto the aft attachment and the
+      // tank's aft dome, where the last two documented events happen (they read small at z 1.9)
+      const cam2 = { fx: 600, fy: st0.et.top + (st0.srb.bot - st0.et.top) * 0.88, z: 2.4, rot: 0 };
+      const k2 = ease(t, EV[3].screen - 0.3, EV[3].screen + 0.5);
+      const cam = X.mix(X.mix(cam0, cam1, k), cam2, k2); const sx = lerp(f.x, 540, k), sy = lerp(f.y, 760, k);
       const st = X.stack({ cx: 540, top: 0, pxPerM: 24, dims: DIMS, jointFromAft: 0.2, plume: 1, deflect: ev.k("deflect"), leak: ev.k("leak") * flick,
         strut: ev.k("strut"), rot: -5 * ev.k("strut"), dome: ev.k("dome"), orbiter: 0.16, flick }); // Phase 1b: fainter outline at the tighter framing (read as stray lines at 0.35)
       const at = (x, y) => X.apply(cam, x, y, sx, sy);
@@ -59,7 +63,8 @@
         const ly = anchor.y < 760 ? anchor.y + 260 : anchor.y - 300;
         return FR.callout(anchor.x, anchor.y, 120, clamp(ly, 520, 1180), e.label, p(t, e.screen, e.screen + 0.35) * (k > 0.6 ? 1 : 0), { size: 40, anchor: "start" }); })();
       const hold = p(t, EV[4].screen + 0.9, T.s10);
-      return { svg: FR.blueprint() + `<g transform="${X.xf(cam, sx, sy)}">${st.svg}</g>` + lab + `<rect width="${W}" height="${H}" fill="#000" opacity="${0.35 * hold}"/>`
+      // V3: the drawing is clipped above the caption band (the falling aft dome no longer passes under the captions)
+      return { svg: FR.blueprint() + `<clipPath id="c9"><rect width="${W}" height="1290"/></clipPath><g clip-path="url(#c9)"><g transform="${X.xf(cam, sx, sy)}">${st.svg}</g></g>` + lab + `<rect width="${W}" height="${H}" fill="#000" opacity="${0.35 * hold}"/>`
           + `<rect y="1290" width="${W}" height="${H}" fill="#000" opacity="0.4"/>`,
         hud: FR.clock(ev.now, 1, { decimals: ev.now >= 73 ? 3 : 1 }) + FR.chip("Reconstruction", "reconstruction")
           + FR.source("Times: Rogers Commission, Vol. 1, Ch. III", 1, 1556) }; } });

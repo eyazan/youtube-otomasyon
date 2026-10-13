@@ -144,9 +144,13 @@
     });
     return FR.cues;
   };
+  // FR.captionFrom (optional, V3): no caption is shown before this time (the opening headline owns the
+  // screen); a cue already running then fades in at captionFrom. Absent on V1/V2.
+  FR.cueShownAt = (c) => (FR.captionFrom ? Math.max(c.start, FR.captionFrom) : c.start);
   FR.captionAt = (t, { y = 1318 } = {}) => {
+    if (FR.captionFrom && t < FR.captionFrom) return "";
     const cue = FR.cues.find((c) => t >= c.start - 0.03 && t < c.end); if (!cue) return "";
-    const k = p(t, cue.start - 0.03, cue.start + 0.09);
+    const st = FR.cueShownAt(cue); const k = p(t, st - 0.03, st + 0.09);
     const line = (ws) => ws.map((w) => { const on = t >= w.start - 0.02; const now = on && t < w.end + 0.06;
       return `<span style="color:${now ? C.hot2 : on ? C.text : "rgba(245,242,236,0.78)"}">${esc(w.text)}</span>`; }).join(" ");
     return `<div data-role="caption" style="position:absolute;left:110px;right:110px;top:${y}px;transform:translate(0,${(1 - E.out(k)) * 14}px);opacity:${k};text-align:center;font:800 62px/1.16 ${F.sans};letter-spacing:-0.4px;text-shadow:0 3px 0 rgba(0,0,0,.55),0 0 22px rgba(0,0,0,.85),0 0 4px #000;">${cue.lines.map(line).join("<br>")}</div>`;
@@ -174,7 +178,7 @@
     return { shots: FR.shots.map((s) => ({ id: s.id, start: +s.start.toFixed(3), end: +s.end.toFixed(3), kind: s.kind, label: s.label, subject: s.subject, source: s.source || null, evidence: s.evidence || [], transition: s.trans || "cut",
       // creative-plan metadata read by creative_qa.py (Phase 0); absent on V1/V2 shots
       plan: { transitionReason: s.transReason || null, states: (s.states || []).map((x) => ({ t: +x.t.toFixed(3), what: x.what, ev: x.ev || null })),
-        register: s.register || null, primitives: s.primitives || [], framing: s.framing || null } })), cues: FR.cues.map((c) => ({ start: c.start, end: c.end, lines: c.lines.map((l) => l.map((w) => w.text).join(" ")) })) };
+        register: s.register || null, primitives: s.primitives || [], framing: s.framing || null } })), cues: FR.cues.filter((c) => c.end > FR.cueShownAt(c)).map((c) => ({ start: FR.cueShownAt(c), end: c.end, lines: c.lines.map((l) => l.map((w) => w.text).join(" ")) })) }; // displayed timing
   };
   const active = (t) => {
     const out = [];
