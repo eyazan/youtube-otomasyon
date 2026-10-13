@@ -106,7 +106,8 @@ test("framing: cover() keeps the crop inside the image at any focus and zoom", (
 });
 
 test("isolation: the prototype never uploads, publishes, calls paid providers or reads credentials", () => {
-  const files = fs.readdirSync(TOOLS).map((f) => path.join(TOOLS, f)).concat([path.join(FILM, "scenes.js")], fs.readdirSync(path.join(FILM, "phase1")).filter((f) => /\.(js|json)$/.test(f)).map((f) => path.join(FILM, "phase1", f)));
+  const walkAll = (d) => fs.readdirSync(d, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walkAll(path.join(d, e.name)) : [path.join(d, e.name)]));
+  const files = walkAll(TOOLS).concat([path.join(FILM, "scenes.js")], fs.readdirSync(path.join(FILM, "phase1")).filter((f) => /\.(js|json)$/.test(f)).map((f) => path.join(FILM, "phase1", f)));
   const banned = /youtube-yukle|tiktok-yukle|googleapis|youtube\.upload|@anthropic-ai|anthropic\.com\/v1|openai|elevenlabs|cartesia|GOOGLE_APPLICATION_CREDENTIALS|YOUTUBE_(CLIENT|REFRESH)|process\.env\.(ANTHROPIC|OPENAI|ELEVEN|CARTESIA)/i;
   for (const f of files) assert.ok(!banned.test(read(f)), `${path.basename(f)} references a publishing/paid/credential path`);
   // and nothing in production references the prototype

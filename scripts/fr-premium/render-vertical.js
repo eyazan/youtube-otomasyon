@@ -7,6 +7,7 @@
 //   node scripts/fr-premium/render-vertical.js <filmDir> --timeline timeline.json --assets <dir> --work <dir>
 //        [--out video.mp4] [--stills 0,1.5,3] [--from s] [--to s] [--tail 0.8]
 //        [--overrides proto.js,...] [--media-extra media.json,...]   (Phase 1 scene-only prototypes)
+//        [--plan shot-plan.json]   (data-driven shots from the premium engine; scenes.js/overrides feed legacy-code shots only)
 //
 // <filmDir> holds scenes.js (shots, using fr-lib.js) and media.json (photos and clip ranges).
 // The output is video only; mix-audio.js adds the soundtrack. Reuses the ProfitDecoded motion
@@ -23,11 +24,16 @@ const W = 1080, H = 1920, FPS = 30;
 const work = path.resolve(opt("--work", path.join(filmDir, "out")));
 const assets = path.resolve(opt("--assets", filmDir));
 const timeline = JSON.parse(fs.readFileSync(path.resolve(opt("--timeline")), "utf8"));
-const tail = +opt("--tail", 0.8);
+let tail = +opt("--tail", 0.8);
 const probe = (f) => { const [w, h] = execFileSync("ffprobe", ["-v", "error", "-select_streams", "v:0", "-show_entries", "stream=width,height", "-of", "csv=p=0:s=x", f]).toString().trim().split("x").map(Number); return { w, h }; };
 
+// --plan shot-plan.json: shots come from data (engine/fr-plan.js + templates); media from the plan's assets.json
+const planFile = opt("--plan", null); const PLAN = planFile ? (() => { const p = JSON.parse(fs.readFileSync(path.resolve(planFile), "utf8")); const d = path.dirname(path.resolve(planFile));
+  return { plan: p, evidence: JSON.parse(fs.readFileSync(path.resolve(d, p.evidence), "utf8")), assets: JSON.parse(fs.readFileSync(path.resolve(d, p.assets), "utf8")) }; })() : null;
 function prepareMedia() {
-  const spec = JSON.parse(fs.readFileSync(path.join(filmDir, "media.json"), "utf8"));
+  const spec = PLAN ? { photos: Object.fromEntries(Object.entries(PLAN.assets.assets).filter(([, a]) => a.kind !== "clip").map(([k, a]) => [k, { file: a.file }])),
+      clips: Object.fromEntries(Object.entries(PLAN.assets.assets).filter(([, a]) => a.kind === "clip").map(([k, a]) => [k, { file: a.file, ...a.clip }])) }
+    : JSON.parse(fs.readFileSync(path.join(filmDir, "media.json"), "utf8"));
   // --media-extra a.json,b.json: extra photos/clips for scene prototypes (merged over media.json)
   for (const f of (opt("--media-extra", "") || "").split(",").filter(Boolean)) { const x = JSON.parse(fs.readFileSync(path.resolve(f), "utf8")); spec.photos = { ...spec.photos, ...(x.photos || {}) }; spec.clips = { ...spec.clips, ...(x.clips || {}) }; }
   const mdir = path.join(work, "media"); fs.mkdirSync(mdir, { recursive: true });
@@ -52,6 +58,7 @@ function prepareMedia() {
 
 async function main() {
   fs.mkdirSync(work, { recursive: true });
+  if (PLAN) tail = PLAN.plan.film.tail;
   const media = prepareMedia();
   const duration = +(timeline.duration + tail).toFixed(3);
   const lib = fs.readFileSync(path.join(__dirname, "fr-lib.js"), "utf8");
@@ -59,11 +66,17 @@ async function main() {
   const forensic = fs.readFileSync(path.join(__dirname, "fr-forensic.js"), "utf8");
   // --overrides a.js,b.js: scene-only prototypes that FR.replace() shots of the film by id
   const overrides = (opt("--overrides", "") || "").split(",").filter(Boolean).map((f) => fs.readFileSync(path.resolve(f), "utf8")).join("\n");
+  // plan mode: the engine's time references, templates and resolver run after the legacy scenes (which only
+  // feed legacy-code shots); FR_PLAN carries the plan, evidence and assets into the page
+  const E = path.join(__dirname, "engine"); const planJs = PLAN ? [path.join(E, "timeref.js"), path.join(E, "templates", "_common.js"),
+    ...fs.readdirSync(path.join(E, "templates")).filter((f) => f.endsWith(".js") && !f.startsWith("_")).map((f) => path.join(E, "templates", f)), path.join(E, "fr-plan.js")]
+    .map((f) => fs.readFileSync(f, "utf8")).join("\n") : "";
+  const planData = PLAN ? `window.FR_PLAN = ${JSON.stringify(PLAN).replace(/</g, "\\u003c")};` : "";
   const html = `<!doctype html><html><head><meta charset="utf-8"><style>${Fonts.css()}
 html,body{margin:0;width:${W}px;height:${H}px;overflow:hidden;background:#000}#stage{position:relative;width:${W}px;height:${H}px;overflow:hidden;background:#090c11}
 #under,#media,#svg,#hud{position:absolute;left:0;top:0;width:${W}px;height:${H}px}#svg{overflow:visible}</style></head>
 <body><div id="stage"><svg id="under" xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"></svg><div id="media"></div><svg id="svg" xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"></svg><div id="hud"></div></div>
-<script>${lib}</script><script>${forensic}</script><script>${scenes}</script><script>${overrides}</script></body></html>`;
+<script>${lib}</script><script>${forensic}</script><script>${scenes}</script><script>${overrides}</script><script>${planData}</script><script>${planJs}</script></body></html>`;
   const page$ = path.join(work, "page.html"); fs.writeFileSync(page$, html);
   const { chromium } = require("playwright-core");
   const browser = await chromium.launch(process.env.PD_CHROMIUM ? { executablePath: process.env.PD_CHROMIUM } : { args: ["--allow-file-access-from-files"] });

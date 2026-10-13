@@ -1,0 +1,41 @@
+{
+ "errors": [
+  "S09: evidence: claim C-srb-length is unverified (V3 used 45.6 m from general knowledge; no primary source recorded yet. Blocks the event-sequence shot until verified.)",
+  "S09: params.dims.srbLength: claim C-srb-length is unverified (V3 used 45.6 m from general knowledge; no primary source recorded yet. Blocks the event-sequence shot until verified.)"
+ ],
+ "warnings": [
+  "S03: custom code (manual): Fig. 14 grows out of S02's traced band (cross-asset registration on a document crop path); needs a document-zoom template",
+  "S06: custom code (manual): hand-drawn joint rotation and blow-by with numbered step titles (slide-like); to be rebuilt on joint-section per ENGINEERING-VISUAL-SYSTEM.md",
+  "S07: custom code (manual): running clock from 2.7 s to 58 s over the climb film: the 2.7 s start value has no evidence (needs the film's documented time base)"
+ ],
+ "stats": {
+  "shots": 15,
+  "dataDriven": 12,
+  "legacy": 3,
+  "manual": [
+   {
+    "shot": "S03",
+    "reason": "Fig. 14 grows out of S02's traced band (cross-asset registration on a document crop path); needs a document-zoom template"
+   },
+   {
+    "shot": "S06",
+    "reason": "hand-drawn joint rotation and blow-by with numbered step titles (slide-like); to be rebuilt on joint-section per ENGINEERING-VISUAL-SYSTEM.md"
+   },
+   {
+    "shot": "S07",
+    "reason": "running clock from 2.7 s to 58 s over the climb film: the 2.7 s start value has no evidence (needs the film's documented time base)"
+   }
+  ],
+  "byTemplate": {
+   "archival-plate": 6,
+   "trace-over-photo": 1,
+   "legacy-code": 3,
+   "joint-section": 1,
+   "event-sequence": 1,
+   "document-desk": 2,
+   "payoff": 1
+  },
+  "claimsUsed": 35,
+  "assetsUsed": 10
+ }
+}

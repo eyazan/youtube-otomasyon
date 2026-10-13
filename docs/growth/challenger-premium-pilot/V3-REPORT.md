@@ -108,6 +108,7 @@ The unchanged shots measure the same as V2.
 1. Label B's gap exaggeration, or draw it to true scale (§ engineering spec). The true gap is 0.017–0.029 in against a 0.280 in ring (Findings 8 and 5c; Ch. IV).
 2. Restore "proportions approximate" in C's source line.
 3. Mark the chronology times as approximate.
+4. **Added by the engine validator:** C's booster length (45.6 m) has no recorded primary source. The Rogers report gives the External Tank (154 × 27 ½ ft) and the motor case diameter (about 12 ft) only. Record a NASA source, or the event-sequence shot stays blocked (`AUTOMATION-READINESS.md` §2).
 
 ## 6. Caption correction (proposal; in source, not rendered)
 

@@ -1,0 +1,245 @@
+{
+ "method": "stills at 35% and 80% of each shot; plan render vs V3 source render (same code base, same assets); PSNR/SSIM via ffmpeg",
+ "rows": [
+  {
+   "shot": "S01",
+   "template": "archival-plate",
+   "t": 1.38,
+   "result": "identical",
+   "psnr": "inf",
+   "ssim": "1.0"
+  },
+  {
+   "shot": "S01",
+   "template": "archival-plate",
+   "t": 3.16,
+   "result": "identical",
+   "psnr": "inf",
+   "ssim": "1.0"
+  },
+  {
+   "shot": "S02",
+   "template": "trace-over-photo",
+   "t": 4.93,
+   "result": "differs",
+   "psnr": "20.227195",
+   "ssim": "0.762478"
+  },
+  {
+   "shot": "S02",
+   "template": "trace-over-photo",
+   "t": 6.2,
+   "result": "differs",
+   "psnr": "21.252898",
+   "ssim": "0.899200"
+  },
+  {
+   "shot": "S03",
+   "template": "legacy-code",
+   "t": 7.57,
+   "result": "identical",
+   "psnr": "inf",
+   "ssim": "1.0"
+  },
+  {
+   "shot": "S03",
+   "template": "legacy-code",
+   "t": 8.6,
+   "result": "identical",
+   "psnr": "inf",
+   "ssim": "1.0"
+  },
+  {
+   "shot": "S04",
+   "template": "archival-plate",
+   "t": 10.34,
+   "result": "identical",
+   "psnr": "inf",
+   "ssim": "1.0"
+  },
+  {
+   "shot": "S04",
+   "template": "archival-plate",
+   "t": 12.0,
+   "result": "identical",
+   "psnr": "inf",
+   "ssim": "1.0"
+  },
+  {
+   "shot": "S05",
+   "template": "joint-section",
+   "t": 13.5,
+   "result": "identical",
+   "psnr": "inf",
+   "ssim": "1.0"
+  },
+  {
+   "shot": "S05",
+   "template": "joint-section",
+   "t": 14.49,
+   "result": "identical",
+   "psnr": "inf",
+   "ssim": "1.0"
+  },
+  {
+   "shot": "S06",
+   "template": "legacy-code",
+   "t": 16.92,
+   "result": "identical",
+   "psnr": "inf",
+   "ssim": "1.0"
+  },
+  {
+   "shot": "S06",
+   "template": "legacy-code",
+   "t": 19.49,
+   "result": "identical",
+   "psnr": "inf",
+   "ssim": "1.0"
+  },
+  {
+   "shot": "S07",
+   "template": "legacy-code",
+   "t": 21.6,
+   "result": "identical",
+   "psnr": "inf",
+   "ssim": "1.0"
+  },
+  {
+   "shot": "S07",
+   "template": "legacy-code",
+   "t": 22.86,
+   "result": "identical",
+   "psnr": "inf",
+   "ssim": "1.0"
+  },
+  {
+   "shot": "S08",
+   "template": "archival-plate",
+   "t": 24.4,
+   "result": "differs",
+   "psnr": "56.063303",
+   "ssim": "0.999809"
+  },
+  {
+   "shot": "S08",
+   "template": "archival-plate",
+   "t": 25.66,
+   "result": "differs",
+   "psnr": "47.304017",
+   "ssim": "0.999224"
+  },
+  {
+   "shot": "S09",
+   "template": "event-sequence",
+   "t": 28.35,
+   "result": "differs",
+   "psnr": "32.059486",
+   "ssim": "0.988032"
+  },
+  {
+   "shot": "S09",
+   "template": "event-sequence",
+   "t": 31.08,
+   "result": "differs",
+   "psnr": "33.671662",
+   "ssim": "0.989095"
+  },
+  {
+   "shot": "S10",
+   "template": "archival-plate",
+   "t": 32.8,
+   "result": "identical",
+   "psnr": "inf",
+   "ssim": "1.0"
+  },
+  {
+   "shot": "S10",
+   "template": "archival-plate",
+   "t": 33.45,
+   "result": "identical",
+   "psnr": "inf",
+   "ssim": "1.0"
+  },
+  {
+   "shot": "S11",
+   "template": "archival-plate",
+   "t": 34.77,
+   "result": "identical",
+   "psnr": "inf",
+   "ssim": "1.0"
+  },
+  {
+   "shot": "S11",
+   "template": "archival-plate",
+   "t": 36.09,
+   "result": "identical",
+   "psnr": "inf",
+   "ssim": "1.0"
+  },
+  {
+   "shot": "S12",
+   "template": "document-desk",
+   "t": 38.46,
+   "result": "identical",
+   "psnr": "inf",
+   "ssim": "1.0"
+  },
+  {
+   "shot": "S12",
+   "template": "document-desk",
+   "t": 40.75,
+   "result": "differs",
+   "psnr": "64.351709",
+   "ssim": "0.999980"
+  },
+  {
+   "shot": "S13",
+   "template": "document-desk",
+   "t": 43.52,
+   "result": "differs",
+   "psnr": "28.178047",
+   "ssim": "0.974809"
+  },
+  {
+   "shot": "S13",
+   "template": "document-desk",
+   "t": 45.76,
+   "result": "identical",
+   "psnr": "inf",
+   "ssim": "1.0"
+  },
+  {
+   "shot": "S14",
+   "template": "archival-plate",
+   "t": 47.43,
+   "result": "identical",
+   "psnr": "inf",
+   "ssim": "1.0"
+  },
+  {
+   "shot": "S14",
+   "template": "archival-plate",
+   "t": 48.3,
+   "result": "identical",
+   "psnr": "inf",
+   "ssim": "1.0"
+  },
+  {
+   "shot": "S15",
+   "template": "payoff",
+   "t": 49.74,
+   "result": "identical",
+   "psnr": "inf",
+   "ssim": "1.0"
+  },
+  {
+   "shot": "S15",
+   "template": "payoff",
+   "t": 51.09,
+   "result": "identical",
+   "psnr": "inf",
+   "ssim": "1.0"
+  }
+ ]
+}
