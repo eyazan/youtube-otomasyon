@@ -183,6 +183,10 @@
   };
   FR.frame = async (t) => {
     const layers = active(t); const media = []; let svg = FR.defs(); let under = FR.defs(); let hud = "";
+    // During a crossfade the pictures dissolve, but text is sequenced: the outgoing shot's HUD text clears
+    // in the first half of the fade and the incoming shot's appears in the second half (v2: v1 ghosted
+    // two sets of text over each other for 0.2-0.35 s).
+    const fading = layers.length > 1 && layers[0].held; const fk = fading ? layers[1].op : 1;
     for (const { s, op, held } of layers) {
       const tt = held ? Math.min(t, s.end + (s.fadeOutHold || 0.5)) : t;
       const r = s.render(tt, p(tt, s.start, s.end), s) || {};
@@ -191,8 +195,10 @@
       const z = s.drift ? lerp(s.drift[0], s.drift[1], E.sine(p(tt, s.start, s.end))) : 1;
       const g = z !== 1 ? `transform="translate(540 860) scale(${z.toFixed(5)}) translate(-540 -860)"` : "";
       if (r.under) under += `<g opacity="${op}">${r.under}</g>`;
-      if (r.svg) svg += `<g opacity="${op}" ${g}>${r.svg}</g>`;
-      if (r.hud) hud += `<div style="position:absolute;inset:0;opacity:${op};${z !== 1 ? `transform:scale(${z.toFixed(5)});transform-origin:540px 860px` : ""}">${r.hud}</div>`;
+      // the outgoing shot's SVG sits above the incoming picture, so it must clear too, or the dissolve never shows
+      if (r.svg) svg += `<g opacity="${held && fading ? Math.max(0, 1 - 2 * fk) : op}" ${g}>${r.svg}</g>`;
+      const hop = !fading ? op : held ? Math.max(0, 1 - 2 * fk) : Math.max(0, 2 * fk - 1);
+      if (r.hud) hud += `<div style="position:absolute;inset:0;opacity:${hop};${z !== 1 ? `transform:scale(${z.toFixed(5)});transform-origin:540px 860px` : ""}">${r.hud}</div>`;
     }
     for (const fn of FR.overlays) { const o = fn(t) || {}; if (o.svg) svg += o.svg; if (o.hud) hud += o.hud; }
     // media pool: one <div><img></div> per layer slot, reused across frames

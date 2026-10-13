@@ -72,6 +72,26 @@ function qa(video, { cuesFile = null, wordsFile = null } = {}) {
       add("caption sync vs acoustic onsets", r.captionSync.maxMs <= 150, `${r.captionSync.measured} cues: mean ${r.captionSync.meanMs} ms, max ${r.captionSync.maxMs} ms`, "max <= 150 ms", false);
     }
   }
+  // Loop continuity (Shorts replay): last frame -> first frame, against the normal frame-to-frame change
+  // in the final second. Thresholds fixed: FAIL if whole-frame MAD > 25; WARN if the jump is > 3x the
+  // final second's median change AND > 4 (same rule as ProfitDecoded visual-metrics boundaryContinuity).
+  {
+    const n = 270 * 480; const raw = execFileSync("ffmpeg", ["-v", "error", "-i", video, "-vf", "scale=270:480,format=gray", "-f", "rawvideo", "pipe:1"], { maxBuffer: 1 << 30 });
+    const fr = Math.floor(raw.length / n); const at = (k) => raw.subarray(k * n, (k + 1) * n);
+    const mad = (a, b, y0 = 0, y1 = 480) => { let d = 0; for (let i = y0 * 270; i < y1 * 270; i += 1) d += Math.abs(a[i] - b[i]); return d / ((y1 - y0) * 270); };
+    const last = at(fr - 1), first = at(0);
+    const tail = []; for (let k = Math.max(1, fr - 30); k < fr; k += 1) tail.push(mad(at(k - 1), at(k)));
+    tail.sort((x, y) => x - y); const med = tail[Math.floor(tail.length / 2)] || 0;
+    const whole = mad(last, first), photo = mad(last, first, 175, 325); // y 700-1300 at full size: below the headline, above the captions
+    r.loop = { method: "mean abs gray diff on 270x480 proxy", lastToFirstWhole: +whole.toFixed(2), lastToFirstPhotoRegion: +photo.toFixed(2), finalSecondMedianStep: +med.toFixed(2), ratio: +((whole + 0.5) / (med + 0.5)).toFixed(2) };
+    add("loop continuity (last -> first frame)", whole <= 25 && !(r.loop.ratio > 3 && whole > 4), `whole ${r.loop.lastToFirstWhole}, photo region ${r.loop.lastToFirstPhotoRegion}, final-second step ${r.loop.finalSecondMedianStep}, ratio ${r.loop.ratio}`, "whole <= 25; not (ratio > 3 and > 4)", whole > 25);
+  }
+  // First 3 s: when speech starts (from the final mix and, when given, the narration track).
+  {
+    const onset = (f) => { const e = ff(["-t", "3", "-i", f, "-af", "silencedetect=n=-38dB:d=0.05", "-f", "null", "-"]); const m = e.match(/silence_end: ([\d.]+)/); const startsSilent = /silence_start: 0(\.0+)?\b/.test(e) || /silence_start: -?0\.0/.test(e); return startsSilent && m ? +m[1] : 0; };
+    r.first3s = { speechOnsetSec: onset(opt("--narration", video)), motionMean: r.motion.first3sMean, staticShare: r.motion.first3sStaticShare, frame0: r.frame0 };
+    add("first spoken word within 0.5 s", r.first3s.speechOnsetSec <= 0.5, `${r.first3s.speechOnsetSec.toFixed(2)} s`, "<= 0.5 s", false);
+  }
   r.pass = checks.filter((c) => c.hard).every((c) => c.ok);
   return r;
 }
