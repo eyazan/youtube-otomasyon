@@ -1,0 +1,506 @@
+{
+ "thresholds": {
+  "overlapShare": 0.15,
+  "captionBand": [
+   1318,
+   1470
+  ],
+  "bottomUiY": 1600,
+  "rightUi": {
+   "x": 950,
+   "y0": 1000,
+   "y1": 1600
+  },
+  "minFontFail": 18,
+  "minFontWarn": 24,
+  "edgeMargin": 32
+ },
+ "samples": 207,
+ "step": 0.25,
+ "minEssentialFontPx": 24,
+ "minEssentialAt": {
+  "t": 0,
+  "text": "TIME AFTER LIFTOFFT+0.678 s"
+ },
+ "fails": [
+  {
+   "level": "FAIL",
+   "check": "text at/over frame edge",
+   "detail": "\"RIGHT BOOSTER\" x=774-1087",
+   "from": 4.5,
+   "to": 6.75
+  },
+  {
+   "level": "FAIL",
+   "check": "text in caption band",
+   "detail": "\"LOWEST JOINT\" y=1316-1360",
+   "from": 5.75,
+   "to": 5.75
+  },
+  {
+   "level": "FAIL",
+   "check": "text collision",
+   "detail": "\"LOWEST JOINT\" x \"on the right booster,\" (44%)",
+   "from": 5.75,
+   "to": 5.75
+  },
+  {
+   "level": "FAIL",
+   "check": "text in caption band",
+   "detail": "\"LOWEST JOINT\" y=1312-1356",
+   "from": 6,
+   "to": 6
+  },
+  {
+   "level": "FAIL",
+   "check": "text collision",
+   "detail": "\"LOWEST JOINT\" x \"on the right booster,\" (40%)",
+   "from": 6,
+   "to": 6
+  },
+  {
+   "level": "FAIL",
+   "check": "text collision",
+   "detail": "\"sealed by tworubber O-rings.\" x \"Rogers Commission Report, Vol. 1, Figure 14\" (15%)",
+   "from": 7,
+   "to": 7
+  },
+  {
+   "level": "FAIL",
+   "check": "text collision",
+   "detail": "\"sealed by tworubber O-rings.\" x \"Rogers Commission Report, Vol. 1, Figure 14\" (18%)",
+   "from": 7.25,
+   "to": 7.25
+  },
+  {
+   "level": "FAIL",
+   "check": "text collision",
+   "detail": "\"sealed by tworubber O-rings.\" x \"Rogers Commission Report, Vol. 1, Figure 14\" (25%)",
+   "from": 7.5,
+   "to": 7.5
+  },
+  {
+   "level": "FAIL",
+   "check": "text collision",
+   "detail": "\"sealed by tworubber O-rings.\" x \"Rogers Commission Report, Vol. 1, Figure 14\" (37%)",
+   "from": 7.75,
+   "to": 7.75
+  },
+  {
+   "level": "FAIL",
+   "check": "text in caption band",
+   "detail": "\"Rogers Commission Report, Vol. 1, Figure 14\" y=1299-1328",
+   "from": 7.75,
+   "to": 7.75
+  },
+  {
+   "level": "FAIL",
+   "check": "text collision",
+   "detail": "\"sealed by tworubber O-rings.\" x \"Rogers Commission Report, Vol. 1, Figure 14\" (59%)",
+   "from": 8,
+   "to": 8
+  },
+  {
+   "level": "FAIL",
+   "check": "text in caption band",
+   "detail": "\"Rogers Commission Report, Vol. 1, Figure 14\" y=1306-1335",
+   "from": 8,
+   "to": 8
+  },
+  {
+   "level": "FAIL",
+   "check": "text collision",
+   "detail": "\"sealed by tworubber O-rings.\" x \"Rogers Commission Report, Vol. 1, Figure 14\" (74%)",
+   "from": 8.25,
+   "to": 8.25
+  },
+  {
+   "level": "FAIL",
+   "check": "text in caption band",
+   "detail": "\"Rogers Commission Report, Vol. 1, Figure 14\" y=1311-1340",
+   "from": 8.25,
+   "to": 8.25
+  },
+  {
+   "level": "FAIL",
+   "check": "text collision",
+   "detail": "\"sealed by tworubber O-rings.\" x \"Rogers Commission Report, Vol. 1, Figure 14\" (83%)",
+   "from": 8.5,
+   "to": 8.5
+  },
+  {
+   "level": "FAIL",
+   "check": "text in caption band",
+   "detail": "\"Rogers Commission Report, Vol. 1, Figure 14\" y=1314-1343",
+   "from": 8.5,
+   "to": 8.5
+  },
+  {
+   "level": "FAIL",
+   "check": "text collision",
+   "detail": "\"sealed by tworubber O-rings.\" x \"Rogers Commission Report, Vol. 1, Figure 14\" (86%)",
+   "from": 8.75,
+   "to": 9
+  },
+  {
+   "level": "FAIL",
+   "check": "text in caption band",
+   "detail": "\"Rogers Commission Report, Vol. 1, Figure 14\" y=1315-1344",
+   "from": 8.75,
+   "to": 9
+  },
+  {
+   "level": "FAIL",
+   "check": "text at/over frame edge",
+   "detail": "\"PRIMARY O-RING\" x=31-468",
+   "from": 16.75,
+   "to": 16.75
+  },
+  {
+   "level": "FAIL",
+   "check": "text at/over frame edge",
+   "detail": "\"SECONDARY O-RING\" x=31-551",
+   "from": 16.75,
+   "to": 16.75
+  },
+  {
+   "level": "FAIL",
+   "check": "text at/over frame edge",
+   "detail": "\"PRIMARY O-RING\" x=29-467",
+   "from": 17,
+   "to": 17
+  },
+  {
+   "level": "FAIL",
+   "check": "text at/over frame edge",
+   "detail": "\"SECONDARY O-RING\" x=29-551",
+   "from": 17,
+   "to": 17
+  },
+  {
+   "level": "FAIL",
+   "check": "text at/over frame edge",
+   "detail": "\"PRIMARY O-RING\" x=28-468",
+   "from": 17.25,
+   "to": 17.25
+  },
+  {
+   "level": "FAIL",
+   "check": "text at/over frame edge",
+   "detail": "\"SECONDARY O-RING\" x=28-552",
+   "from": 17.25,
+   "to": 17.25
+  },
+  {
+   "level": "FAIL",
+   "check": "text at/over frame edge",
+   "detail": "\"PRIMARY O-RING\" x=26-468",
+   "from": 17.5,
+   "to": 17.5
+  },
+  {
+   "level": "FAIL",
+   "check": "text at/over frame edge",
+   "detail": "\"SECONDARY O-RING\" x=26-552",
+   "from": 17.5,
+   "to": 17.5
+  },
+  {
+   "level": "FAIL",
+   "check": "text at/over frame edge",
+   "detail": "\"PRIMARY O-RING\" x=23-466",
+   "from": 17.75,
+   "to": 17.75
+  },
+  {
+   "level": "FAIL",
+   "check": "text at/over frame edge",
+   "detail": "\"SECONDARY O-RING\" x=23-551",
+   "from": 17.75,
+   "to": 17.75
+  },
+  {
+   "level": "FAIL",
+   "check": "text at/over frame edge",
+   "detail": "\"PRIMARY O-RING\" x=21-466",
+   "from": 18,
+   "to": 18
+  },
+  {
+   "level": "FAIL",
+   "check": "text at/over frame edge",
+   "detail": "\"SECONDARY O-RING\" x=21-551",
+   "from": 18,
+   "to": 18
+  },
+  {
+   "level": "FAIL",
+   "check": "text at/over frame edge",
+   "detail": "\"PRIMARY O-RING\" x=19-466",
+   "from": 18.25,
+   "to": 18.25
+  },
+  {
+   "level": "FAIL",
+   "check": "text at/over frame edge",
+   "detail": "\"SECONDARY O-RING\" x=19-552",
+   "from": 18.25,
+   "to": 18.25
+  },
+  {
+   "level": "FAIL",
+   "check": "text at/over frame edge",
+   "detail": "\"PRIMARY O-RING\" x=17-466",
+   "from": 18.5,
+   "to": 18.5
+  },
+  {
+   "level": "FAIL",
+   "check": "text at/over frame edge",
+   "detail": "\"SECONDARY O-RING\" x=17-552",
+   "from": 18.5,
+   "to": 18.5
+  },
+  {
+   "level": "FAIL",
+   "check": "text at/over frame edge",
+   "detail": "\"PRIMARY O-RING\" x=16-466",
+   "from": 18.75,
+   "to": 18.75
+  },
+  {
+   "level": "FAIL",
+   "check": "text at/over frame edge",
+   "detail": "\"SECONDARY O-RING\" x=16-552",
+   "from": 18.75,
+   "to": 18.75
+  },
+  {
+   "level": "FAIL",
+   "check": "text at/over frame edge",
+   "detail": "\"PRIMARY O-RING\" x=14-466",
+   "from": 19,
+   "to": 19
+  },
+  {
+   "level": "FAIL",
+   "check": "text at/over frame edge",
+   "detail": "\"SECONDARY O-RING\" x=14-552",
+   "from": 19,
+   "to": 19
+  },
+  {
+   "level": "FAIL",
+   "check": "text at/over frame edge",
+   "detail": "\"PRIMARY O-RING\" x=12-465",
+   "from": 19.25,
+   "to": 19.25
+  },
+  {
+   "level": "FAIL",
+   "check": "text at/over frame edge",
+   "detail": "\"SECONDARY O-RING\" x=12-552",
+   "from": 19.25,
+   "to": 19.25
+  },
+  {
+   "level": "FAIL",
+   "check": "text at/over frame edge",
+   "detail": "\"PRIMARY O-RING\" x=11-465",
+   "from": 19.5,
+   "to": 19.5
+  },
+  {
+   "level": "FAIL",
+   "check": "text at/over frame edge",
+   "detail": "\"SECONDARY O-RING\" x=11-552",
+   "from": 19.5,
+   "to": 19.5
+  },
+  {
+   "level": "FAIL",
+   "check": "text at/over frame edge",
+   "detail": "\"PRIMARY O-RING\" x=10-465",
+   "from": 19.75,
+   "to": 19.75
+  },
+  {
+   "level": "FAIL",
+   "check": "text at/over frame edge",
+   "detail": "\"SECONDARY O-RING\" x=10-552",
+   "from": 19.75,
+   "to": 19.75
+  },
+  {
+   "level": "FAIL",
+   "check": "text at/over frame edge",
+   "detail": "\"PRIMARY O-RING\" x=9-465",
+   "from": 20,
+   "to": 20.25
+  },
+  {
+   "level": "FAIL",
+   "check": "text at/over frame edge",
+   "detail": "\"SECONDARY O-RING\" x=9-552",
+   "from": 20,
+   "to": 20
+  },
+  {
+   "level": "FAIL",
+   "check": "text at/over frame edge",
+   "detail": "\"SECONDARY O-RING\" x=9-553",
+   "from": 20.25,
+   "to": 20.25
+  },
+  {
+   "level": "FAIL",
+   "check": "text at/over frame edge",
+   "detail": "\"PRIMARY O-RING\" x=8-464",
+   "from": 20.5,
+   "to": 20.5
+  },
+  {
+   "level": "FAIL",
+   "check": "text at/over frame edge",
+   "detail": "\"SECONDARY O-RING\" x=8-552",
+   "from": 20.5,
+   "to": 20.5
+  }
+ ],
+ "warns": [
+  {
+   "level": "WARN",
+   "check": "text under right UI buttons",
+   "detail": "\"GAP\" x=851-957",
+   "from": 15.75,
+   "to": 15.75
+  },
+  {
+   "level": "WARN",
+   "check": "text under right UI buttons",
+   "detail": "\"GAP\" x=852-958",
+   "from": 16,
+   "to": 16
+  },
+  {
+   "level": "WARN",
+   "check": "text under right UI buttons",
+   "detail": "\"GAP\" x=853-960",
+   "from": 16.25,
+   "to": 16.25
+  },
+  {
+   "level": "WARN",
+   "check": "text under right UI buttons",
+   "detail": "\"GAP\" x=854-961",
+   "from": 16.5,
+   "to": 16.5
+  },
+  {
+   "level": "WARN",
+   "check": "text under right UI buttons",
+   "detail": "\"GAP\" x=855-962",
+   "from": 16.75,
+   "to": 16.75
+  },
+  {
+   "level": "WARN",
+   "check": "text under right UI buttons",
+   "detail": "\"GAP\" x=856-964",
+   "from": 17,
+   "to": 17
+  },
+  {
+   "level": "WARN",
+   "check": "text under right UI buttons",
+   "detail": "\"GAP\" x=857-965",
+   "from": 17.25,
+   "to": 17.25
+  },
+  {
+   "level": "WARN",
+   "check": "text under right UI buttons",
+   "detail": "\"GAP\" x=858-966",
+   "from": 17.5,
+   "to": 17.5
+  },
+  {
+   "level": "WARN",
+   "check": "text under right UI buttons",
+   "detail": "\"GAP\" x=859-968",
+   "from": 17.75,
+   "to": 17.75
+  },
+  {
+   "level": "WARN",
+   "check": "text under right UI buttons",
+   "detail": "\"GAP\" x=861-970",
+   "from": 18,
+   "to": 18
+  },
+  {
+   "level": "WARN",
+   "check": "text under right UI buttons",
+   "detail": "\"GAP\" x=862-972",
+   "from": 18.25,
+   "to": 18.25
+  },
+  {
+   "level": "WARN",
+   "check": "text under right UI buttons",
+   "detail": "\"GAP\" x=863-973",
+   "from": 18.5,
+   "to": 18.5
+  },
+  {
+   "level": "WARN",
+   "check": "text under right UI buttons",
+   "detail": "\"GAP\" x=864-975",
+   "from": 18.75,
+   "to": 18.75
+  },
+  {
+   "level": "WARN",
+   "check": "text under right UI buttons",
+   "detail": "\"GAP\" x=865-976",
+   "from": 19,
+   "to": 19
+  },
+  {
+   "level": "WARN",
+   "check": "text under right UI buttons",
+   "detail": "\"GAP\" x=866-977",
+   "from": 19.25,
+   "to": 19.25
+  },
+  {
+   "level": "WARN",
+   "check": "text under right UI buttons",
+   "detail": "\"GAP\" x=867-979",
+   "from": 19.5,
+   "to": 19.5
+  },
+  {
+   "level": "WARN",
+   "check": "text under right UI buttons",
+   "detail": "\"GAP\" x=868-980",
+   "from": 19.75,
+   "to": 20
+  },
+  {
+   "level": "WARN",
+   "check": "text under right UI buttons",
+   "detail": "\"GAP\" x=869-981",
+   "from": 20.25,
+   "to": 20.5
+  },
+  {
+   "level": "WARN",
+   "check": "text under right UI buttons",
+   "detail": "\"FLAME AT THE JOINT\" x=614-1023",
+   "from": 24.5,
+   "to": 26
+  }
+ ],
+ "pass": false
+}
