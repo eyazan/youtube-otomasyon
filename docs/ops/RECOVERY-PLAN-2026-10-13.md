@@ -81,3 +81,21 @@ The unapproved voices were refused for publishing (`allowed: false`) and without
 - GitHub cron starts production 6–9 h late.
 
 After this PR, #251 with an approved voice, #234, and one green scheduled day verified through the YouTube API, the FR and IB lanes can be reassessed.
+
+## Update: 2026-10-13, about 04:30 UTC
+
+- **False alarms.** #256, #257 and #258 are closed as not planned, each with an explanation. The premature `sla-failure:2026-10-13` keys cannot be pushed to `main` from an agent session. Their removal is **#260**: a 3-line state-only diff that must be merged before 16:30 UTC today. The same pattern had already pre-written keys for 10-02, 10-03 and 10-07 through 10-10. It is the evening-before signature of this bug, and #259 prevents it.
+- **#251 hardening** is draft **#261**, stacked on `fix/tts-fallback-health`. It adds:
+  - a fail-closed upload guard;
+  - a verified Kokoro cache;
+  - outcome categories (`SUCCESS`, `CONTENT_BLOCKED`, `QUALITY_REJECTED`, `AWAITING_APPROVAL`, `UPLOAD_FAILED`, `PUBLISH_VERIFICATION_FAILED`, `PRODUCTION_FAILED`);
+  - asset outages that no longer spend FR topics (exit 76);
+  - an FR outcome table in `uretim-is.yml`;
+  - `docs/ops/TTS-FALLBACK-OPTIONS.md`.
+- **Merge order, validated on current `main`:** #260 (time-sensitive), then #259, then #251 together with #261, then #234, then #235.
+  - Tests after each step: 620, 634, 639, 644 JS passing, plus the Python tests.
+  - The only conflict is in #235: two tests appended at the same spot in `tests/js/ct-research.test.js`. Keep both.
+  - No cron line changes, and the CT threshold is unchanged at bucket A, viral ≥ 75.
+- **Offline dry run on the full combined tree.** Network policy blocks Wikimedia, Pexels and Edge from this environment.
+  - FR queue mode stopped on the first topic with `ASSET_SOURCE_UNAVAILABLE` (exit 76). `basarisiz.json` and `engellenen.json` were unchanged.
+  - CT-219 rendered with the preview voice (speech check OK), then was blocked by the quality gate (no licensed images reachable) and refused by the upload guard (voice not approved).
