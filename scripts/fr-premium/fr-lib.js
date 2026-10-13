@@ -117,6 +117,8 @@
 
   // ---- registration ----------------------------------------------------------------------------
   FR.shot = (s) => { FR.shots.push(s); return s; };
+  // Phase 1: a scene-only prototype replaces one shot of an existing film by id (window.OVERRIDES).
+  FR.replace = (id, s) => { const i = FR.shots.findIndex((x) => x.id === id); if (i < 0) throw new Error("replace: no shot " + id); FR.shots[i] = { id, ...s }; return FR.shots[i]; };
   FR.overlay = (fn) => FR.overlays.push(fn);
 
   // ---- captions (word-aligned, from the measured timeline) ---------------------------------------
@@ -166,9 +168,13 @@
     FR.tl = timeline; FR.media = media; FR.duration = duration;
     stage = document.getElementById("stage"); underEl = document.getElementById("under"); mediaEl = document.getElementById("media"); svgEl = document.getElementById("svg"); hudEl = document.getElementById("hud");
     if (window.SCENES) window.SCENES(FR);
+    (window.OVERRIDES || []).forEach((fn) => fn(FR));
     FR.shots.forEach((s, i) => { s.index = i; if (!(s.end > s.start)) throw new Error(`shot ${s.id} has no duration (${s.start}..${s.end})`); });
     FR.buildCaptions();
-    return { shots: FR.shots.map((s) => ({ id: s.id, start: +s.start.toFixed(3), end: +s.end.toFixed(3), kind: s.kind, label: s.label, subject: s.subject, source: s.source || null, evidence: s.evidence || [], transition: s.trans || "cut" })), cues: FR.cues.map((c) => ({ start: c.start, end: c.end, lines: c.lines.map((l) => l.map((w) => w.text).join(" ")) })) };
+    return { shots: FR.shots.map((s) => ({ id: s.id, start: +s.start.toFixed(3), end: +s.end.toFixed(3), kind: s.kind, label: s.label, subject: s.subject, source: s.source || null, evidence: s.evidence || [], transition: s.trans || "cut",
+      // creative-plan metadata read by creative_qa.py (Phase 0); absent on V1/V2 shots
+      plan: { transitionReason: s.transReason || null, states: (s.states || []).map((x) => ({ t: +x.t.toFixed(3), what: x.what, ev: x.ev || null })),
+        register: s.register || null, primitives: s.primitives || [], framing: s.framing || null } })), cues: FR.cues.map((c) => ({ start: c.start, end: c.end, lines: c.lines.map((l) => l.map((w) => w.text).join(" ")) })) };
   };
   const active = (t) => {
     const out = [];

@@ -1,0 +1,246 @@
+{
+ "schema": "fr-premium.creative-qa.v1",
+ "mode": "WARN-only",
+ "thresholds": {
+  "empty": 0.35,
+  "inset": 0.25,
+  "subject_min": 0.25,
+  "tiers": 3,
+  "labels": 3,
+  "words": 8,
+  "label_px": 32,
+  "states_per_2s": 1,
+  "states_min": 2
+ },
+ "grammar": [
+  "continuous",
+  "cut",
+  "dip",
+  "follow-cause",
+  "hard-cut",
+  "loop",
+  "match",
+  "push-in"
+ ],
+ "mp4": "challenger-p1-D-warning-and-decision.mp4",
+ "offset": 36.3,
+ "summary": {
+  "shots": 4,
+  "warn_shots": 4,
+  "warns": 22,
+  "time_weighted_empty": 0.668,
+  "mechanism_registered": "0/0",
+  "slide_like": 1
+ },
+ "shots": [
+  {
+   "id": "S11",
+   "kind": "archival",
+   "start": 33.74,
+   "end": 36.676,
+   "measured_from": 36.3,
+   "measured_to": 36.676,
+   "empty": 0.508,
+   "subject_motion": 0.006,
+   "subject_median": 0.006,
+   "camera_per_s": 0.0,
+   "states": [],
+   "registered": null,
+   "boundary_corr": null,
+   "transition": {
+    "type": "cut",
+    "reason": null,
+    "measured": null
+   },
+   "text": {
+    "max_tiers": 1,
+    "max_labels": 1,
+    "max_words": 3,
+    "smallest_label_px": 28,
+    "competing_samples": 0
+   },
+   "framing": null,
+   "primitives": [],
+   "slide_like": false,
+   "warns": [
+    "empty background 51% > 35%",
+    "archival inset over void 51% > 25%",
+    "transition 'cut' has no declared reason",
+    "smallest label 28 px < 32"
+   ]
+  },
+  {
+   "id": "S12",
+   "kind": "document",
+   "start": 36.676,
+   "end": 41.774,
+   "measured_from": 36.676,
+   "measured_to": 41.774,
+   "empty": 0.698,
+   "subject_motion": 0.293,
+   "subject_median": 0.021,
+   "camera_per_s": 0.031,
+   "states": [
+    {
+     "t": 36.776,
+     "what": "timeline at 8:45 PM, chart arrives",
+     "ev": "E3 chronology",
+     "verified": true,
+     "peak": 8.44
+    },
+    {
+     "t": 38.59,
+     "what": "the recommendation line is highlighted",
+     "ev": "E3 p. 90",
+     "verified": false,
+     "peak": 0.13
+    },
+    {
+     "t": 40.354,
+     "what": "53 \u00b0F marked on the scale against 36 \u00b0F",
+     "ev": "E3; E1 36 \u00b0F",
+     "verified": false,
+     "peak": 0.1
+    }
+   ],
+   "registered": null,
+   "boundary_corr": 0.827,
+   "transition": {
+    "type": "dip",
+    "reason": "slow dissolve from the crew portrait (loss beat, respectful pace)",
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 4,
+    "max_labels": 5,
+    "max_words": 26,
+    "smallest_label_px": 24,
+    "competing_samples": 6
+   },
+   "framing": "full-width document plate",
+   "primitives": [
+    "document",
+    "measure-scale",
+    "timeline"
+   ],
+   "slide_like": false,
+   "warns": [
+    "empty background 70% > 35%",
+    "2 declared state change(s) not visible in the MP4",
+    "4 text tiers > 3",
+    "5 labels at once > 3",
+    "26 non-caption words on screen > 8",
+    "smallest label 24 px < 32",
+    "headline competes with caption in 6 samples"
+   ]
+  },
+  {
+   "id": "S13",
+   "kind": "document",
+   "start": 41.774,
+   "end": 46.753,
+   "measured_from": 41.774,
+   "measured_to": 46.753,
+   "empty": 0.688,
+   "subject_motion": 0.107,
+   "subject_median": 0.003,
+   "camera_per_s": 0.019,
+   "states": [
+    {
+     "t": 42.475,
+     "what": "timeline to 11:00 PM; the 53 \u00b0F chart is set aside",
+     "ev": "E3 chronology",
+     "verified": true,
+     "peak": 1.18
+    },
+    {
+     "t": 42.675,
+     "what": "signed fax: 'MTI recommends ... launch proceed'",
+     "ev": "E3 p. 97",
+     "verified": true,
+     "peak": 1.0
+    },
+    {
+     "t": 43.087,
+     "what": "signature highlighted; timeline 11:45 PM",
+     "ev": "E3 p. 97",
+     "verified": false,
+     "peak": 0.1
+    },
+    {
+     "t": 43.908,
+     "what": "timeline to launch; the Commission's finding",
+     "ev": "E3 p. 82",
+     "verified": true,
+     "peak": 0.38
+    }
+   ],
+   "registered": null,
+   "boundary_corr": 0.929,
+   "transition": {
+    "type": "continuous",
+    "reason": "continuous: same document desk, the timeline moves on to the reversal",
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 5,
+    "max_labels": 5,
+    "max_words": 28,
+    "smallest_label_px": 24,
+    "competing_samples": 0
+   },
+   "framing": "full-width document plate",
+   "primitives": [
+    "document",
+    "quote",
+    "timeline"
+   ],
+   "slide_like": true,
+   "warns": [
+    "empty background 69% > 35%",
+    "subject motion 0.11 < 0.25 (camera drift only)",
+    "1 declared state change(s) not visible in the MP4",
+    "5 text tiers > 3",
+    "5 labels at once > 3",
+    "28 non-caption words on screen > 8",
+    "smallest label 24 px < 32",
+    "slide-like composition"
+   ]
+  },
+  {
+   "id": "S14",
+   "kind": "archival",
+   "start": 46.753,
+   "end": 48.691,
+   "measured_from": 46.753,
+   "measured_to": 47.1,
+   "empty": 0.12,
+   "subject_motion": 0.242,
+   "subject_median": 0.242,
+   "camera_per_s": 0.0,
+   "states": [],
+   "registered": null,
+   "boundary_corr": -0.18,
+   "transition": {
+    "type": "cut",
+    "reason": null,
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 3,
+    "max_labels": 2,
+    "max_words": 19,
+    "smallest_label_px": 24,
+    "competing_samples": 0
+   },
+   "framing": null,
+   "primitives": [],
+   "slide_like": false,
+   "warns": [
+    "transition 'cut' has no declared reason",
+    "19 non-caption words on screen > 8",
+    "smallest label 24 px < 32"
+   ]
+  }
+ ]
+}

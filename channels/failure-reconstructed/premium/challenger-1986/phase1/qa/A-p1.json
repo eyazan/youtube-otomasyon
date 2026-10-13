@@ -1,0 +1,230 @@
+{
+ "schema": "fr-premium.creative-qa.v1",
+ "mode": "WARN-only",
+ "thresholds": {
+  "empty": 0.35,
+  "inset": 0.25,
+  "subject_min": 0.25,
+  "tiers": 3,
+  "labels": 3,
+  "words": 8,
+  "label_px": 32,
+  "states_per_2s": 1,
+  "states_min": 2
+ },
+ "grammar": [
+  "continuous",
+  "cut",
+  "dip",
+  "follow-cause",
+  "hard-cut",
+  "loop",
+  "match",
+  "push-in"
+ ],
+ "mp4": "challenger-p1-A-opening-to-joint.mp4",
+ "offset": 0.0,
+ "summary": {
+  "shots": 4,
+  "warn_shots": 3,
+  "warns": 9,
+  "time_weighted_empty": 0.332,
+  "mechanism_registered": "1/1",
+  "slide_like": 0
+ },
+ "shots": [
+  {
+   "id": "S01",
+   "kind": "archival",
+   "start": 0,
+   "end": 3.946,
+   "measured_from": 0,
+   "measured_to": 3.946,
+   "empty": 0.287,
+   "subject_motion": 0.408,
+   "subject_median": 0.423,
+   "camera_per_s": 0.049,
+   "states": [],
+   "registered": null,
+   "boundary_corr": null,
+   "transition": {
+    "type": "cut",
+    "reason": null,
+    "measured": null
+   },
+   "text": {
+    "max_tiers": 3,
+    "max_labels": 3,
+    "max_words": 16,
+    "smallest_label_px": 30,
+    "competing_samples": 15
+   },
+   "framing": null,
+   "primitives": [],
+   "slide_like": false,
+   "warns": [
+    "archival inset over void 29% > 25%",
+    "16 non-caption words on screen > 8",
+    "smallest label 30 px < 32",
+    "headline competes with caption in 15 samples"
+   ]
+  },
+  {
+   "id": "S02",
+   "kind": "explanatory",
+   "start": 3.946,
+   "end": 6.766,
+   "measured_from": 3.946,
+   "measured_to": 6.766,
+   "empty": 0.156,
+   "subject_motion": 1.249,
+   "subject_median": 0.896,
+   "camera_per_s": 0.502,
+   "states": [
+    {
+     "t": 4.146,
+     "what": "trace of the right booster draws on",
+     "ev": "E4",
+     "verified": true,
+     "peak": 2.07
+    },
+    {
+     "t": 5.186,
+     "what": "aft field joint band lights",
+     "ev": "E1",
+     "verified": true,
+     "peak": 1.34
+    },
+    {
+     "t": 5.762,
+     "what": "label: right booster",
+     "ev": "E1",
+     "verified": true,
+     "peak": 1.65
+    },
+    {
+     "t": 6.166,
+     "what": "photo dims, camera pushes into the joint",
+     "ev": null,
+     "verified": true,
+     "peak": 5.42
+    }
+   ],
+   "registered": {
+    "from": "S01",
+    "asset": "liftoff",
+    "anchors": [
+     "smoke",
+     "joint band"
+    ]
+   },
+   "boundary_corr": 0.768,
+   "transition": {
+    "type": "continuous",
+    "reason": "continuous camera on the same photograph (no cut)",
+    "measured": "gradual"
+   },
+   "text": {
+    "max_tiers": 1,
+    "max_labels": 2,
+    "max_words": 5,
+    "smallest_label_px": 40,
+    "competing_samples": 0
+   },
+   "framing": "full-bleed photo (1080x1400) + caption band",
+   "primitives": [],
+   "slide_like": false,
+   "warns": []
+  },
+  {
+   "id": "S03",
+   "kind": "document",
+   "start": 6.766,
+   "end": 9.056,
+   "measured_from": 6.766,
+   "measured_to": 9.056,
+   "empty": 0.647,
+   "subject_motion": 0.754,
+   "subject_median": 0.391,
+   "camera_per_s": 0.321,
+   "states": [
+    {
+     "t": 6.766,
+     "what": "cross-section grows out of the joint band",
+     "ev": "E2",
+     "verified": true,
+     "peak": 5.75
+    },
+    {
+     "t": 7.89,
+     "what": "camera closes on the two O-rings; rings drawn",
+     "ev": "E2",
+     "verified": true,
+     "peak": 1.19
+    }
+   ],
+   "registered": {
+    "from": "S02",
+    "asset": "fig14",
+    "anchors": [
+     "joint band -> wall section"
+    ]
+   },
+   "boundary_corr": 0.349,
+   "transition": {
+    "type": "push-in",
+    "reason": "push-in through the traced joint band into the Commission's cross-section of that joint",
+    "measured": "gradual"
+   },
+   "text": {
+    "max_tiers": 1,
+    "max_labels": 1,
+    "max_words": 11,
+    "smallest_label_px": 24,
+    "competing_samples": 0
+   },
+   "framing": "full-width document plate",
+   "primitives": [],
+   "slide_like": false,
+   "warns": [
+    "empty background 65% > 35%",
+    "11 non-caption words on screen > 8",
+    "smallest label 24 px < 32"
+   ]
+  },
+  {
+   "id": "S04",
+   "kind": "archival",
+   "start": 9.056,
+   "end": 12.733,
+   "measured_from": 9.056,
+   "measured_to": 9.3,
+   "empty": 0.137,
+   "subject_motion": 0.0,
+   "subject_median": 0.0,
+   "camera_per_s": 0.0,
+   "states": [],
+   "registered": null,
+   "boundary_corr": -0.026,
+   "transition": {
+    "type": "cut",
+    "reason": null,
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 1,
+    "max_labels": 1,
+    "max_words": 5,
+    "smallest_label_px": 28,
+    "competing_samples": 0
+   },
+   "framing": null,
+   "primitives": [],
+   "slide_like": false,
+   "warns": [
+    "transition 'cut' has no declared reason",
+    "smallest label 28 px < 32"
+   ]
+  }
+ ]
+}

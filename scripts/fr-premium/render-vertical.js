@@ -6,6 +6,7 @@
 //
 //   node scripts/fr-premium/render-vertical.js <filmDir> --timeline timeline.json --assets <dir> --work <dir>
 //        [--out video.mp4] [--stills 0,1.5,3] [--from s] [--to s] [--tail 0.8]
+//        [--overrides proto.js,...] [--media-extra media.json,...]   (Phase 1 scene-only prototypes)
 //
 // <filmDir> holds scenes.js (shots, using fr-lib.js) and media.json (photos and clip ranges).
 // The output is video only; mix-audio.js adds the soundtrack. Reuses the ProfitDecoded motion
@@ -27,6 +28,8 @@ const probe = (f) => { const [w, h] = execFileSync("ffprobe", ["-v", "error", "-
 
 function prepareMedia() {
   const spec = JSON.parse(fs.readFileSync(path.join(filmDir, "media.json"), "utf8"));
+  // --media-extra a.json,b.json: extra photos/clips for scene prototypes (merged over media.json)
+  for (const f of (opt("--media-extra", "") || "").split(",").filter(Boolean)) { const x = JSON.parse(fs.readFileSync(path.resolve(f), "utf8")); spec.photos = { ...spec.photos, ...(x.photos || {}) }; spec.clips = { ...spec.clips, ...(x.clips || {}) }; }
   const mdir = path.join(work, "media"); fs.mkdirSync(mdir, { recursive: true });
   const media = {};
   for (const [key, ph] of Object.entries(spec.photos || {})) {
@@ -53,11 +56,14 @@ async function main() {
   const duration = +(timeline.duration + tail).toFixed(3);
   const lib = fs.readFileSync(path.join(__dirname, "fr-lib.js"), "utf8");
   const scenes = fs.readFileSync(path.join(filmDir, "scenes.js"), "utf8");
+  const forensic = fs.readFileSync(path.join(__dirname, "fr-forensic.js"), "utf8");
+  // --overrides a.js,b.js: scene-only prototypes that FR.replace() shots of the film by id
+  const overrides = (opt("--overrides", "") || "").split(",").filter(Boolean).map((f) => fs.readFileSync(path.resolve(f), "utf8")).join("\n");
   const html = `<!doctype html><html><head><meta charset="utf-8"><style>${Fonts.css()}
 html,body{margin:0;width:${W}px;height:${H}px;overflow:hidden;background:#000}#stage{position:relative;width:${W}px;height:${H}px;overflow:hidden;background:#090c11}
 #under,#media,#svg,#hud{position:absolute;left:0;top:0;width:${W}px;height:${H}px}#svg{overflow:visible}</style></head>
 <body><div id="stage"><svg id="under" xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"></svg><div id="media"></div><svg id="svg" xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"></svg><div id="hud"></div></div>
-<script>${lib}</script><script>${scenes}</script></body></html>`;
+<script>${lib}</script><script>${forensic}</script><script>${scenes}</script><script>${overrides}</script></body></html>`;
   const page$ = path.join(work, "page.html"); fs.writeFileSync(page$, html);
   const { chromium } = require("playwright-core");
   const browser = await chromium.launch(process.env.PD_CHROMIUM ? { executablePath: process.env.PD_CHROMIUM } : { args: ["--allow-file-access-from-files"] });

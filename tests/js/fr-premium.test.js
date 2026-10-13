@@ -18,6 +18,7 @@ function loadLib() {
   const window = {};
   const ctx = vm.createContext({ window, document: { getElementById: () => ({ appendChild() {}, style: {} }) }, Math, JSON, String, Number, Set, Map, Promise, Array, Object, Error });
   vm.runInContext(read(path.join(TOOLS, "fr-lib.js")), ctx);
+  vm.runInContext(read(path.join(TOOLS, "fr-forensic.js")), ctx);
   return { FR: window.FR, window, ctx };
 }
 
@@ -105,7 +106,7 @@ test("framing: cover() keeps the crop inside the image at any focus and zoom", (
 });
 
 test("isolation: the prototype never uploads, publishes, calls paid providers or reads credentials", () => {
-  const files = fs.readdirSync(TOOLS).map((f) => path.join(TOOLS, f)).concat([path.join(FILM, "scenes.js")]);
+  const files = fs.readdirSync(TOOLS).map((f) => path.join(TOOLS, f)).concat([path.join(FILM, "scenes.js")], fs.readdirSync(path.join(FILM, "phase1")).filter((f) => /\.(js|json)$/.test(f)).map((f) => path.join(FILM, "phase1", f)));
   const banned = /youtube-yukle|tiktok-yukle|googleapis|youtube\.upload|@anthropic-ai|anthropic\.com\/v1|openai|elevenlabs|cartesia|GOOGLE_APPLICATION_CREDENTIALS|YOUTUBE_(CLIENT|REFRESH)|process\.env\.(ANTHROPIC|OPENAI|ELEVEN|CARTESIA)/i;
   for (const f of files) assert.ok(!banned.test(read(f)), `${path.basename(f)} references a publishing/paid/credential path`);
   // and nothing in production references the prototype
@@ -115,4 +116,59 @@ test("isolation: the prototype never uploads, publishes, calls paid providers or
     assert.ok(!/fr-premium|premium\/challenger/.test(read(f)), `${path.relative(ROOT, f)} references the prototype`);
   for (const f of fs.readdirSync(ROOT).filter((x) => /\.(c?js)$/.test(x)))
     assert.ok(!/fr-premium/.test(read(path.join(ROOT, f))), `${f} references the prototype`);
+});
+
+// ---- Phase 1 scene prototypes -------------------------------------------------------------------
+const GRAMMAR = new Set(["match", "push-in", "follow-cause", "cut", "hard-cut", "dip", "loop", "continuous"]);
+function loadPrototypes() {
+  const { FR, window, ctx } = loadLib();
+  vm.runInContext(read(path.join(FILM, "scenes.js")), ctx);
+  for (const f of fs.readdirSync(path.join(FILM, "phase1")).filter((x) => /^proto-.*\.js$/.test(x))) vm.runInContext(read(path.join(FILM, "phase1", f)), ctx);
+  const tl = json(path.join(FILM, "v1/timeline-edge-andrew.json"));
+  const media = {}; for (const k of ["liftoff", "fig14", "icicles", "breakup", "crew", "burn", "climb", "e207", "chart53", "fax"]) media[k] = { src: "", iw: 1000, ih: 1500, scale: 1, fps: 30, frames: 30, dir: "", crop: { x: 0, y: 0, w: 1000, h: 1000 } };
+  const meta = JSON.parse(JSON.stringify(FR.init(tl, media, tl.duration + 0.8)));
+  return { FR, window, meta, tl };
+}
+
+test("phase 1: four prototypes replace exactly S02 S03 S05 S08 S09 S12 S13 and the film still tiles", () => {
+  const { window, meta, tl } = loadPrototypes();
+  assert.equal(window.OVERRIDES.length, 4);
+  const shots = meta.shots; assert.equal(shots.length, 15);
+  for (let i = 1; i < shots.length; i += 1) assert.ok(Math.abs(shots[i].start - shots[i - 1].end) < 1e-6, `gap/overlap before ${shots[i].id}`);
+  assert.ok(Math.abs(shots[shots.length - 1].end - (tl.duration + 0.8)) < 1e-3);
+  const planned = shots.filter((s) => s.plan.transitionReason).map((s) => s.id);
+  assert.deepEqual(planned, ["S02", "S03", "S05", "S08", "S09", "S12", "S13"]);
+});
+
+test("phase 1: every rebuilt shot declares a grammar transition, timed states with evidence, and provenance", () => {
+  const { meta } = loadPrototypes();
+  for (const s of meta.shots.filter((x) => x.plan.transitionReason)) {
+    assert.ok(GRAMMAR.has(s.transition), `${s.id} transition '${s.transition}' not in grammar`);
+    assert.ok(s.label && s.kind, `${s.id} provenance`);
+    if (s.kind !== "archival") {
+      assert.ok(s.plan.states.length >= 2, `${s.id} needs >= 2 narration-timed state changes`);
+      for (const x of s.plan.states) assert.ok(x.t >= s.start - 1e-6 && x.t < s.end, `${s.id} state '${x.what}' outside the shot`);
+      assert.ok(s.plan.states.filter((x) => x.ev).length >= 1, `${s.id} states cite no evidence`);
+    }
+    // mechanism shots are registered to archival media, or say why not (creative_qa then WARNs)
+    if (s.kind === "explanatory" || s.kind === "reconstruction") assert.ok(s.plan.register && (s.plan.register.from || s.plan.register.reason), `${s.id} has no registration or reason`);
+    assert.ok(!s.plan.primitives.some((p) => ["bar-chart", "flowchart", "bullets"].includes(p)), `${s.id} uses a slide primitive`);
+  }
+});
+
+test("phase 1: the flame-to-tank event clock uses the Commission's documented times, in order", () => {
+  const { FR } = loadPrototypes();
+  const s09 = FR.shots.find((s) => s.id === "S09");
+  const at = JSON.parse(JSON.stringify(s09.events.map((e) => e.at)));
+  assert.deepEqual(at, [59.262, 60.238, 64.66, 72.204, 73.124]); // Rogers Commission Vol. 1 Ch. III
+  for (let i = 1; i < s09.events.length; i += 1) assert.ok(s09.events[i].screen > s09.events[i - 1].screen);
+  const ev = FR.X.events(s09.events, s09.events[2].screen + 1e-3); assert.ok(Math.abs(ev.now - 64.66) < 0.05);
+});
+
+test("forensic components: event clock interpolates, groove seals warm and leaks cold", () => {
+  const { FR } = loadLib();
+  const evs = [{ at: 10, screen: 0, key: "a" }, { at: 20, screen: 1, key: "b" }];
+  assert.equal(FR.X.events(evs, 0.5).now, 15); assert.equal(FR.X.events(evs, 5).now, 20);
+  const g = (tau) => FR.X.groove({ x: 0, y: 0, w: 1080, h: 460, gap: 1, tRel: 0.6, tau, tint: "warm" });
+  assert.equal(g(0.06).sealed, true); assert.equal(g(4).sealed, false); assert.ok(g(4).gapW > 20);
 });

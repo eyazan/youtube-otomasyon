@@ -1,0 +1,189 @@
+{
+ "schema": "fr-premium.creative-qa.v1",
+ "mode": "WARN-only",
+ "thresholds": {
+  "empty": 0.35,
+  "inset": 0.25,
+  "subject_min": 0.25,
+  "tiers": 3,
+  "labels": 3,
+  "words": 8,
+  "label_px": 32,
+  "states_per_2s": 1,
+  "states_min": 2
+ },
+ "grammar": [
+  "continuous",
+  "cut",
+  "dip",
+  "follow-cause",
+  "hard-cut",
+  "loop",
+  "match",
+  "push-in"
+ ],
+ "mp4": "challenger-premium-v2.mp4",
+ "offset": 0.0,
+ "summary": {
+  "shots": 4,
+  "warn_shots": 4,
+  "warns": 24,
+  "time_weighted_empty": 0.709,
+  "mechanism_registered": "0/1",
+  "slide_like": 1
+ },
+ "shots": [
+  {
+   "id": "S07",
+   "kind": "archival",
+   "start": 20.625,
+   "end": 23.419,
+   "measured_from": 23.0,
+   "measured_to": 23.419,
+   "empty": 0.571,
+   "subject_motion": 0.263,
+   "subject_median": 0.269,
+   "camera_per_s": 0.162,
+   "states": [],
+   "registered": null,
+   "boundary_corr": 0.098,
+   "transition": {
+    "type": "cut",
+    "reason": null,
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 3,
+    "max_labels": 2,
+    "max_words": 7,
+    "smallest_label_px": 24,
+    "competing_samples": 0
+   },
+   "framing": null,
+   "primitives": [],
+   "slide_like": false,
+   "warns": [
+    "empty background 57% > 35%",
+    "archival inset over void 57% > 25%",
+    "transition 'cut' has no declared reason",
+    "smallest label 24 px < 32"
+   ]
+  },
+  {
+   "id": "S08",
+   "kind": "archival",
+   "start": 23.419,
+   "end": 26.226,
+   "measured_from": 23.419,
+   "measured_to": 26.226,
+   "empty": 0.765,
+   "subject_motion": 0.329,
+   "subject_median": 0.328,
+   "camera_per_s": 0.017,
+   "states": [],
+   "registered": null,
+   "boundary_corr": 0.117,
+   "transition": {
+    "type": "cut",
+    "reason": null,
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 4,
+    "max_labels": 4,
+    "max_words": 15,
+    "smallest_label_px": 24,
+    "competing_samples": 0
+   },
+   "framing": null,
+   "primitives": [],
+   "slide_like": false,
+   "warns": [
+    "empty background 76% > 35%",
+    "archival inset over void 76% > 25%",
+    "transition 'cut' has no declared reason",
+    "4 text tiers > 3",
+    "4 labels at once > 3",
+    "15 non-caption words on screen > 8",
+    "smallest label 24 px < 32"
+   ]
+  },
+  {
+   "id": "S09",
+   "kind": "reconstruction",
+   "start": 26.226,
+   "end": 32.297,
+   "measured_from": 26.226,
+   "measured_to": 32.297,
+   "empty": 0.714,
+   "subject_motion": 0.158,
+   "subject_median": 0.184,
+   "camera_per_s": 0.003,
+   "states": [],
+   "registered": null,
+   "boundary_corr": 0.253,
+   "transition": {
+    "type": "cut",
+    "reason": null,
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 4,
+    "max_labels": 3,
+    "max_words": 11,
+    "smallest_label_px": 24,
+    "competing_samples": 0
+   },
+   "framing": null,
+   "primitives": [],
+   "slide_like": true,
+   "warns": [
+    "empty background 71% > 35%",
+    "subject motion 0.16 < 0.25 (camera drift only)",
+    "no narration-timed state changes declared",
+    "mechanism shot not registered to archival media",
+    "transition 'cut' has no declared reason",
+    "4 text tiers > 3",
+    "11 non-caption words on screen > 8",
+    "smallest label 24 px < 32",
+    "slide-like composition"
+   ]
+  },
+  {
+   "id": "S10",
+   "kind": "archival",
+   "start": 32.297,
+   "end": 33.74,
+   "measured_from": 32.297,
+   "measured_to": 32.8,
+   "empty": 0.454,
+   "subject_motion": 4.659,
+   "subject_median": 0.315,
+   "camera_per_s": 0.215,
+   "states": [],
+   "registered": null,
+   "boundary_corr": 0.039,
+   "transition": {
+    "type": "cut",
+    "reason": null,
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 1,
+    "max_labels": 1,
+    "max_words": 8,
+    "smallest_label_px": 28,
+    "competing_samples": 0
+   },
+   "framing": null,
+   "primitives": [],
+   "slide_like": false,
+   "warns": [
+    "empty background 45% > 35%",
+    "archival inset over void 45% > 25%",
+    "transition 'cut' has no declared reason",
+    "smallest label 28 px < 32"
+   ]
+  }
+ ]
+}
