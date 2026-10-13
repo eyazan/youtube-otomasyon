@@ -27,10 +27,10 @@
  "summary": {
   "shots": 15,
   "warn_shots": 14,
-  "warns": 59,
+  "warns": 60,
   "time_weighted_empty": 0.431,
   "mechanism_registered": "2/4",
-  "slide_like": 0
+  "slide_like": 1
  },
  "shots": [
   {
@@ -322,8 +322,10 @@
     "competing_samples": 0
    },
    "framing": null,
-   "primitives": [],
-   "slide_like": false,
+   "primitives": [
+    "bullets"
+   ],
+   "slide_like": true,
    "warns": [
     "empty background 45% > 35%",
     "subject motion 0.13 < 0.25 (camera drift only)",
@@ -333,7 +335,8 @@
     "4 text tiers > 3",
     "7 labels at once > 3",
     "19 non-caption words on screen > 8",
-    "smallest label 28 px < 32"
+    "smallest label 28 px < 32",
+    "slide-like composition (bullets)"
    ]
   },
   {

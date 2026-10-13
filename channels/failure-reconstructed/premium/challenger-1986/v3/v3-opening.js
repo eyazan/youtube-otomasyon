@@ -1,12 +1,15 @@
 // V3 opening (replaces V2 S01's text timing only). The NASA photo, camera, ring and evidence label are
 // V2's, unchanged. V2 showed the headline "Already leaking" and the first caption at the same time for
-// ~3.9 s (two reading tasks at frame 0). V3: the headline holds alone for the first 0.75 s, clears by
-// 1.0 s, and the synchronized captions take over from 1.0 s (FR.captionFrom). Narration is unchanged.
+// ~3.9 s (two reading tasks at frame 0). V3: the headline holds alone, clears by 0.5 s (V3 render: 1.0 s),
+// and the synchronized captions take over from then (FR.captionFrom). Narration is unchanged.
 (window.OVERRIDES = window.OVERRIDES || []).push(function (FR) {
   const { C, F, E, clamp, lerp, p, W, H } = FR; const L = FR.L;
   const P = (key, x, y) => { const m = FR.media[key]; return [x * m.scale, y * m.scale]; };
   const ease = (t, a, b, f = E.inOut) => f(p(t, a, b));
-  const HEAD = { hold: 0.75, out: 1.0 };
+  // V3.1 caption correction: the first cue (33 chars) must end at 1.948 s, when "Challenger" is spoken.
+  // Shown from 1.0 s it read at 34.8 chars/s; from 0.5 s it reads at 22.8 chars/s with every word captioned.
+  // The headline still stands alone for 0.5 s (the minimum of the owner's 0.5-1.0 s range).
+  const HEAD = { hold: 0.3, out: 0.5 };
   FR.captionFrom = HEAD.out;
   const T = { s02: L("L2").start - 0.1 };
   const headline = (top, big, y, op) => `<div style="position:absolute;left:60px;right:60px;top:${y}px;text-align:center;opacity:${op};text-shadow:0 3px 18px rgba(0,0,0,.9),0 0 3px #000">
