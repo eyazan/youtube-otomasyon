@@ -26,12 +26,14 @@ The audit used read-only evidence from `main` at `7168d6e`: registries, quota le
 ## PR dependency and merge order
 
 The three PRs touch mostly separate files. Overlaps:
+
 - #251 and #235: `core/rendering/index.js` and `quality-preview.yml`.
 - #234 and #235: `core/growth/index.js`, `scripts/ct-research.js` and `tests/js/ct-research.test.js`.
 
 Merged together on current `main`, the only textual conflict is two tests appended at the same place in `tests/js/ct-research.test.js` (keep both). The combined tree passes 639/639 JS and 24 Python tests, including this fix.
 
 Recommended order:
+
 1. **This PR** (watchdog guard): independent and smallest.
 2. **#251** (TTS): stops topic loss and restores 28 FR topics. It is still blocked for publishing until a fallback voice is approved, or until Edge works from runners again.
 3. **#234** (CT selection): CT-219 becomes eligible at A/77 with the threshold unchanged.
@@ -73,6 +75,7 @@ The unapproved voices were refused for publishing (`allowed: false`) and without
 ## Readiness
 
 **Not ready for unattended daily operation.**
+
 - Narration has no approved working provider on runners.
 - CT has at most one eligible topic.
 - GitHub cron starts production 6–9 h late.
