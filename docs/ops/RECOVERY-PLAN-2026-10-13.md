@@ -88,7 +88,7 @@ After this PR, #251 with an approved voice, #234, and one green scheduled day ve
 - **#251 hardening** is draft **#261**, stacked on `fix/tts-fallback-health`. It adds:
   - a fail-closed upload guard;
   - a verified Kokoro cache;
-  - outcome categories (`SUCCESS`, `CONTENT_BLOCKED`, `QUALITY_REJECTED`, `AWAITING_APPROVAL`, `UPLOAD_FAILED`, `PUBLISH_VERIFICATION_FAILED`, `PRODUCTION_FAILED`);
+  - outcome categories (`SCHEDULED`, `CONTENT_BLOCKED`, `QUALITY_REJECTED`, `AWAITING_APPROVAL`, `UPLOAD_FAILED`, `PUBLISH_VERIFICATION_FAILED`, `PRODUCTION_FAILED`);
   - asset outages that no longer spend FR topics (exit 76);
   - an FR outcome table in `uretim-is.yml`;
   - `docs/ops/TTS-FALLBACK-OPTIONS.md`.
@@ -99,3 +99,10 @@ After this PR, #251 with an approved voice, #234, and one green scheduled day ve
 - **Offline dry run on the full combined tree.** Network policy blocks Wikimedia, Pexels and Edge from this environment.
   - FR queue mode stopped on the first topic with `ASSET_SOURCE_UNAVAILABLE` (exit 76). `basarisiz.json` and `engellenen.json` were unchanged.
   - CT-219 rendered with the preview voice (speech check OK), then was blocked by the quality gate (no licensed images reachable) and refused by the upload guard (voice not approved).
+
+## Update: 2026-10-13, about 04:40 UTC
+
+- **#260 is not merged yet.** `main` (`869d249a`) still holds `sla-failure:2026-10-13` in all three notification-state files. #260 still applies cleanly, and its deadline is 16:30 UTC today.
+- **Scheduled is not published.** #261 now separates the production result `SCHEDULED` (a videoId plus `publishAt` from the upload) from publication evidence (`lib/publication-evidence.js`). `PUBLICATION_CONFIRMED` is reached only through the YouTube API's `privacyStatus: "public"` observation (the `publish.public` event from `bildirim.js --yayin-kontrol`).
+- **Evidence on current data:** every FR/IB/CT Short scheduled from 10-05 to 10-11 (16 videos) is `PUBLICATION_CONFIRMED`. The confirmations were observed 9–170 minutes after `publishAt`, and 1,610 minutes for CT on 10-06. That is the delay of the check run, not necessarily of publication.
+- **Order revalidated on `869d249a`:** #260 (617), #259 (620), #251 with #261 (635), #234 (640), #235 (645 after keeping both conflicting tests).
