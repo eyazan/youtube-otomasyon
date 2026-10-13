@@ -70,6 +70,13 @@ html,body{margin:0;width:${W}px;height:${H}px;overflow:hidden;background:#000}#s
   fs.writeFileSync(path.join(work, "shots.json"), JSON.stringify(meta, null, 1) + "\n");
   fs.writeFileSync(path.join(work, "media-resolved.json"), JSON.stringify(media, null, 1) + "\n");
 
+  // --inspect-text <step>: text boxes every <step> s -> work/text-inspection.json (no video is written).
+  if (opt("--inspect-text", null)) {
+    const step = +opt("--inspect-text"); const samples = [];
+    for (let t = 0; t < duration; t += step) { await page.evaluate((x) => FR.frame(x), t); samples.push({ t: +t.toFixed(3), boxes: await page.evaluate(() => FR.inspectText()) }); }
+    fs.writeFileSync(path.join(work, "text-inspection.json"), JSON.stringify({ step, duration, samples }, null, 1) + "\n");
+    await browser.close(); if (errors.length) throw new Error("scene errors: " + errors.join(" | ")); console.log(`text inspection: ${samples.length} samples -> ${work}/text-inspection.json`); return;
+  }
   const stills = opt("--stills", null);
   if (stills) {
     const sdir = path.join(work, "stills"); fs.mkdirSync(sdir, { recursive: true });

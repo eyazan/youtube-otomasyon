@@ -147,7 +147,7 @@
     const k = p(t, cue.start - 0.03, cue.start + 0.09);
     const line = (ws) => ws.map((w) => { const on = t >= w.start - 0.02; const now = on && t < w.end + 0.06;
       return `<span style="color:${now ? C.hot2 : on ? C.text : "rgba(245,242,236,0.78)"}">${esc(w.text)}</span>`; }).join(" ");
-    return `<div style="position:absolute;left:110px;right:110px;top:${y}px;transform:translate(0,${(1 - E.out(k)) * 14}px);opacity:${k};text-align:center;font:800 62px/1.16 ${F.sans};letter-spacing:-0.4px;text-shadow:0 3px 0 rgba(0,0,0,.55),0 0 22px rgba(0,0,0,.85),0 0 4px #000;">${cue.lines.map(line).join("<br>")}</div>`;
+    return `<div data-role="caption" style="position:absolute;left:110px;right:110px;top:${y}px;transform:translate(0,${(1 - E.out(k)) * 14}px);opacity:${k};text-align:center;font:800 62px/1.16 ${F.sans};letter-spacing:-0.4px;text-shadow:0 3px 0 rgba(0,0,0,.55),0 0 22px rgba(0,0,0,.85),0 0 4px #000;">${cue.lines.map(line).join("<br>")}</div>`;
   };
 
   // ---- HUD components -----------------------------------------------------------------------------
@@ -156,7 +156,7 @@
     return `<div style="position:absolute;right:56px;top:188px;opacity:${op};display:flex;align-items:center;gap:12px;padding:10px 18px;border-radius:30px;background:rgba(6,9,13,.66);border:1.5px solid rgba(255,255,255,.14);font:700 28px ${F.sans};letter-spacing:2px;color:${C.text};text-transform:uppercase"><span style="width:13px;height:13px;border-radius:50%;background:${dot}"></span>${esc(label)}</div>`; };
   FR.clock = (sec, op = 1, { label = "TIME AFTER LIFTOFF", decimals = 3 } = {}) => op <= 0 ? "" :
     `<div style="position:absolute;left:44px;top:170px;opacity:${op};padding:12px 20px 14px;border-radius:14px;background:rgba(6,9,13,.7);font:600 24px ${F.sans};letter-spacing:2.4px;color:${C.steel}">${label}<div style="font:600 70px/1 ${F.num};letter-spacing:1px;color:${C.text};margin-top:6px">T+${sec.toFixed(decimals)}<span style="font-size:40px;color:${C.steel}"> s</span></div></div>`;
-  FR.handle = (op = 0.78) => `<div style="position:absolute;left:0;right:0;top:112px;text-align:center;opacity:${op};font:700 27px ${F.sans};letter-spacing:1px;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.7)">@FailureReconstructed</div>`;
+  FR.handle = (op = 0.78) => `<div data-role="handle" style="position:absolute;left:0;right:0;top:112px;text-align:center;opacity:${op};font:700 27px ${F.sans};letter-spacing:1px;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.7)">@FailureReconstructed</div>`;
   FR.source = (s, op = 1, y = 1556) => `<div style="position:absolute;left:60px;right:60px;top:${y}px;opacity:${op};text-align:center;font:500 24px ${F.sans};letter-spacing:.6px;color:rgba(236,230,218,.82);text-shadow:0 1px 4px #000">${esc(s)}</div>`;
 
   // ---- frame composition --------------------------------------------------------------------------
@@ -209,6 +209,28 @@
     underEl.innerHTML = under; svgEl.innerHTML = svg; hudEl.innerHTML = hud;
     await Promise.all(decodes);
     return media.length;
+  };
+  // Text inspection (run after FR.frame(t)): every visible text box on screen, in screen px. A box is
+  // an SVG <text>, an element holding its own text, or a whole caption (data-role="caption").
+  // Visible = cumulative opacity >= 0.5 and on screen.
+  FR.inspectText = () => {
+    const vis = (el) => { let o = 1; for (let n = el; n && n.id !== "stage"; n = n.parentElement) { const cs = getComputedStyle(n); if (cs.display === "none" || cs.visibility === "hidden") return 0; o *= Number(cs.opacity); if (n.getAttribute && n.getAttribute("opacity") != null) o *= Number(n.getAttribute("opacity")); } return o; };
+    const out = [];
+    // HTML boxes are measured on the rendered text itself (a Range over the element's contents), not on
+    // the container, which can be full-width while the centred text is much narrower.
+    const rectOf = (el) => { if (el instanceof SVGElement) return el.getBoundingClientRect(); const rg = document.createRange(); rg.selectNodeContents(el); return rg.getBoundingClientRect(); };
+    const add = (el, role) => { const r = rectOf(el); if (r.width < 2 || r.height < 2 || r.right < 0 || r.left > W || r.bottom < 0 || r.top > H) return;
+      const o = vis(el); if (o < 0.5) return;
+      const fs = parseFloat(el.getAttribute && el.getAttribute("font-size")) || parseFloat(getComputedStyle(el).fontSize) || 0;
+      const sc = el instanceof SVGElement && el.getScreenCTM ? Math.hypot(el.getScreenCTM().a, el.getScreenCTM().b) : 1;
+      out.push({ role, text: el.textContent.trim().replace(/\s+/g, " ").slice(0, 60), x: Math.round(r.left), y: Math.round(r.top), w: Math.round(r.width), h: Math.round(r.height), fontPx: +(fs * sc).toFixed(1), opacity: +o.toFixed(2) }); };
+    document.querySelectorAll("#svg text, #hud svg text").forEach((el) => add(el, "svg"));
+    document.querySelectorAll('#hud [data-role="caption"]').forEach((el) => add(el, "caption"));
+    document.querySelectorAll("#hud div, #hud span").forEach((el) => {
+      if (el.closest('[data-role="caption"]')) return;
+      const own = [...el.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim()); if (own) add(el, el.closest('[data-role="handle"]') ? "handle" : "hud");
+    });
+    return out;
   };
   window.FR = FR;
 })();

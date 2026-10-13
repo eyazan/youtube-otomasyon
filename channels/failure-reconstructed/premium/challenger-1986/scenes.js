@@ -47,8 +47,8 @@ window.SCENES = function (FR) {
       const tx = lerp(0, 560 - j.x * z, ease(t, a + 1.0, b + 0.2)), ty = lerp(0, 780 - j.y * z, ease(t, a + 1.0, b + 0.2));
       const g = `<g transform="translate(${tx} ${ty}) scale(${z})">${st.svg}${ring(j.x, j.y, j.w * 1.25, p(t, a + 0.35, a + 0.9), C.hot2, 5 / z)}</g>`;
       const s = { x: tx + j.x * z, y: ty + j.y * z };
-      return { svg: FR.blueprint() + g + callout(s.x + 40, s.y - 10, 760, s.y - 260 * (1 - 0.4 * ease(t, a + 1, b)), "RIGHT BOOSTER", p(t, a + 0.15, a + 0.7), { size: 36 })
-          + callout(s.x - 40, s.y + 10, 230, s.y + 190, "LOWEST JOINT", p(t, a + 0.9, a + 1.5), { size: 36, anchor: "end" }).replace(/text-anchor="end"/, 'text-anchor="middle"'),
+      return { svg: FR.blueprint() + g + callout(s.x + 40, s.y - 10, 690, s.y - 260 * (1 - 0.4 * ease(t, a + 1, b)), "RIGHT BOOSTER", p(t, a + 0.15, a + 0.7), { size: 36 })
+          + callout(s.x - 40, s.y - 10, 200, Math.min(s.y - 150, 1150), "LOWEST JOINT", p(t, a + 0.9, a + 1.5), { size: 36, anchor: "end" }).replace(/text-anchor="end"/, 'text-anchor="middle"'), // v2: kept out of the caption band
         hud: FR.chip("Explanatory diagram", "explanatory") };
     } });
 
@@ -99,7 +99,7 @@ window.SCENES = function (FR) {
           <ellipse cx="${ringCx}" cy="${cy}" rx="${rx}" ry="${r * (1 - follow / 400)}" fill="#26292e" stroke="${col}" stroke-width="8"/>
           ${gap > 6 ? `<rect x="${gx + 2 * rx + 4}" y="${cy - 60}" width="${gap - 8}" height="120" fill="${C.hot}" opacity="${0.7 * res}"/>` : ""}
           ${text(cx, 590, title, { size: 50, weight: 800, fill: col, ls: 2 })}
-          ${text(cx, 1080, ok ? "follows: still sealed" : "lags: gap left open", { size: 36, weight: 800, fill: ok ? "#7be0a0" : C.hot, op: res })}</g>`; };
+          ${text(cx - 30, 1080, ok ? "follows: still sealed" : "lags: gap left open", { size: 36, weight: 800, fill: ok ? "#7be0a0" : C.hot, op: res })}</g>`; };
       return { svg: FR.blueprint() + panel(290, warmF, C.hot2, "WARM", true) + panel(790, coldF, C.cold, "COLD", false)
           + `<line x1="540" y1="560" x2="540" y2="1120" stroke="${C.line}" stroke-width="3"/>` + text(540, 1190, "O-ring cross-section · illustration, not to scale", { size: 26, weight: 500, fill: C.muted }),
         hud: FR.chip("Explanatory animation", "explanatory") };
@@ -140,9 +140,9 @@ window.SCENES = function (FR) {
       const lab = (x, y, lx, ly, s, k, anchor) => callout(x, y, lx, ly, s, k, { size: 32, anchor });
       // Enlarged 1.45x around the joint: the O-rings read at phone size; the case wall beyond is cropped.
       const zoom = (inner) => `<g transform="translate(540 860) scale(1.45) translate(-540 -860)">${inner}</g>`;
-      return { svg: FR.blueprint() + zoom(svg + lab(452, 790, 180, 610, "PRIMARY O-RING", p(t, T.s06 + 0.1, T.s06 + 0.6), "start")
-          + lab(452, 930, 180, 1110, "SECONDARY O-RING", p(t, T.s06 + 0.4, T.s06 + 0.9), "start")
-          + (g > 4 ? lab(tangX - 4, 990, 740, 990, "GAP", p(t, tIgn + 0.2, tIgn + 0.6), "start") : ""))
+      return { svg: FR.blueprint() + zoom(svg + lab(452, 790, 215, 610, "PRIMARY O-RING", p(t, T.s06 + 0.1, T.s06 + 0.6), "start")
+          + lab(452, 930, 215, 1110, "SECONDARY O-RING", p(t, T.s06 + 0.4, T.s06 + 0.9), "start")
+          + (g > 4 ? lab(tangX - 4, 990, 680, 990, "GAP", p(t, tIgn + 0.2, tIgn + 0.6), "start") : ""))
           + text(150, 330, "INSIDE", { size: 32, weight: 800, fill: C.hot2, ls: 3 }) + text(930, 330, "OUTSIDE", { size: 32, weight: 800, fill: C.steel, ls: 3 })
           // Review v1.1: one numbered step at a time, each landing on its spoken words.
           + (() => { const steps = [[tIgn - 0.05, "1  Ignition flexes the joint open"], [Wd("L5", "couldn't") - 0.05, "2  Cold O-rings can't follow"], [tHot - 0.05, "3  Hot gas blows past both seals"]];
@@ -164,7 +164,7 @@ window.SCENES = function (FR) {
       const fx = filmBox.x + 515, fy = filmBox.y + 458; const sec = 58.788 + lt * 0.95;
       return { under: FR.blueprint(), media: [fl], // Review v1.1: the ring arrives by 0.5 s (was 0.9 s), has a dark outline for contrast on the bright
           // plume, pulses gently, and stays to the end of the shot; the label follows at 0.6 s.
-          hud: `<svg style="position:absolute;left:0;top:0" width="${W}" height="${H}">${ring(fx, fy, 78 + 4 * Math.sin(lt * 6), p(t, a + 0.1, a + 0.5), "#000", 15)}${ring(fx, fy, 78 + 4 * Math.sin(lt * 6), p(t, a + 0.1, a + 0.5), C.hot2, 9)}${callout(fx + 60, fy + 50, 600, 1150, "FLAME AT THE JOINT", p(t, a + 0.3, a + 0.7), { size: 40 })}</svg>`
+          hud: `<svg style="position:absolute;left:0;top:0" width="${W}" height="${H}">${ring(fx, fy, 78 + 4 * Math.sin(lt * 6), p(t, a + 0.1, a + 0.5), "#000", 15)}${ring(fx, fy, 78 + 4 * Math.sin(lt * 6), p(t, a + 0.1, a + 0.5), C.hot2, 9)}${callout(fx + 60, fy + 50, 470, 1150, "FLAME AT THE JOINT", p(t, a + 0.3, a + 0.7), { size: 40 })}</svg>`
           + FR.clock(sec, 1) + FR.chip("NASA tracking film E-207", "archival") }; } });
 
   // S09 — reconstruction: the plume swings onto the External Tank; the tank fails at 73 s. No explosion is drawn.
@@ -206,7 +206,7 @@ window.SCENES = function (FR) {
         hud: `<div style="position:absolute;left:90px;right:90px;top:300px;opacity:${k};text-align:center">
             <div style="font:700 26px ${F.sans};letter-spacing:3px;color:${C.steel}">THE NIGHT BEFORE · THIOKOL ENGINEERS</div>
             <div style="font:700 50px/1.2 ${F.serif};color:${C.paper};margin-top:16px">“would not recommend a launch below 53 degrees”</div>
-            <div style="font:500 22px ${F.sans};color:${C.muted};margin-top:12px">quoted in the Rogers Commission Report, Vol. 1, Ch. V</div></div>` + FR.chip("Commission record", "document") }; } });
+            <div style="font:500 24px ${F.sans};color:${C.muted};margin-top:12px">quoted in the Rogers Commission Report, Vol. 1, Ch. V</div></div>` + FR.chip("Commission record", "document") }; } });
 
   // S13 — explanatory diagram: where the warning stopped.
   FR.shot({ id: "S13", drift: [1.0, 1.04], start: T.s13, end: T.s14, kind: "explanatory", label: "Explanatory diagram", subject: "decision chain: engineers, managers, top launch officials", evidence: ["E3"],
