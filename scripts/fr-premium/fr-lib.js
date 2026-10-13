@@ -214,7 +214,9 @@
       if (!slot) { const d = document.createElement("div"); d.style.position = "absolute"; d.style.overflow = "hidden"; const im = document.createElement("img"); im.style.position = "absolute"; im.style.transformOrigin = "0 0"; d.appendChild(im); mediaEl.appendChild(d); slot = { d, im, src: "" }; pool.set(i, slot); }
       if (slot.src !== m.src) { slot.im.src = m.src; slot.src = m.src; decodes.push(slot.im.decode().catch((e) => { throw new Error("image failed: " + m.src); })); }
       const sx = m.box.w / m.crop.w, sy = m.box.h / m.crop.h;
-      Object.assign(slot.d.style, { left: m.box.x + "px", top: m.box.y + "px", width: m.box.w + "px", height: m.box.h + "px", opacity: String(m.opacity), display: "block", borderRadius: (m.radius || 0) + "px", filter: m.filter || "none" });
+      Object.assign(slot.d.style, { left: m.box.x + "px", top: m.box.y + "px", width: m.box.w + "px", height: m.box.h + "px", opacity: String(m.opacity), display: "block", borderRadius: (m.radius || 0) + "px", filter: m.filter || "none",
+        // optional rotation about the box centre (documents lying on a desk); absent on V1/V2 layers
+        transform: m.rotate ? `rotate(${m.rotate}deg)` : "none", transformOrigin: "50% 50%" });
       Object.assign(slot.im.style, { width: m.iw + "px", height: m.ih + "px", transform: `translate(${-m.crop.x * sx}px, ${-m.crop.y * sy}px) scale(${sx}, ${sy})` });
     });
     for (const [i, slot] of pool) if (i >= media.length) slot.d.style.display = "none";

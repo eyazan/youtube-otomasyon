@@ -1,5 +1,7 @@
 # Premium Shorts engine: Phase 0 + Phase 1 report (2026-10-13)
 
+> **Superseded in part by [PHASE1B-REVIEW.md](PHASE1B-REVIEW.md):** prototype D was rebuilt (r3), B's text was simplified and C's framing was tightened. The r2 numbers below are kept as the record of that pass.
+
 **Offline prototypes only.**
 - No full V3 render.
 - Nothing published or uploaded; no paid API.

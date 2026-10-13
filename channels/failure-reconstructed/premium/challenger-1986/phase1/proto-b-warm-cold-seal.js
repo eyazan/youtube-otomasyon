@@ -27,16 +27,16 @@
       const pw = { x: 0, y: 300, w: W, h: 470 }, pc = { x: 0, y: 790, w: W, h: 470 };
       const gw = X.groove({ ...pw, gap: g, tRel: rel, tau: P.warm.tau, tint: "warm", gas });
       const gc = X.groove({ ...pc, gap: g, tRel: rel, tau: P.cold.tau, tint: "cold", frost, gas });
-      const sec = clamp(rel, 0, P.openSec);
-      const temp = (y, d, col) => `<g>${text(60, y + 120, d.temp, { size: 112, weight: 600, family: F.num, fill: col, anchor: "start", extra: `paint-order="stroke" stroke="#000" stroke-width="6" stroke-opacity="0.5"` })}
-          ${text(64, y + 172, d.note.toUpperCase(), { size: 32, weight: 800, fill: C.text, anchor: "start", ls: 2, extra: `paint-order="stroke" stroke="#000" stroke-width="6" stroke-opacity="0.6"` })}</g>`;
+      // simplification (Phase 1b): only the two temperatures, the GAP label and one source line are on screen;
+      // the notes ("warm test", "this joint, est.") moved into the source line, the clock was removed.
+      const temp = (y, d, col) => text(60, y + 140, d.temp, { size: 112, weight: 600, family: F.num, fill: col, anchor: "start", extra: `paint-order="stroke" stroke="#000" stroke-width="6" stroke-opacity="0.5"` });
       const gapLbl = !gc.sealed && gc.gapW > 10 ? FR.callout(gc.gapX, gc.cy + gc.r * 1.1, 860, pc.y + pc.h - 70, "GAP", p(t, tOpen + 0.35, tOpen + 0.7), { size: 44, anchor: "middle" }) : "";
       const ground = `<rect width="${W}" height="${H}" fill="url(#steelGrad)"/><rect width="${W}" height="${H}" fill="#0b1520" opacity="0.72"/>`;
       return { under: ground,
         svg: gw.svg + gc.svg + `<rect y="${pw.y + pw.h}" width="${W}" height="${pc.y - pw.y - pw.h}" fill="${C.ink}"/>`
           + temp(pw.y, P.warm, C.hot2) + temp(pc.y, P.cold, C.cold) + gapLbl
           + `<rect y="1270" width="${W}" height="${H}" fill="#000" opacity="0.45"/>`,
-        hud: FR.clock(sec, 1, { label: "AFTER IGNITION", decimals: 2 }) + FR.chip("Animation · not to scale", "explanatory")
-          + FR.source("Rogers Commission, Vol. 1, Ch. IV · recovery speeds illustrative", 1, 1556) };
+        hud: FR.chip("Animation · not to scale", "explanatory")
+          + FR.source("75°F test, 28°F est. · Rogers Commission Ch. IV · speeds illustrative", 1, 1494) };
     } });
 });

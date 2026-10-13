@@ -48,11 +48,11 @@
       const f = flameOnScreen(T.s09);
       // the booster in the closed-up film frame is about 50 film px wide (estimated on the frames) = 50 * f.s screen px
       const cam0 = { fx: st0.joint.inner, fy: st0.joint.y, z: (FILM.srbWidthPx * f.s) / (DIMS.srb.dia * 24), rot: FILM.axisDeg };
-      const cam1 = { fx: 540, fy: st0.et.top + (st0.srb.bot - st0.et.top) * 0.66, z: 1.32, rot: 0 }; // the aft half, where every documented event happens
+      const cam1 = { fx: 540, fy: st0.et.top + (st0.srb.bot - st0.et.top) * 0.845, z: 1.9, rot: 0 }; // Phase 1b: the aft ~22 m, where every documented event happens (was z 1.32: 58% empty ground)
       const k = ease(t, T.s09, T.s09 + 1.0, E.inOut);
       const cam = X.mix(cam0, cam1, k); const sx = lerp(f.x, 540, k), sy = lerp(f.y, 760, k);
       const st = X.stack({ cx: 540, top: 0, pxPerM: 24, dims: DIMS, jointFromAft: 0.2, plume: 1, deflect: ev.k("deflect"), leak: ev.k("leak") * flick,
-        strut: ev.k("strut"), rot: -5 * ev.k("strut"), dome: ev.k("dome"), orbiter: 0.35, flick });
+        strut: ev.k("strut"), rot: -5 * ev.k("strut"), dome: ev.k("dome"), orbiter: 0.16, flick }); // Phase 1b: fainter outline at the tighter framing (read as stray lines at 0.35)
       const at = (x, y) => X.apply(cam, x, y, sx, sy);
       const lab = (() => { const e = ev.last; if (!e || !e.label) return "";
         const anchor = e.key === "deflect" ? at(st.joint.inner - 30, st.joint.y + 40) : e.key === "leak" ? at(st.leakAt.x, st.leakAt.y) : e.key === "strut" ? at(st.aft.x, st.aft.y) : at(st.et.x, st.et.domeY + 40);

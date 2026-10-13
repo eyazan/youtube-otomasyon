@@ -10,6 +10,7 @@
 //   FR.X.doc        authentic document scan on a paper plate, camera over source px, highlight sweeps
 //   FR.X.rail       timeline rail with dated ticks and a moving "now" marker
 //   FR.X.scale      a single temperature (or any unit) scale with labelled markers
+//   FR.X.desk       document camera: real scans on a desk, camera path, page-space highlights
 //   FR.X.stamp      dated evidence stamp (wall-clock times), same family as the mission clock
 //   FR.X.plate      fills a 9:16 frame behind non-9:16 media with a blurred copy of the same media
 (function () {
@@ -172,8 +173,24 @@
   X.plate = (layer, { blur = 30, dim = 0.5 } = {}) => ({ ...layer, box: { x: -60, y: -60, w: W + 120, h: H + 120 }, crop: (() => { const c = layer.crop; const ar = (W + 120) / (H + 120); const h = c.h, w = h * ar; return { x: c.x + (c.w - w) / 2, y: c.y, w, h }; })(), filter: `blur(${blur}px) brightness(${dim}) saturate(1.1)`, radius: 0 });
 
   // ---- dated stamp (same visual family as FR.clock, for wall-clock evidence times) ------------------------
-  X.stamp = (label, value, op = 1, { sub = "" } = {}) => op <= 0 ? "" :
-    `<div style="position:absolute;left:44px;top:170px;opacity:${op};padding:12px 20px 14px;border-radius:14px;background:rgba(6,9,13,.7);font:600 24px ${F.sans};letter-spacing:2.4px;color:${C.steel}">${esc(label)}<div style="font:600 70px/1 ${F.num};letter-spacing:1px;color:${C.text};margin-top:6px">${esc(value)}${sub ? `<span style="font-size:36px;color:${C.steel}"> ${esc(sub)}</span>` : ""}</div></div>`;
+  X.stamp = (label, value, op = 1, { sub = "", size = 70 } = {}) => op <= 0 ? "" :
+    `<div style="position:absolute;left:44px;top:170px;opacity:${op};padding:12px 20px 14px;border-radius:14px;background:rgba(6,9,13,.7);font:600 24px ${F.sans};letter-spacing:2.4px;color:${C.steel}">${label ? esc(label) : ""}<div style="font:600 ${size}px/1 ${F.num};letter-spacing:1px;color:${C.text};margin-top:${label ? 6 : 0}px">${esc(value)}${sub ? `<span style="font-size:36px;color:${C.steel}"> ${esc(sub)}</span>` : ""}</div></div>`;
+
+  // ---- document desk (document camera) ---------------------------------------------------------------
+  // docs: [{ key, x, y (world centre), w (world width), rot (deg), op, marks: [{ x, y, w, h (source px), k, color }] }]
+  // cam: { cx, cy, z } world point at screen (540, sy). Pages are real scans lying on a desk; the camera
+  // travels over them and highlights are drawn in each page's own (rotated) coordinates.
+  X.desk = (docs, cam, { sy = 860, shadow = true } = {}) => {
+    const media = [], svg = [];
+    for (const d of docs) { if ((d.op == null ? 1 : d.op) <= 0) continue; const m = FR.media[d.key];
+      const sw = d.w * cam.z, sh = sw * m.ih / m.iw; const sx = 540 + (d.x - cam.cx) * cam.z, syy = sy + (d.y - cam.cy) * cam.z;
+      media.push({ src: m.src, iw: m.iw, ih: m.ih, crop: { x: 0, y: 0, w: m.iw, h: m.ih }, box: { x: sx - sw / 2, y: syy - sh / 2, w: sw, h: sh }, opacity: d.op == null ? 1 : d.op,
+        filter: `contrast(1.08)${shadow ? " drop-shadow(0 18px 26px rgba(0,0,0,.6))" : ""}${d.dim ? ` brightness(${1 - d.dim})` : ""}`, radius: 2, rotate: d.rot || 0 });
+      const k = sw / (m.iw / m.scale); // screen px per source px
+      const marks = (d.marks || []).map((q) => q.k <= 0 ? "" : `<rect x="${q.x - 5}" y="${q.y - 3}" width="${(q.w + 10) * E.out(clamp(q.k))}" height="${q.h + 6}" fill="${q.color || C.hot2}" opacity="${0.45 * (d.op == null ? 1 : d.op)}" style="mix-blend-mode:multiply"/>`).join("");
+      if (marks) svg.push(`<g transform="translate(${sx} ${syy}) rotate(${d.rot || 0}) translate(${-sw / 2} ${-sh / 2}) scale(${k})">${marks}</g>`); }
+    return { media, svg: svg.join("") };
+  };
 
   FR.X = X;
 })();
