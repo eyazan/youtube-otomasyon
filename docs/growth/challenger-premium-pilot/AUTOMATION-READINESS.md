@@ -1,4 +1,41 @@
-# Premium Shorts engine: foundation and automation readiness (2026-10-13)
+# Premium Shorts engine: foundation and automation readiness (2026-10-13, updated 2026-10-14)
+
+## Update 2026-10-14: automation measurement (six separate measures)
+
+| # | Measure | Value | What it means |
+|---|---|---|---|
+| 1 | **Data-driven rendering coverage** | **15 / 15 shots (100%)**; 0 legacy-code shots; plan VALID (0 errors, 0 warnings) | every Challenger shot renders from `shot-plan.json` through registered templates; no hand-written scene code is executed |
+| 2 | **Automatically generated shot plans** | **0 / 15** | the plan is **hand-authored JSON** (by Claude, in this session). The planner (beat → template → parameters) is not built. This is data-driven rendering, **not automated production**. |
+| 3 | **Manual visual anchor work** | 21 anchors, all hand-measured (6 manual-measure on photos and film, 14 document-layout on scans, 1 caption-located) | about 5–10 min each; anchor suggestion is not built |
+| 4 | **Manual research** | 38 claims from 12 sources, all verified. Passages are extracted verbatim by script (`plan/build_evidence.py` fails if a passage is not found), but **finding sources and choosing claims is manual**. This round needed 1 web search plus a PDF read for the SRB length, and 1 caption check for the film time base. | |
+| 5 | **Manual storyboard adjustments** | 113 narration time anchors, 37 timing windows, 33 camera keys and 293 numeric visual parameters, all set by hand. **This round:** S06 took 4 still or clip iterations (ring rim, gas stream, combustion pressure, label overlap); S05 and S07 needed 1 label or framing fix each. | the largest remaining manual cost |
+| 6 | **Human approval requirements** | topic; claim verification; anchors; plan or storyboard review; final video at phone size; narration voice (still unapproved); the existing publishing gate | unchanged by the engine; the engine makes each gate checkable (validator, text gate, creative QA) |
+
+**Rendering comparison with V3** (`plan/qa/stills-vs-v3.json`):
+- **Byte-identical:** S01, S04, S10, S11, S14, S15.
+- **Essentially identical:** S03, now the data-driven `document-zoom` (78 / 41 dB).
+- **Intended changes:**
+  - S05: the "GAP ×2.6" disclosure;
+  - S06: the new `joint-mechanism`;
+  - S07: the documented film clock, full-width framing;
+  - S09: the evidenced dimensions, the "APPROX." clock and "proportions approximate";
+  - S12 and S13: "~" on approximate times.
+- **Generic curve differences:** S02, S08.
+
+**Scene clip S03–S07** (`reports/…/engine-s03-s07/`, creative QA in `plan/qa/creative-qa-S03-S07.json`):
+
+| | Empty | Subject motion | Labels / words | Slide-like |
+|---|---|---|---|---|
+| S07 | 46% → **13%** | 0.27 → 0.30 | — | — |
+| S06 (V3 → engine) | 45% → 48% | 0.13 → **0.22** (target 0.25) | 7 / 19 → 4 / 19 | **numbered step titles removed** |
+| Window | — | — | — | 1 → **0** |
+
+**S06 remains the weakest shot.** It is below the motion target, and its empty background is slightly worse than V3. Owner review is needed before any further tuning.
+
+**Remaining manual workload for a second topic:** claims (3–5 h), anchors (about 2 h), hand-authored plan (4–6 h), storyboard iterations (1–3 h), review (1–2 h). That is **about 1.5–2 working days**, with the planner and anchor suggestion as the next reductions.
+
+---
+
 
 **Implementation of phases 1–4** of `AUTOMATION-ARCHITECTURE.md`.
 - No video rendered: stills and text inspection only.

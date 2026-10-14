@@ -1,10 +1,10 @@
-# Extracts the Challenger claims in plan/evidence.json verbatim from locally downloaded Rogers Commission pages
-# (curl https://www.nasa.gov/history/rogersrep/v1ch{1,3,4,5}.htm | strip tags -> rch{1,3,4,5}.txt) and the
-# Commons captions in v1/source-licensing-manifest.json. It exits if any passage is not found word for word.
-#   python3 build_evidence.py <dir with rch*.txt and wt/> <out evidence.json>
+# Extracts the Challenger claims in plan/evidence.json verbatim from locally downloaded sources: Rogers Commission
+# pages (curl https://www.nasa.gov/history/rogersrep/v1ch{1,3,4,5}.htm | strip tags -> rch{1,3,4,5}.txt), NASA NTRS
+# 20120003006 (pdftotext -> rchS.txt) and the Commons captions in v1/source-licensing-manifest.json.
+# It exits if any passage is not found word for word.   python3 build_evidence.py <dir> <out evidence.json>
 import json, re, sys
 SP = sys.argv[1]; OUT = sys.argv[2]
-T = {c: re.sub(r"\s+", " ", open(f"{SP}/rch{c}.txt", errors="ignore").read()) for c in "1345"}
+T = {c: re.sub(r"\s+", " ", open(f"{SP}/rch{c}.txt", errors="ignore").read()) for c in "1345S"}
 def P(ch, start, end):
     s = T[ch]; i = s.find(start)
     if i < 0: raise SystemExit(f"passage start not found in ch{ch}: {start}")
@@ -30,7 +30,8 @@ ev = {"schema": "fr-premium.evidence.v1", "topic": "challenger-1986",
     "E7": {"title": "NASA STS-51-L crew portrait caption", "url": "https://commons.wikimedia.org/wiki/File:Challenger_flight_51-l_crew.jpg", "kind": "official-media-caption"},
     "E8": {"title": "Thiokol initial recommendation chart (Rogers Vol. 1 p. 90 reproduction)", "url": "https://www.nasa.gov/wp-content/uploads/static/history/rogersrep/v1p90.jpg", "kind": "archival-record"},
     "E9": {"title": "Thiokol telefax of final position (Rogers Vol. 1 p. 97 reproduction)", "url": "https://www.nasa.gov/wp-content/uploads/static/history/rogersrep/v1p97.jpg", "kind": "archival-record"},
-    "E10": {"title": "Primary source for the SRB overall length not yet located", "url": "https://www.nasa.gov/history/", "kind": "official-reference"}
+    "E10": {"title": "T. D. Wood (NASA MSFC) et al., Solid Rocket Booster (SRB) Flight System Integration at Its Best, NASA NTRS 20120003006", "url": "https://ntrs.nasa.gov/citations/20120003006", "kind": "official-reference", "publisher": "NASA Technical Reports Server"},
+    "E11": {"title": "NASA video 'Challenger Launch and Breakup' caption (NASA STI Program)", "url": "https://commons.wikimedia.org/wiki/File:Challenger_Launch_and_Breakup.ogv", "kind": "official-media-caption"}
   }, "claims": {}}
 def add(cid, **k): ev["claims"][cid] = {**k}
 add("C-launch-1986", text="Mission 51-L flew on January 28, 1986", kind="fact", source="E1", locator="Ch. III p. 19", passage=P("3", "Flight of the Space Shuttle Challenger", "January 28, 1986."), value=1986, display="1986", status="verified")
@@ -58,10 +59,13 @@ add("C-hole-recovered", text="Scorched hole in the recovered right Solid Rocket 
 add("C-et-length", text="The External Tank is 154 feet long", kind="fact", source="E0", passage=P("1", "It is 154 feet long", "diameter."), value=154, unit="ft", status="verified")
 add("C-et-diameter", text="The External Tank is 27 1/2 feet in diameter", kind="fact", source="E0", passage=P("1", "It is 154 feet long", "diameter."), value=27.5, unit="ft", valueAsWritten="27 1/2", status="verified")
 add("C-srm-diameter", text="SRM case sections are about 12 feet in diameter", kind="fact", source="E0", passage=P("1", "steel sections about 12 feet in diameter", "diameter"), value=12, unit="ft", approximate=True, status="verified")
-add("C-srb-length", text="Overall SRB length about 149.6 ft (45.6 m) as drawn in V3", kind="measurement", source="E10", value=149.6, unit="ft", status="unverified", note="V3 used 45.6 m from general knowledge; no primary source recorded yet. Blocks the event-sequence shot until verified.")
-add("C-telecon-0845", text="Phase 2 of the teleconference began at about 8:45 p.m. EST on 27 January", kind="fact", source="E3", passage=P("5", "At approximately 8:45 p.m. Eastern Standard", "Time"), display="8:45 PM", approximate=True, status="verified")
-add("C-reversal-1100", text="At about 11:00 PM EST Thiokol recommended launch", kind="fact", source="E3", locator="Ch. V chronology", passage=P("5", "Approximately 11:00 PM (EST)", "Thiokol recommends launch."), display="11:00 PM", approximate=True, status="verified")
-add("C-fax-1145", text="At about 11:45 PM EST Kilminster faxed Thiokol's recommendation to launch", kind="fact", source="E3", locator="Ch. V chronology", passage=P("5", "Approximately 11:45 PM (EST)", "recommendation"), display="11:45 PM", approximate=True, status="verified")
+add("C-srb-length", text="Each SRB is 149.16 feet long", kind="fact", source="E10", locator="p. 1", passage=P("S", "Each SRB is 149.16", "launch."), value=149.16, unit="ft", status="verified", note="V3 drew 45.6 m (no source); the evidenced 149.16 ft = 45.46 m is used now")
+add("C-srb-diameter", text="Each SRB is 12.17 feet in diameter", kind="fact", source="E10", locator="p. 1", passage=P("S", "Each SRB is 149.16", "launch."), value=12.17, unit="ft", status="verified")
+add("C-gap-max", text="Aft field joint gap opening increases of approximately 0.029 in (primary) and 0.017 in (secondary)", kind="fact", source="E2", locator="Ch. IV", passage=P("4", "For the aft field joints these data indicate gap opening increases", "respectively"), value=0.029, unit="in", approximate=True, status="verified")
+add("C-climb-timebase", text="The NASA launch-and-breakup video starts at T-10 seconds", kind="fact", source="E11", passage=C("climb", "Launch of Challenger", "T-10 seconds."), value=-10, unit="s", valueAsWritten="T-10", approximate=True, status="verified", note="caption-level time base; the clock built on it is marked approximate")
+add("C-telecon-0845", text="Phase 2 of the teleconference began at about 8:45 p.m. EST on 27 January", kind="fact", source="E3", passage=P("5", "At approximately 8:45 p.m. Eastern Standard", "Time"), display="~8:45 PM", approximate=True, status="verified")
+add("C-reversal-1100", text="At about 11:00 PM EST Thiokol recommended launch", kind="fact", source="E3", locator="Ch. V chronology", passage=P("5", "Approximately 11:00 PM (EST)", "Thiokol recommends launch."), display="~11:00 PM", approximate=True, status="verified")
+add("C-fax-1145", text="At about 11:45 PM EST Kilminster faxed Thiokol's recommendation to launch", kind="fact", source="E3", locator="Ch. V chronology", passage=P("5", "Approximately 11:45 PM (EST)", "recommendation"), display="~11:45 PM", approximate=True, status="verified")
 add("C-launch-1138", text="Launch at 11:38 a.m. EST, January 28, 1986", kind="fact", source="E1", passage=P("3", "Flight of the Space Shuttle Challenger", "January 28, 1986."), display="11:38 AM", status="verified")
 add("C-chart-53f", text="Thiokol's chart: O-ring temp must be ≥ 53 °F at launch", kind="quote", source="E8", locator="chart line 1", passage="O-RING TEMP MUST BE ≥ 53 °F AT LAUNCH (handwritten chart, Rogers Vol. 1 p. 90)", value=53, unit="°F", status="verified")
 add("C-reversed-finding4", text="Thiokol management reversed its position and recommended launch", kind="fact", source="E3", locator="Ch. V Finding 4", passage=P("5", "4. The Commission concluded that the Thiokol", "recommended the launch of 51-L"), status="verified")

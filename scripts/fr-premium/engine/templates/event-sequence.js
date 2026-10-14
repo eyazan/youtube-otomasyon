@@ -32,7 +32,7 @@
       const m = (ref) => ctx.value(ref) * FT;
       const DIMS = { et: { len: m(P.dims.etLength), dia: m(P.dims.etDiameter) }, srb: { len: m(P.dims.srbLength), dia: m(P.dims.srbDiameter) }, offset: P.dims.srbOffsetM, srbAftBelowEt: P.dims.srbAftBelowEtM };
       const jf = P.jointFromAft == null ? 0.2 : P.jointFromAft; const px = 24;
-      const EV = P.events.map((e) => ({ at: ctx.value(e.claim), screen: ctx.time(e.at), key: e.key, dur: e.dur || 0, label: e.label ? H.text(e.label, ctx) : null }));
+      const EV = P.events.map((e) => ({ at: ctx.value(e.claim), screen: ctx.time(e.at), key: e.key, dur: e.dur || 0, label: e.label ? H.text(e.label, ctx) : null, approx: !!ctx.claim(e.claim.slice(6)).approximate }));
       const st0 = X.stack({ cx: 540, top: 0, pxPerM: px, dims: DIMS, jointFromAft: jf });
       const reg = P.register; const C = P.camera; const frac = (f) => st0.et.top + (st0.srb.bot - st0.et.top) * f;
       const f = reg ? ctx.shotApi(reg.fromShot).screenOf(reg.anchor, shot.start) : { x: 540, y: C.settle.screenY, s: 1 };
@@ -55,7 +55,8 @@
         const hold = de ? p(t, de.screen + P.endDim.delay, shot.end) : 0; const clipY = P.clipAboveY || HH;
         return { svg: FR.blueprint() + `<clipPath id="c9"><rect width="${W}" height="${clipY}"/></clipPath><g clip-path="url(#c9)"><g transform="${X.xf(cam, sx, sy)}">${st.svg}</g></g>` + lab
             + `<rect width="${W}" height="${HH}" fill="#000" opacity="${(de ? P.endDim.opacity : 0) * hold}"/>` + `<rect y="${clipY}" width="${W}" height="${HH}" fill="#000" opacity="0.4"/>`,
-          hud: FR.clock(ev.now, 1, { decimals: ev.now >= 73 ? 3 : 1 }) + FR.chip(H.text(P.chip.label, ctx), P.chip.kind || "reconstruction") + FR.source(H.text(P.source.text, ctx), 1, P.source.y) };
+          // the clock says APPROX. while the latest documented event is an approximate time (e.g. "about 72.20 s")
+          hud: FR.clock(ev.now, 1, { decimals: ev.now >= 73 ? 3 : 1, label: "TIME AFTER LIFTOFF" + (ev.last && ev.last.approx ? " · APPROX." : "") }) + FR.chip(H.text(P.chip.label, ctx), P.chip.kind || "reconstruction") + FR.source(H.text(P.source.text, ctx), 1, P.source.y) };
       };
       return { render, events: EV };
     },

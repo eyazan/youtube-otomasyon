@@ -605,7 +605,7 @@
    "id": "S03",
    "beat": "mechanism",
    "line": "L2",
-   "template": "legacy-code",
+   "template": "document-zoom",
    "start": "word:L2:sealed -0.05",
    "end": "line:L3 -0.1",
    "provenance": {
@@ -616,10 +616,115 @@
     "C-two-orings"
    ],
    "assets": [
-    "fig14"
+    "fig14",
+    "liftoff"
    ],
    "params": {
-    "shot": "S03"
+    "media": "asset:fig14",
+    "box": {
+     "x": 0,
+     "y": 340,
+     "w": 1080,
+     "h": 740
+    },
+    "register": {
+     "fromShot": "S02",
+     "fromAnchor": "asset:liftoff#joint-wall",
+     "toAnchor": "asset:fig14#wall",
+     "at": "word:L2:sealed",
+     "startScale": 0.55
+    },
+    "crops": [
+     {
+      "at": "word:L2:sealed +0.55",
+      "rect": {
+       "x": 0,
+       "y": 120,
+       "w": 527,
+       "h": 360
+      },
+      "ease": "out"
+     },
+     {
+      "at": "word:L2:O-rings -0.45",
+      "rect": {
+       "x": 0,
+       "y": 120,
+       "w": 527,
+       "h": 360
+      }
+     },
+     {
+      "at": "word:L2:O-rings +0.35",
+      "rect": {
+       "x": 160,
+       "y": 153,
+       "w": 355,
+       "h": 243
+      },
+      "ease": "inOut"
+     }
+    ],
+    "ground": {
+     "fromShot": "S02",
+     "at": "word:L2:sealed -0.05",
+     "opacity": 0.3,
+     "grade": "dim"
+    },
+    "rings": [
+     {
+      "anchor": "asset:fig14#primary-oring",
+      "radiusPx": 15,
+      "window": [
+       "word:L2:O-rings -0.1",
+       "word:L2:O-rings +0.35"
+      ]
+     },
+     {
+      "anchor": "asset:fig14#secondary-oring",
+      "radiusPx": 15,
+      "window": [
+       "word:L2:O-rings +0.1",
+       "word:L2:O-rings +0.45"
+      ]
+     }
+    ],
+    "highlights": [
+     {
+      "anchor": "asset:fig14#label-primary",
+      "window": [
+       "word:L2:O-rings -0.1",
+       "word:L2:O-rings +0.35"
+      ]
+     },
+     {
+      "anchor": "asset:fig14#label-secondary",
+      "window": [
+       "word:L2:O-rings +0.1",
+       "word:L2:O-rings +0.45"
+      ]
+     }
+    ],
+    "enter": [
+     "word:L2:sealed -0.05",
+     "word:L2:sealed +0.35"
+    ],
+    "shades": [
+     {
+      "kind": "ink",
+      "y": 1120,
+      "color": "#000000",
+      "opacity": 0.35
+     }
+    ],
+    "chip": {
+     "label": "Commission record",
+     "kind": "document"
+    },
+    "source": {
+     "text": "Rogers Commission Report, Vol. 1, Figure 14 · the field joint",
+     "y": 1110
+    }
    },
    "transition": {
     "type": "push-in",
@@ -632,11 +737,14 @@
       "at": "word:L2:sealed -0.05",
       "what": "cross-section grows out of the joint band",
       "claim": "C-two-orings"
+     },
+     {
+      "at": "word:L2:O-rings -0.45",
+      "what": "camera closes on the two O-rings; rings drawn",
+      "claim": "C-two-orings"
      }
-    ]
-   },
-   "manual": {
-    "reason": "Fig. 14 grows out of S02's traced band (cross-asset registration on a document crop path); needs a document-zoom template"
+    ],
+    "registered": true
    }
   },
   {
@@ -738,13 +846,20 @@
     "C-test-75f",
     "C-joint-28f",
     "C-gap-600ms",
-    "C-resiliency-cold"
+    "C-resiliency-cold",
+    "C-gap-max",
+    "C-two-orings"
    ],
    "assets": [],
    "params": {
     "scale": {
-     "mode": "schematic"
+     "mode": "declared-exaggeration",
+     "factor": 2.6
     },
+    "ringDiameter": "claim:C-two-orings",
+    "gapMax": "claim:C-gap-max",
+    "squeeze": 0.3,
+    "follow": 0.9,
     "panels": [
      {
       "tint": "warm",
@@ -776,13 +891,13 @@
      ]
     },
     "gapLabel": {
-     "text": "GAP",
+     "text": "GAP ×{scale}",
      "window": [
       "word:L4:springs +0.15",
       "word:L4:springs +0.5"
      ],
      "to": [
-      860,
+      780,
       1190
      ]
     },
@@ -828,43 +943,169 @@
    "id": "S06",
    "beat": "mechanism",
    "line": "L5",
-   "template": "legacy-code",
+   "template": "joint-mechanism",
    "start": "line:L5 -0.1",
    "end": "line:L6 -0.1",
    "provenance": {
     "kind": "explanatory",
-    "label": "Explanatory animation · not to scale"
+    "label": "Explanatory animation · Fig. 14 geometry, gap exaggerated"
    },
    "evidence": [
     "C-gap-600ms",
-    "C-two-orings"
+    "C-gap-max",
+    "C-two-orings",
+    "C-joint-28f",
+    "C-resiliency-cold"
    ],
-   "assets": [],
+   "assets": [
+    "fig14"
+   ],
    "params": {
-    "shot": "S06"
+    "drawing": "asset:fig14",
+    "geometry": {
+     "tang": "asset:fig14#tang",
+     "innerLeg": "asset:fig14#clevis-inner-leg",
+     "outerLeg": "asset:fig14#clevis-outer-leg",
+     "rings": [
+      "asset:fig14#primary-oring",
+      "asset:fig14#secondary-oring"
+     ],
+     "ringSize": "asset:fig14#oring-size"
+    },
+    "view": {
+     "region": {
+      "x": 150,
+      "y": 262,
+      "w": 130,
+      "h": 140
+     },
+     "box": {
+      "x": 70,
+      "y": 300,
+      "w": 940,
+      "h": 1012
+     }
+    },
+    "ringDiameter": "claim:C-two-orings",
+    "gapMax": "claim:C-gap-max",
+    "scale": {
+     "mode": "declared-exaggeration",
+     "factor": 8
+    },
+    "open": {
+     "startAt": "word:L5:ignition",
+     "duration": "claim:C-gap-600ms"
+    },
+    "recovery": {
+     "temperature": "claim:C-joint-28f",
+     "tauSec": 4.0,
+     "squeeze": 0.3
+    },
+    "gas": {
+     "window": [
+      "word:L5:hot -0.15",
+      "word:L5:hot +1.0"
+     ]
+    },
+    "push": {
+     "window": [
+      "line:L5 -0.1",
+      "line:L6 -0.1"
+     ],
+     "zoom": 1.06
+    },
+    "labels": [
+     {
+      "text": "PRIMARY O-RING",
+      "target": "ring0",
+      "window": [
+       "line:L5 +0.0",
+       "word:L5:open -0.3"
+      ],
+      "to": [
+       90,
+       470
+      ]
+     },
+     {
+      "text": "SECONDARY O-RING",
+      "target": "ring1",
+      "window": [
+       "line:L5 +0.3",
+       "word:L5:open -0.3"
+      ],
+      "to": [
+       90,
+       1000
+      ]
+     },
+     {
+      "text": "GAP ×{scale}",
+      "target": "gap",
+      "window": [
+       "word:L5:open",
+       "line:L6 -0.1"
+      ],
+      "to": [
+       990,
+       420
+      ]
+     },
+     {
+      "text": "HOT GAS",
+      "target": "gas",
+      "window": [
+       "word:L5:hot",
+       "line:L6 -0.1"
+      ],
+      "to": [
+       90,
+       470
+      ]
+     }
+    ],
+    "chip": {
+     "label": "Animation · Fig. 14 geometry",
+     "kind": "explanatory"
+    },
+    "source": {
+     "text": "Rogers Fig. 14 geometry · gap ×{scale} · recovery illustrative",
+     "y": 1494
+    }
    },
    "transition": {
     "type": "cut",
-    "reason": "cut on the narration beat to the joint rotation"
+    "reason": "cut on the narration beat into the joint itself, drawn from the Commission's figure"
    },
    "qa": {
     "states": [
      {
+      "at": "word:L5:ignition -0.1",
+      "what": "combustion pressure builds on the inside"
+     },
+     {
       "at": "word:L5:ignition",
-      "what": "joint opens",
+      "what": "joint opens over the documented 0.6 s",
       "claim": "C-gap-600ms"
+     },
+     {
+      "at": "word:L5:couldn't",
+      "what": "cold rings lag: gap stays open",
+      "claim": "C-resiliency-cold"
+     },
+     {
+      "at": "word:L5:hot",
+      "what": "hot gas flows past both rings"
      }
-    ]
-   },
-   "manual": {
-    "reason": "hand-drawn joint rotation and blow-by with numbered step titles (slide-like); to be rebuilt on joint-section per ENGINEERING-VISUAL-SYSTEM.md"
+    ],
+    "registered": true
    }
   },
   {
    "id": "S07",
    "beat": "event-sequence",
    "line": "L6",
-   "template": "legacy-code",
+   "template": "archival-plate",
    "start": "line:L6 -0.1",
    "end": "line:L7 -0.1",
    "provenance": {
@@ -872,13 +1113,52 @@
     "label": "NASA film"
    },
    "evidence": [
-    "C-flame-58788"
+    "C-climb-timebase"
    ],
    "assets": [
     "climb"
    ],
    "params": {
-    "shot": "S07"
+    "media": "asset:climb",
+    "box": {
+     "x": 0,
+     "y": 290,
+     "w": 1080,
+     "h": 1080
+    },
+    "camera": {
+     "keys": [
+      {
+       "at": "line:L6 -0.1",
+       "focus": [
+        500,
+        500
+       ],
+       "zoom": 1.0
+      }
+     ]
+    },
+    "plate": {
+     "blur": 34,
+     "dim": 0.45
+    },
+    "under": "ink",
+    "shades": [
+     {
+      "kind": "bottom",
+      "y": 1170,
+      "h": 200
+     }
+    ],
+    "filmClock": {
+     "label": "TIME AFTER LIFTOFF",
+     "timeBase": "claim:C-climb-timebase",
+     "decimals": 1
+    },
+    "chip": {
+     "label": "NASA film",
+     "kind": "archival"
+    }
    },
    "transition": {
     "type": "cut",
@@ -888,12 +1168,10 @@
     "states": [
      {
       "at": "line:L6",
-      "what": "vehicle climbs; clock runs"
+      "what": "film plays; clock from the documented time base",
+      "claim": "C-climb-timebase"
      }
     ]
-   },
-   "manual": {
-    "reason": "running clock from 2.7 s to 58 s over the climb film: the 2.7 s start value has no evidence (needs the film's documented time base)"
    }
   },
   {
@@ -1007,7 +1285,7 @@
     "C-dome-73124",
     "C-et-length",
     "C-et-diameter",
-    "C-srm-diameter",
+    "C-srb-diameter",
     "C-srb-length"
    ],
    "assets": [
@@ -1018,7 +1296,7 @@
      "etLength": "claim:C-et-length",
      "etDiameter": "claim:C-et-diameter",
      "srbLength": "claim:C-srb-length",
-     "srbDiameter": "claim:C-srm-diameter",
+     "srbDiameter": "claim:C-srb-diameter",
      "srbOffsetM": 6.3,
      "srbAftBelowEtM": 2.4
     },
@@ -1093,7 +1371,7 @@
      "kind": "reconstruction"
     },
     "source": {
-     "text": "Times: Rogers Commission, Vol. 1, Ch. III",
+     "text": "Times: Rogers Commission, Vol. 1, Ch. III · proportions approximate",
      "y": 1556
     }
    },

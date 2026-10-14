@@ -19,21 +19,17 @@ const base = () => clone(loadPlanFiles(PLAN_FILE));
 const run = (d) => validatePlan(d);
 const has = (r, re) => r.errors.some((e) => re.test(e));
 const shot = (d, id) => d.plan.shots.find((s) => s.id === id);
-// The one recorded evidence gap (V3-REPORT / readiness report): the SRB overall length has no primary source yet.
-const KNOWN_GAP = /C-srb-length is unverified/;
-const newErrors = (r) => r.errors.filter((e) => !KNOWN_GAP.test(e));
+const newErrors = (r) => r.errors;
 
-test("Challenger plan: valid except the recorded SRB-length evidence gap; 12 of 15 shots data-driven", () => {
+test("Challenger plan: valid, 15 of 15 shots data-driven, no legacy code", () => {
   const r = run(base());
-  assert.deepEqual(newErrors(r), [], newErrors(r).join("\n"));
-  assert.ok(has(r, KNOWN_GAP), "the unverified SRB length must block the event-sequence shot");
-  assert.equal(r.stats.shots, 15); assert.equal(r.stats.dataDriven, 12); assert.equal(r.stats.legacy, 3);
-  assert.deepEqual(r.stats.manual.map((m) => m.shot), ["S03", "S06", "S07"]);
+  assert.deepEqual(r.errors, [], r.errors.join("\n")); assert.deepEqual(r.warnings, []);
+  assert.equal(r.stats.shots, 15); assert.equal(r.stats.dataDriven, 15); assert.equal(r.stats.legacy, 0);
 });
 
-test("verifying the gap with a real passage would make the plan valid (the gate is the evidence, not the code)", () => {
-  const d = base(); Object.assign(d.evidence.claims["C-srb-length"], { status: "verified", passage: "test fixture passage: overall length 149.6 feet", source: "E0" });
-  assert.deepEqual(run(d).errors, []);
+test("an unverified dimension blocks the reconstruction that depends on it (former SRB-length gap)", () => {
+  const d = base(); d.evidence.claims["C-srb-length"].status = "unverified";
+  assert.ok(has(run(d), /S09: params\.dims\.srbLength: claim C-srb-length is unverified/));
 });
 
 // ---- evidence ------------------------------------------------------------------------------------
@@ -75,10 +71,25 @@ test("unsupported visual reconstruction: illustrative values without a visible l
   const d = base(); const s = shot(d, "S05"); s.provenance.label = "Explanatory animation"; s.params.chip.label = "Animation"; s.params.source.text = "{C-test-75f}, {C-joint-28f} · Rogers Commission Ch. IV";
   assert.ok(has(run(d), /S05: unsupported visual reconstruction: illustrative values without a visible label/));
 });
-test("declared exaggeration must show its factor on screen", () => {
-  const d = base(); shot(d, "S05").params.scale = { mode: "declared-exaggeration", factor: 8 };
-  assert.ok(has(run(d), /S05: declared exaggeration ×8 is not shown on screen/));
-  shot(d, "S05").params.source.text += " · gap ×8"; assert.ok(!has(run(d), /declared exaggeration/));
+test("declared exaggeration must match the evidence and be shown on screen", () => {
+  const d = base(); shot(d, "S05").params.scale = { mode: "declared-exaggeration", factor: 8 }; shot(d, "S05").params.gapLabel.text = "GAP";
+  assert.ok(has(run(d), /S05: declared exaggeration ×8 does not match the evidence/));
+  shot(d, "S05").params.source.text += " · gap ×8"; assert.ok(has(run(d), /S05: declared exaggeration ×8 does not match the evidence \(×2\.61\)/));
+});
+
+test("visual exaggeration derived from evidence must be declared; the joint mechanism must show its factor", () => {
+  let d = base(); shot(d, "S05").params.scale = { mode: "schematic" }; assert.ok(has(run(d), /S05: visual exaggeration ×2\.6 must be declared/));
+  d = base(); delete shot(d, "S05").params.gapMax; assert.ok(has(run(d), /S05: visual scale cannot be derived from evidence/));
+  d = base(); const s6 = shot(d, "S06"); s6.params.labels = s6.params.labels.filter((l) => l.target !== "gap"); s6.params.source.text = "Rogers Fig. 14 geometry · recovery illustrative";
+  assert.ok(has(run(d), /S06: declared exaggeration ×8 is not shown on screen/));
+});
+test("approximate values must say so on screen", () => {
+  let d = base(); d.evidence.claims["C-telecon-0845"].display = "8:45 PM"; assert.ok(has(run(d), /approximate claim C-telecon-0845 is shown as "8:45 PM" without an approximation marker/));
+  d = base(); d.evidence.claims["C-breakup-photo-76s"].display = "76 s after launch"; assert.ok(has(run(d), /S10: .*approximate claim C-breakup-photo-76s/));
+});
+test("film clock: the time base must be a claim; document zoom: anchors must exist", () => {
+  let d = base(); shot(d, "S07").params.filmClock.timeBase = -10; assert.ok(has(run(d), /S07: params\.filmClock\.timeBase: factual value must reference a claim/));
+  d = base(); shot(d, "S03").params.register.toAnchor = "asset:fig14#nowhere"; assert.ok(has(run(d), /S03: params\.register\.toAnchor: asset fig14 has no anchor "nowhere"/));
 });
 
 // ---- parameters ----------------------------------------------------------------------------------
@@ -102,7 +113,7 @@ test("wrong transition type and a missing reason fail", () => {
 });
 test("unsupported shot template fails; a legacy shot must state why", () => {
   let d = base(); shot(d, "S04").template = "particle-storm"; assert.ok(has(run(d), /S04: unsupported template "particle-storm"/));
-  d = base(); delete shot(d, "S06").manual; assert.ok(has(run(d), /S06: legacy-code shot without manual\.reason/));
+  d = base(); Object.assign(shot(d, "S06"), { template: "legacy-code", params: { shot: "S06" } }); assert.ok(has(run(d), /S06: legacy-code shot without manual\.reason/));
 });
 test("template provenance: an archival plate cannot be labelled a reconstruction", () => {
   const d = base(); shot(d, "S04").provenance.kind = "reconstruction"; assert.ok(has(run(d), /S04: template archival-plate cannot carry provenance "reconstruction"/));
@@ -131,7 +142,7 @@ test("qa expectations: a mechanism template needs its minimum narration-timed st
 // ---- registry, schemas, time references -----------------------------------------------------------
 test("registry: every template has an id, provenance, a parameter schema and a builder; the channel pack only lists known templates", () => {
   const reg = loadRegistry(); const pack = JSON.parse(fs.readFileSync(path.join(ENGINE, "channels/failure-reconstructed.json"), "utf8"));
-  for (const id of ["archival-plate", "trace-over-photo", "joint-section", "document-desk", "event-sequence", "timeline", "payoff", "legacy-code"]) {
+  for (const id of ["archival-plate", "trace-over-photo", "joint-section", "joint-mechanism", "document-zoom", "document-desk", "event-sequence", "timeline", "payoff", "legacy-code"]) {
     const T = reg[id]; assert.ok(T, id); assert.equal(T.id, id); assert.ok(T.provenance.length); assert.equal(T.params.type, "object"); assert.equal(typeof T.build, "function"); }
   for (const t of pack.templates) assert.ok(reg[t], `pack lists unknown template ${t}`);
 });

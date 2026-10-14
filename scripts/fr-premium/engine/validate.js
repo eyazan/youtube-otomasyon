@@ -59,6 +59,11 @@ function validatePlan({ plan, evidence, assets, timeline, root = ROOT, registry 
   }
   const useClaim = (shot, id, where) => { const c = claims[id]; if (!c) { E(shot, `${where}: unknown claim ${id}`); return null; }
     if (c.status !== "verified") E(shot, `${where}: claim ${id} is ${c.status}${c.note ? ` (${c.note})` : ""}`); return c; };
+  // an approximate claim shown with a number must say so on screen
+  const APPROX = /(~|≈|\babout\b|\bapprox|\best\.|\bestimated\b|\bapproximately\b)/i;
+  const showClaim = (shot, id, where, context) => { const c = useClaim(shot, id, where); if (!c || !c.approximate) return;
+    const shown = String(c.display != null ? c.display : c.value);
+    if (/\d/.test(shown) && !APPROX.test(shown) && !APPROX.test(context || "")) E(shot, `${where}: approximate claim ${id} is shown as "${shown}" without an approximation marker (~, about, approx., est.)`); };
   // 4. assets: licences, anchors in bounds and referencing evidence
   for (const [key, a] of Object.entries(assets.assets)) {
     if (["cc-by", "cc-by-sa"].includes(a.licence.id) && !a.licence.attribution) E(null, `asset ${key}: ${a.licence.id} requires an attribution`);
@@ -108,11 +113,11 @@ function validatePlan({ plan, evidence, assets, timeline, root = ROOT, registry 
     const ann = annotated(T.params, s.params, T.params, "params", []);
     const visibleText = [s.provenance.label];
     for (const x of ann) {
-      if (x.kind === "x-onscreen") { visibleText.push(String(x.value)); const stripped = String(x.value).replace(/\{C-[a-z0-9-]+(\.value)?\}/g, "");
-        for (const m of String(x.value).matchAll(/\{(C-[a-z0-9-]+)(\.value)?\}/g)) { useClaim(sid, m[1], x.at); stats.claimsUsed.add(m[1]); }
+      if (x.kind === "x-onscreen") { visibleText.push(String(x.value)); const stripped = String(x.value).replace(/\{C-[a-z0-9-]+(\.value)?\}/g, "").replace(/\{scale\}/g, "");
+        for (const m of String(x.value).matchAll(/\{(C-[a-z0-9-]+)(\.value)?\}/g)) { showClaim(sid, m[1], x.at, m[2] ? String(x.value).replace(m[0], "") : ""); stats.claimsUsed.add(m[1]); }
         // allowed without a claim: citation locators (Vol. 1, p. 90, Ch. III, Fig. 14) and identifiers that are part of
         // a listed asset's own provenance label or title (e.g. "E-207"); any other digit must come from a claim
-        const CITE = /\b(Vol|p|pp|Fig|Figure|Ch|No)\.\s?\d+/g; const clean = (tok) => tok.replace(/^[^\w]+|[^\w]+$/g, "");
+        const CITE = /\b(?:(?:Vol|p|pp|Fig|Ch|No)\.|Figure|Chapter|Volume)\s?\d+/g; const clean = (tok) => tok.replace(/^[^\w]+|[^\w]+$/g, "");
         const ids = new Set((s.assets || []).flatMap((k) => assets.assets[k] ? [assets.assets[k].provenanceLabel || "", assets.assets[k].source.title] : [])
           .join(" ").replace(CITE, "").split(/\s+/).map(clean).filter((tok) => /\d/.test(tok) && /[A-Za-z]/.test(tok))); // identifiers only, never bare numbers
         const rest = stripped.replace(/<br>/g, " ").replace(CITE, "").split(/\s+/).map(clean).filter((tok) => /\d/.test(tok) && !ids.has(tok));
@@ -132,17 +137,27 @@ function validatePlan({ plan, evidence, assets, timeline, root = ROOT, registry 
         for (const x of annotated(T.deskSchema, d, T.deskSchema, `shared.${name}`, [])) {
           if (x.kind === "x-anchor") anchorOf(sid, x.value, x.at); if (x.kind === "x-time") tRes(sid, x.value, x.at);
           if (x.kind === "x-factual") { if (!/^claim:C-/.test(x.value)) E(sid, `${x.at}: factual value must reference a claim`); else { useClaim(sid, x.value.slice(6), x.at); stats.claimsUsed.add(x.value.slice(6)); } } }
-        if (d.finding) { useClaim(sid, d.finding.claim.slice(6), "finding"); stats.claimsUsed.add(d.finding.claim.slice(6)); } } }
+        if (d.finding) { useClaim(sid, d.finding.claim.slice(6), "finding"); stats.claimsUsed.add(d.finding.claim.slice(6)); }
+        for (const tk of (d.rail || {}).ticks || []) showClaim(sid, tk.slice(6), `shared.${name}.rail.ticks`); } }
+    if (s.template === "timeline") for (const tk of s.params.ticks || []) showClaim(sid, tk.slice(6), "params.ticks");
     // illustrative values must be labelled on screen
     const illus = ann.some((x) => x.kind === "x-illustrative") || (s.params.scale && s.params.scale.mode === "schematic");
     if (illus && pack) { const vis = visibleText.join(" ").toLowerCase(); if (!pack.illustrativeLabels.some((l) => vis.includes(l))) E(sid, `unsupported visual reconstruction: illustrative values without a visible label (${pack.illustrativeLabels.join(" / ")})`); }
-    if (s.params.scale && s.params.scale.mode === "declared-exaggeration") { const f = s.params.scale.factor; if (!f) E(sid, "declared exaggeration without a factor");
-      else if (!visibleText.join(" ").includes(`×${f}`)) E(sid, `declared exaggeration ×${f} is not shown on screen`); }
+    // visual exaggeration must be derived from evidence, declared, and shown with its factor
+    const vis = visibleText.join(" "); const sc = s.params.scale; const shownF = (f) => vis.includes("×{scale}") || vis.includes(`×${f}`);
+    if (T.exaggeration) { let f = null; try { f = T.exaggeration(s.params, (ref) => claims[String(ref).replace(/^claim:/, "")] || {}); } catch (e) { f = null; }
+      if (f == null || !isFinite(f)) E(sid, `visual scale cannot be derived from evidence (template ${s.template} needs its ring-diameter and gap claims)`);
+      else if (f > 1.05 && (!sc || sc.mode !== "declared-exaggeration")) E(sid, `visual exaggeration ×${f.toFixed(1)} must be declared (scale.mode "declared-exaggeration") and shown`);
+      else if (sc && sc.mode === "declared-exaggeration") { if (!sc.factor) E(sid, "declared exaggeration without a factor");
+        else if (Math.abs(f - sc.factor) / sc.factor > 0.05) E(sid, `declared exaggeration ×${sc.factor} does not match the evidence (×${f.toFixed(2)})`);
+        else if (!shownF(sc.factor)) E(sid, `declared exaggeration ×${sc.factor} is not shown on screen`); } }
+    else if (sc && sc.mode === "declared-exaggeration") { if (!sc.factor) E(sid, "declared exaggeration without a factor"); else if (!shownF(sc.factor)) E(sid, `declared exaggeration ×${sc.factor} is not shown on screen`); }
     // QA expectations
     const min = s.qa.minStates != null ? s.qa.minStates : T.minStates;
     if (!T.legacy && s.qa.states.length < min) E(sid, `qa: ${s.qa.states.length} narration-timed states, template ${s.template} expects >= ${min}`);
     for (const st of s.qa.states) { const t = tRes(sid, st.at, "qa.states"); if (t != null && a != null && b != null && (t < a - 1e-6 || t > b + 1e-6)) E(sid, `qa state "${st.what}" at ${t.toFixed(2)} s is outside the shot`); if (st.claim) useClaim(sid, st.claim, "qa.states"); }
-    if (s.qa.registered && !(s.params.register || s.template === "trace-over-photo")) E(sid, "qa.registered is set but the shot declares no registration");
+    // registered = tied to archival geometry: an explicit register block, a trace over a photo, or a mechanism drawn from a document's measured anchors
+    if (s.qa.registered && !(s.params.register || s.template === "trace-over-photo" || (s.template === "joint-mechanism" && s.params.drawing))) E(sid, "qa.registered is set but the shot declares no registration");
   });
   if (Math.abs(prevEnd - duration) > 1e-3) E(null, `invalid timing: shots end at ${prevEnd.toFixed(3)} s, the film at ${duration.toFixed(3)} s`);
   stats.claimsUsed = stats.claimsUsed.size; stats.assetsUsed = stats.assetsUsed.size;

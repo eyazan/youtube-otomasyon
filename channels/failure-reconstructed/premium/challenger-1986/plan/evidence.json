@@ -53,9 +53,15 @@
    "kind": "archival-record"
   },
   "E10": {
-   "title": "Primary source for the SRB overall length not yet located",
-   "url": "https://www.nasa.gov/history/",
-   "kind": "official-reference"
+   "title": "T. D. Wood (NASA MSFC) et al., Solid Rocket Booster (SRB) Flight System Integration at Its Best, NASA NTRS 20120003006",
+   "url": "https://ntrs.nasa.gov/citations/20120003006",
+   "kind": "official-reference",
+   "publisher": "NASA Technical Reports Server"
+  },
+  "E11": {
+   "title": "NASA video 'Challenger Launch and Breakup' caption (NASA STI Program)",
+   "url": "https://commons.wikimedia.org/wiki/File:Challenger_Launch_and_Breakup.ogv",
+   "kind": "official-media-caption"
   }
  },
  "claims": {
@@ -302,20 +308,55 @@
    "status": "verified"
   },
   "C-srb-length": {
-   "text": "Overall SRB length about 149.6 ft (45.6 m) as drawn in V3",
-   "kind": "measurement",
+   "text": "Each SRB is 149.16 feet long",
+   "kind": "fact",
    "source": "E10",
-   "value": 149.6,
+   "locator": "p. 1",
+   "passage": "Each SRB is 149.16 feet long, 12.17 feet in diameter and weighs ~1,300,000 pounds at launch.",
+   "value": 149.16,
    "unit": "ft",
-   "status": "unverified",
-   "note": "V3 used 45.6 m from general knowledge; no primary source recorded yet. Blocks the event-sequence shot until verified."
+   "status": "verified",
+   "note": "V3 drew 45.6 m (no source); the evidenced 149.16 ft = 45.46 m is used now"
+  },
+  "C-srb-diameter": {
+   "text": "Each SRB is 12.17 feet in diameter",
+   "kind": "fact",
+   "source": "E10",
+   "locator": "p. 1",
+   "passage": "Each SRB is 149.16 feet long, 12.17 feet in diameter and weighs ~1,300,000 pounds at launch.",
+   "value": 12.17,
+   "unit": "ft",
+   "status": "verified"
+  },
+  "C-gap-max": {
+   "text": "Aft field joint gap opening increases of approximately 0.029 in (primary) and 0.017 in (secondary)",
+   "kind": "fact",
+   "source": "E2",
+   "locator": "Ch. IV",
+   "passage": "For the aft field joints these data indicate gap opening increases of approximately 0.029 inches and 0.017 inches for the primary and secondary O-rings respectively",
+   "value": 0.029,
+   "unit": "in",
+   "approximate": true,
+   "status": "verified"
+  },
+  "C-climb-timebase": {
+   "text": "The NASA launch-and-breakup video starts at T-10 seconds",
+   "kind": "fact",
+   "source": "E11",
+   "passage": "Launch of Challenger (STS-51-L) and breakup. Video starts at T-10 seconds.",
+   "value": -10,
+   "unit": "s",
+   "valueAsWritten": "T-10",
+   "approximate": true,
+   "status": "verified",
+   "note": "caption-level time base; the clock built on it is marked approximate"
   },
   "C-telecon-0845": {
    "text": "Phase 2 of the teleconference began at about 8:45 p.m. EST on 27 January",
    "kind": "fact",
    "source": "E3",
    "passage": "At approximately 8:45 p.m. Eastern Standard Time",
-   "display": "8:45 PM",
+   "display": "~8:45 PM",
    "approximate": true,
    "status": "verified"
   },
@@ -325,7 +366,7 @@
    "source": "E3",
    "locator": "Ch. V chronology",
    "passage": "Approximately 11:00 PM (EST) &nbsp; Same participants at 8:45 PM Teleconference. &nbsp; Second Teleconference (Cont'd). Thiokol indicates it had reassessed; temperature effects are concern, but data is inconclusive. Kilminster reads the rationale for recommending launch. Thiokol recommends launch.",
-   "display": "11:00 PM",
+   "display": "~11:00 PM",
    "approximate": true,
    "status": "verified"
   },
@@ -335,7 +376,7 @@
    "source": "E3",
    "locator": "Ch. V chronology",
    "passage": "Approximately 11:45 PM (EST) Telefax. Kilminster faxes Thiokol's recommendation",
-   "display": "11:45 PM",
+   "display": "~11:45 PM",
    "approximate": true,
    "status": "verified"
   },

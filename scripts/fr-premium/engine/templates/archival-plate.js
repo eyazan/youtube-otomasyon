@@ -24,6 +24,8 @@
         label: { type: "object", required: ["lines", "in"], additionalProperties: false, properties: { lines: S.text, value: S.text, in: S.window2 } } } },
       kicker: { type: "object", required: ["text", "y"], additionalProperties: false, properties: { text: S.text, y: { type: "number" } } },
       stamp: { type: "object", required: ["label", "value"], additionalProperties: false, properties: { label: S.text, value: S.claim } },
+      // running clock on archival film: mission time = clip source time + the film's documented time base (a claim)
+      filmClock: { type: "object", required: ["label", "timeBase"], additionalProperties: false, properties: { label: S.text, timeBase: S.claim, decimals: { type: "integer", minimum: 0, maximum: 3 } } },
       chip: S.chip,
       source: S.source,
     } },
@@ -61,6 +63,8 @@
           <div style="font:700 38px/1.3 ${F.sans};color:${C.text};margin-top:18px">${H.text(P.stat.sub, ctx)}</div></div>`; }
         if (P.kicker) hud += `<div style="position:absolute;left:0;right:0;top:${P.kicker.y}px;text-align:center;font:700 28px ${F.sans};letter-spacing:4px;color:${C.steel}">${FR.esc(H.text(P.kicker.text, ctx))}</div>`;
         if (P.stamp) hud += FR.clock(ctx.value(P.stamp.value), 1, { label: H.text(P.stamp.label, ctx) });
+        if (P.filmClock) { const tb = ctx.claim(P.filmClock.timeBase.slice(6)); const src = (isClip ? m.from || 0 : 0) + (t - clip0); // seconds into the source film
+          hud += FR.clock(src + tb.value, 1, { label: H.text(P.filmClock.label, ctx) + (tb.approximate ? " · APPROX." : ""), decimals: P.filmClock.decimals == null ? 1 : P.filmClock.decimals }); }
         hud += FR.chip(H.text(P.chip.label, ctx), P.chip.kind || shot.provenance.kind);
         if (P.source) hud += FR.source(H.text(P.source.text, ctx), 1, P.source.y);
         return { under: P.under === "ink" ? `<rect width="${W}" height="${HH}" fill="${C.ink}"/>` : undefined, media, svg, hud };

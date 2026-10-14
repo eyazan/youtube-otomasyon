@@ -40,7 +40,7 @@
         source: (ps.assets || [])[0] || null, evidence: ps.evidence, fade: ps.transition.fade || (L ? L.fade : 0) || 0, drift: L ? L.drift : undefined,
         trans: ps.transition.type, transReason: ps.transition.reason || null, template: ps.template,
         states: (ps.qa.states || []).map((s) => ({ t: time(s.at), what: s.what, ev: s.claim || null })),
-        register: ps.qa.registered ? { from: (ps.params.register || {}).fromShot || "previous", asset: (ps.assets || [])[0] } : null,
+        register: ps.qa.registered ? { from: (ps.params.register || {}).fromShot || (ps.params.drawing ? "drawing" : "previous"), asset: (ps.assets || [])[0] } : null,
         primitives: [ps.template], framing: ps.template, render: built.render });
     }
     // 5. standard overlays: handle + word-aligned captions
