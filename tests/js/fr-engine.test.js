@@ -88,7 +88,7 @@ test("approximate values must say so on screen", () => {
   d = base(); d.evidence.claims["C-breakup-photo-76s"].display = "76 s after launch"; assert.ok(has(run(d), /S10: .*approximate claim C-breakup-photo-76s/));
 });
 test("film clock: the time base must be a claim; document zoom: anchors must exist", () => {
-  let d = base(); shot(d, "S07").params.filmClock.timeBase = -10; assert.ok(has(run(d), /S07: params\.filmClock\.timeBase: factual value must reference a claim/));
+  let d = base(); shot(d, "S07").params.filmClock = { label: "TIME AFTER LIFTOFF", timeBase: -10 }; assert.ok(has(run(d), /S07: params\.filmClock\.timeBase: factual value must reference a claim/));
   d = base(); shot(d, "S03").params.register.toAnchor = "asset:fig14#nowhere"; assert.ok(has(run(d), /S03: params\.register\.toAnchor: asset fig14 has no anchor "nowhere"/));
 });
 

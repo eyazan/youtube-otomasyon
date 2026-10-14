@@ -8,6 +8,7 @@ const fs = require("fs");
 const path = require("path");
 const { validate: schemaCheck } = require("./jsonschema");
 const TIME = require("./timeref");
+const CAM = require("./camera-presets");
 
 const ENGINE = __dirname; const ROOT = path.join(ENGINE, "..", "..", "..");
 const readJSON = (p) => JSON.parse(fs.readFileSync(p, "utf8"));
@@ -55,7 +56,8 @@ function validatePlan({ plan, evidence, assets, timeline, root = ROOT, registry 
     if (c.status === "verified" && c.passage) { const pass = c.passage.replace(/,/g, "");
       if (c.value != null) { const v = c.value; const forms = c.valueAsWritten ? [c.valueAsWritten] : [String(v), v.toFixed(1), v.toFixed(2), v.toFixed(3)];
         if (!forms.some((f) => (/^\d+$/.test(f) ? new RegExp(`(^|[^\\d.])${f}(?![\\d]|\\.\\d)`).test(pass) : pass.includes(f)))) E(null, `claim ${id}: value ${v} does not appear in its source passage`); }
-      for (const n of nums((c.display || "").replace(/\|/g, " "))) if (!(c.value != null && +n === c.value) && !nums(pass).includes(n)) E(null, `claim ${id}: displayed number ${n} is neither its value nor in its passage`); }
+      // a displayed number must be the value or occur in the passage as a whole number (digit boundaries, so "53" is found in "55:54:53.555" but not in "530")
+      for (const n of nums((c.display || "").replace(/\|/g, " "))) if (!(c.value != null && +n === c.value) && !new RegExp(`(^|[^\\d])${n.replace(".", "\\.")}(?!\\d)`).test(pass)) E(null, `claim ${id}: displayed number ${n} is neither its value nor in its passage`); }
   }
   const useClaim = (shot, id, where) => { const c = claims[id]; if (!c) { E(shot, `${where}: unknown claim ${id}`); return null; }
     if (c.status !== "verified") E(shot, `${where}: claim ${id} is ${c.status}${c.note ? ` (${c.note})` : ""}`); return c; };
@@ -127,6 +129,24 @@ function validatePlan({ plan, evidence, assets, timeline, root = ROOT, registry 
       if (x.kind === "x-time") tRes(sid, x.value, x.at);
     }
     for (const r of JSON.stringify(s.params).match(/"asset:[a-z0-9-]+"/g) || []) { const k = r.slice(7, -1); if (!assets.assets[k]) E(sid, `params: unknown asset ${k}`); else if (s.assets && !s.assets.includes(k)) E(sid, `params: asset ${k} not listed in shot.assets`); }
+    // a running film clock needs a verified continuous segment of the film covering the excerpt (timeline.segments),
+    // whose time base is the clock's claim; a caption alone ("video starts at T-10") does not map an edited film
+    if (s.params.filmClock) { const k = String(s.params.media || "").replace(/^asset:/, ""); const as = assets.assets[k]; const tb = String(s.params.filmClock.timeBase || "").replace(/^claim:/, "");
+      const seg = as && as.clip && as.timeline ? as.timeline.segments.find((g) => g.timeBase === tb && g.from <= as.clip.from && g.to >= as.clip.to) : null;
+      if (!seg) E(sid, `unsupported film clock: asset ${k} has no verified continuous segment covering ${as && as.clip ? `${as.clip.from}-${as.clip.to} s` : "the excerpt"} with time base ${tb}${as && as.timeline && as.timeline.edited ? " (the film is an edited compilation)" : ""}`); }
+    // camera positions: zoom range, focus inside the image, and a marked anchor inside the mobile safe zone at the last key
+    if (["archival-plate", "trace-over-photo", "payoff"].includes(s.template) && s.params.camera && s.params.camera.mode !== "crop" && Array.isArray(s.params.camera.keys)) {
+      const k = String(s.params.media || "").replace(/^asset:/, ""); const as = assets.assets[k];
+      if (as && as.kind !== "clip") { const b0 = s.params.box || { x: 0, y: 0, w: CAM.W, h: CAM.H }; const box = { ...b0, h: b0.h === "auto" ? b0.w * as.height / as.width : b0.h };
+        const keys = s.params.camera.keys; let last = null; const tpl = s.template;
+        keys.forEach((key, j) => { const f = typeof key.focus === "string" ? (() => { const v = anchorOf(sid, key.focus, `params.camera.keys[${j}].focus`); return v ? CAM.pointOf(v) : null; })() : key.focus || (last && last.focus); last = { ...key, focus: f };
+          const zmax = tpl === "trace-over-photo" ? 4 : 4; if (!(key.zoom >= 1 && key.zoom <= zmax)) E(sid, `invalid camera position: params.camera.keys[${j}].zoom ${key.zoom} outside 1..${zmax}`);
+          if (f && (f[0] < 0 || f[1] < 0 || f[0] > as.width || f[1] > as.height)) E(sid, `invalid camera position: params.camera.keys[${j}].focus (${f}) outside the ${as.width}x${as.height} image`); });
+        const mark = s.params.mark && s.params.mark.anchor ? anchorOf(sid, s.params.mark.anchor, "params.mark.anchor") : null;
+        if (mark && last && last.focus) for (const msg of CAM.checkCover(as, box, last, CAM.pointOf(mark))) if (/safe zone/.test(msg)) E(sid, `invalid camera position: at the last camera key the ${msg}`); } }
+    // channel style: label sizes at or above the channel's mobile minimum
+    if (pack && pack.minLabelPx) { const sizes = []; const walk = (o, at) => { if (Array.isArray(o)) o.forEach((v, j) => walk(v, `${at}[${j}]`)); else if (o && typeof o === "object") for (const [kk, v] of Object.entries(o)) { if (kk === "size" && typeof v === "number") sizes.push([at, v]); else walk(v, `${at}.${kk}`); } };
+      walk(s.params, "params"); for (const [at2, v] of sizes) if (v < pack.minLabelPx) E(sid, `mobile typography: ${at2}.size ${v} px is below the ${plan.channel} minimum of ${pack.minLabelPx} px`); }
     // traced geometry must lie on the measured anchor it cites (rect +15 px, point within 150 px)
     const near = (v, x, y) => v.rect ? (x >= v.rect.x - 15 && x <= v.rect.x + v.rect.w + 15 && y >= v.rect.y - 15 && y <= v.rect.y + v.rect.h + 15) : v.point ? Math.hypot(x - v.point[0], y - v.point[1]) <= 150 : false;
     const traced = [...(s.params.paths || []).map((pa, i) => ({ basis: pa.basis, pts: pa.points, at: `params.paths[${i}]` })), ...(s.params.callouts || []).map((c, i) => ({ basis: c.from.basis, pts: [c.from.point], at: `params.callouts[${i}]` }))];

@@ -26,7 +26,9 @@
           "space": "source-px",
           "method": "caption-located",
           "claim": "C-smoke-right-srb",
-          "basis": "grey-brown smoke on the right side of the SRB, as the NASA caption describes; measured centre"
+          "basis": "grey-brown smoke on the right side of the SRB, as the NASA caption describes; measured centre",
+          "role": "point-of-interest",
+          "label": "smoke at the right booster joint"
         },
         "right-srb": {
           "rect": {
@@ -37,7 +39,9 @@
           },
           "space": "source-px",
           "method": "manual-measure",
-          "basis": "visible edges of the near booster (the right SRB: orbiter belly to the tank, nose up)"
+          "basis": "visible edges of the near booster (the right SRB: orbiter belly to the tank, nose up)",
+          "role": "traceable-part",
+          "label": "right booster"
         },
         "aft-field-joint": {
           "point": [
@@ -47,7 +51,9 @@
           "space": "source-px",
           "method": "manual-measure",
           "claim": "C-smoke-right-srb",
-          "basis": "aft field joint band, measured at the smoke's height"
+          "basis": "aft field joint band, measured at the smoke's height",
+          "role": "subject",
+          "label": "aft field joint"
         },
         "joint-wall": {
           "point": [
@@ -56,9 +62,18 @@
           ],
           "space": "source-px",
           "method": "manual-measure",
-          "basis": "left wall of the right SRB at the aft field joint band (registration point for the Fig. 14 hand-off)"
+          "basis": "left wall of the right SRB at the aft field joint band (registration point for the Fig. 14 hand-off)",
+          "role": "registration",
+          "registersTo": "asset:fig14#wall"
         }
-      }
+      },
+      "depicts": [
+        "C-smoke-right-srb",
+        "C-smoke-0678"
+      ],
+      "tags": [
+        "vehicle"
+      ]
     },
     "fig14": {
       "kind": "document",
@@ -84,7 +99,9 @@
           "space": "source-px",
           "method": "document-layout",
           "claim": "C-two-orings",
-          "basis": "the O-ring Fig. 14 labels 'Primary O-Ring'"
+          "basis": "the O-ring Fig. 14 labels 'Primary O-Ring'",
+          "role": "mechanism-ring",
+          "label": "primary O-ring"
         },
         "secondary-oring": {
           "point": [
@@ -94,7 +111,9 @@
           "space": "source-px",
           "method": "document-layout",
           "claim": "C-two-orings",
-          "basis": "the O-ring Fig. 14 labels 'Secondary O-Ring'"
+          "basis": "the O-ring Fig. 14 labels 'Secondary O-Ring'",
+          "role": "mechanism-ring",
+          "label": "secondary O-ring"
         },
         "wall": {
           "point": [
@@ -103,7 +122,8 @@
           ],
           "space": "source-px",
           "method": "document-layout",
-          "basis": "midpoint between the two O-rings (registration point)"
+          "basis": "midpoint between the two O-rings (registration point)",
+          "role": "registration"
         },
         "label-primary": {
           "rect": {
@@ -114,7 +134,8 @@
           },
           "space": "source-px",
           "method": "document-layout",
-          "basis": "printed label 'Primary O-Ring'"
+          "basis": "printed label 'Primary O-Ring'",
+          "role": "document-block"
         },
         "label-secondary": {
           "rect": {
@@ -125,49 +146,73 @@
           },
           "space": "source-px",
           "method": "document-layout",
-          "basis": "printed label 'Secondary O-Ring'"
+          "basis": "printed label 'Secondary O-Ring'",
+          "role": "document-block"
         },
         "tang": {
           "rect": {
             "x": 180,
             "y": 260,
             "w": 56,
-            "h": 150
+            "h": 151
           },
           "space": "source-px",
           "method": "document-layout",
-          "basis": "segment tang (hatched, upper segment) around the O-rings, measured on Fig. 14"
+          "basis": "segment tang (hatched, upper segment) around the O-rings, measured on Fig. 14",
+          "role": "mechanism-part"
         },
         "clevis-inner-leg": {
           "rect": {
             "x": 238,
             "y": 280,
             "w": 23,
-            "h": 180
+            "h": 131
           },
           "space": "source-px",
           "method": "document-layout",
-          "basis": "clevis inner leg carrying the O-ring grooves, measured on Fig. 14"
+          "basis": "clevis inner leg carrying the O-ring grooves, measured on Fig. 14",
+          "role": "mechanism-part"
         },
         "clevis-outer-leg": {
           "rect": {
             "x": 157,
             "y": 316,
             "w": 19,
-            "h": 94
+            "h": 95
           },
           "space": "source-px",
           "method": "document-layout",
-          "basis": "clevis outer leg, measured on Fig. 14"
+          "basis": "clevis outer leg, measured on Fig. 14",
+          "role": "mechanism-part"
         },
         "oring-size": {
           "lengthPx": 10,
           "space": "source-px",
           "method": "document-layout",
           "claim": "C-two-orings",
-          "basis": "drawn O-ring cross-section about 10 px across on Fig. 14 (the 0.280 in ring)"
+          "basis": "drawn O-ring cross-section about 10 px across on Fig. 14 (the 0.280 in ring)",
+          "role": "mechanism-scale"
+        },
+        "clevis-pin": {
+          "rect": {
+            "x": 158,
+            "y": 411,
+            "w": 103,
+            "h": 59
+          },
+          "space": "source-px",
+          "method": "document-layout",
+          "basis": "clevis pin crossing the outer leg, tang and inner leg, measured on Fig. 14 ('Clevis Pin')",
+          "role": "mechanism-part"
         }
-      }
+      },
+      "depicts": [
+        "C-two-orings"
+      ],
+      "tags": [
+        "drawing",
+        "document"
+      ]
     },
     "icicles": {
       "kind": "photo",
@@ -183,7 +228,14 @@
       "licence": {
         "id": "public-domain",
         "statement": "NASA work, public domain"
-      }
+      },
+      "depicts": [
+        "C-temp-36f",
+        "C-15f-colder"
+      ],
+      "tags": [
+        "setting"
+      ]
     },
     "climb": {
       "kind": "clip",
@@ -213,7 +265,16 @@
           "w": 1000,
           "h": 1000
         }
-      }
+      },
+      "timeline": {
+        "edited": true,
+        "segments": [],
+        "note": "edited compilation: camera changes at about 3, 12, 16, 18 and 27 s (checked frame by frame); the caption's 'starts at T-10 seconds' does not map later segments to mission time"
+      },
+      "depicts": [],
+      "tags": [
+        "film"
+      ]
     },
     "e207": {
       "kind": "clip",
@@ -253,21 +314,36 @@
           "space": "clip-frame",
           "method": "manual-measure",
           "claim": "C-flame-58788",
-          "basis": "flame at the right SRB aft field joint, measured on the extracted frames"
+          "basis": "flame at the right SRB aft field joint, measured on the extracted frames",
+          "role": "point-of-interest",
+          "label": "flame at the joint"
         },
         "vehicle-axis": {
           "angleDeg": -28,
           "space": "clip-frame",
           "method": "manual-measure",
-          "basis": "vehicle long axis in the extracted frames (nose up-left)"
+          "basis": "vehicle long axis in the extracted frames (nose up-left)",
+          "role": "registration"
         },
         "srb-width": {
           "lengthPx": 50,
           "space": "clip-frame",
           "method": "manual-measure",
-          "basis": "apparent booster width in the extracted frames (estimate)"
+          "basis": "apparent booster width in the extracted frames (estimate)",
+          "role": "registration"
         }
-      }
+      },
+      "timeline": {
+        "edited": false,
+        "segments": [],
+        "note": "no documented time code for this excerpt; only the documented event time (first flame) may be stated, not a running clock"
+      },
+      "depicts": [
+        "C-flame-58788"
+      ],
+      "tags": [
+        "film"
+      ]
     },
     "breakup": {
       "kind": "photo",
@@ -283,7 +359,13 @@
       "licence": {
         "id": "public-domain",
         "statement": "NASA work, public domain"
-      }
+      },
+      "depicts": [
+        "C-breakup-photo-76s"
+      ],
+      "tags": [
+        "damage"
+      ]
     },
     "crew": {
       "kind": "photo",
@@ -299,7 +381,13 @@
       "licence": {
         "id": "public-domain",
         "statement": "NASA work, public domain"
-      }
+      },
+      "depicts": [
+        "C-crew-seven"
+      ],
+      "tags": [
+        "portrait"
+      ]
     },
     "burn": {
       "kind": "photo",
@@ -315,7 +403,13 @@
       "licence": {
         "id": "public-domain",
         "statement": "NASA work, public domain"
-      }
+      },
+      "depicts": [
+        "C-hole-recovered"
+      ],
+      "tags": [
+        "recovered-hardware"
+      ]
     },
     "chart53": {
       "kind": "document",
@@ -342,7 +436,8 @@
           "space": "source-px",
           "method": "document-layout",
           "claim": "C-chart-53f",
-          "basis": "handwritten line 'O-RING TEMP MUST BE ≥ 53 °F AT LAUNCH'"
+          "basis": "handwritten line 'O-RING TEMP MUST BE ≥ 53 °F AT LAUNCH'",
+          "role": "document-line"
         },
         "value-53f": {
           "rect": {
@@ -354,7 +449,8 @@
           "space": "source-px",
           "method": "document-layout",
           "claim": "C-chart-53f",
-          "basis": "'≥ 53 °F' on the same line"
+          "basis": "'≥ 53 °F' on the same line",
+          "role": "document-line"
         },
         "reason": {
           "rect": {
@@ -365,9 +461,16 @@
           },
           "space": "source-px",
           "method": "document-layout",
-          "basis": "development-motor and SRM-15 lines under it"
+          "basis": "development-motor and SRM-15 lines under it",
+          "role": "document-block"
         }
-      }
+      },
+      "depicts": [
+        "C-chart-53f"
+      ],
+      "tags": [
+        "document"
+      ]
     },
     "fax": {
       "kind": "document",
@@ -394,7 +497,8 @@
           "space": "source-px",
           "method": "document-layout",
           "claim": "C-fax-recommend",
-          "basis": "typed line 'MTI RECOMMENDS STS-51L LAUNCH PROCEED ON 28 JANUARY 1986'"
+          "basis": "typed line 'MTI RECOMMENDS STS-51L LAUNCH PROCEED ON 28 JANUARY 1986'",
+          "role": "document-line"
         },
         "signature": {
           "rect": {
@@ -405,9 +509,16 @@
           },
           "space": "source-px",
           "method": "document-layout",
-          "basis": "Kilminster signature block"
+          "basis": "Kilminster signature block",
+          "role": "document-block"
         }
-      }
+      },
+      "depicts": [
+        "C-fax-recommend"
+      ],
+      "tags": [
+        "document"
+      ]
     }
   }
 }

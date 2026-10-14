@@ -1,0 +1,83 @@
+{
+ "schema": "fr-premium.narration-script.v1",
+ "topic": "apollo-13-1970",
+ "status": "draft",
+ "timeline": {
+  "kind": "estimated",
+  "file": "timeline-estimated.json"
+ },
+ "lines": [
+  {
+   "id": "L1",
+   "text": "Apollo Thirteen's oxygen tank was already dangerous on the launch pad.",
+   "claims": [
+    "C-a13-hazard",
+    "C-a13-mission",
+    "C-a13-launch"
+   ],
+   "headline": "Doomed<br>on the pad",
+   "kicker": "{C-a13-mission} · {C-a13-launch}"
+  },
+  {
+   "id": "L2",
+   "text": "During ground tests, its heaters were powered from a sixty-five volt supply.",
+   "claims": [
+    "C-a13-heaters-65v",
+    "C-a13-detank-date"
+   ]
+  },
+  {
+   "id": "L3",
+   "text": "But its thermostatic switches were rated for twenty-eight volts.",
+   "claims": [
+    "C-a13-switch-rating"
+   ]
+  },
+  {
+   "id": "L4",
+   "text": "They were meant to open at eighty degrees, and at sixty-five volts they could not.",
+   "claims": [
+    "C-a13-switch-80f",
+    "C-a13-switch-rating"
+   ]
+  },
+  {
+   "id": "L5",
+   "text": "The heater tube may have reached a thousand degrees, damaging the insulation on the fan wires.",
+   "claims": [
+    "C-a13-1000f",
+    "C-a13-teflon"
+   ]
+  },
+  {
+   "id": "L6",
+   "text": "In flight, the crew switched on the tank's fans, and about ninety seconds later the tank lost pressure.",
+   "claims": [
+    "C-a13-fans",
+    "C-a13-dataloss",
+    "C-a13-pressure"
+   ]
+  },
+  {
+   "id": "L7",
+   "text": "The board found an electrically initiated fire inside oxygen tank number two.",
+   "claims": [
+    "C-a13-cause"
+   ]
+  },
+  {
+   "id": "L8",
+   "text": "It was a near disaster, averted only by the crew and the ground control team.",
+   "claims": [
+    "C-a13-averted"
+   ]
+  },
+  {
+   "id": "L9",
+   "text": "The flight was saved in space. The tank was lost on the ground.",
+   "claims": [
+    "C-a13-payoff"
+   ]
+  }
+ ]
+}

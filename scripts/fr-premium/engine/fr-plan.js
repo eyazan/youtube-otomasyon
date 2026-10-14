@@ -33,7 +33,9 @@
     for (const ps of plan.shots) {
       const T = TPL[ps.template]; if (!T) throw new Error(`shot ${ps.id}: unknown template ${ps.template}`);
       const shot = { ...ps, start: time(ps.start), end: time(ps.end) };
-      const built = T.build(FR, shot, ctxFor(shot));
+      // preview only: a planner shot awaiting human input renders as a labelled placeholder (it stays invalid for production)
+      const built = ps.review && (!ps.params || !Object.keys(ps.params).length) ? { render: () => ({ under: `<rect width="${FR.W}" height="${FR.H}" fill="#1b0f12"/>`,
+          hud: `<div style="position:absolute;left:80px;right:80px;top:600px;text-align:center;font:800 64px ${FR.F.sans};color:#ffb547">NEEDS HUMAN REVIEW</div><div style="position:absolute;left:80px;right:80px;top:720px;text-align:center;font:600 34px ${FR.F.sans};color:#e8e3da">${FR.esc(ps.review.codes.join(" · "))}</div>` }) } : T.build(FR, shot, ctxFor(shot));
       if (built.api) api.set(ps.id, built.api);
       const L = built.legacyShot;
       FR.shot({ id: ps.id, start: shot.start, end: shot.end, kind: ps.provenance.kind, label: ps.provenance.label, subject: L ? L.subject : `${ps.template} (${ps.beat})`,

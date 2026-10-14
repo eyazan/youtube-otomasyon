@@ -1,0 +1,497 @@
+{
+ "schema": "fr-premium.shot-plan.v1",
+ "topic": "apollo-13-1970",
+ "channel": "failure-reconstructed",
+ "style": "failure-reconstructed/forensic-v1",
+ "narration": "../timeline-estimated.json",
+ "evidence": "../evidence.json",
+ "assets": "../assets.json",
+ "film": {
+  "tail": 0.8,
+  "captionSkip": [
+   "L9"
+  ],
+  "captionFrom": "0.5"
+ },
+ "shared": {},
+ "shots": [
+  {
+   "id": "S01",
+   "beat": "hook",
+   "line": "L1",
+   "start": "0",
+   "end": "line:L2 -0.1",
+   "evidence": [
+    "C-a13-hazard",
+    "C-a13-mission",
+    "C-a13-launch"
+   ],
+   "qa": {
+    "states": [
+     {
+      "at": "line:L1",
+      "what": "shot on the narration beat"
+     }
+    ]
+   },
+   "template": "archival-plate",
+   "provenance": {
+    "kind": "archival",
+    "label": "NASA photo · launch"
+   },
+   "assets": [
+    "launch"
+   ],
+   "params": {
+    "media": "asset:launch",
+    "chip": {
+     "label": "NASA photo · launch",
+     "kind": "archival"
+    },
+    "box": {
+     "x": 0,
+     "y": 0,
+     "w": 1080,
+     "h": 1400
+    },
+    "camera": {
+     "keys": [
+      {
+       "at": "0",
+       "focus": [
+        3400,
+        4250
+       ],
+       "zoom": 1
+      },
+      {
+       "at": "line:L2 -0.1",
+       "focus": [
+        3400,
+        4250
+       ],
+       "zoom": 1.06
+      }
+     ]
+    },
+    "under": "ink",
+    "shades": [
+     {
+      "kind": "top",
+      "h": 640
+     },
+     {
+      "kind": "bottom",
+      "y": 1120,
+      "h": 290
+     },
+     {
+      "kind": "ink",
+      "y": 1400,
+      "h": 520
+     }
+    ],
+    "headline": {
+     "kicker": "{C-a13-mission} · {C-a13-launch}",
+     "text": "Doomed<br>on the pad",
+     "y": 330,
+     "out": [
+      "0.3",
+      "0.5"
+     ]
+    }
+   },
+   "transition": {
+    "type": "cut"
+   },
+   "review": {
+    "codes": [
+     "MISSING_ANCHOR"
+    ]
+   }
+  },
+  {
+   "id": "S02",
+   "beat": "evidence",
+   "line": "L2",
+   "start": "line:L2 -0.1",
+   "end": "line:L3 -0.1",
+   "evidence": [
+    "C-a13-heaters-65v",
+    "C-a13-detank-date"
+   ],
+   "qa": {
+    "states": []
+   },
+   "template": "archival-plate",
+   "provenance": {
+    "kind": "archival",
+    "label": "NEEDS ASSET"
+   },
+   "assets": [],
+   "params": {},
+   "transition": {
+    "type": "cut",
+    "reason": "cut on the narration beat"
+   },
+   "review": {
+    "codes": [
+     "MISSING_ASSET"
+    ]
+   }
+  },
+  {
+   "id": "S03",
+   "beat": "evidence",
+   "line": "L3",
+   "start": "line:L3 -0.1",
+   "end": "line:L4 -0.1",
+   "evidence": [
+    "C-a13-switch-rating"
+   ],
+   "qa": {
+    "states": []
+   },
+   "template": "archival-plate",
+   "provenance": {
+    "kind": "archival",
+    "label": "NEEDS ASSET"
+   },
+   "assets": [],
+   "params": {},
+   "transition": {
+    "type": "cut",
+    "reason": "cut on the narration beat"
+   },
+   "review": {
+    "codes": [
+     "MISSING_ASSET"
+    ]
+   }
+  },
+  {
+   "id": "S04",
+   "beat": "setting",
+   "line": "L4",
+   "start": "line:L4 -0.1",
+   "end": "line:L5 -0.1",
+   "evidence": [
+    "C-a13-switch-80f",
+    "C-a13-switch-rating"
+   ],
+   "qa": {
+    "states": []
+   },
+   "template": "archival-plate",
+   "provenance": {
+    "kind": "archival",
+    "label": "NEEDS ASSET"
+   },
+   "assets": [],
+   "params": {},
+   "transition": {
+    "type": "cut",
+    "reason": "cut on the narration beat"
+   },
+   "review": {
+    "codes": [
+     "MISSING_ASSET"
+    ]
+   }
+  },
+  {
+   "id": "S05",
+   "beat": "mechanism",
+   "line": "L5",
+   "start": "line:L5 -0.1",
+   "end": "line:L6 -0.1",
+   "evidence": [
+    "C-a13-1000f",
+    "C-a13-teflon"
+   ],
+   "qa": {
+    "states": []
+   },
+   "template": "joint-mechanism",
+   "provenance": {
+    "kind": "explanatory",
+    "label": "NEEDS MECHANISM TEMPLATE"
+   },
+   "assets": [],
+   "params": {},
+   "transition": {
+    "type": "cut",
+    "reason": "cut on the narration beat"
+   },
+   "review": {
+    "codes": [
+     "MISSING_EVIDENCE",
+     "NO_TEMPLATE"
+    ]
+   }
+  },
+  {
+   "id": "S06",
+   "beat": "human-cost",
+   "line": "L6",
+   "start": "line:L6 -0.1",
+   "end": "line:L7 -0.1",
+   "evidence": [
+    "C-a13-fans",
+    "C-a13-dataloss",
+    "C-a13-pressure"
+   ],
+   "qa": {
+    "states": [
+     {
+      "at": "line:L6",
+      "what": "shot on the narration beat"
+     }
+    ]
+   },
+   "template": "archival-plate",
+   "provenance": {
+    "kind": "archival",
+    "label": "NASA photo · after separation"
+   },
+   "assets": [
+    "sm-damage"
+   ],
+   "params": {
+    "media": "asset:sm-damage",
+    "chip": {
+     "label": "NASA photo · after separation",
+     "kind": "archival"
+    },
+    "camera": {
+     "keys": [
+      {
+       "at": "line:L6 -0.1",
+       "focus": [
+        1473,
+        1200
+       ],
+       "zoom": 1
+      },
+      {
+       "at": "line:L7 -0.1",
+       "focus": [
+        1473,
+        1200
+       ],
+       "zoom": 1.06
+      }
+     ]
+    },
+    "shades": [
+     {
+      "kind": "top",
+      "h": 820
+     },
+     {
+      "kind": "bottom",
+      "y": 1180,
+      "h": 740
+     }
+    ]
+   },
+   "transition": {
+    "type": "dip",
+    "reason": "loss beat: slow dissolve, no animation",
+    "fade": 0.35
+   }
+  },
+  {
+   "id": "S07",
+   "beat": "decision",
+   "line": "L7",
+   "start": "line:L7 -0.1",
+   "end": "line:L8 -0.1",
+   "evidence": [
+    "C-a13-cause"
+   ],
+   "qa": {
+    "states": []
+   },
+   "template": "document-desk",
+   "provenance": {
+    "kind": "document",
+    "label": "NEEDS DOCUMENT REGION"
+   },
+   "assets": [],
+   "params": {},
+   "transition": {
+    "type": "dip",
+    "reason": "slow dissolve after the loss beat",
+    "fade": 0.3
+   },
+   "review": {
+    "codes": [
+     "MISSING_ANCHOR"
+    ]
+   }
+  },
+  {
+   "id": "S08",
+   "beat": "human-cost",
+   "line": "L8",
+   "start": "line:L8 -0.1",
+   "end": "line:L9 -0.1",
+   "evidence": [
+    "C-a13-averted"
+   ],
+   "qa": {
+    "states": [
+     {
+      "at": "line:L8",
+      "what": "shot on the narration beat"
+     }
+    ]
+   },
+   "template": "archival-plate",
+   "provenance": {
+    "kind": "archival",
+    "label": "NASA portrait"
+   },
+   "assets": [
+    "crew"
+   ],
+   "params": {
+    "media": "asset:crew",
+    "chip": {
+     "label": "NASA portrait",
+     "kind": "archival"
+    },
+    "box": {
+     "x": 0,
+     "y": 420,
+     "w": 1080,
+     "h": "auto"
+    },
+    "camera": {
+     "keys": [
+      {
+       "at": "line:L8 -0.1",
+       "focus": [
+        3231,
+        4039
+       ],
+       "zoom": 1
+      },
+      {
+       "at": "line:L9 -0.1",
+       "focus": [
+        3231,
+        4039
+       ],
+       "zoom": 1.05
+      }
+     ]
+    },
+    "under": "ink"
+   },
+   "transition": {
+    "type": "dip",
+    "reason": "loss beat: slow dissolve, no animation",
+    "fade": 0.35
+   }
+  },
+  {
+   "id": "S09",
+   "beat": "payoff",
+   "line": "L9",
+   "start": "line:L9 -0.1",
+   "end": "end",
+   "evidence": [
+    "C-a13-payoff"
+   ],
+   "qa": {
+    "states": [
+     {
+      "at": "line:L9",
+      "what": "payoff line"
+     },
+     {
+      "at": "end -0.35",
+      "what": "returns to the opening frame"
+     }
+    ]
+   },
+   "template": "payoff",
+   "provenance": {
+    "kind": "archival",
+    "label": "NASA photo · launch"
+   },
+   "assets": [
+    "launch"
+   ],
+   "params": {
+    "media": "asset:launch",
+    "box": {
+     "x": 0,
+     "y": 0,
+     "w": 1080,
+     "h": 1400
+    },
+    "camera": {
+     "keys": [
+      {
+       "at": "line:L9 -0.1",
+       "focus": [
+        3400,
+        4250
+       ],
+       "zoom": 1.06
+      },
+      {
+       "at": "end",
+       "focus": [
+        3400,
+        4250
+       ],
+       "zoom": 1
+      }
+     ]
+    },
+    "lines": [
+     {
+      "text": "The flight was saved in space.",
+      "tier": "setup"
+     },
+     {
+      "text": "The tank was lost on the ground.",
+      "tier": "payoff",
+      "in": 0.35
+     }
+    ],
+    "y": 330,
+    "fadeOut": 0.35,
+    "dim": 0.25,
+    "shades": [
+     {
+      "kind": "top",
+      "h": 640
+     },
+     {
+      "kind": "bottom",
+      "y": 1120,
+      "h": 290
+     },
+     {
+      "kind": "ink",
+      "y": 1400,
+      "h": 520
+     }
+    ],
+    "chip": {
+     "label": "NASA photo · launch",
+     "kind": "archival"
+    }
+   },
+   "transition": {
+    "type": "loop",
+    "reason": "returns to the opening framing for the replay"
+   }
+  }
+ ]
+}

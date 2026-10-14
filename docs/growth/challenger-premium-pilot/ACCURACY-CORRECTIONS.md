@@ -45,3 +45,14 @@
 - plume shape.
 
 All are labelled illustrative or approximate on screen.
+
+## 4. Round 2 audit (2026-10-14): time bases and geometry
+
+| Item | Finding | Correction |
+|---|---|---|
+| **S07 film clock** | The time base "Video starts at T-10 seconds" (NASA caption) is **insufficient**. The video is an **edited compilation**: camera changes at about 3, 12, 16, 18 and 27 s (checked frame by frame). The 29.5–33.0 s excerpt cannot be mapped to mission time. | **No mission clock** on S07. `assets.json` records `climb.timeline.edited = true` with no verified segment. A new validator gate fails any film clock unless the asset lists a verified continuous segment covering the excerpt with that time base. The previous round's "T+19.5 → 22.3 s · APPROX." is withdrawn. |
+| **S08 E-207 stamp** | No documented time code for the excerpt, so "FIRST FLAME T+58.788" could read as the time of the frame shown | Relabelled **"FIRST FLAME · DOCUMENTED TIME"**: the event's documented time, not a frame clock. `e207.timeline` notes that no running clock may be shown. |
+| **S06 geometry** | The view now extends over the clevis pin (Fig. 14 "Clevis Pin", measured: x 158–261, y 411–470) | New measured anchor `clevis-pin`. All S06 parts come from Fig. 14 anchors; the gap stays a declared ×8. |
+| **S06 blow-by timing** | Gas now starts escaping shortly after the joint opens | Grounded in E1 (smoke at the joint at 0.678 s): the lead-in starts 0.7 s after "ignition" and cites C-smoke-0678. |
+| **S06 combustion side** | Pressure glow and arrows on the inside | Ch. IV: the gap "opens as the combustion gas pressure rises". The arrows are illustrative, inside a declared explanatory animation. |
+| **V3 narration L6** ("Then the smoke stopped, and Challenger flew on.") | **No claim** in evidence.json supports it (found by the planner) | Open: needs a verified passage (E1 describes the smoke puffs ending) or a rewrite before production. |

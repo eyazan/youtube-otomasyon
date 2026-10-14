@@ -72,5 +72,14 @@ add("C-reversed-finding4", text="Thiokol management reversed its position and re
 add("C-fax-recommend", text="The signed telefax: MTI recommends STS-51L launch proceed on 28 January 1986", kind="quote", source="E9", passage="MTI RECOMMENDS STS-51L LAUNCH PROCEED ON 28 JANUARY 1986 (typed telefax, Rogers Vol. 1 p. 97)", status="verified")
 add("C-finding-unaware", text="Those who made that decision were unaware of the contractor's written recommendation", kind="quote", source="E3", locator="Ch. V p. 82", passage=P("5", "Those who made that decision were", "53 degrees Fahrenheit"), display="Those who made that decision|were unaware…", status="verified")
 add("C-payoff", text="Editorial summary: the seal failed in the cold; the warning failed the night before", kind="editorial", source="E2", note="editorial summary of E2 (cause) and E3 (contributing cause); not a quotation", status="verified")
+# planner metadata (human-entered): what each claim is, so templates can be chosen by rule
+ROLES = {"C-launch-1986": "date", "C-smoke-0678": "event", "C-smoke-right-srb": "context", "C-temp-36f": "temperature", "C-15f-colder": "context",
+  "C-two-orings": "ring-diameter", "C-gap-max": "gap-max", "C-gap-600ms": "opening-duration", "C-joint-28f": "temperature", "C-test-75f": "temperature", "C-resiliency-cold": "context",
+  "C-flame-58788": "event", "C-plume-59262": "event", "C-deflect-60238": "event", "C-leak-64660": "event", "C-strut-7220": "event", "C-dome-73124": "event", "C-ended-73s": "context",
+  "C-breakup-photo-76s": "context", "C-crew-seven": "context", "C-mission-sts51l": "designation", "C-crew-portrait-1985": "date", "C-hole-recovered": "context",
+  "C-et-length": "tank-length", "C-et-diameter": "tank-diameter", "C-srb-length": "booster-length", "C-srb-diameter": "booster-diameter", "C-srm-diameter": "context",
+  "C-telecon-0845": "chronology", "C-reversal-1100": "chronology", "C-fax-1145": "chronology", "C-launch-1138": "chronology", "C-chart-53f": "quote", "C-fax-recommend": "quote",
+  "C-reversed-finding4": "context", "C-finding-unaware": "finding", "C-payoff": "editorial", "C-climb-timebase": "context"}
+for cid, role in ROLES.items(): ev["claims"][cid]["role"] = role
 json.dump(ev, open(OUT, "w"), indent=1, ensure_ascii=False); open(OUT, "a").write("\n")
 print(len(ev["claims"]), "claims")

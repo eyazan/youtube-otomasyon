@@ -200,7 +200,7 @@
   // one fixed key light. State: gapPx (drawing px, already scaled by any declared exaggeration),
   // rec[i] 0..1 (how far ring i has recovered), squeeze (0..1 initial compression), gas 0..1 (flow progress).
   // Returns { svg, rings: [{x, y, sealed}], gap: {x, y} } in screen px for labels.
-  X.jointSection = ({ geom, view, gapPx = 0, rec = [], squeeze = 0.3, gas = 0, lightDeg = -135, uid = "js", ringRim = "#7cc6ff", pressure = 0, t = 0 }) => {
+  X.jointSection = ({ geom, view, gapPx = 0, rec = [], squeeze = 0.3, gas = 0, lightDeg = -135, uid = "js", ringRim = "#7cc6ff", pressure = 0, t = 0, gasLevel = 1 }) => {
     const R = view.region, B = view.box, s = B.w / R.w; const map = (x, y) => ({ x: B.x + (x - R.x) * s, y: B.y + (y - R.y) * s });
     const rect = (r, dx = 0) => { const a = map(r.x + dx, r.y), b = map(r.x + r.w + dx, r.y + r.h); return { x: a.x, y: a.y, w: b.x - a.x, h: b.y - a.y }; };
     const L = (lightDeg * Math.PI) / 180, gx = 0.5 - 0.5 * Math.cos(L), gy = 0.5 - 0.5 * Math.sin(L);
@@ -215,6 +215,9 @@
     const body = (r) => `<g><rect x="${r.x}" y="${r.y}" width="${r.w}" height="${r.h}" fill="url(#${uid}st)"/><rect x="${r.x}" y="${r.y}" width="${r.w}" height="${r.h}" fill="#fff" filter="url(#${uid}n)"/>
       <rect x="${r.x}" y="${r.y}" width="${r.w}" height="${r.h}" fill="url(#${uid}h)"/><rect x="${r.x + 1}" y="${r.y + 1}" width="${r.w - 2}" height="${r.h - 2}" fill="none" stroke="#c9d3de" stroke-opacity="0.45" stroke-width="2"/></g>`;
     const tang = rect(geom.tang, -gapPx), inner = rect(geom.innerLeg), outer = geom.outerLeg ? rect(geom.outerLeg) : null;
+    // clevis pin (fixed with the clevis): a steel cylinder seen side-on, lit from the key light
+    const pin = geom.pin ? (() => { const r = rect(geom.pin); return `<defs><linearGradient id="${uid}pn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c3ccd6"/><stop offset="0.45" stop-color="#8a96a4"/><stop offset="1" stop-color="#424b56"/></linearGradient></defs>
+      <rect x="${r.x}" y="${r.y}" width="${r.w}" height="${r.h}" rx="${r.h * 0.18}" fill="url(#${uid}pn)" stroke="#20262e" stroke-width="3"/><rect x="${r.x}" y="${r.y}" width="${r.w}" height="${r.h}" rx="${r.h * 0.18}" fill="#fff" filter="url(#${uid}n)"/>`; })() : "";
     const W = geom.ringPx * s, depth = W * (1 - squeeze), xb = inner.x + depth, xt = tang.x + tang.w;
     let grooves = "", rings = "", info = [];
     geom.rings.forEach((rp, i) => { const c = map(rp[0], rp[1]); const gh = W * 1.25;
@@ -232,9 +235,10 @@
       const end = blocked == null ? bottom : blocked; const len = end - top; const n = 26; const reach = top + len * Math.min(1, gas * 1.4);
       const xAt = (y) => { const rr = info.find((r) => Math.abs(y - r.y) < r.h / 2); return rr ? (xt + rr.left) / 2 : gapX; };
       const line = []; for (let y = top; y <= Math.min(end, reach); y += 6) line.push(`${xAt(y).toFixed(1)} ${y.toFixed(1)}`);
-      for (let i = 0; i < n; i += 1) { const u = ((i / n) + gas * 1.7) % 1; const y = top + u * len * Math.min(1, gas * 1.4); if (y > end) continue;
+      // particles keep flowing with time once the path is open
+      for (let i = 0; i < n; i += 1) { const u = ((i / n) + t * 0.9) % 1; const y = top + u * len * Math.min(1, gas * 1.4); if (y > end) continue;
         pts.push(`<circle cx="${xAt(y)}" cy="${y}" r="${(10 + 5 * Math.sin(i * 1.7)) * s / 7}" fill="url(#${uid}gl)"/>`); }
-      flow = `<g opacity="${Math.min(1, gas * 2)}">${line.length > 1 ? `<path d="M${line.join(" L")}" fill="none" stroke="#ff8a3a" stroke-width="${2.2 * s}" stroke-linecap="round" opacity="0.55" filter="url(#${uid}ao)"/><path d="M${line.join(" L")}" fill="none" stroke="#ffd27a" stroke-width="${0.7 * s}" stroke-linecap="round" opacity="0.9"/>` : ""}${pts.join("")}<rect x="${inner.x}" y="${top - 30}" width="${inner.w}" height="30" fill="url(#${uid}gl)" opacity="0.6"/></g>`; }
+      flow = `<g opacity="${Math.min(1, gas * 2) * gasLevel}">${line.length > 1 ? `<path d="M${line.join(" L")}" fill="none" stroke="#ff8a3a" stroke-width="${2.2 * s}" stroke-linecap="round" opacity="0.55" filter="url(#${uid}ao)"/><path d="M${line.join(" L")}" fill="none" stroke="#ffd27a" stroke-width="${0.7 * s}" stroke-linecap="round" opacity="0.9"/>` : ""}${pts.join("")}<rect x="${inner.x}" y="${top - 30}" width="${inner.w}" height="30" fill="url(#${uid}gl)" opacity="0.6"/></g>`; }
     // combustion side (inside, beyond the inner leg): hot gas pressure builds from ignition and pushes on the joint
     const ix = inner.x + inner.w; const fl = 0.85 + 0.15 * Math.sin(t * 19) * Math.sin(t * 5.7);
     const chamber = pressure > 0 ? `<rect x="${ix}" y="${B.y}" width="${B.x + B.w - ix}" height="${B.h}" fill="url(#${uid}ch)" opacity="${0.9 * pressure * fl}"/>
@@ -243,7 +247,7 @@
         return `<path d="M${x0} ${y} h${-40} m14 -16 l-14 16 l14 16" fill="none" stroke="#ffd27a" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" opacity="${0.8 * pressure * (1 - d * 0.6)}"/>`; }).join("")}` : "";
     const svg = `${defs}<g clip-path="url(#${uid}c)"><rect x="${B.x}" y="${B.y}" width="${B.w}" height="${B.h}" fill="#0b0f14"/>${chamber}
       <rect x="${xt}" y="${B.y}" width="${Math.max(0, inner.x - xt)}" height="${B.h}" fill="#05070a"/>
-      ${outer ? body(outer) : ""}${body(tang)}${body(inner)}${grooves}${rings}${flow}</g>`;
+      ${outer ? body(outer) : ""}${body(tang)}${body(inner)}${pin}${grooves}${rings}${flow}</g>`;
     return { svg, rings: info, gap: { x: gapX, y: (info[0] ? info[0].y : B.y + B.h / 2) - W * 1.3 }, map, s, tangFace: xt };
   };
 

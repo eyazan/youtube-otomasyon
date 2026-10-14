@@ -955,7 +955,8 @@
     "C-gap-max",
     "C-two-orings",
     "C-joint-28f",
-    "C-resiliency-cold"
+    "C-resiliency-cold",
+    "C-smoke-0678"
    ],
    "assets": [
     "fig14"
@@ -966,6 +967,7 @@
      "tang": "asset:fig14#tang",
      "innerLeg": "asset:fig14#clevis-inner-leg",
      "outerLeg": "asset:fig14#clevis-outer-leg",
+     "pin": "asset:fig14#clevis-pin",
      "rings": [
       "asset:fig14#primary-oring",
       "asset:fig14#secondary-oring"
@@ -977,14 +979,20 @@
       "x": 150,
       "y": 262,
       "w": 130,
-      "h": 140
+      "h": 183
      },
      "box": {
       "x": 70,
       "y": 300,
       "w": 940,
-      "h": 1012
+      "h": 1323
      }
+    },
+    "fromDrawing": {
+     "window": [
+      "line:L5 -0.1",
+      "line:L5 +0.5"
+     ]
     },
     "ringDiameter": "claim:C-two-orings",
     "gapMax": "claim:C-gap-max",
@@ -1005,7 +1013,11 @@
      "window": [
       "word:L5:hot -0.15",
       "word:L5:hot +1.0"
-     ]
+     ],
+     "leadIn": {
+      "from": "word:L5:ignition +0.7",
+      "level": 0.45
+     }
     },
     "push": {
      "window": [
@@ -1089,6 +1101,11 @@
       "claim": "C-gap-600ms"
      },
      {
+      "at": "word:L5:ignition +0.7",
+      "what": "blow-by begins (smoke documented at 0.678 s)",
+      "claim": "C-smoke-0678"
+     },
+     {
       "at": "word:L5:couldn't",
       "what": "cold rings lag: gap stays open",
       "claim": "C-resiliency-cold"
@@ -1112,9 +1129,7 @@
     "kind": "archival",
     "label": "NASA film"
    },
-   "evidence": [
-    "C-climb-timebase"
-   ],
+   "evidence": [],
    "assets": [
     "climb"
    ],
@@ -1150,11 +1165,6 @@
       "h": 200
      }
     ],
-    "filmClock": {
-     "label": "TIME AFTER LIFTOFF",
-     "timeBase": "claim:C-climb-timebase",
-     "decimals": 1
-    },
     "chip": {
      "label": "NASA film",
      "kind": "archival"
@@ -1168,8 +1178,7 @@
     "states": [
      {
       "at": "line:L6",
-      "what": "film plays; clock from the documented time base",
-      "claim": "C-climb-timebase"
+      "what": "film plays (edited compilation: no mission clock shown)"
      }
     ]
    }
@@ -1241,7 +1250,7 @@
      ]
     },
     "stamp": {
-     "label": "FIRST FLAME",
+     "label": "FIRST FLAME · DOCUMENTED TIME",
      "value": "claim:C-flame-58788"
     },
     "chip": {

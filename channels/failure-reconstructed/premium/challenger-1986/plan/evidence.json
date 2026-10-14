@@ -73,7 +73,8 @@
    "passage": "Flight of the Space Shuttle Challenger on Mission 51-L began at 11:38 a.m. Eastern Standard Time on January 28, 1986.",
    "value": 1986,
    "display": "1986",
-   "status": "verified"
+   "status": "verified",
+   "role": "date"
   },
   "C-smoke-0678": {
    "text": "Smoke above the right SRM field joint was confirmed at 0.678 s",
@@ -84,14 +85,16 @@
    "value": 0.678,
    "unit": "s",
    "display": "0.678 s after liftoff",
-   "status": "verified"
+   "status": "verified",
+   "role": "event"
   },
   "C-smoke-right-srb": {
    "text": "Grey-brown smoke is visible on the right side of the SRB in GPN-2000-001347",
    "kind": "fact",
    "source": "E4",
    "passage": "a cloud of grey-brown smoke can be seen on the right side of the Solid Rocket Booster (SRB) on a line directly across from the letter \"U\" in United States.",
-   "status": "verified"
+   "status": "verified",
+   "role": "context"
   },
   "C-temp-36f": {
    "text": "Ambient temperature at launch was 36 °F",
@@ -102,7 +105,8 @@
    "value": 36,
    "unit": "°F",
    "display": "36°F",
-   "status": "verified"
+   "status": "verified",
+   "role": "temperature"
   },
   "C-15f-colder": {
    "text": "36 °F was 15 degrees colder than any previous launch",
@@ -113,7 +117,8 @@
    "value": 15,
    "unit": "°F",
    "display": "at launch — 15° colder<br>than any launch before",
-   "status": "verified"
+   "status": "verified",
+   "role": "context"
   },
   "C-two-orings": {
    "text": "Each field joint is sealed by two rubber O-rings of 0.280 in diameter",
@@ -123,7 +128,8 @@
    "passage": "Joint sealing is provided by two rubber O-rings with diameters of 0.280 inches (+0.005, -0.003)",
    "value": 0.28,
    "unit": "in",
-   "status": "verified"
+   "status": "verified",
+   "role": "ring-diameter"
   },
   "C-joint-28f": {
    "text": "The right SRB aft joint O-ring temperature was estimated at 28 ±5 °F",
@@ -135,7 +141,8 @@
    "unit": "°F",
    "display": "28°F est.",
    "status": "verified",
-   "approximate": true
+   "approximate": true,
+   "role": "temperature"
   },
   "C-test-75f": {
    "text": "O-ring resiliency tests covered 10 to 75 °F",
@@ -146,7 +153,8 @@
    "value": 75,
    "unit": "°F",
    "display": "75°F test",
-   "status": "verified"
+   "status": "verified",
+   "role": "temperature"
   },
   "C-gap-600ms": {
    "text": "Joint opening at ignition is essentially complete at 600 ms",
@@ -156,7 +164,8 @@
    "passage": "This opening begins upon ignition, reaches its maximum rate of opening at about 200-300 milliseconds, and is essentially complete at 600 milliseconds",
    "value": 600,
    "unit": "ms",
-   "status": "verified"
+   "status": "verified",
+   "role": "opening-duration"
   },
   "C-resiliency-cold": {
    "text": "Cold O-rings are very slow in returning towards their original shape",
@@ -164,7 +173,8 @@
    "source": "E2",
    "locator": "Ch. IV",
    "passage": "the O-ring is very slow in returning towards its original shape",
-   "status": "verified"
+   "status": "verified",
+   "role": "context"
   },
   "C-flame-58788": {
    "text": "First evidence of flame on the right SRB at 58.788 s",
@@ -174,7 +184,8 @@
    "value": 58.788,
    "unit": "s",
    "display": "58.788",
-   "status": "verified"
+   "status": "verified",
+   "role": "event"
   },
   "C-plume-59262": {
    "text": "Continuous, well-defined plume at 59.262 s",
@@ -183,7 +194,8 @@
    "passage": "It grew into a continuous, well-defined plume at 59.262 seconds.",
    "value": 59.262,
    "unit": "s",
-   "status": "verified"
+   "status": "verified",
+   "role": "event"
   },
   "C-deflect-60238": {
    "text": "First evidence of plume deflection at 60.238 s",
@@ -194,7 +206,8 @@
    "value": 60.238,
    "unit": "s",
    "display": "PLUME TURNS ONTO THE TANK",
-   "status": "verified"
+   "status": "verified",
+   "role": "event"
   },
   "C-leak-64660": {
    "text": "The plume breached the External Tank (hydrogen leak) at 64.660 s",
@@ -204,7 +217,8 @@
    "value": 64.66,
    "unit": "s",
    "display": "HYDROGEN TANK LEAKS",
-   "status": "verified"
+   "status": "verified",
+   "role": "event"
   },
   "C-strut-7220": {
    "text": "At about 72.20 s the lower SRB-ET strut was severed or pulled away",
@@ -215,7 +229,8 @@
    "unit": "s",
    "display": "LOWER STRUT BREAKS",
    "approximate": true,
-   "status": "verified"
+   "status": "verified",
+   "role": "event"
   },
   "C-dome-73124": {
    "text": "At 73.124 s the tank's aft dome began to fail",
@@ -225,7 +240,8 @@
    "value": 73.124,
    "unit": "s",
    "display": "TANK’S AFT DOME FAILS",
-   "status": "verified"
+   "status": "verified",
+   "role": "event"
   },
   "C-ended-73s": {
    "text": "The flight ended 73 seconds after launch",
@@ -234,14 +250,16 @@
    "passage": "It ended 73 seconds later in an explosive burn of hydrogen and oxygen propellants that destroyed the External Tank",
    "value": 73,
    "unit": "s",
-   "status": "verified"
+   "status": "verified",
+   "role": "context"
   },
   "C-crew-seven": {
    "text": "All seven crew members perished",
    "kind": "fact",
    "source": "E1",
    "passage": "All seven crew members perished.",
-   "status": "verified"
+   "status": "verified",
+   "role": "context"
   },
   "C-breakup-photo-76s": {
    "text": "The breakup photograph shows the vehicle about 76 s into the flight",
@@ -252,7 +270,8 @@
    "unit": "s",
    "display": "about 76 s after launch",
    "approximate": true,
-   "status": "verified"
+   "status": "verified",
+   "role": "context"
   },
   "C-crew-portrait-1985": {
    "text": "STS-51-L official crew portrait, November 15, 1985",
@@ -261,7 +280,8 @@
    "passage": "The crew of Space Shuttle mission STS-51-L pose for their official portrait on November 15, 1985.",
    "value": 1985,
    "display": "1985",
-   "status": "verified"
+   "status": "verified",
+   "role": "date"
   },
   "C-mission-sts51l": {
    "text": "The mission designation was STS-51-L",
@@ -269,14 +289,16 @@
    "source": "E7",
    "passage": "The crew of Space Shuttle mission STS-51-L pose for their official portrait",
    "display": "THE STS-51-L CREW",
-   "status": "verified"
+   "status": "verified",
+   "role": "designation"
   },
   "C-hole-recovered": {
    "text": "Scorched hole in the recovered right Solid Rocket Motor",
    "kind": "fact",
    "source": "E5",
    "passage": "Shown here is an interior view of the scorched hole in Space Shuttle Challenger's right Solid Rocket Motor.",
-   "status": "verified"
+   "status": "verified",
+   "role": "context"
   },
   "C-et-length": {
    "text": "The External Tank is 154 feet long",
@@ -285,7 +307,8 @@
    "passage": "It is 154 feet long and 27 1/2 feet in diameter.",
    "value": 154,
    "unit": "ft",
-   "status": "verified"
+   "status": "verified",
+   "role": "tank-length"
   },
   "C-et-diameter": {
    "text": "The External Tank is 27 1/2 feet in diameter",
@@ -295,7 +318,8 @@
    "value": 27.5,
    "unit": "ft",
    "valueAsWritten": "27 1/2",
-   "status": "verified"
+   "status": "verified",
+   "role": "tank-diameter"
   },
   "C-srm-diameter": {
    "text": "SRM case sections are about 12 feet in diameter",
@@ -305,7 +329,8 @@
    "value": 12,
    "unit": "ft",
    "approximate": true,
-   "status": "verified"
+   "status": "verified",
+   "role": "context"
   },
   "C-srb-length": {
    "text": "Each SRB is 149.16 feet long",
@@ -316,7 +341,8 @@
    "value": 149.16,
    "unit": "ft",
    "status": "verified",
-   "note": "V3 drew 45.6 m (no source); the evidenced 149.16 ft = 45.46 m is used now"
+   "note": "V3 drew 45.6 m (no source); the evidenced 149.16 ft = 45.46 m is used now",
+   "role": "booster-length"
   },
   "C-srb-diameter": {
    "text": "Each SRB is 12.17 feet in diameter",
@@ -326,7 +352,8 @@
    "passage": "Each SRB is 149.16 feet long, 12.17 feet in diameter and weighs ~1,300,000 pounds at launch.",
    "value": 12.17,
    "unit": "ft",
-   "status": "verified"
+   "status": "verified",
+   "role": "booster-diameter"
   },
   "C-gap-max": {
    "text": "Aft field joint gap opening increases of approximately 0.029 in (primary) and 0.017 in (secondary)",
@@ -337,7 +364,8 @@
    "value": 0.029,
    "unit": "in",
    "approximate": true,
-   "status": "verified"
+   "status": "verified",
+   "role": "gap-max"
   },
   "C-climb-timebase": {
    "text": "The NASA launch-and-breakup video starts at T-10 seconds",
@@ -349,7 +377,8 @@
    "valueAsWritten": "T-10",
    "approximate": true,
    "status": "verified",
-   "note": "caption-level time base; the clock built on it is marked approximate"
+   "note": "caption-level time base; the clock built on it is marked approximate",
+   "role": "context"
   },
   "C-telecon-0845": {
    "text": "Phase 2 of the teleconference began at about 8:45 p.m. EST on 27 January",
@@ -358,7 +387,8 @@
    "passage": "At approximately 8:45 p.m. Eastern Standard Time",
    "display": "~8:45 PM",
    "approximate": true,
-   "status": "verified"
+   "status": "verified",
+   "role": "chronology"
   },
   "C-reversal-1100": {
    "text": "At about 11:00 PM EST Thiokol recommended launch",
@@ -368,7 +398,8 @@
    "passage": "Approximately 11:00 PM (EST) &nbsp; Same participants at 8:45 PM Teleconference. &nbsp; Second Teleconference (Cont'd). Thiokol indicates it had reassessed; temperature effects are concern, but data is inconclusive. Kilminster reads the rationale for recommending launch. Thiokol recommends launch.",
    "display": "~11:00 PM",
    "approximate": true,
-   "status": "verified"
+   "status": "verified",
+   "role": "chronology"
   },
   "C-fax-1145": {
    "text": "At about 11:45 PM EST Kilminster faxed Thiokol's recommendation to launch",
@@ -378,7 +409,8 @@
    "passage": "Approximately 11:45 PM (EST) Telefax. Kilminster faxes Thiokol's recommendation",
    "display": "~11:45 PM",
    "approximate": true,
-   "status": "verified"
+   "status": "verified",
+   "role": "chronology"
   },
   "C-launch-1138": {
    "text": "Launch at 11:38 a.m. EST, January 28, 1986",
@@ -386,7 +418,8 @@
    "source": "E1",
    "passage": "Flight of the Space Shuttle Challenger on Mission 51-L began at 11:38 a.m. Eastern Standard Time on January 28, 1986.",
    "display": "11:38 AM",
-   "status": "verified"
+   "status": "verified",
+   "role": "chronology"
   },
   "C-chart-53f": {
    "text": "Thiokol's chart: O-ring temp must be ≥ 53 °F at launch",
@@ -396,7 +429,8 @@
    "passage": "O-RING TEMP MUST BE ≥ 53 °F AT LAUNCH (handwritten chart, Rogers Vol. 1 p. 90)",
    "value": 53,
    "unit": "°F",
-   "status": "verified"
+   "status": "verified",
+   "role": "quote"
   },
   "C-reversed-finding4": {
    "text": "Thiokol management reversed its position and recommended launch",
@@ -404,14 +438,16 @@
    "source": "E3",
    "locator": "Ch. V Finding 4",
    "passage": "4. The Commission concluded that the Thiokol Management reversed its position and recommended the launch of 51-L",
-   "status": "verified"
+   "status": "verified",
+   "role": "context"
   },
   "C-fax-recommend": {
    "text": "The signed telefax: MTI recommends STS-51L launch proceed on 28 January 1986",
    "kind": "quote",
    "source": "E9",
    "passage": "MTI RECOMMENDS STS-51L LAUNCH PROCEED ON 28 JANUARY 1986 (typed telefax, Rogers Vol. 1 p. 97)",
-   "status": "verified"
+   "status": "verified",
+   "role": "quote"
   },
   "C-finding-unaware": {
    "text": "Those who made that decision were unaware of the contractor's written recommendation",
@@ -420,14 +456,16 @@
    "locator": "Ch. V p. 82",
    "passage": "Those who made that decision were unaware of the recent history of problems concerning the O-rings and the joint and were unaware of the initial written recommendation of the contractor advising against the launch at temperatures below 53 degrees Fahrenheit",
    "display": "Those who made that decision|were unaware…",
-   "status": "verified"
+   "status": "verified",
+   "role": "finding"
   },
   "C-payoff": {
    "text": "Editorial summary: the seal failed in the cold; the warning failed the night before",
    "kind": "editorial",
    "source": "E2",
    "note": "editorial summary of E2 (cause) and E3 (contributing cause); not a quotation",
-   "status": "verified"
+   "status": "verified",
+   "role": "editorial"
   }
  }
 }
