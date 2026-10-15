@@ -2,6 +2,7 @@
 const test=require("node:test"),assert=require("node:assert/strict"),fs=require("node:fs");
 const path=require("node:path"),os=require("node:os");
 const Primary=require("../../scripts/ct-primary-document"),CLI=require("../../scripts/ct-evidence-first-manual");
+const Evidence=require("../../scripts/ct-evidence-first");
 const one={kind:"primary",url:"https://nasa.gov/reports/incident"};
 const dns=async()=>["8.8.8.8"];
 const html=Buffer.from("<html><body><h1>Official Report</h1>Documented technical failure.</body></html>");
@@ -83,4 +84,25 @@ test("manual fixture is explicitly MOCKED with no LLM or publication",async()=>{
     assert.equal(output.model_usage,"MOCKED_NOT_REAL");
     assert.equal(output.no_groq_requests,true);
   }finally{fs.rmSync(dir,{recursive:true,force:true});if(prior===undefined)delete process.env.CT_EVIDENCE_FIRST_MANUAL;else process.env.CT_EVIDENCE_FIRST_MANUAL=prior;}
+});
+
+test("real Stage A receives only independently retrieved original text; matching two documents is still semantic-review-only",async()=>{
+  const quote=i=>"The official report confirms component number "+i+" triggered a cascade of documented technical failures.";
+  const facts=Array.from({length:16},(_,i)=>({fact_id:"F"+(i+1),source_id:i<8?"S1":"S2",
+    claim:"Component "+(i+1)+" triggered documented technical failures.",verbatim_quote:quote(i+1)}));
+  const sources=[1,2].map(n=>({source_id:"S"+n,kind:"primary",
+    url:n===1?"https://nasa.gov/mock-first":"https://nist.gov/mock-second",
+    excerpt:facts.filter(f=>f.source_id==="S"+n).map(f=>f.verbatim_quote).join("\n")}));
+  const lookup=new Map(sources.map(s=>[s.url,s.excerpt]));
+  const verifier=Primary.createPrimaryVerifier({resolve4:dns,requestBytes:async url=>
+    response(Buffer.from(lookup.get(url.toString())||""),{"content-type":"text/plain"})});
+  const p=await Evidence.validateEvidence({topic:{id:"CT-MOCK"},facts,sources,verifyPrimary:verifier});
+  assert.equal(p.verification.distinct_primary_documents,2);
+  assert.equal(p.status,"READY_FOR_STORY_REVIEW_REQUIRED");
+  assert.ok(p.approved_facts.every(f=>f.semantic_status==="NEEDS_REVIEW"));
+  lookup.set(sources[1].url,"another source unrelated to the claimed event");
+  const q=await Evidence.validateEvidence({topic:{id:"CT-MOCK"},facts,sources,verifyPrimary:verifier});
+  assert.equal(q.verification.distinct_primary_documents,1);
+  assert.equal(q.status,"INSUFFICIENT_EVIDENCE");
+  assert.equal(q.approved_facts[8].evidence_status,"EXCERPT_MATCHED");
 });
