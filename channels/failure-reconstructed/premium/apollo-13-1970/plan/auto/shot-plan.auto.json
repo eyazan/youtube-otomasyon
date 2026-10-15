@@ -13,7 +13,214 @@
   ],
   "captionFrom": "0.5"
  },
- "shared": {},
+ "shared": {
+  "component-l2": {
+   "mode": "conceptual",
+   "disclosure": "Conceptual diagram · not to scale",
+   "scale": {
+    "mode": "schematic"
+   },
+   "parts": [
+    {
+     "id": "heater",
+     "kind": "heater",
+     "label": "heater tube assembly",
+     "claim": "claim:C-a13-1000f"
+    },
+    {
+     "id": "gse-power-supply",
+     "kind": "supply",
+     "label": "GSE power supply",
+     "claim": "claim:C-a13-heaters-65v"
+    },
+    {
+     "id": "switch",
+     "kind": "switch",
+     "label": "thermostatic switches",
+     "claim": "claim:C-a13-switch-rating"
+    },
+    {
+     "id": "spacecraft-power-supply",
+     "kind": "supply",
+     "label": "spacecraft power supply",
+     "claim": "claim:C-a13-switch-rating"
+    },
+    {
+     "id": "insulation",
+     "kind": "insulation",
+     "label": "Teflon insulation",
+     "claim": "claim:C-a13-teflon",
+     "layerOf": "wire"
+    },
+    {
+     "id": "wire",
+     "kind": "wire",
+     "label": "fan motor wires",
+     "claim": "claim:C-a13-teflon"
+    }
+   ],
+   "links": [
+    {
+     "from": "heater",
+     "to": "gse-power-supply",
+     "kind": "powered-by",
+     "claim": "claim:C-a13-heaters-65v"
+    },
+    {
+     "from": "switch",
+     "to": "spacecraft-power-supply",
+     "kind": "rated-for",
+     "claim": "claim:C-a13-switch-rating"
+    },
+    {
+     "from": "switch",
+     "to": "heater",
+     "kind": "in-series",
+     "claim": "claim:C-a13-switch-80f"
+    },
+    {
+     "from": "switch",
+     "to": "heater",
+     "kind": "mounted-on",
+     "claim": "claim:C-a13-switch-80f"
+    },
+    {
+     "from": "insulation",
+     "to": "wire",
+     "kind": "layer-of",
+     "claim": "claim:C-a13-teflon"
+    },
+    {
+     "from": "wire",
+     "to": "heater",
+     "kind": "near",
+     "claim": "claim:C-a13-teflon"
+    }
+   ],
+   "states": [
+    {
+     "part": "heater",
+     "state": "on",
+     "at": "word:L2:sixty-five",
+     "claim": "claim:C-a13-heaters-65v",
+     "value": "claim:C-a13-heaters-65v",
+     "tag": "ENERGIZED {C-a13-heaters-65v}"
+    },
+    {
+     "part": "switch",
+     "state": "stuck-closed",
+     "at": "word:L4:not",
+     "claim": "claim:C-a13-switch-rating",
+     "tag": "COULD NOT OPEN"
+    },
+    {
+     "part": "switch",
+     "state": "rated",
+     "at": "word:L3:twenty-eight",
+     "claim": "claim:C-a13-switch-rating",
+     "value": "claim:C-a13-switch-rating",
+     "tag": "RATED {C-a13-switch-rating}"
+    },
+    {
+     "part": "switch",
+     "state": "threshold",
+     "at": "word:L4:eighty",
+     "claim": "claim:C-a13-switch-80f",
+     "value": "claim:C-a13-switch-80f",
+     "tag": "OPEN AT {C-a13-switch-80f}"
+    },
+    {
+     "part": "heater",
+     "state": "hot",
+     "at": "word:L5:thousand",
+     "claim": "claim:C-a13-1000f",
+     "value": "claim:C-a13-1000f",
+     "tag": "{C-a13-1000f}"
+    },
+    {
+     "part": "insulation",
+     "state": "damaged",
+     "at": "word:L5:damaging",
+     "claim": "claim:C-a13-teflon",
+     "tag": "INSULATION DAMAGED"
+    }
+   ],
+   "camera": [
+    {
+     "at": "line:L2 -0.1",
+     "focus": [
+      "heater",
+      "gse-power-supply",
+      "switch",
+      "wire"
+     ]
+    },
+    {
+     "at": "line:L2 +0.9",
+     "focus": [
+      "heater",
+      "gse-power-supply",
+      "switch",
+      "wire"
+     ]
+    },
+    {
+     "at": "line:L2 +1.7",
+     "focus": [
+      "heater",
+      "gse-power-supply"
+     ]
+    },
+    {
+     "at": "line:L3 -0.1",
+     "focus": [
+      "heater",
+      "gse-power-supply"
+     ]
+    },
+    {
+     "at": "line:L3 +0.7",
+     "focus": [
+      "switch"
+     ]
+    },
+    {
+     "at": "line:L4 -0.1",
+     "focus": [
+      "switch"
+     ]
+    },
+    {
+     "at": "line:L4 +0.7",
+     "focus": [
+      "switch"
+     ]
+    },
+    {
+     "at": "line:L5 -0.1",
+     "focus": [
+      "switch"
+     ]
+    },
+    {
+     "at": "line:L5 +0.7",
+     "focus": [
+      "heater",
+      "insulation"
+     ]
+    }
+   ],
+   "stamps": [
+    {
+     "value": "{C-a13-detank-date}",
+     "window": [
+      "line:L2 +0.1",
+      "line:L3 -0.3"
+     ]
+    }
+   ]
+  }
+ },
  "shots": [
   {
    "id": "S01",
@@ -59,16 +266,16 @@
       {
        "at": "0",
        "focus": [
-        3400,
-        4250
+        1920,
+        2400
        ],
        "zoom": 1
       },
       {
        "at": "line:L2 -0.1",
        "focus": [
-        3400,
-        4250
+        1920,
+        2400
        ],
        "zoom": 1.06
       }
@@ -121,23 +328,34 @@
     "C-a13-detank-date"
    ],
    "qa": {
-    "states": []
+    "states": [
+     {
+      "at": "word:L2:sixty-five",
+      "what": "heater: on",
+      "claim": "C-a13-heaters-65v"
+     }
+    ]
    },
-   "template": "archival-plate",
+   "template": "component-section",
    "provenance": {
-    "kind": "archival",
-    "label": "NEEDS ASSET"
+    "kind": "explanatory",
+    "label": "Conceptual diagram · not to scale"
    },
    "assets": [],
-   "params": {},
+   "params": {
+    "scene": "shared:component-l2",
+    "chip": {
+     "label": "Explanatory animation",
+     "kind": "explanatory"
+    },
+    "enter": [
+     "line:L2 -0.1",
+     "line:L2 +0.3"
+    ]
+   },
    "transition": {
     "type": "cut",
-    "reason": "cut on the narration beat"
-   },
-   "review": {
-    "codes": [
-     "MISSING_ASSET"
-    ]
+    "reason": "into the component the narration describes"
    }
   },
   {
@@ -150,28 +368,35 @@
     "C-a13-switch-rating"
    ],
    "qa": {
-    "states": []
+    "states": [
+     {
+      "at": "word:L3:twenty-eight",
+      "what": "switch: rated",
+      "claim": "C-a13-switch-rating"
+     }
+    ]
    },
-   "template": "archival-plate",
+   "template": "component-section",
    "provenance": {
-    "kind": "archival",
-    "label": "NEEDS ASSET"
+    "kind": "explanatory",
+    "label": "Conceptual diagram · not to scale"
    },
    "assets": [],
-   "params": {},
-   "transition": {
-    "type": "cut",
-    "reason": "cut on the narration beat"
+   "params": {
+    "scene": "shared:component-l2",
+    "chip": {
+     "label": "Explanatory animation",
+     "kind": "explanatory"
+    }
    },
-   "review": {
-    "codes": [
-     "MISSING_ASSET"
-    ]
+   "transition": {
+    "type": "continuous",
+    "reason": "same component model; the camera travels to the next documented state"
    }
   },
   {
    "id": "S04",
-   "beat": "setting",
+   "beat": "mechanism",
    "line": "L4",
    "start": "line:L4 -0.1",
    "end": "line:L5 -0.1",
@@ -180,23 +405,35 @@
     "C-a13-switch-rating"
    ],
    "qa": {
-    "states": []
+    "states": [
+     {
+      "at": "word:L4:not",
+      "what": "switch: stuck-closed",
+      "claim": "C-a13-switch-rating"
+     },
+     {
+      "at": "word:L4:eighty",
+      "what": "switch: threshold",
+      "claim": "C-a13-switch-80f"
+     }
+    ]
    },
-   "template": "archival-plate",
+   "template": "component-section",
    "provenance": {
-    "kind": "archival",
-    "label": "NEEDS ASSET"
+    "kind": "explanatory",
+    "label": "Conceptual diagram · not to scale"
    },
    "assets": [],
-   "params": {},
-   "transition": {
-    "type": "cut",
-    "reason": "cut on the narration beat"
+   "params": {
+    "scene": "shared:component-l2",
+    "chip": {
+     "label": "Explanatory animation",
+     "kind": "explanatory"
+    }
    },
-   "review": {
-    "codes": [
-     "MISSING_ASSET"
-    ]
+   "transition": {
+    "type": "continuous",
+    "reason": "same component model; the camera travels to the next documented state"
    }
   },
   {
@@ -210,24 +447,35 @@
     "C-a13-teflon"
    ],
    "qa": {
-    "states": []
+    "states": [
+     {
+      "at": "word:L5:thousand",
+      "what": "heater: hot",
+      "claim": "C-a13-1000f"
+     },
+     {
+      "at": "word:L5:damaging",
+      "what": "insulation: damaged",
+      "claim": "C-a13-teflon"
+     }
+    ]
    },
-   "template": "joint-mechanism",
+   "template": "component-section",
    "provenance": {
     "kind": "explanatory",
-    "label": "NEEDS MECHANISM TEMPLATE"
+    "label": "Conceptual diagram · not to scale"
    },
    "assets": [],
-   "params": {},
-   "transition": {
-    "type": "cut",
-    "reason": "cut on the narration beat"
+   "params": {
+    "scene": "shared:component-l2",
+    "chip": {
+     "label": "Explanatory animation",
+     "kind": "explanatory"
+    }
    },
-   "review": {
-    "codes": [
-     "MISSING_EVIDENCE",
-     "NO_TEMPLATE"
-    ]
+   "transition": {
+    "type": "continuous",
+    "reason": "same component model; the camera travels to the next documented state"
    }
   },
   {
@@ -311,24 +559,48 @@
     "C-a13-cause"
    ],
    "qa": {
-    "states": []
+    "states": [
+     {
+      "at": "line:L7",
+      "what": "excerpt card enters"
+     },
+     {
+      "at": "word:L7:electrically",
+      "what": "the finding's words are highlighted",
+      "claim": "C-a13-cause"
+     }
+    ]
    },
-   "template": "document-desk",
+   "template": "document-excerpt",
    "provenance": {
     "kind": "document",
-    "label": "NEEDS DOCUMENT REGION"
+    "label": "Report text · typeset"
    },
    "assets": [],
-   "params": {},
+   "params": {
+    "claim": "claim:C-a13-cause",
+    "highlightAt": "word:L7:electrically",
+    "enter": [
+     "line:L7 -0.1",
+     "line:L7 +0.35"
+    ],
+    "disclosure": "Report text · typeset, not a scan",
+    "chip": {
+     "label": "Report text",
+     "kind": "document"
+    },
+    "push": {
+     "window": [
+      "line:L7 -0.1",
+      "line:L8 -0.1"
+     ],
+     "zoom": 1.04
+    }
+   },
    "transition": {
     "type": "dip",
     "reason": "slow dissolve after the loss beat",
     "fade": 0.3
-   },
-   "review": {
-    "codes": [
-     "MISSING_ANCHOR"
-    ]
    }
   },
   {
@@ -373,16 +645,16 @@
       {
        "at": "line:L8 -0.1",
        "focus": [
-        3231,
-        4039
+        1920,
+        2400
        ],
        "zoom": 1
       },
       {
        "at": "line:L9 -0.1",
        "focus": [
-        3231,
-        4039
+        1920,
+        2400
        ],
        "zoom": 1.05
       }
@@ -438,16 +710,16 @@
       {
        "at": "line:L9 -0.1",
        "focus": [
-        3400,
-        4250
+        1920,
+        2400
        ],
        "zoom": 1.06
       },
       {
        "at": "end",
        "focus": [
-        3400,
-        4250
+        1920,
+        2400
        ],
        "zoom": 1
       }

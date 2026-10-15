@@ -29,10 +29,11 @@ test("planner: Challenger -> 12 shots, 9 clean; the only blockers are real gaps 
   const tpl = r.plan.shots.map((s) => s.template);
   assert.deepEqual(tpl, ["archival-plate", "trace-over-photo", "archival-plate", "joint-section", "joint-mechanism", "archival-plate", "event-sequence", "event-sequence", "archival-plate", "document-desk", "document-desk", "payoff"]);
 });
-test("planner: Apollo 13 -> NEEDS_HUMAN_REVIEW with structured missing anchors, assets and the missing mechanism template", () => {
+test("planner: Apollo 13 -> NEEDS_HUMAN_REVIEW; only the hook still needs a human (its anchor), the rest is planned from evidence", () => {
   const r = run(apollo());
   assert.equal(r.status, "NEEDS_HUMAN_REVIEW"); assert.equal(r.metrics.shots, 9);
-  assert.ok(codes(r, "L1").includes("MISSING_ANCHOR")); assert.ok(codes(r, "L5").includes("NO_TEMPLATE")); assert.ok(codes(r, "L7").includes("MISSING_ANCHOR"));
+  assert.ok(codes(r, "L1").includes("MISSING_ANCHOR")); assert.deepEqual(r.metrics.reviewShots, ["S01"]);
+  assert.deepEqual(r.plan.shots.map((s) => s.template), ["archival-plate", "component-section", "component-section", "component-section", "component-section", "archival-plate", "document-excerpt", "archival-plate", "payoff"]);
   assert.ok(codes(r).includes("SCRIPT_NOT_APPROVED") && codes(r).includes("ESTIMATED_TIMELINE"));
   for (const i of r.issues.filter((x) => x.line)) assert.ok(i.detail && i.needed, `${i.code} has detail and what is needed`);
 });

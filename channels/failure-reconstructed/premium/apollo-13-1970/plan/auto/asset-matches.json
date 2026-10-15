@@ -1,0 +1,1814 @@
+{
+ "schema": "fr-premium.asset-matches.v1",
+ "topic": "apollo-13-1970",
+ "identity": {
+  "designations": [
+   "APOLLO 13"
+  ],
+  "fams": [
+   {
+    "prefix": "apollo",
+    "id": "13"
+   }
+  ],
+  "period": [
+   1970,
+   1970
+  ]
+ },
+ "lines": [
+  {
+   "line": "L1",
+   "beat": "hook",
+   "templates": [
+    "archival-plate"
+   ],
+   "decision": "launch",
+   "status": "MATCHED",
+   "candidates": [
+    {
+     "asset": "launch",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0.875,
+      "exact": 1,
+      "resolution": 1,
+      "aspect": 0.96,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "shares terms with the claims: apollo, launch, complex, kennedy, spac, center",
+      "depicts C-a13-launch (confirmed in assets.json)"
+     ],
+     "verdict": "ACCEPT",
+     "codes": [],
+     "templates": [
+      "archival-plate"
+     ],
+     "score": 0.973
+    },
+    {
+     "asset": "sm-damage-2",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0.25,
+      "exact": 0.5,
+      "resolution": 1,
+      "aspect": 0.77,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "shares terms with the claims: apollo, april",
+      "caption overlap only: confirm what the image depicts"
+     ],
+     "verdict": "NEEDS_HUMAN_REVIEW",
+     "codes": [
+      "CONFIRM_DEPICTION"
+     ],
+     "templates": [
+      "archival-plate"
+     ],
+     "score": 0.689
+    },
+    {
+     "asset": "mission-control",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0.25,
+      "exact": 0.5,
+      "resolution": 1,
+      "aspect": 0.52,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "shares terms with the claims: apollo, center",
+      "caption overlap only: confirm what the image depicts"
+     ],
+     "verdict": "NEEDS_HUMAN_REVIEW",
+     "codes": [
+      "CONFIRM_DEPICTION"
+     ],
+     "templates": [
+      "archival-plate"
+     ],
+     "score": 0.676
+    },
+    {
+     "asset": "tank-fire-test",
+     "criteria": {
+      "licensing": 1,
+      "subject": 0.4,
+      "evidence": 0.5,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.99,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "subject not named in title or caption: confirm",
+      "shares terms with the claims: oxygen, tank, apollo, center",
+      "caption describes a test: not the event; usable only with a reconstruction/test label"
+     ],
+     "verdict": "DISCLOSURE_REQUIRED",
+     "codes": [
+      "DISCLOSURE_REQUIRED"
+     ],
+     "templates": [
+      "archival-plate"
+     ],
+     "score": 0.509
+    },
+    {
+     "asset": "crew",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0.125,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.96,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "shares terms with the claims: apollo"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "archival-plate"
+     ],
+     "score": 0.523
+    },
+    {
+     "asset": "sm-damage",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0.125,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.63,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "shares terms with the claims: apollo"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "archival-plate"
+     ],
+     "score": 0.506
+    },
+    {
+     "asset": "tank-location",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0.375,
+      "exact": 0.5,
+      "resolution": 0.66,
+      "aspect": 0.99,
+      "mobile": 0.69,
+      "template": 0
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "shares terms with the claims: oxygen, tank, apollo",
+      "caption overlap only: confirm what the image depicts",
+      "text ~21 px tall on a phone at 900 px width (from OCR boxes)"
+     ],
+     "verdict": "INCOMPATIBLE",
+     "codes": [
+      "CONFIRM_DEPICTION"
+     ],
+     "templates": [],
+     "score": 0.576
+    },
+    {
+     "asset": "tank-diagram",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0.375,
+      "exact": 0.5,
+      "resolution": 0.33,
+      "aspect": 0.42,
+      "mobile": 0.61,
+      "template": 0
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "shares terms with the claims: oxygen, tank, apollo",
+      "caption overlap only: confirm what the image depicts",
+      "text ~18 px tall on a phone at 900 px width (from OCR boxes)"
+     ],
+     "verdict": "INCOMPATIBLE",
+     "codes": [
+      "CONFIRM_DEPICTION"
+     ],
+     "templates": [],
+     "score": 0.515
+    }
+   ]
+  },
+  {
+   "line": "L2",
+   "beat": "evidence",
+   "templates": [
+    "archival-plate",
+    "component-section"
+   ],
+   "decision": null,
+   "status": "NO_SUITABLE_VISUAL",
+   "candidates": [
+    {
+     "asset": "tank-fire-test",
+     "criteria": {
+      "licensing": 1,
+      "subject": 0.4,
+      "evidence": 0,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.99,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "subject not named in title or caption: confirm",
+      "caption describes a test: not the event; usable only with a reconstruction/test label"
+     ],
+     "verdict": "DISCLOSURE_REQUIRED",
+     "codes": [
+      "DISCLOSURE_REQUIRED"
+     ],
+     "templates": [
+      "archival-plate"
+     ],
+     "score": 0.409
+    },
+    {
+     "asset": "mission-control",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0.2222222222222222,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.52,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "shares terms with the claims: operation"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "archival-plate"
+     ],
+     "score": 0.52
+    },
+    {
+     "asset": "crew",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.96,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "archival-plate"
+     ],
+     "score": 0.498
+    },
+    {
+     "asset": "launch",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.96,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "archival-plate"
+     ],
+     "score": 0.498
+    },
+    {
+     "asset": "sm-damage-2",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.77,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "archival-plate"
+     ],
+     "score": 0.488
+    },
+    {
+     "asset": "sm-damage",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.63,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "archival-plate"
+     ],
+     "score": 0.481
+    },
+    {
+     "asset": "tank-location",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0,
+      "exact": 0,
+      "resolution": 0.66,
+      "aspect": 0.99,
+      "mobile": 0.69,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "text ~21 px tall on a phone at 900 px width (from OCR boxes)"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "component-section"
+     ],
+     "score": 0.451
+    },
+    {
+     "asset": "tank-diagram",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0,
+      "exact": 0,
+      "resolution": 0.33,
+      "aspect": 0.42,
+      "mobile": 0.61,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "text ~18 px tall on a phone at 900 px width (from OCR boxes)"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "component-section"
+     ],
+     "score": 0.39
+    }
+   ]
+  },
+  {
+   "line": "L3",
+   "beat": "evidence",
+   "templates": [
+    "archival-plate",
+    "component-section"
+   ],
+   "decision": null,
+   "status": "NO_SUITABLE_VISUAL",
+   "candidates": [
+    {
+     "asset": "tank-fire-test",
+     "criteria": {
+      "licensing": 1,
+      "subject": 0.4,
+      "evidence": 0.15384615384615385,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.99,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "subject not named in title or caption: confirm",
+      "shares terms with the claims: spacecraft",
+      "caption describes a test: not the event; usable only with a reconstruction/test label"
+     ],
+     "verdict": "DISCLOSURE_REQUIRED",
+     "codes": [
+      "DISCLOSURE_REQUIRED"
+     ],
+     "templates": [
+      "archival-plate"
+     ],
+     "score": 0.44
+    },
+    {
+     "asset": "launch",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0.15384615384615385,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.96,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "shares terms with the claims: spacecraft"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "archival-plate"
+     ],
+     "score": 0.529
+    },
+    {
+     "asset": "mission-control",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0.15384615384615385,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.52,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "shares terms with the claims: spacecraft"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "archival-plate"
+     ],
+     "score": 0.507
+    },
+    {
+     "asset": "crew",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.96,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "archival-plate"
+     ],
+     "score": 0.498
+    },
+    {
+     "asset": "sm-damage-2",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.77,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "archival-plate"
+     ],
+     "score": 0.488
+    },
+    {
+     "asset": "sm-damage",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.63,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "archival-plate"
+     ],
+     "score": 0.481
+    },
+    {
+     "asset": "tank-location",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0,
+      "exact": 0,
+      "resolution": 0.66,
+      "aspect": 0.99,
+      "mobile": 0.69,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "text ~21 px tall on a phone at 900 px width (from OCR boxes)"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "component-section"
+     ],
+     "score": 0.451
+    },
+    {
+     "asset": "tank-diagram",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0,
+      "exact": 0,
+      "resolution": 0.33,
+      "aspect": 0.42,
+      "mobile": 0.61,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "text ~18 px tall on a phone at 900 px width (from OCR boxes)"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "component-section"
+     ],
+     "score": 0.39
+    }
+   ]
+  },
+  {
+   "line": "L4",
+   "beat": "mechanism",
+   "templates": [
+    "component-section",
+    "joint-mechanism",
+    "trace-over-photo"
+   ],
+   "decision": null,
+   "status": "NO_SUITABLE_VISUAL",
+   "candidates": [
+    {
+     "asset": "tank-fire-test",
+     "criteria": {
+      "licensing": 1,
+      "subject": 0.4,
+      "evidence": 0.125,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.99,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "subject not named in title or caption: confirm",
+      "shares terms with the claims: spacecraft",
+      "caption describes a test: not the event; usable only with a reconstruction/test label"
+     ],
+     "verdict": "DISCLOSURE_REQUIRED",
+     "codes": [
+      "DISCLOSURE_REQUIRED"
+     ],
+     "templates": [
+      "trace-over-photo"
+     ],
+     "score": 0.434
+    },
+    {
+     "asset": "launch",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0.125,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.96,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "shares terms with the claims: spacecraft"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "trace-over-photo"
+     ],
+     "score": 0.523
+    },
+    {
+     "asset": "mission-control",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0.125,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.52,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "shares terms with the claims: spacecraft"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "trace-over-photo"
+     ],
+     "score": 0.501
+    },
+    {
+     "asset": "crew",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.96,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "trace-over-photo"
+     ],
+     "score": 0.498
+    },
+    {
+     "asset": "sm-damage-2",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.77,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "trace-over-photo"
+     ],
+     "score": 0.488
+    },
+    {
+     "asset": "sm-damage",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.63,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "trace-over-photo"
+     ],
+     "score": 0.481
+    },
+    {
+     "asset": "tank-location",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0,
+      "exact": 0,
+      "resolution": 0.66,
+      "aspect": 0.99,
+      "mobile": 0.69,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "text ~21 px tall on a phone at 900 px width (from OCR boxes)"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "component-section",
+      "joint-mechanism"
+     ],
+     "score": 0.451
+    },
+    {
+     "asset": "tank-diagram",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0,
+      "exact": 0,
+      "resolution": 0.33,
+      "aspect": 0.42,
+      "mobile": 0.61,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "text ~18 px tall on a phone at 900 px width (from OCR boxes)"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "component-section",
+      "joint-mechanism"
+     ],
+     "score": 0.39
+    }
+   ]
+  },
+  {
+   "line": "L5",
+   "beat": "mechanism",
+   "templates": [
+    "component-section",
+    "joint-mechanism",
+    "trace-over-photo"
+   ],
+   "decision": null,
+   "status": "NEEDS_HUMAN_REVIEW",
+   "candidates": [
+    {
+     "asset": "sm-damage-2",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0.25,
+      "exact": 0.5,
+      "resolution": 1,
+      "aspect": 0.77,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "shares terms with the claims: severely, damag",
+      "caption overlap only: confirm what the image depicts"
+     ],
+     "verdict": "NEEDS_HUMAN_REVIEW",
+     "codes": [
+      "CONFIRM_DEPICTION"
+     ],
+     "templates": [
+      "trace-over-photo"
+     ],
+     "score": 0.689
+    },
+    {
+     "asset": "tank-fire-test",
+     "criteria": {
+      "licensing": 1,
+      "subject": 0.4,
+      "evidence": 0.125,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.99,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "subject not named in title or caption: confirm",
+      "shares terms with the claims: test",
+      "caption describes a test: not the event; usable only with a reconstruction/test label"
+     ],
+     "verdict": "DISCLOSURE_REQUIRED",
+     "codes": [
+      "DISCLOSURE_REQUIRED"
+     ],
+     "templates": [
+      "trace-over-photo"
+     ],
+     "score": 0.434
+    },
+    {
+     "asset": "mission-control",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0.125,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.52,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "shares terms with the claims: operation"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "trace-over-photo"
+     ],
+     "score": 0.501
+    },
+    {
+     "asset": "crew",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.96,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "trace-over-photo"
+     ],
+     "score": 0.498
+    },
+    {
+     "asset": "launch",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.96,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "trace-over-photo"
+     ],
+     "score": 0.498
+    },
+    {
+     "asset": "sm-damage",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.63,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "trace-over-photo"
+     ],
+     "score": 0.481
+    },
+    {
+     "asset": "tank-location",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0,
+      "exact": 0,
+      "resolution": 0.66,
+      "aspect": 0.99,
+      "mobile": 0.69,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "text ~21 px tall on a phone at 900 px width (from OCR boxes)"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "component-section",
+      "joint-mechanism"
+     ],
+     "score": 0.451
+    },
+    {
+     "asset": "tank-diagram",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0,
+      "exact": 0,
+      "resolution": 0.33,
+      "aspect": 0.42,
+      "mobile": 0.61,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "text ~18 px tall on a phone at 900 px width (from OCR boxes)"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "component-section",
+      "joint-mechanism"
+     ],
+     "score": 0.39
+    }
+   ]
+  },
+  {
+   "line": "L6",
+   "beat": "human-cost",
+   "templates": [
+    "archival-plate"
+   ],
+   "decision": "sm-damage-2",
+   "status": "MATCHED",
+   "candidates": [
+    {
+     "asset": "sm-damage-2",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0,
+      "exact": 1,
+      "resolution": 1,
+      "aspect": 0.77,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "depicts C-a13-pressure (confirmed in assets.json)"
+     ],
+     "verdict": "ACCEPT",
+     "codes": [],
+     "templates": [
+      "archival-plate"
+     ],
+     "score": 0.788
+    },
+    {
+     "asset": "sm-damage",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0,
+      "exact": 1,
+      "resolution": 1,
+      "aspect": 0.63,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "depicts C-a13-pressure (confirmed in assets.json)"
+     ],
+     "verdict": "ACCEPT",
+     "codes": [],
+     "templates": [
+      "archival-plate"
+     ],
+     "score": 0.781
+    },
+    {
+     "asset": "tank-fire-test",
+     "criteria": {
+      "licensing": 1,
+      "subject": 0.4,
+      "evidence": 0.375,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.99,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "subject not named in title or caption: confirm",
+      "shares terms with the claims: oxygen, tank, spacecraft",
+      "caption describes a test: not the event; usable only with a reconstruction/test label"
+     ],
+     "verdict": "DISCLOSURE_REQUIRED",
+     "codes": [
+      "DISCLOSURE_REQUIRED"
+     ],
+     "templates": [
+      "archival-plate"
+     ],
+     "score": 0.485
+    },
+    {
+     "asset": "launch",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0.125,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.96,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "shares terms with the claims: spacecraft"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "archival-plate"
+     ],
+     "score": 0.523
+    },
+    {
+     "asset": "mission-control",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0.125,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.52,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "shares terms with the claims: spacecraft"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "archival-plate"
+     ],
+     "score": 0.501
+    },
+    {
+     "asset": "crew",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.96,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "archival-plate"
+     ],
+     "score": 0.498
+    },
+    {
+     "asset": "tank-location",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0.25,
+      "exact": 0.5,
+      "resolution": 0.66,
+      "aspect": 0.99,
+      "mobile": 0.69,
+      "template": 0
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "shares terms with the claims: oxygen, tank",
+      "caption overlap only: confirm what the image depicts",
+      "text ~21 px tall on a phone at 900 px width (from OCR boxes)"
+     ],
+     "verdict": "INCOMPATIBLE",
+     "codes": [
+      "CONFIRM_DEPICTION"
+     ],
+     "templates": [],
+     "score": 0.551
+    },
+    {
+     "asset": "tank-diagram",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0.25,
+      "exact": 0.5,
+      "resolution": 0.33,
+      "aspect": 0.42,
+      "mobile": 0.61,
+      "template": 0
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "shares terms with the claims: oxygen, tank",
+      "caption overlap only: confirm what the image depicts",
+      "text ~18 px tall on a phone at 900 px width (from OCR boxes)"
+     ],
+     "verdict": "INCOMPATIBLE",
+     "codes": [
+      "CONFIRM_DEPICTION"
+     ],
+     "templates": [],
+     "score": 0.49
+    }
+   ]
+  },
+  {
+   "line": "L7",
+   "beat": "decision",
+   "templates": [
+    "document-desk",
+    "document-excerpt"
+   ],
+   "decision": null,
+   "status": "NO_SUITABLE_VISUAL",
+   "candidates": [
+    {
+     "asset": "tank-location",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0.8,
+      "exact": 0.5,
+      "resolution": 0.66,
+      "aspect": 0.99,
+      "mobile": 0.69,
+      "template": 0
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "shares terms with the claims: oxygen, tank, servic, modul",
+      "caption overlap only: confirm what the image depicts",
+      "text ~21 px tall on a phone at 900 px width (from OCR boxes)"
+     ],
+     "verdict": "INCOMPATIBLE",
+     "codes": [
+      "CONFIRM_DEPICTION"
+     ],
+     "templates": [],
+     "score": 0.661
+    },
+    {
+     "asset": "sm-damage-2",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0.4,
+      "exact": 0.5,
+      "resolution": 1,
+      "aspect": 0.77,
+      "mobile": 1,
+      "template": 0
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "shares terms with the claims: servic, modul",
+      "caption overlap only: confirm what the image depicts"
+     ],
+     "verdict": "INCOMPATIBLE",
+     "codes": [
+      "CONFIRM_DEPICTION"
+     ],
+     "templates": [],
+     "score": 0.619
+    },
+    {
+     "asset": "sm-damage",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0.4,
+      "exact": 0.5,
+      "resolution": 1,
+      "aspect": 0.63,
+      "mobile": 1,
+      "template": 0
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "shares terms with the claims: servic, modul",
+      "caption overlap only: confirm what the image depicts"
+     ],
+     "verdict": "INCOMPATIBLE",
+     "codes": [
+      "CONFIRM_DEPICTION"
+     ],
+     "templates": [],
+     "score": 0.612
+    },
+    {
+     "asset": "tank-diagram",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0.8,
+      "exact": 0.5,
+      "resolution": 0.33,
+      "aspect": 0.42,
+      "mobile": 0.61,
+      "template": 0
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "shares terms with the claims: oxygen, tank, servic, modul",
+      "caption overlap only: confirm what the image depicts",
+      "text ~18 px tall on a phone at 900 px width (from OCR boxes)"
+     ],
+     "verdict": "INCOMPATIBLE",
+     "codes": [
+      "CONFIRM_DEPICTION"
+     ],
+     "templates": [],
+     "score": 0.6
+    },
+    {
+     "asset": "tank-fire-test",
+     "criteria": {
+      "licensing": 1,
+      "subject": 0.4,
+      "evidence": 1,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.99,
+      "mobile": 1,
+      "template": 0
+     },
+     "reasons": [
+      "subject not named in title or caption: confirm",
+      "shares terms with the claims: fir, oxygen, tank, servic, modul",
+      "caption describes a test: not the event; usable only with a reconstruction/test label"
+     ],
+     "verdict": "INCOMPATIBLE",
+     "codes": [
+      "DISCLOSURE_REQUIRED"
+     ],
+     "templates": [],
+     "score": 0.51
+    },
+    {
+     "asset": "crew",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0.2,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.96,
+      "mobile": 1,
+      "template": 0
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "shares terms with the claims: modul"
+     ],
+     "verdict": "INCOMPATIBLE",
+     "codes": [],
+     "templates": [],
+     "score": 0.438
+    },
+    {
+     "asset": "launch",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0.2,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.96,
+      "mobile": 1,
+      "template": 0
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "shares terms with the claims: modul"
+     ],
+     "verdict": "INCOMPATIBLE",
+     "codes": [],
+     "templates": [],
+     "score": 0.438
+    },
+    {
+     "asset": "mission-control",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.52,
+      "mobile": 1,
+      "template": 0
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)"
+     ],
+     "verdict": "INCOMPATIBLE",
+     "codes": [],
+     "templates": [],
+     "score": 0.376
+    }
+   ]
+  },
+  {
+   "line": "L8",
+   "beat": "human-cost",
+   "templates": [
+    "archival-plate"
+   ],
+   "decision": "crew",
+   "status": "MATCHED",
+   "candidates": [
+    {
+     "asset": "crew",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0.2857142857142857,
+      "exact": 1,
+      "resolution": 1,
+      "aspect": 0.96,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "shares terms with the claims: apollo, crew",
+      "depicts C-a13-averted (confirmed in assets.json)"
+     ],
+     "verdict": "ACCEPT",
+     "codes": [],
+     "templates": [
+      "archival-plate"
+     ],
+     "score": 0.855
+    },
+    {
+     "asset": "launch",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0.2857142857142857,
+      "exact": 0.5,
+      "resolution": 1,
+      "aspect": 0.96,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "shares terms with the claims: apollo, crew",
+      "caption overlap only: confirm what the image depicts"
+     ],
+     "verdict": "NEEDS_HUMAN_REVIEW",
+     "codes": [
+      "CONFIRM_DEPICTION"
+     ],
+     "templates": [
+      "archival-plate"
+     ],
+     "score": 0.705
+    },
+    {
+     "asset": "mission-control",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0.2857142857142857,
+      "exact": 0.5,
+      "resolution": 1,
+      "aspect": 0.52,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "shares terms with the claims: apollo, control",
+      "caption overlap only: confirm what the image depicts"
+     ],
+     "verdict": "NEEDS_HUMAN_REVIEW",
+     "codes": [
+      "CONFIRM_DEPICTION"
+     ],
+     "templates": [
+      "archival-plate"
+     ],
+     "score": 0.683
+    },
+    {
+     "asset": "tank-fire-test",
+     "criteria": {
+      "licensing": 1,
+      "subject": 0.4,
+      "evidence": 0.14285714285714285,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.99,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "subject not named in title or caption: confirm",
+      "shares terms with the claims: apollo",
+      "caption describes a test: not the event; usable only with a reconstruction/test label"
+     ],
+     "verdict": "DISCLOSURE_REQUIRED",
+     "codes": [
+      "DISCLOSURE_REQUIRED"
+     ],
+     "templates": [
+      "archival-plate"
+     ],
+     "score": 0.438
+    },
+    {
+     "asset": "sm-damage-2",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0.14285714285714285,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.77,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "shares terms with the claims: apollo"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "archival-plate"
+     ],
+     "score": 0.517
+    },
+    {
+     "asset": "sm-damage",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0.14285714285714285,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.63,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "shares terms with the claims: apollo"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "archival-plate"
+     ],
+     "score": 0.51
+    },
+    {
+     "asset": "tank-location",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0.14285714285714285,
+      "exact": 0,
+      "resolution": 0.66,
+      "aspect": 0.99,
+      "mobile": 0.69,
+      "template": 0
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "shares terms with the claims: apollo",
+      "text ~21 px tall on a phone at 900 px width (from OCR boxes)"
+     ],
+     "verdict": "INCOMPATIBLE",
+     "codes": [],
+     "templates": [],
+     "score": 0.379
+    },
+    {
+     "asset": "tank-diagram",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0.14285714285714285,
+      "exact": 0,
+      "resolution": 0.33,
+      "aspect": 0.42,
+      "mobile": 0.61,
+      "template": 0
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "shares terms with the claims: apollo",
+      "text ~18 px tall on a phone at 900 px width (from OCR boxes)"
+     ],
+     "verdict": "INCOMPATIBLE",
+     "codes": [],
+     "templates": [],
+     "score": 0.319
+    }
+   ]
+  },
+  {
+   "line": "L9",
+   "beat": "payoff",
+   "templates": [
+    "payoff"
+   ],
+   "decision": null,
+   "status": "NO_SUITABLE_VISUAL",
+   "candidates": [
+    {
+     "asset": "tank-fire-test",
+     "criteria": {
+      "licensing": 1,
+      "subject": 0.4,
+      "evidence": 0.25,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.99,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "subject not named in title or caption: confirm",
+      "shares terms with the claims: tank",
+      "caption describes a test: not the event; usable only with a reconstruction/test label"
+     ],
+     "verdict": "DISCLOSURE_REQUIRED",
+     "codes": [
+      "DISCLOSURE_REQUIRED"
+     ],
+     "templates": [
+      "payoff"
+     ],
+     "score": 0.46
+    },
+    {
+     "asset": "launch",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0.25,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.96,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "shares terms with the claims: spac"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "payoff"
+     ],
+     "score": 0.548
+    },
+    {
+     "asset": "crew",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.96,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "payoff"
+     ],
+     "score": 0.498
+    },
+    {
+     "asset": "sm-damage-2",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.77,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "payoff"
+     ],
+     "score": 0.488
+    },
+    {
+     "asset": "sm-damage",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.63,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "payoff"
+     ],
+     "score": 0.481
+    },
+    {
+     "asset": "mission-control",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0,
+      "exact": 0,
+      "resolution": 1,
+      "aspect": 0.52,
+      "mobile": 1,
+      "template": 1
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)"
+     ],
+     "verdict": "NOT_DEPICTED",
+     "codes": [],
+     "templates": [
+      "payoff"
+     ],
+     "score": 0.476
+    },
+    {
+     "asset": "tank-location",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0.25,
+      "exact": 0,
+      "resolution": 0.66,
+      "aspect": 0.99,
+      "mobile": 0.69,
+      "template": 0
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "shares terms with the claims: tank",
+      "text ~21 px tall on a phone at 900 px width (from OCR boxes)"
+     ],
+     "verdict": "INCOMPATIBLE",
+     "codes": [],
+     "templates": [],
+     "score": 0.401
+    },
+    {
+     "asset": "tank-diagram",
+     "criteria": {
+      "licensing": 1,
+      "subject": 1,
+      "evidence": 0.25,
+      "exact": 0,
+      "resolution": 0.33,
+      "aspect": 0.42,
+      "mobile": 0.61,
+      "template": 0
+     },
+     "reasons": [
+      "caption/title names the topic (apollo 13)",
+      "shares terms with the claims: tank",
+      "text ~18 px tall on a phone at 900 px width (from OCR boxes)"
+     ],
+     "verdict": "INCOMPATIBLE",
+     "codes": [],
+     "templates": [],
+     "score": 0.34
+    }
+   ]
+  }
+ ],
+ "ms": 11.171208
+}

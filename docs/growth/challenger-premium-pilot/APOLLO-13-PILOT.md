@@ -1,5 +1,7 @@
 # Apollo 13 premium pilot: inventory and automatically planned shots (2026-10-14)
 
+> **Update 2026-10-15:** see `GENERALIZATION-V1.md`. The planner now makes 8/9 clean shots (component-section + document-excerpt). Correction: in §5 below, L6 was actually planned as a human-cost archival plate (sm-damage), not a timeline; the 3/9 total was right.
+
 **Offline pilot.** Nothing was rendered, published or downloaded beyond Commons metadata and the Review Board text. Files: `channels/failure-reconstructed/premium/apollo-13-1970/plan/`.
 
 ## 1. Duplicate check (done first)

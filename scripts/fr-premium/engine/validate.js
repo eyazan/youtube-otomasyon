@@ -9,6 +9,8 @@ const path = require("path");
 const { validate: schemaCheck } = require("./jsonschema");
 const TIME = require("./timeref");
 const CAM = require("./camera-presets");
+const COMP = require("./component-extract");
+const MATCH = require("./asset-matcher");
 
 const ENGINE = __dirname; const ROOT = path.join(ENGINE, "..", "..", "..");
 const readJSON = (p) => JSON.parse(fs.readFileSync(p, "utf8"));
@@ -31,7 +33,7 @@ function annotated(schema, value, root, at, out) {
   return out;
 }
 
-function validatePlan({ plan, evidence, assets, timeline, root = ROOT, registry = loadRegistry() }) {
+function validatePlan({ plan, evidence, assets, timeline, root = ROOT, registry = loadRegistry(), suggestions = null }) {
   const errors = [], warnings = []; const E = (shot, msg) => errors.push(shot ? `${shot}: ${msg}` : msg); const Wn = (shot, msg) => warnings.push(shot ? `${shot}: ${msg}` : msg);
   // 1. schemas
   for (const [name, doc] of [["shot-plan", plan], ["evidence", evidence], ["assets", assets]]) for (const e of schemaCheck(SCHEMA(name), doc)) E(null, `${name} schema: ${e}`);
@@ -79,6 +81,18 @@ function validatePlan({ plan, evidence, assets, timeline, root = ROOT, registry 
       if (v.claim) useClaim(null, v.claim, `asset ${key}#${an}`);
     }
   }
+  // duplicates: two asset keys for the same file or source page
+  const byPage = new Map(); for (const [key, a] of Object.entries(assets.assets)) { for (const k2 of [`${a.source.page} ${a.source.title} ${a.file}`, a.sha256].filter(Boolean)) { if (byPage.has(k2) && byPage.get(k2) !== key) E(null, `duplicate asset: ${key} and ${byPage.get(k2)} are the same ${k2 === a.sha256 ? "file (sha256)" : "source page"}`); byPage.set(k2, key); } }
+  // suggested anchors stay suggestions: an assets.json anchor may cite a suggestion only once a human VERIFIED it,
+  // and may not copy the coordinates of a suggestion that is still SUGGESTED or was REJECTED
+  const SG = suggestions ? suggestions.suggestions || [] : [];
+  for (const g of SG) { if (!["SUGGESTED", "VERIFIED", "REJECTED"].includes(g.status)) E(null, `anchor suggestion ${g.id}: status "${g.status}" (SUGGESTED / VERIFIED / REJECTED)`);
+    if (g.status === "VERIFIED" && !(g.review && g.review.by && g.review.at)) E(null, `anchor suggestion ${g.id}: VERIFIED without a human reviewer and date (review.by, review.at)`); }
+  const same = (v, g) => (v.rect && g.rect && ["x", "y", "w", "h"].every((k) => Math.abs(v.rect[k] - g.rect[k]) < 0.5)) || (v.point && g.point && Math.hypot(v.point[0] - g.point[0], v.point[1] - g.point[1]) < 0.5);
+  for (const [key, a] of Object.entries(assets.assets)) for (const [an, v] of Object.entries(a.anchors || {})) {
+    if (v.suggestion) { const g = SG.find((x) => x.id === v.suggestion); if (!g) E(null, `asset ${key}#${an}: cites suggestion ${v.suggestion}, which is not in anchor-suggestions.json`); else if (g.status !== "VERIFIED") E(null, `asset ${key}#${an}: suggested anchor used as verified (suggestion ${g.id} is ${g.status})`); }
+    const copy = SG.find((g) => g.asset === key && g.status !== "VERIFIED" && same(v, g)); if (copy) E(null, `asset ${key}#${an}: suggested anchor used as verified (coordinates of ${copy.id}, status ${copy.status})`); }
+  const ID = MATCH.identity(evidence);
   const anchorOf = (shot, ref, where) => { const m = /^asset:([a-z0-9-]+)#([a-z0-9-]+)$/.exec(ref); if (!m) { E(shot, `${where}: bad anchor ref ${ref}`); return null; }
     const a = assets.assets[m[1]]; if (!a) { E(shot, `${where}: unknown asset ${m[1]}`); return null; }
     const v = (a.anchors || {})[m[2]]; if (!v) { E(shot, `${where}: asset ${m[1]} has no anchor "${m[2]}"`); return null; } return v; };
@@ -86,6 +100,16 @@ function validatePlan({ plan, evidence, assets, timeline, root = ROOT, registry 
   const duration = timeline.duration + plan.film.tail; const tRes = (shot, ref, where) => { try { return TIME.resolve(ref, timeline, duration); } catch (e) { E(shot, `${where}: ${e.message}`); return null; } };
   if (plan.film.captionFrom) tRes(null, plan.film.captionFrom, "film.captionFrom");
   for (const l of plan.film.captionSkip || []) if (!timeline.lines.some((x) => x.id === l)) E(null, `film.captionSkip: no line ${l}`);
+  // on-screen text: digits only via claim placeholders, citation locators, or identifiers from the shot's assets
+  const onscreen = (sid, s, x) => { const stripped = String(x.value).replace(/\{C-[a-z0-9-]+(\.value)?\}/g, "").replace(/\{scale\}/g, "");
+        for (const m of String(x.value).matchAll(/\{(C-[a-z0-9-]+)(\.value)?\}/g)) { showClaim(sid, m[1], x.at, m[2] ? String(x.value).replace(m[0], "") : ""); stats.claimsUsed.add(m[1]); }
+        // allowed without a claim: citation locators (Vol. 1, p. 90, Ch. III, Fig. 14) and identifiers that are part of
+        // a listed asset's own provenance label or title (e.g. "E-207"); any other digit must come from a claim
+        const CITE = /\b(?:(?:Vol|p|pp|Fig|Ch|No)\.|Figure|Chapter|Volume)\s?\d+/g; const clean = (tok) => tok.replace(/^[^\w]+|[^\w]+$/g, "");
+        const ids = new Set((s.assets || []).flatMap((k) => assets.assets[k] ? [assets.assets[k].provenanceLabel || "", assets.assets[k].source.title] : [])
+          .join(" ").replace(CITE, "").split(/\s+/).map(clean).filter((tok) => /\d/.test(tok) && /[A-Za-z]/.test(tok))); // identifiers only, never bare numbers
+        const rest = stripped.replace(/<br>/g, " ").replace(CITE, "").split(/\s+/).map(clean).filter((tok) => /\d/.test(tok) && !ids.has(tok));
+        if (rest.length) E(sid, `${x.at}: on-screen number "${rest.join(" ")}" in "${x.value}" is not taken from a claim`); };
   // 6. shots
   const stats = { shots: plan.shots.length, dataDriven: 0, legacy: 0, manual: [], byTemplate: {}, claimsUsed: new Set(), assetsUsed: new Set() };
   let prevEnd = 0; const ids = new Set();
@@ -115,15 +139,7 @@ function validatePlan({ plan, evidence, assets, timeline, root = ROOT, registry 
     const ann = annotated(T.params, s.params, T.params, "params", []);
     const visibleText = [s.provenance.label];
     for (const x of ann) {
-      if (x.kind === "x-onscreen") { visibleText.push(String(x.value)); const stripped = String(x.value).replace(/\{C-[a-z0-9-]+(\.value)?\}/g, "").replace(/\{scale\}/g, "");
-        for (const m of String(x.value).matchAll(/\{(C-[a-z0-9-]+)(\.value)?\}/g)) { showClaim(sid, m[1], x.at, m[2] ? String(x.value).replace(m[0], "") : ""); stats.claimsUsed.add(m[1]); }
-        // allowed without a claim: citation locators (Vol. 1, p. 90, Ch. III, Fig. 14) and identifiers that are part of
-        // a listed asset's own provenance label or title (e.g. "E-207"); any other digit must come from a claim
-        const CITE = /\b(?:(?:Vol|p|pp|Fig|Ch|No)\.|Figure|Chapter|Volume)\s?\d+/g; const clean = (tok) => tok.replace(/^[^\w]+|[^\w]+$/g, "");
-        const ids = new Set((s.assets || []).flatMap((k) => assets.assets[k] ? [assets.assets[k].provenanceLabel || "", assets.assets[k].source.title] : [])
-          .join(" ").replace(CITE, "").split(/\s+/).map(clean).filter((tok) => /\d/.test(tok) && /[A-Za-z]/.test(tok))); // identifiers only, never bare numbers
-        const rest = stripped.replace(/<br>/g, " ").replace(CITE, "").split(/\s+/).map(clean).filter((tok) => /\d/.test(tok) && !ids.has(tok));
-        if (rest.length) E(sid, `${x.at}: on-screen number "${rest.join(" ")}" in "${x.value}" is not taken from a claim`); }
+      if (x.kind === "x-onscreen") { visibleText.push(String(x.value)); onscreen(sid, s, x); }
       if (x.kind === "x-factual") { if (typeof x.value !== "string" || !/^claim:C-/.test(x.value)) E(sid, `${x.at}: factual value must reference a claim`); else { useClaim(sid, x.value.slice(6), x.at); stats.claimsUsed.add(x.value.slice(6)); } }
       if (x.kind === "x-anchor") { const v = anchorOf(sid, x.value, x.at); const k = x.value.split("#")[0].slice(6); if (v && s.assets && !s.assets.includes(k)) E(sid, `${x.at}: anchor on asset ${k} not listed in shot.assets`); }
       if (x.kind === "x-time") tRes(sid, x.value, x.at);
@@ -160,6 +176,46 @@ function validatePlan({ plan, evidence, assets, timeline, root = ROOT, registry 
         if (d.finding) { useClaim(sid, d.finding.claim.slice(6), "finding"); stats.claimsUsed.add(d.finding.claim.slice(6)); }
         for (const tk of (d.rail || {}).ticks || []) showClaim(sid, tk.slice(6), `shared.${name}.rail.ticks`); } }
     if (s.template === "timeline") for (const tk of s.params.ticks || []) showClaim(sid, tk.slice(6), "params.ticks");
+    // component scenes: schema, claims, labels in their passages, disclosure by mode, geometry only from verified anchors
+    if (T.sceneSchema && s.params.scene) { const name = typeof s.params.scene === "string" ? s.params.scene.slice(7) : null; const sc = name ? (plan.shared || {})[name] : s.params.scene;
+      if (!sc) E(sid, `params.scene: no shared "${name}"`); else { const at0 = name ? `shared.${name}` : "params.scene"; const before = errors.length;
+        for (const e of schemaCheck(T.sceneSchema, sc, T.sceneSchema)) E(sid, `${at0}: ${e.replace(/^\$/, "")}`);
+        if (errors.length === before) {
+          for (const x of annotated(T.sceneSchema, sc, T.sceneSchema, at0, [])) { if (x.kind === "x-onscreen") { visibleText.push(String(x.value)); onscreen(sid, s, x); }
+            if (x.kind === "x-anchor") { const v = anchorOf(sid, x.value, x.at); const k = x.value.split("#")[0].slice(6); if (v && !(s.assets || []).includes(k)) E(sid, `${x.at}: anchor on asset ${k} not listed in shot.assets`); }
+            if (x.kind === "x-time") tRes(sid, x.value, x.at);
+            if (x.kind === "x-factual") { if (!/^claim:C-/.test(x.value)) E(sid, `${x.at}: factual value must reference a claim`); else { useClaim(sid, x.value.slice(6), x.at); stats.claimsUsed.add(x.value.slice(6)); } } }
+          const ids = new Set(sc.parts.map((q) => q.id)); const passage = (ref) => (claims[String(ref).slice(6)] || {}).passage || "";
+          for (const q of sc.parts) { const miss = COMP.labelSupported(q.label, passage(q.claim)); if (miss.length) E(sid, `unsupported visual claim: part ${q.id} label "${q.label}" has words not in ${q.claim.slice(6)}'s passage (${miss.join(", ")})`); }
+          for (const l of sc.links) { if (!ids.has(l.from) || !ids.has(l.to)) E(sid, `${at0}.links: ${l.from} -> ${l.to} names an unknown part`);
+            const ps = passage(l.claim).toLowerCase(); const ph = (id) => COMP.mentions(passage(l.claim)).some((m) => m.kind === (sc.parts.find((q) => q.id === id) || {}).kind);
+            if (!ph(l.from) || !ph(l.to)) E(sid, `unsupported visual claim: link ${l.from} ${l.kind} ${l.to} is not stated in ${l.claim.slice(6)}'s passage`); void ps; }
+          for (const st of sc.states) { if (!ids.has(st.part)) E(sid, `${at0}.states: unknown part ${st.part}`);
+            if (st.tag) { const miss = COMP.labelSupported(st.tag, passage(st.claim)); if (miss.length) E(sid, `unsupported visual claim: state tag "${st.tag}" has words not in ${st.claim.slice(6)}'s passage (${miss.join(", ")})`); }
+            if (st.value) showClaim(sid, st.value.slice(6), `${at0}.states`, st.tag || ""); }
+          if (sc.states.length < 3) E(sid, `qa: component scene ${name || ""} has ${sc.states.length} documented states, component-section expects >= 3`);
+          const vis = visibleText.join(" ").toLowerCase();
+          if (sc.mode === "conceptual") { if (!/conceptual/.test(String(sc.disclosure).toLowerCase())) E(sid, "misleading reconstruction visual: conceptual component scene without a visible \"conceptual\" disclosure");
+            if (sc.scale.mode !== "schematic") E(sid, "unsupported geometry: a conceptual scene has no measured geometry, so its scale must be \"schematic\"");
+            if (sc.drawing || sc.parts.some((q) => q.anchor)) E(sid, "unsupported geometry: conceptual scenes do not take drawing anchors (use mode \"measured\")");
+            if (pack && !pack.illustrativeLabels.some((l) => vis.includes(l))) E(sid, `unsupported visual reconstruction: conceptual scene without a visible scale label (${pack.illustrativeLabels.join(" / ")})`); }
+          else { const dk = sc.drawing ? sc.drawing.slice(6) : null; if (!dk) E(sid, "unsupported geometry: measured scene without a drawing");
+            const rated = new Set(sc.links.filter((l) => l.kind === "rated-for").map((l) => l.to));
+            for (const q of sc.parts.filter((x) => !x.layerOf && !(rated.has(x.id) && !sc.links.some((l) => (l.from === x.id || l.to === x.id) && l.kind !== "rated-for")))) {
+              if (!q.anchor) { E(sid, `unsupported geometry: measured part ${q.id} has no verified anchor`); continue; }
+              const v = anchorOf(sid, q.anchor, `${at0}.parts.${q.id}`); if (v && v.role !== "mechanism-part") E(sid, `unsupported geometry: part ${q.id} anchor ${q.anchor} has role ${v.role}, not mechanism-part`);
+              if (dk && !q.anchor.startsWith(`asset:${dk}#`)) E(sid, `unsupported geometry: part ${q.id} is anchored on another asset than the scene drawing`); } } } } }
+    // document excerpts: the highlighted words are in the passage, and the card says it is typeset
+    if (s.template === "document-excerpt") { const c = claims[String(s.params.claim).slice(6)];
+      if (c) { if (!["finding", "quote"].includes(c.role)) E(sid, `document-excerpt: ${s.params.claim.slice(6)} is a ${c.role || "claim"} claim, not a finding or quote`);
+        const hl = String(c.display || "").replace(/\|/g, " "); if (!hl || !(c.passage || "").includes(hl)) E(sid, `unsupported visual claim: excerpt highlight "${hl}" is not verbatim in the passage`); }
+      if (!/typeset|not a scan/i.test(String(s.params.disclosure))) E(sid, "misleading reconstruction visual: a typeset excerpt must say it is typeset, not a scan"); }
+    // imagery from another mission, vehicle or period, and tests/concepts shown as if they were the event
+    for (const k of s.assets || []) { const a2 = assets.assets[k]; if (!a2) continue; const sj = MATCH.subjectCheck(a2, ID);
+      if (sj.reject) E(sid, `wrong subject imagery: asset ${k} ${sj.reasons.join("; ")}`);
+      const ne = MATCH.NONEVENT.exec(`${a2.source.title} ${a2.source.caption || ""}`);
+      if (ne && !new RegExp(ne[0].split(/\s+/)[0].slice(0, 5), "i").test(`${s.provenance.label} ${visibleText.join(" ")}`) && !/reconstruction|test|concept|model/i.test(s.provenance.label))
+        E(sid, `misleading reconstruction visual: asset ${k} shows a ${ne[0].toLowerCase()}, but the shot does not say so`); }
     // illustrative values must be labelled on screen
     const illus = ann.some((x) => x.kind === "x-illustrative") || (s.params.scale && s.params.scale.mode === "schematic");
     if (illus && pack) { const vis = visibleText.join(" ").toLowerCase(); if (!pack.illustrativeLabels.some((l) => vis.includes(l))) E(sid, `unsupported visual reconstruction: illustrative values without a visible label (${pack.illustrativeLabels.join(" / ")})`); }
@@ -186,7 +242,8 @@ function validatePlan({ plan, evidence, assets, timeline, root = ROOT, registry 
 
 function loadPlanFiles(planFile) {
   const plan = readJSON(planFile); const dir = path.dirname(planFile);
-  return { plan, evidence: readJSON(path.resolve(dir, plan.evidence)), assets: readJSON(path.resolve(dir, plan.assets)), timeline: readJSON(path.resolve(dir, plan.narration)) };
+  const assetsFile = path.resolve(dir, plan.assets); const sg = path.join(path.dirname(assetsFile), "anchor-suggestions.json");
+  return { plan, evidence: readJSON(path.resolve(dir, plan.evidence)), assets: readJSON(assetsFile), timeline: readJSON(path.resolve(dir, plan.narration)), ...(fs.existsSync(sg) ? { suggestions: readJSON(sg) } : {}) };
 }
 
 if (require.main === module) {

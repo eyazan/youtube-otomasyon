@@ -18,6 +18,8 @@ const CAM = require("./camera-presets");
 const TIME = require("./timeref");
 const { validatePlan, loadRegistry } = require("./validate");
 const { validate: schemaCheck } = require("./jsonschema");
+const COMP = require("./component-extract");
+const MATCH = require("./asset-matcher");
 
 const ENGINE = __dirname;
 const norm = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, "");
@@ -36,22 +38,29 @@ const KEY = { mechanismTrigger: /^(ignition|ignited|opened|open|flexed|flex|swit
   event: /\b(seconds|minutes|hours|later)\b/i, mechanism: /\b(seal|seals|joint|o-rings?|gap|pressure|heater|heaters|switch|switches|insulation|valve|weld|crack|wires?|fan|fans|tank)\b/i,
   setting: /\b(morning|weather|cold|temperature|degrees|colder|ice)\b/i };
 
-function makePlanner({ script, evidence, assets, timeline, channel, tail = 0.8 }) {
-  const C = evidence.claims, A = assets.assets; const issues = []; const gen = { values: 0, shots: 0 }; const reviewShots = new Set();
+function makePlanner({ script, evidence, assets, timeline, channel, tail = 0.8, suggestions = [] }) {
+  const C = evidence.claims, A = assets.assets; const ID = MATCH.identity(evidence); const upgrades = [];
+  // assets the matcher rejects outright (wrong mission/vehicle/period, licence) are never picked
+  const banned = new Set(Object.entries(A).filter(([, a]) => { const sj = MATCH.subjectCheck(a, ID); const lic = a.licence || {};
+    return sj.reject || !(["public-domain", "cc0"].includes(lic.id) || (["cc-by", "cc-by-sa"].includes(lic.id) && lic.attribution)); }).map(([k]) => k));
+  const nonEvent = (a) => MATCH.NONEVENT.test(`${a.source.title} ${a.source.caption || ""}`); const issues = []; const gen = { values: 0, shots: 0 }; const reviewShots = new Set();
   const need = (line, code, detail, needed) => { issues.push({ line, code, detail, needed }); };
   const count = (o) => { if (typeof o === "number") gen.values += 1; else if (Array.isArray(o)) o.forEach(count); else if (o && typeof o === "object") Object.values(o).forEach(count); return o; };
   const dur = timeline.duration + tail; const at = (ref) => TIME.resolve(ref, timeline, dur);
   const L = Object.fromEntries(timeline.lines.map((l) => [l.id, l])); const lineWords = (id) => timeline.words.filter((w) => w.line === id);
   // the narration word that states a claim's number (e.g. 53 -> "fifty-three"), else null
   const wordFor = (lineId, claimId) => { const c = C[claimId]; if (!c || c.value == null || !Number.isInteger(c.value) || c.value < 0) return null;
-    const target = norm(words(c.value)); const w = lineWords(lineId).find((x) => norm(x.text) === target); return w ? `word:${lineId}:${w.text.replace(/[^\w'-]/g, "")}` : null; };
+    const target = norm(words(c.value)); const ws = lineWords(lineId); let w = ws.find((x) => norm(x.text) === target);
+    // "a thousand", "a hundred": the spoken article form of 1000 / 100
+    if (!w && [100, 1000].includes(c.value)) w = ws.find((x, j) => norm(x.text) === (c.value === 100 ? "hundred" : "thousand") && j > 0 && norm(ws[j - 1].text) === "a");
+    return w ? `word:${lineId}:${w.text.replace(/[^\w'-]/g, "")}` : null; };
   const firstWord = (lineId, re) => { const w = lineWords(lineId).find((x) => re.test(x.text.toLowerCase().replace(/[^a-z'-]/g, ""))); return w ? `word:${lineId}:${w.text.replace(/[^\w'-]/g, "")}` : null; };
   const anchorsOf = (key) => Object.entries(A[key].anchors || {}).map(([n, v]) => ({ name: n, ref: `asset:${key}#${n}`, ...v }));
   const claimsWithRole = (ids, role) => ids.filter((id) => C[id] && C[id].role === role);
   // asset choice: depicts a claim of the line (+3), has an anchor stating one (+2), tag fits the beat (+1)
   const TAGS = { hook: ["damage", "vehicle"], setting: ["setting"], "human-cost": ["portrait"], decision: ["document"], mechanism: ["drawing"], evidence: ["recovered-hardware", "damage"], "event-sequence": ["film"], payoff: [] };
   const pickAsset = (line, beat, filter = () => true) => { let best = null;
-    for (const [k, a] of Object.entries(A)) { if (!filter(k, a)) continue; let sc = 0;
+    for (const [k, a] of Object.entries(A)) { if (!filter(k, a) || banned.has(k) || nonEvent(a)) continue; let sc = 0;
       if ((a.depicts || []).some((c) => line.claims.includes(c))) sc += 3; if (anchorsOf(k).some((x) => x.claim && line.claims.includes(x.claim))) sc += 2;
       if ((a.tags || []).some((t) => (TAGS[beat] || []).includes(t))) sc += 1; if (sc >= 2 && (!best || sc > best.sc)) best = { k, sc }; } // a tag alone never selects footage
     return best ? best.k : null; };
@@ -62,11 +71,52 @@ function makePlanner({ script, evidence, assets, timeline, channel, tail = 0.8 }
     if (cl.some((c) => ["quote", "finding"].includes(c.role)) || KEY.decision.test(line.text)) return "decision"; // a chronology claim alone is not a decision
     if (cl.filter((c) => c.role === "event").length >= 2 || (KEY.event.test(line.text) && cl.some((c) => c.role === "event"))) return "event-sequence";
     if (KEY.mechanism.test(line.text) && cl.some((c) => ["ring-diameter", "gap-max", "opening-duration", "temperature"].includes(c.role))) return "mechanism";
+    // a temperature whose passage is about a component (a switch threshold, a heater) is a mechanism, not the weather
+    if (cl.some((c) => c.role === "temperature" && COMP.mentions(c.passage || "").some((m) => ["switch", "heater", "valve", "sensor", "vessel", "wire", "insulation"].includes(m.kind)))) return "mechanism";
     if (KEY.setting.test(line.text)) return "setting"; return "evidence"; };
   const chipFor = (k, kind) => ({ label: A[k].provenanceLabel || (kind === "document" ? "Document" : "Archival"), kind });
   const upperLabel = (s) => { const w = String(s).toUpperCase().split(" "); if (w.length < 4) return w.join(" "); const m = Math.ceil(w.length / 2); return w.slice(0, m).join(" ") + "<br>" + w.slice(m).join(" "); };
 
   const lines = script.lines; const n = lines.length; const beats = lines.map((l, i) => classify(l, i, n));
+  // ---- component scenes: lines whose claims describe parts and documented states of a system, with no
+  // archival asset that depicts them (evidence) or no mechanism evidence for the joint templates (mechanism)
+  const verified = (ids) => ids.filter((c) => C[c] && C[c].status === "verified");
+  const compOf = (i) => COMP.extract(verified(lines[i].claims), C);
+  const isComponent = (i, prevAsset) => { const l = lines[i], b = beats[i]; if (!["evidence", "mechanism"].includes(b)) return false;
+    if (b === "evidence" && pickAsset(l, b, (kk, a) => a.kind !== "document")) return false;
+    if (b === "mechanism") { const has = (r) => claimsWithRole(l.claims, r).length; if (has("ring-diameter") && has("gap-max") && has("opening-duration")) return false;
+      if (prevAsset && anchorsOf(prevAsset).some((x) => x.role === "traceable-part")) return false; }
+    return compOf(i).states.length > 0; };
+  const CUE = { "stuck-closed": /^(not|failed|couldn't|stuck)$/, damaged: /^damag/, hot: /^(thousand|hot|heat\w*|reached)$/, on: /^(powered|energized|on|supply)$/, rated: /^rated$/, threshold: /^(open|opens)$/, "pressure-loss": /^(pressure|lost)$/ };
+  const TAG = { rated: (s) => `RATED {${s.value}}`, threshold: (s) => `OPEN AT {${s.value}}`, on: (s) => `ENERGIZED {${s.value}}`, hot: (s) => `{${s.value}}`, "stuck-closed": () => "COULD NOT OPEN", damaged: (s, part) => `${part.kind === "insulation" ? "INSULATION" : part.label.toUpperCase()} DAMAGED`, "pressure-loss": () => "LOST PRESSURE" };
+  const stateAt = (st, idxs) => { const L0 = idxs.filter((j) => lines[j].claims.includes(st.claim));
+    for (const j of L0) { const w = (st.value && wordFor(lines[j].id, st.value)) || (CUE[st.state] && firstWord(lines[j].id, CUE[st.state])); if (w) return { j, at: w }; }
+    const j = L0[0] != null ? L0[0] : idxs[0]; return { j, at: `line:${lines[j].id} +0.4`, guessed: true }; };
+  function componentScene(i0, idxs) {
+    const ids = [...new Set(idxs.flatMap((j) => verified(lines[j].claims)))]; const ex = COMP.extract(ids, C); const name = `component-${lines[i0].id.toLowerCase()}`;
+    const parts = Object.values(ex.parts).map((q) => ({ id: q.id, kind: q.kind, label: q.label, claim: `claim:${q.claim}`, ...(q.layerOf ? { layerOf: q.layerOf } : {}) }));
+    const links = ex.links.map((l) => ({ from: l.from, to: l.to, kind: l.kind, claim: `claim:${l.claim}` }));
+    const placed = ex.states.map((st) => { const w = stateAt(st, idxs); const part = ex.parts[st.part];
+      return { line: w.j, guessed: !!w.guessed, s: { part: st.part, state: st.state, at: w.at, claim: `claim:${st.claim}`, ...(st.value ? { value: `claim:${st.value}` } : {}), tag: TAG[st.state](st, part) } }; });
+    for (const x of placed.filter((y) => y.guessed)) need(lines[x.line].id, "REVIEW_TIMING", `component state "${x.s.state}" of ${x.s.part} has no spoken cue in the line (placed at +0.4 s)`, "confirm or anchor the state to a word");
+    // measured mode only when a drawing has VERIFIED mechanism-part anchors for every drawn part (suggestions never count)
+    const drawn = parts.filter((q) => !q.layerOf && !links.some((l) => l.to === q.id && l.kind === "rated-for"));
+    const drawing = Object.keys(A).find((k) => (A[k].tags || []).includes("drawing") && !banned.has(k) && drawn.every((q) => anchorsOf(k).some((x) => x.role === "mechanism-part" && x.label && COMP.mentions(x.label).some((m) => m.kind === q.kind))));
+    if (drawing) for (const q of drawn) q.anchor = anchorsOf(drawing).find((x) => x.role === "mechanism-part" && COMP.mentions(x.label).some((m) => m.kind === q.kind)).ref;
+    else { const sug = suggestions.filter((g) => g.status === "SUGGESTED" && g.label && A[g.asset] && (A[g.asset].tags || []).includes("drawing") && COMP.mentions(g.label).some((m) => drawn.some((q) => q.kind === m.kind)));
+      if (sug.length) upgrades.push({ line: lines[i0].id, code: "MEASURED_MODE_AFTER_VERIFICATION", detail: `${sug.length} suggested anchors on ${[...new Set(sug.map((g) => g.asset))].join(", ")} name drawn parts (${[...new Set(sug.map((g) => g.label))].join(", ")}); conceptual mode until a human verifies part geometry`, suggestions: sug.map((g) => g.id) }); }
+    // camera: overview, then each line frames the parts whose states it states
+    const cam = [{ at: shift(startRef(i0), +0.0), focus: drawn.map((q) => q.id) }]; let last = drawn.map((q) => q.id);
+    idxs.forEach((j, k) => { const here = placed.filter((x) => x.line === j).map((x) => x.s.part); const extra = placed.filter((x) => x.line === j && x.s.state === "on").flatMap((x) => links.filter((l) => l.from === x.s.part && l.kind === "powered-by").map((l) => l.to));
+      const f = [...new Set([...here, ...extra])].filter((id) => parts.some((q) => q.id === id)); const focus = f.length ? f : last;
+      cam.push({ at: shift(startRef(j), k === 0 ? +1.0 : +0.0), focus: last }, { at: shift(startRef(j), k === 0 ? +1.8 : +0.8), focus }); last = focus; });
+    const stamps = idxs.flatMap((j) => claimsWithRole(lines[j].claims, "chronology").map((c) => ({ value: `{${c}}`, window: [shift(startRef(j), +0.2), shift(endRef(j), -0.2)] })));
+    shared[name] = { mode: drawing ? "measured" : "conceptual", disclosure: drawing ? "Drawing geometry · parts registered" : "Conceptual diagram · not to scale", ...(drawing ? { drawing: `asset:${drawing}` } : {}),
+      scale: { mode: drawing ? "true-scale" : "schematic" }, parts, links, states: placed.map((x) => x.s), camera: dedupeCam(cam), ...(stamps.length ? { stamps } : {}) };
+    return { name, placed, drawing };
+  }
+  const dedupeCam = (cam) => cam.filter((k, j) => !cam.slice(0, j).some((x) => x.at === k.at));
+  let comp = null; // the scene being continued by consecutive component lines
   const startRef = (i) => (i === 0 ? "0" : `line:${lines[i].id} -0.1`); const endRef = (i) => (i === n - 1 ? "end" : `line:${lines[i + 1].id} -0.1`);
   const shots = []; const film = { tail, captionSkip: [] }; const shared = {}; let hookKeys = null, hookAsset = null;
   const emit = (i, s, review) => { const codes = issues.filter((x) => x.line === lines[i].id).map((x) => x.code); if (review || codes.length) s.review = { codes: [...new Set(codes)] };
@@ -77,6 +127,16 @@ function makePlanner({ script, evidence, assets, timeline, channel, tail = 0.8 }
     if (!line.claims.length && beat !== "payoff") need(line.id, "UNSUPPORTED_CLAIM", `line "${line.text}" states facts but cites no claim`, "add a verified claim for the statement, or rewrite the line");
     const missing = line.claims.filter((c) => !C[c]); for (const c of missing) need(line.id, "UNSUPPORTED_CLAIM", `line cites ${c}, which is not in evidence.json`, "add the claim with a verified passage or remove it from the line");
     const prev = shots[shots.length - 1];
+    // ---------------------------------------------------------------- component section (conceptual or measured)
+    if (comp && comp.idxs.includes(i) || isComponent(i, prev && prev.assets && prev.assets[0])) {
+      if (!comp || !comp.idxs.includes(i)) { const idxs = [i]; while (idxs[idxs.length - 1] + 1 < n && isComponent(idxs[idxs.length - 1] + 1, null)) idxs.push(idxs[idxs.length - 1] + 1); comp = { idxs, ...componentScene(i, idxs) }; }
+      const mine = comp.placed.filter((x) => x.line === i).map((x) => x.s); const first = comp.idxs[0] === i;
+      base.qa.states.push(...mine.map((s0) => ({ at: s0.at, what: `${s0.part}: ${s0.state}`, claim: s0.claim.slice(6) })));
+      if (!base.qa.states.length) base.qa.states.push({ at: `line:${line.id}`, what: "camera holds on the component" });
+      const P = { scene: `shared:${comp.name}`, chip: { label: comp.drawing ? "Animation · drawing geometry" : "Explanatory animation", kind: "explanatory" }, ...(first ? { enter: [t0, shift(t0, +0.4)] } : {}) };
+      emit(i, { ...base, template: "component-section", provenance: { kind: "explanatory", label: comp.drawing ? "Explanatory animation · drawing geometry" : "Conceptual diagram · not to scale" }, assets: comp.drawing ? [comp.drawing] : [], params: count(P),
+        transition: first ? (i === 0 ? { type: "cut" } : { type: "cut", reason: "into the component the narration describes" }) : { type: "continuous", reason: "same component model; the camera travels to the next documented state" } }, false); continue;
+    }
     const trans = (() => { if (i === 0) return { type: "cut" };
       if (beat === "payoff") return { type: "loop", reason: "returns to the opening framing for the replay" };
       if (beat === "human-cost") return { type: "dip", reason: "loss beat: slow dissolve, no animation", fade: 0.35 };
@@ -94,7 +154,8 @@ function makePlanner({ script, evidence, assets, timeline, channel, tail = 0.8 }
         if (poi) P.mark = { anchor: poi.ref, radius: 70, pulse: true, outline: true, layer: "hud", in: [shift(t0, +0.1), shift(t0, +0.5)] };
         const ev = line.claims.find((c) => C[c] && C[c].role === "event"); if (ev) P.stamp = { label: "DOCUMENTED TIME", value: `claim:${ev}` };
       } else if (beat === "hook") { const poi = anchorsOf(k).find((x) => x.role === "point-of-interest" && x.point && line.claims.includes(x.claim));
-        if (!poi) { need(line.id, "MISSING_ANCHOR", `hook asset ${k} has no point-of-interest anchor stating one of the line's claims`, "measure the point of interest on the photo (manual anchor) and tie it to the claim"); review = true; }
+        if (!poi) { const sg = suggestions.filter((g) => g.asset === k && g.status === "SUGGESTED");
+          need(line.id, "MISSING_ANCHOR", `hook asset ${k} has no point-of-interest anchor stating one of the line's claims${sg.length ? ` (${sg.length} suggested, unverified: ${sg.map((g) => g.id).join(", ")})` : ""}`, sg.length ? "verify or reject the suggested anchor (a suggestion is never used as a verified point)" : "measure the point of interest on the photo (manual anchor) and tie it to the claim"); review = true; }
         const box = portrait ? CAM.PHOTO_BOX : { x: 0, y: 0, w: CAM.W, h: CAM.H };
         const cam = poi ? CAM.evidencePushIn({ asset: a, anchor: poi, t0: "0", t1: shift(t1, +0.3), box }) : CAM.establishing({ asset: a, t0: "0", t1, box });
         Object.assign(P, { box, camera: { keys: cam.keys }, under: "ink", shades: portrait ? [{ kind: "top", h: 640 }, { kind: "bottom", y: 1120, h: 290 }, { kind: "ink", y: 1400, h: 520 }] : [{ kind: "top", h: 640 }, { kind: "bottom", y: 1180, h: 740 }] });
@@ -194,6 +255,12 @@ function makePlanner({ script, evidence, assets, timeline, channel, tail = 0.8 }
     if (beat === "decision") {
       const deskName = `desk-${(() => { let j = i; while (j > 0 && beats[j - 1] === "decision") j -= 1; return lines[j].id.toLowerCase(); })()}`; const _unused = `${beats.slice(0, i + 1).lastIndexOf("decision") === i && (i === 0 || beats[i - 1] !== "decision") ? line.id : (() => { let j = i; while (j > 0 && beats[j - 1] === "decision") j -= 1; return lines[j].id; })()}`;
       const docs = Object.keys(A).filter((k) => A[k].kind === "document" && anchorsOf(k).some((x) => x.claim && line.claims.includes(x.claim)));
+      const fq = line.claims.find((c) => C[c] && C[c].status === "verified" && ["finding", "quote"].includes(C[c].role) && C[c].display && C[c].passage && C[c].passage.includes(String(C[c].display).replace(/\|/g, " ")));
+      if (!docs.length && fq) { const hw = firstWord(line.id, new RegExp(`^${norm(String(C[fq].display).split(/\s+/).find((w) => w.length > 4) || "").slice(0, 6)}`)) || `line:${line.id} +0.6`;
+        const P = { claim: `claim:${fq}`, highlightAt: hw, enter: [t0, shift(t0, +0.45)], disclosure: "Report text · typeset, not a scan", chip: { label: "Report text", kind: "document" }, push: { window: [t0, t1], zoom: 1.04 } };
+        base.qa.states.push({ at: shift(t0, +0.1), what: "excerpt card enters" }, { at: hw, what: "the finding's words are highlighted", claim: fq });
+        upgrades.push({ line: line.id, code: "SCAN_REGION_WOULD_UPGRADE", detail: `no document asset has a measured region for ${fq}; a scan of the source page with a verified region would let document-desk show the original` });
+        emit(i, { ...base, template: "document-excerpt", provenance: { kind: "document", label: "Report text · typeset" }, assets: [], params: count(P), transition: trans }, false); continue; }
       if (!docs.length) { need(line.id, "MISSING_ANCHOR", "decision line: no document asset has a region anchor stating one of the line's claims", "measure the quoted line on the document scan and tie it to the claim");
         emit(i, { ...base, template: "document-desk", provenance: { kind: "document", label: "NEEDS DOCUMENT REGION" }, assets: [], params: {}, transition: trans }, true); continue; }
       if (!shared[deskName]) shared[deskName] = { pages: [], camera: [], _lines: [] };
@@ -228,27 +295,27 @@ function makePlanner({ script, evidence, assets, timeline, channel, tail = 0.8 }
   }
   for (const d of Object.values(shared)) delete d._lines; count(shared);
   const plan = { schema: "fr-premium.shot-plan.v1", topic: script.topic, channel, style: `${channel}/forensic-v1`, narration: "", evidence: "evidence.json", assets: "assets.json", film, shared, shots };
-  return { plan, issues, reviewShots: [...reviewShots], gen };
+  return { plan, issues, reviewShots: [...reviewShots], gen, beats, upgrades };
 }
 
-function run({ script, evidence, assets, timeline, channel, root }) {
+function run({ script, evidence, assets, timeline, channel, root, suggestions = [] }) {
   const errs = schemaCheck(JSON.parse(fs.readFileSync(path.join(ENGINE, "schemas/narration-script.schema.json"), "utf8")), script);
   if (errs.length) return { status: "INVALID_INPUT", issues: errs.map((e) => ({ code: "SCRIPT_SCHEMA", detail: e })) };
-  const r = makePlanner({ script, evidence, assets, timeline, channel });
+  const r = makePlanner({ script, evidence, assets, timeline, channel, suggestions });
   const v = validatePlan({ plan: r.plan, evidence, assets, timeline, ...(root ? { root } : {}) });
   for (const e of v.errors) { const m = /^(S\d\d): (.*)$/.exec(e); r.issues.push({ shot: m ? m[1] : null, code: "VALIDATION", detail: m ? m[2] : e }); if (m) r.reviewShots.push(m[1]); }
   if (script.status !== "approved") r.issues.push({ code: "SCRIPT_NOT_APPROVED", detail: "narration script status is draft", needed: "owner approval of the script" });
   if (script.timeline && script.timeline.kind === "estimated") r.issues.push({ code: "ESTIMATED_TIMELINE", detail: "word timings are estimated, not measured from narration", needed: "record narration and re-plan" });
   const review = [...new Set(r.reviewShots)]; const total = r.plan.shots.length;
   const status = r.issues.length ? "NEEDS_HUMAN_REVIEW" : "PLANNED";
-  return { status, plan: r.plan, issues: r.issues, metrics: { shots: total, autoPlannedClean: total - review.length, needsReview: review.length, reviewShots: review, generatedValues: r.gen.values, manualValues: 0, validation: { errors: v.errors.length, warnings: v.warnings.length } } };
+  return { status, plan: r.plan, issues: r.issues, upgrades: r.upgrades, beats: r.beats, metrics: { shots: total, autoPlannedClean: total - review.length, needsReview: review.length, reviewShots: review, generatedValues: r.gen.values, manualValues: 0, validation: { errors: v.errors.length, warnings: v.warnings.length } } };
 }
 
 if (require.main === module) {
   const a = process.argv.slice(2); const opt = (k) => (a.includes(k) ? a[a.indexOf(k) + 1] : null); const J = (f) => JSON.parse(fs.readFileSync(path.resolve(f), "utf8"));
-  const res = run({ script: J(opt("--script")), evidence: J(opt("--evidence")), assets: J(opt("--assets")), timeline: J(opt("--timeline")), channel: opt("--channel") || "failure-reconstructed" });
+  const res = run({ script: J(opt("--script")), evidence: J(opt("--evidence")), assets: J(opt("--assets")), timeline: J(opt("--timeline")), channel: opt("--channel") || "failure-reconstructed", suggestions: opt("--suggestions") ? J(opt("--suggestions")).suggestions : [] });
   if (res.plan) { const out = opt("--out"); const tl = opt("--timeline"); if (out) { const rel = (f) => path.relative(path.dirname(path.resolve(out)), path.resolve(f)); res.plan.narration = rel(tl); res.plan.evidence = rel(opt("--evidence")); res.plan.assets = rel(opt("--assets")); fs.writeFileSync(out, JSON.stringify(res.plan, null, 1) + "\n"); } }
-  const rep = { status: res.status, metrics: res.metrics, issues: res.issues }; if (opt("--report")) fs.writeFileSync(opt("--report"), JSON.stringify(rep, null, 1) + "\n");
+  const rep = { status: res.status, metrics: res.metrics, issues: res.issues, upgrades: res.upgrades || [] }; if (opt("--report")) fs.writeFileSync(opt("--report"), JSON.stringify(rep, null, 1) + "\n");
   console.log(`${res.status}: ${res.metrics ? `${res.metrics.shots} shots, ${res.metrics.autoPlannedClean} clean, ${res.metrics.needsReview} need review; ${res.metrics.generatedValues} generated values` : ""}`);
   for (const i of res.issues) console.log(`  ${i.code}${i.line ? " " + i.line : ""}${i.shot ? " " + i.shot : ""}: ${i.detail}`);
   process.exit(res.status === "PLANNED" ? 0 : 2);

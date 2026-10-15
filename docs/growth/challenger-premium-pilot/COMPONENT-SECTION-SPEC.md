@@ -1,5 +1,7 @@
 # Template spec: `component-section` (before implementation, 2026-10-14)
 
+> **Implemented 2026-10-15** (`engine/templates/component-section.js`, `engine/component-extract.js`), with a conceptual mode added (topology from passages, disclosed, no geometry) besides the measured mode specified here. Results and gaps: `GENERALIZATION-V1.md` §4 and §6.
+
 **Why:** Apollo 13's mechanism (L5) has no template. The planner reports NO_TEMPLATE, and no existing template may be bent to fit it. This is the spec; nothing is implemented.
 
 ## Purpose

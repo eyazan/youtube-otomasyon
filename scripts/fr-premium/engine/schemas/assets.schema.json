@@ -224,6 +224,10 @@
               "recovered-hardware"
             ]
           }
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
         }
       }
     },
@@ -321,6 +325,10 @@
             "mechanism-ring",
             "mechanism-scale"
           ]
+        },
+        "suggestion": {
+          "type": "string",
+          "pattern": "^SG-[a-z0-9-]+$"
         }
       },
       "oneOf": [
