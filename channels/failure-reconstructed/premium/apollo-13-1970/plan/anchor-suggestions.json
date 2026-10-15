@@ -9,9 +9,12 @@
    "asset": "sm-damage",
    "method": "subject-box",
    "role": "subject",
-   "confidence": 0.63,
+   "confidence": 0.3,
+   "rawConfidence": 0.63,
    "status": "SUGGESTED",
    "basis": "largest region that differs from the frame border",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "separates foreground from background; it cannot tell which object is the subject",
    "rect": {
     "x": 900,
     "y": 117,
@@ -24,9 +27,12 @@
    "asset": "sm-damage",
    "method": "region-of-interest",
    "role": "point-of-interest",
-   "confidence": 0.7,
+   "confidence": 0.15,
+   "rawConfidence": 0.7,
    "status": "SUGGESTED",
    "basis": "highest edge-density window (no claim attached)",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the densest-edge window; it has no subject model (on a launch photo it picks the gantry lattice)",
    "rect": {
     "x": 1463,
     "y": 644,
@@ -39,9 +45,12 @@
    "asset": "sm-damage-2",
    "method": "subject-box",
    "role": "subject",
-   "confidence": 0.67,
+   "confidence": 0.3,
+   "rawConfidence": 0.67,
    "status": "SUGGESTED",
    "basis": "largest region that differs from the frame border",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "separates foreground from background; it cannot tell which object is the subject",
    "rect": {
     "x": 2424,
     "y": 1788,
@@ -54,9 +63,12 @@
    "asset": "sm-damage-2",
    "method": "region-of-interest",
    "role": "point-of-interest",
-   "confidence": 0.52,
+   "confidence": 0.15,
+   "rawConfidence": 0.52,
    "status": "SUGGESTED",
    "basis": "highest edge-density window (no claim attached)",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the densest-edge window; it has no subject model (on a launch photo it picks the gantry lattice)",
    "rect": {
     "x": 2214,
     "y": 1710,
@@ -70,6 +82,7 @@
    "method": "ocr-text",
    "role": "text-line",
    "confidence": 0.48,
+   "rawConfidence": 0.48,
    "status": "SUGGESTED",
    "basis": "tesseract line 'c=' conf 48.5",
    "rect": {
@@ -86,6 +99,7 @@
    "method": "ocr-text",
    "role": "text-line",
    "confidence": 0.43,
+   "rawConfidence": 0.43,
    "status": "SUGGESTED",
    "basis": "tesseract line 'ons' conf 43.0",
    "rect": {
@@ -102,6 +116,7 @@
    "method": "ocr-text",
    "role": "text-line",
    "confidence": 0.52,
+   "rawConfidence": 0.52,
    "status": "SUGGESTED",
    "basis": "tesseract line 'NN' conf 52.4",
    "rect": {
@@ -117,7 +132,8 @@
    "asset": "tank-location",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.97,
+   "confidence": 0.7,
+   "rawConfidence": 0.97,
    "status": "SUGGESTED",
    "basis": "tesseract line 'Fuel' conf 96.9",
    "rect": {
@@ -133,7 +149,8 @@
    "asset": "tank-location",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.96,
+   "confidence": 0.7,
+   "rawConfidence": 0.96,
    "status": "SUGGESTED",
    "basis": "tesseract line 'cell' conf 96.1",
    "rect": {
@@ -149,7 +166,8 @@
    "asset": "tank-location",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.76,
+   "confidence": 0.7,
+   "rawConfidence": 0.76,
    "status": "SUGGESTED",
    "basis": "tesseract line '(' conf 75.7",
    "rect": {
@@ -166,6 +184,7 @@
    "method": "ocr-text",
    "role": "text-line",
    "confidence": 0.3,
+   "rawConfidence": 0.3,
    "status": "SUGGESTED",
    "basis": "tesseract line 'rb' conf 30.3",
    "rect": {
@@ -181,7 +200,8 @@
    "asset": "tank-location",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.96,
+   "confidence": 0.7,
+   "rawConfidence": 0.96,
    "status": "SUGGESTED",
    "basis": "tesseract line 'Fuel' conf 96.5",
    "rect": {
@@ -197,7 +217,8 @@
    "asset": "tank-location",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.96,
+   "confidence": 0.7,
+   "rawConfidence": 0.96,
    "status": "SUGGESTED",
    "basis": "tesseract line 'Fuel' conf 96.1",
    "rect": {
@@ -213,7 +234,8 @@
    "asset": "tank-location",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.97,
+   "confidence": 0.7,
+   "rawConfidence": 0.97,
    "status": "SUGGESTED",
    "basis": "tesseract line 'Fuel cell shelf' conf 96.7",
    "rect": {
@@ -229,7 +251,8 @@
    "asset": "tank-location",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.96,
+   "confidence": 0.7,
+   "rawConfidence": 0.96,
    "status": "SUGGESTED",
    "basis": "tesseract line 'cell' conf 96.5",
    "rect": {
@@ -245,7 +268,8 @@
    "asset": "tank-location",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.97,
+   "confidence": 0.7,
+   "rawConfidence": 0.97,
    "status": "SUGGESTED",
    "basis": "tesseract line 'cell' conf 96.8",
    "rect": {
@@ -262,6 +286,7 @@
    "method": "ocr-text",
    "role": "text-line",
    "confidence": 0.66,
+   "rawConfidence": 0.66,
    "status": "SUGGESTED",
    "basis": "tesseract line '3 \\' conf 65.9",
    "rect": {
@@ -277,7 +302,8 @@
    "asset": "tank-location",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.96,
+   "confidence": 0.7,
+   "rawConfidence": 0.96,
    "status": "SUGGESTED",
    "basis": "tesseract line 'Oxygen' conf 96.5",
    "rect": {
@@ -293,7 +319,8 @@
    "asset": "tank-location",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.96,
+   "confidence": 0.7,
+   "rawConfidence": 0.96,
    "status": "SUGGESTED",
    "basis": "tesseract line 'tank 1' conf 95.8",
    "rect": {
@@ -310,6 +337,7 @@
    "method": "ocr-text",
    "role": "text-line",
    "confidence": 0.56,
+   "rawConfidence": 0.56,
    "status": "SUGGESTED",
    "basis": "tesseract line '—' conf 55.5",
    "rect": {
@@ -325,7 +353,8 @@
    "asset": "tank-location",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.96,
+   "confidence": 0.7,
+   "rawConfidence": 0.96,
    "status": "SUGGESTED",
    "basis": "tesseract line 'Oxygen' conf 96.5",
    "rect": {
@@ -342,6 +371,7 @@
    "method": "ocr-text",
    "role": "text-line",
    "confidence": 0.46,
+   "rawConfidence": 0.46,
    "status": "SUGGESTED",
    "basis": "tesseract line 'vat' conf 46.4",
    "rect": {
@@ -357,7 +387,8 @@
    "asset": "tank-location",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.96,
+   "confidence": 0.7,
+   "rawConfidence": 0.96,
    "status": "SUGGESTED",
    "basis": "tesseract line 'tank 2' conf 96.0",
    "rect": {
@@ -374,6 +405,7 @@
    "method": "ocr-text",
    "role": "text-line",
    "confidence": 0.4,
+   "rawConfidence": 0.4,
    "status": "SUGGESTED",
    "basis": "tesseract line 'oe:' conf 40.1",
    "rect": {
@@ -389,7 +421,8 @@
    "asset": "tank-location",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.95,
+   "confidence": 0.7,
+   "rawConfidence": 0.95,
    "status": "SUGGESTED",
    "basis": "tesseract line 'Oxygen valve' conf 95.1",
    "rect": {
@@ -405,7 +438,8 @@
    "asset": "tank-location",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.96,
+   "confidence": 0.7,
+   "rawConfidence": 0.96,
    "status": "SUGGESTED",
    "basis": "tesseract line 'module' conf 96.5",
    "rect": {
@@ -422,6 +456,7 @@
    "method": "ocr-text",
    "role": "text-line",
    "confidence": 0.32,
+   "rawConfidence": 0.32,
    "status": "SUGGESTED",
    "basis": "tesseract line 'AY' conf 31.5",
    "rect": {
@@ -437,7 +472,8 @@
    "asset": "tank-location",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.94,
+   "confidence": 0.7,
+   "rawConfidence": 0.94,
    "status": "SUGGESTED",
    "basis": "tesseract line 'Oxygen subsystem' conf 94.5",
    "rect": {
@@ -453,7 +489,8 @@
    "asset": "tank-location",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.96,
+   "confidence": 0.7,
+   "rawConfidence": 0.96,
    "status": "SUGGESTED",
    "basis": "tesseract line 'Oxygen servicing' conf 96.0",
    "rect": {
@@ -470,6 +507,7 @@
    "method": "ocr-text",
    "role": "text-line",
    "confidence": 0.33,
+   "rawConfidence": 0.33,
    "status": "SUGGESTED",
    "basis": "tesseract line 'On' conf 32.8",
    "rect": {
@@ -486,6 +524,7 @@
    "method": "ocr-text",
    "role": "text-line",
    "confidence": 0.31,
+   "rawConfidence": 0.31,
    "status": "SUGGESTED",
    "basis": "tesseract line 'or' conf 30.9",
    "rect": {
@@ -501,7 +540,8 @@
    "asset": "tank-location",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.96,
+   "confidence": 0.7,
+   "rawConfidence": 0.96,
    "status": "SUGGESTED",
    "basis": "tesseract line 'shelf module' conf 96.3",
    "rect": {
@@ -517,7 +557,8 @@
    "asset": "tank-location",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.94,
+   "confidence": 0.7,
+   "rawConfidence": 0.94,
    "status": "SUGGESTED",
    "basis": "tesseract line 'panel' conf 93.5",
    "rect": {
@@ -534,6 +575,7 @@
    "method": "ocr-text",
    "role": "text-line",
    "confidence": 0.6,
+   "rawConfidence": 0.6,
    "status": "SUGGESTED",
    "basis": "tesseract line '“iy' conf 59.9",
    "rect": {
@@ -549,7 +591,8 @@
    "asset": "tank-location",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.78,
+   "confidence": 0.7,
+   "rawConfidence": 0.78,
    "status": "SUGGESTED",
    "basis": "tesseract line 'Hydrogen J Y' conf 77.5",
    "rect": {
@@ -566,6 +609,7 @@
    "method": "ocr-text",
    "role": "text-line",
    "confidence": 0.65,
+   "rawConfidence": 0.65,
    "status": "SUGGESTED",
    "basis": "tesseract line '‘ow' conf 64.6",
    "rect": {
@@ -581,7 +625,8 @@
    "asset": "tank-location",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.73,
+   "confidence": 0.7,
+   "rawConfidence": 0.73,
    "status": "SUGGESTED",
    "basis": "tesseract line 'al' conf 73.3",
    "rect": {
@@ -598,6 +643,7 @@
    "method": "ocr-text",
    "role": "text-line",
    "confidence": 0.56,
+   "rawConfidence": 0.56,
    "status": "SUGGESTED",
    "basis": "tesseract line '“pt' conf 56.2",
    "rect": {
@@ -614,6 +660,7 @@
    "method": "ocr-text",
    "role": "text-line",
    "confidence": 0.59,
+   "rawConfidence": 0.59,
    "status": "SUGGESTED",
    "basis": "tesseract line '{.¢' conf 58.6",
    "rect": {
@@ -630,6 +677,7 @@
    "method": "ocr-text",
    "role": "text-line",
    "confidence": 0.48,
+   "rawConfidence": 0.48,
    "status": "SUGGESTED",
    "basis": "tesseract line 'Da' conf 48.0",
    "rect": {
@@ -646,6 +694,7 @@
    "method": "ocr-text",
    "role": "text-line",
    "confidence": 0.35,
+   "rawConfidence": 0.35,
    "status": "SUGGESTED",
    "basis": "tesseract line 'a' conf 34.9",
    "rect": {
@@ -662,6 +711,7 @@
    "method": "ocr-text",
    "role": "text-line",
    "confidence": 0.41,
+   "rawConfidence": 0.41,
    "status": "SUGGESTED",
    "basis": "tesseract line 'aw' conf 40.8",
    "rect": {
@@ -677,7 +727,8 @@
    "asset": "tank-location",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.87,
+   "confidence": 0.7,
+   "rawConfidence": 0.87,
    "status": "SUGGESTED",
    "basis": "tesseract line '=' conf 87.0",
    "rect": {
@@ -693,7 +744,8 @@
    "asset": "tank-location",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.96,
+   "confidence": 0.7,
+   "rawConfidence": 0.96,
    "status": "SUGGESTED",
    "basis": "tesseract line 'Hydrogen subsystem' conf 96.1",
    "rect": {
@@ -710,6 +762,7 @@
    "method": "ocr-text",
    "role": "text-line",
    "confidence": 0.6,
+   "rawConfidence": 0.6,
    "status": "SUGGESTED",
    "basis": "tesseract line 'pi' conf 60.1",
    "rect": {
@@ -725,7 +778,8 @@
    "asset": "tank-location",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.96,
+   "confidence": 0.7,
+   "rawConfidence": 0.96,
    "status": "SUGGESTED",
    "basis": "tesseract line 'shelf module' conf 96.4",
    "rect": {
@@ -742,6 +796,7 @@
    "method": "ocr-text",
    "role": "text-line",
    "confidence": 0.4,
+   "rawConfidence": 0.4,
    "status": "SUGGESTED",
    "basis": "tesseract line '5' conf 40.0",
    "rect": {
@@ -758,6 +813,7 @@
    "method": "ocr-text",
    "role": "text-line",
    "confidence": 0.62,
+   "rawConfidence": 0.62,
    "status": "SUGGESTED",
    "basis": "tesseract line '|' conf 62.1",
    "rect": {
@@ -774,6 +830,7 @@
    "method": "ocr-text",
    "role": "text-line",
    "confidence": 0.49,
+   "rawConfidence": 0.49,
    "status": "SUGGESTED",
    "basis": "tesseract line 'SS]' conf 48.7",
    "rect": {
@@ -790,6 +847,7 @@
    "method": "ocr-text",
    "role": "text-line",
    "confidence": 0.64,
+   "rawConfidence": 0.64,
    "status": "SUGGESTED",
    "basis": "tesseract line 'm Ry' conf 64.4",
    "rect": {
@@ -806,6 +864,7 @@
    "method": "ocr-text",
    "role": "text-line",
    "confidence": 0.5,
+   "rawConfidence": 0.5,
    "status": "SUGGESTED",
    "basis": "tesseract line '4)' conf 50.0",
    "rect": {
@@ -822,6 +881,7 @@
    "method": "ocr-text",
    "role": "text-line",
    "confidence": 0.33,
+   "rawConfidence": 0.33,
    "status": "SUGGESTED",
    "basis": "tesseract line 'ae.' conf 33.1",
    "rect": {
@@ -838,6 +898,7 @@
    "method": "ocr-text",
    "role": "text-line",
    "confidence": 0.49,
+   "rawConfidence": 0.49,
    "status": "SUGGESTED",
    "basis": "tesseract line '=' conf 49.5",
    "rect": {
@@ -853,7 +914,8 @@
    "asset": "tank-location",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.92,
+   "confidence": 0.7,
+   "rawConfidence": 0.92,
    "status": "SUGGESTED",
    "basis": "tesseract line '\\' conf 91.5",
    "rect": {
@@ -869,7 +931,8 @@
    "asset": "tank-location",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.96,
+   "confidence": 0.7,
+   "rawConfidence": 0.96,
    "status": "SUGGESTED",
    "basis": "tesseract line 'Hydrogen' conf 96.4",
    "rect": {
@@ -885,7 +948,8 @@
    "asset": "tank-location",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.96,
+   "confidence": 0.7,
+   "rawConfidence": 0.96,
    "status": "SUGGESTED",
    "basis": "tesseract line 'tank 2' conf 96.4",
    "rect": {
@@ -902,6 +966,7 @@
    "method": "document-heading",
    "role": "document-block",
    "confidence": 0.26,
+   "rawConfidence": 0.26,
    "status": "SUGGESTED",
    "basis": "heading-like line 'NN'",
    "rect": {
@@ -918,6 +983,7 @@
    "method": "document-heading",
    "role": "document-block",
    "confidence": 0.38,
+   "rawConfidence": 0.38,
    "status": "SUGGESTED",
    "basis": "heading-like line '('",
    "rect": {
@@ -933,7 +999,8 @@
    "asset": "tank-location",
    "method": "diagram-label",
    "role": "document-block",
-   "confidence": 0.97,
+   "confidence": 0.6,
+   "rawConfidence": 0.97,
    "status": "SUGGESTED",
    "basis": "upper-case label 'Fuel'",
    "rect": {
@@ -949,9 +1016,12 @@
    "asset": "tank-location",
    "method": "leader-target",
    "role": "mechanism-part",
-   "confidence": 0.44,
+   "confidence": 0.35,
+   "rawConfidence": 0.44,
    "status": "SUGGESTED",
    "basis": "far end of the leader line from label 'Fuel'",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the leader's far end is where a line stops, not proven to be the named part (no held-out accuracy)",
    "point": [
     293,
     272
@@ -963,7 +1033,8 @@
    "asset": "tank-location",
    "method": "diagram-label",
    "role": "document-block",
-   "confidence": 0.96,
+   "confidence": 0.6,
+   "rawConfidence": 0.96,
    "status": "SUGGESTED",
    "basis": "upper-case label 'Fuel'",
    "rect": {
@@ -979,9 +1050,12 @@
    "asset": "tank-location",
    "method": "leader-target",
    "role": "mechanism-part",
-   "confidence": 0.43,
+   "confidence": 0.35,
+   "rawConfidence": 0.43,
    "status": "SUGGESTED",
    "basis": "far end of the leader line from label 'Fuel'",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the leader's far end is where a line stops, not proven to be the named part (no held-out accuracy)",
    "point": [
     80,
     176
@@ -993,7 +1067,8 @@
    "asset": "tank-location",
    "method": "diagram-label",
    "role": "document-block",
-   "confidence": 0.96,
+   "confidence": 0.6,
+   "rawConfidence": 0.96,
    "status": "SUGGESTED",
    "basis": "upper-case label 'Fuel'",
    "rect": {
@@ -1009,9 +1084,12 @@
    "asset": "tank-location",
    "method": "leader-target",
    "role": "mechanism-part",
-   "confidence": 0.43,
+   "confidence": 0.35,
+   "rawConfidence": 0.43,
    "status": "SUGGESTED",
    "basis": "far end of the leader line from label 'Fuel'",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the leader's far end is where a line stops, not proven to be the named part (no held-out accuracy)",
    "point": [
     401,
     205
@@ -1023,7 +1101,8 @@
    "asset": "tank-location",
    "method": "diagram-label",
    "role": "document-block",
-   "confidence": 0.96,
+   "confidence": 0.6,
+   "rawConfidence": 0.96,
    "status": "SUGGESTED",
    "basis": "upper-case label 'Oxygen'",
    "rect": {
@@ -1039,9 +1118,12 @@
    "asset": "tank-location",
    "method": "leader-target",
    "role": "mechanism-part",
-   "confidence": 0.43,
+   "confidence": 0.35,
+   "rawConfidence": 0.43,
    "status": "SUGGESTED",
    "basis": "far end of the leader line from label 'Oxygen'",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the leader's far end is where a line stops, not proven to be the named part (no held-out accuracy)",
    "point": [
     441,
     353
@@ -1053,7 +1135,8 @@
    "asset": "tank-location",
    "method": "diagram-label",
    "role": "document-block",
-   "confidence": 0.96,
+   "confidence": 0.6,
+   "rawConfidence": 0.96,
    "status": "SUGGESTED",
    "basis": "upper-case label 'Oxygen'",
    "rect": {
@@ -1069,9 +1152,12 @@
    "asset": "tank-location",
    "method": "leader-target",
    "role": "mechanism-part",
-   "confidence": 0.43,
+   "confidence": 0.35,
+   "rawConfidence": 0.43,
    "status": "SUGGESTED",
    "basis": "far end of the leader line from label 'Oxygen'",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the leader's far end is where a line stops, not proven to be the named part (no held-out accuracy)",
    "point": [
     107,
     400
@@ -1083,7 +1169,8 @@
    "asset": "tank-location",
    "method": "diagram-label",
    "role": "document-block",
-   "confidence": 0.78,
+   "confidence": 0.6,
+   "rawConfidence": 0.78,
    "status": "SUGGESTED",
    "basis": "upper-case label 'Hydrogen J Y'",
    "rect": {
@@ -1100,8 +1187,11 @@
    "method": "leader-target",
    "role": "mechanism-part",
    "confidence": 0.35,
+   "rawConfidence": 0.35,
    "status": "SUGGESTED",
    "basis": "far end of the leader line from label 'Hydrogen J Y'",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the leader's far end is where a line stops, not proven to be the named part (no held-out accuracy)",
    "point": [
     581,
     288
@@ -1113,7 +1203,8 @@
    "asset": "tank-location",
    "method": "diagram-label",
    "role": "document-block",
-   "confidence": 0.64,
+   "confidence": 0.6,
+   "rawConfidence": 0.64,
    "status": "SUGGESTED",
    "basis": "upper-case label 'm Ry'",
    "rect": {
@@ -1130,8 +1221,11 @@
    "method": "leader-target",
    "role": "mechanism-part",
    "confidence": 0.29,
+   "rawConfidence": 0.29,
    "status": "SUGGESTED",
    "basis": "far end of the leader line from label 'm Ry'",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the leader's far end is where a line stops, not proven to be the named part (no held-out accuracy)",
    "point": [
     207,
     496
@@ -1143,7 +1237,8 @@
    "asset": "tank-location",
    "method": "diagram-label",
    "role": "document-block",
-   "confidence": 0.96,
+   "confidence": 0.6,
+   "rawConfidence": 0.96,
    "status": "SUGGESTED",
    "basis": "upper-case label 'Hydrogen'",
    "rect": {
@@ -1159,9 +1254,12 @@
    "asset": "tank-location",
    "method": "leader-target",
    "role": "mechanism-part",
-   "confidence": 0.43,
+   "confidence": 0.35,
+   "rawConfidence": 0.43,
    "status": "SUGGESTED",
    "basis": "far end of the leader line from label 'Hydrogen'",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the leader's far end is where a line stops, not proven to be the named part (no held-out accuracy)",
    "point": [
     440,
     776
@@ -1173,7 +1271,8 @@
    "asset": "tank-location",
    "method": "figure-boundary",
    "role": "document-block",
-   "confidence": 0.9,
+   "confidence": 0.6,
+   "rawConfidence": 0.9,
    "status": "SUGGESTED",
    "basis": "largest non-text ink region",
    "rect": {
@@ -1189,6 +1288,7 @@
    "method": "ocr-text",
    "role": "text-line",
    "confidence": 0.55,
+   "rawConfidence": 0.55,
    "status": "SUGGESTED",
    "basis": "tesseract line 'd' conf 55.4",
    "rect": {
@@ -1204,7 +1304,8 @@
    "asset": "tank-diagram",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.97,
+   "confidence": 0.7,
+   "rawConfidence": 0.97,
    "status": "SUGGESTED",
    "basis": "tesseract line 'TEMPERATURE' conf 96.7",
    "rect": {
@@ -1220,7 +1321,8 @@
    "asset": "tank-diagram",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.96,
+   "confidence": 0.7,
+   "rawConfidence": 0.96,
    "status": "SUGGESTED",
    "basis": "tesseract line 'SENSOR' conf 95.6",
    "rect": {
@@ -1237,6 +1339,7 @@
    "method": "ocr-text",
    "role": "text-line",
    "confidence": 0.68,
+   "rawConfidence": 0.68,
    "status": "SUGGESTED",
    "basis": "tesseract line 'q' conf 67.5",
    "rect": {
@@ -1253,6 +1356,7 @@
    "method": "ocr-text",
    "role": "text-line",
    "confidence": 0.69,
+   "rawConfidence": 0.69,
    "status": "SUGGESTED",
    "basis": "tesseract line 'TO FAN!' conf 69.5",
    "rect": {
@@ -1268,7 +1372,8 @@
    "asset": "tank-diagram",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.77,
+   "confidence": 0.7,
+   "rawConfidence": 0.77,
    "status": "SUGGESTED",
    "basis": "tesseract line '—' conf 77.3",
    "rect": {
@@ -1284,7 +1389,8 @@
    "asset": "tank-diagram",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.96,
+   "confidence": 0.7,
+   "rawConfidence": 0.96,
    "status": "SUGGESTED",
    "basis": "tesseract line 'CAPACITANCE' conf 96.0",
    "rect": {
@@ -1301,6 +1407,7 @@
    "method": "ocr-text",
    "role": "text-line",
    "confidence": 0.64,
+   "rawConfidence": 0.64,
    "status": "SUGGESTED",
    "basis": "tesseract line '= a!' conf 63.6",
    "rect": {
@@ -1316,7 +1423,8 @@
    "asset": "tank-diagram",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.91,
+   "confidence": 0.7,
+   "rawConfidence": 0.91,
    "status": "SUGGESTED",
    "basis": "tesseract line 'GAGING' conf 90.6",
    "rect": {
@@ -1332,7 +1440,8 @@
    "asset": "tank-diagram",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.91,
+   "confidence": 0.7,
+   "rawConfidence": 0.91,
    "status": "SUGGESTED",
    "basis": "tesseract line 'FAN' conf 90.6",
    "rect": {
@@ -1349,6 +1458,7 @@
    "method": "ocr-text",
    "role": "text-line",
    "confidence": 0.4,
+   "rawConfidence": 0.4,
    "status": "SUGGESTED",
    "basis": "tesseract line 'Jj' conf 39.6",
    "rect": {
@@ -1365,6 +1475,7 @@
    "method": "ocr-text",
    "role": "text-line",
    "confidence": 0.44,
+   "rawConfidence": 0.44,
    "status": "SUGGESTED",
    "basis": "tesseract line 'je =a,' conf 43.9",
    "rect": {
@@ -1380,7 +1491,8 @@
    "asset": "tank-diagram",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.96,
+   "confidence": 0.7,
+   "rawConfidence": 0.96,
    "status": "SUGGESTED",
    "basis": "tesseract line 'TEMPERATURE' conf 96.0",
    "rect": {
@@ -1396,7 +1508,8 @@
    "asset": "tank-diagram",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.96,
+   "confidence": 0.7,
+   "rawConfidence": 0.96,
    "status": "SUGGESTED",
    "basis": "tesseract line 'PROBE' conf 96.2",
    "rect": {
@@ -1412,7 +1525,8 @@
    "asset": "tank-diagram",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.97,
+   "confidence": 0.7,
+   "rawConfidence": 0.97,
    "status": "SUGGESTED",
    "basis": "tesseract line 'MOTOR' conf 96.7",
    "rect": {
@@ -1428,7 +1542,8 @@
    "asset": "tank-diagram",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.95,
+   "confidence": 0.7,
+   "rawConfidence": 0.95,
    "status": "SUGGESTED",
    "basis": "tesseract line 'SENSOR' conf 95.5",
    "rect": {
@@ -1445,6 +1560,7 @@
    "method": "ocr-text",
    "role": "text-line",
    "confidence": 0.4,
+   "rawConfidence": 0.4,
    "status": "SUGGESTED",
    "basis": "tesseract line 'q' conf 40.0",
    "rect": {
@@ -1461,6 +1577,7 @@
    "method": "ocr-text",
    "role": "text-line",
    "confidence": 0.65,
+   "rawConfidence": 0.65,
    "status": "SUGGESTED",
    "basis": "tesseract line '—' conf 64.6",
    "rect": {
@@ -1477,6 +1594,7 @@
    "method": "ocr-text",
    "role": "text-line",
    "confidence": 0.47,
+   "rawConfidence": 0.47,
    "status": "SUGGESTED",
    "basis": "tesseract line '7A' conf 46.6",
    "rect": {
@@ -1493,6 +1611,7 @@
    "method": "ocr-text",
    "role": "text-line",
    "confidence": 0.66,
+   "rawConfidence": 0.66,
    "status": "SUGGESTED",
    "basis": "tesseract line '=' conf 65.5",
    "rect": {
@@ -1508,7 +1627,8 @@
    "asset": "tank-diagram",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.95,
+   "confidence": 0.7,
+   "rawConfidence": 0.95,
    "status": "SUGGESTED",
    "basis": "tesseract line 'HEATER' conf 95.2",
    "rect": {
@@ -1524,7 +1644,8 @@
    "asset": "tank-diagram",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.84,
+   "confidence": 0.7,
+   "rawConfidence": 0.84,
    "status": "SUGGESTED",
    "basis": "tesseract line 'TO' conf 83.7",
    "rect": {
@@ -1540,7 +1661,8 @@
    "asset": "tank-diagram",
    "method": "ocr-text",
    "role": "text-line",
-   "confidence": 0.96,
+   "confidence": 0.7,
+   "rawConfidence": 0.96,
    "status": "SUGGESTED",
    "basis": "tesseract line 'FAN 2' conf 96.0",
    "rect": {
@@ -1557,6 +1679,7 @@
    "method": "document-heading",
    "role": "document-block",
    "confidence": 0.28,
+   "rawConfidence": 0.28,
    "status": "SUGGESTED",
    "basis": "heading-like line 'd'",
    "rect": {
@@ -1573,6 +1696,7 @@
    "method": "document-heading",
    "role": "document-block",
    "confidence": 0.48,
+   "rawConfidence": 0.48,
    "status": "SUGGESTED",
    "basis": "heading-like line 'TEMPERATURE'",
    "rect": {
@@ -1589,6 +1713,7 @@
    "method": "document-heading",
    "role": "document-block",
    "confidence": 0.34,
+   "rawConfidence": 0.34,
    "status": "SUGGESTED",
    "basis": "heading-like line 'q'",
    "rect": {
@@ -1605,6 +1730,7 @@
    "method": "document-heading",
    "role": "document-block",
    "confidence": 0.35,
+   "rawConfidence": 0.35,
    "status": "SUGGESTED",
    "basis": "heading-like line 'TO FAN!'",
    "rect": {
@@ -1620,7 +1746,8 @@
    "asset": "tank-diagram",
    "method": "diagram-label",
    "role": "document-block",
-   "confidence": 0.96,
+   "confidence": 0.6,
+   "rawConfidence": 0.96,
    "status": "SUGGESTED",
    "basis": "upper-case label 'TEMPERATURE SENSOR'",
    "rect": {
@@ -1637,9 +1764,12 @@
    "asset": "tank-diagram",
    "method": "diagram-label",
    "role": "document-block",
-   "confidence": 0.69,
+   "confidence": 0.6,
+   "rawConfidence": 0.69,
    "status": "SUGGESTED",
    "basis": "upper-case label 'TO FAN!'",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "a 'TO ...' label names where a lead goes, not the part",
    "rect": {
     "x": 124,
     "y": 50,
@@ -1647,31 +1777,36 @@
     "h": 8
    },
    "label": "To Fan!",
-   "component": "fan"
+   "leadTo": "Fan!"
   },
   {
    "id": "SG-tank-diagram-30",
    "asset": "tank-diagram",
    "method": "leader-target",
-   "role": "mechanism-part",
+   "role": "connection-lead",
    "confidence": 0.31,
+   "rawConfidence": 0.31,
    "status": "SUGGESTED",
    "basis": "far end of the leader line from label 'TO FAN!'",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the leader's far end is where a line stops, not proven to be the named part (no held-out accuracy)",
    "point": [
     102,
     58
    ],
-   "label": "To Fan!",
-   "component": "fan"
+   "label": "To Fan!"
   },
   {
    "id": "SG-tank-diagram-31",
    "asset": "tank-diagram",
    "method": "diagram-label",
    "role": "document-block",
-   "confidence": 0.91,
+   "confidence": 0.6,
+   "rawConfidence": 0.91,
    "status": "SUGGESTED",
    "basis": "upper-case label 'CAPACITANCE GAGING PROBE'",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "label sits among 'TO ...' lead labels: it may name a lead's destination, not the part",
    "rect": {
     "x": 184,
     "y": 102,
@@ -1686,9 +1821,12 @@
    "asset": "tank-diagram",
    "method": "leader-target",
    "role": "mechanism-part",
-   "confidence": 0.41,
+   "confidence": 0.35,
+   "rawConfidence": 0.41,
    "status": "SUGGESTED",
    "basis": "far end of the leader line from label 'CAPACITANCE GAGING PROBE'",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the leader's far end is where a line stops, not proven to be the named part (no held-out accuracy)",
    "point": [
     250,
     205
@@ -1701,7 +1839,8 @@
    "asset": "tank-diagram",
    "method": "diagram-label",
    "role": "document-block",
-   "confidence": 0.91,
+   "confidence": 0.6,
+   "rawConfidence": 0.91,
    "status": "SUGGESTED",
    "basis": "upper-case label 'FAN MOTOR'",
    "rect": {
@@ -1718,9 +1857,12 @@
    "asset": "tank-diagram",
    "method": "leader-target",
    "role": "mechanism-part",
-   "confidence": 0.41,
+   "confidence": 0.35,
+   "rawConfidence": 0.41,
    "status": "SUGGESTED",
    "basis": "far end of the leader line from label 'FAN MOTOR'",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the leader's far end is where a line stops, not proven to be the named part (no held-out accuracy)",
    "point": [
     217,
     31
@@ -1733,7 +1875,8 @@
    "asset": "tank-diagram",
    "method": "diagram-label",
    "role": "document-block",
-   "confidence": 0.95,
+   "confidence": 0.6,
+   "rawConfidence": 0.95,
    "status": "SUGGESTED",
    "basis": "upper-case label 'TEMPERATURE SENSOR'",
    "rect": {
@@ -1750,9 +1893,12 @@
    "asset": "tank-diagram",
    "method": "leader-target",
    "role": "mechanism-part",
-   "confidence": 0.43,
+   "confidence": 0.35,
+   "rawConfidence": 0.43,
    "status": "SUGGESTED",
    "basis": "far end of the leader line from label 'TEMPERATURE SENSOR'",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the leader's far end is where a line stops, not proven to be the named part (no held-out accuracy)",
    "point": [
     86,
     18
@@ -1765,9 +1911,12 @@
    "asset": "tank-diagram",
    "method": "diagram-label",
    "role": "document-block",
-   "confidence": 0.95,
+   "confidence": 0.6,
+   "rawConfidence": 0.95,
    "status": "SUGGESTED",
    "basis": "upper-case label 'HEATER'",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "label sits among 'TO ...' lead labels: it may name a lead's destination, not the part",
    "rect": {
     "x": 151,
     "y": 181,
@@ -1782,9 +1931,12 @@
    "asset": "tank-diagram",
    "method": "leader-target",
    "role": "mechanism-part",
-   "confidence": 0.43,
+   "confidence": 0.35,
+   "rawConfidence": 0.43,
    "status": "SUGGESTED",
    "basis": "far end of the leader line from label 'HEATER'",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the leader's far end is where a line stops, not proven to be the named part (no held-out accuracy)",
    "point": [
     75,
     154
@@ -1797,9 +1949,12 @@
    "asset": "tank-diagram",
    "method": "diagram-label",
    "role": "document-block",
-   "confidence": 0.96,
+   "confidence": 0.6,
+   "rawConfidence": 0.96,
    "status": "SUGGESTED",
    "basis": "upper-case label 'FAN 2'",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "label sits among 'TO ...' lead labels: it may name a lead's destination, not the part",
    "rect": {
     "x": 172,
     "y": 203,
@@ -1814,9 +1969,12 @@
    "asset": "tank-diagram",
    "method": "leader-target",
    "role": "mechanism-part",
-   "confidence": 0.43,
+   "confidence": 0.35,
+   "rawConfidence": 0.43,
    "status": "SUGGESTED",
    "basis": "far end of the leader line from label 'FAN 2'",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the leader's far end is where a line stops, not proven to be the named part (no held-out accuracy)",
    "point": [
     148,
     190
@@ -1829,7 +1987,8 @@
    "asset": "tank-diagram",
    "method": "figure-boundary",
    "role": "document-block",
-   "confidence": 0.85,
+   "confidence": 0.6,
+   "rawConfidence": 0.85,
    "status": "SUGGESTED",
    "basis": "largest non-text ink region",
    "rect": {
@@ -1844,9 +2003,12 @@
    "asset": "tank-fire-test",
    "method": "subject-box",
    "role": "subject",
-   "confidence": 0.54,
+   "confidence": 0.3,
+   "rawConfidence": 0.54,
    "status": "SUGGESTED",
    "basis": "largest region that differs from the frame border",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "separates foreground from background; it cannot tell which object is the subject",
    "rect": {
     "x": 280,
     "y": 378,
@@ -1859,9 +2021,12 @@
    "asset": "tank-fire-test",
    "method": "region-of-interest",
    "role": "point-of-interest",
-   "confidence": 0.32,
+   "confidence": 0.15,
+   "rawConfidence": 0.32,
    "status": "SUGGESTED",
    "basis": "highest edge-density window (no claim attached)",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the densest-edge window; it has no subject model (on a launch photo it picks the gantry lattice)",
    "rect": {
     "x": 60,
     "y": 2550,
@@ -1874,9 +2039,12 @@
    "asset": "crew",
    "method": "subject-box",
    "role": "subject",
-   "confidence": 0.69,
+   "confidence": 0.3,
+   "rawConfidence": 0.69,
    "status": "SUGGESTED",
    "basis": "largest region that differs from the frame border",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "separates foreground from background; it cannot tell which object is the subject",
    "rect": {
     "x": 1216,
     "y": 2912,
@@ -1889,9 +2057,12 @@
    "asset": "crew",
    "method": "region-of-interest",
    "role": "point-of-interest",
-   "confidence": 0.43,
+   "confidence": 0.15,
+   "rawConfidence": 0.43,
    "status": "SUGGESTED",
    "basis": "highest edge-density window (no claim attached)",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the densest-edge window; it has no subject model (on a launch photo it picks the gantry lattice)",
    "rect": {
     "x": 1752,
     "y": 3648,
@@ -1904,9 +2075,12 @@
    "asset": "mission-control",
    "method": "region-of-interest",
    "role": "point-of-interest",
-   "confidence": 0.46,
+   "confidence": 0.15,
+   "rawConfidence": 0.46,
    "status": "SUGGESTED",
    "basis": "highest edge-density window (no claim attached)",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the densest-edge window; it has no subject model (on a launch photo it picks the gantry lattice)",
    "rect": {
     "x": 1710,
     "y": 1440,
@@ -1919,9 +2093,12 @@
    "asset": "launch",
    "method": "region-of-interest",
    "role": "point-of-interest",
-   "confidence": 0.52,
+   "confidence": 0.15,
+   "rawConfidence": 0.52,
    "status": "SUGGESTED",
    "basis": "highest edge-density window (no claim attached)",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the densest-edge window; it has no subject model (on a launch photo it picks the gantry lattice)",
    "rect": {
     "x": 2028,
     "y": 3660,
@@ -1933,7 +2110,7 @@
  "timing": [
   {
    "asset": "sm-damage",
-   "seconds": 0.18,
+   "seconds": 0.1,
    "steps": {
     "subject": 0.02,
     "roi": 0.0
@@ -1945,7 +2122,7 @@
   },
   {
    "asset": "sm-damage-2",
-   "seconds": 0.2,
+   "seconds": 0.19,
    "steps": {
     "subject": 0.0,
     "roi": 0.0
@@ -1957,10 +2134,10 @@
   },
   {
    "asset": "tank-location",
-   "seconds": 2.47,
+   "seconds": 2.38,
    "steps": {
-    "ocr": 1.48,
-    "labels": 0.48,
+    "ocr": 1.38,
+    "labels": 0.49,
     "figure": 0.49
    },
    "file_px": [
@@ -1970,11 +2147,11 @@
   },
   {
    "asset": "tank-diagram",
-   "seconds": 0.78,
+   "seconds": 0.76,
    "steps": {
-    "ocr": 0.32,
-    "labels": 0.37,
-    "figure": 0.07
+    "ocr": 0.3,
+    "labels": 0.36,
+    "figure": 0.06
    },
    "file_px": [
     394,
@@ -1983,7 +2160,7 @@
   },
   {
    "asset": "tank-fire-test",
-   "seconds": 0.23,
+   "seconds": 0.19,
    "steps": {
     "subject": 0.03,
     "roi": 0.0
@@ -1995,7 +2172,7 @@
   },
   {
    "asset": "crew",
-   "seconds": 0.21,
+   "seconds": 0.22,
    "steps": {
     "subject": 0.02,
     "roi": 0.0
@@ -2007,7 +2184,7 @@
   },
   {
    "asset": "mission-control",
-   "seconds": 0.11,
+   "seconds": 0.12,
    "steps": {
     "subject": 0.0,
     "roi": 0.0

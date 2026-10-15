@@ -103,7 +103,9 @@ function makePlanner({ script, evidence, assets, timeline, channel, tail = 0.8, 
     const drawn = parts.filter((q) => !q.layerOf && !links.some((l) => l.to === q.id && l.kind === "rated-for"));
     const drawing = Object.keys(A).find((k) => (A[k].tags || []).includes("drawing") && !banned.has(k) && drawn.every((q) => anchorsOf(k).some((x) => x.role === "mechanism-part" && x.label && COMP.mentions(x.label).some((m) => m.kind === q.kind))));
     if (drawing) for (const q of drawn) q.anchor = anchorsOf(drawing).find((x) => x.role === "mechanism-part" && COMP.mentions(x.label).some((m) => m.kind === q.kind)).ref;
-    else { const sug = suggestions.filter((g) => g.status === "SUGGESTED" && g.label && A[g.asset] && (A[g.asset].tags || []).includes("drawing") && COMP.mentions(g.label).some((m) => drawn.some((q) => q.kind === m.kind)));
+    else { const sug = suggestions.filter((g) => g.status === "SUGGESTED" && g.assessment !== "NEEDS_HUMAN_REVIEW" && g.label && A[g.asset] && (A[g.asset].tags || []).includes("drawing") && COMP.mentions(g.label).some((m) => drawn.some((q) => q.kind === m.kind)));
+      const unreliable = suggestions.filter((g) => g.status === "SUGGESTED" && g.assessment === "NEEDS_HUMAN_REVIEW" && g.component && drawn.some((q) => COMP.mentions(g.component).some((m) => m.kind === q.kind)));
+      if (!sug.length && unreliable.length) upgrades.push({ line: lines[i0].id, code: "MEASURED_MODE_NEEDS_MANUAL_ANCHORS", detail: `no reliable suggestion for the drawn parts; ${unreliable.length} candidates on ${[...new Set(unreliable.map((g) => g.asset))].join(", ")} need a human (${[...new Set(unreliable.map((g) => g.assessmentReason))].join("; ")})`, suggestions: unreliable.map((g) => g.id) });
       if (sug.length) upgrades.push({ line: lines[i0].id, code: "MEASURED_MODE_AFTER_VERIFICATION", detail: `${sug.length} suggested anchors on ${[...new Set(sug.map((g) => g.asset))].join(", ")} name drawn parts (${[...new Set(sug.map((g) => g.label))].join(", ")}); conceptual mode until a human verifies part geometry`, suggestions: sug.map((g) => g.id) }); }
     // archival plates before the model: historical images whose own title/caption names the topic AND the
     // system the scene's parts belong to (the vessel named in these or the previous line's passages).
@@ -131,10 +133,16 @@ function makePlanner({ script, evidence, assets, timeline, channel, tail = 0.8, 
     const cam = [{ at: shift(startRef(i0), +lead), focus: drawn.map((q) => q.id) }]; let last = drawn.map((q) => q.id);
     idxs.forEach((j, k) => { const here = placed.filter((x) => x.line === j).map((x) => x.s.part); const extra = placed.filter((x) => x.line === j && x.s.state === "on").flatMap((x) => links.filter((l) => l.from === x.s.part && l.kind === "powered-by").map((l) => l.to));
       const f = [...new Set([...here, ...extra])].filter((id) => parts.some((q) => q.id === id)); const focus = f.length ? f : last;
-      cam.push({ at: shift(startRef(j), k === 0 ? +(lead + 1.0).toFixed(2) : +0.0), focus: last }, { at: shift(startRef(j), k === 0 ? +(lead + 1.8).toFixed(2) : +0.8), focus }); last = focus; });
+      const ls = at(startRef(j)) + (k === 0 ? lead + 0.6 : 0), le = at(endRef(j)); const cue = Math.min(...placed.filter((x) => x.line === j).map((x) => at(x.s.at)).concat([le]));
+      // arrive and settle at least 0.6 s before the cue (the state change then reads on a still frame); the move stays inside the line
+      // if there is no room to settle before the cue, the camera waits until the state has read (cue + 0.9) and moves after it:
+      // it never moves during a documented state change
+      const room = cue - 0.6 >= ls + 0.5; const go = room ? Math.max(ls, Math.min(cue - 0.6, le - 0.3) - 1.2) : Math.min(le - 0.8, Math.max(ls, cue + 0.9));
+      const arrive = room ? Math.min(cue - 0.6, le - 0.3) : Math.min(le - 0.3, go + 1.2); const rel = (x) => shift(startRef(j), +(x - at(startRef(j))).toFixed(2));
+      cam.push({ at: rel(go), focus: last }, { at: rel(arrive), focus }); last = focus; });
     const stamps = idxs.flatMap((j) => claimsWithRole(lines[j].claims, "chronology").map((c) => ({ value: `{${c}}`, window: [shift(startRef(j), +0.2), shift(endRef(j), -0.2)] })));
-    shared[name] = { mode: drawing ? "measured" : "conceptual", disclosure: drawing ? "Drawing geometry · parts registered" : "Conceptual diagram · not to scale", ...(drawing ? { drawing: `asset:${drawing}` } : {}),
-      scale: { mode: drawing ? "true-scale" : "schematic" }, parts, links, states: placed.map((x) => x.s), camera: dedupeCam(cam), ...(stamps.length ? { stamps } : {}), ...(archival.length ? { archival } : {}), ...(meters.length ? { meters } : {}) };
+    shared[name] = { mode: drawing ? "measured" : "conceptual", disclosure: drawing ? "Drawing geometry · parts registered" : "Conceptual · not to scale", ...(drawing ? { drawing: `asset:${drawing}` } : {}),
+      scale: { mode: drawing ? "true-scale" : "schematic" }, parts, links, states: placed.map((x) => x.s), camera: dedupeCam(cam), span: [startRef(i0), endRef(idxs[idxs.length - 1])], ...(stamps.length ? { stamps } : {}), ...(archival.length ? { archival } : {}), ...(meters.length ? { meters } : {}) };
     return { name, placed, drawing, archivalAssets: archival.map((a) => a.asset.slice(6)) };
   }
   const dedupeCam = (cam) => cam.filter((k, j) => !cam.slice(0, j).some((x) => x.at === k.at));
@@ -155,7 +163,7 @@ function makePlanner({ script, evidence, assets, timeline, channel, tail = 0.8, 
       const mine = comp.placed.filter((x) => x.line === i).map((x) => x.s); const first = comp.idxs[0] === i;
       base.qa.states.push(...mine.map((s0) => ({ at: s0.at, what: `${s0.part}: ${s0.state}`, claim: s0.claim.slice(6) })));
       if (!base.qa.states.length) base.qa.states.push({ at: `line:${line.id}`, what: "camera holds on the component" });
-      const P = { scene: `shared:${comp.name}`, chip: { label: comp.drawing ? "Animation · drawing geometry" : "Explanatory animation", kind: "explanatory" }, ...(first ? { enter: [t0, shift(t0, +0.4)] } : {}) };
+      const P = { scene: `shared:${comp.name}`, chip: { label: comp.drawing ? "Animation · drawing geometry" : "Conceptual · not to scale", kind: "explanatory" }, ...(first ? { enter: [t0, shift(t0, +0.4)] } : {}) };
       if (first && comp.archivalAssets.length) base.qa.states.unshift({ at: shift(t0, +0.1), what: "historical image (unmarked) before the model" });
       emit(i, { ...base, template: "component-section", provenance: { kind: "explanatory", label: comp.drawing ? "Explanatory animation · drawing geometry" : "Conceptual diagram · not to scale" }, assets: [...new Set([...(comp.drawing ? [comp.drawing] : []), ...comp.archivalAssets])], params: count(P),
         transition: first ? (i === 0 ? { type: "cut" } : { type: "cut", reason: "into the component the narration describes" }) : { type: "continuous", reason: "same component model; the camera travels to the next documented state" } }, false); continue;
@@ -177,8 +185,8 @@ function makePlanner({ script, evidence, assets, timeline, channel, tail = 0.8, 
         if (poi) P.mark = { anchor: poi.ref, radius: 70, pulse: true, outline: true, layer: "hud", in: [shift(t0, +0.1), shift(t0, +0.5)] };
         const ev = line.claims.find((c) => C[c] && C[c].role === "event"); if (ev) P.stamp = { label: "DOCUMENTED TIME", value: `claim:${ev}` };
       } else if (beat === "hook") { const poi = anchorsOf(k).find((x) => x.role === "point-of-interest" && x.point && line.claims.includes(x.claim));
-        if (!poi) { const sg = suggestions.filter((g) => g.asset === k && g.status === "SUGGESTED");
-          need(line.id, "MISSING_ANCHOR", `hook asset ${k} has no point-of-interest anchor stating one of the line's claims${sg.length ? ` (${sg.length} suggested, unverified: ${sg.map((g) => g.id).join(", ")})` : ""}`, sg.length ? "verify or reject the suggested anchor (a suggestion is never used as a verified point)" : "measure the point of interest on the photo (manual anchor) and tie it to the claim"); review = true; }
+        if (!poi) { const sg = suggestions.filter((g) => g.asset === k && g.status === "SUGGESTED"); const weak = sg.filter((g) => g.assessment === "NEEDS_HUMAN_REVIEW").length;
+          need(line.id, "MISSING_ANCHOR", `hook asset ${k} has no point-of-interest anchor stating one of the line's claims${sg.length ? ` (${sg.length} suggested, unverified${weak ? `, ${weak} assessed unreliable` : ""}: ${sg.map((g) => g.id).join(", ")})` : ""}`, sg.length ? "verify or reject the suggested anchor (a suggestion is never used as a verified point)" : "measure the point of interest on the photo (manual anchor) and tie it to the claim"); review = true; }
         const box = portrait ? CAM.PHOTO_BOX : { x: 0, y: 0, w: CAM.W, h: CAM.H };
         const cam = poi ? CAM.evidencePushIn({ asset: a, anchor: poi, t0: "0", t1: shift(t1, +0.3), box }) : CAM.establishing({ asset: a, t0: "0", t1, box });
         Object.assign(P, { box, camera: { keys: cam.keys }, under: "ink", shades: portrait ? [{ kind: "top", h: 640 }, { kind: "bottom", y: 1120, h: 290 }, { kind: "ink", y: 1400, h: 520 }] : [{ kind: "top", h: 640 }, { kind: "bottom", y: 1180, h: 740 }] });

@@ -26,6 +26,7 @@
       part: { type: "string" }, state: { enum: ["on", "rated", "threshold", "stuck-closed", "hot", "damaged", "pressure-loss"] }, at: S.timeRef, claim: S.claim, value: S.claim, tag: S.text } } },
     camera: { type: "array", minItems: 1, items: { type: "object", required: ["at", "focus"], additionalProperties: false, properties: {
       at: S.timeRef, focus: { type: "array", minItems: 1, items: { type: "string" } }, zoom: { type: "number", minimum: 1, maximum: 2.4 } } } },
+    span: S.window2,
     stamps: { type: "array", items: { type: "object", required: ["value", "window"], additionalProperties: false, properties: { value: S.text, window: S.window2 } } },
     // archival plates shown before the model (unmarked, unregistered): kind says what the image is
     archival: { type: "array", items: { type: "object", required: ["asset", "kind", "label", "window"], additionalProperties: false, properties: {
@@ -76,8 +77,9 @@
       const st = sc.states.map((s) => ({ ...s, t: ctx.time(s.at) })).sort((s1, s2) => s1.t - s2.t); const kOf = (part, state, t, d = 0.6) => { const s = st.find((x) => x.part === part && x.state === state); return s ? E.inOut(p(t, s.t, s.t + d)) : 0; };
       const center = (id) => { const b = pos[id]; return b ? [b.x, b.y + b.h / 2] : null; };
       const fit = (ids, zoom) => { const bs = ids.map((id) => pos[id] || (byId[id] && byId[id].layerOf && pos[byId[id].layerOf])).filter(Boolean); if (!bs.length) return { fx: 540, fy: 860, z: 1 };
-        const x0 = Math.min(...bs.map((b) => b.x - b.w / 2)) - 80, x1 = Math.max(...bs.map((b) => b.x + b.w / 2)) + 80, y0 = Math.min(...bs.map((b) => b.y)) - 80, y1 = Math.max(...bs.map((b) => b.y + b.h)) + 80;
-        const z = zoom || Math.max(1, Math.min(2.2, 900 / (x1 - x0), 600 / (y1 - y0))); return { fx: (x0 + x1) / 2, fy: (y0 + y1) / 2, z }; };
+        const x0 = Math.min(...bs.map((b) => b.x - b.w / 2)) - 60, x1 = Math.max(...bs.map((b) => b.x + b.w / 2)) + 60, y0 = Math.min(...bs.map((b) => b.y)) - 60, y1 = Math.max(...bs.map((b) => b.y + b.h)) + 60;
+        // the parts that change fill the model band (y 430-1030) up to 3x; the overview stays at 1x+
+        const z = zoom || Math.max(1, Math.min(3.0, 920 / (x1 - x0), 600 / (y1 - y0))); return { fx: (x0 + x1) / 2, fy: (y0 + y1) / 2, z }; };
       const keys = sc.camera.map((k) => [ctx.time(k.at), fit(k.focus, k.zoom)]);
       const SY = 730; const scr = (x, y, c) => [540 + (x - c.fx) * c.z, SY + (y - c.fy) * c.z];
       const stamps = (sc.stamps || []).map((s) => ({ v: H.text(s.value, ctx), w: H.win(s.window, ctx) }));
@@ -86,10 +88,12 @@
         <path d="${d}" fill="none" stroke="#56606d" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="${d}" fill="none" stroke="#c9824a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
         ${flow > 0 ? `<path d="${d}" fill="none" stroke="#ffe08a" stroke-width="7" stroke-linecap="round" stroke-dasharray="16 30" stroke-dashoffset="${(-t * 140).toFixed(1)}" opacity="${(0.9 * flow).toFixed(3)}"/>` : ""}`;
+      const plates = (sc.archival || []).map((a) => ({ ...a, w: H.win(a.window, ctx), key: ctx.assetKey(a.asset) }));
+      const KIND = { estimate: "ESTIMATE", quote: "REPORT", measurement: "MEASURED" };
       const render = (t) => {
         // continuous travel: a slow push and a small lateral drift on every line, so no section holds still
-        const c = X.path(keys, t); const u = p(t, shot.start, shot.end); const drift = 1 + 0.05 * E.sine(u);
-        const cam = { fx: c.fx + 22 * Math.sin(Math.PI * (u - 0.5)) / c.z, fy: c.fy - 10 * u / c.z, z: c.z * drift };
+        const c = X.path(keys, t); const sp = sc.span ? H.win(sc.span, ctx) : [shot.start, shot.end]; const u = p(t, sp[0], sp[1]); const drift = 1 + 0.04 * u;
+        const cam = { fx: c.fx + 16 * Math.sin(Math.PI * 2 * u) / c.z, fy: c.fy, z: c.z * drift };
         let world = "";
         // backing plate under the model: one key light from the upper left, soft falloff (presentation only, not part geometry)
         const all = Object.values(pos); if (all.length) { const x0 = Math.min(...all.map((b) => b.x - b.w / 2)) - 110, x1 = Math.max(...all.map((b) => b.x + b.w / 2)) + 110, y0 = Math.min(...all.map((b) => b.y)) - 110, y1 = Math.max(...all.map((b) => b.y + b.h)) + 150;
@@ -157,21 +161,28 @@
           <g transform="translate(540 ${SY}) scale(${cam.z.toFixed(4)}) translate(${(-cam.fx).toFixed(2)} ${(-cam.fy).toFixed(2)})">${world}</g>`;
         // labels and tags in screen space (constant size for phones): the focused parts of the current camera key and the latest state tag
         const cur = sc.camera.filter((k) => ctx.time(k.at) <= t + 0.3).pop() || sc.camera[0];
-        const ids = cur.focus.filter((id) => byId[id]).slice(0, 2); const out = []; const used = [];
+        // one label: the focused part whose documented state changed last (a layer such as insulation names itself)
+        const focusAll = cur.focus.filter((id) => byId[id]); const withLayers = focusAll.concat(focusAll.flatMap((i) => sc.parts.filter((x) => x.layerOf === i || x.id === i && x.layerOf).map((x) => x.id)));
+        const latest = st.filter((x) => x.t <= t + 0.2 && withLayers.includes(x.part)).pop();
+        const ids = [latest ? latest.part : focusAll[0]].filter(Boolean); const out = []; const used = [];
         // a clear label band (y 330-420) above the model; leaders run down to the parts, labels never cross them
         const marks = ids.map((id) => { const part = byId[id]; const b = pos[id] || (part.layerOf && pos[part.layerOf]); return b ? { id, part, b, sx: scr(b.x, b.y, cam)[0] } : null; }).filter(Boolean).sort((m1, m2) => m1.sx - m2.sx);
-        const boxes = Object.values(pos).map((b) => { const [a0, b0] = scr(b.x - b.w / 2, b.y, cam), [a1, b1] = scr(b.x + b.w / 2, b.y + b.h, cam); return { x0: a0, y0: b0, x1: a1, y1: b1 }; });
-        const rowFree = (y, x0, x1) => !boxes.some((q) => q.x0 < x1 && q.x1 > x0 && q.y0 < y + 26 && q.y1 > y - 34);
-        const rows = [372, 434, 1010];
-        for (const [j, m] of marks.entries()) { const { part, b } = m; const right = marks.length > 1 ? j === 1 : scr(b.x, b.y, cam)[0] > 540; const lx = right ? 1010 : 70;
-          const tw = 25 * String(part.label).length; const x0 = right ? lx - tw : lx, x1 = right ? lx : lx + tw;
-          const ly = rows.filter((r) => !used.includes(r)).find((r) => rowFree(r, x0, x1)) || rows.filter((r) => !used.includes(r))[0]; used.push(ly);
-          const [x, y] = scr(b.x, ly > 700 ? b.y + b.h : b.y, cam); const ex = Math.max(60, Math.min(1020, x));
-          out.push(`<rect x="${x0 - 14}" y="${ly - 38}" width="${tw + 28}" height="56" rx="12" fill="#06090d" opacity="0.78"/>`);
-          out.push(`<polyline points="${ex.toFixed(1)},${y.toFixed(1)} ${ex.toFixed(1)},${ly + 20} ${right ? x0 - 14 : x1 + 14},${ly + 20}" fill="none" stroke="#ffb547" stroke-width="4" opacity="0.9"/><circle cx="${ex.toFixed(1)}" cy="${y.toFixed(1)}" r="9" fill="#ffb547"/>`
-            + FR.text(lx, ly, H.text(part.label, ctx).toUpperCase(), { size: 40, weight: 800, anchor: right ? "end" : "start", ls: 1.5, extra: `paint-order="stroke" stroke="#000" stroke-width="8" stroke-opacity="0.6"` })); }
+        // label placement: candidates around the part itself (above, below, top inside), the first that crosses no other part
+        // and stays inside the model band and the side margins; leader from the part edge
+        const scrBox = (b) => { const [a0, b0] = scr(b.x - b.w / 2, b.y, cam), [a1, b1] = scr(b.x + b.w / 2, b.y + b.h, cam); return { x0: a0, y0: b0, x1: a1, y1: b1 }; };
+        for (const m of marks) { const { part, id } = m; const own = scrBox(m.b); const others = Object.entries(pos).filter(([k]) => k !== id && k !== part.layerOf).map(([, b]) => scrBox(b));
+          const txt = H.text(part.label, ctx).toUpperCase(); const tw = 25 * txt.length; const clampX = (x) => Math.max(70 + tw / 2, Math.min(1010 - tw / 2, x));
+          const mid = (Math.max(own.x0, 0) + Math.min(own.x1, 1080)) / 2; const xs = [clampX(mid), clampX(own.x0 + tw / 2), clampX(own.x1 - tw / 2)];
+          const ys = [own.y0 - 30, own.y1 + 52, Math.max(own.y0, 400) + 52].filter((y) => y >= 360 && y <= 1020);
+          const free = (x, y) => !others.some((q) => q.x0 < x + tw / 2 + 14 && q.x1 > x - tw / 2 - 14 && q.y0 < y + 22 && q.y1 > y - 40);
+          const pick = ys.flatMap((y) => xs.map((x) => [x, y])).find(([x, y]) => free(x, y)) || [xs[0], ys[ys.length - 1] || 400];
+          const [cx, ly] = pick; const x0 = cx - tw / 2, x1 = cx + tw / 2;
+          const ey = ly < own.y0 ? own.y0 : ly > own.y1 ? own.y1 : null;
+          out.push(`<rect x="${x0 - 14}" y="${ly - 38}" width="${tw + 28}" height="56" rx="12" fill="#06090d" opacity="0.8"/>`);
+          if (ey != null) out.push(`<line x1="${cx.toFixed(1)}" y1="${(ly < own.y0 ? ly + 18 : ly - 38).toFixed(1)}" x2="${cx.toFixed(1)}" y2="${ey.toFixed(1)}" stroke="#ffb547" stroke-width="4"/><circle cx="${cx.toFixed(1)}" cy="${ey.toFixed(1)}" r="8" fill="#ffb547"/>`);
+          out.push(FR.text(cx, ly, txt, { size: 40, weight: 800, anchor: "middle", ls: 1.5 })); }
         const metered = new Set((sc.meters || []).flatMap((mt) => mt.entries.map((e) => `${(e.tagClaim || e.value)}|${e.tag}`)));
-        const live = st.filter((s) => s.t <= t && tagOf(s) && !metered.has(`${s.claim}|${s.tag}`) && !metered.has(`${s.value}|${s.tag}`) && ids.concat(ids.map((i) => (sc.parts.find((x) => x.layerOf === i) || {}).id)).includes(s.part)).pop();
+        const live = st.filter((s) => s.t <= t && tagOf(s) && !metered.has(`${s.claim}|${s.tag}`) && !metered.has(`${s.value}|${s.tag}`) && withLayers.includes(s.part)).pop();
         if (live) { const k = E.out(p(t, live.t, live.t + 0.35)); const txt = esc(tagOf(live).toUpperCase()); const wpx = 26 * txt.length + 60; const alert = ["stuck-closed", "damaged", "hot", "pressure-loss"].includes(live.state);
           out.push(`<g opacity="${k.toFixed(3)}" transform="translate(540 ${1236 - 18 * (1 - k)})"><rect x="${-wpx / 2}" y="-44" width="${wpx}" height="76" rx="38" fill="${alert ? "#e5484d" : "#0f1720"}" stroke="${alert ? "#ffb547" : "#7cc6ff"}" stroke-width="3" opacity="0.92"/>`
             + FR.text(0, 8, tagOf(live).toUpperCase(), { size: 44, weight: 800, ls: 1 }) + `</g>`); }
@@ -187,10 +198,10 @@
             <rect x="${X0}" y="${Y - 16}" width="${Math.max(0, xs(fill) - X0)}" height="32" rx="16" fill="${hot ? "url(#csHeat)" : "#ffcf6a"}"/>${over}
             ${mt.es.filter((e) => e.role === "mark" && t >= e.t - 0.1).map((e) => { const k = E.out(p(t, e.t - 0.1, e.t + 0.3)); const x = xs(e.v); const breach = fill > e.v + 1e-6;
               return `<g opacity="${k.toFixed(3)}"><line x1="${x}" y1="${Y - 34}" x2="${x}" y2="${Y + 34}" stroke="${breach ? "#ff6a6f" : "#7cc6ff"}" stroke-width="7"/>` + FR.text(Math.min(Math.max(x, X0 + 200), 940 - 11 * e.txt.length), Y - 30, e.txt, { size: 36, weight: 800, fill: breach ? "#ffb4b6" : "#cfe8ff", ls: 1 }) + `</g>`; }).join("")}
-            ${last ? FR.text(Math.min(Math.max(xs(fill), X0 + 340), 930), Y + 66, last.txt, { size: 38, weight: 800, fill: hot ? "#ffd0a0" : "#ffe3a3", ls: 1, anchor: "end" }) : ""}</g>`); });
+            ${last ? FR.text(Math.min(Math.max(xs(fill), X0 + 340), 930), Y + 66, last.txt, { size: 38, weight: 800, fill: hot ? "#ffd0a0" : "#ffe3a3", ls: 1, anchor: "end" }) : ""}
+            ${last && KIND[ctx.claim(last.value.slice(6)).kind] ? FR.text(930, Y - 30, KIND[ctx.claim(last.value.slice(6)).kind], { size: 32, weight: 800, fill: "#9fb3c8", ls: 2, anchor: "end" }) : ""}</g>`); });
         const enter = P.enter ? E.inOut(p(t, ctx.time(P.enter[0]), ctx.time(P.enter[1]))) : 1;
         // archival plates (historical photos/drawings, or test imagery with its label): unmarked, unregistered; the model fades in after them
-        const plates = (sc.archival || []).map((a) => ({ ...a, w: H.win(a.window, ctx), key: ctx.assetKey(a.asset) }));
         let plateK = 0; const media = []; let plateChip = null;
         plates.forEach((a, i) => { const isLast = i === plates.length - 1; const kIn = i === 0 ? 1 : E.inOut(p(t, a.w[0], a.w[0] + 0.45)); const kOut = 1 - E.inOut(p(t, a.w[1] - 0.45, a.w[1]));
           const k = t < a.w[0] ? 0 : kIn * kOut; if (k <= 0) return; const m = FR.media[a.key]; const z = 1 + 0.08 * p(t, a.w[0], a.w[1]);
@@ -203,8 +214,8 @@
         const band = `<rect y="1150" width="${W}" height="${HH - 1150}" fill="url(#botShade)"/><rect y="1290" width="${W}" height="${HH - 1290}" fill="#06090d" opacity="0.72"/><rect width="${W}" height="440" fill="url(#topShade)" opacity="0.8"/>`;
         const wop = enter * (1 - plateK);
         return { under: FR.blueprint(1), media, svg: `<g opacity="${wop.toFixed(3)}">${svgWorld}${band}${out.join("")}</g>`,
-          hud: (plateChip ? FR.chip(H.text(plateChip.label, ctx), plateChip.kind === "test-imagery" ? "reconstruction" : "archival") : FR.chip(H.text(P.chip.label, ctx), P.chip.kind || "explanatory")) + (stampNow ? X.stamp("", stampNow.v, H.fadeWin(FR, t, [stampNow.w[0], stampNow.w[0] + 0.3], [stampNow.w[1], stampNow.w[1] + 0.4])) : "")
-            + `<div style="position:absolute;left:0;right:0;top:262px;text-align:center;font:700 32px ${F.sans};letter-spacing:2.4px;color:#a9b7c8;opacity:${(0.9 * (1 - plateK)).toFixed(3)};text-transform:uppercase">${esc(H.text(sc.disclosure, ctx))}</div>`
+          hud: (plateChip ? FR.chip(H.text(plateChip.label, ctx), plateChip.kind === "test-imagery" ? "reconstruction" : "archival") : FR.chip(H.text(sc.mode === "conceptual" ? sc.disclosure : P.chip.label, ctx), P.chip.kind || "explanatory")) + (stampNow ? X.stamp("", stampNow.v, H.fadeWin(FR, t, [stampNow.w[0], stampNow.w[0] + 0.3], [stampNow.w[1], stampNow.w[1] + 0.4])) : "")
+
             + (P.source ? FR.source(H.text(P.source.text, ctx), 1, P.source.y) : "") };
       };
       return { render };

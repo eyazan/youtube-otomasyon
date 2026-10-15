@@ -65,3 +65,12 @@ class AnchorSuggest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class Calibration(unittest.TestCase):
+    def test_lead_labels_and_ceilings(self):
+        a = load()
+        self.assertTrue(a.LEAD.match("TO HEATER") and a.LEAD.match("to fan 2") and not a.LEAD.match("TOTAL HEATER"))
+        self.assertLessEqual(a.CEILING["region-of-interest"], 0.2)
+        for m in ("leader-target", "subject-box", "region-of-interest"):
+            self.assertIn(m, a.ALWAYS_REVIEW)

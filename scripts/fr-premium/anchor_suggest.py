@@ -34,6 +34,18 @@ VOCAB = ["heater", "heating element", "switch", "thermostat", "sensor", "probe",
          "o-ring", "seal", "pin", "tang", "clevis", "insulation", "supply", "gage", "gaging", "pump", "line", "tube", "joint"]
 
 
+# Confidence calibration (V1.1). A raw score says how clean the signal was, not whether it names the right object.
+# Each method gets a ceiling from what it can know; methods with no way to tell WHICH object they found (no subject
+# model, no held-out accuracy) are always assessed NEEDS_HUMAN_REVIEW. Ceilings were set from the failure analysis of
+# the Apollo review cards, not by re-tuning on the Challenger evaluation images (whose recall is reported unchanged).
+CEILING = {"claim-line": 0.8, "ocr-text": 0.7, "document-heading": 0.5, "figure-boundary": 0.6, "diagram-label": 0.6,
+           "leader-target": 0.35, "subject-box": 0.3, "region-of-interest": 0.15}
+ALWAYS_REVIEW = {"leader-target": "the leader's far end is where a line stops, not proven to be the named part (no held-out accuracy)",
+                 "subject-box": "separates foreground from background; it cannot tell which object is the subject",
+                 "region-of-interest": "the densest-edge window; it has no subject model (on a launch photo it picks the gantry lattice)"}
+LEAD = re.compile(r"^\s*TO\s+", re.I)  # "TO HEATER", "TO FAN 2": a connection lead's destination, not the part itself
+
+
 class Unsafe(Exception):
     pass
 
@@ -239,7 +251,9 @@ def suggest(key, asset, path, claims):
 
     def add(method, role, conf, basis, rect=None, point=None, **kw):
         n[0] += 1
-        s = {"id": f"SG-{key}-{n[0]}", "asset": key, "method": method, "role": role, "confidence": conf, "status": "SUGGESTED", "basis": basis}
+        s = {"id": f"SG-{key}-{n[0]}", "asset": key, "method": method, "role": role, "confidence": round(min(conf, CEILING.get(method, 0.5)), 2), "rawConfidence": conf, "status": "SUGGESTED", "basis": basis}
+        why = ALWAYS_REVIEW.get(method) or kw.pop("review", None)
+        if why: s["assessment"] = "NEEDS_HUMAN_REVIEW"; s["assessmentReason"] = why
         if rect: s["rect"] = S(rect)
         if point: s["point"] = [round(point[0] * sx), round(point[1] * sy)]
         s.update({k: v for k, v in kw.items() if v is not None})
@@ -269,11 +283,17 @@ def suggest(key, asset, path, claims):
         if "drawing" in (asset.get("tags") or []):
             t = time.time()
             for lab in merge_labels(lines):
-                comp = next((v for v in VOCAB if v in lab["text"].lower()), None)
-                add("diagram-label", "document-block", round(lab["conf"] / 100, 2), f"upper-case label '{lab['text']}'", rect=lab["rect"], label=lab["text"].title(), component=comp)
+                lead = bool(LEAD.match(lab["text"]))
+                # a part-named label inside a cluster of lead labels ("TO" within ~2 lines, overlapping columns) may itself be a
+                # lead whose "TO" was not read; it is never trusted as the part
+                r0 = lab["rect"]; near_lead = not lead and any(re.match(r"^\s*TO\b", l["text"], re.I) and l["rect"] is not r0 and abs(l["rect"]["y"] - r0["y"]) <= 2.5 * max(r0["h"], 6)
+                    and l["rect"]["x"] < r0["x"] + r0["w"] + 20 and l["rect"]["x"] + l["rect"]["w"] > r0["x"] - 20 for l in lines)
+                comp = None if lead else next((v for v in VOCAB if v in lab["text"].lower()), None)
+                add("diagram-label", "document-block", round(lab["conf"] / 100, 2), f"upper-case label '{lab['text']}'", rect=lab["rect"], label=lab["text"].title(), component=comp,
+                    leadTo=(LEAD.sub("", lab["text"]).title() if lead else None), review=("a 'TO ...' label names where a lead goes, not the part" if lead else "label sits among 'TO ...' lead labels: it may name a lead's destination, not the part" if near_lead else None))
                 tgt = leader_target(g, lab["rect"])
                 if tgt:
-                    add("leader-target", "mechanism-part", round(0.45 * lab["conf"] / 100, 2), f"far end of the leader line from label '{lab['text']}'", point=tgt, label=lab["text"].title(), component=comp)
+                    add("leader-target", "connection-lead" if lead else "mechanism-part", round(0.45 * lab["conf"] / 100, 2), f"far end of the leader line from label '{lab['text']}'", point=tgt, label=lab["text"].title(), component=comp)
             timings["labels"] = round(time.time() - t, 2)
         t = time.time()
         for r, conf in figure_boundary(g):

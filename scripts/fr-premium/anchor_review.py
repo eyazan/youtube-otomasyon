@@ -26,7 +26,7 @@ def uses(report, plan):
             out[sid] = f"{i.get('line')}: {i['code']} - would become the shot's point of interest once verified and tied to a claim"
     for u in report.get("upgrades", []):
         for sid in u.get("suggestions", []):
-            out[sid] = f"{u['line']}: {u['code']} - part geometry for the component scene (measured mode)"
+            out[sid] = f"{u['line']}: {u['code']} - candidate part geometry for the component scene (measured mode)"
     return out
 
 
@@ -61,9 +61,11 @@ def main(argv=None):
         support = f"{s['claim']}: \"{ev[s['claim']]['passage'][:150]}\"" if s.get("claim") and s["claim"] in ev else f"no claim; image caption only: \"{(A['source'].get('caption') or A['source']['title'])[:140]}\""
         row = {"id": s["id"], "asset": s["asset"], "file": A["file"], "method": s["method"], "role": s["role"], "rect": s.get("rect"), "point": s.get("point"),
                "label": s.get("label") or s.get("text"), "intendedComponent": intended, "supportingSource": support, "confidence": s.get("confidence"),
-               "expectedUse": use.get(s["id"], "not used by the current plan"), "status": s["status"], "basis": s["basis"]}
+               "expectedUse": use.get(s["id"], "not used by the current plan"), "status": s["status"], "basis": s["basis"],
+               "rawConfidence": s.get("rawConfidence"), "assessment": s.get("assessment", "-"), "assessmentReason": s.get("assessmentReason")}
         rows.append(row)
-        txt = (f"{s['id']}  [{s['status']}]\nasset: {s['asset']}  method: {s['method']}  confidence: {s.get('confidence')}\n"
+        txt = (f"{s['id']}  [{s['status']}]{'  ASSESSED NEEDS_HUMAN_REVIEW' if s.get('assessment') else ''}\nasset: {s['asset']}  method: {s['method']}  confidence: {s.get('confidence')} (raw {s.get('rawConfidence')})\n"
+               + (f"why: {s['assessmentReason']}\n" if s.get("assessmentReason") else "") +
                f"intended: {intended}\nsource: {support}\nuse: {row['expectedUse']}\nhuman: [ ] VERIFY   [ ] REJECT   by ____  date ____")
         tf = os.path.join(a.out, f"_{s['id']}_t.png")
         magick("-size", "1040x230", "-background", "#111", "-fill", "#eee", "-font", "DejaVu-Sans" if False else "Helvetica", "-pointsize", "17", f"caption:{txt}", tf)

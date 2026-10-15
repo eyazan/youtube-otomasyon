@@ -8,6 +8,7 @@
 //        [--out video.mp4] [--stills 0,1.5,3] [--from s] [--to s] [--tail 0.8]
 //        [--overrides proto.js,...] [--media-extra media.json,...]   (Phase 1 scene-only prototypes)
 //        [--plan shot-plan.json]   (data-driven shots from the premium engine; scenes.js/overrides feed legacy-code shots only)
+//        [--capture fast|playwright] [--profile frames.json]   (lossless capture mode; per-frame timing)
 //
 // <filmDir> holds scenes.js (shots, using fr-lib.js) and media.json (photos and clip ranges).
 // The output is video only; mix-audio.js adds the soundtrack. Reuses the ProfitDecoded motion
@@ -41,7 +42,7 @@ function prepareMedia() {
   for (const [key, ph] of Object.entries(spec.photos || {})) {
     const src = path.join(assets, ph.file); const dst = path.join(mdir, key + ".jpg");
     // Long side at most 2600 px (enough for a 1.6x push on a 1080 px frame), RGB, high quality.
-    if (!fs.existsSync(dst)) execFileSync("ffmpeg", ["-v", "error", "-y", "-i", src, "-vf", "scale='if(gt(iw,ih),min(2600,iw),-2)':'if(gt(iw,ih),-2,min(2600,ih))',format=yuvj444p", "-q:v", "2", dst]);
+    if (!fs.existsSync(dst)) execFileSync("ffmpeg", ["-v", "error", "-y", "-i", src, "-vf", "scale='if(gt(iw,ih),min(2600,iw),-2)':'if(gt(iw,ih),-2,min(2600,ih))',format=yuvj444p", "-frames:v", "1", "-q:v", "2", dst]); // first frame only (GIF drawings)
     const d = probe(dst); const s0 = probe(src);
     media[key] = { src: path.relative(work, dst), iw: d.w, ih: d.h, scale: d.w / s0.w, ...ph };
   }
@@ -110,13 +111,21 @@ html,body{margin:0;width:${W}px;height:${H}px;overflow:hidden;background:#000}#s
     "-colorspace", "bt709", "-color_primaries", "bt709", "-color_trc", "bt709", "-color_range", "tv", "-r", String(FPS), "-an", "-movflags", "+faststart", video], { stdio: ["pipe", "inherit", "inherit"] });
   const done = new Promise((ok, no) => ff.on("close", (c) => (c === 0 ? ok() : no(new Error("ffmpeg exited " + c)))));
   const n = Math.round((to - from) * FPS); const t0 = Date.now();
+  // frame capture: lossless PNG either way. Default ("fast"): Chrome's speed-optimized PNG encoder over CDP
+  // (bit-identical frames, larger PNGs, ~2.5x faster); --capture playwright uses Playwright's screenshot.
+  const cdp = opt("--capture", "fast") === "fast" ? await page.context().newCDPSession(page) : null;
+  const capture = cdp ? async () => Buffer.from((await cdp.send("Page.captureScreenshot", { format: "png", optimizeForSpeed: true, captureBeyondViewport: false })).data, "base64") : () => page.screenshot({ type: "png", timeout: 120000 });
+  // --profile out.json: per-frame time in scene build + DOM update (page), screenshot (paint + PNG) and ffmpeg back-pressure
+  const prof = opt("--profile", null) ? [] : null; const now = () => Number(process.hrtime.bigint()) / 1e6;
   for (let i = 0; i < n; i += 1) {
-    await page.evaluate((x) => FR.frame(x), from + i / FPS);
-    const buf = await page.screenshot({ type: "png", timeout: 120000 });
+    const a0 = now(); const inPage = await page.evaluate(async (x) => { const q = performance.now(); await FR.frame(x); return performance.now() - q; }, from + i / FPS);
+    const a1 = now(); const buf = await capture(); const a2 = now();
     if (!ff.stdin.write(buf)) await new Promise((r) => ff.stdin.once("drain", r));
+    if (prof) prof.push({ t: +(from + i / FPS).toFixed(3), build: +inPage.toFixed(1), evaluate: +(a1 - a0).toFixed(1), screenshot: +(a2 - a1).toFixed(1), pipe: +(now() - a2).toFixed(1), png: buf.length });
     if (i % 150 === 0) process.stdout.write(`\r[fr-premium] frame ${i}/${n}`);
   }
-  ff.stdin.end(); await done; await browser.close();
+  ff.stdin.end(); const e0 = now(); await done; const encTail = now() - e0; await browser.close();
+  if (prof) { const sum = (k) => +prof.reduce((x, r) => x + r[k], 0).toFixed(0); fs.writeFileSync(path.resolve(opt("--profile")), JSON.stringify({ frames: n, wallMs: Date.now() - t0, totals: { build: sum("build"), evaluate: sum("evaluate"), screenshot: sum("screenshot"), pipe: sum("pipe"), encodeTail: +encTail.toFixed(0), pngBytes: sum("png") }, frames_: prof }, null, 1) + "\n"); }
   if (errors.length) throw new Error("scene errors during render: " + errors.join(" | "));
   console.log(`\n[fr-premium] ${n} frames in ${((Date.now() - t0) / 1000).toFixed(0)} s -> ${video}`);
 }

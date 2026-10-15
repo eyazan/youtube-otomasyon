@@ -185,3 +185,26 @@ test("meters: values are claims (65 V fill, 28 V rating; 80°F mark, about 1000�
   const d2 = planned(); d2.plan.shared["component-l2"].meters[1].entries[2].tag = "{C-a13-1000f.value}°F";
   assert.ok(has(d2, /approximate claim C-a13-1000f is shown .* without an approximation marker/));
 });
+
+// ---- round 3: camera continuity, cue timing, anchor calibration ------------------------------------------
+test("component camera: one continuous scene span, moves stay inside their line and settle >= 0.6 s before the line's first cue", () => {
+  const d = apollo(); const r = run(d); const sc = r.plan.shared["component-l2"]; const TIME = require(path.join(ENGINE, "timeref.js"));
+  const dur = d.timeline.duration + 0.8; const at = (x) => TIME.resolve(x, d.timeline, dur);
+  const shots = r.plan.shots.filter((s) => s.params.scene === "shared:component-l2");
+  assert.equal(at(sc.span[0]), at(shots[0].start)); assert.equal(at(sc.span[1]), at(shots[shots.length - 1].end));
+  for (const s of shots) { const a = at(s.start), b = at(s.end); const keys = sc.camera.filter((k) => at(k.at) >= a - 1e-6 && at(k.at) < b - 1e-6);
+    const cue = Math.min(...sc.states.filter((x) => s.qa.states.some((q) => q.claim === x.claim.slice(6) && q.at === x.at)).map((x) => at(x.at)));
+    const moves = keys.filter((k, j) => j > 0 && JSON.stringify(k.focus) !== JSON.stringify(keys[j - 1].focus));
+    for (const k of moves) { const j = sc.camera.indexOf(k); const start = at(sc.camera[j - 1].at);
+      assert.ok(at(k.at) <= b - 0.3 + 1e-6, `${s.id}: camera arrives inside the line`);
+      // either settled 0.6 s before the cue, or the move starts only after the state has read (cue + 0.9)
+      if (isFinite(cue)) assert.ok(at(k.at) <= cue - 0.6 + 1e-6 || start >= cue + 0.9 - 1e-6, `${s.id}: no move during the state change (${start.toFixed(2)}-${at(k.at).toFixed(2)}, cue ${cue.toFixed(2)})`); } }
+});
+test("anchor calibration: unreliable suggestions are assessed NEEDS_HUMAN_REVIEW, stay SUGGESTED, and never offered as measured-mode geometry", () => {
+  const sug = J(path.join(AP, "anchor-suggestions.json")).suggestions; const by = Object.fromEntries(sug.map((s) => [s.id, s]));
+  for (const id of ["SG-launch-1", "SG-tank-diagram-37", "SG-tank-diagram-38"]) { assert.equal(by[id].status, "SUGGESTED"); assert.equal(by[id].assessment, "NEEDS_HUMAN_REVIEW", id); assert.ok(by[id].assessmentReason); }
+  assert.ok(by["SG-launch-1"].confidence <= 0.15 && by["SG-launch-1"].rawConfidence > by["SG-launch-1"].confidence);
+  for (const s of sug.filter((x) => ["leader-target", "subject-box", "region-of-interest"].includes(x.method))) assert.equal(s.assessment, "NEEDS_HUMAN_REVIEW", s.id);
+  const up = run({ ...apollo(), suggestions: sug }).upgrades; assert.ok(!up.some((u) => u.code === "MEASURED_MODE_AFTER_VERIFICATION"));
+  assert.ok(up.some((u) => u.code === "MEASURED_MODE_NEEDS_MANUAL_ANCHORS" && u.suggestions.includes("SG-tank-diagram-37")));
+});
