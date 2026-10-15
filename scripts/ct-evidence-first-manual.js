@@ -19,7 +19,7 @@ async function run({argv=process.argv.slice(2),fetchPrimary=Primary.fetchPrimary
     const doc=await fetchPrimary({kind:"primary",url:value});
     if(!doc||!doc.url||!doc.content_type||!doc.body_sha256||!doc.text)
       throw Error("INVALID_PRIMARY_DOCUMENT_RESULT");
-    return {mode:"MANUAL_PRIMARY_PROBE",primary_source_checked:true,
+    return {mode:"MANUAL_PRIMARY_PROBE",document_retrieved:true,
       host:new URL(doc.final_url||doc.url).hostname,content_type:doc.content_type,
       bytes:doc.bytes,characters:doc.text.length,sha256:doc.body_sha256,
       semantic_accuracy:"NOT_CHECKED",no_groq_requests:true,no_writes:true};
