@@ -105,15 +105,37 @@ function makePlanner({ script, evidence, assets, timeline, channel, tail = 0.8, 
     if (drawing) for (const q of drawn) q.anchor = anchorsOf(drawing).find((x) => x.role === "mechanism-part" && COMP.mentions(x.label).some((m) => m.kind === q.kind)).ref;
     else { const sug = suggestions.filter((g) => g.status === "SUGGESTED" && g.label && A[g.asset] && (A[g.asset].tags || []).includes("drawing") && COMP.mentions(g.label).some((m) => drawn.some((q) => q.kind === m.kind)));
       if (sug.length) upgrades.push({ line: lines[i0].id, code: "MEASURED_MODE_AFTER_VERIFICATION", detail: `${sug.length} suggested anchors on ${[...new Set(sug.map((g) => g.asset))].join(", ")} name drawn parts (${[...new Set(sug.map((g) => g.label))].join(", ")}); conceptual mode until a human verifies part geometry`, suggestions: sug.map((g) => g.id) }); }
+    // archival plates before the model: historical images whose own title/caption names the topic AND the
+    // system the scene's parts belong to (the vessel named in these or the previous line's passages).
+    // Unmarked and unregistered; tests/concepts never qualify as historical plates.
+    const ctxKinds = new Set([...parts.map((q) => q.kind), ...(i0 > 0 ? verified(lines[i0 - 1].claims) : []).flatMap((c) => COMP.mentions(C[c].passage || "").map((m) => m.kind)), ...ids.flatMap((c) => COMP.mentions(C[c].passage || "").map((m) => m.kind))]);
+    const firstState = Math.min(...placed.filter((x) => x.line === i0).map((x) => at(x.s.at)).concat([at(endRef(i0))]));
+    const t0s = at(startRef(i0)); const room = firstState - 0.4 - t0s;
+    const cand = Object.entries(A).filter(([k, a]) => !banned.has(k) && !nonEvent(a) && a.kind !== "clip" && MATCH.subjectCheck(a, ID).score === 1
+      && COMP.mentions(`${a.source.title} ${a.source.caption || ""}`).some((m) => ctxKinds.has(m.kind)) && !Object.values(A).some((o) => o !== a && o.sha256 && o.sha256 === a.sha256 && Object.keys(A).indexOf(k) > Object.keys(A).indexOf(Object.keys(A).find((kk) => A[kk] === o))))
+      .sort(([, a], [, b]) => (/\b(location|relative|overview|cutaway)\b/i.test(b.source.caption || "") - /\b(location|relative|overview|cutaway)\b/i.test(a.source.caption || "")) || (a.width * a.height) - (b.width * b.height))
+      .slice(0, room >= 2.8 ? 2 : room >= 1.4 ? 1 : 0);
+    const archival = cand.map(([k, a], j) => ({ asset: `asset:${k}`, kind: (a.tags || []).includes("drawing") || a.kind === "document" ? "historical-drawing" : "historical-photo", label: a.provenanceLabel || "Archival",
+      window: [shift(startRef(i0), +(j * (room / cand.length)).toFixed(2)), shift(startRef(i0), +(((j + 1) * room) / cand.length + (j + 1 < cand.length ? 0.45 : 0)).toFixed(2))] }));
+    const lead = archival.length ? room : 0;
+    // meters: a claim value per fill or mark (voltage: energized vs rated; temperature: threshold, the stuck contact reaching it, the documented peak)
+    const unitQ = (c) => /^V$/.test((C[c] || {}).unit || "") ? "voltage" : /°?[FC]$/.test((C[c] || {}).unit || "") ? "temperature" : /psi/i.test((C[c] || {}).unit || "") ? "pressure" : null;
+    const M = {}; const add = (q, e) => { (M[q] = M[q] || { quantity: q, entries: [] }).entries.push(e); };
+    for (const { s: x } of placed) { const v = x.value && x.value.slice(6); const q = v && unitQ(v); if (!q) continue;
+      add(q, { role: ["on", "hot"].includes(x.state) ? "fill" : "mark", at: x.at, value: x.value, tag: x.tag }); }
+    const thr = placed.find((x) => x.s.state === "threshold"); const stk = placed.find((x) => x.s.state === "stuck-closed" && thr && x.s.part === thr.s.part);
+    if (thr && stk && unitQ(thr.s.value.slice(6))) add(unitQ(thr.s.value.slice(6)), { role: "fill", at: stk.s.at, value: thr.s.value, tag: stk.s.tag, tagClaim: stk.s.claim });
+    for (const m of Object.values(M)) m.entries.sort((a, b) => at(a.at) - at(b.at));
+    const meters = Object.values(M).filter((m) => m.entries.length >= 2);
     // camera: overview, then each line frames the parts whose states it states
-    const cam = [{ at: shift(startRef(i0), +0.0), focus: drawn.map((q) => q.id) }]; let last = drawn.map((q) => q.id);
+    const cam = [{ at: shift(startRef(i0), +lead), focus: drawn.map((q) => q.id) }]; let last = drawn.map((q) => q.id);
     idxs.forEach((j, k) => { const here = placed.filter((x) => x.line === j).map((x) => x.s.part); const extra = placed.filter((x) => x.line === j && x.s.state === "on").flatMap((x) => links.filter((l) => l.from === x.s.part && l.kind === "powered-by").map((l) => l.to));
       const f = [...new Set([...here, ...extra])].filter((id) => parts.some((q) => q.id === id)); const focus = f.length ? f : last;
-      cam.push({ at: shift(startRef(j), k === 0 ? +1.0 : +0.0), focus: last }, { at: shift(startRef(j), k === 0 ? +1.8 : +0.8), focus }); last = focus; });
+      cam.push({ at: shift(startRef(j), k === 0 ? +(lead + 1.0).toFixed(2) : +0.0), focus: last }, { at: shift(startRef(j), k === 0 ? +(lead + 1.8).toFixed(2) : +0.8), focus }); last = focus; });
     const stamps = idxs.flatMap((j) => claimsWithRole(lines[j].claims, "chronology").map((c) => ({ value: `{${c}}`, window: [shift(startRef(j), +0.2), shift(endRef(j), -0.2)] })));
     shared[name] = { mode: drawing ? "measured" : "conceptual", disclosure: drawing ? "Drawing geometry · parts registered" : "Conceptual diagram · not to scale", ...(drawing ? { drawing: `asset:${drawing}` } : {}),
-      scale: { mode: drawing ? "true-scale" : "schematic" }, parts, links, states: placed.map((x) => x.s), camera: dedupeCam(cam), ...(stamps.length ? { stamps } : {}) };
-    return { name, placed, drawing };
+      scale: { mode: drawing ? "true-scale" : "schematic" }, parts, links, states: placed.map((x) => x.s), camera: dedupeCam(cam), ...(stamps.length ? { stamps } : {}), ...(archival.length ? { archival } : {}), ...(meters.length ? { meters } : {}) };
+    return { name, placed, drawing, archivalAssets: archival.map((a) => a.asset.slice(6)) };
   }
   const dedupeCam = (cam) => cam.filter((k, j) => !cam.slice(0, j).some((x) => x.at === k.at));
   let comp = null; // the scene being continued by consecutive component lines
@@ -134,7 +156,8 @@ function makePlanner({ script, evidence, assets, timeline, channel, tail = 0.8, 
       base.qa.states.push(...mine.map((s0) => ({ at: s0.at, what: `${s0.part}: ${s0.state}`, claim: s0.claim.slice(6) })));
       if (!base.qa.states.length) base.qa.states.push({ at: `line:${line.id}`, what: "camera holds on the component" });
       const P = { scene: `shared:${comp.name}`, chip: { label: comp.drawing ? "Animation · drawing geometry" : "Explanatory animation", kind: "explanatory" }, ...(first ? { enter: [t0, shift(t0, +0.4)] } : {}) };
-      emit(i, { ...base, template: "component-section", provenance: { kind: "explanatory", label: comp.drawing ? "Explanatory animation · drawing geometry" : "Conceptual diagram · not to scale" }, assets: comp.drawing ? [comp.drawing] : [], params: count(P),
+      if (first && comp.archivalAssets.length) base.qa.states.unshift({ at: shift(t0, +0.1), what: "historical image (unmarked) before the model" });
+      emit(i, { ...base, template: "component-section", provenance: { kind: "explanatory", label: comp.drawing ? "Explanatory animation · drawing geometry" : "Conceptual diagram · not to scale" }, assets: [...new Set([...(comp.drawing ? [comp.drawing] : []), ...comp.archivalAssets])], params: count(P),
         transition: first ? (i === 0 ? { type: "cut" } : { type: "cut", reason: "into the component the narration describes" }) : { type: "continuous", reason: "same component model; the camera travels to the next documented state" } }, false); continue;
     }
     const trans = (() => { if (i === 0) return { type: "cut" };
@@ -186,7 +209,7 @@ function makePlanner({ script, evidence, assets, timeline, channel, tail = 0.8, 
         const [cold, warm] = temps.slice().sort((x, y) => C[x].value - C[y].value); const squeeze = 0.3, follow = 0.9;
         const factor = +((squeeze * follow) / (C[gap].value / C[ring].value)).toFixed(1);
         const P = { scale: { mode: "declared-exaggeration", factor }, ringDiameter: `claim:${ring}`, gapMax: `claim:${gap}`, squeeze, follow,
-          panels: [{ tint: "warm", label: `{${warm}.value}°F`, temperature: `claim:${warm}`, tauSec: 0.06 }, { tint: "cold", label: `{${cold}.value}°F`, temperature: `claim:${cold}`, tauSec: 4.0 }],
+          panels: [{ tint: "warm", label: C[warm].approximate ? `{${warm}}` : `{${warm}.value}°F`, temperature: `claim:${warm}`, tauSec: 0.06 }, { tint: "cold", label: C[cold].approximate ? `{${cold}}` : `{${cold}.value}°F`, temperature: `claim:${cold}`, tauSec: 4.0 }],
           gap: { duration: `claim:${open}`, startAt: shift(trigger, -0.2) }, gas: { window: [shift(trigger, +0.22), shift(t1, -0.2)] }, frost: { window: [t0, shift(t0, +0.6)] },
           gapLabel: { text: "GAP ×{scale}", window: [shift(trigger, +0.15), shift(trigger, +0.5)], to: [780, 1190] }, chip: { label: "Animation · not to scale", kind: "explanatory" },
           source: { text: `{${warm}}, {${cold}} · speeds illustrative`, y: 1494 } };
@@ -257,10 +280,15 @@ function makePlanner({ script, evidence, assets, timeline, channel, tail = 0.8, 
       const docs = Object.keys(A).filter((k) => A[k].kind === "document" && anchorsOf(k).some((x) => x.claim && line.claims.includes(x.claim)));
       const fq = line.claims.find((c) => C[c] && C[c].status === "verified" && ["finding", "quote"].includes(C[c].role) && C[c].display && C[c].passage && C[c].passage.includes(String(C[c].display).replace(/\|/g, " ")));
       if (!docs.length && fq) { const hw = firstWord(line.id, new RegExp(`^${norm(String(C[fq].display).split(/\s+/).find((w) => w.length > 4) || "").slice(0, 6)}`)) || `line:${line.id} +0.6`;
-        const P = { claim: `claim:${fq}`, highlightAt: hw, enter: [t0, shift(t0, +0.45)], disclosure: "Report text · typeset, not a scan", chip: { label: "Report text", kind: "document" }, push: { window: [t0, t1], zoom: 1.04 } };
+        // backdrop: a related image behind the card. A test/concept image qualifies only as labelled test imagery
+        // ("... · not the accident"); it must share at least two terms with the finding's passage and not contradict the subject.
+        const want = MATCH.terms(C[fq].passage); const bd = Object.entries(A).filter(([k, a]) => !banned.has(k) && a.kind === "photo" && [...MATCH.terms(`${a.source.title} ${a.source.caption || ""}`)].filter((w) => want.has(w)).length >= 2)
+          .sort(([, a], [, b]) => nonEvent(b) - nonEvent(a))[0];
+        const P = { claim: `claim:${fq}`, highlightAt: hw, enter: [t0, shift(t0, +0.45)], disclosure: "Report text · typeset, not a scan", chip: { label: "Report text", kind: "document" }, push: { window: [t0, t1], zoom: 1.04 },
+          ...(bd ? { backdrop: { asset: `asset:${bd[0]}`, kind: nonEvent(bd[1]) ? "test-imagery" : "historical-photo", label: `${bd[1].provenanceLabel || "Archival photo"}${nonEvent(bd[1]) ? " · not the accident" : ""}` } } : {}) };
         base.qa.states.push({ at: shift(t0, +0.1), what: "excerpt card enters" }, { at: hw, what: "the finding's words are highlighted", claim: fq });
         upgrades.push({ line: line.id, code: "SCAN_REGION_WOULD_UPGRADE", detail: `no document asset has a measured region for ${fq}; a scan of the source page with a verified region would let document-desk show the original` });
-        emit(i, { ...base, template: "document-excerpt", provenance: { kind: "document", label: "Report text · typeset" }, assets: [], params: count(P), transition: trans }, false); continue; }
+        emit(i, { ...base, template: "document-excerpt", provenance: { kind: "document", label: "Report text · typeset" }, assets: bd ? [bd[0]] : [], params: count(P), transition: trans }, false); continue; }
       if (!docs.length) { need(line.id, "MISSING_ANCHOR", "decision line: no document asset has a region anchor stating one of the line's claims", "measure the quoted line on the document scan and tie it to the claim");
         emit(i, { ...base, template: "document-desk", provenance: { kind: "document", label: "NEEDS DOCUMENT REGION" }, assets: [], params: {}, transition: trans }, true); continue; }
       if (!shared[deskName]) shared[deskName] = { pages: [], camera: [], _lines: [] };

@@ -157,3 +157,31 @@ test("Challenger production plan stays VALID and the planner still makes 9/12 cl
   const r = run({ script: J(path.join(CH, "narration-script.json")), evidence: J(path.join(CH, "evidence.json")), assets: J(path.join(CH, "assets.json")), timeline: J(path.join(CH, "../v1/timeline-edge-andrew.json")), channel: "failure-reconstructed" });
   assert.equal(r.metrics.autoPlannedClean, 9); assert.ok(!r.plan.shots.some((s) => ["component-section", "document-excerpt"].includes(s.template)));
 });
+
+// ---- creative round 2: archival plates, evidence meters, labelled test imagery ----------------------------
+test("archival plates: chosen by rule (topic + system named in the image's own caption), never tests", () => {
+  const sc = run(apollo()).plan.shared["component-l2"];
+  assert.deepEqual(sc.archival.map((a) => [a.asset, a.kind]), [["asset:tank-location", "historical-drawing"], ["asset:tank-diagram", "historical-drawing"]]);
+  assert.ok(!sc.archival.some((a) => a.asset === "asset:tank-fire-test"));
+});
+test("validator: a test photo labelled as a historical image, or test imagery without 'not the accident', fails", () => {
+  let d = planned(); d.plan.shared["component-l2"].archival[0] = { asset: "asset:tank-fire-test", kind: "historical-photo", label: "NASA photo", window: ["line:L2 -0.1", "line:L2 +1"] };
+  for (const s of d.plan.shots.filter((x) => x.template === "component-section")) s.assets.push("tank-fire-test");
+  assert.ok(has(d, /misleading reconstruction visual: tank-fire-test shows a test but is labelled historical-photo/));
+  d = planned(); shot(d, "document-excerpt").params.backdrop.label = "NASA photo · fire inside the tank";
+  assert.ok(has(d, /test imagery tank-fire-test must be labelled as a test and "not the accident"/));
+  d = planned(); shot(d, "document-excerpt").params.backdrop.kind = "historical-photo";
+  assert.ok(has(d, /misleading reconstruction visual: backdrop tank-fire-test shows a test but is labelled historical-photo/));
+});
+test("excerpt backdrop: the related test photo is used only as labelled test imagery", () => {
+  const b = shot(planned(), "document-excerpt").params.backdrop;
+  assert.equal(b.kind, "test-imagery"); assert.match(b.label, /test · not the accident$/);
+});
+test("meters: values are claims (65 V fill, 28 V rating; 80°F mark, about 1000°F fill) and tags use only passage words", () => {
+  const m = run(apollo()).plan.shared["component-l2"].meters;
+  assert.deepEqual(m.map((x) => [x.quantity, x.entries.map((e) => `${e.role}:${e.value.slice(6)}`)]), [["voltage", ["fill:C-a13-heaters-65v", "mark:C-a13-switch-rating"]], ["temperature", ["mark:C-a13-switch-80f", "fill:C-a13-switch-80f", "fill:C-a13-1000f"]]]);
+  const d = planned(); d.plan.shared["component-l2"].meters[0].entries[1].tag = "MAX SAFE {C-a13-switch-rating}";
+  assert.ok(has(d, /unsupported visual claim: meter tag "MAX SAFE \{C-a13-switch-rating\}" has words not in C-a13-switch-rating's passage \(MAX, SAFE\)/));
+  const d2 = planned(); d2.plan.shared["component-l2"].meters[1].entries[2].tag = "{C-a13-1000f.value}°F";
+  assert.ok(has(d2, /approximate claim C-a13-1000f is shown .* without an approximation marker/));
+});

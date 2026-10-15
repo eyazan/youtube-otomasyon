@@ -56,3 +56,9 @@ All are labelled illustrative or approximate on screen.
 | **S06 blow-by timing** | Gas now starts escaping shortly after the joint opens | Grounded in E1 (smoke at the joint at 0.678 s): the lead-in starts 0.7 s after "ignition" and cites C-smoke-0678. |
 | **S06 combustion side** | Pressure glow and arrows on the inside | Ch. IV: the gap "opens as the combustion gas pressure rises". The arrows are illustrative, inside a declared explanatory animation. |
 | **V3 narration L6** ("Then the smoke stopped, and Challenger flew on.") | **No claim** in evidence.json supports it (found by the planner) | Open: needs a verified passage (E1 describes the smoke puffs ending) or a rewrite before production. |
+
+## 5. Round 3 (2026-10-15): estimate shown as exact
+
+| Item | Finding | Correction |
+|---|---|---|
+| **S05 cold panel "28°F"** | `C-joint-28f` is a calculated estimate ("28°F est."). The panel label used the bare value (`{C-joint-28f.value}°F`), and the approximation gate accepted it because the display carried the marker. V2/V3 show "28°F" without "est." | The gate now checks the number actually shown. The label is now `{C-joint-28f}` (shown as "28°F est."), and the planner uses the display for approximate panel temperatures. V2/V3 are not re-rendered. |

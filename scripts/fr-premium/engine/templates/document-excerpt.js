@@ -9,6 +9,8 @@
     id: "document-excerpt", version: 1, provenance: ["document"], minStates: 2,
     params: { type: "object", required: ["claim", "highlightAt", "disclosure", "chip"], additionalProperties: false, properties: {
       claim: S.claim, highlightAt: S.timeRef, enter: S.window2, disclosure: S.text, chip: S.chip, source: S.source,
+      // a related image behind the card, dimmed; test imagery must say it is a test and not the accident (validator)
+      backdrop: { type: "object", required: ["asset", "kind", "label"], additionalProperties: false, properties: { asset: S.asset, kind: { enum: ["historical-photo", "historical-drawing", "test-imagery"] }, label: S.text } },
       push: { type: "object", required: ["window", "zoom"], additionalProperties: false, properties: { window: S.window2, zoom: { type: "number", minimum: 1, maximum: 1.3 } } } } },
     states: ["card-enters", "highlight"],
     // the words shown: the passage, trimmed to the sentence that holds the highlighted display
@@ -25,12 +27,15 @@
         const lh = 74, top = 820 - (lines.length * lh) / 2; let hotSeen = 0; const hotTotal = marks.filter((m) => m.hot).length;
         const body = lines.map((ln, i) => `<div style="height:${lh}px;white-space:nowrap">${ln.map((m) => { if (!m.hot) return `<span>${esc(m.w)}</span>`; hotSeen += 1; const on = hk * hotTotal >= hotSeen - 0.5;
           return `<span style="background:linear-gradient(90deg, rgba(229,72,77,.42) ${on ? 100 : 0}%, transparent 0);color:#15181d">${esc(m.w)}</span>`; }).join(" ")}</div>`).join("");
-        return { under: `<rect width="${W}" height="${HH}" fill="${C.ink}"/><rect width="${W}" height="${HH}" fill="url(#vig)"/>`,
+        const bk = P.backdrop ? ctx.assetKey(P.backdrop.asset) : null; const bm = bk ? FR.media[bk] : null; const u = p(t, shot.start, shot.end);
+        const media = bm ? [FR.photo(bk, { fx: bm.iw / 2, fy: bm.ih * 0.45, z: 1.05 + 0.1 * u, opacity: 0.9, filter: "brightness(0.42) saturate(0.85)" })] : [];
+        const bl = P.backdrop ? `<div style="position:absolute;left:60px;top:${top - 190}px;right:60px;line-height:42px;opacity:${k};font:800 32px ${F.sans};letter-spacing:2px;color:#ffd0a0;text-transform:uppercase;text-shadow:0 2px 8px #000">${P.backdrop.kind === "test-imagery" ? "◆ " : ""}${esc(H.text(P.backdrop.label, ctx))}</div>` : "";
+        return { media, under: `<rect width="${W}" height="${HH}" fill="${C.ink}"/><rect width="${W}" height="${HH}" fill="url(#vig)"/>`,
           hud: `<div style="position:absolute;left:70px;right:70px;top:${top - 70}px;transform:translateY(${(1 - k) * 60}px) scale(${z.toFixed(4)});transform-origin:50% 50%;opacity:${k};background:#f3eee3;border-radius:6px;padding:46px 44px 40px;box-shadow:0 24px 60px rgba(0,0,0,.55)">
             <div style="font:700 32px ${F.sans};letter-spacing:2px;color:#5b574e;margin-bottom:22px;text-transform:uppercase">${esc(H.text(P.disclosure, ctx))}</div>
             <div style="font:600 52px/${lh}px ${F.serif};color:#2b2a27">${body}</div>
             <div style="font:600 32px ${F.sans};color:#4a4740;margin-top:24px">${esc(cite)}</div></div>`
-            + FR.chip(H.text(P.chip.label, ctx), P.chip.kind || "document") + (P.source ? FR.source(H.text(P.source.text, ctx), k, P.source.y) : "") }; };
+            + bl + FR.chip(H.text(P.chip.label, ctx), P.chip.kind || "document") + (P.source ? FR.source(H.text(P.source.text, ctx), k, P.source.y) : "") }; };
       return { render };
     },
   };

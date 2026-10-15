@@ -26,7 +26,14 @@
       part: { type: "string" }, state: { enum: ["on", "rated", "threshold", "stuck-closed", "hot", "damaged", "pressure-loss"] }, at: S.timeRef, claim: S.claim, value: S.claim, tag: S.text } } },
     camera: { type: "array", minItems: 1, items: { type: "object", required: ["at", "focus"], additionalProperties: false, properties: {
       at: S.timeRef, focus: { type: "array", minItems: 1, items: { type: "string" } }, zoom: { type: "number", minimum: 1, maximum: 2.4 } } } },
-    stamps: { type: "array", items: { type: "object", required: ["value", "window"], additionalProperties: false, properties: { value: S.text, window: S.window2 } } } } };
+    stamps: { type: "array", items: { type: "object", required: ["value", "window"], additionalProperties: false, properties: { value: S.text, window: S.window2 } } },
+    // archival plates shown before the model (unmarked, unregistered): kind says what the image is
+    archival: { type: "array", items: { type: "object", required: ["asset", "kind", "label", "window"], additionalProperties: false, properties: {
+      asset: S.asset, kind: { enum: ["historical-photo", "historical-drawing", "historical-footage", "test-imagery"] }, label: S.text, window: S.window2 } } },
+    // one bar per quantity: fill and marks are claim values (proportional; no other numbers drawn)
+    meters: { type: "array", items: { type: "object", required: ["quantity", "entries"], additionalProperties: false, properties: {
+      quantity: { enum: ["voltage", "temperature", "pressure"] }, entries: { type: "array", minItems: 1, items: { type: "object", required: ["role", "at", "value", "tag"], additionalProperties: false, properties: {
+        role: { enum: ["fill", "mark"] }, at: S.timeRef, value: S.claim, tag: S.text, tagClaim: S.claim } } } } } } } };
 
   // neutral schematic layout from topology (world px; the camera maps world to screen). Conceptual only:
   // positions say "connected to / mounted on / near", never a size or a distance.
@@ -70,9 +77,9 @@
       const center = (id) => { const b = pos[id]; return b ? [b.x, b.y + b.h / 2] : null; };
       const fit = (ids, zoom) => { const bs = ids.map((id) => pos[id] || (byId[id] && byId[id].layerOf && pos[byId[id].layerOf])).filter(Boolean); if (!bs.length) return { fx: 540, fy: 860, z: 1 };
         const x0 = Math.min(...bs.map((b) => b.x - b.w / 2)) - 80, x1 = Math.max(...bs.map((b) => b.x + b.w / 2)) + 80, y0 = Math.min(...bs.map((b) => b.y)) - 80, y1 = Math.max(...bs.map((b) => b.y + b.h)) + 80;
-        const z = zoom || Math.max(1, Math.min(2.2, 920 / (x1 - x0), 820 / (y1 - y0))); return { fx: (x0 + x1) / 2, fy: (y0 + y1) / 2, z }; };
+        const z = zoom || Math.max(1, Math.min(2.2, 900 / (x1 - x0), 600 / (y1 - y0))); return { fx: (x0 + x1) / 2, fy: (y0 + y1) / 2, z }; };
       const keys = sc.camera.map((k) => [ctx.time(k.at), fit(k.focus, k.zoom)]);
-      const SY = 820; const scr = (x, y, c) => [540 + (x - c.fx) * c.z, SY + (y - c.fy) * c.z];
+      const SY = 730; const scr = (x, y, c) => [540 + (x - c.fx) * c.z, SY + (y - c.fy) * c.z];
       const stamps = (sc.stamps || []).map((s) => ({ v: H.text(s.value, ctx), w: H.win(s.window, ctx) }));
       const tagOf = (s) => s.tag ? H.text(s.tag, ctx) : s.value ? H.text(`{${s.value.slice(6)}}`, ctx) : "";
       const conductor = (d, flow, t, dmg = 0) => `<path d="${d}" fill="none" stroke="#1d242d" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
@@ -80,8 +87,15 @@
         <path d="${d}" fill="none" stroke="#c9824a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
         ${flow > 0 ? `<path d="${d}" fill="none" stroke="#ffe08a" stroke-width="7" stroke-linecap="round" stroke-dasharray="16 30" stroke-dashoffset="${(-t * 140).toFixed(1)}" opacity="${(0.9 * flow).toFixed(3)}"/>` : ""}`;
       const render = (t) => {
-        const c = X.path(keys, t); const drift = 1 + 0.015 * p(t, shot.start, shot.end); const cam = { fx: c.fx, fy: c.fy, z: c.z * drift };
+        // continuous travel: a slow push and a small lateral drift on every line, so no section holds still
+        const c = X.path(keys, t); const u = p(t, shot.start, shot.end); const drift = 1 + 0.05 * E.sine(u);
+        const cam = { fx: c.fx + 22 * Math.sin(Math.PI * (u - 0.5)) / c.z, fy: c.fy - 10 * u / c.z, z: c.z * drift };
         let world = "";
+        // backing plate under the model: one key light from the upper left, soft falloff (presentation only, not part geometry)
+        const all = Object.values(pos); if (all.length) { const x0 = Math.min(...all.map((b) => b.x - b.w / 2)) - 110, x1 = Math.max(...all.map((b) => b.x + b.w / 2)) + 110, y0 = Math.min(...all.map((b) => b.y)) - 110, y1 = Math.max(...all.map((b) => b.y + b.h)) + 150;
+          world += `<rect x="${x0}" y="${y0}" width="${x1 - x0}" height="${y1 - y0}" rx="36" fill="url(#csPlate)" stroke="#2b3747" stroke-width="3"/>
+            <rect x="${x0}" y="${y0}" width="${x1 - x0}" height="${y1 - y0}" rx="36" fill="url(#csGrid)" opacity="0.55"/>
+            <rect x="${x0}" y="${y0}" width="${x1 - x0}" height="${y1 - y0}" rx="36" fill="url(#csKey)"/>`; }
         // measured mode: the registered drawing lies under the model (parts are drawn on its verified anchors)
         if (dm && dfit) world += `<image href="${dm.src}" x="${dfit.x0}" y="${dfit.y0}" width="${dm.iw / dm.scale * dfit.s}" height="${dm.ih / dm.scale * dfit.s}" opacity="0.55"/>`;
         const hb = host ? pos[host] : null;
@@ -101,7 +115,7 @@
           const coil = Array.from({ length: 13 }, (_, i) => `${i ? "L" : "M"}${hb.x + (i % 2 ? 34 : -34)} ${hb.y + 40 + i * ((hb.h - 80) / 12)}`).join(" ");
           const tint = heat > 0 ? `rgb(${Math.round(lerp(120, 255, heat))},${Math.round(lerp(130, 150 + 80 * heat, heat))},${Math.round(lerp(150, 60, heat))})` : "#7c8898";
           world += `${heat > 0 ? `<ellipse cx="${hb.x}" cy="${hb.y + hb.h / 2}" rx="${hb.w * (0.9 + 0.8 * heat)}" ry="${hb.h * 0.62}" fill="#ff7a2a" opacity="${(0.42 * heat).toFixed(3)}" filter="url(#csBlur)"/>` : ""}
-            <rect x="${hb.x - hb.w / 2}" y="${hb.y}" width="${hb.w}" height="${hb.h}" rx="${hb.w / 2}" fill="url(#csSteel)" stroke="#2a323d" stroke-width="5"/>
+            <rect x="${hb.x - hb.w / 2}" y="${hb.y}" width="${hb.w}" height="${hb.h}" rx="${hb.w / 2}" fill="url(#csSteel)" stroke="#2a323d" stroke-width="5" filter="url(#csShadow)"/>
             <rect x="${hb.x - hb.w / 2 + 14}" y="${hb.y + 14}" width="${hb.w - 28}" height="${hb.h - 28}" rx="${hb.w / 2 - 14}" fill="${tint}" opacity="${(0.25 + 0.6 * heat).toFixed(3)}"/>
             <path d="${coil}" fill="none" stroke="${heat > 0.5 ? "#fff1c4" : "#c9824a"}" stroke-width="9" stroke-linejoin="round" opacity="0.95"/>
             <rect x="${hb.x - hb.w / 2 + 12}" y="${hb.y + 10}" width="16" height="${hb.h - 20}" rx="8" fill="#fff" opacity="0.16"/>`;
@@ -116,44 +130,81 @@
               world += `<rect x="${x - 13}" y="${yy}" width="26" height="${len}" rx="6" fill="#2a1a10" opacity="${(Math.min(1, dmg * 1.6 - i * 0.07)).toFixed(3)}"/>`;
               world += `<path d="M${x - 12} ${yy + len + 6} l 9 7 l -5 8 l 10 6" fill="none" stroke="#120c08" stroke-width="3" opacity="${(dmg * 0.9).toFixed(3)}"/>`; } } } }
         // supply: panel with terminals and a lamp that lights when the circuit is energized
-        if (sup) { const b = pos[sup.id]; world += `<rect x="${b.x - b.w / 2}" y="${b.y}" width="${b.w}" height="${b.h}" rx="18" fill="#18212c" stroke="#6d7c8f" stroke-width="6"/>
+        if (sup) { const b = pos[sup.id]; world += `<rect x="${b.x - b.w / 2}" y="${b.y}" width="${b.w}" height="${b.h}" rx="18" fill="url(#csPanel)" stroke="#6d7c8f" stroke-width="6" filter="url(#csShadow)"/>
           <rect x="${b.x - b.w / 2 + 18}" y="${b.y + 18}" width="${b.w - 36}" height="${b.h - 36}" rx="10" fill="#0d131a"/>
           <circle cx="${b.x - 70}" cy="${b.y + b.h / 2}" r="26" fill="${on > 0 ? "#ffd27a" : "#2b3747"}" opacity="${(0.4 + 0.6 * on).toFixed(3)}"/>${on > 0 ? `<circle cx="${b.x - 70}" cy="${b.y + b.h / 2}" r="60" fill="#ffd27a" opacity="${(0.25 * on).toFixed(3)}" filter="url(#csBlur)"/>` : ""}
           <path d="M${b.x + 10} ${b.y + b.h / 2} h36 M${b.x + 28} ${b.y + b.h / 2 - 18} v36 M${b.x + 70} ${b.y + b.h / 2} h36" stroke="#a9b7c8" stroke-width="7" stroke-linecap="round"/>`; }
         // switch housing on the host: the contact stays closed when stuck; the intended opening is a dashed ghost
         if (sw) { const b = pos[sw.id]; const thr = kOf(sw.id, "threshold", t); const stuck = kOf(sw.id, "stuck-closed", t, 0.4); const px = b.x - b.w / 2 + 40, py = b.y + b.h / 2 + 18;
           const ghostAng = -32 * thr; const weld = stuck;
-          world += `<rect x="${b.x - b.w / 2}" y="${b.y}" width="${b.w}" height="${b.h}" rx="16" fill="#202a36" stroke="#8b95a3" stroke-width="5"/>
+          world += `<rect x="${b.x - b.w / 2}" y="${b.y}" width="${b.w}" height="${b.h}" rx="16" fill="url(#csPanel)" stroke="#8b95a3" stroke-width="5" filter="url(#csShadow)"/>
+            <rect x="${b.x - b.w / 2 + 8}" y="${b.y + 6}" width="${b.w - 16}" height="10" rx="5" fill="#fff" opacity="0.08"/>
             <circle cx="${px}" cy="${py}" r="11" fill="#c9824a"/><circle cx="${b.x + b.w / 2 - 40}" cy="${py}" r="11" fill="#c9824a"/>
-            <line x1="${px}" y1="${py}" x2="${b.x + b.w / 2 - 40}" y2="${py}" stroke="#e9e7e1" stroke-width="10" stroke-linecap="round"/>
+            <line x1="${px}" y1="${py}" x2="${b.x + b.w / 2 - 40}" y2="${py}" stroke="${weld > 0 ? `rgb(255,${Math.round(lerp(231, 120, weld))},${Math.round(lerp(225, 80, weld))})` : "#e9e7e1"}" stroke-width="${10 + 4 * weld}" stroke-linecap="round"/>
             ${thr > 0 ? `<line x1="${px}" y1="${py}" x2="${px + (b.w - 80) * Math.cos(ghostAng * Math.PI / 180)}" y2="${py + (b.w - 80) * Math.sin(ghostAng * Math.PI / 180)}" stroke="#7cc6ff" stroke-width="7" stroke-dasharray="12 10" stroke-linecap="round" opacity="${(thr * (1 - 0.65 * stuck)).toFixed(3)}"/>` : ""}
             ${weld > 0 ? `<circle cx="${b.x + b.w / 2 - 40}" cy="${py}" r="${22 + 6 * Math.sin(t * 9)}" fill="#e5484d" opacity="${(0.55 * weld).toFixed(3)}" filter="url(#csBlur)"/><circle cx="${b.x + b.w / 2 - 40}" cy="${py}" r="14" fill="#ffb547" opacity="${weld.toFixed(3)}"/>` : ""}`; }
         // other parts (valves, sensors, motors without a host relation): neutral boxes
         for (const q of sc.parts.filter((x) => pos[x.id] && pos[x.id].shape === "box" && x.id !== host)) { const b = pos[q.id];
           world += `<rect x="${b.x - b.w / 2}" y="${b.y}" width="${b.w}" height="${b.h}" rx="14" fill="#18212c" stroke="#6d7c8f" stroke-width="5"/>`; }
         const svgWorld = `<defs><linearGradient id="csSteel" x1="0" x2="1"><stop offset="0" stop-color="#46505d"/><stop offset="0.45" stop-color="#9aa6b5"/><stop offset="1" stop-color="#3f4955"/></linearGradient>
-          <filter id="csBlur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="22"/></filter></defs>
+          <filter id="csBlur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="22"/></filter>
+          <filter id="csShadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="10" dy="16" stdDeviation="12" flood-color="#000" flood-opacity="0.55"/></filter>
+          <linearGradient id="csPlate" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1a2532"/><stop offset="1" stop-color="#0c1219"/></linearGradient>
+          <linearGradient id="csPanel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a3644"/><stop offset="1" stop-color="#151d27"/></linearGradient>
+          <radialGradient id="csKey" cx="25%" cy="15%" r="85%"><stop offset="0" stop-color="#9fc4ff" stop-opacity="0.13"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+          <linearGradient id="csHeat" x1="0" x2="1"><stop offset="0" stop-color="#7cc6ff"/><stop offset="0.5" stop-color="#ffb547"/><stop offset="1" stop-color="#ff5a2a"/></linearGradient>
+          <pattern id="csGrid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#2a3a4d" stroke-width="1.2"/></pattern></defs>
           <g transform="translate(540 ${SY}) scale(${cam.z.toFixed(4)}) translate(${(-cam.fx).toFixed(2)} ${(-cam.fy).toFixed(2)})">${world}</g>`;
         // labels and tags in screen space (constant size for phones): the focused parts of the current camera key and the latest state tag
         const cur = sc.camera.filter((k) => ctx.time(k.at) <= t + 0.3).pop() || sc.camera[0];
         const ids = cur.focus.filter((id) => byId[id]).slice(0, 2); const out = []; const used = [];
         // a clear label band (y 330-420) above the model; leaders run down to the parts, labels never cross them
         const marks = ids.map((id) => { const part = byId[id]; const b = pos[id] || (part.layerOf && pos[part.layerOf]); return b ? { id, part, b, sx: scr(b.x, b.y, cam)[0] } : null; }).filter(Boolean).sort((m1, m2) => m1.sx - m2.sx);
-        void used;
-        for (const [j, m] of marks.entries()) { const { part, b } = m; const [x, y] = scr(b.x, Math.max(b.y + 20, cam.fy - 380 / cam.z), cam);
-          const right = marks.length > 1 ? j === 1 : x > 540; const lx = right ? 1010 : 70; const ly = marks.length > 1 ? 352 + 62 * j : 370; const ex = x;
-          out.push(`<polyline points="${ex.toFixed(1)},${y.toFixed(1)} ${ex.toFixed(1)},${ly + 22} ${right ? lx - 8 : lx + 8},${ly + 22}" fill="none" stroke="#ffb547" stroke-width="4" opacity="0.9"/><circle cx="${ex.toFixed(1)}" cy="${y.toFixed(1)}" r="9" fill="#ffb547"/>`
+        const boxes = Object.values(pos).map((b) => { const [a0, b0] = scr(b.x - b.w / 2, b.y, cam), [a1, b1] = scr(b.x + b.w / 2, b.y + b.h, cam); return { x0: a0, y0: b0, x1: a1, y1: b1 }; });
+        const rowFree = (y, x0, x1) => !boxes.some((q) => q.x0 < x1 && q.x1 > x0 && q.y0 < y + 26 && q.y1 > y - 34);
+        const rows = [372, 434, 1010];
+        for (const [j, m] of marks.entries()) { const { part, b } = m; const right = marks.length > 1 ? j === 1 : scr(b.x, b.y, cam)[0] > 540; const lx = right ? 1010 : 70;
+          const tw = 25 * String(part.label).length; const x0 = right ? lx - tw : lx, x1 = right ? lx : lx + tw;
+          const ly = rows.filter((r) => !used.includes(r)).find((r) => rowFree(r, x0, x1)) || rows.filter((r) => !used.includes(r))[0]; used.push(ly);
+          const [x, y] = scr(b.x, ly > 700 ? b.y + b.h : b.y, cam); const ex = Math.max(60, Math.min(1020, x));
+          out.push(`<rect x="${x0 - 14}" y="${ly - 38}" width="${tw + 28}" height="56" rx="12" fill="#06090d" opacity="0.78"/>`);
+          out.push(`<polyline points="${ex.toFixed(1)},${y.toFixed(1)} ${ex.toFixed(1)},${ly + 20} ${right ? x0 - 14 : x1 + 14},${ly + 20}" fill="none" stroke="#ffb547" stroke-width="4" opacity="0.9"/><circle cx="${ex.toFixed(1)}" cy="${y.toFixed(1)}" r="9" fill="#ffb547"/>`
             + FR.text(lx, ly, H.text(part.label, ctx).toUpperCase(), { size: 40, weight: 800, anchor: right ? "end" : "start", ls: 1.5, extra: `paint-order="stroke" stroke="#000" stroke-width="8" stroke-opacity="0.6"` })); }
-        const live = st.filter((s) => s.t <= t && tagOf(s) && ids.concat(ids.map((i) => (sc.parts.find((x) => x.layerOf === i) || {}).id)).includes(s.part)).pop();
+        const metered = new Set((sc.meters || []).flatMap((mt) => mt.entries.map((e) => `${(e.tagClaim || e.value)}|${e.tag}`)));
+        const live = st.filter((s) => s.t <= t && tagOf(s) && !metered.has(`${s.claim}|${s.tag}`) && !metered.has(`${s.value}|${s.tag}`) && ids.concat(ids.map((i) => (sc.parts.find((x) => x.layerOf === i) || {}).id)).includes(s.part)).pop();
         if (live) { const k = E.out(p(t, live.t, live.t + 0.35)); const txt = esc(tagOf(live).toUpperCase()); const wpx = 26 * txt.length + 60; const alert = ["stuck-closed", "damaged", "hot", "pressure-loss"].includes(live.state);
           out.push(`<g opacity="${k.toFixed(3)}" transform="translate(540 ${1236 - 18 * (1 - k)})"><rect x="${-wpx / 2}" y="-44" width="${wpx}" height="76" rx="38" fill="${alert ? "#e5484d" : "#0f1720"}" stroke="${alert ? "#ffb547" : "#7cc6ff"}" stroke-width="3" opacity="0.92"/>`
             + FR.text(0, 8, tagOf(live).toUpperCase(), { size: 44, weight: 800, ls: 1 }) + `</g>`); }
+        // evidence meters (screen space, y 1060-1200): one quantity at a time; fill and marks are claim values
+        const MT = (sc.meters || []).map((mt) => ({ ...mt, es: mt.entries.map((e) => ({ ...e, t: ctx.time(e.at), v: ctx.value(e.value), txt: H.text(e.tag, ctx).toUpperCase() })) })).map((mt) => ({ ...mt, t0: Math.min(...mt.es.map((e) => e.t)) })).sort((m1, m2) => m1.t0 - m2.t0);
+        MT.forEach((mt, i) => { const next = MT[i + 1]; const vis = p(t, mt.t0 - 0.4, mt.t0) * (next ? 1 - p(t, next.t0 - 0.5, next.t0 - 0.1) : 1); if (vis <= 0) return;
+          const max = 1.15 * Math.max(...mt.es.map((e) => e.v)); const X0 = 90, X1 = 990, Y = 1110; const xs = (v) => X0 + (X1 - X0) * Math.max(0, v) / max;
+          let fill = 0; let last = null; for (const e of mt.es.filter((x) => x.role === "fill")) { if (t >= e.t - 0.2) { const k = E.inOut(p(t, e.t - 0.2, e.t + 0.9)); fill = lerp(fill, e.v, k); last = e; } }
+          const hot = mt.quantity === "temperature"; const firstMark = mt.es.filter((e) => e.role === "mark" && t >= e.t).sort((a, b) => a.v - b.v)[0];
+          const over = firstMark && fill > firstMark.v ? `<rect x="${xs(firstMark.v)}" y="${Y - 16}" width="${xs(fill) - xs(firstMark.v)}" height="32" rx="6" fill="#e5484d" opacity="${(0.85 * vis).toFixed(3)}"/>` : "";
+          out.push(`<g opacity="${vis.toFixed(3)}"><rect x="${X0 - 30}" y="${Y - 70}" width="${X1 - X0 + 60}" height="150" rx="22" fill="#06090d" opacity="0.82"/>
+            <rect x="${X0}" y="${Y - 16}" width="${X1 - X0}" height="32" rx="16" fill="#1b2633"/>
+            <rect x="${X0}" y="${Y - 16}" width="${Math.max(0, xs(fill) - X0)}" height="32" rx="16" fill="${hot ? "url(#csHeat)" : "#ffcf6a"}"/>${over}
+            ${mt.es.filter((e) => e.role === "mark" && t >= e.t - 0.1).map((e) => { const k = E.out(p(t, e.t - 0.1, e.t + 0.3)); const x = xs(e.v); const breach = fill > e.v + 1e-6;
+              return `<g opacity="${k.toFixed(3)}"><line x1="${x}" y1="${Y - 34}" x2="${x}" y2="${Y + 34}" stroke="${breach ? "#ff6a6f" : "#7cc6ff"}" stroke-width="7"/>` + FR.text(Math.min(Math.max(x, X0 + 200), 940 - 11 * e.txt.length), Y - 30, e.txt, { size: 36, weight: 800, fill: breach ? "#ffb4b6" : "#cfe8ff", ls: 1 }) + `</g>`; }).join("")}
+            ${last ? FR.text(Math.min(Math.max(xs(fill), X0 + 340), 930), Y + 66, last.txt, { size: 38, weight: 800, fill: hot ? "#ffd0a0" : "#ffe3a3", ls: 1, anchor: "end" }) : ""}</g>`); });
         const enter = P.enter ? E.inOut(p(t, ctx.time(P.enter[0]), ctx.time(P.enter[1]))) : 1;
+        // archival plates (historical photos/drawings, or test imagery with its label): unmarked, unregistered; the model fades in after them
+        const plates = (sc.archival || []).map((a) => ({ ...a, w: H.win(a.window, ctx), key: ctx.assetKey(a.asset) }));
+        let plateK = 0; const media = []; let plateChip = null;
+        plates.forEach((a, i) => { const isLast = i === plates.length - 1; const kIn = i === 0 ? 1 : E.inOut(p(t, a.w[0], a.w[0] + 0.45)); const kOut = 1 - E.inOut(p(t, a.w[1] - 0.45, a.w[1]));
+          const k = t < a.w[0] ? 0 : kIn * kOut; if (k <= 0) return; const m = FR.media[a.key]; const z = 1 + 0.08 * p(t, a.w[0], a.w[1]);
+          // the plate sits between the chip row and the caption band (y 340-1220) whatever its aspect
+          const bw = Math.min(1000, m.iw / m.scale * 2.2, 860 * m.iw / m.ih / 1.08), bh = bw * m.ih / m.iw; const box = { x: 540 - bw * z / 2, y: 780 - bh * z / 2, w: bw * z, h: bh * z };
+          media.push(FR.photo(a.key, { fx: m.iw / 2, fy: m.ih / 2, z: 1, opacity: 0.55 * k, filter: "blur(28px) brightness(0.35)" }), { ...FR.photo(a.key, { box, crop: { x: 0, y: 0, w: m.iw, h: m.ih } }), opacity: k, filter: "drop-shadow(0 18px 30px rgba(0,0,0,.6))", radius: 6 });
+          plateK = Math.max(plateK, isLast ? k : 1 * (t <= a.w[1] ? 1 : 0)); if (k > 0.5) plateChip = a; });
+        if (plates.length && t >= plates[plates.length - 1].w[1]) plateK = 0;
         const stampNow = stamps.filter((s) => t >= s.w[0] && t <= s.w[1] + 0.4).pop();
         const band = `<rect y="1150" width="${W}" height="${HH - 1150}" fill="url(#botShade)"/><rect y="1290" width="${W}" height="${HH - 1290}" fill="#06090d" opacity="0.72"/><rect width="${W}" height="440" fill="url(#topShade)" opacity="0.8"/>`;
-        return { under: FR.blueprint(1), svg: `<g opacity="${enter.toFixed(3)}">${svgWorld}${band}${out.join("")}</g>`,
-          hud: FR.chip(H.text(P.chip.label, ctx), P.chip.kind || "explanatory") + (stampNow ? X.stamp("", stampNow.v, H.fadeWin(FR, t, [stampNow.w[0], stampNow.w[0] + 0.3], [stampNow.w[1], stampNow.w[1] + 0.4])) : "")
-            + `<div style="position:absolute;left:0;right:0;top:262px;text-align:center;font:700 32px ${F.sans};letter-spacing:2.4px;color:#a9b7c8;opacity:0.9;text-transform:uppercase">${esc(H.text(sc.disclosure, ctx))}</div>`
+        const wop = enter * (1 - plateK);
+        return { under: FR.blueprint(1), media, svg: `<g opacity="${wop.toFixed(3)}">${svgWorld}${band}${out.join("")}</g>`,
+          hud: (plateChip ? FR.chip(H.text(plateChip.label, ctx), plateChip.kind === "test-imagery" ? "reconstruction" : "archival") : FR.chip(H.text(P.chip.label, ctx), P.chip.kind || "explanatory")) + (stampNow ? X.stamp("", stampNow.v, H.fadeWin(FR, t, [stampNow.w[0], stampNow.w[0] + 0.3], [stampNow.w[1], stampNow.w[1] + 0.4])) : "")
+            + `<div style="position:absolute;left:0;right:0;top:262px;text-align:center;font:700 32px ${F.sans};letter-spacing:2.4px;color:#a9b7c8;opacity:${(0.9 * (1 - plateK)).toFixed(3)};text-transform:uppercase">${esc(H.text(sc.disclosure, ctx))}</div>`
             + (P.source ? FR.source(H.text(P.source.text, ctx), 1, P.source.y) : "") };
       };
       return { render };

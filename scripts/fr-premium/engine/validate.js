@@ -65,8 +65,9 @@ function validatePlan({ plan, evidence, assets, timeline, root = ROOT, registry 
     if (c.status !== "verified") E(shot, `${where}: claim ${id} is ${c.status}${c.note ? ` (${c.note})` : ""}`); return c; };
   // an approximate claim shown with a number must say so on screen
   const APPROX = /(~|≈|\babout\b|\bapprox|\best\.|\bestimated\b|\bapproximately\b)/i;
-  const showClaim = (shot, id, where, context) => { const c = useClaim(shot, id, where); if (!c || !c.approximate) return;
-    const shown = String(c.display != null ? c.display : c.value);
+  // asValue: the text shows the bare number ({C-x.value}), so the display's own marker does not count
+  const showClaim = (shot, id, where, context, asValue = false) => { const c = useClaim(shot, id, where); if (!c || !c.approximate) return;
+    const shown = String(!asValue && c.display != null ? c.display : c.value);
     if (/\d/.test(shown) && !APPROX.test(shown) && !APPROX.test(context || "")) E(shot, `${where}: approximate claim ${id} is shown as "${shown}" without an approximation marker (~, about, approx., est.)`); };
   // 4. assets: licences, anchors in bounds and referencing evidence
   for (const [key, a] of Object.entries(assets.assets)) {
@@ -102,7 +103,7 @@ function validatePlan({ plan, evidence, assets, timeline, root = ROOT, registry 
   for (const l of plan.film.captionSkip || []) if (!timeline.lines.some((x) => x.id === l)) E(null, `film.captionSkip: no line ${l}`);
   // on-screen text: digits only via claim placeholders, citation locators, or identifiers from the shot's assets
   const onscreen = (sid, s, x) => { const stripped = String(x.value).replace(/\{C-[a-z0-9-]+(\.value)?\}/g, "").replace(/\{scale\}/g, "");
-        for (const m of String(x.value).matchAll(/\{(C-[a-z0-9-]+)(\.value)?\}/g)) { showClaim(sid, m[1], x.at, m[2] ? String(x.value).replace(m[0], "") : ""); stats.claimsUsed.add(m[1]); }
+        for (const m of String(x.value).matchAll(/\{(C-[a-z0-9-]+)(\.value)?\}/g)) { showClaim(sid, m[1], x.at, m[2] ? String(x.value).replace(m[0], "") : "", !!m[2]); stats.claimsUsed.add(m[1]); }
         // allowed without a claim: citation locators (Vol. 1, p. 90, Ch. III, Fig. 14) and identifiers that are part of
         // a listed asset's own provenance label or title (e.g. "E-207"); any other digit must come from a claim
         const CITE = /\b(?:(?:Vol|p|pp|Fig|Ch|No)\.|Figure|Chapter|Volume)\s?\d+/g; const clean = (tok) => tok.replace(/^[^\w]+|[^\w]+$/g, "");
@@ -193,6 +194,16 @@ function validatePlan({ plan, evidence, assets, timeline, root = ROOT, registry 
           for (const st of sc.states) { if (!ids.has(st.part)) E(sid, `${at0}.states: unknown part ${st.part}`);
             if (st.tag) { const miss = COMP.labelSupported(st.tag, passage(st.claim)); if (miss.length) E(sid, `unsupported visual claim: state tag "${st.tag}" has words not in ${st.claim.slice(6)}'s passage (${miss.join(", ")})`); }
             if (st.value) showClaim(sid, st.value.slice(6), `${at0}.states`, st.tag || ""); }
+          // archival plates: historical kinds only for images that are not tests/concepts; test imagery must say so on screen
+          for (const [j, ap] of (sc.archival || []).entries()) { const k = ap.asset.slice(6); const a2 = assets.assets[k]; if (!a2) { E(sid, `${at0}.archival[${j}]: unknown asset ${k}`); continue; }
+            if (!(s.assets || []).includes(k)) E(sid, `${at0}.archival[${j}]: asset ${k} not listed in shot.assets`);
+            const ne = MATCH.NONEVENT.exec(`${a2.source.title} ${a2.source.caption || ""}`);
+            if (ap.kind !== "test-imagery" && ne) E(sid, `misleading reconstruction visual: ${k} shows a ${ne[0].toLowerCase()} but is labelled ${ap.kind}`);
+            if (ap.kind === "test-imagery" && !(/\btest/i.test(ap.label) && /not the accident/i.test(ap.label))) E(sid, `misleading reconstruction visual: test imagery ${k} must be labelled as a test and "not the accident"`);
+            if (ap.kind === "historical-footage" && a2.kind !== "clip") E(sid, `${at0}.archival[${j}]: ${k} is a ${a2.kind}, not footage`); }
+          // meters: each tag uses only words of its claim's passage; values are verified claims (approximate ones keep their marker)
+          for (const mt of sc.meters || []) for (const e of mt.entries) { const src = e.tagClaim || e.value; const miss = COMP.labelSupported(e.tag, passage(src)); if (miss.length) E(sid, `unsupported visual claim: meter tag "${e.tag}" has words not in ${src.slice(6)}'s passage (${miss.join(", ")})`);
+            showClaim(sid, e.value.slice(6), `${at0}.meters`, e.tag); }
           if (sc.states.length < 3) E(sid, `qa: component scene ${name || ""} has ${sc.states.length} documented states, component-section expects >= 3`);
           const vis = visibleText.join(" ").toLowerCase();
           if (sc.mode === "conceptual") { if (!/conceptual/.test(String(sc.disclosure).toLowerCase())) E(sid, "misleading reconstruction visual: conceptual component scene without a visible \"conceptual\" disclosure");
@@ -209,7 +220,10 @@ function validatePlan({ plan, evidence, assets, timeline, root = ROOT, registry 
     if (s.template === "document-excerpt") { const c = claims[String(s.params.claim).slice(6)];
       if (c) { if (!["finding", "quote"].includes(c.role)) E(sid, `document-excerpt: ${s.params.claim.slice(6)} is a ${c.role || "claim"} claim, not a finding or quote`);
         const hl = String(c.display || "").replace(/\|/g, " "); if (!hl || !(c.passage || "").includes(hl)) E(sid, `unsupported visual claim: excerpt highlight "${hl}" is not verbatim in the passage`); }
-      if (!/typeset|not a scan/i.test(String(s.params.disclosure))) E(sid, "misleading reconstruction visual: a typeset excerpt must say it is typeset, not a scan"); }
+      if (!/typeset|not a scan/i.test(String(s.params.disclosure))) E(sid, "misleading reconstruction visual: a typeset excerpt must say it is typeset, not a scan");
+      const bd = s.params.backdrop; if (bd) { const k = bd.asset.slice(6); const a2 = assets.assets[k]; const ne = a2 && MATCH.NONEVENT.exec(`${a2.source.title} ${a2.source.caption || ""}`);
+        if (ne && bd.kind !== "test-imagery") E(sid, `misleading reconstruction visual: backdrop ${k} shows a ${ne[0].toLowerCase()} but is labelled ${bd.kind}`);
+        if (bd.kind === "test-imagery" && !(/\btest/i.test(bd.label) && /not the accident/i.test(bd.label))) E(sid, `misleading reconstruction visual: test imagery ${k} must be labelled as a test and "not the accident"`); } }
     // imagery from another mission, vehicle or period, and tests/concepts shown as if they were the event
     for (const k of s.assets || []) { const a2 = assets.assets[k]; if (!a2) continue; const sj = MATCH.subjectCheck(a2, ID);
       if (sj.reject) E(sid, `wrong subject imagery: asset ${k} ${sj.reasons.join("; ")}`);

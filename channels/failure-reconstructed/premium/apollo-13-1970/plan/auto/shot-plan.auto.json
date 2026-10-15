@@ -147,7 +147,7 @@
    ],
    "camera": [
     {
-     "at": "line:L2 -0.1",
+     "at": "line:L2 +3.23",
      "focus": [
       "heater",
       "gse-power-supply",
@@ -156,7 +156,7 @@
      ]
     },
     {
-     "at": "line:L2 +0.9",
+     "at": "line:L2 +4.23",
      "focus": [
       "heater",
       "gse-power-supply",
@@ -165,7 +165,7 @@
      ]
     },
     {
-     "at": "line:L2 +1.7",
+     "at": "line:L2 +5.03",
      "focus": [
       "heater",
       "gse-power-supply"
@@ -216,6 +216,69 @@
      "window": [
       "line:L2 +0.1",
       "line:L3 -0.3"
+     ]
+    }
+   ],
+   "archival": [
+    {
+     "asset": "asset:tank-location",
+     "kind": "historical-drawing",
+     "label": "NASA drawing",
+     "window": [
+      "line:L2 -0.1",
+      "line:L2 +2.01"
+     ]
+    },
+    {
+     "asset": "asset:tank-diagram",
+     "kind": "historical-drawing",
+     "label": "NASA drawing",
+     "window": [
+      "line:L2 +1.56",
+      "line:L2 +3.23"
+     ]
+    }
+   ],
+   "meters": [
+    {
+     "quantity": "voltage",
+     "entries": [
+      {
+       "role": "fill",
+       "at": "word:L2:sixty-five",
+       "value": "claim:C-a13-heaters-65v",
+       "tag": "ENERGIZED {C-a13-heaters-65v}"
+      },
+      {
+       "role": "mark",
+       "at": "word:L3:twenty-eight",
+       "value": "claim:C-a13-switch-rating",
+       "tag": "RATED {C-a13-switch-rating}"
+      }
+     ]
+    },
+    {
+     "quantity": "temperature",
+     "entries": [
+      {
+       "role": "mark",
+       "at": "word:L4:eighty",
+       "value": "claim:C-a13-switch-80f",
+       "tag": "OPEN AT {C-a13-switch-80f}"
+      },
+      {
+       "role": "fill",
+       "at": "word:L4:not",
+       "value": "claim:C-a13-switch-80f",
+       "tag": "COULD NOT OPEN",
+       "tagClaim": "claim:C-a13-switch-rating"
+      },
+      {
+       "role": "fill",
+       "at": "word:L5:thousand",
+       "value": "claim:C-a13-1000f",
+       "tag": "{C-a13-1000f}"
+      }
      ]
     }
    ]
@@ -330,6 +393,10 @@
    "qa": {
     "states": [
      {
+      "at": "line:L2",
+      "what": "historical image (unmarked) before the model"
+     },
+     {
       "at": "word:L2:sixty-five",
       "what": "heater: on",
       "claim": "C-a13-heaters-65v"
@@ -341,7 +408,10 @@
     "kind": "explanatory",
     "label": "Conceptual diagram · not to scale"
    },
-   "assets": [],
+   "assets": [
+    "tank-location",
+    "tank-diagram"
+   ],
    "params": {
     "scene": "shared:component-l2",
     "chip": {
@@ -381,7 +451,10 @@
     "kind": "explanatory",
     "label": "Conceptual diagram · not to scale"
    },
-   "assets": [],
+   "assets": [
+    "tank-location",
+    "tank-diagram"
+   ],
    "params": {
     "scene": "shared:component-l2",
     "chip": {
@@ -423,7 +496,10 @@
     "kind": "explanatory",
     "label": "Conceptual diagram · not to scale"
    },
-   "assets": [],
+   "assets": [
+    "tank-location",
+    "tank-diagram"
+   ],
    "params": {
     "scene": "shared:component-l2",
     "chip": {
@@ -465,7 +541,10 @@
     "kind": "explanatory",
     "label": "Conceptual diagram · not to scale"
    },
-   "assets": [],
+   "assets": [
+    "tank-location",
+    "tank-diagram"
+   ],
    "params": {
     "scene": "shared:component-l2",
     "chip": {
@@ -576,7 +655,9 @@
     "kind": "document",
     "label": "Report text · typeset"
    },
-   "assets": [],
+   "assets": [
+    "tank-fire-test"
+   ],
    "params": {
     "claim": "claim:C-a13-cause",
     "highlightAt": "word:L7:electrically",
@@ -595,6 +676,11 @@
       "line:L8 -0.1"
      ],
      "zoom": 1.04
+    },
+    "backdrop": {
+     "asset": "asset:tank-fire-test",
+     "kind": "test-imagery",
+     "label": "NASA photo · fire propagation test · not the accident"
     }
    },
    "transition": {
