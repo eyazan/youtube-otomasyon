@@ -33,7 +33,7 @@
 | Mission Control photo | NASA's own description, via Commons from the NASA Image and Video Library: the Apollo 13 MOCR, **13 April 1970**, Flight Director Eugene F. Kranz in view. The shot claims only "Mission Control", which the source supports. It does not claim the photo shows the rescue. |
 | Tank drawing (`4-339a.gif`) | From NASA SP-4009, *The Apollo Spacecraft: A Chronology* (NASA History Office), captioned "Apollo 13's service module oxygen tank". Shown unmarked as "NASA drawing". |
 | SM cutaway (`Apollo13_tank.jpg`) | From NASA NSSDC (D. R. Williams), "location of the oxygen tanks". Shown unmarked as "NASA drawing". |
-| Licences | All 7 images used are NASA works, public domain (Commons metadata; NASA does not claim copyright). AS13-59-8500 is a scan of a NASA photo (scan by K. Teague). The sha256 of every file matches `assets.json`. |
+| Licences | All 6 images used are NASA works, public domain (Commons metadata; NASA does not claim copyright). AS13-59-8500 is a scan of a NASA photo (scan by K. Teague). The sha256 of every file matches `assets.json`. |
 | Geometry and claims | No dimensions, anchors or claims were added. 15 claims are used, each with a verbatim passage. "About 1000°F" is shown as an estimate. |
 
 ## 2. Approval package: blocking decisions only
