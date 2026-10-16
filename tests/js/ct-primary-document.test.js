@@ -106,3 +106,23 @@ test("real Stage A receives only independently retrieved original text; matching
   assert.equal(q.status,"INSUFFICIENT_EVIDENCE");
   assert.equal(q.approved_facts[8].evidence_status,"EXCERPT_MATCHED");
 });
+
+test("fail closed when ANY resolved address is non-public (mixed answers), before any request",async()=>{
+  for(const answer of [["8.8.8.8","10.0.0.1"],["127.0.0.1","8.8.8.8"],["8.8.8.8","169.254.169.254"],[]]){
+    let called=false;
+    await assert.rejects(Primary.fetchPrimaryDocument(one,{resolve4:async()=>answer,requestBytes:async()=>{called=true;return response();}}),
+      answer.length?/PRIMARY_NONPUBLIC_ADDRESS/:/PRIMARY_DNS_FAILED/);
+    assert.equal(called,false,JSON.stringify(answer));
+  }
+  await assert.rejects(Primary.fetchPrimaryDocument(one,{resolve4:async()=>{throw new Error("ENOTFOUND");},requestBytes:async()=>response()}),/PRIMARY_DNS_FAILED/);
+  assert.equal(await Primary.resolvePublicIp("nasa.gov",async()=>["8.8.8.8","1.1.1.1"]),"8.8.8.8");
+});
+test("redirect limits: a redirect chain longer than two, or to another approved host, fails closed",async()=>{
+  let n=0;
+  await assert.rejects(Primary.fetchPrimaryDocument(one,{resolve4:dns,requestBytes:async()=>{n++;return response(Buffer.alloc(0),{location:"/next"+n},302);}}),/PRIMARY_TOO_MANY_REDIRECTS/);
+  assert.equal(n,3);
+  await assert.rejects(Primary.fetchPrimaryDocument(one,{resolve4:dns,requestBytes:async()=>response(Buffer.alloc(0),{location:"http://nasa.gov/x"},301)}),/UNSAFE_PRIMARY_URL/);
+  await assert.rejects(Primary.fetchPrimaryDocument(one,{resolve4:dns,requestBytes:async()=>response(Buffer.alloc(0),{location:"https://nasa.gov.evil.example/x"},307)}),/UNAPPROVED_PRIMARY_HOST/);
+  await assert.rejects(Primary.fetchPrimaryDocument(one,{resolve4:dns,requestBytes:async()=>response(Buffer.from("x"),{"content-type":"text/plain"},404)}),/PRIMARY_HTTP_NOT_OK/);
+  await assert.rejects(Primary.fetchPrimaryDocument({kind:"secondary",url:one.url}),/SOURCE_NOT_PRIMARY/);
+});

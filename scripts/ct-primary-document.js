@@ -27,13 +27,19 @@ function parseAllowedUrl(input){
 async function resolvePublicIp(host,resolve4=dns.resolve4.bind(dns)){
   let ips;try{ips=await resolve4(host);}catch(_){throw fail("PRIMARY_DNS_FAILED");}
   if(!Array.isArray(ips)||!ips.length)throw fail("PRIMARY_DNS_FAILED");
-  const ip=ips.find(publicIpv4);if(!ip)throw fail("PRIMARY_NONPUBLIC_ADDRESS");return ip;
+  // Fail closed if ANY answer is non-public (mixed answers are a rebinding/SSRF signal); the
+  // connection is then pinned to the first, public, address.
+  if(!ips.every(publicIpv4))throw fail("PRIMARY_NONPUBLIC_ADDRESS");
+  return ips[0];
 }
 function requestBytes(url,ip,{maxBytes=MAX_BYTES,timeoutMs=TIMEOUT_MS}={}){
   return new Promise((resolve,reject)=>{
     let done=false,req;
-    const wall=setTimeout(()=>{if(req)req.destroy(fail("PRIMARY_REQUEST_TIMEOUT"));},timeoutMs);
     const finish=(error,result)=>{if(done)return;done=true;clearTimeout(wall);error?reject(error):resolve(result);};
+    // The specific failure is recorded before the socket is torn down, so a later generic stream
+    // error cannot replace it.
+    const abort=(code)=>{finish(fail(code));if(req)req.destroy();};
+    const wall=setTimeout(()=>abort("PRIMARY_REQUEST_TIMEOUT"),timeoutMs);
     req=https.request({
       protocol:"https:",hostname:url.hostname,servername:url.hostname,port:443,
       method:"GET",path:url.pathname+url.search,agent:false,rejectUnauthorized:true,
@@ -43,16 +49,17 @@ function requestBytes(url,ip,{maxBytes=MAX_BYTES,timeoutMs=TIMEOUT_MS}={}){
     },res=>{
       const chunks=[];let bytes=0;
       const expected=Number(res.headers["content-length"]);
-      if(Number.isFinite(expected)&&expected>maxBytes){req.destroy(fail("PRIMARY_DOCUMENT_TOO_LARGE"));return;}
+      if(Number.isFinite(expected)&&expected>maxBytes){abort("PRIMARY_DOCUMENT_TOO_LARGE");return;}
       res.on("data",chunk=>{
+        if(done)return;
         bytes+=chunk.length;
-        if(bytes>maxBytes){req.destroy(fail("PRIMARY_DOCUMENT_TOO_LARGE"));return;}
+        if(bytes>maxBytes){abort("PRIMARY_DOCUMENT_TOO_LARGE");return;}
         chunks.push(chunk);
       });
       res.on("error",()=>finish(fail("PRIMARY_RESPONSE_ERROR")));
       res.on("end",()=>finish(null,{status:res.statusCode,headers:res.headers,body:Buffer.concat(chunks)}));
     });
-    req.setTimeout(timeoutMs,()=>req.destroy(fail("PRIMARY_REQUEST_TIMEOUT")));
+    req.setTimeout(timeoutMs,()=>abort("PRIMARY_REQUEST_TIMEOUT"));
     req.on("error",err=>finish(err.code&&/^PRIMARY_/.test(err.code)?err:fail("PRIMARY_REQUEST_FAILED")));
     req.end();
   });
