@@ -1,0 +1,65 @@
+name: CriticalThread Evidence-First manual experiment
+
+# ONE manual, read-only, single-topic Evidence-First experiment (scripts/ct-evidence-first-run.js).
+# Manual dispatch only: no schedule, not connected to CT_RESEARCH_AUTO, read-only repository token,
+# no commit or push step. It never writes topic records, promotes, renders, uploads or publishes.
+# Free provider only: Groq with no fallback and no paid key in this job. The review package is a
+# short-lived run artifact for a human editor; it is never committed.
+on:
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: One existing CriticalThread topic id or slug (CT-...)
+        default: 'CT-265'
+      confirm:
+        description: Type RUN-ONE-TOPIC-READ-ONLY to confirm one manual read-only experiment
+        default: ''
+
+concurrency:
+  group: ct-research
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  experiment:
+    if: inputs.confirm == 'RUN-ONE-TOPIC-READ-ONLY'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      CT_EVIDENCE_FIRST_MANUAL: '1'
+      LONGFORM_LLM_PROVIDER: groq
+      LONGFORM_LLM_FALLBACK_PROVIDER: ''
+      LONGFORM_LLM_MAX_ATTEMPTS: '3'
+      LONGFORM_LLM_MAX_RETRY_MS: '120000'
+      LONGFORM_LLM_TPM: '8000'
+      LONGFORM_LLM_JSON_RECOVERIES: '1'
+      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      GROQ_MODEL: ${{ vars.GROQ_MODEL }}
+      SLUG: ${{ inputs.slug }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci --no-audit --no-fund
+      # PDF primary documents need pdftotext; without it they fail closed.
+      - name: PDF text extractor (optional)
+        run: sudo apt-get install -y --no-install-recommends poppler-utils >/dev/null || echo "pdftotext unavailable, PDF documents fail closed"
+      - name: Evidence-First experiment (read-only)
+        run: |
+          # The slug is passed as one argument and must match an existing topic record; anything else is refused.
+          node scripts/ct-evidence-first-run.js --manual --slug "$SLUG" --write=false --out "$RUNNER_TEMP/ct-evidence-first" | tee "$RUNNER_TEMP/report.json"
+          { echo '```json'; cat "$RUNNER_TEMP/report.json"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ct-evidence-first-review
+          path: |
+            ${{ runner.temp }}/report.json
+            ${{ runner.temp }}/ct-evidence-first
+          if-no-files-found: ignore
+          retention-days: 7
