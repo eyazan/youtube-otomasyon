@@ -127,7 +127,7 @@
 | Shot diversity | 6 changes, longest hold 23.6 s | 10 changes, longest hold 17.9 s |
 | Mobile readability | Text gate PASS; 14 words on L2 | Text gate PASS; large stat and clock; captions on grey plates need a human check |
 | Retention structure (heuristic) | Slow middle, static opening | Faster mode changes; the reveal on "But"; payoff loop kept |
-| Production complexity | Planner only | Planner + one deterministic pass (≈ 210 lines); no new animation |
+| Production complexity | Planner only | Planner + one deterministic pass (≈ 230 lines); no new animation |
 | Human intervention | As round 3 | As round 3, **minus** the test-photo decision, **plus** confirming the Mission Control depiction |
 
 ## 7. Estimated human effort per new topic (estimate, not measured)
