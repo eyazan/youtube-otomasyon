@@ -1,0 +1,1022 @@
+{
+ "schema": "fr-premium.shot-plan.v1",
+ "topic": "apollo-13-1970",
+ "channel": "failure-reconstructed",
+ "style": "failure-reconstructed/forensic-v1",
+ "narration": "../timeline-estimated.json",
+ "evidence": "../evidence.json",
+ "assets": "../assets.json",
+ "film": {
+  "tail": 0.8,
+  "captionSkip": [
+   "L9"
+  ],
+  "captionFrom": "1.5"
+ },
+ "shared": {
+  "component-l2": {
+   "mode": "conceptual",
+   "disclosure": "Conceptual · not to scale",
+   "scale": {
+    "mode": "schematic"
+   },
+   "parts": [
+    {
+     "id": "heater",
+     "kind": "heater",
+     "label": "heater tube assembly",
+     "claim": "claim:C-a13-1000f"
+    },
+    {
+     "id": "gse-power-supply",
+     "kind": "supply",
+     "label": "GSE power supply",
+     "claim": "claim:C-a13-heaters-65v"
+    },
+    {
+     "id": "switch",
+     "kind": "switch",
+     "label": "thermostatic switches",
+     "claim": "claim:C-a13-switch-rating"
+    },
+    {
+     "id": "spacecraft-power-supply",
+     "kind": "supply",
+     "label": "spacecraft power supply",
+     "claim": "claim:C-a13-switch-rating"
+    },
+    {
+     "id": "insulation",
+     "kind": "insulation",
+     "label": "Teflon insulation",
+     "claim": "claim:C-a13-teflon",
+     "layerOf": "wire"
+    },
+    {
+     "id": "wire",
+     "kind": "wire",
+     "label": "fan motor wires",
+     "claim": "claim:C-a13-teflon"
+    }
+   ],
+   "links": [
+    {
+     "from": "heater",
+     "to": "gse-power-supply",
+     "kind": "powered-by",
+     "claim": "claim:C-a13-heaters-65v"
+    },
+    {
+     "from": "switch",
+     "to": "spacecraft-power-supply",
+     "kind": "rated-for",
+     "claim": "claim:C-a13-switch-rating"
+    },
+    {
+     "from": "switch",
+     "to": "heater",
+     "kind": "in-series",
+     "claim": "claim:C-a13-switch-80f"
+    },
+    {
+     "from": "switch",
+     "to": "heater",
+     "kind": "mounted-on",
+     "claim": "claim:C-a13-switch-80f"
+    },
+    {
+     "from": "insulation",
+     "to": "wire",
+     "kind": "layer-of",
+     "claim": "claim:C-a13-teflon"
+    },
+    {
+     "from": "wire",
+     "to": "heater",
+     "kind": "near",
+     "claim": "claim:C-a13-teflon"
+    }
+   ],
+   "states": [
+    {
+     "part": "heater",
+     "state": "on",
+     "at": "word:L2:sixty-five",
+     "claim": "claim:C-a13-heaters-65v",
+     "value": "claim:C-a13-heaters-65v",
+     "tag": "ENERGIZED {C-a13-heaters-65v}"
+    },
+    {
+     "part": "switch",
+     "state": "stuck-closed",
+     "at": "word:L4:not",
+     "claim": "claim:C-a13-switch-rating",
+     "tag": "COULD NOT OPEN"
+    },
+    {
+     "part": "switch",
+     "state": "rated",
+     "at": "word:L3:twenty-eight",
+     "claim": "claim:C-a13-switch-rating",
+     "value": "claim:C-a13-switch-rating",
+     "tag": "RATED {C-a13-switch-rating}"
+    },
+    {
+     "part": "switch",
+     "state": "threshold",
+     "at": "word:L4:eighty",
+     "claim": "claim:C-a13-switch-80f",
+     "value": "claim:C-a13-switch-80f",
+     "tag": "OPEN AT {C-a13-switch-80f}"
+    },
+    {
+     "part": "heater",
+     "state": "hot",
+     "at": "word:L5:thousand",
+     "claim": "claim:C-a13-1000f",
+     "value": "claim:C-a13-1000f",
+     "tag": "{C-a13-1000f}"
+    },
+    {
+     "part": "insulation",
+     "state": "damaged",
+     "at": "word:L5:damaging",
+     "claim": "claim:C-a13-teflon",
+     "tag": "INSULATION DAMAGED"
+    }
+   ],
+   "camera": [
+    {
+     "at": "line:L3 +1.25",
+     "focus": [
+      "heater",
+      "gse-power-supply"
+     ]
+    },
+    {
+     "at": "line:L3 +2.45",
+     "focus": [
+      "switch"
+     ]
+    },
+    {
+     "at": "line:L4 +0.12",
+     "focus": [
+      "switch"
+     ]
+    },
+    {
+     "at": "line:L4 +1.32",
+     "focus": [
+      "switch"
+     ]
+    },
+    {
+     "at": "line:L5 +0.65",
+     "focus": [
+      "switch"
+     ]
+    },
+    {
+     "at": "line:L5 +1.85",
+     "focus": [
+      "heater",
+      "insulation"
+     ]
+    }
+   ],
+   "span": [
+    "line:L3 -0.1",
+    "line:L6 -0.1"
+   ],
+   "meters": [
+    {
+     "quantity": "voltage",
+     "entries": [
+      {
+       "role": "fill",
+       "at": "word:L2:sixty-five",
+       "value": "claim:C-a13-heaters-65v",
+       "tag": "ENERGIZED {C-a13-heaters-65v}"
+      },
+      {
+       "role": "mark",
+       "at": "word:L3:twenty-eight",
+       "value": "claim:C-a13-switch-rating",
+       "tag": "RATED {C-a13-switch-rating}"
+      }
+     ]
+    },
+    {
+     "quantity": "temperature",
+     "entries": [
+      {
+       "role": "mark",
+       "at": "word:L4:eighty",
+       "value": "claim:C-a13-switch-80f",
+       "tag": "OPEN AT {C-a13-switch-80f}"
+      },
+      {
+       "role": "fill",
+       "at": "word:L4:not",
+       "value": "claim:C-a13-switch-80f",
+       "tag": "COULD NOT OPEN",
+       "tagClaim": "claim:C-a13-switch-rating"
+      },
+      {
+       "role": "fill",
+       "at": "word:L5:thousand",
+       "value": "claim:C-a13-1000f",
+       "tag": "{C-a13-1000f}"
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "shots": [
+  {
+   "id": "S01",
+   "beat": "hook",
+   "line": "L1",
+   "start": "0",
+   "end": "line:L2 -0.1",
+   "evidence": [
+    "C-a13-hazard",
+    "C-a13-mission",
+    "C-a13-launch"
+   ],
+   "qa": {
+    "states": [
+     {
+      "at": "line:L1",
+      "what": "shot on the narration beat"
+     }
+    ]
+   },
+   "template": "archival-plate",
+   "provenance": {
+    "kind": "archival",
+    "label": "NASA photo · launch"
+   },
+   "assets": [
+    "launch"
+   ],
+   "params": {
+    "media": "asset:launch",
+    "chip": {
+     "label": "NASA photo · launch",
+     "kind": "archival"
+    },
+    "box": {
+     "x": 0,
+     "y": 0,
+     "w": 1080,
+     "h": 1920
+    },
+    "camera": {
+     "keys": [
+      {
+       "at": "0",
+       "focus": [
+        1920,
+        2400
+       ],
+       "zoom": 1
+      },
+      {
+       "at": "line:L2 -0.1",
+       "focus": [
+        1920,
+        2400
+       ],
+       "zoom": 1.12
+      }
+     ]
+    },
+    "under": "ink",
+    "shades": [
+     {
+      "kind": "top",
+      "h": 640
+     },
+     {
+      "kind": "bottom",
+      "y": 1080,
+      "h": 840
+     }
+    ],
+    "headline": {
+     "kicker": "{C-a13-mission} · {C-a13-launch}",
+     "text": "Doomed<br>on the pad",
+     "y": 330,
+     "out": [
+      "1.2",
+      "1.5"
+     ]
+    }
+   },
+   "transition": {
+    "type": "cut"
+   },
+   "review": {
+    "codes": [
+     "MISSING_ANCHOR"
+    ]
+   }
+  },
+  {
+   "id": "S02",
+   "beat": "evidence",
+   "line": "L2",
+   "start": "line:L2 -0.1",
+   "end": "word:L2:heaters -0.1",
+   "evidence": [
+    "C-a13-heaters-65v",
+    "C-a13-detank-date"
+   ],
+   "qa": {
+    "states": [
+     {
+      "at": "line:L2 -0.1",
+      "what": "historical drawing (unmarked)"
+     }
+    ]
+   },
+   "template": "archival-plate",
+   "provenance": {
+    "kind": "document",
+    "label": "NASA drawing"
+   },
+   "assets": [
+    "tank-location"
+   ],
+   "params": {
+    "media": "asset:tank-location",
+    "chip": {
+     "label": "NASA drawing",
+     "kind": "document"
+    },
+    "box": {
+     "x": 159,
+     "y": 280,
+     "w": 763,
+     "h": 1000
+    },
+    "plate": {
+     "blur": 40,
+     "dim": 0.38
+    },
+    "under": "ink",
+    "camera": {
+     "keys": [
+      {
+       "at": "line:L2 -0.1",
+       "focus": [
+        303,
+        397
+       ],
+       "zoom": 1
+      },
+      {
+       "at": "word:L2:heaters -0.1",
+       "focus": [
+        303,
+        397
+       ],
+       "zoom": 1.08
+      }
+     ]
+    },
+    "kicker": {
+     "text": "{C-a13-detank-date}",
+     "y": 210
+    }
+   },
+   "transition": {
+    "type": "cut",
+    "reason": "setup line on the historical drawing before the conceptual model"
+   }
+  },
+  {
+   "id": "S03",
+   "beat": "evidence",
+   "line": "L2",
+   "start": "word:L2:heaters -0.1",
+   "end": "line:L3 -0.1",
+   "evidence": [
+    "C-a13-heaters-65v",
+    "C-a13-detank-date"
+   ],
+   "qa": {
+    "states": [
+     {
+      "at": "word:L2:sixty-five",
+      "what": "stat C-a13-heaters-65v",
+      "claim": "C-a13-heaters-65v"
+     }
+    ]
+   },
+   "template": "archival-plate",
+   "provenance": {
+    "kind": "document",
+    "label": "NASA drawing"
+   },
+   "assets": [
+    "tank-diagram"
+   ],
+   "params": {
+    "media": "asset:tank-diagram",
+    "chip": {
+     "label": "NASA drawing",
+     "kind": "document"
+    },
+    "box": {
+     "x": 0,
+     "y": 623,
+     "w": 1080,
+     "h": 595
+    },
+    "plate": {
+     "blur": 40,
+     "dim": 0.38
+    },
+    "under": "ink",
+    "camera": {
+     "keys": [
+      {
+       "at": "word:L2:heaters -0.1",
+       "focus": [
+        197,
+        108.5
+       ],
+       "zoom": 1
+      },
+      {
+       "at": "line:L3 -0.1",
+       "focus": [
+        197,
+        108.5
+       ],
+       "zoom": 1.08
+      }
+     ]
+    },
+    "stat": {
+     "value": "{C-a13-heaters-65v}",
+     "sub": "GSE POWER SUPPLY",
+     "y": 250,
+     "in": [
+      "word:L2:sixty-five",
+      "word:L2:sixty-five +0.4"
+     ]
+    }
+   },
+   "transition": {
+    "type": "cut",
+    "reason": "second drawing on the narration's subject word"
+   }
+  },
+  {
+   "id": "S04",
+   "beat": "evidence",
+   "line": "L3",
+   "start": "line:L3 -0.1",
+   "end": "line:L4 -0.1",
+   "evidence": [
+    "C-a13-switch-rating"
+   ],
+   "qa": {
+    "states": [
+     {
+      "at": "line:L3 -0.1",
+      "what": "conceptual model enters (prior state already set: fill from the drawing's stat)"
+     },
+     {
+      "at": "word:L3:twenty-eight",
+      "what": "switch: rated",
+      "claim": "C-a13-switch-rating"
+     }
+    ]
+   },
+   "template": "component-section",
+   "provenance": {
+    "kind": "explanatory",
+    "label": "Conceptual diagram · not to scale"
+   },
+   "assets": [],
+   "params": {
+    "scene": "shared:component-l2",
+    "chip": {
+     "label": "Conceptual · not to scale",
+     "kind": "explanatory"
+    },
+    "enter": [
+     "line:L3 -0.1",
+     "line:L3 +0.3"
+    ]
+   },
+   "transition": {
+    "type": "cut",
+    "reason": "into the conceptual model on the contrast line"
+   }
+  },
+  {
+   "id": "S05",
+   "beat": "mechanism",
+   "line": "L4",
+   "start": "line:L4 -0.1",
+   "end": "line:L5 -0.1",
+   "evidence": [
+    "C-a13-switch-80f",
+    "C-a13-switch-rating"
+   ],
+   "qa": {
+    "states": [
+     {
+      "at": "word:L4:not",
+      "what": "switch: stuck-closed",
+      "claim": "C-a13-switch-rating"
+     },
+     {
+      "at": "word:L4:eighty",
+      "what": "switch: threshold",
+      "claim": "C-a13-switch-80f"
+     }
+    ]
+   },
+   "template": "component-section",
+   "provenance": {
+    "kind": "explanatory",
+    "label": "Conceptual diagram · not to scale"
+   },
+   "assets": [],
+   "params": {
+    "scene": "shared:component-l2",
+    "chip": {
+     "label": "Conceptual · not to scale",
+     "kind": "explanatory"
+    }
+   },
+   "transition": {
+    "type": "continuous",
+    "reason": "same component model; the camera travels to the next documented state"
+   }
+  },
+  {
+   "id": "S06",
+   "beat": "mechanism",
+   "line": "L5",
+   "start": "line:L5 -0.1",
+   "end": "line:L6 -0.1",
+   "evidence": [
+    "C-a13-1000f",
+    "C-a13-teflon"
+   ],
+   "qa": {
+    "states": [
+     {
+      "at": "word:L5:thousand",
+      "what": "heater: hot",
+      "claim": "C-a13-1000f"
+     },
+     {
+      "at": "word:L5:damaging",
+      "what": "insulation: damaged",
+      "claim": "C-a13-teflon"
+     }
+    ]
+   },
+   "template": "component-section",
+   "provenance": {
+    "kind": "explanatory",
+    "label": "Conceptual diagram · not to scale"
+   },
+   "assets": [],
+   "params": {
+    "scene": "shared:component-l2",
+    "chip": {
+     "label": "Conceptual · not to scale",
+     "kind": "explanatory"
+    }
+   },
+   "transition": {
+    "type": "continuous",
+    "reason": "same component model; the camera travels to the next documented state"
+   }
+  },
+  {
+   "id": "S07",
+   "beat": "human-cost",
+   "line": "L6",
+   "start": "line:L6 -0.1",
+   "end": "word:L6:tank -0.3",
+   "evidence": [
+    "C-a13-fans",
+    "C-a13-dataloss"
+   ],
+   "qa": {
+    "states": [
+     {
+      "at": "word:L6:tank's",
+      "what": "clock to C-a13-fans",
+      "claim": "C-a13-fans"
+     },
+     {
+      "at": "word:L6:later",
+      "what": "clock to C-a13-dataloss",
+      "claim": "C-a13-dataloss"
+     }
+    ]
+   },
+   "template": "timeline",
+   "provenance": {
+    "kind": "document",
+    "label": "Mission time · Review Board report"
+   },
+   "assets": [
+    "tank-location"
+   ],
+   "params": {
+    "hero": true,
+    "ground": "photo",
+    "groundGrade": "soft",
+    "media": "asset:tank-location",
+    "ticks": [
+     "claim:C-a13-fans",
+     "claim:C-a13-dataloss"
+    ],
+    "steps": [
+     {
+      "at": "word:L6:later"
+     }
+    ],
+    "chip": {
+     "label": "Report · NASA drawing",
+     "kind": "document"
+    }
+   },
+   "transition": {
+    "type": "cut",
+    "reason": "documented times: the clock carries the ninety seconds"
+   }
+  },
+  {
+   "id": "S08",
+   "beat": "human-cost",
+   "line": "L6",
+   "start": "word:L6:tank -0.3",
+   "end": "line:L7 -0.1",
+   "evidence": [
+    "C-a13-pressure"
+   ],
+   "qa": {
+    "states": [
+     {
+      "at": "word:L6:tank -0.3",
+      "what": "result image lands on the narration's consequence",
+      "claim": "C-a13-pressure"
+     }
+    ]
+   },
+   "template": "archival-plate",
+   "provenance": {
+    "kind": "archival",
+    "label": "NASA photo · after separation"
+   },
+   "assets": [
+    "sm-damage"
+   ],
+   "params": {
+    "media": "asset:sm-damage",
+    "chip": {
+     "label": "NASA photo · after separation",
+     "kind": "archival"
+    },
+    "camera": {
+     "keys": [
+      {
+       "at": "word:L6:tank -0.3",
+       "focus": [
+        1473,
+        1200
+       ],
+       "zoom": 1
+      },
+      {
+       "at": "line:L7 -0.1",
+       "focus": [
+        1473,
+        1200
+       ],
+       "zoom": 1.1
+      }
+     ]
+    },
+    "shades": [
+     {
+      "kind": "top",
+      "h": 820
+     },
+     {
+      "kind": "bottom",
+      "y": 1180,
+      "h": 740
+     }
+    ]
+   },
+   "transition": {
+    "type": "hard-cut",
+    "reason": "the consequence lands on its word"
+   }
+  },
+  {
+   "id": "S09",
+   "beat": "decision",
+   "line": "L7",
+   "start": "line:L7 -0.1",
+   "end": "line:L8 -0.1",
+   "evidence": [
+    "C-a13-cause"
+   ],
+   "qa": {
+    "states": [
+     {
+      "at": "line:L7",
+      "what": "excerpt card enters"
+     },
+     {
+      "at": "word:L7:electrically",
+      "what": "the finding's words are highlighted",
+      "claim": "C-a13-cause"
+     }
+    ]
+   },
+   "template": "document-excerpt",
+   "provenance": {
+    "kind": "document",
+    "label": "Report text · typeset"
+   },
+   "assets": [],
+   "params": {
+    "claim": "claim:C-a13-cause",
+    "highlightAt": "word:L7:electrically",
+    "enter": [
+     "line:L7 -0.1",
+     "line:L7 +0.35"
+    ],
+    "disclosure": "Report text · typeset, not a scan",
+    "chip": {
+     "label": "Report text",
+     "kind": "document"
+    },
+    "push": {
+     "window": [
+      "line:L7 -0.1",
+      "line:L8 -0.1"
+     ],
+     "zoom": 1.04
+    }
+   },
+   "transition": {
+    "type": "dip",
+    "reason": "slow dissolve after the loss beat",
+    "fade": 0.3
+   }
+  },
+  {
+   "id": "S10",
+   "beat": "human-cost",
+   "line": "L8",
+   "start": "line:L8 -0.1",
+   "end": "word:L8:the#1 -0.1",
+   "evidence": [
+    "C-a13-averted"
+   ],
+   "qa": {
+    "states": [
+     {
+      "at": "line:L8",
+      "what": "shot on the narration beat"
+     }
+    ]
+   },
+   "template": "archival-plate",
+   "provenance": {
+    "kind": "archival",
+    "label": "NASA portrait"
+   },
+   "assets": [
+    "crew"
+   ],
+   "params": {
+    "media": "asset:crew",
+    "chip": {
+     "label": "NASA portrait",
+     "kind": "archival"
+    },
+    "box": {
+     "x": 0,
+     "y": 420,
+     "w": 1080,
+     "h": "auto"
+    },
+    "camera": {
+     "keys": [
+      {
+       "at": "line:L8 -0.1",
+       "focus": [
+        1920,
+        2400
+       ],
+       "zoom": 1
+      },
+      {
+       "at": "word:L8:the#1 -0.1",
+       "focus": [
+        1920,
+        2400
+       ],
+       "zoom": 1.05
+      }
+     ]
+    },
+    "under": "ink",
+    "plate": {
+     "blur": 40,
+     "dim": 0.5
+    }
+   },
+   "transition": {
+    "type": "dip",
+    "reason": "loss beat: slow dissolve, no animation",
+    "fade": 0.35
+   }
+  },
+  {
+   "id": "S11",
+   "beat": "human-cost",
+   "line": "L8",
+   "start": "word:L8:the#1 -0.1",
+   "end": "line:L9 -0.1",
+   "evidence": [
+    "C-a13-averted"
+   ],
+   "qa": {
+    "states": [
+     {
+      "at": "word:L8:the#1 -0.1",
+      "what": "mission-control on \"control\""
+     }
+    ]
+   },
+   "template": "archival-plate",
+   "provenance": {
+    "kind": "archival",
+    "label": "NASA photo · Mission Control"
+   },
+   "assets": [
+    "mission-control"
+   ],
+   "review": {
+    "codes": [
+     "CONFIRM_DEPICTION"
+    ]
+   },
+   "params": {
+    "media": "asset:mission-control",
+    "chip": {
+     "label": "NASA photo · Mission Control",
+     "kind": "archival"
+    },
+    "box": {
+     "x": 0,
+     "y": 520,
+     "w": 1080,
+     "h": "auto"
+    },
+    "plate": {
+     "blur": 40,
+     "dim": 0.5
+    },
+    "under": "ink",
+    "camera": {
+     "keys": [
+      {
+       "at": "word:L8:the#1 -0.1",
+       "focus": [
+        1920,
+        1298.5
+       ],
+       "zoom": 1
+      },
+      {
+       "at": "line:L9 -0.1",
+       "focus": [
+        1920,
+        1298.5
+       ],
+       "zoom": 1.06
+      }
+     ]
+    }
+   },
+   "transition": {
+    "type": "cut",
+    "reason": "the narration names \"control\""
+   }
+  },
+  {
+   "id": "S12",
+   "beat": "payoff",
+   "line": "L9",
+   "start": "line:L9 -0.1",
+   "end": "end",
+   "evidence": [
+    "C-a13-payoff"
+   ],
+   "qa": {
+    "states": [
+     {
+      "at": "line:L9",
+      "what": "payoff line"
+     },
+     {
+      "at": "end -0.35",
+      "what": "returns to the opening frame"
+     }
+    ]
+   },
+   "template": "payoff",
+   "provenance": {
+    "kind": "archival",
+    "label": "NASA photo · launch"
+   },
+   "assets": [
+    "launch"
+   ],
+   "params": {
+    "media": "asset:launch",
+    "box": {
+     "x": 0,
+     "y": 0,
+     "w": 1080,
+     "h": 1920
+    },
+    "camera": {
+     "keys": [
+      {
+       "at": "line:L9 -0.1",
+       "focus": [
+        1920,
+        2400
+       ],
+       "zoom": 1.12
+      },
+      {
+       "at": "end",
+       "focus": [
+        1920,
+        2400
+       ],
+       "zoom": 1
+      }
+     ]
+    },
+    "lines": [
+     {
+      "text": "The flight was saved in space.",
+      "tier": "setup"
+     },
+     {
+      "text": "The tank was lost on the ground.",
+      "tier": "payoff",
+      "in": 0.35
+     }
+    ],
+    "y": 330,
+    "fadeOut": 0.35,
+    "dim": 0.25,
+    "shades": [
+     {
+      "kind": "top",
+      "h": 640
+     },
+     {
+      "kind": "bottom",
+      "y": 1080,
+      "h": 840
+     }
+    ],
+    "chip": {
+     "label": "NASA photo · launch",
+     "kind": "archival"
+    }
+   },
+   "transition": {
+    "type": "loop",
+    "reason": "returns to the opening framing for the replay"
+   }
+  }
+ ]
+}
