@@ -1,0 +1,637 @@
+{
+ "schema": "fr-premium.creative-qa.v1",
+ "mode": "WARN-only",
+ "thresholds": {
+  "empty": 0.35,
+  "inset": 0.25,
+  "subject_min": 0.25,
+  "tiers": 3,
+  "labels": 3,
+  "words": 8,
+  "label_px": 32,
+  "states_per_2s": 1,
+  "states_min": 2
+ },
+ "grammar": [
+  "continuous",
+  "cut",
+  "dip",
+  "follow-cause",
+  "hard-cut",
+  "loop",
+  "match",
+  "push-in"
+ ],
+ "mp4": "apollo13-premium-pilot-eval.mp4",
+ "offset": 0.0,
+ "summary": {
+  "shots": 12,
+  "warn_shots": 12,
+  "warns": 54,
+  "time_weighted_empty": 0.39,
+  "mechanism_registered": "0/3",
+  "slide_like": 2
+ },
+ "shots": [
+  {
+   "id": "S01",
+   "kind": "archival",
+   "start": 0,
+   "end": 7.075,
+   "measured_from": 0,
+   "measured_to": 7.075,
+   "empty": 0.074,
+   "subject_motion": 0.073,
+   "subject_median": 0.065,
+   "camera_per_s": 0.01,
+   "states": [
+    {
+     "t": 0.06,
+     "what": "shot on the narration beat",
+     "ev": null,
+     "verified": false,
+     "peak": 0.01
+    }
+   ],
+   "registered": null,
+   "boundary_corr": null,
+   "transition": {
+    "type": "cut",
+    "reason": null,
+    "measured": null
+   },
+   "text": {
+    "max_tiers": 2,
+    "max_labels": 1,
+    "max_words": 7,
+    "smallest_label_px": 30,
+    "competing_samples": 0
+   },
+   "framing": "archival-plate",
+   "primitives": [
+    "archival-plate"
+   ],
+   "slide_like": false,
+   "warns": [
+    "smallest label 30 px < 32"
+   ]
+  },
+  {
+   "id": "S02",
+   "kind": "document",
+   "start": 7.075,
+   "end": 8.725,
+   "measured_from": 7.075,
+   "measured_to": 8.725,
+   "empty": 0.092,
+   "subject_motion": 0.218,
+   "subject_median": 0.21,
+   "camera_per_s": 0.034,
+   "states": [
+    {
+     "t": 7.075,
+     "what": "historical drawing (unmarked)",
+     "ev": null,
+     "verified": false,
+     "peak": 0.31
+    }
+   ],
+   "registered": null,
+   "boundary_corr": 0.015,
+   "transition": {
+    "type": "cut",
+    "reason": "setup line on the historical drawing before the conceptual model",
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 1,
+    "max_labels": 1,
+    "max_words": 3,
+    "smallest_label_px": 28,
+    "competing_samples": 0
+   },
+   "framing": "archival-plate",
+   "primitives": [
+    "archival-plate"
+   ],
+   "slide_like": false,
+   "warns": [
+    "subject motion 0.22 < 0.25 (camera drift only)",
+    "1 state changes in 1.6 s (< 2, or < 1 per 2 s)",
+    "1 declared state change(s) not visible in the MP4",
+    "smallest label 28 px < 32"
+   ]
+  },
+  {
+   "id": "S03",
+   "kind": "document",
+   "start": 8.725,
+   "end": 12.865,
+   "measured_from": 8.725,
+   "measured_to": 12.865,
+   "empty": 0.163,
+   "subject_motion": 0.07,
+   "subject_median": 0.054,
+   "camera_per_s": 0.004,
+   "states": [
+    {
+     "t": 10.3,
+     "what": "stat C-a13-heaters-65v",
+     "ev": "C-a13-heaters-65v",
+     "verified": false,
+     "peak": 0.18
+    }
+   ],
+   "registered": null,
+   "boundary_corr": 0.012,
+   "transition": {
+    "type": "cut",
+    "reason": "second drawing on the narration's subject word",
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 2,
+    "max_labels": 1,
+    "max_words": 5,
+    "smallest_label_px": 38,
+    "competing_samples": 9
+   },
+   "framing": "archival-plate",
+   "primitives": [
+    "archival-plate"
+   ],
+   "slide_like": false,
+   "warns": [
+    "subject motion 0.07 < 0.25 (camera drift only)",
+    "1 state changes in 4.1 s (< 2, or < 1 per 2 s)",
+    "1 declared state change(s) not visible in the MP4",
+    "headline competes with caption in 9 samples"
+   ]
+  },
+  {
+   "id": "S04",
+   "kind": "explanatory",
+   "start": 12.865,
+   "end": 17.555,
+   "measured_from": 12.865,
+   "measured_to": 17.555,
+   "empty": 0.635,
+   "subject_motion": 0.309,
+   "subject_median": 0.068,
+   "camera_per_s": 0.031,
+   "states": [
+    {
+     "t": 12.865,
+     "what": "conceptual model enters (prior state already set: fill from the drawing's stat)",
+     "ev": null,
+     "verified": true,
+     "peak": 1.75
+    },
+    {
+     "t": 15.515,
+     "what": "switch: rated",
+     "ev": "C-a13-switch-rating",
+     "verified": false,
+     "peak": 0.18
+    }
+   ],
+   "registered": null,
+   "boundary_corr": 0.0,
+   "transition": {
+    "type": "cut",
+    "reason": "into the conceptual model on the contrast line",
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 4,
+    "max_labels": 4,
+    "max_words": 13,
+    "smallest_label_px": 28,
+    "competing_samples": 0
+   },
+   "framing": "component-section",
+   "primitives": [
+    "component-section"
+   ],
+   "slide_like": false,
+   "warns": [
+    "empty background 63% > 35%",
+    "2 state changes in 4.7 s (< 2, or < 1 per 2 s)",
+    "1 declared state change(s) not visible in the MP4",
+    "mechanism shot not registered to archival media",
+    "4 text tiers > 3",
+    "4 labels at once > 3",
+    "13 non-caption words on screen > 8",
+    "smallest label 28 px < 32"
+   ]
+  },
+  {
+   "id": "S05",
+   "kind": "explanatory",
+   "start": 17.555,
+   "end": 23.87,
+   "measured_from": 17.555,
+   "measured_to": 23.87,
+   "empty": 0.608,
+   "subject_motion": 0.104,
+   "subject_median": 0.093,
+   "camera_per_s": 0.001,
+   "states": [
+    {
+     "t": 22.58,
+     "what": "switch: stuck-closed",
+     "ev": "C-a13-switch-rating",
+     "verified": false,
+     "peak": 0.15
+    },
+    {
+     "t": 18.88,
+     "what": "switch: threshold",
+     "ev": "C-a13-switch-80f",
+     "verified": false,
+     "peak": 0.21
+    }
+   ],
+   "registered": null,
+   "boundary_corr": 0.999,
+   "transition": {
+    "type": "continuous",
+    "reason": "same component model; the camera travels to the next documented state",
+    "measured": "gradual"
+   },
+   "text": {
+    "max_tiers": 4,
+    "max_labels": 4,
+    "max_words": 13,
+    "smallest_label_px": 28,
+    "competing_samples": 0
+   },
+   "framing": "component-section",
+   "primitives": [
+    "component-section"
+   ],
+   "slide_like": true,
+   "warns": [
+    "empty background 61% > 35%",
+    "subject motion 0.10 < 0.25 (camera drift only)",
+    "2 state changes in 6.3 s (< 2, or < 1 per 2 s)",
+    "2 declared state change(s) not visible in the MP4",
+    "mechanism shot not registered to archival media",
+    "4 text tiers > 3",
+    "4 labels at once > 3",
+    "13 non-caption words on screen > 8",
+    "smallest label 28 px < 32",
+    "slide-like composition"
+   ]
+  },
+  {
+   "id": "S06",
+   "kind": "explanatory",
+   "start": 23.87,
+   "end": 30.735,
+   "measured_from": 23.87,
+   "measured_to": 30.735,
+   "empty": 0.628,
+   "subject_motion": 0.3,
+   "subject_median": 0.058,
+   "camera_per_s": 0.084,
+   "states": [
+    {
+     "t": 25.695,
+     "what": "heater: hot",
+     "ev": "C-a13-1000f",
+     "verified": true,
+     "peak": 0.23
+    },
+    {
+     "t": 27.195,
+     "what": "insulation: damaged",
+     "ev": "C-a13-teflon",
+     "verified": false,
+     "peak": 0.16
+    }
+   ],
+   "registered": null,
+   "boundary_corr": 0.977,
+   "transition": {
+    "type": "continuous",
+    "reason": "same component model; the camera travels to the next documented state",
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 6,
+    "max_labels": 6,
+    "max_words": 15,
+    "smallest_label_px": 28,
+    "competing_samples": 0
+   },
+   "framing": "component-section",
+   "primitives": [
+    "component-section"
+   ],
+   "slide_like": false,
+   "warns": [
+    "empty background 63% > 35%",
+    "2 state changes in 6.9 s (< 2, or < 1 per 2 s)",
+    "1 declared state change(s) not visible in the MP4",
+    "mechanism shot not registered to archival media",
+    "6 text tiers > 3",
+    "6 labels at once > 3",
+    "15 non-caption words on screen > 8",
+    "smallest label 28 px < 32"
+   ]
+  },
+  {
+   "id": "S07",
+   "kind": "document",
+   "start": 30.735,
+   "end": 35.46,
+   "measured_from": 30.735,
+   "measured_to": 35.46,
+   "empty": 0.003,
+   "subject_motion": 0.031,
+   "subject_median": 0.0,
+   "camera_per_s": 0.006,
+   "states": [
+    {
+     "t": 32.635,
+     "what": "clock to C-a13-fans",
+     "ev": "C-a13-fans",
+     "verified": false,
+     "peak": 0.0
+    },
+    {
+     "t": 35.235,
+     "what": "clock to C-a13-dataloss",
+     "ev": "C-a13-dataloss",
+     "verified": true,
+     "peak": 0.46
+    }
+   ],
+   "registered": null,
+   "boundary_corr": 0.09,
+   "transition": {
+    "type": "cut",
+    "reason": "documented times: the clock carries the ninety seconds",
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 2,
+    "max_labels": 1,
+    "max_words": 2,
+    "smallest_label_px": 40,
+    "competing_samples": 18
+   },
+   "framing": "timeline",
+   "primitives": [
+    "timeline"
+   ],
+   "slide_like": false,
+   "warns": [
+    "subject motion 0.03 < 0.25 (camera drift only)",
+    "2 state changes in 4.7 s (< 2, or < 1 per 2 s)",
+    "1 declared state change(s) not visible in the MP4",
+    "headline competes with caption in 18 samples"
+   ]
+  },
+  {
+   "id": "S08",
+   "kind": "archival",
+   "start": 35.46,
+   "end": 37.875,
+   "measured_from": 35.46,
+   "measured_to": 37.875,
+   "empty": 0.589,
+   "subject_motion": 0.126,
+   "subject_median": 0.118,
+   "camera_per_s": 0.04,
+   "states": [
+    {
+     "t": 35.46,
+     "what": "result image lands on the narration's consequence",
+     "ev": "C-a13-pressure",
+     "verified": false,
+     "peak": 0.11
+    }
+   ],
+   "registered": null,
+   "boundary_corr": 0.257,
+   "transition": {
+    "type": "hard-cut",
+    "reason": "the consequence lands on its word",
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 1,
+    "max_labels": 1,
+    "max_words": 5,
+    "smallest_label_px": 28,
+    "competing_samples": 0
+   },
+   "framing": "archival-plate",
+   "primitives": [
+    "archival-plate"
+   ],
+   "slide_like": false,
+   "warns": [
+    "empty background 59% > 35%",
+    "archival inset over void 59% > 25%",
+    "smallest label 28 px < 32"
+   ]
+  },
+  {
+   "id": "S09",
+   "kind": "document",
+   "start": 37.875,
+   "end": 44.29,
+   "measured_from": 37.875,
+   "measured_to": 44.29,
+   "empty": 0.764,
+   "subject_motion": 0.168,
+   "subject_median": 0.033,
+   "camera_per_s": 0.011,
+   "states": [
+    {
+     "t": 37.975,
+     "what": "excerpt card enters",
+     "ev": null,
+     "verified": true,
+     "peak": 5.82
+    },
+    {
+     "t": 38.9,
+     "what": "the finding's words are highlighted",
+     "ev": "C-a13-cause",
+     "verified": false,
+     "peak": 0.15
+    }
+   ],
+   "registered": null,
+   "boundary_corr": 0.985,
+   "transition": {
+    "type": "dip",
+    "reason": "slow dissolve after the loss beat",
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 2,
+    "max_labels": 26,
+    "max_words": 37,
+    "smallest_label_px": 32,
+    "competing_samples": 0
+   },
+   "framing": "document-excerpt",
+   "primitives": [
+    "document-excerpt"
+   ],
+   "slide_like": true,
+   "warns": [
+    "empty background 76% > 35%",
+    "subject motion 0.17 < 0.25 (camera drift only)",
+    "2 state changes in 6.4 s (< 2, or < 1 per 2 s)",
+    "1 declared state change(s) not visible in the MP4",
+    "26 labels at once > 3",
+    "37 non-caption words on screen > 8",
+    "slide-like composition"
+   ]
+  },
+  {
+   "id": "S10",
+   "kind": "archival",
+   "start": 44.29,
+   "end": 47.99,
+   "measured_from": 44.29,
+   "measured_to": 47.99,
+   "empty": 0.367,
+   "subject_motion": 0.155,
+   "subject_median": 0.062,
+   "camera_per_s": 0.012,
+   "states": [
+    {
+     "t": 44.39,
+     "what": "shot on the narration beat",
+     "ev": null,
+     "verified": true,
+     "peak": 2.8
+    }
+   ],
+   "registered": null,
+   "boundary_corr": 0.79,
+   "transition": {
+    "type": "dip",
+    "reason": "loss beat: slow dissolve, no animation",
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 0,
+    "max_labels": 0,
+    "max_words": 0,
+    "smallest_label_px": null,
+    "competing_samples": 0
+   },
+   "framing": "archival-plate",
+   "primitives": [
+    "archival-plate"
+   ],
+   "slide_like": false,
+   "warns": [
+    "empty background 37% > 35%",
+    "archival inset over void 37% > 25%"
+   ]
+  },
+  {
+   "id": "S11",
+   "kind": "archival",
+   "start": 47.99,
+   "end": 50.405,
+   "measured_from": 47.99,
+   "measured_to": 50.405,
+   "empty": 0.311,
+   "subject_motion": 0.077,
+   "subject_median": 0.064,
+   "camera_per_s": 0.015,
+   "states": [
+    {
+     "t": 47.99,
+     "what": "mission-control on \"control\"",
+     "ev": null,
+     "verified": false,
+     "peak": 0.06
+    }
+   ],
+   "registered": null,
+   "boundary_corr": 0.475,
+   "transition": {
+    "type": "cut",
+    "reason": "the narration names \"control\"",
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 1,
+    "max_labels": 1,
+    "max_words": 5,
+    "smallest_label_px": 28,
+    "competing_samples": 0
+   },
+   "framing": "archival-plate",
+   "primitives": [
+    "archival-plate"
+   ],
+   "slide_like": false,
+   "warns": [
+    "archival inset over void 31% > 25%",
+    "smallest label 28 px < 32"
+   ]
+  },
+  {
+   "id": "S12",
+   "kind": "archival",
+   "start": 50.405,
+   "end": 55.605,
+   "measured_from": 50.405,
+   "measured_to": 55.6,
+   "empty": 0.148,
+   "subject_motion": 0.102,
+   "subject_median": 0.046,
+   "camera_per_s": 0.002,
+   "states": [
+    {
+     "t": 50.505,
+     "what": "payoff line",
+     "ev": null,
+     "verified": false,
+     "peak": 0.15
+    },
+    {
+     "t": 55.255,
+     "what": "returns to the opening frame",
+     "ev": null,
+     "verified": true,
+     "peak": 1.06
+    }
+   ],
+   "registered": null,
+   "boundary_corr": 0.0,
+   "transition": {
+    "type": "loop",
+    "reason": "returns to the opening framing for the replay",
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 2,
+    "max_labels": 0,
+    "max_words": 12,
+    "smallest_label_px": null,
+    "competing_samples": 0
+   },
+   "framing": "payoff",
+   "primitives": [
+    "payoff"
+   ],
+   "slide_like": false,
+   "warns": [
+    "12 non-caption words on screen > 8"
+   ]
+  }
+ ]
+}

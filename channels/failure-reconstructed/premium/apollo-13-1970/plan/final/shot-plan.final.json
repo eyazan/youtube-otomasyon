@@ -3,7 +3,7 @@
  "topic": "apollo-13-1970",
  "channel": "failure-reconstructed",
  "style": "failure-reconstructed/forensic-v1",
- "narration": "../timeline-estimated.json",
+ "narration": "../timeline-kokoro-am_michael.json",
  "evidence": "../evidence.json",
  "assets": "../assets.json",
  "film": {
@@ -147,38 +147,38 @@
    ],
    "camera": [
     {
-     "at": "line:L3 +1.25",
+     "at": "line:L3 +0.75",
      "focus": [
       "heater",
       "gse-power-supply"
      ]
     },
     {
-     "at": "line:L3 +2.45",
+     "at": "line:L3 +1.95",
      "focus": [
       "switch"
      ]
     },
     {
-     "at": "line:L4 +0.12",
+     "at": "line:L4 -0.1",
      "focus": [
       "switch"
      ]
     },
     {
-     "at": "line:L4 +1.32",
+     "at": "line:L4 +0.62",
      "focus": [
       "switch"
      ]
     },
     {
-     "at": "line:L5 +0.65",
+     "at": "line:L5 -0.07",
      "focus": [
       "switch"
      ]
     },
     {
-     "at": "line:L5 +1.85",
+     "at": "line:L5 +1.13",
      "focus": [
       "heater",
       "insulation"
@@ -330,7 +330,7 @@
    "beat": "evidence",
    "line": "L2",
    "start": "line:L2 -0.1",
-   "end": "word:L2:heaters -0.1",
+   "end": "word:L2:its -0.1",
    "evidence": [
     "C-a13-heaters-65v",
     "C-a13-detank-date"
@@ -379,7 +379,7 @@
        "zoom": 1
       },
       {
-       "at": "word:L2:heaters -0.1",
+       "at": "word:L2:its -0.1",
        "focus": [
         303,
         397
@@ -402,7 +402,7 @@
    "id": "S03",
    "beat": "evidence",
    "line": "L2",
-   "start": "word:L2:heaters -0.1",
+   "start": "word:L2:its -0.1",
    "end": "line:L3 -0.1",
    "evidence": [
     "C-a13-heaters-65v",
@@ -445,7 +445,7 @@
     "camera": {
      "keys": [
       {
-       "at": "word:L2:heaters -0.1",
+       "at": "word:L2:its -0.1",
        "focus": [
         197,
         108.5
@@ -985,11 +985,11 @@
     },
     "lines": [
      {
-      "text": "The flight was saved in space.",
+      "text": "The danger began on the ground.",
       "tier": "setup"
      },
      {
-      "text": "The tank was lost on the ground.",
+      "text": "The mission was saved in space.",
       "tier": "payoff",
       "in": 0.35
      }

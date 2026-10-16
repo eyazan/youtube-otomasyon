@@ -34,7 +34,10 @@ test("planner: Apollo 13 -> NEEDS_HUMAN_REVIEW; only the hook still needs a huma
   assert.equal(r.status, "NEEDS_HUMAN_REVIEW"); assert.equal(r.metrics.shots, 9);
   assert.ok(codes(r, "L1").includes("MISSING_ANCHOR")); assert.deepEqual(r.metrics.reviewShots, ["S01"]);
   assert.deepEqual(r.plan.shots.map((s) => s.template), ["archival-plate", "component-section", "component-section", "component-section", "component-section", "archival-plate", "document-excerpt", "archival-plate", "payoff"]);
-  assert.ok(codes(r).includes("SCRIPT_NOT_APPROVED") && codes(r).includes("ESTIMATED_TIMELINE"));
+  // the owner approved the script for the evaluation pilot and the timeline is measured (Kokoro), so neither global flag is raised
+  assert.ok(!codes(r).includes("SCRIPT_NOT_APPROVED") && !codes(r).includes("ESTIMATED_TIMELINE"));
+  const d = apollo(); d.script = { ...d.script, status: "draft", timeline: { kind: "estimated", file: "timeline-estimated.json" } }; const r2 = run(d);
+  assert.ok(codes(r2).includes("SCRIPT_NOT_APPROVED") && codes(r2).includes("ESTIMATED_TIMELINE"), "a draft script on estimated timings is still flagged");
   for (const i of r.issues.filter((x) => x.line)) assert.ok(i.detail && i.needed, `${i.code} has detail and what is needed`);
 });
 test("planner: deterministic (same inputs, identical plan)", () => {

@@ -1,15 +1,15 @@
 {
  "schema": "fr-premium.narration-script.v1",
  "topic": "apollo-13-1970",
- "status": "draft",
+ "status": "approved",
  "timeline": {
-  "kind": "estimated",
-  "file": "timeline-estimated.json"
+  "kind": "measured",
+  "file": "timeline-kokoro-am_michael.json"
  },
  "lines": [
   {
    "id": "L1",
-   "text": "Apollo Thirteen's oxygen tank was already dangerous on the launch pad.",
+   "text": "One of Apollo Thirteen's oxygen tanks was already in a hazardous condition on the launch pad.",
    "claims": [
     "C-a13-hazard",
     "C-a13-mission",
@@ -35,7 +35,7 @@
   },
   {
    "id": "L4",
-   "text": "They were meant to open at eighty degrees, and at sixty-five volts they could not.",
+   "text": "They were meant to open at eighty degrees Fahrenheit, and at sixty-five volts they could not.",
    "claims": [
     "C-a13-switch-80f",
     "C-a13-switch-rating"
@@ -74,10 +74,11 @@
   },
   {
    "id": "L9",
-   "text": "The flight was saved in space. The tank was lost on the ground.",
+   "text": "The danger began on the ground. The mission was saved in space.",
    "claims": [
     "C-a13-payoff"
    ]
   }
- ]
+ ],
+ "approvedBy": "owner, in chat 2026-10-16: approved for the offline evaluation pilot only (not for publishing)"
 }
