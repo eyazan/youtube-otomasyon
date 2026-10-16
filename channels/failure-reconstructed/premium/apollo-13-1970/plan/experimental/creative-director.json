@@ -1,0 +1,611 @@
+{
+ "schema": "fr-premium.creative-director.v1",
+ "experimental": true,
+ "rules": {
+  "maxModeSeconds": 18,
+  "maxModeLines": 3,
+  "minShot": 1.5,
+  "hookHeadline": 1.2,
+  "hookZoom": 1.12,
+  "aheadShare": 0.6
+ },
+ "before": {
+  "summary": {
+   "shots": 9,
+   "modes": 6,
+   "visualChanges": 6,
+   "longestHold": 23.6,
+   "meanHold": 9,
+   "risks": {
+    "HOOK_TEXT_TOO_BRIEF": 1,
+    "DEAD_ZONE": 1,
+    "STATIC_OPENING": 1,
+    "HOLD_TOO_LONG": 1,
+    "TIMES_NOT_SHOWN": 1,
+    "TEST_IMAGERY_WHERE_HISTORICAL_EXISTS": 1,
+    "NAMED_BUT_NOT_SHOWN": 1
+   }
+  },
+  "shots": [
+   {
+    "shot": "S01",
+    "line": "L1",
+    "mode": "archival-photo",
+    "key": "asset:launch",
+    "start": 0,
+    "dur": 5.26,
+    "stage": "hook",
+    "scores": {
+     "curiosity": 2,
+     "novelty": 2,
+     "explanatory": 0,
+     "density": 0.57
+    },
+    "run": 5.3,
+    "risks": [
+     {
+      "code": "HOOK_TEXT_TOO_BRIEF",
+      "detail": "headline readable 0.5 s"
+     },
+     {
+      "code": "DEAD_ZONE",
+      "detail": "picture ends at y 1400; 27% of the frame is flat ink"
+     },
+     {
+      "code": "STATIC_OPENING",
+      "detail": "hook camera travels to zoom 1.06 only"
+     }
+    ]
+   },
+   {
+    "shot": "S02",
+    "line": "L2",
+    "mode": "conceptual-mechanism",
+    "key": "shared:component-l2",
+    "start": 5.26,
+    "dur": 5.67,
+    "stage": "setup",
+    "scores": {
+     "curiosity": 1,
+     "novelty": 2,
+     "explanatory": 1,
+     "density": 0.35
+    },
+    "run": 5.7,
+    "risks": []
+   },
+   {
+    "shot": "S03",
+    "line": "L3",
+    "mode": "conceptual-mechanism",
+    "key": "shared:component-l2",
+    "start": 10.93,
+    "dur": 4.8,
+    "stage": "turn",
+    "scores": {
+     "curiosity": 2,
+     "novelty": 0,
+     "explanatory": 1,
+     "density": 0.21
+    },
+    "run": 10.5,
+    "risks": []
+   },
+   {
+    "shot": "S04",
+    "line": "L4",
+    "mode": "conceptual-mechanism",
+    "key": "shared:component-l2",
+    "start": 15.73,
+    "dur": 6.18,
+    "stage": "escalation",
+    "scores": {
+     "curiosity": 2,
+     "novelty": 0,
+     "explanatory": 2,
+     "density": 0.32
+    },
+    "run": 16.6,
+    "risks": []
+   },
+   {
+    "shot": "S05",
+    "line": "L5",
+    "mode": "conceptual-mechanism",
+    "key": "shared:component-l2",
+    "start": 21.91,
+    "dur": 6.95,
+    "stage": "climax",
+    "scores": {
+     "curiosity": 2,
+     "novelty": 0,
+     "explanatory": 2,
+     "density": 0.29
+    },
+    "run": 23.6,
+    "risks": [
+     {
+      "code": "HOLD_TOO_LONG",
+      "detail": "conceptual-mechanism held 23.6 s over 4 lines since S02"
+     }
+    ]
+   },
+   {
+    "shot": "S06",
+    "line": "L6",
+    "mode": "event-consequence",
+    "key": "asset:sm-damage",
+    "start": 28.86,
+    "dur": 7.59,
+    "stage": "consequence",
+    "scores": {
+     "curiosity": 2,
+     "novelty": 2,
+     "explanatory": 0,
+     "density": 0.4
+    },
+    "run": 7.6,
+    "risks": [
+     {
+      "code": "TIMES_NOT_SHOWN",
+      "detail": "C-a13-fans, C-a13-dataloss are documented times; the shot shows none of them"
+     }
+    ]
+   },
+   {
+    "shot": "S07",
+    "line": "L7",
+    "mode": "document",
+    "key": "document-excerpt",
+    "start": 36.45,
+    "dur": 5.73,
+    "stage": "verdict",
+    "scores": {
+     "curiosity": 1,
+     "novelty": 2,
+     "explanatory": 1,
+     "density": 0.17
+    },
+    "run": 5.7,
+    "risks": [
+     {
+      "code": "TEST_IMAGERY_WHERE_HISTORICAL_EXISTS",
+      "detail": "backdrop is a test photo; historical sm-damage, sm-damage-2 show the event's result"
+     }
+    ]
+   },
+   {
+    "shot": "S08",
+    "line": "L8",
+    "mode": "human-outcome",
+    "key": "asset:crew",
+    "start": 42.18,
+    "dur": 5.88,
+    "stage": "relief",
+    "scores": {
+     "curiosity": 2,
+     "novelty": 2,
+     "explanatory": 0,
+     "density": 0.17
+    },
+    "run": 5.9,
+    "risks": [
+     {
+      "code": "NAMED_BUT_NOT_SHOWN",
+      "detail": "the line names \"control\"; unused on-topic asset mission-control shows it (caption: \"Overall view of the Mission Operations Control Room in the Mission Con…\")"
+     }
+    ]
+   },
+   {
+    "shot": "S09",
+    "line": "L9",
+    "mode": "payoff",
+    "key": "asset:launch",
+    "start": 48.06,
+    "dur": 5.84,
+    "stage": "payoff",
+    "scores": {
+     "curiosity": 2,
+     "novelty": 1,
+     "explanatory": 0,
+     "density": 0.17
+    },
+    "run": 5.8,
+    "risks": []
+   }
+  ]
+ },
+ "decisions": [
+  {
+   "rule": "R5",
+   "what": "S01: headline held to 1.5 s; captions start after it"
+  },
+  {
+   "rule": "R5",
+   "what": "S01: full-bleed photo with a bottom shade for the caption (no flat ink band)"
+  },
+  {
+   "rule": "R5",
+   "what": "S01: centre push to 1.12 (no VERIFIED point of interest, so no aimed move)"
+  },
+  {
+   "rule": "R5",
+   "what": "S09: payoff mirrors the hook framing so the loop lands on frame 0"
+  },
+  {
+   "rule": "R1",
+   "what": "component-l2: 23.6 s / 4 lines over the cap; L2 moved to tank-location → tank-diagram, model enters on L3"
+  },
+  {
+   "rule": "R2",
+   "what": "S06: C-a13-fans → C-a13-dataloss on a timeline; sm-damage moves to \"tank\" (34.45 s), where the narration reaches C-a13-pressure"
+  },
+  {
+   "rule": "R3",
+   "what": "S07: backdrop tank-fire-test (test) → sm-damage-2 (historical: the result of the event the finding names)"
+  },
+  {
+   "rule": "R4",
+   "what": "S08: \"control\" is named; mission-control (unused, on topic, matcher NEEDS_HUMAN_REVIEW) from 45.91 s"
+  },
+  {
+   "rule": "ids",
+   "what": "S02a→S02, S02b→S03, S03→S04, S04→S05, S05→S06, S06a→S07, S06b→S08, S07→S09, S08→S10, S08b→S11, S09→S12"
+  }
+ ],
+ "after": {
+  "summary": {
+   "shots": 12,
+   "modes": 8,
+   "visualChanges": 10,
+   "longestHold": 17.9,
+   "meanHold": 5.4,
+   "risks": {}
+  },
+  "shots": [
+   {
+    "shot": "S01",
+    "line": "L1",
+    "mode": "archival-photo",
+    "key": "asset:launch",
+    "start": 0,
+    "dur": 5.26,
+    "stage": "hook",
+    "scores": {
+     "curiosity": 2,
+     "novelty": 2,
+     "explanatory": 0,
+     "density": 0.57
+    },
+    "run": 5.3,
+    "risks": []
+   },
+   {
+    "shot": "S02",
+    "line": "L2",
+    "mode": "historical-document",
+    "key": "asset:tank-location",
+    "start": 5.26,
+    "dur": 1.7,
+    "stage": "setup",
+    "scores": {
+     "curiosity": 1,
+     "novelty": 2,
+     "explanatory": 0,
+     "density": 1.18
+    },
+    "run": 1.7,
+    "risks": []
+   },
+   {
+    "shot": "S03",
+    "line": "L2",
+    "mode": "historical-document",
+    "key": "asset:tank-diagram",
+    "start": 6.96,
+    "dur": 3.97,
+    "stage": "setup",
+    "scores": {
+     "curiosity": 1,
+     "novelty": 1,
+     "explanatory": 1,
+     "density": 0.5
+    },
+    "run": 4,
+    "risks": []
+   },
+   {
+    "shot": "S04",
+    "line": "L3",
+    "mode": "conceptual-mechanism",
+    "key": "shared:component-l2",
+    "start": 10.93,
+    "dur": 4.8,
+    "stage": "turn",
+    "scores": {
+     "curiosity": 2,
+     "novelty": 1,
+     "explanatory": 1,
+     "density": 0.21
+    },
+    "run": 4.8,
+    "risks": []
+   },
+   {
+    "shot": "S05",
+    "line": "L4",
+    "mode": "conceptual-mechanism",
+    "key": "shared:component-l2",
+    "start": 15.73,
+    "dur": 6.18,
+    "stage": "escalation",
+    "scores": {
+     "curiosity": 2,
+     "novelty": 0,
+     "explanatory": 2,
+     "density": 0.32
+    },
+    "run": 11,
+    "risks": []
+   },
+   {
+    "shot": "S06",
+    "line": "L5",
+    "mode": "conceptual-mechanism",
+    "key": "shared:component-l2",
+    "start": 21.91,
+    "dur": 6.95,
+    "stage": "climax",
+    "scores": {
+     "curiosity": 2,
+     "novelty": 0,
+     "explanatory": 2,
+     "density": 0.29
+    },
+    "run": 17.9,
+    "risks": []
+   },
+   {
+    "shot": "S07",
+    "line": "L6",
+    "mode": "evidence-highlight",
+    "key": "asset:tank-location",
+    "start": 28.86,
+    "dur": 5.59,
+    "stage": "consequence",
+    "scores": {
+     "curiosity": 2,
+     "novelty": 1,
+     "explanatory": 2,
+     "density": 0.54
+    },
+    "run": 5.6,
+    "risks": []
+   },
+   {
+    "shot": "S08",
+    "line": "L6",
+    "mode": "event-consequence",
+    "key": "asset:sm-damage",
+    "start": 34.45,
+    "dur": 2,
+    "stage": "consequence",
+    "scores": {
+     "curiosity": 2,
+     "novelty": 2,
+     "explanatory": 0,
+     "density": 1.5
+    },
+    "run": 2,
+    "risks": []
+   },
+   {
+    "shot": "S09",
+    "line": "L7",
+    "mode": "document",
+    "key": "document-excerpt",
+    "start": 36.45,
+    "dur": 5.73,
+    "stage": "verdict",
+    "scores": {
+     "curiosity": 1,
+     "novelty": 2,
+     "explanatory": 1,
+     "density": 0.17
+    },
+    "run": 5.7,
+    "risks": []
+   },
+   {
+    "shot": "S10",
+    "line": "L8",
+    "mode": "human-outcome",
+    "key": "asset:crew",
+    "start": 42.18,
+    "dur": 3.73,
+    "stage": "relief",
+    "scores": {
+     "curiosity": 2,
+     "novelty": 2,
+     "explanatory": 0,
+     "density": 0.27
+    },
+    "run": 3.7,
+    "risks": []
+   },
+   {
+    "shot": "S11",
+    "line": "L8",
+    "mode": "human-outcome",
+    "key": "asset:mission-control",
+    "start": 45.91,
+    "dur": 2.15,
+    "stage": "relief",
+    "scores": {
+     "curiosity": 2,
+     "novelty": 1,
+     "explanatory": 0,
+     "density": 0.47
+    },
+    "run": 2.1,
+    "risks": []
+   },
+   {
+    "shot": "S12",
+    "line": "L9",
+    "mode": "payoff",
+    "key": "asset:launch",
+    "start": 48.06,
+    "dur": 5.84,
+    "stage": "payoff",
+    "scores": {
+     "curiosity": 2,
+     "novelty": 1,
+     "explanatory": 0,
+     "density": 0.17
+    },
+    "run": 5.8,
+    "risks": []
+   }
+  ]
+ },
+ "recommendations": [
+  {
+   "line": "L1",
+   "text": "Apollo Thirteen's oxygen tank was already dangerous on the launch pad.",
+   "stage": "hook",
+   "duration": 5.26,
+   "visual": "archival-photo",
+   "source": "archival",
+   "camera": "push 1.12",
+   "emphasis": [
+    "APOLLO 13",
+    "1970"
+   ],
+   "transition": "cut",
+   "captions": "headline first, captions from 1.5 s",
+   "mechanismReveal": []
+  },
+  {
+   "line": "L2",
+   "text": "During ground tests, its heaters were powered from a sixty-five volt supply.",
+   "stage": "setup",
+   "duration": 5.67,
+   "visual": "historical-document → historical-document",
+   "source": "archival → archival",
+   "camera": "push 1.08 | push 1.08",
+   "emphasis": [
+    "March 27, 1970",
+    "65 V"
+   ],
+   "transition": "cut / cut",
+   "captions": "spoken-word captions only; at most one on-screen label besides the chip",
+   "mechanismReveal": []
+  },
+  {
+   "line": "L3",
+   "text": "But its thermostatic switches were rated for twenty-eight volts.",
+   "stage": "turn",
+   "duration": 4.8,
+   "visual": "conceptual-mechanism",
+   "source": "reconstruction (conceptual, disclosed)",
+   "camera": "scene-continuous drift; settles 0.6 s before each cue",
+   "emphasis": [
+    "28 V"
+   ],
+   "transition": "cut",
+   "captions": "spoken-word captions only; at most one on-screen label besides the chip",
+   "mechanismReveal": [
+    "rated @ 14.08 s"
+   ]
+  },
+  {
+   "line": "L4",
+   "text": "They were meant to open at eighty degrees, and at sixty-five volts they could not.",
+   "stage": "escalation",
+   "duration": 6.18,
+   "visual": "conceptual-mechanism",
+   "source": "reconstruction (conceptual, disclosed)",
+   "camera": "scene-continuous drift; settles 0.6 s before each cue",
+   "emphasis": [
+    "80°F"
+   ],
+   "transition": "continuous",
+   "captions": "spoken-word captions only; at most one on-screen label besides the chip",
+   "mechanismReveal": [
+    "stuck-closed @ 21.21 s",
+    "threshold @ 17.75 s"
+   ]
+  },
+  {
+   "line": "L5",
+   "text": "The heater tube may have reached a thousand degrees, damaging the insulation on the fan wires.",
+   "stage": "climax",
+   "duration": 6.95,
+   "visual": "conceptual-mechanism",
+   "source": "reconstruction (conceptual, disclosed)",
+   "camera": "scene-continuous drift; settles 0.6 s before each cue",
+   "emphasis": [
+    "about 1000°F"
+   ],
+   "transition": "continuous",
+   "captions": "spoken-word captions only; at most one on-screen label besides the chip",
+   "mechanismReveal": [
+    "hot @ 24.46 s",
+    "damaged @ 25.64 s"
+   ]
+  },
+  {
+   "line": "L6",
+   "text": "In flight, the crew switched on the tank's fans, and about ninety seconds later the tank lost pressure.",
+   "stage": "consequence",
+   "duration": 7.59,
+   "visual": "evidence-highlight → event-consequence",
+   "source": "document → archival",
+   "camera": "static rail; the clock is the motion | push 1.1",
+   "emphasis": [],
+   "transition": "cut / hard-cut",
+   "captions": "spoken-word captions only; at most one on-screen label besides the chip",
+   "mechanismReveal": []
+  },
+  {
+   "line": "L7",
+   "text": "The board found an electrically initiated fire inside oxygen tank number two.",
+   "stage": "verdict",
+   "duration": 5.73,
+   "visual": "document",
+   "source": "document",
+   "camera": "slow push 1.04; highlight sweep",
+   "emphasis": [],
+   "transition": "dip",
+   "captions": "spoken-word captions only; at most one on-screen label besides the chip",
+   "mechanismReveal": []
+  },
+  {
+   "line": "L8",
+   "text": "It was a near disaster, averted only by the crew and the ground control team.",
+   "stage": "relief",
+   "duration": 5.88,
+   "visual": "human-outcome → human-outcome",
+   "source": "archival → archival",
+   "camera": "push 1.05 | push 1.06",
+   "emphasis": [],
+   "transition": "dip / cut",
+   "captions": "spoken-word captions only; at most one on-screen label besides the chip",
+   "mechanismReveal": []
+  },
+  {
+   "line": "L9",
+   "text": "The flight was saved in space. The tank was lost on the ground.",
+   "stage": "payoff",
+   "duration": 4.94,
+   "visual": "payoff",
+   "source": "archival",
+   "camera": "push 1.12",
+   "emphasis": [],
+   "transition": "loop",
+   "captions": "spoken-word captions only; at most one on-screen label besides the chip",
+   "mechanismReveal": []
+  }
+ ]
+}

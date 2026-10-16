@@ -47,7 +47,8 @@
       const hw = P.headline ? { in: W2(P.headline.in), out: W2(P.headline.out) } : null;
       const st = P.stat ? W2(P.stat.in) : null; const mk = P.mark ? { in: W2(P.mark.in), lab: P.mark.label ? W2(P.mark.label.in) : null } : null;
       const render = (t) => {
-        const ly = layerAt(t); const media = P.plate ? [FR.X.plate(FR.clip(key, t - clip0, { box }), P.plate), ly] : [ly];
+        const ly = layerAt(t); // blurred full-bleed backing plate: a film frame, or the still itself
+        const media = P.plate ? [FR.X.plate(isClip ? FR.clip(key, t - clip0, { box }) : FR.photo(key, { fx: m.iw / 2, fy: m.ih / 2, box }), P.plate), ly] : [ly];
         let svg = H.shades(FR, P.shades), hud = "";
         if (P.mark) { const s = screenOf(P.mark.anchor, t); const rk = p(t, mk.in[0], mk.in[1]);
           const r = P.mark.radius + (P.mark.pulse ? 3 * Math.sin((t - shot.start) * 6) : 0);
@@ -60,7 +61,7 @@
         if (P.stat) { const k = p(t, st[0], st[1]);
           hud += `<div style="position:absolute;left:0;right:0;top:${P.stat.y}px;text-align:center;opacity:${k};transform:translateY(${(1 - E.out(k)) * 24}px);text-shadow:0 4px 24px rgba(0,0,0,.9)">
           <div style="font:600 220px/0.9 ${F.num};color:${C.cold}">${H.text(P.stat.value, ctx)}</div>
-          <div style="font:700 38px/1.3 ${F.sans};color:${C.text};margin-top:18px">${H.text(P.stat.sub, ctx)}</div></div>`; }
+          <div style="font:700 38px/1.3 ${F.sans};color:${C.text};margin-top:44px">${H.text(P.stat.sub, ctx)}</div></div>`; }
         if (P.kicker) hud += `<div style="position:absolute;left:0;right:0;top:${P.kicker.y}px;text-align:center;font:700 28px ${F.sans};letter-spacing:4px;color:${C.steel}">${FR.esc(H.text(P.kicker.text, ctx))}</div>`;
         if (P.stamp) hud += FR.clock(ctx.value(P.stamp.value), 1, { label: H.text(P.stamp.label, ctx) });
         if (P.filmClock) { const tb = ctx.claim(P.filmClock.timeBase.slice(6)); const src = (isClip ? m.from || 0 : 0) + (t - clip0); // seconds into the source film

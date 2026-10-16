@@ -1,0 +1,186 @@
+{
+ "schema": "fr-premium.creative-qa.v1",
+ "mode": "WARN-only",
+ "thresholds": {
+  "empty": 0.35,
+  "inset": 0.25,
+  "subject_min": 0.25,
+  "tiers": 3,
+  "labels": 3,
+  "words": 8,
+  "label_px": 32,
+  "states_per_2s": 1,
+  "states_min": 2
+ },
+ "grammar": [
+  "continuous",
+  "cut",
+  "dip",
+  "follow-cause",
+  "hard-cut",
+  "loop",
+  "match",
+  "push-in"
+ ],
+ "mp4": "cd-a.mp4",
+ "offset": 5.26,
+ "summary": {
+  "shots": 3,
+  "warn_shots": 3,
+  "warns": 16,
+  "time_weighted_empty": 0.364,
+  "mechanism_registered": "0/1",
+  "slide_like": 0
+ },
+ "shots": [
+  {
+   "id": "S02",
+   "kind": "document",
+   "start": 5.26,
+   "end": 6.96,
+   "measured_from": 5.26,
+   "measured_to": 6.96,
+   "empty": 0.082,
+   "subject_motion": 0.207,
+   "subject_median": 0.202,
+   "camera_per_s": 0.03,
+   "states": [
+    {
+     "t": 5.26,
+     "what": "historical drawing (unmarked)",
+     "ev": null,
+     "verified": false,
+     "peak": 0.28
+    }
+   ],
+   "registered": null,
+   "boundary_corr": null,
+   "transition": {
+    "type": "cut",
+    "reason": "setup line on the historical drawing before the conceptual model",
+    "measured": null
+   },
+   "text": {
+    "max_tiers": 1,
+    "max_labels": 1,
+    "max_words": 3,
+    "smallest_label_px": 28,
+    "competing_samples": 0
+   },
+   "framing": "archival-plate",
+   "primitives": [
+    "archival-plate"
+   ],
+   "slide_like": false,
+   "warns": [
+    "subject motion 0.21 < 0.25 (camera drift only)",
+    "1 state changes in 1.7 s (< 2, or < 1 per 2 s)",
+    "1 declared state change(s) not visible in the MP4",
+    "smallest label 28 px < 32"
+   ]
+  },
+  {
+   "id": "S03",
+   "kind": "document",
+   "start": 6.96,
+   "end": 10.93,
+   "measured_from": 6.96,
+   "measured_to": 10.93,
+   "empty": 0.164,
+   "subject_motion": 0.074,
+   "subject_median": 0.057,
+   "camera_per_s": 0.006,
+   "states": [
+    {
+     "t": 8.99,
+     "what": "stat C-a13-heaters-65v",
+     "ev": "C-a13-heaters-65v",
+     "verified": false,
+     "peak": 0.2
+    }
+   ],
+   "registered": null,
+   "boundary_corr": 0.012,
+   "transition": {
+    "type": "cut",
+    "reason": "second drawing on the narration's subject word",
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 2,
+    "max_labels": 1,
+    "max_words": 5,
+    "smallest_label_px": 38,
+    "competing_samples": 7
+   },
+   "framing": "archival-plate",
+   "primitives": [
+    "archival-plate"
+   ],
+   "slide_like": false,
+   "warns": [
+    "subject motion 0.07 < 0.25 (camera drift only)",
+    "1 state changes in 4.0 s (< 2, or < 1 per 2 s)",
+    "1 declared state change(s) not visible in the MP4",
+    "headline competes with caption in 7 samples"
+   ]
+  },
+  {
+   "id": "S04",
+   "kind": "explanatory",
+   "start": 10.93,
+   "end": 15.73,
+   "measured_from": 10.93,
+   "measured_to": 15.33,
+   "empty": 0.653,
+   "subject_motion": 0.331,
+   "subject_median": 0.072,
+   "camera_per_s": 0.033,
+   "states": [
+    {
+     "t": 10.93,
+     "what": "conceptual model enters (prior state already set: fill from the drawing's stat)",
+     "ev": null,
+     "verified": true,
+     "peak": 1.81
+    },
+    {
+     "t": 14.08,
+     "what": "switch: rated",
+     "ev": "C-a13-switch-rating",
+     "verified": false,
+     "peak": 0.17
+    }
+   ],
+   "registered": null,
+   "boundary_corr": 0.0,
+   "transition": {
+    "type": "cut",
+    "reason": "into the conceptual model on the contrast line",
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 4,
+    "max_labels": 4,
+    "max_words": 13,
+    "smallest_label_px": 28,
+    "competing_samples": 0
+   },
+   "framing": "component-section",
+   "primitives": [
+    "component-section"
+   ],
+   "slide_like": false,
+   "warns": [
+    "empty background 65% > 35%",
+    "2 state changes in 4.8 s (< 2, or < 1 per 2 s)",
+    "1 declared state change(s) not visible in the MP4",
+    "mechanism shot not registered to archival media",
+    "4 text tiers > 3",
+    "4 labels at once > 3",
+    "13 non-caption words on screen > 8",
+    "smallest label 28 px < 32"
+   ]
+  }
+ ]
+}

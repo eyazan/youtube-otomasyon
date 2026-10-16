@@ -1,0 +1,138 @@
+{
+ "schema": "fr-premium.creative-qa.v1",
+ "mode": "WARN-only",
+ "thresholds": {
+  "empty": 0.35,
+  "inset": 0.25,
+  "subject_min": 0.25,
+  "tiers": 3,
+  "labels": 3,
+  "words": 8,
+  "label_px": 32,
+  "states_per_2s": 1,
+  "states_min": 2
+ },
+ "grammar": [
+  "continuous",
+  "cut",
+  "dip",
+  "follow-cause",
+  "hard-cut",
+  "loop",
+  "match",
+  "push-in"
+ ],
+ "mp4": "v3-b.mp4",
+ "offset": 28.86,
+ "summary": {
+  "shots": 2,
+  "warn_shots": 2,
+  "warns": 10,
+  "time_weighted_empty": 0.541,
+  "mechanism_registered": "0/0",
+  "slide_like": 0
+ },
+ "shots": [
+  {
+   "id": "S06",
+   "kind": "archival",
+   "start": 28.86,
+   "end": 36.45,
+   "measured_from": 28.86,
+   "measured_to": 36.45,
+   "empty": 0.6,
+   "subject_motion": 0.083,
+   "subject_median": 0.036,
+   "camera_per_s": 0.006,
+   "states": [
+    {
+     "t": 28.96,
+     "what": "shot on the narration beat",
+     "ev": null,
+     "verified": true,
+     "peak": 2.74
+    }
+   ],
+   "registered": null,
+   "boundary_corr": null,
+   "transition": {
+    "type": "dip",
+    "reason": "loss beat: slow dissolve, no animation",
+    "measured": null
+   },
+   "text": {
+    "max_tiers": 1,
+    "max_labels": 1,
+    "max_words": 5,
+    "smallest_label_px": 28,
+    "competing_samples": 0
+   },
+   "framing": "archival-plate",
+   "primitives": [
+    "archival-plate"
+   ],
+   "slide_like": false,
+   "warns": [
+    "empty background 60% > 35%",
+    "archival inset over void 60% > 25%",
+    "smallest label 28 px < 32"
+   ]
+  },
+  {
+   "id": "S07",
+   "kind": "document",
+   "start": 36.45,
+   "end": 42.18,
+   "measured_from": 36.45,
+   "measured_to": 41.76,
+   "empty": 0.456,
+   "subject_motion": 0.207,
+   "subject_median": 0.043,
+   "camera_per_s": 0.062,
+   "states": [
+    {
+     "t": 36.55,
+     "what": "excerpt card enters",
+     "ev": null,
+     "verified": true,
+     "peak": 6.53
+    },
+    {
+     "t": 37.89,
+     "what": "the finding's words are highlighted",
+     "ev": "C-a13-cause",
+     "verified": false,
+     "peak": 0.14
+    }
+   ],
+   "registered": null,
+   "boundary_corr": 0.958,
+   "transition": {
+    "type": "dip",
+    "reason": "slow dissolve after the loss beat",
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 2,
+    "max_labels": 27,
+    "max_words": 48,
+    "smallest_label_px": 28,
+    "competing_samples": 0
+   },
+   "framing": "document-excerpt",
+   "primitives": [
+    "document-excerpt"
+   ],
+   "slide_like": false,
+   "warns": [
+    "empty background 46% > 35%",
+    "subject motion 0.21 < 0.25 (camera drift only)",
+    "2 state changes in 5.7 s (< 2, or < 1 per 2 s)",
+    "1 declared state change(s) not visible in the MP4",
+    "27 labels at once > 3",
+    "48 non-caption words on screen > 8",
+    "smallest label 28 px < 32"
+   ]
+  }
+ ]
+}

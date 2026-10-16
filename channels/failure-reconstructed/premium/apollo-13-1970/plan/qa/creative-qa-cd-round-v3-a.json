@@ -1,0 +1,143 @@
+{
+ "schema": "fr-premium.creative-qa.v1",
+ "mode": "WARN-only",
+ "thresholds": {
+  "empty": 0.35,
+  "inset": 0.25,
+  "subject_min": 0.25,
+  "tiers": 3,
+  "labels": 3,
+  "words": 8,
+  "label_px": 32,
+  "states_per_2s": 1,
+  "states_min": 2
+ },
+ "grammar": [
+  "continuous",
+  "cut",
+  "dip",
+  "follow-cause",
+  "hard-cut",
+  "loop",
+  "match",
+  "push-in"
+ ],
+ "mp4": "v3-a.mp4",
+ "offset": 5.26,
+ "summary": {
+  "shots": 2,
+  "warn_shots": 2,
+  "warns": 15,
+  "time_weighted_empty": 0.561,
+  "mechanism_registered": "0/2",
+  "slide_like": 0
+ },
+ "shots": [
+  {
+   "id": "S02",
+   "kind": "explanatory",
+   "start": 5.26,
+   "end": 10.93,
+   "measured_from": 5.26,
+   "measured_to": 10.93,
+   "empty": 0.5,
+   "subject_motion": 0.451,
+   "subject_median": 0.163,
+   "camera_per_s": 0.043,
+   "states": [
+    {
+     "t": 5.36,
+     "what": "historical image (unmarked) before the model",
+     "ev": null,
+     "verified": false,
+     "peak": 0.19
+    },
+    {
+     "t": 8.99,
+     "what": "heater: on",
+     "ev": "C-a13-heaters-65v",
+     "verified": false,
+     "peak": 0.26
+    }
+   ],
+   "registered": null,
+   "boundary_corr": null,
+   "transition": {
+    "type": "cut",
+    "reason": "into the component the narration describes",
+    "measured": null
+   },
+   "text": {
+    "max_tiers": 4,
+    "max_labels": 3,
+    "max_words": 14,
+    "smallest_label_px": 28,
+    "competing_samples": 0
+   },
+   "framing": "component-section",
+   "primitives": [
+    "component-section"
+   ],
+   "slide_like": false,
+   "warns": [
+    "empty background 50% > 35%",
+    "2 state changes in 5.7 s (< 2, or < 1 per 2 s)",
+    "2 declared state change(s) not visible in the MP4",
+    "mechanism shot not registered to archival media",
+    "4 text tiers > 3",
+    "14 non-caption words on screen > 8",
+    "smallest label 28 px < 32"
+   ]
+  },
+  {
+   "id": "S03",
+   "kind": "explanatory",
+   "start": 10.93,
+   "end": 15.73,
+   "measured_from": 10.93,
+   "measured_to": 15.33,
+   "empty": 0.64,
+   "subject_motion": 0.277,
+   "subject_median": 0.066,
+   "camera_per_s": 0.033,
+   "states": [
+    {
+     "t": 14.08,
+     "what": "switch: rated",
+     "ev": "C-a13-switch-rating",
+     "verified": false,
+     "peak": 0.18
+    }
+   ],
+   "registered": null,
+   "boundary_corr": 1.0,
+   "transition": {
+    "type": "continuous",
+    "reason": "same component model; the camera travels to the next documented state",
+    "measured": "gradual"
+   },
+   "text": {
+    "max_tiers": 4,
+    "max_labels": 4,
+    "max_words": 13,
+    "smallest_label_px": 28,
+    "competing_samples": 0
+   },
+   "framing": "component-section",
+   "primitives": [
+    "component-section"
+   ],
+   "slide_like": false,
+   "warns": [
+    "empty background 64% > 35%",
+    "1 state changes in 4.8 s (< 2, or < 1 per 2 s)",
+    "1 declared state change(s) not visible in the MP4",
+    "mechanism shot not registered to archival media",
+    "4 text tiers > 3",
+    "4 labels at once > 3",
+    "13 non-caption words on screen > 8",
+    "smallest label 28 px < 32"
+   ]
+  }
+ ]
+}
