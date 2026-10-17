@@ -1,0 +1,187 @@
+{
+ "file": "<local>/challenger-premium-v1.mp4",
+ "observedAt": "2026-10-13T03:13:03.955Z",
+ "durationSec": 51.7,
+ "video": "1080x1920 30/1 h264",
+ "audio": "aac 2ch 48000 Hz",
+ "loudness": {
+  "I": -14.1,
+  "LRA": 2.9,
+  "truePeak": -1.8
+ },
+ "motion": {
+  "method": "mean abs luma diff per frame on a 270x480 gray proxy; static = diff < 0.5",
+  "first3sMean": 3.04,
+  "first3sStaticShare": 0.11,
+  "wholeMean": 1.78,
+  "wholeStaticShare": 0.46,
+  "longestStaticRunSec": 1.97
+ },
+ "frame0": {
+  "meanLuma": 75.8,
+  "detailSd": 65.2,
+  "edgeEnergy": 7.46
+ },
+ "black": [],
+ "freezes": [],
+ "silences": [],
+ "checks": [
+  {
+   "name": "resolution",
+   "ok": true,
+   "measured": "1080x1920",
+   "target": "1080x1920",
+   "hard": true
+  },
+  {
+   "name": "frame rate",
+   "ok": true,
+   "measured": "30/1",
+   "target": "30/1",
+   "hard": true
+  },
+  {
+   "name": "codec",
+   "ok": true,
+   "measured": "h264 High yuv420p",
+   "target": "h264 yuv420p",
+   "hard": true
+  },
+  {
+   "name": "full decode errors",
+   "ok": true,
+   "measured": 0,
+   "target": 0,
+   "hard": true
+  },
+  {
+   "name": "duration",
+   "ok": true,
+   "measured": "51.70 s",
+   "target": "45-55 s",
+   "hard": false
+  },
+  {
+   "name": "black frames >= 0.1 s",
+   "ok": true,
+   "measured": "none",
+   "target": "none",
+   "hard": true
+  },
+  {
+   "name": "first frame not empty",
+   "ok": true,
+   "measured": "mean luma 75.8, detail sd 65.2, edge 7.46",
+   "target": "mean > 25, sd > 20",
+   "hard": true
+  },
+  {
+   "name": "static holds >= 2 s (freezedetect n=0.003)",
+   "ok": true,
+   "measured": "none",
+   "target": "none",
+   "hard": true
+  },
+  {
+   "name": "audio clipping",
+   "ok": true,
+   "measured": "clipped , flat 0/0/0",
+   "target": "0",
+   "hard": true
+  },
+  {
+   "name": "integrated loudness",
+   "ok": true,
+   "measured": "-14.1 LUFS",
+   "target": "-14 +/- 1",
+   "hard": false
+  },
+  {
+   "name": "true peak",
+   "ok": true,
+   "measured": "-1.8 dBTP",
+   "target": "<= -1 dBTP",
+   "hard": true
+  },
+  {
+   "name": "silence >= 1.0 s at -45 dB",
+   "ok": true,
+   "measured": "none",
+   "target": "reported (designed pauses allowed)",
+   "hard": false
+  },
+  {
+   "name": "a/v duration match",
+   "ok": true,
+   "measured": "0.000 s",
+   "target": "<= 0.1 s",
+   "hard": true
+  },
+  {
+   "name": "caption layout",
+   "ok": true,
+   "measured": "26 cues, 0 over 2 lines x 26 chars",
+   "target": "<= 2 x 26",
+   "hard": true
+  },
+  {
+   "name": "caption reading speed",
+   "ok": false,
+   "measured": "1 cues over 22 chars/s (max 22.6)",
+   "target": "<= 22 chars/s",
+   "hard": false
+  },
+  {
+   "name": "captions within video",
+   "ok": true,
+   "measured": "last cue ends 46.50 s",
+   "target": "<= 51.70 s",
+   "hard": true
+  },
+  {
+   "name": "caption sync vs acoustic onsets",
+   "ok": false,
+   "measured": "20 cues: mean 59 ms, max 287 ms",
+   "target": "max <= 150 ms",
+   "hard": false
+  },
+  {
+   "name": "loop continuity (last -> first frame)",
+   "ok": false,
+   "measured": "whole 50.43, photo region 59.64, final-second step 1.92, ratio 21.08",
+   "target": "whole <= 25; not (ratio > 3 and > 4)",
+   "hard": true
+  },
+  {
+   "name": "first spoken word within 0.5 s",
+   "ok": true,
+   "measured": "0.11 s",
+   "target": "<= 0.5 s",
+   "hard": false
+  }
+ ],
+ "captionSync": {
+  "method": "|cue start - nearest acoustic onset (silencedetect -38 dB, 0.12 s) on the narration track| for cues that start after a pause",
+  "measured": 20,
+  "meanMs": 59,
+  "maxMs": 287
+ },
+ "loop": {
+  "method": "mean abs gray diff on 270x480 proxy",
+  "lastToFirstWhole": 50.43,
+  "lastToFirstPhotoRegion": 59.64,
+  "finalSecondMedianStep": 1.92,
+  "ratio": 21.08
+ },
+ "first3s": {
+  "speechOnsetSec": 0.11125,
+  "motionMean": 3.04,
+  "staticShare": 0.11,
+  "frame0": {
+   "meanLuma": 75.8,
+   "detailSd": 65.2,
+   "edgeEnergy": 7.46
+  }
+ },
+ "pass": false
+}

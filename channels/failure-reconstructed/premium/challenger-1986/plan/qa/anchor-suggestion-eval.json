@@ -1,0 +1,2408 @@
+{
+ "schema": "fr-premium.anchor-suggestions.v1",
+ "topic": "challenger-1986",
+ "engine": "anchor_suggest.py v1 (tesseract + numpy, local)",
+ "states": "SUGGESTED until a human sets VERIFIED or REJECTED with review.by and review.at",
+ "suggestions": [
+  {
+   "id": "SG-liftoff-1",
+   "asset": "liftoff",
+   "method": "region-of-interest",
+   "role": "point-of-interest",
+   "confidence": 0.15,
+   "rawConfidence": 0.57,
+   "status": "SUGGESTED",
+   "basis": "highest edge-density window (no claim attached)",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the densest-edge window; it has no subject model (on a launch photo it picks the gantry lattice)",
+   "rect": {
+    "x": 0,
+    "y": 1736,
+    "w": 376,
+    "h": 376
+   }
+  },
+  {
+   "id": "SG-fig14-1",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.76,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'Y' conf 76.1",
+   "rect": {
+    "x": 181,
+    "y": 16,
+    "w": 22,
+    "h": 23
+   },
+   "text": "Y"
+  },
+  {
+   "id": "SG-fig14-2",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.91,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'Propeliant' conf 91.3",
+   "rect": {
+    "x": 364,
+    "y": 49,
+    "w": 82,
+    "h": 17
+   },
+   "text": "Propeliant"
+  },
+  {
+   "id": "SG-fig14-3",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.96,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'Segment Tang' conf 96.0",
+   "rect": {
+    "x": 19,
+    "y": 101,
+    "w": 121,
+    "h": 18
+   },
+   "text": "Segment Tang"
+  },
+  {
+   "id": "SG-fig14-4",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.88,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'Insulation' conf 88.0",
+   "rect": {
+    "x": 355,
+    "y": 138,
+    "w": 78,
+    "h": 13
+   },
+   "text": "Insulation"
+  },
+  {
+   "id": "SG-fig14-5",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.96,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'Primary O-Ring' conf 96.1",
+   "rect": {
+    "x": 356,
+    "y": 174,
+    "w": 124,
+    "h": 17
+   },
+   "text": "Primary O-Ring"
+  },
+  {
+   "id": "SG-fig14-6",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.41,
+   "rawConfidence": 0.41,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'Sv' conf 41.2",
+   "rect": {
+    "x": 283,
+    "y": 192,
+    "w": 92,
+    "h": 95
+   },
+   "text": "Sv"
+  },
+  {
+   "id": "SG-fig14-7",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.96,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'Leak Test Por' conf 96.2",
+   "rect": {
+    "x": 10,
+    "y": 205,
+    "w": 115,
+    "h": 14
+   },
+   "text": "Leak Test Por"
+  },
+  {
+   "id": "SG-fig14-8",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.95,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'Secondary' conf 95.2",
+   "rect": {
+    "x": 394,
+    "y": 218,
+    "w": 85,
+    "h": 17
+   },
+   "text": "Secondary"
+  },
+  {
+   "id": "SG-fig14-9",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.73,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'Plug and Packing' conf 72.6",
+   "rect": {
+    "x": 10,
+    "y": 226,
+    "w": 144,
+    "h": 18
+   },
+   "text": "Plug and Packing"
+  },
+  {
+   "id": "SG-fig14-10",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.94,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'O-Ring' conf 94.4",
+   "rect": {
+    "x": 395,
+    "y": 239,
+    "w": 55,
+    "h": 17
+   },
+   "text": "O-Ring"
+  },
+  {
+   "id": "SG-fig14-11",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.95,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'Propellant' conf 94.6",
+   "rect": {
+    "x": 393,
+    "y": 265,
+    "w": 82,
+    "h": 17
+   },
+   "text": "Propellant"
+  },
+  {
+   "id": "SG-fig14-12",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.85,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'Rejief Flap' conf 84.6",
+   "rect": {
+    "x": 390,
+    "y": 285,
+    "w": 88,
+    "h": 17
+   },
+   "text": "Rejief Flap"
+  },
+  {
+   "id": "SG-fig14-13",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.96,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'Grease Bead' conf 96.5",
+   "rect": {
+    "x": 27,
+    "y": 286,
+    "w": 105,
+    "h": 15
+   },
+   "text": "Grease Bead"
+  },
+  {
+   "id": "SG-fig14-14",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.96,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'AFT Facing' conf 95.8",
+   "rect": {
+    "x": 413,
+    "y": 312,
+    "w": 95,
+    "h": 16
+   },
+   "text": "AFT Facing"
+  },
+  {
+   "id": "SG-fig14-15",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.97,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'Pin' conf 97.0",
+   "rect": {
+    "x": 95,
+    "y": 324,
+    "w": 24,
+    "h": 14
+   },
+   "text": "Pin"
+  },
+  {
+   "id": "SG-fig14-16",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.95,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'Inhibitor' conf 94.6",
+   "rect": {
+    "x": 441,
+    "y": 332,
+    "w": 66,
+    "h": 14
+   },
+   "text": "Inhibitor"
+  },
+  {
+   "id": "SG-fig14-17",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.84,
+   "status": "SUGGESTED",
+   "basis": "tesseract line '\\' conf 84.2",
+   "rect": {
+    "x": 240,
+    "y": 344,
+    "w": 20,
+    "h": 27
+   },
+   "text": "\\"
+  },
+  {
+   "id": "SG-fig14-18",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.67,
+   "rawConfidence": 0.67,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'WM,' conf 67.2",
+   "rect": {
+    "x": 369,
+    "y": 344,
+    "w": 71,
+    "h": 45
+   },
+   "text": "WM,"
+  },
+  {
+   "id": "SG-fig14-19",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.96,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'Retainer Clio' conf 96.4",
+   "rect": {
+    "x": 12,
+    "y": 346,
+    "w": 107,
+    "h": 14
+   },
+   "text": "Retainer Clio"
+  },
+  {
+   "id": "SG-fig14-20",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.75,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'NN' conf 74.9",
+   "rect": {
+    "x": 289,
+    "y": 354,
+    "w": 40,
+    "h": 44
+   },
+   "text": "NN"
+  },
+  {
+   "id": "SG-fig14-21",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.88,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'Zinc Chromate' conf 88.1",
+   "rect": {
+    "x": 381,
+    "y": 397,
+    "w": 124,
+    "h": 14
+   },
+   "text": "Zinc Chromate"
+  },
+  {
+   "id": "SG-fig14-22",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.96,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'Pin' conf 96.1",
+   "rect": {
+    "x": 100,
+    "y": 417,
+    "w": 23,
+    "h": 13
+   },
+   "text": "Pin"
+  },
+  {
+   "id": "SG-fig14-23",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.96,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'Putty' conf 96.5",
+   "rect": {
+    "x": 383,
+    "y": 419,
+    "w": 39,
+    "h": 17
+   },
+   "text": "Putty"
+  },
+  {
+   "id": "SG-fig14-24",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.9,
+   "status": "SUGGESTED",
+   "basis": "tesseract line '\\' conf 89.8",
+   "rect": {
+    "x": 251,
+    "y": 435,
+    "w": 9,
+    "h": 33
+   },
+   "text": "\\"
+  },
+  {
+   "id": "SG-fig14-25",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.96,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'Retainer' conf 96.0",
+   "rect": {
+    "x": 12,
+    "y": 437,
+    "w": 69,
+    "h": 14
+   },
+   "text": "Retainer"
+  },
+  {
+   "id": "SG-fig14-26",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.69,
+   "rawConfidence": 0.69,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'ae Insulatio' conf 68.8",
+   "rect": {
+    "x": 335,
+    "y": 443,
+    "w": 147,
+    "h": 34
+   },
+   "text": "ae Insulatio"
+  },
+  {
+   "id": "SG-fig14-27",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.82,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'WZ' conf 81.7",
+   "rect": {
+    "x": 163,
+    "y": 461,
+    "w": 33,
+    "h": 26
+   },
+   "text": "WZ"
+  },
+  {
+   "id": "SG-fig14-28",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.47,
+   "rawConfidence": 0.47,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'Ss' conf 47.1",
+   "rect": {
+    "x": 251,
+    "y": 464,
+    "w": 9,
+    "h": 9
+   },
+   "text": "Ss"
+  },
+  {
+   "id": "SG-fig14-29",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.9,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'N' conf 90.4",
+   "rect": {
+    "x": 158,
+    "y": 480,
+    "w": 15,
+    "h": 31
+   },
+   "text": "N"
+  },
+  {
+   "id": "SG-fig14-30",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.94,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'Clevis Pin' conf 93.6",
+   "rect": {
+    "x": 26,
+    "y": 492,
+    "w": 81,
+    "h": 14
+   },
+   "text": "Clevis Pin"
+  },
+  {
+   "id": "SG-fig14-31",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.55,
+   "rawConfidence": 0.55,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'V7' conf 54.5",
+   "rect": {
+    "x": 158,
+    "y": 500,
+    "w": 58,
+    "h": 45
+   },
+   "text": "V7"
+  },
+  {
+   "id": "SG-fig14-32",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.7,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'Forwar d acing' conf 69.7",
+   "rect": {
+    "x": 366,
+    "y": 544,
+    "w": 131,
+    "h": 44
+   },
+   "text": "Forwar d acing"
+  },
+  {
+   "id": "SG-fig14-33",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.86,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'Pin Retain er ‘Ban' conf 86.2",
+   "rect": {
+    "x": 10,
+    "y": 595,
+    "w": 140,
+    "h": 26
+   },
+   "text": "Pin Retain er ‘Ban"
+  },
+  {
+   "id": "SG-fig14-34",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.95,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'Cork Insulation' conf 95.3",
+   "rect": {
+    "x": 9,
+    "y": 628,
+    "w": 125,
+    "h": 15
+   },
+   "text": "Cork Insulation"
+  },
+  {
+   "id": "SG-fig14-35",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.71,
+   "status": "SUGGESTED",
+   "basis": "tesseract line '/' conf 71.2",
+   "rect": {
+    "x": 253,
+    "y": 657,
+    "w": 11,
+    "h": 42
+   },
+   "text": "/"
+  },
+  {
+   "id": "SG-fig14-36",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.92,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'Segment Clevis' conf 91.9",
+   "rect": {
+    "x": 11,
+    "y": 671,
+    "w": 129,
+    "h": 18
+   },
+   "text": "Segment Clevis"
+  },
+  {
+   "id": "SG-fig14-37",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.92,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'Propellant' conf 91.6",
+   "rect": {
+    "x": 355,
+    "y": 688,
+    "w": 83,
+    "h": 17
+   },
+   "text": "Propellant"
+  },
+  {
+   "id": "SG-fig14-38",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.96,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'Figure 14' conf 96.4",
+   "rect": {
+    "x": 12,
+    "y": 719,
+    "w": 77,
+    "h": 17
+   },
+   "text": "Figure 14"
+  },
+  {
+   "id": "SG-fig14-39",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.91,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'Sclia Rocket Motor cross section sno' conf 90.5",
+   "rect": {
+    "x": 11,
+    "y": 739,
+    "w": 320,
+    "h": 16
+   },
+   "text": "Sclia Rocket Motor cross section sno"
+  },
+  {
+   "id": "SG-fig14-40",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.96,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'positions of tang' conf 96.3",
+   "rect": {
+    "x": 364,
+    "y": 743,
+    "w": 139,
+    "h": 17
+   },
+   "text": "positions of tang"
+  },
+  {
+   "id": "SG-fig14-41",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.88,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'clevis and O-rings. Putty ‘ines the joint on the side toward' conf 88.2",
+   "rect": {
+    "x": 11,
+    "y": 761,
+    "w": 497,
+    "h": 19
+   },
+   "text": "clevis and O-rings. Putty ‘ines the joint on the side toward the"
+  },
+  {
+   "id": "SG-fig14-42",
+   "asset": "fig14",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.94,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'propellant' conf 93.5",
+   "rect": {
+    "x": 12,
+    "y": 781,
+    "w": 80,
+    "h": 18
+   },
+   "text": "propellant"
+  },
+  {
+   "id": "SG-fig14-43",
+   "asset": "fig14",
+   "method": "document-heading",
+   "role": "document-block",
+   "confidence": 0.38,
+   "rawConfidence": 0.38,
+   "status": "SUGGESTED",
+   "basis": "heading-like line 'Y'",
+   "rect": {
+    "x": 181,
+    "y": 16,
+    "w": 22,
+    "h": 23
+   },
+   "label": "Y"
+  },
+  {
+   "id": "SG-fig14-44",
+   "asset": "fig14",
+   "method": "document-heading",
+   "role": "document-block",
+   "confidence": 0.21,
+   "rawConfidence": 0.21,
+   "status": "SUGGESTED",
+   "basis": "heading-like line 'Sv'",
+   "rect": {
+    "x": 283,
+    "y": 192,
+    "w": 92,
+    "h": 95
+   },
+   "label": "Sv"
+  },
+  {
+   "id": "SG-fig14-45",
+   "asset": "fig14",
+   "method": "diagram-label",
+   "role": "document-block",
+   "confidence": 0.6,
+   "rawConfidence": 0.91,
+   "status": "SUGGESTED",
+   "basis": "upper-case label 'Propeliant'",
+   "rect": {
+    "x": 364,
+    "y": 49,
+    "w": 82,
+    "h": 17
+   },
+   "label": "Propeliant"
+  },
+  {
+   "id": "SG-fig14-46",
+   "asset": "fig14",
+   "method": "diagram-label",
+   "role": "document-block",
+   "confidence": 0.6,
+   "rawConfidence": 0.96,
+   "status": "SUGGESTED",
+   "basis": "upper-case label 'Segment Tang'",
+   "rect": {
+    "x": 19,
+    "y": 101,
+    "w": 121,
+    "h": 18
+   },
+   "label": "Segment Tang",
+   "component": "tang"
+  },
+  {
+   "id": "SG-fig14-47",
+   "asset": "fig14",
+   "method": "leader-target",
+   "role": "mechanism-part",
+   "confidence": 0.35,
+   "rawConfidence": 0.43,
+   "status": "SUGGESTED",
+   "basis": "far end of the leader line from label 'Segment Tang'",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the leader's far end is where a line stops, not proven to be the named part (no held-out accuracy)",
+   "point": [
+    225,
+    166
+   ],
+   "label": "Segment Tang",
+   "component": "tang"
+  },
+  {
+   "id": "SG-fig14-48",
+   "asset": "fig14",
+   "method": "diagram-label",
+   "role": "document-block",
+   "confidence": 0.6,
+   "rawConfidence": 0.88,
+   "status": "SUGGESTED",
+   "basis": "upper-case label 'Insulation'",
+   "rect": {
+    "x": 355,
+    "y": 138,
+    "w": 78,
+    "h": 13
+   },
+   "label": "Insulation",
+   "component": "insulation"
+  },
+  {
+   "id": "SG-fig14-49",
+   "asset": "fig14",
+   "method": "leader-target",
+   "role": "mechanism-part",
+   "confidence": 0.35,
+   "rawConfidence": 0.4,
+   "status": "SUGGESTED",
+   "basis": "far end of the leader line from label 'Insulation'",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the leader's far end is where a line stops, not proven to be the named part (no held-out accuracy)",
+   "point": [
+    247,
+    164
+   ],
+   "label": "Insulation",
+   "component": "insulation"
+  },
+  {
+   "id": "SG-fig14-50",
+   "asset": "fig14",
+   "method": "diagram-label",
+   "role": "document-block",
+   "confidence": 0.6,
+   "rawConfidence": 0.96,
+   "status": "SUGGESTED",
+   "basis": "upper-case label 'Primary O-Ring'",
+   "rect": {
+    "x": 356,
+    "y": 174,
+    "w": 124,
+    "h": 17
+   },
+   "label": "Primary O-Ring",
+   "component": "o-ring"
+  },
+  {
+   "id": "SG-fig14-51",
+   "asset": "fig14",
+   "method": "leader-target",
+   "role": "mechanism-part",
+   "confidence": 0.35,
+   "rawConfidence": 0.43,
+   "status": "SUGGESTED",
+   "basis": "far end of the leader line from label 'Primary O-Ring'",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the leader's far end is where a line stops, not proven to be the named part (no held-out accuracy)",
+   "point": [
+    229,
+    315
+   ],
+   "label": "Primary O-Ring",
+   "component": "o-ring"
+  },
+  {
+   "id": "SG-fig14-52",
+   "asset": "fig14",
+   "method": "diagram-label",
+   "role": "document-block",
+   "confidence": 0.6,
+   "rawConfidence": 0.96,
+   "status": "SUGGESTED",
+   "basis": "upper-case label 'Leak Test Por'",
+   "rect": {
+    "x": 10,
+    "y": 205,
+    "w": 115,
+    "h": 14
+   },
+   "label": "Leak Test Por"
+  },
+  {
+   "id": "SG-fig14-53",
+   "asset": "fig14",
+   "method": "leader-target",
+   "role": "mechanism-part",
+   "confidence": 0.35,
+   "rawConfidence": 0.43,
+   "status": "SUGGESTED",
+   "basis": "far end of the leader line from label 'Leak Test Por'",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the leader's far end is where a line stops, not proven to be the named part (no held-out accuracy)",
+   "point": [
+    109,
+    239
+   ],
+   "label": "Leak Test Por"
+  },
+  {
+   "id": "SG-fig14-54",
+   "asset": "fig14",
+   "method": "diagram-label",
+   "role": "document-block",
+   "confidence": 0.6,
+   "rawConfidence": 0.94,
+   "status": "SUGGESTED",
+   "basis": "upper-case label 'Secondary O-Ring'",
+   "rect": {
+    "x": 394,
+    "y": 218,
+    "w": 85,
+    "h": 38
+   },
+   "label": "Secondary O-Ring",
+   "component": "o-ring"
+  },
+  {
+   "id": "SG-fig14-55",
+   "asset": "fig14",
+   "method": "leader-target",
+   "role": "mechanism-part",
+   "confidence": 0.35,
+   "rawConfidence": 0.42,
+   "status": "SUGGESTED",
+   "basis": "far end of the leader line from label 'Secondary O-Ring'",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the leader's far end is where a line stops, not proven to be the named part (no held-out accuracy)",
+   "point": [
+    296,
+    301
+   ],
+   "label": "Secondary O-Ring",
+   "component": "o-ring"
+  },
+  {
+   "id": "SG-fig14-56",
+   "asset": "fig14",
+   "method": "diagram-label",
+   "role": "document-block",
+   "confidence": 0.6,
+   "rawConfidence": 0.85,
+   "status": "SUGGESTED",
+   "basis": "upper-case label 'Propellant Rejief Flap'",
+   "rect": {
+    "x": 390,
+    "y": 265,
+    "w": 88,
+    "h": 37
+   },
+   "label": "Propellant Rejief Flap"
+  },
+  {
+   "id": "SG-fig14-57",
+   "asset": "fig14",
+   "method": "leader-target",
+   "role": "mechanism-part",
+   "confidence": 0.35,
+   "rawConfidence": 0.38,
+   "status": "SUGGESTED",
+   "basis": "far end of the leader line from label 'Propellant Rejief Flap'",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the leader's far end is where a line stops, not proven to be the named part (no held-out accuracy)",
+   "point": [
+    343,
+    302
+   ],
+   "label": "Propellant Rejief Flap"
+  },
+  {
+   "id": "SG-fig14-58",
+   "asset": "fig14",
+   "method": "diagram-label",
+   "role": "document-block",
+   "confidence": 0.6,
+   "rawConfidence": 0.96,
+   "status": "SUGGESTED",
+   "basis": "upper-case label 'Grease Bead'",
+   "rect": {
+    "x": 27,
+    "y": 286,
+    "w": 105,
+    "h": 15
+   },
+   "label": "Grease Bead"
+  },
+  {
+   "id": "SG-fig14-59",
+   "asset": "fig14",
+   "method": "leader-target",
+   "role": "mechanism-part",
+   "confidence": 0.35,
+   "rawConfidence": 0.43,
+   "status": "SUGGESTED",
+   "basis": "far end of the leader line from label 'Grease Bead'",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the leader's far end is where a line stops, not proven to be the named part (no held-out accuracy)",
+   "point": [
+    195,
+    312
+   ],
+   "label": "Grease Bead"
+  },
+  {
+   "id": "SG-fig14-60",
+   "asset": "fig14",
+   "method": "diagram-label",
+   "role": "document-block",
+   "confidence": 0.6,
+   "rawConfidence": 0.95,
+   "status": "SUGGESTED",
+   "basis": "upper-case label 'AFT Facing Inhibitor'",
+   "rect": {
+    "x": 413,
+    "y": 312,
+    "w": 95,
+    "h": 34
+   },
+   "label": "Aft Facing Inhibitor"
+  },
+  {
+   "id": "SG-fig14-61",
+   "asset": "fig14",
+   "method": "leader-target",
+   "role": "mechanism-part",
+   "confidence": 0.35,
+   "rawConfidence": 0.43,
+   "status": "SUGGESTED",
+   "basis": "far end of the leader line from label 'AFT Facing Inhibitor'",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the leader's far end is where a line stops, not proven to be the named part (no held-out accuracy)",
+   "point": [
+    343,
+    351
+   ],
+   "label": "Aft Facing Inhibitor"
+  },
+  {
+   "id": "SG-fig14-62",
+   "asset": "fig14",
+   "method": "diagram-label",
+   "role": "document-block",
+   "confidence": 0.6,
+   "rawConfidence": 0.96,
+   "status": "SUGGESTED",
+   "basis": "upper-case label 'Pin Retainer Clio'",
+   "rect": {
+    "x": 12,
+    "y": 324,
+    "w": 107,
+    "h": 36
+   },
+   "label": "Pin Retainer Clio",
+   "component": "pin"
+  },
+  {
+   "id": "SG-fig14-63",
+   "asset": "fig14",
+   "method": "leader-target",
+   "role": "mechanism-part",
+   "confidence": 0.35,
+   "rawConfidence": 0.43,
+   "status": "SUGGESTED",
+   "basis": "far end of the leader line from label 'Pin Retainer Clio'",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the leader's far end is where a line stops, not proven to be the named part (no held-out accuracy)",
+   "point": [
+    262,
+    402
+   ],
+   "label": "Pin Retainer Clio",
+   "component": "pin"
+  },
+  {
+   "id": "SG-fig14-64",
+   "asset": "fig14",
+   "method": "diagram-label",
+   "role": "document-block",
+   "confidence": 0.6,
+   "rawConfidence": 0.88,
+   "status": "SUGGESTED",
+   "basis": "upper-case label 'Zinc Chromate Putty'",
+   "rect": {
+    "x": 381,
+    "y": 397,
+    "w": 124,
+    "h": 39
+   },
+   "label": "Zinc Chromate Putty"
+  },
+  {
+   "id": "SG-fig14-65",
+   "asset": "fig14",
+   "method": "leader-target",
+   "role": "mechanism-part",
+   "confidence": 0.35,
+   "rawConfidence": 0.4,
+   "status": "SUGGESTED",
+   "basis": "far end of the leader line from label 'Zinc Chromate Putty'",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the leader's far end is where a line stops, not proven to be the named part (no held-out accuracy)",
+   "point": [
+    428,
+    339
+   ],
+   "label": "Zinc Chromate Putty"
+  },
+  {
+   "id": "SG-fig14-66",
+   "asset": "fig14",
+   "method": "diagram-label",
+   "role": "document-block",
+   "confidence": 0.6,
+   "rawConfidence": 0.96,
+   "status": "SUGGESTED",
+   "basis": "upper-case label 'Pin'",
+   "rect": {
+    "x": 100,
+    "y": 417,
+    "w": 23,
+    "h": 13
+   },
+   "label": "Pin",
+   "component": "pin"
+  },
+  {
+   "id": "SG-fig14-67",
+   "asset": "fig14",
+   "method": "diagram-label",
+   "role": "document-block",
+   "confidence": 0.6,
+   "rawConfidence": 0.96,
+   "status": "SUGGESTED",
+   "basis": "upper-case label 'Retainer'",
+   "rect": {
+    "x": 12,
+    "y": 437,
+    "w": 69,
+    "h": 14
+   },
+   "label": "Retainer"
+  },
+  {
+   "id": "SG-fig14-68",
+   "asset": "fig14",
+   "method": "diagram-label",
+   "role": "document-block",
+   "confidence": 0.6,
+   "rawConfidence": 0.69,
+   "status": "SUGGESTED",
+   "basis": "upper-case label 'ae Insulatio'",
+   "rect": {
+    "x": 335,
+    "y": 443,
+    "w": 147,
+    "h": 34
+   },
+   "label": "Ae Insulatio"
+  },
+  {
+   "id": "SG-fig14-69",
+   "asset": "fig14",
+   "method": "leader-target",
+   "role": "mechanism-part",
+   "confidence": 0.31,
+   "rawConfidence": 0.31,
+   "status": "SUGGESTED",
+   "basis": "far end of the leader line from label 'ae Insulatio'",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the leader's far end is where a line stops, not proven to be the named part (no held-out accuracy)",
+   "point": [
+    136,
+    480
+   ],
+   "label": "Ae Insulatio"
+  },
+  {
+   "id": "SG-fig14-70",
+   "asset": "fig14",
+   "method": "diagram-label",
+   "role": "document-block",
+   "confidence": 0.6,
+   "rawConfidence": 0.94,
+   "status": "SUGGESTED",
+   "basis": "upper-case label 'Clevis Pin'",
+   "rect": {
+    "x": 26,
+    "y": 492,
+    "w": 81,
+    "h": 14
+   },
+   "label": "Clevis Pin",
+   "component": "pin"
+  },
+  {
+   "id": "SG-fig14-71",
+   "asset": "fig14",
+   "method": "leader-target",
+   "role": "mechanism-part",
+   "confidence": 0.35,
+   "rawConfidence": 0.42,
+   "status": "SUGGESTED",
+   "basis": "far end of the leader line from label 'Clevis Pin'",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the leader's far end is where a line stops, not proven to be the named part (no held-out accuracy)",
+   "point": [
+    173,
+    462
+   ],
+   "label": "Clevis Pin",
+   "component": "pin"
+  },
+  {
+   "id": "SG-fig14-72",
+   "asset": "fig14",
+   "method": "diagram-label",
+   "role": "document-block",
+   "confidence": 0.6,
+   "rawConfidence": 0.86,
+   "status": "SUGGESTED",
+   "basis": "upper-case label 'Pin Retain er ‘Ban Cork Insulation'",
+   "rect": {
+    "x": 9,
+    "y": 595,
+    "w": 141,
+    "h": 48
+   },
+   "label": "Pin Retain Er ‘Ban Cork Insulation",
+   "component": "pin"
+  },
+  {
+   "id": "SG-fig14-73",
+   "asset": "fig14",
+   "method": "leader-target",
+   "role": "mechanism-part",
+   "confidence": 0.35,
+   "rawConfidence": 0.39,
+   "status": "SUGGESTED",
+   "basis": "far end of the leader line from label 'Pin Retain er ‘Ban Cork Insulation'",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the leader's far end is where a line stops, not proven to be the named part (no held-out accuracy)",
+   "point": [
+    150,
+    543
+   ],
+   "label": "Pin Retain Er ‘Ban Cork Insulation",
+   "component": "pin"
+  },
+  {
+   "id": "SG-fig14-74",
+   "asset": "fig14",
+   "method": "diagram-label",
+   "role": "document-block",
+   "confidence": 0.6,
+   "rawConfidence": 0.92,
+   "status": "SUGGESTED",
+   "basis": "upper-case label 'Segment Clevis'",
+   "rect": {
+    "x": 11,
+    "y": 671,
+    "w": 129,
+    "h": 18
+   },
+   "label": "Segment Clevis",
+   "component": "clevis"
+  },
+  {
+   "id": "SG-fig14-75",
+   "asset": "fig14",
+   "method": "leader-target",
+   "role": "mechanism-part",
+   "confidence": 0.35,
+   "rawConfidence": 0.41,
+   "status": "SUGGESTED",
+   "basis": "far end of the leader line from label 'Segment Clevis'",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the leader's far end is where a line stops, not proven to be the named part (no held-out accuracy)",
+   "point": [
+    240,
+    597
+   ],
+   "label": "Segment Clevis",
+   "component": "clevis"
+  },
+  {
+   "id": "SG-fig14-76",
+   "asset": "fig14",
+   "method": "diagram-label",
+   "role": "document-block",
+   "confidence": 0.6,
+   "rawConfidence": 0.92,
+   "status": "SUGGESTED",
+   "basis": "upper-case label 'Propellant'",
+   "rect": {
+    "x": 355,
+    "y": 688,
+    "w": 83,
+    "h": 17
+   },
+   "label": "Propellant"
+  },
+  {
+   "id": "SG-fig14-77",
+   "asset": "fig14",
+   "method": "figure-boundary",
+   "role": "document-block",
+   "confidence": 0.6,
+   "rawConfidence": 0.79,
+   "status": "SUGGESTED",
+   "basis": "largest non-text ink region",
+   "rect": {
+    "x": 4,
+    "y": 8,
+    "w": 508,
+    "h": 696
+   }
+  },
+  {
+   "id": "SG-icicles-1",
+   "asset": "icicles",
+   "method": "region-of-interest",
+   "role": "point-of-interest",
+   "confidence": 0.15,
+   "rawConfidence": 0.44,
+   "status": "SUGGESTED",
+   "basis": "highest edge-density window (no claim attached)",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the densest-edge window; it has no subject model (on a launch photo it picks the gantry lattice)",
+   "rect": {
+    "x": 665,
+    "y": 2807,
+    "w": 385,
+    "h": 385
+   }
+  },
+  {
+   "id": "SG-breakup-1",
+   "asset": "breakup",
+   "method": "region-of-interest",
+   "role": "point-of-interest",
+   "confidence": 0.15,
+   "rawConfidence": 0.41,
+   "status": "SUGGESTED",
+   "basis": "highest edge-density window (no claim attached)",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the densest-edge window; it has no subject model (on a launch photo it picks the gantry lattice)",
+   "rect": {
+    "x": 830,
+    "y": 1380,
+    "w": 245,
+    "h": 245
+   }
+  },
+  {
+   "id": "SG-crew-1",
+   "asset": "crew",
+   "method": "subject-box",
+   "role": "subject",
+   "confidence": 0.3,
+   "rawConfidence": 0.6,
+   "status": "SUGGESTED",
+   "basis": "largest region that differs from the frame border",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "separates foreground from background; it cannot tell which object is the subject",
+   "rect": {
+    "x": 276,
+    "y": 1932,
+    "w": 180,
+    "h": 684
+   }
+  },
+  {
+   "id": "SG-crew-2",
+   "asset": "crew",
+   "method": "region-of-interest",
+   "role": "point-of-interest",
+   "confidence": 0.15,
+   "rawConfidence": 0.7,
+   "status": "SUGGESTED",
+   "basis": "highest edge-density window (no claim attached)",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the densest-edge window; it has no subject model (on a launch photo it picks the gantry lattice)",
+   "rect": {
+    "x": 0,
+    "y": 801,
+    "w": 495,
+    "h": 495
+   }
+  },
+  {
+   "id": "SG-burn-1",
+   "asset": "burn",
+   "method": "region-of-interest",
+   "role": "point-of-interest",
+   "confidence": 0.15,
+   "rawConfidence": 0.48,
+   "status": "SUGGESTED",
+   "basis": "highest edge-density window (no claim attached)",
+   "assessment": "NEEDS_HUMAN_REVIEW",
+   "assessmentReason": "the densest-edge window; it has no subject model (on a launch photo it picks the gantry lattice)",
+   "rect": {
+    "x": 170,
+    "y": 2100,
+    "w": 365,
+    "h": 365
+   }
+  },
+  {
+   "id": "SG-chart53-1",
+   "asset": "chart53",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.68,
+   "rawConfidence": 0.68,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'RECOMMENDATIONS 3' conf 68.2",
+   "rect": {
+    "x": 57,
+    "y": 19,
+    "w": 172,
+    "h": 13
+   },
+   "text": "RECOMMENDATIONS 3"
+  },
+  {
+   "id": "SG-chart53-2",
+   "asset": "chart53",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.76,
+   "status": "SUGGESTED",
+   "basis": "tesseract line '© O-RING “TEMP MusT BE = 53°F AT LauNcH' conf 76.2",
+   "rect": {
+    "x": 63,
+    "y": 49,
+    "w": 440,
+    "h": 16
+   },
+   "text": "© O-RING “TEMP MusT BE = 53°F AT LauNcH"
+  },
+  {
+   "id": "SG-chart53-3",
+   "asset": "chart53",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.69,
+   "rawConfidence": 0.69,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'DEVELOPMENT MoroRs AT 47° Te 52°F' conf 69.3",
+   "rect": {
+    "x": 76,
+    "y": 77,
+    "w": 354,
+    "h": 14
+   },
+   "text": "DEVELOPMENT MoroRs AT 47° Te 52°F"
+  },
+  {
+   "id": "SG-chart53-4",
+   "asset": "chart53",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.79,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'PutTY PAcKING HAD NO BLow-Br' conf 79.3",
+   "rect": {
+    "x": 77,
+    "y": 93,
+    "w": 327,
+    "h": 11
+   },
+   "text": "PutTY PAcKING HAD NO BLow-Br"
+  },
+  {
+   "id": "SG-chart53-5",
+   "asset": "chart53",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.83,
+   "status": "SUGGESTED",
+   "basis": "tesseract line '1S (THE SIMULATION ) WeRKED AT SB °F' conf 82.6",
+   "rect": {
+    "x": 121,
+    "y": 106,
+    "w": 421,
+    "h": 18
+   },
+   "text": "1S (THE SIMULATION ) WeRKED AT SB °F"
+  },
+  {
+   "id": "SG-chart53-6",
+   "asset": "chart53",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.69,
+   "rawConfidence": 0.69,
+   "status": "SUGGESTED",
+   "basis": "tesseract line '© PRoJECT AMBIENT CONDrrions (TEMP ¢€ WinD)' conf 68.7",
+   "rect": {
+    "x": 65,
+    "y": 130,
+    "w": 466,
+    "h": 19
+   },
+   "text": "© PRoJECT AMBIENT CONDrrions (TEMP ¢€ WinD)"
+  },
+  {
+   "id": "SG-chart53-7",
+   "asset": "chart53",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.85,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'Te DETERNINE LAUNCH “TIME' conf 85.4",
+   "rect": {
+    "x": 77,
+    "y": 148,
+    "w": 299,
+    "h": 12
+   },
+   "text": "Te DETERNINE LAUNCH “TIME"
+  },
+  {
+   "id": "SG-chart53-8",
+   "asset": "chart53",
+   "method": "document-heading",
+   "role": "document-block",
+   "confidence": 0.34,
+   "rawConfidence": 0.34,
+   "status": "SUGGESTED",
+   "basis": "heading-like line 'RECOMMENDATIONS 3'",
+   "rect": {
+    "x": 57,
+    "y": 19,
+    "w": 172,
+    "h": 13
+   },
+   "label": "RECOMMENDATIONS 3"
+  },
+  {
+   "id": "SG-chart53-9",
+   "asset": "chart53",
+   "method": "claim-line",
+   "role": "document-line",
+   "confidence": 0.76,
+   "rawConfidence": 0.76,
+   "status": "SUGGESTED",
+   "basis": "100% of OCR line '© O-RING “TEMP MusT BE = 53°F AT LauNcH' is in C-chart-53f's passage",
+   "rect": {
+    "x": 63,
+    "y": 49,
+    "w": 440,
+    "h": 16
+   },
+   "claim": "C-chart-53f",
+   "text": "© O-RING “TEMP MusT BE = 53°F AT LauNcH"
+  },
+  {
+   "id": "SG-chart53-10",
+   "asset": "chart53",
+   "method": "figure-boundary",
+   "role": "document-block",
+   "confidence": 0.6,
+   "rawConfidence": 0.9,
+   "status": "SUGGESTED",
+   "basis": "largest non-text ink region",
+   "rect": {
+    "x": 74,
+    "y": 76,
+    "w": 376,
+    "h": 48
+   }
+  },
+  {
+   "id": "SG-chart53-11",
+   "asset": "chart53",
+   "method": "figure-boundary",
+   "role": "document-block",
+   "confidence": 0.6,
+   "rawConfidence": 0.9,
+   "status": "SUGGESTED",
+   "basis": "largest non-text ink region",
+   "rect": {
+    "x": 78,
+    "y": 132,
+    "w": 250,
+    "h": 32
+   }
+  },
+  {
+   "id": "SG-fax-1",
+   "asset": "fax",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.77,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'MT] ASSESSMENT OF TEMPERATURE CONCERN ON SRM-25 (SIL) LAuNcH' conf 77.2",
+   "rect": {
+    "x": 49,
+    "y": 39,
+    "w": 521,
+    "h": 16
+   },
+   "text": "MT] ASSESSMENT OF TEMPERATURE CONCERN ON SRM-25 (SIL) LAuNcH"
+  },
+  {
+   "id": "SG-fax-2",
+   "asset": "fax",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.47,
+   "rawConfidence": 0.47,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'SS' conf 47.4",
+   "rect": {
+    "x": 47,
+    "y": 61,
+    "w": 52,
+    "h": 11
+   },
+   "text": "SS"
+  },
+  {
+   "id": "SG-fax-3",
+   "asset": "fax",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.88,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'QO CALCULATIONS SHOW THAT SRM-25 O-RINGS WILL BE 20° COLDER ' conf 88.0",
+   "rect": {
+    "x": 50,
+    "y": 82,
+    "w": 695,
+    "h": 16
+   },
+   "text": "QO CALCULATIONS SHOW THAT SRM-25 O-RINGS WILL BE 20° COLDER THAN SRM-15 O-RINGS"
+  },
+  {
+   "id": "SG-fax-4",
+   "asset": "fax",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.92,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'O TEMPERATURE DATA NOT CONCLUSIVE ON PREDICTING PRIMARY O-RI' conf 91.5",
+   "rect": {
+    "x": 50,
+    "y": 113,
+    "w": 625,
+    "h": 14
+   },
+   "text": "O TEMPERATURE DATA NOT CONCLUSIVE ON PREDICTING PRIMARY O-RING BLOW-BY"
+  },
+  {
+   "id": "SG-fax-5",
+   "asset": "fax",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.84,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'Q ENGINEERING ASSESSMENT IS THAT:' conf 83.7",
+   "rect": {
+    "x": 51,
+    "y": 142,
+    "w": 300,
+    "h": 14
+   },
+   "text": "Q ENGINEERING ASSESSMENT IS THAT:"
+  },
+  {
+   "id": "SG-fax-6",
+   "asset": "fax",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.85,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'O COLDER O-RINGS WILL HAVE INCREASED EFFECTIVE DUROMETER' conf 85.0",
+   "rect": {
+    "x": 93,
+    "y": 171,
+    "w": 504,
+    "h": 14
+   },
+   "text": "O COLDER O-RINGS WILL HAVE INCREASED EFFECTIVE DUROMETER"
+  },
+  {
+   "id": "SG-fax-7",
+   "asset": "fax",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.84,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'QO “KARDER” O-RINGS WILL TAKE LONGER TO “SEAT”' conf 84.5",
+   "rect": {
+    "x": 94,
+    "y": 198,
+    "w": 412,
+    "h": 15
+   },
+   "text": "QO “KARDER” O-RINGS WILL TAKE LONGER TO “SEAT”"
+  },
+  {
+   "id": "SG-fax-8",
+   "asset": "fax",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.9,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'Q MORE GAS MAY PASS PRIMARY O-RING BEFORE THE PRIMARY SEAL S' conf 90.1",
+   "rect": {
+    "x": 138,
+    "y": 229,
+    "w": 576,
+    "h": 14
+   },
+   "text": "Q MORE GAS MAY PASS PRIMARY O-RING BEFORE THE PRIMARY SEAL SEATS"
+  },
+  {
+   "id": "SG-fax-9",
+   "asset": "fax",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.88,
+   "status": "SUGGESTED",
+   "basis": "tesseract line '(RELATIVE TO SRM-15)' conf 87.8",
+   "rect": {
+    "x": 174,
+    "y": 243,
+    "w": 171,
+    "h": 17
+   },
+   "text": "(RELATIVE TO SRM-15)"
+  },
+  {
+   "id": "SG-fax-10",
+   "asset": "fax",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.84,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'Q DEMONSTRATED SEALING 1S 3 TIMES GREATER THAN 0,038\"' conf 83.6",
+   "rect": {
+    "x": 180,
+    "y": 270,
+    "w": 569,
+    "h": 17
+   },
+   "text": "Q DEMONSTRATED SEALING 1S 3 TIMES GREATER THAN 0,038\""
+  },
+  {
+   "id": "SG-fax-11",
+   "asset": "fax",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.92,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'EROSION EXPERIENCED ON SRA-1' conf 91.5",
+   "rect": {
+    "x": 217,
+    "y": 287,
+    "w": 245,
+    "h": 16
+   },
+   "text": "EROSION EXPERIENCED ON SRA-1"
+  },
+  {
+   "id": "SG-fax-12",
+   "asset": "fax",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.92,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'Q IF THE PRIMARY SEAL DOES NOT SEAT, THE SECONDARY SEAL WILL' conf 91.8",
+   "rect": {
+    "x": 96,
+    "y": 317,
+    "w": 584,
+    "h": 14
+   },
+   "text": "Q IF THE PRIMARY SEAL DOES NOT SEAT, THE SECONDARY SEAL WILL SEAT"
+  },
+  {
+   "id": "SG-fax-13",
+   "asset": "fax",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.88,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'QO PRESSURE WILL GET TO SECONDARY SEAL BEFORE THE NETAL PART' conf 88.1",
+   "rect": {
+    "x": 140,
+    "y": 345,
+    "w": 603,
+    "h": 15
+   },
+   "text": "QO PRESSURE WILL GET TO SECONDARY SEAL BEFORE THE NETAL PARTS ROTATE"
+  },
+  {
+   "id": "SG-fax-14",
+   "asset": "fax",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.91,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'Q O-RING PRESSURE LEAK SECONDARY SEAL IN OUTBOARD' conf 91.2",
+   "rect": {
+    "x": 182,
+    "y": 375,
+    "w": 561,
+    "h": 14
+   },
+   "text": "Q O-RING PRESSURE LEAK SECONDARY SEAL IN OUTBOARD"
+  },
+  {
+   "id": "SG-fax-15",
+   "asset": "fax",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.84,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'POSITION WHICH MINIMIZES SEALING TIME' conf 83.9",
+   "rect": {
+    "x": 219,
+    "y": 391,
+    "w": 325,
+    "h": 13
+   },
+   "text": "POSITION WHICH MINIMIZES SEALING TIME"
+  },
+  {
+   "id": "SG-fax-16",
+   "asset": "fax",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.79,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'QO REcomMENDS STS-51L LAUNCH PROCEED ON 28 JANUARY 1986' conf 78.5",
+   "rect": {
+    "x": 57,
+    "y": 418,
+    "w": 521,
+    "h": 16
+   },
+   "text": "QO REcomMENDS STS-51L LAUNCH PROCEED ON 28 JANUARY 1986"
+  },
+  {
+   "id": "SG-fax-17",
+   "asset": "fax",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.82,
+   "status": "SUGGESTED",
+   "basis": "tesseract line '0 SAM-25 WILL NOT BE SIGNIFICANTLY DIFFERENT FROM SRI-1S' conf 81.8",
+   "rect": {
+    "x": 99,
+    "y": 440,
+    "w": 505,
+    "h": 16
+   },
+   "text": "0 SAM-25 WILL NOT BE SIGNIFICANTLY DIFFERENT FROM SRI-1S"
+  },
+  {
+   "id": "SG-fax-18",
+   "asset": "fax",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.86,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'C, KICMINSTER, VICE PRESIDENT' conf 86.3",
+   "rect": {
+    "x": 93,
+    "y": 530,
+    "w": 251,
+    "h": 14
+   },
+   "text": "C, KICMINSTER, VICE PRESIDENT"
+  },
+  {
+   "id": "SG-fax-19",
+   "asset": "fax",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.87,
+   "status": "SUGGESTED",
+   "basis": "tesseract line '“SPACE BOOSTER PROGRANS' conf 86.8",
+   "rect": {
+    "x": 55,
+    "y": 542,
+    "w": 191,
+    "h": 16
+   },
+   "text": "“SPACE BOOSTER PROGRANS"
+  },
+  {
+   "id": "SG-fax-20",
+   "asset": "fax",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.74,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'MORTON THIOIKOL. INC' conf 74.2",
+   "rect": {
+    "x": 39,
+    "y": 591,
+    "w": 284,
+    "h": 34
+   },
+   "text": "MORTON THIOIKOL. INC"
+  },
+  {
+   "id": "SG-fax-21",
+   "asset": "fax",
+   "method": "ocr-text",
+   "role": "text-line",
+   "confidence": 0.7,
+   "rawConfidence": 0.96,
+   "status": "SUGGESTED",
+   "basis": "tesseract line 'Wasatch Division' conf 96.5",
+   "rect": {
+    "x": 39,
+    "y": 631,
+    "w": 171,
+    "h": 21
+   },
+   "text": "Wasatch Division"
+  },
+  {
+   "id": "SG-fax-22",
+   "asset": "fax",
+   "method": "document-heading",
+   "role": "document-block",
+   "confidence": 0.44,
+   "rawConfidence": 0.44,
+   "status": "SUGGESTED",
+   "basis": "heading-like line 'QO CALCULATIONS SHOW THAT SRM-25 O-RINGS WILL BE 20° COLDER '",
+   "rect": {
+    "x": 50,
+    "y": 82,
+    "w": 695,
+    "h": 16
+   },
+   "label": "QO CALCULATIONS SHOW THAT SRM-25 O-RINGS WILL BE 20° COLDER THAN SRM-15 O-RINGS"
+  },
+  {
+   "id": "SG-fax-23",
+   "asset": "fax",
+   "method": "document-heading",
+   "role": "document-block",
+   "confidence": 0.46,
+   "rawConfidence": 0.46,
+   "status": "SUGGESTED",
+   "basis": "heading-like line 'O TEMPERATURE DATA NOT CONCLUSIVE ON PREDICTING PRIMARY O-RI'",
+   "rect": {
+    "x": 50,
+    "y": 113,
+    "w": 625,
+    "h": 14
+   },
+   "label": "O TEMPERATURE DATA NOT CONCLUSIVE ON PREDICTING PRIMARY O-RING BLOW-BY"
+  },
+  {
+   "id": "SG-fax-24",
+   "asset": "fax",
+   "method": "document-heading",
+   "role": "document-block",
+   "confidence": 0.42,
+   "rawConfidence": 0.42,
+   "status": "SUGGESTED",
+   "basis": "heading-like line 'Q ENGINEERING ASSESSMENT IS THAT:'",
+   "rect": {
+    "x": 51,
+    "y": 142,
+    "w": 300,
+    "h": 14
+   },
+   "label": "Q ENGINEERING ASSESSMENT IS THAT:"
+  },
+  {
+   "id": "SG-fax-25",
+   "asset": "fax",
+   "method": "document-heading",
+   "role": "document-block",
+   "confidence": 0.42,
+   "rawConfidence": 0.42,
+   "status": "SUGGESTED",
+   "basis": "heading-like line 'O COLDER O-RINGS WILL HAVE INCREASED EFFECTIVE DUROMETER'",
+   "rect": {
+    "x": 93,
+    "y": 171,
+    "w": 504,
+    "h": 14
+   },
+   "label": "O COLDER O-RINGS WILL HAVE INCREASED EFFECTIVE DUROMETER"
+  },
+  {
+   "id": "SG-fax-26",
+   "asset": "fax",
+   "method": "claim-line",
+   "role": "document-line",
+   "confidence": 0.71,
+   "rawConfidence": 0.71,
+   "status": "SUGGESTED",
+   "basis": "90% of OCR line 'QO REcomMENDS STS-51L LAUNCH PROCEED ON 28 JANUARY' is in C-fax-recommend's passage",
+   "rect": {
+    "x": 57,
+    "y": 418,
+    "w": 521,
+    "h": 16
+   },
+   "claim": "C-fax-recommend",
+   "text": "QO REcomMENDS STS-51L LAUNCH PROCEED ON 28 JANUARY 1986"
+  },
+  {
+   "id": "SG-fax-27",
+   "asset": "fax",
+   "method": "figure-boundary",
+   "role": "document-block",
+   "confidence": 0.6,
+   "rawConfidence": 0.9,
+   "status": "SUGGESTED",
+   "basis": "largest non-text ink region",
+   "rect": {
+    "x": 92,
+    "y": 368,
+    "w": 658,
+    "h": 96
+   }
+  },
+  {
+   "id": "SG-fax-28",
+   "asset": "fax",
+   "method": "figure-boundary",
+   "role": "document-block",
+   "confidence": 0.6,
+   "rawConfidence": 0.9,
+   "status": "SUGGESTED",
+   "basis": "largest non-text ink region",
+   "rect": {
+    "x": 50,
+    "y": 470,
+    "w": 298,
+    "h": 96
+   }
+  }
+ ],
+ "timing": [
+  {
+   "asset": "liftoff",
+   "seconds": 0.27,
+   "steps": {
+    "subject": 0.01,
+    "roi": 0.0
+   },
+   "file_px": [
+    2308,
+    3458
+   ]
+  },
+  {
+   "asset": "fig14",
+   "seconds": 2.99,
+   "steps": {
+    "ocr": 1.25,
+    "labels": 1.63,
+    "figure": 0.09
+   },
+   "file_px": [
+    527,
+    807
+   ]
+  },
+  {
+   "asset": "icicles",
+   "seconds": 0.14,
+   "steps": {
+    "subject": 0.0,
+    "roi": 0.0
+   },
+   "file_px": [
+    2404,
+    3000
+   ]
+  },
+  {
+   "asset": "breakup",
+   "seconds": 0.06,
+   "steps": {
+    "subject": 0.0,
+    "roi": 0.0
+   },
+   "file_px": [
+    1552,
+    2113
+   ]
+  },
+  {
+   "asset": "crew",
+   "seconds": 0.13,
+   "steps": {
+    "subject": 0.0,
+    "roi": 0.0
+   },
+   "file_px": [
+    3840,
+    3072
+   ]
+  },
+  {
+   "asset": "burn",
+   "seconds": 0.07,
+   "steps": {
+    "subject": 0.0,
+    "roi": 0.0
+   },
+   "file_px": [
+    2307,
+    2281
+   ]
+  },
+  {
+   "asset": "chart53",
+   "seconds": 0.48,
+   "steps": {
+    "ocr": 0.41,
+    "figure": 0.05
+   },
+   "file_px": [
+    599,
+    186
+   ]
+  },
+  {
+   "asset": "fax",
+   "seconds": 1.6,
+   "steps": {
+    "ocr": 1.47,
+    "figure": 0.1
+   },
+   "file_px": [
+    804,
+    689
+   ]
+  }
+ ],
+ "skipped": [
+  {
+   "asset": "climb",
+   "reason": "clip"
+  },
+  {
+   "asset": "e207",
+   "reason": "clip"
+  }
+ ],
+ "evaluation": {
+  "anchors": 18,
+  "hits": 8,
+  "recall": 0.444,
+  "inScope": 16,
+  "recallInScope": 0.5,
+  "rows": [
+   {
+    "asset": "liftoff",
+    "anchor": "smoke",
+    "kind": "point",
+    "role": "point-of-interest",
+    "best": 2026.4,
+    "tolerance": 124.7,
+    "hit": false,
+    "by": "region-of-interest",
+    "suggestion": "SG-liftoff-1"
+   },
+   {
+    "asset": "liftoff",
+    "anchor": "right-srb",
+    "kind": "rect",
+    "role": "traceable-part",
+    "best": 0.0,
+    "hit": false,
+    "by": null,
+    "suggestion": null
+   },
+   {
+    "asset": "liftoff",
+    "anchor": "aft-field-joint",
+    "kind": "point",
+    "role": "subject",
+    "best": 1801.1,
+    "tolerance": 124.7,
+    "hit": false,
+    "by": "region-of-interest",
+    "suggestion": "SG-liftoff-1"
+   },
+   {
+    "asset": "liftoff",
+    "anchor": "joint-wall",
+    "kind": "point",
+    "role": "registration",
+    "best": null,
+    "hit": false,
+    "by": null,
+    "suggestion": null,
+    "outOfScope": true
+   },
+   {
+    "asset": "fig14",
+    "anchor": "primary-oring",
+    "kind": "point",
+    "role": "mechanism-ring",
+    "best": 16.4,
+    "tolerance": 28.9,
+    "hit": true,
+    "by": "leader-target",
+    "suggestion": "SG-fig14-51"
+   },
+   {
+    "asset": "fig14",
+    "anchor": "secondary-oring",
+    "kind": "point",
+    "role": "mechanism-ring",
+    "best": 64.9,
+    "tolerance": 28.9,
+    "hit": false,
+    "by": "leader-target",
+    "suggestion": "SG-fig14-55"
+   },
+   {
+    "asset": "fig14",
+    "anchor": "wall",
+    "kind": "point",
+    "role": "registration",
+    "best": null,
+    "hit": false,
+    "by": null,
+    "suggestion": null,
+    "outOfScope": true
+   },
+   {
+    "asset": "fig14",
+    "anchor": "label-primary",
+    "kind": "rect",
+    "role": "document-block",
+    "best": 0.749,
+    "hit": true,
+    "by": "ocr-text",
+    "suggestion": "SG-fig14-5"
+   },
+   {
+    "asset": "fig14",
+    "anchor": "label-secondary",
+    "kind": "rect",
+    "role": "document-block",
+    "best": 0.841,
+    "hit": true,
+    "by": "diagram-label",
+    "suggestion": "SG-fig14-54"
+   },
+   {
+    "asset": "fig14",
+    "anchor": "tang",
+    "kind": "rect",
+    "role": "mechanism-part",
+    "best": 0.0,
+    "hit": false,
+    "by": "diagram-label",
+    "suggestion": null
+   },
+   {
+    "asset": "fig14",
+    "anchor": "clevis-inner-leg",
+    "kind": "rect",
+    "role": "mechanism-part",
+    "best": 0.0,
+    "hit": false,
+    "by": "diagram-label",
+    "suggestion": null
+   },
+   {
+    "asset": "fig14",
+    "anchor": "clevis-outer-leg",
+    "kind": "rect",
+    "role": "mechanism-part",
+    "best": 0.0,
+    "hit": false,
+    "by": "diagram-label",
+    "suggestion": null
+   },
+   {
+    "asset": "fig14",
+    "anchor": "clevis-pin",
+    "kind": "rect",
+    "role": "mechanism-part",
+    "best": 0.0,
+    "hit": true,
+    "by": "leader-target",
+    "suggestion": "SG-fig14-71",
+    "pointInRect": "SG-fig14-71"
+   },
+   {
+    "asset": "chart53",
+    "anchor": "line-53f",
+    "kind": "rect",
+    "role": "document-line",
+    "best": 0.576,
+    "hit": true,
+    "by": "ocr-text",
+    "suggestion": "SG-chart53-2"
+   },
+   {
+    "asset": "chart53",
+    "anchor": "value-53f",
+    "kind": "rect",
+    "role": "document-line",
+    "best": 0.23,
+    "hit": false,
+    "by": "ocr-text",
+    "suggestion": null
+   },
+   {
+    "asset": "chart53",
+    "anchor": "reason",
+    "kind": "rect",
+    "role": "document-block",
+    "best": 0.672,
+    "hit": true,
+    "by": "figure-boundary",
+    "suggestion": "SG-chart53-10"
+   },
+   {
+    "asset": "fax",
+    "anchor": "recommend",
+    "kind": "rect",
+    "role": "document-line",
+    "best": 0.744,
+    "hit": true,
+    "by": "ocr-text",
+    "suggestion": "SG-fax-16"
+   },
+   {
+    "asset": "fax",
+    "anchor": "signature",
+    "kind": "rect",
+    "role": "document-block",
+    "best": 0.867,
+    "hit": true,
+    "by": "figure-boundary",
+    "suggestion": "SG-fax-28"
+   }
+  ],
+  "note": "a hit means a suggestion lands on a known verified anchor; it does not make the suggestion verified"
+ }
+}

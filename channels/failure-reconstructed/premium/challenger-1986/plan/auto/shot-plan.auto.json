@@ -1,0 +1,1289 @@
+{
+ "schema": "fr-premium.shot-plan.v1",
+ "topic": "challenger-1986",
+ "channel": "failure-reconstructed",
+ "style": "failure-reconstructed/forensic-v1",
+ "narration": "../../v1/timeline-edge-andrew.json",
+ "evidence": "../evidence.json",
+ "assets": "../assets.json",
+ "film": {
+  "tail": 0.8,
+  "captionSkip": [
+   "L12"
+  ],
+  "captionFrom": "0.5"
+ },
+ "shared": {
+  "desk-l10": {
+   "pages": [
+    {
+     "asset": "asset:chart53",
+     "x": 540,
+     "y": 700,
+     "w": 1000,
+     "rot": -1.5,
+     "marks": [
+      {
+       "region": "asset:chart53#line-53f",
+       "window": [
+        "word:L10:fifty-three -0.05",
+        "word:L10:fifty-three +0.6"
+       ]
+      },
+      {
+       "region": "asset:chart53#value-53f",
+       "window": [
+        "word:L10:fifty-three -0.05",
+        "word:L10:fifty-three +0.6"
+       ]
+      }
+     ],
+     "dimBy": {
+      "event": "slide",
+      "amount": 0.25
+     },
+     "hideMarksWhenCovered": true
+    },
+    {
+     "asset": "asset:fax",
+     "x": 540,
+     "y": 780,
+     "w": 1040,
+     "rot": 1,
+     "slideIn": {
+      "window": [
+       "line:L11 -0.05",
+       "line:L11 +0.55"
+      ],
+      "fromDy": 1500,
+      "fromRot": 4
+     },
+     "marks": [
+      {
+       "region": "asset:fax#recommend",
+       "window": [
+        "line:L11 +0.45",
+        "line:L11 +1.1"
+       ]
+      }
+     ]
+    }
+   ],
+   "camera": [
+    {
+     "at": "line:L10 -0.1",
+     "world": [
+      540,
+      700
+     ],
+     "zoom": 1
+    },
+    {
+     "at": "word:L10:fifty-three",
+     "page": "asset:chart53",
+     "point": [
+      287,
+      57
+     ],
+     "zoom": 1.1
+    },
+    {
+     "at": "word:L10:fifty-three",
+     "page": "asset:chart53",
+     "point": [
+      321,
+      57
+     ],
+     "zoom": 2.8
+    },
+    {
+     "at": "line:L11 -0.1",
+     "world": [
+      540,
+      740
+     ],
+     "zoom": 1
+    },
+    {
+     "at": "line:L11 +0.5",
+     "page": "asset:fax",
+     "point": [
+      324,
+      428
+     ],
+     "zoom": 1.19
+    },
+    {
+     "at": "line:L12 -0.1",
+     "world": [
+      540,
+      820
+     ],
+     "zoom": 1
+    }
+   ],
+   "rail": {
+    "ticks": [
+     "claim:C-telecon-0845",
+     "claim:C-reversal-1100",
+     "claim:C-fax-1145",
+     "claim:C-launch-1138"
+    ],
+    "steps": [
+     {
+      "at": "line:L11 +0.63",
+      "lead": 0.1,
+      "lag": 0.4
+     },
+     {
+      "at": "line:L11 +1.60",
+      "lead": 0.1,
+      "lag": 0.4
+     },
+     {
+      "at": "line:L11 +2.58",
+      "lead": 0.1,
+      "lag": 0.4
+     }
+    ]
+   },
+   "finding": {
+    "claim": "claim:C-finding-unaware",
+    "window": [
+     "line:L12 -1.9",
+     "line:L12 -1.45"
+    ],
+    "highlight": "",
+    "highlightAt": "line:L12 -1.1"
+   }
+  }
+ },
+ "shots": [
+  {
+   "id": "S01",
+   "beat": "hook",
+   "line": "L1",
+   "start": "0",
+   "end": "line:L2 -0.1",
+   "evidence": [
+    "C-smoke-0678",
+    "C-smoke-right-srb",
+    "C-launch-1986"
+   ],
+   "qa": {
+    "states": [
+     {
+      "at": "0.5",
+      "what": "ring on the anchored point of interest",
+      "claim": "C-smoke-right-srb"
+     }
+    ]
+   },
+   "template": "archival-plate",
+   "provenance": {
+    "kind": "archival",
+    "label": "NASA photo"
+   },
+   "assets": [
+    "liftoff"
+   ],
+   "params": {
+    "media": "asset:liftoff",
+    "chip": {
+     "label": "NASA photo",
+     "kind": "archival"
+    },
+    "box": {
+     "x": 0,
+     "y": 0,
+     "w": 1080,
+     "h": 1400
+    },
+    "camera": {
+     "keys": [
+      {
+       "at": "0",
+       "focus": [
+        1563,
+        2307
+       ],
+       "zoom": 1
+      },
+      {
+       "at": "line:L2 +0.2",
+       "focus": [
+        1682,
+        2560
+       ],
+       "zoom": 1.4
+      }
+     ]
+    },
+    "under": "ink",
+    "shades": [
+     {
+      "kind": "top",
+      "h": 640
+     },
+     {
+      "kind": "bottom",
+      "y": 1120,
+      "h": 290
+     },
+     {
+      "kind": "ink",
+      "y": 1400,
+      "h": 520
+     }
+    ],
+    "headline": {
+     "kicker": "CHALLENGER · {C-launch-1986}",
+     "text": "Already<br>leaking",
+     "y": 330,
+     "out": [
+      "0.3",
+      "0.5"
+     ]
+    },
+    "mark": {
+     "anchor": "asset:liftoff#smoke",
+     "radius": 86,
+     "in": [
+      "0.5",
+      "1.15"
+     ],
+     "layer": "svg",
+     "label": {
+      "lines": "SMOKE AT THE<br>RIGHT BOOSTER JOINT",
+      "value": "{C-smoke-0678}",
+      "in": [
+       "0.95",
+       "1.4"
+      ]
+     }
+    }
+   },
+   "transition": {
+    "type": "cut"
+   }
+  },
+  {
+   "id": "S02",
+   "beat": "mechanism",
+   "line": "L2",
+   "start": "line:L2 -0.1",
+   "end": "line:L3 -0.1",
+   "evidence": [
+    "C-smoke-right-srb",
+    "C-two-orings"
+   ],
+   "qa": {
+    "states": [
+     {
+      "at": "line:L2",
+      "what": "trace draws on the measured parts"
+     },
+     {
+      "at": "line:L3 -0.65",
+      "what": "camera pushes in"
+     }
+    ],
+    "registered": true
+   },
+   "template": "trace-over-photo",
+   "provenance": {
+    "kind": "explanatory",
+    "label": "NASA photo · traced outline"
+   },
+   "assets": [
+    "liftoff"
+   ],
+   "params": {
+    "media": "asset:liftoff",
+    "box": {
+     "x": 0,
+     "y": 0,
+     "w": 1080,
+     "h": 1400
+    },
+    "camera": {
+     "keys": [
+      {
+       "at": "0",
+       "focus": [
+        1563,
+        2307
+       ],
+       "zoom": 1
+      },
+      {
+       "at": "line:L2 +0.2",
+       "focus": [
+        1682,
+        2560
+       ],
+       "zoom": 1.4
+      },
+      {
+       "at": "line:L3 -0.1",
+       "focus": [
+        1972,
+        2885
+       ],
+       "zoom": 2.4
+      }
+     ],
+     "zoomInterp": "log"
+    },
+    "reveal": {
+     "fromH": 1400,
+     "window": [
+      "line:L2 -0.1",
+      "line:L2 +0.6"
+     ]
+    },
+    "grade": {
+     "window": [
+      "line:L2 -0.1",
+      "line:L2 +0.5"
+     ],
+     "saturate": 0.45,
+     "brightness": 0.65
+    },
+    "fadeOut": {
+     "window": [
+      "line:L3 -0.65",
+      "line:L3 -0.05"
+     ],
+     "to": 0.25
+    },
+    "paths": [
+     {
+      "basis": "asset:liftoff#right-srb",
+      "points": [
+       [
+        1500,
+        1950
+       ],
+       [
+        1500,
+        2990
+       ]
+      ],
+      "window": [
+       "line:L2 -0.1",
+       "line:L2 +0.5"
+      ],
+      "color": "line",
+      "width": 5
+     },
+     {
+      "basis": "asset:liftoff#right-srb",
+      "points": [
+       [
+        1910,
+        1950
+       ],
+       [
+        1910,
+        2990
+       ]
+      ],
+      "window": [
+       "line:L2",
+       "line:L2 +0.6"
+      ],
+      "color": "line",
+      "width": 5
+     }
+    ],
+    "marks": [
+     {
+      "anchor": "asset:liftoff#smoke",
+      "radius": 86
+     }
+    ],
+    "callouts": [
+     {
+      "from": {
+       "basis": "asset:liftoff#right-srb",
+       "point": [
+        1705,
+        2470
+       ]
+      },
+      "to": {
+       "x": 150,
+       "dy": -360,
+       "minY": 470
+      },
+      "label": "RIGHT BOOSTER",
+      "window": [
+       "line:L2 +0.3",
+       "line:L2 +0.7"
+      ],
+      "size": 40
+     }
+    ],
+    "shades": [
+     {
+      "kind": "top",
+      "h": 640,
+      "opacity": 0.6
+     },
+     {
+      "kind": "bottom",
+      "y": 1060,
+      "h": 520
+     },
+     {
+      "kind": "ink",
+      "y": 1290,
+      "color": "#000000",
+      "opacity": 0.35
+     }
+    ],
+    "chip": {
+     "label": "NASA photo · traced",
+     "kind": "explanatory"
+    }
+   },
+   "transition": {
+    "type": "continuous",
+    "reason": "same photograph, same camera: the trace is registered to it"
+   }
+  },
+  {
+   "id": "S03",
+   "beat": "setting",
+   "line": "L3",
+   "start": "line:L3 -0.1",
+   "end": "line:L4 -0.1",
+   "evidence": [
+    "C-temp-36f",
+    "C-15f-colder"
+   ],
+   "qa": {
+    "states": [
+     {
+      "at": "word:L3:fifteen",
+      "what": "the stated number is spoken",
+      "claim": "C-15f-colder"
+     }
+    ]
+   },
+   "template": "archival-plate",
+   "provenance": {
+    "kind": "archival",
+    "label": "NASA photo · launch morning"
+   },
+   "assets": [
+    "icicles"
+   ],
+   "params": {
+    "media": "asset:icicles",
+    "chip": {
+     "label": "NASA photo · launch morning",
+     "kind": "archival"
+    },
+    "camera": {
+     "keys": [
+      {
+       "at": "line:L3 -0.1",
+       "focus": [
+        1202,
+        1500
+       ],
+       "zoom": 1
+      },
+      {
+       "at": "line:L4 -0.1",
+       "focus": [
+        1202,
+        1500
+       ],
+       "zoom": 1.06
+      }
+     ]
+    },
+    "shades": [
+     {
+      "kind": "tint",
+      "color": "#06121c",
+      "opacity": 0.28
+     },
+     {
+      "kind": "top",
+      "h": 760
+     },
+     {
+      "kind": "bottom",
+      "y": 1180,
+      "h": 740
+     }
+    ],
+    "stat": {
+     "value": "{C-temp-36f}",
+     "sub": "{C-15f-colder}",
+     "y": 330,
+     "in": [
+      "line:L3",
+      "line:L3 +0.35"
+     ]
+    }
+   },
+   "transition": {
+    "type": "cut",
+    "reason": "cut on the narration beat"
+   }
+  },
+  {
+   "id": "S04",
+   "beat": "mechanism",
+   "line": "L4",
+   "start": "line:L4 -0.1",
+   "end": "line:L5 -0.1",
+   "evidence": [
+    "C-test-75f",
+    "C-joint-28f",
+    "C-gap-600ms",
+    "C-resiliency-cold",
+    "C-gap-max",
+    "C-two-orings"
+   ],
+   "qa": {
+    "states": [
+     {
+      "at": "line:L4 +0.2",
+      "what": "sealing face moves (joint opens)",
+      "claim": "C-gap-600ms"
+     },
+     {
+      "at": "line:L4 +0.8",
+      "what": "cold ring lags: gap open",
+      "claim": "C-joint-28f"
+     }
+    ]
+   },
+   "template": "joint-section",
+   "provenance": {
+    "kind": "explanatory",
+    "label": "Explanatory animation · not to scale"
+   },
+   "assets": [],
+   "params": {
+    "scale": {
+     "mode": "declared-exaggeration",
+     "factor": 2.6
+    },
+    "ringDiameter": "claim:C-two-orings",
+    "gapMax": "claim:C-gap-max",
+    "squeeze": 0.3,
+    "follow": 0.9,
+    "panels": [
+     {
+      "tint": "warm",
+      "label": "{C-test-75f.value}°F",
+      "temperature": "claim:C-test-75f",
+      "tauSec": 0.06
+     },
+     {
+      "tint": "cold",
+      "label": "{C-joint-28f}",
+      "temperature": "claim:C-joint-28f",
+      "tauSec": 4
+     }
+    ],
+    "gap": {
+     "duration": "claim:C-gap-600ms",
+     "startAt": "line:L4 +0.2"
+    },
+    "gas": {
+     "window": [
+      "line:L4 +0.62",
+      "line:L5 -0.3"
+     ]
+    },
+    "frost": {
+     "window": [
+      "line:L4 -0.1",
+      "line:L4 +0.5"
+     ]
+    },
+    "gapLabel": {
+     "text": "GAP ×{scale}",
+     "window": [
+      "line:L4 +0.55",
+      "line:L4 +0.9"
+     ],
+     "to": [
+      780,
+      1190
+     ]
+    },
+    "chip": {
+     "label": "Animation · not to scale",
+     "kind": "explanatory"
+    },
+    "source": {
+     "text": "{C-test-75f}, {C-joint-28f} · speeds illustrative",
+     "y": 1494
+    }
+   },
+   "transition": {
+    "type": "follow-cause",
+    "reason": "from the setting into the mechanism it causes",
+    "fade": 0.3
+   }
+  },
+  {
+   "id": "S05",
+   "beat": "mechanism",
+   "line": "L5",
+   "start": "line:L5 -0.1",
+   "end": "line:L6 -0.1",
+   "evidence": [
+    "C-gap-600ms",
+    "C-gap-max",
+    "C-two-orings",
+    "C-joint-28f",
+    "C-resiliency-cold",
+    "C-smoke-0678"
+   ],
+   "qa": {
+    "states": [
+     {
+      "at": "line:L5 -0.1",
+      "what": "drawing dissolves into the model"
+     },
+     {
+      "at": "word:L5:ignition",
+      "what": "joint opens over the documented time",
+      "claim": "C-gap-600ms"
+     },
+     {
+      "at": "word:L5:gas",
+      "what": "gas passes the rings"
+     }
+    ],
+    "registered": true
+   },
+   "template": "joint-mechanism",
+   "provenance": {
+    "kind": "explanatory",
+    "label": "Explanatory animation · drawing geometry, gap exaggerated"
+   },
+   "assets": [
+    "fig14"
+   ],
+   "params": {
+    "drawing": "asset:fig14",
+    "geometry": {
+     "tang": "asset:fig14#tang",
+     "innerLeg": "asset:fig14#clevis-inner-leg",
+     "outerLeg": "asset:fig14#clevis-outer-leg",
+     "pin": "asset:fig14#clevis-pin",
+     "rings": [
+      "asset:fig14#primary-oring",
+      "asset:fig14#secondary-oring"
+     ],
+     "ringSize": "asset:fig14#oring-size"
+    },
+    "view": {
+     "region": {
+      "x": 123,
+      "y": 244,
+      "w": 172,
+      "h": 241
+     },
+     "box": {
+      "x": 70,
+      "y": 300,
+      "w": 940,
+      "h": 1323
+     }
+    },
+    "fromDrawing": {
+     "window": [
+      "line:L5 -0.1",
+      "line:L5 +0.5"
+     ]
+    },
+    "ringDiameter": "claim:C-two-orings",
+    "gapMax": "claim:C-gap-max",
+    "scale": {
+     "mode": "declared-exaggeration",
+     "factor": 9
+    },
+    "open": {
+     "startAt": "word:L5:ignition",
+     "duration": "claim:C-gap-600ms"
+    },
+    "recovery": {
+     "temperature": "claim:C-joint-28f",
+     "tauSec": 4,
+     "squeeze": 0.3
+    },
+    "gas": {
+     "window": [
+      "word:L5:gas -0.15",
+      "word:L5:gas +1"
+     ],
+     "leadIn": {
+      "from": "word:L5:ignition +0.7",
+      "level": 0.45
+     }
+    },
+    "push": {
+     "window": [
+      "line:L5 -0.1",
+      "line:L6 -0.1"
+     ],
+     "zoom": 1.06
+    },
+    "labels": [
+     {
+      "text": "PRIMARY O-RING",
+      "target": "ring0",
+      "window": [
+       "line:L5",
+       "word:L5:ignition +0.3"
+      ],
+      "to": [
+       90,
+       470
+      ]
+     },
+     {
+      "text": "SECONDARY O-RING",
+      "target": "ring1",
+      "window": [
+       "line:L5 +0.3",
+       "word:L5:ignition +0.3"
+      ],
+      "to": [
+       90,
+       1000
+      ]
+     },
+     {
+      "text": "GAP ×{scale}",
+      "target": "gap",
+      "window": [
+       "word:L5:ignition +0.6",
+       "line:L6 -0.1"
+      ],
+      "to": [
+       990,
+       420
+      ]
+     }
+    ],
+    "chip": {
+     "label": "Animation · drawing geometry",
+     "kind": "explanatory"
+    },
+    "source": {
+     "text": "Drawing geometry · gap ×{scale} · recovery illustrative",
+     "y": 1494
+    }
+   },
+   "transition": {
+    "type": "cut",
+    "reason": "cut on the narration beat"
+   }
+  },
+  {
+   "id": "S06",
+   "beat": "evidence",
+   "line": "L6",
+   "start": "line:L6 -0.1",
+   "end": "line:L7 -0.1",
+   "evidence": [],
+   "qa": {
+    "states": []
+   },
+   "template": "archival-plate",
+   "provenance": {
+    "kind": "archival",
+    "label": "NEEDS ASSET"
+   },
+   "assets": [],
+   "params": {},
+   "transition": {
+    "type": "cut",
+    "reason": "cut on the narration beat"
+   },
+   "review": {
+    "codes": [
+     "UNSUPPORTED_CLAIM",
+     "MISSING_ASSET"
+    ]
+   }
+  },
+  {
+   "id": "S07",
+   "beat": "event-sequence",
+   "line": "L7",
+   "start": "line:L7 -0.1",
+   "end": "line:L8 -0.1",
+   "evidence": [
+    "C-flame-58788",
+    "C-deflect-60238",
+    "C-leak-64660",
+    "C-et-length",
+    "C-et-diameter",
+    "C-srb-length",
+    "C-srb-diameter"
+   ],
+   "qa": {
+    "states": [
+     {
+      "at": "line:L7 -0.1",
+      "what": "documented event C-flame-58788",
+      "claim": "C-flame-58788"
+     },
+     {
+      "at": "line:L7 +1.60",
+      "what": "documented event C-deflect-60238",
+      "claim": "C-deflect-60238"
+     },
+     {
+      "at": "line:L7 +3.20",
+      "what": "documented event C-leak-64660",
+      "claim": "C-leak-64660"
+     }
+    ]
+   },
+   "template": "event-sequence",
+   "provenance": {
+    "kind": "reconstruction",
+    "label": "Reconstruction · proportions approximate"
+   },
+   "assets": [],
+   "params": {
+    "dims": {
+     "etLength": "claim:C-et-length",
+     "etDiameter": "claim:C-et-diameter",
+     "srbLength": "claim:C-srb-length",
+     "srbDiameter": "claim:C-srb-diameter",
+     "srbOffsetM": 6.3,
+     "srbAftBelowEtM": 2.4
+    },
+    "events": [
+     {
+      "claim": "claim:C-flame-58788",
+      "at": "line:L7 -0.1",
+      "key": "plume",
+      "dur": 0.7
+     },
+     {
+      "claim": "claim:C-deflect-60238",
+      "at": "line:L7 +1.60",
+      "key": "deflect",
+      "dur": 0.7,
+      "label": "{C-deflect-60238}"
+     },
+     {
+      "claim": "claim:C-leak-64660",
+      "at": "line:L7 +3.20",
+      "key": "leak",
+      "dur": 0.7,
+      "label": "{C-leak-64660}"
+     }
+    ],
+    "rotationDeg": 5,
+    "camera": {
+     "settle": {
+      "dur": 1,
+      "focusFrac": 0.845,
+      "zoom": 1.9,
+      "screenY": 760
+     }
+    },
+    "orbiterOpacity": 0.16,
+    "clipAboveY": 1290,
+    "chip": {
+     "label": "Reconstruction",
+     "kind": "reconstruction"
+    },
+    "source": {
+     "text": "Times: event table · proportions approximate",
+     "y": 1556
+    }
+   },
+   "transition": {
+    "type": "cut",
+    "reason": "cut on the narration beat"
+   },
+   "review": {
+    "codes": [
+     "REVIEW_EVENT_KEYS"
+    ]
+   }
+  },
+  {
+   "id": "S08",
+   "beat": "event-sequence",
+   "line": "L8",
+   "start": "line:L8 -0.1",
+   "end": "line:L9 -0.1",
+   "evidence": [
+    "C-strut-7220",
+    "C-dome-73124",
+    "C-ended-73s",
+    "C-breakup-photo-76s"
+   ],
+   "qa": {
+    "states": [
+     {
+      "at": "line:L8 -0.1",
+      "what": "documented event C-strut-7220",
+      "claim": "C-strut-7220"
+     },
+     {
+      "at": "line:L8 +1.98",
+      "what": "documented event C-dome-73124",
+      "claim": "C-dome-73124"
+     }
+    ]
+   },
+   "template": "event-sequence",
+   "provenance": {
+    "kind": "reconstruction",
+    "label": "Reconstruction · proportions approximate"
+   },
+   "assets": [],
+   "params": {
+    "dims": {
+     "etLength": "claim:C-et-length",
+     "etDiameter": "claim:C-et-diameter",
+     "srbLength": "claim:C-srb-length",
+     "srbDiameter": "claim:C-srb-diameter",
+     "srbOffsetM": 6.3,
+     "srbAftBelowEtM": 2.4
+    },
+    "events": [
+     {
+      "claim": "claim:C-strut-7220",
+      "at": "line:L8 -0.1",
+      "key": "plume",
+      "dur": 0.7,
+      "label": "{C-strut-7220}"
+     },
+     {
+      "claim": "claim:C-dome-73124",
+      "at": "line:L8 +1.98",
+      "key": "deflect",
+      "dur": 0.7,
+      "label": "{C-dome-73124}"
+     }
+    ],
+    "rotationDeg": 5,
+    "camera": {
+     "settle": {
+      "dur": 1,
+      "focusFrac": 0.845,
+      "zoom": 1.9,
+      "screenY": 760
+     }
+    },
+    "orbiterOpacity": 0.16,
+    "clipAboveY": 1290,
+    "chip": {
+     "label": "Reconstruction",
+     "kind": "reconstruction"
+    },
+    "source": {
+     "text": "Times: event table · proportions approximate",
+     "y": 1556
+    }
+   },
+   "transition": {
+    "type": "cut",
+    "reason": "cut on the narration beat"
+   },
+   "review": {
+    "codes": [
+     "REVIEW_EVENT_KEYS"
+    ]
+   }
+  },
+  {
+   "id": "S09",
+   "beat": "human-cost",
+   "line": "L9",
+   "start": "line:L9 -0.1",
+   "end": "line:L10 -0.1",
+   "evidence": [
+    "C-crew-seven",
+    "C-mission-sts51l",
+    "C-crew-portrait-1985"
+   ],
+   "qa": {
+    "states": [
+     {
+      "at": "line:L9",
+      "what": "shot on the narration beat"
+     }
+    ]
+   },
+   "template": "archival-plate",
+   "provenance": {
+    "kind": "archival",
+    "label": "NASA portrait"
+   },
+   "assets": [
+    "crew"
+   ],
+   "params": {
+    "media": "asset:crew",
+    "chip": {
+     "label": "NASA portrait",
+     "kind": "archival"
+    },
+    "box": {
+     "x": 0,
+     "y": 420,
+     "w": 1080,
+     "h": "auto"
+    },
+    "camera": {
+     "keys": [
+      {
+       "at": "line:L9 -0.1",
+       "focus": [
+        1920,
+        1536
+       ],
+       "zoom": 1
+      },
+      {
+       "at": "line:L10 -0.1",
+       "focus": [
+        1920,
+        1536
+       ],
+       "zoom": 1.05
+      }
+     ]
+    },
+    "under": "ink",
+    "kicker": {
+     "text": "{C-mission-sts51l}",
+     "y": 330
+    }
+   },
+   "transition": {
+    "type": "dip",
+    "reason": "loss beat: slow dissolve, no animation",
+    "fade": 0.35
+   }
+  },
+  {
+   "id": "S10",
+   "beat": "decision",
+   "line": "L10",
+   "start": "line:L10 -0.1",
+   "end": "line:L11 -0.1",
+   "evidence": [
+    "C-chart-53f",
+    "C-telecon-0845"
+   ],
+   "qa": {
+    "states": [
+     {
+      "at": "word:L10:fifty-three",
+      "what": "camera reads the quoted line; highlight follows"
+     },
+     {
+      "at": "word:L10:fifty-three",
+      "what": "camera reads the quoted line; highlight follows"
+     },
+     {
+      "at": "line:L10",
+      "what": "documents on the desk"
+     }
+    ]
+   },
+   "template": "document-desk",
+   "provenance": {
+    "kind": "document",
+    "label": "Commission record"
+   },
+   "assets": [
+    "chart53"
+   ],
+   "params": {
+    "desk": "shared:desk-l10",
+    "enter": [
+     "line:L10 -0.1",
+     "line:L10 +0.3"
+    ],
+    "chip": {
+     "label": "Commission record",
+     "kind": "document"
+    }
+   },
+   "transition": {
+    "type": "dip",
+    "reason": "slow dissolve after the loss beat",
+    "fade": 0.3
+   },
+   "review": {
+    "codes": [
+     "REVIEW_TIMING"
+    ]
+   }
+  },
+  {
+   "id": "S11",
+   "beat": "decision",
+   "line": "L11",
+   "start": "line:L11 -0.1",
+   "end": "line:L12 -0.1",
+   "evidence": [
+    "C-reversed-finding4",
+    "C-fax-recommend",
+    "C-reversal-1100",
+    "C-fax-1145",
+    "C-launch-1138",
+    "C-finding-unaware"
+   ],
+   "qa": {
+    "states": [
+     {
+      "at": "line:L11 +0.5",
+      "what": "camera reads the quoted line; highlight follows"
+     },
+     {
+      "at": "line:L11",
+      "what": "documents on the desk"
+     }
+    ]
+   },
+   "template": "document-desk",
+   "provenance": {
+    "kind": "document",
+    "label": "Commission record"
+   },
+   "assets": [
+    "fax"
+   ],
+   "params": {
+    "desk": "shared:desk-l10",
+    "chip": {
+     "label": "Commission record",
+     "kind": "document"
+    }
+   },
+   "transition": {
+    "type": "continuous",
+    "reason": "continuous document camera on the same desk"
+   },
+   "review": {
+    "codes": [
+     "REVIEW_TIMING"
+    ]
+   }
+  },
+  {
+   "id": "S12",
+   "beat": "payoff",
+   "line": "L12",
+   "start": "line:L12 -0.1",
+   "end": "end",
+   "evidence": [
+    "C-payoff",
+    "C-hole-recovered"
+   ],
+   "qa": {
+    "states": [
+     {
+      "at": "line:L12",
+      "what": "payoff line"
+     },
+     {
+      "at": "end -0.35",
+      "what": "returns to the opening frame"
+     }
+    ]
+   },
+   "template": "payoff",
+   "provenance": {
+    "kind": "archival",
+    "label": "NASA photo"
+   },
+   "assets": [
+    "liftoff"
+   ],
+   "params": {
+    "media": "asset:liftoff",
+    "box": {
+     "x": 0,
+     "y": 0,
+     "w": 1080,
+     "h": 1400
+    },
+    "camera": {
+     "keys": [
+      {
+       "at": "line:L12 -0.1",
+       "focus": [
+        1682,
+        2560
+       ],
+       "zoom": 1.4
+      },
+      {
+       "at": "end",
+       "focus": [
+        1563,
+        2307
+       ],
+       "zoom": 1
+      }
+     ]
+    },
+    "lines": [
+     {
+      "text": "The seal failed in the cold.",
+      "tier": "setup"
+     },
+     {
+      "text": "But the warning failed the night before.",
+      "tier": "payoff",
+      "in": 0.35
+     }
+    ],
+    "y": 330,
+    "fadeOut": 0.35,
+    "dim": 0.25,
+    "shades": [
+     {
+      "kind": "top",
+      "h": 640
+     },
+     {
+      "kind": "bottom",
+      "y": 1120,
+      "h": 290
+     },
+     {
+      "kind": "ink",
+      "y": 1400,
+      "h": 520
+     }
+    ],
+    "chip": {
+     "label": "NASA photo",
+     "kind": "archival"
+    }
+   },
+   "transition": {
+    "type": "loop",
+    "reason": "returns to the opening framing for the replay"
+   }
+  }
+ ]
+}

@@ -1,0 +1,234 @@
+{
+ "schema": "fr-premium.creative-qa.v1",
+ "mode": "WARN-only",
+ "thresholds": {
+  "empty": 0.35,
+  "inset": 0.25,
+  "subject_min": 0.25,
+  "tiers": 3,
+  "labels": 3,
+  "words": 8,
+  "label_px": 32,
+  "states_per_2s": 1,
+  "states_min": 2
+ },
+ "grammar": [
+  "continuous",
+  "cut",
+  "dip",
+  "follow-cause",
+  "hard-cut",
+  "loop",
+  "match",
+  "push-in"
+ ],
+ "mp4": "challenger-p1-C-flame-to-tank.mp4",
+ "offset": 23.0,
+ "summary": {
+  "shots": 4,
+  "warn_shots": 4,
+  "warns": 18,
+  "time_weighted_empty": 0.571,
+  "mechanism_registered": "1/1",
+  "slide_like": 0
+ },
+ "shots": [
+  {
+   "id": "S07",
+   "kind": "archival",
+   "start": 20.625,
+   "end": 23.419,
+   "measured_from": 23.0,
+   "measured_to": 23.419,
+   "empty": 0.563,
+   "subject_motion": 0.263,
+   "subject_median": 0.269,
+   "camera_per_s": 0.163,
+   "states": [],
+   "registered": null,
+   "boundary_corr": null,
+   "transition": {
+    "type": "cut",
+    "reason": null,
+    "measured": null
+   },
+   "text": {
+    "max_tiers": 3,
+    "max_labels": 2,
+    "max_words": 7,
+    "smallest_label_px": 24,
+    "competing_samples": 0
+   },
+   "framing": null,
+   "primitives": [],
+   "slide_like": false,
+   "warns": [
+    "empty background 56% > 35%",
+    "archival inset over void 56% > 25%",
+    "transition 'cut' has no declared reason",
+    "smallest label 24 px < 32"
+   ]
+  },
+  {
+   "id": "S08",
+   "kind": "archival",
+   "start": 23.419,
+   "end": 26.226,
+   "measured_from": 23.419,
+   "measured_to": 26.226,
+   "empty": 0.713,
+   "subject_motion": 0.487,
+   "subject_median": 0.485,
+   "camera_per_s": 0.205,
+   "states": [
+    {
+     "t": 23.519,
+     "what": "ring on the flame",
+     "ev": "E1 58.788",
+     "verified": false,
+     "peak": 0.41
+    },
+    {
+     "t": 23.819,
+     "what": "camera closes on the flame",
+     "ev": null,
+     "verified": false,
+     "peak": 0.57
+    }
+   ],
+   "registered": null,
+   "boundary_corr": 0.159,
+   "transition": {
+    "type": "cut",
+    "reason": "cut on the narration beat into the documented film (V2 grammar)",
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 4,
+    "max_labels": 3,
+    "max_words": 10,
+    "smallest_label_px": 24,
+    "competing_samples": 0
+   },
+   "framing": "full-width film + blurred plate of the same film",
+   "primitives": [],
+   "slide_like": false,
+   "warns": [
+    "empty background 71% > 35%",
+    "archival inset over void 71% > 25%",
+    "4 text tiers > 3",
+    "10 non-caption words on screen > 8",
+    "smallest label 24 px < 32"
+   ]
+  },
+  {
+   "id": "S09",
+   "kind": "reconstruction",
+   "start": 26.226,
+   "end": 32.297,
+   "measured_from": 26.226,
+   "measured_to": 32.297,
+   "empty": 0.523,
+   "subject_motion": 0.528,
+   "subject_median": 0.222,
+   "camera_per_s": 0.134,
+   "states": [
+    {
+     "t": 26.526,
+     "what": "plume turns onto the tank",
+     "ev": "E1 60.238 plume deflection; 60.248 attaching to ET ring frame",
+     "verified": true,
+     "peak": 2.48
+    },
+    {
+     "t": 27.882,
+     "what": "hydrogen tank leaks",
+     "ev": "E1 64.660 LH2 tank leak near 2058 ring frame",
+     "verified": false,
+     "peak": 0.25
+    },
+    {
+     "t": 29.158,
+     "what": "lower strut breaks",
+     "ev": "E1 72.204 lower strut severed; right SRB rotates about upper strut",
+     "verified": true,
+     "peak": 1.08
+    },
+    {
+     "t": 31.033,
+     "what": "tank\u2019s aft dome fails",
+     "ev": "E1 73.124 aft dome dropping away",
+     "verified": true,
+     "peak": 3.8
+    }
+   ],
+   "registered": {
+    "from": "S08",
+    "asset": "e207",
+    "anchors": [
+     "flame -> right SRB aft field joint (inner side)",
+     "vehicle axis -28\u00b0"
+    ]
+   },
+   "boundary_corr": -0.26,
+   "transition": {
+    "type": "match",
+    "reason": "match cut on position and angle: the flame in the film becomes the joint in the reconstruction",
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 3,
+    "max_labels": 4,
+    "max_words": 19,
+    "smallest_label_px": 24,
+    "competing_samples": 0
+   },
+   "framing": "full-frame reconstruction",
+   "primitives": [],
+   "slide_like": false,
+   "warns": [
+    "empty background 52% > 35%",
+    "1 declared state change(s) not visible in the MP4",
+    "4 labels at once > 3",
+    "19 non-caption words on screen > 8",
+    "smallest label 24 px < 32"
+   ]
+  },
+  {
+   "id": "S10",
+   "kind": "archival",
+   "start": 32.297,
+   "end": 33.74,
+   "measured_from": 32.297,
+   "measured_to": 32.8,
+   "empty": 0.356,
+   "subject_motion": 4.656,
+   "subject_median": 0.317,
+   "camera_per_s": 0.214,
+   "states": [],
+   "registered": null,
+   "boundary_corr": 0.272,
+   "transition": {
+    "type": "cut",
+    "reason": null,
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 1,
+    "max_labels": 1,
+    "max_words": 8,
+    "smallest_label_px": 28,
+    "competing_samples": 0
+   },
+   "framing": null,
+   "primitives": [],
+   "slide_like": false,
+   "warns": [
+    "empty background 36% > 35%",
+    "archival inset over void 36% > 25%",
+    "transition 'cut' has no declared reason",
+    "smallest label 28 px < 32"
+   ]
+  }
+ ]
+}

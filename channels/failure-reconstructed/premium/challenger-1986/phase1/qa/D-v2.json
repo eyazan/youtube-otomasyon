@@ -1,0 +1,195 @@
+{
+ "schema": "fr-premium.creative-qa.v1",
+ "mode": "WARN-only",
+ "thresholds": {
+  "empty": 0.35,
+  "inset": 0.25,
+  "subject_min": 0.25,
+  "tiers": 3,
+  "labels": 3,
+  "words": 8,
+  "label_px": 32,
+  "states_per_2s": 1,
+  "states_min": 2
+ },
+ "grammar": [
+  "continuous",
+  "cut",
+  "dip",
+  "follow-cause",
+  "hard-cut",
+  "loop",
+  "match",
+  "push-in"
+ ],
+ "mp4": "challenger-premium-v2.mp4",
+ "offset": 0.0,
+ "summary": {
+  "shots": 4,
+  "warn_shots": 4,
+  "warns": 26,
+  "time_weighted_empty": 0.724,
+  "mechanism_registered": "0/1",
+  "slide_like": 2
+ },
+ "shots": [
+  {
+   "id": "S11",
+   "kind": "archival",
+   "start": 33.74,
+   "end": 36.676,
+   "measured_from": 36.3,
+   "measured_to": 36.676,
+   "empty": 0.508,
+   "subject_motion": 0.006,
+   "subject_median": 0.005,
+   "camera_per_s": 0.0,
+   "states": [],
+   "registered": null,
+   "boundary_corr": 0.407,
+   "transition": {
+    "type": "cut",
+    "reason": null,
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 1,
+    "max_labels": 1,
+    "max_words": 3,
+    "smallest_label_px": 28,
+    "competing_samples": 0
+   },
+   "framing": null,
+   "primitives": [],
+   "slide_like": false,
+   "warns": [
+    "empty background 51% > 35%",
+    "archival inset over void 51% > 25%",
+    "transition 'cut' has no declared reason",
+    "smallest label 28 px < 32"
+   ]
+  },
+  {
+   "id": "S12",
+   "kind": "document",
+   "start": 36.676,
+   "end": 41.774,
+   "measured_from": 36.676,
+   "measured_to": 41.774,
+   "empty": 0.689,
+   "subject_motion": 0.235,
+   "subject_median": 0.054,
+   "camera_per_s": 0.01,
+   "states": [],
+   "registered": null,
+   "boundary_corr": 0.94,
+   "transition": {
+    "type": "cut",
+    "reason": null,
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 5,
+    "max_labels": 5,
+    "max_words": 30,
+    "smallest_label_px": 24,
+    "competing_samples": 20
+   },
+   "framing": null,
+   "primitives": [
+    "bar-chart"
+   ],
+   "slide_like": true,
+   "warns": [
+    "empty background 69% > 35%",
+    "subject motion 0.23 < 0.25 (camera drift only)",
+    "no narration-timed state changes declared",
+    "transition 'cut' has no declared reason",
+    "5 text tiers > 3",
+    "5 labels at once > 3",
+    "30 non-caption words on screen > 8",
+    "smallest label 24 px < 32",
+    "headline competes with caption in 20 samples",
+    "slide-like composition (bar-chart)"
+   ]
+  },
+  {
+   "id": "S13",
+   "kind": "explanatory",
+   "start": 41.774,
+   "end": 46.753,
+   "measured_from": 41.774,
+   "measured_to": 46.753,
+   "empty": 0.813,
+   "subject_motion": 0.12,
+   "subject_median": 0.076,
+   "camera_per_s": 0.007,
+   "states": [],
+   "registered": null,
+   "boundary_corr": 0.004,
+   "transition": {
+    "type": "cut",
+    "reason": null,
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 3,
+    "max_labels": 7,
+    "max_words": 23,
+    "smallest_label_px": 24,
+    "competing_samples": 0
+   },
+   "framing": null,
+   "primitives": [
+    "flowchart"
+   ],
+   "slide_like": true,
+   "warns": [
+    "empty background 81% > 35%",
+    "subject motion 0.12 < 0.25 (camera drift only)",
+    "no narration-timed state changes declared",
+    "mechanism shot not registered to archival media",
+    "transition 'cut' has no declared reason",
+    "7 labels at once > 3",
+    "23 non-caption words on screen > 8",
+    "smallest label 24 px < 32",
+    "slide-like composition (flowchart)"
+   ]
+  },
+  {
+   "id": "S14",
+   "kind": "archival",
+   "start": 46.753,
+   "end": 48.691,
+   "measured_from": 46.753,
+   "measured_to": 47.1,
+   "empty": 0.205,
+   "subject_motion": 0.184,
+   "subject_median": 0.184,
+   "camera_per_s": 0.001,
+   "states": [],
+   "registered": null,
+   "boundary_corr": 0.051,
+   "transition": {
+    "type": "cut",
+    "reason": null,
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 3,
+    "max_labels": 2,
+    "max_words": 19,
+    "smallest_label_px": 24,
+    "competing_samples": 0
+   },
+   "framing": null,
+   "primitives": [],
+   "slide_like": false,
+   "warns": [
+    "transition 'cut' has no declared reason",
+    "19 non-caption words on screen > 8",
+    "smallest label 24 px < 32"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,93 @@
+{
+ "schema": "fr-premium.creative-qa.v1",
+ "mode": "WARN-only",
+ "thresholds": {
+  "empty": 0.35,
+  "inset": 0.25,
+  "subject_min": 0.25,
+  "tiers": 3,
+  "labels": 3,
+  "words": 8,
+  "label_px": 32,
+  "states_per_2s": 1,
+  "states_min": 2
+ },
+ "grammar": [
+  "continuous",
+  "cut",
+  "dip",
+  "follow-cause",
+  "hard-cut",
+  "loop",
+  "match",
+  "push-in"
+ ],
+ "mp4": "apollo13-proto-excerpt.mp4",
+ "offset": 36.45,
+ "summary": {
+  "shots": 1,
+  "warn_shots": 1,
+  "warns": 7,
+  "time_weighted_empty": 0.455,
+  "mechanism_registered": "0/0",
+  "slide_like": 0
+ },
+ "shots": [
+  {
+   "id": "S07",
+   "kind": "document",
+   "start": 36.45,
+   "end": 42.18,
+   "measured_from": 36.45,
+   "measured_to": 42.15,
+   "empty": 0.455,
+   "subject_motion": 0.2,
+   "subject_median": 0.034,
+   "camera_per_s": 0.013,
+   "states": [
+    {
+     "t": 36.55,
+     "what": "excerpt card enters",
+     "ev": null,
+     "verified": true,
+     "peak": 6.55
+    },
+    {
+     "t": 37.89,
+     "what": "the finding's words are highlighted",
+     "ev": "C-a13-cause",
+     "verified": false,
+     "peak": 0.12
+    }
+   ],
+   "registered": null,
+   "boundary_corr": null,
+   "transition": {
+    "type": "dip",
+    "reason": "slow dissolve after the loss beat",
+    "measured": null
+   },
+   "text": {
+    "max_tiers": 2,
+    "max_labels": 27,
+    "max_words": 48,
+    "smallest_label_px": 28,
+    "competing_samples": 0
+   },
+   "framing": "document-excerpt",
+   "primitives": [
+    "document-excerpt"
+   ],
+   "slide_like": false,
+   "warns": [
+    "empty background 45% > 35%",
+    "subject motion 0.20 < 0.25 (camera drift only)",
+    "2 state changes in 5.7 s (< 2, or < 1 per 2 s)",
+    "1 declared state change(s) not visible in the MP4",
+    "27 labels at once > 3",
+    "48 non-caption words on screen > 8",
+    "smallest label 28 px < 32"
+   ]
+  }
+ ]
+}

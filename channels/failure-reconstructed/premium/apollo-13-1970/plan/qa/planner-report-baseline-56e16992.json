@@ -1,0 +1,196 @@
+{
+ "status": "NEEDS_HUMAN_REVIEW",
+ "metrics": {
+  "shots": 9,
+  "autoPlannedClean": 3,
+  "needsReview": 6,
+  "reviewShots": [
+   "S01",
+   "S02",
+   "S03",
+   "S04",
+   "S05",
+   "S07"
+  ],
+  "generatedValues": 53,
+  "manualValues": 0,
+  "validation": {
+   "errors": 24,
+   "warnings": 0
+  }
+ },
+ "issues": [
+  {
+   "line": "L1",
+   "code": "MISSING_ANCHOR",
+   "detail": "hook asset launch has no point-of-interest anchor stating one of the line's claims",
+   "needed": "measure the point of interest on the photo (manual anchor) and tie it to the claim"
+  },
+  {
+   "line": "L2",
+   "code": "MISSING_ASSET",
+   "detail": "no licensed asset depicts the line's claims (C-a13-heaters-65v, C-a13-detank-date)",
+   "needed": "add an asset with depicts/tags, or a claim the asset depicts"
+  },
+  {
+   "line": "L3",
+   "code": "MISSING_ASSET",
+   "detail": "no licensed asset depicts the line's claims (C-a13-switch-rating)",
+   "needed": "add an asset with depicts/tags, or a claim the asset depicts"
+  },
+  {
+   "line": "L4",
+   "code": "MISSING_ASSET",
+   "detail": "no licensed asset depicts the line's claims (C-a13-switch-80f, C-a13-switch-rating)",
+   "needed": "add an asset with depicts/tags, or a claim the asset depicts"
+  },
+  {
+   "line": "L5",
+   "code": "MISSING_EVIDENCE",
+   "detail": "mechanism line lacks ring-diameter / gap-max / opening-duration claims (missing, missing, missing)",
+   "needed": "add the claims (with roles) or choose a non-mechanism template"
+  },
+  {
+   "line": "L5",
+   "code": "NO_TEMPLATE",
+   "detail": "mechanism line: no drawing with mechanism anchors and no photo with traceable parts",
+   "needed": "add mechanism anchors, or a mechanism template for this component (see the component-section spec)"
+  },
+  {
+   "line": "L7",
+   "code": "MISSING_ANCHOR",
+   "detail": "decision line: no document asset has a region anchor stating one of the line's claims",
+   "needed": "measure the quoted line on the document scan and tie it to the claim"
+  },
+  {
+   "shot": "S02",
+   "code": "VALIDATION",
+   "detail": "unsupported parameter: params: missing required \"media\""
+  },
+  {
+   "shot": "S02",
+   "code": "VALIDATION",
+   "detail": "unsupported parameter: params: missing required \"camera\""
+  },
+  {
+   "shot": "S02",
+   "code": "VALIDATION",
+   "detail": "unsupported parameter: params: missing required \"chip\""
+  },
+  {
+   "shot": "S03",
+   "code": "VALIDATION",
+   "detail": "unsupported parameter: params: missing required \"media\""
+  },
+  {
+   "shot": "S03",
+   "code": "VALIDATION",
+   "detail": "unsupported parameter: params: missing required \"camera\""
+  },
+  {
+   "shot": "S03",
+   "code": "VALIDATION",
+   "detail": "unsupported parameter: params: missing required \"chip\""
+  },
+  {
+   "shot": "S04",
+   "code": "VALIDATION",
+   "detail": "unsupported parameter: params: missing required \"media\""
+  },
+  {
+   "shot": "S04",
+   "code": "VALIDATION",
+   "detail": "unsupported parameter: params: missing required \"camera\""
+  },
+  {
+   "shot": "S04",
+   "code": "VALIDATION",
+   "detail": "unsupported parameter: params: missing required \"chip\""
+  },
+  {
+   "shot": "S05",
+   "code": "VALIDATION",
+   "detail": "unsupported parameter: params: missing required \"drawing\""
+  },
+  {
+   "shot": "S05",
+   "code": "VALIDATION",
+   "detail": "unsupported parameter: params: missing required \"geometry\""
+  },
+  {
+   "shot": "S05",
+   "code": "VALIDATION",
+   "detail": "unsupported parameter: params: missing required \"view\""
+  },
+  {
+   "shot": "S05",
+   "code": "VALIDATION",
+   "detail": "unsupported parameter: params: missing required \"ringDiameter\""
+  },
+  {
+   "shot": "S05",
+   "code": "VALIDATION",
+   "detail": "unsupported parameter: params: missing required \"gapMax\""
+  },
+  {
+   "shot": "S05",
+   "code": "VALIDATION",
+   "detail": "unsupported parameter: params: missing required \"scale\""
+  },
+  {
+   "shot": "S05",
+   "code": "VALIDATION",
+   "detail": "unsupported parameter: params: missing required \"open\""
+  },
+  {
+   "shot": "S05",
+   "code": "VALIDATION",
+   "detail": "unsupported parameter: params: missing required \"recovery\""
+  },
+  {
+   "shot": "S05",
+   "code": "VALIDATION",
+   "detail": "unsupported parameter: params: missing required \"chip\""
+  },
+  {
+   "shot": "S05",
+   "code": "VALIDATION",
+   "detail": "unsupported parameter: params: missing required \"source\""
+  },
+  {
+   "shot": "S05",
+   "code": "VALIDATION",
+   "detail": "visual scale cannot be derived from evidence (template joint-mechanism needs its ring-diameter and gap claims)"
+  },
+  {
+   "shot": "S05",
+   "code": "VALIDATION",
+   "detail": "qa: 0 narration-timed states, template joint-mechanism expects >= 2"
+  },
+  {
+   "shot": "S07",
+   "code": "VALIDATION",
+   "detail": "unsupported parameter: params: missing required \"desk\""
+  },
+  {
+   "shot": "S07",
+   "code": "VALIDATION",
+   "detail": "unsupported parameter: params: missing required \"chip\""
+  },
+  {
+   "shot": "S07",
+   "code": "VALIDATION",
+   "detail": "qa: 0 narration-timed states, template document-desk expects >= 2"
+  },
+  {
+   "code": "SCRIPT_NOT_APPROVED",
+   "detail": "narration script status is draft",
+   "needed": "owner approval of the script"
+  },
+  {
+   "code": "ESTIMATED_TIMELINE",
+   "detail": "word timings are estimated, not measured from narration",
+   "needed": "record narration and re-plan"
+  }
+ ]
+}

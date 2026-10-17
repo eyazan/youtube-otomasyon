@@ -1,0 +1,323 @@
+{
+ "schema": "fr-premium.creative-qa.v1",
+ "mode": "WARN-only",
+ "thresholds": {
+  "empty": 0.35,
+  "inset": 0.25,
+  "subject_min": 0.25,
+  "tiers": 3,
+  "labels": 3,
+  "words": 8,
+  "label_px": 32,
+  "states_per_2s": 1,
+  "states_min": 2
+ },
+ "grammar": [
+  "continuous",
+  "cut",
+  "dip",
+  "follow-cause",
+  "hard-cut",
+  "loop",
+  "match",
+  "push-in"
+ ],
+ "mp4": "challenger-engine-S03-S07.mp4",
+ "offset": 6.7,
+ "summary": {
+  "shots": 5,
+  "warn_shots": 5,
+  "warns": 21,
+  "time_weighted_empty": 0.349,
+  "mechanism_registered": "1/2",
+  "slide_like": 0
+ },
+ "shots": [
+  {
+   "id": "S03",
+   "kind": "document",
+   "start": 6.766,
+   "end": 9.056,
+   "measured_from": 6.766,
+   "measured_to": 9.056,
+   "empty": 0.647,
+   "subject_motion": 0.757,
+   "subject_median": 0.391,
+   "camera_per_s": 0.31,
+   "states": [
+    {
+     "t": 6.766,
+     "what": "cross-section grows out of the joint band",
+     "ev": "C-two-orings",
+     "verified": true,
+     "peak": 5.76
+    },
+    {
+     "t": 7.64,
+     "what": "camera closes on the two O-rings; rings drawn",
+     "ev": "C-two-orings",
+     "verified": true,
+     "peak": 1.19
+    }
+   ],
+   "registered": {
+    "from": "S02",
+    "asset": "fig14"
+   },
+   "boundary_corr": null,
+   "transition": {
+    "type": "push-in",
+    "reason": "push-in through the traced joint band into the Commission's cross-section",
+    "measured": null
+   },
+   "text": {
+    "max_tiers": 1,
+    "max_labels": 1,
+    "max_words": 11,
+    "smallest_label_px": 24,
+    "competing_samples": 0
+   },
+   "framing": "document-zoom",
+   "primitives": [
+    "document-zoom"
+   ],
+   "slide_like": false,
+   "warns": [
+    "empty background 65% > 35%",
+    "11 non-caption words on screen > 8",
+    "smallest label 24 px < 32"
+   ]
+  },
+  {
+   "id": "S04",
+   "kind": "archival",
+   "start": 9.056,
+   "end": 12.733,
+   "measured_from": 9.056,
+   "measured_to": 12.733,
+   "empty": 0.133,
+   "subject_motion": 0.298,
+   "subject_median": 0.212,
+   "camera_per_s": 0.034,
+   "states": [
+    {
+     "t": 9.156,
+     "what": "36 \u00b0F stat on the icicle photograph",
+     "ev": "C-temp-36f",
+     "verified": false,
+     "peak": 0.33
+    }
+   ],
+   "registered": null,
+   "boundary_corr": 0.0,
+   "transition": {
+    "type": "cut",
+    "reason": "cut on the narration beat to the launch-morning photograph",
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 3,
+    "max_labels": 2,
+    "max_words": 14,
+    "smallest_label_px": 28,
+    "competing_samples": 13
+   },
+   "framing": "archival-plate",
+   "primitives": [
+    "archival-plate"
+   ],
+   "slide_like": false,
+   "warns": [
+    "14 non-caption words on screen > 8",
+    "smallest label 28 px < 32",
+    "headline competes with caption in 13 samples"
+   ]
+  },
+  {
+   "id": "S05",
+   "kind": "explanatory",
+   "start": 12.733,
+   "end": 14.926,
+   "measured_from": 12.733,
+   "measured_to": 14.926,
+   "empty": 0.352,
+   "subject_motion": 0.347,
+   "subject_median": 0.05,
+   "camera_per_s": 0.007,
+   "states": [
+    {
+     "t": 13.282,
+     "what": "sealing face starts moving away (joint opens)",
+     "ev": "C-gap-600ms",
+     "verified": true,
+     "peak": 0.44
+    },
+    {
+     "t": 13.432,
+     "what": "warm ring springs out and keeps contact",
+     "ev": "C-test-75f",
+     "verified": true,
+     "peak": 0.44
+    },
+    {
+     "t": 13.882,
+     "what": "cold ring still squeezed: gap open",
+     "ev": "C-resiliency-cold",
+     "verified": true,
+     "peak": 0.35
+    },
+    {
+     "t": 14.156,
+     "what": "hot gas passes the cold ring only",
+     "ev": null,
+     "verified": false,
+     "peak": 0.04
+    }
+   ],
+   "registered": null,
+   "boundary_corr": 0.472,
+   "transition": {
+    "type": "follow-cause",
+    "reason": "from the frozen launch tower into the cold rubber (frost carries across)",
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 4,
+    "max_labels": 3,
+    "max_words": 21,
+    "smallest_label_px": 24,
+    "competing_samples": 9
+   },
+   "framing": "joint-section",
+   "primitives": [
+    "joint-section"
+   ],
+   "slide_like": false,
+   "warns": [
+    "empty background 35% > 35%",
+    "1 declared state change(s) not visible in the MP4",
+    "mechanism shot not registered to archival media",
+    "4 text tiers > 3",
+    "21 non-caption words on screen > 8",
+    "smallest label 24 px < 32",
+    "headline competes with caption in 9 samples"
+   ]
+  },
+  {
+   "id": "S06",
+   "kind": "explanatory",
+   "start": 14.926,
+   "end": 20.625,
+   "measured_from": 14.926,
+   "measured_to": 20.625,
+   "empty": 0.477,
+   "subject_motion": 0.225,
+   "subject_median": 0.209,
+   "camera_per_s": 0.003,
+   "states": [
+    {
+     "t": 15.171,
+     "what": "combustion pressure builds on the inside",
+     "ev": null,
+     "verified": true,
+     "peak": 0.61
+    },
+    {
+     "t": 15.271,
+     "what": "joint opens over the documented 0.6 s",
+     "ev": "C-gap-600ms",
+     "verified": true,
+     "peak": 0.61
+    },
+    {
+     "t": 17.735,
+     "what": "cold rings lag: gap stays open",
+     "ev": "C-resiliency-cold",
+     "verified": false,
+     "peak": 0.3
+    },
+    {
+     "t": 18.911,
+     "what": "hot gas flows past both rings",
+     "ev": null,
+     "verified": false,
+     "peak": 0.34
+    }
+   ],
+   "registered": {
+    "from": "drawing",
+    "asset": "fig14"
+   },
+   "boundary_corr": 0.0,
+   "transition": {
+    "type": "cut",
+    "reason": "cut on the narration beat into the joint itself, drawn from the Commission's figure",
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 3,
+    "max_labels": 4,
+    "max_words": 19,
+    "smallest_label_px": 24,
+    "competing_samples": 0
+   },
+   "framing": "joint-mechanism",
+   "primitives": [
+    "joint-mechanism"
+   ],
+   "slide_like": false,
+   "warns": [
+    "empty background 48% > 35%",
+    "subject motion 0.22 < 0.25 (camera drift only)",
+    "2 declared state change(s) not visible in the MP4",
+    "4 labels at once > 3",
+    "19 non-caption words on screen > 8",
+    "smallest label 24 px < 32"
+   ]
+  },
+  {
+   "id": "S07",
+   "kind": "archival",
+   "start": 20.625,
+   "end": 23.419,
+   "measured_from": 20.625,
+   "measured_to": 23.419,
+   "empty": 0.126,
+   "subject_motion": 0.305,
+   "subject_median": 0.281,
+   "camera_per_s": 0.204,
+   "states": [
+    {
+     "t": 20.725,
+     "what": "film plays; clock from the documented time base",
+     "ev": "C-climb-timebase",
+     "verified": false,
+     "peak": 0.38
+    }
+   ],
+   "registered": null,
+   "boundary_corr": 0.435,
+   "transition": {
+    "type": "cut",
+    "reason": "cut on the narration beat to the climbing film",
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 3,
+    "max_labels": 2,
+    "max_words": 9,
+    "smallest_label_px": 24,
+    "competing_samples": 0
+   },
+   "framing": "archival-plate",
+   "primitives": [
+    "archival-plate"
+   ],
+   "slide_like": false,
+   "warns": [
+    "9 non-caption words on screen > 8",
+    "smallest label 24 px < 32"
+   ]
+  }
+ ]
+}
