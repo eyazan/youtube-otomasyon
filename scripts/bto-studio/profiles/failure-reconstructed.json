@@ -1,0 +1,13 @@
+{
+ "schema": "premium-studio.channel-profile.v1",
+ "channel": "failure-reconstructed",
+ "name": "Failure Reconstructed",
+ "premiumMode": "fr-engine",
+ "studioRenders": false,
+ "rolloutStage": 4,
+ "refusal": "Failure Reconstructed premium videos are made with its own offline-review engine (scripts/fr-premium, docs/premium/README.md). Migrating it onto the shared studio is rollout Stage 4 and has not been done.",
+ "visualProfile": ["engineering failures", "disaster reconstructions", "exploded technical diagrams", "chronology animations", "failure-chain storytelling", "early high-impact hook showing the consequence or the critical fault", "archival media with provenance chips"],
+ "components": { "existing": "scripts/fr-premium/engine/templates/* (joint-section, component-section, event-sequence, timeline, document-*, archival-plate, trace-over-photo, payoff)", "fromStudio": ["exploded-layers / qr-3d projection engine (2.5D)", "scan-line", "labels", "kinetic-type"], "toBuild": ["failure-chain", "pressure-or-load-gauge", "fracture-propagation"] },
+ "evidencePolicy": { "source": "scripts/fr-premium/engine/validate.js (verbatim claims, provenance, licences)", "remakesOfPublishedTopics": "owner approval per video" },
+ "publishing": { "autoPublish": false, "contract": "scripts/fr-premium/engine/premium-contract.js" }
+}

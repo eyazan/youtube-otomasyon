@@ -1,0 +1,14 @@
+{
+ "schema": "premium-studio.channel-profile.v1",
+ "channel": "goal-lore-lab",
+ "name": "GoalLore Lab",
+ "premiumMode": "design-only",
+ "studioRenders": false,
+ "rolloutStage": 6,
+ "refusal": "GoalLore Lab is a proposed channel: it is not in config/channels.json, has no credentials and no VERIFIED topics. The studio can render its design sample board only (scripts/bto-studio/samples/goal-lore-lab-board.json).",
+ "stylePack": "channels/goal-lore-lab/premium/style-pack.json",
+ "visualProfile": ["story-first football storytelling", "animated tactical pitches", "player positions and runs", "ball trajectories with real physics", "passing networks", "career timelines", "statistical comparisons from cited data", "stadium storytelling", "no broadcast footage"],
+ "components": { "built": ["football-pitch (pitch, player tokens, runs, passes, ball arc)"], "toBuild": ["passing-network", "career-timeline", "stat-compare", "stadium-silhouette", "shot-map"] },
+ "evidencePolicy": { "researchStatus": "VERIFIED", "verbatimQuotes": true, "hypotheticalLabel": "WHAT IF", "noBroadcastFootage": true },
+ "publishing": { "autoPublish": false, "credentials": "none created" }
+}

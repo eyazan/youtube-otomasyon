@@ -1,0 +1,15 @@
+{
+ "schema": "premium-studio.channel-profile.v1",
+ "channel": "behind-the-ordinary",
+ "name": "The Hidden Logic of Things",
+ "premiumMode": "studio-preview",
+ "studioRenders": true,
+ "rolloutStage": 1,
+ "stylePack": "channels/behind-the-ordinary/premium/style-pack.json",
+ "visualProfile": ["hidden engineering of everyday objects", "cross-sections", "mechanism animations", "exploded product views (2.5D projection)", "clean technical labels", "scanner/sensor points of view", "printed-matter environments"],
+ "components": ["qr-3d", "row-signal", "qr-symbol", "exploded-layers", "scan-line", "run-length-strip", "search-window", "print-surface", "paper-card", "kinetic-type", "labels", "quote-card", "timeline-ruler", "reticle", "desk-grain"],
+ "evidencePolicy": { "researchStatus": "VERIFIED", "verbatimQuotes": true, "numbersOnScreenFromFacts": true, "conceptualChip": true },
+ "narration": { "approvedFrom": "channels/behind-the-ordinary/config.json#voice", "previewFallback": "kokoro af_heart (BTO_PREMIUM_RENDER=preview only)" },
+ "quality": { "hardChecks": "scripts/bto-studio/qa.js", "minLabelPx": 40, "durationSeconds": [30, 50] },
+ "publishing": { "autoPublish": false, "handOff": "owner decision; see docs/premium-studio/integration-plan.md" }
+}

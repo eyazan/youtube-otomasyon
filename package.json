@@ -37,7 +37,10 @@
     "profitdecoded:audio": "node scripts/profitdecoded/produce-audio.js",
     "profitdecoded:dry-run:short": "node profitdecoded.js dry-run channels/profitdecoded/dryruns/short-costco-membership/bundle.json",
     "profitdecoded:dry-run:long": "node profitdecoded.js dry-run channels/profitdecoded/dryruns/long-planet-fitness-capacity/bundle.json",
-    "test:profitdecoded": "node --test tests/js/profitdecoded-*.test.js"
+    "test:profitdecoded": "node --test tests/js/profitdecoded-*.test.js",
+    "premium:video": "node scripts/bto-studio/studio.js",
+    "premium:compare": "node scripts/bto-studio/compare.js",
+    "test:premium-studio": "node --test tests/js/bto-studio.test.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "0.115.0",

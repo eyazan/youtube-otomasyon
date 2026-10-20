@@ -1,0 +1,13 @@
+{
+ "schema": "premium-studio.channel-profile.v1",
+ "channel": "impossible-brief",
+ "name": "ImpossibleBrief",
+ "premiumMode": "not-integrated",
+ "studioRenders": false,
+ "rolloutStage": 5,
+ "refusal": "ImpossibleBrief has no premium pack yet (premium-policy.json: not-available). Its pack must separate verified physics from hypothetical projection on screen; that is rollout Stage 5.",
+ "visualProfile": ["science, space, physics what-ifs", "scale comparisons", "simulations driven by stated assumptions", "cinematic scientific storytelling", "every frame labelled FACT or PROJECTION"],
+ "components": { "toBuild": ["scale-ladder", "orbit-simulation (closed-form)", "projection-band (fact vs hypothesis)", "timeline-of-consequences", "planet/body cross-section"] },
+ "evidencePolicy": { "factVsHypothesis": "mandatory on-screen layer label; projections must cite the assumption they follow from" },
+ "publishing": { "autoPublish": false }
+}
