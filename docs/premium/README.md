@@ -74,6 +74,8 @@ It keeps **five separate results**:
 | ImpossibleBrief | `not-available`: no IB pack. FR engineering templates are not allowed (the validator rejects them). An IB cinematic what-if pack would be a separate, approved project. | The daily Short continues on the existing pipeline (09:30 Istanbul). |
 | CriticalThread, The Hidden Logic of Things, ProfitDecoded | `not-available` | Unchanged |
 
+The Hidden Logic of Things has its own separate, opt-in premium studio (`scripts/bto-studio/`, `BTO_PREMIUM_RENDER=preview`). It does not use this FR engine's pack or templates; see `docs/premium-studio/README.md`.
+
 ## 5. How a premium FR video would enter production (manual, per video)
 
 1. Evidence and assets: `evidence.json` (verbatim passages) and `assets.json` (licence, sha256).
