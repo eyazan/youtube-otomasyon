@@ -1,0 +1,58 @@
+{
+ "stages": {
+  "load": {
+   "status": "done",
+   "hash": "13e0e90af8c1d439",
+   "at": "2026-10-20T17:25:36.459Z",
+   "readiness": {
+    "ready": true,
+    "errors": [],
+    "warnings": [],
+    "publishedRows": 0
+   }
+  },
+  "storyboard": {
+   "status": "done",
+   "hash": "eb4d7980b7c7103d",
+   "at": "2026-10-20T17:25:36.460Z"
+  },
+  "validate": {
+   "status": "done",
+   "hash": "77f34e1b460d8b84",
+   "at": "2026-10-20T17:25:36.468Z"
+  },
+  "render": {
+   "status": "done",
+   "hash": "dca3d4b2eacb1f9a",
+   "at": "2026-10-20T17:27:37.254Z",
+   "perf": {
+    "quality": "final",
+    "resolution": "1080x1920",
+    "workers": 3,
+    "segments": 7,
+    "cachedSegments": 0,
+    "framesRendered": 948,
+    "wallSec": 120,
+    "msPerFrameWall": 126.6,
+    "peakChromiumRssMb": 4023,
+    "host": "linux x64 4 cpu 16 GB"
+   }
+  },
+  "audio": {
+   "status": "done",
+   "hash": "588e3e85a51c4eba",
+   "at": "2026-10-20T17:27:49.155Z"
+  },
+  "qa": {
+   "status": "done",
+   "hash": "61a2305de01c0a35",
+   "at": "2026-10-20T17:28:33.581Z",
+   "pass": true
+  },
+  "package": {
+   "status": "done",
+   "hash": "7fc0f33efb10f07c",
+   "at": "2026-10-20T17:28:33.583Z"
+  }
+ }
+}

@@ -1,0 +1,255 @@
+{
+ "schema": "bto-studio.review-package.v1",
+ "channel": "behind-the-ordinary",
+ "topicId": "BTO-301",
+ "slug": "why-qr-codes-have-three-corner-squares",
+ "title": "Why QR Codes Have Three Corner Squares",
+ "verdict": "PREVIEW_ONLY_UNAPPROVED_VOICE",
+ "autoPublish": false,
+ "uploadAttempted": false,
+ "mode": "preview",
+ "quality": "final",
+ "createdAt": "2026-10-20T16:58:05.950Z",
+ "video": "channels/behind-the-ordinary/premium/BTO-301/out/why-qr-codes-have-three-corner-squares-premium-final.mp4",
+ "voice": {
+  "used": "kokoro af_heart",
+  "approved": false,
+  "approvedVoice": {
+   "provider": "edge-tts",
+   "voice": "en-US-EmmaMultilingualNeural",
+   "rate": "+1%"
+  },
+  "note": "PREVIEW ONLY. The channel's approved voice is Edge en-US-EmmaMultilingualNeural; re-narrate with --voice edge before any publishing review.",
+  "wordTiming": "line timing measured per take; word timing inside a line estimated (energy envelope, punctuation-snapped pauses, syllable weights)"
+ },
+ "narrationUnchanged": {
+  "sourceHash": "13e0e90af8c1d439",
+  "lines": [
+   "Those three QR squares aren't decoration.",
+   "They tell the scanner where to look.",
+   "Denso Wave released the QR Code in 1994, and QR means quick response.",
+   "The corner marks are position detection patterns. Finding them made high-speed reading possible.",
+   "Why squares? The team said that pattern was least likely to appear on business forms.",
+   "They surveyed flyers, magazines and cardboard boxes for the rarest black-and-white ratio.",
+   "That rare ratio lets a scanner orient the code from any angle."
+  ]
+ },
+ "traceability": [
+  {
+   "scene": "s1-hook",
+   "lines": [
+    "L1"
+   ],
+   "purpose": "Separate the three squares from the data visually: everything else disappears, so 'not decoration' is seen, not just heard. Plants the empty fourth corner.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F3",
+     "claim": "The developers added positional information indicating that a code is present and should be read.",
+     "quote": "adding positional information indicating the existence of a code to be read",
+     "source": "DENSO WAVE — History of QR Code",
+     "url": "https://www.qrcode.com/en/history/"
+    },
+    {
+     "id": "F11",
+     "claim": "The three finder patterns sit at the upper left, upper right and lower left corners.",
+     "quote": "at the upper left, upper right and lower left corners of the QR code image",
+     "source": "Wikipedia — QR code",
+     "url": "https://en.wikipedia.org/wiki/QR_code"
+    }
+   ]
+  },
+  {
+   "scene": "s2-locate",
+   "lines": [
+    "L2"
+   ],
+   "purpose": "Show what 'tell the scanner where to look' means: a reader's scan lines sweep a cluttered package, and its marks lock onto exactly the three squares, then join them.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F3",
+     "claim": "The developers added positional information indicating that a code is present and should be read.",
+     "quote": "adding positional information indicating the existence of a code to be read",
+     "source": "DENSO WAVE — History of QR Code",
+     "url": "https://www.qrcode.com/en/history/"
+    },
+    {
+     "id": "F11",
+     "claim": "The three finder patterns sit at the upper left, upper right and lower left corners.",
+     "quote": "at the upper left, upper right and lower left corners of the QR code image",
+     "source": "Wikipedia — QR code",
+     "url": "https://en.wikipedia.org/wiki/QR_code"
+    }
+   ]
+  },
+  {
+   "scene": "s3-origin",
+   "lines": [
+    "L3"
+   ],
+   "purpose": "Anchor the invention in time and name: the year ruler lands on 1994 as it is spoken, and the letters QR unfold into the words they stand for.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "Denso Wave, then a division of Denso Corporation, announced the release of the QR Code in 1994.",
+     "quote": "In 1994, DENSO WAVE (then a division of DENSO CORPORATION) announced the release of its QR Code",
+     "source": "DENSO WAVE — History of QR Code",
+     "url": "https://www.qrcode.com/en/history/"
+    },
+    {
+     "id": "F2",
+     "claim": "QR stands for quick response, reflecting a development focus on high-speed reading.",
+     "quote": "The QR in the name stands for quick response",
+     "source": "DENSO WAVE — History of QR Code",
+     "url": "https://www.qrcode.com/en/history/"
+    }
+   ]
+  },
+  {
+   "scene": "s4-anatomy",
+   "lines": [
+    "L4"
+   ],
+   "purpose": "Name the corner marks and show their structure: one pattern lifts out as three stacked layers (dark, light, dark), then the reader finds all three and the data is read in one fast sweep.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "The square position detection marks made high-speed reading possible.",
+     "quote": "By incorporating these marks into their code, high-speed reading became possible",
+     "source": "DENSO WAVE — History of QR Code",
+     "url": "https://www.qrcode.com/en/history/"
+    },
+    {
+     "id": "F11",
+     "claim": "The three finder patterns sit at the upper left, upper right and lower left corners.",
+     "quote": "at the upper left, upper right and lower left corners of the QR code image",
+     "source": "Wikipedia — QR code",
+     "url": "https://en.wikipedia.org/wiki/QR_code"
+    }
+   ]
+  },
+  {
+   "scene": "s5-why-squares",
+   "lines": [
+    "L5"
+   ],
+   "purpose": "Make 'least likely to appear on business forms' concrete: a template of the nested-square pattern searches a busy form and every square-ish feature fails to match; the team's words appear verbatim.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F5",
+     "claim": "Masahiro Hara said square marks were chosen because that pattern was least likely to appear on business forms.",
+     "quote": "it was the pattern least likely to appear on various business forms and the like",
+     "source": "DENSO WAVE — History of QR Code",
+     "url": "https://www.qrcode.com/en/history/"
+    },
+    {
+     "id": "F6",
+     "claim": "A similar-looking mark near the code could be mistaken for a position detection pattern, so the pattern had to be unique.",
+     "quote": "their position detection patterns had to be truly unique",
+     "source": "DENSO WAVE — History of QR Code",
+     "url": "https://www.qrcode.com/en/history/"
+    }
+   ]
+  },
+  {
+   "scene": "s6-ratio",
+   "lines": [
+    "L6"
+   ],
+   "purpose": "Show what 'black-and-white ratio' means: a scan line turns printed matter into runs of black and white; then the line crosses the corner pattern and its runs measure exactly 1:1:3:1:1.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F7",
+     "claim": "The team surveyed the ratio of white to black areas in printing on fliers, magazines and cardboard boxes.",
+     "quote": "an exhaustive survey of the ratio of white to black areas in pictures and symbols printed on fliers, magazines, cardboard boxes",
+     "source": "DENSO WAVE — History of QR Code",
+     "url": "https://www.qrcode.com/en/history/"
+    },
+    {
+     "id": "F8",
+     "claim": "The least-used black-and-white ratio on printed matter, 1:1:3:1:1, set the widths of the position detection patterns.",
+     "quote": "came up with the least used ratio of black and white areas on printed matter. This ratio was 1:1:3:1:1",
+     "source": "DENSO WAVE — History of QR Code",
+     "url": "https://www.qrcode.com/en/history/"
+    }
+   ]
+  },
+  {
+   "scene": "s7-any-angle",
+   "lines": [
+    "L7"
+   ],
+   "purpose": "Prove the payoff: the code turns to different angles while the scan line through the corner keeps reading the same 1:1:3:1:1 runs; three found corners plus the empty one fix which way is up, and the code settles upright.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F9",
+     "claim": "Searching for this unique ratio lets a reader determine the code's orientation at any scanning angle.",
+     "quote": "the orientation of their code could be determined regardless of the angle of scanning",
+     "source": "DENSO WAVE — History of QR Code",
+     "url": "https://www.qrcode.com/en/history/"
+    },
+    {
+     "id": "F8",
+     "claim": "The least-used black-and-white ratio on printed matter, 1:1:3:1:1, set the widths of the position detection patterns.",
+     "quote": "came up with the least used ratio of black and white areas on printed matter. This ratio was 1:1:3:1:1",
+     "source": "DENSO WAVE — History of QR Code",
+     "url": "https://www.qrcode.com/en/history/"
+    },
+    {
+     "id": "F11",
+     "claim": "The three finder patterns sit at the upper left, upper right and lower left corners.",
+     "quote": "at the upper left, upper right and lower left corners of the QR code image",
+     "source": "Wikipedia — QR code",
+     "url": "https://en.wikipedia.org/wiki/QR_code"
+    }
+   ]
+  }
+ ],
+ "licensing": {
+  "visuals": "all drawn in-house from code (SVG); the QR symbol is generated by segno (BSD-3-Clause) and encodes 'HIDDEN LOGIC'",
+  "fonts": "SIL OFL 1.1 (@fontsource Inter, Source Serif 4, Barlow Semi Condensed 5.3.0)",
+  "audio": "narration TTS + effects/music synthesised by scripts/bto-studio/audio/sound_design.py (no samples)",
+  "thirdPartyMedia": []
+ },
+ "qa": {
+  "objectivePass": true,
+  "report": "channels/behind-the-ordinary/premium/BTO-301/out/qa-report.md",
+  "contactSheet": "channels/behind-the-ordinary/premium/BTO-301/out/contact-sheet.png",
+  "sceneSheet": "channels/behind-the-ordinary/premium/BTO-301/out/scene-sheet.png",
+  "failures": [
+   "WARN caption reading speed: 1 cues over 22 chars/s (max 23.8)"
+  ]
+ },
+ "audio": {
+  "integratedLufs": -14.1,
+  "truePeakDbtp": -1.8
+ },
+ "performance": {
+  "renderWallSec": 1.6,
+  "msPerFrame": 0,
+  "workers": 1,
+  "peakChromiumRssMb": 1181,
+  "cachedSegments": 7,
+  "segments": 7,
+  "host": "linux x64 4 cpu 16 GB",
+  "totalPipelineSec": 58.7
+ },
+ "cost": {
+  "llmUsd": 0,
+  "ttsUsd": 0,
+  "renderUsd": 0,
+  "note": "local rendering and free/offline TTS; LLM use only when a Claude storyboard draft was requested and approved"
+ },
+ "approvalsNeeded": [
+  "voice: re-narrate with the approved Edge voice (if PREVIEW_ONLY)",
+  "creative sign-off (video-quality-review findings)",
+  "factual sign-off on the traceability table",
+  "owner decision to hand the MP4 to the normal pipeline (never automatic)"
+ ]
+}
