@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T18:43:34.735Z",
+  "generatedAt": "2026-10-21T19:23:39.657Z",
   "note": "Per-channel baselines are computed separately and never blended.",
   "channels": [
     {
@@ -9,8 +9,8 @@
         "lastPublished": "2026-10-21T18:00:00.000Z",
         "published": 29,
         "inventory": {
-          "A": 107,
-          "B": 122,
+          "A": 105,
+          "B": 124,
           "C": 59,
           "D": 59
         },
@@ -26,11 +26,11 @@
           "reason": "EXPLORE (0.25): under-sampled cluster maritime-disasters"
         },
         "baseline": {
-          "n": 28,
-          "views": 496,
+          "n": 29,
+          "views": 465,
           "averagePercentageViewed": 64.5,
           "subscribersPer1000Views": 1.46,
-          "engagementPer1000Views": 25.36,
+          "engagementPer1000Views": 24.19,
           "watchHoursPer1000Views": 2.49
         }
       },
@@ -94,13 +94,19 @@
         "episodes": 0,
         "backlog": [
           {
-            "slug": "challenger-1986",
+            "slug": "chernobyl-1986",
+            "LongFormPotentialScore": 86,
+            "bucket": "A",
+            "mode": "B_SHORT_PROVES_DEMAND"
+          },
+          {
+            "slug": "air-france-447-2009",
             "LongFormPotentialScore": 85,
             "bucket": "A",
             "mode": "B_SHORT_PROVES_DEMAND"
           },
           {
-            "slug": "chernobyl-1986",
+            "slug": "challenger-1986",
             "LongFormPotentialScore": 85,
             "bucket": "A",
             "mode": "B_SHORT_PROVES_DEMAND"
@@ -108,12 +114,6 @@
           {
             "slug": "columbia-2003",
             "LongFormPotentialScore": 85,
-            "bucket": "A",
-            "mode": "B_SHORT_PROVES_DEMAND"
-          },
-          {
-            "slug": "air-france-447-2009",
-            "LongFormPotentialScore": 84,
             "bucket": "A",
             "mode": "B_SHORT_PROVES_DEMAND"
           },
@@ -159,7 +159,7 @@
       "learning": {
         "shorts": {
           "status": "adaptive",
-          "sampleSize": 28,
+          "sampleSize": 29,
           "adopted": 0,
           "hypotheses": 5
         },

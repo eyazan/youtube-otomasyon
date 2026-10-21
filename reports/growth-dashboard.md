@@ -1,20 +1,20 @@
 # Growth dashboard
 
-Generated 2026-10-21T18:43:34.735Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-10-21T19:23:39.657Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
-**Shorts health** — last published 2026-10-21T18:00:00.000Z · 29 published · inventory A107/B122/C59/D59 · next: admiral-nakhimov-1986 (EXPLORE (0.25): under-sampled cluster maritime-disasters)
+**Shorts health** — last published 2026-10-21T18:00:00.000Z · 29 published · inventory A105/B124/C59/D59 · next: admiral-nakhimov-1986 (EXPLORE (0.25): under-sampled cluster maritime-disasters)
 
 **Long-form health** — cycle 2026-W43: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W43 already QUALITY_BLOCKED)
 
-**Long-form backlog** — challenger-1986 85/A, chernobyl-1986 85/A, columbia-2003 85/A, air-france-447-2009 84/A, apollo-13-1970 84/A
+**Long-form backlog** — chernobyl-1986 86/A, air-france-447-2009 85/A, challenger-1986 85/A, columbia-2003 85/A, apollo-13-1970 84/A
 
 **Content clusters** — 12 · integrity OK
 
 **Growth / subscriber conversion** — tracked 30 · subs/1k Shorts 1.46 · subs/1k long n/a
 
-**Learning** — Shorts adaptive (n=28, adopted 0) · Long-form heuristics-only (n=0)
+**Learning** — Shorts adaptive (n=29, adopted 0) · Long-form heuristics-only (n=0)
 
 **Short → Long funnel** — 0 link(s), 0 long→long, 0 pending RELATED_VIDEO_MANUAL_ACTION_REQUIRED
 
