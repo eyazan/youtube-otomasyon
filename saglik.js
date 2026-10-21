@@ -54,9 +54,10 @@ function nitelikliKonu() {
   try {
     const Growth = require("./core/growth");
     if (CHANNEL.config.pathMode !== "legacy-adapter") {
-      const exclude = [...require("./core/discovery").usedIds(CHANNEL)];
-      const selection = Growth.selectShortTopic(CHANNEL, { exclude, write: false });
-      return { count: selection.selected ? (selection.candidatePool || {}).count || 1 : 0, first: selection.selected ? selection.selected.topic.slug : null, reason: selection.reason };
+      // Same exclusions and bar as the production selection (core/growth/inventory.js).
+      const buffer = require("./core/growth/inventory").qualifiedBuffer(CHANNEL);
+      if (buffer.status === "unknown") throw new Error(buffer.reason);
+      return { count: buffer.qualified, first: buffer.next[0] ? buffer.next[0].slug : null, reason: buffer.reason, verified: buffer.visuallyVerified };
     }
     const K = require("./lib/kutuphane");
     const durum = (ad) => jsonOku(path.join(CHANNEL.paths.state, ad), null);
@@ -186,8 +187,8 @@ async function denetle(ops = {}) {
   // gun gosterirken 0 nitelikli konu vardi). Yayin icin secilebilecek konu yoksa bugun Short cikmaz.
   const nitelikli = ops.nitelikli ?? nitelikliKonu();
   ekle("nitelikli-konu", nitelikli.count === 0 ? "kritik" : nitelikli.count < 7 ? "uyari" : "ok",
-    nitelikli.count === 0 ? `kalite çubuğunu geçen konu yok — ${nitelikli.reason}` : `${nitelikli.count} nitelikli konu (ilk: ${nitelikli.first})`,
-    nitelikli.count < 7 ? "Konu araştırması/görsel kürasyonu gerekiyor; eşik düşürülmez." : null);
+    nitelikli.count === 0 ? `kalite çubuğunu geçen konu yok — ${nitelikli.reason}` : `${nitelikli.count} nitelikli konu (ilk: ${nitelikli.first})${nitelikli.verified != null ? `; ${nitelikli.verified} görseli ölçülmüş` : ""}${nitelikli.count < 7 ? " — 7 günlük tampon altında" : ""}`,
+    nitelikli.count < 7 ? "Konu araştırması/görsel kürasyonu gerekiyor; eşik düşürülmez. Görsel ölçümü: Actions → Topic buffer (visual survey + preflight)." : null);
 
   // 6) Seslendirme: Edge sesi; reddedilirse yalnizca ONAYLI yedek ses uretimi kurtarir.
   if (publish || ops.seslendirme) {

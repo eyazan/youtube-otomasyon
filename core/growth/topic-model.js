@@ -8,6 +8,7 @@
 
 const fs = require("fs");
 const Popularity = require("./popularity");
+const VisualSurvey = require("./visual-survey");
 const Overrides = require("../topic-overrides");
 const path = require("path");
 const M = require("../../lib/metin");
@@ -336,6 +337,13 @@ function normalize(channel, raw, slug) {
   if (popularity) {
     topic.popularity = popularity;
     topic.signals.popularity = popularity.score;
+  }
+  // Measured licensed-picture availability (core/growth/visual-survey.js): a topic whose pictures
+  // passed the production pre-check counts as having confirmed stills, exactly like curated ones.
+  const survey = VisualSurvey.forTopic(typeof channel === "string" ? null : channel, raw);
+  if (survey) {
+    topic.visualSurvey = { measuredAt: survey.measuredAt, licensedStills: survey.licensedStills, licensedClips: survey.licensedClips, passesPrecheck: survey.passesPrecheck };
+    if (survey.passesPrecheck) topic.archival = true;
   }
   return topic;
 }

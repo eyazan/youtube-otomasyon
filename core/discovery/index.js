@@ -12,6 +12,18 @@ function universe(channel = getChannel()) {
   return data;
 }
 
+// A topic blocked only by the licensed-picture pre-check is re-admitted when a NEWER visual survey
+// (core/growth/visual-survey.js) measured enough licensed pictures with the same pre-check. Every
+// other block (readiness, render gate, legacy ids) stays permanent. If the pre-check fails again at
+// production time the pipeline re-blocks the topic with a new date, which the old survey cannot lift.
+function visualBlockLifted(channel, id, entry) {
+  if (!entry || !/^visual pre-check/.test(entry.reason || "")) return false;
+  const VisualSurvey = require("../growth/visual-survey");
+  if (!VisualSurvey.enabled(channel)) return false;
+  const survey = VisualSurvey.load(channel).topics[id];
+  return !!(survey && survey.passesPrecheck && VisualSurvey.fresh(survey) && Date.parse(survey.measuredAt) > Date.parse(entry.date || 0));
+}
+
 function usedIds(channel = getChannel()) {
   const files = ["published.json", "generated.json", "blocked.json"];
   const ids = new Set();
@@ -35,7 +47,7 @@ function usedIds(channel = getChannel()) {
         const id = item && (item.topicId || idForSlug(item.slug));
         if (id) ids.add(id);
       });
-      else Object.keys(value || {}).forEach((id) => ids.add(id));
+      else Object.entries(value || {}).forEach(([id, entry]) => { if (!(file === "blocked.json" && visualBlockLifted(channel, id, entry))) ids.add(id); });
     } catch (error) {}
   }
   return ids;
@@ -51,4 +63,4 @@ function discover(channel = getChannel(), options = {}) {
     .slice(0, options.limit || 20);
 }
 
-module.exports = { universe, usedIds, discover };
+module.exports = { universe, usedIds, discover, visualBlockLifted };

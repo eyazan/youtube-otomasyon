@@ -160,7 +160,10 @@ function selectShortTopic(channel, options = {}) {
       roll: Engagement.hash01(`${channel.slug}:${day}:${row.topic.slug}:explore`),
     }))).sort((a, b) => a.observations - b.observations || a.roll - b.roll || b.row.score.SelectionScore - a.row.score.SelectionScore);
     choice = underSampled[0] && underSampled[0].row || null;
-    reason = choice ? `EXPLORE (${selectionPolicy.exploreRatio}): under-sampled cluster ${choice.topic.cluster}` : "NO_EXPLORE_CANDIDATE";
+    reason = choice ? `EXPLORE (${selectionPolicy.exploreRatio}): under-sampled cluster ${choice.topic.cluster}` : null;
+    // An explore day without an explore-bucket candidate takes the best qualified exploit topic
+    // instead of skipping the slot (2026-10-20 ImpossibleBrief logged only "NO_EXPLORE_CANDIDATE").
+    if (!choice && primary.length) { choice = primary[0]; reason = `EXPLORE_FALLBACK_TO_EXPLOIT: no ${selectionPolicy.exploreBuckets.join("/")} explore candidate; best ${primary[0].score.bucket} topic by SelectionScore`; }
   } else if (primary.length) { choice = primary[0]; reason = `EXPLOIT (${selectionPolicy.exploitRatio}): best ${primary[0].score.bucket} topic by SelectionScore`; }
   else if (policy.fallbackToC && experimental.length) { choice = experimental[0]; reason = "FALLBACK_TO_C: no A/B topic remains; C must still pass full production readiness"; }
   const inventory = { A: 0, B: 0, C: 0, D: 0 };
