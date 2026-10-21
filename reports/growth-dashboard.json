@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T17:22:43.510Z",
+  "generatedAt": "2026-10-21T18:08:02.524Z",
   "note": "Per-channel baselines are computed separately and never blended.",
   "channels": [
     {
@@ -9,9 +9,9 @@
         "lastPublished": "2026-10-21T18:00:00.000Z",
         "published": 29,
         "inventory": {
-          "A": 92,
-          "B": 136,
-          "C": 60,
+          "A": 107,
+          "B": 122,
+          "C": 59,
           "D": 59
         },
         "durableInventory": {
@@ -28,10 +28,10 @@
         "baseline": {
           "n": 28,
           "views": 496,
-          "averagePercentageViewed": 64.36,
+          "averagePercentageViewed": 64.5,
           "subscribersPer1000Views": 1.46,
           "engagementPer1000Views": 25.36,
-          "watchHoursPer1000Views": 2.05
+          "watchHoursPer1000Views": 2.49
         }
       },
       "longform": {
@@ -94,13 +94,13 @@
         "episodes": 0,
         "backlog": [
           {
-            "slug": "chernobyl-1986",
-            "LongFormPotentialScore": 86,
+            "slug": "challenger-1986",
+            "LongFormPotentialScore": 85,
             "bucket": "A",
             "mode": "B_SHORT_PROVES_DEMAND"
           },
           {
-            "slug": "challenger-1986",
+            "slug": "chernobyl-1986",
             "LongFormPotentialScore": 85,
             "bucket": "A",
             "mode": "B_SHORT_PROVES_DEMAND"
@@ -161,7 +161,7 @@
           "status": "adaptive",
           "sampleSize": 28,
           "adopted": 0,
-          "hypotheses": 6
+          "hypotheses": 5
         },
         "longform": {
           "status": "heuristics-only",
@@ -179,20 +179,25 @@
         {
           "slug": "skylab-1973",
           "bucket": "C",
-          "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
-        },
-        {
-          "slug": "eastland-1915",
-          "bucket": "C",
-          "reason": "VideoPotential 82 in experimental band 58–71; sources 41 < 62"
+          "reason": "VideoPotential 85 in experimental band 58–71; sources 41 < 62"
         },
         {
           "slug": "munich-1958",
           "bucket": "C",
-          "reason": "VideoPotential 85 in experimental band 58–71; sources 41 < 62"
+          "reason": "VideoPotential 86 in experimental band 58–71; sources 41 < 62"
         },
         {
-          "slug": "boston-molasses-1919",
+          "slug": "eastland-1915",
+          "bucket": "C",
+          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
+        },
+        {
+          "slug": "uss-forrestal-1967",
+          "bucket": "C",
+          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
+        },
+        {
+          "slug": "vanguard-1957",
           "bucket": "C",
           "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
         },
@@ -202,19 +207,14 @@
           "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
         },
         {
-          "slug": "uss-forrestal-1967",
-          "bucket": "C",
-          "reason": "VideoPotential 82 in experimental band 58–71; sources 41 < 62"
-        },
-        {
-          "slug": "vanguard-1957",
-          "bucket": "C",
-          "reason": "VideoPotential 82 in experimental band 58–71; sources 41 < 62"
-        },
-        {
           "slug": "castle-bravo-1954",
           "bucket": "C",
           "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
+        },
+        {
+          "slug": "b2-guam-2008",
+          "bucket": "C",
+          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
         },
         {
           "slug": "quebec-bridge-1907",
@@ -362,10 +362,10 @@
         "baseline": {
           "n": 17,
           "views": 922,
-          "averagePercentageViewed": 66.19,
-          "subscribersPer1000Views": 0,
+          "averagePercentageViewed": 68.85,
+          "subscribersPer1000Views": 0.55,
           "engagementPer1000Views": 19.21,
-          "watchHoursPer1000Views": 2.6
+          "watchHoursPer1000Views": 2.64
         }
       },
       "longform": {
@@ -426,32 +426,32 @@
         "episodes": 0,
         "backlog": [
           {
-            "slug": "what-if-synthetic-fertilizer-disappeared",
+            "slug": "what-if-we-mined-a-metal-asteroid",
+            "LongFormPotentialScore": 84,
+            "bucket": "A",
+            "mode": "A_LONG_FIRST"
+          },
+          {
+            "slug": "what-if-we-swam-in-europas-ocean",
             "LongFormPotentialScore": 83,
             "bucket": "A",
             "mode": "A_LONG_FIRST"
           },
           {
-            "slug": "what-if-the-ozone-hole-never-closed",
-            "LongFormPotentialScore": 82,
+            "slug": "what-if-we-built-a-star-on-earth",
+            "LongFormPotentialScore": 83,
             "bucket": "A",
             "mode": "A_LONG_FIRST"
           },
           {
-            "slug": "what-if-the-tunguska-blast-happened-over-a-city",
-            "LongFormPotentialScore": 82,
+            "slug": "what-if-hyperloop-actually-worked",
+            "LongFormPotentialScore": 83,
             "bucket": "A",
             "mode": "A_LONG_FIRST"
           },
           {
-            "slug": "could-earth-survive-one-day-without-earth-s-magnetic-field",
-            "LongFormPotentialScore": 82,
-            "bucket": "A",
-            "mode": "A_LONG_FIRST"
-          },
-          {
-            "slug": "what-if-the-permafrost-thawed",
-            "LongFormPotentialScore": 82,
+            "slug": "what-if-we-dimmed-the-sun-to-cool-earth",
+            "LongFormPotentialScore": 83,
             "bucket": "A",
             "mode": "A_LONG_FIRST"
           }
@@ -484,7 +484,7 @@
       "growth": {
         "trackedVideos": 18,
         "subscriberConversion": {
-          "shorts": 0,
+          "shorts": 0.55,
           "longform": null
         }
       },

@@ -1518,5 +1518,74 @@
       }
     ],
     "at": "2026-10-20T18:02:22.474Z"
+  },
+  {
+    "videoId": "x5VVXKhOhMQ",
+    "channel": "impossible-brief",
+    "contentType": "short",
+    "checkpoint": "48h",
+    "diagnoses": [
+      {
+        "code": "HEALTHY",
+        "confidence": "low",
+        "evidence": "no problem pattern in available metrics",
+        "recommendation": "Keep; revisit at next checkpoint.",
+        "specCode": "HEALTHY"
+      }
+    ],
+    "at": "2026-10-21T18:07:54.748Z"
+  },
+  {
+    "videoId": "6zrtuhSsLgA",
+    "channel": "impossible-brief",
+    "contentType": "short",
+    "checkpoint": "7d",
+    "diagnoses": [
+      {
+        "code": "LOW_ENGAGEMENT",
+        "confidence": "low",
+        "evidence": "12.11 engagements / 1,000 views",
+        "recommendation": "Contextual comment prompt after the payoff.",
+        "specCode": "LOW_ENGAGEMENT"
+      },
+      {
+        "code": "LOW_SUBSCRIBER_CONVERSION",
+        "confidence": "medium",
+        "evidence": "0.55 subs / 1,000 views",
+        "recommendation": "Series-shaped payoff; link a related long-form episode.",
+        "specCode": "SUBSCRIBER_CONVERSION_WEAK"
+      }
+    ],
+    "at": "2026-10-21T18:07:54.748Z"
+  },
+  {
+    "videoId": "wvn-RzNCb-M",
+    "channel": "impossible-brief",
+    "contentType": "short",
+    "checkpoint": "14d",
+    "diagnoses": [
+      {
+        "code": "LOW_ENGAGEMENT",
+        "confidence": "low",
+        "evidence": "12.43 engagements / 1,000 views",
+        "recommendation": "Contextual comment prompt after the payoff.",
+        "specCode": "LOW_ENGAGEMENT"
+      },
+      {
+        "code": "LOW_SUBSCRIBER_CONVERSION",
+        "confidence": "medium",
+        "evidence": "1.66 subs / 1,000 views",
+        "recommendation": "Series-shaped payoff; link a related long-form episode.",
+        "specCode": "SUBSCRIBER_CONVERSION_WEAK"
+      },
+      {
+        "code": "STRONG_TOPIC_AUDIENCE_FIT",
+        "confidence": "medium",
+        "evidence": "1.66 subs / 1,000 views vs channel median 0.55",
+        "recommendation": "Nominate adjacent topics in this cluster; candidate for a series.",
+        "specCode": "STRONG_TOPIC_AUDIENCE_FIT"
+      }
+    ],
+    "at": "2026-10-21T18:07:54.748Z"
   }
 ]

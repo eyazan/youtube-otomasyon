@@ -2,19 +2,19 @@
   "channel": "failure-reconstructed",
   "status": "sample-floor-met",
   "minimumSample": 5,
-  "sampleSize": 23,
+  "sampleSize": 24,
   "learnedRules": [
     {
       "key": "hookType",
       "value": "consequence",
       "weakValue": "statement",
-      "evidenceVideos": 23,
+      "evidenceVideos": 24,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
           "value": "consequence",
           "sample": 7,
-          "averagePercentageViewed": 187.57
+          "averagePercentageViewed": 126.33
         },
         {
           "value": "number-or-countdown",
@@ -23,23 +23,18 @@
         },
         {
           "value": "statement",
-          "sample": 13,
-          "averagePercentageViewed": 64.68
+          "sample": 14,
+          "averagePercentageViewed": 65.1
         }
       ]
     },
     {
       "key": "durationRange",
-      "value": "25-35s",
-      "weakValue": "under-25s",
-      "evidenceVideos": 23,
+      "value": "over-35s",
+      "weakValue": "25-35s",
+      "evidenceVideos": 24,
       "confidence": "SUPPORTED",
       "aggregates": [
-        {
-          "value": "25-35s",
-          "sample": 19,
-          "averagePercentageViewed": 106.37
-        },
         {
           "value": "over-35s",
           "sample": 2,
@@ -47,8 +42,13 @@
         },
         {
           "value": "under-25s",
-          "sample": 2,
-          "averagePercentageViewed": 91.37
+          "sample": 3,
+          "averagePercentageViewed": 84.42
+        },
+        {
+          "value": "25-35s",
+          "sample": 19,
+          "averagePercentageViewed": 83.81
         }
       ]
     },
@@ -56,13 +56,13 @@
       "key": "secondBeat",
       "value": "countdown",
       "weakValue": "emergency",
-      "evidenceVideos": 23,
+      "evidenceVideos": 24,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
           "value": "countdown",
-          "sample": 5,
-          "averagePercentageViewed": 231.09
+          "sample": 6,
+          "averagePercentageViewed": 132.87
         },
         {
           "value": "context",
@@ -72,7 +72,7 @@
         {
           "value": "event",
           "sample": 12,
-          "averagePercentageViewed": 68.08
+          "averagePercentageViewed": 68.09
         },
         {
           "value": "emergency",
@@ -85,13 +85,13 @@
       "key": "visualChangeFrequency",
       "value": "fast",
       "weakValue": "measured",
-      "evidenceVideos": 23,
+      "evidenceVideos": 24,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
           "value": "fast",
-          "sample": 16,
-          "averagePercentageViewed": 118.38
+          "sample": 17,
+          "averagePercentageViewed": 90.35
         },
         {
           "value": "measured",
@@ -104,37 +104,37 @@
       "key": "questionStyle",
       "value": "question",
       "weakValue": null,
-      "evidenceVideos": 23,
+      "evidenceVideos": 24,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
           "value": "question",
-          "sample": 23,
-          "averagePercentageViewed": 103.77
+          "sample": 24,
+          "averagePercentageViewed": 84.52
         }
       ]
     },
     {
       "key": "category",
-      "value": "maritime-disasters",
+      "value": "nuclear-accidents",
       "weakValue": "materials-failures",
-      "evidenceVideos": 23,
+      "evidenceVideos": 24,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
           "value": "structural-failures",
           "sample": 1,
-          "averagePercentageViewed": 894.37
+          "averagePercentageViewed": 465.62
         },
         {
           "value": "nuclear-accidents",
-          "sample": 1,
-          "averagePercentageViewed": 108.58
+          "sample": 2,
+          "averagePercentageViewed": 89.56
         },
         {
           "value": "maritime-disasters",
           "sample": 2,
-          "averagePercentageViewed": 84.19
+          "averagePercentageViewed": 84.22
         },
         {
           "value": "aviation-failures",
@@ -187,17 +187,17 @@
       "key": "ctaStyle",
       "value": "adaptive after payoff",
       "weakValue": null,
-      "evidenceVideos": 23,
+      "evidenceVideos": 24,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
           "value": "adaptive after payoff",
-          "sample": 23,
-          "averagePercentageViewed": 103.77
+          "sample": 24,
+          "averagePercentageViewed": 84.52
         }
       ]
     }
   ],
-  "lastUpdated": "2026-10-21T17:22:39.569Z",
+  "lastUpdated": "2026-10-21T18:07:43.015Z",
   "caveat": "Observed associations only; topic, timing and packaging can confound retention. No causal claim."
 }

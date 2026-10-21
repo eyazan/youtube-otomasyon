@@ -2,19 +2,19 @@
   "channel": "impossible-brief",
   "status": "sample-floor-met",
   "minimumSample": 5,
-  "sampleSize": 15,
+  "sampleSize": 16,
   "learnedRules": [
     {
       "key": "hookType",
       "value": "number-or-countdown",
       "weakValue": "statement",
-      "evidenceVideos": 15,
+      "evidenceVideos": 16,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
           "value": "number-or-countdown",
-          "sample": 13,
-          "averagePercentageViewed": 71.43
+          "sample": 14,
+          "averagePercentageViewed": 73
         },
         {
           "value": "statement",
@@ -27,7 +27,7 @@
       "key": "durationRange",
       "value": "over-35s",
       "weakValue": "25-35s",
-      "evidenceVideos": 15,
+      "evidenceVideos": 16,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
@@ -37,8 +37,8 @@
         },
         {
           "value": "25-35s",
-          "sample": 13,
-          "averagePercentageViewed": 69.63
+          "sample": 14,
+          "averagePercentageViewed": 71.33
         }
       ]
     },
@@ -46,13 +46,18 @@
       "key": "secondBeat",
       "value": "context",
       "weakValue": "technical",
-      "evidenceVideos": 15,
+      "evidenceVideos": 16,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
+          "value": "event",
+          "sample": 1,
+          "averagePercentageViewed": 95.79
+        },
+        {
           "value": "context",
           "sample": 13,
-          "averagePercentageViewed": 70.39
+          "averagePercentageViewed": 70.2
         },
         {
           "value": "technical",
@@ -65,7 +70,7 @@
       "key": "visualChangeFrequency",
       "value": null,
       "weakValue": null,
-      "evidenceVideos": 15,
+      "evidenceVideos": 16,
       "confidence": "INSUFFICIENT_DATA",
       "aggregates": []
     },
@@ -73,13 +78,13 @@
       "key": "questionStyle",
       "value": "question",
       "weakValue": null,
-      "evidenceVideos": 15,
+      "evidenceVideos": 16,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
           "value": "question",
-          "sample": 15,
-          "averagePercentageViewed": 70.15
+          "sample": 16,
+          "averagePercentageViewed": 71.61
         }
       ]
     },
@@ -87,18 +92,18 @@
       "key": "category",
       "value": "EARTH",
       "weakValue": "PHYSICS",
-      "evidenceVideos": 15,
+      "evidenceVideos": 16,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
           "value": "EARTH",
-          "sample": 2,
-          "averagePercentageViewed": 116.39
+          "sample": 3,
+          "averagePercentageViewed": 109.52
         },
         {
           "value": "FUTURE TECHNOLOGY",
           "sample": 3,
-          "averagePercentageViewed": 76.17
+          "averagePercentageViewed": 75.37
         },
         {
           "value": "EXTREME SCIENCE",
@@ -131,17 +136,17 @@
       "key": "ctaStyle",
       "value": "optional curiosity bridge after the scientific payoff",
       "weakValue": null,
-      "evidenceVideos": 15,
+      "evidenceVideos": 16,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
           "value": "optional curiosity bridge after the scientific payoff",
-          "sample": 15,
-          "averagePercentageViewed": 70.15
+          "sample": 16,
+          "averagePercentageViewed": 71.61
         }
       ]
     }
   ],
-  "lastUpdated": "2026-10-21T17:22:41.826Z",
+  "lastUpdated": "2026-10-21T18:07:56.249Z",
   "caveat": "Observed associations only; topic, timing and packaging can confound retention. No causal claim."
 }

@@ -1,14 +1,14 @@
 # Growth dashboard
 
-Generated 2026-10-21T17:22:43.510Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-10-21T18:08:02.524Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
-**Shorts health** — last published 2026-10-21T18:00:00.000Z · 29 published · inventory A92/B136/C60/D59 · next: admiral-nakhimov-1986 (EXPLORE (0.25): under-sampled cluster maritime-disasters)
+**Shorts health** — last published 2026-10-21T18:00:00.000Z · 29 published · inventory A107/B122/C59/D59 · next: admiral-nakhimov-1986 (EXPLORE (0.25): under-sampled cluster maritime-disasters)
 
 **Long-form health** — cycle 2026-W43: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W43 already QUALITY_BLOCKED)
 
-**Long-form backlog** — chernobyl-1986 86/A, challenger-1986 85/A, columbia-2003 85/A, air-france-447-2009 84/A, apollo-13-1970 84/A
+**Long-form backlog** — challenger-1986 85/A, chernobyl-1986 85/A, columbia-2003 85/A, air-france-447-2009 84/A, apollo-13-1970 84/A
 
 **Content clusters** — 12 · integrity OK
 
@@ -21,10 +21,10 @@ Generated 2026-10-21T17:22:43.510Z. Per-channel baselines are computed separatel
 **Research/source enrichment tasks**
 
 - apollo-1-1967 (C): VideoPotential 87 in experimental band 58–71; sources 41 < 62
-- skylab-1973 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
-- eastland-1915 (C): VideoPotential 82 in experimental band 58–71; sources 41 < 62
-- munich-1958 (C): VideoPotential 85 in experimental band 58–71; sources 41 < 62
-- boston-molasses-1919 (C): VideoPotential 83 in experimental band 58–71; sources 41 < 62
+- skylab-1973 (C): VideoPotential 85 in experimental band 58–71; sources 41 < 62
+- munich-1958 (C): VideoPotential 86 in experimental band 58–71; sources 41 < 62
+- eastland-1915 (C): VideoPotential 83 in experimental band 58–71; sources 41 < 62
+- uss-forrestal-1967 (C): VideoPotential 83 in experimental band 58–71; sources 41 < 62
 
 **Recent alerts**
 
@@ -40,11 +40,11 @@ Generated 2026-10-21T17:22:43.510Z. Per-channel baselines are computed separatel
 
 **Long-form health** — cycle 2026-W43: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W43 already QUALITY_BLOCKED)
 
-**Long-form backlog** — what-if-synthetic-fertilizer-disappeared 83/A, what-if-the-ozone-hole-never-closed 82/A, what-if-the-tunguska-blast-happened-over-a-city 82/A, could-earth-survive-one-day-without-earth-s-magnetic-field 82/A, what-if-the-permafrost-thawed 82/A
+**Long-form backlog** — what-if-we-mined-a-metal-asteroid 84/A, what-if-we-swam-in-europas-ocean 83/A, what-if-we-built-a-star-on-earth 83/A, what-if-hyperloop-actually-worked 83/A, what-if-we-dimmed-the-sun-to-cool-earth 83/A
 
 **Content clusters** — 7 · integrity OK
 
-**Growth / subscriber conversion** — tracked 18 · subs/1k Shorts 0 · subs/1k long n/a
+**Growth / subscriber conversion** — tracked 18 · subs/1k Shorts 0.55 · subs/1k long n/a
 
 **Learning** — Shorts adaptive (n=17, adopted 0) · Long-form heuristics-only (n=0)
 
