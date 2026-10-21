@@ -1,0 +1,69 @@
+{
+ "stages": {
+  "load": {
+   "status": "done",
+   "hash": "59c21d316d452511",
+   "at": "2026-10-21T16:46:46.268Z",
+   "readiness": {
+    "ready": false,
+    "errors": [
+     "researchStatus is NEEDS_PRIMARY_SOURCE, not VERIFIED",
+     "topic is not productionReady"
+    ],
+    "warnings": [],
+    "publishedRows": 0
+   }
+  },
+  "storyboard": {
+   "status": "done",
+   "hash": "6223659f4656e6c2",
+   "at": "2026-10-21T16:46:46.270Z"
+  },
+  "narrate": {
+   "status": "done",
+   "hash": "d82434c498b344e8",
+   "at": "2026-10-21T16:39:36.126Z",
+   "voice": "kokoro af_heart",
+   "approved": false,
+   "sec": 28.838
+  },
+  "validate": {
+   "status": "done",
+   "hash": "8b5a3deb82924775",
+   "at": "2026-10-21T16:46:46.277Z"
+  },
+  "render": {
+   "status": "done",
+   "hash": "61d4b6d5ce0ca35e",
+   "at": "2026-10-21T16:43:28.456Z",
+   "perf": {
+    "quality": "final",
+    "resolution": "1080x1920",
+    "workers": 3,
+    "segments": 8,
+    "cachedSegments": 0,
+    "framesRendered": 962,
+    "wallSec": 100.7,
+    "msPerFrameWall": 104.7,
+    "peakChromiumRssMb": 3986,
+    "host": "linux x64 4 cpu 16 GB"
+   }
+  },
+  "audio": {
+   "status": "done",
+   "hash": "57465239f7ce07d5",
+   "at": "2026-10-21T16:43:40.198Z"
+  },
+  "qa": {
+   "status": "done",
+   "hash": "a7ce63a6eb47828c",
+   "at": "2026-10-21T16:44:18.123Z",
+   "pass": true
+  },
+  "package": {
+   "status": "done",
+   "hash": "2c94ad7a1bddd0a3",
+   "at": "2026-10-21T16:44:18.126Z"
+  }
+ }
+}

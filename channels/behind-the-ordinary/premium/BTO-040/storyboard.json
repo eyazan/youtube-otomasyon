@@ -1,0 +1,3071 @@
+{
+ "schema": "bto-studio.storyboard.v1",
+ "channel": "behind-the-ordinary",
+ "topicId": "BTO-040",
+ "slug": "the-shopping-cart-started-as-a-folding-chair",
+ "version": 1,
+ "author": "visual-director (Claude, V5 engine-reusability pilot; research pending)",
+ "licensingNote": "all drawn in-house from code (SVG): store, figures, chair-cart rig and plan are original; no photographs, logos or brand marks",
+ "treatment": {
+  "educationalObjective": "The viewer leaves knowing that the first shopping cart was literally a folding chair with a basket on the seat and wheels on the legs (Sylvan Goldman, Humpty Dumpty stores, 1936-37), that shoppers first rejected it, and that Goldman made it normal by having people push carts around the store.",
+  "visualHook": "Frame 0: a wooden folding chair, wired basket on its seat and casters on its legs, rolls down a 1930s grocery aisle toward the camera. It is obviously a chair, and obviously being used as a cart.",
+  "mechanismsToAnimate": [
+   "chair + basket on the seat + wheels on the legs = carrier (exploded assembly, orbit)",
+   "why 'folding': the seat folds up once the basket is lifted off",
+   "social proof: models push carts, then shoppers follow (store plan)"
+  ],
+  "factualRisks": [
+   "RESEARCH PENDING: only one fact is quote-verified on a non-Wikipedia source (Oklahoma Historical Society); channel rule needs two",
+   "L2 'shoppers first refused to push it' and L6 'pushed her last baby' are not contained in the captured quotes (see evidence report)",
+   "search summaries disagree on 1936 vs 1937 for the idea; narration follows the cited source (idea 1936, introduction 1937)",
+   "the chair-cart rig is illustrative, not a drawing of the 1937 carrier",
+   "the pram comparison in S6 is an interpretation of the woman's remark (marked conceptual)"
+  ]
+ },
+ "tail": 0.35,
+ "scenes": [
+  {
+   "id": "s1-aisle",
+   "lines": [
+    "L1"
+   ],
+   "start": 0,
+   "env": "desk",
+   "evidence": [
+    "F2"
+   ],
+   "chips": [
+    "illustrationLabel"
+   ],
+   "visualPurpose": "Hook: an obvious folding chair, basket on the seat and wheels on its legs, rolls down a warm 1930s grocery aisle toward a low camera. The viewer sees the punchline before hearing it.",
+   "camera": [
+    {
+     "at": 0,
+     "x": 540,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L1.end",
+     "x": 540,
+     "y": 820,
+     "z": 1.06
+    }
+   ],
+   "layers": [
+    {
+     "component": "store-aisle",
+     "screen": true,
+     "props": {
+      "id": "aisle1",
+      "seed": 5,
+      "vpY": 760,
+      "dollyKeys": [
+       [
+        0,
+        0
+       ],
+       [
+        "L1.end+0.3",
+        1.2
+       ]
+      ]
+     }
+    },
+    {
+     "component": "rig-3d",
+     "screen": true,
+     "props": {
+      "rx": 72,
+      "D": 2400,
+      "light": [
+       -0.5,
+       -0.7,
+       0.6
+      ],
+      "id": "cart1",
+      "x": 540,
+      "y": 1200,
+      "s": 5.2,
+      "yawKeys": [
+       [
+        0,
+        32
+       ],
+       [
+        "L1.end",
+        16
+       ]
+      ],
+      "rollKeys": [
+       [
+        0,
+        0,
+        -110
+       ],
+       [
+        "L1.end+0.2",
+        0,
+        0
+       ]
+      ],
+      "parts": [
+       {
+        "id": "frame",
+        "shape": "group",
+        "c": [
+         0,
+         0,
+         0
+        ],
+        "moveKeys": [
+         [
+          0,
+          0,
+          0,
+          11
+         ]
+        ]
+       },
+       {
+        "id": "legFL",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         -19,
+         -17,
+         21.5
+        ],
+        "size": [
+         3,
+         3,
+         43
+        ],
+        "color": "#a0703f"
+       },
+       {
+        "id": "legFR",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         19,
+         -17,
+         21.5
+        ],
+        "size": [
+         3,
+         3,
+         43
+        ],
+        "color": "#a0703f"
+       },
+       {
+        "id": "legBL",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         -19,
+         18,
+         44
+        ],
+        "size": [
+         3,
+         3,
+         88
+        ],
+        "color": "#a0703f"
+       },
+       {
+        "id": "legBR",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         19,
+         18,
+         44
+        ],
+        "size": [
+         3,
+         3,
+         88
+        ],
+        "color": "#a0703f"
+       },
+       {
+        "id": "braceF",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         0,
+         -17,
+         14
+        ],
+        "size": [
+         38,
+         2,
+         2
+        ],
+        "color": "#7d5330"
+       },
+       {
+        "id": "braceB",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         0,
+         18,
+         14
+        ],
+        "size": [
+         38,
+         2,
+         2
+        ],
+        "color": "#7d5330"
+       },
+       {
+        "id": "braceL",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         -19,
+         0,
+         20
+        ],
+        "size": [
+         2,
+         34,
+         2
+        ],
+        "color": "#7d5330"
+       },
+       {
+        "id": "braceR",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         19,
+         0,
+         20
+        ],
+        "size": [
+         2,
+         34,
+         2
+        ],
+        "color": "#7d5330"
+       },
+       {
+        "id": "slat",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         0,
+         18,
+         78
+        ],
+        "size": [
+         40,
+         2.5,
+         14
+        ],
+        "color": "#a0703f"
+       },
+       {
+        "id": "slat2",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         0,
+         18,
+         62
+        ],
+        "size": [
+         40,
+         2,
+         4
+        ],
+        "color": "#7d5330"
+       },
+       {
+        "id": "seat",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         0,
+         0,
+         44.5
+        ],
+        "size": [
+         42,
+         38,
+         3
+        ],
+        "color": "#a0703f",
+        "pivot": [
+         0,
+         17,
+         44.5
+        ],
+        "axis": "x"
+       },
+       {
+        "id": "basket",
+        "parent": "frame",
+        "shape": "wire",
+        "c": [
+         0,
+         -1,
+         58
+        ],
+        "size": [
+         40,
+         34,
+         22
+        ],
+        "color": "#d8d2c2",
+        "grid": 7
+       },
+       {
+        "id": "wFL",
+        "parent": "frame",
+        "shape": "cyl",
+        "cylAxis": "x",
+        "c": [
+         -19,
+         -17,
+         -5.5
+        ],
+        "size": [
+         3.5,
+         11,
+         11
+        ],
+        "color": "#262220",
+        "sides": 14
+       },
+       {
+        "id": "wFR",
+        "parent": "frame",
+        "shape": "cyl",
+        "cylAxis": "x",
+        "c": [
+         19,
+         -17,
+         -5.5
+        ],
+        "size": [
+         3.5,
+         11,
+         11
+        ],
+        "color": "#262220",
+        "sides": 14
+       },
+       {
+        "id": "wBL",
+        "parent": "frame",
+        "shape": "cyl",
+        "cylAxis": "x",
+        "c": [
+         -19,
+         18,
+         -5.5
+        ],
+        "size": [
+         3.5,
+         11,
+         11
+        ],
+        "color": "#262220",
+        "sides": 14
+       },
+       {
+        "id": "wBR",
+        "parent": "frame",
+        "shape": "cyl",
+        "cylAxis": "x",
+        "c": [
+         19,
+         18,
+         -5.5
+        ],
+        "size": [
+         3.5,
+         11,
+         11
+        ],
+        "color": "#262220",
+        "sides": 14
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s2-refused",
+   "lines": [
+    "L2"
+   ],
+   "start": "L2-0.2",
+   "env": "desk",
+   "transition": {
+    "type": "continuity",
+    "dur": 0.45
+   },
+   "evidence": [
+    "F5",
+    "F6"
+   ],
+   "chips": [
+    "illustrationLabel"
+   ],
+   "visualPurpose": "Shoppers in period silhouettes walk past carrying hand baskets; one stops beside the chair-cart, looks, and walks on. The cart is left alone in the aisle.",
+   "camera": [
+    {
+     "at": "L2-0.2",
+     "x": 540,
+     "y": 820,
+     "z": 1.06
+    },
+    {
+     "at": "L2.end",
+     "x": 560,
+     "y": 840,
+     "z": 1.12
+    }
+   ],
+   "layers": [
+    {
+     "component": "store-aisle",
+     "screen": true,
+     "props": {
+      "id": "aisle2",
+      "seed": 5,
+      "vpY": 760,
+      "camZ": 1.2
+     }
+    },
+    {
+     "component": "rig-3d",
+     "screen": true,
+     "props": {
+      "rx": 72,
+      "D": 2400,
+      "light": [
+       -0.5,
+       -0.7,
+       0.6
+      ],
+      "id": "cart2",
+      "x": 600,
+      "y": 1200,
+      "s": 5.2,
+      "yaw": 16,
+      "rollKeys": [
+       [
+        0,
+        0,
+        0
+       ]
+      ],
+      "parts": [
+       {
+        "id": "frame",
+        "shape": "group",
+        "c": [
+         0,
+         0,
+         0
+        ],
+        "moveKeys": [
+         [
+          0,
+          0,
+          0,
+          11
+         ]
+        ]
+       },
+       {
+        "id": "legFL",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         -19,
+         -17,
+         21.5
+        ],
+        "size": [
+         3,
+         3,
+         43
+        ],
+        "color": "#a0703f"
+       },
+       {
+        "id": "legFR",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         19,
+         -17,
+         21.5
+        ],
+        "size": [
+         3,
+         3,
+         43
+        ],
+        "color": "#a0703f"
+       },
+       {
+        "id": "legBL",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         -19,
+         18,
+         44
+        ],
+        "size": [
+         3,
+         3,
+         88
+        ],
+        "color": "#a0703f"
+       },
+       {
+        "id": "legBR",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         19,
+         18,
+         44
+        ],
+        "size": [
+         3,
+         3,
+         88
+        ],
+        "color": "#a0703f"
+       },
+       {
+        "id": "braceF",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         0,
+         -17,
+         14
+        ],
+        "size": [
+         38,
+         2,
+         2
+        ],
+        "color": "#7d5330"
+       },
+       {
+        "id": "braceB",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         0,
+         18,
+         14
+        ],
+        "size": [
+         38,
+         2,
+         2
+        ],
+        "color": "#7d5330"
+       },
+       {
+        "id": "braceL",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         -19,
+         0,
+         20
+        ],
+        "size": [
+         2,
+         34,
+         2
+        ],
+        "color": "#7d5330"
+       },
+       {
+        "id": "braceR",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         19,
+         0,
+         20
+        ],
+        "size": [
+         2,
+         34,
+         2
+        ],
+        "color": "#7d5330"
+       },
+       {
+        "id": "slat",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         0,
+         18,
+         78
+        ],
+        "size": [
+         40,
+         2.5,
+         14
+        ],
+        "color": "#a0703f"
+       },
+       {
+        "id": "slat2",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         0,
+         18,
+         62
+        ],
+        "size": [
+         40,
+         2,
+         4
+        ],
+        "color": "#7d5330"
+       },
+       {
+        "id": "seat",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         0,
+         0,
+         44.5
+        ],
+        "size": [
+         42,
+         38,
+         3
+        ],
+        "color": "#a0703f",
+        "pivot": [
+         0,
+         17,
+         44.5
+        ],
+        "axis": "x"
+       },
+       {
+        "id": "basket",
+        "parent": "frame",
+        "shape": "wire",
+        "c": [
+         0,
+         -1,
+         58
+        ],
+        "size": [
+         40,
+         34,
+         22
+        ],
+        "color": "#d8d2c2",
+        "grid": 7
+       },
+       {
+        "id": "wFL",
+        "parent": "frame",
+        "shape": "cyl",
+        "cylAxis": "x",
+        "c": [
+         -19,
+         -17,
+         -5.5
+        ],
+        "size": [
+         3.5,
+         11,
+         11
+        ],
+        "color": "#262220",
+        "sides": 14
+       },
+       {
+        "id": "wFR",
+        "parent": "frame",
+        "shape": "cyl",
+        "cylAxis": "x",
+        "c": [
+         19,
+         -17,
+         -5.5
+        ],
+        "size": [
+         3.5,
+         11,
+         11
+        ],
+        "color": "#262220",
+        "sides": 14
+       },
+       {
+        "id": "wBL",
+        "parent": "frame",
+        "shape": "cyl",
+        "cylAxis": "x",
+        "c": [
+         -19,
+         18,
+         -5.5
+        ],
+        "size": [
+         3.5,
+         11,
+         11
+        ],
+        "color": "#262220",
+        "sides": 14
+       },
+       {
+        "id": "wBR",
+        "parent": "frame",
+        "shape": "cyl",
+        "cylAxis": "x",
+        "c": [
+         19,
+         18,
+         -5.5
+        ],
+        "size": [
+         3.5,
+         11,
+         11
+        ],
+        "color": "#262220",
+        "sides": 14
+       }
+      ]
+     }
+    },
+    {
+     "component": "figure",
+     "screen": true,
+     "props": {
+      "people": [
+       {
+        "pathKeys": [
+         [
+          "L2-0.2",
+          -120,
+          1300,
+          1.05
+         ],
+         [
+          "L2.end+0.2",
+          520,
+          1300,
+          1.05
+         ]
+        ],
+        "facing": 1,
+        "pose": "carry",
+        "hat": "fedora",
+        "color": "#120d09",
+        "height": 560
+       },
+       {
+        "pathKeys": [
+         [
+          "L2-0.2",
+          1180,
+          1240,
+          0.9
+         ],
+         [
+          "L2:refused",
+          860,
+          1240,
+          0.9
+         ],
+         [
+          "L2:push",
+          860,
+          1240,
+          0.9
+         ],
+         [
+          "L2.end+0.3",
+          1200,
+          1240,
+          0.9
+         ]
+        ],
+        "facing": -1,
+        "pose": "carry",
+        "poseKeys": [
+         [
+          "L2:refused",
+          "stand"
+         ],
+         [
+          "L2:push+0.2",
+          "carry"
+         ]
+        ],
+        "hat": "cloche",
+        "skirt": true,
+        "color": "#1a120c",
+        "height": 560
+       },
+       {
+        "pathKeys": [
+         [
+          "L2:first",
+          -150,
+          1380,
+          1.2
+         ],
+         [
+          "L2.end+0.3",
+          330,
+          1380,
+          1.2
+         ]
+        ],
+        "facing": 1,
+        "pose": "carry",
+        "color": "#0e0a07",
+        "height": 560
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s3-idea",
+   "lines": [
+    "L3"
+   ],
+   "start": "L3-0.25",
+   "env": "paper",
+   "transition": {
+    "type": "push",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "illustrationLabel"
+   ],
+   "visualPurpose": "Origin: the timeline lands on 1936; grocer Sylvan Goldman (silhouette) watches a shopper's hand basket fill until groceries pile over the rim. The problem is the basket's size, shown, not told.",
+   "camera": [
+    {
+     "at": "L3-0.25",
+     "x": 540,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L3:groceries",
+     "x": 560,
+     "y": 860,
+     "z": 1.1
+    }
+   ],
+   "layers": [
+    {
+     "component": "timeline-ruler",
+     "screen": true,
+     "props": {
+      "theme": "light",
+      "y": 470,
+      "fromYear": 1930,
+      "year": 1936,
+      "enterAt": "L3-0.1",
+      "arriveAt": "L3:1936",
+      "outAt": "L3.end-0.2"
+     }
+    },
+    {
+     "component": "figure",
+     "screen": true,
+     "props": {
+      "people": [
+       {
+        "pathKeys": [
+         [
+          "L3-0.25",
+          250,
+          1250,
+          1
+         ]
+        ],
+        "facing": 1,
+        "pose": "think",
+        "hat": "fedora",
+        "color": "#2a1d12",
+        "height": 620,
+        "enterAt": "L3:grocer"
+       }
+      ]
+     }
+    },
+    {
+     "component": "rig-3d",
+     "props": {
+      "rx": 64,
+      "D": 2400,
+      "light": [
+       -0.5,
+       -0.7,
+       0.6
+      ],
+      "id": "basket3",
+      "x": 700,
+      "y": 1130,
+      "s": 5.2,
+      "rzKeys": [
+       [
+        "L3-0.25",
+        -18
+       ],
+       [
+        "L3.end",
+        6
+       ]
+      ],
+      "shadow": true,
+      "parts": [
+       {
+        "id": "basket",
+        "shape": "wire",
+        "c": [
+         0,
+         0,
+         14
+        ],
+        "size": [
+         40,
+         30,
+         26
+        ],
+        "color": "#8c6a3c",
+        "grid": 7
+       },
+       {
+        "id": "item0",
+        "shape": "box",
+        "c": [
+         -10,
+         -5,
+         8
+        ],
+        "size": [
+         12,
+         10,
+         14
+        ],
+        "color": "#c8553d",
+        "enterAt": "L3:customers",
+        "enterFrom": [
+         0,
+         0,
+         70
+        ],
+        "hideBefore": true,
+        "cue": "drop"
+       },
+       {
+        "id": "item1",
+        "shape": "box",
+        "c": [
+         8,
+         -6,
+         9
+        ],
+        "size": [
+         13,
+         10,
+         16
+        ],
+        "color": "#3f8f8a",
+        "enterAt": "L3:could",
+        "enterFrom": [
+         0,
+         0,
+         70
+        ],
+        "hideBefore": true,
+        "cue": "drop"
+       },
+       {
+        "id": "item2",
+        "shape": "box",
+        "c": [
+         -4,
+         7,
+         9
+        ],
+        "size": [
+         16,
+         11,
+         15
+        ],
+        "color": "#e0b13c",
+        "enterAt": "L3:move",
+        "enterFrom": [
+         0,
+         0,
+         70
+        ],
+        "hideBefore": true,
+        "cue": "drop"
+       },
+       {
+        "id": "item3",
+        "shape": "box",
+        "c": [
+         11,
+         6,
+         22
+        ],
+        "size": [
+         11,
+         10,
+         18
+        ],
+        "color": "#efe6d2",
+        "enterAt": "L3:more",
+        "enterFrom": [
+         0,
+         0,
+         70
+        ],
+        "hideBefore": true,
+        "cue": "drop"
+       },
+       {
+        "id": "item4",
+        "shape": "box",
+        "c": [
+         -11,
+         3,
+         28
+        ],
+        "size": [
+         12,
+         12,
+         16
+        ],
+        "color": "#8c4a2f",
+        "enterAt": "L3:groceries",
+        "enterFrom": [
+         0,
+         0,
+         70
+        ],
+        "hideBefore": true,
+        "cue": "drop"
+       },
+       {
+        "id": "item5",
+        "shape": "box",
+        "c": [
+         2,
+         -3,
+         37
+        ],
+        "size": [
+         14,
+         12,
+         13
+        ],
+        "color": "#5b7a99",
+        "enterAt": "L3:groceries+0.25",
+        "enterFrom": [
+         0,
+         0,
+         70
+        ],
+        "hideBefore": true,
+        "cue": "drop"
+       }
+      ],
+      "labels": [
+       {
+        "part": "basket",
+        "at": "L3:groceries+0.5",
+        "text": "FULL",
+        "lx": 560,
+        "ly": 820,
+        "size": 44
+       }
+      ]
+     }
+    },
+    {
+     "component": "labels",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "x": 270,
+        "y": 760,
+        "lx": 360,
+        "ly": 700,
+        "text": "SYLVAN GOLDMAN",
+        "at": "L3:Goldman",
+        "size": 42,
+        "pill": true
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s4-assembly",
+   "lines": [
+    "L4"
+   ],
+   "start": "L4-0.2",
+   "env": "spot",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.55
+   },
+   "evidence": [
+    "F2",
+    "F3"
+   ],
+   "chips": [
+    "illustrationLabel"
+   ],
+   "visualPurpose": "Mechanism: under a spotlight a plain folding chair turns; the basket drops onto the seat, then four wheels slide onto the legs and lift it. Each part is named as it arrives. Chair + basket + wheels = carrier.",
+   "camera": [
+    {
+     "at": "L4-0.2",
+     "x": 540,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L4:seat",
+     "x": 540,
+     "y": 820,
+     "z": 1.08
+    },
+    {
+     "at": "L4.end",
+     "x": 540,
+     "y": 860,
+     "z": 1.16
+    }
+   ],
+   "layers": [
+    {
+     "component": "rig-3d",
+     "props": {
+      "rx": 70,
+      "D": 2400,
+      "light": [
+       -0.5,
+       -0.7,
+       0.6
+      ],
+      "id": "cart4",
+      "x": 540,
+      "y": 1160,
+      "s": 7.2,
+      "rzKeys": [
+       [
+        "L4-0.2",
+        38
+       ],
+       [
+        "L4.end+0.3",
+        -24
+       ]
+      ],
+      "parts": [
+       {
+        "id": "frame",
+        "shape": "group",
+        "c": [
+         0,
+         0,
+         0
+        ],
+        "moveKeys": [
+         [
+          0,
+          0,
+          0,
+          0
+         ],
+         [
+          "L4:wheels",
+          0,
+          0,
+          0
+         ],
+         [
+          "L4:wheels+0.35",
+          0,
+          0,
+          11
+         ]
+        ]
+       },
+       {
+        "id": "legFL",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         -19,
+         -17,
+         21.5
+        ],
+        "size": [
+         3,
+         3,
+         43
+        ],
+        "color": "#a0703f"
+       },
+       {
+        "id": "legFR",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         19,
+         -17,
+         21.5
+        ],
+        "size": [
+         3,
+         3,
+         43
+        ],
+        "color": "#a0703f"
+       },
+       {
+        "id": "legBL",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         -19,
+         18,
+         44
+        ],
+        "size": [
+         3,
+         3,
+         88
+        ],
+        "color": "#a0703f"
+       },
+       {
+        "id": "legBR",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         19,
+         18,
+         44
+        ],
+        "size": [
+         3,
+         3,
+         88
+        ],
+        "color": "#a0703f"
+       },
+       {
+        "id": "braceF",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         0,
+         -17,
+         14
+        ],
+        "size": [
+         38,
+         2,
+         2
+        ],
+        "color": "#7d5330"
+       },
+       {
+        "id": "braceB",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         0,
+         18,
+         14
+        ],
+        "size": [
+         38,
+         2,
+         2
+        ],
+        "color": "#7d5330"
+       },
+       {
+        "id": "braceL",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         -19,
+         0,
+         20
+        ],
+        "size": [
+         2,
+         34,
+         2
+        ],
+        "color": "#7d5330"
+       },
+       {
+        "id": "braceR",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         19,
+         0,
+         20
+        ],
+        "size": [
+         2,
+         34,
+         2
+        ],
+        "color": "#7d5330"
+       },
+       {
+        "id": "slat",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         0,
+         18,
+         78
+        ],
+        "size": [
+         40,
+         2.5,
+         14
+        ],
+        "color": "#a0703f"
+       },
+       {
+        "id": "slat2",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         0,
+         18,
+         62
+        ],
+        "size": [
+         40,
+         2,
+         4
+        ],
+        "color": "#7d5330"
+       },
+       {
+        "id": "seat",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         0,
+         0,
+         44.5
+        ],
+        "size": [
+         42,
+         38,
+         3
+        ],
+        "color": "#a0703f",
+        "pivot": [
+         0,
+         17,
+         44.5
+        ],
+        "axis": "x"
+       },
+       {
+        "id": "basket",
+        "parent": "frame",
+        "shape": "wire",
+        "c": [
+         0,
+         -1,
+         58
+        ],
+        "size": [
+         40,
+         34,
+         22
+        ],
+        "color": "#d8d2c2",
+        "grid": 7,
+        "enterAt": "L4:basket",
+        "enterFrom": [
+         0,
+         0,
+         90
+        ],
+        "hideBefore": true,
+        "cue": "drop"
+       },
+       {
+        "id": "wFL",
+        "parent": "frame",
+        "shape": "cyl",
+        "cylAxis": "x",
+        "c": [
+         -19,
+         -17,
+         -5.5
+        ],
+        "size": [
+         3.5,
+         11,
+         11
+        ],
+        "color": "#262220",
+        "sides": 14,
+        "enterAt": "L4:wheels",
+        "enterFrom": [
+         -45,
+         0,
+         0
+        ],
+        "hideBefore": true,
+        "cue": "lock"
+       },
+       {
+        "id": "wFR",
+        "parent": "frame",
+        "shape": "cyl",
+        "cylAxis": "x",
+        "c": [
+         19,
+         -17,
+         -5.5
+        ],
+        "size": [
+         3.5,
+         11,
+         11
+        ],
+        "color": "#262220",
+        "sides": 14,
+        "enterAt": "L4:wheels",
+        "enterFrom": [
+         45,
+         0,
+         0
+        ],
+        "hideBefore": true,
+        "cue": "lock"
+       },
+       {
+        "id": "wBL",
+        "parent": "frame",
+        "shape": "cyl",
+        "cylAxis": "x",
+        "c": [
+         -19,
+         18,
+         -5.5
+        ],
+        "size": [
+         3.5,
+         11,
+         11
+        ],
+        "color": "#262220",
+        "sides": 14,
+        "enterAt": "L4:wheels",
+        "enterFrom": [
+         -45,
+         0,
+         0
+        ],
+        "hideBefore": true,
+        "cue": "lock"
+       },
+       {
+        "id": "wBR",
+        "parent": "frame",
+        "shape": "cyl",
+        "cylAxis": "x",
+        "c": [
+         19,
+         18,
+         -5.5
+        ],
+        "size": [
+         3.5,
+         11,
+         11
+        ],
+        "color": "#262220",
+        "sides": 14,
+        "enterAt": "L4:wheels",
+        "enterFrom": [
+         45,
+         0,
+         0
+        ],
+        "hideBefore": true,
+        "cue": "lock"
+       }
+      ],
+      "labels": [
+       {
+        "part": "slat",
+        "at": "L4:folding",
+        "text": "FOLDING CHAIR",
+        "lx": 450,
+        "ly": 400,
+        "outAt": "L4.end"
+       },
+       {
+        "part": "basket",
+        "at": "L4:basket+0.3",
+        "text": "BASKET",
+        "lx": 150,
+        "ly": 560,
+        "outAt": "L4.end"
+       },
+       {
+        "part": "wFR",
+        "at": "L4:wheels+0.4",
+        "text": "WHEELS",
+        "lx": 740,
+        "ly": 1230,
+        "outAt": "L4.end"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s5-folding",
+   "lines": [
+    "L5"
+   ],
+   "start": "L5-0.2",
+   "env": "amber",
+   "transition": {
+    "type": "dissolve",
+    "dur": 0.45
+   },
+   "evidence": [
+    "F3",
+    "F4"
+   ],
+   "chips": [
+    "illustrationLabel"
+   ],
+   "visualPurpose": "Why 'folding basket carriers': the timeline moves to 1937 as the basket lifts off and the seat folds flat against the back, then unfolds; Goldman's own name for them appears as a verbatim quote.",
+   "camera": [
+    {
+     "at": "L5-0.2",
+     "x": 540,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L5.end",
+     "x": 540,
+     "y": 790,
+     "z": 1.05
+    }
+   ],
+   "layers": [
+    {
+     "component": "timeline-ruler",
+     "screen": true,
+     "props": {
+      "theme": "light",
+      "y": 470,
+      "fromYear": 1936,
+      "year": 1937,
+      "enterAt": "L5-0.1",
+      "arriveAt": "L5:1937",
+      "outAt": "L5.end+0.1"
+     }
+    },
+    {
+     "component": "rig-3d",
+     "props": {
+      "rx": 68,
+      "D": 2400,
+      "light": [
+       -0.5,
+       -0.7,
+       0.6
+      ],
+      "id": "cart5",
+      "x": 540,
+      "y": 990,
+      "s": 4,
+      "rzKeys": [
+       [
+        "L5-0.2",
+        -30
+       ],
+       [
+        "L5.end",
+        22
+       ]
+      ],
+      "parts": [
+       {
+        "id": "frame",
+        "shape": "group",
+        "c": [
+         0,
+         0,
+         0
+        ],
+        "moveKeys": [
+         [
+          0,
+          0,
+          0,
+          11
+         ]
+        ]
+       },
+       {
+        "id": "legFL",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         -19,
+         -17,
+         21.5
+        ],
+        "size": [
+         3,
+         3,
+         43
+        ],
+        "color": "#a0703f"
+       },
+       {
+        "id": "legFR",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         19,
+         -17,
+         21.5
+        ],
+        "size": [
+         3,
+         3,
+         43
+        ],
+        "color": "#a0703f"
+       },
+       {
+        "id": "legBL",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         -19,
+         18,
+         44
+        ],
+        "size": [
+         3,
+         3,
+         88
+        ],
+        "color": "#a0703f"
+       },
+       {
+        "id": "legBR",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         19,
+         18,
+         44
+        ],
+        "size": [
+         3,
+         3,
+         88
+        ],
+        "color": "#a0703f"
+       },
+       {
+        "id": "braceF",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         0,
+         -17,
+         14
+        ],
+        "size": [
+         38,
+         2,
+         2
+        ],
+        "color": "#7d5330"
+       },
+       {
+        "id": "braceB",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         0,
+         18,
+         14
+        ],
+        "size": [
+         38,
+         2,
+         2
+        ],
+        "color": "#7d5330"
+       },
+       {
+        "id": "braceL",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         -19,
+         0,
+         20
+        ],
+        "size": [
+         2,
+         34,
+         2
+        ],
+        "color": "#7d5330"
+       },
+       {
+        "id": "braceR",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         19,
+         0,
+         20
+        ],
+        "size": [
+         2,
+         34,
+         2
+        ],
+        "color": "#7d5330"
+       },
+       {
+        "id": "slat",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         0,
+         18,
+         78
+        ],
+        "size": [
+         40,
+         2.5,
+         14
+        ],
+        "color": "#a0703f"
+       },
+       {
+        "id": "slat2",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         0,
+         18,
+         62
+        ],
+        "size": [
+         40,
+         2,
+         4
+        ],
+        "color": "#7d5330"
+       },
+       {
+        "id": "seat",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         0,
+         0,
+         44.5
+        ],
+        "size": [
+         42,
+         38,
+         3
+        ],
+        "color": "#a0703f",
+        "pivot": [
+         0,
+         17,
+         44.5
+        ],
+        "axis": "x",
+        "rotKeys": [
+         [
+          "L5:folding",
+          0
+         ],
+         [
+          "L5:basket",
+          -82
+         ],
+         [
+          "L5:in",
+          -82
+         ],
+         [
+          "L5:1937",
+          0
+         ]
+        ]
+       },
+       {
+        "id": "basket",
+        "parent": "frame",
+        "shape": "wire",
+        "c": [
+         0,
+         -1,
+         58
+        ],
+        "size": [
+         40,
+         34,
+         22
+        ],
+        "color": "#d8d2c2",
+        "grid": 7,
+        "moveKeys": [
+         [
+          "L5:stores",
+          0,
+          0,
+          0
+         ],
+         [
+          "L5:folding",
+          0,
+          30,
+          24
+         ],
+         [
+          "L5:in",
+          0,
+          30,
+          24
+         ],
+         [
+          "L5:1937",
+          0,
+          0,
+          0
+         ]
+        ]
+       },
+       {
+        "id": "wFL",
+        "parent": "frame",
+        "shape": "cyl",
+        "cylAxis": "x",
+        "c": [
+         -19,
+         -17,
+         -5.5
+        ],
+        "size": [
+         3.5,
+         11,
+         11
+        ],
+        "color": "#262220",
+        "sides": 14
+       },
+       {
+        "id": "wFR",
+        "parent": "frame",
+        "shape": "cyl",
+        "cylAxis": "x",
+        "c": [
+         19,
+         -17,
+         -5.5
+        ],
+        "size": [
+         3.5,
+         11,
+         11
+        ],
+        "color": "#262220",
+        "sides": 14
+       },
+       {
+        "id": "wBL",
+        "parent": "frame",
+        "shape": "cyl",
+        "cylAxis": "x",
+        "c": [
+         -19,
+         18,
+         -5.5
+        ],
+        "size": [
+         3.5,
+         11,
+         11
+        ],
+        "color": "#262220",
+        "sides": 14
+       },
+       {
+        "id": "wBR",
+        "parent": "frame",
+        "shape": "cyl",
+        "cylAxis": "x",
+        "c": [
+         19,
+         18,
+         -5.5
+        ],
+        "size": [
+         3.5,
+         11,
+         11
+        ],
+        "color": "#262220",
+        "sides": 14
+       }
+      ]
+     }
+    },
+    {
+     "component": "quote-card",
+     "screen": true,
+     "props": {
+      "at": "L5:carriers",
+      "y": 1030,
+      "size": 50,
+      "lines": [
+       "Goldman called his carts",
+       "“folding basket carriers”"
+      ],
+      "quoteOf": "F3",
+      "attribution": "Wikipedia, “Shopping cart”",
+      "outAt": "L5.end+0.2"
+     }
+    }
+   ]
+  },
+  {
+   "id": "s6-baby",
+   "lines": [
+    "L6"
+   ],
+   "start": "L6-0.2",
+   "env": "teal",
+   "transition": {
+    "type": "whip",
+    "dur": 0.4
+   },
+   "evidence": [
+    "F5"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "conceptualLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "The objection: a shopper stands, arms on hips, beside the carrier; on 'pushed' a dashed pram outline draws itself over the cart, making the comparison she felt (interpretation, marked conceptual).",
+   "camera": [
+    {
+     "at": "L6-0.2",
+     "x": 540,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L6:pushed",
+     "x": 600,
+     "y": 830,
+     "z": 1.08
+    },
+    {
+     "at": "L6.end",
+     "x": 610,
+     "y": 840,
+     "z": 1.1
+    }
+   ],
+   "layers": [
+    {
+     "component": "figure",
+     "screen": true,
+     "props": {
+      "people": [
+       {
+        "pathKeys": [
+         [
+          "L6-0.2",
+          300,
+          1250,
+          1
+         ]
+        ],
+        "facing": 1,
+        "pose": "akimbo",
+        "hat": "cloche",
+        "skirt": true,
+        "color": "#f2ead8",
+        "height": 660
+       }
+      ]
+     }
+    },
+    {
+     "component": "rig-3d",
+     "props": {
+      "rx": 72,
+      "D": 2400,
+      "light": [
+       -0.5,
+       -0.7,
+       0.6
+      ],
+      "id": "cart6",
+      "x": 700,
+      "y": 1150,
+      "s": 5.2,
+      "rz": 70,
+      "parts": [
+       {
+        "id": "frame",
+        "shape": "group",
+        "c": [
+         0,
+         0,
+         0
+        ],
+        "moveKeys": [
+         [
+          0,
+          0,
+          0,
+          11
+         ]
+        ]
+       },
+       {
+        "id": "legFL",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         -19,
+         -17,
+         21.5
+        ],
+        "size": [
+         3,
+         3,
+         43
+        ],
+        "color": "#a0703f"
+       },
+       {
+        "id": "legFR",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         19,
+         -17,
+         21.5
+        ],
+        "size": [
+         3,
+         3,
+         43
+        ],
+        "color": "#a0703f"
+       },
+       {
+        "id": "legBL",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         -19,
+         18,
+         44
+        ],
+        "size": [
+         3,
+         3,
+         88
+        ],
+        "color": "#a0703f"
+       },
+       {
+        "id": "legBR",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         19,
+         18,
+         44
+        ],
+        "size": [
+         3,
+         3,
+         88
+        ],
+        "color": "#a0703f"
+       },
+       {
+        "id": "braceF",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         0,
+         -17,
+         14
+        ],
+        "size": [
+         38,
+         2,
+         2
+        ],
+        "color": "#7d5330"
+       },
+       {
+        "id": "braceB",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         0,
+         18,
+         14
+        ],
+        "size": [
+         38,
+         2,
+         2
+        ],
+        "color": "#7d5330"
+       },
+       {
+        "id": "braceL",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         -19,
+         0,
+         20
+        ],
+        "size": [
+         2,
+         34,
+         2
+        ],
+        "color": "#7d5330"
+       },
+       {
+        "id": "braceR",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         19,
+         0,
+         20
+        ],
+        "size": [
+         2,
+         34,
+         2
+        ],
+        "color": "#7d5330"
+       },
+       {
+        "id": "slat",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         0,
+         18,
+         78
+        ],
+        "size": [
+         40,
+         2.5,
+         14
+        ],
+        "color": "#a0703f"
+       },
+       {
+        "id": "slat2",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         0,
+         18,
+         62
+        ],
+        "size": [
+         40,
+         2,
+         4
+        ],
+        "color": "#7d5330"
+       },
+       {
+        "id": "seat",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         0,
+         0,
+         44.5
+        ],
+        "size": [
+         42,
+         38,
+         3
+        ],
+        "color": "#a0703f",
+        "pivot": [
+         0,
+         17,
+         44.5
+        ],
+        "axis": "x"
+       },
+       {
+        "id": "basket",
+        "parent": "frame",
+        "shape": "wire",
+        "c": [
+         0,
+         -1,
+         58
+        ],
+        "size": [
+         40,
+         34,
+         22
+        ],
+        "color": "#d8d2c2",
+        "grid": 7
+       },
+       {
+        "id": "wFL",
+        "parent": "frame",
+        "shape": "cyl",
+        "cylAxis": "x",
+        "c": [
+         -19,
+         -17,
+         -5.5
+        ],
+        "size": [
+         3.5,
+         11,
+         11
+        ],
+        "color": "#262220",
+        "sides": 14
+       },
+       {
+        "id": "wFR",
+        "parent": "frame",
+        "shape": "cyl",
+        "cylAxis": "x",
+        "c": [
+         19,
+         -17,
+         -5.5
+        ],
+        "size": [
+         3.5,
+         11,
+         11
+        ],
+        "color": "#262220",
+        "sides": 14
+       },
+       {
+        "id": "wBL",
+        "parent": "frame",
+        "shape": "cyl",
+        "cylAxis": "x",
+        "c": [
+         -19,
+         18,
+         -5.5
+        ],
+        "size": [
+         3.5,
+         11,
+         11
+        ],
+        "color": "#262220",
+        "sides": 14
+       },
+       {
+        "id": "wBR",
+        "parent": "frame",
+        "shape": "cyl",
+        "cylAxis": "x",
+        "c": [
+         19,
+         18,
+         -5.5
+        ],
+        "size": [
+         3.5,
+         11,
+         11
+        ],
+        "color": "#262220",
+        "sides": 14
+       }
+      ]
+     }
+    },
+    {
+     "component": "line-art",
+     "screen": true,
+     "props": {
+      "x": 560,
+      "y": 760,
+      "s": 1.25,
+      "paths": [
+       {
+        "d": "M40 120 Q40 210 140 210 Q240 210 240 120 Z",
+        "at": "L6:pushed",
+        "dur": 0.5,
+        "color": "amber",
+        "width": 7
+       },
+       {
+        "d": "M40 120 Q50 30 150 40 L150 120",
+        "at": "L6:pushed+0.2",
+        "dur": 0.4,
+        "color": "amber",
+        "width": 7
+       },
+       {
+        "d": "M240 120 L300 60 L330 60",
+        "at": "L6:her",
+        "dur": 0.3,
+        "color": "amber",
+        "width": 7
+       },
+       {
+        "d": "M90 250 m-28 0 a28 28 0 1 0 56 0 a28 28 0 1 0 -56 0 M200 250 m-28 0 a28 28 0 1 0 56 0 a28 28 0 1 0 -56 0",
+        "at": "L6:last",
+        "dur": 0.35,
+        "color": "amber",
+        "width": 7
+       }
+      ]
+     }
+    },
+    {
+     "component": "labels",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "x": 720,
+        "y": 760,
+        "lx": 760,
+        "ly": 560,
+        "text": "A PRAM?",
+        "at": "L6:baby",
+        "size": 46
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s7-models",
+   "lines": [
+    "L7"
+   ],
+   "start": "L7-0.2",
+   "env": "paper",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F6"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "conceptualLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Social proof from above: a store plan; hired models (amber) push carts along the aisles, then the shoppers (teal) start taking carts too. Paths are illustrative, not a plan of the real store.",
+   "camera": [
+    {
+     "at": "L7-0.2",
+     "x": 540,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L7.end",
+     "x": 540,
+     "y": 780,
+     "z": 1.06
+    }
+   ],
+   "layers": [
+    {
+     "component": "floor-plan",
+     "screen": true,
+     "props": {
+      "box": {
+       "x": 90,
+       "y": 330,
+       "w": 900,
+       "h": 900
+      },
+      "aisles": [
+       [
+        120,
+        120,
+        120,
+        520
+       ],
+       [
+        390,
+        120,
+        120,
+        520
+       ],
+       [
+        660,
+        120,
+        120,
+        520
+       ],
+       [
+        120,
+        760,
+        660,
+        60
+       ]
+      ],
+      "movers": [
+       {
+        "kind": "cart",
+        "color": "#e0b13c",
+        "enterAt": "L7:hired",
+        "pathKeys": [
+         [
+          "L7:hired",
+          60,
+          700
+         ],
+         [
+          "L7:push",
+          60,
+          80
+         ],
+         [
+          "L7:around",
+          330,
+          80
+         ],
+         [
+          "L7.end+0.3",
+          330,
+          700
+         ]
+        ],
+        "label": "MODELS",
+        "labelAt": "L7:models",
+        "lx": 60,
+        "ly": 20
+       },
+       {
+        "kind": "cart",
+        "color": "#e0b13c",
+        "enterAt": "L7:models",
+        "pathKeys": [
+         [
+          "L7:models",
+          600,
+          700
+         ],
+         [
+          "L7:carts",
+          600,
+          80
+         ],
+         [
+          "L7.end+0.3",
+          840,
+          80
+         ]
+        ]
+       },
+       {
+        "kind": "person",
+        "color": "#3f8f8a",
+        "enterAt": "L7-0.1",
+        "outAt": "L7:carts",
+        "pathKeys": [
+         [
+          "L7-0.1",
+          840,
+          720
+         ],
+         [
+          "L7:carts",
+          840,
+          560
+         ]
+        ]
+       },
+       {
+        "kind": "cart",
+        "color": "#3f8f8a",
+        "enterAt": "L7:carts",
+        "pathKeys": [
+         [
+          "L7:carts",
+          840,
+          560
+         ],
+         [
+          "L7.end+0.3",
+          840,
+          200
+         ]
+        ]
+       },
+       {
+        "kind": "person",
+        "color": "#3f8f8a",
+        "enterAt": "L7-0.1",
+        "outAt": "L7:around",
+        "pathKeys": [
+         [
+          "L7-0.1",
+          300,
+          860
+         ],
+         [
+          "L7:around",
+          470,
+          860
+         ]
+        ]
+       },
+       {
+        "kind": "cart",
+        "color": "#3f8f8a",
+        "enterAt": "L7:around",
+        "pathKeys": [
+         [
+          "L7:around",
+          470,
+          860
+         ],
+         [
+          "L7.end+0.3",
+          560,
+          700
+         ]
+        ]
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s8-popular",
+   "lines": [
+    "L8"
+   ],
+   "start": "L8-0.25",
+   "env": "desk",
+   "transition": {
+    "type": "push",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F6"
+   ],
+   "chips": [
+    "illustrationLabel"
+   ],
+   "visualPurpose": "Payoff: back in the aisle, carts multiply into a row and shoppers push them; then everything clears and the camera settles exactly where the video began, so the loop restarts on the lone chair-cart.",
+   "camera": [
+    {
+     "at": "L8-0.25",
+     "x": 540,
+     "y": 820,
+     "z": 1.06
+    },
+    {
+     "at": "end-0.6",
+     "x": 540,
+     "y": 800,
+     "z": 1
+    }
+   ],
+   "layers": [
+    {
+     "component": "store-aisle",
+     "screen": true,
+     "props": {
+      "id": "aisle8",
+      "seed": 5,
+      "vpY": 760,
+      "dollyKeys": [
+       [
+        "L8-0.25",
+        1.2
+       ],
+       [
+        "end-0.6",
+        0
+       ]
+      ]
+     }
+    },
+    {
+     "component": "rig-3d",
+     "screen": true,
+     "props": {
+      "rx": 72,
+      "D": 2400,
+      "light": [
+       -0.5,
+       -0.7,
+       0.6
+      ],
+      "id": "cart8",
+      "x": 540,
+      "y": 1200,
+      "s": 5.2,
+      "yawKeys": [
+       [
+        "L8-0.25",
+        16
+       ],
+       [
+        "end-0.6",
+        32
+       ]
+      ],
+      "rollKeys": [
+       [
+        "L8-0.25",
+        0,
+        0
+       ],
+       [
+        "end-0.6",
+        0,
+        -110
+       ]
+      ],
+      "parts": [
+       {
+        "id": "frame",
+        "shape": "group",
+        "c": [
+         0,
+         0,
+         0
+        ],
+        "moveKeys": [
+         [
+          0,
+          0,
+          0,
+          11
+         ]
+        ]
+       },
+       {
+        "id": "legFL",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         -19,
+         -17,
+         21.5
+        ],
+        "size": [
+         3,
+         3,
+         43
+        ],
+        "color": "#a0703f"
+       },
+       {
+        "id": "legFR",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         19,
+         -17,
+         21.5
+        ],
+        "size": [
+         3,
+         3,
+         43
+        ],
+        "color": "#a0703f"
+       },
+       {
+        "id": "legBL",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         -19,
+         18,
+         44
+        ],
+        "size": [
+         3,
+         3,
+         88
+        ],
+        "color": "#a0703f"
+       },
+       {
+        "id": "legBR",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         19,
+         18,
+         44
+        ],
+        "size": [
+         3,
+         3,
+         88
+        ],
+        "color": "#a0703f"
+       },
+       {
+        "id": "braceF",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         0,
+         -17,
+         14
+        ],
+        "size": [
+         38,
+         2,
+         2
+        ],
+        "color": "#7d5330"
+       },
+       {
+        "id": "braceB",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         0,
+         18,
+         14
+        ],
+        "size": [
+         38,
+         2,
+         2
+        ],
+        "color": "#7d5330"
+       },
+       {
+        "id": "braceL",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         -19,
+         0,
+         20
+        ],
+        "size": [
+         2,
+         34,
+         2
+        ],
+        "color": "#7d5330"
+       },
+       {
+        "id": "braceR",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         19,
+         0,
+         20
+        ],
+        "size": [
+         2,
+         34,
+         2
+        ],
+        "color": "#7d5330"
+       },
+       {
+        "id": "slat",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         0,
+         18,
+         78
+        ],
+        "size": [
+         40,
+         2.5,
+         14
+        ],
+        "color": "#a0703f"
+       },
+       {
+        "id": "slat2",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         0,
+         18,
+         62
+        ],
+        "size": [
+         40,
+         2,
+         4
+        ],
+        "color": "#7d5330"
+       },
+       {
+        "id": "seat",
+        "parent": "frame",
+        "shape": "box",
+        "c": [
+         0,
+         0,
+         44.5
+        ],
+        "size": [
+         42,
+         38,
+         3
+        ],
+        "color": "#a0703f",
+        "pivot": [
+         0,
+         17,
+         44.5
+        ],
+        "axis": "x"
+       },
+       {
+        "id": "basket",
+        "parent": "frame",
+        "shape": "wire",
+        "c": [
+         0,
+         -1,
+         58
+        ],
+        "size": [
+         40,
+         34,
+         22
+        ],
+        "color": "#d8d2c2",
+        "grid": 7
+       },
+       {
+        "id": "wFL",
+        "parent": "frame",
+        "shape": "cyl",
+        "cylAxis": "x",
+        "c": [
+         -19,
+         -17,
+         -5.5
+        ],
+        "size": [
+         3.5,
+         11,
+         11
+        ],
+        "color": "#262220",
+        "sides": 14
+       },
+       {
+        "id": "wFR",
+        "parent": "frame",
+        "shape": "cyl",
+        "cylAxis": "x",
+        "c": [
+         19,
+         -17,
+         -5.5
+        ],
+        "size": [
+         3.5,
+         11,
+         11
+        ],
+        "color": "#262220",
+        "sides": 14
+       },
+       {
+        "id": "wBL",
+        "parent": "frame",
+        "shape": "cyl",
+        "cylAxis": "x",
+        "c": [
+         -19,
+         18,
+         -5.5
+        ],
+        "size": [
+         3.5,
+         11,
+         11
+        ],
+        "color": "#262220",
+        "sides": 14
+       },
+       {
+        "id": "wBR",
+        "parent": "frame",
+        "shape": "cyl",
+        "cylAxis": "x",
+        "c": [
+         19,
+         18,
+         -5.5
+        ],
+        "size": [
+         3.5,
+         11,
+         11
+        ],
+        "color": "#262220",
+        "sides": 14
+       }
+      ],
+      "instances": [
+       {
+        "dx": 0,
+        "dy": 0
+       },
+       {
+        "dx": -95,
+        "dy": -140,
+        "rz": 6,
+        "enterAt": "L8:folding",
+        "outAt": "end-0.9",
+        "fromDx": -260
+       },
+       {
+        "dx": 95,
+        "dy": -160,
+        "rz": -8,
+        "enterAt": "L8:chair",
+        "outAt": "end-0.9",
+        "fromDx": 260
+       },
+       {
+        "dx": -100,
+        "dy": -330,
+        "rz": 10,
+        "enterAt": "L8:wheels",
+        "outAt": "end-0.9",
+        "fromDx": -260
+       },
+       {
+        "dx": 105,
+        "dy": -360,
+        "rz": -4,
+        "enterAt": "L8:became",
+        "outAt": "end-0.9",
+        "fromDx": 260
+       },
+       {
+        "dx": -95,
+        "dy": -540,
+        "enterAt": "L8:extremely",
+        "outAt": "end-0.9",
+        "fromDx": -260
+       },
+       {
+        "dx": 100,
+        "dy": -570,
+        "rz": 8,
+        "enterAt": "L8:popular",
+        "outAt": "end-0.9",
+        "fromDx": 260
+       }
+      ]
+     }
+    }
+   ]
+  }
+ ]
+}
