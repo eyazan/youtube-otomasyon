@@ -1,0 +1,73 @@
+{
+ "status": "NEEDS_HUMAN_REVIEW",
+ "metrics": {
+  "shots": 12,
+  "autoPlannedClean": 9,
+  "needsReview": 3,
+  "reviewShots": [
+   "S06",
+   "S07",
+   "S08"
+  ],
+  "generatedValues": 185,
+  "manualValues": 0,
+  "validation": {
+   "errors": 3,
+   "warnings": 0
+  }
+ },
+ "issues": [
+  {
+   "line": "L6",
+   "code": "UNSUPPORTED_CLAIM",
+   "detail": "line \"Then the smoke stopped, and Challenger flew on.\" states facts but cites no claim",
+   "needed": "add a verified claim for the statement, or rewrite the line"
+  },
+  {
+   "line": "L6",
+   "code": "MISSING_ASSET",
+   "detail": "no licensed asset depicts the line's claims (none)",
+   "needed": "add an asset with depicts/tags, or a claim the asset depicts"
+  },
+  {
+   "line": "L7",
+   "code": "REVIEW_EVENT_KEYS",
+   "detail": "event-sequence: the mapping of events to vehicle states (plume/deflect/leak/strut/dome) is positional; confirm it",
+   "needed": "confirm or set each event's state key"
+  },
+  {
+   "line": "L8",
+   "code": "REVIEW_EVENT_KEYS",
+   "detail": "event-sequence: the mapping of events to vehicle states (plume/deflect/leak/strut/dome) is positional; confirm it",
+   "needed": "confirm or set each event's state key"
+  },
+  {
+   "line": "L10",
+   "code": "REVIEW_TIMING",
+   "detail": "timeline steps for C-telecon-0845 are spaced evenly across the line (no spoken time to anchor them)",
+   "needed": "confirm or anchor each step to a word"
+  },
+  {
+   "line": "L11",
+   "code": "REVIEW_TIMING",
+   "detail": "timeline steps for C-reversal-1100, C-fax-1145, C-launch-1138 are spaced evenly across the line (no spoken time to anchor them)",
+   "needed": "confirm or anchor each step to a word"
+  },
+  {
+   "shot": "S06",
+   "code": "VALIDATION",
+   "detail": "unsupported parameter: params: missing required \"media\""
+  },
+  {
+   "shot": "S06",
+   "code": "VALIDATION",
+   "detail": "unsupported parameter: params: missing required \"camera\""
+  },
+  {
+   "shot": "S06",
+   "code": "VALIDATION",
+   "detail": "unsupported parameter: params: missing required \"chip\""
+  }
+ ],
+ "upgrades": []
+}

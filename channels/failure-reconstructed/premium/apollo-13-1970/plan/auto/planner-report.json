@@ -1,0 +1,41 @@
+{
+ "status": "NEEDS_HUMAN_REVIEW",
+ "metrics": {
+  "shots": 9,
+  "autoPlannedClean": 8,
+  "needsReview": 1,
+  "reviewShots": [
+   "S01"
+  ],
+  "generatedValues": 54,
+  "manualValues": 0,
+  "validation": {
+   "errors": 0,
+   "warnings": 0
+  }
+ },
+ "issues": [
+  {
+   "line": "L1",
+   "code": "MISSING_ANCHOR",
+   "detail": "hook asset launch has no point-of-interest anchor stating one of the line's claims (1 suggested, unverified, 1 assessed unreliable: SG-launch-1)",
+   "needed": "verify or reject the suggested anchor (a suggestion is never used as a verified point)"
+  }
+ ],
+ "upgrades": [
+  {
+   "line": "L2",
+   "code": "MEASURED_MODE_NEEDS_MANUAL_ANCHORS",
+   "detail": "no reliable suggestion for the drawn parts; 2 candidates on tank-diagram need a human (label sits among 'TO ...' lead labels: it may name a lead's destination, not the part; the leader's far end is where a line stops, not proven to be the named part (no held-out accuracy))",
+   "suggestions": [
+    "SG-tank-diagram-37",
+    "SG-tank-diagram-38"
+   ]
+  },
+  {
+   "line": "L7",
+   "code": "SCAN_REGION_WOULD_UPGRADE",
+   "detail": "no document asset has a measured region for C-a13-cause; a scan of the source page with a verified region would let document-desk show the original"
+  }
+ ]
+}

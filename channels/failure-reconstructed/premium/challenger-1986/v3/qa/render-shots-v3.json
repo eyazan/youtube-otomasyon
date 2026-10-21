@@ -1,0 +1,664 @@
+{
+ "shots": [
+  {
+   "id": "S01",
+   "start": 0,
+   "end": 3.946,
+   "kind": "archival",
+   "label": "NASA photo",
+   "subject": "liftoff close-up with smoke at the right SRB aft field joint",
+   "source": "liftoff",
+   "evidence": [
+    "E1",
+    "E2",
+    "E4"
+   ],
+   "transition": "cut",
+   "plan": {
+    "transitionReason": "film start",
+    "states": [],
+    "register": null,
+    "primitives": [],
+    "framing": "photo 1080x1400 (V2)"
+   }
+  },
+  {
+   "id": "S02",
+   "start": 3.946,
+   "end": 6.766,
+   "kind": "explanatory",
+   "label": "NASA photo · traced outline",
+   "subject": "right SRB and its aft field joint traced over the opening photo",
+   "source": "liftoff",
+   "evidence": [
+    "E1",
+    "E2",
+    "E4"
+   ],
+   "transition": "continuous",
+   "plan": {
+    "transitionReason": "continuous camera on the same photograph (no cut)",
+    "states": [
+     {
+      "t": 4.146,
+      "what": "trace of the right booster draws on",
+      "ev": "E4"
+     },
+     {
+      "t": 5.186,
+      "what": "aft field joint band lights",
+      "ev": "E1"
+     },
+     {
+      "t": 5.762,
+      "what": "label: right booster",
+      "ev": "E1"
+     },
+     {
+      "t": 6.166,
+      "what": "photo dims, camera pushes into the joint",
+      "ev": null
+     }
+    ],
+    "register": {
+     "from": "S01",
+     "asset": "liftoff",
+     "anchors": [
+      "smoke",
+      "joint band"
+     ]
+    },
+    "primitives": [],
+    "framing": "full-bleed photo (1080x1400) + caption band"
+   }
+  },
+  {
+   "id": "S03",
+   "start": 6.766,
+   "end": 9.056,
+   "kind": "document",
+   "label": "Commission record",
+   "subject": "Rogers Commission Fig. 14 field joint cross-section, registered to the traced joint",
+   "source": "fig14",
+   "evidence": [
+    "E2"
+   ],
+   "transition": "push-in",
+   "plan": {
+    "transitionReason": "push-in through the traced joint band into the Commission's cross-section of that joint",
+    "states": [
+     {
+      "t": 6.766,
+      "what": "cross-section grows out of the joint band",
+      "ev": "E2"
+     },
+     {
+      "t": 7.89,
+      "what": "camera closes on the two O-rings; rings drawn",
+      "ev": "E2"
+     }
+    ],
+    "register": {
+     "from": "S02",
+     "asset": "fig14",
+     "anchors": [
+      "joint band -> wall section"
+     ]
+    },
+    "primitives": [],
+    "framing": "full-width document plate"
+   }
+  },
+  {
+   "id": "S04",
+   "start": 9.056,
+   "end": 12.733,
+   "kind": "archival",
+   "label": "NASA photo",
+   "subject": "icicles on the launch tower, launch morning",
+   "source": "icicles",
+   "evidence": [
+    "E1"
+   ],
+   "transition": "cut",
+   "plan": {
+    "transitionReason": null,
+    "states": [],
+    "register": null,
+    "primitives": [],
+    "framing": null
+   }
+  },
+  {
+   "id": "S05",
+   "start": 12.733,
+   "end": 14.926,
+   "kind": "explanatory",
+   "label": "Explanatory animation · not to scale",
+   "subject": "warm vs cold O-ring following the opening joint (0.6 s, real time)",
+   "source": null,
+   "evidence": [
+    "E2"
+   ],
+   "transition": "follow-cause",
+   "plan": {
+    "transitionReason": "follow the cause: from the frozen launch tower into the cold rubber (frost carries across)",
+    "states": [
+     {
+      "t": 13.282,
+      "what": "sealing face starts moving away (joint opens)",
+      "ev": "E2 F8a"
+     },
+     {
+      "t": 13.432,
+      "what": "warm ring springs out and keeps contact",
+      "ev": "E2"
+     },
+     {
+      "t": 13.882,
+      "what": "cold ring still squeezed: gap open",
+      "ev": "E2"
+     },
+     {
+      "t": 14.156,
+      "what": "hot gas passes the cold ring only",
+      "ev": "E2"
+     }
+    ],
+    "register": {
+     "from": null,
+     "reason": "generic seal behaviour, not a photographed point; continuity with S04 is tonal (frost), not geometric"
+    },
+    "primitives": [],
+    "framing": "full-bleed cross-section, two stacked panels"
+   }
+  },
+  {
+   "id": "S06",
+   "start": 14.926,
+   "end": 20.625,
+   "kind": "explanatory",
+   "label": "Explanatory animation · not to scale",
+   "subject": "field joint rotation, O-ring lag and hot-gas blow-by",
+   "source": null,
+   "evidence": [
+    "E2"
+   ],
+   "transition": "cut",
+   "plan": {
+    "transitionReason": null,
+    "states": [],
+    "register": null,
+    "primitives": [],
+    "framing": null
+   }
+  },
+  {
+   "id": "S07",
+   "start": 20.625,
+   "end": 23.419,
+   "kind": "archival",
+   "label": "NASA film",
+   "subject": "Challenger climbing normally",
+   "source": "climb",
+   "evidence": [
+    "E1"
+   ],
+   "transition": "cut",
+   "plan": {
+    "transitionReason": null,
+    "states": [],
+    "register": null,
+    "primitives": [],
+    "framing": null
+   }
+  },
+  {
+   "id": "S08",
+   "start": 23.419,
+   "end": 26.226,
+   "kind": "archival",
+   "label": "NASA tracking film E-207",
+   "subject": "flame at the right SRB aft field joint, full width with plate",
+   "source": "e207",
+   "evidence": [
+    "E1"
+   ],
+   "transition": "cut",
+   "plan": {
+    "transitionReason": "cut on the narration beat into the documented film (V2 grammar)",
+    "states": [
+     {
+      "t": 23.519,
+      "what": "ring on the flame",
+      "ev": "E1 58.788"
+     },
+     {
+      "t": 23.819,
+      "what": "camera closes on the flame",
+      "ev": null
+     }
+    ],
+    "register": null,
+    "primitives": [],
+    "framing": "full-width film + blurred plate of the same film"
+   }
+  },
+  {
+   "id": "S09",
+   "start": 26.226,
+   "end": 32.297,
+   "kind": "reconstruction",
+   "label": "Reconstruction · proportions approximate",
+   "subject": "Commission event sequence 59.3-73.1 s on the stack: plume, leak, strut, rotation, aft dome",
+   "source": null,
+   "evidence": [
+    "E1"
+   ],
+   "transition": "match",
+   "plan": {
+    "transitionReason": "match cut on position and angle: the flame in the film becomes the joint in the reconstruction",
+    "states": [
+     {
+      "t": 26.526,
+      "what": "plume turns onto the tank",
+      "ev": "E1 60.238 plume deflection; 60.248 attaching to ET ring frame"
+     },
+     {
+      "t": 27.882,
+      "what": "hydrogen tank leaks",
+      "ev": "E1 64.660 LH2 tank leak near 2058 ring frame"
+     },
+     {
+      "t": 29.158,
+      "what": "lower strut breaks",
+      "ev": "E1 72.204 lower strut severed; right SRB rotates about upper strut"
+     },
+     {
+      "t": 31.033,
+      "what": "tank’s aft dome fails",
+      "ev": "E1 73.124 aft dome dropping away"
+     }
+    ],
+    "register": {
+     "from": "S08",
+     "asset": "e207",
+     "anchors": [
+      "flame -> right SRB aft field joint (inner side)",
+      "vehicle axis -28°"
+     ]
+    },
+    "primitives": [],
+    "framing": "full-frame reconstruction"
+   }
+  },
+  {
+   "id": "S10",
+   "start": 32.297,
+   "end": 33.74,
+   "kind": "archival",
+   "label": "NASA photo",
+   "subject": "breakup, about 76 s after launch",
+   "source": "breakup",
+   "evidence": [
+    "E1"
+   ],
+   "transition": "cut",
+   "plan": {
+    "transitionReason": null,
+    "states": [],
+    "register": null,
+    "primitives": [],
+    "framing": null
+   }
+  },
+  {
+   "id": "S11",
+   "start": 33.74,
+   "end": 36.676,
+   "kind": "archival",
+   "label": "NASA portrait",
+   "subject": "STS-51-L crew official portrait",
+   "source": "crew",
+   "evidence": [
+    "E1"
+   ],
+   "transition": "cut",
+   "plan": {
+    "transitionReason": null,
+    "states": [],
+    "register": null,
+    "primitives": [],
+    "framing": null
+   }
+  },
+  {
+   "id": "S12",
+   "start": 36.676,
+   "end": 41.774,
+   "kind": "document",
+   "label": "Commission record",
+   "subject": "document camera over Thiokol's initial recommendation chart (Rogers Vol. 1 p. 90), 27 Jan 1986",
+   "source": "chart53",
+   "evidence": [
+    "E3"
+   ],
+   "transition": "dip",
+   "plan": {
+    "transitionReason": "slow dissolve from the crew portrait (loss beat, respectful pace)",
+    "states": [
+     {
+      "t": 38.59,
+      "what": "camera reads the engineers' line; highlight follows the words",
+      "ev": "E3 p. 90"
+     },
+     {
+      "t": 40.354,
+      "what": "camera lands on '≥ 53 °F'",
+      "ev": "E3 p. 90"
+     },
+     {
+      "t": 41.457,
+      "what": "pull back to the engineers' reason (47-52 °F motors, no blow-by)",
+      "ev": "E3 p. 90"
+     }
+    ],
+    "register": null,
+    "primitives": [
+     "document",
+     "document-camera",
+     "timeline"
+    ],
+    "framing": "document camera on a desk"
+   }
+  },
+  {
+   "id": "S13",
+   "start": 41.774,
+   "end": 46.753,
+   "kind": "document",
+   "label": "Commission record",
+   "subject": "signed telefax slides over the chart (p. 97); Commission finding (p. 82); clock to launch",
+   "source": "fax",
+   "evidence": [
+    "E3"
+   ],
+   "transition": "continuous",
+   "plan": {
+    "transitionReason": "continuous document camera: the reversal is laid on top of the warning",
+    "states": [
+     {
+      "t": 41.984,
+      "what": "telefax slides over the engineers' chart",
+      "ev": "E3 p. 97; Finding 4"
+     },
+     {
+      "t": 42.475,
+      "what": "camera reads 'MTI recommends ... launch proceed'",
+      "ev": "E3 p. 97"
+     },
+     {
+      "t": 43.187,
+      "what": "signature (Kilminster) highlighted",
+      "ev": "E3 p. 97"
+     },
+     {
+      "t": 43.908,
+      "what": "clock to launch; the Commission's finding laid on top",
+      "ev": "E3 p. 82"
+     }
+    ],
+    "register": null,
+    "primitives": [
+     "document",
+     "document-camera",
+     "timeline",
+     "quote"
+    ],
+    "framing": "document camera on a desk"
+   }
+  },
+  {
+   "id": "S14",
+   "start": 46.753,
+   "end": 48.691,
+   "kind": "archival",
+   "label": "NASA photo · recovered hardware",
+   "subject": "scorched hole in the recovered right Solid Rocket Motor segment",
+   "source": "burn",
+   "evidence": [
+    "E5",
+    "E2"
+   ],
+   "transition": "cut",
+   "plan": {
+    "transitionReason": null,
+    "states": [],
+    "register": null,
+    "primitives": [],
+    "framing": null
+   }
+  },
+  {
+   "id": "S15",
+   "start": 48.691,
+   "end": 51.689,
+   "kind": "archival",
+   "label": "NASA photo",
+   "subject": "liftoff close-up, pull back",
+   "source": "liftoff",
+   "evidence": [
+    "E3"
+   ],
+   "transition": "cut",
+   "plan": {
+    "transitionReason": null,
+    "states": [],
+    "register": null,
+    "primitives": [],
+    "framing": null
+   }
+  }
+ ],
+ "cues": [
+  {
+   "start": 1,
+   "end": 1.948,
+   "lines": [
+    "Less than a second",
+    "after liftoff,"
+   ]
+  },
+  {
+   "start": 1.948,
+   "end": 3.9160000000000004,
+   "lines": [
+    "Challenger was",
+    "already leaking."
+   ]
+  },
+  {
+   "start": 4.046,
+   "end": 5.578,
+   "lines": [
+    "Smoke was puffing",
+    "from a joint"
+   ]
+  },
+  {
+   "start": 5.578,
+   "end": 6.816,
+   "lines": [
+    "on the right booster,"
+   ]
+  },
+  {
+   "start": 6.816,
+   "end": 9.156,
+   "lines": [
+    "sealed by two",
+    "rubber O-rings."
+   ]
+  },
+  {
+   "start": 9.156,
+   "end": 11.203,
+   "lines": [
+    "That morning was",
+    "fifteen degrees colder"
+   ]
+  },
+  {
+   "start": 11.203,
+   "end": 12.833,
+   "lines": [
+    "than any launch before."
+   ]
+  },
+  {
+   "start": 12.833,
+   "end": 15.026,
+   "lines": [
+    "And cold rubber",
+    "springs back slowly."
+   ]
+  },
+  {
+   "start": 15.026,
+   "end": 16.485,
+   "lines": [
+    "So when ignition",
+    "flexed the joint"
+   ]
+  },
+  {
+   "start": 16.485,
+   "end": 18.825,
+   "lines": [
+    "open, the O-rings",
+    "couldn't keep up,"
+   ]
+  },
+  {
+   "start": 18.825,
+   "end": 20.725,
+   "lines": [
+    "and hot gas",
+    "blew past them."
+   ]
+  },
+  {
+   "start": 20.725,
+   "end": 21.975,
+   "lines": [
+    "Then the smoke stopped,"
+   ]
+  },
+  {
+   "start": 21.975,
+   "end": 23.503,
+   "lines": [
+    "and Challenger flew on."
+   ]
+  },
+  {
+   "start": 23.519,
+   "end": 24.99,
+   "lines": [
+    "Fifty-eight seconds in,"
+   ]
+  },
+  {
+   "start": 24.99,
+   "end": 26.73,
+   "lines": [
+    "a flame broke",
+    "through and swept"
+   ]
+  },
+  {
+   "start": 26.73,
+   "end": 28.773,
+   "lines": [
+    "onto the external",
+    "fuel tank."
+   ]
+  },
+  {
+   "start": 29.043,
+   "end": 30.637,
+   "lines": [
+    "At seventy-three",
+    "seconds,"
+   ]
+  },
+  {
+   "start": 30.637,
+   "end": 31.798,
+   "lines": [
+    "the tank failed,"
+   ]
+  },
+  {
+   "start": 31.798,
+   "end": 33.46,
+   "lines": [
+    "and Challenger",
+    "broke apart."
+   ]
+  },
+  {
+   "start": 33.89,
+   "end": 36.297000000000004,
+   "lines": [
+    "All seven crew",
+    "members were lost."
+   ]
+  },
+  {
+   "start": 36.776,
+   "end": 37.928,
+   "lines": [
+    "The night before,"
+   ]
+  },
+  {
+   "start": 37.928,
+   "end": 40.354,
+   "lines": [
+    "engineers had recommended",
+    "not launching below"
+   ]
+  },
+  {
+   "start": 40.354,
+   "end": 41.874,
+   "lines": [
+    "fifty-three degrees."
+   ]
+  },
+  {
+   "start": 41.874,
+   "end": 43.761,
+   "lines": [
+    "Their managers",
+    "reversed that advice,"
+   ]
+  },
+  {
+   "start": 43.761,
+   "end": 45.661,
+   "lines": [
+    "and NASA's top launch",
+    "officials never"
+   ]
+  },
+  {
+   "start": 45.661,
+   "end": 46.503,
+   "lines": [
+    "heard it."
+   ]
+  }
+ ]
+}

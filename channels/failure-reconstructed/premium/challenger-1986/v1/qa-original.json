@@ -1,0 +1,122 @@
+{
+ "file": "challenger-original.mp4",
+ "observedAt": "2026-10-12T20:21:56.940Z",
+ "durationSec": 27.585,
+ "video": "1080x1920 30/1 h264",
+ "audio": "aac 2ch 44100 Hz",
+ "loudness": {
+  "I": -15.2,
+  "LRA": 2.4,
+  "truePeak": -4.4
+ },
+ "motion": {
+  "method": "mean abs luma diff per frame on a 270x480 gray proxy; static = diff < 0.5",
+  "first3sMean": 4.11,
+  "first3sStaticShare": 0.39,
+  "wholeMean": 1.72,
+  "wholeStaticShare": 0.44,
+  "longestStaticRunSec": 0.57
+ },
+ "frame0": {
+  "meanLuma": 76.1,
+  "detailSd": 67.1,
+  "edgeEnergy": 1.24
+ },
+ "black": [],
+ "freezes": [],
+ "silences": [],
+ "checks": [
+  {
+   "name": "resolution",
+   "ok": true,
+   "measured": "1080x1920",
+   "target": "1080x1920",
+   "hard": true
+  },
+  {
+   "name": "frame rate",
+   "ok": true,
+   "measured": "30/1",
+   "target": "30/1",
+   "hard": true
+  },
+  {
+   "name": "codec",
+   "ok": true,
+   "measured": "h264 High yuv420p",
+   "target": "h264 yuv420p",
+   "hard": true
+  },
+  {
+   "name": "full decode errors",
+   "ok": true,
+   "measured": 0,
+   "target": 0,
+   "hard": true
+  },
+  {
+   "name": "duration",
+   "ok": false,
+   "measured": "27.59 s",
+   "target": "45-55 s",
+   "hard": false
+  },
+  {
+   "name": "black frames >= 0.1 s",
+   "ok": true,
+   "measured": "none",
+   "target": "none",
+   "hard": true
+  },
+  {
+   "name": "first frame not empty",
+   "ok": true,
+   "measured": "mean luma 76.1, detail sd 67.1, edge 1.24",
+   "target": "mean > 25, sd > 20",
+   "hard": true
+  },
+  {
+   "name": "static holds >= 2 s (freezedetect n=0.003)",
+   "ok": true,
+   "measured": "none",
+   "target": "none",
+   "hard": true
+  },
+  {
+   "name": "audio clipping",
+   "ok": true,
+   "measured": "clipped , flat 0/0/0",
+   "target": "0",
+   "hard": true
+  },
+  {
+   "name": "integrated loudness",
+   "ok": false,
+   "measured": "-15.2 LUFS",
+   "target": "-14 +/- 1",
+   "hard": false
+  },
+  {
+   "name": "true peak",
+   "ok": true,
+   "measured": "-4.4 dBTP",
+   "target": "<= -1 dBTP",
+   "hard": true
+  },
+  {
+   "name": "silence >= 1.0 s at -45 dB",
+   "ok": true,
+   "measured": "none",
+   "target": "reported (designed pauses allowed)",
+   "hard": false
+  },
+  {
+   "name": "a/v duration match",
+   "ok": true,
+   "measured": "0.052 s",
+   "target": "<= 0.1 s",
+   "hard": true
+  }
+ ],
+ "pass": true
+}

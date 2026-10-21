@@ -1,0 +1,238 @@
+{
+ "schema": "fr-premium.creative-qa.v1",
+ "mode": "WARN-only",
+ "thresholds": {
+  "empty": 0.35,
+  "inset": 0.25,
+  "subject_min": 0.25,
+  "tiers": 3,
+  "labels": 3,
+  "words": 8,
+  "label_px": 32,
+  "states_per_2s": 1,
+  "states_min": 2
+ },
+ "grammar": [
+  "continuous",
+  "cut",
+  "dip",
+  "follow-cause",
+  "hard-cut",
+  "loop",
+  "match",
+  "push-in"
+ ],
+ "mp4": "challenger-p1-D-warning-and-decision.mp4",
+ "offset": 36.3,
+ "summary": {
+  "shots": 4,
+  "warn_shots": 4,
+  "warns": 13,
+  "time_weighted_empty": 0.602,
+  "mechanism_registered": "0/0",
+  "slide_like": 0
+ },
+ "shots": [
+  {
+   "id": "S11",
+   "kind": "archival",
+   "start": 33.74,
+   "end": 36.676,
+   "measured_from": 36.3,
+   "measured_to": 36.676,
+   "empty": 0.507,
+   "subject_motion": 0.005,
+   "subject_median": 0.006,
+   "camera_per_s": 0.0,
+   "states": [],
+   "registered": null,
+   "boundary_corr": null,
+   "transition": {
+    "type": "cut",
+    "reason": null,
+    "measured": null
+   },
+   "text": {
+    "max_tiers": 1,
+    "max_labels": 1,
+    "max_words": 3,
+    "smallest_label_px": 28,
+    "competing_samples": 0
+   },
+   "framing": null,
+   "primitives": [],
+   "slide_like": false,
+   "warns": [
+    "empty background 51% > 35%",
+    "archival inset over void 51% > 25%",
+    "transition 'cut' has no declared reason",
+    "smallest label 28 px < 32"
+   ]
+  },
+  {
+   "id": "S12",
+   "kind": "document",
+   "start": 36.676,
+   "end": 41.774,
+   "measured_from": 36.676,
+   "measured_to": 41.774,
+   "empty": 0.728,
+   "subject_motion": 0.543,
+   "subject_median": 0.281,
+   "camera_per_s": 0.286,
+   "states": [
+    {
+     "t": 38.59,
+     "what": "camera reads the engineers' line; highlight follows the words",
+     "ev": "E3 p. 90",
+     "verified": false,
+     "peak": 0.43
+    },
+    {
+     "t": 40.354,
+     "what": "camera lands on '\u2265 53 \u00b0F'",
+     "ev": "E3 p. 90",
+     "verified": true,
+     "peak": 1.07
+    },
+    {
+     "t": 41.457,
+     "what": "pull back to the engineers' reason (47-52 \u00b0F motors, no blow-by)",
+     "ev": "E3 p. 90",
+     "verified": true,
+     "peak": 0.49
+    }
+   ],
+   "registered": null,
+   "boundary_corr": 0.774,
+   "transition": {
+    "type": "dip",
+    "reason": "slow dissolve from the crew portrait (loss beat, respectful pace)",
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 2,
+    "max_labels": 1,
+    "max_words": 8,
+    "smallest_label_px": 24,
+    "competing_samples": 0
+   },
+   "framing": "document camera on a desk",
+   "primitives": [
+    "document",
+    "document-camera",
+    "timeline"
+   ],
+   "slide_like": false,
+   "warns": [
+    "empty background 73% > 35%",
+    "1 declared state change(s) not visible in the MP4",
+    "smallest label 24 px < 32"
+   ]
+  },
+  {
+   "id": "S13",
+   "kind": "document",
+   "start": 41.774,
+   "end": 46.753,
+   "measured_from": 41.774,
+   "measured_to": 46.753,
+   "empty": 0.514,
+   "subject_motion": 0.499,
+   "subject_median": 0.144,
+   "camera_per_s": 0.283,
+   "states": [
+    {
+     "t": 41.984,
+     "what": "telefax slides over the engineers' chart",
+     "ev": "E3 p. 97; Finding 4",
+     "verified": true,
+     "peak": 4.23
+    },
+    {
+     "t": 42.475,
+     "what": "camera reads 'MTI recommends ... launch proceed'",
+     "ev": "E3 p. 97",
+     "verified": true,
+     "peak": 0.53
+    },
+    {
+     "t": 43.187,
+     "what": "signature (Kilminster) highlighted",
+     "ev": "E3 p. 97",
+     "verified": true,
+     "peak": 1.52
+    },
+    {
+     "t": 43.908,
+     "what": "clock to launch; the Commission's finding laid on top",
+     "ev": "E3 p. 82",
+     "verified": true,
+     "peak": 1.82
+    }
+   ],
+   "registered": null,
+   "boundary_corr": 0.892,
+   "transition": {
+    "type": "continuous",
+    "reason": "continuous document camera: the reversal is laid on top of the warning",
+    "measured": "gradual"
+   },
+   "text": {
+    "max_tiers": 3,
+    "max_labels": 3,
+    "max_words": 15,
+    "smallest_label_px": 24,
+    "competing_samples": 0
+   },
+   "framing": "document camera on a desk",
+   "primitives": [
+    "document",
+    "document-camera",
+    "quote",
+    "timeline"
+   ],
+   "slide_like": false,
+   "warns": [
+    "empty background 51% > 35%",
+    "15 non-caption words on screen > 8",
+    "smallest label 24 px < 32"
+   ]
+  },
+  {
+   "id": "S14",
+   "kind": "archival",
+   "start": 46.753,
+   "end": 48.691,
+   "measured_from": 46.753,
+   "measured_to": 47.1,
+   "empty": 0.118,
+   "subject_motion": 0.2,
+   "subject_median": 0.2,
+   "camera_per_s": 0.0,
+   "states": [],
+   "registered": null,
+   "boundary_corr": 0.5,
+   "transition": {
+    "type": "cut",
+    "reason": null,
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 3,
+    "max_labels": 2,
+    "max_words": 19,
+    "smallest_label_px": 24,
+    "competing_samples": 0
+   },
+   "framing": null,
+   "primitives": [],
+   "slide_like": false,
+   "warns": [
+    "transition 'cut' has no declared reason",
+    "19 non-caption words on screen > 8",
+    "smallest label 24 px < 32"
+   ]
+  }
+ ]
+}

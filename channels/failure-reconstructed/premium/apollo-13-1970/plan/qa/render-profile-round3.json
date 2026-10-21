@@ -1,0 +1,52 @@
+{
+ "machine": "Apple M1",
+ "frames": 680,
+ "settings": "1080x1920@30, libx264 slow crf 17, film 5.26-27.91",
+ "wallSeconds": {
+  "v1_playwright": 100.7,
+  "v2_playwright": 186.4,
+  "v3_playwright": 185.0,
+  "v3_fast": [
+   64.9,
+   65.4,
+   65.8,
+   69.1
+  ]
+ },
+ "v3_fast_vs_playwright_frames_identical": "680/680 (framemd5)",
+ "v3_fast_profile_totals_ms": {
+  "build": 496,
+  "evaluate": 2024,
+  "screenshot": 61182,
+  "pipe": 2469,
+  "encodeTail": 1111,
+  "pngBytes": 813593931
+ },
+ "v2_ablation_90_frames_s": {
+  "B_22-25_baseline": 23.7,
+  "B_no_svg_shadows": 23.0,
+  "B_no_glow_blur": 22.6,
+  "B_no_both": 22.7,
+  "A_5.3-8.3_baseline": 31.8,
+  "A_no_plate_bg_blur": 27.6,
+  "A_no_plate_dropshadow": 27.8
+ },
+ "v2_profile_90_frames_ms": {
+  "A": {
+   "build": 89,
+   "evaluate": 228,
+   "screenshot": 26584,
+   "pipe": 191,
+   "encodeTail": 1453,
+   "pngBytes": 89594434
+  },
+  "B": {
+   "build": 59,
+   "evaluate": 270,
+   "screenshot": 20448,
+   "pipe": 127,
+   "encodeTail": 931,
+   "pngBytes": 61316934
+  }
+ }
+}

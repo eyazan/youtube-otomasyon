@@ -1,0 +1,179 @@
+{
+ "schema": "fr-premium.creative-qa.v1",
+ "mode": "WARN-only",
+ "thresholds": {
+  "empty": 0.35,
+  "inset": 0.25,
+  "subject_min": 0.25,
+  "tiers": 3,
+  "labels": 3,
+  "words": 8,
+  "label_px": 32,
+  "states_per_2s": 1,
+  "states_min": 2
+ },
+ "grammar": [
+  "continuous",
+  "cut",
+  "dip",
+  "follow-cause",
+  "hard-cut",
+  "loop",
+  "match",
+  "push-in"
+ ],
+ "mp4": "challenger-p1-B-warm-cold-seal.mp4",
+ "offset": 12.2,
+ "summary": {
+  "shots": 3,
+  "warn_shots": 3,
+  "warns": 17,
+  "time_weighted_empty": 0.332,
+  "mechanism_registered": "0/2",
+  "slide_like": 0
+ },
+ "shots": [
+  {
+   "id": "S04",
+   "kind": "archival",
+   "start": 9.056,
+   "end": 12.733,
+   "measured_from": 12.2,
+   "measured_to": 12.733,
+   "empty": 0.128,
+   "subject_motion": 0.048,
+   "subject_median": 0.044,
+   "camera_per_s": 0.001,
+   "states": [],
+   "registered": null,
+   "boundary_corr": null,
+   "transition": {
+    "type": "cut",
+    "reason": null,
+    "measured": null
+   },
+   "text": {
+    "max_tiers": 3,
+    "max_labels": 2,
+    "max_words": 14,
+    "smallest_label_px": 28,
+    "competing_samples": 2
+   },
+   "framing": null,
+   "primitives": [],
+   "slide_like": false,
+   "warns": [
+    "transition 'cut' has no declared reason",
+    "14 non-caption words on screen > 8",
+    "smallest label 28 px < 32",
+    "headline competes with caption in 2 samples"
+   ]
+  },
+  {
+   "id": "S05",
+   "kind": "explanatory",
+   "start": 12.733,
+   "end": 14.926,
+   "measured_from": 12.733,
+   "measured_to": 14.926,
+   "empty": 0.347,
+   "subject_motion": 0.326,
+   "subject_median": 0.047,
+   "camera_per_s": 0.006,
+   "states": [
+    {
+     "t": 13.282,
+     "what": "sealing face starts moving away (joint opens)",
+     "ev": "E2 F8a",
+     "verified": true,
+     "peak": 0.4
+    },
+    {
+     "t": 13.432,
+     "what": "warm ring springs out and keeps contact",
+     "ev": "E2",
+     "verified": true,
+     "peak": 0.4
+    },
+    {
+     "t": 13.882,
+     "what": "cold ring still squeezed: gap open",
+     "ev": "E2",
+     "verified": true,
+     "peak": 0.32
+    },
+    {
+     "t": 14.156,
+     "what": "hot gas passes the cold ring only",
+     "ev": "E2",
+     "verified": false,
+     "peak": 0.04
+    }
+   ],
+   "registered": null,
+   "boundary_corr": 0.462,
+   "transition": {
+    "type": "follow-cause",
+    "reason": "follow the cause: from the frozen launch tower into the cold rubber (frost carries across)",
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 7,
+    "max_labels": 7,
+    "max_words": 29,
+    "smallest_label_px": 24,
+    "competing_samples": 9
+   },
+   "framing": "full-bleed cross-section, two stacked panels",
+   "primitives": [],
+   "slide_like": false,
+   "warns": [
+    "1 declared state change(s) not visible in the MP4",
+    "mechanism shot not registered to archival media",
+    "7 text tiers > 3",
+    "7 labels at once > 3",
+    "29 non-caption words on screen > 8",
+    "smallest label 24 px < 32",
+    "headline competes with caption in 9 samples"
+   ]
+  },
+  {
+   "id": "S06",
+   "kind": "explanatory",
+   "start": 14.926,
+   "end": 20.625,
+   "measured_from": 14.926,
+   "measured_to": 15.4,
+   "empty": 0.49,
+   "subject_motion": 0.139,
+   "subject_median": 0.104,
+   "camera_per_s": 0.001,
+   "states": [],
+   "registered": null,
+   "boundary_corr": 0.018,
+   "transition": {
+    "type": "cut",
+    "reason": null,
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 2,
+    "max_labels": 3,
+    "max_words": 7,
+    "smallest_label_px": 28,
+    "competing_samples": 0
+   },
+   "framing": null,
+   "primitives": [],
+   "slide_like": false,
+   "warns": [
+    "empty background 49% > 35%",
+    "subject motion 0.14 < 0.25 (camera drift only)",
+    "no narration-timed state changes declared",
+    "mechanism shot not registered to archival media",
+    "transition 'cut' has no declared reason",
+    "smallest label 28 px < 32"
+   ]
+  }
+ ]
+}

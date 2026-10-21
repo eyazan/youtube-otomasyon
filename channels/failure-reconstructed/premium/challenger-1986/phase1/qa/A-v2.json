@@ -1,0 +1,181 @@
+{
+ "schema": "fr-premium.creative-qa.v1",
+ "mode": "WARN-only",
+ "thresholds": {
+  "empty": 0.35,
+  "inset": 0.25,
+  "subject_min": 0.25,
+  "tiers": 3,
+  "labels": 3,
+  "words": 8,
+  "label_px": 32,
+  "states_per_2s": 1,
+  "states_min": 2
+ },
+ "grammar": [
+  "continuous",
+  "cut",
+  "dip",
+  "follow-cause",
+  "hard-cut",
+  "loop",
+  "match",
+  "push-in"
+ ],
+ "mp4": "challenger-premium-v2.mp4",
+ "offset": 0.0,
+ "summary": {
+  "shots": 4,
+  "warn_shots": 4,
+  "warns": 16,
+  "time_weighted_empty": 0.526,
+  "mechanism_registered": "0/1",
+  "slide_like": 1
+ },
+ "shots": [
+  {
+   "id": "S01",
+   "kind": "archival",
+   "start": 0,
+   "end": 3.946,
+   "measured_from": 0,
+   "measured_to": 3.946,
+   "empty": 0.287,
+   "subject_motion": 0.408,
+   "subject_median": 0.423,
+   "camera_per_s": 0.049,
+   "states": [],
+   "registered": null,
+   "boundary_corr": null,
+   "transition": {
+    "type": "cut",
+    "reason": null,
+    "measured": null
+   },
+   "text": {
+    "max_tiers": 3,
+    "max_labels": 3,
+    "max_words": 16,
+    "smallest_label_px": 30,
+    "competing_samples": 15
+   },
+   "framing": null,
+   "primitives": [],
+   "slide_like": false,
+   "warns": [
+    "archival inset over void 29% > 25%",
+    "16 non-caption words on screen > 8",
+    "smallest label 30 px < 32",
+    "headline competes with caption in 15 samples"
+   ]
+  },
+  {
+   "id": "S02",
+   "kind": "explanatory",
+   "start": 3.946,
+   "end": 6.766,
+   "measured_from": 3.946,
+   "measured_to": 6.766,
+   "empty": 0.777,
+   "subject_motion": 0.43,
+   "subject_median": 0.362,
+   "camera_per_s": 0.459,
+   "states": [],
+   "registered": null,
+   "boundary_corr": 0.093,
+   "transition": {
+    "type": "cut",
+    "reason": null,
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 1,
+    "max_labels": 2,
+    "max_words": 4,
+    "smallest_label_px": 36,
+    "competing_samples": 0
+   },
+   "framing": null,
+   "primitives": [],
+   "slide_like": false,
+   "warns": [
+    "empty background 78% > 35%",
+    "no narration-timed state changes declared",
+    "mechanism shot not registered to archival media",
+    "transition 'cut' has no declared reason"
+   ]
+  },
+  {
+   "id": "S03",
+   "kind": "document",
+   "start": 6.766,
+   "end": 9.056,
+   "measured_from": 6.766,
+   "measured_to": 9.056,
+   "empty": 0.67,
+   "subject_motion": 0.114,
+   "subject_median": 0.101,
+   "camera_per_s": 0.006,
+   "states": [],
+   "registered": null,
+   "boundary_corr": 0.16,
+   "transition": {
+    "type": "cut",
+    "reason": null,
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 1,
+    "max_labels": 1,
+    "max_words": 8,
+    "smallest_label_px": 24,
+    "competing_samples": 0
+   },
+   "framing": null,
+   "primitives": [],
+   "slide_like": true,
+   "warns": [
+    "empty background 67% > 35%",
+    "subject motion 0.11 < 0.25 (camera drift only)",
+    "no narration-timed state changes declared",
+    "transition 'cut' has no declared reason",
+    "smallest label 24 px < 32",
+    "slide-like composition"
+   ]
+  },
+  {
+   "id": "S04",
+   "kind": "archival",
+   "start": 9.056,
+   "end": 12.733,
+   "measured_from": 9.056,
+   "measured_to": 9.3,
+   "empty": 0.137,
+   "subject_motion": 0.0,
+   "subject_median": 0.0,
+   "camera_per_s": 0.0,
+   "states": [],
+   "registered": null,
+   "boundary_corr": 0.094,
+   "transition": {
+    "type": "cut",
+    "reason": null,
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 1,
+    "max_labels": 1,
+    "max_words": 5,
+    "smallest_label_px": 28,
+    "competing_samples": 0
+   },
+   "framing": null,
+   "primitives": [],
+   "slide_like": false,
+   "warns": [
+    "transition 'cut' has no declared reason",
+    "smallest label 28 px < 32"
+   ]
+  }
+ ]
+}

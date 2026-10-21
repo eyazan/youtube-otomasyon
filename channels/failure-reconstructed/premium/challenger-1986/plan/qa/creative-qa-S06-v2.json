@@ -1,0 +1,186 @@
+{
+ "schema": "fr-premium.creative-qa.v1",
+ "mode": "WARN-only",
+ "thresholds": {
+  "empty": 0.35,
+  "inset": 0.25,
+  "subject_min": 0.25,
+  "tiers": 3,
+  "labels": 3,
+  "words": 8,
+  "label_px": 32,
+  "states_per_2s": 1,
+  "states_min": 2
+ },
+ "grammar": [
+  "continuous",
+  "cut",
+  "dip",
+  "follow-cause",
+  "hard-cut",
+  "loop",
+  "match",
+  "push-in"
+ ],
+ "mp4": "challenger-engine-S06-v2.mp4",
+ "offset": 14.7,
+ "summary": {
+  "shots": 2,
+  "warn_shots": 2,
+  "warns": 13,
+  "time_weighted_empty": 0.401,
+  "mechanism_registered": "1/2",
+  "slide_like": 0
+ },
+ "shots": [
+  {
+   "id": "S05",
+   "kind": "explanatory",
+   "start": 12.733,
+   "end": 14.926,
+   "measured_from": 14.7,
+   "measured_to": 14.926,
+   "empty": 0.425,
+   "subject_motion": 0.033,
+   "subject_median": 0.033,
+   "camera_per_s": 0.001,
+   "states": [
+    {
+     "t": 13.282,
+     "what": "sealing face starts moving away (joint opens)",
+     "ev": "C-gap-600ms",
+     "verified": false,
+     "peak": null
+    },
+    {
+     "t": 13.432,
+     "what": "warm ring springs out and keeps contact",
+     "ev": "C-test-75f",
+     "verified": false,
+     "peak": null
+    },
+    {
+     "t": 13.882,
+     "what": "cold ring still squeezed: gap open",
+     "ev": "C-resiliency-cold",
+     "verified": false,
+     "peak": null
+    },
+    {
+     "t": 14.156,
+     "what": "hot gas passes the cold ring only",
+     "ev": null,
+     "verified": false,
+     "peak": 0.03
+    }
+   ],
+   "registered": null,
+   "boundary_corr": null,
+   "transition": {
+    "type": "follow-cause",
+    "reason": "from the frozen launch tower into the cold rubber (frost carries across)",
+    "measured": null
+   },
+   "text": {
+    "max_tiers": 4,
+    "max_labels": 3,
+    "max_words": 21,
+    "smallest_label_px": 24,
+    "competing_samples": 1
+   },
+   "framing": "joint-section",
+   "primitives": [
+    "joint-section"
+   ],
+   "slide_like": false,
+   "warns": [
+    "empty background 43% > 35%",
+    "subject motion 0.03 < 0.25 (camera drift only)",
+    "4 declared state change(s) not visible in the MP4",
+    "mechanism shot not registered to archival media",
+    "4 text tiers > 3",
+    "21 non-caption words on screen > 8",
+    "smallest label 24 px < 32",
+    "headline competes with caption in 1 samples"
+   ]
+  },
+  {
+   "id": "S06",
+   "kind": "explanatory",
+   "start": 14.926,
+   "end": 20.625,
+   "measured_from": 14.926,
+   "measured_to": 20.625,
+   "empty": 0.4,
+   "subject_motion": 0.351,
+   "subject_median": 0.215,
+   "camera_per_s": 0.007,
+   "states": [
+    {
+     "t": 15.171,
+     "what": "combustion pressure builds on the inside",
+     "ev": null,
+     "verified": true,
+     "peak": 3.69
+    },
+    {
+     "t": 15.271,
+     "what": "joint opens over the documented 0.6 s",
+     "ev": "C-gap-600ms",
+     "verified": true,
+     "peak": 3.69
+    },
+    {
+     "t": 15.971,
+     "what": "blow-by begins (smoke documented at 0.678 s)",
+     "ev": "C-smoke-0678",
+     "verified": true,
+     "peak": 0.41
+    },
+    {
+     "t": 17.735,
+     "what": "cold rings lag: gap stays open",
+     "ev": "C-resiliency-cold",
+     "verified": false,
+     "peak": 0.32
+    },
+    {
+     "t": 18.911,
+     "what": "hot gas flows past both rings",
+     "ev": null,
+     "verified": false,
+     "peak": 0.28
+    }
+   ],
+   "registered": {
+    "from": "drawing",
+    "asset": "fig14"
+   },
+   "boundary_corr": 0.033,
+   "transition": {
+    "type": "cut",
+    "reason": "cut on the narration beat into the joint itself, drawn from the Commission's figure",
+    "measured": "cut"
+   },
+   "text": {
+    "max_tiers": 3,
+    "max_labels": 4,
+    "max_words": 19,
+    "smallest_label_px": 24,
+    "competing_samples": 0
+   },
+   "framing": "joint-mechanism",
+   "primitives": [
+    "joint-mechanism"
+   ],
+   "slide_like": false,
+   "warns": [
+    "empty background 40% > 35%",
+    "2 declared state change(s) not visible in the MP4",
+    "4 labels at once > 3",
+    "19 non-caption words on screen > 8",
+    "smallest label 24 px < 32"
+   ]
+  }
+ ]
+}
