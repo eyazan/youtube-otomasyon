@@ -28,9 +28,13 @@ function evaluate(pkgFile, approvals = {}) {
   const published = (() => { try { return J(path.join(channel.paths.state, "published.json")); } catch (e) { return []; } })();
   const dup = published.filter((p) => p.slug === topic.slug || p.topicId === topic.id || (sha && p.mediaSha256 === sha));
   // licensed media used by the storyboard that produced this package
-  const mediaIssues = []; const scenes = J(path.join(out, "scenes.json")).scenes || [];
-  const usesPlates = scenes.some((s) => (s.components || []).includes("image-plate"));
-  if (usesPlates) for (const a of Assets.load(pkg.channel).assets.filter((x) => (x.review || {}).status !== "rejected")) { const used = fs.readFileSync(path.join(out, "work", "page.html"), "utf8").includes(a.id); if (used) mediaIssues.push(...Assets.check(a, "publish")); }
+  // (from the committed storyboard: out/ -> storyboard.json, out/vN/ -> storyboard.vN.json; the render work dir is
+  // git-ignored and may not exist where the gate runs)
+  const mediaIssues = []; const vm = out.match(/[\\/]out[\\/]v(\d+)$/); const topicDir = vm ? path.dirname(path.dirname(out)) : path.dirname(out);
+  const sbFile = path.join(topicDir, vm ? `storyboard.v${vm[1]}.json` : "storyboard.json");
+  if (!fs.existsSync(sbFile)) mediaIssues.push(`storyboard for this package not found (${path.relative(ROOT, sbFile)}): licensed media cannot be checked`);
+  else { const used = new Set(Assets.usedIds(J(sbFile))); const reg = Assets.load(pkg.channel).assets;
+    for (const id of used) { const a = reg.find((x) => x.id === id); mediaIssues.push(...(a ? Assets.check(a, "publish") : [`${id}: not in the asset registry`])); } }
   const speech = (qa.objective || []).find((c) => /real speech/.test(c.name));
   const facts = topic.facts || [];
   let v = { topic, alreadyPublished: dup.length > 0 };
