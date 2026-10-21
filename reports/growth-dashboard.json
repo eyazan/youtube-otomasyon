@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-10-20T17:20:29.857Z",
+  "generatedAt": "2026-10-21T19:23:39.657Z",
   "note": "Per-channel baselines are computed separately and never blended.",
   "channels": [
     {
       "channel": "failure-reconstructed",
       "name": "Failure Reconstructed",
       "shorts": {
-        "lastPublished": "2026-10-20T18:00:00.000Z",
-        "published": 28,
+        "lastPublished": "2026-10-21T18:00:00.000Z",
+        "published": 29,
         "inventory": {
-          "A": 93,
-          "B": 137,
+          "A": 105,
+          "B": 124,
           "C": 59,
           "D": 59
         },
@@ -22,16 +22,16 @@
           "used": 10
         },
         "nextSelection": {
-          "slug": "titanic-1912",
-          "reason": "EXPLOIT (0.75): best A topic by SelectionScore"
+          "slug": "admiral-nakhimov-1986",
+          "reason": "EXPLORE (0.25): under-sampled cluster maritime-disasters"
         },
         "baseline": {
-          "n": 27,
-          "views": 451,
+          "n": 29,
+          "views": 465,
           "averagePercentageViewed": 64.5,
-          "subscribersPer1000Views": 1.56,
-          "engagementPer1000Views": 26.65,
-          "watchHoursPer1000Views": 2.48
+          "subscribersPer1000Views": 1.46,
+          "engagementPer1000Views": 24.19,
+          "watchHoursPer1000Views": 2.49
         }
       },
       "longform": {
@@ -118,7 +118,7 @@
             "mode": "B_SHORT_PROVES_DEMAND"
           },
           {
-            "slug": "armero-1985",
+            "slug": "apollo-13-1970",
             "LongFormPotentialScore": 84,
             "bucket": "A",
             "mode": "B_SHORT_PROVES_DEMAND"
@@ -150,16 +150,16 @@
         "pendingRelatedVideoManualActions": 0
       },
       "growth": {
-        "trackedVideos": 29,
+        "trackedVideos": 30,
         "subscriberConversion": {
-          "shorts": 1.56,
+          "shorts": 1.46,
           "longform": null
         }
       },
       "learning": {
         "shorts": {
           "status": "adaptive",
-          "sampleSize": 27,
+          "sampleSize": 29,
           "adopted": 0,
           "hypotheses": 5
         },
@@ -179,15 +179,20 @@
         {
           "slug": "skylab-1973",
           "bucket": "C",
-          "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
+          "reason": "VideoPotential 85 in experimental band 58–71; sources 41 < 62"
         },
         {
           "slug": "munich-1958",
           "bucket": "C",
-          "reason": "VideoPotential 85 in experimental band 58–71; sources 41 < 62"
+          "reason": "VideoPotential 86 in experimental band 58–71; sources 41 < 62"
         },
         {
           "slug": "eastland-1915",
+          "bucket": "C",
+          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
+        },
+        {
+          "slug": "uss-forrestal-1967",
           "bucket": "C",
           "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
         },
@@ -197,7 +202,12 @@
           "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
         },
         {
-          "slug": "boston-molasses-1919",
+          "slug": "new-london-school-1937",
+          "bucket": "C",
+          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
+        },
+        {
+          "slug": "castle-bravo-1954",
           "bucket": "C",
           "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
         },
@@ -207,19 +217,9 @@
           "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
         },
         {
-          "slug": "new-london-school-1937",
+          "slug": "quebec-bridge-1907",
           "bucket": "C",
-          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
-        },
-        {
-          "slug": "uss-forrestal-1967",
-          "bucket": "C",
-          "reason": "VideoPotential 82 in experimental band 58–71; sources 41 < 62"
-        },
-        {
-          "slug": "castle-bravo-1954",
-          "bucket": "C",
-          "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
+          "reason": "VideoPotential 83 in experimental band 58–71; sources 55 < 62"
         }
       ],
       "alerts": [
@@ -343,8 +343,8 @@
         "lastPublished": "2026-10-19T18:00:00.000Z",
         "published": 19,
         "inventory": {
-          "A": 115,
-          "B": 19,
+          "A": 110,
+          "B": 24,
           "C": 140,
           "D": 206
         },
@@ -356,14 +356,14 @@
           "used": 0
         },
         "nextSelection": {
-          "slug": "what-if-you-remembered-every-day-of-your-life",
-          "reason": "EXPLORE (0.25): under-sampled cluster HUMAN"
+          "slug": "what-if-we-tried-to-drill-through-the-earth",
+          "reason": "EXPLOIT (0.75): best A topic by SelectionScore"
         },
         "baseline": {
           "n": 17,
           "views": 922,
           "averagePercentageViewed": 68.85,
-          "subscribersPer1000Views": 0.96,
+          "subscribersPer1000Views": 0.55,
           "engagementPer1000Views": 19.21,
           "watchHoursPer1000Views": 2.64
         }
@@ -438,20 +438,20 @@
             "mode": "A_LONG_FIRST"
           },
           {
-            "slug": "what-if-synthetic-fertilizer-disappeared",
+            "slug": "what-if-we-built-a-star-on-earth",
             "LongFormPotentialScore": 83,
             "bucket": "A",
             "mode": "A_LONG_FIRST"
           },
           {
-            "slug": "what-if-olympus-mons-stood-on-earth",
-            "LongFormPotentialScore": 82,
+            "slug": "what-if-hyperloop-actually-worked",
+            "LongFormPotentialScore": 83,
             "bucket": "A",
             "mode": "A_LONG_FIRST"
           },
           {
-            "slug": "what-if-earth-had-rings-like-saturn",
-            "LongFormPotentialScore": 82,
+            "slug": "what-if-we-dimmed-the-sun-to-cool-earth",
+            "LongFormPotentialScore": 83,
             "bucket": "A",
             "mode": "A_LONG_FIRST"
           }
@@ -484,7 +484,7 @@
       "growth": {
         "trackedVideos": 18,
         "subscriberConversion": {
-          "shorts": 0.96,
+          "shorts": 0.55,
           "longform": null
         }
       },
@@ -506,7 +506,7 @@
         {
           "slug": "what-if-human-heat-tolerance-doubled-overnight",
           "bucket": "C",
-          "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
+          "reason": "VideoPotential 72 in experimental band 58–71; boilerplate 0.5"
         },
         {
           "slug": "could-we-function-with-half-human-heat-tolerance",
@@ -516,12 +516,12 @@
         {
           "slug": "what-if-human-muscle-efficiency-doubled-overnight",
           "bucket": "C",
-          "reason": "VideoPotential 70 in experimental band 58–71; boilerplate 0.5"
+          "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
         },
         {
           "slug": "what-happens-if-the-global-ocean-doubles",
           "bucket": "C",
-          "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
+          "reason": "VideoPotential 72 in experimental band 58–71; boilerplate 0.5"
         },
         {
           "slug": "what-if-the-brain-s-energy-use-doubled-overnight",
@@ -531,7 +531,7 @@
         {
           "slug": "could-we-function-with-half-human-muscle-efficiency",
           "bucket": "C",
-          "reason": "VideoPotential 68 in experimental band 58–71; boilerplate 0.5"
+          "reason": "VideoPotential 69 in experimental band 58–71; boilerplate 0.5"
         },
         {
           "slug": "if-a-rogue-planet-vanished-right-now-what-would-change-first",
@@ -629,6 +629,21 @@
           },
           "date": "2026-10-20",
           "at": "2026-10-20T11:23:51.468Z"
+        },
+        {
+          "channel": "impossible-brief",
+          "code": "NO_QUALIFIED_TOPIC",
+          "message": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [104 unused A topic(s), best viral score 74 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]",
+          "details": {
+            "inventory": {
+              "A": 104,
+              "B": 24,
+              "C": 140,
+              "D": 206
+            }
+          },
+          "date": "2026-10-21",
+          "at": "2026-10-21T11:39:29.224Z"
         }
       ],
       "legacyPaths": false
@@ -653,8 +668,8 @@
           "used": 0
         },
         "nextSelection": {
-          "slug": "the-hidden-system-behind-border-gateway-routing-system",
-          "reason": "EXPLOIT (0.75): best A topic by SelectionScore"
+          "slug": "why-rail-signaling-interlocking-is-so-hard-to-replace",
+          "reason": "EXPLORE (0.25): under-sampled cluster RAIL"
         },
         "baseline": {
           "n": 6,
@@ -814,21 +829,6 @@
               "D": 362
             }
           },
-          "date": "2026-10-10",
-          "at": "2026-10-10T12:24:25.153Z"
-        },
-        {
-          "channel": "critical-thread",
-          "code": "NO_QUALIFIED_TOPIC",
-          "message": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content",
-          "details": {
-            "inventory": {
-              "A": 7,
-              "B": 144,
-              "C": 0,
-              "D": 362
-            }
-          },
           "date": "2026-10-11",
           "at": "2026-10-11T12:40:08.097Z"
         },
@@ -951,6 +951,21 @@
           },
           "date": "2026-10-20",
           "at": "2026-10-20T11:23:57.436Z"
+        },
+        {
+          "channel": "critical-thread",
+          "code": "NO_QUALIFIED_TOPIC",
+          "message": "NO_EXPLORE_CANDIDATE",
+          "details": {
+            "inventory": {
+              "A": 6,
+              "B": 144,
+              "C": 0,
+              "D": 362
+            }
+          },
+          "date": "2026-10-21",
+          "at": "2026-10-21T11:39:35.070Z"
         }
       ],
       "legacyPaths": false
