@@ -205,3 +205,74 @@ test("V2 storyboard validates against the measured narration and uses no repeate
   const r = validateStoryboard(sb, { script: A.studioScript(channel, topic), timeline: JSON.parse(fs.readFileSync(timelineFile, "utf8")), style: J("channels/behind-the-ordinary/premium/style-pack.json") });
   assert.deepEqual(r.errors, []); assert.equal(new Set(sb.scenes.map((s) => s.env)).size >= 5, true, "at least 5 environments");
 });
+
+test("signatures: a corner square's centre line reads 1:1:3:1:1; logos, cells and checkboxes do not", () => {
+  const B = page(["motion.js", "components/core.js", "components/signatures.js"]);
+  const tpl = B.ringRuns([{ size: 7, dark: true }, { size: 5, dark: false }, { size: 3, dark: true }]);
+  assert.deepEqual(Array.from(tpl, (r) => [r.dark, r.n]), [[true, 1], [false, 1], [true, 3], [false, 1], [true, 1]]);
+  assert.equal(B.signatureMatch(tpl, tpl), 0);
+  assert.equal(B.signatureMatch(B.ringRuns([{ size: 1, dark: true }, { size: 0.4, dark: false }]), tpl), -1, "logo");
+  assert.equal(B.signatureMatch([{ dark: true, n: 0.03 }, { dark: false, n: 0.94 }, { dark: true, n: 0.03 }], tpl), -1, "table cell");
+  assert.equal(B.signatureMatch(B.ringRuns([{ size: 1, dark: true }, { size: 0.73, dark: false }]), tpl), -1, "checkbox");
+});
+
+test("asset manager: licence allowlist, trademarks, sha256 and owner approval for publishing", () => {
+  const A = require(path.join(STUDIO, "asset-manager"));
+  const reg = A.load("behind-the-ordinary"); const photo = reg.assets.find((a) => a.id.endsWith("e6bc34117568")); const can = reg.assets.find((a) => a.id.endsWith("1d8e644a6707"));
+  assert.deepEqual(A.check(photo, "preview"), [], "the CC0 photo is usable in previews");
+  assert.ok(A.check(photo, "publish").some((e) => /owner approval/.test(e)), "but needs owner approval to publish");
+  assert.ok(A.check(can, "preview").some((e) => /rejected|trademark/.test(e)), "the branded can is blocked");
+  for (const bad of ["CC BY-NC 4.0", "CC BY-ND 2.0", "All rights reserved", "unknown"]) assert.ok(A.check({ ...photo, licence: bad }, "preview").some((e) => /allowlist/.test(e)), bad);
+  assert.ok(A.check({ ...photo, sha256: "0".repeat(64) }, "preview").some((e) => /sha256/.test(e)));
+  assert.ok(A.check({ ...photo, licence: "CC BY 4.0", author: "", attribution: "" }, "preview").some((e) => /attribution/.test(e)));
+});
+
+test("publish gate: the V3 preview never reaches PUBLISH_APPROVED (unapproved photo, preview voice, no sign-offs)", (t) => {
+  const pkg = path.join(ROOT, "channels/behind-the-ordinary/premium/BTO-301/out/v3/review-package.json");
+  if (!fs.existsSync(pkg)) return t.skip("V3 package not rendered in this checkout (out/ is local)");
+  const G = require(path.join(STUDIO, "publish-gate"));
+  const r = G.evaluate(pkg, {}); assert.notEqual(r.furthestState, "PUBLISH_APPROVED"); assert.ok(r.mediaIssues.length > 0);
+  const all = { creative: { by: "test", at: "x" }, factual: { by: "test", at: "x" }, publish: { by: "test", at: "x" } };
+  assert.notEqual(G.evaluate(pkg, all).furthestState, "PUBLISH_APPROVED", "approvals alone cannot override media, voice or channel gates");
+});
+
+test("creative director: plan obeys its diversity rules; the audit flags a text-only static scene", () => {
+  const CD = require(path.join(STUDIO, "creative-director"));
+  const script = { topicId: "T", lines: [{ id: "L1", role: "hook", text: "Look at this." }, { id: "L2", text: "It was invented in 1994." }, { id: "L3", text: "It was released in 1995." }, { id: "L4", text: "The spin makes it curve." }] };
+  const p = CD.plan(script, {}); const seq = p.beats.map((b) => b.technique);
+  assert.ok(seq.every((x, i) => !i || x !== seq[i - 1]), `no repeats in a row: ${seq}`);
+  assert.ok(Object.values(p.techniqueUse).every((n) => n <= 2)); assert.equal(TECHNIQUE_FAMILY(CD, seq[0]), "cinematic");
+  const a = CD.audit({ scenes: [{ id: "a", layers: [{ component: "quote-card", props: {} }] }, { id: "b", layers: [{ component: "quote-card", props: {} }] }] });
+  assert.ok(a.scenes[0].flags.some((f) => /TEXT_ONLY/.test(f)) && a.scenes[0].flags.some((f) => /STATIC_CAMERA/.test(f)));
+  assert.ok(a.scenes[1].flags.some((f) => /SAME_ENV/.test(f)));
+});
+function TECHNIQUE_FAMILY(CD, t) { return CD.TECHNIQUES[t].family; }
+
+test("football physics: deterministic kick; sidespin curls the ball, no spin flies straight; airflow is faster on the spin side", () => {
+  const B = page(["motion.js", "components/core.js", "components/projection.js", "components/football.js", "components/football-atmos.js"]);
+  B.style = J("channels/goal-lore-lab/premium/style-pack.json");
+  const k = { at: 0, x0: 9, y0: -28, speed: 24, elevation: 20, azimuth: -6, spinRps: 11, ghostAt: 0 };
+  B.comps["football-pitch"]({ id: "a", kicks: [k] }); const K = B.geo.a.kicks[0];
+  B.comps["football-pitch"]({ id: "b", kicks: [k] }); assert.deepEqual(B.geo.b.kicks[0].path.at(-1), K.path.at(-1), "deterministic");
+  const end = K.path.at(-1), ghost = K.ghost.at(-1);
+  assert.ok(Math.abs(end.y + 52.5) < 0.2 && Math.abs(ghost.y + 52.5) < 0.2, "both reach the goal line");
+  assert.ok(Math.abs(end.x) < 3.66 && end.z > 0 && end.z < 2.44, `spin: inside the goal (${end.x.toFixed(2)}, ${end.z.toFixed(2)})`);
+  assert.ok(ghost.x > 3.66, `no spin: wide of the post (${ghost.x.toFixed(2)})`);
+  const az = -6 * Math.PI / 180; const lateral = (q) => (q.x - 9) * Math.cos(az) + (q.y + 28) * Math.sin(az); // offset from the launch line
+  assert.ok(K.ghost.every((q) => Math.abs(lateral(q)) < 1e-6), "spin-free flight stays in its vertical plane");
+  const top = B.flowVelocity(0, 160, 260, 150, 0.3), bottom = B.flowVelocity(0, -160, 260, 150, 0.3);
+  assert.ok(Math.hypot(...top) > Math.hypot(...bottom), "clockwise circulation: faster over the top");
+  const far = B.flowVelocity(-1e6, 0, 260, 150, 0.3); assert.ok(Math.abs(far[0] - 260) < 1 && Math.abs(far[1]) < 1, "uniform flow far away (circulation decays as 1/r)");
+  const surf = B.flowVelocity(150 * Math.cos(1), 150 * Math.sin(1), 260, 150, 0); const normal = surf[0] * Math.cos(1) + surf[1] * Math.sin(1);
+  assert.ok(Math.abs(normal) < 1e-6, "no flow through the ball's surface");
+});
+
+test("daily readiness: read-only, covers the four strategic channels, leaves CriticalThread untouched, and no unapproved package counts as buffer", () => {
+  const before = cp.execSync("git status --porcelain -- channels/*/state config", { cwd: ROOT }).toString();
+  const r = require(path.join(STUDIO, "daily")).report({});
+  assert.equal(r.readOnly, true); assert.equal(r.uploadsPerformed, 0);
+  assert.deepEqual(r.channels.map((c) => c.channel), ["failure-reconstructed", "impossible-brief", "behind-the-ordinary", "goal-lore-lab"]);
+  assert.equal(r.untouched[0].channel, "critical-thread");
+  for (const c of r.channels) for (const p of c.packages) if (p.furthestState !== "PUBLISH_APPROVED") assert.equal(c.buffer.approvedUnpublished, 0);
+  assert.equal(cp.execSync("git status --porcelain -- channels/*/state config", { cwd: ROOT }).toString(), before, "no state or config file changed");
+});

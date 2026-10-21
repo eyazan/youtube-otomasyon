@@ -37,4 +37,8 @@ Topic: `$ARGUMENTS`. Output: `channels/behind-the-ordinary/premium/<id>/storyboa
    - List every factual risk in `treatment.factualRisks`.
 6. **Validate**: `BTO_PREMIUM_RENDER=preview node scripts/bto-studio/studio.js --channel behind-the-ordinary --topic <id> --stills 0` runs validation and one still. Fix every error before rendering.
 
-Worked example: `channels/behind-the-ordinary/premium/BTO-301/storyboard.json`.
+7. **Audit**: `node scripts/bto-studio/creative-director.js audit --channel <c> --topic <id> --storyboard <file>`; treat every flag as a question (a deliberate continuity shot is marked with `envShift` or explained in `visualPurpose`), not a score.
+
+Technique variety: each beat picks its own technique (`creative-director.js plan`): real object or licensed photo (`image-plate`, asset registry only), cross-section, exploded 2.5D, technical diagram, physics model, data comparison (`signature-compare`, `signature-ledger`), documentary timeline, tactical pitch, stadium. Kinetic type never carries a scene alone.
+
+Worked examples: `channels/behind-the-ordinary/premium/BTO-301/storyboard.json` (V1), `storyboard.v2.json`, `storyboard.v3.json` (real CC0 photo hook, signature comparison, loop to the photo).

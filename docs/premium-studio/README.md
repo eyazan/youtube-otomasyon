@@ -10,6 +10,8 @@ An **opt-in, offline** production path. It turns an existing researched topic an
 6. measured QA
 7. review package
 
+Latest status: [`v4-report.md`](v4-report.md) (Creative Director, licensed media, publish gate, GoalLore Lab physics components, daily readiness, benchmarks, blockers).
+
 It never uploads. No workflow, schedule, channel config, voice approval or publisher was changed. Nothing is committed or pushed.
 
 ## Commands (all run in this session)

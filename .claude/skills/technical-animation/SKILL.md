@@ -25,7 +25,9 @@ allowed-tools: Read Grep Glob Edit Write Bash(node scripts/bto-studio/*) Bash(BT
 - `search-window`: template matching over candidate features (conceptual).
 - `print-surface`: procedural printed matter (box, flyer, magazine, form, label).
 
-Planned next (see `docs/premium-studio/components.md`): `gear-train`, `flow-field` (air/fluid), `pressure-vessel`, `circuit-path`, `force-arrows`, `optical-path`. Build each when a production needs it, generic and props-driven.
+Physics models available: `football-pitch` kicks (RK4 drag + Magnus lift, spin-free ghost, follow camera) and `airflow` (2D potential flow past a rotating cylinder, tracers at the model's local speed, lift arrow) in `football-atmos.js`. Both are MODELS: the scene carries the `modelLabel` chip, parameters live in `treatment.factualRisks`, and no model speed is shown as a measurement.
+
+Planned next (see `docs/premium-studio/components.md`): `gear-train`, `pressure-vessel`, `circuit-path`, `force-arrows`, `optical-path`. Build each when a production needs it, generic and props-driven.
 
 ## Showing a mechanism
 State 0 → cause → internal change → effect → resolved state, each on a spoken anchor. Show cause and effect in the same frame (no cut between them). Use teal for the second state, amber for the active part and coral only for a failed or rejected candidate.
