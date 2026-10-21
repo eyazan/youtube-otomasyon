@@ -2,50 +2,6 @@
   "channel": "failure-reconstructed",
   "runs": [
     {
-      "runId": "39280069175",
-      "attempt": "1",
-      "startedAt": "2026-10-19T15:45:51.133Z",
-      "publish": true,
-      "trigger": {
-        "event": "schedule",
-        "correlationId": null
-      },
-      "targetDay": null,
-      "slug": null,
-      "outcome": "NOT_DUE",
-      "reason": "today's Short already exists (tasman-bridge-1975)",
-      "stages": {
-        "RESEARCH": {
-          "status": "not-reached"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "not-reached"
-        },
-        "QA": {
-          "status": "not-reached"
-        },
-        "UPLOAD": {
-          "status": "not-reached"
-        },
-        "SCHEDULE": {
-          "status": "not-reached"
-        },
-        "PUBLISH": {
-          "status": "not-reached"
-        }
-      },
-      "finishedAt": "2026-10-19T15:45:51.155Z"
-    },
-    {
       "runId": "39286292476",
       "attempt": "1",
       "startedAt": "2026-10-19T16:33:38.205Z",
@@ -1352,6 +1308,50 @@
         }
       },
       "finishedAt": "2026-10-21T14:34:00.778Z"
+    },
+    {
+      "runId": "39624499601",
+      "attempt": "1",
+      "startedAt": "2026-10-21T15:20:09.648Z",
+      "publish": true,
+      "trigger": {
+        "event": "schedule",
+        "correlationId": null
+      },
+      "targetDay": null,
+      "slug": null,
+      "outcome": "NOT_DUE",
+      "reason": "today's Short already exists (ajka-red-mud-2010)",
+      "stages": {
+        "RESEARCH": {
+          "status": "not-reached"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "not-reached"
+        },
+        "QA": {
+          "status": "not-reached"
+        },
+        "UPLOAD": {
+          "status": "not-reached"
+        },
+        "SCHEDULE": {
+          "status": "not-reached"
+        },
+        "PUBLISH": {
+          "status": "not-reached"
+        }
+      },
+      "finishedAt": "2026-10-21T15:20:09.663Z"
     }
   ]
 }
