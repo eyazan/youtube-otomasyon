@@ -17,7 +17,9 @@ Arguments: `$ARGUMENTS` (channel `$channel`, topic `$topic`).
 | `failure-reconstructed` | fr-engine | exits 3: use `scripts/fr-premium` (docs/premium/README.md); studio migration is rollout Stage 4 |
 | `impossible-brief` | not-integrated | exits 3: no premium pack yet (Stage 5) |
 | `goal-lore-lab` | design-only | exits 3: proposed channel, unregistered, no VERIFIED topics; only design samples: `node scripts/bto-studio/samples/render-sample.js scripts/bto-studio/samples/goal-lore-lab-physics-board.json --video` (physics pilot treatment) or `goal-lore-lab-board.json` (tactics) |
-Report the refusal to the user verbatim; never work around it.
+Report the refusal to the user verbatim; never work around it. Two explicit, preview-only exceptions exist and both stamp every frame and can never be published (the gate refuses them):
+- `--research-pending`: a topic whose only gap is `NEEDS_PRIMARY_SOURCE` / not productionReady (never a published, question-only or unquoted topic). Verdict `RESEARCH_PENDING_NOT_PUBLISHABLE`.
+- `--pilot <dir>` with `<dir>/topic.json`: a creative pilot for a channel the studio does not render yet (e.g. `channels/goal-lore-lab/premium/pilots/GLL-P01`). No registry, state or credentials are touched. Verdict `PILOT_NOT_APPROVED_FOR_PUBLICATION`. `--kokoro-voice` picks the preview voice.
 
 You coordinate the other studio Skills. The software lives in `scripts/bto-studio/` (one engine for every video); never write a new renderer for a topic.
 
@@ -37,7 +39,7 @@ You coordinate the other studio Skills. The software lives in `scripts/bto-studi
 6. **Composition**: `/cinematic-composition` checks camera, hierarchy, safe zones and transitions.
 7. **Narration and audio**: `/audio-director` (narration is produced by the studio; audio cues come from the components).
 8. **Preview render**: `BTO_PREMIUM_RENDER=preview node scripts/bto-studio/studio.js --channel behind-the-ordinary --topic <id> --quality preview`. For quick looks, use `--stills 0.5,3.2,...`. A revised direction is a new versioned file: `--storyboard storyboard.v2.json` renders into `out/v2/` and keeps V1.
-9. **QA**: `/video-quality-review` on `out/qa-report.json`, `out/contact-sheet.png` and `out/scene-sheet.png`. Look at the images.
+9. **QA**: `node scripts/bto-studio/creative-director.js review --out <out>` measures every scene from decoded frames (motion, novelty, text share, smallest text) next to the human rubric; reviewer notes go in `<out>/creative-notes.json` with `by`. Then `/video-quality-review` on `out/qa-report.json`, `out/contact-sheet.png` and `out/scene-sheet.png`. Look at the images.
 10. **Revise**: at most 3 passes. Each pass names the weakest scenes, fixes them in the storyboard or components, and re-renders. Unchanged segments come from cache; use `--only <scene>` for one-scene tries. Archive each pass in `out/revisions/vN/` and log it in `out/revision-history.md`.
 11. **Final**: run with `--quality final` (1080x1920). It still writes only to `out/`.
 12. **Package**: `out/review-package.json` holds the verdict, the traceability of each scene to its facts, licensing, performance and cost. Report the verdict honestly; flag scenes still below standard for human review.

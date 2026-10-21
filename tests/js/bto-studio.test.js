@@ -276,3 +276,56 @@ test("daily readiness: read-only, covers the four strategic channels, leaves Cri
   for (const c of r.channels) for (const p of c.packages) if (p.furthestState !== "PUBLISH_APPROVED") assert.equal(c.buffer.approvedUnpublished, 0);
   assert.equal(cp.execSync("git status --porcelain -- channels/*/state config", { cwd: ROOT }).toString(), before, "no state or config file changed");
 });
+
+test("pilot and research-pending modes: refused outside preview, never publishable, gate blocks both", () => {
+  const A = require(path.join(STUDIO, "adapter"));
+  const pilot = J("channels/goal-lore-lab/premium/pilots/GLL-P01/topic.json");
+  const { channel } = A.loadPilot("goal-lore-lab", pilot); assert.equal(channel.pilot, true); assert.ok(!channel.entry, "a pilot channel has no registry entry");
+  const r = A.pilotReadiness(pilot); assert.equal(r.ready, true); assert.ok(r.warnings.some((w) => /no verbatim quote/.test(w)), "unquoted facts are reported");
+  assert.equal(A.pilotReadiness({ narration: [], facts: [{ claim: "x" }] }).ready, false, "no narration / no URL is refused");
+  const env = { ...process.env, BTO_PREMIUM_RENDER: "final" };
+  for (const args of [["--pilot", "channels/goal-lore-lab/premium/pilots/GLL-P01"], ["--channel", "behind-the-ordinary", "--topic", "BTO-040", "--research-pending"]]) {
+    const p = cp.spawnSync(process.execPath, [path.join(STUDIO, "studio.js"), ...args, "--stills", "0"], { cwd: ROOT, env, encoding: "utf8" });
+    assert.notEqual(p.status, 0); assert.match(p.stderr + p.stdout, /allowed only with BTO_PREMIUM_RENDER=preview/); }
+  // research-pending never widens readiness beyond the primary-source gap: a published topic still refuses
+  const pub = cp.spawnSync(process.execPath, [path.join(STUDIO, "studio.js"), "--channel", "behind-the-ordinary", "--topic", "BTO-016", "--research-pending", "--stills", "0"], { cwd: ROOT, env: { ...process.env, BTO_PREMIUM_RENDER: "preview" }, encoding: "utf8" });
+  assert.notEqual(pub.status, 0); assert.match(pub.stderr, /already published/);
+  assert.equal(cp.execSync("git status --porcelain -- channels/behind-the-ordinary/premium/BTO-016", { cwd: ROOT }).toString(), "", "a refused run writes nothing");
+  const G = require(path.join(STUDIO, "publish-gate")); const tmp = fs.mkdtempSync(path.join(require("os").tmpdir(), "gate-"));
+  fs.writeFileSync(path.join(tmp, "review-package.json"), JSON.stringify({ channel: "goal-lore-lab", topicId: "GLL-P01", pilot: "x", verdict: "PILOT_NOT_APPROVED_FOR_PUBLICATION", video: "x.mp4" }));
+  const e = G.evaluate(path.join(tmp, "review-package.json"), { creative: { by: "t", at: "2026-01-01" }, factual: { by: "t", at: "2026-01-01" }, publish: { by: "t", at: "2026-01-01" } });
+  assert.equal(e.furthestState, null); assert.match(e.steps[0].reasons[0], /pilots are never publishable/);
+});
+
+test("rig-3d and places: deterministic geometry, back faces culled, figures and aisle draw from t alone", () => {
+  const B = page(["motion.js", "components/core.js", "components/projection.js", "components/rig.js", "components/places.js"]);
+  B.style = J("channels/behind-the-ordinary/premium/style-pack.json"); B.audio = [];
+  const rig = B.comps["rig-3d"]({ parts: [{ id: "box", shape: "box", c: [0, 0, 10], size: [20, 20, 20], color: "#a0703f" }], rx: 60, s: 4 });
+  const a = rig.draw(1), b = rig.draw(1); assert.equal(a, b, "deterministic");
+  const faces = (a.match(/<path d="M[^"]+Z" fill="#/g) || []).length; assert.ok(faces >= 2 && faces <= 3, `a box shows 2-3 faces, drew ${faces}`);
+  const fig = B.comps["figure"]({ people: [{ pathKeys: [[0, 0, 1000], [2, 600, 1000]], pose: "walk", hat: "fedora" }] });
+  assert.notEqual(fig.draw(0.5), fig.draw(1.0), "the gait advances with distance"); assert.equal(fig.draw(0.7), fig.draw(0.7));
+  const aisle = B.comps["store-aisle"]({ dollyKeys: [[0, 0], [2, 1]] }); assert.notEqual(aisle.draw(0), aisle.draw(2), "dolly moves the camera");
+});
+
+test("creative director: V5 techniques are planned for people, assembly and place beats; review never invents a human verdict", () => {
+  const CD = require(path.join(STUDIO, "creative-director"));
+  const script = { topicId: "T", lines: [{ id: "L1", text: "The first shopping cart rolled down the store aisle." }, { id: "L2", text: "Shoppers refused to push it." }, { id: "L3", text: "He put a basket on the seat and wheels on its legs." }, { id: "L4", text: "Then it became extremely popular." }] };
+  const p = CD.plan(script, J("scripts/bto-studio/profiles/behind-the-ordinary.json")); const seq = p.beats.map((b) => b.technique);
+  assert.equal(seq[0], "place-establishing"); assert.equal(seq[1], "character-staging"); assert.equal(seq[2], "mechanical-assembly"); assert.equal(seq[3], "social-diagram");
+  const out = path.join(ROOT, "channels/behind-the-ordinary/premium/BTO-040/out");
+  if (fs.existsSync(path.join(out, "scenes.json")) && fs.readdirSync(out).some((f) => /premium-(final|preview)\.mp4$/.test(f))) {
+    const r = CD.review(out, J("channels/behind-the-ordinary/premium/BTO-040/storyboard.json"));
+    assert.ok(r.scenes.every((s) => s.measured && typeof s.measured.motion === "number"));
+    const notes = fs.existsSync(path.join(out, "creative-notes.json")) ? J("channels/behind-the-ordinary/premium/BTO-040/out/creative-notes.json") : {};
+    for (const s of r.scenes) if (!notes[s.id]) assert.equal(s.human.verdict, null, "no note -> no verdict"); else assert.ok(s.human.by, "notes carry their author");
+  }
+});
+
+test("daily readiness matrix: every dimension for every strategic channel, legacy FR state resolved, GLL blocked on identity", () => {
+  const r = require(path.join(STUDIO, "daily")).report({});
+  const dims = ["topicReadiness", "researchCompleteness", "scriptReadiness", "narration", "premiumRenderer", "qualityGates", "credentials", "duplicatePrevention", "publishingPermission", "schedulerCompatibility"];
+  for (const c of r.channels) for (const d of dims) assert.ok(["ready", "partial", "blocked", "unknown"].includes(c.matrix[d].status), `${c.channel}.${d}`);
+  const gll = r.channels.find((c) => c.channel === "goal-lore-lab"); assert.equal(gll.matrix.credentials.status, "blocked"); assert.equal(gll.matrix.publishingPermission.status, "blocked");
+  const fr = r.channels.find((c) => c.channel === "failure-reconstructed"); assert.ok(fr.topics.published > 0, "FR publish history read from its legacy state (icerik/)");
+});
