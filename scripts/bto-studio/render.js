@@ -42,6 +42,7 @@ async function openPage(browser, file, scale) {
   await page.goto("file://" + file, { waitUntil: "load" });
   await page.evaluate(Fonts.PAGE_CHECK);
   const meta = await page.evaluate(() => BTO.init(window.STUDIO_DATA));
+  await page.evaluate(() => (BTO.preload ? BTO.preload() : null)); // photos decoded before any capture
   if (errors.length) throw new Error("page errors: " + errors.join(" | "));
   return { page, meta, errors };
 }
@@ -54,7 +55,7 @@ function segmentsOf(meta, data, quality) {
   const used = new Set(data.storyboard.scenes.flatMap((s) => (s.layers || []).map((l) => l.component)));
   const compFiles = fs.readdirSync(path.join(PAGE, "components")).filter((f) => f.endsWith(".js")).sort().map((f) => fs.readFileSync(path.join(PAGE, "components", f), "utf8"))
     .filter((src) => [...src.matchAll(/BTO\.def\("([a-z0-9-]+)"/g)].some((m) => used.has(m[1])) || /BTO\.(measure|projector|enter|paperCard|isoStack|geo|runsFrom|rowRuns)\s*=/.test(src));
-  const code = sha(fs.readFileSync(path.join(PAGE, "motion.js"), "utf8") + compFiles.join("\n")); const style = sha(JSON.stringify(data.style)); const assets = sha(JSON.stringify(data.assets));
+  const code = sha(fs.readFileSync(path.join(PAGE, "motion.js"), "utf8") + compFiles.join("\n")); const style = sha(JSON.stringify(data.style)); const assets = sha(JSON.stringify({ assets: data.assets, images: Object.fromEntries(Object.entries(data.images || {}).map(([k, v]) => [k, { sha256: v.sha256, w: v.w, h: v.h, credit: v.credit }])) })); // content, not machine paths
   return meta.scenes.map((s, i) => {
     const f0 = Math.round(s.start * FPS), f1 = i === meta.scenes.length - 1 ? Math.round(data.duration * FPS) : Math.round(meta.scenes[i + 1].start * FPS);
     const specs = data.storyboard.scenes.slice(Math.max(0, i - 1), i + 1);

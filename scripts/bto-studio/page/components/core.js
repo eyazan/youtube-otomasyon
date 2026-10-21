@@ -30,7 +30,7 @@
   // ---- paper-card: a printed card / label lying on the desk ----------------------------------------------
   BTO.paperCard = ({ x, y, w, h, rot = 0, fill, r = 10, shadow = true }) =>
     `<g transform="rotate(${rot} ${x + w / 2} ${y + h / 2})"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${r}" fill="${fill || P().paper}" ${shadow ? 'filter="url(#shadow)"' : ""}/><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${r}" fill="url(#paperShade)"/></g>`;
-  BTO.def("paper-card", (o) => ({ draw: (t) => { const e = BTO.enter(t, o.enterAt, { rise: 60 }); const op = e.op * exitOp(t, o.outAt); if (op <= 0) return "";
+  BTO.def("paper-card", (o) => ({ draw: (t) => { const e = BTO.enter(t, o.enterAt, { rise: 60 }); const op = e.op * exitOp(t, o.outAt) * (o.opacityKeys ? BTO.keys(t, o.opacityKeys) : 1); if (op <= 0.002) return "";
     const cx = o.x + o.w / 2, cy = o.y + o.h / 2; return `<g opacity="${op}" transform="translate(${cx} ${cy + e.dy}) scale(${e.s}) translate(${-cx} ${-cy})">${BTO.paperCard(o)}</g>`; } }));
 
   // ---- print-surface: procedurally drawn printed matter (flyer, magazine, box, form, label) ----------------

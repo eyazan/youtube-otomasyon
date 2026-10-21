@@ -93,7 +93,9 @@ async function main() {
   log(`validate: PASS (${storyboard.scenes.length} scenes, ${v.warnings.length} warnings)`);
   done("validate", sha({ storyboard, timeline: timeline.words }));
 
-  const data = { storyboard, timeline, style, assets, duration };
+  // licensed real-world media (image-plate): verified against the channel asset registry; unreviewed media refuses to render
+  const images = require("./asset-manager").prepare(channelSlug, storyboard, path.join(out, "work"), "preview");
+  const data = { storyboard, timeline, style, assets, images, duration };
   const work = path.join(out, "work");
   // quick inspection paths (no full render)
   if (opt("--stills", null)) { const r = await Renderer.render(data, { work, stills: opt("--stills").split(",").map(Number), log }); log(`stills: ${r.stills.length} -> ${path.relative(ROOT, path.dirname(r.stills[0]))}`); return; }

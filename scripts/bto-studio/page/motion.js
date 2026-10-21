@@ -143,7 +143,7 @@
   // ---- registration and init --------------------------------------------------------------------------
   BTO.def = (name, factory) => { BTO.comps[name] = factory; };
   BTO.init = (data) => {
-    BTO.style = data.style; BTO.tl = data.timeline; BTO.duration = data.duration; BTO.assets = data.assets || {};
+    BTO.style = data.style; BTO.tl = data.timeline; BTO.duration = data.duration; BTO.assets = data.assets || {}; BTO.images = data.images || {};
     BTO._eases = Object.fromEntries(Object.entries(BTO.style.motion.ease).map(([k, v]) => [k, bezier(...v)]));
     const sb = data.storyboard; BTO.audio = [];
     BTO.captionsOff = (sb.captionsOff || []).map((w) => [BTO.at(w.from), BTO.at(w.to)]);
