@@ -19,6 +19,9 @@ const J = (f) => JSON.parse(fs.readFileSync(f, "utf8"));
 
 function evaluate(pkgFile, approvals = {}) {
   const pkg = J(pkgFile); const out = path.dirname(pkgFile);
+  // pilot packages (studio --pilot) never enter the lifecycle: their topic is not in a production universe
+  if (pkg.pilot || pkg.verdict === "PILOT_NOT_APPROVED_FOR_PUBLICATION") return { video: pkg.video, mediaSha256: null, furthestState: null, duplicates: [], mediaIssues: [], facts: 0,
+    steps: [{ to: "TOPIC_READY", ok: false, reasons: [`pilot package (${pkg.pilot || pkg.topicId}): pilots are never publishable; produce the topic through the channel's research pipeline first`] }] };
   const { channel, topic } = Adapter.loadTopic(pkg.channel, pkg.topicId);
   const qa = J(path.join(out, "qa-report.json"));
   const video = path.join(ROOT, pkg.video); const sha = fs.existsSync(video) ? crypto.createHash("sha256").update(fs.readFileSync(video)).digest("hex") : null;

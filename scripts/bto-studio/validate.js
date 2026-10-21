@@ -46,7 +46,7 @@ function screenTexts(layer) {
   return out;
 }
 
-function validateStoryboard(sb, { script, timeline, style }) {
+function validateStoryboard(sb, { script, timeline, style, pilot = false }) {
   const errors = schemaValidate(SCHEMA, sb).map((e) => "schema " + e); const warnings = [];
   if (errors.length) return { ok: false, errors, warnings };
   const facts = new Map(script.facts.map((f) => [f.id, f]));
@@ -67,7 +67,7 @@ function validateStoryboard(sb, { script, timeline, style }) {
     const end = i < sb.scenes.length - 1 ? starts[i + 1] : duration;
     if (end - starts[i] < 1.2) warnings.push(`${s.id}: only ${(end - starts[i]).toFixed(2)} s on screen`);
     s.lines.forEach((l) => { if (!timeline.lines.some((x) => x.id === l)) errors.push(`${s.id}: line ${l} is not in the narration`); covered.push(l); });
-    for (const id of s.evidence) { const f = facts.get(id); if (!f) errors.push(`${s.id}: cites unknown fact ${id}`); else if (f.layer !== "VERIFIED FACT" || !f.quote) errors.push(`${s.id}: fact ${id} is not a verified, quoted fact`); }
+    for (const id of s.evidence) { const f = facts.get(id); if (!f) errors.push(`${s.id}: cites unknown fact ${id}`); else if (f.layer !== "VERIFIED FACT" || !f.quote) (pilot ? warnings : errors).push(`${s.id}: fact ${id} is not a verified, quoted fact${pilot ? " (pilot: blocks production)" : ""}`); }
     const cited = s.evidence.map((id) => facts.get(id)).filter(Boolean); const citedText = cited.map((f) => f.claim + " " + f.quote).join(" ");
     for (const L of s.layers) {
       if (!COMPONENTS.has(L.component)) errors.push(`${s.id}: unknown component ${L.component} (known: ${[...COMPONENTS].join(", ")})`);

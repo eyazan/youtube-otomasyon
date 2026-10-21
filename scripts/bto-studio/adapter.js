@@ -78,4 +78,26 @@ function studioScript(channel, topic, { pauses = {} } = {}) {
   };
 }
 
-module.exports = { loadTopic, readiness, factsWithIds, suggestEvidence, studioScript };
+// Pilot topics (studio --pilot <dir>): the topic object comes from the pilot folder and the channel object from the
+// channel's own config.json, without the registry, state paths or credentials. Nothing here can make a pilot publishable.
+function loadPilot(channelSlug, topic) {
+  const base = path.join(ROOT, "channels", channelSlug); const config = readJson(path.join(base, "config.json"), null);
+  if (!config || config.slug !== channelSlug) throw new Error(`pilot: channels/${channelSlug}/config.json missing or for another channel`);
+  return { channel: { slug: channelSlug, config, paths: { base, state: path.join(base, "state") }, pilot: true }, topic };
+}
+// Pilot readiness: narration lines and sourced claims are required; missing verbatim quotes are reported (they block
+// production, not a pilot); research must be honest about its level (layer) for every fact.
+function pilotReadiness(topic) {
+  const errors = [], warnings = [];
+  if (!Array.isArray(topic.narration) || !topic.narration.length) errors.push("pilot has no narration");
+  (topic.narration || []).forEach((l, i) => { if (!String(l.text || "").trim()) errors.push(`narration line ${i + 1} is empty`); });
+  if (!Array.isArray(topic.facts) || !topic.facts.length) errors.push("pilot has no facts");
+  (topic.facts || []).forEach((f, i) => {
+    if (!String(f.claim || "").trim()) errors.push(`fact ${i + 1} has no claim`);
+    if (!/^https?:\/\//.test(String(f.url || ""))) errors.push(`fact ${i + 1} has no source URL`);
+    if (!f.layer) errors.push(`fact ${i + 1} has no evidence layer`);
+    if (!String(f.quote || "").trim()) warnings.push(`fact ${i + 1} has no verbatim quote (blocks production, allowed in a pilot)`); });
+  return { ready: errors.length === 0, errors, warnings, publishedRows: 0 };
+}
+
+module.exports = { loadTopic, loadPilot, readiness, pilotReadiness, factsWithIds, suggestEvidence, studioScript };

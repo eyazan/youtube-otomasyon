@@ -143,7 +143,7 @@
   // ---- registration and init --------------------------------------------------------------------------
   BTO.def = (name, factory) => { BTO.comps[name] = factory; };
   BTO.init = (data) => {
-    BTO.style = data.style; BTO.tl = data.timeline; BTO.duration = data.duration; BTO.assets = data.assets || {}; BTO.images = data.images || {};
+    BTO.style = data.style; BTO.tl = data.timeline; BTO.duration = data.duration; BTO.assets = data.assets || {}; BTO.images = data.images || {}; BTO.watermark = data.watermark || null;
     BTO._eases = Object.fromEntries(Object.entries(BTO.style.motion.ease).map(([k, v]) => [k, bezier(...v)]));
     const sb = data.storyboard; BTO.audio = [];
     BTO.captionsOff = (sb.captionsOff || []).map((w) => [BTO.at(w.from), BTO.at(w.to)]);
@@ -252,6 +252,8 @@
     const chipOp = cur.index > 0 && k < 1 ? BTO.ease("inOut", k) : 1;
     let hud = `<div data-role="handle" style="position:absolute;left:0;right:0;top:112px;text-align:center;opacity:.72;font:600 26px ${BTO.style.type.sans};letter-spacing:1px;color:${BTO.isLightEnv(cur.spec.env) ? C.ink : C.paper};text-shadow:${BTO.isLightEnv(cur.spec.env) ? "none" : "0 2px 6px rgba(0,0,0,.7)"}">${esc(BTO.style.identity.handle)}</div>`;
     cur.chips.forEach((c, j) => { hud += BTO.chip(BTO.style.identity[c] || c, chipOp, { y: 182 + j * 62 }); });
+    // non-publishable renders (research pending, pilots) carry their status on every frame
+    if (BTO.watermark) hud += `<div data-role="watermark" style="position:absolute;left:50%;transform:translateX(-50%);top:1500px;white-space:nowrap;padding:8px 14px;border-radius:8px;background:rgba(150,30,20,.82);font:800 30px ${BTO.style.type.sans};letter-spacing:1.6px;color:#fff">${esc(BTO.watermark)}</div>`;
     hud += captionAt(t);
     svgEl.innerHTML = svg; hudEl.innerHTML = hud;
     return cur.id;

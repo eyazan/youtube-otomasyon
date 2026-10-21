@@ -36,18 +36,33 @@ const STAGES = ["load", "storyboard", "narrate", "validate", "render", "audio", 
 async function main() {
   const mode = String(process.env.BTO_PREMIUM_RENDER || "").toLowerCase();
   if (!["preview", "final"].includes(mode)) { console.error("BTO Premium Studio is opt-in: set BTO_PREMIUM_RENDER=preview (or final). Nothing was run."); process.exit(2); }
-  const channelSlug = opt("--channel", "behind-the-ordinary"); const topicRef = opt("--topic");
+  // --pilot <dir>: a creative pilot whose topic lives in <dir>/topic.json (not in any production topic universe), for a
+  // channel that is not registered or not yet rendered by the studio. Preview only; every frame is stamped, the package
+  // can never be publishable, and nothing reads or writes channel state, credentials or the registry.
+  const pilotDir = opt("--pilot", null) ? path.resolve(ROOT, opt("--pilot")) : null;
+  const pilotTopic = pilotDir ? J(path.join(pilotDir, "topic.json")) : null;
+  if (pilotDir && mode !== "preview") throw new Error("--pilot is allowed only with BTO_PREMIUM_RENDER=preview");
+  const channelSlug = pilotTopic ? pilotTopic.channel : opt("--channel", "behind-the-ordinary"); const topicRef = pilotTopic ? pilotTopic.id : opt("--topic");
   const profileFile = path.join(__dirname, "profiles", `${channelSlug}.json`);
   if (!fs.existsSync(profileFile)) throw new Error(`no premium channel profile for ${channelSlug} (profiles: ${fs.readdirSync(path.join(__dirname, "profiles")).map((f) => f.replace(/\.json$/, "")).join(", ")})`);
   const profile = J(profileFile);
-  if (!profile.studioRenders) { console.error(`${profile.name}: premium mode "${profile.premiumMode}" (rollout stage ${profile.rolloutStage}). ${profile.refusal}`); process.exit(3); }
+  if (!profile.studioRenders && !pilotDir) { console.error(`${profile.name}: premium mode "${profile.premiumMode}" (rollout stage ${profile.rolloutStage}). ${profile.refusal}`); process.exit(3); }
   if (!topicRef) throw new Error("--topic <id|slug> is required");
   const quality = opt("--quality", "preview"); const voiceMode = opt("--voice", mode === "final" ? "edge" : "auto");
   if (mode === "final" && voiceMode !== "edge") throw new Error("BTO_PREMIUM_RENDER=final allows only the approved Edge voice");
 
   // ---- load ----------------------------------------------------------------------------------------------
-  const { channel, topic } = Adapter.loadTopic(channelSlug, topicRef);
-  const dir = path.join(channel.paths.base, "premium", topic.id);
+  const { channel, topic } = pilotDir ? Adapter.loadPilot(channelSlug, pilotTopic) : Adapter.loadTopic(channelSlug, topicRef);
+  // readiness is decided before anything is written: a refused run leaves no files behind
+  const ready = pilotDir ? Adapter.pilotReadiness(topic) : Adapter.readiness(channel, topic);
+  // --research-pending: an engine/creative pilot of a topic whose research is incomplete. Preview mode only; only the
+  // "needs a primary source / not productionReady" gap is tolerated (never published, question-only or unquoted
+  // topics); every frame is stamped and the package can never be publishable (the gate also blocks at TOPIC_READY).
+  const pending = flag("--research-pending");
+  const tolerated = (e) => /^researchStatus is NEEDS_PRIMARY_SOURCE, not VERIFIED$|^topic is not productionReady$/.test(e);
+  if (pending && mode !== "preview") throw new Error("--research-pending is allowed only with BTO_PREMIUM_RENDER=preview");
+  if (!ready.ready && !(pending && ready.errors.every(tolerated))) throw new Error("topic is not ready for production: " + ready.errors.join("; "));
+  const dir = pilotDir || path.join(channel.paths.base, "premium", topic.id);
   // --storyboard storyboard.v2.json: a versioned storyboard renders into out/v<N>/ (V1 stays in out/); narration is shared
   const sbFile = path.join(dir, opt("--storyboard", "storyboard.json"));
   const sbVersion = fs.existsSync(sbFile) ? (J(sbFile).version || 1) : 1;
@@ -59,8 +74,8 @@ async function main() {
   const fresh = (stage, hash) => !flag("--force") && (fromIdx < 0 || STAGES.indexOf(stage) < fromIdx) && state.stages[stage] && state.stages[stage].hash === hash && state.stages[stage].status === "done";
   const done = (stage, hash, extra = {}) => { state.stages[stage] = { status: "done", hash, at: new Date().toISOString(), ...extra }; W(stateFile, state); };
   log(`=== BTO Premium Studio: ${topic.id} ${topic.slug} | mode ${mode} | quality ${quality} | voice ${voiceMode} ===`);
-  const ready = Adapter.readiness(channel, topic);
-  if (!ready.ready) throw new Error("topic is not ready for production: " + ready.errors.join("; "));
+  if (pending) log(`RESEARCH PENDING pilot: ${ready.errors.join("; ")}; never publishable`);
+  if (pilotDir) log(`PILOT (${path.relative(ROOT, pilotDir)}): channel ${channelSlug} is not rendered in production (${profile.premiumMode}); NOT APPROVED FOR PUBLICATION`);
   ready.warnings.forEach((w) => log("readiness warning: " + w));
   const script = Adapter.studioScript(channel, topic); W(path.join(out, "studio-script.json"), script);
   const style = J(path.join(channel.paths.base, "premium", "style-pack.json"));
@@ -77,17 +92,17 @@ async function main() {
   done("storyboard", sha(storyboard));
 
   // ---- narrate ------------------------------------------------------------------------------------------------
-  const ndir = path.join(dir, "out", "narration"); const nHash = sha({ beats: script.beats, voiceMode, code: fs.readFileSync(path.join(__dirname, "narrate.js"), "utf8") });
+  const ndir = path.join(dir, "out", "narration"); const nHash = sha({ beats: script.beats, voiceMode, kv: opt("--kokoro-voice", "af_heart"), code: fs.readFileSync(path.join(__dirname, "narrate.js"), "utf8") });
   let timeline;
   const hashFile = path.join(ndir, "narration-hash.txt"); const sharedFresh = !flag("--force") && fs.existsSync(hashFile) && fs.readFileSync(hashFile, "utf8").trim() === nHash;
   if ((fresh("narrate", nHash) || sharedFresh) && fs.existsSync(path.join(ndir, "timeline.json"))) { timeline = J(path.join(ndir, "timeline.json")); log(`narration: cached (${timeline.voice}, ${timeline.duration} s)`); }
-  else { const t0 = Date.now(); timeline = Narrator.narrate(script, ndir, { mode: voiceMode, preview: mode === "preview", log }); fs.writeFileSync(hashFile, nHash + "\n"); done("narrate", nHash, { voice: timeline.voice, approved: timeline.approved, sec: (Date.now() - t0) / 1000 }); log(`narration: ${timeline.voice} ${timeline.duration} s (approved: ${timeline.approved}) in ${((Date.now() - t0) / 1000).toFixed(1)} s`); }
+  else { const t0 = Date.now(); timeline = Narrator.narrate(script, ndir, { mode: voiceMode, preview: mode === "preview", kokoroVoice: opt("--kokoro-voice", "af_heart"), log }); fs.writeFileSync(hashFile, nHash + "\n"); done("narrate", nHash, { voice: timeline.voice, approved: timeline.approved, sec: (Date.now() - t0) / 1000 }); log(`narration: ${timeline.voice} ${timeline.duration} s (approved: ${timeline.approved}) in ${((Date.now() - t0) / 1000).toFixed(1)} s`); }
   const target = (channel.config.publishingCadence.shorts.targetDurationSeconds || [30, 50]);
   const duration = +(timeline.duration + (storyboard.tail || 0)).toFixed(3);
   if (duration < target[0] || duration > target[1]) log(`WARNING: duration ${duration} s is outside the channel's Shorts target ${target.join("-")} s`);
 
   // ---- validate -----------------------------------------------------------------------------------------------
-  const v = Validator.validateStoryboard(storyboard, { script, timeline, style }); W(path.join(out, "validation.json"), v);
+  const v = Validator.validateStoryboard(storyboard, { script, timeline, style, pilot: !!pilotDir }); W(path.join(out, "validation.json"), v);
   v.warnings.forEach((w) => log("validate WARN: " + w)); v.errors.forEach((e) => log("validate ERROR: " + e));
   if (!v.ok) throw new Error(`storyboard failed validation (${v.errors.length} errors; see ${path.relative(ROOT, path.join(out, "validation.json"))})`);
   log(`validate: PASS (${storyboard.scenes.length} scenes, ${v.warnings.length} warnings)`);
@@ -95,7 +110,7 @@ async function main() {
 
   // licensed real-world media (image-plate): verified against the channel asset registry; unreviewed media refuses to render
   const images = require("./asset-manager").prepare(channelSlug, storyboard, path.join(out, "work"), "preview");
-  const data = { storyboard, timeline, style, assets, images, duration };
+  const data = { storyboard, timeline, style, assets, images, duration, watermark: pilotDir ? "PILOT · NOT APPROVED FOR PUBLICATION" : pending ? "RESEARCH PENDING · NOT FOR PUBLICATION" : storyboard.watermark || null };
   const work = path.join(out, "work");
   // quick inspection paths (no full render)
   if (opt("--stills", null)) { const r = await Renderer.render(data, { work, stills: opt("--stills").split(",").map(Number), log }); log(`stills: ${r.stills.length} -> ${path.relative(ROOT, path.dirname(r.stills[0]))}`); return; }
@@ -127,7 +142,7 @@ async function main() {
   done("qa", sha(qa.objective), { pass: qa.objectivePass });
 
   // ---- package ------------------------------------------------------------------------------------------------
-  const pkg = require("./package").build({ channel, topic, script, storyboard, timeline, qa, perf: r.perf, master, final, out, quality, mode, totalSec: (Date.now() - t00) / 1000 });
+  const pkg = require("./package").build({ channel, topic, script, storyboard, timeline, qa, perf: r.perf, master, final, out, quality, mode, researchPending: pending ? ready.errors : null, pilot: pilotDir ? path.relative(ROOT, pilotDir) : null, totalSec: (Date.now() - t00) / 1000 });
   done("package", sha(pkg)); log(`package: ${pkg.verdict} -> ${path.relative(ROOT, path.join(out, "review-package.json"))}`);
 }
 

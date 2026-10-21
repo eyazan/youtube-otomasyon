@@ -122,7 +122,7 @@
 
   // ---- labels: leader-line callouts in world space ------------------------------------------------------------
   BTO.def("labels", (o) => { (o.items || []).forEach((it) => BTO.cue(it.at, "tick", 0.35)); return { draw: (t) => (o.items || []).map((it) => {
-    const k = clamp((t - it.at) / 0.45) * exitOp(t, it.outAt); return BTO.label(it.x, it.y, it.lx, it.ly, it.text, k, { size: it.size || T().scale.label, anchor: it.anchor || "start", color: it.color && P()[it.color] }); }).join("") }; });
+    const k = clamp((t - it.at) / 0.45) * exitOp(t, it.outAt); return BTO.label(it.x, it.y, it.lx, it.ly, it.text, k, { size: it.size || T().scale.label, anchor: it.anchor || "start", color: it.color && P()[it.color], pill: !!it.pill }); }).join("") }; });
 
   // ---- quote-card: a verbatim source quote with attribution (screen space, above the caption band) -------------
   BTO.def("quote-card", (o) => { BTO.cue(o.at, "paper", 0.5); if (o.emphasis) BTO.cue(o.emphasis.at, "sweep", 0.25, 0, { dur: 0.4 }); return { draw: (t) => {

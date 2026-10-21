@@ -108,7 +108,7 @@ function kokoro(script, outDir, voice, speed) {
   const out = path.join(outDir, "narration.wav");
   cp.execFileSync("ffmpeg", ["-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", lf, "-c:a", "pcm_s16le", out]);
   const timeline = { voice: `kokoro ${voice}`, provider: "Kokoro-82M v1.0 ONNX (kokoro-onnx 0.6.1, Apache-2.0), local CPU, via lib/shorts-tts.js", approved: false,
-    approvalNote: "PREVIEW ONLY. The channel's approved voice is Edge en-US-EmmaMultilingualNeural; re-narrate with --voice edge before any publishing review.",
+    approvalNote: `PREVIEW ONLY. The channel's approved voice is Edge ${(script.voice.approved || {}).voice || "(none approved yet)"}; re-narrate with --voice edge before any publishing review.`,
     wordTiming: "line timing measured per take; word timing inside a line estimated (energy envelope, punctuation-snapped pauses, syllable weights)",
     modelLoadSec: summary.loadSeconds, duration: +dur(out).toFixed(3), ...tl };
   fs.writeFileSync(path.join(outDir, "timeline.json"), JSON.stringify(timeline, null, 1) + "\n");

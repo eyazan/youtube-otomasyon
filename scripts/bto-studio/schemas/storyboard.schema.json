@@ -15,11 +15,16 @@
       "const": "bto-studio.storyboard.v1"
     },
     "channel": {
-      "const": "behind-the-ordinary"
+      "enum": [
+        "behind-the-ordinary",
+        "goal-lore-lab",
+        "failure-reconstructed",
+        "impossible-brief"
+      ]
     },
     "topicId": {
       "type": "string",
-      "pattern": "^BTO-\\d+$"
+      "pattern": "^(BTO|GLL|FR|IB)-P?\\d+$"
     },
     "slug": {
       "type": "string"
@@ -101,6 +106,14 @@
       "items": {
         "$ref": "#/$defs/scene"
       }
+    },
+    "licensingNote": {
+      "type": "string",
+      "description": "what the visuals are made of, for the review package licensing section"
+    },
+    "watermark": {
+      "type": "string",
+      "description": "status text stamped on every frame (e.g. NOT APPROVED FOR PUBLICATION)"
     }
   },
   "additionalProperties": false,
