@@ -1,6 +1,6 @@
 {
-  "at": "2026-10-21T12:43:18.628Z",
-  "runId": "39601644623",
+  "at": "2026-10-21T13:02:09.850Z",
+  "runId": "39604273694",
   "rows": [
     {
       "channel": "failure-reconstructed",
@@ -66,7 +66,7 @@
         "RESEARCH": {
           "status": "failed",
           "detail": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [104 unused A topic(s), best viral score 74 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]",
-          "at": "2026-10-21T12:42:53.834Z"
+          "at": "2026-10-21T13:01:46.611Z"
         },
         "SCRIPT": {
           "status": "not-reached"
@@ -96,22 +96,24 @@
     },
     {
       "channel": "critical-thread",
-      "outcome": "FAILED",
-      "category": "AWAITING_APPROVAL",
+      "outcome": "NO_TOPIC",
+      "category": "CONTENT_BLOCKED",
       "scheduled": false,
       "publication": "NOT_SCHEDULED",
       "publishAt": null,
-      "reason": "health pre-flight: nitelikli-konu: kalite çubuğunu geçen konu yok — NO_EXPLORE_CANDIDATE; seslendirme: NARRATION_UNAVAILABLE: Edge sesi reddedildi (Edge TTS WebSocket error: Unexpected server response: 429, Edge TTS WebSocket error: Unexpected server response: 429, Edge TTS WebSocket error: Unexpected server response: 429; msedge-tts 2.1.0); yedek ses yok — fallback voice af_heart is not approved ",
+      "reason": "NO_EXPLORE_CANDIDATE",
       "slug": null,
       "videoId": null,
-      "targetDay": null,
+      "targetDay": "2026-10-21",
       "trigger": {
         "event": "schedule",
         "correlationId": null
       },
       "stages": {
         "RESEARCH": {
-          "status": "not-reached"
+          "status": "failed",
+          "detail": "NO_EXPLORE_CANDIDATE",
+          "at": "2026-10-21T13:01:51.816Z"
         },
         "SCRIPT": {
           "status": "not-reached"
