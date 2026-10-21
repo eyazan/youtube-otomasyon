@@ -1,9 +1,9 @@
 {
   "channel": "impossible-brief",
   "channelName": "ImpossibleBrief",
-  "tarih": "2026-10-21T19:23:29.608Z",
+  "tarih": "2026-10-21T20:16:49.216Z",
   "aggregateManaged": true,
-  "yuklemeUygun": true,
+  "yuklemeUygun": false,
   "bulgular": [
     {
       "ad": "youtube-yetki",
@@ -43,8 +43,9 @@
     },
     {
       "ad": "seslendirme",
-      "durum": "ok",
-      "mesaj": "Edge sesi çalışıyor (en-US-BrianMultilingualNeural; msedge-tts 2.1.0)"
+      "durum": "kritik",
+      "mesaj": "NARRATION_UNAVAILABLE: Edge sesi reddedildi (Edge TTS WebSocket error: Unexpected server response: 429, Edge TTS WebSocket error: Unexpected server response: 429, Edge TTS WebSocket error: Unexpected server response: 429; msedge-tts 2.1.0); yedek ses yok — fallback voice am_fenrir is not approved for publishing (config.voice.fallback.approved)",
+      "cozum": "Yedek sesi (config.voice.fallback) dinleyip onaylayın ya da Edge'in düzelmesini bekleyin. Konu harcanmaz, hiçbir şey render edilmez."
     },
     {
       "ad": "render-araclari",
