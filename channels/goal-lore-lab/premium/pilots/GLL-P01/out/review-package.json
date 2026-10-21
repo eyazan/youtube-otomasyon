@@ -1,0 +1,291 @@
+{
+ "schema": "bto-studio.review-package.v1",
+ "channel": "goal-lore-lab",
+ "topicId": "GLL-P01",
+ "slug": "the-free-kick-that-turned-into-a-spiral",
+ "title": "The Free Kick That Turned Into a Spiral",
+ "verdict": "PILOT_NOT_APPROVED_FOR_PUBLICATION",
+ "pilot": "channels/goal-lore-lab/premium/pilots/GLL-P01",
+ "researchPending": null,
+ "autoPublish": false,
+ "uploadAttempted": false,
+ "mode": "preview",
+ "quality": "final",
+ "createdAt": "2026-10-21T16:33:54.787Z",
+ "video": "channels/goal-lore-lab/premium/pilots/GLL-P01/out/the-free-kick-that-turned-into-a-spiral-premium-final.mp4",
+ "voice": {
+  "used": "kokoro bm_george",
+  "approved": false,
+  "approvedVoice": {
+   "provider": "edge-tts",
+   "voice": "en-GB-RyanNeural"
+  },
+  "note": "PREVIEW ONLY. The channel's approved voice is Edge en-GB-RyanNeural; re-narrate with --voice edge before any publishing review.",
+  "wordTiming": "line timing measured per take; word timing inside a line estimated (energy envelope, punctuation-snapped pauses, syllable weights)"
+ },
+ "narrationUnchanged": {
+  "sourceHash": "3eb669084858d9a2",
+  "lines": [
+   "This free kick was flying wide. Then it turned.",
+   "Lyon, June 1997. Brazil against France.",
+   "Roberto Carlos hit it with the outside of his left foot, from far out.",
+   "The ball swung around the wall and kept heading wide.",
+   "Then it bent back in, past a goalkeeper who never moved.",
+   "In 2010, French physicists showed why.",
+   "Spin pushes the ball sideways. Drag slows the ball down, but the spin keeps going.",
+   "So the slower it flies, the tighter it curves, into a spiral.",
+   "That is why the bend came so late. Every goal has a story."
+  ]
+ },
+ "traceability": [
+  {
+   "scene": "s1-hook",
+   "lines": [
+    "L1"
+   ],
+   "purpose": "Hook: low floodlit camera behind the ball and the wall; the ball flies out wide of the post, then visibly turns back. The question is asked by the picture before the words finish.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F3",
+     "claim": "The ball swerved around the French wall and appeared to be heading wide before bending back into the goal.",
+     "quote": "",
+     "source": "Sky Sports; What A Howler; ESPN",
+     "url": "https://www.skysports.com/football/news/11095/10899358/roberto-carlos-brilliant-brazil-free-kick-against-france-remembered"
+    },
+    {
+     "id": "F7",
+     "claim": "Model used for the animated trajectories: point ball with quadratic drag (Cd 0.25) and Magnus lift from the spin ratio, integrated with RK4; launch values are chosen for the illustration, not measured from the 1997 kick.",
+     "quote": "",
+     "source": "studio model (scripts/bto-studio/page/components/football.js)",
+     "url": "https://hal-polytechnique.archives-ouvertes.fr/hal-01021119"
+    }
+   ]
+  },
+  {
+   "scene": "s2-when",
+   "lines": [
+    "L2"
+   ],
+   "purpose": "Place and date as a stadium scoreboard: an original dot-matrix board lights up LYON, 3 JUNE 1997, then the fixture, over the floodlit stands.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "Roberto Carlos scored a free kick for Brazil against France on 3 June 1997 at the Stade de Gerland in Lyon, in the opening match of the Tournoi de France, which ended 1-1.",
+     "quote": "",
+     "source": "Wikipedia, 1997 Tournoi de France; Sky Sports (skysports.com/football/news/11095/10899358)",
+     "url": "https://en.wikipedia.org/wiki/1997_Tournoi_de_France"
+    }
+   ]
+  },
+  {
+   "scene": "s3-strike",
+   "lines": [
+    "L3"
+   ],
+   "purpose": "The strike in close-up: a boot swings in and meets the ball off-centre with its outside edge; the contact sets the ball spinning (arrow). Shape of the contact, not a likeness.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F2",
+     "claim": "He struck the ball with the outside of his left foot from long range; reported distances vary from about 33 metres to 40 yards.",
+     "quote": "",
+     "source": "What A Howler; Sky Sports; Chalkdust Magazine",
+     "url": "https://www.whatahowler.com/the-20th-anniversary-of-when-roberto-carlos-bent-time-and-space/"
+    }
+   ]
+  },
+  {
+   "scene": "s4-wide",
+   "lines": [
+    "L4"
+   ],
+   "purpose": "From above and behind the wall, the camera follows the ball as it swings around the wall and keeps flying wide of the post; the post is in shot so 'wide' is visible.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F3",
+     "claim": "The ball swerved around the French wall and appeared to be heading wide before bending back into the goal.",
+     "quote": "",
+     "source": "Sky Sports; What A Howler; ESPN",
+     "url": "https://www.skysports.com/football/news/11095/10899358/roberto-carlos-brilliant-brazil-free-kick-against-france-remembered"
+    },
+    {
+     "id": "F7",
+     "claim": "Model used for the animated trajectories: point ball with quadratic drag (Cd 0.25) and Magnus lift from the spin ratio, integrated with RK4; launch values are chosen for the illustration, not measured from the 1997 kick.",
+     "quote": "",
+     "source": "studio model (scripts/bto-studio/page/components/football.js)",
+     "url": "https://hal-polytechnique.archives-ouvertes.fr/hal-01021119"
+    }
+   ]
+  },
+  {
+   "scene": "s5-in",
+   "lines": [
+    "L5"
+   ],
+   "purpose": "Goal-mouth view across the goal: the ball, already wide, bends back inside the post past the keeper, who stays planted; the full curve is left as a trail.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F3",
+     "claim": "The ball swerved around the French wall and appeared to be heading wide before bending back into the goal.",
+     "quote": "",
+     "source": "Sky Sports; What A Howler; ESPN",
+     "url": "https://www.skysports.com/football/news/11095/10899358/roberto-carlos-brilliant-brazil-free-kick-against-france-remembered"
+    },
+    {
+     "id": "F4",
+     "claim": "France goalkeeper Fabien Barthez did not move as the ball went in.",
+     "quote": "",
+     "source": "What A Howler (single outlet in search; re-check)",
+     "url": "https://www.whatahowler.com/the-20th-anniversary-of-when-roberto-carlos-bent-time-and-space/"
+    },
+    {
+     "id": "F7",
+     "claim": "Model used for the animated trajectories: point ball with quadratic drag (Cd 0.25) and Magnus lift from the spin ratio, integrated with RK4; launch values are chosen for the illustration, not measured from the 1997 kick.",
+     "quote": "",
+     "source": "studio model (scripts/bto-studio/page/components/football.js)",
+     "url": "https://hal-polytechnique.archives-ouvertes.fr/hal-01021119"
+    }
+   ]
+  },
+  {
+   "scene": "s6-paper",
+   "lines": [
+    "L6"
+   ],
+   "purpose": "Thirteen years later: the timeline runs from 1997 to 2010 and a journal page slides in with the paper's title and authors, the source of the explanation that follows.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F5",
+     "claim": "In 2010 Guillaume Dupeux, Anne Le Goff, David Quere and Christophe Clanet published 'The spinning ball spiral' in New Journal of Physics 12, 093004.",
+     "quote": "",
+     "source": "HAL (Ecole polytechnique); ScienceDaily, 2 September 2010",
+     "url": "https://hal-polytechnique.archives-ouvertes.fr/hal-01021119"
+    }
+   ]
+  },
+  {
+   "scene": "s7-forces",
+   "lines": [
+    "L7"
+   ],
+   "purpose": "The mechanism in the ball's frame: spin speeds the air on one side and the sideways force appears; then drag appears and the air (ball) slows while the spin gauge holds; the flow pattern grows more lopsided.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F6",
+     "claim": "The paper shows that a spinning ball slowed by drag, while its spin stays nearly constant, follows a path that curves more and more tightly, a spiral; the authors use Roberto Carlos's 1997 free kick as the example of a ball that began to follow this spiral.",
+     "quote": "",
+     "source": "ScienceDaily; Physics World; APS DFD 2009 abstract 'The Roberto Carlos Spiral'",
+     "url": "https://www.sciencedaily.com/releases/2010/09/100902073509.htm"
+    },
+    {
+     "id": "F7",
+     "claim": "Model used for the animated trajectories: point ball with quadratic drag (Cd 0.25) and Magnus lift from the spin ratio, integrated with RK4; launch values are chosen for the illustration, not measured from the 1997 kick.",
+     "quote": "",
+     "source": "studio model (scripts/bto-studio/page/components/football.js)",
+     "url": "https://hal-polytechnique.archives-ouvertes.fr/hal-01021119"
+    }
+   ]
+  },
+  {
+   "scene": "s8-spiral",
+   "lines": [
+    "L8"
+   ],
+   "purpose": "Top view of the model path: as speed falls with spin held, the turning circles shrink (drawn as they occur) and the path closes into a spiral; the stretch a real kick flies is solid, the model's continuation dashed.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F6",
+     "claim": "The paper shows that a spinning ball slowed by drag, while its spin stays nearly constant, follows a path that curves more and more tightly, a spiral; the authors use Roberto Carlos's 1997 free kick as the example of a ball that began to follow this spiral.",
+     "quote": "",
+     "source": "ScienceDaily; Physics World; APS DFD 2009 abstract 'The Roberto Carlos Spiral'",
+     "url": "https://www.sciencedaily.com/releases/2010/09/100902073509.htm"
+    },
+    {
+     "id": "F7",
+     "claim": "Model used for the animated trajectories: point ball with quadratic drag (Cd 0.25) and Magnus lift from the spin ratio, integrated with RK4; launch values are chosen for the illustration, not measured from the 1997 kick.",
+     "quote": "",
+     "source": "studio model (scripts/bto-studio/page/components/football.js)",
+     "url": "https://hal-polytechnique.archives-ouvertes.fr/hal-01021119"
+    }
+   ]
+  },
+  {
+   "scene": "s9-story",
+   "lines": [
+    "L9"
+   ],
+   "purpose": "Payoff: back behind the ball at night; the ball bends in late, exactly where the hook left the viewer; the brand line lands over the stadium.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F3",
+     "claim": "The ball swerved around the French wall and appeared to be heading wide before bending back into the goal.",
+     "quote": "",
+     "source": "Sky Sports; What A Howler; ESPN",
+     "url": "https://www.skysports.com/football/news/11095/10899358/roberto-carlos-brilliant-brazil-free-kick-against-france-remembered"
+    },
+    {
+     "id": "F7",
+     "claim": "Model used for the animated trajectories: point ball with quadratic drag (Cd 0.25) and Magnus lift from the spin ratio, integrated with RK4; launch values are chosen for the illustration, not measured from the 1997 kick.",
+     "quote": "",
+     "source": "studio model (scripts/bto-studio/page/components/football.js)",
+     "url": "https://hal-polytechnique.archives-ouvertes.fr/hal-01021119"
+    }
+   ]
+  }
+ ],
+ "licensing": {
+  "visuals": "all drawn in-house from code (SVG): stadium, pitch, players (generic standing tokens, no likeness, no kits or crests), physics plots; no broadcast footage, no photographs",
+  "fonts": "SIL OFL 1.1 (@fontsource Inter, Source Serif 4, Barlow Semi Condensed 5.3.0)",
+  "audio": "narration TTS + effects/music synthesised by scripts/bto-studio/audio/sound_design.py (no samples)",
+  "thirdPartyMedia": []
+ },
+ "qa": {
+  "objectivePass": true,
+  "report": "channels/goal-lore-lab/premium/pilots/GLL-P01/out/qa-report.md",
+  "contactSheet": "channels/goal-lore-lab/premium/pilots/GLL-P01/out/contact-sheet.png",
+  "sceneSheet": "channels/goal-lore-lab/premium/pilots/GLL-P01/out/scene-sheet.png",
+  "failures": [
+   "UNVERIFIED audio samples clipped: not reported by this FFmpeg build (astats has no clipped-sample count)",
+   "WARN loop continuity (last -> first frame): whole 16.36, photo region 22.28, final-second step 0, ratio 33.48",
+   "WARN narration voice approved for publishing: kokoro bm_george (preview fallback)",
+   "WARN no static hold >= 1.5 s inside a scene (visual change target): longest 2.5 s (s2-when)"
+  ],
+  "unverified": [
+   "audio samples clipped"
+  ]
+ },
+ "audio": {
+  "integratedLufs": -14,
+  "truePeakDbtp": -1.9
+ },
+ "performance": {
+  "renderWallSec": 111.8,
+  "msPerFrame": 96.9,
+  "workers": 3,
+  "peakChromiumRssMb": 3904,
+  "cachedSegments": 0,
+  "segments": 9,
+  "host": "linux x64 4 cpu 16 GB",
+  "totalPipelineSec": 170.1
+ },
+ "cost": {
+  "llmUsd": 0,
+  "ttsUsd": 0,
+  "renderUsd": 0,
+  "note": "local rendering and free/offline TTS; LLM use only when a Claude storyboard draft was requested and approved"
+ },
+ "approvalsNeeded": [
+  "voice: re-narrate with the approved Edge voice (if PREVIEW_ONLY)",
+  "creative sign-off (video-quality-review findings)",
+  "factual sign-off on the traceability table",
+  "owner decision to hand the MP4 to the normal pipeline (never automatic)"
+ ]
+}

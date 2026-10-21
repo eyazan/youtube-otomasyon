@@ -1,0 +1,351 @@
+{
+ "schema": "premium-studio.creative-review.v1",
+ "video": "channels/goal-lore-lab/premium/pilots/GLL-P01/out/the-free-kick-that-turned-into-a-spiral-premium-final.mp4",
+ "measuredFrom": "3 decoded frames per scene at 108x192 (ffmpeg) + text-inspection.json",
+ "note": "Measurements describe the frames; they are not quality scores. Human fields are filled by a reviewer (creative-notes.json) and are marked with who wrote them.",
+ "scenes": [
+  {
+   "id": "s1-hook",
+   "start": 0,
+   "end": 3.204,
+   "technique": [
+    "tactical-pitch"
+   ],
+   "transition": "cut",
+   "measured": {
+    "motion": 0.0371,
+    "novelty": null,
+    "compositionOffset": 0.021,
+    "detail": 0.1402,
+    "meanLuma": 56.6,
+    "textShare": 0,
+    "minTextPx": null,
+    "camera": {
+     "pan": 0,
+     "zoom": 0,
+     "roll": 0
+    }
+   },
+   "flags": [],
+   "storyboardFlags": [],
+   "human": {
+    "storytelling": "strong",
+    "educationalClarity": "good",
+    "emotionalImpact": "anticipation: the ball sails wide, then turns",
+    "transitionMotivation": "n/a (frame 0)",
+    "assetRelevance": "high (original stadium, generic tokens)",
+    "verdict": "keep",
+    "by": "Claude (AI reviewer, from the rendered frames; human review pending)",
+    "note": "After the framing fix the wide-then-turn reads on a phone; the ball is still small."
+   }
+  },
+  {
+   "id": "s2-when",
+   "start": 3.204,
+   "end": 7.827,
+   "technique": [
+    "place-establishing",
+    "scoreboard-archival"
+   ],
+   "transition": "whip",
+   "measured": {
+    "motion": 0.0111,
+    "novelty": 0.1461,
+    "compositionOffset": 0.018,
+    "detail": 0.0764,
+    "meanLuma": 23,
+    "textShare": 0,
+    "minTextPx": null,
+    "camera": {
+     "pan": 20,
+     "zoom": 0.06000000000000005,
+     "roll": 0
+    }
+   },
+   "flags": [],
+   "storyboardFlags": [
+    "CENTRED_FLAT: everything centred on a flat plane",
+    "THIN: two or fewer visual elements",
+    "SAME_ENV_AS_PREVIOUS (desk)"
+   ],
+   "human": {
+    "storytelling": "good",
+    "educationalClarity": "good",
+    "emotionalImpact": "occasion",
+    "transitionMotivation": "good (whip to the scoreboard)",
+    "assetRelevance": "high",
+    "verdict": "revise",
+    "by": "Claude (AI reviewer, from the rendered frames; human review pending)",
+    "note": "Original dot-matrix board is distinctive but holds still 2.5 s; add a slow push or crowd flicker."
+   }
+  },
+  {
+   "id": "s3-strike",
+   "start": 7.827,
+   "end": 12.681,
+   "technique": [
+    "line-drawing",
+    "technical-diagram"
+   ],
+   "transition": "decode-flash",
+   "measured": {
+    "motion": 0.0118,
+    "novelty": 0.0833,
+    "compositionOffset": 0.019,
+    "detail": 0.0919,
+    "meanLuma": 34.3,
+    "textShare": 0.016,
+    "minTextPx": 42,
+    "camera": {
+     "pan": 40,
+     "zoom": 0.17999999999999994,
+     "roll": 0
+    }
+   },
+   "flags": [],
+   "storyboardFlags": [],
+   "human": {
+    "storytelling": "good",
+    "educationalClarity": "good",
+    "emotionalImpact": "medium",
+    "transitionMotivation": "good (decode-flash cut to the contact)",
+    "assetRelevance": "medium",
+    "verdict": "revise",
+    "by": "Claude (AI reviewer, from the rendered frames; human review pending)",
+    "note": "The boot outline is crude; a better boot silhouette and a seam that starts spinning on contact would sell the spin."
+   }
+  },
+  {
+   "id": "s4-wide",
+   "start": 12.681,
+   "end": 16.251,
+   "technique": [
+    "tactical-pitch"
+   ],
+   "transition": "match-zoom",
+   "measured": {
+    "motion": 0.0394,
+    "novelty": 0.1837,
+    "compositionOffset": 0.029,
+    "detail": 0.1245,
+    "meanLuma": 69.4,
+    "textShare": 0.018,
+    "minTextPx": 45.5,
+    "camera": {
+     "pan": 0,
+     "zoom": 0,
+     "roll": 0
+    }
+   },
+   "flags": [],
+   "storyboardFlags": [],
+   "human": {
+    "storytelling": "strong",
+    "educationalClarity": "good",
+    "emotionalImpact": "tension",
+    "transitionMotivation": "good (zoom into the flight)",
+    "assetRelevance": "high",
+    "verdict": "keep",
+    "by": "Claude (AI reviewer, from the rendered frames; human review pending)",
+    "note": "Follow camera keeps the ball outside the post: 'heading wide' is shown."
+   }
+  },
+  {
+   "id": "s5-in",
+   "start": 16.251,
+   "end": 19.983,
+   "technique": [
+    "tactical-pitch",
+    "technical-diagram"
+   ],
+   "transition": "continuity",
+   "measured": {
+    "motion": 0.024,
+    "novelty": 0.0888,
+    "compositionOffset": 0.022,
+    "detail": 0.1514,
+    "meanLuma": 53.9,
+    "textShare": 0.008,
+    "minTextPx": 42,
+    "camera": {
+     "pan": 10,
+     "zoom": 0.050000000000000044,
+     "roll": 0
+    }
+   },
+   "flags": [],
+   "storyboardFlags": [
+    "SAME_ENV_AS_PREVIOUS (desk)"
+   ],
+   "human": {
+    "storytelling": "strong",
+    "educationalClarity": "good",
+    "emotionalImpact": "release",
+    "transitionMotivation": "good (continuity to the goal mouth)",
+    "assetRelevance": "high",
+    "verdict": "keep",
+    "by": "Claude (AI reviewer, from the rendered frames; human review pending)",
+    "note": "The full curve is left as a trail; the keeper token is small."
+   }
+  },
+  {
+   "id": "s6-paper",
+   "start": 19.983,
+   "end": 23.276,
+   "technique": [
+    "timeline-archival",
+    "kinetic-typography"
+   ],
+   "transition": "push",
+   "measured": {
+    "motion": 0.031,
+    "novelty": 0.6069,
+    "compositionOffset": 0.033,
+    "detail": 0.1375,
+    "meanLuma": 208.4,
+    "textShare": 0.087,
+    "minTextPx": 36,
+    "camera": {
+     "pan": 10,
+     "zoom": 0.06000000000000005,
+     "roll": 0
+    }
+   },
+   "flags": [
+    "SMALL_TEXT: smallest scene text 36px (< 40px mobile label size)"
+   ],
+   "storyboardFlags": [],
+   "human": {
+    "storytelling": "medium",
+    "educationalClarity": "good",
+    "emotionalImpact": "low",
+    "transitionMotivation": "good (push to the time jump)",
+    "assetRelevance": "high (the real paper's title and authors)",
+    "verdict": "acceptable",
+    "by": "Claude (AI reviewer, from the rendered frames; human review pending)",
+    "note": "Clean, but a document scene; keep it short."
+   }
+  },
+  {
+   "id": "s7-forces",
+   "start": 23.276,
+   "end": 29.311,
+   "technique": [
+    "physics-visualization",
+    "model-plot",
+    "technical-diagram"
+   ],
+   "transition": "iris",
+   "measured": {
+    "motion": 0.0173,
+    "novelty": 0.6753,
+    "compositionOffset": 0.025,
+    "detail": 0.1511,
+    "meanLuma": 37,
+    "textShare": 0.085,
+    "minTextPx": 36,
+    "camera": {
+     "pan": 10,
+     "zoom": 0.040000000000000036,
+     "roll": 0
+    }
+   },
+   "flags": [
+    "SMALL_TEXT: smallest scene text 36px (< 40px mobile label size)"
+   ],
+   "storyboardFlags": [
+    "STATIC_CAMERA: no meaningful camera move",
+    "CENTRED_FLAT: everything centred on a flat plane",
+    "THIN: two or fewer visual elements"
+   ],
+   "human": {
+    "storytelling": "strong",
+    "educationalClarity": "strong",
+    "emotionalImpact": "insight",
+    "transitionMotivation": "good (iris into the ball's frame)",
+    "assetRelevance": "high (model, labelled)",
+    "verdict": "keep",
+    "by": "Claude (AI reviewer, from the rendered frames; human review pending)",
+    "note": "Speed falling while spin holds is visible in the gauges and the flow."
+   }
+  },
+  {
+   "id": "s8-spiral",
+   "start": 29.311,
+   "end": 33.789,
+   "technique": [
+    "model-plot",
+    "technical-diagram"
+   ],
+   "transition": "scan-wipe",
+   "measured": {
+    "motion": 0.0077,
+    "novelty": 0.073,
+    "compositionOffset": 0.03,
+    "detail": 0.0852,
+    "meanLuma": 34.5,
+    "textShare": 0.01,
+    "minTextPx": 36,
+    "camera": {
+     "pan": 0,
+     "zoom": 0.08000000000000007,
+     "roll": 0
+    }
+   },
+   "flags": [
+    "LOW_MOTION: frames inside the scene barely change",
+    "SMALL_TEXT: smallest scene text 36px (< 40px mobile label size)"
+   ],
+   "storyboardFlags": [
+    "CENTRED_FLAT: everything centred on a flat plane",
+    "THIN: two or fewer visual elements"
+   ],
+   "human": {
+    "storytelling": "strong",
+    "educationalClarity": "strong",
+    "emotionalImpact": "payoff of the idea",
+    "transitionMotivation": "good (wipe to the top view)",
+    "assetRelevance": "high (model, labelled)",
+    "verdict": "keep",
+    "by": "Claude (AI reviewer, from the rendered frames; human review pending)",
+    "note": "The kick is the solid start of a spiral the model completes: the core idea in one picture."
+   }
+  },
+  {
+   "id": "s9-story",
+   "start": 33.789,
+   "end": 38.469,
+   "technique": [
+    "tactical-pitch",
+    "kinetic-typography"
+   ],
+   "transition": "push",
+   "measured": {
+    "motion": 0.0228,
+    "novelty": 0.138,
+    "compositionOffset": 0.061,
+    "detail": 0.1157,
+    "meanLuma": 56.7,
+    "textShare": 0.075,
+    "minTextPx": 42,
+    "camera": {
+     "pan": 0,
+     "zoom": 0,
+     "roll": 0
+    }
+   },
+   "flags": [],
+   "storyboardFlags": [],
+   "human": {
+    "storytelling": "good",
+    "educationalClarity": "good",
+    "emotionalImpact": "brand line",
+    "transitionMotivation": "good (back behind the ball)",
+    "assetRelevance": "high",
+    "verdict": "acceptable",
+    "by": "Claude (AI reviewer, from the rendered frames; human review pending)",
+    "note": "Loop continuity WARN (ends on the brand line, not the opening frame)."
+   }
+  }
+ ]
+}
