@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-10-20T20:03:59.326Z",
+  "generatedAt": "2026-10-21T11:39:58.904Z",
   "note": "Per-channel baselines are computed separately and never blended.",
   "channels": [
     {
       "channel": "failure-reconstructed",
       "name": "Failure Reconstructed",
       "shorts": {
-        "lastPublished": "2026-10-20T18:00:00.000Z",
-        "published": 28,
+        "lastPublished": "2026-10-21T18:00:00.000Z",
+        "published": 29,
         "inventory": {
-          "A": 98,
-          "B": 132,
+          "A": 104,
+          "B": 125,
           "C": 59,
           "D": 59
         },
@@ -22,12 +22,12 @@
           "used": 10
         },
         "nextSelection": {
-          "slug": "titanic-1912",
-          "reason": "EXPLOIT (0.75): best A topic by SelectionScore"
+          "slug": "admiral-nakhimov-1986",
+          "reason": "EXPLORE (0.25): under-sampled cluster maritime-disasters"
         },
         "baseline": {
           "n": 28,
-          "views": 465,
+          "views": 496,
           "averagePercentageViewed": 64.36,
           "subscribersPer1000Views": 1.46,
           "engagementPer1000Views": 25.36,
@@ -100,12 +100,6 @@
             "mode": "B_SHORT_PROVES_DEMAND"
           },
           {
-            "slug": "air-france-447-2009",
-            "LongFormPotentialScore": 85,
-            "bucket": "A",
-            "mode": "B_SHORT_PROVES_DEMAND"
-          },
-          {
             "slug": "challenger-1986",
             "LongFormPotentialScore": 85,
             "bucket": "A",
@@ -114,6 +108,12 @@
           {
             "slug": "columbia-2003",
             "LongFormPotentialScore": 85,
+            "bucket": "A",
+            "mode": "B_SHORT_PROVES_DEMAND"
+          },
+          {
+            "slug": "air-france-447-2009",
+            "LongFormPotentialScore": 84,
             "bucket": "A",
             "mode": "B_SHORT_PROVES_DEMAND"
           },
@@ -150,7 +150,7 @@
         "pendingRelatedVideoManualActions": 0
       },
       "growth": {
-        "trackedVideos": 29,
+        "trackedVideos": 30,
         "subscriberConversion": {
           "shorts": 1.46,
           "longform": null
@@ -161,7 +161,7 @@
           "status": "adaptive",
           "sampleSize": 28,
           "adopted": 0,
-          "hypotheses": 6
+          "hypotheses": 4
         },
         "longform": {
           "status": "heuristics-only",
@@ -179,7 +179,7 @@
         {
           "slug": "skylab-1973",
           "bucket": "C",
-          "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
+          "reason": "VideoPotential 85 in experimental band 58–71; sources 41 < 62"
         },
         {
           "slug": "munich-1958",
@@ -356,8 +356,8 @@
           "used": 0
         },
         "nextSelection": {
-          "slug": "what-if-you-remembered-every-day-of-your-life",
-          "reason": "EXPLORE (0.25): under-sampled cluster HUMAN"
+          "slug": "what-if-we-tried-to-drill-through-the-earth",
+          "reason": "EXPLOIT (0.75): best A topic by SelectionScore"
         },
         "baseline": {
           "n": 17,
@@ -629,6 +629,21 @@
           },
           "date": "2026-10-20",
           "at": "2026-10-20T11:23:51.468Z"
+        },
+        {
+          "channel": "impossible-brief",
+          "code": "NO_QUALIFIED_TOPIC",
+          "message": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [104 unused A topic(s), best viral score 74 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]",
+          "details": {
+            "inventory": {
+              "A": 104,
+              "B": 24,
+              "C": 140,
+              "D": 206
+            }
+          },
+          "date": "2026-10-21",
+          "at": "2026-10-21T11:39:29.224Z"
         }
       ],
       "legacyPaths": false
@@ -653,8 +668,8 @@
           "used": 0
         },
         "nextSelection": {
-          "slug": "the-hidden-system-behind-border-gateway-routing-system",
-          "reason": "EXPLOIT (0.75): best A topic by SelectionScore"
+          "slug": "why-rail-signaling-interlocking-is-so-hard-to-replace",
+          "reason": "EXPLORE (0.25): under-sampled cluster RAIL"
         },
         "baseline": {
           "n": 6,
@@ -814,21 +829,6 @@
               "D": 362
             }
           },
-          "date": "2026-10-10",
-          "at": "2026-10-10T12:24:25.153Z"
-        },
-        {
-          "channel": "critical-thread",
-          "code": "NO_QUALIFIED_TOPIC",
-          "message": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content",
-          "details": {
-            "inventory": {
-              "A": 7,
-              "B": 144,
-              "C": 0,
-              "D": 362
-            }
-          },
           "date": "2026-10-11",
           "at": "2026-10-11T12:40:08.097Z"
         },
@@ -951,6 +951,21 @@
           },
           "date": "2026-10-20",
           "at": "2026-10-20T11:23:57.436Z"
+        },
+        {
+          "channel": "critical-thread",
+          "code": "NO_QUALIFIED_TOPIC",
+          "message": "NO_EXPLORE_CANDIDATE",
+          "details": {
+            "inventory": {
+              "A": 6,
+              "B": 144,
+              "C": 0,
+              "D": 362
+            }
+          },
+          "date": "2026-10-21",
+          "at": "2026-10-21T11:39:35.070Z"
         }
       ],
       "legacyPaths": false

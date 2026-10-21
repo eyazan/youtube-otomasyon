@@ -2,67 +2,6 @@
   "channel": "impossible-brief",
   "runs": [
     {
-      "runId": "39254760139",
-      "attempt": "1",
-      "startedAt": "2026-10-19T12:53:20.006Z",
-      "publish": true,
-      "trigger": {
-        "event": "schedule",
-        "correlationId": null
-      },
-      "targetDay": "2026-10-19",
-      "slug": "what-if-mosquitoes-went-extinct",
-      "outcome": "UPLOADED",
-      "reason": null,
-      "stages": {
-        "RESEARCH": {
-          "status": "done",
-          "detail": "EXPLORE (0.25): under-sampled cluster OTHER",
-          "at": "2026-10-19T12:53:22.212Z"
-        },
-        "SCRIPT": {
-          "status": "done",
-          "detail": "pre-render readiness PUBLISH 88",
-          "at": "2026-10-19T12:53:22.212Z"
-        },
-        "ASSETS": {
-          "status": "done",
-          "at": "2026-10-19T12:54:00.780Z"
-        },
-        "NARRATION": {
-          "status": "done",
-          "detail": "Microsoft Edge neural TTS (claim-timed)",
-          "at": "2026-10-19T12:54:00.780Z"
-        },
-        "RENDER": {
-          "status": "done",
-          "at": "2026-10-19T12:54:00.780Z"
-        },
-        "QA": {
-          "status": "done",
-          "detail": "validations passed",
-          "at": "2026-10-19T12:54:00.837Z"
-        },
-        "UPLOAD": {
-          "status": "done",
-          "detail": "x5VVXKhOhMQ",
-          "at": "2026-10-19T12:54:04.235Z"
-        },
-        "SCHEDULE": {
-          "status": "done",
-          "detail": "2026-10-19T18:00:00.000Z",
-          "at": "2026-10-19T12:54:04.235Z"
-        },
-        "PUBLISH": {
-          "status": "scheduled",
-          "detail": "YouTube makes it public at 2026-10-19T18:00:00.000Z",
-          "at": "2026-10-19T12:54:04.236Z"
-        }
-      },
-      "finishedAt": "2026-10-19T12:54:04.236Z",
-      "videoId": "x5VVXKhOhMQ"
-    },
-    {
       "runId": "39262776968",
       "attempt": "1",
       "startedAt": "2026-10-19T13:45:59.848Z",
@@ -1357,6 +1296,52 @@
         }
       },
       "finishedAt": "2026-10-20T20:30:59.374Z"
+    },
+    {
+      "runId": "39592762587",
+      "attempt": "1",
+      "startedAt": "2026-10-21T11:39:25.357Z",
+      "publish": true,
+      "trigger": {
+        "event": "schedule",
+        "correlationId": null
+      },
+      "targetDay": "2026-10-21",
+      "slug": null,
+      "outcome": "NO_TOPIC",
+      "reason": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [104 unused A topic(s), best viral score 74 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]",
+      "stages": {
+        "RESEARCH": {
+          "status": "failed",
+          "detail": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [104 unused A topic(s), best viral score 74 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]",
+          "at": "2026-10-21T11:39:29.223Z"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "not-reached"
+        },
+        "QA": {
+          "status": "not-reached"
+        },
+        "UPLOAD": {
+          "status": "not-reached"
+        },
+        "SCHEDULE": {
+          "status": "not-reached"
+        },
+        "PUBLISH": {
+          "status": "not-reached"
+        }
+      },
+      "finishedAt": "2026-10-21T11:39:29.224Z"
     }
   ]
 }

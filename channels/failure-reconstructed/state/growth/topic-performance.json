@@ -1,6 +1,6 @@
 {
   "channel": "failure-reconstructed",
-  "updatedAt": "2026-10-20T20:03:55.696Z",
+  "updatedAt": "2026-10-21T11:39:36.245Z",
   "families": [
     {
       "contentType": "short",
@@ -46,20 +46,6 @@
     },
     {
       "contentType": "short",
-      "cluster": "aviation-failures",
-      "publications": 4,
-      "measured": 4,
-      "predictedTopicScore": 85.3,
-      "actualGrowthScore": 69.6,
-      "medianViews": 1041,
-      "medianAveragePercentageViewed": 74.39,
-      "medianSubscribersPer1000Views": 1.92,
-      "confidence": "low",
-      "mode": "exploit",
-      "fatigue": false
-    },
-    {
-      "contentType": "short",
       "cluster": "natural-hazards",
       "publications": 4,
       "measured": 4,
@@ -70,6 +56,20 @@
       "medianSubscribersPer1000Views": 5.2,
       "confidence": "low",
       "mode": "exploit",
+      "fatigue": false
+    },
+    {
+      "contentType": "short",
+      "cluster": "rail-disasters",
+      "publications": 2,
+      "measured": 2,
+      "predictedTopicScore": 80.5,
+      "actualGrowthScore": 68.6,
+      "medianViews": 1013,
+      "medianAveragePercentageViewed": 58.78,
+      "medianSubscribersPer1000Views": 1.97,
+      "confidence": "insufficient",
+      "mode": "explore",
       "fatigue": false
     },
     {
@@ -102,25 +102,11 @@
     },
     {
       "contentType": "short",
-      "cluster": "rail-disasters",
-      "publications": 2,
-      "measured": 2,
-      "predictedTopicScore": 80.5,
-      "actualGrowthScore": 67,
-      "medianViews": 1013,
-      "medianAveragePercentageViewed": 58.78,
-      "medianSubscribersPer1000Views": 1.97,
-      "confidence": "insufficient",
-      "mode": "explore",
-      "fatigue": false
-    },
-    {
-      "contentType": "short",
       "cluster": "maritime-disasters",
       "publications": 2,
       "measured": 2,
       "predictedTopicScore": 84,
-      "actualGrowthScore": 62.3,
+      "actualGrowthScore": 63,
       "medianViews": 1197,
       "medianAveragePercentageViewed": 91.89,
       "medianSubscribersPer1000Views": 1.04,
@@ -130,10 +116,24 @@
     },
     {
       "contentType": "short",
+      "cluster": "aviation-failures",
+      "publications": 4,
+      "measured": 4,
+      "predictedTopicScore": 85.3,
+      "actualGrowthScore": 62.2,
+      "medianViews": 1055,
+      "medianAveragePercentageViewed": 74.39,
+      "medianSubscribersPer1000Views": 1.92,
+      "confidence": "low",
+      "mode": "exploit",
+      "fatigue": false
+    },
+    {
+      "contentType": "short",
       "cluster": "industrial-disasters",
-      "publications": 1,
+      "publications": 2,
       "measured": 1,
-      "predictedTopicScore": null,
+      "predictedTopicScore": 81,
       "actualGrowthScore": 58.6,
       "medianViews": 496,
       "medianAveragePercentageViewed": 70.55,
@@ -148,7 +148,7 @@
       "publications": 2,
       "measured": 2,
       "predictedTopicScore": 84.5,
-      "actualGrowthScore": 39.7,
+      "actualGrowthScore": 40.4,
       "medianViews": 1060,
       "medianAveragePercentageViewed": 64.5,
       "medianSubscribersPer1000Views": 2.82,

@@ -2,10 +2,10 @@
   "schema": "growth-topic-decision/1",
   "channel": "impossible-brief",
   "contentType": "short",
-  "date": "2026-10-20",
-  "createdAt": "2026-10-20T16:36:22.475Z",
-  "mode": "EXPLORE",
-  "modeRoll": 0.143,
+  "date": "2026-10-21",
+  "createdAt": "2026-10-21T11:39:29.181Z",
+  "mode": "EXPLOIT",
+  "modeRoll": 0.819,
   "pool": {
     "minimum": 20,
     "target": 50,
@@ -19,7 +19,7 @@
         "cluster": "PHYSICS",
         "bucket": "B",
         "viralScore": 75,
-        "videoPotentialScore": 87,
+        "videoPotentialScore": 86,
         "selectionScore": 77,
         "viralComponents": {
           "curiosity_gap": {
@@ -145,7 +145,7 @@
           "score": 77
         },
         "rejectionReasons": [
-          "VideoPotential 87 ≥ 72",
+          "VideoPotential 86 ≥ 72",
           "not A: hook 77 < 78"
         ],
         "competitor": {
@@ -231,7 +231,7 @@
             "basis": "derived"
           },
           "historical_similarity": {
-            "value": 43,
+            "value": 46,
             "basis": "learned",
             "note": "1 same-cluster upload(s), breakout rate 0"
           },
@@ -301,5 +301,5 @@
     ]
   },
   "selected": null,
-  "reason": "NO_EXPLORE_CANDIDATE"
+  "reason": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [104 unused A topic(s), best viral score 74 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]"
 }
