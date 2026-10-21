@@ -1,64 +1,49 @@
 {
-  "at": "2026-10-21T11:40:02.689Z",
-  "runId": "39592762587",
+  "at": "2026-10-21T12:08:02.896Z",
+  "runId": "39597002311",
   "rows": [
     {
       "channel": "failure-reconstructed",
-      "outcome": "UPLOADED",
-      "category": "SCHEDULED",
-      "scheduled": true,
-      "publication": "SCHEDULED",
-      "publishAt": "2026-10-21T18:00:00.000Z",
-      "reason": null,
-      "slug": "ajka-red-mud-2010",
-      "videoId": "JAKAYnkbxd8",
-      "targetDay": "2026-10-21",
+      "outcome": "NOT_DUE",
+      "category": "NOT_DUE",
+      "scheduled": false,
+      "publication": "NOT_SCHEDULED",
+      "publishAt": null,
+      "reason": "today's Short already exists (ajka-red-mud-2010)",
+      "slug": null,
+      "videoId": null,
+      "targetDay": null,
       "trigger": {
         "event": "schedule",
         "correlationId": null
       },
       "stages": {
         "RESEARCH": {
-          "status": "done",
-          "detail": "growth queue selected ajka-red-mud-2010",
-          "at": "2026-10-21T11:34:10.340Z"
+          "status": "not-reached"
         },
         "SCRIPT": {
-          "status": "done",
-          "detail": "pre gate REVIEW 82",
-          "at": "2026-10-21T11:34:10.725Z"
+          "status": "not-reached"
         },
         "ASSETS": {
-          "status": "done",
-          "at": "2026-10-21T11:34:13.023Z"
+          "status": "not-reached"
         },
         "NARRATION": {
-          "status": "done",
-          "at": "2026-10-21T11:39:15.552Z"
+          "status": "not-reached"
         },
         "RENDER": {
-          "status": "done",
-          "at": "2026-10-21T11:39:15.554Z"
+          "status": "not-reached"
         },
         "QA": {
-          "status": "done",
-          "detail": "final gate PUBLISH 87",
-          "at": "2026-10-21T11:39:18.572Z"
+          "status": "not-reached"
         },
         "UPLOAD": {
-          "status": "done",
-          "detail": "JAKAYnkbxd8",
-          "at": "2026-10-21T11:39:22.711Z"
+          "status": "not-reached"
         },
         "SCHEDULE": {
-          "status": "done",
-          "detail": "2026-10-21T18:00:00.000Z",
-          "at": "2026-10-21T11:39:22.712Z"
+          "status": "not-reached"
         },
         "PUBLISH": {
-          "status": "scheduled",
-          "detail": "YouTube makes it public at 2026-10-21T18:00:00.000Z",
-          "at": "2026-10-21T11:39:22.713Z"
+          "status": "not-reached"
         }
       }
     },
@@ -81,7 +66,7 @@
         "RESEARCH": {
           "status": "failed",
           "detail": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [104 unused A topic(s), best viral score 74 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]",
-          "at": "2026-10-21T11:39:29.223Z"
+          "at": "2026-10-21T12:07:47.170Z"
         },
         "SCRIPT": {
           "status": "not-reached"
@@ -128,7 +113,7 @@
         "RESEARCH": {
           "status": "failed",
           "detail": "NO_EXPLORE_CANDIDATE",
-          "at": "2026-10-21T11:39:35.068Z"
+          "at": "2026-10-21T12:07:52.387Z"
         },
         "SCRIPT": {
           "status": "not-reached"
