@@ -18,15 +18,19 @@
 
   // ---- failure-chain ------------------------------------------------------------------------------------------
   // props: x (centre), y (first step), gap, w, steps [text], activeKeys [[t, index]] (fractional = travelling between
-  //   links), failIndex (default last), enterAt, outAt
+  //   links), failIndex (default last), enterAt, outAt; window { center: y, top, bottom }: the chain scrolls so the active
+  //   link sits at window.center and links fade out toward the window edges (a screen-space chain that never reaches the
+  //   caption band or the chip column, however long it is)
   BTO.def("failure-chain", (o) => {
     const C = P(); (o.activeKeys || []).forEach(([at], i) => { if (i) BTO.cue(at, "tick", 0.35); });
     return { draw: (t) => {
       const op = fade(t, o.enterAt, o.outAt); if (op <= 0) return "";
-      const x = o.x || 540, y0 = o.y || 380, gap = o.gap || 230, w = o.w || 760, h = 150; const steps = o.steps || [];
+      const x = o.x || 540, gap = o.gap || 230, w = o.w || 760, h = 150; const steps = o.steps || [];
       const fail = o.failIndex == null ? steps.length - 1 : o.failIndex; const act = o.activeKeys ? BTO.keys(t, o.activeKeys, "inOut") : 0;
+      const win = o.window || null; const y0 = win ? win.center - h / 2 - act * gap : (o.y || 380);
+      const vis = (y) => (win ? clamp(Math.min((y - win.top) / 90, (win.bottom - (y + h)) / 90)) : 1);
       let g = "";
-      steps.forEach((s, i) => { const y = y0 + i * gap;
+      steps.forEach((s, i) => { const y = y0 + i * gap; const vk = vis(y); if (vk <= 0 && vis(y + gap) <= 0) return; g += `<g opacity="${clamp(Math.max(vk, 0)).toFixed(3)}">`;
         if (i < steps.length - 1) { const yA = y + h, yB = y + gap; const lit = clamp(act - i);
           g += `<line x1="${x}" y1="${yA}" x2="${x}" y2="${yB}" stroke="${C.muted}" stroke-width="6" opacity="0.35"/>`;
           g += `<line x1="${x}" y1="${yA}" x2="${x}" y2="${n1(lerp(yA, yB, lit))}" stroke="${i + 1 === fail ? C.coral : C.amber}" stroke-width="8"/>`;
@@ -40,6 +44,7 @@
         g += `<circle cx="${x - w / 2 + 62}" cy="${y + h / 2}" r="34" fill="${fill}" opacity="${state === "future" ? 0.5 : 1}"/>` + BTO.text(x - w / 2 + 62, y + h / 2 + 14, String(i + 1), { size: 40, weight: 800, family: T().num, fill: state === "future" || state === "passed" ? C.text : C.desk });
         const lines = wrap(String(s).toUpperCase(), 24);
         lines.forEach((ln, k) => { g += BTO.text(x - w / 2 + 124, y + h / 2 + 15 + (k - (lines.length - 1) / 2) * 50, ln, { size: T().scale.label + 4, anchor: "start", weight: 800, ls: 1, fill: state === "future" ? C.muted : C.text }); });
+        g += "</g>";
       });
       return `<g opacity="${op.toFixed(3)}">${g}</g>`;
     } };

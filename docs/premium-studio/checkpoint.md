@@ -72,3 +72,54 @@ changes a schedule, a credential or a publish flag; production changes are owner
 
 **Exact next action:** Priority 3, IB storyboard variety. The Creative Director flags SAME_ENV_AS_PREVIOUS on every
 IB-EAR-019 scene, and two scenes are THIN.
+
+## Priority 3: IB storyboard variety (`2328006` + follow-ups)
+
+- Worlds chosen from the topic's own words: magnetic, current, lake, micro, body (generic figure), earth-surface, named
+  bodies (Venus/Mars/Moon), plus the earlier earth-interior, ocean-depth, orbit, sky and cosmos.
+- New space components: magnetosphere, flow-arrows, microbes, event-ticks.
+- **Fixes from frame review** (IB-EAR-019, IB-EAR-071 local preview renders, Kokoro voice marked unapproved):
+  - Plates alternate instead of every scene using "space".
+  - The field stays off after "switch it off".
+  - Ranges show as one figure.
+  - Refuted figures are struck through.
+  - No % ladders; log scale for wide ladders.
+  - Composite worlds reframe instead of repeating one composition.
+  - Contractions are kept whole.
+- **Evidence guard:** every on-screen digit group must be in a cited fact, checked with the validator's rule.
+- **Results:** all 136 ready IB topics validate (0 errors). Tests: `tests/js/ib-premium.test.js` 8/8.
+
+## Priority 4: Failure Reconstructed on the shared studio
+
+- `adapter.loadTopic("failure-reconstructed", slug)` reads the researched case file `icerik/konular/<slug>.json`.
+  Readiness uses FR's own ledgers; 332 of 377 case files are ready (unpublished, not produced/failed/in review/blocked).
+- **Generator:** `scripts/bto-studio/auto/failure-reconstructed.js`. Grammar:
+  - hook: the object class gives way;
+  - toll: the case count;
+  - chain: the five-link chain scrolls;
+  - trigger close-up;
+  - contrast;
+  - lesson payoff.
+- **Components** (`page/components/engineering.js`): failure-chain (scrolling screen window), object-silhouette
+  (13 generic classes), blueprint plate.
+- **Results:** all 332 ready cases validate. Tests: `tests/js/fr-studio.test.js`.
+- **Shadow:** shared module `core/pipeline/premium-shadow.js` (IB and FR). FR hook in `shorts-sira.js`, after the
+  live outcome, `FR_PREMIUM_RENDER=preview`, default OFF. FR studio output (`premium/FR-*/`) and the comparison
+  (`uretim/<slug>/premium-shadow.json`) are git-ignored.
+- **CI:** `.github/workflows/fr-studio-dry-run.yml` runs the real FR entry point with `PUBLISH=0`, no credentials and
+  no commit.
+- **Open:** licensed archival photos in the automatic FR grammar need assets reviewed in `premium/assets.json`
+  (licence, people, trademarks). That is per-asset human review by design.
+
+## Priorities 5 and 6: research is the blocker, not code
+
+- **BTO:** a complete research→production pipeline already exists (`scripts/bto-research.js` via `bto-research.yml`):
+  Wikipedia text, provider draft, verbatim quotes verified in the source text, numbers traced, quality gate.
+  - Only 1 of 525 topics is ready for the studio (BTO-301). The channel is inactive by owner decision and research is
+    manual-dispatch only.
+  - **Next action (owner):** dispatch `bto-research.yml` (limit 4). It commits researched records to main, so it is a
+    production write.
+- **GoalLore Lab:** 109 candidates are IDEA with empty evidence; the pilot has no verbatim quotes, and the channel rule
+  requires them.
+  - **Next action:** generalise `scripts/bto-research.js` to a `--channel goal-lore-lab` mode. Do this after the owner
+    decides the CriticalThread → GoalLore Lab migration (same YouTube channel `UCBTEWcPZvo4B71hFw9Do_NA`).

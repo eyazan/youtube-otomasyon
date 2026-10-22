@@ -1,0 +1,92 @@
+name: Failure Reconstructed dry run (selection + live render + premium shadow)
+
+# End-to-end dry run of the Failure Reconstructed production entry point WITHOUT uploading:
+#   1. node shorts-sira.js --channel failure-reconstructed with PUBLISH=0 and FR_PREMIUM_RENDER=preview: the live growth
+#      queue, the live legacy renderer and its quality gate, then (after the live lane finished) the premium studio
+#      shadow on the case the live lane produced (automatic forensic grammar from icerik/konular/<slug>.json)
+#   2. live vs premium side-by-side (premium-shadow.json: gates, duration, runtime, peak memory), premium publish gate,
+#      Creative Director frame review; artifacts for human review
+# No YouTube credentials are given to this job, contents permission is read-only, nothing is committed or uploaded,
+# and it uses its own concurrency group so it never queues behind or blocks portfolio-production.
+on:
+  pull_request:
+    paths:
+      - 'core/**'
+      - 'scripts/bto-studio/**'
+      - 'scripts/growth/**'
+      - 'channels/failure-reconstructed/**'
+      - 'icerik/konular/**'
+      - 'shorts-sira.js'
+      - '.github/workflows/fr-studio-dry-run.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: fr-studio-dry-run-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  dry-run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      PUBLISH: '0'
+      PEXELS_KEY: ${{ secrets.PEXELS_KEY }}
+      SHORTS_FONT: DejaVu Sans
+      PD_CHROMIUM: /usr/bin/google-chrome
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Runtime dependencies
+        run: |
+          bash scripts/ci-apt.sh --no-install-recommends ffmpeg fonts-dejavu-core fonts-liberation python3-pil time
+          npm ci --no-audit --no-fund
+          python -m pip install --quiet numpy soundfile pillow
+      - name: Scheduled-production entry point, dry run (no upload) + premium shadow
+        env:
+          FR_PREMIUM_RENDER: preview
+          FR_PREMIUM_QUALITY: final
+        run: node shorts-sira.js --channel failure-reconstructed 2>&1 | tee fr-dry-run.log
+      - name: Premium gate and creative review
+        if: always()
+        run: |
+          for cmp in uretim/*/premium-shadow.json; do
+            [ -f "$cmp" ] || continue
+            echo "### live vs premium: $cmp" | tee -a "$GITHUB_STEP_SUMMARY"
+            # shellcheck disable=SC2016  # the single-quoted program is JavaScript (template literals), not shell
+            node -e 'const r=require(require("path").resolve(process.argv[1]));const l=r.live||{},p=r.premium;console.log(["| | live (stock) | premium (shadow) |","|---|---|---|",`| gate | ${l.decision} ${l.productionScore} | ${p.verdict} (objective ${p.objectivePass?"PASS":"FAIL"}${p.hardFailures.length?": "+p.hardFailures.join(", "):""}) |`,`| duration | ${l.durationSeconds} s | ${p.durationSeconds} s |`,`| voice | ${l.voice} | ${p.voice&&p.voice.used} (approved ${p.voice&&p.voice.approved}) |`,`| runtime | render ${l.renderSec} s | ${p.runtimeSec} s (render ${p.renderWallSec} s) |`,`| peak memory | n/a | Chromium tree ${p.peakChromiumRssMb} MB (PSS); largest single process ${p.peakMemoryMB} MB |`,`| upload | ${l.upload} | never |`].join("\n"))' "$cmp" | tee -a "$GITHUB_STEP_SUMMARY" || true
+          done
+          for pkg in channels/failure-reconstructed/premium/FR-*/out/review-package.json; do
+            [ -f "$pkg" ] || continue
+            echo "### $pkg" | tee -a "$GITHUB_STEP_SUMMARY"
+            node scripts/bto-studio/publish-gate.js "$pkg" | tee -a "$GITHUB_STEP_SUMMARY" || true
+            # QA verdict lines and the end of the studio log, so a BLOCKED package is diagnosable from the job log
+            grep -E "Objective verdict|\*\*(FAIL|WARN)\*\*|^- FAIL" "$(dirname "$pkg")/qa-report.md" 2>/dev/null | head -30 | tee -a "$GITHUB_STEP_SUMMARY" || true
+            tail -25 "$(dirname "$pkg")/production.log" 2>/dev/null || true
+            # frame review needs the rendered MP4 (never committed): only packages rendered in this run have one
+            if ls "$(dirname "$pkg")"/*.mp4 >/dev/null 2>&1; then node scripts/bto-studio/creative-director.js review --out "$(dirname "$pkg")" | tail -14 | tee -a "$GITHUB_STEP_SUMMARY" || true; fi
+          done
+          git status --short | tee state-diff.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: fr-dry-run
+          path: |
+            fr-dry-run.log
+            state-diff.txt
+            channels/failure-reconstructed/premium/FR-*/storyboard.json
+            channels/failure-reconstructed/premium/FR-*/out/*.mp4
+            channels/failure-reconstructed/premium/FR-*/out/*.md
+            channels/failure-reconstructed/premium/FR-*/out/*.json
+            channels/failure-reconstructed/premium/FR-*/out/production.log
+            icerik/paket/*/quality-gate.json
+            uretim/*/premium-shadow.json
+          retention-days: 14
+          if-no-files-found: warn

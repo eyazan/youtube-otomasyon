@@ -122,16 +122,16 @@ test("skills: the seven studio Skills exist with valid frontmatter whose name ma
 
 // The only studio entry points outside scripts/bto-studio are the default-OFF ImpossibleBrief shadow in
 // core/pipeline/impossible-brief.js (IB_PREMIUM_RENDER=preview) and the read-only, no-upload dry-run workflow.
-const STUDIO_ALLOWED = new Set(["ib-premium-dry-run.yml", path.join("pipeline", "impossible-brief.js")]);
+const STUDIO_ALLOWED = new Set(["ib-premium-dry-run.yml", "fr-studio-dry-run.yml", path.join("pipeline", "impossible-brief.js"), path.join("pipeline", "premium-shadow.js")]);
 test("isolation: no live workflow, root production script or channel config references the studio; BTO stays disabled", () => {
   const wf = path.join(ROOT, ".github/workflows");
   for (const f of fs.readdirSync(wf).filter((x) => !STUDIO_ALLOWED.has(x))) assert.doesNotMatch(fs.readFileSync(path.join(wf, f), "utf8"), /bto-studio|BTO_PREMIUM_RENDER|IB_PREMIUM_RENDER|premium:video/, f);
-  const dry = fs.readFileSync(path.join(wf, "ib-premium-dry-run.yml"), "utf8");
-  assert.match(dry, /PUBLISH: '0'/); assert.match(dry, /contents: read/); assert.doesNotMatch(dry, /_YT_REFRESH_TOKEN|_CLIENT_SECRET|git push|group: portfolio-production/, "dry run: no credentials, no push, own concurrency group");
+  for (const name of ["ib-premium-dry-run.yml", "fr-studio-dry-run.yml"]) { const dry = fs.readFileSync(path.join(wf, name), "utf8");
+    assert.match(dry, /PUBLISH: '0'/, name); assert.match(dry, /contents: read/, name); assert.doesNotMatch(dry, /_YT_REFRESH_TOKEN|_CLIENT_SECRET|git push|group: portfolio-production/, `${name}: no credentials, no push, own concurrency group`); }
   for (const f of fs.readdirSync(ROOT).filter((x) => x.endsWith(".js"))) assert.doesNotMatch(fs.readFileSync(path.join(ROOT, f), "utf8"), /scripts\/bto-studio/, f);
   for (const c of fs.readdirSync(path.join(ROOT, "channels"))) { const cfg = path.join(ROOT, "channels", c, "config.json"); if (fs.existsSync(cfg)) assert.doesNotMatch(fs.readFileSync(cfg, "utf8"), /bto-studio|BTO_PREMIUM/, c); }
   for (const f of fs.readdirSync(path.join(ROOT, "core"), { recursive: true }).filter((x) => String(x).endsWith(".js") && !STUDIO_ALLOWED.has(String(x)))) assert.doesNotMatch(fs.readFileSync(path.join(ROOT, "core", f), "utf8"), /bto-studio/, f);
-  assert.match(read("core/pipeline/impossible-brief.js"), /mode !== "preview"\) return null/, "the IB shadow is gated by IB_PREMIUM_RENDER=preview");
+  assert.match(read("core/pipeline/premium-shadow.js"), /mode !== "preview"\) return null/, "the shadow is gated by <PREFIX>_PREMIUM_RENDER=preview");
   assert.equal(J("config/channels.json").channels["behind-the-ordinary"].enabled, false);
   assert.equal(J("channels/behind-the-ordinary/config.json").voice.voice, "en-US-EmmaMultilingualNeural");
   for (const f of ["package.js", "studio.js"]) assert.doesNotMatch(fs.readFileSync(path.join(STUDIO, f), "utf8"), /youtube-yukle|uploadVideo|videos\.insert/, f);
@@ -186,7 +186,7 @@ test("lifecycle: states advance one at a time and never past weak evidence, plac
 
 test("profiles: The Hidden Logic of Things and ImpossibleBrief (preview, no auto-publish) render in the studio; others refuse with their rollout stage", () => {
   assert.equal(J("scripts/bto-studio/profiles/impossible-brief.json").publishing.autoPublish, false);
-  for (const [c, renders] of [["behind-the-ordinary", true], ["failure-reconstructed", false], ["impossible-brief", true], ["goal-lore-lab", false]]) {
+  for (const [c, renders] of [["behind-the-ordinary", true], ["failure-reconstructed", true], ["impossible-brief", true], ["goal-lore-lab", false]]) {
     const p = J(`scripts/bto-studio/profiles/${c}.json`); assert.equal(p.studioRenders, renders, c); assert.equal(p.channel, c);
     if (!renders) { const r = cp.spawnSync(process.execPath, [path.join(STUDIO, "studio.js"), "--channel", c, "--topic", "X"], { encoding: "utf8", env: { ...process.env, BTO_PREMIUM_RENDER: "preview" } }); assert.equal(r.status, 3, c); assert.match(r.stderr, /rollout stage/); }
   }
