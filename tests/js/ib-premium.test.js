@@ -117,3 +117,10 @@ test("premium shadow runs after the live lane, renders the produced topic, and w
   const pkg = require("../../scripts/bto-studio/package");
   assert.ok(/shadow \? "SHADOW_OF_LIVE_NOT_PUBLISHABLE"/.test(fs.readFileSync(require.resolve("../../scripts/bto-studio/package"), "utf8")) && typeof pkg.build === "function");
 });
+
+test("no tracked file under channels/impossible-brief/premium/<id>/: a shadow run in production can never be committed", () => {
+  const tracked = require("child_process").execSync("git ls-files channels/impossible-brief/premium", { cwd: path.join(__dirname, "../.."), encoding: "utf8" }).trim().split("\n");
+  assert.deepEqual(tracked.filter((f) => /premium\/[^/]+\//.test(f)), [], "evidence lives in docs/premium-studio/evidence/impossible-brief/");
+  const probe = "channels/impossible-brief/premium/IB-NEW-001/out/review-package.json";
+  assert.equal(require("child_process").spawnSync("git", ["check-ignore", "-q", probe], { cwd: path.join(__dirname, "../..") }).status, 0, "new shadow output is ignored");
+});

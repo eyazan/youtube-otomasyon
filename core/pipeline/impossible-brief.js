@@ -147,7 +147,8 @@ function premiumShadow(channel, topic, env = process.env, spawn = cp.spawnSync, 
   const mode = String(env.IB_PREMIUM_RENDER || "").toLowerCase();
   if (channel.slug !== "impossible-brief" || mode !== "preview") return null;
   const args = [path.join(Channel.ROOT, "scripts", "bto-studio", "studio.js"), "--channel", channel.slug, "--topic", topic.id, "--shadow", "--quality", env.IB_PREMIUM_QUALITY === "final" ? "final" : "preview", "--kokoro-voice", ((channel.config.voice || {}).fallback || {}).voice || "am_fenrir"];
-  // GNU time reports the peak resident memory of the largest process in the tree (Chromium, ffmpeg or the studio)
+  // GNU time reports the peak resident memory of the largest single process the studio waited for; the Chromium tree's
+  // total (PSS) comes from the studio's own sampler (performance.peakChromiumRssMb)
   const timed = env.IB_PREMIUM_MEASURE !== "0" && fs.existsSync(TIME_BIN);
   const started = Date.now();
   try {

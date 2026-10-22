@@ -69,7 +69,7 @@ collisions / a semantically wrong "flowing strata" scene (run 39718311156).
           PD_CHROMIUM: /usr/bin/google-chrome
    ```
    plus `python -m pip install --quiet numpy soundfile` and `time` in the runtime-dependency step, and an
-   `actions/upload-artifact` step for `channels/impossible-brief/premium/*/out/` and
+   `actions/upload-artifact` step for `channels/impossible-brief/premium/*/out/` (git-ignored; committed evidence is in `docs/premium-studio/evidence/impossible-brief/`) and
    `channels/impossible-brief/state/production/*/premium-shadow.json` (review material; not committed). Costs about
    3-5 runner minutes per produced Short, after the upload.
 6. Premium **publishing** is not implemented. It needs: a human creative sign-off per video (`--approvals`), the

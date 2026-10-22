@@ -66,7 +66,7 @@ jobs:
             [ -f "$cmp" ] || continue
             echo "### live vs premium: $cmp" | tee -a "$GITHUB_STEP_SUMMARY"
             # shellcheck disable=SC2016  # the single-quoted program is JavaScript (template literals), not shell
-            node -e 'const r=require(require("path").resolve(process.argv[1]));const l=r.live||{},p=r.premium;console.log(["| | live (stock) | premium (shadow) |","|---|---|---|",`| gate | ${l.decision} ${l.productionScore} | ${p.verdict} (objective ${p.objectivePass?"PASS":"FAIL"}${p.hardFailures.length?": "+p.hardFailures.join(", "):""}) |`,`| duration | ${l.durationSeconds} s | ${p.durationSeconds} s |`,`| voice | ${l.voice} | ${p.voice&&p.voice.used} (approved ${p.voice&&p.voice.approved}) |`,`| runtime | render ${l.renderSec} s | ${p.runtimeSec} s (render ${p.renderWallSec} s) |`,`| peak memory | n/a | ${p.peakMemoryMB} MB (Chromium ${p.peakChromiumRssMb} MB) |`,`| upload | ${l.upload} | never |`].join("\n"))' "$cmp" | tee -a "$GITHUB_STEP_SUMMARY" || true
+            node -e 'const r=require(require("path").resolve(process.argv[1]));const l=r.live||{},p=r.premium;console.log(["| | live (stock) | premium (shadow) |","|---|---|---|",`| gate | ${l.decision} ${l.productionScore} | ${p.verdict} (objective ${p.objectivePass?"PASS":"FAIL"}${p.hardFailures.length?": "+p.hardFailures.join(", "):""}) |`,`| duration | ${l.durationSeconds} s | ${p.durationSeconds} s |`,`| voice | ${l.voice} | ${p.voice&&p.voice.used} (approved ${p.voice&&p.voice.approved}) |`,`| runtime | render ${l.renderSec} s | ${p.runtimeSec} s (render ${p.renderWallSec} s) |`,`| peak memory | n/a | Chromium tree ${p.peakChromiumRssMb} MB (PSS); largest single process ${p.peakMemoryMB} MB |`,`| upload | ${l.upload} | never |`].join("\n"))' "$cmp" | tee -a "$GITHUB_STEP_SUMMARY" || true
           done
           for pkg in channels/impossible-brief/premium/*/out/review-package.json; do
             [ -f "$pkg" ] || continue
@@ -75,7 +75,8 @@ jobs:
             # QA verdict lines and the end of the studio log, so a BLOCKED package is diagnosable from the job log
             grep -E "Objective verdict|\*\*(FAIL|WARN)\*\*|^- FAIL" "$(dirname "$pkg")/qa-report.md" 2>/dev/null | head -30 | tee -a "$GITHUB_STEP_SUMMARY" || true
             tail -25 "$(dirname "$pkg")/production.log" 2>/dev/null || true
-            node scripts/bto-studio/creative-director.js review --out "$(dirname "$pkg")" | tail -14 | tee -a "$GITHUB_STEP_SUMMARY" || true
+            # frame review needs the rendered MP4 (never committed): only packages rendered in this run have one
+            if ls "$(dirname "$pkg")"/*.mp4 >/dev/null 2>&1; then node scripts/bto-studio/creative-director.js review --out "$(dirname "$pkg")" | tail -14 | tee -a "$GITHUB_STEP_SUMMARY" || true; fi
           done
           git status --short | tee state-diff.txt
       - uses: actions/upload-artifact@v4

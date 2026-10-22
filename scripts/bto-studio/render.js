@@ -91,7 +91,10 @@ async function renderSegment(ctx, seg, q) {
 function rssMb(pid) { // resident memory of a process tree (Linux/macOS ps)
   try { const out = cp.execFileSync("ps", ["-A", "-o", "pid=,ppid=,rss="], { encoding: "utf8" }); const rows = out.trim().split("\n").map((l) => l.trim().split(/\s+/).map(Number));
     const kids = new Map(); rows.forEach(([p, pp]) => { if (!kids.has(pp)) kids.set(pp, []); kids.get(pp).push(p); }); const rss = new Map(rows.map(([p, , r]) => [p, r]));
-    let sum = 0; const st = [pid]; while (st.length) { const x = st.pop(); sum += rss.get(x) || 0; (kids.get(x) || []).forEach((k) => st.push(k)); } return Math.round(sum / 1024); } catch (e) { return null; }
+    // Linux: proportional set size (shared pages split between the processes that map them), so the sum is the tree's
+    // real memory; summing RSS counts Chromium's shared pages once per process and overstated it ~5x on CI runners
+    const pss = (x) => { try { const m = /^Pss:\s+(\d+) kB/m.exec(fs.readFileSync(`/proc/${x}/smaps_rollup`, "utf8")); return m ? Number(m[1]) : null; } catch (e) { return null; } };
+    let sum = 0; const st = [pid]; while (st.length) { const x = st.pop(); const p = process.platform === "linux" ? pss(x) : null; sum += p != null ? p : rss.get(x) || 0; (kids.get(x) || []).forEach((k) => st.push(k)); } return Math.round(sum / 1024); } catch (e) { return null; }
 }
 
 // data: { storyboard, timeline, style, assets, duration }

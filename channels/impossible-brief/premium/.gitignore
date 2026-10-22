@@ -12,5 +12,6 @@
 */out/narration/narration-hash.txt
 # Scheduled production (portfolio-production.yml) runs `git add channels`: a premium shadow render of a live run
 # (IB_PREMIUM_RENDER=preview) must stay on the runner and is reviewed from the job artifact. Evidence committed on
-# purpose (IB-EAR-019, IB-EXT-050) is already tracked and stays tracked; add new evidence with `git add -f`.
+# purpose lives in docs/premium-studio/evidence/impossible-brief/ (tracked files here would be rewritten by a shadow run
+# and committed by production even with this rule).
 /*/
