@@ -2,50 +2,6 @@
   "channel": "failure-reconstructed",
   "runs": [
     {
-      "runId": "39432295839",
-      "attempt": "1",
-      "startedAt": "2026-10-20T13:40:27.255Z",
-      "publish": true,
-      "trigger": {
-        "event": "schedule",
-        "correlationId": null
-      },
-      "targetDay": null,
-      "slug": null,
-      "outcome": "NOT_DUE",
-      "reason": "today's Short already exists (colgan-3407-2009)",
-      "stages": {
-        "RESEARCH": {
-          "status": "not-reached"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "not-reached"
-        },
-        "QA": {
-          "status": "not-reached"
-        },
-        "UPLOAD": {
-          "status": "not-reached"
-        },
-        "SCHEDULE": {
-          "status": "not-reached"
-        },
-        "PUBLISH": {
-          "status": "not-reached"
-        }
-      },
-      "finishedAt": "2026-10-20T13:40:27.269Z"
-    },
-    {
       "runId": "39438693969",
       "attempt": "1",
       "startedAt": "2026-10-20T14:24:46.366Z",
@@ -1352,6 +1308,50 @@
         }
       },
       "finishedAt": "2026-10-22T15:55:48.861Z"
+    },
+    {
+      "runId": "39821557048",
+      "attempt": "1",
+      "startedAt": "2026-10-22T17:19:57.814Z",
+      "publish": true,
+      "trigger": {
+        "event": "schedule",
+        "correlationId": null
+      },
+      "targetDay": null,
+      "slug": null,
+      "outcome": "NOT_DUE",
+      "reason": "today's Short already exists (ss-arctic-1854)",
+      "stages": {
+        "RESEARCH": {
+          "status": "not-reached"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "not-reached"
+        },
+        "QA": {
+          "status": "not-reached"
+        },
+        "UPLOAD": {
+          "status": "not-reached"
+        },
+        "SCHEDULE": {
+          "status": "not-reached"
+        },
+        "PUBLISH": {
+          "status": "not-reached"
+        }
+      },
+      "finishedAt": "2026-10-22T17:19:57.836Z"
     }
   ]
 }
