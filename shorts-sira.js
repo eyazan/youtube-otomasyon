@@ -329,11 +329,23 @@ function main() {
     if (RUN) RUN.record.targetDay = HEDEF_GUN;
     console.log(`Takvim: ${d.neden} · hedef yayin gunu ${HEDEF_GUN} (${d.hedefYayin || "?"})`);
   }
+  // Premium publishing adapter (core/pipeline/premium-publish.js; FR_PREMIUM_PUBLISH=1 only, no workflow sets it): an
+  // owner-approved premium Short for a reserved case takes the due slot through youtube-yukle.js; otherwise null and the
+  // lane below runs unchanged.
+  if (!hepsi) {
+    const premium = require("./core/pipeline/premium-publish").run(CHANNEL, { targetDay: HEDEF_GUN });
+    if (premium) {
+      if (premium.uploaded) { isaretle(premium.slug); asama().topic(premium.slug).outcome("UPLOADED", `premium ${premium.topicId} ${premium.videoId || ""}`.trim()); }
+      else asama().topic(premium.slug).outcome(premium.dryRun ? "DRY_RUN" : "FAILED", `premium ${premium.topicId}: ${premium.dryRun ? "uploader --dogrula" : "not uploaded, reservation kept"}`);
+      return premium.exitCode;
+    }
+  }
   // Uretilmemis, kalici basarisiz olmamis ve (ayni spec ile) engellenmemis konular.
   // Yayin kaydindaki (icerik/yayinlananlar.json) slug'lar da atlanir: elle yuklenmis bir
   // video uretilenler listesinde olmasa bile IKINCI KEZ yuklenmez.
   const yuklenmis = require("./lib/kutuphane").yayinlananlar().map((y) => y.slug).filter(Boolean);
-  const atla = new Set([...uretilenler(), ...basarisizlar(), ...yuklenmis,
+  // Konular reserved for an owner-approved premium Short (core/pipeline/premium-publish.js) are never produced here.
+  const atla = new Set([...uretilenler(), ...basarisizlar(), ...yuklenmis, ...require("./core/pipeline/premium-publish").reserved(CHANNEL),
     ...Object.keys(engellenenler()).filter(engelliMi), ...Object.keys(incelemedekiler()).filter(incelemedeMi)]);
   // Siralama: growth engine (A/B once, C yalnizca deney gunu ya da kanal izin
   // veriyorsa yedek; D asla). Growth kuyrugu bossa eski kutuphane sirasi DEGIL,

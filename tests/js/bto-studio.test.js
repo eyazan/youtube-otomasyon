@@ -122,7 +122,10 @@ test("skills: the seven studio Skills exist with valid frontmatter whose name ma
 
 // The only studio entry points outside scripts/bto-studio are the default-OFF ImpossibleBrief shadow in
 // core/pipeline/impossible-brief.js (IB_PREMIUM_RENDER=preview) and the read-only, no-upload dry-run workflow.
-const STUDIO_ALLOWED = new Set(["ib-premium-dry-run.yml", "fr-studio-dry-run.yml", "premium-render-check.yml", path.join("pipeline", "impossible-brief.js"), path.join("pipeline", "premium-shadow.js")]);
+const STUDIO_ALLOWED = new Set(["ib-premium-dry-run.yml", "fr-studio-dry-run.yml", "premium-render-check.yml", path.join("pipeline", "impossible-brief.js"), path.join("pipeline", "premium-shadow.js"),
+  // the publishing adapter: flag-gated (<PREFIX>_PREMIUM_PUBLISH=1, set nowhere), renders through the studio and hands the
+  // MP4 to the existing uploader only after the publish gate (tests/js/premium-publish.test.js)
+  path.join("pipeline", "premium-publish.js")]);
 test("isolation: no live workflow, root production script or channel config references the studio; BTO stays disabled", () => {
   const wf = path.join(ROOT, ".github/workflows");
   for (const f of fs.readdirSync(wf).filter((x) => !STUDIO_ALLOWED.has(x))) assert.doesNotMatch(fs.readFileSync(path.join(wf, f), "utf8"), /bto-studio|BTO_PREMIUM_RENDER|IB_PREMIUM_RENDER|premium:video/, f);

@@ -187,6 +187,17 @@ function runChannel(slug, argv = []) {
     run.record.targetDay = targetDay;
     console.log(`[${channel.name}] ${due.reason} · target publication day ${targetDay} (${due.targetPublishAt || "?"})`);
   }
+  // Premium publishing adapter (core/pipeline/premium-publish.js; IB_/HLT_PREMIUM_PUBLISH=1 only, no workflow sets it):
+  // an owner-approved premium Short for a reserved topic takes the due slot through the existing uploader. With the flag
+  // off, or nothing approved, or any refusal before an upload, it returns null and the live lane below runs unchanged.
+  if (!explicit) {
+    const premium = require("./premium-publish").run(channel, { targetDay });
+    if (premium) {
+      if (premium.uploaded) { recordGenerated(channel, { id: premium.topicId, slug: premium.slug }, true); run.topic(premium.slug).outcome("UPLOADED", `premium ${premium.topicId} ${premium.videoId || ""}`.trim()); }
+      else run.topic(premium.slug).outcome(premium.dryRun ? "DRY_RUN" : "FAILED", `premium ${premium.topicId}: ${premium.dryRun ? "uploader --dogrula" : "not uploaded, reservation kept"}`);
+      return premium.exitCode;
+    }
+  }
   // Per-channel, per-target-day retry budget (lib/attempt-budget.js); only in scheduled publishing runs.
   const budget = (kind) => {
     if (!targetDay) return true;
