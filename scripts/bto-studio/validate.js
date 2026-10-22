@@ -89,6 +89,8 @@ function validateStoryboard(sb, { script, timeline, style, pilot = false, policy
         if ((tx.kind === "label" || tx.kind === "type") && tx.text.split(/\s+/).length > style.type.maxWordsPerLabel) warnings.push(`${s.id}: "${tx.text}" is longer than ${style.type.maxWordsPerLabel} words`);
       }
     }
+    // a chip key the channel's style pack does not define renders as its raw key ("factLabel" on a BTO frame)
+    for (const c of s.chips || []) if (!(style.identity && style.identity[c])) errors.push(`${s.id}: chip ${c} is not defined in the channel style identity`);
     if (!(s.chips || []).some((c) => c === "illustrationLabel" || c === "conceptualLabel")) warnings.push(`${s.id}: drawn scene without the ILLUSTRATION chip (brand visualRules.illustrationLabel)`);
     if (s.visualPurpose.length < 60) warnings.push(`${s.id}: visualPurpose is thin; say what the viewer sees that narration alone cannot show`);
   });

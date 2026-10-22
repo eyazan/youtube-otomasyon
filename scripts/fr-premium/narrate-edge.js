@@ -43,10 +43,19 @@ async function request(text, rate) {
   return { audio: Buffer.concat(chunks), words };
 }
 
+// A rate limit (HTTP 429, seen when several CI jobs narrate at once: run 39790677366) needs a longer, still bounded,
+// backoff (20/40/60 s) than a dropped socket (2.5/5 s). After the last attempt the error propagates: the caller fails
+// safely and never substitutes an unapproved voice.
 async function withRetry(fn, n = 3) {
-  let last;
-  for (let a = 1; a <= n; a += 1) { try { return await fn(); } catch (e) { last = e; process.stdout.write(`  (edge retry ${a}: ${String(e.message).slice(0, 60)})\n`); await new Promise((r) => setTimeout(r, 2500 * a)); } }
-  throw last;
+  for (let a = 1; ; a += 1) {
+    try { return await fn(); } catch (e) {
+      const limited = /\b429\b/.test(String(e.message));
+      if (a >= (limited ? n + 1 : n)) throw e;
+      const wait = limited ? 20000 * a : 2500 * a;
+      process.stdout.write(`  (edge retry ${a}${limited ? " after rate limit" : ""}: ${String(e.message).slice(0, 60)}; waiting ${wait / 1000} s)\n`);
+      await new Promise((r) => setTimeout(r, wait));
+    }
+  }
 }
 
 // Script words (display spelling) timed from Edge's spoken words by consuming normalised characters.

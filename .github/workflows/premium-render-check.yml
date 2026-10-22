@@ -49,7 +49,7 @@ jobs:
       - name: The Hidden Logic of Things BTO-301, automatic storyboard
         run: |
           set -o pipefail
-          node -e 'const A=require("./scripts/bto-studio/adapter");const G=require("./scripts/bto-studio/auto/behind-the-ordinary");const st=require("./channels/behind-the-ordinary/premium/style-pack.json");const {channel,topic}=A.loadTopic("behind-the-ordinary","BTO-301");const r=A.readiness(channel,topic);if(!r.ready){console.log("not ready: "+r.errors.join("; "));process.exit(1)}const sb=G.build(A.studioScript(channel,topic),st,topic);sb.version=9;require("fs").writeFileSync("channels/behind-the-ordinary/premium/BTO-301/storyboard.auto.json",JSON.stringify(sb,null,1))'
+          node -e 'const A=require("./scripts/bto-studio/adapter");const G=require("./scripts/bto-studio/auto/behind-the-ordinary");const st=require("./channels/behind-the-ordinary/premium/style-pack.json");const {channel,topic}=A.loadTopic("behind-the-ordinary","BTO-301");const r=A.readiness(channel,topic);if(!r.ready){console.log("not ready: "+r.errors.join("; "));process.exit(1)}const fs=require("fs");const ad="channels/behind-the-ordinary/premium/BTO-301/assets";const assets={};for(const f of fs.readdirSync(ad))assets[f.replace(/\.json$/,"")]=JSON.parse(fs.readFileSync(ad+"/"+f,"utf8"));const sb=G.build(A.studioScript(channel,topic),st,topic,{assets});sb.version=9;require("fs").writeFileSync("channels/behind-the-ordinary/premium/BTO-301/storyboard.auto.json",JSON.stringify(sb,null,1))'
           node scripts/bto-studio/studio.js --channel behind-the-ordinary --topic BTO-301 --storyboard storyboard.auto.json --voice edge 2>&1 | tail -40
       - name: GoalLore Lab GLL-P01 pilot, automatic storyboard
         run: |
