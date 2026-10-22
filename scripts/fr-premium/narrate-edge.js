@@ -7,13 +7,15 @@
 //
 //   node scripts/fr-premium/narrate-edge.js <script.json> <outDir> [--voice en-US-AndrewNeural]
 //
-// Free service only; nothing here is paid. A beat that fails three times stops the run: no silent
-// placeholder or tone is ever written in place of speech.
+// Free service only; nothing here is paid. Requests go through scripts/fr-premium/edge-client.js (cache, bounded
+// concurrency, jittered backoff within a retry budget). A beat that still fails stops the run: no silent placeholder
+// or tone is ever written in place of speech.
 const fs = require("fs");
 const path = require("path");
 const { execFileSync } = require("child_process");
 const { MsEdgeTTS, OUTPUT_FORMAT } = require("msedge-tts");
 const telaffuz = require("../../pronunciation-check");
+const Edge = require("./edge-client");
 
 const args = process.argv.slice(2);
 const opt = (k, d) => (args.includes(k) ? args[args.indexOf(k) + 1] : d);
@@ -26,9 +28,10 @@ const SR = 48000;
 const norm = (t) => String(t).toLowerCase().replace(/[^a-z0-9]+/g, "");
 const xml = (t) => String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
+const FORMAT = OUTPUT_FORMAT.AUDIO_24KHZ_96KBITRATE_MONO_MP3;
 async function request(text, rate) {
   const tts = new MsEdgeTTS();
-  await tts.setMetadata(VOICE, OUTPUT_FORMAT.AUDIO_24KHZ_96KBITRATE_MONO_MP3, { wordBoundaryEnabled: true });
+  await tts.setMetadata(VOICE, FORMAT, { wordBoundaryEnabled: true });
   const locale = VOICE.slice(0, 5);
   const ssml = `<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="${locale}"><voice name="${VOICE}"><prosody pitch="+0Hz" rate="${rate}" volume="+0%">${xml(text)}</prosody></voice></speak>`;
   const res = await tts.rawToStream(ssml);
@@ -43,21 +46,22 @@ async function request(text, rate) {
   return { audio: Buffer.concat(chunks), words };
 }
 
-// A rate limit (HTTP 429, seen when several CI jobs narrate at once: run 39790677366) needs a longer, still bounded,
-// backoff (20/40/60 s) than a dropped socket (2.5/5 s). After the last attempt the error propagates: the caller fails
-// safely and never substitutes an unapproved voice. EDGE_RATE_LIMIT_RETRIES raises the rate-limit attempts for a CI
-// check that shares Edge with other jobs (premium-render-check: 429 outlasted 20/40/60 s on run 39834813687).
-const rateLimitRetries = () => Math.min(8, Math.max(3, parseInt(process.env.EDGE_RATE_LIMIT_RETRIES, 10) || 3));
-async function withRetry(fn, n = 3) {
-  for (let a = 1; ; a += 1) {
-    try { return await fn(); } catch (e) {
-      const limited = /\b429\b/.test(String(e.message));
-      if (a >= (limited ? rateLimitRetries() + 1 : n)) throw e;
-      const wait = limited ? 20000 * a : 2500 * a;
-      process.stdout.write(`  (edge retry ${a}${limited ? " after rate limit" : ""}: ${String(e.message).slice(0, 60)}; waiting ${wait / 1000} s)\n`);
-      await new Promise((r) => setTimeout(r, wait));
-    }
-  }
+// One beat: from the cache when this exact request was narrated before, otherwise from Edge inside a concurrency slot
+// with bounded retries; a fresh result is stored for reuse.
+const S = Edge.settings();
+const budget = { waitedMs: 0 }; const stats = { cacheHits: 0, edgeRequests: 0 };
+async function beatAudio(beat, spoken, rate) {
+  const key = Edge.cacheKey({ voice: VOICE, rate, text: spoken, format: FORMAT });
+  const hit = Edge.cacheGet(S.cacheDir, key);
+  if (hit) { stats.cacheHits += 1; return { ...hit, cached: true }; }
+  const lockDir = path.join(S.cacheDir || path.join(require("os").tmpdir(), "edge-tts"), "locks");
+  const r = await Edge.withRetry(() => Edge.withSlot(lockDir, S.maxConcurrency, async () => {
+    stats.edgeRequests += 1; const x = await request(spoken, rate);
+    if (x.audio.length < 2000 || !x.words.length) throw new Error("Edge returned no audio or no word boundaries");
+    return x;
+  }), { label: `beat ${beat.id}`, s: S, budget });
+  Edge.cachePut(S.cacheDir, key, r, { voice: VOICE, rate, chars: spoken.length });
+  return { ...r, cached: false };
 }
 
 // Script words (display spelling) timed from Edge's spoken words by consuming normalised characters.
@@ -84,7 +88,7 @@ function alignWords(lines, edgeWords) {
   const pieces = []; const lines = []; const words = []; let clock = 0; const log = [];
   for (const beat of script.beats) {
     const spoken = beat.lines.map((l) => telaffuz.ttsMetni(l.text)).join(" ");
-    const r = await withRetry(async () => { const x = await request(spoken, rateOf(beat.rate)); if (x.audio.length < 2000 || !x.words.length) throw new Error("no audio/words"); return x; });
+    const r = await beatAudio(beat, spoken, rateOf(beat.rate));
     const mp3 = path.join(tmp, beat.id + ".mp3"); fs.writeFileSync(mp3, r.audio);
     // Trim to speech: 60 ms before the first word, 220 ms after the last word's boundary (decay).
     const a = Math.max(0, r.words[0].start - 0.06), z = r.words[r.words.length - 1].end + 0.22;
@@ -95,21 +99,22 @@ function alignWords(lines, edgeWords) {
     words.push(...bw);
     for (const l of beat.lines) { const lw = bw.filter((x) => x.line === l.id); lines.push({ id: l.id, beat: beat.id, text: l.text, start: lw[0].start, end: lw[lw.length - 1].end }); }
     pieces.push(wav); clock += dur;
-    log.push({ beat: beat.id, rate: rateOf(beat.rate), requestChars: spoken.length, edgeWords: r.words.length, speechSec: +dur.toFixed(3) });
+    log.push({ beat: beat.id, rate: rateOf(beat.rate), requestChars: spoken.length, edgeWords: r.words.length, speechSec: +dur.toFixed(3), cached: r.cached });
     if (beat.pauseAfterMs > 0) {
       const sil = path.join(tmp, beat.id + "-pause.wav");
       execFileSync("ffmpeg", ["-v", "error", "-y", "-f", "lavfi", "-i", `anullsrc=r=${SR}:cl=mono`, "-t", (beat.pauseAfterMs / 1000).toFixed(3), "-c:a", "pcm_s16le", sil]);
       pieces.push(sil); clock += beat.pauseAfterMs / 1000;
     }
-    process.stdout.write(`  ${beat.id}: ${dur.toFixed(2)} s, ${r.words.length} words\n`);
+    process.stdout.write(`  ${beat.id}: ${dur.toFixed(2)} s, ${r.words.length} words${r.cached ? " (cached)" : ""}\n`);
   }
   const list = path.join(tmp, "list.txt"); fs.writeFileSync(list, pieces.map((p) => `file '${p}'`).join("\n"));
   const out = path.join(outDir, "narration.wav");
   execFileSync("ffmpeg", ["-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", list, "-c:a", "pcm_s16le", out]);
   const total = parseFloat(execFileSync("ffprobe", ["-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", out]).toString());
-  fs.writeFileSync(path.join(outDir, "timeline.json"), JSON.stringify({ voice: VOICE, provider: "Microsoft Edge neural TTS (free endpoint, msedge-tts)", duration: +total.toFixed(3), beats: log, lines, words }, null, 1) + "\n");
+  fs.writeFileSync(path.join(outDir, "timeline.json"), JSON.stringify({ voice: VOICE, provider: "Microsoft Edge neural TTS (free endpoint, msedge-tts)", duration: +total.toFixed(3), cache: { ...stats, retryWaitSec: +(budget.waitedMs / 1000).toFixed(1) }, beats: log, lines, words }, null, 1) + "\n");
   fs.rmSync(tmp, { recursive: true, force: true });
-  console.log(`narration ${total.toFixed(2)} s, ${words.length} words -> ${out}`);
+  const pruned = Edge.cachePrune(S.cacheDir, S.cacheMaxMb);
+  console.log(`narration ${total.toFixed(2)} s, ${words.length} words (${stats.cacheHits} beat(s) from cache, ${stats.edgeRequests} Edge request(s)${pruned ? `, ${pruned} old cache entr${pruned === 1 ? "y" : "ies"} pruned` : ""}) -> ${out}`);
   // the msedge-tts socket keeps the event loop alive after the last request; every file is written synchronously above,
   // so exit explicitly (otherwise a caller's timeout kills a successful run: IB dry run 2026-10-22, 300 s, exit != 0)
   process.exit(0);
