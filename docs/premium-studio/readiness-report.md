@@ -116,8 +116,12 @@ production: the studio renders every day's topic next to the live Short and comp
     `zxing-cpp` installed; QA now names a decoder failure, and the check still fails closed). WARNs for review: two
     caption cues at 23.3 chars/s, one 1.7 s in-scene hold (s3-year); Creative Director flags SMALL_TEXT on the quote
     and year scenes and SAME_ENV (desk) across the Short.
-  - **CI re-render with the decoder** (`a6820d5`): not yet measured. Run 39840693330 died in `apt` before rendering
-    (Ubuntu mirror outage, no ffmpeg); its failed job was re-run once.
+  - **CI re-render with the decoder, run 39840693330 attempt 2** (`a6820d5`, log read; attempt 1 died in `apt`
+    before rendering and was re-run once): objective QA **PASS**, Edge **Emma (approved)**, render 96.8 s, Chromium
+    PSS 2390 MB, **QR decodes "HIDDEN LOGIC" on the first and last frame**, text gate 0/0, deterministic frames.
+    Package **READY_FOR_HUMAN_REVIEW**; nothing uploaded. Same WARNs and Creative Director flags as above.
+    This is the evidence-qualified BTO topic rendered automatically end to end; it is not production-ready
+    (channel inactive, 1 of 525 topics qualified, no live-lane CI dry run).
 - **Daily entry point:**
   - `shorts-sira.js --channel behind-the-ordinary`, manual dispatch only (`portfolio-production.yml`; `BTO_ACTIVE`
     gate). It now carries the disabled shadow `HLT_PREMIUM_RENDER=preview` (`01c6691`).
@@ -206,8 +210,8 @@ Isolation is tested (`tests/js/fr-studio.test.js`, `ib-premium.test.js`, `bto-st
 | IB shadow, final (39790677787) | 198 s | 129.6 s | ≈ 3950 MB | Edge Brian (approved) |
 | IB shadow, final (39837070274) | 175 s | 117.3 s | 4062 MB | Edge Brian Multilingual (approved) |
 | FR shadow, final (39828652879) | 88 s | 54.4 s | 3871 MB | Edge Andrew (approved) |
-| BTO-301 auto, final (39835922184) | — | 94.8 s | 2370 MB | Edge Emma (approved) |
-| GLL-P01 auto, pilot (39835922184) | — | 65.1 s | 2416 MB | Edge Ryan (pilot) |
+| BTO-301 auto, final (39840693330) | — | 96.8 s | 2390 MB | Edge Emma (approved) |
+| GLL-P01 auto, pilot (39840693330) | — | 64.6 s | 2440 MB | Edge Ryan (pilot) |
 | FR shadow, final (39790677333) | 141 s | 85 s | 3957 MB | Edge Andrew (approved) |
 | BTO shadow, preview, local container | 190 s | 138.7 s | 1897 MB | Kokoro preview (unapproved) |
 
