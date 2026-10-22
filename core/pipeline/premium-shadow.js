@@ -99,9 +99,10 @@ function render(channel, topic, env, spawn, live, mode, v) {
     const out = outDir(channel, topic);
     const read = (name) => { try { return JSON.parse(fs.readFileSync(path.join(out, name), "utf8")); } catch (error) { return null; } };
     const pkg = read("review-package.json") || {}; const qa = read("qa-report.json") || {};
+    const narrationCache = (read(path.join("narration", "timeline.json")) || {}).cache || null;
     const verdict = pkg.verdict || null;
     const status = child.error ? `did not finish (${child.error.code || child.error.message})` : `exit ${child.status}`;
-    console.log(`[${channel.name}] premium shadow (${mode}) ${topic.slug}: ${status} in ${sec} s${peakMemoryMB ? `, peak ${peakMemoryMB} MB` : ""}, package ${verdict || "none"}; live production unaffected`);
+    console.log(`[${channel.name}] premium shadow (${mode}) ${topic.slug}: ${status} in ${sec} s${peakMemoryMB ? `, peak ${peakMemoryMB} MB` : ""}, package ${verdict || "none"}${narrationCache ? `, Edge beats ${narrationCache.cacheHits} cached / ${narrationCache.edgeRequests} requested` : ""}; live production unaffected`);
     if (child.status !== 0) console.log(String(child.stderr || child.stdout || "").replace(/IB_SHADOW_MAXRSS_KB=\d+/, "").trim().split("\n").slice(-6).join("\n"));
     const report = {
       schema: "ib-premium-shadow/1", topicId: topic.id, slug: topic.slug, measuredAt: new Date().toISOString(),
@@ -111,7 +112,7 @@ function render(channel, topic, env, spawn, live, mode, v) {
         hardFailures: (qa.objective || []).filter((c) => c.hard && !c.ok).map((c) => c.name), loudness: (qa.technical || {}).loudness || null,
         durationSeconds: parseFloat(((qa.objective || []).find((c) => /^duration/.test(c.name)) || {}).measured) || null,
         voice: pkg.voice ? { used: pkg.voice.used, approved: pkg.voice.approved === true } : null, quality: v("QUALITY") === "final" ? "final" : "preview",
-        runtimeSec: sec, peakMemoryMB, renderWallSec: (pkg.performance || {}).renderWallSec ?? null, peakChromiumRssMb: (pkg.performance || {}).peakChromiumRssMb ?? null, uploaded: false },
+        runtimeSec: sec, peakMemoryMB, narrationCache, renderWallSec: (pkg.performance || {}).renderWallSec ?? null, peakChromiumRssMb: (pkg.performance || {}).peakChromiumRssMb ?? null, uploaded: false },
     };
     if (v("KEEP_WORK") !== "1") { const freed = cleanup(out, started); report.premium.cleanedMb = freed; if (freed) console.log(`[${channel.name}] premium shadow: removed ${freed} MB of intermediates (MP4 and QA reports kept)`); }
     if (live && live.output) { try { fs.writeFileSync(path.join(live.output, "premium-shadow.json"), JSON.stringify(report, null, 2) + "\n"); } catch (error) {} }

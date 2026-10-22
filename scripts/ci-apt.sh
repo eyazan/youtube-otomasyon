@@ -22,6 +22,8 @@ APT_OPTS=(-o Acquire::Retries=2 -o Acquire::http::Timeout=20 -o Acquire::https::
 INSTALL_OPTS=()
 if [ -n "${CI_APT_ARCHIVES:-}" ]; then
   mkdir -p "$CI_APT_ARCHIVES/partial"
+  # apt downloads as its sandbox user _apt: give it the partial folder (save_cache hands everything back)
+  id _apt >/dev/null 2>&1 && sudo chown _apt "$CI_APT_ARCHIVES/partial" 2>/dev/null
   cached=$(find "$CI_APT_ARCHIVES" -maxdepth 1 -name '*.deb' | wc -l)
   echo "apt: package cache $CI_APT_ARCHIVES ($cached .deb file(s) restored)"
   INSTALL_OPTS=(-o "Dir::Cache::Archives=$CI_APT_ARCHIVES/")
