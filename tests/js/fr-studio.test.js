@@ -113,3 +113,17 @@ test("dry-run verdict: green only when the premium shadow rendered and passed ob
   w({ status: "exit 0", verdict: "SHADOW_OF_LIVE_NOT_PUBLISHABLE", objectivePass: true }); assert.equal(C.check(dir).ok, true);
   for (const f of ["ib-premium-dry-run.yml", "fr-studio-dry-run.yml"]) assert.match(fs.readFileSync(path.join(ROOT, ".github/workflows", f), "utf8"), /shadow-check\.js/, f);
 });
+
+test("Hidden Logic of Things shadow: OFF by default, HLT_PREMIUM_RENDER only, rendered into a git-ignored folder apart from the tracked pilots", () => {
+  const Shadow = require("../../core/pipeline/premium-shadow"); const Channel = require("../../core/channel-context");
+  const channel = Channel.selectChannel("behind-the-ordinary"); let calls = 0; let args = null;
+  const spawn = (bin, a) => { calls += 1; args = a; return { status: 0, stdout: "", stderr: "" }; };
+  assert.equal(Shadow.run(channel, { id: "BTO-301", slug: "BTO-301" }, {}, spawn), null);
+  assert.equal(Shadow.run(channel, { id: "BTO-301", slug: "BTO-301" }, { BTO_PREMIUM_RENDER: "preview" }, spawn), null, "the studio's own opt-in is not the lane flag");
+  Shadow.run(channel, { id: "BTO-301", slug: "BTO-301" }, { HLT_PREMIUM_RENDER: "preview", HLT_PREMIUM_MEASURE: "0" }, spawn);
+  assert.equal(calls, 1); const i = args.indexOf("--shadow-dir");
+  assert.ok(i > 0 && args[i + 1] === "channels/behind-the-ordinary/premium/shadow/BTO-301", "never the tracked premium/BTO-301 pilot folder");
+  assert.equal(require("child_process").spawnSync("git", ["check-ignore", "-q", "channels/behind-the-ordinary/premium/shadow/BTO-301/out/final.mp4"], { cwd: ROOT }).status, 0);
+  assert.equal(Shadow.run(Channel.selectChannel("critical-thread"), { id: "x", slug: "x" }, { HLT_PREMIUM_RENDER: "preview", IB_PREMIUM_RENDER: "preview" }, spawn), null, "no shadow on other channels");
+  assert.match(fs.readFileSync(path.join(ROOT, "scripts/bto-studio/studio.js"), "utf8"), /--shadow-dir is allowed only with --shadow/);
+});

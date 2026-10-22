@@ -134,9 +134,10 @@ function llmShadow(channel, topic, output, env = process.env, spawn = cp.spawnSy
   }
 }
 
-// Premium studio shadow for ImpossibleBrief (IB_PREMIUM_RENDER=preview, default OFF): core/pipeline/premium-shadow.js.
+// Premium studio shadow for ImpossibleBrief (IB_PREMIUM_RENDER=preview) and The Hidden Logic of Things
+// (HLT_PREMIUM_RENDER=preview), default OFF: core/pipeline/premium-shadow.js. Other isolated channels have no shadow.
 function premiumShadow(channel, topic, env = process.env, spawn = cp.spawnSync, live = null) {
-  if (channel.slug !== "impossible-brief") return null;
+  if (!["impossible-brief", "behind-the-ordinary"].includes(channel.slug)) return null;
   return require("./premium-shadow").run(channel, topic, env, spawn, live);
 }
 
