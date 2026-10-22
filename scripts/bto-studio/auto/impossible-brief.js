@@ -54,14 +54,19 @@ function world(topic) {
 }
 
 // numbers spoken in a line with their unit, kept only when a fact contains the same digits
-const NUM = /(\d{1,3}(?:,\d{3})+|\d+(?:\.\d+)?)\s*(°\s?C|°\s?F|degrees|metres|meters|kilometres|kilometers|km|m\b|cm|centimetres|percent|%|years?|hours?|days?|minutes?|seconds?|times)?/gi;
+const NUM = /(\d{1,3}(?:,\d{3})+|\d+(?:\.\d+)?)(\s+(?:million|billion|thousand|trillion)\b)?\s*(°\s?C|°\s?F|degrees|metres|meters|kilometres|kilometers|km|m\b|cm|centimetres|percent|%|years?|hours?|days?|minutes?|seconds?|times)?/gi;
+const MULT = { thousand: 1e3, million: 1e6, billion: 1e9, trillion: 1e12 };
 const UNIT = { metres: "m", meters: "m", kilometres: "km", kilometers: "km", centimetres: "cm", degrees: "°", percent: "%" };
 function numbersIn(text) {
   const out = []; let m; NUM.lastIndex = 0;
-  while ((m = NUM.exec(text))) { const raw = m[1]; const unit = (m[2] || "").replace(/\s/g, ""); const value = Number(raw.replace(/,/g, ""));
-    if (!Number.isFinite(value)) continue; out.push({ raw, value, unit: UNIT[unit.toLowerCase()] || unit, year: !unit && /^\d{4}$/.test(raw) && value >= 1500 && value <= 2100, end: NUM.lastIndex, start: m.index }); }
+  while ((m = NUM.exec(text))) { const mult = (m[2] || "").trim().toLowerCase(); const raw = m[1] + (mult ? ` ${mult}` : ""); const unit = (m[3] || "").replace(/\s/g, ""); const value = Number(m[1].replace(/,/g, "")) * (MULT[mult] || 1);
+    if (!Number.isFinite(value)) continue;
+    // the counted thing ("2 million bacterial genes", "10,000 microbial species"): its last plain word before punctuation
+    const noun = ((text.slice(NUM.lastIndex).match(/^\s*((?:[A-Za-z-]+\s+){0,2}[A-Za-z-]+)/) || [])[1] || "").toLowerCase().split(/\s+/).filter((w) => !STOP.has(w)).pop() || "";
+    out.push({ raw, value, unit: UNIT[unit.toLowerCase()] || unit, noun: noun.replace(/s$/, ""), year: !mult && !unit && /^\d{4}$/.test(m[1]) && value >= 1500 && value <= 2100, end: NUM.lastIndex, start: m.index }); }
   // "900, 1,600 and 1,400 metres" / "4 to 10 °C": bare numbers in a list take the unit written after the last one
-  for (let i = out.length - 2; i >= 0; i -= 1) if (!out[i].unit && out[i + 1].unit && /^(\s*,\s*|\s*and\s+|\s*to\s+|\s*[–-]\s*)$/.test(text.slice(out[i].end, out[i + 1].start))) { out[i].unit = out[i + 1].unit; out[i].year = false; }
+  // ("2 million, 100 times the number" is not a list: "times" and a multiplier never pass on)
+  for (let i = out.length - 2; i >= 0; i -= 1) if (!out[i].unit && out[i + 1].unit && out[i + 1].unit !== "times" && !/ (million|billion|thousand|trillion)$/.test(out[i].raw) && /^(\s*,\s*|\s*and\s+|\s*to\s+|\s*[–-]\s*)$/.test(text.slice(out[i].end, out[i + 1].start))) { out[i].unit = out[i + 1].unit; out[i].year = false; }
   // a range ("4 to 10 °C", "85 to 90%") is one figure: never show only its first number
   for (let i = 0; i < out.length - 1; i += 1) if (out[i].unit && out[i].unit === out[i + 1].unit && /^(\s*to\s+|\s*[–-]\s*)$/.test(text.slice(out[i].end, out[i + 1].start))) out[i].upto = out[i + 1];
   return out.map(({ end, start, ...n }) => ({ ...n, ...(n.upto ? { upto: { raw: n.upto.raw, value: n.upto.value } } : {}) }));
@@ -77,8 +82,8 @@ function off(a, d) {
 
 function keyPhrase(text, max = 3) {
   // a contrast the line states ("heat, not hardness") is the strongest short form; it keeps the line's own words
-  const contrast = String(text).match(/\b([A-Za-z]+),?\s+not\s+([A-Za-z]+)/i);
-  if (contrast) return `${contrast[1]}, NOT ${contrast[2]}`.toUpperCase();
+  const contrast = String(text).match(/\b([A-Za-z]+),?\s+not\s+(?:(?:a|an|the|just|only|simply)\s+)?([A-Za-z]+)/i);
+  if (contrast && !STOP.has(contrast[1].toLowerCase())) return `${contrast[1]}, NOT ${contrast[2]}`.toUpperCase();
   const comparison = String(text).match(/\bmore\s+(?:like\s+)?([A-Za-z]+)\s+than\s+([A-Za-z]+)/i);
   if (comparison) return `MORE ${comparison[1]} THAN ${comparison[2]}`.toUpperCase();
   text = String(text).replace(/['’]s\b/g, "").replace(/’/g, "'");
@@ -228,7 +233,8 @@ function build(script, style, topic) {
       camera = cam(1.0, 1.06, 820, 860);
     } else if (qty) {
       // percentages of different bases ("6.3% per century" vs "10% over 150 years") are not comparable bars: no % ladders
-      const same = qty.unit === "%" ? [] : facts.flatMap((f) => numbersIn(f.claim).filter((n) => !n.year && n.unit === qty.unit).map((n) => ({ ...n, fact: f.id }))).filter((n, k, a) => a.findIndex((x) => x.value === n.value) === k).slice(0, 4);
+      // unitless counts are comparable only when they count the same thing (genes vs genes, not genes vs species)
+      const same = qty.unit === "%" ? [] : facts.flatMap((f) => numbersIn(f.claim).filter((n) => !n.year && n.unit === qty.unit && (qty.unit || (qty.noun && n.noun === qty.noun))).map((n) => ({ ...n, fact: f.id }))).filter((n, k, a) => a.findIndex((x) => x.value === n.value) === k).slice(0, 4);
       const ladderKey = same.map((n) => n.value).sort((a, b) => a - b).join("|");
       kind = "measure"; if (same.length >= 2 && !laddersShown.has(ladderKey) && laddersShown.add(ladderKey)) { layers = [stars(40 + i), { component: "scale-ladder", props: { x: 110, y: 560, w: 700, log: Math.max(...same.map((n) => n.value)) / Math.max(1e-9, Math.min(...same.map((n) => n.value))) > 50, items: same.sort((a, b) => a.value - b.value).map((n, k) => ({ label: `FACT ${n.fact}`.replace("FACT ", ""), value: n.value, valueText: valueLabel(n), at: `${L.id}+${(0.2 + k * 0.45).toFixed(2)}` })) } }];
         same.forEach((n) => { if (!evidence.includes(n.fact)) evidence.push(n.fact); }); purpose = `Scale: the topic's own ${qty.unit || "values"} side by side as growing bars, so the size of the change is seen, not read.`; }
