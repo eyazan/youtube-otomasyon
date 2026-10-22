@@ -1,0 +1,198 @@
+# Premium engine: four-channel readiness report (2026-10-22, PR #316)
+
+This report decides one question per channel: is it ready for **premium daily production**? Every verdict rests on
+real renders. Storyboard validation alone never counts as ready. A channel is ready only when its daily entry point
+has run end to end in CI with:
+
+- the approved voice;
+- a final render;
+- objective QA;
+- the publish gate;
+- shadow isolation (nothing committed, nothing uploaded).
+
+What still blocks it is named precisely. Nothing in this PR merges, changes a schedule, or enables publishing.
+
+## Verdict
+
+| Channel | Premium shadow (daily, never uploaded) | Premium publishing | What blocks activation |
+|---|---|---|---|
+| **ImpossibleBrief** | **READY to enable** after merge (flag `IB_PREMIUM_RENDER=preview`) | NOT READY | owner merge; human creative sign-off per package; the go-live switch to the uploader is not built (by design) |
+| **Failure Reconstructed** | **READY to enable** after merge (flag `FR_PREMIUM_RENDER=preview`) | NOT READY | as IB, plus topic supply: today **0** unused A cases are at the 75 bar (best 74), so the live lane skips and the shadow has nothing to shadow |
+| **The Hidden Logic of Things** | built, flag `HLT_PREMIUM_RENDER=preview`; **BLOCKED** by research and channel state | NOT READY | channel inactive by owner decision (2026-10-11); only **1 of 525** topics is evidence-qualified (BTO-301; 518 are QUESTION_ONLY) |
+| **GoalLore Lab** | **BLOCKED** (no live lane) | NOT READY | not registered; identity migration needs an owner decision; no researched topic (109 IDEA candidates, no verbatim quotes); no approved voice (en-GB-RyanNeural is a candidate) |
+
+**No channel is ready for premium publishing.** Two channels, IB and FR, are ready for premium **shadow** daily
+production: the studio renders every day's topic next to the live Short and compares the two, without ever uploading.
+
+## Evidence per channel (real renders, CI logs read, not just job status)
+
+### ImpossibleBrief
+
+- **Entry point:**
+  - `node shorts-sira.js --channel impossible-brief` → `core/pipeline/impossible-brief.js`.
+  - The shadow runs after the live lane has finished, inside try/catch.
+- **CI run 39790677787** (`ce4c159`):
+  - **Survey:** visual survey buffer 0 → 18.
+  - **Live lane:** IB-EAR-019 PUBLISH 88; upload skipped (`PUBLISH=0`).
+  - **Shadow:**
+    - Edge **en-US-BrianNeural (approved)**, final quality.
+    - Objective QA **PASS**, −14 LUFS.
+    - 198 s total (render 129.6 s), Chromium PSS ≈ 3.95 GB.
+    - Gate blocks at TOPIC_READY (already generated: a duplicate by construction).
+    - State diff shows no premium output.
+- **Head `6bda7e5`:** run 39828653040, pending.
+- **Storyboards:** all 136 studio-ready topics validate with 0 errors. 346 of 500 are not researched for the studio;
+  18 are already published.
+- **Local frame review** (EAR-019, HUM-050, SPA-031): objective PASS. The Creative Director flags
+  CENTRED_FLAT on payoffs and THIN on single scenes. These are not hard failures; they are for human review.
+
+### Failure Reconstructed
+
+- **Entry point:**
+  - `node shorts-sira.js --channel failure-reconstructed` (legacy lane).
+  - The shadow runs after the live outcome is recorded.
+- **CI run 39828652879** (`6bda7e5`, log read):
+  - **Live lane:** `NO_QUALIFIED_TOPIC: 79 unused A topic(s), best viral score 74 < minimum 75`. It skipped; the bar
+    was not lowered.
+  - **Standalone shadow** on the top unused A case (avianca-52-1990):
+    - Edge **en-US-AndrewMultilingualNeural (approved)**, final quality.
+    - All hard QA checks PASS:
+      - text gate 0 FAIL / 0 WARN;
+      - −14.1 LUFS, −2 dBTP;
+      - caption sync max 90 ms;
+      - deterministic frames;
+      - longest in-scene hold 1.2 s;
+      - max scene correlation 0.769.
+    - 88 s total (render 54.4 s), Chromium PSS 3871 MB.
+    - Gate: TOPIC/SCRIPT/VISUAL_READY, RENDERED, then **BLOCK at QA_PASSED** (creative sign-off missing).
+  - **State diff:** only growth logs and stage files. No premium output, and the run commits nothing.
+- **Previous run 39790677333** (`ce4c159`): same case, 141 s, PASS.
+- **Storyboards:** all 332 ready case files (of 377) validate.
+- **Creative Director:** THIN on every scene; LOW_MOTION on chain scenes s3/s7; s7 LOW_NOVELTY and SAME_ENV.
+  - The forensic grammar is legible but sparse.
+  - A human reviewer should judge it before any premium publishing is built; it does not block the shadow.
+  - No new component was added, because no failed real video demonstrated the need.
+- **Supply (blocker for daily output, live and shadow):**
+  - 0 A cases at the bar today. The same-family recent-fatigue penalty is −22 per upload in 30 days.
+  - A 7-day simulation on main state still selects daily as fatigue ages out, but with one topic of margin.
+  - The fix is researched case files, not a lower bar.
+
+### The Hidden Logic of Things (behind-the-ordinary)
+
+- **Generator:** `scripts/bto-studio/auto/behind-the-ordinary.js`, a documentary-desk grammar.
+  - Quote cards are verbatim from the cited fact.
+  - On-screen digits must appear in cited facts.
+  - The real, decodable QR symbol appears when the topic prepared one.
+- **Evidence-qualified render (BTO-301, VERIFIED, every fact quoted):**
+  - **First CI render, run 39790677366** (Edge Emma, final): QA **FAIL**: 2.3 s static hold on a quote scene, text
+    collisions (rotated cards), no on-screen QR. Fixed in `6bda7e5`. A literal "factLabel" chip is now also a
+    validation error.
+  - **Local re-render** (Kokoro preview, marked unapproved): objective QA PASS, QR decodes first and last frame,
+    text gate 0/0.
+  - **CI re-render, run 39828652821** (`6bda7e5`, Edge Emma): pending.
+- **Daily entry point:**
+  - `shorts-sira.js --channel behind-the-ordinary`, manual dispatch only (`portfolio-production.yml`; `BTO_ACTIVE`
+    gate). It now carries the disabled shadow `HLT_PREMIUM_RENDER=preview` (`01c6691`).
+  - **Defect found and fixed first:** `premium/BTO-301/` holds tracked pilots, so a shadow render there would have been
+    committed by the production `git add channels`. Shadows now render into git-ignored `premium/shadow/<topic>/`.
+  - **Local run of the real shadow module on BTO-301:** exit 0 in 190 s (render 138.7 s, PSS 1897 MB), objective
+    PASS, SHADOW_OF_LIVE_NOT_PUBLISHABLE, **no tracked file changed**.
+  - **Not exercised in CI:** the live BTO lane, because the channel is inactive.
+- **Blocks:**
+  1. The owner decision to reactivate BTO.
+  2. Research: dispatch `bto-research.yml` (it commits records to main, so it is a production write).
+  3. The CI entry-point dry run, once a second VERIFIED topic exists.
+
+  Evidence requirements were not weakened: QUESTION_ONLY and unquoted records are refused (tested).
+
+### GoalLore Lab
+
+- **Generator:** `scripts/bto-studio/auto/goal-lore-lab.js`. It reuses the football components (stadium, pitch with
+  generic model kick, dot-board, timeline ruler, airflow, spiral plot, line-art boot and ball). The grammar branches by
+  what the line carries:
+  - physics (airflow → spiral);
+  - strike / flight (two views);
+  - "when" (dot-board);
+  - year (ruler);
+  - number;
+  - story (narrative text over the stadium).
+
+  Football physics, player stories, tactics and historical narratives therefore get different scene types rather than
+  one style. Every kick is chipped MODEL plus CONCEPTUAL. Players are never drawn as likenesses, and no broadcast
+  footage is used.
+- **Renders:**
+  - Local auto render of the GLL-P01 pilot: objective PASS.
+  - **CI render, run 39828652821** (Edge Ryan candidate, pilot stamp): pending.
+  - The earlier run failed on Edge HTTP 429. `6bda7e5` adds a bounded backoff, and the studio still fails safely and
+    never substitutes another voice.
+- **Identity validation (step 4):**
+  - CriticalThread's credentials authenticate as `UCBTEWcPZvo4B71hFw9Do_NA`: the `saglik.js` health check on main,
+    2026-10-21.
+  - Public metadata of that ID: title **GoalLore Lab**, 0 public videos.
+  - **New today:** none of CriticalThread's 8 recorded video IDs resolves publicly:
+    - 7q3E09HMIGI, fGE8kZOaQZ4, hsuWhB8lCvU, wG9a6kQL8Kc, rAZ4cE4A0DE, 7g6pgV-E0PE, 24eJvZ2cswc, OOFFfcr0rC4
+    - Source: vidIQ video lookup, 2026-10-22.
+  - Whether they were made private or deleted cannot be seen without the channel's own credentials. The owner should
+    confirm in YouTube Studio before any migration.
+  - The historical records are preserved: `channels/critical-thread/state/published.json` (8 rows) and analytics
+    state are untouched. The migration plan retargets the existing `critical-thread` registry entry. It does not add a
+    second entry for the same account.
+  - **Live risk, still open:** the `critical-thread` lane is scheduled with `PUBLISH=1`. Any qualifying engineering
+    topic would be uploaded into the GoalLore Lab channel. It produces nothing today (0 qualified topics). Pausing it
+    is a schedule change, and the owner's to make.
+- **Blocks:**
+  1. The owner identity decision, and confirmation of the 8 videos' status.
+  2. Pausing the CriticalThread lane.
+  3. Retargeting the registry entry.
+  4. Research with verbatim quotes (a `--channel goal-lore-lab` mode for `bto-research.js`).
+  5. A voice approved by listening test.
+  6. Only then a live lane and shadow flag.
+
+  `studioRenders` stays false; pilot renders only.
+
+## Feature flags (all default OFF; existing publishing unaffected)
+
+| Flag | Channel | Effect |
+|---|---|---|
+| `IB_PREMIUM_RENDER=preview` (+ `_QUALITY=final`) | ImpossibleBrief | shadow render after the live lane; comparison `premium-shadow.json` |
+| `FR_PREMIUM_RENDER=preview` | Failure Reconstructed | same, after the legacy lane's outcome |
+| `HLT_PREMIUM_RENDER=preview` | The Hidden Logic of Things | same, into the git-ignored `premium/shadow/<topic>/` |
+| none | GoalLore Lab | no live lane exists |
+| none | premium publishing | not built: a premium package reaches the uploader only after PUBLISH_APPROVED and an owner go-live switch |
+
+Isolation is tested (`tests/js/fr-studio.test.js`, `ib-premium.test.js`, `bto-studio.test.js`):
+
+- one channel's flag never switches another channel on;
+- shadow output is git-ignored;
+- a shadow failure is caught and logged;
+- the dry runs are green only if the shadow rendered and passed objective QA (`tools/shadow-check.js`).
+
+## Benchmarks and runtime cost (measured, GitHub-hosted `ubuntu-latest`)
+
+| Run | Total | Render | Chromium PSS | Voice |
+|---|---|---|---|---|
+| IB shadow, final (39790677787) | 198 s | 129.6 s | ≈ 3950 MB | Edge Brian (approved) |
+| FR shadow, final (39828652879) | 88 s | 54.4 s | 3871 MB | Edge Andrew (approved) |
+| FR shadow, final (39790677333) | 141 s | 85 s | 3957 MB | Edge Andrew (approved) |
+| BTO shadow, preview, local container | 190 s | 138.7 s | 1897 MB | Kokoro preview (unapproved) |
+
+- **Minutes:** a shadow adds about 1.5–3.5 runner-minutes per Short. On a public repository, hosted runner minutes
+  are free; on a private one they count against the plan's Actions minutes.
+- **Memory:** about 4 GB of PSS fits the 16 GB hosted runner.
+- **No model calls:** generators are deterministic and Edge TTS needs no key.
+- **Not included:** interactive Claude Code work (this session) is not free and is not part of the daily cost.
+
+## Activation (owner actions, in order) and rollback
+
+The procedure is unchanged from `checkpoint.md` §"Feature flags, activation and rollback":
+
+1. Merge PR #316.
+2. IB topic buffer: `commit=false`, then `commit=true`.
+3. Watch the next IB live run.
+4. Add `IB_PREMIUM_RENDER: preview`, plus Chromium, numpy/soundfile, `time` and the artifact upload, to the IB step.
+5. The same for FR.
+6. BTO: reactivate, research, then `HLT_PREMIUM_RENDER`.
+7. GoalLore Lab: the identity decision first, then pause CriticalThread.
+
+**Rollback:** remove the flag line from the step env, or set `studioRenders: false` in the channel profile. Neither
+touches published history, analytics, credentials or ledgers.
