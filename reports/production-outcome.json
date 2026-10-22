@@ -1,51 +1,15 @@
 {
-  "at": "2026-10-22T18:47:00.849Z",
-  "runId": "39832706696",
+  "at": "2026-10-22T19:48:50.763Z",
+  "runId": "39838684488",
   "rows": [
     {
       "channel": "failure-reconstructed",
-      "outcome": "NOT_DUE",
-      "category": "NOT_DUE",
+      "outcome": "MISSING",
+      "category": "PRODUCTION_FAILED",
       "scheduled": false,
       "publication": "NOT_SCHEDULED",
-      "publishAt": null,
-      "reason": "today's Short already exists (ss-arctic-1854)",
-      "slug": null,
-      "videoId": null,
-      "targetDay": null,
-      "trigger": {
-        "event": "schedule",
-        "correlationId": null
-      },
-      "stages": {
-        "RESEARCH": {
-          "status": "not-reached"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "not-reached"
-        },
-        "QA": {
-          "status": "not-reached"
-        },
-        "UPLOAD": {
-          "status": "not-reached"
-        },
-        "SCHEDULE": {
-          "status": "not-reached"
-        },
-        "PUBLISH": {
-          "status": "not-reached"
-        }
-      }
+      "reason": "no stage record for this run (the step crashed before tracking or did not run)",
+      "stages": null
     },
     {
       "channel": "impossible-brief",
