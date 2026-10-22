@@ -123,3 +123,26 @@ IB-EAR-019 scene, and two scenes are THIN.
   requires them.
   - **Next action:** generalise `scripts/bto-research.js` to a `--channel goal-lore-lab` mode. Do this after the owner
     decides the CriticalThread → GoalLore Lab migration (same YouTube channel `UCBTEWcPZvo4B71hFw9Do_NA`).
+
+## Local render verification (2026-10-22, Kokoro preview voice marked unapproved; Edge only in CI)
+
+| Render | Objective QA | Creative Director flags | Render | Chromium PSS |
+|---|---|---|---|---|
+| FR-air-france-447-2009 (auto forensic grammar) | PASS, text gate 0/0 | THIN everywhere, LOW_NOVELTY on continuous chain scenes, LOW_MOTION s4/s7 | 72 s, 85 ms/frame | 1950 MB |
+| IB-EAR-019 (magnetic world) | PASS | THIN s4, CENTRED_FLAT payoff | 75 s | 2049 MB |
+| IB-HUM-050 (microbes) | PASS | CENTRED_FLAT payoff | 71 s (1/7 cached) | 1979 MB |
+| IB-SPA-031 (Venus) | PASS | CENTRED_FLAT payoff | 23 s (7/8 segments cached) | 1342 MB |
+
+Earlier IB renders (same day, before the variety fixes) carried SAME_ENV on every scene, LOW_MOTION and text-gate FAILs.
+The fixes removed all of them. An objective pass is not creative approval; every package still needs a human verdict.
+
+## FR topic supply (found by the FR dry run, verified on main 2026-10-22)
+
+- **Today:** FR produced `ss-arctic-1854` (scheduled, `zq07sKTZmCs`). After it, current main has **0** unused A topics
+  at the 75 bar. The 88 unused A topics sit at 69–74.
+- **Cause:** the same-family recent-fatigue penalty (−22 per same-cluster upload in 30 days). This is by design,
+  not a defect: visual availability is a real stills-vs-film classification, unlike IB's constant penalty.
+- **Simulation on main state:** FR still selects every day for the next 7 days as fatigue ages out
+  (10-23 avianca-52-1990 at 75, then usair-1016-1994, lahaina-fire-2023 at 76–77). But the margin is one topic at the bar.
+- **Now visible before the production slot:** `scripts/growth/topic-buffer.js` covers the FR legacy lane.
+- **Next action (owner):** if FR shows CRITICAL in the preflight, add researched FR case files. Do not lower the bar.

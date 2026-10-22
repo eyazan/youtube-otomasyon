@@ -17,7 +17,7 @@
 // headlines, readouts and rulers are SCREEN layers so text never drifts toward the frame edge.
 // Chips: ILLUSTRATION on every drawn scene + the line's evidence layer (KNOWN SCIENCE / ESTIMATE / SPECULATIVE).
 
-const STOP = new Set("the a an and of to in on for that this it its is are was were be by with from as at or they them their these those so but if would could than more like just only still even much very into over down up out what when where who how why your you we our".split(" "));
+const STOP = new Set("the a an and of to in on for that this it its is are was were be by with from as at or they them their these those so but if would could than more like just only still even much very into over down up out what when where who how why your you we our which mostly also has have had been about around nearly almost instead now then there here".split(" "));
 // push and match-zoom move or scale on-screen text across the frame edge during the transition (text gate FAIL in
 // IB-EXT-050 v1 and BTO-040); whip does too (v2). The generator alternates the transitions that leave text in place
 // and uses the one allowed dissolve at the midpoint.
