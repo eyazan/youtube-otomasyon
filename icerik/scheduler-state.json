@@ -484,7 +484,8 @@
       "renderLane": 0,
       "uploadLane": 0,
       "date": "2026-10-21",
-      "status": "queued"
+      "status": "done",
+      "settledOn": "2026-10-22"
     },
     {
       "channel": "failure-reconstructed",
@@ -494,6 +495,27 @@
       "renderLane": 0,
       "uploadLane": 0,
       "date": "2026-10-21",
+      "status": "expired",
+      "settledOn": "2026-10-22"
+    },
+    {
+      "channel": "failure-reconstructed",
+      "format": "short",
+      "key": "failure-reconstructed:short",
+      "position": 1,
+      "renderLane": 0,
+      "uploadLane": 0,
+      "date": "2026-10-22",
+      "status": "queued"
+    },
+    {
+      "channel": "failure-reconstructed",
+      "format": "long",
+      "key": "failure-reconstructed:long",
+      "position": 4,
+      "renderLane": 0,
+      "uploadLane": 0,
+      "date": "2026-10-22",
       "status": "queued"
     }
   ]

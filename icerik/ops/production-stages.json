@@ -2,50 +2,6 @@
   "channel": "failure-reconstructed",
   "runs": [
     {
-      "runId": "39320928852",
-      "attempt": "1",
-      "startedAt": "2026-10-19T20:39:16.120Z",
-      "publish": true,
-      "trigger": {
-        "event": "schedule",
-        "correlationId": null
-      },
-      "targetDay": null,
-      "slug": null,
-      "outcome": "NOT_DUE",
-      "reason": "today's Short already exists (tasman-bridge-1975)",
-      "stages": {
-        "RESEARCH": {
-          "status": "not-reached"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "not-reached"
-        },
-        "QA": {
-          "status": "not-reached"
-        },
-        "UPLOAD": {
-          "status": "not-reached"
-        },
-        "SCHEDULE": {
-          "status": "not-reached"
-        },
-        "PUBLISH": {
-          "status": "not-reached"
-        }
-      },
-      "finishedAt": "2026-10-19T20:39:16.137Z"
-    },
-    {
       "runId": "39325338227",
       "attempt": "1",
       "startedAt": "2026-10-19T21:11:22.730Z",
@@ -1352,6 +1308,66 @@
         }
       },
       "finishedAt": "2026-10-21T20:16:32.313Z"
+    },
+    {
+      "runId": "39771439235",
+      "attempt": "1",
+      "startedAt": "2026-10-22T11:34:13.945Z",
+      "publish": true,
+      "trigger": {
+        "event": "schedule",
+        "correlationId": null
+      },
+      "targetDay": "2026-10-22",
+      "slug": "ss-arctic-1854",
+      "outcome": "UPLOADED",
+      "reason": null,
+      "stages": {
+        "RESEARCH": {
+          "status": "done",
+          "detail": "growth queue selected ss-arctic-1854",
+          "at": "2026-10-22T11:34:17.949Z"
+        },
+        "SCRIPT": {
+          "status": "done",
+          "detail": "pre gate REVIEW 82",
+          "at": "2026-10-22T11:34:18.331Z"
+        },
+        "ASSETS": {
+          "status": "done",
+          "at": "2026-10-22T11:34:24.686Z"
+        },
+        "NARRATION": {
+          "status": "done",
+          "at": "2026-10-22T11:39:26.791Z"
+        },
+        "RENDER": {
+          "status": "done",
+          "at": "2026-10-22T11:39:26.791Z"
+        },
+        "QA": {
+          "status": "done",
+          "detail": "final gate PUBLISH 86",
+          "at": "2026-10-22T11:39:29.573Z"
+        },
+        "UPLOAD": {
+          "status": "done",
+          "detail": "zq07sKTZmCs",
+          "at": "2026-10-22T11:39:45.740Z"
+        },
+        "SCHEDULE": {
+          "status": "done",
+          "detail": "2026-10-22T18:00:00.000Z",
+          "at": "2026-10-22T11:39:45.741Z"
+        },
+        "PUBLISH": {
+          "status": "scheduled",
+          "detail": "YouTube makes it public at 2026-10-22T18:00:00.000Z",
+          "at": "2026-10-22T11:39:45.742Z"
+        }
+      },
+      "finishedAt": "2026-10-22T11:39:45.796Z",
+      "videoId": "zq07sKTZmCs"
     }
   ]
 }

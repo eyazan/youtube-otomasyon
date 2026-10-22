@@ -1,18 +1,18 @@
 # Growth dashboard
 
-Generated 2026-10-21T20:17:00.040Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-10-22T11:40:19.696Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
-**Shorts health** — last published 2026-10-21T18:00:00.000Z · 29 published · inventory A105/B124/C59/D59 · next: admiral-nakhimov-1986 (EXPLORE (0.25): under-sampled cluster maritime-disasters)
+**Shorts health** — last published 2026-10-22T18:00:00.000Z · 30 published · inventory A110/B118/C59/D59 · next: titanic-1912 (EXPLOIT (0.75): best A topic by SelectionScore)
 
 **Long-form health** — cycle 2026-W43: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W43 already QUALITY_BLOCKED)
 
-**Long-form backlog** — chernobyl-1986 86/A, air-france-447-2009 85/A, challenger-1986 85/A, columbia-2003 85/A, apollo-13-1970 84/A
+**Long-form backlog** — chernobyl-1986 86/A, challenger-1986 85/A, columbia-2003 85/A, air-france-447-2009 84/A, apollo-13-1970 84/A
 
 **Content clusters** — 12 · integrity OK
 
-**Growth / subscriber conversion** — tracked 30 · subs/1k Shorts 1.46 · subs/1k long n/a
+**Growth / subscriber conversion** — tracked 31 · subs/1k Shorts 1.46 · subs/1k long n/a
 
 **Learning** — Shorts adaptive (n=29, adopted 0) · Long-form heuristics-only (n=0)
 
@@ -23,8 +23,8 @@ Generated 2026-10-21T20:17:00.040Z. Per-channel baselines are computed separatel
 - apollo-1-1967 (C): VideoPotential 87 in experimental band 58–71; sources 41 < 62
 - skylab-1973 (C): VideoPotential 85 in experimental band 58–71; sources 41 < 62
 - munich-1958 (C): VideoPotential 86 in experimental band 58–71; sources 41 < 62
+- vanguard-1957 (C): VideoPotential 83 in experimental band 58–71; sources 41 < 62
 - eastland-1915 (C): VideoPotential 83 in experimental band 58–71; sources 41 < 62
-- uss-forrestal-1967 (C): VideoPotential 83 in experimental band 58–71; sources 41 < 62
 
 **Recent alerts**
 
@@ -68,6 +68,7 @@ Generated 2026-10-21T20:17:00.040Z. Per-channel baselines are computed separatel
 - 2026-10-12 VISUAL_PRECHECK_BLOCK: what-if-earth-spun-like-the-fastest-pulsar
 - 2026-10-20 NO_QUALIFIED_TOPIC: NO_EXPLORE_CANDIDATE
 - 2026-10-21 NO_QUALIFIED_TOPIC: NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [104 unused A topic(s), best viral score 74 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]
+- 2026-10-22 NO_QUALIFIED_TOPIC: NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [104 unused A topic(s), best viral score 74 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]
 
 ## CriticalThread
 
@@ -87,7 +88,6 @@ Generated 2026-10-21T20:17:00.040Z. Per-channel baselines are computed separatel
 
 **Recent alerts**
 
-- 2026-10-11 NO_QUALIFIED_TOPIC: NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content
 - 2026-10-12 NO_QUALIFIED_TOPIC: NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [7 unused A topic(s), best viral score 73 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]
 - 2026-10-14 NO_QUALIFIED_TOPIC: NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [6 unused A topic(s), best viral score 73 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]
 - 2026-10-15 NO_QUALIFIED_TOPIC: NO_EXPLORE_CANDIDATE
@@ -97,6 +97,7 @@ Generated 2026-10-21T20:17:00.040Z. Per-channel baselines are computed separatel
 - 2026-10-19 NO_QUALIFIED_TOPIC: NO_EXPLORE_CANDIDATE
 - 2026-10-20 NO_QUALIFIED_TOPIC: NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [6 unused A topic(s), best viral score 73 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]
 - 2026-10-21 NO_QUALIFIED_TOPIC: NO_EXPLORE_CANDIDATE
+- 2026-10-22 NO_QUALIFIED_TOPIC: NO_EXPLORE_CANDIDATE
 
 ## Cross-channel infrastructure
 

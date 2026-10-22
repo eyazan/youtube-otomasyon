@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-10-21T20:17:00.040Z",
+  "generatedAt": "2026-10-22T11:40:19.696Z",
   "note": "Per-channel baselines are computed separately and never blended.",
   "channels": [
     {
       "channel": "failure-reconstructed",
       "name": "Failure Reconstructed",
       "shorts": {
-        "lastPublished": "2026-10-21T18:00:00.000Z",
-        "published": 29,
+        "lastPublished": "2026-10-22T18:00:00.000Z",
+        "published": 30,
         "inventory": {
-          "A": 105,
-          "B": 124,
+          "A": 110,
+          "B": 118,
           "C": 59,
           "D": 59
         },
@@ -22,15 +22,15 @@
           "used": 10
         },
         "nextSelection": {
-          "slug": "admiral-nakhimov-1986",
-          "reason": "EXPLORE (0.25): under-sampled cluster maritime-disasters"
+          "slug": "titanic-1912",
+          "reason": "EXPLOIT (0.75): best A topic by SelectionScore"
         },
         "baseline": {
           "n": 29,
           "views": 465,
           "averagePercentageViewed": 64.5,
           "subscribersPer1000Views": 1.46,
-          "engagementPer1000Views": 24.19,
+          "engagementPer1000Views": 25.36,
           "watchHoursPer1000Views": 2.49
         }
       },
@@ -100,12 +100,6 @@
             "mode": "B_SHORT_PROVES_DEMAND"
           },
           {
-            "slug": "air-france-447-2009",
-            "LongFormPotentialScore": 85,
-            "bucket": "A",
-            "mode": "B_SHORT_PROVES_DEMAND"
-          },
-          {
             "slug": "challenger-1986",
             "LongFormPotentialScore": 85,
             "bucket": "A",
@@ -114,6 +108,12 @@
           {
             "slug": "columbia-2003",
             "LongFormPotentialScore": 85,
+            "bucket": "A",
+            "mode": "B_SHORT_PROVES_DEMAND"
+          },
+          {
+            "slug": "air-france-447-2009",
+            "LongFormPotentialScore": 84,
             "bucket": "A",
             "mode": "B_SHORT_PROVES_DEMAND"
           },
@@ -150,7 +150,7 @@
         "pendingRelatedVideoManualActions": 0
       },
       "growth": {
-        "trackedVideos": 30,
+        "trackedVideos": 31,
         "subscriberConversion": {
           "shorts": 1.46,
           "longform": null
@@ -161,7 +161,7 @@
           "status": "adaptive",
           "sampleSize": 29,
           "adopted": 0,
-          "hypotheses": 5
+          "hypotheses": 4
         },
         "longform": {
           "status": "heuristics-only",
@@ -187,17 +187,12 @@
           "reason": "VideoPotential 86 in experimental band 58–71; sources 41 < 62"
         },
         {
-          "slug": "eastland-1915",
-          "bucket": "C",
-          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
-        },
-        {
-          "slug": "uss-forrestal-1967",
-          "bucket": "C",
-          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
-        },
-        {
           "slug": "vanguard-1957",
+          "bucket": "C",
+          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
+        },
+        {
+          "slug": "eastland-1915",
           "bucket": "C",
           "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
         },
@@ -220,6 +215,11 @@
           "slug": "quebec-bridge-1907",
           "bucket": "C",
           "reason": "VideoPotential 83 in experimental band 58–71; sources 55 < 62"
+        },
+        {
+          "slug": "uss-forrestal-1967",
+          "bucket": "C",
+          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
         }
       ],
       "alerts": [
@@ -644,6 +644,21 @@
           },
           "date": "2026-10-21",
           "at": "2026-10-21T11:39:29.224Z"
+        },
+        {
+          "channel": "impossible-brief",
+          "code": "NO_QUALIFIED_TOPIC",
+          "message": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [104 unused A topic(s), best viral score 74 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]",
+          "details": {
+            "inventory": {
+              "A": 104,
+              "B": 24,
+              "C": 140,
+              "D": 206
+            }
+          },
+          "date": "2026-10-22",
+          "at": "2026-10-22T11:39:51.615Z"
         }
       ],
       "legacyPaths": false
@@ -820,21 +835,6 @@
         {
           "channel": "critical-thread",
           "code": "NO_QUALIFIED_TOPIC",
-          "message": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content",
-          "details": {
-            "inventory": {
-              "A": 7,
-              "B": 144,
-              "C": 0,
-              "D": 362
-            }
-          },
-          "date": "2026-10-11",
-          "at": "2026-10-11T12:40:08.097Z"
-        },
-        {
-          "channel": "critical-thread",
-          "code": "NO_QUALIFIED_TOPIC",
           "message": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [7 unused A topic(s), best viral score 73 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]",
           "details": {
             "inventory": {
@@ -966,6 +966,21 @@
           },
           "date": "2026-10-21",
           "at": "2026-10-21T11:39:35.070Z"
+        },
+        {
+          "channel": "critical-thread",
+          "code": "NO_QUALIFIED_TOPIC",
+          "message": "NO_EXPLORE_CANDIDATE",
+          "details": {
+            "inventory": {
+              "A": 6,
+              "B": 144,
+              "C": 0,
+              "D": 362
+            }
+          },
+          "date": "2026-10-22",
+          "at": "2026-10-22T11:40:00.503Z"
         }
       ],
       "legacyPaths": false
