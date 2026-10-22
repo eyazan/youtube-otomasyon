@@ -1,0 +1,212 @@
+{
+ "schema": "bto-studio.narration-script.v1",
+ "channel": "impossible-brief",
+ "topicId": "IB-EAR-019",
+ "slug": "could-earth-survive-one-day-without-earth-s-magnetic-field",
+ "coreQuestion": "Could Earth survive a single day without its magnetic field, and how close are we to finding out?",
+ "sourceHash": "a970bcd4f4b78c27",
+ "voice": {
+  "approved": {
+   "provider": "edge-tts",
+   "voice": "en-US-BrianMultilingualNeural",
+   "rate": "+2%"
+  }
+ },
+ "lines": [
+  {
+   "id": "L1",
+   "role": "IMPOSSIBLE_QUESTION",
+   "layer": "KNOWN SCIENCE",
+   "text": "Earth's magnetic field is already weakening.",
+   "evidenceSuggested": []
+  },
+  {
+   "id": "L2",
+   "role": "FIRST_EFFECT",
+   "layer": "KNOWN SCIENCE",
+   "text": "Its main dipole has faded about 6.3% per century.",
+   "evidenceSuggested": [
+    "F1"
+   ]
+  },
+  {
+   "id": "L3",
+   "role": "SCIENCE_EXPLANATION",
+   "layer": "KNOWN SCIENCE",
+   "text": "Fields have flipped 183 times in 83 million years.",
+   "evidenceSuggested": [
+    "F3"
+   ]
+  },
+  {
+   "id": "L4",
+   "role": "SCIENCE_EXPLANATION",
+   "layer": "KNOWN SCIENCE",
+   "text": "The last flip was 780,000 years ago.",
+   "evidenceSuggested": [
+    "F3",
+    "F2"
+   ]
+  },
+  {
+   "id": "L5",
+   "role": "IMPOSSIBLE_QUESTION",
+   "layer": "SPECULATIVE SCENARIO",
+   "text": "Now switch it off completely, for just one day.",
+   "evidenceSuggested": []
+  },
+  {
+   "id": "L6",
+   "role": "SECOND_ORDER_EFFECT",
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Satellites and power grids would take more charged particles.",
+   "evidenceSuggested": []
+  },
+  {
+   "id": "L7",
+   "role": "LIMITS",
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "But the air wouldn't vanish in a day; that takes far longer.",
+   "evidenceSuggested": []
+  },
+  {
+   "id": "L8",
+   "role": "SCIENTIFIC_PAYOFF",
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So we'd survive, but our technology would feel it first.",
+   "evidenceSuggested": []
+  }
+ ],
+ "beats": [
+  {
+   "id": "b1",
+   "rate": "+2%",
+   "pauseAfterMs": 200,
+   "lines": [
+    {
+     "id": "L1",
+     "text": "Earth's magnetic field is already weakening."
+    }
+   ]
+  },
+  {
+   "id": "b2",
+   "rate": "+2%",
+   "pauseAfterMs": 200,
+   "lines": [
+    {
+     "id": "L2",
+     "text": "Its main dipole has faded about 6.3% per century."
+    }
+   ]
+  },
+  {
+   "id": "b3",
+   "rate": "+2%",
+   "pauseAfterMs": 200,
+   "lines": [
+    {
+     "id": "L3",
+     "text": "Fields have flipped 183 times in 83 million years."
+    }
+   ]
+  },
+  {
+   "id": "b4",
+   "rate": "+2%",
+   "pauseAfterMs": 200,
+   "lines": [
+    {
+     "id": "L4",
+     "text": "The last flip was 780,000 years ago."
+    }
+   ]
+  },
+  {
+   "id": "b5",
+   "rate": "+2%",
+   "pauseAfterMs": 200,
+   "lines": [
+    {
+     "id": "L5",
+     "text": "Now switch it off completely, for just one day."
+    }
+   ]
+  },
+  {
+   "id": "b6",
+   "rate": "+2%",
+   "pauseAfterMs": 200,
+   "lines": [
+    {
+     "id": "L6",
+     "text": "Satellites and power grids would take more charged particles."
+    }
+   ]
+  },
+  {
+   "id": "b7",
+   "rate": "+2%",
+   "pauseAfterMs": 200,
+   "lines": [
+    {
+     "id": "L7",
+     "text": "But the air wouldn't vanish in a day; that takes far longer."
+    }
+   ]
+  },
+  {
+   "id": "b8",
+   "rate": "+2%",
+   "pauseAfterMs": 0,
+   "lines": [
+    {
+     "id": "L8",
+     "text": "So we'd survive, but our technology would feel it first."
+    }
+   ]
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "hash": "c96fda010a",
+   "claim": "Over the last two centuries the dipole strength has been decreasing at a rate of about 6.3% per century.",
+   "source": "Wikipedia — Earth's magnetic field",
+   "url": "https://en.wikipedia.org/wiki/Earth%27s_magnetic_field",
+   "layer": "KNOWN SCIENCE"
+  },
+  {
+   "id": "F2",
+   "hash": "05399acd1d",
+   "claim": "Measurements since Gauss in 1832 show a relative decay of about 10% over the last 150 years.",
+   "source": "Wikipedia — Earth's magnetic field",
+   "url": "https://en.wikipedia.org/wiki/Earth%27s_magnetic_field",
+   "layer": "KNOWN SCIENCE"
+  },
+  {
+   "id": "F3",
+   "hash": "6fa27ecb47",
+   "claim": "There have been at least 183 reversals over the last 83 million years, on average once every ~450,000 years.",
+   "source": "Wikipedia — Geomagnetic reversal",
+   "url": "https://en.wikipedia.org/wiki/Geomagnetic_reversal",
+   "layer": "KNOWN SCIENCE"
+  },
+  {
+   "id": "F4",
+   "hash": "95b9a97159",
+   "claim": "The latest, the Brunhes–Matuyama reversal, occurred 780,000 years ago.",
+   "source": "Wikipedia — Geomagnetic reversal",
+   "url": "https://en.wikipedia.org/wiki/Geomagnetic_reversal",
+   "layer": "KNOWN SCIENCE"
+  },
+  {
+   "id": "F5",
+   "hash": "bbed809f5a",
+   "claim": "Some sources estimate the four most recent reversals took on average 7,000 years.",
+   "source": "Wikipedia — Geomagnetic reversal",
+   "url": "https://en.wikipedia.org/wiki/Geomagnetic_reversal",
+   "layer": "KNOWN SCIENCE"
+  }
+ ]
+}

@@ -10,7 +10,7 @@
  "uploadAttempted": false,
  "mode": "preview",
  "quality": "preview",
- "createdAt": "2026-10-22T03:20:43.005Z",
+ "createdAt": "2026-10-22T04:00:51.050Z",
  "video": "channels/impossible-brief/premium/IB-EXT-050/out/what-if-we-tried-to-drill-through-the-earth-premium-preview.mp4",
  "voice": {
   "used": "kokoro am_fenrir",
@@ -197,7 +197,7 @@
   "sceneSheet": "channels/impossible-brief/premium/IB-EXT-050/out/scene-sheet.png",
   "failures": [
    "UNVERIFIED audio samples clipped: not reported by this FFmpeg build (astats has no clipped-sample count)",
-   "WARN loop continuity (last -> first frame): whole 8.5, photo region 15.23, final-second step 0.19, ratio 13.13",
+   "WARN loop continuity (last -> first frame): whole 8.49, photo region 15.2, final-second step 0.19, ratio 13.08",
    "WARN narration voice approved for publishing: kokoro am_fenrir (preview fallback)",
    "WARN no static hold >= 1.5 s inside a scene (visual change target): longest 1.83 s (s5-heat)"
   ],
@@ -210,14 +210,14 @@
   "truePeakDbtp": -1.5
  },
  "performance": {
-  "renderWallSec": 0.1,
-  "msPerFrame": 0,
-  "workers": 1,
-  "peakChromiumRssMb": 1290,
-  "cachedSegments": 8,
+  "renderWallSec": 61.7,
+  "msPerFrame": 111.2,
+  "workers": 3,
+  "peakChromiumRssMb": 2470,
+  "cachedSegments": 3,
   "segments": 8,
   "host": "linux x64 4 cpu 16 GB",
-  "totalPipelineSec": 29.1
+  "totalPipelineSec": 90.4
  },
  "cost": {
   "llmUsd": 0,

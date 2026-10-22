@@ -88,7 +88,7 @@ function build(script, style, topic) {
       const base = { kind: "earth", spin: 0.32, seed: 4 };
       if (zoom) return [{ component: "planet", props: { ...base, spin: 0.25, ice: false, grid: true, x: 540, rKeys: [[zoom.from, 330], [zoom.to, 2600]], yKeys: [[zoom.from, 820], [zoom.to, 560 + 2600]], probe: { at: zoom.from, f: 0.004, dur: 0.6, angle: -90, width: 8, label: "DEEPEST HOLE", lx: 170, ly: 700 } } }];
       return [{ component: "planet", props: { ...base, x: cut ? 400 : 540, y: 820, r: cut ? 280 : 330, ...(probe ? { probe: { at, f: 0.03, dur: 1.4, angle: -90, width: 8 } } : {}),
-        ...(cut ? { cutaway: { at, angle: -30, open: 32, layers: [{ f: 0.99, color: "#7a4a2a", label: "CRUST", labelAt: off(at, 0.6), lx: 690, ly: 470 }, { f: 0.88, color: "#c0501f", label: "MANTLE", labelAt: off(at, 0.9), lx: 690, ly: 560 }, { f: 0.47, color: "#ff8a2a", label: "CORE", labelAt: off(at, 1.2), lx: 690, ly: 650 }, { f: 0.2, color: "#ffd06a" }] } } : {}) } }];
+        ...(cut ? { cutaway: { at, angle: -30, open: 32, layers: [{ f: 0.99, color: "#7a4a2a", label: "CRUST", labelAt: off(at, 0.6), lx: 690, ly: 600 }, { f: 0.88, color: "#c0501f", label: "MANTLE", labelAt: off(at, 0.9), lx: 690, ly: 690 }, { f: 0.47, color: "#ff8a2a", label: "CORE", labelAt: off(at, 1.2), lx: 690, ly: 780 }, { f: 0.2, color: "#ffd06a" }] } } : {}) } }];
     }
     if (W === "ocean-depth") return [{ component: "planet", props: { kind: "earth", x: 540, y: 820, r: 330, spin: 0.32, seed: 8 } }];
     if (W === "orbit") return [{ component: "orbit", props: { cx: 540, cy: 800, a: 360, e: 0.18, tilt: -8, period: 7, trail: 0.22, central: { r: 74 }, body: { r: 26 }, enterAt: 0 } }];
@@ -96,14 +96,18 @@ function build(script, style, topic) {
     if (W === "body") return [{ component: "planet", props: { kind: "ice", x: 540, y: 800, r: 260, spin: 0.4, seed: 6, colors: { base: "#7a2f4f", land: "#c25a7c", land2: "#9b3f63", atm: "#ff9bbd" } } }];
     return [{ component: "planet", props: { kind: "gas", x: 540, y: 820, r: 300, spin: 0.3, seed: 5, rings: true } }];
   };
+  // subject views rotate through three framings of the world's body so consecutive "subject" scenes never repeat
+  const FRAMINGS = [{ x: 540, y: 820, r: 330 }, { x: 250, y: 860, r: 560 }, { x: 540, y: 1500, r: 820 }];
+  const subjectView = (at, n) => signature(at).map((l) => (l.component === "planet" ? { ...l, props: { ...l.props, ...FRAMINGS[n % FRAMINGS.length], spin: l.props.spin * (n % 2 ? -1 : 1) } } : l));
+  let subjectN = 0;
   const stars = (seed) => ({ component: "starfield", screen: true, props: { seed, count: 300, drift: [22, 9] } });
   const headline = (at, text, y = 470, size = S.headline) => ({ component: "kinetic-type", screen: true, props: { items: [{ at, text, x: 540, y, size, family: "sans" }] } });
   const readout = (at, text, y = 1200) => ({ component: "kinetic-type", screen: true, props: { items: [{ at, text, x: 540, y, size: S.display, family: "num" }] } });
   const probeSlice = (L, { to = null, from = null, heat = false, flow = false, markers = [], readouts = [], surface = true }) => ({ component: "depth-probe", props: {
-    x: 470, y: 450, w: 420, h: 770, maxDepth, ...(surface ? { surface: W === "ocean-depth" ? "SEA LEVEL" : "SURFACE" } : {}), heat, heatAt: heat ? `${L.id}+0.2` : undefined, ...(flow ? { flow: { at: `${L.id}+0.3`, amp: 30 } } : {}),
+    x: 470, y: 450, w: 420, h: 770, maxDepth, ...(surface && !surfaceShown && (surfaceShown = true) ? { surface: W === "ocean-depth" ? "SEA LEVEL" : "SURFACE" } : {}), heat, heatAt: heat ? `${L.id}+0.2` : undefined, ...(flow ? { flow: { at: `${L.id}+0.3`, amp: 30 } } : {}),
     probeKeys: to != null ? [[`${L.id}-0.1`, from != null ? from : Math.min(to * 0.25, maxDepth * 0.2)], [`${L.id}.end`, to]] : undefined, markers, readouts } });
 
-  let cutUsed = false;
+  let cutUsed = false; let surfaceShown = false;
   const scenes = lines.map((L, i) => {
     const nums = evidenced(L); const year = nums.find((n) => n.year); const temp = nums.find((n) => /°|degrees/i.test(n.unit) || /°C/.test(L.text) && n.unit === "");
     const qty = nums.find((n) => !n.year && n !== temp);
@@ -147,18 +151,21 @@ function build(script, style, topic) {
       camera = cam(1.0, 1.06, 820, 860);
     } else if (qty) {
       const same = facts.flatMap((f) => numbersIn(f.claim).filter((n) => !n.year && n.unit === qty.unit).map((n) => ({ ...n, fact: f.id }))).filter((n, k, a) => a.findIndex((x) => x.value === n.value) === k).slice(0, 4);
-      kind = "measure"; if (same.length >= 2) { layers = [stars(40 + i), { component: "scale-ladder", props: { x: 110, y: 560, w: 860, items: same.sort((a, b) => a.value - b.value).map((n, k) => ({ label: `FACT ${n.fact}`.replace("FACT ", ""), value: n.value, valueText: valueLabel(n), at: `${L.id}+${(0.2 + k * 0.45).toFixed(2)}` })) } }];
+      kind = "measure"; if (same.length >= 2) { layers = [stars(40 + i), { component: "scale-ladder", props: { x: 110, y: 560, w: 700, items: same.sort((a, b) => a.value - b.value).map((n, k) => ({ label: `FACT ${n.fact}`.replace("FACT ", ""), value: n.value, valueText: valueLabel(n), at: `${L.id}+${(0.2 + k * 0.45).toFixed(2)}` })) } }];
         same.forEach((n) => { if (!evidence.includes(n.fact)) evidence.push(n.fact); }); purpose = `Scale: the topic's own ${qty.unit || "values"} side by side as growing bars, so the size of the change is seen, not read.`; }
       else { layers = [stars(40 + i), ...signature(`${L.id}`), readout(`${L.id}+0.3`, valueLabel(qty), 1230)]; purpose = `Number: the cited value (${valueLabel(qty)}) lands as a large readout over the subject while the camera pushes in, so the quantity is held on screen as it is spoken.`; }
       camera = cam(1.0, 1.05);
     } else {
       // mechanism: the line's own words pick the visual, and the cutaway is used at most once per Short
+      // a drawn mechanism only when the line names it (rock flowing, layers inside); anything else keeps the subject on
+      // screen (IB-EAR-019: magnetic-field lines fell through to "flowing strata", which says something they do not)
       const v = W !== "earth-interior" ? "subject" : /\b(scratch|scratched|crust|surface|barely|thin|skin)\b/i.test(L.text) ? "zoom"
-        : /\b(plastic|flow|flows|soft|melt|melts|bend|deform|behav)/i.test(L.text) ? "flow" : cutUsed ? "flow" : "cut";
+        : /\b(plastic|flow|flows|soft|melt|melts|bend|deform|behav)/i.test(L.text) ? "flow"
+        : !cutUsed && /\b(deep|deeper|inside|core|mantle|layer|layers|interior|pressure|centre|center)\b/i.test(L.text) ? "cut" : "subject";
       if (v === "cut") cutUsed = true;
       kind = v === "subject" ? "mechanism" : v;
       layers = [stars(50 + i),
-        ...(v === "flow" ? [probeSlice(L, { heat: true, flow: true })] : signature(`${L.id}`, { cut: v === "cut", zoom: v === "zoom" ? { from: off(`${L.id}`, 0.1), to: `${L.id}.end` } : null })),
+        ...(v === "flow" ? [probeSlice(L, { heat: true, flow: true })] : v === "subject" ? subjectView(`${L.id}`, subjectN++) : signature(`${L.id}`, { cut: v === "cut", zoom: v === "zoom" ? { from: off(`${L.id}`, 0.1), to: `${L.id}.end` } : null })),
         headline(`${L.id}+0.25`, keyPhrase(L.text), 360, S.title)];
       purpose = `Mechanism: ${{ zoom: "the camera dives at the planet until its curve fills the frame and the deepest hole is a single scratch on the surface", flow: "the rock slice heats and its strata bend and travel like a slow fluid (conceptual)", cut: "the planet opens into its layers so the depth beyond the hole is visible", subject: "the subject stays on screen while the key idea is set in two or three words" }[v]}; ${L.layer === "KNOWN SCIENCE" ? "known science" : L.layer === "ESTIMATED CONSEQUENCE" ? "an estimate, chipped as such" : "speculative, chipped as such"}.`;
       camera = cam(1.0, 1.1, 800, 780);

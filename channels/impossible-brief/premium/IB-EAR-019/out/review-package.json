@@ -1,0 +1,241 @@
+{
+ "schema": "bto-studio.review-package.v1",
+ "channel": "impossible-brief",
+ "topicId": "IB-EAR-019",
+ "slug": "could-earth-survive-one-day-without-earth-s-magnetic-field",
+ "verdict": "PREVIEW_ONLY_UNAPPROVED_VOICE",
+ "pilot": null,
+ "researchPending": null,
+ "autoPublish": false,
+ "uploadAttempted": false,
+ "mode": "preview",
+ "quality": "preview",
+ "createdAt": "2026-10-22T03:59:07.486Z",
+ "video": "channels/impossible-brief/premium/IB-EAR-019/out/could-earth-survive-one-day-without-earth-s-magnetic-field-premium-preview.mp4",
+ "voice": {
+  "used": "kokoro am_fenrir",
+  "approved": false,
+  "approvedVoice": {
+   "provider": "edge-tts",
+   "voice": "en-US-BrianMultilingualNeural",
+   "rate": "+2%"
+  },
+  "note": "PREVIEW ONLY. The channel's approved voice is Edge en-US-BrianMultilingualNeural; re-narrate with --voice edge before any publishing review.",
+  "wordTiming": "line timing measured per take; word timing inside a line estimated (energy envelope, punctuation-snapped pauses, syllable weights)"
+ },
+ "narrationUnchanged": {
+  "sourceHash": "a970bcd4f4b78c27",
+  "lines": [
+   "Earth's magnetic field is already weakening.",
+   "Its main dipole has faded about 6.3% per century.",
+   "Fields have flipped 183 times in 83 million years.",
+   "The last flip was 780,000 years ago.",
+   "Now switch it off completely, for just one day.",
+   "Satellites and power grids would take more charged particles.",
+   "But the air wouldn't vanish in a day; that takes far longer.",
+   "So we'd survive, but our technology would feel it first."
+  ]
+ },
+ "traceability": [
+  {
+   "scene": "s1-hook",
+   "lines": [
+    "L1"
+   ],
+   "purpose": "Hook: frame 0 shows the earth interior itself, so the scale of the question is visible before it is explained.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "Over the last two centuries the dipole strength has been decreasing at a rate of about 6.3% per century.",
+     "source": "Wikipedia — Earth's magnetic field",
+     "url": "https://en.wikipedia.org/wiki/Earth%27s_magnetic_field"
+    }
+   ]
+  },
+  {
+   "scene": "s2-measure",
+   "lines": [
+    "L2"
+   ],
+   "purpose": "Scale: the topic's own % side by side as growing bars, so the size of the change is seen, not read.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "Over the last two centuries the dipole strength has been decreasing at a rate of about 6.3% per century.",
+     "source": "Wikipedia — Earth's magnetic field",
+     "url": "https://en.wikipedia.org/wiki/Earth%27s_magnetic_field"
+    },
+    {
+     "id": "F2",
+     "claim": "Measurements since Gauss in 1832 show a relative decay of about 10% over the last 150 years.",
+     "source": "Wikipedia — Earth's magnetic field",
+     "url": "https://en.wikipedia.org/wiki/Earth%27s_magnetic_field"
+    }
+   ]
+  },
+  {
+   "scene": "s3-measure",
+   "lines": [
+    "L3"
+   ],
+   "purpose": "Number: the cited value (183 times) lands as a large readout over the subject while the camera pushes in, so the quantity is held on screen as it is spoken.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F3",
+     "claim": "There have been at least 183 reversals over the last 83 million years, on average once every ~450,000 years.",
+     "source": "Wikipedia — Geomagnetic reversal",
+     "url": "https://en.wikipedia.org/wiki/Geomagnetic_reversal"
+    }
+   ]
+  },
+  {
+   "scene": "s4-measure",
+   "lines": [
+    "L4"
+   ],
+   "purpose": "Scale: the topic's own years side by side as growing bars, so the size of the change is seen, not read.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "The latest, the Brunhes–Matuyama reversal, occurred 780,000 years ago.",
+     "source": "Wikipedia — Geomagnetic reversal",
+     "url": "https://en.wikipedia.org/wiki/Geomagnetic_reversal"
+    },
+    {
+     "id": "F3",
+     "claim": "There have been at least 183 reversals over the last 83 million years, on average once every ~450,000 years.",
+     "source": "Wikipedia — Geomagnetic reversal",
+     "url": "https://en.wikipedia.org/wiki/Geomagnetic_reversal"
+    },
+    {
+     "id": "F2",
+     "claim": "Measurements since Gauss in 1832 show a relative decay of about 10% over the last 150 years.",
+     "source": "Wikipedia — Earth's magnetic field",
+     "url": "https://en.wikipedia.org/wiki/Earth%27s_magnetic_field"
+    },
+    {
+     "id": "F5",
+     "claim": "Some sources estimate the four most recent reversals took on average 7,000 years.",
+     "source": "Wikipedia — Geomagnetic reversal",
+     "url": "https://en.wikipedia.org/wiki/Geomagnetic_reversal"
+    }
+   ]
+  },
+  {
+   "scene": "s5-mechanism",
+   "lines": [
+    "L5"
+   ],
+   "purpose": "Mechanism: the subject stays on screen while the key idea is set in two or three words; speculative, chipped as such.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "Over the last two centuries the dipole strength has been decreasing at a rate of about 6.3% per century.",
+     "source": "Wikipedia — Earth's magnetic field",
+     "url": "https://en.wikipedia.org/wiki/Earth%27s_magnetic_field"
+    }
+   ]
+  },
+  {
+   "scene": "s6-mechanism",
+   "lines": [
+    "L6"
+   ],
+   "purpose": "Mechanism: the subject stays on screen while the key idea is set in two or three words; an estimate, chipped as such.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "Over the last two centuries the dipole strength has been decreasing at a rate of about 6.3% per century.",
+     "source": "Wikipedia — Earth's magnetic field",
+     "url": "https://en.wikipedia.org/wiki/Earth%27s_magnetic_field"
+    }
+   ]
+  },
+  {
+   "scene": "s7-mechanism",
+   "lines": [
+    "L7"
+   ],
+   "purpose": "Mechanism: the subject stays on screen while the key idea is set in two or three words; an estimate, chipped as such.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "Over the last two centuries the dipole strength has been decreasing at a rate of about 6.3% per century.",
+     "source": "Wikipedia — Earth's magnetic field",
+     "url": "https://en.wikipedia.org/wiki/Earth%27s_magnetic_field"
+    }
+   ]
+  },
+  {
+   "scene": "s8-payoff",
+   "lines": [
+    "L8"
+   ],
+   "purpose": "Payoff: the answer in a few words over the opening composition; the camera eases back to the frame-0 framing so the Short loops on its first image.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "Over the last two centuries the dipole strength has been decreasing at a rate of about 6.3% per century.",
+     "source": "Wikipedia — Earth's magnetic field",
+     "url": "https://en.wikipedia.org/wiki/Earth%27s_magnetic_field"
+    }
+   ]
+  }
+ ],
+ "licensing": {
+  "visuals": "all visuals drawn in-house from code (SVG): starfield, bodies, slices, ladders and orbits are original; no photographs or third-party media",
+  "fonts": "SIL OFL 1.1 (@fontsource Inter, Source Serif 4, Barlow Semi Condensed 5.3.0)",
+  "audio": "narration TTS + effects/music synthesised by scripts/bto-studio/audio/sound_design.py (no samples)",
+  "thirdPartyMedia": []
+ },
+ "qa": {
+  "objectivePass": true,
+  "report": "channels/impossible-brief/premium/IB-EAR-019/out/qa-report.md",
+  "contactSheet": "channels/impossible-brief/premium/IB-EAR-019/out/contact-sheet.png",
+  "sceneSheet": "channels/impossible-brief/premium/IB-EAR-019/out/scene-sheet.png",
+  "failures": [
+   "UNVERIFIED audio samples clipped: not reported by this FFmpeg build (astats has no clipped-sample count)",
+   "WARN caption reading speed: 1 cues over 22 chars/s (max 23.7)",
+   "WARN loop continuity (last -> first frame): whole 8.88, photo region 14.38, final-second step 0.21, ratio 13.2",
+   "WARN narration voice approved for publishing: kokoro am_fenrir (preview fallback)",
+   "WARN no static hold >= 1.5 s inside a scene (visual change target): longest 1.5 s (s2-measure)"
+  ],
+  "unverified": [
+   "audio samples clipped"
+  ]
+ },
+ "audio": {
+  "integratedLufs": -14.3,
+  "truePeakDbtp": -1.5
+ },
+ "performance": {
+  "renderWallSec": 90.5,
+  "msPerFrame": 116.2,
+  "workers": 3,
+  "peakChromiumRssMb": 2497,
+  "cachedSegments": 1,
+  "segments": 8,
+  "host": "linux x64 4 cpu 16 GB",
+  "totalPipelineSec": 118.1
+ },
+ "cost": {
+  "llmUsd": 0,
+  "ttsUsd": 0,
+  "renderUsd": 0,
+  "note": "local rendering and free/offline TTS; LLM use only when a Claude storyboard draft was requested and approved"
+ },
+ "approvalsNeeded": [
+  "voice: re-narrate with the approved Edge voice (if PREVIEW_ONLY)",
+  "creative sign-off (video-quality-review findings)",
+  "factual sign-off on the traceability table",
+  "owner decision to hand the MP4 to the normal pipeline (never automatic)"
+ ]
+}

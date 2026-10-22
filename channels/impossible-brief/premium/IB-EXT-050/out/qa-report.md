@@ -1,6 +1,6 @@
 # QA report: what-if-we-tried-to-drill-through-the-earth-premium-preview.mp4
 
-Objective verdict: **PASS (hard checks)** · measured 2026-10-22T03:20:43.001Z
+Objective verdict: **PASS (hard checks)** · measured 2026-10-22T04:00:51.046Z
 UNVERIFIED (could not be measured, not counted as pass): audio samples clipped
 
 | Check | Result | Measured | Target |
@@ -23,7 +23,7 @@ UNVERIFIED (could not be measured, not counted as pass): audio samples clipped
 | caption layout | PASS | 17 cues, 0 over 2 lines x 26 chars | <= 2 x 26 |
 | caption reading speed | PASS | 0 cues over 22 chars/s (max 19.5) | <= 22 chars/s |
 | captions within video | PASS | last cue ends 29.31 s | <= 29.60 s |
-| loop continuity (last -> first frame) | WARN | whole 8.5, photo region 15.23, final-second step 0.19, ratio 13.13 | whole <= 25; not (ratio > 3 and > 4) |
+| loop continuity (last -> first frame) | WARN | whole 8.49, photo region 15.2, final-second step 0.19, ratio 13.08 | whole <= 25; not (ratio > 3 and > 4) |
 | first spoken word within 0.5 s | PASS | 0.00 s | <= 0.5 s |
 | caption sync vs narration onsets (cues after a pause) | PASS | 8 cues: max 20 ms, mean 5 ms | max <= 150 ms |
 | narration is real speech (lib/speech-check) | PASS | voiced 0.831, 2.31 words/s, longest silence 0.42 s | speech-check ok |
@@ -41,11 +41,11 @@ UNVERIFIED (could not be measured, not counted as pass): audio samples clipped
 | s1-hook | 4.72 | 0.301 | 0.55 | 0.67 s |
 | s2-zoom | 1.61 | 2.863 | 0.04 | 0.03 s |
 | s3-year | 4.75 | 0.617 | 0.56 | 1.33 s |
-| s4-measure | 3.16 | 0.495 | 0.38 | 0.63 s |
-| s5-heat | 4.62 | 0.526 | 0.43 | 1.83 s |
-| s6-flow | 3.63 | 0.475 | 0.58 | 1.2 s |
-| s7-cut | 2.63 | 0.691 | 0.32 | 0.37 s |
-| s8-payoff | 4.46 | 0.401 | 0.68 | 0.47 s |
+| s4-measure | 3.16 | 0.465 | 0.44 | 0.63 s |
+| s5-heat | 4.62 | 0.525 | 0.43 | 1.83 s |
+| s6-flow | 3.63 | 0.463 | 0.59 | 1.2 s |
+| s7-cut | 2.63 | 0.682 | 0.35 | 0.73 s |
+| s8-payoff | 4.46 | 0.4 | 0.66 | 0.47 s |
 
 ## Text gate findings
 

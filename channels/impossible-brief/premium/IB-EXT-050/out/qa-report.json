@@ -1,7 +1,7 @@
 {
  "video": "channels/impossible-brief/premium/IB-EXT-050/out/what-if-we-tried-to-drill-through-the-earth-premium-preview.mp4",
  "quality": "preview",
- "measuredAt": "2026-10-22T03:20:43.001Z",
+ "measuredAt": "2026-10-22T04:00:51.046Z",
  "objectivePass": true,
  "unverified": [
   "audio samples clipped"
@@ -154,7 +154,7 @@
   {
    "name": "loop continuity (last -> first frame)",
    "ok": false,
-   "measured": "whole 8.5, photo region 15.23, final-second step 0.19, ratio 13.13",
+   "measured": "whole 8.49, photo region 15.2, final-second step 0.19, ratio 13.08",
    "target": "whole <= 25; not (ratio > 3 and > 4)",
    "hard": false,
    "status": "WARN"
@@ -257,36 +257,36 @@
   {
    "id": "s4-measure",
    "sec": 3.16,
-   "meanMotion": 0.495,
-   "staticShare": 0.38,
+   "meanMotion": 0.465,
+   "staticShare": 0.44,
    "longestStaticSec": 0.63
   },
   {
    "id": "s5-heat",
    "sec": 4.62,
-   "meanMotion": 0.526,
+   "meanMotion": 0.525,
    "staticShare": 0.43,
    "longestStaticSec": 1.83
   },
   {
    "id": "s6-flow",
    "sec": 3.63,
-   "meanMotion": 0.475,
-   "staticShare": 0.58,
+   "meanMotion": 0.463,
+   "staticShare": 0.59,
    "longestStaticSec": 1.2
   },
   {
    "id": "s7-cut",
    "sec": 2.63,
-   "meanMotion": 0.691,
-   "staticShare": 0.32,
-   "longestStaticSec": 0.37
+   "meanMotion": 0.682,
+   "staticShare": 0.35,
+   "longestStaticSec": 0.73
   },
   {
    "id": "s8-payoff",
    "sec": 4.46,
-   "meanMotion": 0.401,
-   "staticShare": 0.68,
+   "meanMotion": 0.4,
+   "staticShare": 0.66,
    "longestStaticSec": 0.47
   }
  ],
@@ -302,19 +302,19 @@
    "r": 0.733
   },
   {
-   "a": "s4-measure",
-   "b": "s6-flow",
-   "r": 0.693
-  },
-  {
    "a": "s1-hook",
    "b": "s5-heat",
    "r": 0.683
   },
   {
    "a": "s4-measure",
+   "b": "s6-flow",
+   "r": 0.683
+  },
+  {
+   "a": "s4-measure",
    "b": "s5-heat",
-   "r": 0.673
+   "r": 0.677
   }
  ],
  "qr": null,
@@ -346,8 +346,8 @@
    "method": "mean abs luma diff per frame on a 270x480 gray proxy; static = diff < 0.5",
    "first3sMean": 0.35,
    "first3sStaticShare": 0.87,
-   "wholeMean": 0.67,
-   "wholeStaticShare": 0.72,
+   "wholeMean": 0.66,
+   "wholeStaticShare": 0.74,
    "longestStaticRunSec": 2.5
   },
   "captionSync": {
@@ -358,10 +358,10 @@
   },
   "loop": {
    "method": "mean abs gray diff on 270x480 proxy",
-   "lastToFirstWhole": 8.5,
-   "lastToFirstPhotoRegion": 15.23,
+   "lastToFirstWhole": 8.49,
+   "lastToFirstPhotoRegion": 15.2,
    "finalSecondMedianStep": 0.19,
-   "ratio": 13.13
+   "ratio": 13.08
   },
   "first3s": {
    "speechOnsetSec": 0,

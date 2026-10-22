@@ -48,6 +48,12 @@ test("auto storyboard: earth-interior grammar varies its mechanism visuals and u
   const kinds = sb.scenes.map((s) => s.id.replace(/^s\d+-/, ""));
   assert.deepEqual(kinds, ["hook", "zoom", "year", "measure", "heat", "flow", "cut", "payoff"]);
   assert.equal(kinds.filter((k) => k === "cut").length, 1);
+  // a mechanism visual is drawn only when the line names it: magnetic-field lines never become "flowing strata"
+  const ear = Adapter.loadTopic("impossible-brief", "IB-EAR-019");
+  const earKinds = Generator.build(Adapter.studioScript(ear.channel, ear.topic), style, ear.topic).scenes.map((s) => s.id.replace(/^s\d+-/, ""));
+  assert.ok(!earKinds.includes("flow"), earKinds.join(","));
+  const framings = Generator.build(Adapter.studioScript(ear.channel, ear.topic), style, ear.topic).scenes.filter((s) => s.id.endsWith("-mechanism")).map((s) => JSON.stringify(s.layers.find((l) => l.component === "planet").props.r));
+  assert.equal(new Set(framings).size, framings.length, "consecutive subject scenes use different framings");
   assert.equal(Generator.keyPhrase("So the planet's first defence against drilling is heat, not hardness."), "HEAT, NOT HARDNESS");
   assert.equal(Generator.keyPhrase("Rock that hot starts behaving more like plastic than stone."), "MORE PLASTIC THAN STONE");
 });
