@@ -1,30 +1,142 @@
 # Premium engine: four-channel readiness report (2026-10-22, PR #316)
 
-This report decides one question per channel: is it ready for **premium daily production**? Every verdict rests on
-real renders. Storyboard validation alone never counts as ready. A channel is ready only when its daily entry point
-has run end to end in CI with:
+Every verdict below rests on real renders whose GitHub Actions logs were read, not on job status or storyboard
+validation. **Pilot success is not production readiness**: a channel is production-ready only when its own daily entry
+point has run end to end with the approved voice, a final render, objective QA, the publish gate and isolation, and
+nothing upstream (research, approvals, channel state) blocks it. Nothing in this PR merges, changes a schedule, sets a
+flag in production or uploads.
 
-- the approved voice;
-- a final render;
-- objective QA;
-- the publish gate;
-- shadow isolation (nothing committed, nothing uploaded).
+## 1. Four-channel readiness matrix
 
-What still blocks it is named precisely. Nothing in this PR merges, changes a schedule, or enables publishing.
+| | ImpossibleBrief | Failure Reconstructed | The Hidden Logic of Things | GoalLore Lab |
+|---|---|---|---|---|
+| Automatic topic/script loading | yes: the live lane's topic (CI) | yes: live lane or top unused A case (CI) | yes: VERIFIED record BTO-301 (CI) | **no**: hand-made pilot `topic.json` |
+| Storyboard generation | automatic (`auto/impossible-brief.js`) | automatic (`auto/failure-reconstructed.js`) | automatic (`auto/behind-the-ordinary.js`) | automatic (`auto/goal-lore-lab.js`) |
+| Approved narration | Edge Brian Multilingual | Edge Andrew Multilingual | Edge Emma Multilingual | Edge Ryan: pilot config only, **no listening test** |
+| Final rendering | yes | yes | yes | yes (pilot) |
+| Objective QA | PASS | PASS | PASS, QR decodes "HIDDEN LOGIC" on first and last frame | PASS |
+| Evidence verification | IB research layers (adapter readiness) | FR case file layers | VERIFIED, every fact with a verbatim quote | **no**: facts without verbatim quotes (pilot warnings) |
+| Creative approval | not signed | not signed | not signed | not signed |
+| Publication package | SHADOW_OF_LIVE_NOT_PUBLISHABLE (duplicate by construction) | SHADOW_OF_LIVE_NOT_PUBLISHABLE | READY_FOR_HUMAN_REVIEW | PILOT_NOT_APPROVED_FOR_PUBLICATION |
+| GitHub Actions integration | daily entry point dry run green (`ib-premium-dry-run.yml`) | daily entry point dry run green (`fr-studio-dry-run.yml`) | render check green; the live lane is not run (channel inactive) | render check green (pilot); no lane |
+| **Premium shadow, daily** | **READY after merge** | **READY after merge** | built, BLOCKED (channel state, research) | BLOCKED (no lane) |
+| **Premium publishing** | adapter built, off; needs approvals | adapter built, off; needs approvals | adapter built, off; channel publishing disabled | not possible (no lane) |
 
-## Verdict
+## 2. Latest CI results (head `a955dce`, all green; logs read)
 
-| Channel | Premium shadow (daily, never uploaded) | Premium publishing | What blocks activation |
-|---|---|---|---|
-| **ImpossibleBrief** | **READY to enable** after merge (flag `IB_PREMIUM_RENDER=preview`) | NOT READY | owner merge; human creative sign-off per package; the go-live switch to the uploader is not built (by design) |
-| **Failure Reconstructed** | **READY to enable** after merge (flag `FR_PREMIUM_RENDER=preview`) | NOT READY | as IB, plus topic supply: today **0** unused A cases are at the 75 bar (best 74), so the live lane skips and the shadow has nothing to shadow |
-| **The Hidden Logic of Things** | built, flag `HLT_PREMIUM_RENDER=preview`; **BLOCKED** by research and channel state | NOT READY | channel inactive by owner decision (2026-10-11); only **1 of 525** topics is evidence-qualified (BTO-301; 518 are QUESTION_ONLY) |
-| **GoalLore Lab** | **BLOCKED** (no live lane) | NOT READY | not registered; identity migration needs an owner decision; no researched topic (109 IDEA candidates, no verbatim quotes); no approved voice (en-GB-RyanNeural is a candidate) |
+| Run | Workflow | Result |
+|---|---|---|
+| 39851796042 | IB dry run | live lane PUBLISH 88 (upload skipped, PUBLISH=0); shadow Edge Brian Multilingual (approved), objective PASS, 184 s (render 100.2 s), PSS 4287 MB; gate BLOCK at TOPIC_READY (duplicate of the live topic, by design); no premium output in the state diff |
+| 39851796007 | FR dry run | live lane: two A cases (avianca-52-1990, usair-1016-1994) rendered and held for human review (quality gate REVIEW 89 and 88), not uploaded; standalone shadow on alaska-261-2000: Edge Andrew (approved), objective PASS, **90 s with 8/8 narration beats from the cache, 0 Edge requests**; 33 MB of intermediates removed; gate BLOCK at QA_PASSED |
+| 39851795975 | Premium render check | BTO-301: Edge Emma (approved), objective PASS, QR "HIDDEN LOGIC" on both frames, READY_FOR_HUMAN_REVIEW, render 140.2 s; GLL-P01: Edge Ryan, objective PASS, PILOT_NOT_APPROVED_FOR_PUBLICATION, render 87.9 s; dependency preflight OK incl. zxingcpp and segno; dependencies installed in 19 s |
+| 39851796067 | Testler | green: 978 JS tests, Python tests, actionlint, dry-run packages |
+| 39851796065 | BTO integration load | green |
 
-**No channel is ready for premium publishing.** Two channels, IB and FR, are ready for premium **shadow** daily
-production: the studio renders every day's topic next to the live Short and compares the two, without ever uploading.
+Earlier confirmations: BTO-301 QR decode first passed in run 39840693330 attempt 2 (`a6820d5`) and again in 39846282785
+(`0a5f80e`); the IB and FR shadows passed on `af6bbd3`, `a6820d5`, `e466d76`.
 
-## Evidence per channel (real renders, CI logs read, not just job status)
+## 3. Edge TTS reliability
+
+`scripts/fr-premium/edge-client.js`, used by every premium channel's narration:
+
+| Requirement | Implementation | Evidence |
+|---|---|---|
+| Bounded concurrency | `EDGE_TTS_MAX_CONCURRENCY` (default 1) lock slots per machine (`lib/slot-lock.js`, dead holders reclaimed) | `tests/js/edge-client.test.js` |
+| Retry-After | honoured when the error carries it (seconds or HTTP date) | test; note: msedge-tts 2.1.0 keeps the status code but drops the header, so on Edge today the backoff applies |
+| Exponential backoff with jitter | rate limit from 15 s, other failures from 2.5 s, doubling, half fixed + half random, cap 120 s | test |
+| Maximum retry budget | `EDGE_TTS_RETRY_BUDGET_S` (default 180 s, 30–900) shared by all beats, plus attempt caps; the narrator's timeout grows with it | tests; offline run: 3 bounded attempts then one named error |
+| Narration caching / reuse | content-addressed beats (voice, rate, text, format, client version) in `.cache/edge-tts`, LRU under 200 MB, git-ignored; restored and saved by `actions/cache` in the three premium workflows | **FR run 39851796007: 8 beats cached, 0 requested, 90 s vs 142 s for the same case one run earlier** |
+| No unapproved voice fallback | the client never substitutes; `BTO_PREMIUM_RENDER=final` (publishing) never falls back; preview shadows may use the marked-unapproved Kokoro preview only | tests; adapter test asserts `final` |
+| Clear errors | `Edge narration failed for beat b3: rate-limited (HTTP 429) after 4 attempt(s) …; no other voice is substituted`; the studio reports that line, not Node's version banner | tests |
+
+The repeated-identical-narration problem is solved by the cache: a re-run of the same topic and two jobs narrating the
+same text call Edge once. The live lanes' own narration (`lib/shorts-tts.js`) is unchanged.
+
+## 4. Dependency installation reliability
+
+| Measure | Status |
+|---|---|
+| Dependency caching | `scripts/ci-apt.sh` `CI_APT_ARCHIVES`: downloaded `.deb` files kept in `.cache/apt`, restored by `actions/cache` (weekly key per package set) in the premium workflows, `test.yml` and `portfolio-production.yml`; pip cached by `setup-python` |
+| Measured effect | cold runs on 2026-10-22: up to 43 min stalled, three failed attempts; warm run `a955dce`: render check dependencies 19 s, IB 22 s, FR 20 s |
+| Version pinning | `scripts/bto-studio/requirements.txt`: numpy 2.5.3, soundfile 0.14.0, Pillow 12.3.0, segno 1.6.6, zxing-cpp 2.3.0 (wheels verified for Python 3.12) |
+| Required dependency checks | `scripts/bto-studio/preflight-deps.js`: ffmpeg, ffprobe, Chromium, numpy, soundfile, PIL, plus zxingcpp and segno for QR topics; studio.js runs it before narration and fails by name; CI runs it as a step |
+| Bounded retries | unchanged: three bounded apt attempts, the second and third via archive.ubuntu.com |
+| Prebuilt runner image | evaluated, not built: a container image on GHCR would remove apt entirely, but needs a registry write and image maintenance; the cache gives most of the benefit without either |
+
+## 5. Premium publishing adapter status
+
+`core/pipeline/premium-publish.js`, **disabled**: active only with `IB_PREMIUM_PUBLISH=1`, `FR_PREMIUM_PUBLISH=1` or
+`HLT_PREMIUM_PUBLISH=1`; no workflow sets one (asserted by tests).
+
+1. **Reserve** (owner): `node core/pipeline/premium-publish.js reserve --channel <c> --topic <id> --by <name>` writes
+   `channels/<c>/premium/approvals/<id>.json`. Live selection never picks a reserved topic.
+2. **Review**: render the candidate (`BTO_PREMIUM_RENDER=final`, approved Edge voice); `… hash --channel <c> --topic <id>`
+   prints its content hash (storyboard, narration source and lines, voice). The owner signs `creative`, `factual` and
+   `publish` ({ by, at }) for exactly that hash, and writes the title, description and tags.
+3. **Publish** (due day, flag on): fresh final render with the approved voice only; it must match the approved hash, pass
+   objective QA, reach PUBLISH_APPROVED in the existing gate (licensed media, channel publishing enabled) and not be in
+   published.json. The MP4 is then staged as a normal package, and **`youtube-yukle.js` runs unchanged**: identity check,
+   quality gate, narration approval, idempotent journal, remote duplicate reconciliation, target-day publishAt.
+   `PUBLISH!=1` runs `--dogrula`.
+4. Any refusal returns the day to the live lane and keeps the reservation; a published premium topic is recorded and
+   never uploaded again.
+
+Tested: `tests/js/premium-publish.test.js` (7 tests). A package staged by the adapter passed the real
+`youtube-yukle.js --dogrula`: MP4 found, metadata validated, the PUBLISH gate scheduled the next 21:00 slot, narration
+approval ok. Nothing was uploaded.
+
+## 6. Daily automation integration status
+
+The production workflow runs the channels one after another on one runner, under one concurrency group, so rendering
+is already serial. The shadow (`core/pipeline/premium-shadow.js`) adds:
+
+| Requirement | How |
+|---|---|
+| Resource-aware scheduling | skipped, with the reason recorded, below 2.5 GB free memory or 1.5 GB free disk (configurable) |
+| Bounded rendering concurrency | one premium render per machine (`PREMIUM_RENDER_MAX_CONCURRENCY`), waits up to 10 min, then skips |
+| Independent failure handling | try/catch around the child; the live lane's result is never changed; each channel's step is separate |
+| Idempotent jobs, safe retries | a topic whose shadow already passed is not re-rendered (`<P>_PREMIUM_FORCE=1` overrides); publishing is idempotent through the reservation record and the uploader's journal |
+| Artifact cleanup | only this render's intermediates are removed (33 MB per FR Short); MP4 and reports kept in git-ignored folders |
+| No secret leakage | the studio child receives no tokens, secrets, client IDs or API keys |
+| No duplicate uploads, no unapproved publishing | the shadow never uploads; the adapter requires signed approvals, the hash match and the gate, and uses the existing uploader's duplicate protection |
+
+Tested: `tests/js/premium-daily.test.js` (6 tests); production installs packages through the cache; no premium flag is
+set in `portfolio-production.yml`.
+
+## 7. Remaining blockers
+
+- **All channels:** PR #316 not merged; no package has a creative, factual or publish sign-off; premium publishing has
+  never run with the flag on.
+- **ImpossibleBrief:** none beyond merge and the owner's choice to enable the shadow.
+- **Failure Reconstructed:** none for the shadow. Live supply is no longer zero (two A cases reached the bar in today's
+  runs, held for human review); the bar was not lowered.
+- **The Hidden Logic of Things:** channel inactive (owner decision); 1 of 525 topics evidence-qualified; the live lane has
+  never been run end to end in CI; channel publishing disabled, so the gate cannot reach PUBLISH_APPROVED.
+- **GoalLore Lab:** identity decision (the CriticalThread credentials sign in to a channel titled GoalLore Lab; its 8
+  recorded videos are not publicly visible); the CriticalThread lane still runs with PUBLISH=1; no registry entry or
+  lane; no quoted research; voice not approved by listening test.
+- **Infrastructure:** Edge does not expose Retry-After through the client; the first run after a cache-key change still
+  downloads from the mirror.
+
+## 8. Exact next production activation actions (owner)
+
+1. Review and merge PR #316. The production workflow then only gains the apt cache.
+2. ImpossibleBrief shadow: in `portfolio-production.yml`, IB step env, add `IB_PREMIUM_RENDER: preview` and
+   `IB_PREMIUM_QUALITY: final`; add `python -m pip install -r scripts/bto-studio/requirements.txt` and
+   `node scripts/bto-studio/preflight-deps.js` to the dependency step; add the `.cache/edge-tts` cache step; upload
+   `channels/impossible-brief/premium/*/out/*.mp4` as an artifact. Watch one scheduled run.
+3. Failure Reconstructed shadow: the same with `FR_PREMIUM_RENDER: preview`.
+4. First premium publication, per channel: reserve a topic, render the candidate, review it, sign the three approvals
+   against the printed hash, then add `IB_PREMIUM_PUBLISH: '1'` (or `FR_`) to that channel's step.
+5. The Hidden Logic of Things: reactivate the channel, run research to qualify more topics, enable publishing in the
+   registry, then `HLT_PREMIUM_RENDER` (with `--qr` in the preflight).
+6. GoalLore Lab: decide the identity, pause the CriticalThread lane, retarget its registry entry; then research with
+   quotes and a voice listening test.
+
+**Rollback:** remove the flag line from the step env. Neither the shadow nor the adapter touches published history,
+analytics, credentials or ledgers; an approvals file can be deleted to release a reservation.
+
+## Appendix: evidence per channel (real renders, CI logs read, not just job status)
 
 ### ImpossibleBrief
 
@@ -186,61 +298,3 @@ production: the studio renders every day's topic next to the live Short and comp
 
   `studioRenders` stays false; pilot renders only.
 
-## Feature flags (all default OFF; existing publishing unaffected)
-
-| Flag | Channel | Effect |
-|---|---|---|
-| `IB_PREMIUM_RENDER=preview` (+ `_QUALITY=final`) | ImpossibleBrief | shadow render after the live lane; comparison `premium-shadow.json` |
-| `FR_PREMIUM_RENDER=preview` | Failure Reconstructed | same, after the legacy lane's outcome |
-| `HLT_PREMIUM_RENDER=preview` | The Hidden Logic of Things | same, into the git-ignored `premium/shadow/<topic>/` |
-| none | GoalLore Lab | no live lane exists |
-| none | premium publishing | not built: a premium package reaches the uploader only after PUBLISH_APPROVED and an owner go-live switch |
-
-Isolation is tested (`tests/js/fr-studio.test.js`, `ib-premium.test.js`, `bto-studio.test.js`):
-
-- one channel's flag never switches another channel on;
-- shadow output is git-ignored;
-- a shadow failure is caught and logged;
-- the dry runs are green only if the shadow rendered and passed objective QA (`tools/shadow-check.js`).
-
-## Benchmarks and runtime cost (measured, GitHub-hosted `ubuntu-latest`)
-
-| Run | Total | Render | Chromium PSS | Voice |
-|---|---|---|---|---|
-| IB shadow, final (39790677787) | 198 s | 129.6 s | ≈ 3950 MB | Edge Brian (approved) |
-| IB shadow, final (39837070274) | 175 s | 117.3 s | 4062 MB | Edge Brian Multilingual (approved) |
-| FR shadow, final (39828652879) | 88 s | 54.4 s | 3871 MB | Edge Andrew (approved) |
-| BTO-301 auto, final (39840693330) | — | 96.8 s | 2390 MB | Edge Emma (approved) |
-| GLL-P01 auto, pilot (39840693330) | — | 64.6 s | 2440 MB | Edge Ryan (pilot) |
-| FR shadow, final (39790677333) | 141 s | 85 s | 3957 MB | Edge Andrew (approved) |
-| BTO shadow, preview, local container | 190 s | 138.7 s | 1897 MB | Kokoro preview (unapproved) |
-
-- **Minutes:** a shadow adds about 1.5–3.5 runner-minutes per Short. On a public repository, hosted runner minutes
-  are free; on a private one they count against the plan's Actions minutes.
-- **Memory:** about 4 GB of PSS fits the 16 GB hosted runner.
-- **No model calls:** generators are deterministic and Edge TTS needs no key.
-- **Not included:** interactive Claude Code work (this session) is not free and is not part of the daily cost.
-
-## Activation (owner actions, in order) and rollback
-
-The procedure is unchanged from `checkpoint.md` §"Feature flags, activation and rollback":
-
-1. Merge PR #316.
-2. IB topic buffer: `commit=false`, then `commit=true`.
-3. Watch the next IB live run.
-4. Add `IB_PREMIUM_RENDER: preview`, plus Chromium, numpy/soundfile, `time` and the artifact upload, to the IB step.
-5. The same for FR.
-6. BTO: reactivate, research, then `HLT_PREMIUM_RENDER`. Its production step must also install `segno==1.6.6
-   zxing-cpp==2.3.0`: without the decoder, QA fails every QR topic (seen in CI run 39835922184).
-7. GoalLore Lab: the identity decision first, then pause CriticalThread.
-
-**Edge rate limit:** Edge answered HTTP 429 when three CI jobs narrated at once. If several channels' shadows run in
-the same minute, set `EDGE_RATE_LIMIT_RETRIES` (up to 8) on their steps; a narration that still fails leaves the live
-Short untouched and records the shadow as failed.
-
-**CI infrastructure (2026-10-22):** the Ubuntu apt mirrors repeatedly stalled hosted runners (up to 43 min, three
-failed attempts). Those runs died before any test or render ran. `a6820d5` drops ffmpeg's recommended packages from
-`test.yml`, about a third of the download.
-
-**Rollback:** remove the flag line from the step env, or set `studioRenders: false` in the channel profile. Neither
-touches published history, analytics, credentials or ledgers.
