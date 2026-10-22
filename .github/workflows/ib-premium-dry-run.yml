@@ -65,6 +65,7 @@ jobs:
           for cmp in channels/impossible-brief/state/production/*/premium-shadow.json; do
             [ -f "$cmp" ] || continue
             echo "### live vs premium: $cmp" | tee -a "$GITHUB_STEP_SUMMARY"
+            # shellcheck disable=SC2016  # the single-quoted program is JavaScript (template literals), not shell
             node -e 'const r=require(require("path").resolve(process.argv[1]));const l=r.live||{},p=r.premium;console.log(["| | live (stock) | premium (shadow) |","|---|---|---|",`| gate | ${l.decision} ${l.productionScore} | ${p.verdict} (objective ${p.objectivePass?"PASS":"FAIL"}${p.hardFailures.length?": "+p.hardFailures.join(", "):""}) |`,`| duration | ${l.durationSeconds} s | ${p.durationSeconds} s |`,`| voice | ${l.voice} | ${p.voice&&p.voice.used} (approved ${p.voice&&p.voice.approved}) |`,`| runtime | render ${l.renderSec} s | ${p.runtimeSec} s (render ${p.renderWallSec} s) |`,`| peak memory | n/a | ${p.peakMemoryMB} MB (Chromium ${p.peakChromiumRssMb} MB) |`,`| upload | ${l.upload} | never |`].join("\n"))' "$cmp" | tee -a "$GITHUB_STEP_SUMMARY" || true
           done
           for pkg in channels/impossible-brief/premium/*/out/review-package.json; do
