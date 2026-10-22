@@ -58,7 +58,10 @@ jobs:
         env:
           IB_PREMIUM_RENDER: preview
           IB_PREMIUM_QUALITY: final
-        run: node shorts-sira.js --channel impossible-brief 2>&1 | tee ib-dry-run.log
+        run: |
+          node shorts-sira.js --channel impossible-brief 2>&1 | tee ib-dry-run.log
+          # green only when the premium shadow actually rendered and passed its objective QA
+          node scripts/bto-studio/tools/shadow-check.js channels/impossible-brief/state/production
       - name: Premium gate and creative review
         if: always()
         run: |

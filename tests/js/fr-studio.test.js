@@ -103,3 +103,13 @@ test("GoalLore Lab automatic storyboard: valid on the pilot record, model/recons
   const kinds = sb.scenes.map((s) => s.id.replace(/^s\d+-/, "")); for (const k of ["hook", "when", "flight", "physics", "payoff"]) assert.ok(kinds.includes(k), k);
   const prof = require("../../scripts/bto-studio/profiles/goal-lore-lab.json"); assert.equal(prof.studioRenders, false, "not registered: pilot renders only");
 });
+
+test("dry-run verdict: green only when the premium shadow rendered and passed objective QA", () => {
+  const C = require("../../scripts/bto-studio/tools/shadow-check"); const os = require("os");
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "shadowck-")); assert.equal(C.check(dir).ok, false, "no comparison");
+  fs.mkdirSync(path.join(dir, "x")); const w = (premium) => fs.writeFileSync(path.join(dir, "x", "premium-shadow.json"), JSON.stringify({ slug: "x", live: { decision: "SKIPPED" }, premium }));
+  w({ status: "exit 1", verdict: null, objectivePass: null }); assert.equal(C.check(dir).ok, false, "run 39788178724: studio refused in 0 s");
+  w({ status: "exit 0", verdict: "BLOCKED", objectivePass: false }); assert.equal(C.check(dir).ok, false);
+  w({ status: "exit 0", verdict: "SHADOW_OF_LIVE_NOT_PUBLISHABLE", objectivePass: true }); assert.equal(C.check(dir).ok, true);
+  for (const f of ["ib-premium-dry-run.yml", "fr-studio-dry-run.yml"]) assert.match(fs.readFileSync(path.join(ROOT, ".github/workflows", f), "utf8"), /shadow-check\.js/, f);
+});

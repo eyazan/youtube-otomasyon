@@ -55,23 +55,18 @@ jobs:
           FR_PREMIUM_QUALITY: final
         run: |
           node shorts-sira.js --channel failure-reconstructed 2>&1 | tee fr-dry-run.log
-          # the scheduled lane may skip (no topic at the bar today): then the same entry point produces one ready case
-          # explicitly (shorts-sira.js <slug>, PUBLISH=0), so the live render and the shadow are exercised on every run
+          # The scheduled lane skips when no case is at the bar (it never lowers it). Naming a case below the bar does not help:
+          # the live growth gate refuses it and records a block that the studio then honours (run 39788178724). So when the
+          # live lane produced nothing, the premium half runs on its own through the same shadow module, on the top-ranked
+          # unused A case, and the comparison states that the live lane skipped.
           if ! ls uretim/*/premium-shadow.json >/dev/null 2>&1; then
-            # the top-ranked unused A case (the live growth gate publishes A only), ranked by the live engine itself
             SLUG=$(node -e 'const C=require("./core/channel-context");const ch=C.getChannel("failure-reconstructed");const I=require("./core/growth/inventory");const used=new Set(I.legacyUsed(ch));const s=require("./core/growth").selectShortTopic(ch,{exclude:[...used],write:false});const r=s.ranked.rows.filter((x)=>!used.has(x.topic.slug)&&x.score.bucket==="A").sort((a,b)=>b.score.SelectionScore-a.score.SelectionScore)[0];console.log(r?r.topic.slug:"")')
-            echo "scheduled lane produced nothing; explicit dry run of ready case $SLUG" | tee -a fr-dry-run.log
-            node shorts-sira.js --channel failure-reconstructed "$SLUG" 2>&1 | tee -a fr-dry-run.log
-            # the live growth gate refuses topics below the bar even when named explicitly (by design): the premium half is
-            # then exercised on its own through the same shadow module, and the comparison says the live lane refused
-            if ! ls uretim/*/premium-shadow.json >/dev/null 2>&1; then
-              echo "live lane refused $SLUG (quality bar); premium shadow exercised standalone" | tee -a fr-dry-run.log
-              mkdir -p "uretim/$SLUG"
-              node -e 'const C=require("./core/channel-context");const ch=C.getChannel("failure-reconstructed");const s=process.argv[1];require("./core/pipeline/premium-shadow").run(ch,{id:"FR-"+s,slug:s},process.env,undefined,{output:"uretim/"+s,renderer:"stock (refused by the live growth gate in this dry run: below the quality bar)",decision:"BLOCK",upload:"none"})' "$SLUG" 2>&1 | tee -a fr-dry-run.log
-            fi
+            echo "live lane skipped (no case at the bar); premium shadow exercised standalone on $SLUG" | tee -a fr-dry-run.log
+            mkdir -p "uretim/$SLUG"
+            node -e 'const C=require("./core/channel-context");const ch=C.getChannel("failure-reconstructed");const s=process.argv[1];require("./core/pipeline/premium-shadow").run(ch,{id:"FR-"+s,slug:s},process.env,undefined,{output:"uretim/"+s,renderer:"stock lane skipped in this dry run (no case at the quality bar)",decision:"SKIPPED",upload:"none"})' "$SLUG" 2>&1 | tee -a fr-dry-run.log
           fi
-          # a green dry run must have exercised both renderers: no comparison means nothing was verified
-          if ! ls uretim/*/premium-shadow.json >/dev/null 2>&1; then echo "::error::no live render + premium shadow was produced; nothing verified"; exit 1; fi
+          # green only when the premium shadow actually rendered and passed its objective QA
+          node scripts/bto-studio/tools/shadow-check.js uretim
       - name: Premium gate and creative review
         if: always()
         run: |

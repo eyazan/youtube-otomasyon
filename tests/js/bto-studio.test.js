@@ -122,11 +122,11 @@ test("skills: the seven studio Skills exist with valid frontmatter whose name ma
 
 // The only studio entry points outside scripts/bto-studio are the default-OFF ImpossibleBrief shadow in
 // core/pipeline/impossible-brief.js (IB_PREMIUM_RENDER=preview) and the read-only, no-upload dry-run workflow.
-const STUDIO_ALLOWED = new Set(["ib-premium-dry-run.yml", "fr-studio-dry-run.yml", path.join("pipeline", "impossible-brief.js"), path.join("pipeline", "premium-shadow.js")]);
+const STUDIO_ALLOWED = new Set(["ib-premium-dry-run.yml", "fr-studio-dry-run.yml", "premium-render-check.yml", path.join("pipeline", "impossible-brief.js"), path.join("pipeline", "premium-shadow.js")]);
 test("isolation: no live workflow, root production script or channel config references the studio; BTO stays disabled", () => {
   const wf = path.join(ROOT, ".github/workflows");
   for (const f of fs.readdirSync(wf).filter((x) => !STUDIO_ALLOWED.has(x))) assert.doesNotMatch(fs.readFileSync(path.join(wf, f), "utf8"), /bto-studio|BTO_PREMIUM_RENDER|IB_PREMIUM_RENDER|premium:video/, f);
-  for (const name of ["ib-premium-dry-run.yml", "fr-studio-dry-run.yml"]) { const dry = fs.readFileSync(path.join(wf, name), "utf8");
+  for (const name of ["ib-premium-dry-run.yml", "fr-studio-dry-run.yml", "premium-render-check.yml"]) { const dry = fs.readFileSync(path.join(wf, name), "utf8");
     assert.match(dry, /PUBLISH: '0'/, name); assert.match(dry, /contents: read/, name); assert.doesNotMatch(dry, /_YT_REFRESH_TOKEN|_CLIENT_SECRET|git push|group: portfolio-production/, `${name}: no credentials, no push, own concurrency group`); }
   for (const f of fs.readdirSync(ROOT).filter((x) => x.endsWith(".js"))) assert.doesNotMatch(fs.readFileSync(path.join(ROOT, f), "utf8"), /scripts\/bto-studio/, f);
   for (const c of fs.readdirSync(path.join(ROOT, "channels"))) { const cfg = path.join(ROOT, "channels", c, "config.json"); if (fs.existsSync(cfg)) assert.doesNotMatch(fs.readFileSync(cfg, "utf8"), /bto-studio|BTO_PREMIUM/, c); }
@@ -197,7 +197,9 @@ test("GoalLore Lab: proposed and inert (unregistered, disabled, no credentials, 
   assert.ok(reg["critical-thread"], "CriticalThread untouched");
   const cfg = J("channels/goal-lore-lab/config.json"); assert.equal(cfg.enabled, false); assert.equal(cfg.publishingEnabled, false); assert.equal(cfg.credentialsCreated, false);
   assert.equal(fs.existsSync(path.join(ROOT, "channels/goal-lore-lab/state")), false, "no state dir (workflow globs use channels/*/state)");
-  for (const f of fs.readdirSync(path.join(ROOT, ".github/workflows"))) assert.doesNotMatch(read(`.github/workflows/${f}`), /goal-lore-lab|GoalLore/, f);
+  // only the pilot render check may name the channel, and it holds no GLL credentials, pushes nothing, publishes nothing
+  for (const f of fs.readdirSync(path.join(ROOT, ".github/workflows")).filter((x) => x !== "premium-render-check.yml")) assert.doesNotMatch(read(`.github/workflows/${f}`), /goal-lore-lab|GoalLore/, f);
+  const rc = read(".github/workflows/premium-render-check.yml"); assert.doesNotMatch(rc, /GLL_|_YT_|git push|PUBLISH: '1'/); assert.match(rc, /--pilot/); assert.match(rc, /contents: read/);
   const inv = J("channels/goal-lore-lab/topics/topic-candidates.json"); assert.ok(inv.topics.length >= 100);
   assert.ok(inv.topics.every((t) => t.status === "IDEA" && t.evidence.length === 0), "no topic is claimed researched/verified without evidence");
   assert.deepEqual(inv.statusCounts, { IDEA: inv.topics.length, RESEARCHED: 0, VERIFIED: 0, SCRIPT_READY: 0, PRODUCTION_READY: 0 });

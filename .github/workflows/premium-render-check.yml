@@ -1,0 +1,81 @@
+name: Premium render check (automatic storyboards, approved narration)
+
+# Renders the automatic storyboards of the two channels that have no live premium shadow yet, with the narration the
+# channel config names (Edge is reachable from CI, not from the build container), at final quality, then checks the
+# objective QA and prints the Creative Director frame review:
+#   - The Hidden Logic of Things: the evidence-qualified record BTO-301 (VERIFIED, every fact quoted), rendered from
+#     scripts/bto-studio/auto/behind-the-ordinary.js into a separate storyboard version; the directed storyboard is
+#     not touched
+#   - GoalLore Lab: the pilot record GLL-P01 (pilot mode: stamped NOT APPROVED FOR PUBLICATION; the channel is not
+#     registered and its research lacks verbatim quotes), rendered from scripts/bto-studio/auto/goal-lore-lab.js
+# No YouTube credentials, read-only contents, nothing committed or uploaded, own concurrency group.
+on:
+  pull_request:
+    paths:
+      - 'scripts/bto-studio/**'
+      - 'channels/behind-the-ordinary/premium/**'
+      - 'channels/goal-lore-lab/**'
+      - '.github/workflows/premium-render-check.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: premium-render-check-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      PUBLISH: '0'
+      BTO_PREMIUM_RENDER: preview
+      PD_CHROMIUM: /usr/bin/google-chrome
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Runtime dependencies
+        run: |
+          bash scripts/ci-apt.sh --no-install-recommends ffmpeg fonts-dejavu-core fonts-liberation python3-pil time
+          npm ci --no-audit --no-fund
+          python -m pip install --quiet numpy soundfile pillow
+      - name: The Hidden Logic of Things BTO-301, automatic storyboard
+        run: |
+          set -o pipefail
+          node -e 'const A=require("./scripts/bto-studio/adapter");const G=require("./scripts/bto-studio/auto/behind-the-ordinary");const st=require("./channels/behind-the-ordinary/premium/style-pack.json");const {channel,topic}=A.loadTopic("behind-the-ordinary","BTO-301");const r=A.readiness(channel,topic);if(!r.ready){console.log("not ready: "+r.errors.join("; "));process.exit(1)}const sb=G.build(A.studioScript(channel,topic),st,topic);sb.version=9;require("fs").writeFileSync("channels/behind-the-ordinary/premium/BTO-301/storyboard.auto.json",JSON.stringify(sb,null,1))'
+          node scripts/bto-studio/studio.js --channel behind-the-ordinary --topic BTO-301 --storyboard storyboard.auto.json --voice edge 2>&1 | tail -40
+      - name: GoalLore Lab GLL-P01 pilot, automatic storyboard
+        run: |
+          set -o pipefail
+          mkdir -p "$RUNNER_TEMP/gll/GLL-P01" && cp channels/goal-lore-lab/premium/pilots/GLL-P01/topic.json "$RUNNER_TEMP/gll/GLL-P01/"
+          node scripts/bto-studio/studio.js --pilot "$RUNNER_TEMP/gll/GLL-P01" --regenerate --voice edge 2>&1 | tail -40
+      - name: Objective QA and creative review
+        run: |
+          for out in channels/behind-the-ordinary/premium/BTO-301/out/v9 "$RUNNER_TEMP/gll/GLL-P01/out"; do
+            echo "### $out" | tee -a "$GITHUB_STEP_SUMMARY"
+            node -e 'const p=require(require("path").resolve(process.argv[1],"review-package.json"));console.log("verdict",p.verdict,"| objective",p.qa.objectivePass,"| voice",p.voice.used,"approved",p.voice.approved,"| render",p.performance.renderWallSec,"s, Chromium PSS",p.performance.peakChromiumRssMb,"MB");if(!p.qa.objectivePass)process.exit(1)' "$out" | tee -a "$GITHUB_STEP_SUMMARY"
+            grep -E "^- FAIL" "$out/qa-report.md" | head -10 | tee -a "$GITHUB_STEP_SUMMARY" || true
+            node scripts/bto-studio/creative-director.js review --out "$out" | tail -14 | tee -a "$GITHUB_STEP_SUMMARY" || true
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: premium-render-check
+          path: |
+            channels/behind-the-ordinary/premium/BTO-301/storyboard.auto.json
+            channels/behind-the-ordinary/premium/BTO-301/out/v9/*.mp4
+            channels/behind-the-ordinary/premium/BTO-301/out/v9/*.md
+            channels/behind-the-ordinary/premium/BTO-301/out/v9/*.png
+            ${{ runner.temp }}/gll/GLL-P01/storyboard.json
+            ${{ runner.temp }}/gll/GLL-P01/out/*.mp4
+            ${{ runner.temp }}/gll/GLL-P01/out/*.md
+            ${{ runner.temp }}/gll/GLL-P01/out/*.png
+          retention-days: 14
+          if-no-files-found: warn
