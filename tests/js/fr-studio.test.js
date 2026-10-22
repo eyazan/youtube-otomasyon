@@ -73,7 +73,9 @@ test("FR premium shadow: OFF by default, FR_PREMIUM_RENDER=preview only, after t
   Shadow.run(fr, { id: "FR-air-france-447-2009", slug: "air-france-447-2009" }, { FR_PREMIUM_RENDER: "preview", FR_PREMIUM_MEASURE: "0" }, spawn);
   assert.equal(calls, 1); assert.ok(spawn.args.includes("--shadow") && spawn.args.includes("FR-air-france-447-2009"));
   const src = fs.readFileSync(path.join(ROOT, "shorts-sira.js"), "utf8"); const main = src.slice(src.indexOf("function main()"));
-  assert.ok(main.indexOf("premium-shadow") > main.indexOf('asama().outcome("UPLOADED"'), "the shadow runs after the live outcome is recorded");
+  assert.ok(main.indexOf("premiumShadowAfter(uretilen, son)") > main.indexOf('asama().outcome("UPLOADED"'), "the shadow runs after the live outcome is recorded");
+  assert.ok(/uretBir\(acikSlug\); premiumShadowAfter\(/.test(main), "an explicit-slug run shadows after the live render too");
+  assert.match(src, /function premiumShadowAfter[\s\S]*?catch \(e\) \{ console\.log/, "a shadow failure is caught and logged");
   assert.equal(require("child_process").spawnSync("git", ["check-ignore", "-q", "channels/failure-reconstructed/premium/FR-new-case/out/review-package.json"], { cwd: ROOT }).status, 0);
   assert.equal(require("child_process").spawnSync("git", ["check-ignore", "-q", "uretim/new-case/premium-shadow.json"], { cwd: ROOT }).status, 0);
 });

@@ -53,7 +53,15 @@ jobs:
         env:
           FR_PREMIUM_RENDER: preview
           FR_PREMIUM_QUALITY: final
-        run: node shorts-sira.js --channel failure-reconstructed 2>&1 | tee fr-dry-run.log
+        run: |
+          node shorts-sira.js --channel failure-reconstructed 2>&1 | tee fr-dry-run.log
+          # the scheduled lane may skip (no topic at the bar today): then the same entry point produces one ready case
+          # explicitly (shorts-sira.js <slug>, PUBLISH=0), so the live render and the shadow are exercised on every run
+          if ! ls uretim/*/premium-shadow.json >/dev/null 2>&1; then
+            SLUG=$(node -e 'const A=require("./scripts/bto-studio/adapter");const fs=require("fs");for(const f of fs.readdirSync("icerik/konular").sort()){const s=f.replace(/\.json$/,"");try{const {channel,topic}=A.loadTopic("failure-reconstructed",s);if(A.readiness(channel,topic).ready){console.log(s);break}}catch(e){}}')
+            echo "scheduled lane produced nothing; explicit dry run of ready case $SLUG" | tee -a fr-dry-run.log
+            node shorts-sira.js --channel failure-reconstructed "$SLUG" 2>&1 | tee -a fr-dry-run.log
+          fi
       - name: Premium gate and creative review
         if: always()
         run: |

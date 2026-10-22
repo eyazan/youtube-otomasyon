@@ -298,6 +298,18 @@ function uretBir(slug) {
   return slug;
 }
 
+// Premium shadow (FR_PREMIUM_RENDER=preview, default OFF): after the live lane finished, a second render of the produced
+// case with the shared studio; logged and compared only, never uploaded, cannot change this run's result
+function premiumShadowAfter(uretilen, son) {
+  if (!uretilen) return;
+  try {
+    const qg = (() => { try { return JSON.parse(fs.readFileSync(path.join(CHANNEL.paths.state, "paket", uretilen.slug, "quality-gate.json"), "utf8")); } catch (e) { return {}; } })();
+    const out = path.join(CHANNEL.paths.production, uretilen.slug); // uretim/ is git-ignored: the comparison never reaches main
+    require("./core/pipeline/premium-shadow").run(CHANNEL, { id: "FR-" + uretilen.slug, slug: uretilen.slug }, process.env, cp.spawnSync,
+      { output: fs.existsSync(out) ? out : null, renderer: "stock (shorts-sira legacy lane)", decision: qg.karar || null, score: qg.toplam ?? null, validationsPassed: qg.karar === "PUBLISH", renderSec: uretilen.sec, upload: son && son.stages && son.stages.UPLOAD.status === "done" ? "uploaded" : "skipped" });
+  } catch (e) { console.log("[" + CHANNEL.name + "] premium shadow skipped: " + e.message + "; live production unaffected"); }
+}
+
 function main() {
   const argv = SELECTED.argv;
   const hepsi = argv.includes("--hepsi");
@@ -306,7 +318,7 @@ function main() {
   if (!tum.length) { console.log("icerik/konular/ bos. Once konu ekle."); return 0; }
 
   // Belirli slug: dogrudan uret (hata firlatir).
-  if (acikSlug) { uretBir(acikSlug); return 0; }
+  if (acikSlug) { const t0 = Date.now(); uretBir(acikSlug); premiumShadowAfter({ slug: acikSlug, sec: Math.round((Date.now() - t0) / 1000) }, null); return 0; }
 
   if (!hepsi) RUN = require("./lib/run-stages").start(CHANNEL);
   // Takvim: gunluk (varsayilan) modda slot dolmadiysa uretme (kalite > siklik).
@@ -394,14 +406,7 @@ function main() {
   if (son && son.stages.UPLOAD.status === "done") asama().outcome("UPLOADED", null, { videoId: son.stages.UPLOAD.detail || null });
   else if (process.env.PUBLISH !== "1") asama().outcome("DRY_RUN", "rendered without upload");
   else asama().outcome("FAILED", "rendered but not uploaded (" + ((son && son.stages.UPLOAD.detail) || "no upload") + ")");
-  // Premium shadow (FR_PREMIUM_RENDER=preview, default OFF): after the live lane finished, a second render of the produced
-  // case with the shared studio; logged and compared only, never uploaded, cannot change this run's result
-  if (uretilen) try {
-    const qg = (() => { try { return JSON.parse(fs.readFileSync(path.join(CHANNEL.paths.state, "paket", uretilen.slug, "quality-gate.json"), "utf8")); } catch (e) { return {}; } })();
-    const out = path.join(CHANNEL.paths.production, uretilen.slug); // uretim/ is git-ignored: the comparison never reaches main
-    require("./core/pipeline/premium-shadow").run(CHANNEL, { id: "FR-" + uretilen.slug, slug: uretilen.slug }, process.env, cp.spawnSync,
-      { output: fs.existsSync(out) ? out : null, renderer: "stock (shorts-sira legacy lane)", decision: qg.karar || null, score: qg.toplam ?? null, validationsPassed: qg.karar === "PUBLISH", renderSec: uretilen.sec, upload: son && son.stages.UPLOAD.status === "done" ? "uploaded" : "skipped" });
-  } catch (e) { console.log("[" + CHANNEL.name + "] premium shadow skipped: " + e.message + "; live production unaffected"); }
+  premiumShadowAfter(uretilen, son);
   return 0;
 }
 
