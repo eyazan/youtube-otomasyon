@@ -14,7 +14,9 @@ const approval = (a) => !!(a && typeof a.by === "string" && a.by.trim() && typeo
 
 // Each guard returns a list of reasons the video may NOT enter that state (empty = allowed).
 const GUARDS = {
-  TOPIC_READY: (v) => [
+  // v.topicReadiness (adapter.readiness: the channel's own research standard, e.g. ImpossibleBrief's researched records)
+  // replaces the default The Hidden Logic of Things rule when the caller supplies it
+  TOPIC_READY: (v) => v.topicReadiness ? [...v.topicReadiness.errors, v.alreadyPublished ? "topic already published" : null] : [
     v.topic && v.topic.researchStatus === "VERIFIED" ? null : "topic research is not VERIFIED",
     v.topic && v.topic.productionReady === true ? null : "topic is not productionReady",
     v.topic && Array.isArray(v.topic.facts) && v.topic.facts.length && v.topic.facts.every((f) => f.quote && f.url) ? null : "evidence is weak: every fact needs a verbatim quote and a source URL",

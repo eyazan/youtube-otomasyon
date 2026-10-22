@@ -1,0 +1,391 @@
+{
+ "video": "channels/impossible-brief/premium/IB-EXT-050/out/what-if-we-tried-to-drill-through-the-earth-premium-preview.mp4",
+ "quality": "preview",
+ "measuredAt": "2026-10-22T03:20:43.001Z",
+ "objectivePass": true,
+ "unverified": [
+  "audio samples clipped"
+ ],
+ "objective": [
+  {
+   "name": "resolution",
+   "ok": true,
+   "measured": "540x960 30/1 h264",
+   "target": "540x960",
+   "hard": true,
+   "status": "PASS"
+  },
+  {
+   "name": "frame rate",
+   "ok": true,
+   "measured": "30/1",
+   "target": "30/1",
+   "hard": true,
+   "status": "PASS"
+  },
+  {
+   "name": "codec",
+   "ok": true,
+   "measured": "h264 High yuv420p",
+   "target": "h264 yuv420p",
+   "hard": true,
+   "status": "PASS"
+  },
+  {
+   "name": "full decode errors",
+   "ok": true,
+   "measured": 0,
+   "target": 0,
+   "hard": true,
+   "status": "PASS"
+  },
+  {
+   "name": "duration (channel Shorts target)",
+   "ok": true,
+   "measured": "29.6 s",
+   "target": "18-42 s",
+   "hard": true,
+   "status": "PASS"
+  },
+  {
+   "name": "black frames >= 0.1 s",
+   "ok": true,
+   "measured": "none",
+   "target": "none",
+   "hard": true,
+   "status": "PASS"
+  },
+  {
+   "name": "first frame not empty",
+   "ok": true,
+   "measured": "mean luma 39.2, detail sd 35.2, edge 1.40",
+   "target": "mean > 25, sd > 20",
+   "hard": true,
+   "status": "PASS"
+  },
+  {
+   "name": "static holds >= 2 s (freezedetect n=0.003)",
+   "ok": true,
+   "measured": "none",
+   "target": "none",
+   "hard": true,
+   "status": "PASS"
+  },
+  {
+   "name": "audio samples clipped",
+   "ok": false,
+   "measured": "not reported by this FFmpeg build (astats has no clipped-sample count)",
+   "target": "0",
+   "hard": false,
+   "status": "UNVERIFIED"
+  },
+  {
+   "name": "sample peak below full scale (decoded AAC)",
+   "ok": true,
+   "measured": "-1.46 dBFS",
+   "target": "<= -0.1 dBFS",
+   "hard": true,
+   "status": "PASS"
+  },
+  {
+   "name": "flat factor (sustained full-scale runs)",
+   "ok": true,
+   "measured": "0/0/0",
+   "target": "0",
+   "hard": false,
+   "status": "PASS"
+  },
+  {
+   "name": "integrated loudness",
+   "ok": true,
+   "measured": "-14.3 LUFS",
+   "target": "-14 +/- 1",
+   "hard": false,
+   "status": "PASS"
+  },
+  {
+   "name": "true peak",
+   "ok": true,
+   "measured": "-1.5 dBTP",
+   "target": "<= -1 dBTP",
+   "hard": true,
+   "status": "PASS"
+  },
+  {
+   "name": "silence >= 1.0 s at -45 dB",
+   "ok": true,
+   "measured": "none",
+   "target": "reported (designed pauses allowed)",
+   "hard": false,
+   "status": "PASS"
+  },
+  {
+   "name": "a/v duration match",
+   "ok": true,
+   "measured": "0.000 s",
+   "target": "<= 0.1 s",
+   "hard": true,
+   "status": "PASS"
+  },
+  {
+   "name": "caption layout",
+   "ok": true,
+   "measured": "17 cues, 0 over 2 lines x 26 chars",
+   "target": "<= 2 x 26",
+   "hard": true,
+   "status": "PASS"
+  },
+  {
+   "name": "caption reading speed",
+   "ok": true,
+   "measured": "0 cues over 22 chars/s (max 19.5)",
+   "target": "<= 22 chars/s",
+   "hard": false,
+   "status": "PASS"
+  },
+  {
+   "name": "captions within video",
+   "ok": true,
+   "measured": "last cue ends 29.31 s",
+   "target": "<= 29.60 s",
+   "hard": true,
+   "status": "PASS"
+  },
+  {
+   "name": "loop continuity (last -> first frame)",
+   "ok": false,
+   "measured": "whole 8.5, photo region 15.23, final-second step 0.19, ratio 13.13",
+   "target": "whole <= 25; not (ratio > 3 and > 4)",
+   "hard": false,
+   "status": "WARN"
+  },
+  {
+   "name": "first spoken word within 0.5 s",
+   "ok": true,
+   "measured": "0.00 s",
+   "target": "<= 0.5 s",
+   "hard": false,
+   "status": "PASS"
+  },
+  {
+   "name": "caption sync vs narration onsets (cues after a pause)",
+   "ok": true,
+   "measured": "8 cues: max 20 ms, mean 5 ms",
+   "target": "max <= 150 ms",
+   "hard": false,
+   "status": "PASS"
+  },
+  {
+   "name": "narration is real speech (lib/speech-check)",
+   "ok": true,
+   "measured": "voiced 0.831, 2.31 words/s, longest silence 0.42 s",
+   "target": "speech-check ok",
+   "hard": true,
+   "status": "PASS"
+  },
+  {
+   "name": "narration voice approved for publishing",
+   "ok": false,
+   "measured": "kokoro am_fenrir (preview fallback)",
+   "target": "approved channel voice",
+   "hard": false,
+   "status": "WARN"
+  },
+  {
+   "name": "text gate (collisions, caption band, edges, size)",
+   "ok": true,
+   "measured": "0 FAIL / 0 WARN groups; min essential 30px",
+   "target": "0 FAIL",
+   "hard": true,
+   "status": "PASS"
+  },
+  {
+   "name": "essential text >= style minimum",
+   "ok": true,
+   "measured": "30px",
+   "target": ">= 30px",
+   "hard": false,
+   "status": "PASS"
+  },
+  {
+   "name": "no static hold >= 1.5 s inside a scene (visual change target)",
+   "ok": false,
+   "measured": "longest 1.83 s (s5-heat)",
+   "target": "< 1.5 s",
+   "hard": false,
+   "status": "WARN"
+  },
+  {
+   "name": "no two scenes look alike (key-frame correlation <= 0.92; hook/payoff loop pair exempt)",
+   "ok": true,
+   "measured": "max 0.739",
+   "target": "<= 0.92",
+   "hard": false,
+   "status": "PASS"
+  },
+  {
+   "name": "deterministic frames (two fresh pages, any order)",
+   "ok": true,
+   "measured": "0.7s same, 12.3s same, 24.9s same, 29.1s same",
+   "target": "identical",
+   "hard": true,
+   "status": "PASS"
+  }
+ ],
+ "scenes": [
+  {
+   "id": "s1-hook",
+   "sec": 4.72,
+   "meanMotion": 0.301,
+   "staticShare": 0.55,
+   "longestStaticSec": 0.67
+  },
+  {
+   "id": "s2-zoom",
+   "sec": 1.61,
+   "meanMotion": 2.863,
+   "staticShare": 0.04,
+   "longestStaticSec": 0.03
+  },
+  {
+   "id": "s3-year",
+   "sec": 4.75,
+   "meanMotion": 0.617,
+   "staticShare": 0.56,
+   "longestStaticSec": 1.33
+  },
+  {
+   "id": "s4-measure",
+   "sec": 3.16,
+   "meanMotion": 0.495,
+   "staticShare": 0.38,
+   "longestStaticSec": 0.63
+  },
+  {
+   "id": "s5-heat",
+   "sec": 4.62,
+   "meanMotion": 0.526,
+   "staticShare": 0.43,
+   "longestStaticSec": 1.83
+  },
+  {
+   "id": "s6-flow",
+   "sec": 3.63,
+   "meanMotion": 0.475,
+   "staticShare": 0.58,
+   "longestStaticSec": 1.2
+  },
+  {
+   "id": "s7-cut",
+   "sec": 2.63,
+   "meanMotion": 0.691,
+   "staticShare": 0.32,
+   "longestStaticSec": 0.37
+  },
+  {
+   "id": "s8-payoff",
+   "sec": 4.46,
+   "meanMotion": 0.401,
+   "staticShare": 0.68,
+   "longestStaticSec": 0.47
+  }
+ ],
+ "similarPairsTop": [
+  {
+   "a": "s5-heat",
+   "b": "s8-payoff",
+   "r": 0.739
+  },
+  {
+   "a": "s1-hook",
+   "b": "s8-payoff",
+   "r": 0.733
+  },
+  {
+   "a": "s4-measure",
+   "b": "s6-flow",
+   "r": 0.693
+  },
+  {
+   "a": "s1-hook",
+   "b": "s5-heat",
+   "r": 0.683
+  },
+  {
+   "a": "s4-measure",
+   "b": "s5-heat",
+   "r": 0.673
+  }
+ ],
+ "qr": null,
+ "determinism": [
+  {
+   "t": 0.7,
+   "identical": true
+  },
+  {
+   "t": 12.3,
+   "identical": true
+  },
+  {
+   "t": 24.9,
+   "identical": true
+  },
+  {
+   "t": 29.1,
+   "identical": true
+  }
+ ],
+ "technical": {
+  "loudness": {
+   "I": -14.3,
+   "LRA": 2,
+   "truePeak": -1.5
+  },
+  "motion": {
+   "method": "mean abs luma diff per frame on a 270x480 gray proxy; static = diff < 0.5",
+   "first3sMean": 0.35,
+   "first3sStaticShare": 0.87,
+   "wholeMean": 0.67,
+   "wholeStaticShare": 0.72,
+   "longestStaticRunSec": 2.5
+  },
+  "captionSync": {
+   "method": "|cue start - nearest acoustic onset (silencedetect -38 dB, 0.12 s) on the final mix| for cues that start after a pause",
+   "measured": 0,
+   "meanMs": 0,
+   "maxMs": 0
+  },
+  "loop": {
+   "method": "mean abs gray diff on 270x480 proxy",
+   "lastToFirstWhole": 8.5,
+   "lastToFirstPhotoRegion": 15.23,
+   "finalSecondMedianStep": 0.19,
+   "ratio": 13.13
+  },
+  "first3s": {
+   "speechOnsetSec": 0,
+   "motionMean": 0.35,
+   "staticShare": 0.87,
+   "frame0": {
+    "meanLuma": 39.2,
+    "detailSd": 35.2,
+    "edgeEnergy": 1.4
+   }
+  }
+ },
+ "text": {
+  "fails": [],
+  "warns": [],
+  "minEssentialFontPx": 30
+ },
+ "sheets": {
+  "contactSheet": "channels/impossible-brief/premium/IB-EXT-050/out/contact-sheet.png",
+  "sceneSheet": "channels/impossible-brief/premium/IB-EXT-050/out/scene-sheet.png"
+ },
+ "audioSync": {
+  "method": "every sound effect is placed at a time the page computed from the same word anchors that drive its animation (BTO.audio); the offset is 0 by construction, frame-quantised to 33 ms",
+  "cues": 23
+ },
+ "subjective": "Not measured here: see the video-quality-review skill and revision-history.md."
+}

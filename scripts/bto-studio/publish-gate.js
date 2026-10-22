@@ -37,7 +37,7 @@ function evaluate(pkgFile, approvals = {}) {
     for (const id of used) { const a = reg.find((x) => x.id === id); mediaIssues.push(...(a ? Assets.check(a, "publish") : [`${id}: not in the asset registry`])); } }
   const speech = (qa.objective || []).find((c) => /real speech/.test(c.name));
   const facts = topic.facts || [];
-  let v = { topic, alreadyPublished: dup.length > 0 };
+  let v = { topic, alreadyPublished: dup.length > 0, ...(channel.slug !== "behind-the-ordinary" ? { topicReadiness: Adapter.readiness(channel, topic) } : {}) };
   const steps = [];
   const go = (to, extra) => { v = { ...v, ...extra }; const r = LC.check(v, to); steps.push({ to, ok: r.ok, reasons: r.reasons }); if (r.ok) v = LC.advance(v, to); return r.ok; };
   go("TOPIC_READY", {}) &&

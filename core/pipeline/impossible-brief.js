@@ -134,6 +134,32 @@ function llmShadow(channel, topic, output, env = process.env, spawn = cp.spawnSy
   }
 }
 
+// Premium studio shadow (feature flag, default OFF). IB_PREMIUM_RENDER=preview renders the selected topic a second time
+// with the shared premium studio (scripts/bto-studio/studio.js: auto storyboard from the researched record, approved
+// Edge voice or a marked Kokoro preview, QA, review package) into channels/impossible-brief/premium/<id>/out/. It runs in
+// a child process with a timeout, once per run, and its outcome is only logged: it never uploads, never changes the
+// live render, upload or the topic's state, and a premium package can never reach the uploader from here (publishing a
+// premium Short is a separate owner go-live switch that does not exist yet).
+function premiumShadow(channel, topic, env = process.env, spawn = cp.spawnSync) {
+  const mode = String(env.IB_PREMIUM_RENDER || "").toLowerCase();
+  if (channel.slug !== "impossible-brief" || mode !== "preview") return null;
+  const args = [path.join(Channel.ROOT, "scripts", "bto-studio", "studio.js"), "--channel", channel.slug, "--topic", topic.id, "--quality", env.IB_PREMIUM_QUALITY === "final" ? "final" : "preview", "--kokoro-voice", ((channel.config.voice || {}).fallback || {}).voice || "am_fenrir"];
+  const started = Date.now();
+  try {
+    const child = spawn(process.execPath, args, { cwd: Channel.ROOT, env: { ...env, BTO_PREMIUM_RENDER: "preview" }, encoding: "utf8", timeout: Number(env.IB_PREMIUM_TIMEOUT_MS || 1500000), maxBuffer: 1 << 26 });
+    const sec = Math.round((Date.now() - started) / 1000);
+    const pkgFile = path.join(channel.paths.base, "premium", topic.id, "out", "review-package.json");
+    let verdict = null; try { verdict = JSON.parse(fs.readFileSync(pkgFile, "utf8")).verdict; } catch (error) {}
+    const status = child.error ? `did not finish (${child.error.code || child.error.message})` : `exit ${child.status}`;
+    console.log(`[${channel.name}] premium shadow (${mode}) ${topic.slug}: ${status} in ${sec} s, package ${verdict || "none"}; live production unaffected`);
+    if (child.status !== 0) console.log(String(child.stderr || child.stdout || "").trim().split("\n").slice(-6).join("\n"));
+    return { status: child.status, verdict, sec };
+  } catch (error) {
+    console.log(`[${channel.name}] premium shadow could not start: ${error.message}; live production unaffected`);
+    return null;
+  }
+}
+
 function chooseTopic(channel, explicit, universe) {
   if (explicit) {
     const topic = universe.find((item) => item.slug === explicit || item.id === explicit);
@@ -194,6 +220,7 @@ function runChannel(slug, argv = []) {
   const noRender = argv.includes("--no-render");
   let choice, topic, output, result, finalPlan;
   let prechecks = 0;
+  let shadowDone = false;
   for (let attempt = 1; ; attempt += 1) {
     choice = chooseTopic(channel, explicit, universe);
     if (!choice.topic) {
@@ -205,6 +232,7 @@ function runChannel(slug, argv = []) {
       return 0;
     }
     topic = choice.topic;
+    if (!shadowDone) { shadowDone = true; premiumShadow(channel, topic); }
     run.reset().topic(topic.slug).done("RESEARCH", choice.reason).done("SCRIPT", `pre-render readiness ${choice.plan.readiness.decision} ${choice.plan.readiness.ProductionReadinessScore}`);
     output = path.join(channel.paths.production, topic.slug);
     const shortfall = !noRender && !explicit ? visualShortfall(topic, output) : null;
@@ -332,4 +360,4 @@ function recordGenerated(channel, topic, uploaded) {
 
 function main(argv = []) { return runChannel("impossible-brief", argv); }
 
-module.exports = { llmShadow, MIN_PRECHECK_VISUALS, MAX_VISUAL_PRECHECKS, visualShortfall, writeCompatibilityFiles, writeValidationEvidence, visualRejection, runChannel, main };
+module.exports = { llmShadow, premiumShadow, MIN_PRECHECK_VISUALS, MAX_VISUAL_PRECHECKS, visualShortfall, writeCompatibilityFiles, writeValidationEvidence, visualRejection, runChannel, main };

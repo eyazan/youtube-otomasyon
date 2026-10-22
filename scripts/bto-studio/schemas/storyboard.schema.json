@@ -24,7 +24,7 @@
     },
     "topicId": {
       "type": "string",
-      "pattern": "^(BTO|GLL|FR|IB)-P?\\d+$"
+      "pattern": "^(BTO|GLL|FR|IB|CT)-([A-Z]{2,4}-)?P?\\d+$"
     },
     "slug": {
       "type": "string"
@@ -172,7 +172,10 @@
               "illustrationLabel",
               "conceptualLabel",
               "photoLabel",
-              "modelLabel"
+              "modelLabel",
+              "factLabel",
+              "estimateLabel",
+              "speculativeLabel"
             ]
           }
         },
@@ -290,7 +293,9 @@
             "paper",
             "amber",
             "teal",
-            "scanner"
+            "scanner",
+            "space",
+            "void"
           ]
         },
         "envShift": {
@@ -307,7 +312,9 @@
                 "paper",
                 "amber",
                 "teal",
-                "scanner"
+                "scanner",
+                "space",
+                "void"
               ]
             },
             "at": {

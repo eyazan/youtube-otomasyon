@@ -50,7 +50,7 @@ async function run({ video, data, meta, work, out, ndir, narration, timeline, st
   const cuesFile = path.join(out, "captions.json"); fs.writeFileSync(cuesFile, JSON.stringify({ cues: meta.cues }, null, 1) + "\n");
   // 1. technical
   const tech = technicalQa(video, { cuesFile, wordsFile: path.join(ndir || path.join(out, "narration"), "timeline.json") });
-  const res = quality === "preview" ? "540x960" : "1080x1920"; const target = data.style && [30, 50];
+  const res = quality === "preview" ? "540x960" : "1080x1920"; const target = data.targetDuration || [30, 50]; // the channel's Shorts target (studio passes it); BTO's default otherwise
   for (const c of tech.checks) {
     if (c.name === "resolution") { add("resolution", tech.video.startsWith(res), tech.video, res); continue; }
     if (c.name === "duration") { add("duration (channel Shorts target)", tech.durationSec >= target[0] && tech.durationSec <= target[1], `${tech.durationSec} s`, `${target[0]}-${target[1]} s`); continue; }

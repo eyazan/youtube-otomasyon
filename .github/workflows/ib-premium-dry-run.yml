@@ -1,0 +1,89 @@
+name: ImpossibleBrief dry run (selection + live render + premium shadow)
+
+# End-to-end dry run of the ImpossibleBrief production entry point WITHOUT uploading:
+#   1. visual survey of the topics nearest the bar (scripts/growth/visual-survey.js; runner-local, not committed)
+#   2. qualified topic buffer (scripts/growth/topic-buffer.js)
+#   3. node shorts-sira.js --channel impossible-brief with PUBLISH=0 and IB_PREMIUM_RENDER=preview: the live topic
+#      selection, the live stock renderer and its gates, plus the premium studio shadow on the same topic
+#   4. premium publish gate + Creative Director frame review; artifacts for human review
+# No YouTube credentials are given to this job, contents permission is read-only, nothing is committed or uploaded,
+# and it uses its own concurrency group so it never queues behind or blocks portfolio-production.
+on:
+  pull_request:
+    paths:
+      - 'core/**'
+      - 'scripts/bto-studio/**'
+      - 'scripts/growth/**'
+      - 'channels/impossible-brief/**'
+      - 'shorts-sira.js'
+      - '.github/workflows/ib-premium-dry-run.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: ib-premium-dry-run-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  dry-run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      PUBLISH: '0'
+      PEXELS_KEY: ${{ secrets.PEXELS_KEY }}
+      SHORTS_FONT: DejaVu Sans
+      PD_CHROMIUM: /usr/bin/google-chrome
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Runtime dependencies
+        run: |
+          bash scripts/ci-apt.sh --no-install-recommends ffmpeg fonts-dejavu-core fonts-liberation python3-pil
+          npm ci --no-audit --no-fund
+          python -m pip install --quiet numpy soundfile pillow
+      - name: Visual survey (runner-local)
+        run: node scripts/growth/visual-survey.js --channel impossible-brief --limit 30 --report visual-survey-report.json
+      - name: Qualified topic buffer
+        run: node scripts/growth/topic-buffer.js | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Scheduled-production entry point, dry run (no upload) + premium shadow
+        env:
+          IB_PREMIUM_RENDER: preview
+          IB_PREMIUM_QUALITY: final
+        run: node shorts-sira.js --channel impossible-brief 2>&1 | tee ib-dry-run.log
+      - name: Premium gate and creative review
+        if: always()
+        run: |
+          for pkg in channels/impossible-brief/premium/*/out/review-package.json; do
+            [ -f "$pkg" ] || continue
+            echo "### $pkg" | tee -a "$GITHUB_STEP_SUMMARY"
+            node scripts/bto-studio/publish-gate.js "$pkg" | tee -a "$GITHUB_STEP_SUMMARY" || true
+            node scripts/bto-studio/creative-director.js review --out "$(dirname "$pkg")" | tail -14 | tee -a "$GITHUB_STEP_SUMMARY" || true
+          done
+          git status --short | tee state-diff.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ib-dry-run
+          path: |
+            ib-dry-run.log
+            state-diff.txt
+            visual-survey-report.json
+            channels/impossible-brief/state/visual-survey.json
+            channels/impossible-brief/state/growth/latest-decision.json
+            channels/impossible-brief/premium/*/storyboard.json
+            channels/impossible-brief/premium/*/out/*.mp4
+            channels/impossible-brief/premium/*/out/*.md
+            channels/impossible-brief/premium/*/out/*.json
+            channels/impossible-brief/premium/*/out/production.log
+            channels/impossible-brief/state/production/*/*.mp4
+            channels/impossible-brief/state/production/*/quality-gate.json
+            channels/impossible-brief/state/production/*/render.json
+          retention-days: 14
+          if-no-files-found: warn

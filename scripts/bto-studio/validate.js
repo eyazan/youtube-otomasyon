@@ -42,11 +42,17 @@ function screenTexts(layer) {
   if (layer.component === "qr-3d" && p.explode) (p.explode.labels || []).forEach((it) => out.push({ text: it.text, kind: "label", size: it.size || 44 }));
   if (layer.component === "quote-card") { out.push({ text: (p.lines || [p.quote]).join(" "), kind: "quote", quoteOf: p.quoteOf }); out.push({ text: p.attribution || "", kind: "credit" }); }
   if (layer.component === "timeline-ruler") out.push({ text: String(p.year), kind: "year" });
+  if (layer.component === "scale-ladder") (p.items || []).forEach((it) => { if (it.label) out.push({ text: it.label, kind: "label", size: p.labelSize || 34 }); if (it.valueText) out.push({ text: it.valueText, kind: "label", size: p.valueSize || 40 }); });
+  if (layer.component === "depth-probe") { (p.markers || []).forEach((m) => out.push({ text: m.label, kind: "label", size: m.size || 40 })); (p.readouts || []).forEach((r) => out.push({ text: r.text, kind: "type", size: r.size || 78 })); if (p.surface) out.push({ text: p.surface, kind: "label", size: 40 }); }
+  if (layer.component === "planet") { (p.labels || []).forEach((l) => out.push({ text: l.text, kind: "label", size: l.size || 40 })); ((p.cutaway || {}).layers || []).forEach((l) => l.label && out.push({ text: l.label, kind: "label", size: l.size || 40 })); if (p.probe && p.probe.label) out.push({ text: p.probe.label, kind: "label", size: p.probe.size || 40 }); }
   if (layer.component === "run-length-strip") { if (p.labelsAt != null) out.push({ text: (p.labels || p.runs || []).join(":"), kind: "ratio" }); if (p.caption) out.push({ text: p.caption, kind: "label" }); }
   return out;
 }
 
-function validateStoryboard(sb, { script, timeline, style, pilot = false }) {
+// Evidence policy per channel (profiles/<channel>.json evidencePolicy): which fact layers a scene may cite and whether
+// each cited fact must carry a stored verbatim quote. Default = The Hidden Logic of Things (VERIFIED FACT + quote).
+const DEFAULT_POLICY = { factLayers: ["VERIFIED FACT"], requireQuote: true };
+function validateStoryboard(sb, { script, timeline, style, pilot = false, policy = DEFAULT_POLICY }) {
   const errors = schemaValidate(SCHEMA, sb).map((e) => "schema " + e); const warnings = [];
   if (errors.length) return { ok: false, errors, warnings };
   const facts = new Map(script.facts.map((f) => [f.id, f]));
@@ -67,8 +73,8 @@ function validateStoryboard(sb, { script, timeline, style, pilot = false }) {
     const end = i < sb.scenes.length - 1 ? starts[i + 1] : duration;
     if (end - starts[i] < 1.2) warnings.push(`${s.id}: only ${(end - starts[i]).toFixed(2)} s on screen`);
     s.lines.forEach((l) => { if (!timeline.lines.some((x) => x.id === l)) errors.push(`${s.id}: line ${l} is not in the narration`); covered.push(l); });
-    for (const id of s.evidence) { const f = facts.get(id); if (!f) errors.push(`${s.id}: cites unknown fact ${id}`); else if (f.layer !== "VERIFIED FACT" || !f.quote) (pilot ? warnings : errors).push(`${s.id}: fact ${id} is not a verified, quoted fact${pilot ? " (pilot: blocks production)" : ""}`); }
-    const cited = s.evidence.map((id) => facts.get(id)).filter(Boolean); const citedText = cited.map((f) => f.claim + " " + f.quote).join(" ");
+    for (const id of s.evidence) { const f = facts.get(id); if (!f) errors.push(`${s.id}: cites unknown fact ${id}`); else if (!policy.factLayers.includes(f.layer) || (policy.requireQuote && !f.quote)) (pilot ? warnings : errors).push(`${s.id}: fact ${id} is not a verified${policy.requireQuote ? ", quoted" : ""} fact${pilot ? " (pilot: blocks production)" : ""}`); }
+    const cited = s.evidence.map((id) => facts.get(id)).filter(Boolean); const citedText = cited.map((f) => f.claim + " " + (f.quote || "")).join(" ");
     for (const L of s.layers) {
       if (!COMPONENTS.has(L.component)) errors.push(`${s.id}: unknown component ${L.component} (known: ${[...COMPONENTS].join(", ")})`);
       if (CONCEPTUAL.has(L.component) && !(L.props || {}).context && !(s.conceptual && (s.chips || []).includes("conceptualLabel"))) errors.push(`${s.id}: ${L.component} is a conceptual depiction; mark the scene conceptual and show the conceptualLabel chip`);
@@ -81,7 +87,7 @@ function validateStoryboard(sb, { script, timeline, style, pilot = false }) {
         if ((tx.kind === "label" || tx.kind === "type") && tx.text.split(/\s+/).length > style.type.maxWordsPerLabel) warnings.push(`${s.id}: "${tx.text}" is longer than ${style.type.maxWordsPerLabel} words`);
       }
     }
-    if (!(s.chips || []).includes("illustrationLabel")) warnings.push(`${s.id}: drawn scene without the ILLUSTRATION chip (brand visualRules.illustrationLabel)`);
+    if (!(s.chips || []).some((c) => c === "illustrationLabel" || c === "conceptualLabel")) warnings.push(`${s.id}: drawn scene without the ILLUSTRATION chip (brand visualRules.illustrationLabel)`);
     if (s.visualPurpose.length < 60) warnings.push(`${s.id}: visualPurpose is thin; say what the viewer sees that narration alone cannot show`);
   });
   const lines = timeline.lines.map((l) => l.id);
@@ -94,4 +100,4 @@ function validateStoryboard(sb, { script, timeline, style, pilot = false }) {
   return { ok: errors.length === 0, errors, warnings, duration, components: [...COMPONENTS] };
 }
 
-module.exports = { validateStoryboard, resolver, COMPONENTS, screenTexts };
+module.exports = { validateStoryboard, resolver, COMPONENTS, screenTexts, DEFAULT_POLICY };

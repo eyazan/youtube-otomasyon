@@ -113,6 +113,7 @@
     <radialGradient id="envTeal" cx="35%" cy="25%" r="95%"><stop offset="0" stop-color="#1f4a45"/><stop offset="0.6" stop-color="#14302d"/><stop offset="1" stop-color="#0b1a18"/></radialGradient>
     <radialGradient id="envSpot" cx="50%" cy="38%" r="60%"><stop offset="0" stop-color="#3b3328"/><stop offset="0.7" stop-color="#18150f"/><stop offset="1" stop-color="#0c0a07"/></radialGradient>
     <pattern id="sensor" width="18" height="18" patternUnits="userSpaceOnUse"><rect x="8" y="8" width="2" height="2" fill="#ffffff" opacity="0.16"/></pattern>
+    <radialGradient id="envSpace" cx="62%" cy="24%" r="105%"><stop offset="0" stop-color="${C.lamp}"/><stop offset="0.5" stop-color="${C.desk2}"/><stop offset="1" stop-color="${C.desk}"/></radialGradient>
     <radialGradient id="vigLight" cx="50%" cy="44%" r="75%"><stop offset="65%" stop-color="#3a2a10" stop-opacity="0"/><stop offset="100%" stop-color="#3a2a10" stop-opacity="0.22"/></radialGradient>
   </defs>`; };
   // scene environments (drawn in screen space under each scene, so transitions carry their own backgrounds)
@@ -123,6 +124,8 @@
     amber: () => `<rect width="1080" height="1920" fill="url(#envAmber)"/><rect width="1080" height="1920" fill="url(#vigLight)"/>`,
     teal: () => `<rect width="1080" height="1920" fill="url(#envTeal)"/>`,
     scanner: () => `<rect width="1080" height="1920" fill="#050505"/><rect width="1080" height="1920" fill="url(#sensor)"/>`,
+    space: () => `<rect width="1080" height="1920" fill="url(#envSpace)"/><rect width="1080" height="1920" fill="url(#vig)"/>`,
+    void: () => `<rect width="1080" height="1920" fill="${BTO.style.palette.desk}"/>`,
   };
   BTO.envs = Object.keys(ENV);
   BTO.isLightEnv = (e) => e === "paper" || e === "amber";
