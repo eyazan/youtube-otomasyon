@@ -99,4 +99,7 @@ function alignWords(lines, edgeWords) {
   fs.writeFileSync(path.join(outDir, "timeline.json"), JSON.stringify({ voice: VOICE, provider: "Microsoft Edge neural TTS (free endpoint, msedge-tts)", duration: +total.toFixed(3), beats: log, lines, words }, null, 1) + "\n");
   fs.rmSync(tmp, { recursive: true, force: true });
   console.log(`narration ${total.toFixed(2)} s, ${words.length} words -> ${out}`);
+  // the msedge-tts socket keeps the event loop alive after the last request; every file is written synchronously above,
+  // so exit explicitly (otherwise a caller's timeout kills a successful run: IB dry run 2026-10-22, 300 s, exit != 0)
+  process.exit(0);
 })().catch((e) => { console.error("NARRATION FAILED:", e.message); process.exit(1); });

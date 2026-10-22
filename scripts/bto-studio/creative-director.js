@@ -132,6 +132,7 @@ const diff = (a, b) => { let d = 0; for (let i = 0; i < a.length; i += 1) d += M
 function review(out, sb, { video } = {}) {
   const meta = JSON.parse(fs.readFileSync(path.join(out, "scenes.json"), "utf8"));
   const vid = video || fs.readdirSync(out).filter((f) => /-premium-(final|preview).*\.mp4$/.test(f)).map((f) => path.join(out, f)).sort((a, b) => /final/.test(b) - /final/.test(a))[0];
+  if (!vid || !fs.existsSync(vid)) throw new Error(`no rendered premium video in ${out} (MP4s are not committed; render the package first)`);
   const ti = (() => { try { return JSON.parse(fs.readFileSync(path.join(out, "text-inspection.json"), "utf8")).samples; } catch (e) { return []; } })();
   const notes = (() => { try { return JSON.parse(fs.readFileSync(path.join(out, "creative-notes.json"), "utf8")); } catch (e) { return {}; } })();
   const aud = audit(sb); let prevMid = null;
