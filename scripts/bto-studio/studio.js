@@ -109,6 +109,10 @@ async function main() {
   const assets = {}; const adir = path.join(topicDir, "assets"); if (fs.existsSync(adir)) for (const f of fs.readdirSync(adir).filter((x) => x.endsWith(".json"))) assets[f.replace(/\.json$/, "")] = J(path.join(adir, f));
   done("storyboard", sha(storyboard));
 
+  // ---- required dependencies, before any narration or frame (a QR topic also needs the decoder QA uses) ------------
+  if (!flag("--skip-preflight")) { const pf = require("./preflight-deps").check({ qr: Object.values(assets).some((a) => a && a.matrix) });
+    if (!pf.ok) throw new Error(`missing dependencies, nothing was rendered: ${pf.missing.join("; ")}`); log(`dependencies: OK (${pf.checked.python.join(", ")})`); }
+
   // ---- narrate ------------------------------------------------------------------------------------------------
   const ndir = path.join(dir, "out", "narration"); const nHash = sha({ beats: script.beats, voiceMode, kv: opt("--kokoro-voice", "af_heart"), code: fs.readFileSync(path.join(__dirname, "narrate.js"), "utf8") });
   let timeline;

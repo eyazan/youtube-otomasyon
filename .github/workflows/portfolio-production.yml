@@ -134,9 +134,20 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+      # apt .deb files cached per package set and ISO week (scripts/ci-apt.sh CI_APT_ARCHIVES): a stalled Ubuntu
+      # mirror cannot block the run once the week's cache exists
+      - name: Cache week
+        id: week
+        run: echo "iso=$(date -u +%G-%V)" >> "$GITHUB_OUTPUT"
+      - name: Dependency cache (apt packages)
+        uses: actions/cache@v4
+        with:
+          path: .cache/apt
+          key: apt-debs-v1-${{ runner.os }}-ffmpeg-fonts-pil-${{ hashFiles('scripts/ci-apt.sh') }}-${{ steps.week.outputs.iso }}
+          restore-keys: apt-debs-v1-${{ runner.os }}-ffmpeg-fonts-pil-
       - name: Runtime dependencies
         run: |
-          bash scripts/ci-apt.sh --no-install-recommends ffmpeg fonts-dejavu-core fonts-liberation python3-pil
+          CI_APT_ARCHIVES="$GITHUB_WORKSPACE/.cache/apt" bash scripts/ci-apt.sh --no-install-recommends ffmpeg fonts-dejavu-core fonts-liberation python3-pil
           npm ci --no-audit --no-fund
       # Offline narration fallback (lib/shorts-tts.js). Installing it does not enable it: a channel
       # uses it only when config.voice.fallback.approved is true (owner-approved voice).
