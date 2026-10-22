@@ -58,10 +58,20 @@ jobs:
           # the scheduled lane may skip (no topic at the bar today): then the same entry point produces one ready case
           # explicitly (shorts-sira.js <slug>, PUBLISH=0), so the live render and the shadow are exercised on every run
           if ! ls uretim/*/premium-shadow.json >/dev/null 2>&1; then
-            SLUG=$(node -e 'const A=require("./scripts/bto-studio/adapter");const fs=require("fs");for(const f of fs.readdirSync("icerik/konular").sort()){const s=f.replace(/\.json$/,"");try{const {channel,topic}=A.loadTopic("failure-reconstructed",s);if(A.readiness(channel,topic).ready){console.log(s);break}}catch(e){}}')
+            # the top-ranked unused A case (the live growth gate publishes A only), ranked by the live engine itself
+            SLUG=$(node -e 'const C=require("./core/channel-context");const ch=C.getChannel("failure-reconstructed");const I=require("./core/growth/inventory");const used=new Set(I.legacyUsed(ch));const s=require("./core/growth").selectShortTopic(ch,{exclude:[...used],write:false});const r=s.ranked.rows.filter((x)=>!used.has(x.topic.slug)&&x.score.bucket==="A").sort((a,b)=>b.score.SelectionScore-a.score.SelectionScore)[0];console.log(r?r.topic.slug:"")')
             echo "scheduled lane produced nothing; explicit dry run of ready case $SLUG" | tee -a fr-dry-run.log
             node shorts-sira.js --channel failure-reconstructed "$SLUG" 2>&1 | tee -a fr-dry-run.log
+            # the live growth gate refuses topics below the bar even when named explicitly (by design): the premium half is
+            # then exercised on its own through the same shadow module, and the comparison says the live lane refused
+            if ! ls uretim/*/premium-shadow.json >/dev/null 2>&1; then
+              echo "live lane refused $SLUG (quality bar); premium shadow exercised standalone" | tee -a fr-dry-run.log
+              mkdir -p "uretim/$SLUG"
+              node -e 'const C=require("./core/channel-context");const ch=C.getChannel("failure-reconstructed");const s=process.argv[1];require("./core/pipeline/premium-shadow").run(ch,{id:"FR-"+s,slug:s},process.env,undefined,{output:"uretim/"+s,renderer:"stock (refused by the live growth gate in this dry run: below the quality bar)",decision:"BLOCK",upload:"none"})' "$SLUG" 2>&1 | tee -a fr-dry-run.log
+            fi
           fi
+          # a green dry run must have exercised both renderers: no comparison means nothing was verified
+          if ! ls uretim/*/premium-shadow.json >/dev/null 2>&1; then echo "::error::no live render + premium shadow was produced; nothing verified"; exit 1; fi
       - name: Premium gate and creative review
         if: always()
         run: |
