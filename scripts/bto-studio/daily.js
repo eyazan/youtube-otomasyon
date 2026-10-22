@@ -62,14 +62,19 @@ function channelReport(slug, { targetPerDay, bufferDays }) {
 // Read from files only; credentials are judged from the last recorded health check, never by reading a secret.
 function matrix(slug, reg, profile, uni, published, r, stateDir, legacy) {
   const cfg = J(path.join(ROOT, "channels", slug, "config.json"), {}); const prefix = cfg.credentialsPrefix || "?";
-  const topics = (uni && uni.topics) || []; const verified = topics.filter((t) => t.researchStatus === "VERIFIED");
-  const quoted = verified.filter((t) => (t.facts || []).length && t.facts.every((f) => f.quote && f.url)); const scripted = topics.filter((t) => Array.isArray(t.narration) && t.narration.length);
+  // FR rows point at the researched case files; the evidence standard is the channel's own (profile evidencePolicy):
+  // IB and FR publish on sourced claims without stored quotes, BTO and GLL require a verbatim quote per fact
+  const A = require("./adapter"); const rows = (uni && uni.topics) || [];
+  const topics = slug === "failure-reconstructed" ? rows.map((t) => { try { return A.loadTopic(slug, t.topic_id).topic; } catch (e) { return null; } }).filter(Boolean) : rows;
+  const needQuote = !(profile.evidencePolicy && profile.evidencePolicy.validator && profile.evidencePolicy.validator.requireQuote === false);
+  const verified = topics.filter((t) => t.researchStatus === "VERIFIED" || !!t.researched || (slug === "failure-reconstructed" && (t.facts || []).length));
+  const quoted = verified.filter((t) => (t.facts || []).length && t.facts.every((f) => f.url && (!needQuote || f.quote))); const scripted = topics.filter((t) => Array.isArray(t.narration) && t.narration.length);
   const health = J(path.join(stateDir, legacy ? "saglik.json" : "health.json"), null); const idCheck = health && (health.bulgular || []).find((b) => b.ad === "youtube-kanal");
   const wf = fs.readdirSync(path.join(ROOT, ".github/workflows")).filter((w) => { const t = fs.readFileSync(path.join(ROOT, ".github/workflows", w), "utf8"); return t.includes(slug) || new RegExp(`\\b${prefix}_`).test(t); });
   const row = (status, detail) => ({ status, detail });
   return {
     topicReadiness: row(r.topics && r.topics.readyForStudio > 0 ? "ready" : topics.length ? "blocked" : "blocked", r.topics ? `${r.topics.readyForStudio} of ${r.topics.total} ready for the studio` : "no topic source"),
-    researchCompleteness: row(quoted.length ? (quoted.length >= 7 ? "ready" : "partial") : "blocked", uni ? `${verified.length} VERIFIED, ${quoted.length} with a verbatim quote and URL on every fact (of ${topics.length})` : "candidates only, no research"),
+    researchCompleteness: row(quoted.length ? (quoted.length >= 7 ? "ready" : "partial") : "blocked", uni ? (needQuote ? `${verified.length} VERIFIED, ${quoted.length} with a verbatim quote and URL on every fact (of ${topics.length})` : `${verified.length} researched, ${quoted.length} with a source URL on every fact (of ${topics.length}; channel standard: sourced claims, no stored quotes)`) : "candidates only, no research"),
     scriptReadiness: row(scripted.length ? (scripted.length >= 7 ? "ready" : "partial") : "blocked", `${scripted.length} topics carry a narration script`),
     narration: row(cfg.voice && /CANDIDATE/i.test(cfg.voice.status || "") ? "blocked" : cfg.voice ? (r.enabled ? "ready" : "partial") : "blocked",
       cfg.voice ? `${cfg.voice.provider || "?"} ${cfg.voice.voice || ""}${cfg.voice.status ? " (" + cfg.voice.status.split(":")[0] + ")" : ""}; Edge is unreachable from the build container, used by live CI runs` : "no voice configured"),

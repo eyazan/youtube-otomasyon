@@ -48,7 +48,8 @@ function build(script, style, topic) {
   const F = (role) => (facts.find((f) => f.role === role) || facts[0]).id;
   const kind = objectKind(topic); const chain = (v.zincir || []).slice(0, 5);
   const CH = { x: 540, gap: 230 };
-  let ti = 0; const mid = Math.floor(lines.length / 2); const nextTransition = (i) => (i === mid ? "dissolve" : TRANSITIONS[(ti++) % TRANSITIONS.length]);
+  // no dissolve: it overlays the outgoing headline on the incoming chain links for a few frames (text gate FAIL, FR-aberfan)
+  let ti = 0; const nextTransition = () => TRANSITIONS[(ti++) % TRANSITIONS.length];
   const silhouette = (props) => ({ component: "object-silhouette", props: { kind, x: 540, y: 820, w: 900, seed: 31, ...props } });
   // headlines sit below the chip column (y >= 460) and shrink with length so they never reach the frame edge
   const headline = (at, text, y = 470, size = S.title) => ({ component: "kinetic-type", screen: true, props: { items: [{ at, text, x: 540, y: Math.max(460, y), size: text.length > 22 ? Math.max(44, Math.round(size * 22 / text.length)) : size, family: "sans" }] } });
@@ -75,7 +76,8 @@ function build(script, style, topic) {
     const role = roleOf[i]; const start = i === 0 ? 0 : `${L.id}-0.15`; const end = `${L.id}.end`;
     const drift = i % 2 ? 30 : -30; let kind_, layers, purpose, camera, evidence = [F("case")], chips = ["conceptualLabel", "factLabel"];
     if (role === "hook") {
-      kind_ = "hook"; layers = [silhouette({ drawAt: 0, failAt: 0.7 }), ...(stamp ? [headline(`${L.id}+0.3`, stamp, 330, S.title)] : [])];
+      // frame 0 must show the object (QA: first frame not empty): it is drawn whole at t=0 and gives way at 0.6 s
+      kind_ = "hook"; layers = [silhouette({ failAt: 0.6 }), ...(stamp ? [headline(`${L.id}+0.3`, stamp, 330, S.title)] : [])];
       purpose = `Hook: frame 0 draws the ${kind} as clean line work and it gives way at the failure point within the first second, with the case stamp (${stamp || "case"}), so the consequence is on screen before any cause.`;
       camera = [{ at: start, x: 540, y: 820, z: 1.18 }, { at: end, x: 540 - drift, y: 830, z: 1.02 }];
     } else if (role === "toll") {
@@ -100,9 +102,11 @@ function build(script, style, topic) {
     } else {
       const k = +role.split(":")[1]; kind_ = "chain"; evidence = [F("chain"), F("case")];
       const prev = i > 0 && String(roleOf[i - 1]).startsWith("chain:") ? +roleOf[i - 1].split(":")[1] : Math.max(0, k - 1);
-      layers = [chainLayer([[start, prev], [off(L.id, 0.6), k]])];
+      // the dimmed, already-failed object behind the chain is a world layer, so the camera drift gives the scene depth
+      // and motion; the chain itself scrolls across most of the line
+      layers = [silhouette({ failAt: -1, opacity: 0.16, w: 1160, y: 900 }), chainLayer([[start, prev], [off(L.id, 1.1), k]])];
       purpose = `Chain: the case's failure chain scrolls from link ${prev + 1} to link ${k + 1} ("${chain[k]}"), which lights as the line describes it, so consecutive causes read as one continuous investigation.`;
-      camera = [{ at: start, x: 540, y: 800, z: 1.0 }, { at: end, x: 540, y: 800, z: 1.04 }];
+      camera = [{ at: start, x: 540 + drift * 2, y: 860, z: 1.05 }, { at: end, x: 540 - drift * 2, y: 820, z: 1.22 }];
       chips = ["conceptualLabel", "factLabel"];
     }
     return { id: `s${i + 1}-${kind_}`, lines: [L.id], start, env: "blueprint", ...(i === 0 ? {} : { transition: { type: nextTransition(i), dur: 0.5 } }), evidence: [...new Set(evidence)], chips, conceptual: true, visualPurpose: purpose, camera, layers };

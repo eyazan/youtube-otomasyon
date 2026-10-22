@@ -8,9 +8,18 @@
 
 const Config = require("./config");
 
+// The legacy Failure Reconstructed lane (shorts-sira.js main) excludes by slug from its own ledgers in icerik/: produced,
+// permanently failed, published, blocked and in review (blocked/in-review counted conservatively, whatever their hash).
+function legacyUsed(channel) {
+  const fs = require("fs"); const path = require("path");
+  const j = (name, fallback) => { try { return JSON.parse(fs.readFileSync(path.join(channel.paths.state, name), "utf8")); } catch (error) { return fallback; } };
+  return [...[].concat(j("uretilenler.json", [])), ...[].concat(j("basarisiz.json", [])), ...[].concat(j("yayinlananlar.json", [])).map((p) => p && p.slug).filter(Boolean),
+    ...Object.keys(j("engellenen.json", {})), ...Object.keys(j("inceleme.json", {}))];
+}
+
 function selectableRows(channel, options = {}) {
   const Growth = require("./index");
-  const exclude = options.exclude || [...require("../discovery").usedIds(channel)];
+  const exclude = options.exclude || (channel.config.pathMode === "legacy-adapter" ? legacyUsed(channel) : [...require("../discovery").usedIds(channel)]);
   const config = Config.forChannel(channel);
   const minimum = Number(config.viralScoring.minimumToProduce || 68);
   const buckets = new Set([...(config.selection.exploitBuckets || []), ...(config.selection.exploreBuckets || []), ...(config.scheduler.shorts.fallbackToC ? [config.scheduler.shorts.experimentalBucket] : [])]);
@@ -39,4 +48,4 @@ function qualifiedBuffer(channel, options = {}) {
   }
 }
 
-module.exports = { selectableRows, qualifiedBuffer };
+module.exports = { selectableRows, qualifiedBuffer, legacyUsed };

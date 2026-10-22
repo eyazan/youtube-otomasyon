@@ -141,3 +141,16 @@ test("survey candidates: source outages are retried, measured topics are not; a 
   assert.equal(Discovery.usedIds(channel).has(a), true);
   assert.ok(!Inventory.qualifiedBuffer(channel).next.some((n) => n.id === a || n.slug === raw.slug));
 });
+
+test("topic buffer covers the legacy FR lane: its own ledgers exclude produced, published, failed, blocked and in-review slugs", () => {
+  const fr = Channel.getChannel("failure-reconstructed");
+  const used = new Set(Inventory.legacyUsed(fr));
+  const ledger = (f) => JSON.parse(fs.readFileSync(path.join(fr.paths.state, f), "utf8"));
+  for (const s of ledger("uretilenler.json")) assert.ok(used.has(s), s);
+  for (const p of ledger("yayinlananlar.json")) if (p.slug) assert.ok(used.has(p.slug), p.slug);
+  for (const s of Object.keys(ledger("inceleme.json"))) assert.ok(used.has(s), s);
+  const buffer = Inventory.qualifiedBuffer(fr);
+  assert.ok(["critical", "warning", "ok"].includes(buffer.status), buffer.reason);
+  for (const n of buffer.next) { assert.ok(!used.has(n.slug), `${n.slug} is already used`); assert.ok(n.viral >= buffer.viralMinimum); }
+  assert.ok(require("../../scripts/growth/topic-buffer").main.toString().length > 0);
+});

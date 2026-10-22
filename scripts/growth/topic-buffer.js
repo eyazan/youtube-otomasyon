@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 "use strict";
 
-// Qualified topic buffer preflight for the isolated Shorts channels (core/growth/inventory.js).
+// Qualified topic buffer preflight for the Shorts channels (core/growth/inventory.js), including the legacy FR lane.
 // Read-only. Prints a Markdown table; --json for machine output; --strict exits 3 when any listed
 // channel is below the buffer target (for a workflow gate before the production slot).
 //   node scripts/growth/topic-buffer.js [--channel impossible-brief] [--days 7] [--json] [--strict]
@@ -9,7 +9,7 @@
 const Channel = require("../../core/channel-context");
 const Inventory = require("../../core/growth/inventory");
 
-const DEFAULT_CHANNELS = ["impossible-brief", "critical-thread"];
+const DEFAULT_CHANNELS = ["failure-reconstructed", "impossible-brief", "critical-thread"];
 
 function main(argv = process.argv.slice(2)) {
   const pick = argv.includes("--channel") ? [argv[argv.indexOf("--channel") + 1]] : DEFAULT_CHANNELS;

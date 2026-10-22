@@ -93,13 +93,14 @@
   };
   BTO.silhouetteKinds = Object.keys(KINDS);
 
-  // props: kind, x y (centre), w (drawn width), drawAt (line work draws on), failAt (crack + glow; null = intact), seed
+  // props: kind, x y (centre), w (drawn width), drawAt (line work draws on), failAt (crack + glow; null = intact), seed,
+  //   opacity (a dimmed backdrop copy behind the failure chain)
   BTO.def("object-silhouette", (o) => {
     const C = P(); const K = KINDS[o.kind] || KINDS.structure; if (o.drawAt != null) BTO.cue(o.drawAt, "sweep", 0.3, 0, { dur: 0.9 });
     if (o.failAt != null) { BTO.cue(o.failAt, "lock", 0.5); BTO.cue(o.failAt + 0.35, "whoosh", 0.35); }
     const r = BTO.rng(o.seed || 31); const crack = []; let cx = 0, cy = 0; for (let i = 0; i < 9; i += 1) { cx += (r() - 0.35) * 46; cy += 22 + r() * 30; crack.push([cx, cy]); }
     return { draw: (t) => {
-      const op = fade(t, o.enterAt, o.outAt); if (op <= 0) return "";
+      const op = fade(t, o.enterAt, o.outAt) * (o.opacity == null ? 1 : o.opacity); if (op <= 0) return "";
       const [bw, bh] = K.box; const s = (o.w || 860) / bw; const x0 = (o.x || 540) - (bw * s) / 2, y0 = (o.y || 820) - (bh * s) / 2;
       const draw = o.drawAt == null ? 1 : BTO.ease("inOut", clamp((t - o.drawAt) / 0.9)); const f = o.failAt == null ? 0 : clamp((t - o.failAt) / 1.4); const fe = BTO.ease("inOut", f);
       const [fx, fy] = [K.fp[0] * bw, K.fp[1] * bh];
