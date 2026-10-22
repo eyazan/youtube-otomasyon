@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-22T11:40:19.696Z",
+  "generatedAt": "2026-10-22T12:14:26.597Z",
   "note": "Per-channel baselines are computed separately and never blended.",
   "channels": [
     {
@@ -9,8 +9,8 @@
         "lastPublished": "2026-10-22T18:00:00.000Z",
         "published": 30,
         "inventory": {
-          "A": 110,
-          "B": 118,
+          "A": 103,
+          "B": 125,
           "C": 59,
           "D": 59
         },
@@ -100,6 +100,12 @@
             "mode": "B_SHORT_PROVES_DEMAND"
           },
           {
+            "slug": "air-france-447-2009",
+            "LongFormPotentialScore": 85,
+            "bucket": "A",
+            "mode": "B_SHORT_PROVES_DEMAND"
+          },
+          {
             "slug": "challenger-1986",
             "LongFormPotentialScore": 85,
             "bucket": "A",
@@ -108,12 +114,6 @@
           {
             "slug": "columbia-2003",
             "LongFormPotentialScore": 85,
-            "bucket": "A",
-            "mode": "B_SHORT_PROVES_DEMAND"
-          },
-          {
-            "slug": "air-france-447-2009",
-            "LongFormPotentialScore": 84,
             "bucket": "A",
             "mode": "B_SHORT_PROVES_DEMAND"
           },
@@ -161,7 +161,7 @@
           "status": "adaptive",
           "sampleSize": 29,
           "adopted": 0,
-          "hypotheses": 4
+          "hypotheses": 5
         },
         "longform": {
           "status": "heuristics-only",
@@ -219,7 +219,7 @@
         {
           "slug": "uss-forrestal-1967",
           "bucket": "C",
-          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
+          "reason": "VideoPotential 82 in experimental band 58–71; sources 41 < 62"
         }
       ],
       "alerts": [
