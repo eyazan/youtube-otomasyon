@@ -66,6 +66,9 @@ production: the studio renders every day's topic next to the live Short and comp
     - 88 s total (render 54.4 s), Chromium PSS 3871 MB.
     - Gate: TOPIC/SCRIPT/VISUAL_READY, RENDERED, then **BLOCK at QA_PASSED** (creative sign-off missing).
   - **State diff:** only growth logs and stage files. No premium output, and the run commits nothing.
+- **Re-run 39830171039** (`149b9ea`, after the shadow-module change, log read): same case, Edge Andrew (approved),
+  objective PASS, text gate 0/0, 84 s (render 51 s), Chromium PSS 4022 MB; gate BLOCK at QA_PASSED; state diff again
+  only growth state and stage files.
 - **Previous run 39790677333** (`ce4c159`): same case, 141 s, PASS.
 - **Storyboards:** all 332 ready case files (of 377) validate.
 - **Creative Director:** THIN on every scene; LOW_MOTION on chain scenes s3/s7; s7 LOW_NOVELTY and SAME_ENV.
