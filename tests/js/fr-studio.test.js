@@ -77,3 +77,27 @@ test("FR premium shadow: OFF by default, FR_PREMIUM_RENDER=preview only, after t
   assert.equal(require("child_process").spawnSync("git", ["check-ignore", "-q", "channels/failure-reconstructed/premium/FR-new-case/out/review-package.json"], { cwd: ROOT }).status, 0);
   assert.equal(require("child_process").spawnSync("git", ["check-ignore", "-q", "uretim/new-case/premium-shadow.json"], { cwd: ROOT }).status, 0);
 });
+
+test("BTO automatic storyboard: valid for quoted VERIFIED records, quote cards verbatim, unquoted records refused by the validator", () => {
+  const G = require("../../scripts/bto-studio/auto/behind-the-ordinary"); const st = require("../../channels/behind-the-ordinary/premium/style-pack.json");
+  for (const id of ["BTO-017", "BTO-135", "BTO-256", "BTO-301"]) {
+    const { channel, topic } = Adapter.loadTopic("behind-the-ordinary", id); const script = Adapter.studioScript(channel, topic); const sb = G.build(script, st, topic);
+    assert.deepEqual(Validator.validateStoryboard(sb, { script, timeline: fakeTimeline(script), style: st }).errors, [], id);
+    const types = sb.scenes.slice(1).map((s) => s.transition.type); assert.ok(types.every((t) => ["scan-wipe", "iris", "dissolve"].includes(t)), `${id}: text-safe transitions`);
+    for (const s of sb.scenes) for (const l of s.layers) if (l.component === "quote-card") { const f = script.facts.find((x) => x.id === l.props.quoteOf); assert.ok(f.quote.replace(/\s+/g, " ").includes(l.props.lines.join(" ")), `${id}: verbatim prefix`); }
+  }
+  const { channel, topic } = Adapter.loadTopic("behind-the-ordinary", "BTO-016"); const script = Adapter.studioScript(channel, topic);
+  assert.ok(Validator.validateStoryboard(G.build(script, st, topic), { script, timeline: fakeTimeline(script), style: st }).errors.some((e) => /not a verified, quoted fact/.test(e)), "unquoted facts never pass");
+  assert.equal(require("../../scripts/bto-studio/profiles/behind-the-ordinary.json").storyboard.generator, "scripts/bto-studio/auto/behind-the-ordinary.js");
+});
+
+test("GoalLore Lab automatic storyboard: valid on the pilot record, model/reconstruction chips on every kick, still not renderable outside --pilot", () => {
+  const G = require("../../scripts/bto-studio/auto/goal-lore-lab"); const st = require("../../channels/goal-lore-lab/premium/style-pack.json");
+  const topic = JSON.parse(fs.readFileSync(path.join(ROOT, "channels/goal-lore-lab/premium/pilots/GLL-P01/topic.json"), "utf8"));
+  const { channel } = Adapter.loadPilot("goal-lore-lab", topic); const script = Adapter.studioScript(channel, topic); const sb = G.build(script, st, topic);
+  const v = Validator.validateStoryboard(sb, { script, timeline: fakeTimeline(script), style: st, pilot: true, policy: { factLayers: [topic.facts[0].layer], requireQuote: false } });
+  assert.deepEqual(v.errors, []);
+  for (const s of sb.scenes) if (s.layers.some((l) => l.component === "football-pitch" && (l.props.kicks || []).length)) assert.ok(s.chips.includes("modelLabel") && s.chips.includes("conceptualLabel"), s.id);
+  const kinds = sb.scenes.map((s) => s.id.replace(/^s\d+-/, "")); for (const k of ["hook", "when", "flight", "physics", "payoff"]) assert.ok(kinds.includes(k), k);
+  const prof = require("../../scripts/bto-studio/profiles/goal-lore-lab.json"); assert.equal(prof.studioRenders, false, "not registered: pilot renders only");
+});

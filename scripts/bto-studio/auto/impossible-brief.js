@@ -165,7 +165,9 @@ function build(script, style, topic) {
     : signature(at).map((l) => (l.component === "planet" ? { ...l, props: { ...l.props, ...FRAMINGS[n % FRAMINGS.length], spin: l.props.spin * (n % 2 ? -1 : 1) } } : l)));
   let subjectN = 0;
   const stars = (seed) => ({ component: "starfield", screen: true, props: { seed, count: 300, drift: [22, 9] } });
-  const headline = (at, text, y = 470, size = S.headline) => ({ component: "kinetic-type", screen: true, props: { items: [{ at, text, x: 540, y, size, family: "sans" }] } });
+  // a long key phrase shrinks so it never reaches the frame edge (IB-SPA-031 payoff: 26 characters at 60 px overflowed)
+  const fit = (text, size) => (text.length > 20 ? Math.max(42, Math.round(size * 20 / text.length)) : size);
+  const headline = (at, text, y = 470, size = S.headline) => ({ component: "kinetic-type", screen: true, props: { items: [{ at, text, x: 540, y, size: fit(text, size), family: "sans" }] } });
   const readout = (at, text, y = 1200, strike = false) => ({ component: "kinetic-type", screen: true, props: { items: [{ at, text, x: 540, y, size: S.display, family: "num", ...(strike ? { style: "strike" } : {}) }] } });
   const probeSlice = (L, { to = null, from = null, heat = false, flow = false, markers = [], readouts = [], surface = true }) => ({ component: "depth-probe", props: {
     x: 470, y: 450, w: 420, h: 770, maxDepth, ...(W === "lake" || W === "ocean-depth" ? { strata: ["#1a5b86", "#144c73", "#0f3d5e", "#0b2f4a", "#082438"] } : {}), ...(surface && !surfaceShown && (surfaceShown = true) ? { surface: W === "ocean-depth" ? "SEA LEVEL" : "SURFACE" } : {}), heat, heatAt: heat ? `${L.id}+0.2` : undefined, ...(flow ? { flow: { at: `${L.id}+0.3`, amp: 30 } } : {}),
@@ -201,7 +203,8 @@ function build(script, style, topic) {
       kind = "count"; layers = [stars(60 + i), { component: "event-ticks", props: { x: 150, y: 980, w: 700, count: count.n, at: `${L.id}+0.2`, dur: 2.6, startLabel: count.span, endLabel: "NOW", seed: 7 + i } },
         readout(`${L.id}+0.4`, `${count.raw} ${count.noun}`.toUpperCase(), 760)];
       purpose = `Count: ${count.raw} events tick onto a ${count.span.toLowerCase()} axis as the line is spoken, so the frequency is seen as a density of marks; the spacing is illustrative, the count and span are the cited fact's.`;
-      camera = [{ at: start, x: 470, y: 900, z: 1.0 }, { at: `${L.id}.end`, x: 610, y: 940, z: 1.22 }];
+      // the axis spans x 150-850: a gentle push keeps its end labels inside the safe margins (x >= 72) while it moves
+      camera = [{ at: start, x: 520, y: 900, z: 1.0 }, { at: `${L.id}.end`, x: 560, y: 940, z: 1.08 }];
     } else if (year) {
       kind = "year"; layers = [stars(20 + i), ...(depthWorld ? [probeSlice(L, { from: 0, to: qty && (qty.unit === "m" || qty.unit === "km") ? (qty.unit === "km" ? qty.value * 1000 : qty.value) : maxDepth * 0.82 })] : signature(`${L.id}`)),
         { component: "timeline-ruler", screen: true, props: { theme: "dark", y: 1250, fromYear: year.value - 6, year: year.value, enterAt: `${L.id}-0.1`, arriveAt: `${L.id}+0.6`, outAt: `${L.id}.end` } }];
