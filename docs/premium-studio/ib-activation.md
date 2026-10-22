@@ -1,0 +1,52 @@
+# ImpossibleBrief: restore daily production and activate the premium renderer
+
+Status at the time of writing; every step below is an owner action. Nothing in this branch enables publishing, changes
+a schedule or touches credentials.
+
+## 1. Incident 2026-10-20 / 21 (diagnosis, evidence)
+
+| Question | Answer | Evidence |
+|---|---|---|
+| Did the scheduler run? | Yes, every slot | `portfolio-production.yml` runs 339-368 (e.g. 39413880046, 2026-10-20 11:17 UTC) |
+| Did the IB step run? | Yes, 7 s | job 118598094229, step "ImpossibleBrief Short" |
+| Where did it stop? | Topic selection | 10-20 `NO_EXPLORE_CANDIDATE`, 10-21 `NO_QUALIFIED_TOPIC ... best viral score 74 < minimum 75` (`state/growth/decisions.json`) |
+| Render / upload / publish failure? | None reached | production-outcome: RESEARCH ❌, nothing after |
+| Missed videos to recover? | None exist | last upload `x5VVXKhOhMQ` 2026-10-19, confirmed public 18:46 UTC (`publish.public`); no package for 10-20/21 |
+| Root cause | The six A topics at 76-78 were blocked **permanently** by the stock-picture pre-check (2026-10-03..12, `state/blocked.json`), and the scorer assumed "no archival footage" for all 500 IB topics (identical visual_availability 67 / weak_footage -33) | local reproduction with the production exclusions gives exactly "104 unused A, best 74" |
+
+## 2. What this branch changes (thresholds unchanged: viral 75, A-only)
+
+- Visual survey (`scripts/growth/visual-survey.js`): runs the production pre-check ahead of time; a topic whose licensed
+  pictures pass counts as having confirmed stills; a pre-check block is lifted only by a newer passing survey.
+- Explore days without an explore candidate fall back to the best exploit topic.
+- Qualified 7-day buffer (`scripts/growth/topic-buffer.js`, also in `saglik.js` "nitelikli-konu").
+- Premium studio for IB: automatic storyboard, space components, IB evidence standard, channel-aware publish gate.
+- `core/pipeline/impossible-brief.js` premium shadow, OFF unless `IB_PREMIUM_RENDER=preview`.
+- `ib-premium-dry-run.yml`: dry run of the real entry point on PRs (no credentials, no upload, no commit).
+
+## 3. Activation, in order (owner)
+
+1. Review and merge PR #316 (needed: `workflow_dispatch` workflows only appear from the default branch).
+2. Restore topic selection: Actions → **Topic buffer (visual survey + preflight)** → channel impossible-brief, commit
+   **false** first; read the buffer table. If it shows qualified topics, run again with commit **true**.
+   `gh workflow run topic-buffer.yml -f channel=impossible-brief -f limit=30 -f commit=false`
+3. Next scheduled `portfolio-production` slot selects from the restored pool with the unchanged live renderer.
+   Rollback: delete `channels/impossible-brief/state/visual-survey.json` (scoring returns to the old assumption) or set
+   `visualSurvey.enabled` to false in `channels/impossible-brief/growth-engine.json`.
+4. Optional daily preflight: add `schedule: - cron: '41 4 * * *'` to `topic-buffer.yml` (schedule change: owner).
+5. Premium shadow in production (render only, never uploads): add `IB_PREMIUM_RENDER: preview` to the IB step env in
+   `portfolio-production.yml`, plus `PD_CHROMIUM: /usr/bin/google-chrome` and `pip install numpy soundfile`. Costs about
+   3-5 runner minutes per day. Rollback: remove the env line.
+6. Premium **publishing** is not implemented. It needs: a human creative sign-off per video (`--approvals`), the
+   approved Edge narration (CI has Edge; this container does not), and an owner go-live switch that hands a
+   PUBLISH_APPROVED premium MP4 to the existing uploader. Until then the live stock renderer publishes.
+
+## 4. Blockers
+
+| Blocker | Dependency | Next executable action |
+|---|---|---|
+| Qualified IB inventory is 0 until a survey runs | network to Commons/NASA (CI only) and merge | step 2 above |
+| Whether the survey finds enough pictures is unknown | measurement | read the buffer table of step 2; if < 7, research new topics (`scripts/ib-ct-library/build.js`) |
+| Premium narration here is Kokoro (unapproved) | Edge reachable only in CI | the PR dry run narrates with Edge |
+| Premium publishing | owner go-live switch + creative sign-off | not built (by design) |
+| Creative quality of the automatic grammar | human review | LOW_NOVELTY on 3 of 8 scenes in IB-EXT-050 (see render-notes.md) |
