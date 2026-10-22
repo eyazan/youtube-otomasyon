@@ -64,6 +64,9 @@ jobs:
             [ -f "$pkg" ] || continue
             echo "### $pkg" | tee -a "$GITHUB_STEP_SUMMARY"
             node scripts/bto-studio/publish-gate.js "$pkg" | tee -a "$GITHUB_STEP_SUMMARY" || true
+            # QA verdict lines and the end of the studio log, so a BLOCKED package is diagnosable from the job log
+            grep -E "Objective verdict|\*\*(FAIL|WARN)\*\*|^- FAIL" "$(dirname "$pkg")/qa-report.md" 2>/dev/null | head -30 | tee -a "$GITHUB_STEP_SUMMARY" || true
+            tail -25 "$(dirname "$pkg")/production.log" 2>/dev/null || true
             node scripts/bto-studio/creative-director.js review --out "$(dirname "$pkg")" | tail -14 | tee -a "$GITHUB_STEP_SUMMARY" || true
           done
           git status --short | tee state-diff.txt
