@@ -146,3 +146,37 @@ The fixes removed all of them. An objective pass is not creative approval; every
   (10-23 avianca-52-1990 at 75, then usair-1016-1994, lahaina-fire-2023 at 76–77). But the margin is one topic at the bar.
 - **Now visible before the production slot:** `scripts/growth/topic-buffer.js` covers the FR legacy lane.
 - **Next action (owner):** if FR shows CRITICAL in the preflight, add researched FR case files. Do not lower the bar.
+
+## Feature flags, activation and rollback (per channel)
+
+| Mode | Flag | Behaviour | Status |
+|---|---|---|---|
+| LEGACY | flag unset (default) | the existing renderer and uploader, unchanged | live |
+| SHADOW | `IB_PREMIUM_RENDER=preview` / `FR_PREMIUM_RENDER=preview` on that channel's step in `portfolio-production.yml` | after the live lane finishes, the studio renders the produced topic (`--shadow`): verdict SHADOW_OF_LIVE_NOT_PUBLISHABLE, compared in `premium-shadow.json`, never uploaded, inside try/catch, output git-ignored | built, CI dry runs; **not enabled** |
+| PREMIUM | none | a premium package reaches the uploader only after PUBLISH_APPROVED (human creative, factual and publish sign-off) and an owner go-live switch | **not built, by design** (release decision) |
+
+**Activation order (owner actions)**
+
+1. Merge PR #316.
+2. Restore IB topics: run `topic-buffer.yml` with `commit=false`, then `commit=true` (`ib-activation.md` §3).
+3. Watch the next IB scheduled run: video ID, publish status, no duplicate.
+4. IB shadow: add `IB_PREMIUM_RENDER: preview` to the "ImpossibleBrief Short" step env. Also add `PD_CHROMIUM`,
+   `pip install numpy soundfile`, `time`, and an artifact upload of `channels/impossible-brief/premium/*/out/`.
+5. FR shadow: the same with `FR_PREMIUM_RENDER: preview` on the "Failure Reconstructed Short" step, and an artifact
+   upload of `channels/failure-reconstructed/premium/FR-*/out/` and `uretim/*/premium-shadow.json`.
+6. BTO: owner decision to reactivate the channel and dispatch `bto-research.yml`. The studio and generator are ready
+   for VERIFIED records.
+7. GoalLore Lab: owner decision to retarget the `critical-thread` registry entry. That entry has the same credentials
+   and channel `UCBTEWcPZvo4B71hFw9Do_NA`, publicly titled GoalLore Lab. Do not register a second entry. Then:
+   - approve a voice by listening test (en-GB-RyanNeural is a candidate only);
+   - run GLL research with verbatim quotes, by generalising `scripts/bto-research.js`.
+   Pause the CriticalThread lane first, so engineering content cannot reach the GoalLore Lab channel.
+
+**Rollback** (none of these touch published history, analytics, OAuth credentials, packages or channel config)
+
+| What | Command |
+|---|---|
+| IB or FR shadow | remove the `*_PREMIUM_RENDER` line from the step env |
+| IB survey | `git rm channels/impossible-brief/state/visual-survey.json && git commit -m "revert: IB visual survey" && git push origin main`, or set `visualSurvey.enabled: false` |
+| Explore fallback / visual-block lift / buffer preflight | `git revert <merge commit>` (no state migration; the ledgers are unchanged by this PR) |
+| Premium studio for a channel | set `studioRenders: false` in `scripts/bto-studio/profiles/<channel>.json` |
