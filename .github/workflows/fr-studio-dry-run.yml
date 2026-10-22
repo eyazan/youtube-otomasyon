@@ -33,6 +33,9 @@ jobs:
     timeout-minutes: 60
     env:
       PUBLISH: '0'
+      # Edge is shared with the other premium checks on the same push (HTTP 429 on run 39834813659): up to 6
+      # rate-limit retries for the shadow's narration (20..120 s, bounded); production keeps the default 3
+      EDGE_RATE_LIMIT_RETRIES: '6'
       PEXELS_KEY: ${{ secrets.PEXELS_KEY }}
       SHORTS_FONT: DejaVu Sans
       PD_CHROMIUM: /usr/bin/google-chrome

@@ -47,7 +47,8 @@ jobs:
         run: |
           bash scripts/ci-apt.sh --no-install-recommends ffmpeg fonts-dejavu-core fonts-liberation python3-pil time
           npm ci --no-audit --no-fund
-          python -m pip install --quiet numpy soundfile pillow
+          # zxing-cpp: QA decodes the on-screen QR of BTO-301 (without it every decode reads as a failure)
+          python -m pip install --quiet numpy soundfile pillow segno==1.6.6 zxing-cpp==2.3.0
       - name: The Hidden Logic of Things BTO-301, automatic storyboard
         run: |
           set -o pipefail
@@ -69,7 +70,7 @@ jobs:
             echo "### $out" | tee -a "$GITHUB_STEP_SUMMARY"
             [ -f "$out/review-package.json" ] || { echo "no package (render did not finish)" | tee -a "$GITHUB_STEP_SUMMARY"; fail=1; continue; }
             node -e 'const p=require(require("path").resolve(process.argv[1],"review-package.json"));console.log("verdict",p.verdict,"| objective",p.qa.objectivePass,"| voice",p.voice.used,"approved",p.voice.approved,"| render",p.performance.renderWallSec,"s, Chromium PSS",p.performance.peakChromiumRssMb,"MB");if(!p.qa.objectivePass)process.exit(1)' "$out" | tee -a "$GITHUB_STEP_SUMMARY" || fail=1
-            grep -E "^- FAIL" "$out/qa-report.md" | head -10 | tee -a "$GITHUB_STEP_SUMMARY" || true
+            grep -F "**FAIL**" "$out/qa-report.md" | head -10 | tee -a "$GITHUB_STEP_SUMMARY" || true
             node scripts/bto-studio/creative-director.js review --out "$out" | tail -14 | tee -a "$GITHUB_STEP_SUMMARY" || true
           done
           exit $fail

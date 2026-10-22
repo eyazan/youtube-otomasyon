@@ -40,7 +40,9 @@ function decodeQr(video, times, text) {
   const py = `import sys, zxingcpp\nfrom PIL import Image\nfor f in sys.argv[1:]:\n    r = zxingcpp.read_barcodes(Image.open(f))\n    print(r[0].text if r else '')`;
   const files = times.map((t, i) => { const f = path.join(path.dirname(video), "work", `qr-${i}.png`); cp.execFileSync("ffmpeg", ["-v", "error", "-y", "-ss", t.toFixed(3), "-i", video, "-frames:v", "1", f]); return f; });
   const r = cp.spawnSync("python3", ["-I", "-c", py, ...files], { encoding: "utf8" }); const got = String(r.stdout || "").split("\n").slice(0, files.length);
-  return times.map((t, i) => ({ t, decoded: got[i] || null, ok: text == null ? null : got[i] === text }));
+  // a missing decoder is an instrument failure, not an unreadable symbol: name it (the check still fails closed)
+  const error = r.status === 0 ? null : `decoder failed: ${String(r.stderr || r.error || "").trim().split("\n").pop().slice(0, 120)}`;
+  return times.map((t, i) => ({ t, decoded: got[i] || null, error, ok: text == null ? null : got[i] === text }));
 }
 
 async function run({ video, data, meta, work, out, ndir, narration, timeline, style, assets, quality, log }) {
@@ -102,7 +104,7 @@ async function run({ video, data, meta, work, out, ndir, narration, timeline, st
   const known = [...Object.values(assets).filter((a) => a.matrix).map((a) => a.text), ...require("./asset-manager").load(data.storyboard.channel).assets.filter((a) => a.decodesTo && Object.keys(data.images || {}).includes(a.id)).map((a) => a.decodesTo)];
   let qr = null;
   if (known.length) { qr = decodeQr(video, [0, Math.max(0, tech.durationSec - 0.1)], null).map((x) => ({ ...x, ok: known.includes(x.decoded) }));
-    add("on-screen QR decodes to a registered value (first and last frame)", qr.every((x) => x.ok), qr.map((x) => `${x.t.toFixed(1)}s: ${x.decoded || "no decode"}`).join("; "), known.join(" | ")); }
+    add("on-screen QR decodes to a registered value (first and last frame)", qr.every((x) => x.ok), qr.map((x) => `${x.t.toFixed(1)}s: ${x.decoded || x.error || "no decode"}`).join("; "), known.join(" | ")); }
   // 5. determinism
   const det = await Renderer.determinism(data, path.join(work, "det"), [0.7, 12.3, 24.9, 29.1].filter((t) => t < data.duration));
   add("deterministic frames (two fresh pages, any order)", det.every((d) => d.identical), det.map((d) => `${d.t}s ${d.identical ? "same" : "DIFF"}`).join(", "), "identical");

@@ -20,8 +20,15 @@ const ROOT = path.resolve(__dirname, "..", "..");
 const SR = 48000;
 const dur = (f) => parseFloat(cp.execFileSync("ffprobe", ["-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", f]).toString());
 
+// EDGE_RATE_LIMIT_RETRIES above the default 3 (a CI check sharing Edge) extends the timeout by that backoff budget
+// (20 s x 1..n), so the narrator is not killed before its last attempt; the default keeps 300 s
+function edgeTimeoutMs(env = process.env) {
+  const n = Math.min(8, Math.max(3, parseInt(env.EDGE_RATE_LIMIT_RETRIES, 10) || 3));
+  return 300000 + (n > 3 ? 20000 * (n * (n + 1)) / 2 : 0);
+}
+
 function edge(scriptFile, outDir, voice) {
-  const r = cp.spawnSync(process.execPath, [path.join(ROOT, "scripts/fr-premium/narrate-edge.js"), scriptFile, outDir, "--voice", voice], { encoding: "utf8", timeout: 300000 });
+  const r = cp.spawnSync(process.execPath, [path.join(ROOT, "scripts/fr-premium/narrate-edge.js"), scriptFile, outDir, "--voice", voice], { encoding: "utf8", timeout: edgeTimeoutMs() });
   if (r.status !== 0) throw new Error(String(r.stderr || r.stdout || r.error).trim().split("\n").slice(-1)[0]);
   const tl = JSON.parse(fs.readFileSync(path.join(outDir, "timeline.json"), "utf8"));
   Object.assign(tl, { approved: true, wordTiming: "measured (Edge word boundaries)" });
