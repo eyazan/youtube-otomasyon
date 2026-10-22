@@ -1,6 +1,6 @@
 # Growth dashboard
 
-Generated 2026-10-22T19:48:47.839Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-10-22T20:44:13.346Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
@@ -21,10 +21,10 @@ Generated 2026-10-22T19:48:47.839Z. Per-channel baselines are computed separatel
 **Research/source enrichment tasks**
 
 - apollo-1-1967 (C): VideoPotential 87 in experimental band 58–71; sources 41 < 62
-- skylab-1973 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
 - munich-1958 (C): VideoPotential 86 in experimental band 58–71; sources 41 < 62
+- skylab-1973 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
 - vanguard-1957 (C): VideoPotential 83 in experimental band 58–71; sources 41 < 62
-- eastland-1915 (C): VideoPotential 83 in experimental band 58–71; sources 41 < 62
+- b2-guam-2008 (C): VideoPotential 83 in experimental band 58–71; sources 41 < 62
 
 **Recent alerts**
 

@@ -2335,5 +2335,58 @@
       }
     ],
     "at": "2026-10-22T19:48:42.926Z"
+  },
+  {
+    "videoId": "qkzRUqlEy5I",
+    "channel": "failure-reconstructed",
+    "contentType": "short",
+    "checkpoint": "30d",
+    "diagnoses": [
+      {
+        "code": "RETENTION_FAILURE",
+        "confidence": "medium",
+        "evidence": "average viewed 64.36% < 65%",
+        "recommendation": "Cut setup sentences; move the mechanism earlier.",
+        "specCode": "RETENTION_WEAK"
+      },
+      {
+        "code": "TOPIC_FAILURE",
+        "confidence": "low",
+        "evidence": "Shorts feed share 50% and weak retention",
+        "recommendation": "Lower this cluster's topic weight until more evidence.",
+        "specCode": "TOPIC_REACH_LIMITED"
+      }
+    ],
+    "at": "2026-10-22T20:44:05.153Z"
+  },
+  {
+    "videoId": "PGOKZhPYo7c",
+    "channel": "failure-reconstructed",
+    "contentType": "short",
+    "checkpoint": "30d",
+    "diagnoses": [
+      {
+        "code": "LOW_SUBSCRIBER_CONVERSION",
+        "confidence": "medium",
+        "evidence": "1.9 subs / 1,000 views",
+        "recommendation": "Series-shaped payoff; link a related long-form episode.",
+        "specCode": "SUBSCRIBER_CONVERSION_WEAK"
+      },
+      {
+        "code": "STRONG_TOPIC_AUDIENCE_FIT",
+        "confidence": "medium",
+        "evidence": "1.9 subs / 1,000 views vs channel median 1.04",
+        "recommendation": "Nominate adjacent topics in this cluster; candidate for a series.",
+        "specCode": "STRONG_TOPIC_AUDIENCE_FIT"
+      },
+      {
+        "code": "STRONG_DISCOVERY",
+        "confidence": "medium",
+        "evidence": "1052 views vs channel Shorts median 465",
+        "recommendation": "Study the opening and topic; replicate one variable at a time.",
+        "specCode": "STRONG_DISCOVERY"
+      }
+    ],
+    "at": "2026-10-22T20:44:05.153Z"
   }
 ]
