@@ -36,7 +36,8 @@ function candidates(channel, { margin = 4, limit = 30, refresh = false } = {}) {
   const excluded = new Set(exclude);
   return ranked
     .filter((row) => !excluded.has(row.topic.id) && buckets.has(row.score.bucket) && row.score.ViralPotentialScore >= minimum - margin)
-    .filter((row) => refresh || !(data.topics[row.topic.id] && Survey.fresh(data.topics[row.topic.id])))
+    // a source outage is not a measurement: those topics are retried on the next run, not parked for MAX_AGE_DAYS
+    .filter((row) => { const entry = data.topics[row.topic.id]; return refresh || !(entry && !entry.sourceError && Survey.fresh(entry)); })
     .sort((a, b) => b.score.ViralPotentialScore - a.score.ViralPotentialScore)
     .slice(0, limit);
 }

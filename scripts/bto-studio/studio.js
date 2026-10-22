@@ -61,7 +61,12 @@ async function main() {
   const pending = flag("--research-pending");
   const tolerated = (e) => /^researchStatus is NEEDS_PRIMARY_SOURCE, not VERIFIED$|^topic is not productionReady$/.test(e);
   if (pending && mode !== "preview") throw new Error("--research-pending is allowed only with BTO_PREMIUM_RENDER=preview");
-  if (!ready.ready && !(pending && ready.errors.every(tolerated))) throw new Error("topic is not ready for production: " + ready.errors.join("; "));
+  // --shadow: the live pipeline (core/pipeline/impossible-brief.js premiumShadow) renders the topic it has just produced a
+  // second time for comparison. Preview mode only; only "this topic was already produced/uploaded by the live lane" is
+  // tolerated, so the package is a duplicate by construction and can never be publishable (the gate blocks at TOPIC_READY).
+  const shadow = flag("--shadow");
+  if (shadow && mode !== "preview") throw new Error("--shadow is allowed only with BTO_PREMIUM_RENDER=preview");
+  if (!ready.ready && !(pending && ready.errors.every(tolerated)) && !(shadow && Adapter.shadowTolerated(ready.errors))) throw new Error("topic is not ready for production: " + ready.errors.join("; "));
   const dir = pilotDir || path.join(channel.paths.base, "premium", topic.id);
   // --storyboard storyboard.v2.json: a versioned storyboard renders into out/v<N>/ (V1 stays in out/); narration is shared
   const sbFile = path.join(dir, opt("--storyboard", "storyboard.json"));
@@ -75,6 +80,7 @@ async function main() {
   const done = (stage, hash, extra = {}) => { state.stages[stage] = { status: "done", hash, at: new Date().toISOString(), ...extra }; W(stateFile, state); };
   log(`=== BTO Premium Studio: ${topic.id} ${topic.slug} | mode ${mode} | quality ${quality} | voice ${voiceMode} ===`);
   if (pending) log(`RESEARCH PENDING pilot: ${ready.errors.join("; ")}; never publishable`);
+  if (shadow) log(`SHADOW of the live render${ready.errors.length ? ` (${ready.errors.join("; ")})` : ""}; never publishable`);
   if (pilotDir) log(`PILOT (${path.relative(ROOT, pilotDir)}): channel ${channelSlug} is not rendered in production (${profile.premiumMode}); NOT APPROVED FOR PUBLICATION`);
   ready.warnings.forEach((w) => log("readiness warning: " + w));
   const script = Adapter.studioScript(channel, topic); W(path.join(out, "studio-script.json"), script);
@@ -146,7 +152,7 @@ async function main() {
   done("qa", sha(qa.objective), { pass: qa.objectivePass });
 
   // ---- package ------------------------------------------------------------------------------------------------
-  const pkg = require("./package").build({ channel, topic, script, storyboard, timeline, qa, perf: r.perf, master, final, out, quality, mode, researchPending: pending ? ready.errors : null, pilot: pilotDir ? path.relative(ROOT, pilotDir) : null, totalSec: (Date.now() - t00) / 1000 });
+  const pkg = require("./package").build({ channel, topic, script, storyboard, timeline, qa, perf: r.perf, master, final, out, quality, mode, researchPending: pending ? ready.errors : null, shadow, pilot: pilotDir ? path.relative(ROOT, pilotDir) : null, totalSec: (Date.now() - t00) / 1000 });
   done("package", sha(pkg)); log(`package: ${pkg.verdict} -> ${path.relative(ROOT, path.join(out, "review-package.json"))}`);
 }
 

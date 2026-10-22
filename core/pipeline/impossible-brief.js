@@ -134,26 +134,48 @@ function llmShadow(channel, topic, output, env = process.env, spawn = cp.spawnSy
   }
 }
 
-// Premium studio shadow (feature flag, default OFF). IB_PREMIUM_RENDER=preview renders the selected topic a second time
-// with the shared premium studio (scripts/bto-studio/studio.js: auto storyboard from the researched record, approved
-// Edge voice or a marked Kokoro preview, QA, review package) into channels/impossible-brief/premium/<id>/out/. It runs in
-// a child process with a timeout, once per run, and its outcome is only logged: it never uploads, never changes the
-// live render, upload or the topic's state, and a premium package can never reach the uploader from here (publishing a
-// premium Short is a separate owner go-live switch that does not exist yet).
-function premiumShadow(channel, topic, env = process.env, spawn = cp.spawnSync) {
+// Premium studio shadow (feature flag, default OFF). IB_PREMIUM_RENDER=preview renders the topic the live lane has just
+// produced a second time with the shared premium studio (scripts/bto-studio/studio.js --shadow: auto storyboard from the
+// researched record, approved Edge voice or a marked Kokoro preview, QA, review package) into
+// channels/impossible-brief/premium/<id>/out/. It runs only after the live render, QA and upload have finished, in a child
+// process with a timeout, and its outcome is only logged and written next to the live package (premium-shadow.json, a
+// side-by-side of both renderers with runtime and peak memory): it never uploads, never changes the live render, upload
+// or the topic's state, and its package is a duplicate by construction (SHADOW_OF_LIVE_NOT_PUBLISHABLE; the publish
+// gate blocks it at TOPIC_READY). Publishing a premium Short is a separate owner go-live switch that does not exist yet.
+const TIME_BIN = "/usr/bin/time";
+function premiumShadow(channel, topic, env = process.env, spawn = cp.spawnSync, live = null) {
   const mode = String(env.IB_PREMIUM_RENDER || "").toLowerCase();
   if (channel.slug !== "impossible-brief" || mode !== "preview") return null;
-  const args = [path.join(Channel.ROOT, "scripts", "bto-studio", "studio.js"), "--channel", channel.slug, "--topic", topic.id, "--quality", env.IB_PREMIUM_QUALITY === "final" ? "final" : "preview", "--kokoro-voice", ((channel.config.voice || {}).fallback || {}).voice || "am_fenrir"];
+  const args = [path.join(Channel.ROOT, "scripts", "bto-studio", "studio.js"), "--channel", channel.slug, "--topic", topic.id, "--shadow", "--quality", env.IB_PREMIUM_QUALITY === "final" ? "final" : "preview", "--kokoro-voice", ((channel.config.voice || {}).fallback || {}).voice || "am_fenrir"];
+  // GNU time reports the peak resident memory of the largest process in the tree (Chromium, ffmpeg or the studio)
+  const timed = env.IB_PREMIUM_MEASURE !== "0" && fs.existsSync(TIME_BIN);
   const started = Date.now();
   try {
-    const child = spawn(process.execPath, args, { cwd: Channel.ROOT, env: { ...env, BTO_PREMIUM_RENDER: "preview" }, encoding: "utf8", timeout: Number(env.IB_PREMIUM_TIMEOUT_MS || 1500000), maxBuffer: 1 << 26 });
+    const child = timed
+      ? spawn(TIME_BIN, ["-f", "IB_SHADOW_MAXRSS_KB=%M", process.execPath, ...args], { cwd: Channel.ROOT, env: { ...env, BTO_PREMIUM_RENDER: "preview" }, encoding: "utf8", timeout: Number(env.IB_PREMIUM_TIMEOUT_MS || 1500000), maxBuffer: 1 << 26 })
+      : spawn(process.execPath, args, { cwd: Channel.ROOT, env: { ...env, BTO_PREMIUM_RENDER: "preview" }, encoding: "utf8", timeout: Number(env.IB_PREMIUM_TIMEOUT_MS || 1500000), maxBuffer: 1 << 26 });
     const sec = Math.round((Date.now() - started) / 1000);
-    const pkgFile = path.join(channel.paths.base, "premium", topic.id, "out", "review-package.json");
-    let verdict = null; try { verdict = JSON.parse(fs.readFileSync(pkgFile, "utf8")).verdict; } catch (error) {}
+    const rss = /IB_SHADOW_MAXRSS_KB=(\d+)/.exec(String(child.stderr || ""));
+    const peakMemoryMB = rss ? Math.round(Number(rss[1]) / 1024) : null;
+    const out = path.join(channel.paths.base, "premium", topic.id, "out");
+    const read = (name) => { try { return JSON.parse(fs.readFileSync(path.join(out, name), "utf8")); } catch (error) { return null; } };
+    const pkg = read("review-package.json") || {}; const qa = read("qa-report.json") || {};
+    const verdict = pkg.verdict || null;
     const status = child.error ? `did not finish (${child.error.code || child.error.message})` : `exit ${child.status}`;
-    console.log(`[${channel.name}] premium shadow (${mode}) ${topic.slug}: ${status} in ${sec} s, package ${verdict || "none"}; live production unaffected`);
-    if (child.status !== 0) console.log(String(child.stderr || child.stdout || "").trim().split("\n").slice(-6).join("\n"));
-    return { status: child.status, verdict, sec };
+    console.log(`[${channel.name}] premium shadow (${mode}) ${topic.slug}: ${status} in ${sec} s${peakMemoryMB ? `, peak ${peakMemoryMB} MB` : ""}, package ${verdict || "none"}; live production unaffected`);
+    if (child.status !== 0) console.log(String(child.stderr || child.stdout || "").replace(/IB_SHADOW_MAXRSS_KB=\d+/, "").trim().split("\n").slice(-6).join("\n"));
+    const report = {
+      schema: "ib-premium-shadow/1", topicId: topic.id, slug: topic.slug, measuredAt: new Date().toISOString(),
+      live: live ? { renderer: "stock (core/rendering)", decision: live.decision || null, productionScore: live.score ?? null, validationsPassed: live.validationsPassed ?? null,
+        durationSeconds: live.durationSeconds ?? null, resolution: live.resolution || null, voice: live.voice || null, renderSec: live.renderSec ?? null, upload: live.upload || null } : null,
+      premium: { renderer: "premium studio (scripts/bto-studio)", status, verdict, objectivePass: qa.objectivePass ?? null,
+        hardFailures: (qa.objective || []).filter((c) => c.hard && !c.ok).map((c) => c.name), loudness: (qa.technical || {}).loudness || null,
+        durationSeconds: parseFloat(((qa.objective || []).find((c) => /^duration/.test(c.name)) || {}).measured) || null,
+        voice: pkg.voice ? { used: pkg.voice.used, approved: pkg.voice.approved === true } : null, quality: env.IB_PREMIUM_QUALITY === "final" ? "final" : "preview",
+        runtimeSec: sec, peakMemoryMB, renderWallSec: (pkg.performance || {}).renderWallSec ?? null, peakChromiumRssMb: (pkg.performance || {}).peakChromiumRssMb ?? null, uploaded: false },
+    };
+    if (live && live.output) { try { fs.writeFileSync(path.join(live.output, "premium-shadow.json"), JSON.stringify(report, null, 2) + "\n"); } catch (error) {} }
+    return { status: child.status, verdict, sec, peakMemoryMB, report };
   } catch (error) {
     console.log(`[${channel.name}] premium shadow could not start: ${error.message}; live production unaffected`);
     return null;
@@ -220,7 +242,7 @@ function runChannel(slug, argv = []) {
   const noRender = argv.includes("--no-render");
   let choice, topic, output, result, finalPlan;
   let prechecks = 0;
-  let shadowDone = false;
+  let renderSec = null;
   for (let attempt = 1; ; attempt += 1) {
     choice = chooseTopic(channel, explicit, universe);
     if (!choice.topic) {
@@ -232,7 +254,6 @@ function runChannel(slug, argv = []) {
       return 0;
     }
     topic = choice.topic;
-    if (!shadowDone) { shadowDone = true; premiumShadow(channel, topic); }
     run.reset().topic(topic.slug).done("RESEARCH", choice.reason).done("SCRIPT", `pre-render readiness ${choice.plan.readiness.decision} ${choice.plan.readiness.ProductionReadinessScore}`);
     output = path.join(channel.paths.production, topic.slug);
     const shortfall = !noRender && !explicit ? visualShortfall(topic, output) : null;
@@ -251,6 +272,7 @@ function runChannel(slug, argv = []) {
       continue;
     }
     if (!budget("topics") || (!noRender && !budget("render"))) return 1;
+    const renderStarted = Date.now();
     try { result = Rendering.buildPackage(topic, channel, output, { render: !noRender, growthPlan: choice.plan }); }
     catch (error) {
       if (error.code === "NARRATION_UNAVAILABLE") {
@@ -264,6 +286,7 @@ function runChannel(slug, argv = []) {
       run.fail("RENDER", error.message).outcome("FAILED", `${topic.slug}: ${error.message}`);
       throw error;
     }
+    renderSec = Math.round((Date.now() - renderStarted) / 1000);
     if (!noRender) {
       run.done("ASSETS");
       const audio = result.render.audio || {};
@@ -348,6 +371,17 @@ function runChannel(slug, argv = []) {
   const videoId = uploadStatus === "uploaded" ? GrowthRuntime.afterUpload(channel, topic.slug, finalPlan) : null;
   console.log(`[${channel.name}] ${topic.topic} — ${noRender ? "package only" : "rendered"}${process.env.PUBLISH === "1" ? " and uploaded" : "; upload skipped"}`);
   console.log(GrowthRuntime.shortSummary(finalPlan, { "Upload Status": uploadStatus, "Video ID": videoId || "—" }));
+  // after the live lane is finished, so the shadow can neither delay nor change it (nor its exit status)
+  if (!noRender) {
+    try {
+      const video = (result.render || {}).video || {};
+      premiumShadow(channel, topic, process.env, cp.spawnSync, {
+        output, decision: finalPlan.readiness.decision, score: finalPlan.readiness.ProductionReadinessScore, validationsPassed: true,
+        durationSeconds: video.durationSeconds ?? null, resolution: video.width ? `${video.width}x${video.height}` : null,
+        voice: ((result.render || {}).audio || {}).provider || null, renderSec, upload: uploadStatus,
+      });
+    } catch (error) { console.log(`[${channel.name}] premium shadow skipped: ${error.message}; live production unaffected`); }
+  }
   return 0;
 }
 

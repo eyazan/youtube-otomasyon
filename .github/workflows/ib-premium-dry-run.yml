@@ -4,8 +4,10 @@ name: ImpossibleBrief dry run (selection + live render + premium shadow)
 #   1. visual survey of the topics nearest the bar (scripts/growth/visual-survey.js; runner-local, not committed)
 #   2. qualified topic buffer (scripts/growth/topic-buffer.js)
 #   3. node shorts-sira.js --channel impossible-brief with PUBLISH=0 and IB_PREMIUM_RENDER=preview: the live topic
-#      selection, the live stock renderer and its gates, plus the premium studio shadow on the same topic
-#   4. premium publish gate + Creative Director frame review; artifacts for human review
+#      selection, the live stock renderer and its gates, then (after the live lane finished) the premium studio shadow
+#      on the topic the live lane produced
+#   4. live vs premium side-by-side (premium-shadow.json: gates, duration, runtime, peak memory), premium publish gate,
+#      Creative Director frame review; artifacts for human review
 # No YouTube credentials are given to this job, contents permission is read-only, nothing is committed or uploaded,
 # and it uses its own concurrency group so it never queues behind or blocks portfolio-production.
 on:
@@ -45,7 +47,7 @@ jobs:
           python-version: '3.12'
       - name: Runtime dependencies
         run: |
-          bash scripts/ci-apt.sh --no-install-recommends ffmpeg fonts-dejavu-core fonts-liberation python3-pil
+          bash scripts/ci-apt.sh --no-install-recommends ffmpeg fonts-dejavu-core fonts-liberation python3-pil time
           npm ci --no-audit --no-fund
           python -m pip install --quiet numpy soundfile pillow
       - name: Visual survey (runner-local)
@@ -60,6 +62,11 @@ jobs:
       - name: Premium gate and creative review
         if: always()
         run: |
+          for cmp in channels/impossible-brief/state/production/*/premium-shadow.json; do
+            [ -f "$cmp" ] || continue
+            echo "### live vs premium: $cmp" | tee -a "$GITHUB_STEP_SUMMARY"
+            node -e 'const r=require(require("path").resolve(process.argv[1]));const l=r.live||{},p=r.premium;console.log(["| | live (stock) | premium (shadow) |","|---|---|---|",`| gate | ${l.decision} ${l.productionScore} | ${p.verdict} (objective ${p.objectivePass?"PASS":"FAIL"}${p.hardFailures.length?": "+p.hardFailures.join(", "):""}) |`,`| duration | ${l.durationSeconds} s | ${p.durationSeconds} s |`,`| voice | ${l.voice} | ${p.voice&&p.voice.used} (approved ${p.voice&&p.voice.approved}) |`,`| runtime | render ${l.renderSec} s | ${p.runtimeSec} s (render ${p.renderWallSec} s) |`,`| peak memory | n/a | ${p.peakMemoryMB} MB (Chromium ${p.peakChromiumRssMb} MB) |`,`| upload | ${l.upload} | never |`].join("\n"))' "$cmp" | tee -a "$GITHUB_STEP_SUMMARY" || true
+          done
           for pkg in channels/impossible-brief/premium/*/out/review-package.json; do
             [ -f "$pkg" ] || continue
             echo "### $pkg" | tee -a "$GITHUB_STEP_SUMMARY"
@@ -87,6 +94,7 @@ jobs:
             channels/impossible-brief/premium/*/out/production.log
             channels/impossible-brief/state/production/*/*.mp4
             channels/impossible-brief/state/production/*/quality-gate.json
+            channels/impossible-brief/state/production/*/premium-shadow.json
             channels/impossible-brief/state/production/*/render.json
           retention-days: 14
           if-no-files-found: warn

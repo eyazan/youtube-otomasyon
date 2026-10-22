@@ -4,6 +4,7 @@
 //   PREVIEW_ONLY_UNAPPROVED_VOICE   narrated by the preview fallback voice; re-narrate with the approved voice
 //   PILOT_NOT_APPROVED_FOR_PUBLICATION  rendered with --pilot (unregistered channel / pilot topic file)
 //   RESEARCH_PENDING_NOT_PUBLISHABLE  rendered with --research-pending (topic research incomplete)
+//   SHADOW_OF_LIVE_NOT_PUBLISHABLE  rendered with --shadow beside the live renderer (the live lane produced this topic)
 //   READY_FOR_HUMAN_REVIEW          approved voice + objective QA pass; still needs creative, factual and publish sign-off
 // Eligibility for the normal pipeline is a separate owner decision (docs/premium-studio/integration-plan.md).
 const fs = require("fs");
@@ -11,12 +12,12 @@ const path = require("path");
 
 const ROOT = path.resolve(__dirname, "..", "..");
 
-function build({ channel, topic, script, storyboard, timeline, qa, perf, master, final, out, quality, mode, researchPending, pilot, totalSec }) {
-  const verdict = !qa.objectivePass ? "BLOCKED" : pilot ? "PILOT_NOT_APPROVED_FOR_PUBLICATION" : researchPending ? "RESEARCH_PENDING_NOT_PUBLISHABLE" : timeline.approved !== true ? "PREVIEW_ONLY_UNAPPROVED_VOICE" : "READY_FOR_HUMAN_REVIEW";
+function build({ channel, topic, script, storyboard, timeline, qa, perf, master, final, out, quality, mode, researchPending, pilot, shadow, totalSec }) {
+  const verdict = !qa.objectivePass ? "BLOCKED" : pilot ? "PILOT_NOT_APPROVED_FOR_PUBLICATION" : researchPending ? "RESEARCH_PENDING_NOT_PUBLISHABLE" : shadow ? "SHADOW_OF_LIVE_NOT_PUBLISHABLE" : timeline.approved !== true ? "PREVIEW_ONLY_UNAPPROVED_VOICE" : "READY_FOR_HUMAN_REVIEW";
   const facts = new Map(script.facts.map((f) => [f.id, f]));
   const pkg = {
     schema: "bto-studio.review-package.v1", channel: channel.slug, topicId: topic.id, slug: topic.slug, title: topic.title,
-    verdict, pilot: pilot || null, researchPending: researchPending || null, autoPublish: false, uploadAttempted: false, mode, quality, createdAt: new Date().toISOString(),
+    verdict, pilot: pilot || null, researchPending: researchPending || null, shadow: !!shadow, autoPublish: false, uploadAttempted: false, mode, quality, createdAt: new Date().toISOString(),
     video: path.relative(ROOT, final),
     voice: { used: timeline.voice, approved: timeline.approved === true, approvedVoice: script.voice.approved, note: timeline.approvalNote || null, wordTiming: timeline.wordTiming },
     narrationUnchanged: { sourceHash: script.sourceHash, lines: script.lines.map((l) => l.text) },

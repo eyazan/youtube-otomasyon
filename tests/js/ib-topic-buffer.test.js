@@ -119,3 +119,25 @@ test("qualified buffer counts selectable topics, not unused ones, and survey run
   } finally { Channel.getChannel = original; }
   assert.deepEqual(fs.readdirSync(channel.paths.state).sort(), before, "dry run writes no survey file");
 });
+
+test("survey candidates: source outages are retried, measured topics are not; a published topic is never re-admitted", () => {
+  const now = new Date().toISOString();
+  const top = require("../../scripts/growth/visual-survey").candidates(withState("impossible-brief", {}), { limit: 3 });
+  assert.ok(top.length >= 2, "near-bar candidates exist");
+  const [a, b] = top.map((r) => r.topic.id);
+  const retry = require("../../scripts/growth/visual-survey").candidates(withState("impossible-brief", { "visual-survey.json": survey({
+    [a]: { measuredAt: now, passesPrecheck: false, sourceError: "commons timeout" },
+    [b]: { measuredAt: now, passesPrecheck: false, licensedStills: 1, licensedClips: 0, shortfall: "1 licensed pictures/clips < 4" },
+  }) }), { limit: 50 }).map((r) => r.topic.id);
+  assert.ok(retry.includes(a), "an outage entry is surveyed again");
+  assert.ok(!retry.includes(b), "a fresh measurement is not repeated without --refresh");
+  // published AND visually blocked, with a newer passing survey: still excluded (published.json wins)
+  const raw = universe().find((t) => t.id === a);
+  const channel = withState("impossible-brief", {
+    "published.json": [{ topicId: a, slug: raw.slug }],
+    "blocked.json": { [a]: { slug: raw.slug, reason: "visual pre-check: 2 licensed pictures/clips < 4", date: "2026-10-03T00:00:00Z" } },
+    "visual-survey.json": survey({ [a]: { measuredAt: now, passesPrecheck: true, licensedStills: 6, licensedClips: 0 } }),
+  });
+  assert.equal(Discovery.usedIds(channel).has(a), true);
+  assert.ok(!Inventory.qualifiedBuffer(channel).next.some((n) => n.id === a || n.slug === raw.slug));
+});

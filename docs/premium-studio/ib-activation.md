@@ -21,7 +21,11 @@ a schedule or touches credentials.
 - Explore days without an explore candidate fall back to the best exploit topic.
 - Qualified 7-day buffer (`scripts/growth/topic-buffer.js`, also in `saglik.js` "nitelikli-konu").
 - Premium studio for IB: automatic storyboard, space components, IB evidence standard, channel-aware publish gate.
-- `core/pipeline/impossible-brief.js` premium shadow, OFF unless `IB_PREMIUM_RENDER=preview`.
+- `core/pipeline/impossible-brief.js` premium shadow, OFF unless `IB_PREMIUM_RENDER=preview`. It runs only **after** the live
+  render, QA and upload have finished, on the topic the live lane produced (`studio.js --shadow`, package verdict
+  `SHADOW_OF_LIVE_NOT_PUBLISHABLE`), inside try/catch, and writes `premium-shadow.json` (live vs premium: gates, duration,
+  voice, runtime, peak memory) next to the live package. New shadow output is git-ignored, so the production commit
+  (`git add channels`) never carries it.
 - `ib-premium-dry-run.yml`: dry run of the real entry point on PRs (no credentials, no upload, no commit).
 
 ## 2b. Verified in CI (no upload, no credentials): `ib-premium-dry-run.yml` run 39720060819 on 8df4bf8
@@ -40,26 +44,54 @@ collisions / a semantically wrong "flowing strata" scene (run 39718311156).
 
 ## 3. Activation, in order (owner)
 
-1. Review and merge PR #316 (needed: `workflow_dispatch` workflows only appear from the default branch).
-2. Restore topic selection: Actions → **Topic buffer (visual survey + preflight)** → channel impossible-brief, commit
-   **false** first; read the buffer table. If it shows qualified topics, run again with commit **true**.
-   `gh workflow run topic-buffer.yml -f channel=impossible-brief -f limit=30 -f commit=false`
-3. Next scheduled `portfolio-production` slot selects from the restored pool with the unchanged live renderer.
-   Rollback: delete `channels/impossible-brief/state/visual-survey.json` (scoring returns to the old assumption) or set
-   `visualSurvey.enabled` to false in `channels/impossible-brief/growth-engine.json`.
-4. Optional daily preflight: add `schedule: - cron: '41 4 * * *'` to `topic-buffer.yml` (schedule change: owner).
-5. Premium shadow in production (render only, never uploads): add `IB_PREMIUM_RENDER: preview` to the IB step env in
-   `portfolio-production.yml`, plus `PD_CHROMIUM: /usr/bin/google-chrome` and `pip install numpy soundfile`. Costs about
-   3-5 runner minutes per day. Rollback: remove the env line.
+1. Review and merge PR #316 (needed: `workflow_dispatch` workflows only appear from the default branch). Merging changes
+   no schedule, credential or publish flag; until step 2 the live IB lane keeps skipping exactly as today.
+2. Restore topic selection (survey, then commit). Run it when no `portfolio-production` run is queued: it shares that
+   concurrency group so its commit cannot race the production commit, and GitHub replaces a *pending* run in the group.
+   ```
+   gh workflow run topic-buffer.yml --ref main -f channel=impossible-brief -f limit=30 -f commit=false
+   gh run watch "$(gh run list --workflow topic-buffer.yml --limit 1 --json databaseId -q '.[0].databaseId')"
+   # read the "Qualified topic buffer" table in the run summary; if Qualified >= 7:
+   gh workflow run topic-buffer.yml --ref main -f channel=impossible-brief -f limit=30 -f commit=true
+   git fetch origin main && git show --stat origin/main | head   # expect one file: channels/impossible-brief/state/visual-survey.json
+   ```
+   commit=false writes the survey only on the runner (artifact `visual-survey`); commit=true commits that single file.
+3. The next scheduled `portfolio-production` slot selects from the restored pool with the unchanged live renderer.
+4. Survey entries expire after 45 days (`MAX_AGE_DAYS`), after which the pool falls back to today's state. Re-run step 2
+   at least monthly, or add the daily preflight: `schedule: - cron: '41 4 * * *'` in `topic-buffer.yml` (schedule
+   change: owner) — a scheduled run has no inputs, so also change the commit step's condition to
+   `if: ${{ github.event_name == 'schedule' || inputs.commit }}` and the channel to `${{ inputs.channel || 'impossible-brief' }}`.
+5. Premium shadow in production (render only, never uploads), in the "ImpossibleBrief Short" step of
+   `portfolio-production.yml`:
+   ```yaml
+        env:
+          IB_PREMIUM_RENDER: preview        # add
+          PD_CHROMIUM: /usr/bin/google-chrome
+   ```
+   plus `python -m pip install --quiet numpy soundfile` and `time` in the runtime-dependency step, and an
+   `actions/upload-artifact` step for `channels/impossible-brief/premium/*/out/` and
+   `channels/impossible-brief/state/production/*/premium-shadow.json` (review material; not committed). Costs about
+   3-5 runner minutes per produced Short, after the upload.
 6. Premium **publishing** is not implemented. It needs: a human creative sign-off per video (`--approvals`), the
-   approved Edge narration (CI has Edge; this container does not), and an owner go-live switch that hands a
+   approved Edge narration (verified in CI), a publish path that renders a topic *before* the live lane spends it (the
+   shadow package is a duplicate by construction and the gate refuses it), and an owner go-live switch that hands a
    PUBLISH_APPROVED premium MP4 to the existing uploader. Until then the live stock renderer publishes.
+
+## 3b. Rollback (verified)
+
+| What | Command | Verified effect |
+|---|---|---|
+| Topic survey | `git rm channels/impossible-brief/state/visual-survey.json && git commit -m "revert: IB visual survey" && git push origin main` | with no survey file the buffer is 0 / NO_QUALIFIED_TOPIC (best 74 < 75) — the pre-merge behaviour; the lane skips, it never lowers the bar (`node scripts/growth/topic-buffer.js`) |
+| Survey without deleting data | set `"visualSurvey": {"enabled": false}` in `channels/impossible-brief/growth-engine.json` | survey ignored and every pre-check block applies again (test: "channels without the survey keep every block") |
+| Premium shadow | remove the `IB_PREMIUM_RENDER` line | `premiumShadow` returns null without the flag (test) |
+| Whole PR | `git revert -m 1 <merge-commit> && git push origin main` | code returns to the pre-merge state; published/generated/blocked history is untouched by this PR |
 
 ## 4. Blockers
 
 | Blocker | Dependency | Next executable action |
 |---|---|---|
 | Live IB stays skipped until the survey is committed to main | merge PR #316 | step 2 above (CI measured 21 qualified topics) |
+| Survey expiry (45 days) | a re-run or the daily schedule | step 4 |
 | Premium narration in this container is Kokoro (unapproved) | Edge reachable only in CI | none: CI narrates with the approved Edge voice (verified) |
-| Premium publishing | owner go-live switch + creative sign-off | not built (by design) |
+| Premium publishing | owner go-live switch + creative sign-off + pre-spend render path | not built (by design) |
 | Creative quality of the automatic grammar | human review | LOW_NOVELTY on 3 of 8 scenes in IB-EXT-050 (see render-notes.md) |
