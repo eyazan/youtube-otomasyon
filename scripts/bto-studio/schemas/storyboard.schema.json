@@ -24,7 +24,7 @@
     },
     "topicId": {
       "type": "string",
-      "pattern": "^(BTO|GLL|FR|IB|CT)-([A-Z]{2,4}-)?P?\\d+$"
+      "pattern": "^((BTO|GLL|FR|IB|CT)-([A-Z]{2,4}-)?P?\\d+|FR-[a-z0-9-]+)$"
     },
     "slug": {
       "type": "string"
@@ -295,6 +295,7 @@
             "teal",
             "scanner",
             "space",
+            "blueprint",
             "void"
           ]
         },
@@ -314,6 +315,7 @@
                 "teal",
                 "scanner",
                 "space",
+            "blueprint",
                 "void"
               ]
             },

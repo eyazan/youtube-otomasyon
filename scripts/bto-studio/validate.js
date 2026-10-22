@@ -45,6 +45,8 @@ function screenTexts(layer) {
   if (layer.component === "scale-ladder") (p.items || []).forEach((it) => { if (it.label) out.push({ text: it.label, kind: "label", size: p.labelSize || 34 }); if (it.valueText) out.push({ text: it.valueText, kind: "label", size: p.valueSize || 40 }); });
   if (layer.component === "depth-probe") { (p.markers || []).forEach((m) => out.push({ text: m.label, kind: "label", size: m.size || 40 })); (p.readouts || []).forEach((r) => out.push({ text: r.text, kind: "type", size: r.size || 78 })); if (p.surface) out.push({ text: p.surface, kind: "label", size: 40 }); }
   if (layer.component === "planet") { (p.labels || []).forEach((l) => out.push({ text: l.text, kind: "label", size: l.size || 40 })); ((p.cutaway || {}).layers || []).forEach((l) => l.label && out.push({ text: l.label, kind: "label", size: l.size || 40 })); if (p.probe && p.probe.label) out.push({ text: p.probe.label, kind: "label", size: p.probe.size || 40 }); }
+  if (layer.component === "event-ticks") { if (p.startLabel) out.push({ text: p.startLabel, kind: "label", size: 40 }); if (p.endLabel) out.push({ text: p.endLabel, kind: "label", size: 40 }); out.push({ text: String(p.count), kind: "count" }); }
+  if (layer.component === "failure-chain") (p.steps || []).forEach((st) => out.push({ text: st, kind: "label", size: 44 }));
   if (layer.component === "run-length-strip") { if (p.labelsAt != null) out.push({ text: (p.labels || p.runs || []).join(":"), kind: "ratio" }); if (p.caption) out.push({ text: p.caption, kind: "label" }); }
   return out;
 }

@@ -1,7 +1,7 @@
 // BTO Premium Studio - science/space components for ImpossibleBrief (structured props only; nothing topic-specific).
 //   starfield, planet (shaded body, rotating surface, atmosphere, rings, cutaway layers), depth-probe (vertical cut
 //   with a descending probe, heat ramp and depth markers), scale-ladder (bars growing to evidenced values), orbit
-//   (closed-form Kepler orbit). Every frame is a pure function of t. Geometry is illustrative unless a storyboard
+//   (closed-form Kepler orbit), magnetosphere, flow-arrows, microbes, event-ticks. Every frame is a pure function of t. Geometry is illustrative unless a storyboard
 //   states otherwise: scenes using these carry the ILLUSTRATION chip, models carry MODEL.
 (function (BTO) {
   "use strict";
@@ -152,6 +152,86 @@
       const [bx, by] = pos(phase); const cr = (o.central && o.central.r) || 70; const ccol = (o.central && o.central.color) || C.amber;
       g += `<circle cx="${cx}" cy="${cy}" r="${cr * 1.7}" fill="${ccol}" opacity="0.14" filter="url(#soft)"/><circle cx="${cx}" cy="${cy}" r="${cr}" fill="${ccol}"/>`;
       g += `<circle cx="${n1(bx)}" cy="${n1(by)}" r="${(o.body && o.body.r) || 22}" fill="${(o.body && o.body.color) || C.teal}"/>`;
+      return `<g opacity="${op.toFixed(3)}">${g}</g>`;
+    } };
+  });
+  // ---- magnetosphere: dipole field lines (r = L sin^2 theta) around a body, optional solar-wind particles ---------
+  // props: cx cy r (body radius), shells [L multiples of r], strengthKeys [[t, k 0..1]] (field weakening shrinks and
+  //   dims the lines), wind { at, side: "left"|"right" } particles that are turned aside while k is high and reach the
+  //   body when k is low, tilt (deg), enterAt, outAt. Conceptual geometry: scenes carry the CONCEPTUAL chip.
+  BTO.def("magnetosphere", (o) => {
+    const C = P(); const r0 = BTO.rng(o.seed || 17); const parts = [];
+    for (let i = 0; i < (o.wind ? 110 : 0); i += 1) parts.push({ y: (r0() - 0.5) * 1500, ph: r0(), v: 0.55 + r0() * 0.5 });
+    if (o.wind) BTO.cue(o.wind.at, "whoosh", 0.35);
+    return { draw: (t) => {
+      const op = fade(t, o.enterAt, o.outAt); if (op <= 0) return "";
+      const cx = o.cx || 540, cy = o.cy || 820, R = o.r || 300; const k = o.strengthKeys ? clamp(BTO.keys(t, o.strengthKeys, "inOut")) : 1;
+      const tilt = (o.tilt == null ? -11 : o.tilt) * Math.PI / 180; let g = "";
+      (o.shells || [1.6, 2.2, 3.0, 4.1]).forEach((L0, i) => {
+        const L = 1 + (L0 - 1) * lerp(0.35, 1, k); let d = "";
+        for (const side of [1, -1]) { let run = [];
+          const flush = () => { if (run.length > 1) d += "M" + run.map(([a, b]) => `${n1(a)} ${n1(b)}`).join(" L") + " "; run = []; };
+          for (let s = 0; s <= 48; s += 1) { const th = 0.1 + (Math.PI - 0.2) * s / 48; const rr = R * L * Math.sin(th) ** 2; if (rr < R * 1.01) { flush(); continue; }
+            const x = side * rr * Math.sin(th), y = -rr * Math.cos(th); run.push([cx + x * Math.cos(tilt) - y * Math.sin(tilt), cy + x * Math.sin(tilt) + y * Math.cos(tilt)]); }
+          flush(); }
+        const flow = (t * 60 + i * 23) % 40;
+        g += `<path d="${d}" fill="none" stroke="${C.teal}" stroke-width="${n1(4 - i * 0.5)}" stroke-dasharray="22 18" stroke-dashoffset="${n1(-flow)}" opacity="${(0.75 * Math.pow(k, 0.7)).toFixed(3)}"/>`; });
+      if (o.wind && t >= o.wind.at) { const dir = o.wind.side === "right" ? -1 : 1; const stand = R * lerp(1.15, 3.2, k);
+        parts.forEach((p) => { const run = ((t - o.wind.at) * p.v * 0.6 + p.ph) % 1; const x0 = dir > 0 ? -40 : 1120; let x = x0 + dir * run * 1200; let y = cy + p.y;
+          const dx = (x - cx) * dir; const dy = y - cy; const dist = Math.hypot(dx, dy);
+          if (dx < 0 && dist < stand + 220) { const push = clamp((stand + 220 - dist) / 220); y += Math.sign(dy || 1) * push * push * 260; }
+          if (Math.hypot(x - cx, y - cy) < R) return;
+          g += `<circle cx="${n1(x)}" cy="${n1(y)}" r="5" fill="${C.amber}" opacity="${(0.8 * clamp((t - o.wind.at) / 0.5)).toFixed(3)}"/>`; }); }
+      return `<g opacity="${op.toFixed(3)}">${g}</g>`;
+    } };
+  });
+
+  // ---- flow-arrows: animated streams along polylines (ocean currents, air flow, transport); dashes travel ----------
+  // props: streams [{ pts: [[x,y],...], color, width, at, speedKeys [[t, s]] }] - speed 0 stops the dashes (a current
+  //   shutting down); positions are illustrative (CONCEPTUAL chip).
+  BTO.def("flow-arrows", (o) => {
+    const C = P(); (o.streams || []).forEach((s) => BTO.cue(s.at || 0, "whoosh", 0.25));
+    return { draw: (t) => {
+      const op = fade(t, o.enterAt, o.outAt); if (op <= 0) return ""; let g = "";
+      (o.streams || []).forEach((s, i) => { if (t < (s.at || 0)) return; const k = clamp((t - (s.at || 0)) / 0.6);
+        const sp = s.speedKeys ? BTO.keys(t, s.speedKeys, "inOut") : 1; let ph = 0; const steps = 60; const t0 = s.at || 0; const dt = Math.max(0, t - t0) / steps;
+        for (let j = 0; j < steps; j += 1) ph += dt * (s.speedKeys ? BTO.keys(t0 + (j + 0.5) * dt, s.speedKeys, "inOut") : 1);
+        const d = s.pts.map(([x, y], j) => `${j ? "L" : "M"}${n1(x)} ${n1(y)}`).join(" "); const col = (s.color && C[s.color]) || s.color || (i % 2 ? C.amber : C.teal);
+        const [ax, ay] = s.pts[s.pts.length - 1], [bx, by] = s.pts[s.pts.length - 2]; const an = Math.atan2(ay - by, ax - bx); const w = s.width || 14;
+        g += `<path d="${d}" fill="none" stroke="${col}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" opacity="${(0.22 * k).toFixed(3)}"/>`;
+        g += `<path d="${d}" fill="none" stroke="${col}" stroke-width="${w * 0.55}" stroke-linecap="round" stroke-dasharray="34 26" stroke-dashoffset="${n1(-ph * 120)}" opacity="${(lerp(0.35, 0.95, clamp(sp)) * k).toFixed(3)}"/>`;
+        g += `<path d="M${n1(ax + Math.cos(an) * w * 1.6)} ${n1(ay + Math.sin(an) * w * 1.6)} L${n1(ax + Math.cos(an + 2.5) * w * 1.6)} ${n1(ay + Math.sin(an + 2.5) * w * 1.6)} L${n1(ax + Math.cos(an - 2.5) * w * 1.6)} ${n1(ay + Math.sin(an - 2.5) * w * 1.6)} Z" fill="${col}" opacity="${k.toFixed(3)}"/>`; });
+      return `<g opacity="${op.toFixed(3)}">${g}</g>`;
+    } };
+  });
+
+  // ---- microbes: a seeded cluster of rods and cocci that drift and wobble; countKeys thins the population ----------
+  // props: cx cy spread, count, countKeys [[t, fraction]], palette ["teal","amber",...], seed. Conceptual (not to scale).
+  BTO.def("microbes", (o) => {
+    const C = P(); const r = BTO.rng(o.seed || 23); const n = o.count || 90; const cells = [];
+    for (let i = 0; i < n; i += 1) { const a = r() * 6.283, d = Math.sqrt(r()) * (o.spread || 380); cells.push({ x: Math.cos(a) * d, y: Math.sin(a) * d * 1.25, rod: r() < 0.55, s: 14 + r() * 22, rot: r() * 180, ph: r() * 6.28, c: (o.palette || ["teal", "amber", "paper"])[i % (o.palette || [0, 0, 0]).length], keep: r() }); }
+    return { draw: (t) => {
+      const op = fade(t, o.enterAt, o.outAt); if (op <= 0) return ""; const f = o.countKeys ? clamp(BTO.keys(t, o.countKeys, "inOut")) : 1;
+      const cx = o.cx || 540, cy = o.cy || 820; let g = "";
+      cells.forEach((c) => { const vis = clamp((f - c.keep) * 8 + 1); if (vis <= 0) return; const x = cx + c.x + Math.sin(t * 0.7 + c.ph) * 18, y = cy + c.y + Math.cos(t * 0.6 + c.ph) * 14; const col = C[c.c] || c.c; const rot = c.rot + t * 12;
+        g += c.rod ? `<rect x="${n1(x - c.s)}" y="${n1(y - c.s * 0.32)}" width="${n1(c.s * 2)}" height="${n1(c.s * 0.64)}" rx="${n1(c.s * 0.32)}" fill="${col}" opacity="${(0.82 * vis).toFixed(3)}" transform="rotate(${n1(rot)} ${n1(x)} ${n1(y)})"/>`
+          : `<circle cx="${n1(x)}" cy="${n1(y)}" r="${n1(c.s * 0.55)}" fill="${col}" opacity="${(0.82 * vis).toFixed(3)}"/><circle cx="${n1(x - c.s * 0.15)}" cy="${n1(y - c.s * 0.15)}" r="${n1(c.s * 0.18)}" fill="#fff" opacity="${(0.25 * vis).toFixed(3)}"/>`; });
+      return `<g opacity="${op.toFixed(3)}">${g}</g>`;
+    } };
+  });
+
+  // ---- event-ticks: a long time axis on which N evenly spaced events tick in (count, not dates: the spacing is
+  //   illustrative); end labels carry the span. props: x y w, count, at, dur, startLabel, endLabel, color
+  BTO.def("event-ticks", (o) => {
+    const C = P(); BTO.cue(o.at || 0, "tick", 0.3, 0, { dur: o.dur || 1.6 });
+    return { draw: (t) => {
+      const op = fade(t, o.enterAt, o.outAt); if (op <= 0) return ""; const x = o.x || 110, y = o.y || 980, w = o.w || 860; const n = o.count || 10;
+      const k = clamp((t - (o.at || 0)) / (o.dur || 1.6)); let g = `<line x1="${x}" y1="${y}" x2="${x + w}" y2="${y}" stroke="${C.paper}" stroke-width="4" opacity="0.6"/>`;
+      const shown = Math.floor(n * k); const r = BTO.rng(o.seed || 5);
+      for (let i = 0; i < n; i += 1) { const jitter = (r() - 0.5) * (w / n) * 0.6; if (i >= shown) continue; const xx = x + (w * (i + 0.5)) / n + jitter; const hh = 26 + (i % 3) * 14;
+        g += `<line x1="${n1(xx)}" y1="${n1(y - hh)}" x2="${n1(xx)}" y2="${n1(y + hh)}" stroke="${(o.color && C[o.color]) || C.amber}" stroke-width="${n > 120 ? 2.5 : 4}" opacity="0.9"/>`; }
+      if (o.startLabel) g += BTO.text(x, y + 110, o.startLabel, { size: T().scale.label, anchor: "start", fill: C.muted, weight: 700, op: clamp((t - (o.at || 0)) / 0.4) });
+      if (o.endLabel) g += BTO.text(x + w, y + 110, o.endLabel, { size: T().scale.label, anchor: "end", fill: C.muted, weight: 700, op: clamp((t - (o.at || 0)) / 0.4) });
       return `<g opacity="${op.toFixed(3)}">${g}</g>`;
     } };
   });

@@ -34,7 +34,9 @@ function channelReport(slug, { targetPerDay, bufferDays }) {
   const pubFile = path.join(stateDir, legacy ? "yayinlananlar.json" : "published.json"); const published = J(pubFile, []); const pubKnown = fs.existsSync(pubFile);
   if (uni && reg) {
     const A = require("./adapter"); const ch = require("../../core/channel-context").getChannel(slug); const reasons = {}; let ready = 0;
-    for (const t of uni.topics || []) { const x = A.readiness(ch, t); if (x.ready) ready += 1; else for (const e of x.errors) { const k = e.replace(/\d+/g, "N").replace(/\(.*\)/, "").trim(); reasons[k] = (reasons[k] || 0) + 1; } }
+    // FR universe rows point at the researched case file (icerik/konular/<topic_id>.json): load it as the studio does
+    const asTopic = (t) => { if (slug !== "failure-reconstructed") return t; try { return A.loadTopic(slug, t.topic_id).topic; } catch (e) { return null; } };
+    for (const row of uni.topics || []) { const t = asTopic(row); const x = t ? A.readiness(ch, t) : { ready: false, errors: ["no researched case file"] }; if (x.ready) ready += 1; else for (const e of x.errors) { const k = e.replace(/\d+/g, "N").replace(/\(.*\)/, "").trim(); reasons[k] = (reasons[k] || 0) + 1; } }
     r.topics = { total: (uni.topics || []).length, readyForStudio: ready, published: pubKnown ? published.length : null, topBlockers: Object.entries(reasons).sort((a, b) => b[1] - a[1]).slice(0, 4).map(([k, n]) => `${n}x ${k}`) };
   } else if (!uni) {
     const cand = J(path.join(ROOT, "channels", slug, "topics", "topic-candidates.json"), null);

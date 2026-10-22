@@ -23,21 +23,34 @@ const STOP = new Set("the a an and of to in on for that this it its is are was w
 // and uses the one allowed dissolve at the midpoint.
 const TRANSITIONS = ["scan-wipe", "iris"];
 const WORLD_WORDS = {
+  // specific subjects first: when the title names one, it wins over the broader worlds below (Lake Baikal is water, not
+  // "cosmos"; Earth's magnetic field is a field, not a drilled planet; a current is a flow, not a rock slice)
+  magnetic: /\b(magnetic|magnetosphere|geomagnetic|dipole|aurora|solar wind|compass|pole reversal|reversals?)\b/i,
+  current: /\b(ocean current|current|currents|gulf stream|amoc|circulation|conveyor|monsoon|jet stream)\b/i,
+  lake: /\b(lake|lakes|reservoir|river|basin|fresh water|freshwater|aquifer)\b/i,
+  micro: /\b(microbe|microbes|microbial|bacteria|bacterial|germ|germs|virus|viruses|microbiome|gut|cell|cells)\b/i,
   "earth-interior": /\b(drill|drilling|borehole|crust|mantle|core|underground|deepest hole|bedrock|magma|lava|volcan)/i,
-  "ocean-depth": /\b(trench|ocean|seafloor|sea floor|deep sea|abyss|submarine|dive|mariana|current|gulf stream)/i,
+  "ocean-depth": /\b(trench|ocean|seafloor|sea floor|deep sea|abyss|submarine|dive|mariana)/i,
   orbit: /\b(orbit|moon|sun|planet|mercury|venus|mars|jupiter|saturn|asteroid|comet|pulsar|spin|spun|rotation|day length|year lasted)/i,
   sky: /\b(atmosphere|stratosphere|altitude|edge of space|sky|jump|balloon|cloud|tornado|lightning|storm)/i,
-  body: /\b(body|brain|blood|heart|microbe|cell|sleep|pain|eat|stomach|bone|memory|remember)/i,
+  body: /\b(body|brain|blood|heart|sleep|pain|eat|stomach|bone|memory|remember)/i,
+  "earth-surface": /\b(earth|earth's|climate|europe|greenland|siberia|continent|country|ice age|glacier|desert|dust bowl|forest)/i,
 };
+const SPECIFIC = new Set(["magnetic", "current", "lake", "micro"]);
 const LAYER_CHIP = { "KNOWN SCIENCE": "factLabel", "ESTIMATED CONSEQUENCE": "estimateLabel", "SPECULATIVE SCENARIO": "speculativeLabel" };
 
 function world(topic) {
   const text = [topic.topic, topic.title, topic.scientificMechanism, topic.coreQuestion, ...((topic.visualPotential || {}).scenes || [])].join(" ");
-  // the world whose words occur most often in the record (title and mechanism count double)
+  // the world whose words occur most often in the record (title and mechanism count double); a specific subject named in
+  // the title or topic line wins outright, and "earth-surface" is only the fallback before deep space
   const head = [topic.topic, topic.title, topic.scientificMechanism].join(" ");
-  const score = Object.entries(WORLD_WORDS).map(([w, re]) => [w, (text.match(new RegExp(re.source, "gi")) || []).length + (head.match(new RegExp(re.source, "gi")) || []).length]);
+  const count = (re, str) => (str.match(new RegExp(re.source, "gi")) || []).length;
+  const named = Object.keys(WORLD_WORDS).find((w) => SPECIFIC.has(w) && count(WORLD_WORDS[w], [topic.topic, topic.title].join(" ")) > 0);
+  if (named) return named;
+  const score = Object.entries(WORLD_WORDS).filter(([w]) => w !== "earth-surface").map(([w, re]) => [w, count(re, text) + count(re, head)]);
   const best = score.sort((a, b) => b[1] - a[1])[0];
-  return best && best[1] > 0 ? best[0] : "cosmos";
+  if (best && best[1] > 0) return best[0];
+  return count(WORLD_WORDS["earth-surface"], text) > 0 ? "earth-surface" : "cosmos";
 }
 
 // numbers spoken in a line with their unit, kept only when a fact contains the same digits
@@ -46,8 +59,12 @@ const UNIT = { metres: "m", meters: "m", kilometres: "km", kilometers: "km", cen
 function numbersIn(text) {
   const out = []; let m; NUM.lastIndex = 0;
   while ((m = NUM.exec(text))) { const raw = m[1]; const unit = (m[2] || "").replace(/\s/g, ""); const value = Number(raw.replace(/,/g, ""));
-    if (!Number.isFinite(value)) continue; out.push({ raw, value, unit: UNIT[unit.toLowerCase()] || unit, year: !unit && /^\d{4}$/.test(raw) && value >= 1500 && value <= 2100 }); }
-  return out;
+    if (!Number.isFinite(value)) continue; out.push({ raw, value, unit: UNIT[unit.toLowerCase()] || unit, year: !unit && /^\d{4}$/.test(raw) && value >= 1500 && value <= 2100, end: NUM.lastIndex, start: m.index }); }
+  // "900, 1,600 and 1,400 metres" / "4 to 10 °C": bare numbers in a list take the unit written after the last one
+  for (let i = out.length - 2; i >= 0; i -= 1) if (!out[i].unit && out[i + 1].unit && /^(\s*,\s*|\s*and\s+|\s*to\s+|\s*[–-]\s*)$/.test(text.slice(out[i].end, out[i + 1].start))) { out[i].unit = out[i + 1].unit; out[i].year = false; }
+  // a range ("4 to 10 °C", "85 to 90%") is one figure: never show only its first number
+  for (let i = 0; i < out.length - 1; i += 1) if (out[i].unit && out[i].unit === out[i + 1].unit && /^(\s*to\s+|\s*[–-]\s*)$/.test(text.slice(out[i].end, out[i + 1].start))) out[i].upto = out[i + 1];
+  return out.map(({ end, start, ...n }) => ({ ...n, ...(n.upto ? { upto: { raw: n.upto.raw, value: n.upto.value } } : {}) }));
 }
 const factHas = (fact, raw) => new RegExp(`(^|\\D)${raw.replace(/,/g, ",?")}(\\D|$)`).test(fact.claim + " " + (fact.quote || ""));
 
@@ -64,9 +81,10 @@ function keyPhrase(text, max = 3) {
   if (contrast) return `${contrast[1]}, NOT ${contrast[2]}`.toUpperCase();
   const comparison = String(text).match(/\bmore\s+(?:like\s+)?([A-Za-z]+)\s+than\s+([A-Za-z]+)/i);
   if (comparison) return `MORE ${comparison[1]} THAN ${comparison[2]}`.toUpperCase();
-  text = String(text).replace(/['’]s\b/g, "");
-  const ws = text.replace(/[“”"'’.,;:!?()]/g, " ").split(/\s+/).filter(Boolean);
-  const keep = ws.filter((w) => !STOP.has(w.toLowerCase()) && !/\d/.test(w));
+  text = String(text).replace(/['’]s\b/g, "").replace(/’/g, "'");
+  // contractions stay whole ("wouldn't"); a pronoun contraction ("we'd", "it'll") is a stop word like its pronoun
+  const ws = text.replace(/[“”".,;:!?()]/g, " ").split(/\s+/).map((w) => w.replace(/^'+|'+$/g, "")).filter(Boolean);
+  const keep = ws.filter((w) => !STOP.has(w.toLowerCase().split("'")[0]) && !/\d/.test(w));
   return (keep.length ? keep : ws.filter((w) => !/\d/.test(w))).slice(0, max).join(" ").toUpperCase();
 }
 
@@ -74,13 +92,18 @@ function build(script, style, topic) {
   const W = world(topic); const facts = script.facts; const lines = script.lines; const S = style.type.scale;
   const depthNumbers = facts.flatMap((f) => numbersIn(f.claim).filter((n) => n.unit === "m" || n.unit === "km").map((n) => (n.unit === "km" ? n.value * 1000 : n.value)));
   const maxDepth = depthNumbers.length ? Math.max(...depthNumbers) * 1.18 : 1;
-  const depthWorld = W === "earth-interior" || W === "ocean-depth";
-  const evidenced = (line) => numbersIn(line.text).map((n) => ({ ...n, facts: facts.filter((f) => factHas(f, n.raw)).map((f) => f.id) })).filter((n) => n.facts.length);
-  const valueLabel = (n) => (n.unit === "°C" || n.unit === "°" ? `${n.raw} °C` : n.unit === "°F" ? `${n.raw} °F` : n.unit ? `${n.raw} ${n.unit}` : n.raw);
+  // a topic about one named body is drawn as that body (Venus, Mars, the Moon), not as a generic orbit
+  const BODY = [[/\bvenus\b/i, "venus"], [/\bmars\b/i, "rocky"], [/\bmercury\b/i, "moon"], [/\b(the moon|moon's|lunar)\b/i, "moon"], [/\b(jupiter|saturn|neptune|uranus)\b/i, "gas"], [/\bthe sun\b|\bsun's\b/i, "sun"]];
+  const body = (BODY.find(([re]) => re.test([topic.title, topic.topic].join(" "))) || [])[1] || null;
+  const depthWorld = W === "earth-interior" || W === "ocean-depth" || W === "lake";
+  const evidenced = (line) => numbersIn(line.text).map((n) => ({ ...n, facts: facts.filter((f) => factHas(f, n.raw) && (!n.upto || factHas(f, n.upto.raw))).map((f) => f.id) })).filter((n) => n.facts.length);
+  const valueLabel = (n) => { const r = n.upto ? `${n.raw}–${n.upto.raw}` : n.raw; return n.unit === "°C" || n.unit === "°" ? `${r} °C` : n.unit === "°F" ? `${r} °F` : n.unit ? `${r} ${n.unit}` : r; };
+  // the line rejects the figure it states ("claims of a 15 to 20 °C crash are considered incorrect"): strike it through
+  const rejects = (L) => /\b(incorrect|myth|false|wrong|not true|exaggerat\w*|debunked|unfounded|overstated)\b/i.test(L.text);
   let ti = 0; const mid = Math.floor(lines.length / 2); const nextTransition = (i) => (i === mid ? "dissolve" : TRANSITIONS[(ti++) % TRANSITIONS.length]);
 
   // the world's signature visual (also the payoff, so the loop returns to frame 0)
-  const signature = (at, { probe = null, cut = false, zoom = null } = {}) => {
+  const signature = (at, { probe = null, cut = false, zoom = null, field = null } = {}) => {
     // probe depth is exaggerated for visibility (a real 12 km hole is ~0.2 % of Earth's radius): ILLUSTRATION chip
     // zoom { from, to }: the planet grows past the frame while its top surface stays in view, so a "scratch" reads as tiny
     // cutaway: the planet moves left and its layer labels stack in a column inside the right safe margin
@@ -91,26 +114,71 @@ function build(script, style, topic) {
         ...(cut ? { cutaway: { at, angle: -30, open: 32, layers: [{ f: 0.99, color: "#7a4a2a", label: "CRUST", labelAt: off(at, 0.6), lx: 690, ly: 600 }, { f: 0.88, color: "#c0501f", label: "MANTLE", labelAt: off(at, 0.9), lx: 690, ly: 690 }, { f: 0.47, color: "#ff8a2a", label: "CORE", labelAt: off(at, 1.2), lx: 690, ly: 780 }, { f: 0.2, color: "#ffd06a" }] } } : {}) } }];
     }
     if (W === "ocean-depth") return [{ component: "planet", props: { kind: "earth", x: 540, y: 820, r: 330, spin: 0.32, seed: 8 } }];
+    // field: the planet inside its dipole field lines; weaken/switch-off lines shrink the field, particle lines bring the wind
+    if (W === "magnetic") return [{ component: "planet", props: { kind: "earth", x: 540, y: 820, r: 210, spin: 0.3, seed: 4 } },
+      { component: "magnetosphere", props: { cx: 540, cy: 820, r: 210, ...(field ? { strengthKeys: [[at, field.from], [off(at, 1.6), Math.min(field.from, field.to)]] } : {}), ...(field && field.wind ? { wind: { at, side: "left" } } : {}) } }];
+    // current: a slow globe with a warm stream running north and a cold return; "weaken/shut down" slows the dashes
+    if (W === "current") return [{ component: "planet", props: { kind: "earth", x: 540, y: 820, r: 360, spin: 0.04, seed: 8, ice: false } },
+      { component: "flow-arrows", props: { streams: [
+        { pts: [[330, 1050], [420, 900], [520, 780], [640, 660], [720, 560]], color: "amber", at, ...(field ? { speedKeys: [[at, field.from], [off(at, 1.6), Math.min(field.from, field.to)]] } : {}) },
+        { pts: [[760, 600], [700, 760], [610, 900], [500, 1020], [420, 1110]], color: "teal", width: 10, at: off(at, 0.3), ...(field ? { speedKeys: [[off(at, 0.3), field.from], [off(at, 1.9), Math.min(field.from, field.to)]] } : {}) }] } }];
+    if (W === "lake" || W === "earth-surface") return [{ component: "planet", props: { kind: "earth", x: 540, y: 820, r: 330, spin: 0.22, seed: W === "lake" ? 12 : 3, grid: W === "lake" } }];
+    if (W === "micro") return [{ component: "microbes", props: { cx: 540, cy: 820, spread: 360, count: 110, seed: 23, ...(field ? { countKeys: [[at, field.from], [off(at, 1.4), Math.min(field.from, field.to)]] } : {}) } }];
+    if (W === "orbit" && body) return [{ component: "planet", props: { kind: body, x: 540, y: 820, r: 320, spin: 0.18, seed: 7, ...(body === "gas" ? { rings: /saturn/i.test(topic.title + topic.topic) } : {}) } }];
     if (W === "orbit") return [{ component: "orbit", props: { cx: 540, cy: 800, a: 360, e: 0.18, tilt: -8, period: 7, trail: 0.22, central: { r: 74 }, body: { r: 26 }, enterAt: 0 } }];
     if (W === "sky") return [{ component: "planet", props: { kind: "earth", x: 540, y: 1560, r: 900, spin: 0.03, seed: 2 } }];
-    if (W === "body") return [{ component: "planet", props: { kind: "ice", x: 540, y: 800, r: 260, spin: 0.4, seed: 6, colors: { base: "#7a2f4f", land: "#c25a7c", land2: "#9b3f63", atm: "#ff9bbd" } } }];
+    // a human-body topic is drawn as a person (generic silhouette, no likeness), not as a coloured planet
+    if (W === "body") return [{ component: "figure", props: { pathKeys: [[0, 540, 1220, 1]], height: 700, color: "#9fb3d6", pose: "think", facing: 1 } }];
     return [{ component: "planet", props: { kind: "gas", x: 540, y: 820, r: 300, spin: 0.3, seed: 5, rings: true } }];
   };
+  // what the line does to a field / flow / population world, from its own verbs: weaken (to 35 %), remove (to 5 %), and
+  // whether charged particles arrive (magnetic). null = the world as it is.
+  const COMPOSITE = new Set(["magnetic", "current", "micro", "body"]);
+  const fieldFor = (L) => {
+    if (!COMPOSITE.has(W) || W === "body") return null; const t = L.text;
+    const gone = /\b(switch(?:ed)? (?:it )?off|off completely|without (?:it|them)|vanish|vanished|disappear|disappeared|gone|shut(?:s)? down|collapse[sd]?|wiped out)\b/i.test(t);
+    const weak = /\b(weaken|weakens|weakening|weaker|faded|fade|fading|slow|slows|slowed|decline|declines|shrink|shrinks)\b/i.test(t);
+    const wind = W === "magnetic" && /\b(particle|particles|radiation|solar wind|charged|storm|storms|satellite|satellites)\b/i.test(t);
+    // once the line has removed the field / stopped the current / wiped out the population, later scenes stay in that
+    // state (no field returning at full strength right after "switch it off"); only the payoff returns to frame 0
+    const was = removed;
+    if (gone) removed = { from: 1, to: W === "micro" ? 0.12 : 0.05 };
+    if (!gone && !weak && !wind) return was ? { to: was.to, from: was.to, wind: false } : null;
+    return { to: gone ? removed.to : weak ? 0.4 : 0.25, from: was ? was.to : 1, wind };
+  };
+  let removed = null;
   // subject views rotate through three framings of the world's body so consecutive "subject" scenes never repeat
   const FRAMINGS = [{ x: 540, y: 820, r: 330 }, { x: 250, y: 860, r: 560 }, { x: 540, y: 1500, r: 820 }];
-  const subjectView = (at, n) => signature(at).map((l) => (l.component === "planet" ? { ...l, props: { ...l.props, ...FRAMINGS[n % FRAMINGS.length], spin: l.props.spin * (n % 2 ? -1 : 1) } } : l));
+  // composite worlds (planet + field lines / streams, or a microbe cluster) are reframed as one unit so they stay
+  // registered: every layer is scaled about the world centre (540, 820) and moved to the framing's centre
+  const C_FRAMES = [{ x: 540, y: 820, k: 1 }, { x: 560, y: 1080, k: 1.55 }, { x: 400, y: 760, k: 0.8 }];
+  const reframe = (layers, f) => layers.map((l) => { const P = { ...l.props }; const X = (x) => +(f.x + (x - 540) * f.k).toFixed(1), Y = (y) => +(f.y + (y - 820) * f.k).toFixed(1);
+    if (l.component === "planet") Object.assign(P, { x: X(P.x), y: Y(P.y), r: +(P.r * f.k).toFixed(1) });
+    if (l.component === "magnetosphere") Object.assign(P, { cx: X(P.cx), cy: Y(P.cy), r: +(P.r * f.k).toFixed(1) });
+    if (l.component === "flow-arrows") P.streams = P.streams.map((st) => ({ ...st, width: Math.round((st.width || 14) * Math.sqrt(f.k)), pts: st.pts.map(([x, y]) => [X(x), Y(y)]) }));
+    if (l.component === "microbes") Object.assign(P, { cx: X(P.cx), cy: Y(P.cy), spread: Math.round(P.spread * f.k) });
+    if (l.component === "figure") Object.assign(P, { pathKeys: P.pathKeys.map(([t, x, y, sc]) => [t, X(x), Y(y), sc]), height: Math.round(P.height * f.k), facing: f.k < 1 ? -1 : 1 });
+    return { ...l, props: P }; });
+  const subjectView = (at, n, field = null) => (COMPOSITE.has(W) ? reframe(signature(at, { field }), C_FRAMES[n % C_FRAMES.length])
+    // a named body alternates with a side-by-side beside Earth (sizes illustrative)
+    : body && n % 2 === 1 ? [{ component: "planet", props: { kind: body, x: 300, y: 860, r: 220, spin: 0.18, seed: 7 } }, { component: "planet", props: { kind: "earth", x: 790, y: 860, r: 230, spin: 0.3, seed: 3 } }]
+    : signature(at).map((l) => (l.component === "planet" ? { ...l, props: { ...l.props, ...FRAMINGS[n % FRAMINGS.length], spin: l.props.spin * (n % 2 ? -1 : 1) } } : l)));
   let subjectN = 0;
   const stars = (seed) => ({ component: "starfield", screen: true, props: { seed, count: 300, drift: [22, 9] } });
   const headline = (at, text, y = 470, size = S.headline) => ({ component: "kinetic-type", screen: true, props: { items: [{ at, text, x: 540, y, size, family: "sans" }] } });
-  const readout = (at, text, y = 1200) => ({ component: "kinetic-type", screen: true, props: { items: [{ at, text, x: 540, y, size: S.display, family: "num" }] } });
+  const readout = (at, text, y = 1200, strike = false) => ({ component: "kinetic-type", screen: true, props: { items: [{ at, text, x: 540, y, size: S.display, family: "num", ...(strike ? { style: "strike" } : {}) }] } });
   const probeSlice = (L, { to = null, from = null, heat = false, flow = false, markers = [], readouts = [], surface = true }) => ({ component: "depth-probe", props: {
-    x: 470, y: 450, w: 420, h: 770, maxDepth, ...(surface && !surfaceShown && (surfaceShown = true) ? { surface: W === "ocean-depth" ? "SEA LEVEL" : "SURFACE" } : {}), heat, heatAt: heat ? `${L.id}+0.2` : undefined, ...(flow ? { flow: { at: `${L.id}+0.3`, amp: 30 } } : {}),
+    x: 470, y: 450, w: 420, h: 770, maxDepth, ...(W === "lake" || W === "ocean-depth" ? { strata: ["#1a5b86", "#144c73", "#0f3d5e", "#0b2f4a", "#082438"] } : {}), ...(surface && !surfaceShown && (surfaceShown = true) ? { surface: W === "ocean-depth" ? "SEA LEVEL" : "SURFACE" } : {}), heat, heatAt: heat ? `${L.id}+0.2` : undefined, ...(flow ? { flow: { at: `${L.id}+0.3`, amp: 30 } } : {}),
     probeKeys: to != null ? [[`${L.id}-0.1`, from != null ? from : Math.min(to * 0.25, maxDepth * 0.2)], [`${L.id}.end`, to]] : undefined, markers, readouts } });
 
-  let cutUsed = false; let surfaceShown = false;
+  let cutUsed = false; let surfaceShown = false; const laddersShown = new Set();
   const scenes = lines.map((L, i) => {
     const nums = evidenced(L); const year = nums.find((n) => n.year); const temp = nums.find((n) => /°|degrees/i.test(n.unit) || /°C/.test(L.text) && n.unit === "");
-    const qty = nums.find((n) => !n.year && n !== temp);
+    const qty = (depthWorld && nums.find((n) => !n.year && n !== temp && (n.unit === "m" || n.unit === "km"))) || nums.find((n) => !n.year && n !== temp);
+    // "flipped 183 times in 83 million years": a count of events over a span, both evidenced
+    const cm = /\b(\d{1,3}(?:,\d{3})*|\d+)\s+(times|reversals|flips|eruptions|impacts|events|extinctions)\b[^.]*?\bin\s+(?:the\s+last\s+)?([\d.,]+\s*(?:million|thousand|billion)?\s*years)/i.exec(L.text);
+    const count = cm && nums.some((n) => n.raw === cm[1]) && Number(cm[1].replace(/,/g, "")) >= 3 && Number(cm[1].replace(/,/g, "")) <= 400
+      && facts.some((f) => factHas(f, cm[3].match(/[\d.,]+/)[0])) ? { n: Number(cm[1].replace(/,/g, "")), raw: cm[1], noun: cm[2], span: `${cm[3].toUpperCase()} AGO` } : null;
     const ev = [...new Set([...nums.flatMap((n) => n.facts), ...(L.evidenceSuggested || [])])].slice(0, 3); const evidence = ev.length ? ev : [facts[0].id];
     const chips = ["illustrationLabel", LAYER_CHIP[L.layer] || "factLabel"];
     const start = i === 0 ? 0 : `${L.id}-0.15`; const first = i === 0; const last = i === lines.length - 1;
@@ -121,13 +189,19 @@ function build(script, style, topic) {
     const cam = (z0, z1, y0 = 800, y1 = 800) => [{ at: start, x: 540 - drift, y: y0, z: z0 }, { at: `${L.id}.end`, x: 540 + drift, y: y1, z: Math.max(z1, z0 + 0.14) }];
     if (first) {
       kind = "hook"; const n = qty || temp || year;
-      layers = [stars(11), ...signature(0.15, { probe: W === "earth-interior" }), ...(n ? [readout(`${L.id}+0.25`, valueLabel(n), 1230)] : [headline(`${L.id}+0.2`, keyPhrase(L.text), 420)])];
+      layers = [stars(11), ...signature(0.15, { probe: W === "earth-interior", field: fieldFor(L) }), ...(n ? [readout(`${L.id}+0.25`, valueLabel(n), 1230)] : [headline(`${L.id}+0.2`, keyPhrase(L.text), 420)])];
       purpose = `Hook: frame 0 shows the ${W.replace("-", " ")} itself${n ? ` and the claim's number (${valueLabel(n)}) lands as a readout` : ""}, so the scale of the question is visible before it is explained.`;
       camera = cam(1.12, 1.0);
     } else if (last) {
       kind = "payoff"; layers = [stars(11), ...signature(`${L.id}+0.2`, { probe: W === "earth-interior" }), headline(`${L.id}+0.3`, keyPhrase(L.text, 4), 420, S.title)];
       purpose = "Payoff: the answer in a few words over the opening composition; the camera eases back to the frame-0 framing so the Short loops on its first image.";
       camera = [{ at: start, x: 540, y: 800, z: 1.06 }, { at: "end-0.6", x: 540, y: 800, z: 1.12 }];
+    } else if (count) {
+      // "N times in M years": N evenly spaced ticks on a long axis (spacing illustrative, count and span from the cited fact)
+      kind = "count"; layers = [stars(60 + i), { component: "event-ticks", props: { x: 150, y: 980, w: 700, count: count.n, at: `${L.id}+0.2`, dur: 2.6, startLabel: count.span, endLabel: "NOW", seed: 7 + i } },
+        readout(`${L.id}+0.4`, `${count.raw} ${count.noun}`.toUpperCase(), 760)];
+      purpose = `Count: ${count.raw} events tick onto a ${count.span.toLowerCase()} axis as the line is spoken, so the frequency is seen as a density of marks; the spacing is illustrative, the count and span are the cited fact's.`;
+      camera = [{ at: start, x: 470, y: 900, z: 1.0 }, { at: `${L.id}.end`, x: 610, y: 940, z: 1.22 }];
     } else if (year) {
       kind = "year"; layers = [stars(20 + i), ...(depthWorld ? [probeSlice(L, { from: 0, to: qty && (qty.unit === "m" || qty.unit === "km") ? (qty.unit === "km" ? qty.value * 1000 : qty.value) : maxDepth * 0.82 })] : signature(`${L.id}`)),
         { component: "timeline-ruler", screen: true, props: { theme: "dark", y: 1250, fromYear: year.value - 6, year: year.value, enterAt: `${L.id}-0.1`, arriveAt: `${L.id}+0.6`, outAt: `${L.id}.end` } }];
@@ -139,7 +213,7 @@ function build(script, style, topic) {
       // a close-up of the probe tip, so it does not repeat the previous scene's full-slice framing
       camera = [{ at: start, x: 470, y: 900, z: 1.05 }, { at: `${L.id}.end`, x: 470, y: 1060, z: 1.7 }];
     } else if (temp) {
-      kind = "heat"; layers = [stars(30 + i), ...signature(`${L.id}`), readout(`${L.id}+0.4`, valueLabel(temp), 1230)];
+      kind = "heat"; layers = [stars(30 + i), ...subjectView(`${L.id}`, subjectN++, fieldFor(L)), readout(`${L.id}+0.4`, valueLabel(temp), 1230, rejects(L))];
       purpose = `Heat: the cited temperature (${valueLabel(temp)}) lands as a large readout over the subject while the camera pushes in.`; camera = cam(1.0, 1.08);
     } else if (qty && depthWorld && (qty.unit === "m" || qty.unit === "km")) {
       const d = qty.unit === "km" ? qty.value * 1000 : qty.value; const others = nums.filter((n) => n !== qty && (n.unit === "m" || n.unit === "km"));
@@ -150,10 +224,12 @@ function build(script, style, topic) {
       purpose = `Measure: a dashed marker at ${valueLabel(qty)} while the probe descends${reached ? ` and stops short at the depth actually reached (cited)` : ""}; depth is drawn to the scale of the slice.`;
       camera = cam(1.0, 1.06, 820, 860);
     } else if (qty) {
-      const same = facts.flatMap((f) => numbersIn(f.claim).filter((n) => !n.year && n.unit === qty.unit).map((n) => ({ ...n, fact: f.id }))).filter((n, k, a) => a.findIndex((x) => x.value === n.value) === k).slice(0, 4);
-      kind = "measure"; if (same.length >= 2) { layers = [stars(40 + i), { component: "scale-ladder", props: { x: 110, y: 560, w: 700, items: same.sort((a, b) => a.value - b.value).map((n, k) => ({ label: `FACT ${n.fact}`.replace("FACT ", ""), value: n.value, valueText: valueLabel(n), at: `${L.id}+${(0.2 + k * 0.45).toFixed(2)}` })) } }];
+      // percentages of different bases ("6.3% per century" vs "10% over 150 years") are not comparable bars: no % ladders
+      const same = qty.unit === "%" ? [] : facts.flatMap((f) => numbersIn(f.claim).filter((n) => !n.year && n.unit === qty.unit).map((n) => ({ ...n, fact: f.id }))).filter((n, k, a) => a.findIndex((x) => x.value === n.value) === k).slice(0, 4);
+      const ladderKey = same.map((n) => n.value).sort((a, b) => a - b).join("|");
+      kind = "measure"; if (same.length >= 2 && !laddersShown.has(ladderKey) && laddersShown.add(ladderKey)) { layers = [stars(40 + i), { component: "scale-ladder", props: { x: 110, y: 560, w: 700, log: Math.max(...same.map((n) => n.value)) / Math.max(1e-9, Math.min(...same.map((n) => n.value))) > 50, items: same.sort((a, b) => a.value - b.value).map((n, k) => ({ label: `FACT ${n.fact}`.replace("FACT ", ""), value: n.value, valueText: valueLabel(n), at: `${L.id}+${(0.2 + k * 0.45).toFixed(2)}` })) } }];
         same.forEach((n) => { if (!evidence.includes(n.fact)) evidence.push(n.fact); }); purpose = `Scale: the topic's own ${qty.unit || "values"} side by side as growing bars, so the size of the change is seen, not read.`; }
-      else { layers = [stars(40 + i), ...signature(`${L.id}`), readout(`${L.id}+0.3`, valueLabel(qty), 1230)]; purpose = `Number: the cited value (${valueLabel(qty)}) lands as a large readout over the subject while the camera pushes in, so the quantity is held on screen as it is spoken.`; }
+      else { layers = [stars(40 + i), ...subjectView(`${L.id}`, subjectN++, fieldFor(L)), readout(`${L.id}+0.3`, valueLabel(qty), 1230, rejects(L))]; purpose = `Number: the cited value (${valueLabel(qty)}) lands as a large readout over the subject while the camera pushes in, so the quantity is held on screen as it is spoken.`; }
       camera = cam(1.0, 1.05);
     } else {
       // mechanism: the line's own words pick the visual, and the cutaway is used at most once per Short
@@ -165,15 +241,37 @@ function build(script, style, topic) {
       if (v === "cut") cutUsed = true;
       kind = v === "subject" ? "mechanism" : v;
       layers = [stars(50 + i),
-        ...(v === "flow" ? [probeSlice(L, { heat: true, flow: true })] : v === "subject" ? subjectView(`${L.id}`, subjectN++) : signature(`${L.id}`, { cut: v === "cut", zoom: v === "zoom" ? { from: off(`${L.id}`, 0.1), to: `${L.id}.end` } : null })),
+        ...(v === "flow" ? [probeSlice(L, { heat: true, flow: true })] : v === "subject" ? subjectView(`${L.id}`, subjectN++, fieldFor(L)) : signature(`${L.id}`, { cut: v === "cut", zoom: v === "zoom" ? { from: off(`${L.id}`, 0.1), to: `${L.id}.end` } : null })),
         headline(`${L.id}+0.25`, keyPhrase(L.text), 360, S.title)];
-      purpose = `Mechanism: ${{ zoom: "the camera dives at the planet until its curve fills the frame and the deepest hole is a single scratch on the surface", flow: "the rock slice heats and its strata bend and travel like a slow fluid (conceptual)", cut: "the planet opens into its layers so the depth beyond the hole is visible", subject: "the subject stays on screen while the key idea is set in two or three words" }[v]}; ${L.layer === "KNOWN SCIENCE" ? "known science" : L.layer === "ESTIMATED CONSEQUENCE" ? "an estimate, chipped as such" : "speculative, chipped as such"}.`;
+      purpose = `Mechanism: ${{ zoom: "the camera dives at the planet until its curve fills the frame and the deepest hole is a single scratch on the surface", flow: "the rock slice heats and its strata bend and travel like a slow fluid (conceptual)", cut: "the planet opens into its layers so the depth beyond the hole is visible", subject: COMPOSITE.has(W) && fieldFor(L) ? { magnetic: "the field lines around the planet shrink and dim as the line describes it" + (fieldFor(L).wind ? ", and charged particles now reach the surface" : ""), current: "the warm northbound stream and its cold return slow as the line describes it", micro: "the microbe population thins out as the line describes it" }[W] : "the subject stays on screen while the key idea is set in two or three words" }[v]}; ${L.layer === "KNOWN SCIENCE" ? "known science" : L.layer === "ESTIMATED CONSEQUENCE" ? "an estimate, chipped as such" : "speculative, chipped as such"}.`;
       camera = cam(1.0, 1.1, 800, 780);
       // at most two chips (a third reaches into the picture): CONCEPTUAL replaces ILLUSTRATION, the layer chip stays
-      if (v === "flow" || v === "cut") chips[0] = "conceptualLabel";
+      if (v === "flow" || v === "cut" || (COMPOSITE.has(W) && fieldFor(L))) chips[0] = "conceptualLabel";
     }
     return { id: `s${i + 1}-${kind}`, lines: [L.id], start, env: "space", ...(first ? {} : { transition: { type: nextTransition(i), dur: 0.5 } }), evidence: [...new Set(evidence)].slice(0, 4), chips,
       ...(((kind === "mechanism" && L.layer !== "KNOWN SCIENCE") || chips.includes("conceptualLabel")) ? { conceptual: true } : {}), visualPurpose: purpose, camera, layers };
+  });
+  // backgrounds follow the scene's job (Creative Director SAME_ENV_AS_PREVIOUS on every IB-EAR-019 scene): the world in deep
+  // space, data (ladders, counts) on the teal plate, a lone readout on the flat void; never the same plate twice in a row,
+  // and the payoff returns to the hook's space so the loop matches
+  const data = (sc) => sc.layers.some((l) => ["scale-ladder", "event-ticks"].includes(l.component));
+  scenes.forEach((sc, k) => { sc.env = k === 0 || k === scenes.length - 1 ? "space" : data(sc) ? "teal" : "space"; });
+  for (let k = 1; k < scenes.length; k += 1) if (scenes[k].env === scenes[k - 1].env) {
+    if (k === scenes.length - 1) { if (k - 1 > 0) scenes[k - 1].env = scenes[k - 2].env === "void" ? "teal" : "void"; } else scenes[k].env = scenes[k - 1].env === "void" ? "space" : "void";
+  }
+  // last guard, with the validator's own rule: every digit group on screen must occur in a fact the scene cites
+  // (a source writing "299 792 458" or "1000" does not evidence "299,792,458" / "1,000"). A readout that fails becomes
+  // the line's key phrase, a ladder bar that fails is dropped; nothing unevidenced is ever drawn.
+  const okText = (sc, text) => { const cited = sc.evidence.map((id) => facts.find((f) => f.id === id)).filter(Boolean).map((f) => f.claim + " " + (f.quote || "")).join(" ");
+    return (String(text).match(/\d+/g) || []).every((d) => new RegExp(`(^|\\D)${d}(\\D|$)`).test(cited)); };
+  scenes.forEach((sc, k) => { const L = lines[k];
+    sc.layers = sc.layers.filter((l) => {
+      if (l.component === "kinetic-type") l.props.items = l.props.items.map((it) => (okText(sc, it.text) ? it : { ...it, text: keyPhrase(L.text), family: "sans", size: S.title, style: undefined }));
+      if (l.component === "scale-ladder") { l.props.items = l.props.items.filter((it) => okText(sc, it.valueText || "")); return l.props.items.length >= 2; }
+      if (l.component === "depth-probe") { l.props.markers = (l.props.markers || []).filter((m) => okText(sc, m.label)); l.props.readouts = (l.props.readouts || []).filter((r) => okText(sc, r.text)); }
+      if (l.component === "event-ticks") return okText(sc, `${l.props.count} ${l.props.startLabel || ""}`);
+      return true; });
+    if (!sc.layers.some((l) => !l.screen && l.component !== "starfield")) sc.layers.splice(1, 0, ...subjectView(`${L.id}`, subjectN++, null));
   });
   // the ladder's bar labels must not carry fact ids as text: replace with nothing (value text carries the number)
   scenes.forEach((s) => s.layers.forEach((l) => { if (l.component === "scale-ladder") l.props.items.forEach((it) => { it.label = ""; }); }));

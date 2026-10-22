@@ -99,6 +99,9 @@
       if (it.style === "type") { const n = Math.floor(clamp((t - it.at) / (it.dur || 0.6)) * it.text.length + 0.0001);
         return BTO.text(it.x, it.y, it.text.slice(0, Math.max(1, n)), { ...base, anchor: it.anchor || "middle", op }); }
       if (it.style === "pop") { const k = BTO.sp(t, it.at, "snap"); return `<g transform="translate(${it.x} ${it.y}) scale(${(0.6 + 0.4 * k).toFixed(4)}) translate(${-it.x} ${-it.y})">${BTO.text(it.x, it.y, it.text, { ...base, anchor: it.anchor || "middle", op: op * clamp((t - it.at) / 0.12) })}</g>`; }
+      // strike: a figure the narration rejects ("claims of ... are considered incorrect") is shown, then struck through
+      if (it.style === "strike") { const w = BTO.measure(it.text, size, weight, family, ls); const k = BTO.ease("inOut", clamp((t - it.at - (it.strikeDelay || 0.5)) / 0.35)); const x0 = (it.anchor || "middle") === "middle" ? it.x - w / 2 : it.x;
+        return BTO.text(it.x, it.y, it.text, { ...base, fill: P().muted, anchor: it.anchor || "middle", op: op * clamp((t - it.at) / 0.12) }) + (k > 0 ? `<line x1="${(x0 - 14).toFixed(1)}" y1="${(it.y - size * 0.32).toFixed(1)}" x2="${(x0 - 14 + (w + 28) * k).toFixed(1)}" y2="${(it.y - size * 0.32).toFixed(1)}" stroke="${P().coral}" stroke-width="${Math.max(6, size * 0.09).toFixed(1)}" stroke-linecap="round" opacity="${op.toFixed(3)}"/>` : ""); }
       if (it.style === "expand") {
         // initials (e.g. "QR") sit together first, then fly to their places in the full words and the rest types on
         const words = it.text.split(" "); const sp = BTO.measure(" ", size, weight, family, ls); const ws = words.map((w) => BTO.measure(w, size, weight, family, ls));

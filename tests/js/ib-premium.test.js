@@ -52,10 +52,28 @@ test("auto storyboard: earth-interior grammar varies its mechanism visuals and u
   const ear = Adapter.loadTopic("impossible-brief", "IB-EAR-019");
   const earKinds = Generator.build(Adapter.studioScript(ear.channel, ear.topic), style, ear.topic).scenes.map((s) => s.id.replace(/^s\d+-/, ""));
   assert.ok(!earKinds.includes("flow"), earKinds.join(","));
-  const framings = Generator.build(Adapter.studioScript(ear.channel, ear.topic), style, ear.topic).scenes.filter((s) => s.id.endsWith("-mechanism")).map((s) => JSON.stringify(s.layers.find((l) => l.component === "planet").props.r));
-  assert.equal(new Set(framings).size, framings.length, "consecutive subject scenes use different framings");
   assert.equal(Generator.keyPhrase("So the planet's first defence against drilling is heat, not hardness."), "HEAT, NOT HARDNESS");
   assert.equal(Generator.keyPhrase("Rock that hot starts behaving more like plastic than stone."), "MORE PLASTIC THAN STONE");
+});
+
+test("auto storyboard: the subject picks the visual, plates never repeat back to back, a ladder is shown once", () => {
+  const expect = { "IB-EAR-019": "magnetic", "IB-EAR-071": "current", "IB-HUM-050": "micro", "IB-EAR-066": "lake", "IB-EXT-050": "earth-interior", "IB-OTH-004": "earth-surface" };
+  for (const [id, w] of Object.entries(expect)) {
+    const { channel, topic } = Adapter.loadTopic("impossible-brief", id);
+    assert.equal(Generator.world(topic), w, id);
+    const sb = Generator.build(Adapter.studioScript(channel, topic), style, topic);
+    sb.scenes.forEach((s, k) => { if (k) assert.notEqual(s.env, sb.scenes[k - 1].env, `${id} ${s.id}: same plate as the previous scene`); });
+    assert.equal(sb.scenes[0].env, sb.scenes[sb.scenes.length - 1].env, `${id}: payoff returns to the hook plate`);
+    const ladders = sb.scenes.flatMap((s) => s.layers.filter((l) => l.component === "scale-ladder").map((l) => l.props.items.map((it) => it.value).sort((a, b) => a - b).join("|")));
+    assert.equal(new Set(ladders).size, ladders.length, `${id}: a value set is laddered once`);
+  }
+  const ear = Adapter.loadTopic("impossible-brief", "IB-EAR-019"); const sb = Generator.build(Adapter.studioScript(ear.channel, ear.topic), style, ear.topic);
+  const ticks = sb.scenes.flatMap((s) => s.layers.filter((l) => l.component === "event-ticks")); assert.equal(ticks.length, 1); assert.equal(ticks[0].props.count, 183);
+  assert.ok(sb.scenes.some((s) => s.layers.some((l) => l.component === "magnetosphere" && l.props.wind)), "the charged-particle line brings the solar wind in");
+  assert.ok(sb.scenes.some((s) => s.layers.some((l) => l.component === "magnetosphere" && l.props.strengthKeys && l.props.strengthKeys[1][1] <= 0.05)), "switching the field off collapses it");
+  const venus = Adapter.loadTopic("impossible-brief", "IB-SPA-031"); const vs = Generator.build(Adapter.studioScript(venus.channel, venus.topic), style, venus.topic);
+  assert.ok(vs.scenes[0].layers.some((l) => l.component === "planet" && l.props.kind === "venus"), "a topic about Venus shows Venus");
+  assert.deepEqual(Generator.numbersIn("Its basins reach 900, 1,600 and 1,400 metres deep.").map((n) => n.unit), ["m", "m", "m"]);
 });
 
 test("IB readiness: researched records pass without stored quotes (warned); visual pre-check blocks are tolerated, others are not", () => {
