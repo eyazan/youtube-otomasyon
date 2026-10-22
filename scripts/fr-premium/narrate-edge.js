@@ -45,12 +45,14 @@ async function request(text, rate) {
 
 // A rate limit (HTTP 429, seen when several CI jobs narrate at once: run 39790677366) needs a longer, still bounded,
 // backoff (20/40/60 s) than a dropped socket (2.5/5 s). After the last attempt the error propagates: the caller fails
-// safely and never substitutes an unapproved voice.
+// safely and never substitutes an unapproved voice. EDGE_RATE_LIMIT_RETRIES raises the rate-limit attempts for a CI
+// check that shares Edge with other jobs (premium-render-check: 429 outlasted 20/40/60 s on run 39834813687).
+const rateLimitRetries = () => Math.min(8, Math.max(3, parseInt(process.env.EDGE_RATE_LIMIT_RETRIES, 10) || 3));
 async function withRetry(fn, n = 3) {
   for (let a = 1; ; a += 1) {
     try { return await fn(); } catch (e) {
       const limited = /\b429\b/.test(String(e.message));
-      if (a >= (limited ? n + 1 : n)) throw e;
+      if (a >= (limited ? rateLimitRetries() + 1 : n)) throw e;
       const wait = limited ? 20000 * a : 2500 * a;
       process.stdout.write(`  (edge retry ${a}${limited ? " after rate limit" : ""}: ${String(e.message).slice(0, 60)}; waiting ${wait / 1000} s)\n`);
       await new Promise((r) => setTimeout(r, wait));

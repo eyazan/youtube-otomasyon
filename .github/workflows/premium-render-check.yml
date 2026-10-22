@@ -32,6 +32,8 @@ jobs:
     env:
       PUBLISH: '0'
       BTO_PREMIUM_RENDER: preview
+      # Edge is shared with the IB/FR dry runs on the same push: up to 6 rate-limit retries (20..120 s, bounded)
+      EDGE_RATE_LIMIT_RETRIES: '6'
       PD_CHROMIUM: /usr/bin/google-chrome
     steps:
       - uses: actions/checkout@v4
@@ -52,18 +54,25 @@ jobs:
           node -e 'const A=require("./scripts/bto-studio/adapter");const G=require("./scripts/bto-studio/auto/behind-the-ordinary");const st=require("./channels/behind-the-ordinary/premium/style-pack.json");const {channel,topic}=A.loadTopic("behind-the-ordinary","BTO-301");const r=A.readiness(channel,topic);if(!r.ready){console.log("not ready: "+r.errors.join("; "));process.exit(1)}const fs=require("fs");const ad="channels/behind-the-ordinary/premium/BTO-301/assets";const assets={};for(const f of fs.readdirSync(ad))assets[f.replace(/\.json$/,"")]=JSON.parse(fs.readFileSync(ad+"/"+f,"utf8"));const sb=G.build(A.studioScript(channel,topic),st,topic,{assets});sb.version=9;require("fs").writeFileSync("channels/behind-the-ordinary/premium/BTO-301/storyboard.auto.json",JSON.stringify(sb,null,1))'
           node scripts/bto-studio/studio.js --channel behind-the-ordinary --topic BTO-301 --storyboard storyboard.auto.json --voice edge 2>&1 | tail -40
       - name: GoalLore Lab GLL-P01 pilot, automatic storyboard
+        # rendered even when the BTO step failed: each channel's result is reported on its own
+        if: ${{ !cancelled() }}
         run: |
           set -o pipefail
           mkdir -p "$RUNNER_TEMP/gll/GLL-P01" && cp channels/goal-lore-lab/premium/pilots/GLL-P01/topic.json "$RUNNER_TEMP/gll/GLL-P01/"
           node scripts/bto-studio/studio.js --pilot "$RUNNER_TEMP/gll/GLL-P01" --regenerate --voice edge 2>&1 | tail -40
       - name: Objective QA and creative review
+        if: ${{ !cancelled() }}
         run: |
+          set -o pipefail
+          fail=0
           for out in channels/behind-the-ordinary/premium/BTO-301/out/v9 "$RUNNER_TEMP/gll/GLL-P01/out"; do
             echo "### $out" | tee -a "$GITHUB_STEP_SUMMARY"
-            node -e 'const p=require(require("path").resolve(process.argv[1],"review-package.json"));console.log("verdict",p.verdict,"| objective",p.qa.objectivePass,"| voice",p.voice.used,"approved",p.voice.approved,"| render",p.performance.renderWallSec,"s, Chromium PSS",p.performance.peakChromiumRssMb,"MB");if(!p.qa.objectivePass)process.exit(1)' "$out" | tee -a "$GITHUB_STEP_SUMMARY"
+            [ -f "$out/review-package.json" ] || { echo "no package (render did not finish)" | tee -a "$GITHUB_STEP_SUMMARY"; fail=1; continue; }
+            node -e 'const p=require(require("path").resolve(process.argv[1],"review-package.json"));console.log("verdict",p.verdict,"| objective",p.qa.objectivePass,"| voice",p.voice.used,"approved",p.voice.approved,"| render",p.performance.renderWallSec,"s, Chromium PSS",p.performance.peakChromiumRssMb,"MB");if(!p.qa.objectivePass)process.exit(1)' "$out" | tee -a "$GITHUB_STEP_SUMMARY" || fail=1
             grep -E "^- FAIL" "$out/qa-report.md" | head -10 | tee -a "$GITHUB_STEP_SUMMARY" || true
             node scripts/bto-studio/creative-director.js review --out "$out" | tail -14 | tee -a "$GITHUB_STEP_SUMMARY" || true
           done
+          exit $fail
       - uses: actions/upload-artifact@v4
         if: always()
         with:
