@@ -1,6 +1,6 @@
 # Pronunciation validation — usair-1016-1994
 
-Score: **84/100** (unresolved risky words: 2, AI-cliché phrases: 0)
+Score: **100/100** (unresolved risky words: 0, AI-cliché phrases: 0)
 
 ## Dictionary matches (handled automatically)
 
@@ -8,10 +8,7 @@ _none_
 
 ## Needs a human ear (not in config/pronunciation.json)
 
-| Word | Type | Why |
-|---|---|---|
-| DC-9 | alphanumeric | mixed letters/digits (e.g. B-25) — verify spoken form |
-| Charlotte | proper-noun | name/place — confirm the voice pronounces it correctly |
+_none_
 
 ## AI-cliché phrases
 

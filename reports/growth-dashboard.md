@@ -1,10 +1,10 @@
 # Growth dashboard
 
-Generated 2026-10-22T20:44:13.346Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-10-23T11:34:11.838Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
-**Shorts health** — last published 2026-10-22T18:00:00.000Z · 30 published · inventory A97/B131/C59/D59 · next: titanic-1912 (EXPLOIT (0.75): best A topic by SelectionScore)
+**Shorts health** — last published 2026-10-22T18:00:00.000Z · 30 published · inventory A105/B123/C59/D59 · next: titanic-1912 (EXPLOIT (0.75): best A topic by SelectionScore)
 
 **Long-form health** — cycle 2026-W43: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W43 already QUALITY_BLOCKED)
 
@@ -22,9 +22,9 @@ Generated 2026-10-22T20:44:13.346Z. Per-channel baselines are computed separatel
 
 - apollo-1-1967 (C): VideoPotential 87 in experimental band 58–71; sources 41 < 62
 - munich-1958 (C): VideoPotential 86 in experimental band 58–71; sources 41 < 62
-- skylab-1973 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
+- skylab-1973 (C): VideoPotential 85 in experimental band 58–71; sources 41 < 62
 - vanguard-1957 (C): VideoPotential 83 in experimental band 58–71; sources 41 < 62
-- b2-guam-2008 (C): VideoPotential 83 in experimental band 58–71; sources 41 < 62
+- new-london-school-1937 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
 
 **Recent alerts**
 
@@ -69,10 +69,11 @@ Generated 2026-10-22T20:44:13.346Z. Per-channel baselines are computed separatel
 - 2026-10-20 NO_QUALIFIED_TOPIC: NO_EXPLORE_CANDIDATE
 - 2026-10-21 NO_QUALIFIED_TOPIC: NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [104 unused A topic(s), best viral score 74 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]
 - 2026-10-22 NO_QUALIFIED_TOPIC: NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [104 unused A topic(s), best viral score 74 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]
+- 2026-10-23 NO_QUALIFIED_TOPIC: NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [103 unused A topic(s), best viral score 74 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]
 
 ## CriticalThread
 
-**Shorts health** — last published 2026-10-13T18:00:00.000Z · 8 published · inventory A8/B144/C0/D362 · next: why-rail-signaling-interlocking-is-so-hard-to-replace (EXPLORE (0.25): under-sampled cluster RAIL)
+**Shorts health** — last published 2026-10-13T18:00:00.000Z · 8 published · inventory A8/B144/C0/D362 · next: the-hidden-system-behind-border-gateway-routing-system (EXPLORE (0.25): under-sampled cluster TELECOMMUNICATIONS)
 
 **Long-form health** — cycle 2026-W43: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W43 already QUALITY_BLOCKED)
 
@@ -88,7 +89,6 @@ Generated 2026-10-22T20:44:13.346Z. Per-channel baselines are computed separatel
 
 **Recent alerts**
 
-- 2026-10-12 NO_QUALIFIED_TOPIC: NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [7 unused A topic(s), best viral score 73 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]
 - 2026-10-14 NO_QUALIFIED_TOPIC: NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [6 unused A topic(s), best viral score 73 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]
 - 2026-10-15 NO_QUALIFIED_TOPIC: NO_EXPLORE_CANDIDATE
 - 2026-10-16 NO_QUALIFIED_TOPIC: NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [6 unused A topic(s), best viral score 73 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]
@@ -98,6 +98,7 @@ Generated 2026-10-22T20:44:13.346Z. Per-channel baselines are computed separatel
 - 2026-10-20 NO_QUALIFIED_TOPIC: NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [6 unused A topic(s), best viral score 73 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]
 - 2026-10-21 NO_QUALIFIED_TOPIC: NO_EXPLORE_CANDIDATE
 - 2026-10-22 NO_QUALIFIED_TOPIC: NO_EXPLORE_CANDIDATE
+- 2026-10-23 NO_QUALIFIED_TOPIC: NO_EXPLORE_CANDIDATE
 
 ## Cross-channel infrastructure
 

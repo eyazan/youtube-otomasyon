@@ -1,17 +1,17 @@
-# Quality gate — avianca-52-1990 (pre)
+# Quality gate — avianca-52-1990 (final)
 
-**REVIEW** — 83/100 (PUBLISH ≥ 85, REVIEW ≥ 70)
+**REVIEW** — 89/100 (PUBLISH ≥ 85, REVIEW ≥ 70)
 
 | Component | Score | Notes |
 |---|---:|---|
-| TITLE | 30 | "Why Avianca Flight 52 Ran Out of Fuel" (engine 34.9) |
-| THUMBNAIL | 96 |  |
+| TITLE | 52 | "Avianca 52: What Failed First" (engine 46.1) |
+| THUMBNAIL | 100 |  |
 | HOOK | 95 | 5-12s: missing an unexpected detail |
 | SCRIPT | 92 | 2 pronunciation risk(s) |
-| ORIGINALITY | 79 | structure 1 ≥ 0.9 (vs rana-plaza-2013) |
-| VISUAL QUALITY | 80 (est.) | not rendered yet — source plan only |
+| ORIGINALITY | 75 | structure 1 ≥ 0.9 (vs amtrak-cascades-501-2017) |
+| VISUAL QUALITY | 100 |  |
 | ENGINEERING DEPTH | 100 |  |
 | SOURCE QUALITY | 100 |  |
-| AUDIO | 75 (est.) | not rendered yet — measured at the final gate |
+| AUDIO | 100 |  |
 
 _Scores are editorial heuristics plus real measurements (loudness, resolution, duration) at the final stage. They guide review; they do not predict views._

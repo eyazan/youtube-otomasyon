@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-22T20:44:13.346Z",
+  "generatedAt": "2026-10-23T11:34:11.838Z",
   "note": "Per-channel baselines are computed separately and never blended.",
   "channels": [
     {
@@ -9,8 +9,8 @@
         "lastPublished": "2026-10-22T18:00:00.000Z",
         "published": 30,
         "inventory": {
-          "A": 97,
-          "B": 131,
+          "A": 105,
+          "B": 123,
           "C": 59,
           "D": 59
         },
@@ -30,7 +30,7 @@
           "views": 465,
           "averagePercentageViewed": 64.36,
           "subscribersPer1000Views": 1.04,
-          "engagementPer1000Views": 25.36,
+          "engagementPer1000Views": 26.65,
           "watchHoursPer1000Views": 2.05
         }
       },
@@ -161,7 +161,7 @@
           "status": "adaptive",
           "sampleSize": 30,
           "adopted": 0,
-          "hypotheses": 4
+          "hypotheses": 5
         },
         "longform": {
           "status": "heuristics-only",
@@ -184,12 +184,17 @@
         {
           "slug": "skylab-1973",
           "bucket": "C",
-          "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
+          "reason": "VideoPotential 85 in experimental band 58–71; sources 41 < 62"
         },
         {
           "slug": "vanguard-1957",
           "bucket": "C",
           "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
+        },
+        {
+          "slug": "new-london-school-1937",
+          "bucket": "C",
+          "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
         },
         {
           "slug": "b2-guam-2008",
@@ -203,11 +208,6 @@
         },
         {
           "slug": "eastland-1915",
-          "bucket": "C",
-          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
-        },
-        {
-          "slug": "new-london-school-1937",
           "bucket": "C",
           "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
         },
@@ -659,6 +659,21 @@
           },
           "date": "2026-10-22",
           "at": "2026-10-22T11:39:51.615Z"
+        },
+        {
+          "channel": "impossible-brief",
+          "code": "NO_QUALIFIED_TOPIC",
+          "message": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [103 unused A topic(s), best viral score 74 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]",
+          "details": {
+            "inventory": {
+              "A": 103,
+              "B": 25,
+              "C": 140,
+              "D": 206
+            }
+          },
+          "date": "2026-10-23",
+          "at": "2026-10-23T11:33:45.786Z"
         }
       ],
       "legacyPaths": false
@@ -683,8 +698,8 @@
           "used": 0
         },
         "nextSelection": {
-          "slug": "why-rail-signaling-interlocking-is-so-hard-to-replace",
-          "reason": "EXPLORE (0.25): under-sampled cluster RAIL"
+          "slug": "the-hidden-system-behind-border-gateway-routing-system",
+          "reason": "EXPLORE (0.25): under-sampled cluster TELECOMMUNICATIONS"
         },
         "baseline": {
           "n": 6,
@@ -835,21 +850,6 @@
         {
           "channel": "critical-thread",
           "code": "NO_QUALIFIED_TOPIC",
-          "message": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [7 unused A topic(s), best viral score 73 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]",
-          "details": {
-            "inventory": {
-              "A": 7,
-              "B": 144,
-              "C": 0,
-              "D": 362
-            }
-          },
-          "date": "2026-10-12",
-          "at": "2026-10-12T15:13:52.277Z"
-        },
-        {
-          "channel": "critical-thread",
-          "code": "NO_QUALIFIED_TOPIC",
           "message": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [6 unused A topic(s), best viral score 73 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]",
           "details": {
             "inventory": {
@@ -981,6 +981,21 @@
           },
           "date": "2026-10-22",
           "at": "2026-10-22T11:40:00.503Z"
+        },
+        {
+          "channel": "critical-thread",
+          "code": "NO_QUALIFIED_TOPIC",
+          "message": "NO_EXPLORE_CANDIDATE",
+          "details": {
+            "inventory": {
+              "A": 6,
+              "B": 144,
+              "C": 0,
+              "D": 362
+            }
+          },
+          "date": "2026-10-23",
+          "at": "2026-10-23T11:33:49.948Z"
         }
       ],
       "legacyPaths": false

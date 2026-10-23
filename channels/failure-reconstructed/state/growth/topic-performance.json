@@ -1,6 +1,6 @@
 {
   "channel": "failure-reconstructed",
-  "updatedAt": "2026-10-22T20:44:05.153Z",
+  "updatedAt": "2026-10-23T11:33:50.958Z",
   "families": [
     {
       "contentType": "short",
@@ -36,7 +36,7 @@
       "publications": 3,
       "measured": 2,
       "predictedTopicScore": 87,
-      "actualGrowthScore": 72.3,
+      "actualGrowthScore": 70.9,
       "medianViews": 1373,
       "medianAveragePercentageViewed": 108.57999999999998,
       "medianSubscribersPer1000Views": 1.46,
@@ -78,7 +78,7 @@
       "publications": 2,
       "measured": 2,
       "predictedTopicScore": 80.5,
-      "actualGrowthScore": 65.8,
+      "actualGrowthScore": 64.4,
       "medianViews": 1013,
       "medianAveragePercentageViewed": 58.78,
       "medianSubscribersPer1000Views": 1.97,
@@ -102,20 +102,6 @@
     },
     {
       "contentType": "short",
-      "cluster": "maritime-disasters",
-      "publications": 3,
-      "measured": 3,
-      "predictedTopicScore": 83,
-      "actualGrowthScore": 52.3,
-      "medianViews": 965,
-      "medianAveragePercentageViewed": 91.89,
-      "medianSubscribersPer1000Views": 1.04,
-      "confidence": "low",
-      "mode": "exploit",
-      "fatigue": false
-    },
-    {
-      "contentType": "short",
       "cluster": "structural-failures",
       "publications": 2,
       "measured": 2,
@@ -130,11 +116,25 @@
     },
     {
       "contentType": "short",
+      "cluster": "maritime-disasters",
+      "publications": 3,
+      "measured": 3,
+      "predictedTopicScore": 83,
+      "actualGrowthScore": 51.7,
+      "medianViews": 965,
+      "medianAveragePercentageViewed": 91.89,
+      "medianSubscribersPer1000Views": 1.04,
+      "confidence": "low",
+      "mode": "deprioritise",
+      "fatigue": false
+    },
+    {
+      "contentType": "short",
       "cluster": "infrastructure-failures",
       "publications": 2,
       "measured": 2,
       "predictedTopicScore": 84.5,
-      "actualGrowthScore": 43.2,
+      "actualGrowthScore": 42.6,
       "medianViews": 1060,
       "medianAveragePercentageViewed": 64.5,
       "medianSubscribersPer1000Views": 2.82,

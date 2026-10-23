@@ -2,50 +2,6 @@
   "channel": "failure-reconstructed",
   "runs": [
     {
-      "runId": "39465007749",
-      "attempt": "1",
-      "startedAt": "2026-10-20T17:20:03.927Z",
-      "publish": true,
-      "trigger": {
-        "event": "schedule",
-        "correlationId": null
-      },
-      "targetDay": null,
-      "slug": null,
-      "outcome": "NOT_DUE",
-      "reason": "today's Short already exists (colgan-3407-2009)",
-      "stages": {
-        "RESEARCH": {
-          "status": "not-reached"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "not-reached"
-        },
-        "QA": {
-          "status": "not-reached"
-        },
-        "UPLOAD": {
-          "status": "not-reached"
-        },
-        "SCHEDULE": {
-          "status": "not-reached"
-        },
-        "PUBLISH": {
-          "status": "not-reached"
-        }
-      },
-      "finishedAt": "2026-10-20T17:20:03.949Z"
-    },
-    {
       "runId": "39471050608",
       "attempt": "1",
       "startedAt": "2026-10-20T18:01:56.324Z",
@@ -1352,6 +1308,59 @@
         }
       },
       "finishedAt": "2026-10-22T20:43:51.805Z"
+    },
+    {
+      "runId": "39945639434",
+      "attempt": "1",
+      "startedAt": "2026-10-23T11:23:28.565Z",
+      "publish": true,
+      "trigger": {
+        "event": "schedule",
+        "correlationId": null
+      },
+      "targetDay": "2026-10-23",
+      "slug": "usair-1016-1994",
+      "outcome": "BLOCKED",
+      "reason": "usair-1016-1994: kalite kapisi REVIEW; upload blocked",
+      "stages": {
+        "RESEARCH": {
+          "status": "done",
+          "detail": "growth queue selected usair-1016-1994",
+          "at": "2026-10-23T11:28:36.305Z"
+        },
+        "SCRIPT": {
+          "status": "done",
+          "detail": "pre gate REVIEW 83",
+          "at": "2026-10-23T11:28:36.510Z"
+        },
+        "ASSETS": {
+          "status": "done",
+          "at": "2026-10-23T11:28:37.111Z"
+        },
+        "NARRATION": {
+          "status": "done",
+          "at": "2026-10-23T11:33:39.310Z"
+        },
+        "RENDER": {
+          "status": "done",
+          "at": "2026-10-23T11:33:39.310Z"
+        },
+        "QA": {
+          "status": "failed",
+          "detail": "REVIEW",
+          "at": "2026-10-23T11:33:41.266Z"
+        },
+        "UPLOAD": {
+          "status": "not-reached"
+        },
+        "SCHEDULE": {
+          "status": "not-reached"
+        },
+        "PUBLISH": {
+          "status": "not-reached"
+        }
+      },
+      "finishedAt": "2026-10-23T11:33:41.266Z"
     }
   ]
 }
