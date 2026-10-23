@@ -1,6 +1,6 @@
 {
-  "at": "2026-10-23T18:26:33.712Z",
-  "runId": "40003122403",
+  "at": "2026-10-23T19:49:35.994Z",
+  "runId": "40010655262",
   "rows": [
     {
       "channel": "failure-reconstructed",
@@ -94,12 +94,12 @@
     },
     {
       "channel": "critical-thread",
-      "outcome": "NOT_DUE",
-      "category": "NOT_DUE",
+      "outcome": "FAILED",
+      "category": "AWAITING_APPROVAL",
       "scheduled": false,
       "publication": "NOT_SCHEDULED",
       "publishAt": null,
-      "reason": "production window closed at 21:00 Europe/Istanbul minus 60 min",
+      "reason": "health pre-flight: nitelikli-konu: kalite çubuğunu geçen konu yok — NO_EXPLORE_CANDIDATE; seslendirme: NARRATION_UNAVAILABLE: Edge sesi reddedildi (Edge TTS WebSocket error: Unexpected server response: 200, Edge TTS WebSocket error: Unexpected server response: 200, Edge TTS WebSocket error: Unexpected server response: 200; msedge-tts 2.1.0); yedek ses yok — fallback voice af_heart is not approved ",
       "slug": null,
       "videoId": null,
       "targetDay": null,
