@@ -1,0 +1,22 @@
+{
+  "schema": "bto-studio.style-pack.v1",
+  "channel": "goal-lore-lab",
+  "name": "GoalLore Lab: premium motion style (DESIGN, not yet used in production)",
+  "concept": "A floodlit pitch at night seen from the tactics camera, with chalk-board clarity. Players are clean tokens (never likeness), the ball leaves a real trajectory, and the story is told on the pitch itself. Archival scenes use newsprint paper; numbers come only from cited records.",
+  "distinctFrom": "The Hidden Logic of Things (warm desk, printed matter) and Failure Reconstructed (cold blueprint): GoalLore Lab is night-green, chalk-white and floodlight-gold.",
+  "palette": { "desk": "#0b1410", "desk2": "#13241b", "lamp": "#1d3a2a", "paper": "#f4f1e6", "paper2": "#e3dccb", "ink": "#101512", "inkSoft": "#3c4a42", "amber": "#e0b13c", "amberDeep": "#b48a22", "teal": "#3f8fd6", "coral": "#e8503a", "text": "#f7f7f2", "muted": "#9fb0a5", "pitch": "#1f5a3a", "pitch2": "#246843", "line": "#e9f2e4" },
+  "type": { "sans": "'PD Sans', 'Inter', sans-serif", "serif": "'PD Serif', 'Source Serif 4', serif", "num": "'PD Num', 'Barlow Semi Condensed', sans-serif",
+    "scale": { "display": 112, "headline": 80, "title": 60, "label": 42, "small": 34, "credit": 30 }, "minEssentialPx": 30, "minLabelPx": 40, "labelTracking": 1.5, "maxWordsPerLabel": 6 },
+  "frame": { "width": 1080, "height": 1920, "fps": 30, "worldCenter": [540, 800], "safe": { "top": 220, "bottom": 1290, "left": 72, "right": 1008 }, "captionBand": [1318, 1470], "bottomUiY": 1600 },
+  "motion": { "ease": { "standard": [0.2, 0.0, 0.0, 1.0], "decelerate": [0.05, 0.7, 0.1, 1.0], "accelerate": [0.3, 0.0, 0.8, 0.15], "inOut": [0.65, 0.0, 0.35, 1.0], "camera": [0.45, 0.0, 0.15, 1.0] },
+    "spring": { "snap": { "stiffness": 420, "damping": 28, "mass": 1 }, "settle": { "stiffness": 170, "damping": 20, "mass": 1 }, "soft": { "stiffness": 90, "damping": 17, "mass": 1 } },
+    "durations": { "micro": 0.18, "enter": 0.45, "move": 0.8, "camera": 1.1, "transition": 0.5 }, "staggerMax": 0.9, "cameraMaxZoomRate": 0.9, "noRepeatedTransitionInARow": true, "maxDissolves": 1 },
+  "captions": { "font": "800 62px/1.14 'PD Sans', sans-serif", "top": 1318, "maxChars": 24, "maxWords": 6, "current": "#e0b13c", "spoken": "#f7f7f2", "upcoming": "rgba(247,247,242,0.72)" },
+  "identity": { "handle": "@GoalLoreLab", "illustrationLabel": "ANIMATION", "conceptualLabel": "RECONSTRUCTION", "hypotheticalLabel": "WHAT IF", "modelLabel": "PHYSICS MODEL" },
+  "rules": [
+    "Players are numbered tokens or silhouettes, never a person's likeness; no club crests.",
+    "Positions and runs in reconstructions are labelled RECONSTRUCTION unless they come from published tracking data that is cited.",
+    "What-if scenes carry the WHAT IF chip for their whole duration.",
+    "Every number on screen comes from a cited record."
+  ]
+}

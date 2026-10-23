@@ -1,0 +1,897 @@
+{
+ "duration": 31.605,
+ "scenes": [
+  {
+   "id": "s1-hook",
+   "start": 0,
+   "end": 2.487,
+   "transition": {
+    "type": "cut",
+    "dur": 0
+   },
+   "components": [
+    "desk-grain",
+    "qr-symbol"
+   ],
+   "purpose": "Separate the three squares from the data visually: everything else disappears, so 'not decoration' is seen, not just heard. Plants the empty fourth corner.",
+   "evidence": [
+    "F3",
+    "F11"
+   ],
+   "lines": [
+    "L1"
+   ]
+  },
+  {
+   "id": "s2-locate",
+   "start": 2.487,
+   "end": 4.359,
+   "transition": {
+    "type": "continuity",
+    "dur": 0
+   },
+   "components": [
+    "desk-grain",
+    "print-surface",
+    "qr-symbol",
+    "scan-line",
+    "reticle"
+   ],
+   "purpose": "Show what 'tell the scanner where to look' means: a reader's scan lines sweep a cluttered package, and its marks lock onto exactly the three squares, then join them.",
+   "evidence": [
+    "F3",
+    "F11"
+   ],
+   "lines": [
+    "L2"
+   ]
+  },
+  {
+   "id": "s3-origin",
+   "start": 4.359,
+   "end": 9.88,
+   "transition": {
+    "type": "push",
+    "dur": 0.55,
+    "direction": "left"
+   },
+   "components": [
+    "desk-grain",
+    "kinetic-type",
+    "qr-symbol",
+    "timeline-ruler",
+    "kinetic-type"
+   ],
+   "purpose": "Anchor the invention in time and name: the year ruler lands on 1994 as it is spoken, and the letters QR unfold into the words they stand for.",
+   "evidence": [
+    "F1",
+    "F2"
+   ],
+   "lines": [
+    "L3"
+   ]
+  },
+  {
+   "id": "s4-anatomy",
+   "start": 9.88,
+   "end": 15.605,
+   "transition": {
+    "type": "match-zoom",
+    "dur": 0.6,
+    "focus": [
+     540,
+     610
+    ]
+   },
+   "components": [
+    "desk-grain",
+    "qr-symbol",
+    "labels"
+   ],
+   "purpose": "Name the corner marks and show their structure: one pattern lifts out as three stacked layers (dark, light, dark), then the reader finds all three and the data is read in one fast sweep.",
+   "evidence": [
+    "F4",
+    "F11"
+   ],
+   "lines": [
+    "L4"
+   ]
+  },
+  {
+   "id": "s5-why-squares",
+   "start": 15.605,
+   "end": 20.446,
+   "transition": {
+    "type": "iris",
+    "dur": 0.6,
+    "focus": [
+     288,
+     508
+    ]
+   },
+   "components": [
+    "desk-grain",
+    "print-surface",
+    "kinetic-type",
+    "search-window",
+    "quote-card"
+   ],
+   "purpose": "Make 'least likely to appear on business forms' concrete: a template of the nested-square pattern searches a busy form and every square-ish feature fails to match; the team's words appear verbatim.",
+   "evidence": [
+    "F5",
+    "F6"
+   ],
+   "lines": [
+    "L5"
+   ]
+  },
+  {
+   "id": "s6-ratio",
+   "start": 20.446,
+   "end": 26.595,
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.7
+   },
+   "components": [
+    "desk-grain",
+    "print-surface",
+    "print-surface",
+    "print-surface",
+    "kinetic-type",
+    "scan-line",
+    "run-length-strip",
+    "run-length-strip",
+    "run-length-strip",
+    "paper-card",
+    "qr-symbol",
+    "scan-line",
+    "run-length-strip"
+   ],
+   "purpose": "Show what 'black-and-white ratio' means: a scan line turns printed matter into runs of black and white; then the line crosses the corner pattern and its runs measure exactly 1:1:3:1:1.",
+   "evidence": [
+    "F7",
+    "F8"
+   ],
+   "lines": [
+    "L6"
+   ]
+  },
+  {
+   "id": "s7-any-angle",
+   "start": 26.595,
+   "end": 31.605,
+   "transition": {
+    "type": "continuity",
+    "dur": 0
+   },
+   "components": [
+    "desk-grain",
+    "paper-card",
+    "qr-symbol",
+    "scan-line",
+    "run-length-strip"
+   ],
+   "purpose": "Prove the payoff: the code turns to different angles while the scan line through the corner keeps reading the same 1:1:3:1:1 runs; three found corners plus the empty one fix which way is up, and the code settles upright.",
+   "evidence": [
+    "F9",
+    "F8",
+    "F11"
+   ],
+   "lines": [
+    "L7"
+   ]
+  }
+ ],
+ "cues": [
+  {
+   "start": 0.05,
+   "end": 2.607,
+   "lines": [
+    "Those three QR squares",
+    "aren't decoration."
+   ]
+  },
+  {
+   "start": 2.607,
+   "end": 4.007,
+   "lines": [
+    "They tell the",
+    "scanner where to"
+   ]
+  },
+  {
+   "start": 4.007,
+   "end": 4.4270000000000005,
+   "lines": [
+    "look."
+   ]
+  },
+  {
+   "start": 4.579,
+   "end": 6.427,
+   "lines": [
+    "Denso Wave released",
+    "the QR Code"
+   ]
+  },
+  {
+   "start": 6.427,
+   "end": 8.059,
+   "lines": [
+    "in 1994,"
+   ]
+  },
+  {
+   "start": 8.059,
+   "end": 8.439,
+   "lines": [
+    "and"
+   ]
+  },
+  {
+   "start": 10.08,
+   "end": 12.258,
+   "lines": [
+    "The corner marks are",
+    "position detection"
+   ]
+  },
+  {
+   "start": 12.258,
+   "end": 15.024,
+   "lines": [
+    "patterns. Finding them",
+    "made high-speed reading"
+   ]
+  },
+  {
+   "start": 15.024,
+   "end": 15.805,
+   "lines": [
+    "possible."
+   ]
+  },
+  {
+   "start": 16.905,
+   "end": 18.165,
+   "lines": [
+    "The team said",
+    "that pattern was"
+   ]
+  },
+  {
+   "start": 20.646,
+   "end": 22.066,
+   "lines": [
+    "They surveyed flyers,"
+   ]
+  },
+  {
+   "start": 22.066,
+   "end": 24.558,
+   "lines": [
+    "magazines and",
+    "cardboard boxes for the"
+   ]
+  },
+  {
+   "start": 24.558,
+   "end": 26.656,
+   "lines": [
+    "rarest",
+    "black-and-white ratio."
+   ]
+  },
+  {
+   "start": 26.745,
+   "end": 28.65,
+   "lines": [
+    "That rare ratio",
+    "lets a scanner"
+   ]
+  },
+  {
+   "start": 28.65,
+   "end": 30.715,
+   "lines": [
+    "orient the code",
+    "from any angle."
+   ]
+  }
+ ],
+ "audio": [
+  {
+   "t": -10,
+   "kind": "tick",
+   "gain": 0.32,
+   "pan": -0.4
+  },
+  {
+   "t": -10,
+   "kind": "pop",
+   "gain": 0.4,
+   "pan": -0.5
+  },
+  {
+   "t": -10,
+   "kind": "tick",
+   "gain": 0.5,
+   "pan": 0.5
+  },
+  {
+   "t": -9.999,
+   "kind": "tick",
+   "gain": 0.305,
+   "pan": 0
+  },
+  {
+   "t": -9.998,
+   "kind": "tick",
+   "gain": 0.29000000000000004,
+   "pan": 0.4
+  },
+  {
+   "t": -9.998,
+   "kind": "tick",
+   "gain": 0.275,
+   "pan": -0.4
+  },
+  {
+   "t": -9.997,
+   "kind": "tick",
+   "gain": 0.26,
+   "pan": 0
+  },
+  {
+   "t": -9.996,
+   "kind": "tick",
+   "gain": 0.245,
+   "pan": 0.4
+  },
+  {
+   "t": -9.995,
+   "kind": "tick",
+   "gain": 0.23,
+   "pan": -0.4
+  },
+  {
+   "t": -9.994,
+   "kind": "tick",
+   "gain": 0.21500000000000002,
+   "pan": 0
+  },
+  {
+   "t": -9.993,
+   "kind": "tick",
+   "gain": 0.2,
+   "pan": 0.4
+  },
+  {
+   "t": -9.992,
+   "kind": "tick",
+   "gain": 0.185,
+   "pan": -0.4
+  },
+  {
+   "t": -9.88,
+   "kind": "pop",
+   "gain": 0.4,
+   "pan": 0.5
+  },
+  {
+   "t": -9.76,
+   "kind": "pop",
+   "gain": 0.4,
+   "pan": -0.5
+  },
+  {
+   "t": 0.448,
+   "kind": "tick",
+   "gain": 0.32,
+   "pan": -0.4
+  },
+  {
+   "t": 0.527,
+   "kind": "tick",
+   "gain": 0.305,
+   "pan": 0
+  },
+  {
+   "t": 0.606,
+   "kind": "tick",
+   "gain": 0.29000000000000004,
+   "pan": 0.4
+  },
+  {
+   "t": 0.647,
+   "kind": "pop",
+   "gain": 0.4,
+   "pan": -0.5
+  },
+  {
+   "t": 0.685,
+   "kind": "tick",
+   "gain": 0.275,
+   "pan": -0.4
+  },
+  {
+   "t": 0.765,
+   "kind": "tick",
+   "gain": 0.26,
+   "pan": 0
+  },
+  {
+   "t": 0.767,
+   "kind": "pop",
+   "gain": 0.4,
+   "pan": 0.5
+  },
+  {
+   "t": 0.844,
+   "kind": "tick",
+   "gain": 0.245,
+   "pan": 0.4
+  },
+  {
+   "t": 0.887,
+   "kind": "pop",
+   "gain": 0.4,
+   "pan": -0.5
+  },
+  {
+   "t": 0.923,
+   "kind": "tick",
+   "gain": 0.23,
+   "pan": -0.4
+  },
+  {
+   "t": 1.002,
+   "kind": "tick",
+   "gain": 0.21500000000000002,
+   "pan": 0
+  },
+  {
+   "t": 1.081,
+   "kind": "tick",
+   "gain": 0.2,
+   "pan": 0.4
+  },
+  {
+   "t": 1.16,
+   "kind": "tick",
+   "gain": 0.185,
+   "pan": -0.4
+  },
+  {
+   "t": 1.444,
+   "kind": "tick",
+   "gain": 0.5,
+   "pan": 0.5
+  },
+  {
+   "t": 2.507,
+   "kind": "tick",
+   "gain": 0.28,
+   "pan": -0.4
+  },
+  {
+   "t": 2.567,
+   "kind": "tick",
+   "gain": 0.28,
+   "pan": 0
+  },
+  {
+   "t": 2.627,
+   "kind": "tick",
+   "gain": 0.28,
+   "pan": 0.4
+  },
+  {
+   "t": 2.687,
+   "kind": "tick",
+   "gain": 0.28,
+   "pan": -0.4
+  },
+  {
+   "t": 2.747,
+   "kind": "tick",
+   "gain": 0.28,
+   "pan": 0
+  },
+  {
+   "t": 2.807,
+   "kind": "tick",
+   "gain": 0.28,
+   "pan": 0.4
+  },
+  {
+   "t": 2.867,
+   "kind": "tick",
+   "gain": 0.28,
+   "pan": -0.4
+  },
+  {
+   "t": 2.927,
+   "kind": "tick",
+   "gain": 0.28,
+   "pan": 0
+  },
+  {
+   "t": 3.06,
+   "kind": "whoosh",
+   "gain": 0.35,
+   "pan": 0
+  },
+  {
+   "t": 3.16,
+   "kind": "sweep",
+   "gain": 0.55,
+   "pan": 0,
+   "dur": 0.55
+  },
+  {
+   "t": 3.608,
+   "kind": "lock",
+   "gain": 0.75,
+   "pan": -0.5
+  },
+  {
+   "t": 3.698,
+   "kind": "lock",
+   "gain": 0.75,
+   "pan": 0.5
+  },
+  {
+   "t": 3.788,
+   "kind": "lock",
+   "gain": 0.75,
+   "pan": -0.5
+  },
+  {
+   "t": 4.359,
+   "kind": "transition-push",
+   "gain": 0.8,
+   "pan": 0
+  },
+  {
+   "t": 4.579,
+   "kind": "pop",
+   "gain": 0.45,
+   "pan": 0
+  },
+  {
+   "t": 4.995,
+   "kind": "roll",
+   "gain": 0.55,
+   "pan": 0,
+   "dur": 1.6369999999999996
+  },
+  {
+   "t": 6.632,
+   "kind": "lock",
+   "gain": 0.7,
+   "pan": 0
+  },
+  {
+   "t": 8.439,
+   "kind": "pop",
+   "gain": 0.45,
+   "pan": 0
+  },
+  {
+   "t": 9.88,
+   "kind": "transition-match-zoom",
+   "gain": 0.8,
+   "pan": 0
+  },
+  {
+   "t": 11.171,
+   "kind": "lift",
+   "gain": 0.8,
+   "pan": 0
+  },
+  {
+   "t": 11.714,
+   "kind": "tick",
+   "gain": 0.35,
+   "pan": 0
+  },
+  {
+   "t": 12.85,
+   "kind": "drop",
+   "gain": 0.6,
+   "pan": 0
+  },
+  {
+   "t": 13.736,
+   "kind": "lock",
+   "gain": 0.75,
+   "pan": -0.5
+  },
+  {
+   "t": 13.816,
+   "kind": "lock",
+   "gain": 0.75,
+   "pan": 0.5
+  },
+  {
+   "t": 13.896,
+   "kind": "lock",
+   "gain": 0.75,
+   "pan": -0.5
+  },
+  {
+   "t": 14.112,
+   "kind": "read",
+   "gain": 0.6,
+   "pan": 0,
+   "dur": 0.75
+  },
+  {
+   "t": 15.605,
+   "kind": "transition-iris",
+   "gain": 0.8,
+   "pan": 0
+  },
+  {
+   "t": 15.805,
+   "kind": "pop",
+   "gain": 0.45,
+   "pan": 0
+  },
+  {
+   "t": 16.655,
+   "kind": "whoosh",
+   "gain": 0.25,
+   "pan": 0.5306137561229748
+  },
+  {
+   "t": 16.975,
+   "kind": "reject",
+   "gain": 0.5,
+   "pan": 0.5306137561229748
+  },
+  {
+   "t": 17.085,
+   "kind": "whoosh",
+   "gain": 0.25,
+   "pan": -0.1516293172658774
+  },
+  {
+   "t": 17.405,
+   "kind": "reject",
+   "gain": 0.5,
+   "pan": -0.1516293172658774
+  },
+  {
+   "t": 17.625,
+   "kind": "whoosh",
+   "gain": 0.25,
+   "pan": -0.5543788730594891
+  },
+  {
+   "t": 17.945,
+   "kind": "reject",
+   "gain": 0.5,
+   "pan": -0.5543788730594891
+  },
+  {
+   "t": 18.115,
+   "kind": "paper",
+   "gain": 0.5,
+   "pan": 0
+  },
+  {
+   "t": 18.165,
+   "kind": "sweep",
+   "gain": 0.25,
+   "pan": 0,
+   "dur": 0.4
+  },
+  {
+   "t": 20.446,
+   "kind": "transition-scan-wipe",
+   "gain": 0.8,
+   "pan": 0
+  },
+  {
+   "t": 20.646,
+   "kind": "paper",
+   "gain": 0.7,
+   "pan": -0.6018518518518519
+  },
+  {
+   "t": 20.746,
+   "kind": "pop",
+   "gain": 0.45,
+   "pan": 0
+  },
+  {
+   "t": 22.066,
+   "kind": "paper",
+   "gain": 0.7,
+   "pan": 0
+  },
+  {
+   "t": 22.166,
+   "kind": "pop",
+   "gain": 0.45,
+   "pan": 0
+  },
+  {
+   "t": 23.011,
+   "kind": "paper",
+   "gain": 0.7,
+   "pan": 0.6018518518518519
+  },
+  {
+   "t": 23.111,
+   "kind": "pop",
+   "gain": 0.45,
+   "pan": 0
+  },
+  {
+   "t": 23.567,
+   "kind": "sweep",
+   "gain": 0.55,
+   "pan": 0,
+   "dur": 0.6
+  },
+  {
+   "t": 24.067,
+   "kind": "sweep",
+   "gain": 0.35,
+   "pan": 0,
+   "dur": 0.6
+  },
+  {
+   "t": 24.167,
+   "kind": "sweep",
+   "gain": 0.35,
+   "pan": 0,
+   "dur": 0.6
+  },
+  {
+   "t": 24.267,
+   "kind": "sweep",
+   "gain": 0.35,
+   "pan": 0,
+   "dur": 0.6
+  },
+  {
+   "t": 25.821,
+   "kind": "sweep",
+   "gain": 0.35,
+   "pan": 0,
+   "dur": 0.45
+  },
+  {
+   "t": 26.121,
+   "kind": "pluck",
+   "gain": 0.5,
+   "pan": -0.5,
+   "note": 0
+  },
+  {
+   "t": 26.231,
+   "kind": "pluck",
+   "gain": 0.5,
+   "pan": -0.25,
+   "note": 3
+  },
+  {
+   "t": 26.341,
+   "kind": "pluck",
+   "gain": 0.5,
+   "pan": 0,
+   "note": 7
+  },
+  {
+   "t": 26.451,
+   "kind": "pluck",
+   "gain": 0.5,
+   "pan": 0.25,
+   "note": 3
+  },
+  {
+   "t": 26.561,
+   "kind": "pluck",
+   "gain": 0.5,
+   "pan": 0.5,
+   "note": 0
+  },
+  {
+   "t": 27.513,
+   "kind": "tick",
+   "gain": 0.28,
+   "pan": -0.4
+  },
+  {
+   "t": 27.583,
+   "kind": "tick",
+   "gain": 0.28,
+   "pan": 0
+  },
+  {
+   "t": 27.653,
+   "kind": "tick",
+   "gain": 0.28,
+   "pan": 0.4
+  },
+  {
+   "t": 27.723,
+   "kind": "tick",
+   "gain": 0.28,
+   "pan": -0.4
+  },
+  {
+   "t": 27.793,
+   "kind": "tick",
+   "gain": 0.28,
+   "pan": 0
+  },
+  {
+   "t": 27.863,
+   "kind": "tick",
+   "gain": 0.28,
+   "pan": 0.4
+  },
+  {
+   "t": 27.933,
+   "kind": "tick",
+   "gain": 0.28,
+   "pan": -0.4
+  },
+  {
+   "t": 28.003,
+   "kind": "tick",
+   "gain": 0.28,
+   "pan": 0
+  },
+  {
+   "t": 30.515,
+   "kind": "tick",
+   "gain": 0.5,
+   "pan": 0.5
+  },
+  {
+   "t": 31.015,
+   "kind": "chime",
+   "gain": 0.8,
+   "pan": 0
+  },
+  {
+   "t": 31.095,
+   "kind": "lock",
+   "gain": 0.75,
+   "pan": -0.5
+  },
+  {
+   "t": 31.145,
+   "kind": "lock",
+   "gain": 0.75,
+   "pan": 0.5
+  },
+  {
+   "t": 31.195,
+   "kind": "lock",
+   "gain": 0.75,
+   "pan": -0.5
+  }
+ ],
+ "captionsOff": [
+  [
+   8.439,
+   9.979
+  ],
+  [
+   15.805,
+   16.555
+  ],
+  [
+   18.165,
+   20.575
+  ]
+ ]
+}

@@ -1,0 +1,337 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "bto-studio.storyboard.v1",
+  "title": "BTO Premium Studio storyboard (shot specification)",
+  "type": "object",
+  "required": [
+    "schema",
+    "channel",
+    "topicId",
+    "treatment",
+    "scenes"
+  ],
+  "properties": {
+    "schema": {
+      "const": "bto-studio.storyboard.v1"
+    },
+    "channel": {
+      "enum": [
+        "behind-the-ordinary",
+        "goal-lore-lab",
+        "failure-reconstructed",
+        "impossible-brief"
+      ]
+    },
+    "topicId": {
+      "type": "string",
+      "pattern": "^((BTO|GLL|FR|IB|CT)-([A-Z]{2,4}-)?P?\\d+|FR-[a-z0-9-]+)$"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "author": {
+      "type": "string"
+    },
+    "tail": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 3
+    },
+    "treatment": {
+      "type": "object",
+      "required": [
+        "educationalObjective",
+        "visualHook",
+        "mechanismsToAnimate",
+        "factualRisks"
+      ],
+      "properties": {
+        "educationalObjective": {
+          "type": "string",
+          "minLength": 40
+        },
+        "visualHook": {
+          "type": "string",
+          "minLength": 40
+        },
+        "throughLine": {
+          "type": "string"
+        },
+        "mechanismsToAnimate": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "factualRisks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "captionsOff": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "from",
+          "to",
+          "reason"
+        ],
+        "properties": {
+          "from": {
+            "$ref": "#/$defs/anchor"
+          },
+          "to": {
+            "$ref": "#/$defs/anchor"
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 5
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "scenes": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "$ref": "#/$defs/scene"
+      }
+    },
+    "licensingNote": {
+      "type": "string",
+      "description": "what the visuals are made of, for the review package licensing section"
+    },
+    "watermark": {
+      "type": "string",
+      "description": "status text stamped on every frame (e.g. NOT APPROVED FOR PUBLICATION)"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "anchor": {
+      "type": [
+        "string",
+        "number"
+      ]
+    },
+    "scene": {
+      "type": "object",
+      "required": [
+        "id",
+        "lines",
+        "start",
+        "visualPurpose",
+        "evidence",
+        "layers"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^s\\d+-[a-z0-9-]+$"
+        },
+        "lines": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "pattern": "^L\\d+$"
+          }
+        },
+        "start": {
+          "$ref": "#/$defs/anchor"
+        },
+        "visualPurpose": {
+          "type": "string",
+          "minLength": 30
+        },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "pattern": "^F\\d+$"
+          }
+        },
+        "conceptual": {
+          "type": "boolean"
+        },
+        "chips": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "illustrationLabel",
+              "conceptualLabel",
+              "photoLabel",
+              "modelLabel",
+              "factLabel",
+              "estimateLabel",
+              "speculativeLabel"
+            ]
+          }
+        },
+        "transition": {
+          "type": "object",
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "cut",
+                "continuity",
+                "dissolve",
+                "match-zoom",
+                "push",
+                "scan-wipe",
+                "iris",
+                "decode-flash",
+                "square-iris",
+                "whip"
+              ]
+            },
+            "dur": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1.5
+            },
+            "focus": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number"
+              }
+            },
+            "direction": {
+              "enum": [
+                "left",
+                "up"
+              ]
+            },
+            "color": {
+              "type": "string"
+            },
+            "rotate": {
+              "type": "number"
+            }
+          },
+          "additionalProperties": false
+        },
+        "camera": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "at"
+            ],
+            "properties": {
+              "at": {
+                "$ref": "#/$defs/anchor"
+              },
+              "x": {
+                "type": "number"
+              },
+              "y": {
+                "type": "number"
+              },
+              "z": {
+                "type": "number",
+                "minimum": 0.3,
+                "maximum": 4
+              },
+              "r": {
+                "type": "number"
+              },
+              "ease": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "layers": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "type": "string"
+              },
+              "depth": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "screen": {
+                "type": "boolean"
+              },
+              "props": {
+                "type": "object"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "env": {
+          "enum": [
+            "desk",
+            "spot",
+            "paper",
+            "amber",
+            "teal",
+            "scanner",
+            "space",
+            "blueprint",
+            "void"
+          ]
+        },
+        "envShift": {
+          "type": "object",
+          "required": [
+            "to",
+            "at"
+          ],
+          "properties": {
+            "to": {
+              "enum": [
+                "desk",
+                "spot",
+                "paper",
+                "amber",
+                "teal",
+                "scanner",
+                "space",
+            "blueprint",
+                "void"
+              ]
+            },
+            "at": {
+              "$ref": "#/$defs/anchor"
+            },
+            "dur": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 3
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

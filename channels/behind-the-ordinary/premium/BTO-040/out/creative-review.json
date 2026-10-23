@@ -1,0 +1,312 @@
+{
+ "schema": "premium-studio.creative-review.v1",
+ "video": "channels/behind-the-ordinary/premium/BTO-040/out/the-shopping-cart-started-as-a-folding-chair-premium-final.mp4",
+ "measuredFrom": "3 decoded frames per scene at 108x192 (ffmpeg) + text-inspection.json",
+ "note": "Measurements describe the frames; they are not quality scores. Human fields are filled by a reviewer (creative-notes.json) and are marked with who wrote them.",
+ "scenes": [
+  {
+   "id": "s1-aisle",
+   "start": 0,
+   "end": 2.685,
+   "technique": [
+    "place-establishing",
+    "cinematic-real-object"
+   ],
+   "transition": "cut",
+   "measured": {
+    "motion": 0.1063,
+    "novelty": null,
+    "compositionOffset": 0.076,
+    "detail": 0.2896,
+    "meanLuma": 66.9,
+    "textShare": 0,
+    "minTextPx": null,
+    "camera": {
+     "pan": 20,
+     "zoom": 0.06000000000000005,
+     "roll": 0
+    }
+   },
+   "flags": [],
+   "storyboardFlags": [],
+   "human": {
+    "storytelling": "strong",
+    "educationalClarity": "good",
+    "emotionalImpact": "curiosity: the object is visibly a chair used as a cart",
+    "transitionMotivation": "n/a (frame 0)",
+    "assetRelevance": "high",
+    "verdict": "keep",
+    "by": "Claude (AI reviewer, from the rendered frames; human review pending)",
+    "note": "The punchline is on screen at frame 0; the cart could still be larger on a phone."
+   }
+  },
+  {
+   "id": "s2-refused",
+   "start": 2.685,
+   "end": 5.055,
+   "technique": [
+    "place-establishing",
+    "cinematic-real-object",
+    "character-staging"
+   ],
+   "transition": "continuity",
+   "measured": {
+    "motion": 0.0444,
+    "novelty": 0.1443,
+    "compositionOffset": 0.086,
+    "detail": 0.2709,
+    "meanLuma": 59.8,
+    "textShare": 0,
+    "minTextPx": null,
+    "camera": {
+     "pan": 20,
+     "zoom": 0.06000000000000005,
+     "roll": 0
+    }
+   },
+   "flags": [],
+   "storyboardFlags": [
+    "SAME_ENV_AS_PREVIOUS (desk)"
+   ],
+   "human": {
+    "storytelling": "medium",
+    "educationalClarity": "medium",
+    "emotionalImpact": "low",
+    "transitionMotivation": "good (continuity in the same aisle)",
+    "assetRelevance": "high",
+    "verdict": "revise",
+    "by": "Claude (AI reviewer, from the rendered frames; human review pending)",
+    "note": "Refusal is only implied by shoppers walking past; show it (a shopper steps around the cart or shakes her head)."
+   }
+  },
+  {
+   "id": "s3-idea",
+   "start": 5.055,
+   "end": 11.137,
+   "technique": [
+    "timeline-archival",
+    "character-staging",
+    "mechanical-assembly",
+    "technical-diagram"
+   ],
+   "transition": "push",
+   "measured": {
+    "motion": 0.0421,
+    "novelty": 0.5556,
+    "compositionOffset": 0.051,
+    "detail": 0.1686,
+    "meanLuma": 198.8,
+    "textShare": 0.024,
+    "minTextPx": 36,
+    "camera": {
+     "pan": 60,
+     "zoom": 0.10000000000000009,
+     "roll": 0
+    }
+   },
+   "flags": [
+    "SMALL_TEXT: smallest scene text 36px (< 40px mobile label size)"
+   ],
+   "storyboardFlags": [],
+   "human": {
+    "storytelling": "medium",
+    "educationalClarity": "good",
+    "emotionalImpact": "low",
+    "transitionMotivation": "medium (push to a new place: the idea)",
+    "assetRelevance": "high",
+    "verdict": "acceptable",
+    "by": "Claude (AI reviewer, from the rendered frames; human review pending)",
+    "note": "Groceries piling up show the problem; the scene is fairly static around the figure."
+   }
+  },
+  {
+   "id": "s4-assembly",
+   "start": 11.137,
+   "end": 15.007,
+   "technique": [
+    "mechanical-assembly"
+   ],
+   "transition": "scan-wipe",
+   "measured": {
+    "motion": 0.025,
+    "novelty": 0.6619,
+    "compositionOffset": 0.016,
+    "detail": 0.0891,
+    "meanLuma": 30.5,
+    "textShare": 0.017,
+    "minTextPx": 42,
+    "camera": {
+     "pan": 60,
+     "zoom": 0.15999999999999992,
+     "roll": 0
+    }
+   },
+   "flags": [],
+   "storyboardFlags": [],
+   "human": {
+    "storytelling": "strong",
+    "educationalClarity": "strong",
+    "emotionalImpact": "satisfying build",
+    "transitionMotivation": "good (wipe into the workshop spotlight)",
+    "assetRelevance": "high",
+    "verdict": "keep",
+    "by": "Claude (AI reviewer, from the rendered frames; human review pending)",
+    "note": "Best scene: each part arrives on its word and is named."
+   }
+  },
+  {
+   "id": "s5-folding",
+   "start": 15.007,
+   "end": 20.733,
+   "technique": [
+    "timeline-archival",
+    "mechanical-assembly",
+    "quote-document"
+   ],
+   "transition": "dissolve",
+   "measured": {
+    "motion": 0.0291,
+    "novelty": 0.5219,
+    "compositionOffset": 0.03,
+    "detail": 0.1141,
+    "meanLuma": 163.1,
+    "textShare": 0.064,
+    "minTextPx": 30,
+    "camera": {
+     "pan": 10,
+     "zoom": 0.050000000000000044,
+     "roll": 0
+    }
+   },
+   "flags": [
+    "SMALL_TEXT: smallest scene text 30px (< 40px mobile label size)"
+   ],
+   "storyboardFlags": [],
+   "human": {
+    "storytelling": "good",
+    "educationalClarity": "good",
+    "emotionalImpact": "medium",
+    "transitionMotivation": "good (dissolve to the same object, now dated)",
+    "assetRelevance": "high",
+    "verdict": "keep",
+    "by": "Claude (AI reviewer, from the rendered frames; human review pending)",
+    "note": "The fold explains the word 'folding'; the verbatim name lands as the quote."
+   }
+  },
+  {
+   "id": "s6-baby",
+   "start": 20.733,
+   "end": 24.251,
+   "technique": [
+    "character-staging",
+    "cinematic-real-object",
+    "line-drawing",
+    "technical-diagram"
+   ],
+   "transition": "whip",
+   "measured": {
+    "motion": 0.0087,
+    "novelty": 0.4397,
+    "compositionOffset": 0.063,
+    "detail": 0.087,
+    "meanLuma": 55.8,
+    "textShare": 0.062,
+    "minTextPx": 30,
+    "camera": {
+     "pan": 70,
+     "zoom": 0.10000000000000009,
+     "roll": 0
+    }
+   },
+   "flags": [
+    "LOW_MOTION: frames inside the scene barely change",
+    "SMALL_TEXT: smallest scene text 30px (< 40px mobile label size)"
+   ],
+   "storyboardFlags": [],
+   "human": {
+    "storytelling": "medium",
+    "educationalClarity": "good",
+    "emotionalImpact": "humour lands only if the pram reads",
+    "transitionMotivation": "medium",
+    "assetRelevance": "medium (interpretation, marked conceptual)",
+    "verdict": "revise",
+    "by": "Claude (AI reviewer, from the rendered frames; human review pending)",
+    "note": "Measured lowest motion; give the woman a reaction (step back) and let the pram outline grow from the cart."
+   }
+  },
+  {
+   "id": "s7-models",
+   "start": 24.251,
+   "end": 27.868,
+   "technique": [
+    "social-diagram"
+   ],
+   "transition": "iris",
+   "measured": {
+    "motion": 0.0112,
+    "novelty": 0.5889,
+    "compositionOffset": 0.025,
+    "detail": 0.2015,
+    "meanLuma": 204.2,
+    "textShare": 0.006,
+    "minTextPx": 40,
+    "camera": {
+     "pan": 20,
+     "zoom": 0.06000000000000005,
+     "roll": 0
+    }
+   },
+   "flags": [],
+   "storyboardFlags": [
+    "CENTRED_FLAT: everything centred on a flat plane",
+    "THIN: two or fewer visual elements"
+   ],
+   "human": {
+    "storytelling": "medium",
+    "educationalClarity": "good",
+    "emotionalImpact": "low",
+    "transitionMotivation": "medium (iris to the plan)",
+    "assetRelevance": "high",
+    "verdict": "revise",
+    "by": "Claude (AI reviewer, from the rendered frames; human review pending)",
+    "note": "Plan reads but is flat and the movers are small; enlarge movers and show more shoppers switching to carts."
+   }
+  },
+  {
+   "id": "s8-popular",
+   "start": 27.868,
+   "end": 32.065,
+   "technique": [
+    "place-establishing",
+    "cinematic-real-object"
+   ],
+   "transition": "push",
+   "measured": {
+    "motion": 0.1068,
+    "novelty": 0.5449,
+    "compositionOffset": 0.068,
+    "detail": 0.2556,
+    "meanLuma": 66.7,
+    "textShare": 0.004,
+    "minTextPx": 40,
+    "camera": {
+     "pan": 20,
+     "zoom": 0.06000000000000005,
+     "roll": 0
+    }
+   },
+   "flags": [],
+   "storyboardFlags": [],
+   "human": {
+    "storytelling": "good",
+    "educationalClarity": "good",
+    "emotionalImpact": "payoff: carts multiply",
+    "transitionMotivation": "good (back to the aisle; loops to frame 0)",
+    "assetRelevance": "high",
+    "verdict": "keep",
+    "by": "Claude (AI reviewer, from the rendered frames; human review pending)",
+    "note": "Loop continuity measured 0.26 (PASS)."
+   }
+  }
+ ]
+}

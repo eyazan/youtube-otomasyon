@@ -1,0 +1,167 @@
+{
+ "topic": "BTO-301",
+ "measuredAt": "2026-10-19T11:46:36.244Z",
+ "host": "linux x64 4 cpu",
+ "A": {
+  "engine": "core/rendering buildPackage (FFmpeg filtergraph + Pillow explainer clips + licensed stills)",
+  "video": "channels/behind-the-ordinary/premium/BTO-301/out/compare/engine-a/why-qr-codes-have-three-corner-squares.mp4",
+  "run": {
+   "status": 0,
+   "wallSec": 215.2,
+   "peakRssMb": 839
+  },
+  "qa": {
+   "durationSec": 30.4,
+   "video": "1080x1920 30/1 h264",
+   "loudness": {
+    "I": -14.5,
+    "LRA": 1.4,
+    "truePeak": -4.1
+   },
+   "motion": {
+    "method": "mean abs luma diff per frame on a 270x480 gray proxy; static = diff < 0.5",
+    "first3sMean": 2.45,
+    "first3sStaticShare": 0.13,
+    "wholeMean": 0.75,
+    "wholeStaticShare": 0.82,
+    "longestStaticRunSec": 2
+   },
+   "black": 0,
+   "freezes": 1,
+   "hardPass": false
+  },
+  "shots": [
+   "licensed-still",
+   "explainer",
+   "explainer",
+   "explainer",
+   "explainer",
+   "explainer",
+   "explainer"
+  ],
+  "distinctVisuals": 7
+ },
+ "B": {
+  "engine": "scripts/bto-studio (deterministic Chromium SVG motion, scene-cached)",
+  "video": "channels/behind-the-ordinary/premium/BTO-301/out/why-qr-codes-have-three-corner-squares-premium-final.mp4",
+  "run": {
+   "wallSec": 33.3,
+   "msPerFrame": 221.8,
+   "peakRssMb": 1958,
+   "workers": 1,
+   "totalPipelineSec": 88.5
+  },
+  "qa": {
+   "durationSec": 31.6,
+   "video": "1080x1920 30/1 h264",
+   "loudness": {
+    "I": -14.1,
+    "LRA": 1.8,
+    "truePeak": -1.8
+   },
+   "motion": {
+    "method": "mean abs luma diff per frame on a 270x480 gray proxy; static = diff < 0.5",
+    "first3sMean": 2.65,
+    "first3sStaticShare": 0.45,
+    "wholeMean": 2.56,
+    "wholeStaticShare": 0.57,
+    "longestStaticRunSec": 1.5
+   },
+   "black": 0,
+   "freezes": 0,
+   "hardPass": true
+  },
+  "scenes": [
+   {
+    "id": "s1-hook",
+    "transition": "cut",
+    "components": [
+     "desk-grain",
+     "qr-symbol"
+    ]
+   },
+   {
+    "id": "s2-locate",
+    "transition": "continuity",
+    "components": [
+     "desk-grain",
+     "print-surface",
+     "qr-symbol",
+     "scan-line",
+     "reticle"
+    ]
+   },
+   {
+    "id": "s3-origin",
+    "transition": "push",
+    "components": [
+     "desk-grain",
+     "kinetic-type",
+     "qr-symbol",
+     "timeline-ruler",
+     "kinetic-type"
+    ]
+   },
+   {
+    "id": "s4-anatomy",
+    "transition": "match-zoom",
+    "components": [
+     "desk-grain",
+     "qr-symbol",
+     "labels"
+    ]
+   },
+   {
+    "id": "s5-why-squares",
+    "transition": "iris",
+    "components": [
+     "desk-grain",
+     "print-surface",
+     "kinetic-type",
+     "search-window",
+     "quote-card"
+    ]
+   },
+   {
+    "id": "s6-ratio",
+    "transition": "scan-wipe",
+    "components": [
+     "desk-grain",
+     "print-surface",
+     "print-surface",
+     "print-surface",
+     "kinetic-type",
+     "scan-line",
+     "run-length-strip",
+     "run-length-strip",
+     "run-length-strip",
+     "paper-card",
+     "qr-symbol",
+     "scan-line",
+     "run-length-strip"
+    ]
+   },
+   {
+    "id": "s7-any-angle",
+    "transition": "continuity",
+    "components": [
+     "desk-grain",
+     "paper-card",
+     "qr-symbol",
+     "scan-line",
+     "run-length-strip"
+    ]
+   }
+  ]
+ },
+ "sideBySide": "channels/behind-the-ordinary/premium/BTO-301/out/compare/side-by-side.mp4",
+ "sheet": "channels/behind-the-ordinary/premium/BTO-301/out/compare/side-by-side-sheet.png",
+ "streamsA": [
+  "video:h264 1080x1920",
+  "audio:aac x"
+ ],
+ "streamsB": [
+  "video:h264 1080x1920",
+  "audio:aac x"
+ ]
+}

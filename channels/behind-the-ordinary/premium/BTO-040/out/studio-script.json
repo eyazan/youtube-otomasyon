@@ -1,0 +1,283 @@
+{
+ "schema": "bto-studio.narration-script.v1",
+ "channel": "behind-the-ordinary",
+ "topicId": "BTO-040",
+ "slug": "the-shopping-cart-started-as-a-folding-chair",
+ "title": "The Shopping Cart Started as a Folding Chair",
+ "coreQuestion": "Where did the shopping cart come from, and why did shoppers first refuse to use it?",
+ "sourceHash": "59c21d316d452511",
+ "voice": {
+  "approved": {
+   "provider": "edge-tts",
+   "voice": "en-US-EmmaMultilingualNeural",
+   "rate": "+1%"
+  }
+ },
+ "lines": [
+  {
+   "id": "L1",
+   "role": "VISUAL_MYSTERY",
+   "layer": "VERIFIED FACT",
+   "text": "The first shopping cart barely looked like a cart.",
+   "evidenceSuggested": [
+    "F4"
+   ]
+  },
+  {
+   "id": "L2",
+   "role": "CLEAR_PROMISE",
+   "layer": "VERIFIED FACT",
+   "text": "And shoppers first refused to push it.",
+   "evidenceSuggested": [
+    "F4",
+    "F6"
+   ]
+  },
+  {
+   "id": "L3",
+   "role": "ORIGIN",
+   "layer": "VERIFIED FACT",
+   "text": "In 1936, grocer Sylvan Goldman wondered how customers could move more groceries.",
+   "evidenceSuggested": [
+    "F1",
+    "F4",
+    "F3"
+   ]
+  },
+  {
+   "id": "L4",
+   "role": "EXPLANATION",
+   "layer": "VERIFIED FACT",
+   "text": "He put a basket on a folding chair's seat and wheels on its legs.",
+   "evidenceSuggested": [
+    "F2",
+    "F3",
+    "F9"
+   ]
+  },
+  {
+   "id": "L5",
+   "role": "ORIGIN",
+   "layer": "VERIFIED FACT",
+   "text": "His Humpty Dumpty stores introduced these folding basket carriers in 1937.",
+   "evidenceSuggested": [
+    "F3",
+    "F4",
+    "F2"
+   ]
+  },
+  {
+   "id": "L6",
+   "role": "SURPRISING_DETAIL",
+   "layer": "VERIFIED FACT",
+   "text": "One offended woman told him she had pushed her last baby.",
+   "evidenceSuggested": [
+    "F5"
+   ]
+  },
+  {
+   "id": "L7",
+   "role": "EXPLANATION",
+   "layer": "VERIFIED FACT",
+   "text": "So Goldman hired models to push the carts around his store.",
+   "evidenceSuggested": [
+    "F6",
+    "F4",
+    "F3"
+   ]
+  },
+  {
+   "id": "L8",
+   "role": "PAYOFF",
+   "layer": "VERIFIED FACT",
+   "text": "After that, the folding chair on wheels became extremely popular.",
+   "evidenceSuggested": [
+    "F2",
+    "F3",
+    "F6"
+   ]
+  }
+ ],
+ "beats": [
+  {
+   "id": "b1",
+   "rate": "+1%",
+   "pauseAfterMs": 200,
+   "lines": [
+    {
+     "id": "L1",
+     "text": "The first shopping cart barely looked like a cart."
+    }
+   ]
+  },
+  {
+   "id": "b2",
+   "rate": "+1%",
+   "pauseAfterMs": 360,
+   "lines": [
+    {
+     "id": "L2",
+     "text": "And shoppers first refused to push it."
+    }
+   ]
+  },
+  {
+   "id": "b3",
+   "rate": "+1%",
+   "pauseAfterMs": 200,
+   "lines": [
+    {
+     "id": "L3",
+     "text": "In 1936, grocer Sylvan Goldman wondered how customers could move more groceries."
+    }
+   ]
+  },
+  {
+   "id": "b4",
+   "rate": "+1%",
+   "pauseAfterMs": 200,
+   "lines": [
+    {
+     "id": "L4",
+     "text": "He put a basket on a folding chair's seat and wheels on its legs."
+    }
+   ]
+  },
+  {
+   "id": "b5",
+   "rate": "+1%",
+   "pauseAfterMs": 200,
+   "lines": [
+    {
+     "id": "L5",
+     "text": "His Humpty Dumpty stores introduced these folding basket carriers in 1937."
+    }
+   ]
+  },
+  {
+   "id": "b6",
+   "rate": "+1%",
+   "pauseAfterMs": 200,
+   "lines": [
+    {
+     "id": "L6",
+     "text": "One offended woman told him she had pushed her last baby."
+    }
+   ]
+  },
+  {
+   "id": "b7",
+   "rate": "+1%",
+   "pauseAfterMs": 360,
+   "lines": [
+    {
+     "id": "L7",
+     "text": "So Goldman hired models to push the carts around his store."
+    }
+   ]
+  },
+  {
+   "id": "b8",
+   "rate": "+1%",
+   "pauseAfterMs": 0,
+   "lines": [
+    {
+     "id": "L8",
+     "text": "After that, the folding chair on wheels became extremely popular."
+    }
+   ]
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "hash": "6983423b66",
+   "role": "origin",
+   "claim": "In 1936 Sylvan Goldman wondered how customers might move more groceries.",
+   "quote": "in 1936, Goldman sat in his office wondering how customers might move more groceries",
+   "source": "Wikipedia — Shopping cart",
+   "url": "https://en.wikipedia.org/wiki/Shopping_cart",
+   "layer": "VERIFIED FACT"
+  },
+  {
+   "id": "F2",
+   "hash": "e67d06c451",
+   "role": "explanation",
+   "claim": "Goldman put a basket on the seat of a wooden folding chair and wheels on its legs.",
+   "quote": "He found a wooden folding chair and put a basket on the seat and wheels on the legs",
+   "source": "Wikipedia — Shopping cart",
+   "url": "https://en.wikipedia.org/wiki/Shopping_cart",
+   "layer": "VERIFIED FACT"
+  },
+  {
+   "id": "F3",
+   "hash": "b2f12cd117",
+   "role": "context",
+   "claim": "Because they were inspired by a folding chair, Goldman called them folding basket carriers.",
+   "quote": "Goldman called his carts \"folding basket carriers\"",
+   "source": "Wikipedia — Shopping cart",
+   "url": "https://en.wikipedia.org/wiki/Shopping_cart",
+   "layer": "VERIFIED FACT"
+  },
+  {
+   "id": "F4",
+   "hash": "0457637410",
+   "role": "origin",
+   "claim": "One of the first shopping carts was introduced on June 4, 1937, by Goldman, owner of the Humpty Dumpty supermarket chain in Oklahoma.",
+   "quote": "One of the first shopping carts was introduced on June 4, 1937, the invention of Sylvan Goldman",
+   "source": "Wikipedia — Shopping cart",
+   "url": "https://en.wikipedia.org/wiki/Shopping_cart",
+   "layer": "VERIFIED FACT"
+  },
+  {
+   "id": "F5",
+   "hash": "44662fcd5c",
+   "role": "surprising-detail",
+   "claim": "An offended woman told Goldman she had pushed her last baby.",
+   "quote": "an offended woman informed Goldman",
+   "source": "Wikipedia — Shopping cart",
+   "url": "https://en.wikipedia.org/wiki/Shopping_cart",
+   "layer": "VERIFIED FACT"
+  },
+  {
+   "id": "F6",
+   "hash": "90206d79bf",
+   "role": "explanation",
+   "claim": "Goldman hired male and female models to push carts around the store, and carts then became extremely popular.",
+   "quote": "Goldman hired several male and female models to push his new invention around his store",
+   "source": "Wikipedia — Shopping cart",
+   "url": "https://en.wikipedia.org/wiki/Shopping_cart",
+   "layer": "VERIFIED FACT"
+  },
+  {
+   "id": "F7",
+   "hash": "a0de2a5f24",
+   "role": "context",
+   "claim": "Goldman and his mechanic Fred Young began tinkering with the design.",
+   "quote": "Goldman and one of his employees, a mechanic named Fred Young, began tinkering",
+   "source": "Wikipedia — Shopping cart",
+   "url": "https://en.wikipedia.org/wiki/Shopping_cart",
+   "layer": "VERIFIED FACT"
+  },
+  {
+   "id": "F8",
+   "hash": "b8f1aa0e51",
+   "role": "consequence",
+   "claim": "Orla Watson invented the swinging rear door that allows carts to nest, in 1946.",
+   "quote": "Orla Watson, who invented the swinging rear door to allow for \"nesting\" in 1946",
+   "source": "Wikipedia — Shopping cart",
+   "url": "https://en.wikipedia.org/wiki/Shopping_cart",
+   "layer": "VERIFIED FACT"
+  },
+  {
+   "id": "F9",
+   "hash": "3e65fac22f",
+   "role": "origin",
+   "claim": "Goldman established the Folding Basket Carrier Company to manufacture his invention.",
+   "quote": "He established the Folding Basket Carrier Company to manufacture his invention",
+   "source": "Oklahoma Historical Society — Goldman, Sylvan Nathan",
+   "url": "https://www.okhistory.org/publications/enc/entry?entry=GO004",
+   "layer": "VERIFIED FACT"
+  }
+ ]
+}

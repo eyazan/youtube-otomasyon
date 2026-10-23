@@ -1,0 +1,56 @@
+{
+ "schema": "premium-studio.channel-profile.v1",
+ "channel": "goal-lore-lab",
+ "name": "GoalLore Lab",
+ "premiumMode": "design-only",
+ "studioRenders": false,
+ "rolloutStage": 6,
+ "refusal": "GoalLore Lab is a proposed channel: it is not in config/channels.json, has no credentials and no VERIFIED topics. The studio can render its design sample board only (scripts/bto-studio/samples/goal-lore-lab-board.json).",
+ "stylePack": "channels/goal-lore-lab/premium/style-pack.json",
+ "visualProfile": [
+  "story-first football storytelling",
+  "animated tactical pitches",
+  "player positions and runs",
+  "ball trajectories with real physics",
+  "passing networks",
+  "career timelines",
+  "statistical comparisons from cited data",
+  "stadium storytelling",
+  "no broadcast footage"
+ ],
+ "components": {
+  "built": [
+   "football-pitch (pitch, standing or flat player tokens, runs, passes, ball arcs, RK4 drag+Magnus kicks, follow camera)",
+   "stadium (floodlit night stands, original)",
+   "airflow (2D rotating-cylinder flow, force, drag, gauges)",
+   "spiral-plot (drag+Magnus top-view model)",
+   "dot-board (LED scoreboard)",
+   "line-art",
+   "figure",
+   "labels",
+   "kinetic-type",
+   "timeline-ruler",
+   "paper-card"
+  ],
+  "toBuild": [
+   "passing-network",
+   "career-timeline",
+   "stat-compare",
+   "shot-map"
+  ]
+ },
+ "evidencePolicy": {
+  "researchStatus": "VERIFIED",
+  "verbatimQuotes": true,
+  "hypotheticalLabel": "WHAT IF",
+  "noBroadcastFootage": true
+ },
+ "publishing": {
+  "autoPublish": false,
+  "credentials": "none created"
+ },
+ "storyboard": {
+  "generator": "scripts/bto-studio/auto/goal-lore-lab.js",
+  "note": "deterministic football grammar (stadium, dot-board, strike, model flight, ruler, airflow, spiral); runs only in --pilot mode until the channel is registered and its research meets the verbatim-quote rule"
+ }
+}

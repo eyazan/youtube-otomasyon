@@ -1,0 +1,397 @@
+{
+ "schema": "premium-studio.design-sample.v1",
+ "channel": "goal-lore-lab",
+ "purpose": "DESIGN SAMPLE ONLY (GLL-069 treatment): a curling free kick told as a physics model. Illustrative kick, not a real match or player; model parameters, no measured numbers on screen; no narration; never published.",
+ "stylePack": "channels/goal-lore-lab/premium/style-pack.json",
+ "duration": 13.0,
+ "storyboard": {
+  "schema": "bto-studio.storyboard.v1",
+  "channel": "goal-lore-lab",
+  "topicId": "GLL-069-SAMPLE",
+  "version": 1,
+  "author": "design sample",
+  "treatment": {
+   "educationalObjective": "why a spinning ball curves (Magnus effect)",
+   "visualHook": "a low floodlit camera behind the ball and the wall",
+   "mechanismsToAnimate": [
+    "spin changes the airflow",
+    "pressure difference gives a sideways force",
+    "spin vs no-spin flight"
+   ],
+   "factualRisks": [
+    "2D potential flow is a teaching model, not the real 3D flow",
+    "flight uses stated model parameters (drag 0.25, lift from spin ratio), not measurements"
+   ]
+  },
+  "scenes": [
+   {
+    "id": "s1-wall",
+    "lines": [
+     "L1"
+    ],
+    "start": 0,
+    "env": "desk",
+    "visualPurpose": "Hook: a low camera behind the ball, the wall between ball and goal, the kick curls inside the post.",
+    "evidence": [
+     "F1"
+    ],
+    "chips": [
+     "illustrationLabel"
+    ],
+    "camera": [
+     {
+      "at": 0,
+      "x": 540,
+      "y": 800,
+      "z": 1.0
+     },
+     {
+      "at": 4.4,
+      "x": 540,
+      "y": 800,
+      "z": 1.0
+     }
+    ],
+    "layers": [
+     {
+      "component": "stadium",
+      "props": {
+       "horizonY": 735,
+       "seed": 11,
+       "lightsOnAt": 0.1
+      }
+     },
+     {
+      "component": "football-pitch",
+      "props": {
+       "id": "fk",
+       "x": 540,
+       "y": 1180,
+       "pxPerMetre": 80,
+       "rx": 72,
+       "D": 4000,
+       "tokenStyle": "standing",
+       "focusKeys": [
+        [
+         0,
+         9,
+         -30
+        ],
+        [
+         4.4,
+         7.5,
+         -34
+        ]
+       ],
+       "players": [
+        {
+         "id": "w1",
+         "team": "away",
+         "number": 4,
+         "path": [
+          [
+           0,
+           6.6,
+           -37.15
+          ]
+         ]
+        },
+        {
+         "id": "w2",
+         "team": "away",
+         "number": 5,
+         "path": [
+          [
+           0,
+           7.3,
+           -37.15
+          ]
+         ]
+        },
+        {
+         "id": "w3",
+         "team": "away",
+         "number": 8,
+         "path": [
+          [
+           0,
+           8.0,
+           -37.15
+          ]
+         ]
+        },
+        {
+         "id": "w4",
+         "team": "away",
+         "number": 6,
+         "path": [
+          [
+           0,
+           8.7,
+           -37.15
+          ]
+         ]
+        },
+        {
+         "id": "gk",
+         "team": "home",
+         "number": 1,
+         "path": [
+          [
+           0,
+           0.5,
+           -52.0
+          ],
+          [
+           2.2,
+           0.5,
+           -52.0
+          ],
+          [
+           3.6,
+           -0.8,
+           -52.0
+          ]
+         ]
+        }
+       ],
+       "kicks": [
+        {
+         "at": 1.6,
+         "x0": 9,
+         "y0": -28,
+         "speed": 24,
+         "elevation": 20,
+         "azimuth": -6,
+         "spinRps": 11,
+         "timeScale": 0.5
+        }
+       ],
+       "rz": 14,
+       "ppmKeys": [
+        [
+         0,
+         80
+        ],
+        [
+         4.4,
+         88
+        ]
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "id": "s2-airflow",
+    "lines": [
+     "L1"
+    ],
+    "start": 4.6,
+    "env": "desk",
+    "transition": {
+     "type": "whip",
+     "dur": 0.4
+    },
+    "visualPurpose": "Mechanism: in the ball's frame, spin speeds the air on one side; lower pressure there; the force points that way.",
+    "evidence": [
+     "F1"
+    ],
+    "chips": [
+     "modelLabel"
+    ],
+    "camera": [
+     {
+      "at": 4.6,
+      "x": 540,
+      "y": 800,
+      "z": 1.0
+     },
+     {
+      "at": 8.6,
+      "x": 540,
+      "y": 790,
+      "z": 1.06
+     }
+    ],
+    "layers": [
+     {
+      "component": "airflow",
+      "screen": true,
+      "props": {
+       "x": 540,
+       "y": 800,
+       "R": 140,
+       "U": 260,
+       "w": 1000,
+       "h": 900,
+       "enterAt": 4.6,
+       "spinKeys": [
+        [
+         4.9,
+         0
+        ],
+        [
+         5.9,
+         0.32
+        ]
+       ],
+       "forceAt": 6.9,
+       "forceLen": 190,
+       "lines": 15
+      }
+     },
+     {
+      "component": "labels",
+      "screen": true,
+      "props": {
+       "items": [
+        {
+         "x": 430,
+         "y": 640,
+         "lx": 110,
+         "ly": 450,
+         "text": "FASTER AIR",
+         "at": 6.1
+        },
+        {
+         "x": 540,
+         "y": 960,
+         "lx": 600,
+         "ly": 1150,
+         "text": "SLOWER AIR",
+         "at": 6.4
+        },
+        {
+         "x": 560,
+         "y": 480,
+         "lx": 690,
+         "ly": 420,
+         "text": "FORCE",
+         "at": 7.2
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "id": "s3-flight",
+    "lines": [
+     "L1"
+    ],
+    "start": 8.6,
+    "env": "desk",
+    "transition": {
+     "type": "dissolve",
+     "dur": 0.4
+    },
+    "visualPurpose": "Payoff: the same kick with and without spin (model); only the spin brings it inside the post.",
+    "evidence": [
+     "F1"
+    ],
+    "chips": [
+     "modelLabel"
+    ],
+    "camera": [
+     {
+      "at": 8.6,
+      "x": 540,
+      "y": 800,
+      "z": 1.0
+     },
+     {
+      "at": 12.8,
+      "x": 540,
+      "y": 780,
+      "z": 1.08
+     }
+    ],
+    "layers": [
+     {
+      "component": "football-pitch",
+      "props": {
+       "id": "fk2",
+       "x": 540,
+       "y": 820,
+       "pxPerMetre": 44,
+       "rx": 40,
+       "D": 2400,
+       "tokenStyle": "standing",
+       "focusKeys": [
+        [
+         8.6,
+         5,
+         -41
+        ]
+       ],
+       "players": [
+        {
+         "id": "w1",
+         "team": "away",
+         "number": 4,
+         "path": [
+          [
+           0,
+           6.6,
+           -37.15
+          ]
+         ]
+        },
+        {
+         "id": "w2",
+         "team": "away",
+         "number": 5,
+         "path": [
+          [
+           0,
+           7.3,
+           -37.15
+          ]
+         ]
+        },
+        {
+         "id": "w3",
+         "team": "away",
+         "number": 8,
+         "path": [
+          [
+           0,
+           8.0,
+           -37.15
+          ]
+         ]
+        },
+        {
+         "id": "w4",
+         "team": "away",
+         "number": 6,
+         "path": [
+          [
+           0,
+           8.7,
+           -37.15
+          ]
+         ]
+        }
+       ],
+       "kicks": [
+        {
+         "at": 9.0,
+         "x0": 9,
+         "y0": -28,
+         "speed": 24,
+         "elevation": 20,
+         "azimuth": -6,
+         "spinRps": 11,
+         "timeScale": 0.6,
+         "ghostAt": 10.8
+        }
+       ]
+      }
+     }
+    ]
+   }
+  ]
+ }
+}

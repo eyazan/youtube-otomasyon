@@ -27,7 +27,9 @@ function history(channel) {
   const blocked = Object.keys(readJson(path.join(state, legacy ? "engellenen.json" : "blocked.json"), {}) || {});
   const failedRaw = readJson(path.join(state, legacy ? "basarisiz.json" : "failed.json"), []);
   const failed = Array.isArray(failedRaw) ? failedRaw : [];
-  const used = new Set([...generated, ...published.map((item) => item.slug), ...published.map((item) => item.topicId), ...failed].filter(Boolean));
+  // topics an owner reserved for an approved premium Short (core/pipeline/premium-publish.js) are never selected here
+  const reserved = (() => { try { return [...require("../pipeline/premium-publish").reserved(channel)]; } catch (error) { return []; } })();
+  const used = new Set([...generated, ...published.map((item) => item.slug), ...published.map((item) => item.topicId), ...failed, ...reserved].filter(Boolean));
   return { published, generated, blocked, failed, used, publishedTitles: published.map((item) => item.baslik || item.title).filter(Boolean) };
 }
 

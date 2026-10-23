@@ -107,3 +107,6 @@ channels/profitdecoded/films/*/tts-cache/
 kokoro-model/
 # Small speech fixture for lib/speech-check.js tests (3 s, Kokoro-82M, Apache-2.0)
 !tests/js/fixtures/speech-sample.mp3
+
+# Edge narration cache and dependency caches (scripts/fr-premium/edge-client.js, scripts/ci-apt.sh); never committed
+/.cache/

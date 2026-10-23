@@ -1,0 +1,451 @@
+{
+ "duration": 29.598,
+ "scenes": [
+  {
+   "id": "s1-hook",
+   "start": 0,
+   "end": 4.722,
+   "transition": {
+    "type": "cut",
+    "dur": 0
+   },
+   "components": [
+    "starfield",
+    "planet",
+    "kinetic-type"
+   ],
+   "purpose": "Hook: frame 0 shows the earth interior itself and the claim's number (12,262 m) lands as a readout, so the scale of the question is visible before it is explained.",
+   "evidence": [
+    "F3",
+    "F4"
+   ],
+   "lines": [
+    "L1"
+   ]
+  },
+  {
+   "id": "s2-zoom",
+   "start": 4.722,
+   "end": 6.33,
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "components": [
+    "starfield",
+    "planet",
+    "kinetic-type"
+   ],
+   "purpose": "Mechanism: the camera dives at the planet until its curve fills the frame and the deepest hole is a single scratch on the surface; known science.",
+   "evidence": [
+    "F1"
+   ],
+   "lines": [
+    "L2"
+   ]
+  },
+  {
+   "id": "s3-year",
+   "start": 6.33,
+   "end": 11.084,
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "components": [
+    "starfield",
+    "depth-probe",
+    "timeline-ruler"
+   ],
+   "purpose": "Time: the ruler lands on 1970 while the scene shows what started then (the probe begins its descent); the year is from the cited fact.",
+   "evidence": [
+    "F1"
+   ],
+   "lines": [
+    "L3"
+   ]
+  },
+  {
+   "id": "s4-measure",
+   "start": 11.084,
+   "end": 14.248,
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "components": [
+    "starfield",
+    "depth-probe"
+   ],
+   "purpose": "Measure: a dashed marker at 15,000 m while the probe descends and stops short at the depth actually reached (cited); depth is drawn to the scale of the slice.",
+   "evidence": [
+    "F1",
+    "F2",
+    "F3"
+   ],
+   "lines": [
+    "L4"
+   ]
+  },
+  {
+   "id": "s5-heat",
+   "start": 14.248,
+   "end": 18.867,
+   "transition": {
+    "type": "dissolve",
+    "dur": 0.5
+   },
+   "components": [
+    "starfield",
+    "depth-probe"
+   ],
+   "purpose": "Heat: the camera dives to the bottom of the hole, where the slice glows around the stalled probe tip; the measured temperature (180 °C) is the only number on screen.",
+   "evidence": [
+    "F4"
+   ],
+   "lines": [
+    "L5"
+   ]
+  },
+  {
+   "id": "s6-flow",
+   "start": 18.867,
+   "end": 22.501,
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "components": [
+    "starfield",
+    "depth-probe",
+    "kinetic-type"
+   ],
+   "purpose": "Mechanism: the rock slice heats and its strata bend and travel like a slow fluid (conceptual); an estimate, chipped as such.",
+   "evidence": [
+    "F1"
+   ],
+   "lines": [
+    "L6"
+   ]
+  },
+  {
+   "id": "s7-cut",
+   "start": 22.501,
+   "end": 25.133,
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "components": [
+    "starfield",
+    "planet",
+    "kinetic-type"
+   ],
+   "purpose": "Mechanism: the planet opens into its layers so the depth beyond the hole is visible; an estimate, chipped as such.",
+   "evidence": [
+    "F1"
+   ],
+   "lines": [
+    "L7"
+   ]
+  },
+  {
+   "id": "s8-payoff",
+   "start": 25.133,
+   "end": 29.598,
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "components": [
+    "starfield",
+    "planet",
+    "kinetic-type"
+   ],
+   "purpose": "Payoff: the answer in a few words over the opening composition; the camera eases back to the frame-0 framing so the Short loops on its first image.",
+   "evidence": [
+    "F1"
+   ],
+   "lines": [
+    "L8"
+   ]
+  }
+ ],
+ "cues": [
+  {
+   "start": 0.06,
+   "end": 3.83,
+   "lines": [
+    "Humanity's deepest",
+    "hole stopped at 12,262"
+   ]
+  },
+  {
+   "start": 3.83,
+   "end": 4.872,
+   "lines": [
+    "metres."
+   ]
+  },
+  {
+   "start": 4.872,
+   "end": 6.48,
+   "lines": [
+    "It barely scratched",
+    "the crust."
+   ]
+  },
+  {
+   "start": 6.48,
+   "end": 9.48,
+   "lines": [
+    "Soviet engineers began",
+    "drilling Kola SG-3"
+   ]
+  },
+  {
+   "start": 9.48,
+   "end": 11.234,
+   "lines": [
+    "in 1970."
+   ]
+  },
+  {
+   "start": 11.234,
+   "end": 13.481,
+   "lines": [
+    "They aimed for",
+    "15,000 metres and"
+   ]
+  },
+  {
+   "start": 13.481,
+   "end": 14.354000000000001,
+   "lines": [
+    "fell short."
+   ]
+  },
+  {
+   "start": 14.398,
+   "end": 15.74,
+   "lines": [
+    "Heat stopped them:"
+   ]
+  },
+  {
+   "start": 15.74,
+   "end": 16.215,
+   "lines": [
+    "180 °C,"
+   ]
+  },
+  {
+   "start": 16.215,
+   "end": 19.017,
+   "lines": [
+    "far above what",
+    "they expected."
+   ]
+  },
+  {
+   "start": 19.017,
+   "end": 21.157,
+   "lines": [
+    "Rock that hot",
+    "starts behaving more"
+   ]
+  },
+  {
+   "start": 21.157,
+   "end": 22.651,
+   "lines": [
+    "like plastic than stone."
+   ]
+  },
+  {
+   "start": 22.651,
+   "end": 23.27,
+   "lines": [
+    "Deeper down,"
+   ]
+  },
+  {
+   "start": 23.27,
+   "end": 25.283,
+   "lines": [
+    "the heat and",
+    "pressure only climb."
+   ]
+  },
+  {
+   "start": 25.283,
+   "end": 27.183,
+   "lines": [
+    "So the planet's",
+    "first defence against"
+   ]
+  },
+  {
+   "start": 27.183,
+   "end": 28.133,
+   "lines": [
+    "drilling is heat,"
+   ]
+  },
+  {
+   "start": 28.133,
+   "end": 29.313,
+   "lines": [
+    "not hardness."
+   ]
+  }
+ ],
+ "audio": [
+  {
+   "t": 0.15,
+   "kind": "roll",
+   "gain": 0.45,
+   "pan": 0,
+   "dur": 1.4
+  },
+  {
+   "t": 0.31,
+   "kind": "pop",
+   "gain": 0.45,
+   "pan": 0
+  },
+  {
+   "t": 4.722,
+   "kind": "transition-scan-wipe",
+   "gain": 0.8,
+   "pan": 0
+  },
+  {
+   "t": 4.972,
+   "kind": "roll",
+   "gain": 0.45,
+   "pan": 0,
+   "dur": 0.6
+  },
+  {
+   "t": 5.122,
+   "kind": "pop",
+   "gain": 0.45,
+   "pan": 0
+  },
+  {
+   "t": 6.33,
+   "kind": "transition-iris",
+   "gain": 0.8,
+   "pan": 0
+  },
+  {
+   "t": 6.38,
+   "kind": "roll",
+   "gain": 0.4,
+   "pan": 0,
+   "dur": 4.479999999999999
+  },
+  {
+   "t": 6.38,
+   "kind": "roll",
+   "gain": 0.55,
+   "pan": 0,
+   "dur": 0.6999999999999993
+  },
+  {
+   "t": 7.08,
+   "kind": "lock",
+   "gain": 0.7,
+   "pan": 0
+  },
+  {
+   "t": 11.084,
+   "kind": "transition-scan-wipe",
+   "gain": 0.8,
+   "pan": 0
+  },
+  {
+   "t": 11.134,
+   "kind": "roll",
+   "gain": 0.4,
+   "pan": 0,
+   "dur": 2.8200000000000003
+  },
+  {
+   "t": 11.534,
+   "kind": "tick",
+   "gain": 0.4,
+   "pan": 0
+  },
+  {
+   "t": 14.248,
+   "kind": "transition-dissolve",
+   "gain": 0.8,
+   "pan": 0
+  },
+  {
+   "t": 14.298,
+   "kind": "roll",
+   "gain": 0.4,
+   "pan": 0,
+   "dur": 4.33
+  },
+  {
+   "t": 14.898,
+   "kind": "lock",
+   "gain": 0.45,
+   "pan": 0
+  },
+  {
+   "t": 18.867,
+   "kind": "transition-iris",
+   "gain": 0.8,
+   "pan": 0
+  },
+  {
+   "t": 19.267,
+   "kind": "pop",
+   "gain": 0.45,
+   "pan": 0
+  },
+  {
+   "t": 22.501,
+   "kind": "transition-scan-wipe",
+   "gain": 0.8,
+   "pan": 0
+  },
+  {
+   "t": 22.651,
+   "kind": "whoosh",
+   "gain": 0.5,
+   "pan": 0
+  },
+  {
+   "t": 22.901,
+   "kind": "pop",
+   "gain": 0.45,
+   "pan": 0
+  },
+  {
+   "t": 25.133,
+   "kind": "transition-iris",
+   "gain": 0.8,
+   "pan": 0
+  },
+  {
+   "t": 25.483,
+   "kind": "roll",
+   "gain": 0.45,
+   "pan": 0,
+   "dur": 1.4
+  },
+  {
+   "t": 25.583,
+   "kind": "pop",
+   "gain": 0.45,
+   "pan": 0
+  }
+ ],
+ "captionsOff": []
+}

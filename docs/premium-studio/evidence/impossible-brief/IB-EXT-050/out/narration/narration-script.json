@@ -1,0 +1,214 @@
+{
+ "schema": "bto-studio.narration-script.v1",
+ "channel": "impossible-brief",
+ "topicId": "IB-EXT-050",
+ "slug": "what-if-we-tried-to-drill-through-the-earth",
+ "coreQuestion": "If we tried to drill through the Earth, what would stop us first: rock or heat?",
+ "sourceHash": "54d2971636c466e2",
+ "voice": {
+  "approved": {
+   "provider": "edge-tts",
+   "voice": "en-US-BrianMultilingualNeural",
+   "rate": "+2%"
+  }
+ },
+ "lines": [
+  {
+   "id": "L1",
+   "role": "IMPOSSIBLE_QUESTION",
+   "layer": "KNOWN SCIENCE",
+   "text": "Humanity's deepest hole stopped at 12,262 metres.",
+   "evidenceSuggested": [
+    "F4",
+    "F3"
+   ]
+  },
+  {
+   "id": "L2",
+   "role": "FIRST_EFFECT",
+   "layer": "KNOWN SCIENCE",
+   "text": "It barely scratched the crust.",
+   "evidenceSuggested": []
+  },
+  {
+   "id": "L3",
+   "role": "SCIENCE_EXPLANATION",
+   "layer": "KNOWN SCIENCE",
+   "text": "Soviet engineers began drilling Kola SG-3 in 1970.",
+   "evidenceSuggested": [
+    "F1"
+   ]
+  },
+  {
+   "id": "L4",
+   "role": "SCIENCE_EXPLANATION",
+   "layer": "KNOWN SCIENCE",
+   "text": "They aimed for 15,000 metres and fell short.",
+   "evidenceSuggested": []
+  },
+  {
+   "id": "L5",
+   "role": "SCIENCE_EXPLANATION",
+   "layer": "KNOWN SCIENCE",
+   "text": "Heat stopped them: 180 °C, far above what they expected.",
+   "evidenceSuggested": [
+    "F4"
+   ]
+  },
+  {
+   "id": "L6",
+   "role": "SECOND_ORDER_EFFECT",
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Rock that hot starts behaving more like plastic than stone.",
+   "evidenceSuggested": []
+  },
+  {
+   "id": "L7",
+   "role": "SECOND_ORDER_EFFECT",
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Deeper down, the heat and pressure only climb.",
+   "evidenceSuggested": []
+  },
+  {
+   "id": "L8",
+   "role": "SCIENTIFIC_PAYOFF",
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the planet's first defence against drilling is heat, not hardness.",
+   "evidenceSuggested": [
+    "F1"
+   ]
+  }
+ ],
+ "beats": [
+  {
+   "id": "b1",
+   "rate": "+2%",
+   "pauseAfterMs": 200,
+   "lines": [
+    {
+     "id": "L1",
+     "text": "Humanity's deepest hole stopped at 12,262 metres."
+    }
+   ]
+  },
+  {
+   "id": "b2",
+   "rate": "+2%",
+   "pauseAfterMs": 200,
+   "lines": [
+    {
+     "id": "L2",
+     "text": "It barely scratched the crust."
+    }
+   ]
+  },
+  {
+   "id": "b3",
+   "rate": "+2%",
+   "pauseAfterMs": 200,
+   "lines": [
+    {
+     "id": "L3",
+     "text": "Soviet engineers began drilling Kola SG-3 in 1970."
+    }
+   ]
+  },
+  {
+   "id": "b4",
+   "rate": "+2%",
+   "pauseAfterMs": 200,
+   "lines": [
+    {
+     "id": "L4",
+     "text": "They aimed for 15,000 metres and fell short."
+    }
+   ]
+  },
+  {
+   "id": "b5",
+   "rate": "+2%",
+   "pauseAfterMs": 200,
+   "lines": [
+    {
+     "id": "L5",
+     "text": "Heat stopped them: 180 °C, far above what they expected."
+    }
+   ]
+  },
+  {
+   "id": "b6",
+   "rate": "+2%",
+   "pauseAfterMs": 200,
+   "lines": [
+    {
+     "id": "L6",
+     "text": "Rock that hot starts behaving more like plastic than stone."
+    }
+   ]
+  },
+  {
+   "id": "b7",
+   "rate": "+2%",
+   "pauseAfterMs": 200,
+   "lines": [
+    {
+     "id": "L7",
+     "text": "Deeper down, the heat and pressure only climb."
+    }
+   ]
+  },
+  {
+   "id": "b8",
+   "rate": "+2%",
+   "pauseAfterMs": 0,
+   "lines": [
+    {
+     "id": "L8",
+     "text": "So the planet's first defence against drilling is heat, not hardness."
+    }
+   ]
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "hash": "e8c807de01",
+   "claim": "Drilling at Kola SG-3 began in 1970 using the Uralmash-4E, and later the Uralmash-15000 series drilling rig.",
+   "source": "Wikipedia — Kola Superdeep Borehole",
+   "url": "https://en.wikipedia.org/wiki/Kola_Superdeep_Borehole",
+   "layer": "KNOWN SCIENCE"
+  },
+  {
+   "id": "F2",
+   "hash": "c2f1b2fdc1",
+   "claim": "In 1974, the new Uralmash-15000 rig was installed onsite, named after the new target depth, set at 15,000 metres (49,000 ft).",
+   "source": "Wikipedia — Kola Superdeep Borehole",
+   "url": "https://en.wikipedia.org/wiki/Kola_Superdeep_Borehole",
+   "layer": "KNOWN SCIENCE"
+  },
+  {
+   "id": "F3",
+   "hash": "cf1f50b770",
+   "claim": "The third hole reached 12,262 metres (40,230 ft) in 1989.",
+   "source": "Wikipedia — Kola Superdeep Borehole",
+   "url": "https://en.wikipedia.org/wiki/Kola_Superdeep_Borehole",
+   "layer": "KNOWN SCIENCE"
+  },
+  {
+   "id": "F4",
+   "hash": "1d4e103910",
+   "claim": "The drilling of the fourth hole was stopped due to higher-than-expected temperatures of 180 °C (356 °F) in 1992 at 11,882 metres (38,983 ft) of depth.",
+   "source": "Wikipedia — Kola Superdeep Borehole",
+   "url": "https://en.wikipedia.org/wiki/Kola_Superdeep_Borehole",
+   "layer": "KNOWN SCIENCE"
+  },
+  {
+   "id": "F5",
+   "hash": "ea423dccb3",
+   "claim": "A total of five 23-centimetre-diameter (9 in) boreholes were drilled.",
+   "source": "Wikipedia — Kola Superdeep Borehole",
+   "url": "https://en.wikipedia.org/wiki/Kola_Superdeep_Borehole",
+   "layer": "KNOWN SCIENCE"
+  }
+ ]
+}
