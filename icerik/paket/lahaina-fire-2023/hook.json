@@ -1,0 +1,49 @@
+{
+  "slug": "lahaina-fire-2023",
+  "format": "short",
+  "olusturuldu": "2026-10-23T14:05:13.344Z",
+  "ekranHook": "NO SIRENS",
+  "mevcut": {
+    "puan": 70,
+    "pencereler": {
+      "0-5": "Hydrant pressure failed as burning homes leaked water. Wind-driven fire swept through the historic",
+      "5-12": "town of Lahaina on Maui. It destroyed most of the town and killed at least one hundred two people.",
+      "12-20": "A downed power line sparked flames in dry grass. Winds linked to a distant hurricane spread them fast. Civil defense sirens were",
+      "20-30": "never activated. A plan had warned the area was at extreme risk. Maui faced scrutiny over its warnings and water system."
+    },
+    "bulgular": [
+      "0-5s: lands the event/result immediately",
+      "5-12s: missing an unexpected detail",
+      "12-20s: no central mystery or problem is posed",
+      "on-screen hook is 2 words (readable in <1s)"
+    ],
+    "engelleyici": false
+  },
+  "oneri": {
+    "segmentler": [
+      {
+        "pencere": "0-5s",
+        "rol": "event/result",
+        "metin": "The Lahaina fire destroyed the town of Lahaina on Maui."
+      },
+      {
+        "pencere": "5-12s",
+        "rol": "unexpected detail",
+        "metin": "It took only a downed power line igniting dry grass in high winds."
+      },
+      {
+        "pencere": "12-20s",
+        "rol": "central problem",
+        "metin": "So how could a downed power line igniting dry grass in high winds do this?"
+      },
+      {
+        "pencere": "20-30s",
+        "rol": "viewer promise",
+        "metin": "The answer is wind-driven fire, failing hydrant pressure and no siren warning — and it is why Maui faced scrutiny over warnings, water and grid safety."
+      }
+    ],
+    "metin": "The Lahaina fire destroyed the town of Lahaina on Maui. It took only a downed power line igniting dry grass in high winds. So how could a downed power line igniting dry grass in high winds do this? The answer is wind-driven fire, failing hydrant pressure and no siren warning — and it is why Maui faced scrutiny over warnings, water and grid safety.",
+    "puan": 95
+  },
+  "not": "Suggestions are drafts built from the case file; narration stays editorial — never auto-replaced."
+}

@@ -1,10 +1,10 @@
 # Growth dashboard
 
-Generated 2026-10-23T12:57:02.804Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-10-23T14:05:42.836Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
-**Shorts health** — last published 2026-10-22T18:00:00.000Z · 30 published · inventory A105/B123/C59/D59 · next: titanic-1912 (EXPLOIT (0.75): best A topic by SelectionScore)
+**Shorts health** — last published 2026-10-23T18:00:00.000Z · 31 published · inventory A106/B121/C59/D59 · next: titanic-1912 (EXPLOIT (0.75): best A topic by SelectionScore)
 
 **Long-form health** — cycle 2026-W43: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W43 already QUALITY_BLOCKED)
 
@@ -12,7 +12,7 @@ Generated 2026-10-23T12:57:02.804Z. Per-channel baselines are computed separatel
 
 **Content clusters** — 12 · integrity OK
 
-**Growth / subscriber conversion** — tracked 31 · subs/1k Shorts 1.04 · subs/1k long n/a
+**Growth / subscriber conversion** — tracked 32 · subs/1k Shorts 1.04 · subs/1k long n/a
 
 **Learning** — Shorts adaptive (n=30, adopted 0) · Long-form heuristics-only (n=0)
 

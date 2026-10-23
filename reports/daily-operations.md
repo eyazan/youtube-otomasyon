@@ -1,6 +1,6 @@
 # Daily operations report
 
-Generated: 2026-10-23T12:57:06.492Z
+Generated: 2026-10-23T14:05:44.941Z
 
 Missing API-only metrics are reported as `unavailable`, never as zero.
 
@@ -8,24 +8,24 @@ Missing API-only metrics are reported as `unavailable`, never as zero.
 
 | Signal | Status |
 |---|---|
-| Today topic | unavailable |
-| Short | due-not-produced |
+| Today topic | lahaina-fire-2023 |
+| Short | scheduled |
 | Long | due-not-produced |
-| Quality | unavailable / unavailable |
-| YouTube | not-uploaded |
-| Publish time | unavailable |
-| Video ID | unavailable |
+| Quality | PUBLISH / 87 |
+| YouTube | scheduled |
+| Publish time | 2026-10-23T18:00:00.000Z |
+| Video ID | tH-casKT7OY |
 | Analytics | measured |
-| Scheduler | pending-before-deadline |
-| Ready topic backlog | 346 |
+| Scheduler | healthy |
+| Ready topic backlog | 345 |
 | Errors/review/blocks | 20 |
-| TikTok today | NO_TODAY_VIDEO |
-| TikTok backlog | 20 |
+| TikTok today | NOT_SENT |
+| TikTok backlog | 21 |
 | Analytics warehouse | through 2026-10-21 (lag 2 d) |
-| Ops (24 h) | publish.public 1, analytics.load 1 |
+| Ops (24 h) | publish.public 1, analytics.load 1, publish.success 1, publish.scheduled_verified 1, growth.decision 1 |
 | Scheduler queue | 2 queued, oldest 2026-10-23 (0 d) |
-| API quota today | 25 / 9800 units (project 1012165386949) |
-| YPP readiness (estimate) | subs 27/1,000 · long-form watch h (365 d) unavailable/4,000 · Shorts views (90 d) unavailable/10M |
+| API quota today | 1638 / 9800 units (project 1012165386949) |
+| YPP readiness (estimate) | subs 28/1,000 · long-form watch h (365 d) unavailable/4,000 · Shorts views (90 d) unavailable/10M |
 
 ## ImpossibleBrief
 
@@ -45,7 +45,7 @@ Missing API-only metrics are reported as `unavailable`, never as zero.
 | Analytics warehouse | through 2026-10-21 (lag 2 d) |
 | Ops (24 h) | analytics.load 1 |
 | Scheduler queue | 2 queued, oldest 2026-10-23 (0 d) |
-| API quota today | 29 / 9800 units (project 684098966511) |
+| API quota today | 36 / 9800 units (project 684098966511) |
 | YPP readiness (estimate) | subs 13/1,000 · long-form watch h (365 d) unavailable/4,000 · Shorts views (90 d) unavailable/10M |
 
 ## CriticalThread
@@ -66,6 +66,6 @@ Missing API-only metrics are reported as `unavailable`, never as zero.
 | Analytics warehouse | through 2026-10-21 (lag 2 d) |
 | Ops (24 h) | analytics.load 1 |
 | Scheduler queue | 2 queued, oldest 2026-10-23 (0 d) |
-| API quota today | 25 / 9800 units (project 208987599838) |
+| API quota today | 31 / 9800 units (project 208987599838) |
 | YPP readiness (estimate) | subs 0/1,000 · long-form watch h (365 d) unavailable/4,000 · Shorts views (90 d) unavailable/10M |
 
