@@ -1,6 +1,6 @@
 {
   "schema": "feedback-loop-health/1",
-  "generatedAt": "2026-10-23T07:30:20.534Z",
+  "generatedAt": "2026-10-23T13:25:06.154Z",
   "verdict": "CLOSED_LOOP_WORKING",
   "channels": [
     {
@@ -9,9 +9,9 @@
       "mode": "adaptive",
       "publishedVideos": 30,
       "performanceRows": 31,
-      "diagnosisRows": 131,
+      "diagnosisRows": 132,
       "learning": {
-        "updatedAt": "2026-10-23T07:30:18.041Z",
+        "updatedAt": "2026-10-23T13:25:04.110Z",
         "sampleSize": 30,
         "status": "adaptive",
         "observations": 34,
@@ -76,23 +76,9 @@
         }
       ],
       "timing": {
-        "lateCheckpointCount": 89,
+        "lateCheckpointCount": 91,
         "note": "Historical late collections are retained for audit, but performance math uses their real collection age.",
         "examples": [
-          {
-            "videoId": "qkzRUqlEy5I",
-            "label": "48h",
-            "scheduledHours": 48,
-            "collectedAgeHours": 187.61,
-            "driftHours": 139.61
-          },
-          {
-            "videoId": "qkzRUqlEy5I",
-            "label": "12h",
-            "scheduledHours": 12,
-            "collectedAgeHours": 188.16,
-            "driftHours": 176.16
-          },
           {
             "videoId": "qkzRUqlEy5I",
             "label": "6h",
@@ -148,6 +134,20 @@
             "scheduledHours": 1,
             "collectedAgeHours": 189.68,
             "driftHours": 188.68
+          },
+          {
+            "videoId": "zq07sKTZmCs",
+            "label": "12h",
+            "scheduledHours": 12,
+            "collectedAgeHours": 17.56,
+            "driftHours": 5.56
+          },
+          {
+            "videoId": "zq07sKTZmCs",
+            "label": "6h",
+            "scheduledHours": 6,
+            "collectedAgeHours": 17.9,
+            "driftHours": 11.9
           }
         ]
       },
@@ -162,7 +162,7 @@
       "performanceRows": 18,
       "diagnosisRows": 93,
       "learning": {
-        "updatedAt": "2026-10-23T07:30:19.380Z",
+        "updatedAt": "2026-10-23T13:25:05.015Z",
         "sampleSize": 17,
         "status": "adaptive",
         "observations": 30,
@@ -313,7 +313,7 @@
       "performanceRows": 7,
       "diagnosisRows": 27,
       "learning": {
-        "updatedAt": "2026-10-23T07:30:20.314Z",
+        "updatedAt": "2026-10-23T13:25:05.806Z",
         "sampleSize": 6,
         "status": "observing",
         "observations": 25,
