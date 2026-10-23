@@ -2,66 +2,6 @@
   "channel": "failure-reconstructed",
   "runs": [
     {
-      "runId": "39592762587",
-      "attempt": "1",
-      "startedAt": "2026-10-21T11:34:05.826Z",
-      "publish": true,
-      "trigger": {
-        "event": "schedule",
-        "correlationId": null
-      },
-      "targetDay": "2026-10-21",
-      "slug": "ajka-red-mud-2010",
-      "outcome": "UPLOADED",
-      "reason": null,
-      "stages": {
-        "RESEARCH": {
-          "status": "done",
-          "detail": "growth queue selected ajka-red-mud-2010",
-          "at": "2026-10-21T11:34:10.340Z"
-        },
-        "SCRIPT": {
-          "status": "done",
-          "detail": "pre gate REVIEW 82",
-          "at": "2026-10-21T11:34:10.725Z"
-        },
-        "ASSETS": {
-          "status": "done",
-          "at": "2026-10-21T11:34:13.023Z"
-        },
-        "NARRATION": {
-          "status": "done",
-          "at": "2026-10-21T11:39:15.552Z"
-        },
-        "RENDER": {
-          "status": "done",
-          "at": "2026-10-21T11:39:15.554Z"
-        },
-        "QA": {
-          "status": "done",
-          "detail": "final gate PUBLISH 87",
-          "at": "2026-10-21T11:39:18.572Z"
-        },
-        "UPLOAD": {
-          "status": "done",
-          "detail": "JAKAYnkbxd8",
-          "at": "2026-10-21T11:39:22.711Z"
-        },
-        "SCHEDULE": {
-          "status": "done",
-          "detail": "2026-10-21T18:00:00.000Z",
-          "at": "2026-10-21T11:39:22.712Z"
-        },
-        "PUBLISH": {
-          "status": "scheduled",
-          "detail": "YouTube makes it public at 2026-10-21T18:00:00.000Z",
-          "at": "2026-10-21T11:39:22.713Z"
-        }
-      },
-      "finishedAt": "2026-10-21T11:39:22.761Z",
-      "videoId": "JAKAYnkbxd8"
-    },
-    {
       "runId": "39597002311",
       "attempt": "1",
       "startedAt": "2026-10-21T12:07:34.476Z",
@@ -1381,6 +1321,50 @@
         }
       },
       "finishedAt": "2026-10-23T14:43:23.379Z"
+    },
+    {
+      "runId": "39975783863",
+      "attempt": "1",
+      "startedAt": "2026-10-23T15:10:01.956Z",
+      "publish": true,
+      "trigger": {
+        "event": "schedule",
+        "correlationId": null
+      },
+      "targetDay": null,
+      "slug": null,
+      "outcome": "NOT_DUE",
+      "reason": "today's Short already exists (lahaina-fire-2023)",
+      "stages": {
+        "RESEARCH": {
+          "status": "not-reached"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "not-reached"
+        },
+        "QA": {
+          "status": "not-reached"
+        },
+        "UPLOAD": {
+          "status": "not-reached"
+        },
+        "SCHEDULE": {
+          "status": "not-reached"
+        },
+        "PUBLISH": {
+          "status": "not-reached"
+        }
+      },
+      "finishedAt": "2026-10-23T15:10:01.977Z"
     }
   ]
 }
