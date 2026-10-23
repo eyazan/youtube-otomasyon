@@ -1,53 +1,15 @@
 {
-  "at": "2026-10-23T11:54:22.276Z",
-  "runId": "39949231395",
+  "at": "2026-10-23T12:55:30.220Z",
+  "runId": "39952947912",
   "rows": [
     {
       "channel": "failure-reconstructed",
-      "outcome": "NO_TOPIC",
-      "category": "CONTENT_BLOCKED",
+      "outcome": "MISSING",
+      "category": "PRODUCTION_FAILED",
       "scheduled": false,
       "publication": "NOT_SCHEDULED",
-      "publishAt": null,
-      "reason": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [88 unused A topic(s), best viral score 74 < minimum 75; 10 topic(s) at the minimum are bucket B/C, not selectable]",
-      "slug": null,
-      "videoId": null,
-      "targetDay": "2026-10-23",
-      "trigger": {
-        "event": "schedule",
-        "correlationId": null
-      },
-      "stages": {
-        "RESEARCH": {
-          "status": "failed",
-          "detail": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [88 unused A topic(s), best viral score 74 < minimum 75; 10 topic(s) at the minimum are bucket B/C, not selectable]",
-          "at": "2026-10-23T11:54:01.123Z"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "not-reached"
-        },
-        "QA": {
-          "status": "not-reached"
-        },
-        "UPLOAD": {
-          "status": "not-reached"
-        },
-        "SCHEDULE": {
-          "status": "not-reached"
-        },
-        "PUBLISH": {
-          "status": "not-reached"
-        }
-      }
+      "reason": "no stage record for this run (the step crashed before tracking or did not run)",
+      "stages": null
     },
     {
       "channel": "impossible-brief",
@@ -68,7 +30,7 @@
         "RESEARCH": {
           "status": "failed",
           "detail": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [103 unused A topic(s), best viral score 74 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]",
-          "at": "2026-10-23T11:54:06.520Z"
+          "at": "2026-10-23T12:55:16.377Z"
         },
         "SCRIPT": {
           "status": "not-reached"
@@ -115,7 +77,7 @@
         "RESEARCH": {
           "status": "failed",
           "detail": "NO_EXPLORE_CANDIDATE",
-          "at": "2026-10-23T11:54:11.891Z"
+          "at": "2026-10-23T12:55:20.274Z"
         },
         "SCRIPT": {
           "status": "not-reached"
