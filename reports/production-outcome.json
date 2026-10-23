@@ -1,6 +1,6 @@
 {
-  "at": "2026-10-23T16:10:33.054Z",
-  "runId": "39981143185",
+  "at": "2026-10-23T17:38:28.166Z",
+  "runId": "39993736590",
   "rows": [
     {
       "channel": "failure-reconstructed",
@@ -49,12 +49,12 @@
     },
     {
       "channel": "impossible-brief",
-      "outcome": "FAILED",
-      "category": "AWAITING_APPROVAL",
+      "outcome": "NOT_DUE",
+      "category": "NOT_DUE",
       "scheduled": false,
       "publication": "NOT_SCHEDULED",
       "publishAt": null,
-      "reason": "health pre-flight: nitelikli-konu: kalite çubuğunu geçen konu yok — NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [103 unused A topic(s), best viral score 74 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]; seslendirme: NARRATION_UNAVAILABLE: Edge sesi reddedildi (Edge TTS WebSocket error: Unexpected server response: 200",
+      "reason": "production window closed at 21:00 Europe/Istanbul minus 60 min",
       "slug": null,
       "videoId": null,
       "targetDay": null,
@@ -94,12 +94,12 @@
     },
     {
       "channel": "critical-thread",
-      "outcome": "FAILED",
-      "category": "AWAITING_APPROVAL",
+      "outcome": "NOT_DUE",
+      "category": "NOT_DUE",
       "scheduled": false,
       "publication": "NOT_SCHEDULED",
       "publishAt": null,
-      "reason": "health pre-flight: nitelikli-konu: kalite çubuğunu geçen konu yok — NO_EXPLORE_CANDIDATE; seslendirme: NARRATION_UNAVAILABLE: Edge sesi reddedildi (Edge TTS WebSocket error: Unexpected server response: 200, Edge TTS WebSocket error: Unexpected server response: 200, Edge TTS WebSocket error: Unexpected server response: 200; msedge-tts 2.1.0); yedek ses yok — fallback voice af_heart is not approved ",
+      "reason": "production window closed at 21:00 Europe/Istanbul minus 60 min",
       "slug": null,
       "videoId": null,
       "targetDay": null,
