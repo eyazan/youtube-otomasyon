@@ -2,52 +2,6 @@
   "channel": "impossible-brief",
   "runs": [
     {
-      "runId": "39636080488",
-      "attempt": "1",
-      "startedAt": "2026-10-21T16:36:23.685Z",
-      "publish": true,
-      "trigger": {
-        "event": "repository_dispatch",
-        "correlationId": null
-      },
-      "targetDay": "2026-10-21",
-      "slug": null,
-      "outcome": "NO_TOPIC",
-      "reason": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [104 unused A topic(s), best viral score 74 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]",
-      "stages": {
-        "RESEARCH": {
-          "status": "failed",
-          "detail": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [104 unused A topic(s), best viral score 74 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]",
-          "at": "2026-10-21T16:36:27.338Z"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "not-reached"
-        },
-        "QA": {
-          "status": "not-reached"
-        },
-        "UPLOAD": {
-          "status": "not-reached"
-        },
-        "SCHEDULE": {
-          "status": "not-reached"
-        },
-        "PUBLISH": {
-          "status": "not-reached"
-        }
-      },
-      "finishedAt": "2026-10-21T16:36:27.338Z"
-    },
-    {
       "runId": "39643092362",
       "attempt": "1",
       "startedAt": "2026-10-21T17:22:32.940Z",
@@ -1352,6 +1306,50 @@
         }
       },
       "finishedAt": "2026-10-23T17:54:39.700Z"
+    },
+    {
+      "runId": "40003122403",
+      "attempt": "1",
+      "startedAt": "2026-10-23T18:26:06.282Z",
+      "publish": true,
+      "trigger": {
+        "event": "schedule",
+        "correlationId": null
+      },
+      "targetDay": null,
+      "slug": null,
+      "outcome": "NOT_DUE",
+      "reason": "production window closed at 21:00 Europe/Istanbul minus 60 min",
+      "stages": {
+        "RESEARCH": {
+          "status": "not-reached"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "not-reached"
+        },
+        "QA": {
+          "status": "not-reached"
+        },
+        "UPLOAD": {
+          "status": "not-reached"
+        },
+        "SCHEDULE": {
+          "status": "not-reached"
+        },
+        "PUBLISH": {
+          "status": "not-reached"
+        }
+      },
+      "finishedAt": "2026-10-23T18:26:08.505Z"
     }
   ]
 }

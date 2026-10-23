@@ -1,10 +1,10 @@
 # Growth dashboard
 
-Generated 2026-10-23T17:54:50.552Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-10-23T18:26:31.343Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
-**Shorts health** — last published 2026-10-23T18:00:00.000Z · 31 published · inventory A106/B121/C59/D59 · next: titanic-1912 (EXPLOIT (0.75): best A topic by SelectionScore)
+**Shorts health** — last published 2026-10-23T18:00:00.000Z · 31 published · inventory A107/B120/C59/D59 · next: titanic-1912 (EXPLOIT (0.75): best A topic by SelectionScore)
 
 **Long-form health** — cycle 2026-W43: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W43 already QUALITY_BLOCKED)
 
@@ -24,7 +24,7 @@ Generated 2026-10-23T17:54:50.552Z. Per-channel baselines are computed separatel
 - munich-1958 (C): VideoPotential 86 in experimental band 58–71; sources 41 < 62
 - skylab-1973 (C): VideoPotential 85 in experimental band 58–71; sources 41 < 62
 - vanguard-1957 (C): VideoPotential 83 in experimental band 58–71; sources 41 < 62
-- new-london-school-1937 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
+- controlled-impact-1984 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
 
 **Recent alerts**
 
@@ -41,13 +41,13 @@ Generated 2026-10-23T17:54:50.552Z. Per-channel baselines are computed separatel
 
 **Long-form health** — cycle 2026-W43: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W43 already QUALITY_BLOCKED)
 
-**Long-form backlog** — what-if-we-mined-a-metal-asteroid 83/A, what-if-synthetic-fertilizer-disappeared 83/A, what-if-gps-went-dark-for-a-day 83/A, what-if-the-ozone-hole-never-closed 82/A, what-if-the-tunguska-blast-happened-over-a-city 82/A
+**Long-form backlog** — could-earth-survive-one-day-without-earth-s-magnetic-field 83/A, what-if-we-mined-a-metal-asteroid 83/A, what-if-synthetic-fertilizer-disappeared 83/A, what-if-gps-went-dark-for-a-day 83/A, what-if-the-ozone-hole-never-closed 82/A
 
 **Content clusters** — 7 · integrity OK
 
 **Growth / subscriber conversion** — tracked 18 · subs/1k Shorts 0 · subs/1k long n/a
 
-**Learning** — Shorts adaptive (n=17, adopted 0) · Long-form heuristics-only (n=0)
+**Learning** — Shorts adaptive (n=17, adopted 1) · Long-form heuristics-only (n=0)
 
 **Short → Long funnel** — 0 link(s), 0 long→long, 0 pending RELATED_VIDEO_MANUAL_ACTION_REQUIRED
 
@@ -57,7 +57,7 @@ Generated 2026-10-23T17:54:50.552Z. Per-channel baselines are computed separatel
 - could-we-function-with-half-human-heat-tolerance (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
 - what-if-human-muscle-efficiency-doubled-overnight (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
 - what-happens-if-the-global-ocean-doubles (C): VideoPotential 72 in experimental band 58–71; boilerplate 0.5
-- would-doubling-all-synthetic-fertilizers-help-or-harm-us (C): VideoPotential 72 in experimental band 58–71; boilerplate 0.5
+- what-if-the-brain-s-energy-use-doubled-overnight (C): VideoPotential 72 in experimental band 58–71; boilerplate 0.5
 
 **Recent alerts**
 

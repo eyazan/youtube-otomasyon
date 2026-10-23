@@ -2436,5 +2436,53 @@
       }
     ],
     "at": "2026-10-23T14:05:35.156Z"
+  },
+  {
+    "videoId": "zq07sKTZmCs",
+    "channel": "failure-reconstructed",
+    "contentType": "short",
+    "checkpoint": "24h",
+    "diagnoses": [
+      {
+        "code": "HEALTHY",
+        "confidence": "low",
+        "evidence": "no problem pattern in available metrics",
+        "recommendation": "Keep; revisit at next checkpoint.",
+        "specCode": "HEALTHY"
+      }
+    ],
+    "at": "2026-10-23T18:26:14.647Z"
+  },
+  {
+    "videoId": "JAKAYnkbxd8",
+    "channel": "failure-reconstructed",
+    "contentType": "short",
+    "checkpoint": "48h",
+    "diagnoses": [
+      {
+        "code": "INSUFFICIENT_DATA",
+        "confidence": "high",
+        "evidence": "32 views < 100",
+        "recommendation": "No intervention; wait for the next checkpoint.",
+        "specCode": "INSUFFICIENT_DATA"
+      }
+    ],
+    "at": "2026-10-23T18:26:14.647Z"
+  },
+  {
+    "videoId": "aGG5f0Q2B9c",
+    "channel": "failure-reconstructed",
+    "contentType": "short",
+    "checkpoint": "14d",
+    "diagnoses": [
+      {
+        "code": "RETENTION_FAILURE",
+        "confidence": "medium",
+        "evidence": "average viewed 63.9% < 65%",
+        "recommendation": "Cut setup sentences; move the mechanism earlier.",
+        "specCode": "RETENTION_WEAK"
+      }
+    ],
+    "at": "2026-10-23T18:26:14.647Z"
   }
 ]

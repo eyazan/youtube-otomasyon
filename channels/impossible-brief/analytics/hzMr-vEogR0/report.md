@@ -8,8 +8,9 @@ https://youtu.be/hzMr-vEogR0
 |---|---|---:|---:|---:|---:|---:|---|
 | 1d | 2026-10-17 | 276 | 5 | 1 | — | — |  |
 | 3d | 2026-10-19 | 362 | 5 | 1 | 50.529999999999994 | 0 | Shorts feed 96%, Browse/other YouTube 3% |
+| 7d | 2026-10-23 | 371 | 5 | 1 | 51.27 | 0 | Shorts feed 95%, Search 4% |
 
-## Diagnosis at 3d
+## Diagnosis at 7d
 
 - **HEALTHY** (low) — No problem pattern detected with available data.
 
@@ -24,4 +25,4 @@ https://youtu.be/hzMr-vEogR0
 - Visual type: AI-GENERATED VISUAL
 - This is an observed alignment, not proof that the sentence or visual caused the drop.
 
-Views gained between 1d and 3d: 86.
+Views gained between 3d and 7d: 9.
