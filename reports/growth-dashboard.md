@@ -1,6 +1,6 @@
 # Growth dashboard
 
-Generated 2026-10-23T11:34:11.838Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-10-23T11:54:18.350Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
@@ -33,6 +33,7 @@ Generated 2026-10-23T11:34:11.838Z. Per-channel baselines are computed separatel
 - 2026-10-02 PRODUCTION_READINESS_REVIEW: how-avalanches-start
 - 2026-10-12 NO_QUALIFIED_TOPIC: NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [37 unused A topic(s), best viral score 74 < minimum 75; 29 topic(s) at the minimum are bucket B/C, not selectable]
 - 2026-10-16 RETRY_BUDGET_EXHAUSTED: sl-1-reactor-1961
+- 2026-10-23 NO_QUALIFIED_TOPIC: NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [88 unused A topic(s), best viral score 74 < minimum 75; 10 topic(s) at the minimum are bucket B/C, not selectable]
 
 ## ImpossibleBrief
 

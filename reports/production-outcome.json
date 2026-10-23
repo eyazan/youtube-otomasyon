@@ -1,16 +1,16 @@
 {
-  "at": "2026-10-23T11:34:14.123Z",
-  "runId": "39945639434",
+  "at": "2026-10-23T11:54:22.276Z",
+  "runId": "39949231395",
   "rows": [
     {
       "channel": "failure-reconstructed",
-      "outcome": "BLOCKED",
-      "category": "QUALITY_REJECTED",
+      "outcome": "NO_TOPIC",
+      "category": "CONTENT_BLOCKED",
       "scheduled": false,
       "publication": "NOT_SCHEDULED",
       "publishAt": null,
-      "reason": "usair-1016-1994: kalite kapisi REVIEW; upload blocked",
-      "slug": "usair-1016-1994",
+      "reason": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [88 unused A topic(s), best viral score 74 < minimum 75; 10 topic(s) at the minimum are bucket B/C, not selectable]",
+      "slug": null,
       "videoId": null,
       "targetDay": "2026-10-23",
       "trigger": {
@@ -19,31 +19,24 @@
       },
       "stages": {
         "RESEARCH": {
-          "status": "done",
-          "detail": "growth queue selected usair-1016-1994",
-          "at": "2026-10-23T11:28:36.305Z"
+          "status": "failed",
+          "detail": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [88 unused A topic(s), best viral score 74 < minimum 75; 10 topic(s) at the minimum are bucket B/C, not selectable]",
+          "at": "2026-10-23T11:54:01.123Z"
         },
         "SCRIPT": {
-          "status": "done",
-          "detail": "pre gate REVIEW 83",
-          "at": "2026-10-23T11:28:36.510Z"
+          "status": "not-reached"
         },
         "ASSETS": {
-          "status": "done",
-          "at": "2026-10-23T11:28:37.111Z"
+          "status": "not-reached"
         },
         "NARRATION": {
-          "status": "done",
-          "at": "2026-10-23T11:33:39.310Z"
+          "status": "not-reached"
         },
         "RENDER": {
-          "status": "done",
-          "at": "2026-10-23T11:33:39.310Z"
+          "status": "not-reached"
         },
         "QA": {
-          "status": "failed",
-          "detail": "REVIEW",
-          "at": "2026-10-23T11:33:41.266Z"
+          "status": "not-reached"
         },
         "UPLOAD": {
           "status": "not-reached"
@@ -75,7 +68,7 @@
         "RESEARCH": {
           "status": "failed",
           "detail": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [103 unused A topic(s), best viral score 74 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]",
-          "at": "2026-10-23T11:33:45.784Z"
+          "at": "2026-10-23T11:54:06.520Z"
         },
         "SCRIPT": {
           "status": "not-reached"
@@ -122,7 +115,7 @@
         "RESEARCH": {
           "status": "failed",
           "detail": "NO_EXPLORE_CANDIDATE",
-          "at": "2026-10-23T11:33:49.947Z"
+          "at": "2026-10-23T11:54:11.891Z"
         },
         "SCRIPT": {
           "status": "not-reached"
