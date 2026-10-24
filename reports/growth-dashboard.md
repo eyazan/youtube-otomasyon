@@ -1,6 +1,6 @@
 # Growth dashboard
 
-Generated 2026-10-24T11:22:58.522Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-10-24T11:51:43.577Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
@@ -36,6 +36,7 @@ Generated 2026-10-24T11:22:58.522Z. Per-channel baselines are computed separatel
 - 2026-10-23 NO_QUALIFIED_TOPIC: NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [88 unused A topic(s), best viral score 74 < minimum 75; 10 topic(s) at the minimum are bucket B/C, not selectable]
 - 2026-10-24 NO_QUALIFIED_TOPIC: NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [87 unused A topic(s), best viral score 74 < minimum 75; 10 topic(s) at the minimum are bucket B/C, not selectable]
 - 2026-10-24 NO_QUALIFIED_TOPIC: NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [89 unused A topic(s), best viral score 74 < minimum 75; 10 topic(s) at the minimum are bucket B/C, not selectable]
+- 2026-10-24 NO_QUALIFIED_TOPIC: NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [92 unused A topic(s), best viral score 74 < minimum 75; 10 topic(s) at the minimum are bucket B/C, not selectable]
 
 ## ImpossibleBrief
 
