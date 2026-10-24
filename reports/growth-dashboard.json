@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-24T10:44:03.503Z",
+  "generatedAt": "2026-10-24T11:22:58.522Z",
   "note": "Per-channel baselines are computed separately and never blended.",
   "channels": [
     {
@@ -9,8 +9,8 @@
         "lastPublished": "2026-10-23T18:00:00.000Z",
         "published": 31,
         "inventory": {
-          "A": 106,
-          "B": 121,
+          "A": 109,
+          "B": 118,
           "C": 59,
           "D": 59
         },
@@ -161,7 +161,7 @@
           "status": "adaptive",
           "sampleSize": 31,
           "adopted": 0,
-          "hypotheses": 6
+          "hypotheses": 3
         },
         "longform": {
           "status": "heuristics-only",
@@ -189,20 +189,10 @@
         {
           "slug": "vanguard-1957",
           "bucket": "C",
-          "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
+          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
         },
         {
           "slug": "castle-bravo-1954",
-          "bucket": "C",
-          "reason": "VideoPotential 85 in experimental band 58–71; sources 41 < 62"
-        },
-        {
-          "slug": "controlled-impact-1984",
-          "bucket": "C",
-          "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
-        },
-        {
-          "slug": "eastland-1915",
           "bucket": "C",
           "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
         },
@@ -215,6 +205,16 @@
           "slug": "quebec-bridge-1907",
           "bucket": "C",
           "reason": "VideoPotential 84 in experimental band 58–71; sources 55 < 62"
+        },
+        {
+          "slug": "controlled-impact-1984",
+          "bucket": "C",
+          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
+        },
+        {
+          "slug": "eastland-1915",
+          "bucket": "C",
+          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
         },
         {
           "slug": "b2-guam-2008",
@@ -362,6 +362,21 @@
           },
           "date": "2026-10-24",
           "at": "2026-10-24T10:43:09.843Z"
+        },
+        {
+          "channel": "failure-reconstructed",
+          "code": "NO_QUALIFIED_TOPIC",
+          "message": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [89 unused A topic(s), best viral score 74 < minimum 75; 10 topic(s) at the minimum are bucket B/C, not selectable]",
+          "details": {
+            "inventory": {
+              "A": 89,
+              "B": 121,
+              "C": 59,
+              "D": 59
+            }
+          },
+          "date": "2026-10-24",
+          "at": "2026-10-24T11:22:18.300Z"
         }
       ],
       "legacyPaths": true
