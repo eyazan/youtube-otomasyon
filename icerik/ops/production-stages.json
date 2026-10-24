@@ -2,50 +2,6 @@
   "channel": "failure-reconstructed",
   "runs": [
     {
-      "runId": "39661050953",
-      "attempt": "1",
-      "startedAt": "2026-10-21T19:23:25.339Z",
-      "publish": true,
-      "trigger": {
-        "event": "schedule",
-        "correlationId": null
-      },
-      "targetDay": null,
-      "slug": null,
-      "outcome": "NOT_DUE",
-      "reason": "today's Short already exists (ajka-red-mud-2010)",
-      "stages": {
-        "RESEARCH": {
-          "status": "not-reached"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "not-reached"
-        },
-        "QA": {
-          "status": "not-reached"
-        },
-        "UPLOAD": {
-          "status": "not-reached"
-        },
-        "SCHEDULE": {
-          "status": "not-reached"
-        },
-        "PUBLISH": {
-          "status": "not-reached"
-        }
-      },
-      "finishedAt": "2026-10-21T19:23:25.357Z"
-    },
-    {
       "runId": "39668705224",
       "attempt": "1",
       "startedAt": "2026-10-21T20:16:32.291Z",
@@ -1375,6 +1331,52 @@
         }
       },
       "finishedAt": "2026-10-24T12:09:08.815Z"
+    },
+    {
+      "runId": "40095285575",
+      "attempt": "1",
+      "startedAt": "2026-10-24T12:46:50.470Z",
+      "publish": true,
+      "trigger": {
+        "event": "schedule",
+        "correlationId": null
+      },
+      "targetDay": "2026-10-24",
+      "slug": null,
+      "outcome": "NO_TOPIC",
+      "reason": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [92 unused A topic(s), best viral score 74 < minimum 75; 10 topic(s) at the minimum are bucket B/C, not selectable]",
+      "stages": {
+        "RESEARCH": {
+          "status": "failed",
+          "detail": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [92 unused A topic(s), best viral score 74 < minimum 75; 10 topic(s) at the minimum are bucket B/C, not selectable]",
+          "at": "2026-10-24T12:46:51.913Z"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "not-reached"
+        },
+        "QA": {
+          "status": "not-reached"
+        },
+        "UPLOAD": {
+          "status": "not-reached"
+        },
+        "SCHEDULE": {
+          "status": "not-reached"
+        },
+        "PUBLISH": {
+          "status": "not-reached"
+        }
+      },
+      "finishedAt": "2026-10-24T12:46:51.914Z"
     }
   ]
 }
