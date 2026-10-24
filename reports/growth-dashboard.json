@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-24T17:30:15.613Z",
+  "generatedAt": "2026-10-24T18:16:17.362Z",
   "note": "Per-channel baselines are computed separately and never blended.",
   "channels": [
     {
@@ -9,8 +9,8 @@
         "lastPublished": "2026-10-23T18:00:00.000Z",
         "published": 31,
         "inventory": {
-          "A": 109,
-          "B": 118,
+          "A": 104,
+          "B": 123,
           "C": 59,
           "D": 59
         },
@@ -28,9 +28,9 @@
         "baseline": {
           "n": 31,
           "views": 446,
-          "averagePercentageViewed": 64.36,
+          "averagePercentageViewed": 64.5,
           "subscribersPer1000Views": 1.04,
-          "engagementPer1000Views": 25.91,
+          "engagementPer1000Views": 25.36,
           "watchHoursPer1000Views": 2.08
         }
       },
@@ -118,7 +118,7 @@
             "mode": "B_SHORT_PROVES_DEMAND"
           },
           {
-            "slug": "tam-3054-2007",
+            "slug": "lahaina-fire-2023",
             "LongFormPotentialScore": 85,
             "bucket": "A",
             "mode": "B_SHORT_PROVES_DEMAND"
@@ -161,7 +161,7 @@
           "status": "adaptive",
           "sampleSize": 31,
           "adopted": 0,
-          "hypotheses": 3
+          "hypotheses": 7
         },
         "longform": {
           "status": "heuristics-only",
@@ -187,12 +187,22 @@
           "reason": "VideoPotential 85 in experimental band 58–71; sources 41 < 62"
         },
         {
+          "slug": "castle-bravo-1954",
+          "bucket": "C",
+          "reason": "VideoPotential 85 in experimental band 58–71; sources 41 < 62"
+        },
+        {
           "slug": "vanguard-1957",
           "bucket": "C",
           "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
         },
         {
-          "slug": "castle-bravo-1954",
+          "slug": "controlled-impact-1984",
+          "bucket": "C",
+          "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
+        },
+        {
+          "slug": "eastland-1915",
           "bucket": "C",
           "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
         },
@@ -205,16 +215,6 @@
           "slug": "quebec-bridge-1907",
           "bucket": "C",
           "reason": "VideoPotential 84 in experimental band 58–71; sources 55 < 62"
-        },
-        {
-          "slug": "controlled-impact-1984",
-          "bucket": "C",
-          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
-        },
-        {
-          "slug": "eastland-1915",
-          "bucket": "C",
-          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
         },
         {
           "slug": "b2-guam-2008",
@@ -403,8 +403,8 @@
         "lastPublished": "2026-10-19T18:00:00.000Z",
         "published": 19,
         "inventory": {
-          "A": 109,
-          "B": 25,
+          "A": 108,
+          "B": 26,
           "C": 140,
           "D": 206
         },
@@ -421,11 +421,11 @@
         },
         "baseline": {
           "n": 17,
-          "views": 922,
-          "averagePercentageViewed": 66.19,
+          "views": 920,
+          "averagePercentageViewed": 61.38,
           "subscribersPer1000Views": 0,
-          "engagementPer1000Views": 19.21,
-          "watchHoursPer1000Views": 2.6
+          "engagementPer1000Views": 19.42,
+          "watchHoursPer1000Views": 2.52
         }
       },
       "longform": {
@@ -552,8 +552,8 @@
         "shorts": {
           "status": "adaptive",
           "sampleSize": 17,
-          "adopted": 1,
-          "hypotheses": 4
+          "adopted": 0,
+          "hypotheses": 6
         },
         "longform": {
           "status": "heuristics-only",
@@ -584,14 +584,14 @@
           "reason": "VideoPotential 72 in experimental band 58–71; boilerplate 0.5"
         },
         {
-          "slug": "what-if-the-brain-s-energy-use-doubled-overnight",
+          "slug": "would-doubling-all-synthetic-fertilizers-help-or-harm-us",
           "bucket": "C",
           "reason": "VideoPotential 72 in experimental band 58–71; boilerplate 0.5"
         },
         {
-          "slug": "would-doubling-all-synthetic-fertilizers-help-or-harm-us",
+          "slug": "what-if-the-brain-s-energy-use-doubled-overnight",
           "bucket": "C",
-          "reason": "VideoPotential 72 in experimental band 58–71; boilerplate 0.5"
+          "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
         },
         {
           "slug": "could-we-function-with-half-human-muscle-efficiency",

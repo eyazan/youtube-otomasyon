@@ -1,14 +1,14 @@
 # Growth dashboard
 
-Generated 2026-10-24T17:30:15.613Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-10-24T18:16:17.362Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
-**Shorts health** — last published 2026-10-23T18:00:00.000Z · 31 published · inventory A109/B118/C59/D59 · next: titanic-1912 (EXPLOIT (0.75): best A topic by SelectionScore)
+**Shorts health** — last published 2026-10-23T18:00:00.000Z · 31 published · inventory A104/B123/C59/D59 · next: titanic-1912 (EXPLOIT (0.75): best A topic by SelectionScore)
 
 **Long-form health** — cycle 2026-W43: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W43 already QUALITY_BLOCKED)
 
-**Long-form backlog** — challenger-1986 86/A, chernobyl-1986 86/A, air-france-447-2009 85/A, columbia-2003 85/A, tam-3054-2007 85/A
+**Long-form backlog** — challenger-1986 86/A, chernobyl-1986 86/A, air-france-447-2009 85/A, columbia-2003 85/A, lahaina-fire-2023 85/A
 
 **Content clusters** — 12 · integrity OK
 
@@ -23,8 +23,8 @@ Generated 2026-10-24T17:30:15.613Z. Per-channel baselines are computed separatel
 - apollo-1-1967 (C): VideoPotential 87 in experimental band 58–71; sources 41 < 62
 - munich-1958 (C): VideoPotential 86 in experimental band 58–71; sources 41 < 62
 - skylab-1973 (C): VideoPotential 85 in experimental band 58–71; sources 41 < 62
+- castle-bravo-1954 (C): VideoPotential 85 in experimental band 58–71; sources 41 < 62
 - vanguard-1957 (C): VideoPotential 83 in experimental band 58–71; sources 41 < 62
-- castle-bravo-1954 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
 
 **Recent alerts**
 
@@ -40,7 +40,7 @@ Generated 2026-10-24T17:30:15.613Z. Per-channel baselines are computed separatel
 
 ## ImpossibleBrief
 
-**Shorts health** — last published 2026-10-19T18:00:00.000Z · 19 published · inventory A109/B25/C140/D206 · next: what-if-we-tried-to-drill-through-the-earth (EXPLOIT (0.75): best A topic by SelectionScore)
+**Shorts health** — last published 2026-10-19T18:00:00.000Z · 19 published · inventory A108/B26/C140/D206 · next: what-if-we-tried-to-drill-through-the-earth (EXPLOIT (0.75): best A topic by SelectionScore)
 
 **Long-form health** — cycle 2026-W43: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W43 already QUALITY_BLOCKED)
 
@@ -50,7 +50,7 @@ Generated 2026-10-24T17:30:15.613Z. Per-channel baselines are computed separatel
 
 **Growth / subscriber conversion** — tracked 18 · subs/1k Shorts 0 · subs/1k long n/a
 
-**Learning** — Shorts adaptive (n=17, adopted 1) · Long-form heuristics-only (n=0)
+**Learning** — Shorts adaptive (n=17, adopted 0) · Long-form heuristics-only (n=0)
 
 **Short → Long funnel** — 0 link(s), 0 long→long, 0 pending RELATED_VIDEO_MANUAL_ACTION_REQUIRED
 
@@ -60,7 +60,7 @@ Generated 2026-10-24T17:30:15.613Z. Per-channel baselines are computed separatel
 - could-we-function-with-half-human-heat-tolerance (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
 - what-if-human-muscle-efficiency-doubled-overnight (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
 - what-happens-if-the-global-ocean-doubles (C): VideoPotential 72 in experimental band 58–71; boilerplate 0.5
-- what-if-the-brain-s-energy-use-doubled-overnight (C): VideoPotential 72 in experimental band 58–71; boilerplate 0.5
+- would-doubling-all-synthetic-fertilizers-help-or-harm-us (C): VideoPotential 72 in experimental band 58–71; boilerplate 0.5
 
 **Recent alerts**
 

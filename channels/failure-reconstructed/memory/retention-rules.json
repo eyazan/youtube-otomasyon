@@ -2,13 +2,13 @@
   "channel": "failure-reconstructed",
   "status": "sample-floor-met",
   "minimumSample": 5,
-  "sampleSize": 26,
+  "sampleSize": 27,
   "learnedRules": [
     {
       "key": "hookType",
       "value": "consequence",
       "weakValue": "statement",
-      "evidenceVideos": 26,
+      "evidenceVideos": 27,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
@@ -23,8 +23,8 @@
         },
         {
           "value": "statement",
-          "sample": 15,
-          "averagePercentageViewed": 67.23
+          "sample": 16,
+          "averagePercentageViewed": 66.59
         }
       ]
     },
@@ -32,7 +32,7 @@
       "key": "durationRange",
       "value": "over-35s",
       "weakValue": "under-25s",
-      "evidenceVideos": 26,
+      "evidenceVideos": 27,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
@@ -43,12 +43,12 @@
         {
           "value": "25-35s",
           "sample": 19,
-          "averagePercentageViewed": 86.14
+          "averagePercentageViewed": 86.27
         },
         {
           "value": "under-25s",
-          "sample": 5,
-          "averagePercentageViewed": 74.72
+          "sample": 6,
+          "averagePercentageViewed": 71.35
         }
       ]
     },
@@ -56,7 +56,7 @@
       "key": "secondBeat",
       "value": "countdown",
       "weakValue": "event",
-      "evidenceVideos": 26,
+      "evidenceVideos": 27,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
@@ -65,19 +65,19 @@
           "averagePercentageViewed": 132.87
         },
         {
-          "value": "emergency",
-          "sample": 6,
-          "averagePercentageViewed": 74.93
-        },
-        {
           "value": "context",
           "sample": 1,
           "averagePercentageViewed": 74.29
         },
         {
+          "value": "emergency",
+          "sample": 7,
+          "averagePercentageViewed": 72.42
+        },
+        {
           "value": "event",
           "sample": 13,
-          "averagePercentageViewed": 67.07
+          "averagePercentageViewed": 67.04
         }
       ]
     },
@@ -85,13 +85,13 @@
       "key": "visualChangeFrequency",
       "value": "fast",
       "weakValue": "measured",
-      "evidenceVideos": 26,
+      "evidenceVideos": 27,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
           "value": "fast",
-          "sample": 19,
-          "averagePercentageViewed": 89.42
+          "sample": 20,
+          "averagePercentageViewed": 87.8
         },
         {
           "value": "measured",
@@ -104,13 +104,13 @@
       "key": "questionStyle",
       "value": "question",
       "weakValue": null,
-      "evidenceVideos": 26,
+      "evidenceVideos": 27,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
           "value": "question",
-          "sample": 26,
-          "averagePercentageViewed": 84.35
+          "sample": 27,
+          "averagePercentageViewed": 83.33
         }
       ]
     },
@@ -118,7 +118,7 @@
       "key": "category",
       "value": "nuclear-accidents",
       "weakValue": "materials-failures",
-      "evidenceVideos": 26,
+      "evidenceVideos": 27,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
@@ -147,14 +147,14 @@
           "averagePercentageViewed": 73.15
         },
         {
-          "value": "industrial-disasters",
-          "sample": 1,
-          "averagePercentageViewed": 70.55
-        },
-        {
           "value": "natural-hazards",
           "sample": 4,
           "averagePercentageViewed": 66.21
+        },
+        {
+          "value": "industrial-disasters",
+          "sample": 2,
+          "averagePercentageViewed": 62.54
         },
         {
           "value": "infrastructure-failures",
@@ -164,7 +164,7 @@
         {
           "value": "rail-disasters",
           "sample": 2,
-          "averagePercentageViewed": 60.66
+          "averagePercentageViewed": 61.88
         },
         {
           "value": "bridge-failures",
@@ -187,17 +187,17 @@
       "key": "ctaStyle",
       "value": "adaptive after payoff",
       "weakValue": null,
-      "evidenceVideos": 26,
+      "evidenceVideos": 27,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
           "value": "adaptive after payoff",
-          "sample": 26,
-          "averagePercentageViewed": 84.35
+          "sample": 27,
+          "averagePercentageViewed": 83.33
         }
       ]
     }
   ],
-  "lastUpdated": "2026-10-24T17:30:11.866Z",
+  "lastUpdated": "2026-10-24T18:16:02.826Z",
   "caveat": "Observed associations only; topic, timing and packaging can confound retention. No causal claim."
 }
