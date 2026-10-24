@@ -2,160 +2,16 @@
   "schema": "growth-topic-decision/1",
   "channel": "failure-reconstructed",
   "contentType": "short",
-  "date": "2026-10-23",
-  "createdAt": "2026-10-23T14:00:03.468Z",
+  "date": "2026-10-24",
+  "createdAt": "2026-10-24T10:43:09.801Z",
   "mode": "EXPLOIT",
-  "modeRoll": 0.696,
+  "modeRoll": 0.803,
   "pool": {
     "minimum": 20,
     "target": 50,
-    "count": 11,
+    "count": 10,
     "meetsMinimum": true,
     "candidates": [
-      {
-        "topicId": "lahaina-fire-2023",
-        "slug": "lahaina-fire-2023",
-        "topic": "The Sirens That Never Sounded in Lahaina",
-        "cluster": "natural-hazards",
-        "bucket": "A",
-        "viralScore": 75,
-        "videoPotentialScore": 83,
-        "selectionScore": 77,
-        "viralComponents": {
-          "curiosity_gap": {
-            "value": 98,
-            "basis": "derived"
-          },
-          "immediate_stakes": {
-            "value": 94,
-            "basis": "derived"
-          },
-          "human_consequence": {
-            "value": 95,
-            "basis": "derived"
-          },
-          "recognizability": {
-            "value": 66,
-            "basis": "measured"
-          },
-          "surprise": {
-            "value": 90,
-            "basis": "derived"
-          },
-          "visual_potential": {
-            "value": 78,
-            "basis": "derived"
-          },
-          "archival_footage_potential": {
-            "value": 80,
-            "basis": "inventory-signal"
-          },
-          "first_frame_potential": {
-            "value": 82,
-            "basis": "derived"
-          },
-          "title_potential": {
-            "value": 92,
-            "basis": "derived",
-            "note": "4 source-backed title seeds"
-          },
-          "emotional_tension": {
-            "value": 97,
-            "basis": "derived"
-          },
-          "contradiction": {
-            "value": 85,
-            "basis": "derived"
-          },
-          "unexpected_cause": {
-            "value": 82,
-            "basis": "derived"
-          },
-          "numerical_anomaly": {
-            "value": 74,
-            "basis": "derived"
-          },
-          "didnt_know_factor": {
-            "value": 89,
-            "basis": "derived"
-          },
-          "shareability": {
-            "value": 97,
-            "basis": "derived"
-          },
-          "channel_fit": {
-            "value": 94,
-            "basis": "derived"
-          },
-          "historical_similarity": {
-            "value": 62,
-            "basis": "learned",
-            "note": "4 same-cluster upload(s), breakout rate 0.25"
-          },
-          "subscriber_conversion_potential": {
-            "value": 50,
-            "basis": "learned",
-            "note": "0.01 subscribers / 1,000 views in this topic family"
-          },
-          "audience_breadth": {
-            "value": 70,
-            "basis": "derived"
-          },
-          "hook_potential": {
-            "value": 72,
-            "basis": "derived"
-          },
-          "visual_availability": {
-            "value": 85,
-            "basis": "inventory-signal"
-          },
-          "research_confidence": {
-            "value": 75,
-            "basis": "derived"
-          },
-          "duplicate_risk": {
-            "value": 0,
-            "basis": "penalty",
-            "note": "no published-title collision"
-          },
-          "saturation_risk": {
-            "value": -25,
-            "basis": "penalty",
-            "note": "4 published / 48 inventory in cluster"
-          },
-          "recent_fatigue_risk": {
-            "value": -66,
-            "basis": "penalty",
-            "note": "3 same-family upload(s) in the last 30 days"
-          },
-          "source_confidence_risk": {
-            "value": -25,
-            "basis": "penalty",
-            "note": "75/100 source quality"
-          },
-          "weak_footage_risk": {
-            "value": -15,
-            "basis": "penalty",
-            "note": "archival stills available"
-          }
-        },
-        "selectedHook": {
-          "family": "hidden_cause",
-          "spoken": "Hydrant pressure failed as burning homes leaked water.",
-          "score": 80
-        },
-        "rejectionReasons": [
-          "VideoPotential 83 ≥ 80",
-          "hook 80",
-          "sources 75"
-        ],
-        "competitor": {
-          "demand": null,
-          "saturation": null,
-          "adjustment": 0,
-          "snapshot": null
-        }
-      },
       {
         "topicId": "i-35w-bridge-2007",
         "slug": "i-35w-bridge-2007",
@@ -163,8 +19,8 @@
         "cluster": "bridge-failures",
         "bucket": "B",
         "viralScore": 78,
-        "videoPotentialScore": 85,
-        "selectionScore": 79,
+        "videoPotentialScore": 86,
+        "selectionScore": 80,
         "viralComponents": {
           "curiosity_gap": {
             "value": 98,
@@ -289,7 +145,7 @@
           "score": 76
         },
         "rejectionReasons": [
-          "VideoPotential 85 ≥ 72",
+          "VideoPotential 86 ≥ 72",
           "not A: hook 76 < 78"
         ],
         "competitor": {
@@ -661,7 +517,7 @@
             "basis": "derived"
           },
           "historical_similarity": {
-            "value": 65,
+            "value": 61,
             "basis": "learned",
             "note": "2 same-cluster upload(s), breakout rate 0"
           },
@@ -877,7 +733,7 @@
         "cluster": "software-and-control-failures",
         "bucket": "B",
         "viralScore": 76,
-        "videoPotentialScore": 77,
+        "videoPotentialScore": 78,
         "selectionScore": 76,
         "viralComponents": {
           "curiosity_gap": {
@@ -1003,7 +859,7 @@
           "score": 79
         },
         "rejectionReasons": [
-          "VideoPotential 77 ≥ 72"
+          "VideoPotential 78 ≥ 72"
         ],
         "competitor": {
           "demand": null,
@@ -1076,7 +932,7 @@
             "basis": "derived"
           },
           "didnt_know_factor": {
-            "value": 87,
+            "value": 85,
             "basis": "derived"
           },
           "shareability": {
@@ -1088,7 +944,7 @@
             "basis": "derived"
           },
           "historical_similarity": {
-            "value": 61,
+            "value": 62,
             "basis": "learned",
             "note": "2 same-cluster upload(s), breakout rate 0"
           },
@@ -1114,9 +970,9 @@
             "basis": "derived"
           },
           "duplicate_risk": {
-            "value": -9,
+            "value": -14,
             "basis": "penalty",
-            "note": "published-title similarity 0.09"
+            "note": "published-title similarity 0.14"
           },
           "saturation_risk": {
             "value": -19,
@@ -1231,7 +1087,7 @@
             "basis": "derived"
           },
           "historical_similarity": {
-            "value": 53,
+            "value": 52,
             "basis": "learned",
             "note": "4 same-cluster upload(s), breakout rate 0"
           },
@@ -1374,7 +1230,7 @@
             "basis": "derived"
           },
           "historical_similarity": {
-            "value": 61,
+            "value": 62,
             "basis": "learned",
             "note": "2 same-cluster upload(s), breakout rate 0"
           },
@@ -1517,7 +1373,7 @@
             "basis": "derived"
           },
           "historical_similarity": {
-            "value": 61,
+            "value": 62,
             "basis": "learned",
             "note": "2 same-cluster upload(s), breakout rate 0"
           },
@@ -1586,149 +1442,6 @@
       }
     ]
   },
-  "selected": {
-    "topicId": "lahaina-fire-2023",
-    "slug": "lahaina-fire-2023",
-    "topic": "The Sirens That Never Sounded in Lahaina",
-    "cluster": "natural-hazards",
-    "bucket": "A",
-    "viralScore": 75,
-    "videoPotentialScore": 83,
-    "selectionScore": 77,
-    "viralComponents": {
-      "curiosity_gap": {
-        "value": 98,
-        "basis": "derived"
-      },
-      "immediate_stakes": {
-        "value": 94,
-        "basis": "derived"
-      },
-      "human_consequence": {
-        "value": 95,
-        "basis": "derived"
-      },
-      "recognizability": {
-        "value": 66,
-        "basis": "measured"
-      },
-      "surprise": {
-        "value": 90,
-        "basis": "derived"
-      },
-      "visual_potential": {
-        "value": 78,
-        "basis": "derived"
-      },
-      "archival_footage_potential": {
-        "value": 80,
-        "basis": "inventory-signal"
-      },
-      "first_frame_potential": {
-        "value": 82,
-        "basis": "derived"
-      },
-      "title_potential": {
-        "value": 92,
-        "basis": "derived",
-        "note": "4 source-backed title seeds"
-      },
-      "emotional_tension": {
-        "value": 97,
-        "basis": "derived"
-      },
-      "contradiction": {
-        "value": 85,
-        "basis": "derived"
-      },
-      "unexpected_cause": {
-        "value": 82,
-        "basis": "derived"
-      },
-      "numerical_anomaly": {
-        "value": 74,
-        "basis": "derived"
-      },
-      "didnt_know_factor": {
-        "value": 89,
-        "basis": "derived"
-      },
-      "shareability": {
-        "value": 97,
-        "basis": "derived"
-      },
-      "channel_fit": {
-        "value": 94,
-        "basis": "derived"
-      },
-      "historical_similarity": {
-        "value": 62,
-        "basis": "learned",
-        "note": "4 same-cluster upload(s), breakout rate 0.25"
-      },
-      "subscriber_conversion_potential": {
-        "value": 50,
-        "basis": "learned",
-        "note": "0.01 subscribers / 1,000 views in this topic family"
-      },
-      "audience_breadth": {
-        "value": 70,
-        "basis": "derived"
-      },
-      "hook_potential": {
-        "value": 72,
-        "basis": "derived"
-      },
-      "visual_availability": {
-        "value": 85,
-        "basis": "inventory-signal"
-      },
-      "research_confidence": {
-        "value": 75,
-        "basis": "derived"
-      },
-      "duplicate_risk": {
-        "value": 0,
-        "basis": "penalty",
-        "note": "no published-title collision"
-      },
-      "saturation_risk": {
-        "value": -25,
-        "basis": "penalty",
-        "note": "4 published / 48 inventory in cluster"
-      },
-      "recent_fatigue_risk": {
-        "value": -66,
-        "basis": "penalty",
-        "note": "3 same-family upload(s) in the last 30 days"
-      },
-      "source_confidence_risk": {
-        "value": -25,
-        "basis": "penalty",
-        "note": "75/100 source quality"
-      },
-      "weak_footage_risk": {
-        "value": -15,
-        "basis": "penalty",
-        "note": "archival stills available"
-      }
-    },
-    "selectedHook": {
-      "family": "hidden_cause",
-      "spoken": "Hydrant pressure failed as burning homes leaked water.",
-      "score": 80
-    },
-    "rejectionReasons": [
-      "VideoPotential 83 ≥ 80",
-      "hook 80",
-      "sources 75"
-    ],
-    "competitor": {
-      "demand": null,
-      "saturation": null,
-      "adjustment": 0,
-      "snapshot": null
-    }
-  },
-  "reason": "EXPLOIT (0.75): best A topic by SelectionScore"
+  "selected": null,
+  "reason": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [87 unused A topic(s), best viral score 74 < minimum 75; 10 topic(s) at the minimum are bucket B/C, not selectable]"
 }
