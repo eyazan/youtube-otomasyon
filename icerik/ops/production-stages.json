@@ -2,66 +2,6 @@
   "channel": "failure-reconstructed",
   "runs": [
     {
-      "runId": "39771439235",
-      "attempt": "1",
-      "startedAt": "2026-10-22T11:34:13.945Z",
-      "publish": true,
-      "trigger": {
-        "event": "schedule",
-        "correlationId": null
-      },
-      "targetDay": "2026-10-22",
-      "slug": "ss-arctic-1854",
-      "outcome": "UPLOADED",
-      "reason": null,
-      "stages": {
-        "RESEARCH": {
-          "status": "done",
-          "detail": "growth queue selected ss-arctic-1854",
-          "at": "2026-10-22T11:34:17.949Z"
-        },
-        "SCRIPT": {
-          "status": "done",
-          "detail": "pre gate REVIEW 82",
-          "at": "2026-10-22T11:34:18.331Z"
-        },
-        "ASSETS": {
-          "status": "done",
-          "at": "2026-10-22T11:34:24.686Z"
-        },
-        "NARRATION": {
-          "status": "done",
-          "at": "2026-10-22T11:39:26.791Z"
-        },
-        "RENDER": {
-          "status": "done",
-          "at": "2026-10-22T11:39:26.791Z"
-        },
-        "QA": {
-          "status": "done",
-          "detail": "final gate PUBLISH 86",
-          "at": "2026-10-22T11:39:29.573Z"
-        },
-        "UPLOAD": {
-          "status": "done",
-          "detail": "zq07sKTZmCs",
-          "at": "2026-10-22T11:39:45.740Z"
-        },
-        "SCHEDULE": {
-          "status": "done",
-          "detail": "2026-10-22T18:00:00.000Z",
-          "at": "2026-10-22T11:39:45.741Z"
-        },
-        "PUBLISH": {
-          "status": "scheduled",
-          "detail": "YouTube makes it public at 2026-10-22T18:00:00.000Z",
-          "at": "2026-10-22T11:39:45.742Z"
-        }
-      },
-      "finishedAt": "2026-10-22T11:39:45.796Z",
-      "videoId": "zq07sKTZmCs"
-    },
-    {
       "runId": "39776270237",
       "attempt": "1",
       "startedAt": "2026-10-22T12:14:00.965Z",
@@ -1379,6 +1319,52 @@
         }
       },
       "finishedAt": "2026-10-24T13:00:16.986Z"
+    },
+    {
+      "runId": "40097984205",
+      "attempt": "1",
+      "startedAt": "2026-10-24T13:25:16.486Z",
+      "publish": true,
+      "trigger": {
+        "event": "schedule",
+        "correlationId": null
+      },
+      "targetDay": "2026-10-24",
+      "slug": null,
+      "outcome": "NO_TOPIC",
+      "reason": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [92 unused A topic(s), best viral score 74 < minimum 75; 10 topic(s) at the minimum are bucket B/C, not selectable]",
+      "stages": {
+        "RESEARCH": {
+          "status": "failed",
+          "detail": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [92 unused A topic(s), best viral score 74 < minimum 75; 10 topic(s) at the minimum are bucket B/C, not selectable]",
+          "at": "2026-10-24T13:25:17.579Z"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "not-reached"
+        },
+        "QA": {
+          "status": "not-reached"
+        },
+        "UPLOAD": {
+          "status": "not-reached"
+        },
+        "SCHEDULE": {
+          "status": "not-reached"
+        },
+        "PUBLISH": {
+          "status": "not-reached"
+        }
+      },
+      "finishedAt": "2026-10-24T13:25:17.580Z"
     }
   ]
 }
