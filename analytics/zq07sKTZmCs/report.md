@@ -7,13 +7,21 @@ https://youtu.be/zq07sKTZmCs
 | Checkpoint | Collected | Views | Likes | Comments | Avg % viewed | Subs (net) | Top traffic |
 |---|---|---:|---:|---:|---:|---:|---|
 | 1d | 2026-10-23 | 131 | 3 | 1 | — | — |  |
+| 3d | 2026-10-25 | 158 | 3 | 1 | 69.12 | 0 | Shorts feed 84%, Search 14% |
 
-## Diagnosis at 1d
+## Diagnosis at 3d
 
-- **INSUFFICIENT_DATA** (high) — 131 views after 1 days — too early/small for rate-based conclusions.
 - **WEAK_TOPIC_PACKAGING** (low) — Current title scores 20.4/100 in the title engine; best editorial option scores 44.
 
 ## Suggested interventions
 
-- INSUFFICIENT DATA → no intervention; wait for the next checkpoint.
 - WEAK PACKAGING (heuristic) → candidate for a logged title experiment once data exists.
+
+## First major observed retention drop
+
+- Timestamp: 5s; magnitude: 18 percentage points.
+- Active sentence: The captain first tried to help the other ship.
+- Visual type: REAL ARCHIVAL IMAGE
+- This is an observed alignment, not proof that the sentence or visual caused the drop.
+
+Views gained between 1d and 3d: 27.
