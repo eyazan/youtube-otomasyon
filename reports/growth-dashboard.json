@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-24T18:54:16.372Z",
+  "generatedAt": "2026-10-25T11:08:43.221Z",
   "note": "Per-channel baselines are computed separately and never blended.",
   "channels": [
     {
@@ -392,6 +392,21 @@
           },
           "date": "2026-10-24",
           "at": "2026-10-24T11:51:03.384Z"
+        },
+        {
+          "channel": "failure-reconstructed",
+          "code": "NO_QUALIFIED_TOPIC",
+          "message": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [87 unused A topic(s), best viral score 74 < minimum 75; 11 topic(s) at the minimum are bucket B/C, not selectable]",
+          "details": {
+            "inventory": {
+              "A": 87,
+              "B": 123,
+              "C": 59,
+              "D": 59
+            }
+          },
+          "date": "2026-10-25",
+          "at": "2026-10-25T11:07:57.985Z"
         }
       ],
       "legacyPaths": true
@@ -618,16 +633,6 @@
         {
           "channel": "impossible-brief",
           "code": "VISUAL_PRECHECK_BLOCK",
-          "message": "what-if-we-tried-to-drill-through-the-earth",
-          "details": {
-            "reason": "3 licensed pictures/clips < 4"
-          },
-          "date": "2026-10-03",
-          "at": "2026-10-03T11:31:02.352Z"
-        },
-        {
-          "channel": "impossible-brief",
-          "code": "VISUAL_PRECHECK_BLOCK",
           "message": "what-if-you-stopped-eating-for-a-year",
           "details": {
             "reason": "0 licensed pictures/clips < 4"
@@ -734,6 +739,21 @@
           },
           "date": "2026-10-23",
           "at": "2026-10-23T11:33:45.786Z"
+        },
+        {
+          "channel": "impossible-brief",
+          "code": "NO_QUALIFIED_TOPIC",
+          "message": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [102 unused A topic(s), best viral score 74 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]",
+          "details": {
+            "inventory": {
+              "A": 102,
+              "B": 26,
+              "C": 140,
+              "D": 206
+            }
+          },
+          "date": "2026-10-25",
+          "at": "2026-10-25T11:08:09.765Z"
         }
       ],
       "legacyPaths": false

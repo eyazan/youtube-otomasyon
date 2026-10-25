@@ -168,5 +168,20 @@
     },
     "date": "2026-10-24",
     "at": "2026-10-24T11:51:03.384Z"
+  },
+  {
+    "channel": "failure-reconstructed",
+    "code": "NO_QUALIFIED_TOPIC",
+    "message": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [87 unused A topic(s), best viral score 74 < minimum 75; 11 topic(s) at the minimum are bucket B/C, not selectable]",
+    "details": {
+      "inventory": {
+        "A": 87,
+        "B": 123,
+        "C": 59,
+        "D": 59
+      }
+    },
+    "date": "2026-10-25",
+    "at": "2026-10-25T11:07:57.985Z"
   }
 ]
