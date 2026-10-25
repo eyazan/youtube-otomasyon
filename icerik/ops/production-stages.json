@@ -2,66 +2,6 @@
   "channel": "failure-reconstructed",
   "runs": [
     {
-      "runId": "39962386367",
-      "attempt": "1",
-      "startedAt": "2026-10-23T14:00:02.640Z",
-      "publish": true,
-      "trigger": {
-        "event": "schedule",
-        "correlationId": null
-      },
-      "targetDay": "2026-10-23",
-      "slug": "lahaina-fire-2023",
-      "outcome": "UPLOADED",
-      "reason": null,
-      "stages": {
-        "RESEARCH": {
-          "status": "done",
-          "detail": "growth queue selected lahaina-fire-2023",
-          "at": "2026-10-23T14:00:05.565Z"
-        },
-        "SCRIPT": {
-          "status": "done",
-          "detail": "pre gate REVIEW 82",
-          "at": "2026-10-23T14:00:05.872Z"
-        },
-        "ASSETS": {
-          "status": "done",
-          "at": "2026-10-23T14:00:11.248Z"
-        },
-        "NARRATION": {
-          "status": "done",
-          "at": "2026-10-23T14:05:13.233Z"
-        },
-        "RENDER": {
-          "status": "done",
-          "at": "2026-10-23T14:05:13.234Z"
-        },
-        "QA": {
-          "status": "done",
-          "detail": "final gate PUBLISH 87",
-          "at": "2026-10-23T14:05:15.361Z"
-        },
-        "UPLOAD": {
-          "status": "done",
-          "detail": "tH-casKT7OY",
-          "at": "2026-10-23T14:05:23.069Z"
-        },
-        "SCHEDULE": {
-          "status": "done",
-          "detail": "2026-10-23T18:00:00.000Z",
-          "at": "2026-10-23T14:05:23.070Z"
-        },
-        "PUBLISH": {
-          "status": "scheduled",
-          "detail": "YouTube makes it public at 2026-10-23T18:00:00.000Z",
-          "at": "2026-10-23T14:05:23.070Z"
-        }
-      },
-      "finishedAt": "2026-10-23T14:05:23.101Z",
-      "videoId": "tH-casKT7OY"
-    },
-    {
       "runId": "39968495531",
       "attempt": "1",
       "startedAt": "2026-10-23T14:43:23.357Z",
@@ -1372,6 +1312,52 @@
         }
       },
       "finishedAt": "2026-10-25T12:41:31.042Z"
+    },
+    {
+      "runId": "40196686423",
+      "attempt": "1",
+      "startedAt": "2026-10-25T13:15:18.493Z",
+      "publish": true,
+      "trigger": {
+        "event": "schedule",
+        "correlationId": null
+      },
+      "targetDay": "2026-10-25",
+      "slug": null,
+      "outcome": "NO_TOPIC",
+      "reason": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [87 unused A topic(s), best viral score 74 < minimum 75; 11 topic(s) at the minimum are bucket B/C, not selectable]",
+      "stages": {
+        "RESEARCH": {
+          "status": "failed",
+          "detail": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [87 unused A topic(s), best viral score 74 < minimum 75; 11 topic(s) at the minimum are bucket B/C, not selectable]",
+          "at": "2026-10-25T13:15:19.965Z"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "not-reached"
+        },
+        "QA": {
+          "status": "not-reached"
+        },
+        "UPLOAD": {
+          "status": "not-reached"
+        },
+        "SCHEDULE": {
+          "status": "not-reached"
+        },
+        "PUBLISH": {
+          "status": "not-reached"
+        }
+      },
+      "finishedAt": "2026-10-25T13:15:19.966Z"
     }
   ]
 }
