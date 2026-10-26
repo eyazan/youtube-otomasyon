@@ -2,52 +2,6 @@
   "channel": "failure-reconstructed",
   "runs": [
     {
-      "runId": "40109825152",
-      "attempt": "1",
-      "startedAt": "2026-10-24T16:05:10.580Z",
-      "publish": true,
-      "trigger": {
-        "event": "schedule",
-        "correlationId": null
-      },
-      "targetDay": "2026-10-24",
-      "slug": null,
-      "outcome": "NO_TOPIC",
-      "reason": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [92 unused A topic(s), best viral score 74 < minimum 75; 10 topic(s) at the minimum are bucket B/C, not selectable]",
-      "stages": {
-        "RESEARCH": {
-          "status": "failed",
-          "detail": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [92 unused A topic(s), best viral score 74 < minimum 75; 10 topic(s) at the minimum are bucket B/C, not selectable]",
-          "at": "2026-10-24T16:05:11.699Z"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "not-reached"
-        },
-        "QA": {
-          "status": "not-reached"
-        },
-        "UPLOAD": {
-          "status": "not-reached"
-        },
-        "SCHEDULE": {
-          "status": "not-reached"
-        },
-        "PUBLISH": {
-          "status": "not-reached"
-        }
-      },
-      "finishedAt": "2026-10-24T16:05:11.700Z"
-    },
-    {
       "runId": "40112297576",
       "attempt": "1",
       "startedAt": "2026-10-24T16:37:11.118Z",
@@ -1348,6 +1302,50 @@
         }
       },
       "finishedAt": "2026-10-26T16:44:14.700Z"
+    },
+    {
+      "runId": "40362691353",
+      "attempt": "1",
+      "startedAt": "2026-10-26T16:58:22.572Z",
+      "publish": true,
+      "trigger": {
+        "event": "schedule",
+        "correlationId": null
+      },
+      "targetDay": "2026-10-26",
+      "slug": null,
+      "outcome": "FAILED",
+      "reason": "health pre-flight: seslendirme: NARRATION_UNAVAILABLE: Edge sesi reddedildi (Edge TTS WebSocket error: Unexpected server response: 200, Edge TTS WebSocket error: Unexpected server response: 200, Edge TTS WebSocket error: Unexpected server response: 200; msedge-tts 2.1.0); yedek ses yok — fallback voice am_michael is not approved for publishing (config.voice.fallback.approved)",
+      "stages": {
+        "RESEARCH": {
+          "status": "not-reached"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "not-reached"
+        },
+        "QA": {
+          "status": "not-reached"
+        },
+        "UPLOAD": {
+          "status": "not-reached"
+        },
+        "SCHEDULE": {
+          "status": "not-reached"
+        },
+        "PUBLISH": {
+          "status": "not-reached"
+        }
+      },
+      "finishedAt": "2026-10-26T16:58:32.926Z"
     }
   ]
 }
