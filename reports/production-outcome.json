@@ -1,18 +1,18 @@
 {
-  "at": "2026-10-26T16:59:22.979Z",
-  "runId": "40362691353",
+  "at": "2026-10-26T17:40:26.933Z",
+  "runId": "40368655950",
   "rows": [
     {
       "channel": "failure-reconstructed",
-      "outcome": "FAILED",
-      "category": "AWAITING_APPROVAL",
+      "outcome": "NOT_DUE",
+      "category": "NOT_DUE",
       "scheduled": false,
       "publication": "NOT_SCHEDULED",
       "publishAt": null,
-      "reason": "health pre-flight: seslendirme: NARRATION_UNAVAILABLE: Edge sesi reddedildi (Edge TTS WebSocket error: Unexpected server response: 200, Edge TTS WebSocket error: Unexpected server response: 200, Edge TTS WebSocket error: Unexpected server response: 200; msedge-tts 2.1.0); yedek ses yok — fallback voice am_michael is not approved for publishing (config.voice.fallback.approved)",
+      "reason": "production window closed at 21:00 Europe/Istanbul minus 60 min",
       "slug": null,
       "videoId": null,
-      "targetDay": "2026-10-26",
+      "targetDay": null,
       "trigger": {
         "event": "schedule",
         "correlationId": null
