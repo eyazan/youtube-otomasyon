@@ -1,13 +1,13 @@
 # Optimization report — Why the Tacoma Narrows Bridge Tore Itself Apart
 
-Video: https://youtu.be/qkzRUqlEy5I · short · 33s · published 2026-09-22 (2 days ago) · public
-Production slug: `tacoma-narrows` · Analytics: ok · Generated 2026-09-24T21:02:26.635Z
+Video: https://youtu.be/qkzRUqlEy5I · short · 33s · published 2026-09-22 (34 days ago) · public
+Production slug: `tacoma-narrows` · Analytics: ok · Generated 2026-10-26T15:32:33.150Z
 
 > Nothing here is applied automatically. No video is deleted or re-uploaded. Metrics marked *unavailable* were not invented.
 
 ## CURRENT TITLE
 
-"Why the Tacoma Narrows Bridge Tore Itself Apart" — title engine score **59.5/100**
+"Why the Tacoma Narrows Bridge Tore Itself Apart" — title engine score **52.5/100**
 
 ## CURRENT THUMBNAIL
 
@@ -42,42 +42,42 @@ Narration uses a synthetic voice. Footage is real archival film or licensed stoc
 
 | Metric | Value | Source / reason |
 |---|---|---|
-| Views | 178 | Data API |
+| Views | 189 | Data API |
 | Likes | 5 | Data API |
-| Comments | 1 | Data API |
-| Impressions | unavailable | not exposed by YouTube APIs — export from Studio into studio-manual.json |
-| CTR | unavailable | not exposed by YouTube APIs — export from Studio into studio-manual.json |
-| Watch time | 23 min | Analytics API |
-| Average view duration | 22 s | Analytics API |
-| Average % viewed | 67.76% | Analytics API |
-| Subscribers gained (net) | 0 | Analytics API (net) |
+| Comments | 2 | Data API |
+| Impressions | 674 | Studio (manual entry 2026-10-07) |
+| CTR | 3.86% | Studio (manual entry 2026-10-07) |
+| Watch time | 35 min | Analytics API |
+| Average view duration | 21 s | Analytics API |
+| Average % viewed | 64.36% | Analytics API |
+| Subscribers gained (net) | 0 | Analytics API |
 | Shares | 0 | Analytics API |
-| Returning viewers | unavailable | not exposed per video by the public API |
-| Retention at 30 s | 0.4167 | Analytics API (retention at 91% of video) |
+| Returning viewers | 5 | Studio (manual entry) |
+| Retention at 30 s | 0.39130000000000004 | Analytics API (retention at 91% of video) |
 
-Traffic sources: Shorts feed 68% · Search 30% · Direct/unknown 1% · Browse/other YouTube 1%
+Traffic sources: Shorts feed 50% · Search 44% · Channel page 3% · External 2% · Direct/unknown 1% · Browse (subscribers) 1% · Browse/other YouTube 1%
 
-Derived: subsPer1000 = 0 · likeRate = 2.8 · commentRate = 0.56
+Derived: subsPer1000 = 0 · netSubsPer1000 = 0 · likeRate = 2.6 · commentRate = 1.06
 
 ## PROBLEM DIAGNOSIS
 
-- **HEALTHY** (confidence: low) — No problem pattern detected with available data.
-  → Keep; revisit at the next checkpoint.
+- **SHORTS_FEED_NOT_PICKED_UP** (confidence: low) — Most views are not from the Shorts feed.
+  → Opening frame and first sentence decide feed pickup — review the hook.
 
 ## TITLE OPTIONS
 
 | Score | Title | Source | Notes |
 |---:|---|---|---|
 | 72.5 | The Real Reason the Tacoma Narrows Bridge Tore Itself Apart | template:real-reason |  |
-| 69.7 | 1940: The Tacoma Narrows Bridge Tore Itself Apart | template:year-result | title pattern "label-colon" already used by 2 other videos |
-| 66 | The Tacoma Narrows Bridge Didn't Just Fail — It Tore Itself Apart | template:didnt-just-fail | long for Shorts feed (65 chars); title pattern "two-beat" already used by 4 other videos |
-| 63.2 | Filmed as It Fell: The Tacoma Narrows Collapse | editorial | title pattern "label-colon" already used by 2 other videos |
-| 62.6 | Aeroelastic Flutter: The Force That Destroyed the Tacoma Narrows Bridge | template:mechanism-force | long for Shorts feed (71 chars); title pattern "label-colon" already used by 2 other videos |
-| 59.5 | Why the Tacoma Narrows Bridge Tore Itself Apart | current | title pattern "why" already used by 4 other videos |
+| 61 | The Tacoma Narrows Bridge Didn't Just Fail — It Tore Itself Apart | template:didnt-just-fail | long for Shorts feed (65 chars); title pattern "two-beat" already used by 5 other videos |
 | 58.1 | What Really Destroyed the Tacoma Narrows Bridge | template:what-really | title pattern "what-really" already used by 3 other videos |
-| 55.2 | How a 40 Mph Wind Brought Down the Tacoma Narrows Bridge | template:how-trigger | title pattern "how" already used by 4 other videos |
+| 54.6 | What Engineers Learned From the Tacoma Narrows Bridge | template:lesson | title pattern "what" already used by 3 other videos |
+| 52.7 | 1940: The Tacoma Narrows Bridge Tore Itself Apart | template:year-result | title pattern "label-colon" already used by 20 other videos |
+| 52.5 | Why the Tacoma Narrows Bridge Tore Itself Apart | current | title pattern "why" already used by 32 other videos |
+| 52.5 | How the Tacoma Narrows Bridge Became Tore Itself Apart | template:how-became | title pattern "how" already used by 9 other videos |
+| 51.5 | The Bridge That Started Twisting — Then Tore Itself Apart | editorial | title pattern "the-x-that" already used by 6 other videos |
 
-Recommended: **Filmed as It Fell: The Tacoma Narrows Collapse**
+Recommended: **Why the Tacoma Narrows Bridge Tore Itself Apart** (already live — keep)
 
 ## THUMBNAIL CONCEPTS
 
@@ -98,7 +98,7 @@ In 1940, the Tacoma Narrows Bridge twisted itself apart in a 40 mph wind — the
 
 Failure chain: Steady 40 mph wind → Deck begins to twist → Aeroelastic flutter → Twist feeds on itself → Center span fails
 
-Another reconstruction: The Disaster That Ended the Age of the Airship — https://youtu.be/PGOKZhPYo7c
+Related episode: Tasman Bridge: What Failed First — https://youtu.be/SjJHvPtSvcg
 
 Footage & sources:
 • Archival film: "Tacoma Narrows Bridge destruction" — Wikimedia Commons (public domain / free licence): https://commons.wikimedia.org/wiki/File:Tacoma_Narrows_Bridge_destruction.ogv
@@ -109,16 +109,18 @@ Technical references:
 
 Narration uses a synthetic voice. Footage is real archival film or licensed stock; anything reconstructed is labelled on screen.
 
-#shorts #engineering #bridges
+Failure File · Episode 2 · A new engineering failure, reconstructed every day.
+
+#shorts #engineering #TacomaNarrows #bridges #history
 ```
 
 ## HOOK IMPROVEMENT
 
-Current hook score: **80/100**
+Current hook score: **100/100**
 
 - 0-5s: lands the event/result immediately
-- 5-12s: missing an unexpected detail
-- 12-20s: no central mystery or problem is posed
+- 5-12s: unexpected detail/contrast present
+- 12-20s: a central question/problem is raised
 - payoff line present (why/how/reason)
 - on-screen hook is 4 words (readable in <1s)
 
@@ -133,16 +135,16 @@ _A published video's audio can't be edited in place — apply this to the next p
 
 ## PLAYLIST RECOMMENDATION
 
-Cluster: **Bridge Failures** — playlist "Bridge Failures" (waiting (1/3 published)). Keep the existing series playlist too.
+Cluster: **Bridge Failures** — playlist "Bridge Failures" (waiting (2/3 published)). Keep the existing series playlist too.
 
 ## RELATED VIDEO LINKS
 
 - Previous: —
-- Next: queued: What Really Brings a Bridge Down
+- Next: Tasman Bridge: What Failed First https://youtu.be/SjJHvPtSvcg
 
 ## END SCREEN RECOMMENDATION
 
-The Disaster That Ended the Age of the Airship https://youtu.be/PGOKZhPYo7c
+Tasman Bridge: What Failed First https://youtu.be/SjJHvPtSvcg
 
 Shorts have no end screens — set this as the Short's 'Related video' in Studio. Long-form: end-screen element.
 
@@ -153,7 +155,7 @@ Tacoma is often described as simple resonance, but aeroelastic flutter is the mo
 
 The deck was already moving in the wind before it opened. Should that have stopped the opening?
 
-Related reconstruction: The Disaster That Ended the Age of the Airship → https://youtu.be/PGOKZhPYo7c
+Related reconstruction: Tasman Bridge: What Failed First → https://youtu.be/SjJHvPtSvcg
 
 Which engineering failure should we reconstruct next?
 ```
