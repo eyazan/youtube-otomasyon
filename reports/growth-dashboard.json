@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-26T17:40:22.961Z",
+  "generatedAt": "2026-10-26T18:45:16.296Z",
   "note": "Per-channel baselines are computed separately and never blended.",
   "channels": [
     {
@@ -9,8 +9,8 @@
         "lastPublished": "2026-10-23T18:00:00.000Z",
         "published": 32,
         "inventory": {
-          "A": 108,
-          "B": 119,
+          "A": 101,
+          "B": 126,
           "C": 59,
           "D": 59
         },
@@ -28,7 +28,7 @@
         "baseline": {
           "n": 31,
           "views": 446,
-          "averagePercentageViewed": 64.5,
+          "averagePercentageViewed": 64.65,
           "subscribersPer1000Views": 0.83,
           "engagementPer1000Views": 25.27,
           "watchHoursPer1000Views": 2.05
@@ -113,7 +113,7 @@
           },
           {
             "slug": "columbia-2003",
-            "LongFormPotentialScore": 86,
+            "LongFormPotentialScore": 85,
             "bucket": "A",
             "mode": "B_SHORT_PROVES_DEMAND"
           },
@@ -161,7 +161,7 @@
           "status": "adaptive",
           "sampleSize": 31,
           "adopted": 0,
-          "hypotheses": 9
+          "hypotheses": 6
         },
         "longform": {
           "status": "heuristics-only",
@@ -177,14 +177,14 @@
           "reason": "VideoPotential 87 in experimental band 58–71; sources 41 < 62"
         },
         {
-          "slug": "munich-1958",
-          "bucket": "C",
-          "reason": "VideoPotential 86 in experimental band 58–71; sources 41 < 62"
-        },
-        {
           "slug": "skylab-1973",
           "bucket": "C",
           "reason": "VideoPotential 85 in experimental band 58–71; sources 41 < 62"
+        },
+        {
+          "slug": "munich-1958",
+          "bucket": "C",
+          "reason": "VideoPotential 86 in experimental band 58–71; sources 41 < 62"
         },
         {
           "slug": "vanguard-1957",
@@ -194,27 +194,27 @@
         {
           "slug": "castle-bravo-1954",
           "bucket": "C",
-          "reason": "VideoPotential 85 in experimental band 58–71; sources 41 < 62"
+          "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
         },
         {
           "slug": "controlled-impact-1984",
           "bucket": "C",
-          "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
-        },
-        {
-          "slug": "new-london-school-1937",
-          "bucket": "C",
-          "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
-        },
-        {
-          "slug": "quebec-bridge-1907",
-          "bucket": "C",
-          "reason": "VideoPotential 84 in experimental band 58–71; sources 55 < 62"
+          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
         },
         {
           "slug": "eastland-1915",
           "bucket": "C",
           "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
+        },
+        {
+          "slug": "new-london-school-1937",
+          "bucket": "C",
+          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
+        },
+        {
+          "slug": "quebec-bridge-1907",
+          "bucket": "C",
+          "reason": "VideoPotential 83 in experimental band 58–71; sources 55 < 62"
         },
         {
           "slug": "b2-guam-2008",
@@ -418,8 +418,8 @@
         "lastPublished": "2026-10-19T18:00:00.000Z",
         "published": 19,
         "inventory": {
-          "A": 109,
-          "B": 25,
+          "A": 113,
+          "B": 21,
           "C": 140,
           "D": 206
         },
@@ -437,10 +437,10 @@
         "baseline": {
           "n": 17,
           "views": 920,
-          "averagePercentageViewed": 66.17,
+          "averagePercentageViewed": 61.38,
           "subscribersPer1000Views": 0,
           "engagementPer1000Views": 19.42,
-          "watchHoursPer1000Views": 2.6
+          "watchHoursPer1000Views": 2.52
         }
       },
       "longform": {
@@ -509,18 +509,6 @@
             "mode": "A_LONG_FIRST"
           },
           {
-            "slug": "what-if-synthetic-fertilizer-disappeared",
-            "LongFormPotentialScore": 83,
-            "bucket": "A",
-            "mode": "A_LONG_FIRST"
-          },
-          {
-            "slug": "what-if-gps-went-dark-for-a-day",
-            "LongFormPotentialScore": 83,
-            "bucket": "A",
-            "mode": "A_LONG_FIRST"
-          },
-          {
             "slug": "what-if-the-ozone-hole-never-closed",
             "LongFormPotentialScore": 82,
             "bucket": "A",
@@ -528,6 +516,18 @@
           },
           {
             "slug": "what-if-the-tunguska-blast-happened-over-a-city",
+            "LongFormPotentialScore": 82,
+            "bucket": "A",
+            "mode": "A_LONG_FIRST"
+          },
+          {
+            "slug": "could-earth-survive-one-day-without-earth-s-magnetic-field",
+            "LongFormPotentialScore": 82,
+            "bucket": "A",
+            "mode": "A_LONG_FIRST"
+          },
+          {
+            "slug": "what-if-the-permafrost-thawed",
             "LongFormPotentialScore": 82,
             "bucket": "A",
             "mode": "A_LONG_FIRST"
@@ -583,7 +583,7 @@
         {
           "slug": "what-if-human-heat-tolerance-doubled-overnight",
           "bucket": "C",
-          "reason": "VideoPotential 72 in experimental band 58–71; boilerplate 0.5"
+          "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
         },
         {
           "slug": "could-we-function-with-half-human-heat-tolerance",
@@ -593,12 +593,7 @@
         {
           "slug": "what-if-human-muscle-efficiency-doubled-overnight",
           "bucket": "C",
-          "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
-        },
-        {
-          "slug": "what-happens-if-the-global-ocean-doubles",
-          "bucket": "C",
-          "reason": "VideoPotential 72 in experimental band 58–71; boilerplate 0.5"
+          "reason": "VideoPotential 70 in experimental band 58–71; boilerplate 0.5"
         },
         {
           "slug": "what-if-the-brain-s-energy-use-doubled-overnight",
@@ -608,12 +603,17 @@
         {
           "slug": "could-we-function-with-half-human-muscle-efficiency",
           "bucket": "C",
-          "reason": "VideoPotential 69 in experimental band 58–71; boilerplate 0.5"
+          "reason": "VideoPotential 68 in experimental band 58–71; boilerplate 0.5"
         },
         {
           "slug": "if-a-rogue-planet-vanished-right-now-what-would-change-first",
           "bucket": "C",
-          "reason": "VideoPotential 73 in experimental band 58–71; boilerplate 0.5"
+          "reason": "VideoPotential 72 in experimental band 58–71; boilerplate 0.5"
+        },
+        {
+          "slug": "what-happens-if-the-global-ocean-doubles",
+          "bucket": "C",
+          "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
         },
         {
           "slug": "would-doubling-all-synthetic-fertilizers-help-or-harm-us",

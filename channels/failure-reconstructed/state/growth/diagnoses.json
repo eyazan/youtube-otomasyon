@@ -2746,5 +2746,44 @@
       }
     ],
     "at": "2026-10-25T18:28:37.050Z"
+  },
+  {
+    "videoId": "SjJHvPtSvcg",
+    "channel": "failure-reconstructed",
+    "contentType": "short",
+    "checkpoint": "7d",
+    "diagnoses": [
+      {
+        "code": "RETENTION_FAILURE",
+        "confidence": "medium",
+        "evidence": "average viewed 64.65% < 65%",
+        "recommendation": "Cut setup sentences; move the mechanism earlier.",
+        "specCode": "RETENTION_WEAK"
+      }
+    ],
+    "at": "2026-10-26T18:44:58.431Z"
+  },
+  {
+    "videoId": "bqTpdauhlHo",
+    "channel": "failure-reconstructed",
+    "contentType": "short",
+    "checkpoint": "30d",
+    "diagnoses": [
+      {
+        "code": "STRONG_TOPIC_AUDIENCE_FIT",
+        "confidence": "medium",
+        "evidence": "2.3 subs / 1,000 views vs channel median 0.83",
+        "recommendation": "Nominate adjacent topics in this cluster; candidate for a series.",
+        "specCode": "STRONG_TOPIC_AUDIENCE_FIT"
+      },
+      {
+        "code": "STRONG_DISCOVERY",
+        "confidence": "medium",
+        "evidence": "1742 views vs channel Shorts median 446",
+        "recommendation": "Study the opening and topic; replicate one variable at a time.",
+        "specCode": "STRONG_DISCOVERY"
+      }
+    ],
+    "at": "2026-10-26T18:44:58.431Z"
   }
 ]

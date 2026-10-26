@@ -7,13 +7,21 @@ https://youtu.be/tH-casKT7OY
 | Checkpoint | Collected | Views | Likes | Comments | Avg % viewed | Subs (net) | Top traffic |
 |---|---|---:|---:|---:|---:|---:|---|
 | 1d | 2026-10-24 | 205 | 4 | 1 | — | — |  |
+| 3d | 2026-10-26 | 255 | 6 | 1 | 65.04 | 0 | Shorts feed 86%, Search 13% |
 
-## Diagnosis at 1d
+## Diagnosis at 3d
 
-- **INSUFFICIENT_DATA** (high) — 205 views after 1 days — too early/small for rate-based conclusions.
 - **WEAK_TOPIC_PACKAGING** (low) — Current title scores 48.9/100 in the title engine; best editorial option scores 48.9.
 
 ## Suggested interventions
 
-- INSUFFICIENT DATA → no intervention; wait for the next checkpoint.
 - WEAK PACKAGING (heuristic) → candidate for a logged title experiment once data exists.
+
+## First major observed retention drop
+
+- Timestamp: 6s; magnitude: 15 percentage points.
+- Active sentence: Wind-driven fire swept through the historic town of Lahaina on Maui.
+- Visual type: REAL ARCHIVAL IMAGE
+- This is an observed alignment, not proof that the sentence or visual caused the drop.
+
+Views gained between 1d and 3d: 50.

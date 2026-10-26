@@ -1,14 +1,14 @@
 # Growth dashboard
 
-Generated 2026-10-26T17:40:22.961Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-10-26T18:45:16.296Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
-**Shorts health** — last published 2026-10-23T18:00:00.000Z · 32 published · inventory A108/B119/C59/D59 · next: columbia-2003 (EXPLORE (0.25): under-sampled cluster spaceflight-disasters)
+**Shorts health** — last published 2026-10-23T18:00:00.000Z · 32 published · inventory A101/B126/C59/D59 · next: columbia-2003 (EXPLORE (0.25): under-sampled cluster spaceflight-disasters)
 
 **Long-form health** — cycle 2026-W44: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W44 already QUALITY_BLOCKED)
 
-**Long-form backlog** — air-france-447-2009 86/A, challenger-1986 86/A, chernobyl-1986 86/A, columbia-2003 86/A, fairchild-b52-1994 85/A
+**Long-form backlog** — air-france-447-2009 86/A, challenger-1986 86/A, chernobyl-1986 86/A, columbia-2003 85/A, fairchild-b52-1994 85/A
 
 **Content clusters** — 12 · integrity OK
 
@@ -21,10 +21,10 @@ Generated 2026-10-26T17:40:22.961Z. Per-channel baselines are computed separatel
 **Research/source enrichment tasks**
 
 - apollo-1-1967 (C): VideoPotential 87 in experimental band 58–71; sources 41 < 62
-- munich-1958 (C): VideoPotential 86 in experimental band 58–71; sources 41 < 62
 - skylab-1973 (C): VideoPotential 85 in experimental band 58–71; sources 41 < 62
+- munich-1958 (C): VideoPotential 86 in experimental band 58–71; sources 41 < 62
 - vanguard-1957 (C): VideoPotential 83 in experimental band 58–71; sources 41 < 62
-- castle-bravo-1954 (C): VideoPotential 85 in experimental band 58–71; sources 41 < 62
+- castle-bravo-1954 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
 
 **Recent alerts**
 
@@ -41,11 +41,11 @@ Generated 2026-10-26T17:40:22.961Z. Per-channel baselines are computed separatel
 
 ## ImpossibleBrief
 
-**Shorts health** — last published 2026-10-19T18:00:00.000Z · 19 published · inventory A109/B25/C140/D206 · next: what-if-we-tried-to-drill-through-the-earth (EXPLOIT (0.75): best A topic by SelectionScore)
+**Shorts health** — last published 2026-10-19T18:00:00.000Z · 19 published · inventory A113/B21/C140/D206 · next: what-if-we-tried-to-drill-through-the-earth (EXPLOIT (0.75): best A topic by SelectionScore)
 
 **Long-form health** — cycle 2026-W44: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W44 already QUALITY_BLOCKED)
 
-**Long-form backlog** — what-if-we-mined-a-metal-asteroid 83/A, what-if-synthetic-fertilizer-disappeared 83/A, what-if-gps-went-dark-for-a-day 83/A, what-if-the-ozone-hole-never-closed 82/A, what-if-the-tunguska-blast-happened-over-a-city 82/A
+**Long-form backlog** — what-if-we-mined-a-metal-asteroid 83/A, what-if-the-ozone-hole-never-closed 82/A, what-if-the-tunguska-blast-happened-over-a-city 82/A, could-earth-survive-one-day-without-earth-s-magnetic-field 82/A, what-if-the-permafrost-thawed 82/A
 
 **Content clusters** — 7 · integrity OK
 
@@ -57,11 +57,11 @@ Generated 2026-10-26T17:40:22.961Z. Per-channel baselines are computed separatel
 
 **Research/source enrichment tasks**
 
-- what-if-human-heat-tolerance-doubled-overnight (C): VideoPotential 72 in experimental band 58–71; boilerplate 0.5
+- what-if-human-heat-tolerance-doubled-overnight (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
 - could-we-function-with-half-human-heat-tolerance (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
-- what-if-human-muscle-efficiency-doubled-overnight (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
-- what-happens-if-the-global-ocean-doubles (C): VideoPotential 72 in experimental band 58–71; boilerplate 0.5
+- what-if-human-muscle-efficiency-doubled-overnight (C): VideoPotential 70 in experimental band 58–71; boilerplate 0.5
 - what-if-the-brain-s-energy-use-doubled-overnight (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
+- could-we-function-with-half-human-muscle-efficiency (C): VideoPotential 68 in experimental band 58–71; boilerplate 0.5
 
 **Recent alerts**
 
