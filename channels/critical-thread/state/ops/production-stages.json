@@ -2,50 +2,6 @@
   "channel": "critical-thread",
   "runs": [
     {
-      "runId": "40089544936",
-      "attempt": "1",
-      "startedAt": "2026-10-24T11:22:43.360Z",
-      "publish": true,
-      "trigger": {
-        "event": "schedule",
-        "correlationId": null
-      },
-      "targetDay": null,
-      "slug": null,
-      "outcome": "FAILED",
-      "reason": "health pre-flight: nitelikli-konu: kalite çubuğunu geçen konu yok — NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [6 unused A topic(s), best viral score 73 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]; seslendirme: NARRATION_UNAVAILABLE: Edge sesi reddedildi (Edge TTS WebSocket error: Unexpected server response: 200, ",
-      "stages": {
-        "RESEARCH": {
-          "status": "not-reached"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "not-reached"
-        },
-        "QA": {
-          "status": "not-reached"
-        },
-        "UPLOAD": {
-          "status": "not-reached"
-        },
-        "SCHEDULE": {
-          "status": "not-reached"
-        },
-        "PUBLISH": {
-          "status": "not-reached"
-        }
-      },
-      "finishedAt": "2026-10-24T11:22:51.507Z"
-    },
-    {
       "runId": "40091462865",
       "attempt": "1",
       "startedAt": "2026-10-24T11:51:28.827Z",
@@ -1320,6 +1276,50 @@
         }
       },
       "finishedAt": "2026-10-26T13:52:41.113Z"
+    },
+    {
+      "runId": "40339265899",
+      "attempt": "1",
+      "startedAt": "2026-10-26T14:25:28.666Z",
+      "publish": true,
+      "trigger": {
+        "event": "schedule",
+        "correlationId": null
+      },
+      "targetDay": null,
+      "slug": null,
+      "outcome": "FAILED",
+      "reason": "health pre-flight: nitelikli-konu: kalite çubuğunu geçen konu yok — NO_EXPLORE_CANDIDATE; seslendirme: NARRATION_UNAVAILABLE: Edge sesi reddedildi (Edge TTS WebSocket error: Unexpected server response: 200, Edge TTS WebSocket error: Unexpected server response: 200, Edge TTS WebSocket error: Unexpected server response: 200; msedge-tts 2.1.0); yedek ses yok — fallback voice af_heart is not approved ",
+      "stages": {
+        "RESEARCH": {
+          "status": "not-reached"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "not-reached"
+        },
+        "QA": {
+          "status": "not-reached"
+        },
+        "UPLOAD": {
+          "status": "not-reached"
+        },
+        "SCHEDULE": {
+          "status": "not-reached"
+        },
+        "PUBLISH": {
+          "status": "not-reached"
+        }
+      },
+      "finishedAt": "2026-10-26T14:25:38.785Z"
     }
   ]
 }
