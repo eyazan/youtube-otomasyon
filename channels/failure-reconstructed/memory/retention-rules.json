@@ -2,13 +2,13 @@
   "channel": "failure-reconstructed",
   "status": "sample-floor-met",
   "minimumSample": 5,
-  "sampleSize": 28,
+  "sampleSize": 29,
   "learnedRules": [
     {
       "key": "hookType",
       "value": "consequence",
       "weakValue": "statement",
-      "evidenceVideos": 28,
+      "evidenceVideos": 29,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
@@ -23,8 +23,8 @@
         },
         {
           "value": "statement",
-          "sample": 17,
-          "averagePercentageViewed": 66.52
+          "sample": 18,
+          "averagePercentageViewed": 66.35
         }
       ]
     },
@@ -32,7 +32,7 @@
       "key": "durationRange",
       "value": "over-35s",
       "weakValue": "under-25s",
-      "evidenceVideos": 28,
+      "evidenceVideos": 29,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
@@ -42,8 +42,8 @@
         },
         {
           "value": "25-35s",
-          "sample": 19,
-          "averagePercentageViewed": 86.25
+          "sample": 20,
+          "averagePercentageViewed": 85.12
         },
         {
           "value": "under-25s",
@@ -56,7 +56,7 @@
       "key": "secondBeat",
       "value": "countdown",
       "weakValue": "event",
-      "evidenceVideos": 28,
+      "evidenceVideos": 29,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
@@ -85,7 +85,7 @@
       "key": "visualChangeFrequency",
       "value": "fast",
       "weakValue": "measured",
-      "evidenceVideos": 28,
+      "evidenceVideos": 29,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
@@ -104,13 +104,18 @@
       "key": "questionStyle",
       "value": "question",
       "weakValue": null,
-      "evidenceVideos": 28,
+      "evidenceVideos": 29,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
           "value": "question",
           "sample": 28,
           "averagePercentageViewed": 82.68
+        },
+        {
+          "value": "statement",
+          "sample": 1,
+          "averagePercentageViewed": 63.61
         }
       ]
     },
@@ -118,7 +123,7 @@
       "key": "category",
       "value": "nuclear-accidents",
       "weakValue": "materials-failures",
-      "evidenceVideos": 28,
+      "evidenceVideos": 29,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
@@ -187,17 +192,17 @@
       "key": "ctaStyle",
       "value": "adaptive after payoff",
       "weakValue": null,
-      "evidenceVideos": 28,
+      "evidenceVideos": 29,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
           "value": "adaptive after payoff",
-          "sample": 28,
-          "averagePercentageViewed": 82.68
+          "sample": 29,
+          "averagePercentageViewed": 82.02
         }
       ]
     }
   ],
-  "lastUpdated": "2026-10-26T15:18:37.796Z",
+  "lastUpdated": "2026-10-26T16:42:20.262Z",
   "caveat": "Observed associations only; topic, timing and packaging can confound retention. No causal claim."
 }
