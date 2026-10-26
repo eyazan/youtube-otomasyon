@@ -1,12 +1,12 @@
 # Growth dashboard
 
-Generated 2026-10-25T19:09:56.693Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-10-26T12:42:41.191Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
-**Shorts health** — last published 2026-10-23T18:00:00.000Z · 31 published · inventory A109/B118/C59/D59 · next: titanic-1912 (EXPLOIT (0.75): best A topic by SelectionScore)
+**Shorts health** — last published 2026-10-23T18:00:00.000Z · 31 published · inventory A109/B118/C59/D59 · next: columbia-2003 (EXPLORE (0.25): under-sampled cluster spaceflight-disasters)
 
-**Long-form health** — cycle 2026-W43: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W43 already QUALITY_BLOCKED)
+**Long-form health** — cycle 2026-W44: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W44 already QUALITY_BLOCKED)
 
 **Long-form backlog** — air-france-447-2009 86/A, challenger-1986 86/A, chernobyl-1986 86/A, columbia-2003 86/A, fairchild-b52-1994 85/A
 
@@ -43,7 +43,7 @@ Generated 2026-10-25T19:09:56.693Z. Per-channel baselines are computed separatel
 
 **Shorts health** — last published 2026-10-19T18:00:00.000Z · 19 published · inventory A109/B25/C140/D206 · next: what-if-we-tried-to-drill-through-the-earth (EXPLOIT (0.75): best A topic by SelectionScore)
 
-**Long-form health** — cycle 2026-W43: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W43 already QUALITY_BLOCKED)
+**Long-form health** — cycle 2026-W44: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W44 already QUALITY_BLOCKED)
 
 **Long-form backlog** — what-if-we-mined-a-metal-asteroid 83/A, what-if-synthetic-fertilizer-disappeared 83/A, what-if-gps-went-dark-for-a-day 83/A, what-if-the-ozone-hole-never-closed 82/A, what-if-the-tunguska-blast-happened-over-a-city 82/A
 
@@ -78,9 +78,9 @@ Generated 2026-10-25T19:09:56.693Z. Per-channel baselines are computed separatel
 
 ## CriticalThread
 
-**Shorts health** — last published 2026-10-13T18:00:00.000Z · 8 published · inventory A8/B144/C0/D362 · next: the-hidden-system-behind-border-gateway-routing-system (EXPLOIT (0.75): best A topic by SelectionScore)
+**Shorts health** — last published 2026-10-13T18:00:00.000Z · 8 published · inventory A8/B144/C0/D362 · next: why-rail-signaling-interlocking-is-so-hard-to-replace (EXPLORE (0.25): under-sampled cluster RAIL)
 
-**Long-form health** — cycle 2026-W43: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W43 already QUALITY_BLOCKED)
+**Long-form health** — cycle 2026-W44: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W44 already QUALITY_BLOCKED)
 
 **Long-form backlog** — the-critical-role-of-urban-traffic-control-network 79/A, why-submarine-fiber-optic-cable-is-so-hard-to-replace 78/A, what-quietly-depends-on-cable-landing-station 78/A, the-critical-role-of-cable-laying-ship 78/A, inside-the-system-built-around-road-tunnel-ventilation-system 78/A
 

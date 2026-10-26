@@ -194,6 +194,56 @@
       "selected": null,
       "reason": "no candidate passed the long-form quality gate; cadence does not override quality",
       "finishedAt": "2026-10-19T12:54:09.124Z"
+    },
+    {
+      "cycleId": "2026-W44",
+      "channel": "failure-reconstructed",
+      "startedAt": "2026-10-26T12:42:17.460Z",
+      "status": "QUALITY_BLOCKED",
+      "evaluated": [
+        {
+          "slug": "air-france-447-2009",
+          "mode": "B_SHORT_PROVES_DEMAND",
+          "LongFormPotentialScore": 86,
+          "bucket": "A",
+          "decision": "BLOCK",
+          "score": 83,
+          "hardFails": [
+            "INSUFFICIENT_DEPTH: evidence supports ~1.9 min; target 8–12 min — not padded",
+            "LLM generation failed safely (REQUEST_TOO_LARGE); deterministic evidence draft retained"
+          ],
+          "generationStatus": "FAILED"
+        },
+        {
+          "slug": "challenger-1986",
+          "mode": "B_SHORT_PROVES_DEMAND",
+          "LongFormPotentialScore": 86,
+          "bucket": "A",
+          "decision": "BLOCK",
+          "score": 83,
+          "hardFails": [
+            "INSUFFICIENT_DEPTH: evidence supports ~2.2 min; target 8–12 min — not padded",
+            "LLM generation failed safely (REQUEST_TOO_LARGE); deterministic evidence draft retained"
+          ],
+          "generationStatus": "FAILED"
+        },
+        {
+          "slug": "chernobyl-1986",
+          "mode": "B_SHORT_PROVES_DEMAND",
+          "LongFormPotentialScore": 86,
+          "bucket": "A",
+          "decision": "BLOCK",
+          "score": 89,
+          "hardFails": [
+            "INSUFFICIENT_DEPTH: evidence supports ~1.8 min; target 8–12 min — not padded",
+            "LLM generation failed safely (REQUEST_TOO_LARGE); deterministic evidence draft retained"
+          ],
+          "generationStatus": "FAILED"
+        }
+      ],
+      "selected": null,
+      "reason": "no candidate passed the long-form quality gate; cadence does not override quality",
+      "finishedAt": "2026-10-26T12:42:18.733Z"
     }
   ]
 }

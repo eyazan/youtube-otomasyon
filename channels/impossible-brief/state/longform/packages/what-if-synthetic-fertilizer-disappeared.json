@@ -3,7 +3,7 @@
   "channel": "impossible-brief",
   "channelName": "ImpossibleBrief",
   "contentType": "long",
-  "createdAt": "2026-09-30T15:48:34.232Z",
+  "createdAt": "2026-10-26T12:42:18.789Z",
   "topic": {
     "id": "IB-OTH-020",
     "slug": "what-if-synthetic-fertilizer-disappeared",
@@ -17,10 +17,10 @@
     "slug": "what-if-synthetic-fertilizer-disappeared",
     "title": "What If Synthetic Fertilizer Disappeared?",
     "cluster": "OTHER",
-    "LongFormPotentialScore": 78,
+    "LongFormPotentialScore": 83,
     "bucket": "A",
     "reasons": [
-      "LongFormPotential 78 ≥ 78"
+      "LongFormPotential 83 ≥ 78"
     ],
     "factors": {
       "DepthPotential": {
@@ -58,16 +58,16 @@
         "basis": "inventory-signal"
       },
       "ShortsEvidence": {
-        "value": 50,
-        "basis": "derived",
-        "note": "no published Short in this cluster yet — neutral"
+        "value": 67,
+        "basis": "measured",
+        "note": "best cluster Short 1250 views vs channel median 920; best subscriber conversion unavailable; best growth score 94.8"
       },
       "SeriesPotential": {
-        "value": 80,
+        "value": 95,
         "basis": "derived"
       },
       "ViewerJourneyPotential": {
-        "value": 55,
+        "value": 85,
         "basis": "derived"
       }
     },
@@ -129,7 +129,7 @@
       "licence": "CC BY-SA 4.0 — facts only; never narrate verbatim"
     },
     "gaps": [],
-    "reuseCount": 0
+    "reuseCount": 1
   },
   "outline": {
     "structure": [
@@ -414,80 +414,95 @@
       {
         "type": "visual_first_reveal",
         "text": "Why 7.7 billion people depend on air-made fertilizer.",
-        "score": 74,
+        "score": 81,
         "estimatedSeconds": 2.5
       },
       {
         "type": "contradiction",
         "text": "Air is about 78% nitrogen, but it barely reacts.",
-        "score": 73,
+        "score": 78,
         "estimatedSeconds": 2.8
       },
       {
         "type": "impossible_question",
         "text": "What If Synthetic Fertilizer Disappeared?",
-        "score": 69,
+        "score": 76,
         "estimatedSeconds": 1.6
       },
       {
         "type": "hidden_cause",
         "text": "The world lost synthetic nitrogen fertilizer.",
-        "score": 69,
+        "score": 76,
         "estimatedSeconds": 1.9
-      },
-      {
-        "type": "impossible_sounding_fact",
-        "text": "Each pass converts only about 15% into ammonia.",
-        "score": 68,
-        "estimatedSeconds": 2.5
       },
       {
         "type": "before_after_consequence",
         "text": "Without it, today's harvests couldn't feed today's population.",
-        "score": 68,
+        "score": 75,
         "estimatedSeconds": 2.5
       },
       {
         "type": "shocking_consequence",
         "text": "Harvests would fall far below what today's population needs.",
-        "score": 66,
+        "score": 74,
         "estimatedSeconds": 2.8
+      },
+      {
+        "type": "impossible_sounding_fact",
+        "text": "Each pass converts only about 15% into ammonia.",
+        "score": 74,
+        "estimatedSeconds": 2.5
       },
       {
         "type": "misconception_reversal",
         "text": "It would not all happen at once.",
-        "score": 63,
+        "score": 71,
         "estimatedSeconds": 2.2
       },
       {
         "type": "unexpected_chain_reaction",
         "text": "The Haber process pulls nitrogen from the air.",
-        "score": 62,
+        "score": 71,
         "estimatedSeconds": 2.5
       },
       {
         "type": "question_gap",
         "text": "What changes first?",
-        "score": 61,
+        "score": 68,
         "estimatedSeconds": 0.9
+      },
+      {
+        "type": "mechanism_reveal",
+        "text": "The world failed because the Haber process fixes atmospheric nitrogen into ammonia, the basis of most nitrogen fertilizer.",
+        "score": 67,
+        "estimatedSeconds": 5.6
       },
       {
         "type": "scarcity_bottleneck",
         "text": "On each pass, only about 15% conversion occurs; due to the recycling of leftover reactants, eventually conversion of 97% is achieved.",
-        "score": 55,
+        "score": 56,
         "estimatedSeconds": 6.6
       }
     ],
     "selected": {
       "type": "visual_first_reveal",
       "text": "Why 7.7 billion people depend on air-made fertilizer.",
-      "score": 74,
+      "score": 81,
       "estimatedSeconds": 2.5
     }
   },
   "script": {
     "generator": "deterministic-evidence",
-    "llmError": null,
+    "provider": "groq",
+    "model": null,
+    "status": "FAILED",
+    "pipeline": null,
+    "blueprint": null,
+    "quality": null,
+    "checkpoint": "generation/what-if-synthetic-fertilizer-disappeared.json",
+    "llmError": "groq request too large (HTTP 413)",
+    "llmErrorCode": "REQUEST_TOO_LARGE",
+    "llmErrorStage": "narrative-angle",
     "depthNote": null,
     "sections": [
       {
@@ -1055,17 +1070,29 @@
         "searchIntent": 95,
         "channelIdentity": 50,
         "ctrPotential": 69,
-        "novelty": 100,
-        "evergreenPotential": 85
+        "novelty": 93,
+        "evergreenPotential": 85,
+        "consequence": 42,
+        "compactness": 71,
+        "recognizability": 80,
+        "nonRedundancy": 93,
+        "factualIntegrity": 85,
+        "historicalPerformanceSimilarity": 50,
+        "patternFreshness": 70
       },
       "total": 81,
-      "adjustedTotal": 81,
+      "patternPenalty": 7,
+      "templateNaturalnessPenalty": 0,
+      "genericTemplatePenalty": 0,
+      "adjustedTotal": 74,
       "unsupportedWords": [
         "scenario"
       ],
-      "misleading": false
+      "misleading": false,
+      "grammar": [],
+      "ungrammatical": false
     },
-    "selectedScore": 81,
+    "selectedScore": 74,
     "count": 23,
     "candidates": [
       {
@@ -1080,15 +1107,27 @@
           "searchIntent": 95,
           "channelIdentity": 50,
           "ctrPotential": 69,
-          "novelty": 100,
-          "evergreenPotential": 85
+          "novelty": 93,
+          "evergreenPotential": 85,
+          "consequence": 42,
+          "compactness": 71,
+          "recognizability": 80,
+          "nonRedundancy": 93,
+          "factualIntegrity": 85,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 70
         },
         "total": 81,
-        "adjustedTotal": 81,
+        "patternPenalty": 7,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 74,
         "unsupportedWords": [
           "scenario"
         ],
-        "misleading": false
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
       },
       {
         "title": "The World: A Scientific Thought Experiment",
@@ -1103,12 +1142,24 @@
           "channelIdentity": 50,
           "ctrPotential": 55,
           "novelty": 100,
-          "evergreenPotential": 85
+          "evergreenPotential": 85,
+          "consequence": 42,
+          "compactness": 100,
+          "recognizability": 80,
+          "nonRedundancy": 100,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
         },
         "total": 74,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
         "adjustedTotal": 74,
         "unsupportedWords": [],
-        "misleading": false
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
       },
       {
         "title": "How Long Would Earth Last If Synthetic Fertilizer Disappeared?",
@@ -1122,13 +1173,25 @@
           "searchIntent": 42,
           "channelIdentity": 62,
           "ctrPotential": 69,
-          "novelty": 100,
-          "evergreenPotential": 75
+          "novelty": 91,
+          "evergreenPotential": 75,
+          "consequence": 42,
+          "compactness": 96,
+          "recognizability": 38,
+          "nonRedundancy": 91,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
         },
         "total": 73,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
         "adjustedTotal": 73,
         "unsupportedWords": [],
-        "misleading": false
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
       },
       {
         "title": "What Would Really Happen If Synthetic Fertilizer Disappeared?",
@@ -1142,33 +1205,25 @@
           "searchIntent": 42,
           "channelIdentity": 50,
           "ctrPotential": 69,
-          "novelty": 100,
-          "evergreenPotential": 75
+          "novelty": 90,
+          "evergreenPotential": 75,
+          "consequence": 42,
+          "compactness": 98,
+          "recognizability": 38,
+          "nonRedundancy": 90,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
         },
         "total": 72,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
         "adjustedTotal": 72,
         "unsupportedWords": [],
-        "misleading": false
-      },
-      {
-        "title": "What If Synthetic Fertilizer Disappeared?",
-        "source": "current",
-        "pattern": "what-if-question",
-        "scores": {
-          "clarity": 100,
-          "curiosity": 84,
-          "specificity": 47,
-          "truthfulness": 100,
-          "searchIntent": 42,
-          "channelIdentity": 50,
-          "ctrPotential": 69,
-          "novelty": 100,
-          "evergreenPotential": 75
-        },
-        "total": 72,
-        "adjustedTotal": 72,
-        "unsupportedWords": [],
-        "misleading": false
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
       },
       {
         "title": "If Synthetic Fertilizer Disappeared: What Breaks First, and What Breaks Last",
@@ -1183,12 +1238,24 @@
           "channelIdentity": 50,
           "ctrPotential": 67,
           "novelty": 82,
-          "evergreenPotential": 75
+          "evergreenPotential": 75,
+          "consequence": 80,
+          "compactness": 61,
+          "recognizability": 38,
+          "nonRedundancy": 82,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
         },
         "total": 69,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
         "adjustedTotal": 69,
         "unsupportedWords": [],
-        "misleading": false
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
       },
       {
         "title": "Why Much of Your Food Began as Air",
@@ -1203,12 +1270,56 @@
           "channelIdentity": 60,
           "ctrPotential": 57,
           "novelty": 100,
-          "evergreenPotential": 75
+          "evergreenPotential": 75,
+          "consequence": 42,
+          "compactness": 100,
+          "recognizability": 38,
+          "nonRedundancy": 100,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
         },
         "total": 68,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
         "adjustedTotal": 68,
         "unsupportedWords": [],
-        "misleading": false
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
+        "title": "What If Synthetic Fertilizer Disappeared?",
+        "source": "current",
+        "pattern": "what-if-question",
+        "scores": {
+          "clarity": 100,
+          "curiosity": 84,
+          "specificity": 47,
+          "truthfulness": 100,
+          "searchIntent": 42,
+          "channelIdentity": 50,
+          "ctrPotential": 69,
+          "novelty": 100,
+          "evergreenPotential": 75,
+          "consequence": 42,
+          "compactness": 100,
+          "recognizability": 38,
+          "nonRedundancy": 100,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 70
+        },
+        "total": 72,
+        "patternPenalty": 4,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 68,
+        "unsupportedWords": [],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
       },
       {
         "title": "Could Humanity Survive If Synthetic Fertilizer Disappeared?",
@@ -1223,32 +1334,24 @@
           "channelIdentity": 50,
           "ctrPotential": 57,
           "novelty": 100,
-          "evergreenPotential": 75
+          "evergreenPotential": 75,
+          "consequence": 42,
+          "compactness": 100,
+          "recognizability": 38,
+          "nonRedundancy": 100,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
         },
         "total": 67,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
         "adjustedTotal": 67,
         "unsupportedWords": [],
-        "misleading": false
-      },
-      {
-        "title": "The Real Physics If Synthetic Fertilizer Disappeared",
-        "source": "real-physics",
-        "pattern": "statement",
-        "scores": {
-          "clarity": 100,
-          "curiosity": 58,
-          "specificity": 47,
-          "truthfulness": 100,
-          "searchIntent": 30,
-          "channelIdentity": 62,
-          "ctrPotential": 57,
-          "novelty": 100,
-          "evergreenPotential": 75
-        },
-        "total": 67,
-        "adjustedTotal": 67,
-        "unsupportedWords": [],
-        "misleading": false
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
       },
       {
         "title": "If Synthetic Fertilizer Disappeared — Simulated With Real Science",
@@ -1262,13 +1365,25 @@
           "searchIntent": 30,
           "channelIdentity": 62,
           "ctrPotential": 57,
-          "novelty": 100,
-          "evergreenPotential": 75
+          "novelty": 93,
+          "evergreenPotential": 75,
+          "consequence": 42,
+          "compactness": 90,
+          "recognizability": 38,
+          "nonRedundancy": 93,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
         },
         "total": 67,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
         "adjustedTotal": 67,
         "unsupportedWords": [],
-        "misleading": false
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
       },
       {
         "title": "If Synthetic Fertilizer Disappeared: First Effect to Final Outcome",
@@ -1283,12 +1398,24 @@
           "channelIdentity": 50,
           "ctrPotential": 57,
           "novelty": 93,
-          "evergreenPotential": 75
+          "evergreenPotential": 75,
+          "consequence": 42,
+          "compactness": 88,
+          "recognizability": 38,
+          "nonRedundancy": 93,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
         },
         "total": 66,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
         "adjustedTotal": 66,
         "unsupportedWords": [],
-        "misleading": false
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
       },
       {
         "title": "If Synthetic Fertilizer Disappeared — What Physics Says Happens Next",
@@ -1302,15 +1429,27 @@
           "searchIntent": 30,
           "channelIdentity": 62,
           "ctrPotential": 57,
-          "novelty": 100,
-          "evergreenPotential": 75
+          "novelty": 85,
+          "evergreenPotential": 75,
+          "consequence": 42,
+          "compactness": 84,
+          "recognizability": 38,
+          "nonRedundancy": 85,
+          "factualIntegrity": 85,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
         },
         "total": 65,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
         "adjustedTotal": 65,
         "unsupportedWords": [
           "says"
         ],
-        "misleading": false
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
       },
       {
         "title": "If Synthetic Fertilizer Disappeared: The Full Breakdown",
@@ -1324,13 +1463,25 @@
           "searchIntent": 30,
           "channelIdentity": 50,
           "ctrPotential": 53,
-          "novelty": 100,
-          "evergreenPotential": 75
+          "novelty": 91,
+          "evergreenPotential": 75,
+          "consequence": 80,
+          "compactness": 100,
+          "recognizability": 38,
+          "nonRedundancy": 91,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
         },
         "total": 64,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
         "adjustedTotal": 64,
         "unsupportedWords": [],
-        "misleading": false
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
       },
       {
         "title": "What Changes — And What Doesn't — If Synthetic Fertilizer Disappeared",
@@ -1345,34 +1496,26 @@
           "channelIdentity": 50,
           "ctrPotential": 57,
           "novelty": 100,
-          "evergreenPotential": 75
+          "evergreenPotential": 75,
+          "consequence": 42,
+          "compactness": 75,
+          "recognizability": 38,
+          "nonRedundancy": 100,
+          "factualIntegrity": 85,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
         },
         "total": 64,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
         "adjustedTotal": 64,
         "unsupportedWords": [
           "doesnt"
         ],
-        "misleading": false
-      },
-      {
-        "title": "The Chemical Reaction Feeding Billions",
-        "source": "editorial",
-        "pattern": "statement",
-        "scores": {
-          "clarity": 97,
-          "curiosity": 40,
-          "specificity": 47,
-          "truthfulness": 100,
-          "searchIntent": 30,
-          "channelIdentity": 60,
-          "ctrPotential": 45,
-          "novelty": 100,
-          "evergreenPotential": 75
-        },
-        "total": 63,
-        "adjustedTotal": 63,
-        "unsupportedWords": [],
-        "misleading": false
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
       },
       {
         "title": "If Synthetic Fertilizer Disappeared: The Complete Scientific Timeline",
@@ -1387,32 +1530,24 @@
           "channelIdentity": 50,
           "ctrPotential": 45,
           "novelty": 100,
-          "evergreenPotential": 75
+          "evergreenPotential": 75,
+          "consequence": 42,
+          "compactness": 82,
+          "recognizability": 38,
+          "nonRedundancy": 100,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
         },
         "total": 63,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
         "adjustedTotal": 63,
         "unsupportedWords": [],
-        "misleading": false
-      },
-      {
-        "title": "If Synthetic Fertilizer Disappeared, Minute by Minute",
-        "source": "minute-by-minute",
-        "pattern": "statement",
-        "scores": {
-          "clarity": 100,
-          "curiosity": 40,
-          "specificity": 47,
-          "truthfulness": 100,
-          "searchIntent": 30,
-          "channelIdentity": 50,
-          "ctrPotential": 45,
-          "novelty": 100,
-          "evergreenPotential": 75
-        },
-        "total": 63,
-        "adjustedTotal": 63,
-        "unsupportedWords": [],
-        "misleading": false
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
       },
       {
         "title": "The Chain Reaction That Follows If Synthetic Fertilizer Disappeared",
@@ -1427,97 +1562,56 @@
           "channelIdentity": 50,
           "ctrPotential": 45,
           "novelty": 100,
-          "evergreenPotential": 75
+          "evergreenPotential": 75,
+          "consequence": 42,
+          "compactness": 86,
+          "recognizability": 38,
+          "nonRedundancy": 100,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
         },
         "total": 63,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
         "adjustedTotal": 63,
         "unsupportedWords": [],
-        "misleading": false
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
       },
       {
-        "title": "Every Consequence If Synthetic Fertilizer Disappeared, Explained",
-        "source": "every-consequence",
+        "title": "The Real Physics If Synthetic Fertilizer Disappeared",
+        "source": "real-physics",
         "pattern": "statement",
         "scores": {
           "clarity": 100,
-          "curiosity": 40,
-          "specificity": 47,
-          "truthfulness": 100,
-          "searchIntent": 30,
-          "channelIdentity": 50,
-          "ctrPotential": 45,
-          "novelty": 100,
-          "evergreenPotential": 75
-        },
-        "total": 63,
-        "adjustedTotal": 63,
-        "unsupportedWords": [],
-        "misleading": false
-      },
-      {
-        "title": "The Day After Synthetic Fertilizer Disappeared",
-        "source": "day-after",
-        "pattern": "statement",
-        "scores": {
-          "clarity": 100,
-          "curiosity": 40,
-          "specificity": 47,
-          "truthfulness": 100,
-          "searchIntent": 30,
-          "channelIdentity": 50,
-          "ctrPotential": 45,
-          "novelty": 100,
-          "evergreenPotential": 75
-        },
-        "total": 63,
-        "adjustedTotal": 63,
-        "unsupportedWords": [],
-        "misleading": false
-      },
-      {
-        "title": "What Scientists Can and Can't Predict If Synthetic Fertilizer Disappeared",
-        "source": "can-cant-predict",
-        "pattern": "statement",
-        "scores": {
-          "clarity": 96,
           "curiosity": 58,
           "specificity": 47,
-          "truthfulness": 70,
-          "searchIntent": 42,
-          "channelIdentity": 50,
-          "ctrPotential": 47,
-          "novelty": 100,
-          "evergreenPotential": 75
-        },
-        "total": 61,
-        "adjustedTotal": 61,
-        "unsupportedWords": [
-          "scientists",
-          "cant"
-        ],
-        "misleading": false
-      },
-      {
-        "title": "The Second-Order Effects If Synthetic Fertilizer Disappeared",
-        "source": "second-order",
-        "pattern": "statement",
-        "scores": {
-          "clarity": 100,
-          "curiosity": 40,
-          "specificity": 47,
-          "truthfulness": 85,
+          "truthfulness": 100,
           "searchIntent": 30,
-          "channelIdentity": 50,
-          "ctrPotential": 45,
-          "novelty": 100,
-          "evergreenPotential": 75
+          "channelIdentity": 62,
+          "ctrPotential": 57,
+          "novelty": 84,
+          "evergreenPotential": 75,
+          "consequence": 42,
+          "compactness": 100,
+          "recognizability": 38,
+          "nonRedundancy": 84,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 70
         },
-        "total": 60,
+        "total": 67,
+        "patternPenalty": 7,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
         "adjustedTotal": 60,
-        "unsupportedWords": [
-          "second-order"
-        ],
-        "misleading": false
+        "unsupportedWords": [],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
       },
       {
         "title": "If Synthetic Fertilizer Disappeared: Known Science, Estimates and Speculation",
@@ -1532,66 +1626,235 @@
           "channelIdentity": 62,
           "ctrPotential": 35,
           "novelty": 100,
-          "evergreenPotential": 75
+          "evergreenPotential": 75,
+          "consequence": 42,
+          "compactness": 66,
+          "recognizability": 38,
+          "nonRedundancy": 100,
+          "factualIntegrity": 85,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
         },
         "total": 58,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
         "adjustedTotal": 58,
         "unsupportedWords": [
           "estimates"
         ],
-        "misleading": false
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
+        "title": "The Chemical Reaction Feeding Billions",
+        "source": "editorial",
+        "pattern": "statement",
+        "scores": {
+          "clarity": 97,
+          "curiosity": 40,
+          "specificity": 47,
+          "truthfulness": 100,
+          "searchIntent": 30,
+          "channelIdentity": 60,
+          "ctrPotential": 45,
+          "novelty": 100,
+          "evergreenPotential": 75,
+          "consequence": 42,
+          "compactness": 100,
+          "recognizability": 38,
+          "nonRedundancy": 100,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 70
+        },
+        "total": 63,
+        "patternPenalty": 7,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 56,
+        "unsupportedWords": [],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
+        "title": "If Synthetic Fertilizer Disappeared, Minute by Minute",
+        "source": "minute-by-minute",
+        "pattern": "statement",
+        "scores": {
+          "clarity": 100,
+          "curiosity": 40,
+          "specificity": 47,
+          "truthfulness": 100,
+          "searchIntent": 30,
+          "channelIdentity": 50,
+          "ctrPotential": 45,
+          "novelty": 100,
+          "evergreenPotential": 75,
+          "consequence": 42,
+          "compactness": 100,
+          "recognizability": 38,
+          "nonRedundancy": 100,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 70
+        },
+        "total": 63,
+        "patternPenalty": 7,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 56,
+        "unsupportedWords": [],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
+        "title": "Every Consequence If Synthetic Fertilizer Disappeared, Explained",
+        "source": "every-consequence",
+        "pattern": "statement",
+        "scores": {
+          "clarity": 100,
+          "curiosity": 40,
+          "specificity": 47,
+          "truthfulness": 100,
+          "searchIntent": 30,
+          "channelIdentity": 50,
+          "ctrPotential": 45,
+          "novelty": 91,
+          "evergreenPotential": 75,
+          "consequence": 80,
+          "compactness": 92,
+          "recognizability": 38,
+          "nonRedundancy": 91,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 70
+        },
+        "total": 63,
+        "patternPenalty": 7,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 56,
+        "unsupportedWords": [],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
+        "title": "The Day After Synthetic Fertilizer Disappeared",
+        "source": "day-after",
+        "pattern": "statement",
+        "scores": {
+          "clarity": 100,
+          "curiosity": 40,
+          "specificity": 47,
+          "truthfulness": 100,
+          "searchIntent": 30,
+          "channelIdentity": 50,
+          "ctrPotential": 45,
+          "novelty": 100,
+          "evergreenPotential": 75,
+          "consequence": 42,
+          "compactness": 100,
+          "recognizability": 38,
+          "nonRedundancy": 100,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 70
+        },
+        "total": 63,
+        "patternPenalty": 7,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 56,
+        "unsupportedWords": [],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
+        "title": "What Scientists Can and Can't Predict If Synthetic Fertilizer Disappeared",
+        "source": "can-cant-predict",
+        "pattern": "statement",
+        "scores": {
+          "clarity": 96,
+          "curiosity": 58,
+          "specificity": 47,
+          "truthfulness": 70,
+          "searchIntent": 42,
+          "channelIdentity": 50,
+          "ctrPotential": 47,
+          "novelty": 100,
+          "evergreenPotential": 75,
+          "consequence": 42,
+          "compactness": 74,
+          "recognizability": 38,
+          "nonRedundancy": 100,
+          "factualIntegrity": 70,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 70
+        },
+        "total": 61,
+        "patternPenalty": 7,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 54,
+        "unsupportedWords": [
+          "scientists",
+          "cant"
+        ],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
+        "title": "The Second-Order Effects If Synthetic Fertilizer Disappeared",
+        "source": "second-order",
+        "pattern": "statement",
+        "scores": {
+          "clarity": 100,
+          "curiosity": 40,
+          "specificity": 47,
+          "truthfulness": 85,
+          "searchIntent": 30,
+          "channelIdentity": 50,
+          "ctrPotential": 45,
+          "novelty": 100,
+          "evergreenPotential": 75,
+          "consequence": 42,
+          "compactness": 100,
+          "recognizability": 38,
+          "nonRedundancy": 100,
+          "factualIntegrity": 85,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 70
+        },
+        "total": 60,
+        "patternPenalty": 7,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 53,
+        "unsupportedWords": [
+          "second-order"
+        ],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
       }
     ]
   },
   "derivedShorts": {
     "shorts": [
       {
-        "angle": "impossible-question",
-        "hook": "Why 7.7 billion people depend on air-made fertilizer.",
-        "hookFamily": "countdown",
-        "hookScore": 74,
-        "first3SecondPlan": {
-          "narration": "Why 7.7 billion people depend on air-made fertilizer.",
-          "firstFrame": {
-            "description": "Haber process reactor diagram at the moment the impossible change begins",
-            "source": "procedural render",
-            "startAtSeconds": 0,
-            "sourceClass": "ILLUSTRATION",
-            "communicates": "mystery",
-            "rule": "labelled illustration; no logo, no establishing shot"
-          },
-          "visual": "Haber process reactor diagram at the moment the impossible change begins",
-          "onScreenText": "7.7 BILLION",
-          "motion": "scale shift: object shrinks/grows in 0.8 s, then hard cut",
-          "cutTiming": [
-            0,
-            1.3,
-            2.5
-          ],
-          "soundCue": "sub-bass swell resolving on the first cut",
-          "communicates": "mystery"
-        },
-        "miniNarrative": [
-          "Harvests would fall far below what today's population needs.",
-          "A world is a totality of entities."
-        ],
-        "payoff": "A world is a totality of entities.",
-        "captionPlan": "semantic 2–3 word chunks, ≤ 2 lines, raised above Shorts UI (config.captions)",
-        "visualRhythm": "cut ≤ 1.4 s in the first 3 s, 1.6–2.4 s to 10 s, then 2.6–3.5 s",
-        "standalone": true,
-        "longformBridge": "The full scenario gets much stranger — linked episode below.",
-        "claimIds": [
-          "C1",
-          "C21"
-        ]
-      },
-      {
         "angle": "initial-conditions",
-        "hook": "Why 7.7 billion people depend on air-made fertilizer.",
-        "hookFamily": "countdown",
-        "hookScore": 74,
+        "hook": "Assume the world lost synthetic nitrogen fertilizer.",
+        "hookFamily": "visual_first_reveal",
+        "hookScore": 80,
         "first3SecondPlan": {
-          "narration": "Why 7.7 billion people depend on air-made fertilizer.",
+          "narration": "Assume the world lost synthetic nitrogen fertilizer.",
           "firstFrame": {
             "description": "Haber process reactor diagram at the moment the impossible change begins",
             "source": "procedural render",
@@ -1601,14 +1864,14 @@
             "rule": "labelled illustration; no logo, no establishing shot"
           },
           "visual": "Haber process reactor diagram at the moment the impossible change begins",
-          "onScreenText": "7.7 BILLION",
+          "onScreenText": "FOOD FROM AIR",
           "motion": "scale shift: object shrinks/grows in 0.8 s, then hard cut",
           "cutTiming": [
             0,
-            1.3,
-            2.5
+            0.8,
+            1.6
           ],
-          "soundCue": "sub-bass swell resolving on the first cut",
+          "soundCue": "single low hit on the first cut",
           "communicates": "mystery"
         },
         "miniNarrative": [
@@ -1631,10 +1894,10 @@
         ]
       },
       {
-        "angle": "first-effect",
+        "angle": "impossible-question",
         "hook": "Why 7.7 billion people depend on air-made fertilizer.",
-        "hookFamily": "impossible_sounding_fact",
-        "hookScore": 73,
+        "hookFamily": "countdown",
+        "hookScore": 79,
         "first3SecondPlan": {
           "narration": "Why 7.7 billion people depend on air-made fertilizer.",
           "firstFrame": {
@@ -1650,10 +1913,50 @@
           "motion": "scale shift: object shrinks/grows in 0.8 s, then hard cut",
           "cutTiming": [
             0,
-            1.3,
-            2.5
+            0.8,
+            1.6
           ],
-          "soundCue": "sub-bass swell resolving on the first cut",
+          "soundCue": "single low hit on the first cut",
+          "communicates": "mystery"
+        },
+        "miniNarrative": [
+          "Harvests would fall far below what today's population needs.",
+          "A world is a totality of entities."
+        ],
+        "payoff": "A world is a totality of entities.",
+        "captionPlan": "semantic 2–3 word chunks, ≤ 2 lines, raised above Shorts UI (config.captions)",
+        "visualRhythm": "cut ≤ 1.4 s in the first 3 s, 1.6–2.4 s to 10 s, then 2.6–3.5 s",
+        "standalone": true,
+        "longformBridge": "The full scenario gets much stranger — linked episode below.",
+        "claimIds": [
+          "C1",
+          "C21"
+        ]
+      },
+      {
+        "angle": "first-effect",
+        "hook": "Air is about 78% nitrogen, but it barely reacts.",
+        "hookFamily": "contradiction",
+        "hookScore": 78,
+        "first3SecondPlan": {
+          "narration": "Air is about 78% nitrogen, but it barely reacts.",
+          "firstFrame": {
+            "description": "Haber process reactor diagram at the moment the impossible change begins",
+            "source": "procedural render",
+            "startAtSeconds": 0,
+            "sourceClass": "ILLUSTRATION",
+            "communicates": "mystery",
+            "rule": "labelled illustration; no logo, no establishing shot"
+          },
+          "visual": "Haber process reactor diagram at the moment the impossible change begins",
+          "onScreenText": "78%",
+          "motion": "scale shift: object shrinks/grows in 0.8 s, then hard cut",
+          "cutTiming": [
+            0,
+            0.8,
+            1.6
+          ],
+          "soundCue": "single low hit on the first cut",
           "communicates": "mystery"
         },
         "miniNarrative": [
@@ -1843,7 +2146,29 @@
     "count": 3,
     "meetsMinimum": true
   },
-  "relatedShorts": [],
+  "relatedShorts": [
+    {
+      "short_video_id": "FezZD3MMg_A",
+      "short_slug": "what-if-all-fungi-disappeared",
+      "relationship_type": "TOPIC_EXPANSION",
+      "relationship_reason": "topic expansion; subject overlap 0.00, same cluster OTHER",
+      "score": 0.6
+    },
+    {
+      "short_video_id": "yIX2WcN9dEQ",
+      "short_slug": "what-if-ocean-plankton-disappeared",
+      "relationship_type": "SAME_SERIES",
+      "relationship_reason": "same series; subject overlap 0.00, same cluster OTHER",
+      "score": 0.4
+    },
+    {
+      "short_video_id": "x5VVXKhOhMQ",
+      "short_slug": "what-if-mosquitoes-went-extinct",
+      "relationship_type": "SAME_SERIES",
+      "relationship_reason": "same series; subject overlap 0.00, same cluster OTHER",
+      "score": 0.4
+    }
+  ],
   "nextVideos": {
     "primary_next_video": {
       "slug": "what-if-all-fungi-disappeared",
@@ -1903,7 +2228,7 @@
     "dimensions": {
       "TopicDepth": 94,
       "NarrativeQuality": 74,
-      "Hook": 74,
+      "Hook": 81,
       "ResearchQuality": 99,
       "SourceCoverage": 100,
       "FactualAccuracy": 100,
@@ -1912,7 +2237,7 @@
       "AudioQuality": null,
       "Editing": null,
       "Thumbnail": 91,
-      "Title": 81,
+      "Title": 74,
       "CopyrightSafety": 90,
       "Disclosure": 95,
       "EndScreenPlan": 90,
@@ -1923,14 +2248,15 @@
       "Editing"
     ],
     "hardFails": [
-      "INSUFFICIENT_DEPTH: evidence supports ~1.8 min; target 8–12 min — not padded"
+      "INSUFFICIENT_DEPTH: evidence supports ~1.8 min; target 8–12 min — not padded",
+      "LLM generation failed safely (REQUEST_TOO_LARGE); deterministic evidence draft retained"
     ],
     "notes": [
-      "160 deep-research claims need the LLM writer (LONGFORM_LLM=1 + ANTHROPIC_API_KEY); the deterministic writer never narrates encyclopedia text verbatim"
+      "160 deep-research claims need the LLM writer via a configured long-form provider (LONGFORM_LLM_PROVIDER + provider key); the deterministic writer never narrates encyclopedia text verbatim"
     ],
     "thresholds": {
-      "publish": 85,
-      "review": 70
+      "publish": 86,
+      "review": 74
     }
   },
   "targetMinutes": [
@@ -1941,16 +2267,16 @@
     "Channel": "ImpossibleBrief",
     "Content Type": "LONG_FORM",
     "Topic": "What If Synthetic Fertilizer Disappeared?",
-    "LongFormPotentialScore": 78,
+    "LongFormPotentialScore": 83,
     "Topic Bucket": "A",
     "Cold Open": "Why 7.7 billion people depend on air-made fertilizer.",
     "Target Duration": "8–12 min",
     "Actual Duration": "~1.8 min (script estimate, deterministic-evidence)",
     "Scenes": 9,
     "Thumbnail Score": 91,
-    "Title Score": 81,
+    "Title Score": 74,
     "LongFormProductionReadinessScore": "86 → BLOCK",
-    "Related Shorts": "none published yet",
+    "Related Shorts": "what-if-all-fungi-disappeared, what-if-ocean-plankton-disappeared, what-if-mosquitoes-went-extinct",
     "Primary Next Video": "What If All Fungi Disappeared?"
   }
 }

@@ -1,0 +1,1616 @@
+{
+  "schema": "research-deep/1",
+  "channel": "impossible-brief",
+  "slug": "what-if-gps-went-dark-for-a-day",
+  "article": "GPS signals",
+  "via": "subject title (exact/redirect match, no fuzzy search)",
+  "fetchedAt": "2026-10-26T12:42:18.789Z",
+  "licence": "CC BY-SA 4.0 — facts only; never narrate verbatim",
+  "claims": [
+    {
+      "text": "GPS signals are broadcast by Global Positioning System satellites to enable satellite navigation.",
+      "role": "consequence",
+      "section": "Lead",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Using these signals, receivers on or near the Earth's surface can determine their Position, Velocity and Time (PVT).",
+      "role": "event",
+      "section": "Lead",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The GPS satellite constellation is operated by the 2nd Space Operations Squadron (2SOPS) of Space Delta 8, United States Space Force.",
+      "role": "event",
+      "section": "Lead",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "GPS signals include ranging signals, which are used to measure the distance to the satellite, and navigation messages.",
+      "role": "event",
+      "section": "Lead",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The navigation messages include ephemeris data which are used both in trilateration to calculate the position of each satellite in orbit and also to provide information about the time and status of the entire satellite constellation, called the almanac.",
+      "role": "event",
+      "section": "Lead",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "There are four GPS signal specifications designed for civilian use.",
+      "role": "event",
+      "section": "Lead",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "In order of date of introduction, these are: L1 C/A, L2C, L5 and L1C.",
+      "role": "event",
+      "section": "Lead",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "L1 C/A is also called the legacy signal and is broadcast by all currently operational satellites.",
+      "role": "event",
+      "section": "Lead",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "L2C, L5 and L1C are modernized signals and are only broadcast by newer satellites (or not yet at all).",
+      "role": "event",
+      "section": "Lead",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Furthermore, as of January 2021, none of these three signals are yet considered to be fully operational for civilian use.",
+      "role": "event",
+      "section": "Lead",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "In addition to the four aforementioned signals, there are restricted signals with published frequencies and chip rates, but the signals use encrypted coding, restricting use to authorized parties.",
+      "role": "event",
+      "section": "Lead",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Some limited use of restricted signals can still be made by civilians without decryption; this is called codeless and semi-codeless access, and this is officially supported.",
+      "role": "event",
+      "section": "Lead",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The interface to the User Segment (GPS receivers) is described in the Interface Control Documents (ICD).",
+      "role": "event",
+      "section": "Lead",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The format of civilian signals is described in the Interface Specification (IS) which is a subset of the ICD.",
+      "role": "event",
+      "section": "Lead",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The GPS satellites (called space vehicles in the GPS interface specification documents) transmit simultaneously several ranging codes and navigation data using binary phase-shift keying (BPSK).",
+      "role": "evidence",
+      "section": "Common characteristics",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Only a limited number of central frequencies are used.",
+      "role": "evidence",
+      "section": "Common characteristics",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Satellites using the same frequency are distinguished by using different ranging codes.",
+      "role": "evidence",
+      "section": "Common characteristics",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "In other words, GPS uses code-division multiple access.",
+      "role": "evidence",
+      "section": "Common characteristics",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The ranging codes are also called chipping codes (in reference to CDMA/DSSS), pseudorandom noise (PRN) and pseudorandom binary sequences (in reference to the fact that the sequences are predictable yet that they statistically resemble noise).",
+      "role": "evidence",
+      "section": "Common characteristics",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Some satellites transmit several BPSK streams at the same frequency in quadrature, in a form of quadrature amplitude modulation.",
+      "role": "evidence",
+      "section": "Common characteristics",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "However, unlike typical QAM systems where a single bit stream is split into two, half-symbol-rate bit streams to improve spectral efficiency, the in-phase and quadrature components of GPS signals are modulated by separate (but functionally related) bit streams.",
+      "role": "evidence",
+      "section": "Common characteristics",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Satellites are uniquely identified by a serial number called space vehicle number (SVN) which does not change during its lifetime.",
+      "role": "evidence",
+      "section": "Common characteristics",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "In addition, all operating satellites are numbered with a space vehicle identifier (SV ID) and pseudorandom noise number (PRN number) which uniquely identifies the ranging codes that a satellite uses.",
+      "role": "evidence",
+      "section": "Common characteristics",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "There is a fixed one-to-one correspondence between SV identifiers and PRN numbers described in the interface specification.",
+      "role": "evidence",
+      "section": "Common characteristics",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Unlike SVNs, the SV ID/PRN number of a satellite may be changed (resulting in a change to the ranging codes it uses).",
+      "role": "evidence",
+      "section": "Common characteristics",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "That is, no two active satellites can share any one active SV ID/PRN number.",
+      "role": "evidence",
+      "section": "Common characteristics",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The current SVNs and PRN numbers for the GPS constellation are published at NAVCEN.",
+      "role": "evidence",
+      "section": "Common characteristics",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The original GPS design contains two ranging codes: the coarse/acquisition (C/A) code, which is freely available to the public, and the restricted precision (P) code, usually reserved for military applications.",
+      "role": "aftermath",
+      "section": "Legacy GPS signals",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "For the ranging codes and navigation message to travel from the satellite to the receiver, they must be modulated onto a carrier wave.",
+      "role": "evidence",
+      "section": "Frequency information",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "In the case of the original GPS design, two frequencies are utilized; one at 1575.42 MHz (10.23 MHz × 154) called L1; and a second at 1227.60 MHz (10.23 MHz × 120), called L2.",
+      "role": "evidence",
+      "section": "Frequency information",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The C/A code is transmitted on the L1 frequency as a 1.023 MHz signal using a bi-phase shift keying (BPSK) modulation technique.",
+      "role": "evidence",
+      "section": "Frequency information",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The P(Y)-code is transmitted on both the L1 and L2 frequencies as a 10.23 MHz signal using the same BPSK modulation, however the P(Y)-code carrier is in quadrature with the C/A carrier (meaning it is 90° out of phase).",
+      "role": "evidence",
+      "section": "Frequency information",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Besides redundancy and increased resistance to jamming, a critical benefit of having two frequencies transmitted from one satellite is the ability to measure directly, and therefore remove, the ionospheric delay error for that satellite.",
+      "role": "evidence",
+      "section": "Frequency information",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Without such a measurement, a GPS receiver must use a generic model or receive ionospheric corrections from another source (such as the Wide Area Augmentation System or WAAS).",
+      "role": "evidence",
+      "section": "Frequency information",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Advances in the technology used on both the GPS satellites and the GPS receivers has made ionospheric delay the largest remaining source of error in the signal.",
+      "role": "evidence",
+      "section": "Frequency information",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "A receiver capable of performing this measurement can be significantly more accurate and is typically referred to as a dual frequency receiver.",
+      "role": "evidence",
+      "section": "Frequency information",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The C/A PRN codes are Gold codes with a period of 1023 chips transmitted at 1.023 Mchip/s, causing the code to repeat every 1 millisecond.",
+      "role": "evidence",
+      "section": "Coarse/acquisition code",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "They are exclusive-ored with a 50 bit/s navigation message and the result phase modulates the carrier as previously described.",
+      "role": "evidence",
+      "section": "Coarse/acquisition code",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "These codes only match up, or strongly autocorrelate when they are almost exactly aligned.",
+      "role": "evidence",
+      "section": "Coarse/acquisition code",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Each satellite uses a unique PRN code, which does not correlate well with any other satellite's PRN code.",
+      "role": "evidence",
+      "section": "Coarse/acquisition code",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "In other words, the PRN codes are highly orthogonal to one another.",
+      "role": "evidence",
+      "section": "Coarse/acquisition code",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The 1 ms period of the C/A code corresponds to 299.8 km of distance, and each chip corresponds to a distance of 293 m.",
+      "role": "evidence",
+      "section": "Coarse/acquisition code",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Modern microcontrollers, even low cost ones, are able to measure phase angles well within 1% error.",
+      "role": "evidence",
+      "section": "Coarse/acquisition code",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "1% of the given 1.023 Mchip/s results in approximately 10 nanoseconds.",
+      "role": "evidence",
+      "section": "Coarse/acquisition code",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Since GPS signals propagate at the speed of light, this represents a positional accuracy of about 3 Meters.",
+      "role": "evidence",
+      "section": "Coarse/acquisition code",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The C/A codes are generated by combining (using \"exclusive or\") two bit streams, each generated by two different maximal period 10 stage linear-feedback shift registers (LFSR).",
+      "role": "evidence",
+      "section": "Coarse/acquisition code",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Different codes are obtained by selectively delaying one of those bit streams.",
+      "role": "evidence",
+      "section": "Coarse/acquisition code",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Thus: C/Ai(t) = A(t) ⊕ B(t-Di) where: C/Ai is the code with PRN number i.",
+      "role": "evidence",
+      "section": "Coarse/acquisition code",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "A is the output of the first LFSR whose generator polynomial is x → x10 + x3 + 1, and initial state is 11111111112.",
+      "role": "evidence",
+      "section": "Coarse/acquisition code",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "B is the output of the second LFSR whose generator polynomial is x → x10 + x9 + x8 + x6 + x3 + x2 + 1 and initial state is also 11111111112.",
+      "role": "evidence",
+      "section": "Coarse/acquisition code",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Di is a delay (by an integer number of periods) specific to each PRN number i; it is designated in the GPS interface specification. ⊕ is exclusive or.",
+      "role": "evidence",
+      "section": "Coarse/acquisition code",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The arguments of the functions therein are the number of bits or chips since their epochs, starting at 0.",
+      "role": "evidence",
+      "section": "Coarse/acquisition code",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The epoch of the LFSRs is the point at which they are at the initial state; and for the overall C/A codes it is the start of any UTC second plus any integer number of milliseconds.",
+      "role": "evidence",
+      "section": "Coarse/acquisition code",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The output of LFSRs at negative arguments is defined consistent with the period which is 1,023 chips (this provision is necessary because B may have a negative argument using the above equation).",
+      "role": "evidence",
+      "section": "Coarse/acquisition code",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The delay for PRN numbers 34 and 37 is the same; therefore their C/A codes are identical and are not transmitted at the same time (it may make one or both of those signals unusable due to mutual interference depending on the relative power levels received on each GPS receiver).",
+      "role": "evidence",
+      "section": "Coarse/acquisition code",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The P-code is a PRN sequence much longer than the C/A code: 6.187104 × 1012 chips.",
+      "role": "evidence",
+      "section": "Precision code",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Even though the P-code chip rate (10.23 Mchip/s) is ten times that of the C/A code, it repeats only once per week, eliminating range ambiguity.",
+      "role": "evidence",
+      "section": "Precision code",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "It was assumed that receivers could not directly acquire such a long and fast code so they would first \"bootstrap\" themselves with the C/A code to acquire the spacecraft ephemerides, produce an approximate time and position fix, and then acquire the P-code to refine the fix.",
+      "role": "evidence",
+      "section": "Precision code",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Whereas the C/A PRNs are unique for each satellite, each satellite transmits a different segment of a master P-code sequence approximately 2.35 × 1014 chips long (235,000,000,000,000 chips).",
+      "role": "evidence",
+      "section": "Precision code",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Each satellite repeatedly transmits its assigned segment of the master code, restarting every Sunday at 00:00:00 GPS time.",
+      "role": "evidence",
+      "section": "Precision code",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "For reference, the GPS epoch was Sunday January 6, 1980 at 00:00:00 UTC, but GPS does not follow UTC exactly because GPS time does not incorporate leap seconds.",
+      "role": "evidence",
+      "section": "Precision code",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Thus, GPS time is ahead of UTC by an integer (whole) number of seconds.",
+      "role": "evidence",
+      "section": "Precision code",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The P code is public, so to prevent unauthorized users from using or potentially interfering with it through spoofing, the P-code is XORed with W-code, a cryptographically generated sequence, to produce the Y-code.",
+      "role": "evidence",
+      "section": "Precision code",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The Y-code is what the satellites have been transmitting since the anti-spoofing module was enabled.",
+      "role": "evidence",
+      "section": "Precision code",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The encrypted signal is referred to as the P(Y)-code.",
+      "role": "evidence",
+      "section": "Precision code",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The details of the W-code are secret, but it is known that it is applied to the P-code at approximately 500 kHz, about 20 times slower than the P-code chip rate.",
+      "role": "evidence",
+      "section": "Precision code",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "This has led to semi-codeless and codeless approaches for tracking the P(Y) signal without knowing the W-code in extremely accurate civilian positioning, where it helps correct for ionospheric delay when combined with L1CA.",
+      "role": "evidence",
+      "section": "Precision code",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Unofficial use of L2P(Y) signals may be affected by future changes such as transmission power adjustments (potentially changing its phase).",
+      "role": "evidence",
+      "section": "Precision code",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "In 2008, the U.S. government agreed to not change the L2P(Y) phase until 2020.",
+      "role": "evidence",
+      "section": "Precision code",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The intent is to have civilian users migrate to the L2C code which provides an equivalent benefit.",
+      "role": "evidence",
+      "section": "Precision code",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "In addition to the PRN ranging codes, a receiver needs to know the time and position of each active satellite.",
+      "role": "evidence",
+      "section": "Navigation message",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "GPS encodes this information into the navigation message and modulates it onto both the C/A and P(Y) ranging codes at 50 bit/s.",
+      "role": "evidence",
+      "section": "Navigation message",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The navigation message format described in this section is called LNAV data (for legacy navigation).",
+      "role": "evidence",
+      "section": "Navigation message",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The navigation message conveys information of three types: The GPS date and time, and the satellite's status.",
+      "role": "evidence",
+      "section": "Navigation message",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The ephemeris: precise orbital information for the transmitting satellite.",
+      "role": "evidence",
+      "section": "Navigation message",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The almanac: status and low-resolution orbital information for every satellite.",
+      "role": "evidence",
+      "section": "Navigation message",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "An ephemeris is valid for only four hours, while an almanac is valid–with little dilution of precision–for up to two weeks.",
+      "role": "evidence",
+      "section": "Navigation message",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The receiver uses the almanac to acquire a set of satellites based on stored time and location.",
+      "role": "evidence",
+      "section": "Navigation message",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "As the receiver acquires each satellite, each satellite’s ephemeris is decoded so that the satellite can be used for navigation.",
+      "role": "evidence",
+      "section": "Navigation message",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The navigation message consists of 30-second frames 1,500 bits long, divided into five 6-second subframes of ten 30-bit words each.",
+      "role": "evidence",
+      "section": "Navigation message",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Each subframe has the GPS time in 6-second increments.",
+      "role": "evidence",
+      "section": "Navigation message",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Subframe 1 contains the GPS date (week number), satellite clock correction information, satellite status and satellite health.",
+      "role": "evidence",
+      "section": "Navigation message",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Subframes 2 and 3 together contain the transmitting satellite's ephemeris data.",
+      "role": "evidence",
+      "section": "Navigation message",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Subframes 4 and 5 together contain one page of the 25-page almanac.",
+      "role": "evidence",
+      "section": "Navigation message",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The almanac is 15,000 bits long and the satellite takes 12.5 minutes to cycle through transmission of all 25 pages.",
+      "role": "evidence",
+      "section": "Navigation message",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "A frame begins at the start of the GPS week and every 30 seconds thereafter.",
+      "role": "evidence",
+      "section": "Navigation message",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Each week begins with the transmission of almanac page 1.",
+      "role": "evidence",
+      "section": "Navigation message",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "There are two navigation message types: LNAV-L is used by satellites with PRN numbers 1 to 32 (called lower PRN numbers) and LNAV-U is used by satellites with PRN numbers 33 to 63 (called upper PRN numbers).",
+      "role": "evidence",
+      "section": "Navigation message",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The two types use very similar formats.",
+      "role": "evidence",
+      "section": "Navigation message",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Subframes 1 to 3 are the same, while subframes 4 and 5 are almost the same.",
+      "role": "evidence",
+      "section": "Navigation message",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Each message type contains almanac data for all satellites using the same navigation message type but not the other.",
+      "role": "evidence",
+      "section": "Navigation message",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Each subframe begins with a Telemetry Word (TLM), which enables the receiver to detect the beginning of a subframe and determine the receiver clock time at which the navigation subframe begins.",
+      "role": "evidence",
+      "section": "Navigation message",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Next is the handover word (HOW) giving the GPS time (as the time for when the first bit of the next subframe will be transmitted) and identifies the specific subframe within a complete frame.",
+      "role": "evidence",
+      "section": "Navigation message",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The remaining eight words of the subframe contain the actual data specific to that subframe.",
+      "role": "evidence",
+      "section": "Navigation message",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Each word includes 6 bits of parity generated using an algorithm based on Hamming codes, which take into account the 24 non-parity bits of that word and the last 2 bits of the previous word.",
+      "role": "evidence",
+      "section": "Navigation message",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "After a subframe has been read and interpreted, the time the next subframe was sent can be calculated through the use of the clock correction data and HOW.",
+      "role": "evidence",
+      "section": "Navigation message",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The receiver knows the receiver clock time of when the beginning of the next subframe was received from detection of the Telemetry Word thereby enabling computation of the transit time and thus the pseudorange.",
+      "role": "evidence",
+      "section": "Navigation message",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "GPS time is expressed with a resolution of 1.5 seconds as a week number and a time of week count (TOW).",
+      "role": "evidence",
+      "section": "Time",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Its zero point (week 0, TOW 0) is defined to be 1980-01-06T00:00Z (sunday).",
+      "role": "evidence",
+      "section": "Time",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The TOW count is a value ranging from 0 to 403,199 whose meaning is the number of 1.5 second periods elapsed since the beginning of the GPS week.",
+      "role": "evidence",
+      "section": "Time",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Expressing TOW count thus requires 19 bits (219 = 524,288).",
+      "role": "evidence",
+      "section": "Time",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "GPS time is a continuous time scale in that it does not include leap seconds; therefore the start/end of GPS weeks may differ from that of the corresponding UTC day by an integer (whole) number of seconds.",
+      "role": "evidence",
+      "section": "Time",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "In each subframe, each hand-over word (HOW) contains the most significant 17 bits of the TOW count corresponding to the start of the next following subframe.",
+      "role": "evidence",
+      "section": "Time",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Note that the 2 least significant bits can be safely omitted because one HOW occurs in the navigation message every 6 seconds, which is equal to the resolution of the truncated TOW count thereof.",
+      "role": "evidence",
+      "section": "Time",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Equivalently, the truncated TOW count is the time duration since the last GPS week start/end to the beginning of the next frame in units of 6 seconds.",
+      "role": "evidence",
+      "section": "Time",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Each frame contains (in subframe 1) the 10 least significant bits of the corresponding GPS week number.",
+      "role": "evidence",
+      "section": "Time",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Note that each frame is entirely within one GPS week because GPS frames do not cross GPS week boundaries.",
+      "role": "evidence",
+      "section": "Time",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Since rollover occurs every 1,024 GPS weeks (approximately every 19.6 years; 1,024 is 210), a receiver that computes current calendar dates needs to deduce the upper week number bits or obtain them from a different source.",
+      "role": "evidence",
+      "section": "Time",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "One possible method is for the receiver to save its current date in memory when shut down, and when powered on, assume that the newly decoded truncated week number corresponds to the period of 1,024 weeks that starts at the last saved date.",
+      "role": "evidence",
+      "section": "Time",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "This method correctly deduces the full week number if the receiver is never allowed to remain shut down (or without a time and position fix) for more than 1,024 weeks (~19.6 years).",
+      "role": "evidence",
+      "section": "Time",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The almanac consists of coarse orbit and status information for each satellite in the constellation, an ionospheric model, and information to relate GPS derived time to Coordinated Universal Time (UTC).",
+      "role": "evidence",
+      "section": "Almanac",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Each frame contains a part of the almanac (in subframes 4 and 5) and the complete almanac is transmitted by each satellite in 25 frames total (requiring 12.5 minutes).",
+      "role": "evidence",
+      "section": "Almanac",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The first is to assist in the acquisition of satellites at power-up by allowing the receiver to generate a list of visible satellites based on stored position and time, while an ephemeris from each satellite is needed to compute position fixes using that satellite.",
+      "role": "evidence",
+      "section": "Almanac",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "In older hardware, lack of an almanac in a new receiver would cause long delays before providing a valid position, because the search for each satellite was a slow process.",
+      "role": "evidence",
+      "section": "Almanac",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Advances in hardware have made the acquisition process much faster, so not having an almanac is no longer an issue.",
+      "role": "evidence",
+      "section": "Almanac",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The second purpose is for relating time derived from the GPS (called GPS time) to the international time standard of UTC.",
+      "role": "evidence",
+      "section": "Almanac",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Finally, the almanac allows a single-frequency receiver to correct for ionospheric delay error by using a global ionospheric model.",
+      "role": "evidence",
+      "section": "Almanac",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The corrections are not as accurate as GNSS augmentation systems like WAAS or dual-frequency receivers.",
+      "role": "evidence",
+      "section": "Almanac",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "However, it is often better than no correction, since ionospheric error is the largest error source for a single-frequency GPS receiver.",
+      "role": "evidence",
+      "section": "Almanac",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Satellite data is updated typically every 24 hours, with up to 60 days data loaded in case there is a disruption in the ability to make updates regularly.",
+      "role": "evidence",
+      "section": "Data updates",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Typically the updates contain new ephemerides, with new almanacs uploaded less frequently.",
+      "role": "evidence",
+      "section": "Data updates",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The Control Segment guarantees that during normal operations a new almanac will be uploaded at least every 6 days.",
+      "role": "evidence",
+      "section": "Data updates",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Satellites broadcast a new ephemeris every two hours.",
+      "role": "evidence",
+      "section": "Data updates",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The ephemeris is generally valid for 4 hours, with provisions for updates every 4 hours or longer in non-nominal conditions.",
+      "role": "evidence",
+      "section": "Data updates",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Having reached full operational capability on July 17, 1995 the GPS system had completed its original design goals.",
+      "role": "evidence",
+      "section": "Modernization and additional GPS signals",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "However, additional advances in technology and new demands on the existing system led to the effort to \"modernize\" the GPS system.",
+      "role": "evidence",
+      "section": "Modernization and additional GPS signals",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Announcements from the Vice President and the White House in 1998 heralded the beginning of these changes, and in 2000, the U.S.",
+      "role": "evidence",
+      "section": "Modernization and additional GPS signals",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Congress reaffirmed the effort, referred to as GPS III.",
+      "role": "evidence",
+      "section": "Modernization and additional GPS signals",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The project involves new ground stations and new satellites, with additional navigation signals for both civilian and military users.",
+      "role": "evidence",
+      "section": "Modernization and additional GPS signals",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "It aims to improve the accuracy and availability for all users.",
+      "role": "evidence",
+      "section": "Modernization and additional GPS signals",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The implementation goal of 2013 was established, and contractors were offered incentives if they could complete it by 2011.",
+      "role": "evidence",
+      "section": "Modernization and additional GPS signals",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Modernized GPS civilian signals have two general improvements over their legacy counterparts: a dataless acquisition aid and forward error correction (FEC) coding of the NAV message.",
+      "role": "evidence",
+      "section": "General features",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "A dataless acquisition aid is an additional signal, called a pilot carrier in some cases, broadcast alongside the data signal.",
+      "role": "evidence",
+      "section": "General features",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "This dataless signal is designed to be easier to acquire than the data encoded and, upon successful acquisition, can be used to acquire the data signal.",
+      "role": "evidence",
+      "section": "General features",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "This technique improves acquisition of the GPS signal and boosts power levels at the correlator.",
+      "role": "evidence",
+      "section": "General features",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The second advancement is to use forward error correction (FEC) coding on the NAV message itself.",
+      "role": "evidence",
+      "section": "General features",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Due to the relatively slow transmission rate of NAV data (usually 50 bits per second), small interruptions can have potentially large impacts.",
+      "role": "evidence",
+      "section": "General features",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Therefore, FEC on the NAV message is a significant improvement in overall signal robustness.",
+      "role": "evidence",
+      "section": "General features",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "One of the first announcements was the addition of a new civilian-use signal, to be transmitted on a frequency other than the L1 frequency used for the coarse/acquisition (C/A) signal.",
+      "role": "evidence",
+      "section": "L2C",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Ultimately, this became the L2C signal, so called because it is broadcast on the L2 frequency.",
+      "role": "evidence",
+      "section": "L2C",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Because it requires new hardware on board the satellite, it is only transmitted by the so-called Block IIR-M and later design satellites.",
+      "role": "evidence",
+      "section": "L2C",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The L2C signal is tasked with improving accuracy of navigation, providing an easy to track signal, and acting as a redundant signal in case of localized interference.",
+      "role": "evidence",
+      "section": "L2C",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "L2C signals have been broadcast beginning in April 2014 on satellites capable of broadcasting it, but are still considered pre-operational.",
+      "role": "evidence",
+      "section": "L2C",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "As of July 2023, L2C is broadcast on 25 satellites.",
+      "role": "evidence",
+      "section": "L2C",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Unlike the C/A code, L2C contains two distinct PRN code sequences to provide ranging information; the civil-moderate code (called CM), and the civil-long length code (called CL).",
+      "role": "evidence",
+      "section": "L2C",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The CM code is 10,230 chips long, repeating every 20 ms.",
+      "role": "evidence",
+      "section": "L2C",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The CL code is 767,250 chips long, repeating every 1,500 ms.",
+      "role": "evidence",
+      "section": "L2C",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Each signal is transmitted at 511,500 chips per second (chip/s); however, they are multiplexed together to form a 1,023,000-chip/s signal.",
+      "role": "evidence",
+      "section": "L2C",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "CM is modulated with the CNAV Navigation Message (see below), whereas CL does not contain any modulated data and is called a dataless sequence.",
+      "role": "evidence",
+      "section": "L2C",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The long, dataless sequence provides for approximately 24 dB greater correlation (~250 times stronger) than L1 C/A-code.",
+      "role": "evidence",
+      "section": "L2C",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "When compared to the C/A signal, L2C has 2.7 dB greater data recovery and 0.7 dB greater carrier-tracking, although its transmission power is 2.3 dB weaker.",
+      "role": "evidence",
+      "section": "L2C",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The civil-moderate and civil-long ranging codes are generated by a modular LFSR which is reset periodically to a predetermined initial state.",
+      "role": "evidence",
+      "section": "CM and CL codes",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The period of the CM and CL is determined by this resetting and not by the natural period of the LFSR (as is the case with the C/A code).",
+      "role": "evidence",
+      "section": "CM and CL codes",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The initial states are designated in the interface specification and are different for different PRN numbers and for CM/CL.",
+      "role": "evidence",
+      "section": "CM and CL codes",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The feedback polynomial/mask is the same for CM and CL.",
+      "role": "evidence",
+      "section": "CM and CL codes",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "A(x, t) is the output of the LFSR when initialized with initial state x after being clocked t times.",
+      "role": "evidence",
+      "section": "CM and CL codes",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "Using this convention, the LFSR shifts from most significant bit to least significant bit and when seen in big endian order, it shifts to the right.",
+      "role": "evidence",
+      "section": "CM and CL codes",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The states called final state in the IS are obtained after 10229 cycles for CM and after 767249 cycles for LM (just before reset in both cases).",
+      "role": "evidence",
+      "section": "CM and CL codes",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "The CNAV data is an upgraded version of the original NAV navigation message.",
+      "role": "evidence",
+      "section": "CNAV navigation message",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    },
+    {
+      "text": "It contains higher precision representation and nominally more accurate data than the NAV data.",
+      "role": "evidence",
+      "section": "CNAV navigation message",
+      "source": "Wikipedia — GPS signals",
+      "url": "https://en.wikipedia.org/wiki/GPS_signals",
+      "layer": "SECONDARY SOURCE (encyclopedia)",
+      "verbatim": false,
+      "licence": "CC BY-SA 4.0"
+    }
+  ],
+  "images": [
+    "GPS Satellite NASA art-iif.jpg",
+    "Magellan GPS Blazer12.jpg"
+  ],
+  "status": "OK"
+}

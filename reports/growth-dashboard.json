@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-25T19:09:56.693Z",
+  "generatedAt": "2026-10-26T12:42:41.191Z",
   "note": "Per-channel baselines are computed separately and never blended.",
   "channels": [
     {
@@ -22,8 +22,8 @@
           "used": 10
         },
         "nextSelection": {
-          "slug": "titanic-1912",
-          "reason": "EXPLOIT (0.75): best A topic by SelectionScore"
+          "slug": "columbia-2003",
+          "reason": "EXPLORE (0.25): under-sampled cluster spaceflight-disasters"
         },
         "baseline": {
           "n": 31,
@@ -36,21 +36,34 @@
       },
       "longform": {
         "lane": {
-          "cycleId": "2026-W43",
+          "cycleId": "2026-W44",
           "due": false,
-          "reason": "cycle 2026-W43 already QUALITY_BLOCKED",
+          "reason": "cycle 2026-W44 already QUALITY_BLOCKED",
           "lastPublished": null
         },
         "lastCycle": {
-          "cycleId": "2026-W43",
+          "cycleId": "2026-W44",
           "channel": "failure-reconstructed",
-          "startedAt": "2026-10-19T12:54:08.066Z",
+          "startedAt": "2026-10-26T12:42:17.460Z",
           "status": "QUALITY_BLOCKED",
           "evaluated": [
             {
+              "slug": "air-france-447-2009",
+              "mode": "B_SHORT_PROVES_DEMAND",
+              "LongFormPotentialScore": 86,
+              "bucket": "A",
+              "decision": "BLOCK",
+              "score": 83,
+              "hardFails": [
+                "INSUFFICIENT_DEPTH: evidence supports ~1.9 min; target 8–12 min — not padded",
+                "LLM generation failed safely (REQUEST_TOO_LARGE); deterministic evidence draft retained"
+              ],
+              "generationStatus": "FAILED"
+            },
+            {
               "slug": "challenger-1986",
               "mode": "B_SHORT_PROVES_DEMAND",
-              "LongFormPotentialScore": 85,
+              "LongFormPotentialScore": 86,
               "bucket": "A",
               "decision": "BLOCK",
               "score": 83,
@@ -63,7 +76,7 @@
             {
               "slug": "chernobyl-1986",
               "mode": "B_SHORT_PROVES_DEMAND",
-              "LongFormPotentialScore": 85,
+              "LongFormPotentialScore": 86,
               "bucket": "A",
               "decision": "BLOCK",
               "score": 89,
@@ -72,24 +85,11 @@
                 "LLM generation failed safely (REQUEST_TOO_LARGE); deterministic evidence draft retained"
               ],
               "generationStatus": "FAILED"
-            },
-            {
-              "slug": "columbia-2003",
-              "mode": "B_SHORT_PROVES_DEMAND",
-              "LongFormPotentialScore": 85,
-              "bucket": "A",
-              "decision": "BLOCK",
-              "score": 85,
-              "hardFails": [
-                "INSUFFICIENT_DEPTH: evidence supports ~1.9 min; target 8–12 min — not padded",
-                "LLM generation failed safely (REQUEST_TOO_LARGE); deterministic evidence draft retained"
-              ],
-              "generationStatus": "FAILED"
             }
           ],
           "selected": null,
           "reason": "no candidate passed the long-form quality gate; cadence does not override quality",
-          "finishedAt": "2026-10-19T12:54:09.124Z"
+          "finishedAt": "2026-10-26T12:42:18.733Z"
         },
         "episodes": 0,
         "backlog": [
@@ -445,21 +445,21 @@
       },
       "longform": {
         "lane": {
-          "cycleId": "2026-W43",
+          "cycleId": "2026-W44",
           "due": false,
-          "reason": "cycle 2026-W43 already QUALITY_BLOCKED",
+          "reason": "cycle 2026-W44 already QUALITY_BLOCKED",
           "lastPublished": null
         },
         "lastCycle": {
-          "cycleId": "2026-W43",
+          "cycleId": "2026-W44",
           "channel": "impossible-brief",
-          "startedAt": "2026-10-19T12:54:09.164Z",
+          "startedAt": "2026-10-26T12:42:18.789Z",
           "status": "QUALITY_BLOCKED",
           "evaluated": [
             {
               "slug": "what-if-we-mined-a-metal-asteroid",
-              "mode": "B_SHORT_PROVES_DEMAND",
-              "LongFormPotentialScore": 84,
+              "mode": "A_LONG_FIRST",
+              "LongFormPotentialScore": 83,
               "bucket": "A",
               "decision": "BLOCK",
               "score": 87,
@@ -470,33 +470,35 @@
               "generationStatus": "FAILED"
             },
             {
-              "slug": "what-if-we-swam-in-europas-ocean",
+              "slug": "what-if-synthetic-fertilizer-disappeared",
               "mode": "A_LONG_FIRST",
               "LongFormPotentialScore": 83,
               "bucket": "A",
               "decision": "BLOCK",
-              "score": 84,
+              "score": 86,
               "hardFails": [
-                "INSUFFICIENT_DEPTH: evidence supports ~0.8 min; target 8–12 min — not padded"
+                "INSUFFICIENT_DEPTH: evidence supports ~1.8 min; target 8–12 min — not padded",
+                "LLM generation failed safely (REQUEST_TOO_LARGE); deterministic evidence draft retained"
               ],
-              "generationStatus": "QUALITY_REVIEW"
+              "generationStatus": "FAILED"
             },
             {
-              "slug": "what-if-you-visited-io-the-volcano-moon",
+              "slug": "what-if-gps-went-dark-for-a-day",
               "mode": "A_LONG_FIRST",
               "LongFormPotentialScore": 83,
               "bucket": "A",
               "decision": "BLOCK",
-              "score": 83,
+              "score": 86,
               "hardFails": [
-                "INSUFFICIENT_DEPTH: evidence supports ~0.9 min; target 8–12 min — not padded"
+                "INSUFFICIENT_DEPTH: evidence supports ~1.7 min; target 8–12 min — not padded",
+                "LLM generation failed safely (REQUEST_TOO_LARGE); deterministic evidence draft retained"
               ],
-              "generationStatus": "QUALITY_REVIEW"
+              "generationStatus": "FAILED"
             }
           ],
           "selected": null,
           "reason": "no candidate passed the long-form quality gate; cadence does not override quality",
-          "finishedAt": "2026-10-19T12:54:10.137Z"
+          "finishedAt": "2026-10-26T12:42:19.989Z"
         },
         "episodes": 0,
         "backlog": [
@@ -778,8 +780,8 @@
           "used": 0
         },
         "nextSelection": {
-          "slug": "the-hidden-system-behind-border-gateway-routing-system",
-          "reason": "EXPLOIT (0.75): best A topic by SelectionScore"
+          "slug": "why-rail-signaling-interlocking-is-so-hard-to-replace",
+          "reason": "EXPLORE (0.25): under-sampled cluster RAIL"
         },
         "baseline": {
           "n": 6,
@@ -792,15 +794,15 @@
       },
       "longform": {
         "lane": {
-          "cycleId": "2026-W43",
+          "cycleId": "2026-W44",
           "due": false,
-          "reason": "cycle 2026-W43 already QUALITY_BLOCKED",
+          "reason": "cycle 2026-W44 already QUALITY_BLOCKED",
           "lastPublished": null
         },
         "lastCycle": {
-          "cycleId": "2026-W43",
+          "cycleId": "2026-W44",
           "channel": "critical-thread",
-          "startedAt": "2026-10-19T12:54:10.172Z",
+          "startedAt": "2026-10-26T12:42:20.041Z",
           "status": "QUALITY_BLOCKED",
           "evaluated": [
             {
@@ -844,7 +846,7 @@
           ],
           "selected": null,
           "reason": "no candidate passed the long-form quality gate; cadence does not override quality",
-          "finishedAt": "2026-10-19T12:54:10.492Z"
+          "finishedAt": "2026-10-26T12:42:20.562Z"
         },
         "episodes": 0,
         "backlog": [

@@ -2,16 +2,160 @@
   "schema": "growth-topic-decision/1",
   "channel": "failure-reconstructed",
   "contentType": "short",
-  "date": "2026-10-25",
-  "createdAt": "2026-10-25T16:34:40.734Z",
-  "mode": "EXPLOIT",
-  "modeRoll": 0.849,
+  "date": "2026-10-26",
+  "createdAt": "2026-10-26T12:41:35.897Z",
+  "mode": "EXPLORE",
+  "modeRoll": 0.199,
   "pool": {
     "minimum": 20,
     "target": 50,
     "count": 11,
     "meetsMinimum": true,
     "candidates": [
+      {
+        "topicId": "alaska-261-2000",
+        "slug": "alaska-261-2000",
+        "topic": "Too Little Grease Brought Down Alaska 261",
+        "cluster": "aviation-failures",
+        "bucket": "A",
+        "viralScore": 75,
+        "videoPotentialScore": 85,
+        "selectionScore": 77,
+        "viralComponents": {
+          "curiosity_gap": {
+            "value": 98,
+            "basis": "derived"
+          },
+          "immediate_stakes": {
+            "value": 94,
+            "basis": "derived"
+          },
+          "human_consequence": {
+            "value": 75,
+            "basis": "derived"
+          },
+          "recognizability": {
+            "value": 74,
+            "basis": "measured"
+          },
+          "surprise": {
+            "value": 90,
+            "basis": "derived"
+          },
+          "visual_potential": {
+            "value": 78,
+            "basis": "derived"
+          },
+          "archival_footage_potential": {
+            "value": 80,
+            "basis": "inventory-signal"
+          },
+          "first_frame_potential": {
+            "value": 82,
+            "basis": "derived"
+          },
+          "title_potential": {
+            "value": 92,
+            "basis": "derived",
+            "note": "4 source-backed title seeds"
+          },
+          "emotional_tension": {
+            "value": 89,
+            "basis": "derived"
+          },
+          "contradiction": {
+            "value": 85,
+            "basis": "derived"
+          },
+          "unexpected_cause": {
+            "value": 82,
+            "basis": "derived"
+          },
+          "numerical_anomaly": {
+            "value": 95,
+            "basis": "derived"
+          },
+          "didnt_know_factor": {
+            "value": 89,
+            "basis": "derived"
+          },
+          "shareability": {
+            "value": 97,
+            "basis": "derived"
+          },
+          "channel_fit": {
+            "value": 76,
+            "basis": "derived"
+          },
+          "historical_similarity": {
+            "value": 56,
+            "basis": "learned",
+            "note": "4 same-cluster upload(s), breakout rate 0"
+          },
+          "subscriber_conversion_potential": {
+            "value": 50,
+            "basis": "learned",
+            "note": "0.00 subscribers / 1,000 views in this topic family"
+          },
+          "audience_breadth": {
+            "value": 85,
+            "basis": "derived"
+          },
+          "hook_potential": {
+            "value": 72,
+            "basis": "derived"
+          },
+          "visual_availability": {
+            "value": 85,
+            "basis": "inventory-signal"
+          },
+          "research_confidence": {
+            "value": 78,
+            "basis": "derived"
+          },
+          "duplicate_risk": {
+            "value": 0,
+            "basis": "penalty",
+            "note": "no published-title collision"
+          },
+          "saturation_risk": {
+            "value": -23,
+            "basis": "penalty",
+            "note": "4 published / 53 inventory in cluster"
+          },
+          "recent_fatigue_risk": {
+            "value": -66,
+            "basis": "penalty",
+            "note": "3 same-family upload(s) in the last 30 days"
+          },
+          "source_confidence_risk": {
+            "value": -22,
+            "basis": "penalty",
+            "note": "78/100 source quality"
+          },
+          "weak_footage_risk": {
+            "value": -15,
+            "basis": "penalty",
+            "note": "archival stills available"
+          }
+        },
+        "selectedHook": {
+          "family": "shocking_consequence",
+          "spoken": "Alaska Airlines Flight 261 dove into the Pacific Ocean.",
+          "score": 80
+        },
+        "rejectionReasons": [
+          "VideoPotential 85 ≥ 80",
+          "hook 80",
+          "sources 78"
+        ],
+        "competitor": {
+          "demand": null,
+          "saturation": null,
+          "adjustment": 0,
+          "snapshot": null
+        }
+      },
       {
         "topicId": "i-35w-bridge-2007",
         "slug": "i-35w-bridge-2007",
@@ -517,7 +661,7 @@
             "basis": "derived"
           },
           "historical_similarity": {
-            "value": 65,
+            "value": 66,
             "basis": "learned",
             "note": "2 same-cluster upload(s), breakout rate 0"
           },
@@ -591,7 +735,7 @@
         "cluster": "software-and-control-failures",
         "bucket": "B",
         "viralScore": 76,
-        "videoPotentialScore": 77,
+        "videoPotentialScore": 78,
         "selectionScore": 76,
         "viralComponents": {
           "curiosity_gap": {
@@ -717,7 +861,7 @@
           "score": 79
         },
         "rejectionReasons": [
-          "VideoPotential 77 ≥ 72"
+          "VideoPotential 78 ≥ 72"
         ],
         "competitor": {
           "demand": null,
@@ -944,7 +1088,7 @@
             "basis": "derived"
           },
           "historical_similarity": {
-            "value": 63,
+            "value": 65,
             "basis": "learned",
             "note": "2 same-cluster upload(s), breakout rate 0"
           },
@@ -1087,7 +1231,7 @@
             "basis": "derived"
           },
           "historical_similarity": {
-            "value": 55,
+            "value": 56,
             "basis": "learned",
             "note": "4 same-cluster upload(s), breakout rate 0"
           },
@@ -1230,7 +1374,7 @@
             "basis": "derived"
           },
           "historical_similarity": {
-            "value": 63,
+            "value": 65,
             "basis": "learned",
             "note": "2 same-cluster upload(s), breakout rate 0"
           },
@@ -1285,149 +1429,6 @@
           "family": "impossible_sounding_fact",
           "spoken": "Without it, the station baked at over 120 degrees inside.",
           "score": 77
-        },
-        "rejectionReasons": [
-          "VideoPotential 85 in experimental band 58–71",
-          "sources 41 < 62"
-        ],
-        "competitor": {
-          "demand": null,
-          "saturation": null,
-          "adjustment": 0,
-          "snapshot": null
-        }
-      },
-      {
-        "topicId": "castle-bravo-1954",
-        "slug": "castle-bravo-1954",
-        "topic": "Castle Bravo: The Bomb That Came Out 2.5 Times Too Big",
-        "cluster": "nuclear-accidents",
-        "bucket": "C",
-        "viralScore": 75,
-        "videoPotentialScore": 85,
-        "selectionScore": 77,
-        "viralComponents": {
-          "curiosity_gap": {
-            "value": 98,
-            "basis": "derived"
-          },
-          "immediate_stakes": {
-            "value": 94,
-            "basis": "derived"
-          },
-          "human_consequence": {
-            "value": 95,
-            "basis": "derived"
-          },
-          "recognizability": {
-            "value": 71,
-            "basis": "measured"
-          },
-          "surprise": {
-            "value": 90,
-            "basis": "derived"
-          },
-          "visual_potential": {
-            "value": 90,
-            "basis": "derived"
-          },
-          "archival_footage_potential": {
-            "value": 100,
-            "basis": "inventory-signal"
-          },
-          "first_frame_potential": {
-            "value": 95,
-            "basis": "derived"
-          },
-          "title_potential": {
-            "value": 100,
-            "basis": "derived",
-            "note": "5 source-backed title seeds"
-          },
-          "emotional_tension": {
-            "value": 93,
-            "basis": "derived"
-          },
-          "contradiction": {
-            "value": 85,
-            "basis": "derived"
-          },
-          "unexpected_cause": {
-            "value": 82,
-            "basis": "derived"
-          },
-          "numerical_anomaly": {
-            "value": 95,
-            "basis": "derived"
-          },
-          "didnt_know_factor": {
-            "value": 87,
-            "basis": "derived"
-          },
-          "shareability": {
-            "value": 97,
-            "basis": "derived"
-          },
-          "channel_fit": {
-            "value": 76,
-            "basis": "derived"
-          },
-          "historical_similarity": {
-            "value": 64,
-            "basis": "learned",
-            "note": "3 same-cluster upload(s), breakout rate 0"
-          },
-          "subscriber_conversion_potential": {
-            "value": 50,
-            "basis": "learned",
-            "note": "0.00 subscribers / 1,000 views in this topic family"
-          },
-          "audience_breadth": {
-            "value": 85,
-            "basis": "derived"
-          },
-          "hook_potential": {
-            "value": 83,
-            "basis": "derived"
-          },
-          "visual_availability": {
-            "value": 100,
-            "basis": "inventory-signal"
-          },
-          "research_confidence": {
-            "value": 41,
-            "basis": "derived"
-          },
-          "duplicate_risk": {
-            "value": -8,
-            "basis": "penalty",
-            "note": "published-title similarity 0.08"
-          },
-          "saturation_risk": {
-            "value": -82,
-            "basis": "penalty",
-            "note": "3 published / 11 inventory in cluster"
-          },
-          "recent_fatigue_risk": {
-            "value": -44,
-            "basis": "penalty",
-            "note": "2 same-family upload(s) in the last 30 days"
-          },
-          "source_confidence_risk": {
-            "value": -59,
-            "basis": "penalty",
-            "note": "no primary/authoritative source; only tertiary or unclassified sources"
-          },
-          "weak_footage_risk": {
-            "value": 0,
-            "basis": "penalty",
-            "note": "archival film available"
-          }
-        },
-        "selectedHook": {
-          "family": "shocking_consequence",
-          "spoken": "Castle Bravo yielded 15 megatons instead of 6.",
-          "score": 83
         },
         "rejectionReasons": [
           "VideoPotential 85 in experimental band 58–71",
@@ -1516,7 +1517,7 @@
             "basis": "derived"
           },
           "historical_similarity": {
-            "value": 63,
+            "value": 65,
             "basis": "learned",
             "note": "2 same-cluster upload(s), breakout rate 0"
           },
@@ -1585,6 +1586,149 @@
       }
     ]
   },
-  "selected": null,
-  "reason": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [87 unused A topic(s), best viral score 74 < minimum 75; 11 topic(s) at the minimum are bucket B/C, not selectable]"
+  "selected": {
+    "topicId": "alaska-261-2000",
+    "slug": "alaska-261-2000",
+    "topic": "Too Little Grease Brought Down Alaska 261",
+    "cluster": "aviation-failures",
+    "bucket": "A",
+    "viralScore": 75,
+    "videoPotentialScore": 85,
+    "selectionScore": 77,
+    "viralComponents": {
+      "curiosity_gap": {
+        "value": 98,
+        "basis": "derived"
+      },
+      "immediate_stakes": {
+        "value": 94,
+        "basis": "derived"
+      },
+      "human_consequence": {
+        "value": 75,
+        "basis": "derived"
+      },
+      "recognizability": {
+        "value": 74,
+        "basis": "measured"
+      },
+      "surprise": {
+        "value": 90,
+        "basis": "derived"
+      },
+      "visual_potential": {
+        "value": 78,
+        "basis": "derived"
+      },
+      "archival_footage_potential": {
+        "value": 80,
+        "basis": "inventory-signal"
+      },
+      "first_frame_potential": {
+        "value": 82,
+        "basis": "derived"
+      },
+      "title_potential": {
+        "value": 92,
+        "basis": "derived",
+        "note": "4 source-backed title seeds"
+      },
+      "emotional_tension": {
+        "value": 89,
+        "basis": "derived"
+      },
+      "contradiction": {
+        "value": 85,
+        "basis": "derived"
+      },
+      "unexpected_cause": {
+        "value": 82,
+        "basis": "derived"
+      },
+      "numerical_anomaly": {
+        "value": 95,
+        "basis": "derived"
+      },
+      "didnt_know_factor": {
+        "value": 89,
+        "basis": "derived"
+      },
+      "shareability": {
+        "value": 97,
+        "basis": "derived"
+      },
+      "channel_fit": {
+        "value": 76,
+        "basis": "derived"
+      },
+      "historical_similarity": {
+        "value": 56,
+        "basis": "learned",
+        "note": "4 same-cluster upload(s), breakout rate 0"
+      },
+      "subscriber_conversion_potential": {
+        "value": 50,
+        "basis": "learned",
+        "note": "0.00 subscribers / 1,000 views in this topic family"
+      },
+      "audience_breadth": {
+        "value": 85,
+        "basis": "derived"
+      },
+      "hook_potential": {
+        "value": 72,
+        "basis": "derived"
+      },
+      "visual_availability": {
+        "value": 85,
+        "basis": "inventory-signal"
+      },
+      "research_confidence": {
+        "value": 78,
+        "basis": "derived"
+      },
+      "duplicate_risk": {
+        "value": 0,
+        "basis": "penalty",
+        "note": "no published-title collision"
+      },
+      "saturation_risk": {
+        "value": -23,
+        "basis": "penalty",
+        "note": "4 published / 53 inventory in cluster"
+      },
+      "recent_fatigue_risk": {
+        "value": -66,
+        "basis": "penalty",
+        "note": "3 same-family upload(s) in the last 30 days"
+      },
+      "source_confidence_risk": {
+        "value": -22,
+        "basis": "penalty",
+        "note": "78/100 source quality"
+      },
+      "weak_footage_risk": {
+        "value": -15,
+        "basis": "penalty",
+        "note": "archival stills available"
+      }
+    },
+    "selectedHook": {
+      "family": "shocking_consequence",
+      "spoken": "Alaska Airlines Flight 261 dove into the Pacific Ocean.",
+      "score": 80
+    },
+    "rejectionReasons": [
+      "VideoPotential 85 ≥ 80",
+      "hook 80",
+      "sources 78"
+    ],
+    "competitor": {
+      "demand": null,
+      "saturation": null,
+      "adjustment": 0,
+      "snapshot": null
+    }
+  },
+  "reason": "EXPLORE (0.25): under-sampled cluster aviation-failures"
 }
