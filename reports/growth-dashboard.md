@@ -1,10 +1,10 @@
 # Growth dashboard
 
-Generated 2026-10-26T21:07:58.147Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-10-27T11:58:03.788Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
-**Shorts health** — last published 2026-10-23T18:00:00.000Z · 32 published · inventory A101/B126/C59/D59 · next: columbia-2003 (EXPLORE (0.25): under-sampled cluster spaceflight-disasters)
+**Shorts health** — last published 2026-10-23T18:00:00.000Z · 32 published · inventory A101/B126/C59/D59 · next: titanic-1912 (EXPLOIT (0.75): best A topic by SelectionScore)
 
 **Long-form health** — cycle 2026-W44: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W44 already QUALITY_BLOCKED)
 
@@ -78,7 +78,7 @@ Generated 2026-10-26T21:07:58.147Z. Per-channel baselines are computed separatel
 
 ## CriticalThread
 
-**Shorts health** — last published 2026-10-13T18:00:00.000Z · 8 published · inventory A8/B144/C0/D362 · next: why-rail-signaling-interlocking-is-so-hard-to-replace (EXPLORE (0.25): under-sampled cluster RAIL)
+**Shorts health** — last published 2026-10-13T18:00:00.000Z · 8 published · inventory A8/B144/C0/D362 · next: the-hidden-system-behind-border-gateway-routing-system (EXPLOIT (0.75): best A topic by SelectionScore)
 
 **Long-form health** — cycle 2026-W44: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W44 already QUALITY_BLOCKED)
 

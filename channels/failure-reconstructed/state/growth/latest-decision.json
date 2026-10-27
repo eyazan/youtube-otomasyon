@@ -2,14 +2,14 @@
   "schema": "growth-topic-decision/1",
   "channel": "failure-reconstructed",
   "contentType": "short",
-  "date": "2026-10-26",
-  "createdAt": "2026-10-26T16:58:23.976Z",
-  "mode": "EXPLORE",
-  "modeRoll": 0.199,
+  "date": "2026-10-27",
+  "createdAt": "2026-10-27T11:56:58.570Z",
+  "mode": "EXPLOIT",
+  "modeRoll": 0.294,
   "pool": {
     "minimum": 20,
     "target": 50,
-    "count": 11,
+    "count": 14,
     "meetsMinimum": true,
     "candidates": [
       {
@@ -19,7 +19,7 @@
         "cluster": "aviation-failures",
         "bucket": "A",
         "viralScore": 75,
-        "videoPotentialScore": 85,
+        "videoPotentialScore": 84,
         "selectionScore": 77,
         "viralComponents": {
           "curiosity_gap": {
@@ -88,7 +88,7 @@
             "basis": "derived"
           },
           "historical_similarity": {
-            "value": 56,
+            "value": 58,
             "basis": "learned",
             "note": "4 same-cluster upload(s), breakout rate 0"
           },
@@ -145,8 +145,296 @@
           "score": 80
         },
         "rejectionReasons": [
-          "VideoPotential 85 ≥ 80",
+          "VideoPotential 84 ≥ 80",
           "hook 80",
+          "sources 78"
+        ],
+        "competitor": {
+          "demand": null,
+          "saturation": null,
+          "adjustment": 0,
+          "snapshot": null
+        }
+      },
+      {
+        "topicId": "gemini-8-1966",
+        "slug": "gemini-8-1966",
+        "topic": "Neil Armstrong's Spacecraft Spun Out of Control",
+        "cluster": "spaceflight-disasters",
+        "bucket": "A",
+        "viralScore": 76,
+        "videoPotentialScore": 82,
+        "selectionScore": 77,
+        "viralComponents": {
+          "curiosity_gap": {
+            "value": 98,
+            "basis": "derived"
+          },
+          "immediate_stakes": {
+            "value": 94,
+            "basis": "derived"
+          },
+          "human_consequence": {
+            "value": 65,
+            "basis": "derived"
+          },
+          "recognizability": {
+            "value": 61,
+            "basis": "measured"
+          },
+          "surprise": {
+            "value": 90,
+            "basis": "derived"
+          },
+          "visual_potential": {
+            "value": 78,
+            "basis": "derived"
+          },
+          "archival_footage_potential": {
+            "value": 80,
+            "basis": "inventory-signal"
+          },
+          "first_frame_potential": {
+            "value": 82,
+            "basis": "derived"
+          },
+          "title_potential": {
+            "value": 92,
+            "basis": "derived",
+            "note": "4 source-backed title seeds"
+          },
+          "emotional_tension": {
+            "value": 81,
+            "basis": "derived"
+          },
+          "contradiction": {
+            "value": 85,
+            "basis": "derived"
+          },
+          "unexpected_cause": {
+            "value": 82,
+            "basis": "derived"
+          },
+          "numerical_anomaly": {
+            "value": 74,
+            "basis": "derived"
+          },
+          "didnt_know_factor": {
+            "value": 89,
+            "basis": "derived"
+          },
+          "shareability": {
+            "value": 97,
+            "basis": "derived"
+          },
+          "channel_fit": {
+            "value": 82,
+            "basis": "derived"
+          },
+          "historical_similarity": {
+            "value": 64,
+            "basis": "learned",
+            "note": "2 same-cluster upload(s), breakout rate 0"
+          },
+          "subscriber_conversion_potential": {
+            "value": 50,
+            "basis": "learned",
+            "note": "0.00 subscribers / 1,000 views in this topic family"
+          },
+          "audience_breadth": {
+            "value": 85,
+            "basis": "derived"
+          },
+          "hook_potential": {
+            "value": 72,
+            "basis": "derived"
+          },
+          "visual_availability": {
+            "value": 85,
+            "basis": "inventory-signal"
+          },
+          "research_confidence": {
+            "value": 75,
+            "basis": "derived"
+          },
+          "duplicate_risk": {
+            "value": 0,
+            "basis": "penalty",
+            "note": "no published-title collision"
+          },
+          "saturation_risk": {
+            "value": -19,
+            "basis": "penalty",
+            "note": "2 published / 31 inventory in cluster"
+          },
+          "recent_fatigue_risk": {
+            "value": -22,
+            "basis": "penalty",
+            "note": "1 same-family upload(s) in the last 30 days"
+          },
+          "source_confidence_risk": {
+            "value": -25,
+            "basis": "penalty",
+            "note": "75/100 source quality"
+          },
+          "weak_footage_risk": {
+            "value": -15,
+            "basis": "penalty",
+            "note": "archival stills available"
+          }
+        },
+        "selectedHook": {
+          "family": "shocking_consequence",
+          "spoken": "Gemini 8 began spinning violently in orbit.",
+          "score": 80
+        },
+        "rejectionReasons": [
+          "VideoPotential 82 ≥ 80",
+          "hook 80",
+          "sources 75"
+        ],
+        "competitor": {
+          "demand": null,
+          "saturation": null,
+          "adjustment": 0,
+          "snapshot": null
+        }
+      },
+      {
+        "topicId": "mars-96-1996",
+        "slug": "mars-96-1996",
+        "topic": "Russia's Mars Probe Fell Back to Earth",
+        "cluster": "spaceflight-disasters",
+        "bucket": "A",
+        "viralScore": 75,
+        "videoPotentialScore": 81,
+        "selectionScore": 76,
+        "viralComponents": {
+          "curiosity_gap": {
+            "value": 98,
+            "basis": "derived"
+          },
+          "immediate_stakes": {
+            "value": 94,
+            "basis": "derived"
+          },
+          "human_consequence": {
+            "value": 65,
+            "basis": "derived"
+          },
+          "recognizability": {
+            "value": 38,
+            "basis": "measured"
+          },
+          "surprise": {
+            "value": 90,
+            "basis": "derived"
+          },
+          "visual_potential": {
+            "value": 78,
+            "basis": "derived"
+          },
+          "archival_footage_potential": {
+            "value": 80,
+            "basis": "inventory-signal"
+          },
+          "first_frame_potential": {
+            "value": 82,
+            "basis": "derived"
+          },
+          "title_potential": {
+            "value": 92,
+            "basis": "derived",
+            "note": "4 source-backed title seeds"
+          },
+          "emotional_tension": {
+            "value": 81,
+            "basis": "derived"
+          },
+          "contradiction": {
+            "value": 85,
+            "basis": "derived"
+          },
+          "unexpected_cause": {
+            "value": 82,
+            "basis": "derived"
+          },
+          "numerical_anomaly": {
+            "value": 95,
+            "basis": "derived"
+          },
+          "didnt_know_factor": {
+            "value": 89,
+            "basis": "derived"
+          },
+          "shareability": {
+            "value": 97,
+            "basis": "derived"
+          },
+          "channel_fit": {
+            "value": 82,
+            "basis": "derived"
+          },
+          "historical_similarity": {
+            "value": 64,
+            "basis": "learned",
+            "note": "2 same-cluster upload(s), breakout rate 0"
+          },
+          "subscriber_conversion_potential": {
+            "value": 50,
+            "basis": "learned",
+            "note": "0.00 subscribers / 1,000 views in this topic family"
+          },
+          "audience_breadth": {
+            "value": 85,
+            "basis": "derived"
+          },
+          "hook_potential": {
+            "value": 73,
+            "basis": "derived"
+          },
+          "visual_availability": {
+            "value": 85,
+            "basis": "inventory-signal"
+          },
+          "research_confidence": {
+            "value": 78,
+            "basis": "derived"
+          },
+          "duplicate_risk": {
+            "value": 0,
+            "basis": "penalty",
+            "note": "no published-title collision"
+          },
+          "saturation_risk": {
+            "value": -19,
+            "basis": "penalty",
+            "note": "2 published / 31 inventory in cluster"
+          },
+          "recent_fatigue_risk": {
+            "value": -22,
+            "basis": "penalty",
+            "note": "1 same-family upload(s) in the last 30 days"
+          },
+          "source_confidence_risk": {
+            "value": -22,
+            "basis": "penalty",
+            "note": "78/100 source quality"
+          },
+          "weak_footage_risk": {
+            "value": -15,
+            "basis": "penalty",
+            "note": "archival stills available"
+          }
+        },
+        "selectedHook": {
+          "family": "shocking_consequence",
+          "spoken": "Mars 96 re-entered the atmosphere instead of leaving for Mars.",
+          "score": 81
+        },
+        "rejectionReasons": [
+          "VideoPotential 81 ≥ 80",
+          "hook 81",
           "sources 78"
         ],
         "competitor": {
@@ -162,9 +450,9 @@
         "topic": "The Undersized Steel Plate That Dropped a Freeway",
         "cluster": "bridge-failures",
         "bucket": "B",
-        "viralScore": 79,
-        "videoPotentialScore": 86,
-        "selectionScore": 80,
+        "viralScore": 78,
+        "videoPotentialScore": 85,
+        "selectionScore": 79,
         "viralComponents": {
           "curiosity_gap": {
             "value": 98,
@@ -232,7 +520,7 @@
             "basis": "derived"
           },
           "historical_similarity": {
-            "value": 61,
+            "value": 43,
             "basis": "learned",
             "note": "2 same-cluster upload(s), breakout rate 0"
           },
@@ -289,7 +577,7 @@
           "score": 76
         },
         "rejectionReasons": [
-          "VideoPotential 86 ≥ 72",
+          "VideoPotential 85 ≥ 72",
           "not A: hook 76 < 78"
         ],
         "competitor": {
@@ -375,7 +663,7 @@
             "basis": "derived"
           },
           "historical_similarity": {
-            "value": 61,
+            "value": 43,
             "basis": "learned",
             "note": "2 same-cluster upload(s), breakout rate 0"
           },
@@ -586,6 +874,149 @@
         }
       },
       {
+        "topicId": "gol-1907-2006",
+        "slug": "gol-1907-2006",
+        "topic": "A Business Jet's Collision Warning Was Switched Off",
+        "cluster": "aviation-failures",
+        "bucket": "B",
+        "viralScore": 75,
+        "videoPotentialScore": 85,
+        "selectionScore": 77,
+        "viralComponents": {
+          "curiosity_gap": {
+            "value": 98,
+            "basis": "derived"
+          },
+          "immediate_stakes": {
+            "value": 94,
+            "basis": "derived"
+          },
+          "human_consequence": {
+            "value": 75,
+            "basis": "derived"
+          },
+          "recognizability": {
+            "value": 64,
+            "basis": "measured"
+          },
+          "surprise": {
+            "value": 90,
+            "basis": "derived"
+          },
+          "visual_potential": {
+            "value": 78,
+            "basis": "derived"
+          },
+          "archival_footage_potential": {
+            "value": 80,
+            "basis": "inventory-signal"
+          },
+          "first_frame_potential": {
+            "value": 82,
+            "basis": "derived"
+          },
+          "title_potential": {
+            "value": 92,
+            "basis": "derived",
+            "note": "4 source-backed title seeds"
+          },
+          "emotional_tension": {
+            "value": 89,
+            "basis": "derived"
+          },
+          "contradiction": {
+            "value": 85,
+            "basis": "derived"
+          },
+          "unexpected_cause": {
+            "value": 82,
+            "basis": "derived"
+          },
+          "numerical_anomaly": {
+            "value": 95,
+            "basis": "derived"
+          },
+          "didnt_know_factor": {
+            "value": 89,
+            "basis": "derived"
+          },
+          "shareability": {
+            "value": 97,
+            "basis": "derived"
+          },
+          "channel_fit": {
+            "value": 94,
+            "basis": "derived"
+          },
+          "historical_similarity": {
+            "value": 58,
+            "basis": "learned",
+            "note": "4 same-cluster upload(s), breakout rate 0"
+          },
+          "subscriber_conversion_potential": {
+            "value": 50,
+            "basis": "learned",
+            "note": "0.00 subscribers / 1,000 views in this topic family"
+          },
+          "audience_breadth": {
+            "value": 85,
+            "basis": "derived"
+          },
+          "hook_potential": {
+            "value": 69,
+            "basis": "derived"
+          },
+          "visual_availability": {
+            "value": 85,
+            "basis": "inventory-signal"
+          },
+          "research_confidence": {
+            "value": 78,
+            "basis": "derived"
+          },
+          "duplicate_risk": {
+            "value": 0,
+            "basis": "penalty",
+            "note": "no published-title collision"
+          },
+          "saturation_risk": {
+            "value": -23,
+            "basis": "penalty",
+            "note": "4 published / 53 inventory in cluster"
+          },
+          "recent_fatigue_risk": {
+            "value": -66,
+            "basis": "penalty",
+            "note": "3 same-family upload(s) in the last 30 days"
+          },
+          "source_confidence_risk": {
+            "value": -22,
+            "basis": "penalty",
+            "note": "78/100 source quality"
+          },
+          "weak_footage_risk": {
+            "value": -15,
+            "basis": "penalty",
+            "note": "archival stills available"
+          }
+        },
+        "selectedHook": {
+          "family": "hidden_cause",
+          "spoken": "Controllers failed to catch it.",
+          "score": 77
+        },
+        "rejectionReasons": [
+          "VideoPotential 85 ≥ 72",
+          "not A: hook 77 < 78"
+        ],
+        "competitor": {
+          "demand": null,
+          "saturation": null,
+          "adjustment": 0,
+          "snapshot": null
+        }
+      },
+      {
         "topicId": "pike-river-2010",
         "slug": "pike-river-2010",
         "topic": "The New Zealand Mine With One Way Out",
@@ -661,7 +1092,7 @@
             "basis": "derived"
           },
           "historical_similarity": {
-            "value": 66,
+            "value": 67,
             "basis": "learned",
             "note": "2 same-cluster upload(s), breakout rate 0"
           },
@@ -735,7 +1166,7 @@
         "cluster": "software-and-control-failures",
         "bucket": "B",
         "viralScore": 76,
-        "videoPotentialScore": 78,
+        "videoPotentialScore": 77,
         "selectionScore": 76,
         "viralComponents": {
           "curiosity_gap": {
@@ -861,7 +1292,7 @@
           "score": 79
         },
         "rejectionReasons": [
-          "VideoPotential 78 ≥ 72"
+          "VideoPotential 77 ≥ 72"
         ],
         "competitor": {
           "demand": null,
@@ -1018,9 +1449,9 @@
         "topic": "Apollo 1: The Fire That Happened on the Ground",
         "cluster": "spaceflight-disasters",
         "bucket": "C",
-        "viralScore": 78,
+        "viralScore": 79,
         "videoPotentialScore": 87,
-        "selectionScore": 80,
+        "selectionScore": 81,
         "viralComponents": {
           "curiosity_gap": {
             "value": 98,
@@ -1088,7 +1519,7 @@
             "basis": "derived"
           },
           "historical_similarity": {
-            "value": 65,
+            "value": 64,
             "basis": "learned",
             "note": "2 same-cluster upload(s), breakout rate 0"
           },
@@ -1124,9 +1555,9 @@
             "note": "2 published / 31 inventory in cluster"
           },
           "recent_fatigue_risk": {
-            "value": -44,
+            "value": -22,
             "basis": "penalty",
-            "note": "2 same-family upload(s) in the last 30 days"
+            "note": "1 same-family upload(s) in the last 30 days"
           },
           "source_confidence_risk": {
             "value": -59,
@@ -1146,6 +1577,149 @@
         },
         "rejectionReasons": [
           "VideoPotential 87 in experimental band 58–71",
+          "sources 41 < 62"
+        ],
+        "competitor": {
+          "demand": null,
+          "saturation": null,
+          "adjustment": 0,
+          "snapshot": null
+        }
+      },
+      {
+        "topicId": "skylab-1973",
+        "slug": "skylab-1973",
+        "topic": "How Skylab Lost Its Heat Shield 63 Seconds After Launch",
+        "cluster": "spaceflight-disasters",
+        "bucket": "C",
+        "viralScore": 77,
+        "videoPotentialScore": 85,
+        "selectionScore": 79,
+        "viralComponents": {
+          "curiosity_gap": {
+            "value": 98,
+            "basis": "derived"
+          },
+          "immediate_stakes": {
+            "value": 94,
+            "basis": "derived"
+          },
+          "human_consequence": {
+            "value": 95,
+            "basis": "derived"
+          },
+          "recognizability": {
+            "value": 68,
+            "basis": "measured"
+          },
+          "surprise": {
+            "value": 90,
+            "basis": "derived"
+          },
+          "visual_potential": {
+            "value": 90,
+            "basis": "derived"
+          },
+          "archival_footage_potential": {
+            "value": 100,
+            "basis": "inventory-signal"
+          },
+          "first_frame_potential": {
+            "value": 95,
+            "basis": "derived"
+          },
+          "title_potential": {
+            "value": 100,
+            "basis": "derived",
+            "note": "5 source-backed title seeds"
+          },
+          "emotional_tension": {
+            "value": 97,
+            "basis": "derived"
+          },
+          "contradiction": {
+            "value": 85,
+            "basis": "derived"
+          },
+          "unexpected_cause": {
+            "value": 82,
+            "basis": "derived"
+          },
+          "numerical_anomaly": {
+            "value": 95,
+            "basis": "derived"
+          },
+          "didnt_know_factor": {
+            "value": 84,
+            "basis": "derived"
+          },
+          "shareability": {
+            "value": 97,
+            "basis": "derived"
+          },
+          "channel_fit": {
+            "value": 100,
+            "basis": "derived"
+          },
+          "historical_similarity": {
+            "value": 64,
+            "basis": "learned",
+            "note": "2 same-cluster upload(s), breakout rate 0"
+          },
+          "subscriber_conversion_potential": {
+            "value": 50,
+            "basis": "learned",
+            "note": "0.00 subscribers / 1,000 views in this topic family"
+          },
+          "audience_breadth": {
+            "value": 85,
+            "basis": "derived"
+          },
+          "hook_potential": {
+            "value": 69,
+            "basis": "derived"
+          },
+          "visual_availability": {
+            "value": 100,
+            "basis": "inventory-signal"
+          },
+          "research_confidence": {
+            "value": 41,
+            "basis": "derived"
+          },
+          "duplicate_risk": {
+            "value": -18,
+            "basis": "penalty",
+            "note": "published-title similarity 0.18"
+          },
+          "saturation_risk": {
+            "value": -19,
+            "basis": "penalty",
+            "note": "2 published / 31 inventory in cluster"
+          },
+          "recent_fatigue_risk": {
+            "value": -22,
+            "basis": "penalty",
+            "note": "1 same-family upload(s) in the last 30 days"
+          },
+          "source_confidence_risk": {
+            "value": -59,
+            "basis": "penalty",
+            "note": "no primary/authoritative source; only tertiary or unclassified sources"
+          },
+          "weak_footage_risk": {
+            "value": 0,
+            "basis": "penalty",
+            "note": "archival film available"
+          }
+        },
+        "selectedHook": {
+          "family": "impossible_sounding_fact",
+          "spoken": "Without it, the station baked at over 120 degrees inside.",
+          "score": 77
+        },
+        "rejectionReasons": [
+          "VideoPotential 85 in experimental band 58–71",
           "sources 41 < 62"
         ],
         "competitor": {
@@ -1231,7 +1805,7 @@
             "basis": "derived"
           },
           "historical_similarity": {
-            "value": 56,
+            "value": 58,
             "basis": "learned",
             "note": "4 same-cluster upload(s), breakout rate 0"
           },
@@ -1299,157 +1873,14 @@
         }
       },
       {
-        "topicId": "skylab-1973",
-        "slug": "skylab-1973",
-        "topic": "How Skylab Lost Its Heat Shield 63 Seconds After Launch",
-        "cluster": "spaceflight-disasters",
-        "bucket": "C",
-        "viralScore": 76,
-        "videoPotentialScore": 85,
-        "selectionScore": 78,
-        "viralComponents": {
-          "curiosity_gap": {
-            "value": 98,
-            "basis": "derived"
-          },
-          "immediate_stakes": {
-            "value": 94,
-            "basis": "derived"
-          },
-          "human_consequence": {
-            "value": 95,
-            "basis": "derived"
-          },
-          "recognizability": {
-            "value": 68,
-            "basis": "measured"
-          },
-          "surprise": {
-            "value": 90,
-            "basis": "derived"
-          },
-          "visual_potential": {
-            "value": 90,
-            "basis": "derived"
-          },
-          "archival_footage_potential": {
-            "value": 100,
-            "basis": "inventory-signal"
-          },
-          "first_frame_potential": {
-            "value": 95,
-            "basis": "derived"
-          },
-          "title_potential": {
-            "value": 100,
-            "basis": "derived",
-            "note": "5 source-backed title seeds"
-          },
-          "emotional_tension": {
-            "value": 97,
-            "basis": "derived"
-          },
-          "contradiction": {
-            "value": 85,
-            "basis": "derived"
-          },
-          "unexpected_cause": {
-            "value": 82,
-            "basis": "derived"
-          },
-          "numerical_anomaly": {
-            "value": 95,
-            "basis": "derived"
-          },
-          "didnt_know_factor": {
-            "value": 84,
-            "basis": "derived"
-          },
-          "shareability": {
-            "value": 97,
-            "basis": "derived"
-          },
-          "channel_fit": {
-            "value": 100,
-            "basis": "derived"
-          },
-          "historical_similarity": {
-            "value": 65,
-            "basis": "learned",
-            "note": "2 same-cluster upload(s), breakout rate 0"
-          },
-          "subscriber_conversion_potential": {
-            "value": 50,
-            "basis": "learned",
-            "note": "0.00 subscribers / 1,000 views in this topic family"
-          },
-          "audience_breadth": {
-            "value": 85,
-            "basis": "derived"
-          },
-          "hook_potential": {
-            "value": 69,
-            "basis": "derived"
-          },
-          "visual_availability": {
-            "value": 100,
-            "basis": "inventory-signal"
-          },
-          "research_confidence": {
-            "value": 41,
-            "basis": "derived"
-          },
-          "duplicate_risk": {
-            "value": -18,
-            "basis": "penalty",
-            "note": "published-title similarity 0.18"
-          },
-          "saturation_risk": {
-            "value": -19,
-            "basis": "penalty",
-            "note": "2 published / 31 inventory in cluster"
-          },
-          "recent_fatigue_risk": {
-            "value": -44,
-            "basis": "penalty",
-            "note": "2 same-family upload(s) in the last 30 days"
-          },
-          "source_confidence_risk": {
-            "value": -59,
-            "basis": "penalty",
-            "note": "no primary/authoritative source; only tertiary or unclassified sources"
-          },
-          "weak_footage_risk": {
-            "value": 0,
-            "basis": "penalty",
-            "note": "archival film available"
-          }
-        },
-        "selectedHook": {
-          "family": "impossible_sounding_fact",
-          "spoken": "Without it, the station baked at over 120 degrees inside.",
-          "score": 77
-        },
-        "rejectionReasons": [
-          "VideoPotential 85 in experimental band 58–71",
-          "sources 41 < 62"
-        ],
-        "competitor": {
-          "demand": null,
-          "saturation": null,
-          "adjustment": 0,
-          "snapshot": null
-        }
-      },
-      {
         "topicId": "vanguard-1957",
         "slug": "vanguard-1957",
         "topic": "Flopnik: Why America's Answer to Sputnik Failed Twice",
         "cluster": "spaceflight-disasters",
         "bucket": "C",
-        "viralScore": 75,
+        "viralScore": 77,
         "videoPotentialScore": 83,
-        "selectionScore": 77,
+        "selectionScore": 78,
         "viralComponents": {
           "curiosity_gap": {
             "value": 98,
@@ -1517,7 +1948,7 @@
             "basis": "derived"
           },
           "historical_similarity": {
-            "value": 65,
+            "value": 64,
             "basis": "learned",
             "note": "2 same-cluster upload(s), breakout rate 0"
           },
@@ -1553,9 +1984,9 @@
             "note": "2 published / 31 inventory in cluster"
           },
           "recent_fatigue_risk": {
-            "value": -44,
+            "value": -22,
             "basis": "penalty",
-            "note": "2 same-family upload(s) in the last 30 days"
+            "note": "1 same-family upload(s) in the last 30 days"
           },
           "source_confidence_risk": {
             "value": -59,
@@ -1593,7 +2024,7 @@
     "cluster": "aviation-failures",
     "bucket": "A",
     "viralScore": 75,
-    "videoPotentialScore": 85,
+    "videoPotentialScore": 84,
     "selectionScore": 77,
     "viralComponents": {
       "curiosity_gap": {
@@ -1662,7 +2093,7 @@
         "basis": "derived"
       },
       "historical_similarity": {
-        "value": 56,
+        "value": 58,
         "basis": "learned",
         "note": "4 same-cluster upload(s), breakout rate 0"
       },
@@ -1719,7 +2150,7 @@
       "score": 80
     },
     "rejectionReasons": [
-      "VideoPotential 85 ≥ 80",
+      "VideoPotential 84 ≥ 80",
       "hook 80",
       "sources 78"
     ],
@@ -1730,5 +2161,5 @@
       "snapshot": null
     }
   },
-  "reason": "EXPLORE (0.25): under-sampled cluster aviation-failures"
+  "reason": "EXPLOIT (0.75): best A topic by SelectionScore"
 }
