@@ -14,9 +14,11 @@ function sample(voice, outDir, topicId = "GLL-021", { narrate = Narrator.narrate
   const ready = Adapter.readiness(channel, topic); if (!ready.ready) throw new Error(`${topicId} is not verified: ${ready.errors.join("; ")}`);
   const script = Adapter.studioScript(channel, topic);
   script.voice = { approved: { ...script.voice.approved, voice }, ownerApproved: false };
-  const tl = narrate(script, outDir, { mode: "edge", preview: true, log });
+  // absolute: the narrator's ffmpeg concat list resolves beat paths relative to the list file (run 40568450370)
+  const dir = path.resolve(outDir);
+  const tl = narrate(script, dir, { mode: "edge", preview: true, log });
   if (tl.approved !== false) throw new Error("a listening sample must never be marked approved");
-  log(`${voice}: ${tl.duration} s, CANDIDATE (not approved) -> ${path.join(outDir, "narration.wav")}`);
+  log(`${voice}: ${tl.duration} s, CANDIDATE (not approved) -> ${path.join(dir, "narration.wav")}`);
   return tl;
 }
 
