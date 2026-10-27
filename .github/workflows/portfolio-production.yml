@@ -6,7 +6,8 @@ name: Multi-channel portfolio production
 #
 # Shorts production slots (Europe/Istanbul, UTC+3; each channel's config.json
 # publishingCadence.shorts.productionTime): Failure Reconstructed 09:00,
-# ImpossibleBrief 09:30, CriticalThread 10:00, The Hidden Logic of Things 10:30.
+# ImpossibleBrief 09:30, The Hidden Logic of Things 10:30. CriticalThread was retired on 2026-10-27
+# (config/channels.json): its YouTube channel now belongs to GoalLore Lab and it has no step here.
 # Every quality-approved uploaded Short is scheduled by youtube-yukle.js to go
 # public at 21:00 Europe/Istanbul on its production date. Scheduled runs enable
 # upload for all four channels; BLOCK/REVIEW still fail closed and never publish.
@@ -43,7 +44,7 @@ on:
       channel:
         description: Channel to run
         type: choice
-        options: [all, both, failure-reconstructed, impossible-brief, critical-thread, behind-the-ordinary]
+        options: [all, both, failure-reconstructed, impossible-brief, behind-the-ordinary]
         default: all
       dry_run:
         description: Render and validate without upload
@@ -187,16 +188,6 @@ jobs:
           node saglik.js --channel impossible-brief || true
           node shorts-sira.js --channel impossible-brief
 
-      - name: CriticalThread Short
-        if: ${{ always() && ((github.event_name == 'schedule' || github.event_name == 'repository_dispatch') || inputs.channel == 'all' || inputs.channel == 'critical-thread') }}
-        continue-on-error: true
-        env:
-          PUBLISH: ${{ (github.event_name == 'schedule' || github.event_name == 'repository_dispatch') && '1' || vars.CT_PUBLISH }}
-        run: |
-          if [ "${{ inputs.dry_run }}" = "true" ]; then export PUBLISH=0; fi
-          node saglik.js --channel critical-thread || true
-          node shorts-sira.js --channel critical-thread
-
       # Inactive channel (config/channels.json enabled:false): only an explicit manual run produces it.
       - name: The Hidden Logic of Things Short
         if: ${{ always() && github.event_name == 'workflow_dispatch' && inputs.channel == 'behind-the-ordinary' }}
@@ -236,7 +227,7 @@ jobs:
         run: |
           DRY=""
           if [ "${{ inputs.dry_run }}" = "true" ]; then DRY="--dry-run"; fi
-          for CHANNEL in failure-reconstructed impossible-brief critical-thread behind-the-ordinary; do
+          for CHANNEL in failure-reconstructed impossible-brief behind-the-ordinary; do
             node growth.js longform --channel "$CHANNEL" $DRY || echo "long-form lane for $CHANNEL failed; Shorts are unaffected."
           done
 
@@ -247,7 +238,7 @@ jobs:
         run: |
           # The Hidden Logic of Things is inactive: its analytics, plans and notifications run only
           # when BTO_PUBLISH=1 (its OAuth client is not maintained while the channel is paused).
-          CHANNELS="failure-reconstructed impossible-brief critical-thread"
+          CHANNELS="failure-reconstructed impossible-brief"
           if [ "$BTO_ACTIVE" = "1" ]; then CHANNELS="$CHANNELS behind-the-ordinary"; fi
           for CHANNEL in $CHANNELS; do
             node post-publish-analyzer.js --channel "$CHANNEL" --due || true

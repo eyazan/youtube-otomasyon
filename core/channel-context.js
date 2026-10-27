@@ -174,7 +174,23 @@ function getChannel(slug = currentSlug()) {
     };
   };
   const expectedChannelId = () => credentials().expectedChannelId;
-  return Object.freeze({ slug, name: config.name, entry, config, brand, paths, prefix, credentialNames: names, scopedEnv, expectedChannelId, credentials });
+  const retired = entry.retired ? Object.freeze({ ...entry.retired }) : null;
+  return Object.freeze({ slug, name: config.name, entry, config, brand, paths, prefix, credentialNames: names, scopedEnv, expectedChannelId, credentials, retired });
+}
+
+// A retired channel (config/channels.json "retired") keeps its state, ledgers and read-only analytics as history, but
+// nothing may write to YouTube in its name again: no upload, metadata edit, comment or replacement. Fail closed.
+class ChannelRetiredError extends Error {
+  constructor(channel) {
+    const r = channel.retired || {};
+    super(`${channel.name} (${channel.slug}) is retired since ${r.since || "?"}${r.successor ? `; its YouTube channel now belongs to ${r.successor}` : ""}. Upload/write blocked.`);
+    this.name = "ChannelRetiredError";
+    this.code = "CHANNEL_RETIRED";
+  }
+}
+function assertWritable(channel) {
+  if (channel && channel.retired) throw new ChannelRetiredError(channel);
+  return channel;
 }
 
 function selectFromArgv(argv = process.argv.slice(2), options = {}) {
@@ -203,5 +219,5 @@ function ensureChannelDirectories(channel = getChannel()) {
 
 module.exports = {
   allChannels, activeSlugs, ROOT, REGISTRY_PATH, SLUG_PATTERN, registry, parseChannelArgv, selectChannel, selectFromArgv,
-  currentSlug, getChannel, ensureChannelDirectories, credentialNames,
+  currentSlug, getChannel, ensureChannelDirectories, credentialNames, assertWritable, ChannelRetiredError,
 };

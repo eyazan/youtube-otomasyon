@@ -118,6 +118,7 @@ async function main() {
     const Lane = require("./core/growth/lane");
     const Longform = require("./core/growth/longform");
     const channel = Channel.getChannel(a.channel);
+    if (channel.retired) { console.log(`${channel.name}: retired since ${channel.retired.since}; long-form not run.`); return 0; }
     const result = await Lane.runCycle(channel, { dryRun: !!a["dry-run"], force: !!a.force, llm: Longform.llmAvailable() });
     if (!result.ran) { console.log(`${channel.name}: long-form not run — ${result.status.reason}`); return 0; }
     const Growth = require("./core/growth");

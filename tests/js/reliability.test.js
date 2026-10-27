@@ -128,7 +128,8 @@ test("comment replies run independently every four hours with a conservative cap
   assert.match(replies, /if \[ -e "\$STATE" \]; then git add "\$STATE"; fi/);
   // Every isolated channel replies and seeds with its own identity, only when publishing.
   assert.match(replies, /if: \$\{\{ always\(\) && vars\.IB_PUBLISH == '1' \}\}[\s\S]*?node yorum-yanitla\.js --channel impossible-brief --limit 4[\s\S]*?node seed-comment\.js --channel impossible-brief/);
-  assert.match(replies, /if: \$\{\{ always\(\) && vars\.CT_PUBLISH == '1' \}\}[\s\S]*?node yorum-yanitla\.js --channel critical-thread --limit 4[\s\S]*?node seed-comment\.js --channel critical-thread/);
+  // CriticalThread is retired (2026-10-27): it never replies or seeds comments, whatever CT_PUBLISH says.
+  assert.doesNotMatch(replies, /--channel critical-thread/);
   assert.match(replies, /if: \$\{\{ always\(\) && vars\.BTO_PUBLISH == '1' \}\}[\s\S]*?node yorum-yanitla\.js --channel behind-the-ordinary --limit 4[\s\S]*?node seed-comment\.js --channel behind-the-ordinary/);
   assert.match(replies, /IB_YT_REFRESH_TOKEN: \$\{\{ secrets\.IB_YT_REFRESH_TOKEN \}\}/);
   assert.match(replies, /CT_YT_REFRESH_TOKEN: \$\{\{ secrets\.CT_YT_REFRESH_TOKEN \}\}/);
@@ -208,8 +209,8 @@ test("watchdog workflows enforce safe recovery, deployment evidence and no-produ
   assert.match(production, /needs\.sla\.outputs\.safe_to_recover == 'true'/);
   assert.match(production, /vars\.IB_PUBLISH == '1'/);
   assert.match(production, /needs\.ib-sla\.outputs\.safe_to_recover == 'true'/);
-  assert.match(production, /vars\.CT_PUBLISH == '1'/);
-  assert.match(production, /needs\.ct-sla\.outputs\.safe_to_recover == 'true'/);
+  // CriticalThread is retired (2026-10-27): no SLA check, recovery or verification in its name.
+  assert.doesNotMatch(production, /vars\.CT_PUBLISH|--channel critical-thread|ct-sla|ct-recovery/);
   assert.match(production, /vars\.BTO_PUBLISH == '1'/);
   assert.match(production, /needs\.bto-sla\.outputs\.safe_to_recover == 'true'/);
   assert.match(deploy, /CLOUDFLARE_ACCOUNT_ID is required/);
@@ -223,16 +224,14 @@ test("watchdog workflows enforce safe recovery, deployment evidence and no-produ
 
 test("daily operations report covers all live channels and TikTok only for Failure Reconstructed", () => {
   const report = DailyReport.build(new Date("2026-09-27T17:10:00.000Z"));
-  assert.deepEqual(report.channels.map((row) => row.channel).sort(), ["critical-thread", "failure-reconstructed", "impossible-brief"]);
+  // CriticalThread is retired (2026-10-27) and no longer a live channel in the daily report.
+  assert.deepEqual(report.channels.map((row) => row.channel).sort(), ["failure-reconstructed", "impossible-brief"]);
   const fr = report.channels.find((row) => row.channel === "failure-reconstructed");
   const ib = report.channels.find((row) => row.channel === "impossible-brief");
-  const ct = report.channels.find((row) => row.channel === "critical-thread");
   assert.ok(fr.tiktok);
   assert.equal(ib.tiktok, null);
-  assert.equal(ct.tiktok, null);
   assert.equal(typeof fr.inventory.duplicateRate, "number");
   assert.equal(fr.inventory.acceptance.minimumQualifiedTopics, 500);
   assert.equal(ib.inventory.acceptance.minimumQualifiedTopics, 1000);
-  assert.equal(ct.inventory.acceptance.minimumQualifiedTopics, 500);
   assert.match(DailyReport.markdown(report), /TikTok backlog/);
 });

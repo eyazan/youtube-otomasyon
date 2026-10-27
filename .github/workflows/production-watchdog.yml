@@ -292,130 +292,8 @@ jobs:
           if-no-files-found: error
           retention-days: 30
 
-  # CriticalThread has an independent identity, state tree and publish flag.
-  # An auth/API ambiguity fails closed and must not affect the other channels.
-  ct-sla:
-    if: ${{ github.event.action != 'production-sla-watchdog-self-test' && vars.CT_PUBLISH == '1' && inputs.simulate_missing != true }}
-    runs-on: ubuntu-latest
-    outputs:
-      healthy: ${{ steps.check.outputs.healthy }}
-      production_ready: ${{ steps.check.outputs.production_ready }}
-      youtube_verified: ${{ steps.check.outputs.youtube_verified }}
-      youtube_today_exists: ${{ steps.check.outputs.youtube_today_exists }}
-      safe_to_recover: ${{ steps.check.outputs.safe_to_recover }}
-    env:
-      CT_CLIENT_ID: ${{ secrets.CT_CLIENT_ID }}
-      CT_CLIENT_SECRET: ${{ secrets.CT_CLIENT_SECRET }}
-      CT_YT_REFRESH_TOKEN: ${{ secrets.CT_YT_REFRESH_TOKEN }}
-      CT_YT_CHANNEL_ID: ${{ vars.CT_YT_CHANNEL_ID }}
-      PRODUCTION_DEADLINE_UTC: ${{ vars.PRODUCTION_DEADLINE_UTC || '16:30' }}
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.ref_name }}
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      - id: check
-        name: Check CriticalThread production SLA
-        run: node production-sla-check.js --channel critical-thread --verify-youtube --github-output --output="${{ runner.temp }}/ct-sla-before.json" || true
-      - uses: actions/upload-artifact@v4
-        with:
-          name: critical-thread-sla-before
-          path: ${{ runner.temp }}/ct-sla-before.json
-          if-no-files-found: error
-          retention-days: 30
-
-  ct-recovery:
-    needs: [ct-sla, ib-verify]
-    if: ${{ always() && github.event.action != 'production-sla-watchdog-self-test' && vars.CT_PUBLISH == '1' && inputs.simulate_missing != true && needs.ct-sla.outputs.safe_to_recover == 'true' }}
-    runs-on: ubuntu-latest
-    timeout-minutes: 120
-    env:
-      CT_CLIENT_ID: ${{ secrets.CT_CLIENT_ID }}
-      CT_CLIENT_SECRET: ${{ secrets.CT_CLIENT_SECRET }}
-      CT_YT_REFRESH_TOKEN: ${{ secrets.CT_YT_REFRESH_TOKEN }}
-      CT_YT_CHANNEL_ID: ${{ vars.CT_YT_CHANNEL_ID }}
-      PUBLISH: '1'
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.ref_name }}
-          fetch-depth: 0
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      - name: Runtime dependencies
-        run: |
-          bash scripts/ci-apt.sh ffmpeg fonts-dejavu-core fonts-liberation python3-pil
-          npm ci --no-audit --no-fund
-      - name: Recover one CriticalThread Short
-        run: |
-          node saglik.js --channel critical-thread
-          node shorts-sira.js --channel critical-thread
-          node bildirim.js --channel critical-thread || true
-          node daily-operations-report.js
-      - name: Commit isolated CriticalThread state
-        run: |
-          git config user.name "production-watchdog"
-          git config user.email "actions@users.noreply.github.com"
-          git config merge.json-union.driver "node scripts/git-json-merge.js %O %A %B"
-          git add channels/critical-thread reports
-          if git diff --cached --quiet; then echo "CriticalThread state unchanged."; exit 0; fi
-          git commit -m "chore: recover CriticalThread production SLA"
-          bash scripts/ops/push-state.sh "$GITHUB_REF_NAME" 5
-
-  ct-verify:
-    needs: [ct-sla, ct-recovery]
-    if: ${{ always() && github.event.action != 'production-sla-watchdog-self-test' && vars.CT_PUBLISH == '1' && inputs.simulate_missing != true }}
-    runs-on: ubuntu-latest
-    env:
-      CT_CLIENT_ID: ${{ secrets.CT_CLIENT_ID }}
-      CT_CLIENT_SECRET: ${{ secrets.CT_CLIENT_SECRET }}
-      CT_YT_REFRESH_TOKEN: ${{ secrets.CT_YT_REFRESH_TOKEN }}
-      CT_YT_CHANNEL_ID: ${{ vars.CT_YT_CHANNEL_ID }}
-      PRODUCTION_DEADLINE_UTC: ${{ vars.PRODUCTION_DEADLINE_UTC || '16:30' }}
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.ref_name }}
-          fetch-depth: 0
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      - name: Repair normal notification and verify SLA
-        id: final
-        env:
-          RECOVERY_RESULT: ${{ needs.ct-recovery.result }}
-        run: |
-          node bildirim.js --channel critical-thread || true
-          RECOVERY_ARGS=()
-          if [ "$RECOVERY_RESULT" != "skipped" ]; then RECOVERY_ARGS+=(--recovery-started); fi
-          node production-sla-check.js --channel critical-thread --verify-youtube "${RECOVERY_ARGS[@]}" --github-output --output="${{ runner.temp }}/ct-sla-after.json" || true
-      - name: Notify only after CriticalThread recovery failed
-        if: ${{ steps.final.outputs.healthy != 'true' }}
-        run: node bildirim.js --channel critical-thread --sla-failure "${{ runner.temp }}/ct-sla-after.json"
-      - name: Save notification/report state
-        if: always()
-        run: |
-          node daily-operations-report.js || true
-          git config user.name "production-watchdog"
-          git config user.email "actions@users.noreply.github.com"
-          git config merge.json-union.driver "node scripts/git-json-merge.js %O %A %B"
-          git add channels/critical-thread/state/notification-state.json reports || true
-          if git diff --cached --quiet; then echo "CriticalThread verification state unchanged."; exit 0; fi
-          git commit -m "chore: record CriticalThread SLA verification"
-          bash scripts/ops/push-state.sh "$GITHUB_REF_NAME" 5
-      - name: CriticalThread SLA evidence
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: critical-thread-sla-after
-          path: ${{ runner.temp }}/ct-sla-after.json
-          if-no-files-found: error
-          retention-days: 30
+  # CriticalThread was retired on 2026-10-27 (config/channels.json): its YouTube channel now belongs to GoalLore Lab,
+  # so it has no SLA check, recovery or verification here; youtube-yukle.js refuses it regardless.
 
   # The Hidden Logic of Things remains dormant until its own publish flag and OAuth
   # bundle are present. Its recovery is serialized after the existing lanes.
@@ -452,7 +330,7 @@ jobs:
           retention-days: 30
 
   bto-recovery:
-    needs: [bto-sla, ct-verify]
+    needs: [bto-sla, ib-verify]
     if: ${{ always() && github.event.action != 'production-sla-watchdog-self-test' && vars.BTO_PUBLISH == '1' && inputs.simulate_missing != true && needs.bto-sla.outputs.safe_to_recover == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 120

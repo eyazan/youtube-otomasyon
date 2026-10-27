@@ -86,7 +86,7 @@ test("inactive The Hidden Logic of Things is skipped by the portfolio analytics 
   const wf = read(".github/workflows/portfolio-production.yml");
   const step = wf.slice(wf.indexOf("- name: Channel-scoped analytics, plans, health and notifications"), wf.indexOf("- name: Production outcome (stages)"));
   assert.match(step, /BTO_ACTIVE: \$\{\{ vars\.BTO_PUBLISH \}\}/);
-  assert.match(step, /CHANNELS="failure-reconstructed impossible-brief critical-thread"\n\s+if \[ "\$BTO_ACTIVE" = "1" \]; then CHANNELS="\$CHANNELS behind-the-ordinary"; fi/);
+  assert.match(step, /CHANNELS="failure-reconstructed impossible-brief"\n\s+if \[ "\$BTO_ACTIVE" = "1" \]; then CHANNELS="\$CHANNELS behind-the-ordinary"; fi/);
   assert.doesNotMatch(step, /for CHANNEL in [^\n]*behind-the-ordinary/);
 });
 
