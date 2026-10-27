@@ -42,9 +42,11 @@ test("the lockfile matches package.json exactly", () => {
   }
 });
 
-test("the working Edge read-aloud client stays at 2.1.0 in the manifest and the lockfile", () => {
-  assert.equal(manifest.dependencies["msedge-tts"], "2.1.0");
-  assert.equal(lock.packages["node_modules/msedge-tts"].version, "2.1.0");
+// 2.1.1: from 2026-10-27 the 2.1.0 endpoint answered every handshake with HTTP 200 and all lanes lost narration
+// (production run 40535551278); 2.1.1 moves to the readaloud endpoint with the Sec-MS-GEC v2 token
+test("the working Edge read-aloud client stays at 2.1.1 in the manifest and the lockfile", () => {
+  assert.equal(manifest.dependencies["msedge-tts"], "2.1.1");
+  assert.equal(lock.packages["node_modules/msedge-tts"].version, "2.1.1");
 });
 
 test("every locked package comes from the npm registry with an integrity hash", () => {
