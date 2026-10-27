@@ -24,7 +24,7 @@ flag in production or uploads.
 
 ## 2. Latest CI results
 
-### 2026-10-27: Edge outage and recovery (head `91b9edf`, logs read)
+### 2026-10-27: Edge outage and recovery (head `91b9edf`, all green; logs read)
 
 From about 13:00 UTC on 2026-10-27 Edge refused every msedge-tts 2.1.0 handshake (`Unexpected server response: 200`).
 Every scheduled production run stopped at the health pre-flight with NARRATION_UNAVAILABLE for Failure Reconstructed,
@@ -38,7 +38,7 @@ Sec-MS-GEC v2). **This fix exists only on the PR branch; production on `main` st
 | 40552102932 | FR dry run | live lane narration check passed (Edge en-US-AndrewNeural); mars-96-1996 rendered, quality gate PUBLISH 87, upload skipped (PUBLISH=0); alaska-261-2000 held for review (REVIEW 86); shadow on mars-96-1996: Edge Andrew Multilingual (approved), objective PASS, 174 s, **9 fresh Edge requests**, 32 MB intermediates removed |
 | 40552102846 | Premium render check | BTO-301: Edge Emma (approved), objective PASS, READY_FOR_HUMAN_REVIEW, render 118.8 s; GLL-P01: Edge Ryan, objective PASS, PILOT_NOT_APPROVED_FOR_PUBLICATION, render 77.1 s |
 | 40552102862 | Testler | green |
-| 40552102872 | IB dry run | IB_RESULT |
+| 40552102872 | IB dry run | live lane narrated with Edge (claim-timed), could-earth-survive-one-day-without-earth-s-magnetic-field rendered, PUBLISH 88, upload skipped (PUBLISH=0); shadow (IB-EAR-019): Edge Brian Multilingual (approved), objective PASS, 217 s (render 127.9 s), **8 fresh Edge requests**, 42 MB intermediates removed; gate BLOCK at TOPIC_READY (duplicate of the live topic, by design) |
 
 ### 2026-10-22 (head `a955dce`, all green; logs read)
 
