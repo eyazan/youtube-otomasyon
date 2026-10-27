@@ -16,37 +16,37 @@
   {
    "id": "F2",
    "source": "UEFA Euro 1976 final",
-   "claim": "The final was decided by a penalty shoot-out.",
+   "claim": "Czechoslovakia won the final on penalties.",
    "terms": [
-    "penalt",
-    "shoot"
+    "penalties",
+    "Czechoslovakia"
    ]
   },
   {
    "id": "F3",
    "source": "UEFA Euro 1976 final",
-   "claim": "Uli Hoeneß sent his penalty over the bar.",
+   "claim": "Hoeneß's penalty went over the bar, giving Panenka the chance to win the title.",
    "terms": [
-    "Hoeneß",
-    "bar"
+    "chance",
+    "Panenka"
    ]
   },
   {
    "id": "F4",
    "source": "Antonín Panenka",
-   "claim": "Panenka chipped his penalty into the middle of the goal as goalkeeper Sepp Maier dived.",
+   "claim": "Panenka feigned shooting to the side, Sepp Maier dived, and Panenka gently chipped the ball into the middle of the net.",
    "terms": [
     "Maier",
-    "chip"
+    "chipped"
    ]
   },
   {
    "id": "F5",
    "source": "Panenka (penalty kick)",
-   "claim": "The chipped penalty technique is now named after Panenka.",
+   "claim": "A Panenka is a penalty in which the taker delicately chips the ball over a diving goalkeeper.",
    "terms": [
-    "chip",
-    "goalkeeper"
+    "taker",
+    "chips"
    ]
   }
  ],
@@ -68,7 +68,7 @@
   },
   {
    "role": "SETUP",
-   "text": "The final went to a penalty shoot-out.",
+   "text": "The final went to penalties.",
    "facts": [
     "F2"
    ]
@@ -89,7 +89,7 @@
   },
   {
    "role": "MECHANISM",
-   "text": "Panenka chipped it, softly, into the middle.",
+   "text": "Panenka chipped it, gently, into the middle of the net.",
    "facts": [
     "F4"
    ]
@@ -104,5 +104,5 @@
  ],
  "schema": "goal-lore-lab.research-draft.v1",
  "channel": "goal-lore-lab",
- "draftNote": "Claims drafted by hand from web search summaries on 2026-10-27; no quote is written here. scripts/gll-research/verify.js copies each quote verbatim from the live source or leaves the fact UNVERIFIED."
+ "draftNote": "Claims drafted by hand from web search summaries, revised on 2026-10-27 against the sentences the first verification run copied from the live source. No quote is written here; scripts/gll-research/verify.js copies each one or leaves the fact UNVERIFIED."
 }

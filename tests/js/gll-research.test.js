@@ -54,3 +54,12 @@ test("every draft is well formed: each line cites a draft fact, no draft carries
     for (const l of d.narration) assert.ok(l.facts.length && l.facts.every((id) => ids.has(id)), `${d.id}: "${l.text}" cites draft facts`);
   }
 });
+
+test("a heading, a list lead-in, or a sentence sharing too few of the claim's words is never a quote", async () => {
+  const text = "==== The Hand of God ====\nThe goal is known as the Hand of God by many. Notable differences with the 1891 law:\nIn the semi-final, Italy faced West Germany at Estadio Azteca.";
+  const f = async (url) => ({ query: { pages: [{ title: "Test", extract: text, revisions: [{ revid: 1, timestamp: "t" }] }] } });
+  const src = await V.article("Test", f);
+  assert.equal(V.evidenceFor({ claim: "Maradona's goal became known as the Hand of God.", terms: ["Hand of God"] }, src).quote, "The goal is known as the Hand of God by many.");
+  assert.ok(V.evidenceFor({ claim: "The 1891 law.", terms: ["1891"] }, src).error, "a list lead-in ending with a colon is refused");
+  assert.ok(V.evidenceFor({ claim: "Brazil beat Italy in the final at Estadio Azteca in Mexico City in front of a record crowd.", terms: ["Azteca"] }, src).error, "a sentence about another match shares too few words");
+});

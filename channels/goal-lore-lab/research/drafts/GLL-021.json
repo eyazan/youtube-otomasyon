@@ -8,7 +8,7 @@
   {
    "id": "F1",
    "source": "Argentina v England (1986 FIFA World Cup)",
-   "claim": "Argentina played England in a 1986 World Cup quarter-final at the Estadio Azteca.",
+   "claim": "Argentina played England in a 1986 FIFA World Cup quarter-final at Estadio Azteca in Mexico City.",
    "terms": [
     "quarter-final",
     "Azteca"
@@ -17,7 +17,7 @@
   {
    "id": "F2",
    "source": "Argentina v England (1986 FIFA World Cup)",
-   "claim": "Maradona's first goal was scored with his hand and became known as the Hand of God.",
+   "claim": "Maradona's first goal, scored with his hand, became known as the Hand of God goal.",
    "terms": [
     "Hand of God"
    ]
@@ -25,7 +25,7 @@
   {
    "id": "F3",
    "source": "Argentina v England (1986 FIFA World Cup)",
-   "claim": "Four minutes later Maradona dribbled past England players to score the Goal of the Century.",
+   "claim": "Four minutes later, Maradona dribbled past five England players to score the Goal of the Century.",
    "terms": [
     "four minutes",
     "Goal of the Century"
@@ -34,10 +34,10 @@
   {
    "id": "F4",
    "source": "Argentina v England (1986 FIFA World Cup)",
-   "claim": "FIFA voted the second goal the Goal of the Century.",
+   "claim": "In 2002 the goal was voted Goal of the Century on the FIFA website.",
    "terms": [
-    "FIFA",
-    "voted"
+    "voted",
+    "Goal of the Century"
    ]
   }
  ],
@@ -72,7 +72,7 @@
   },
   {
    "role": "TWIST",
-   "text": "Then he ran through the England team and scored again.",
+   "text": "Then he dribbled past five England players and scored again.",
    "facts": [
     "F3"
    ]
@@ -87,5 +87,5 @@
  ],
  "schema": "goal-lore-lab.research-draft.v1",
  "channel": "goal-lore-lab",
- "draftNote": "Claims drafted by hand from web search summaries on 2026-10-27; no quote is written here. scripts/gll-research/verify.js copies each quote verbatim from the live source or leaves the fact UNVERIFIED."
+ "draftNote": "Claims drafted by hand from web search summaries, revised on 2026-10-27 against the sentences the first verification run copied from the live source. No quote is written here; scripts/gll-research/verify.js copies each one or leaves the fact UNVERIFIED."
 }

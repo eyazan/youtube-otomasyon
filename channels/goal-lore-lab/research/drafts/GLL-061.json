@@ -8,16 +8,16 @@
   {
    "id": "F1",
    "source": "Back-pass rule",
-   "claim": "The back-pass rule was introduced in 1992.",
+   "claim": "The back-pass rule was introduced in 1992 to discourage time-wasting after the 1990 World Cup was criticised as dull, with goalkeepers holding up the ball.",
    "terms": [
     "1992",
-    "introduced"
+    "1990"
    ]
   },
   {
    "id": "F2",
    "source": "Back-pass rule",
-   "claim": "It was brought in to discourage time-wasting and overly defensive play.",
+   "claim": "The rule was introduced to discourage time-wasting and unduly defensive play.",
    "terms": [
     "wasting"
    ]
@@ -25,15 +25,15 @@
   {
    "id": "F3",
    "source": "Back-pass rule",
-   "claim": "The 1990 World Cup was criticised for dull and defensive play.",
+   "claim": "Caen manager Daniel Jeandupeux proposed the rule in December 1990 in a letter to the FIFA technical committee.",
    "terms": [
-    "1990"
+    "Jeandupeux"
    ]
   },
   {
    "id": "F4",
    "source": "Back-pass rule",
-   "claim": "A goalkeeper may not handle the ball after a teammate deliberately kicks it to him.",
+   "claim": "The rule prohibits goalkeepers from handling the ball after it has been deliberately kicked to them by a team-mate.",
    "terms": [
     "deliberately",
     "kick"
@@ -50,28 +50,28 @@
   },
   {
    "role": "CONTEXT",
-   "text": "The 1990 World Cup was criticised as dull and defensive.",
+   "text": "The 1990 World Cup was criticised as dull, with goalkeepers holding up the ball.",
+   "facts": [
+    "F1"
+   ]
+  },
+  {
+   "role": "SETUP",
+   "text": "Caen manager Daniel Jeandupeux proposed a change, in a letter to FIFA.",
    "facts": [
     "F3"
    ]
   },
   {
-   "role": "SETUP",
-   "text": "Defenders passed back, keepers held the ball, and time drained away.",
-   "facts": [
-    "F2"
-   ]
-  },
-  {
    "role": "TWIST",
-   "text": "So in 1992, the rule changed.",
+   "text": "In 1992, the back-pass rule arrived.",
    "facts": [
     "F1"
    ]
   },
   {
    "role": "EXPLANATION",
-   "text": "If a teammate kicks it back on purpose, the goalkeeper cannot use his hands.",
+   "text": "If a team-mate kicks it back on purpose, the goalkeeper cannot handle it.",
    "facts": [
     "F4"
    ]
@@ -86,5 +86,5 @@
  ],
  "schema": "goal-lore-lab.research-draft.v1",
  "channel": "goal-lore-lab",
- "draftNote": "Claims drafted by hand from web search summaries on 2026-10-27; no quote is written here. scripts/gll-research/verify.js copies each quote verbatim from the live source or leaves the fact UNVERIFIED."
+ "draftNote": "Claims drafted by hand from web search summaries, revised on 2026-10-27 against the sentences the first verification run copied from the live source. No quote is written here; scripts/gll-research/verify.js copies each one or leaves the fact UNVERIFIED."
 }

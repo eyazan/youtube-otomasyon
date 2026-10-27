@@ -4,8 +4,9 @@
 // into studio-ready topic records ONLY from text the source itself contains. Nothing here writes a quote: for every fact the
 // draft names the source article and the words the evidence must contain; this script fetches the live article (Wikipedia
 // API plain text, pinned to the revision it read) and copies the shortest sentence that contains all of them, verbatim.
-//   - a fact is VERIFIED only when such a sentence exists, is 5-80 words long, and carries every number of the claim
-//     (years may also come from the article title, e.g. "1970 FIFA World Cup final")
+//   - a fact is VERIFIED only when such a sentence exists, is 5-80 words of prose (no heading or list lead-in), shares at
+//     least half of the claim's content words, and carries every number of the claim (years may also come from the
+//     article title, e.g. "1970 FIFA World Cup final"). The owner's factual sign-off still reads every quote.
 //   - a narration line may state only numbers that occur in the quotes (or titles) of the facts it cites
 //   - a topic is VERIFIED and productionReady only when every fact and every line passes; otherwise it stays RESEARCHED
 //     with the reasons, and the studio refuses it (scripts/bto-studio/adapter.js readiness)
@@ -46,17 +47,26 @@ async function article(title, fetchJson = get) {
   return { title: page.title, text: page.extract, revid: rev && rev.revid, timestamp: rev && rev.timestamp, url: `https://en.wikipedia.org/w/index.php?title=${encodeURIComponent(page.title.replace(/ /g, "_"))}&oldid=${rev && rev.revid}` };
 }
 
+// content words of a claim that the quote should share: matching terms alone do not prove a sentence supports a claim
+const STOP = new Set("about after also been before between from have into its more most over than that their them then there these they this were what when which while with would against during".split(" "));
+const content = (s) => [...new Set(fold(s).replace(/'s\b/g, "").split(/[^a-z0-9]+/).filter((w) => w.length > 3 && !STOP.has(w)))];
+const support = (claim, quote) => { const c = content(claim); const q = new Set(content(quote)); return c.length ? c.filter((w) => q.has(w)).length / c.length : 0; };
+const MIN_SUPPORT = 0.5;
+// a usable quote is prose: not a section heading ("== X ==") and not a list lead-in ending with a colon
+const prose = (s) => !/^=|=$/.test(s.trim()) && !/:\s*$/.test(s.trim());
+
 // the shortest source sentence containing every required term and every non-year claim number (years: sentence or title)
+// that shares at least half of the claim's content words
 function evidenceFor(fact, src) {
   const terms = (fact.terms || []).map(fold);
   const nums = [...new Set(FR.numbersIn(fact.claim))];
   const titleNums = new Set(FR.numbersIn(src.title));
   const candidates = sentences(src.text).filter((s) => terms.every((t) => fold(s).includes(t)));
   const fits = candidates.filter((s) => { const have = new Set(FR.numbersIn(s)); return nums.every((n) => have.has(n) || (isYear(n) && titleNums.has(n))); })
-    .filter((s) => words(s) >= 5 && words(s) <= 80).sort((a, b) => a.length - b.length);
+    .filter((s) => words(s) >= 5 && words(s) <= 80 && prose(s) && support(fact.claim, s) >= MIN_SUPPORT).sort((a, b) => a.length - b.length);
   if (fits[0]) return { quote: fits[0] };
   const near = sentences(src.text).map((s) => ({ s, hit: terms.filter((t) => fold(s).includes(t)).length })).filter((x) => x.hit).sort((a, b) => b.hit - a.hit || a.s.length - b.s.length).slice(0, 3).map((x) => x.s);
-  return { error: candidates.length ? `a sentence has the terms but not every claim number (${nums.join(", ")}) or is not 5-80 words` : `no sentence contains all of: ${fact.terms.join(" + ")}`, near };
+  return { error: candidates.length ? `a sentence has the terms but not every claim number (${nums.join(", ") || "none"}), is not 5-80 words of prose, or shares under ${MIN_SUPPORT * 100}% of the claim's content words` : `no sentence contains all of: ${fact.terms.join(" + ")}`, near };
 }
 
 async function verifyDraft(draft, fetchJson = get) {
@@ -115,4 +125,4 @@ async function run(argv = process.argv.slice(2), { fetchJson = get, log = consol
 }
 
 if (require.main === module) run().catch((e) => { console.error(e.message); process.exit(1); });
-module.exports = { run, verifyDraft, evidenceFor, sentences, article };
+module.exports = { run, verifyDraft, evidenceFor, sentences, article, support };

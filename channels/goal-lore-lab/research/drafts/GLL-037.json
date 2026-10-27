@@ -8,7 +8,7 @@
   {
    "id": "F1",
    "source": "Brazil at the 1970 FIFA World Cup",
-   "claim": "Gordon Banks saved a header from Pelé in Brazil's group match against England.",
+   "claim": "Pelé nearly scored with a header against England that was spectacularly saved by Gordon Banks.",
    "terms": [
     "Banks",
     "header"
@@ -17,26 +17,24 @@
   {
    "id": "F2",
    "source": "Gordon Banks",
-   "claim": "Pelé described it as one of the best saves he had ever seen.",
+   "claim": "Pelé and numerous journalists and pundits later described the save as the greatest in the game's history.",
    "terms": [
-    "Pelé",
-    "save",
-    "ever"
+    "describe the save"
    ]
   },
   {
    "id": "F3",
    "source": "Brazil at the 1970 FIFA World Cup",
-   "claim": "Jairzinho scored the winning goal for Brazil against England.",
+   "claim": "Jairzinho scored the only goal of the match against England.",
    "terms": [
     "Jairzinho",
-    "England"
+    "goal"
    ]
   },
   {
    "id": "F4",
    "source": "1970 FIFA World Cup",
-   "claim": "Brazil won the tournament, beating Italy in the final.",
+   "claim": "Brazil won the final 4–1 against Italy.",
    "terms": [
     "Brazil",
     "Italy",
@@ -75,7 +73,7 @@
   },
   {
    "role": "BUILD",
-   "text": "Pelé later called it one of the best saves he had ever seen.",
+   "text": "Pelé and many pundits later called it the greatest save in the game's history.",
    "facts": [
     "F2"
    ]
@@ -89,7 +87,7 @@
   },
   {
    "role": "PAYOFF",
-   "text": "And they went on to win the whole tournament. Every goal has a story.",
+   "text": "And they went on to win the final against Italy. Every goal has a story.",
    "facts": [
     "F4"
    ]
@@ -97,5 +95,5 @@
  ],
  "schema": "goal-lore-lab.research-draft.v1",
  "channel": "goal-lore-lab",
- "draftNote": "Claims drafted by hand from web search summaries on 2026-10-27; no quote is written here. scripts/gll-research/verify.js copies each quote verbatim from the live source or leaves the fact UNVERIFIED."
+ "draftNote": "Claims drafted by hand from web search summaries, revised on 2026-10-27 against the sentences the first verification run copied from the live source. No quote is written here; scripts/gll-research/verify.js copies each one or leaves the fact UNVERIFIED."
 }

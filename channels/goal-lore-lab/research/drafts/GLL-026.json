@@ -8,7 +8,7 @@
   {
    "id": "F1",
    "source": "1997 Tournoi de France",
-   "claim": "Roberto Carlos scored a free kick for Brazil against France at the 1997 Tournoi de France.",
+   "claim": "Roberto Carlos scored a curling free kick in the opening match between France and Brazil, often considered one of the best in the modern game.",
    "terms": [
     "Roberto Carlos",
     "free kick"
@@ -17,17 +17,17 @@
   {
    "id": "F2",
    "source": "1997 Tournoi de France",
-   "claim": "The match was played at the Stade de Gerland in Lyon.",
+   "claim": "The opening match between France and Brazil was played in Lyon.",
    "terms": [
-    "Gerland"
+    "Lyon"
    ]
   },
   {
    "id": "F3",
    "source": "Roberto Carlos",
-   "claim": "Physicists later studied the trajectory of the free kick.",
+   "claim": "Physicists studied the trajectory of his free kick against France.",
    "terms": [
-    "physicist"
+    "physic"
    ]
   }
  ],
@@ -56,14 +56,7 @@
   },
   {
    "role": "BUILD",
-   "text": "The ball swung around the wall, still heading wide.",
-   "facts": [
-    "F1"
-   ]
-  },
-  {
-   "role": "TWIST",
-   "text": "Then it bent back in.",
+   "text": "The ball curled around the wall.",
    "facts": [
     "F1"
    ]
@@ -77,7 +70,7 @@
   },
   {
    "role": "PAYOFF",
-   "text": "Every goal has a story.",
+   "text": "It is still called one of the best free kicks of the modern game. Every goal has a story.",
    "facts": [
     "F1"
    ]
@@ -85,5 +78,5 @@
  ],
  "schema": "goal-lore-lab.research-draft.v1",
  "channel": "goal-lore-lab",
- "draftNote": "Claims drafted by hand from web search summaries on 2026-10-27; no quote is written here. scripts/gll-research/verify.js copies each quote verbatim from the live source or leaves the fact UNVERIFIED."
+ "draftNote": "Claims drafted by hand from web search summaries, revised on 2026-10-27 against the sentences the first verification run copied from the live source. No quote is written here; scripts/gll-research/verify.js copies each one or leaves the fact UNVERIFIED."
 }

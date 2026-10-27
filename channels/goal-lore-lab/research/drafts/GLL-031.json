@@ -8,25 +8,24 @@
   {
    "id": "F1",
    "source": "1970 FIFA World Cup final",
-   "claim": "Brazil played Italy in the 1970 World Cup final at the Estadio Azteca in Mexico City.",
+   "claim": "Brazil beat Italy in the 1970 World Cup final, played at the Estadio Azteca in Mexico City.",
    "terms": [
-    "Azteca",
-    "Mexico City"
+    "Brazil",
+    "Azteca"
    ]
   },
   {
    "id": "F2",
-   "source": "1970 FIFA World Cup final",
-   "claim": "Carlos Alberto scored Brazil's fourth goal.",
+   "source": "Pelé",
+   "claim": "The move is often regarded as one of the greatest team goals of all time.",
    "terms": [
-    "Carlos Alberto",
-    "fourth"
+    "team goal"
    ]
   },
   {
    "id": "F3",
    "source": "1970 FIFA World Cup final",
-   "claim": "Pelé passed the ball to Carlos Alberto for the goal.",
+   "claim": "Pelé drew the Italian defence into the centre and fed captain Carlos Alberto on the right flank for the final score.",
    "terms": [
     "Pelé",
     "Carlos Alberto"
@@ -35,19 +34,19 @@
   {
    "id": "F4",
    "source": "Carlos Alberto Torres",
-   "claim": "The goal is considered one of the greatest team goals.",
+   "claim": "Carlos Alberto captained Brazil to the 1970 World Cup and scored the fourth goal in the final, considered one of the greatest goals in the tournament's history.",
    "terms": [
-    "greatest",
-    "goal"
+    "fourth goal",
+    "greatest"
    ]
   }
  ],
  "narration": [
   {
    "role": "HOOK",
-   "text": "One goal, built by almost the whole team.",
+   "text": "One goal, often called the greatest team goal ever.",
    "facts": [
-    "F4"
+    "F2"
    ]
   },
   {
@@ -59,34 +58,34 @@
   },
   {
    "role": "SETUP",
-   "text": "Brazil were already in control.",
-   "facts": [
-    "F2"
-   ]
-  },
-  {
-   "role": "BUILD",
-   "text": "The ball moved from player to player across the pitch.",
+   "text": "Brazil's captain was Carlos Alberto.",
    "facts": [
     "F4"
    ]
   },
   {
+   "role": "BUILD",
+   "text": "The move ran through the team.",
+   "facts": [
+    "F2"
+   ]
+  },
+  {
    "role": "TWIST",
-   "text": "Pelé rolled it into space.",
+   "text": "Pelé drew the Italian defence into the middle, and fed him on the right.",
    "facts": [
     "F3"
    ]
   },
   {
    "role": "PAYOFF",
-   "text": "Carlos Alberto arrived and struck it in, Brazil's fourth goal. Every goal has a story.",
+   "text": "Carlos Alberto scored the fourth goal. Every goal has a story.",
    "facts": [
-    "F2"
+    "F4"
    ]
   }
  ],
  "schema": "goal-lore-lab.research-draft.v1",
  "channel": "goal-lore-lab",
- "draftNote": "Claims drafted by hand from web search summaries on 2026-10-27; no quote is written here. scripts/gll-research/verify.js copies each quote verbatim from the live source or leaves the fact UNVERIFIED."
+ "draftNote": "Claims drafted by hand from web search summaries, revised on 2026-10-27 against the sentences the first verification run copied from the live source. No quote is written here; scripts/gll-research/verify.js copies each one or leaves the fact UNVERIFIED."
 }
