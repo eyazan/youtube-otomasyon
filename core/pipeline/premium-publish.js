@@ -1,6 +1,6 @@
 "use strict";
 // Premium publishing adapter: PREMIUM APPROVED VIDEO -> the existing YouTube uploader (youtube-yukle.js).
-// Disabled unless <PREFIX>_PREMIUM_PUBLISH=1 (IB_, FR_, HLT_); no workflow sets it. With the flag off, nothing here
+// Disabled unless <PREFIX>_PREMIUM_PUBLISH=1 (IB_, FR_, HLT_, GLL_); no workflow sets it. With the flag off, nothing here
 // reads, writes or renders anything, and the live lane runs exactly as before.
 //
 // Why a separate path: the premium shadow renders a topic the live lane has already uploaded (a duplicate by

@@ -69,3 +69,44 @@ jobs:
           git commit -m "chore: GoalLore Lab verified research records"
           for i in 1 2 3 4 5; do git pull --rebase --autostash origin "$GITHUB_REF_NAME" && git push origin "HEAD:$GITHUB_REF_NAME" && exit 0; sleep $((i * 5)); done
           exit 1
+
+  # Listening samples for the owner: the same verified script read by each candidate Edge voice (the approved Edge
+  # infrastructure through scripts/bto-studio/narrate.js). Nothing here marks a voice approved; the owner chooses by ear
+  # and records the choice in channels/goal-lore-lab/config.json.
+  voice-samples:
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        voice: [en-GB-RyanNeural, en-GB-ThomasNeural, en-US-ChristopherNeural]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Runtime dependencies
+        run: |
+          bash scripts/ci-apt.sh --no-install-recommends ffmpeg
+          npm ci --no-audit --no-fund
+          python -m pip install --quiet -r scripts/bto-studio/requirements.txt
+      - name: Read the verified GLL-021 script (CANDIDATE voice)
+        env:
+          VOICE: ${{ matrix.voice }}
+        run: |
+          git pull --quiet origin "$GITHUB_REF_NAME" || true
+          node scripts/gll-research/voice-samples.js "$VOICE" "voice-$VOICE" GLL-021
+          ffmpeg -loglevel error -y -i "voice-$VOICE/narration.wav" -codec:a libmp3lame -q:a 3 "GLL-voice-$VOICE.mp3"
+          echo "$VOICE: $(ffprobe -v error -show_entries format=duration -of csv=p=0 "GLL-voice-$VOICE.mp3") s" | tee -a "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gll-voice-${{ matrix.voice }}
+          path: GLL-voice-${{ matrix.voice }}.mp3
+          retention-days: 30

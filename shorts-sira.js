@@ -425,6 +425,8 @@ function main() {
 try {
   // Retired channel (config/channels.json "retired"): nothing is selected, rendered or uploaded in its name.
   if (CHANNEL.retired) { console.log(`[${CHANNEL.name}] retired since ${CHANNEL.retired.since}; no content produced (successor: ${CHANNEL.retired.successor || "none"}).`); process.exit(0); }
+  // Premium-only channel (GoalLore Lab): its own lane, publishing only through the owner-approved premium adapter.
+  if (CHANNEL.config.lane === "premium") process.exit(require("./core/pipeline/goal-lore-lab").runChannel(CHANNEL.slug, SELECTED.argv));
   if (CHANNEL.config.pathMode !== "legacy-adapter") process.exit(require("./core/pipeline/impossible-brief").runChannel(CHANNEL.slug, SELECTED.argv));
   process.exit(main());
 }

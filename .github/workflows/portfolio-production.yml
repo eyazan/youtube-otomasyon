@@ -44,7 +44,7 @@ on:
       channel:
         description: Channel to run
         type: choice
-        options: [all, both, failure-reconstructed, impossible-brief, behind-the-ordinary]
+        options: [all, both, failure-reconstructed, impossible-brief, behind-the-ordinary, goal-lore-lab]
         default: all
       dry_run:
         description: Render and validate without upload
@@ -199,6 +199,24 @@ jobs:
           node saglik.js --channel impossible-brief || true
           node shorts-sira.js --channel impossible-brief
 
+      # GoalLore Lab: premium-only lane, successor of the retired CriticalThread on the same YouTube channel
+      # (config/channels.json). Scheduled runs produce it only when GLL_ACTIVE=1; a manual run is a dry run unless
+      # GLL_PUBLISH=1. Even then it uploads ONLY an owner-approved premium package: core/pipeline/premium-publish.js
+      # needs the channel's premium publish flag (no workflow sets it), signed approvals, the approved voice and the
+      # registry entry enabled. Otherwise it renders one review candidate, never uploaded (core/pipeline/goal-lore-lab.js).
+      - name: GoalLore Lab Short (premium)
+        if: ${{ always() && (((github.event_name == 'schedule' || github.event_name == 'repository_dispatch') && vars.GLL_ACTIVE == '1') || inputs.channel == 'goal-lore-lab') }}
+        continue-on-error: true
+        env:
+          PUBLISH: ${{ vars.GLL_PUBLISH == '1' && '1' || '0' }}
+          PD_CHROMIUM: /usr/bin/google-chrome
+          EDGE_RATE_LIMIT_RETRIES: '6'
+        run: |
+          if [ "${{ inputs.dry_run }}" = "true" ]; then export PUBLISH=0; fi
+          python -m pip install --quiet -r scripts/bto-studio/requirements.txt
+          node scripts/bto-studio/preflight-deps.js
+          node shorts-sira.js --channel goal-lore-lab
+
       # Inactive channel (config/channels.json enabled:false): only an explicit manual run produces it.
       - name: The Hidden Logic of Things Short
         if: ${{ always() && github.event_name == 'workflow_dispatch' && inputs.channel == 'behind-the-ordinary' }}
@@ -285,6 +303,9 @@ jobs:
             channels/*/state/production/*/validations.json
             channels/*/state/production/*/render.json
             channels/*/state/production/*/visual-attribution.json
+            channels/goal-lore-lab/premium/*/out/*.mp4
+            channels/goal-lore-lab/premium/*/out/*.md
+            channels/goal-lore-lab/premium/*/out/review-package.json
           if-no-files-found: ignore
           retention-days: 7
 
