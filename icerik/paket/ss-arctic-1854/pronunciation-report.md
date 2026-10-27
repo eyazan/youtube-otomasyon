@@ -1,6 +1,6 @@
 # Pronunciation validation — ss-arctic-1854
 
-Score: **84/100** (unresolved risky words: 2, AI-cliché phrases: 0)
+Score: **76/100** (unresolved risky words: 3, AI-cliché phrases: 0)
 
 ## Dictionary matches (handled automatically)
 
@@ -10,8 +10,9 @@ _none_
 
 | Word | Type | Why |
 |---|---|---|
-| Newfoundland | proper-noun | name/place — confirm the voice pronounces it correctly |
-| Arctic | proper-noun | name/place — confirm the voice pronounces it correctly |
+| RUN | abbreviation | TTS may read as a word or spell it — add to config/pronunciation.json |
+| LAND | abbreviation | TTS may read as a word or spell it — add to config/pronunciation.json |
+| FAILS | abbreviation | TTS may read as a word or spell it — add to config/pronunciation.json |
 
 ## AI-cliché phrases
 

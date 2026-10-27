@@ -1,13 +1,13 @@
 # Optimization report — Why San Francisco Burned for Three Days
 
-Video: https://youtu.be/X0jw78mIGdk · short · 35s · published 2026-09-23 (1 days ago) · public
-Production slug: `san-francisco-1906` · Analytics: ok · Generated 2026-09-24T21:02:25.969Z
+Video: https://youtu.be/X0jw78mIGdk · short · 35s · published 2026-09-23 (33 days ago) · public
+Production slug: `san-francisco-1906` · Analytics: ok · Generated 2026-10-26T15:32:32.313Z
 
 > Nothing here is applied automatically. No video is deleted or re-uploaded. Metrics marked *unavailable* were not invented.
 
 ## CURRENT TITLE
 
-"Why San Francisco Burned for Three Days" — title engine score **47.4/100**
+"Why San Francisco Burned for Three Days" — title engine score **40.4/100**
 
 ## CURRENT THUMBNAIL
 
@@ -41,28 +41,26 @@ Narration uses a synthetic voice. Footage is real archival film or licensed stoc
 
 | Metric | Value | Source / reason |
 |---|---|---|
-| Views | 110 | Data API |
+| Views | 120 | Data API |
 | Likes | 4 | Data API |
-| Comments | 1 | Data API |
-| Impressions | unavailable | not exposed by YouTube APIs — export from Studio into studio-manual.json |
-| CTR | unavailable | not exposed by YouTube APIs — export from Studio into studio-manual.json |
-| Watch time | unavailable | analytics unavailable |
-| Average view duration | unavailable | analytics unavailable |
-| Average % viewed | unavailable | analytics unavailable |
-| Subscribers gained (net) | unavailable | analytics unavailable |
-| Shares | unavailable | analytics unavailable |
-| Returning viewers | unavailable | not exposed per video by the public API |
-| Retention at 30 s | unavailable | analytics unavailable |
+| Comments | 2 | Data API |
+| Impressions | 255 | Studio (manual entry 2026-10-07) |
+| CTR | 1.96% | Studio (manual entry 2026-10-07) |
+| Watch time | 15 min | Analytics API |
+| Average view duration | 23 s | Analytics API |
+| Average % viewed | 66.99% | Analytics API |
+| Subscribers gained (net) | 2 | Analytics API |
+| Shares | 1 | Analytics API |
+| Returning viewers | 1 | Studio (manual entry) |
+| Retention at 30 s | 0.4595 | Analytics API (retention at 86% of video) |
 
-Traffic sources: 
+Traffic sources: Shorts feed 86% · Search 9% · Channel page 5% · Direct/unknown 0%
 
-Derived: subsPer1000 = unavailable · likeRate = 3.6 · commentRate = 0.91
+Derived: subsPer1000 = 16.7 · netSubsPer1000 = 16.7 · likeRate = 3.3 · commentRate = 1.67
 
 ## PROBLEM DIAGNOSIS
 
-- **INSUFFICIENT_DATA** (confidence: high) — 110 views after 1 days — too early/small for rate-based conclusions.
-  → Do not change packaging yet unless something is objectively broken (missing sources, typo). Re-check at 7 days.
-- **WEAK_TOPIC_PACKAGING** (confidence: low) — Current title scores 47.4/100 in the title engine; best editorial option scores 54.
+- **WEAK_TOPIC_PACKAGING** (confidence: low) — Current title scores 40.4/100 in the title engine; best editorial option scores 40.4.
   → Heuristic only — test the stronger title as a logged experiment rather than switching silently.
 
 ## TITLE OPTIONS
@@ -70,15 +68,15 @@ Derived: subsPer1000 = unavailable · likeRate = 3.6 · commentRate = 0.91
 | Score | Title | Source | Notes |
 |---:|---|---|---|
 | 60.4 | The Real Reason San Francisco Burned for Three Days | template:real-reason |  |
-| 60.4 | 1906: San Francisco Burned for Three Days | template:year-result | title pattern "label-colon" already used by 2 other videos |
-| 54 | No Water, Three Days of Fire: San Francisco 1906 | editorial | title pattern "label-colon" already used by 2 other videos |
-| 47.4 | Why San Francisco Burned for Three Days | current | title pattern "why" already used by 4 other videos |
+| 43.4 | 1906: San Francisco Burned for Three Days | template:year-result | title pattern "label-colon" already used by 20 other videos |
 | 41.7 | San Francisco 1906 Explained | baseline:seo-keyword | ends with 'Explained' — describes the video instead of creating a question; repeats the keyword instead of packaging the story |
-| 41.4 | The Quake Broke the Water Mains. Then the City Burned. | editorial | title pattern "two-beat" already used by 4 other videos |
-| 39.2 | The City That Burned for Three Days | template:object-that-result | title pattern "the-x-that" already used by 5 other videos |
-| 31.8 | 3 DAYS. That's All It Took | template:number-all-it-took | no concrete subject — viewer can't tell what failed; title pattern "label-colon" already used by 2 other videos |
+| 40.4 | Why San Francisco Burned for Three Days | current | title pattern "why" already used by 32 other videos |
+| 40.4 | How San Francisco Became Burned for Three Days | template:how-became | title pattern "how" already used by 9 other videos |
+| 39.9 | San Francisco: The Engineering Behind the Failure | template:engineering-behind | title pattern "label-colon" already used by 20 other videos |
+| 37 | No Water, Three Days of Fire: San Francisco 1906 | editorial | title pattern "label-colon" already used by 20 other videos |
+| 36.4 | The Quake Broke the Water Mains. Then the City Burned. | editorial | title pattern "two-beat" already used by 5 other videos |
 
-Recommended: **No Water, Three Days of Fire: San Francisco 1906**
+Recommended: **Why San Francisco Burned for Three Days** (already live — keep)
 
 ## THUMBNAIL CONCEPTS
 
@@ -99,7 +97,9 @@ In 1906, one of America’s great cities burned for three days. The fire that fo
 
 Failure chain: Fault slips — M7.9 → Water mains rupture → Gas lines & stoves ignite → No water to fight fires → 80% of city destroyed
 
-Another reconstruction: The Disaster That Ended the Age of the Airship — https://youtu.be/PGOKZhPYo7c
+Related episode: How a Single Step Triggers an Avalanche — https://youtu.be/ODZ7y6r1o6o
+
+Series — Natural Hazards vs. Engineering: https://www.youtube.com/playlist?list=PLdrG62GTUxOM
 
 Footage & sources:
 • Archival film: "San Francisco earthquake and fire, April 18, 1906" — Wikimedia Commons (public domain / free licence): https://commons.wikimedia.org/wiki/File:San_Francisco_earthquake_and_fire%2C_April_18%2C_1906.webm
@@ -109,17 +109,19 @@ Technical references:
 
 Narration uses a synthetic voice. Footage is real archival film or licensed stock; anything reconstructed is labelled on screen.
 
-#shorts #engineering #disaster
+Failure File · Episode 3 · A new engineering failure, reconstructed every day.
+
+#shorts #engineering #SanFrancisco1906 #disaster #history
 ```
 
 ## HOOK IMPROVEMENT
 
-Current hook score: **55/100**
+Current hook score: **100/100**
 
-- starts with background/history instead of the event
 - 0-5s: lands the event/result immediately
-- 5-12s: missing an unexpected detail
-- 12-20s: no central mystery or problem is posed
+- 5-12s: unexpected detail/contrast present
+- 12-20s: a central question/problem is raised
+- payoff line present (why/how/reason)
 - on-screen hook is 5 words (readable in <1s)
 
 Draft structure for a future re-cut / long-form version (0-5 / 5-12 / 12-20 / 20-30 s):
@@ -133,16 +135,16 @@ _A published video's audio can't be edited in place — apply this to the next p
 
 ## PLAYLIST RECOMMENDATION
 
-Cluster: **Natural Hazards vs. Engineering** — playlist "Natural Hazards vs. Engineering" (waiting (1/3 published)). Keep the existing series playlist too.
+Cluster: **Natural Hazards vs. Engineering** — playlist "Natural Hazards vs. Engineering" (active). Keep the existing series playlist too.
 
 ## RELATED VIDEO LINKS
 
 - Previous: —
-- Next: queued: How a Single Step Triggers an Avalanche
+- Next: How a Single Step Triggers an Avalanche https://youtu.be/ODZ7y6r1o6o
 
 ## END SCREEN RECOMMENDATION
 
-The Disaster That Ended the Age of the Airship https://youtu.be/PGOKZhPYo7c
+How a Single Step Triggers an Avalanche https://youtu.be/ODZ7y6r1o6o
 
 Shorts have no end screens — set this as the Short's 'Related video' in Studio. Long-form: end-screen element.
 
@@ -153,7 +155,7 @@ Shorts have no end screens — set this as the Short's 'Related video' in Studio
 
 Improvised dynamiting to create firebreaks started new fires. Was it a mistake, or the only option without water?
 
-Related reconstruction: The Disaster That Ended the Age of the Airship → https://youtu.be/PGOKZhPYo7c
+Related reconstruction: How a Single Step Triggers an Avalanche → https://youtu.be/ODZ7y6r1o6o
 
 Which case should Failure Reconstructed investigate next? Name it below.
 ```
@@ -161,13 +163,14 @@ _Post with `node pinned-comment.js --post-pending`, then pin it in Studio (the A
 
 ## SUBSCRIBER CONVERSION OPPORTUNITY
 
-Subscribers per 1,000 views: unavailable (needs Analytics scope).
+Subscribers per 1,000 views: **16.7**.
 Shorts: no spoken CTA (it costs retention). Convert through the series: pinned comment → related episode, and a cluster playlist once it has 3+ videos.
 
 ## ACTION PRIORITY
 
 **P4** — low-data video: fix objective gaps only, then wait for data
 
+- `PLAYLIST_MOVE` — add to cluster playlist "Natural Hazards vs. Engineering" (keep existing series)
 - `REVIEW_MANUALLY` — Published narration says the fire, not the quake, did most of the killing. Sources agree fire caused most of the DESTRUCTION; the split of deaths is uncertain. Clarify in the pinned comment/description rather than re-uploading.
 
 Apply (manual, reversible — review first):

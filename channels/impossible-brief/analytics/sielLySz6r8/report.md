@@ -9,8 +9,9 @@ https://youtu.be/sielLySz6r8
 | 1d | 2026-10-10 | 371 | 8 | 1 | — | — |  |
 | 3d | 2026-10-12 | 613 | 11 | 1 | 56.82000000000001 | 1 | Shorts feed 97%, Browse/other YouTube 2% |
 | 7d | 2026-10-16 | 618 | 11 | 1 | 52.61 | 1 | Shorts feed 96%, Search 2% |
+| 14d | 2026-10-23 | 618 | 11 | 1 | 52.349999999999994 | 1 | Shorts feed 96%, Search 2% |
 
-## Diagnosis at 7d
+## Diagnosis at 14d
 
 - **HEALTHY** (low) — No problem pattern detected with available data.
 
@@ -25,4 +26,4 @@ https://youtu.be/sielLySz6r8
 - Visual type: AI-GENERATED VISUAL
 - This is an observed alignment, not proof that the sentence or visual caused the drop.
 
-Views gained between 3d and 7d: 5.
+Views gained between 7d and 14d: 0.

@@ -9,8 +9,9 @@ https://youtu.be/Wqu8Cdg5PCc
 | 1d | 2026-10-11 | 744 | 15 | 3 | — | — |  |
 | 3d | 2026-10-13 | 1037 | 17 | 3 | 61.36000000000001 | 1 | Shorts feed 96%, Browse/other YouTube 2% |
 | 7d | 2026-10-17 | 1041 | 17 | 3 | 66.19 | 1 | Shorts feed 95%, Search 3% |
+| 14d | 2026-10-24 | 1046 | 18 | 3 | 66.17 | 1 | Shorts feed 94%, Search 4% |
 
-## Diagnosis at 7d
+## Diagnosis at 14d
 
 - **HIGH_VIEWS_LOW_SUB_CONVERSION** (medium) — 1.0 subscribers per 1,000 views.
 
@@ -20,9 +21,9 @@ https://youtu.be/Wqu8Cdg5PCc
 
 ## First major observed retention drop
 
-- Timestamp: 5s; magnitude: 16 percentage points.
+- Timestamp: 5s; magnitude: 15 percentage points.
 - Active sentence: neutron star size over a city map
 - Visual type: AI-GENERATED VISUAL
 - This is an observed alignment, not proof that the sentence or visual caused the drop.
 
-Views gained between 3d and 7d: 4.
+Views gained between 7d and 14d: 5.

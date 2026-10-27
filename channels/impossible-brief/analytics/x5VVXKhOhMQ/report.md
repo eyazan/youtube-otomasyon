@@ -7,11 +7,22 @@ https://youtu.be/x5VVXKhOhMQ
 | Checkpoint | Collected | Views | Likes | Comments | Avg % viewed | Subs (net) | Top traffic |
 |---|---|---:|---:|---:|---:|---:|---|
 | 1d | 2026-10-20 | 623 | 14 | 1 | — | — |  |
+| 3d | 2026-10-22 | 759 | 17 | 3 | 48.83 | 1 | Shorts feed 95%, Search 5% |
+| 7d | 2026-10-26 | 778 | 17 | 3 | 49.95 | 1 | Shorts feed 87%, Search 12% |
 
-## Diagnosis at 1d
+## Diagnosis at 7d
 
-- **INSUFFICIENT_DATA** (high) — 623 views after 1 days — too early/small for rate-based conclusions.
+- **HEALTHY** (low) — No problem pattern detected with available data.
 
 ## Suggested interventions
 
-- INSUFFICIENT DATA → no intervention; wait for the next checkpoint.
+- HEALTHY → no action.
+
+## First major observed retention drop
+
+- Timestamp: 5s; magnitude: 19 percentage points.
+- Active sentence: disease burden chart
+- Visual type: AI-GENERATED VISUAL
+- This is an observed alignment, not proof that the sentence or visual caused the drop.
+
+Views gained between 3d and 7d: 19.

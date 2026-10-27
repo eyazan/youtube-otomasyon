@@ -10,14 +10,15 @@ https://youtu.be/ODZ7y6r1o6o
 | 3d | 2026-09-28 | 976 | 7 | 1 | 63.1 | 2 | Shorts feed 98%, Search 1% |
 | 7d | 2026-10-02 | 976 | 7 | 1 | 62.89 | 2 | Shorts feed 96%, Search 3% |
 | 14d | 2026-10-09 | 978 | 7 | 1 | 62.13000000000001 | 2 | Shorts feed 96%, Search 3% |
+| 30d | 2026-10-25 | 979 | 7 | 1 | 62.13000000000001 | 2 | Shorts feed 96%, Search 3% |
 
-## Diagnosis at 14d
+## Diagnosis at 30d
 
-- **HEALTHY** (low) — No problem pattern detected with available data.
+- **OUTPERFORMER** (medium) — 979 views vs channel median 457.5 (n=30 videos).
 
 ## Suggested interventions
 
-- HEALTHY → no action.
+- OUTPERFORMER → keep as is; reuse its subject/hook shape in the next episode.
 
 ## First major observed retention drop
 
@@ -26,4 +27,4 @@ https://youtu.be/ODZ7y6r1o6o
 - Visual type: unavailable
 - This is an observed alignment, not proof that the sentence or visual caused the drop.
 
-Views gained between 7d and 14d: 2.
+Views gained between 14d and 30d: 1.

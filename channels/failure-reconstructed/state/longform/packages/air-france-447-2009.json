@@ -1,0 +1,2326 @@
+{
+  "schema": "growth-longform-package/1",
+  "channel": "failure-reconstructed",
+  "channelName": "Failure Reconstructed",
+  "contentType": "long",
+  "createdAt": "2026-10-26T12:42:17.460Z",
+  "topic": {
+    "id": "air-france-447-2009",
+    "slug": "air-france-447-2009",
+    "title": "Iced Sensors and a Stall Nobody Recognized",
+    "subject": "Air France 447",
+    "cluster": "aviation-failures"
+  },
+  "LongFormPotential": {
+    "channel": "failure-reconstructed",
+    "topicId": "air-france-447-2009",
+    "slug": "air-france-447-2009",
+    "title": "Iced Sensors and a Stall Nobody Recognized",
+    "cluster": "aviation-failures",
+    "LongFormPotentialScore": 86,
+    "bucket": "A",
+    "reasons": [
+      "LongFormPotential 86 ≥ 78"
+    ],
+    "factors": {
+      "DepthPotential": {
+        "value": 97,
+        "basis": "derived"
+      },
+      "NarrativeDepth": {
+        "value": 83,
+        "basis": "derived"
+      },
+      "SourceDepth": {
+        "value": 63,
+        "basis": "derived",
+        "note": "2 sources, 1 primary"
+      },
+      "VisualDepth": {
+        "value": 80,
+        "basis": "derived"
+      },
+      "EngineeringOrScientificDepth": {
+        "value": 88,
+        "basis": "derived"
+      },
+      "SearchDemand": {
+        "value": 90,
+        "basis": "inventory-signal",
+        "note": "seed estimate unless measured"
+      },
+      "EvergreenPotential": {
+        "value": 85,
+        "basis": "derived"
+      },
+      "AudienceFit": {
+        "value": 85,
+        "basis": "derived"
+      },
+      "ShortsEvidence": {
+        "value": 90,
+        "basis": "measured",
+        "note": "best cluster Short 1297 views vs channel median 446; best subscriber conversion 0.00231; best growth score 74.7 — MODE B: Short proved demand"
+      },
+      "SeriesPotential": {
+        "value": 100,
+        "basis": "derived"
+      },
+      "ViewerJourneyPotential": {
+        "value": 85,
+        "basis": "derived"
+      }
+    },
+    "weights": {
+      "DepthPotential": 1.2,
+      "NarrativeDepth": 1.2,
+      "SourceDepth": 1.2,
+      "VisualDepth": 1,
+      "EngineeringOrScientificDepth": 1.4,
+      "SearchDemand": 0.9,
+      "EvergreenPotential": 0.9,
+      "AudienceFit": 0.8,
+      "ShortsEvidence": 1,
+      "SeriesPotential": 0.8,
+      "ViewerJourneyPotential": 0.8
+    },
+    "specificEvidence": 26
+  },
+  "researchPackage": {
+    "id": "failure-reconstructed:air-france-447-2009",
+    "sources": [
+      {
+        "name": "BEA (French air accident bureau) — organisation.of.investigation.af447.en (cited by Wikipedia)",
+        "url": "http://www.bea.aero/en/enquetes/flight.af.447/organisation.of.investigation.af447.en.pdf",
+        "tier": "OFFICIAL_INVESTIGATION",
+        "score": 100
+      },
+      {
+        "name": "Wikipedia — Air France Flight 447",
+        "url": "https://en.wikipedia.org/wiki/Air_France_Flight_447",
+        "tier": "ENCYCLOPEDIA",
+        "score": 55
+      }
+    ],
+    "claims": 182,
+    "deepResearch": {
+      "article": "Air France Flight 447",
+      "via": "cited source",
+      "claims": 160,
+      "status": "OK",
+      "licence": "CC BY-SA 4.0 — facts only; never narrate verbatim"
+    },
+    "gaps": [
+      "2 source(s); long-form needs ≥ 3"
+    ],
+    "reuseCount": 0
+  },
+  "outline": {
+    "structure": [
+      "COLD_OPEN",
+      "CONSEQUENCE",
+      "WHAT_HAPPENED",
+      "SYSTEM",
+      "HIDDEN_WEAKNESS",
+      "FAILURE_CHAIN",
+      "CRITICAL_MOMENT",
+      "ENGINEERING_EXPLANATION",
+      "AFTERMATH",
+      "WHAT_CHANGED",
+      "FINAL_TAKEAWAY"
+    ],
+    "sections": [
+      {
+        "order": 1,
+        "section": "COLD_OPEN",
+        "question": "What is the unresolved consequence the viewer sees first?",
+        "claimIds": [
+          "C1",
+          "C13",
+          "C14",
+          "C15",
+          "C16",
+          "C17",
+          "C18",
+          "C19",
+          "C20",
+          "C23"
+        ],
+        "evidence": "available"
+      },
+      {
+        "order": 2,
+        "section": "CONSEQUENCE",
+        "question": "What was lost?",
+        "claimIds": [
+          "C1",
+          "C4",
+          "C23"
+        ],
+        "evidence": "available"
+      },
+      {
+        "order": 3,
+        "section": "WHAT_HAPPENED",
+        "question": "In what order did it happen?",
+        "claimIds": [
+          "C12",
+          "C13",
+          "C14",
+          "C15",
+          "C16",
+          "C17",
+          "C18",
+          "C19",
+          "C20",
+          "C24",
+          "C25",
+          "C26",
+          "C27",
+          "C28",
+          "C29",
+          "C30",
+          "C31",
+          "C57",
+          "C58",
+          "C59",
+          "C60",
+          "C61",
+          "C62",
+          "C63",
+          "C64",
+          "C65",
+          "C66",
+          "C67",
+          "C68",
+          "C69",
+          "C70",
+          "C71",
+          "C72",
+          "C73",
+          "C74",
+          "C75",
+          "C76",
+          "C77",
+          "C78",
+          "C79",
+          "C80",
+          "C81",
+          "C82",
+          "C83",
+          "C84"
+        ],
+        "evidence": "available"
+      },
+      {
+        "order": 4,
+        "section": "SYSTEM",
+        "question": "How was the machine/structure supposed to work?",
+        "claimIds": [
+          "C3"
+        ],
+        "evidence": "available"
+      },
+      {
+        "order": 5,
+        "section": "HIDDEN_WEAKNESS",
+        "question": "Where was the weakness hiding?",
+        "claimIds": [
+          "C2",
+          "C5",
+          "C6"
+        ],
+        "evidence": "available"
+      },
+      {
+        "order": 6,
+        "section": "FAILURE_CHAIN",
+        "question": "Which step led to which?",
+        "claimIds": [
+          "C7",
+          "C8",
+          "C9",
+          "C10",
+          "C11"
+        ],
+        "evidence": "available"
+      },
+      {
+        "order": 7,
+        "section": "CRITICAL_MOMENT",
+        "question": "What was the point of no return?",
+        "claimIds": [],
+        "evidence": "MISSING"
+      },
+      {
+        "order": 8,
+        "section": "ENGINEERING_EXPLANATION",
+        "question": "What is the physical mechanism?",
+        "claimIds": [
+          "C32",
+          "C33",
+          "C34",
+          "C35",
+          "C36",
+          "C37",
+          "C38",
+          "C39",
+          "C40",
+          "C41",
+          "C42",
+          "C43",
+          "C44",
+          "C45",
+          "C46",
+          "C47",
+          "C48",
+          "C49",
+          "C50",
+          "C51",
+          "C52",
+          "C53",
+          "C54",
+          "C55",
+          "C56",
+          "C85",
+          "C86",
+          "C87",
+          "C88",
+          "C89",
+          "C90",
+          "C91",
+          "C92",
+          "C93",
+          "C94",
+          "C95",
+          "C96",
+          "C97",
+          "C98",
+          "C99",
+          "C100",
+          "C101",
+          "C102",
+          "C103",
+          "C104",
+          "C105",
+          "C106",
+          "C107",
+          "C108",
+          "C109",
+          "C110",
+          "C111",
+          "C112",
+          "C113",
+          "C114",
+          "C115",
+          "C116",
+          "C117",
+          "C118",
+          "C119",
+          "C120",
+          "C121",
+          "C122",
+          "C123",
+          "C124",
+          "C125",
+          "C126",
+          "C127",
+          "C128",
+          "C129",
+          "C130",
+          "C131",
+          "C132",
+          "C133",
+          "C134",
+          "C135",
+          "C136",
+          "C137",
+          "C138",
+          "C139",
+          "C140",
+          "C141",
+          "C142",
+          "C143",
+          "C144",
+          "C145",
+          "C146",
+          "C147",
+          "C148",
+          "C149",
+          "C150",
+          "C151",
+          "C152",
+          "C153",
+          "C154",
+          "C155",
+          "C156",
+          "C157",
+          "C158",
+          "C159",
+          "C160",
+          "C161",
+          "C162",
+          "C163",
+          "C164",
+          "C165",
+          "C166",
+          "C167",
+          "C168",
+          "C169",
+          "C170",
+          "C171",
+          "C172",
+          "C173",
+          "C174",
+          "C175",
+          "C176",
+          "C177",
+          "C178",
+          "C179",
+          "C180",
+          "C181",
+          "C182"
+        ],
+        "evidence": "available"
+      },
+      {
+        "order": 9,
+        "section": "AFTERMATH",
+        "question": "What happened next?",
+        "claimIds": [],
+        "evidence": "MISSING"
+      },
+      {
+        "order": 10,
+        "section": "WHAT_CHANGED",
+        "question": "What do engineers do differently now?",
+        "claimIds": [
+          "C21"
+        ],
+        "evidence": "available"
+      },
+      {
+        "order": 11,
+        "section": "FINAL_TAKEAWAY",
+        "question": "What should the viewer remember?",
+        "claimIds": [
+          "C22"
+        ],
+        "evidence": "available"
+      }
+    ],
+    "missingSections": [
+      "CRITICAL_MOMENT",
+      "AFTERMATH"
+    ],
+    "coverage": 82
+  },
+  "coldOpens": {
+    "candidates": [
+      {
+        "type": "shocking_consequence",
+        "text": "Air France Flight 447 fell into the Atlantic in a stall.",
+        "score": 77,
+        "estimatedSeconds": 3.4
+      },
+      {
+        "type": "visual_first_reveal",
+        "text": "An airliner fell into the Atlantic Ocean.",
+        "score": 72,
+        "estimatedSeconds": 2.2
+      },
+      {
+        "type": "mechanism_reveal",
+        "text": "Air France 447 failed because pitot tube icing causing autopilot disconnect, followed by a sustained aerodynamic stall.",
+        "score": 72,
+        "estimatedSeconds": 5.3
+      },
+      {
+        "type": "tiny_cause_massive_consequence",
+        "text": "It took only ice crystals blocking the airspeed sensors.",
+        "score": 71,
+        "estimatedSeconds": 2.8
+      },
+      {
+        "type": "hidden_cause",
+        "text": "They blocked the tubes that measure airspeed.",
+        "score": 71,
+        "estimatedSeconds": 2.2
+      },
+      {
+        "type": "warning_ignored",
+        "text": "The stall warning went quiet at very low airspeed.",
+        "score": 70,
+        "estimatedSeconds": 2.8
+      },
+      {
+        "type": "before_after_consequence",
+        "text": "After Air France 447, pitot probes were replaced and crews now train on high-altitude stall recovery.",
+        "score": 70,
+        "estimatedSeconds": 5
+      },
+      {
+        "type": "question_gap",
+        "text": "Air France 447: what failed first?",
+        "score": 68,
+        "estimatedSeconds": 1.9
+      },
+      {
+        "type": "unexpected_chain_reaction",
+        "text": "It started with ice blocks pitot tubes. It ended with stall all the way down.",
+        "score": 64,
+        "estimatedSeconds": 4.7
+      },
+      {
+        "type": "countdown",
+        "text": "It dropped for minutes in a deep stall, and all two hundred twenty eight aboard died.",
+        "score": 64,
+        "estimatedSeconds": 5
+      },
+      {
+        "type": "contradiction",
+        "text": "The airspeed readings came back within about a minute, but the stall had already set in.",
+        "score": 63,
+        "estimatedSeconds": 5
+      }
+    ],
+    "selected": {
+      "type": "shocking_consequence",
+      "text": "Air France Flight 447 fell into the Atlantic in a stall.",
+      "score": 77,
+      "estimatedSeconds": 3.4
+    }
+  },
+  "script": {
+    "generator": "deterministic-evidence",
+    "provider": "groq",
+    "model": null,
+    "status": "FAILED",
+    "pipeline": null,
+    "blueprint": null,
+    "quality": null,
+    "checkpoint": "generation/air-france-447-2009.json",
+    "llmError": "groq request too large (HTTP 413)",
+    "llmErrorCode": "REQUEST_TOO_LARGE",
+    "llmErrorStage": "narrative-angle",
+    "depthNote": null,
+    "sections": [
+      {
+        "section": "COLD_OPEN",
+        "paragraphs": [
+          {
+            "text": "Air France Flight 447 fell into the Atlantic in a stall.",
+            "claims": [],
+            "role": "cold-open"
+          }
+        ]
+      },
+      {
+        "section": "CONSEQUENCE",
+        "paragraphs": [
+          {
+            "text": "But that was only the visible part. Air France Flight 447 fell into the Atlantic in a stall. The key figure: 228 ABOARD.",
+            "claims": [
+              "C1",
+              "C4"
+            ],
+            "role": "evidence"
+          }
+        ]
+      },
+      {
+        "section": "WHAT_HAPPENED",
+        "paragraphs": [
+          {
+            "text": "To see why, look at the structure itself. Jun 1, 2009: Pitot icing over the Atlantic; stall. An airliner fell into the Atlantic Ocean. It dropped for minutes in a deep stall, and all two hundred twenty eight aboard died. It began with ice crystals. They blocked the tubes that measure airspeed. The autopilot disconnected, and the crew lost trusted speed data. The nose was held up, and the wings stopped producing lift. The stall was never recognized. Now crews train for high-altitude stalls, and the sensors were replaced.",
+            "claims": [
+              "C12",
+              "C13",
+              "C14",
+              "C15",
+              "C16",
+              "C17",
+              "C18",
+              "C19",
+              "C20"
+            ],
+            "role": "evidence"
+          }
+        ]
+      },
+      {
+        "section": "SYSTEM",
+        "paragraphs": [
+          {
+            "text": "And the warning signs were already there. The mechanism: pitot tube icing causing autopilot disconnect, followed by a sustained aerodynamic stall.",
+            "claims": [
+              "C3"
+            ],
+            "role": "evidence"
+          }
+        ]
+      },
+      {
+        "section": "HIDDEN_WEAKNESS",
+        "paragraphs": [
+          {
+            "text": "Then the chain began. The trigger: ice crystals blocking the airspeed sensors. The plane itself was flyable. The airspeed readings came back within about a minute, but the stall had already set in.",
+            "claims": [
+              "C2",
+              "C5",
+              "C6"
+            ],
+            "role": "evidence"
+          }
+        ]
+      },
+      {
+        "section": "FAILURE_CHAIN",
+        "paragraphs": [
+          {
+            "text": "This is the moment it could no longer be stopped. Step 1 of the failure chain: ice blocks pitot tubes. Step 2 of the failure chain: airspeed readings drop. Step 3 of the failure chain: autopilot disconnects. Step 4 of the failure chain: nose held up. Step 5 of the failure chain: stall all the way down.",
+            "claims": [
+              "C7",
+              "C8",
+              "C9",
+              "C10",
+              "C11"
+            ],
+            "role": "evidence"
+          }
+        ]
+      },
+      {
+        "section": "CRITICAL_MOMENT",
+        "paragraphs": []
+      },
+      {
+        "section": "ENGINEERING_EXPLANATION",
+        "paragraphs": []
+      },
+      {
+        "section": "AFTERMATH",
+        "paragraphs": []
+      },
+      {
+        "section": "WHAT_CHANGED",
+        "paragraphs": [
+          {
+            "text": "Which leaves one question. What changed: pitot probes were replaced and crews now train on high-altitude stall recovery.",
+            "claims": [
+              "C21"
+            ],
+            "role": "evidence"
+          }
+        ]
+      },
+      {
+        "section": "FINAL_TAKEAWAY",
+        "paragraphs": [
+          {
+            "text": "But that was only the visible part. The stall warning went quiet at very low airspeed, then sounded again when the nose lowered. How should a warning behave when data is unreliable?",
+            "claims": [
+              "C22"
+            ],
+            "role": "evidence"
+          }
+        ]
+      }
+    ],
+    "words": 284,
+    "estimatedMinutes": 1.9,
+    "paragraphs": 8,
+    "secondsPerNewBeat": 14
+  },
+  "claimSourceMap": {
+    "rows": [
+      {
+        "section": "COLD_OPEN",
+        "excerpt": "Air France Flight 447 fell into the Atlantic in a stall.",
+        "claims": []
+      },
+      {
+        "section": "CONSEQUENCE",
+        "excerpt": "But that was only the visible part. Air France Flight 447 fell into the Atlantic in a stal",
+        "claims": [
+          {
+            "id": "C1",
+            "class": "CONFIRMED_FACT",
+            "source": "Wikipedia — Air France Flight 447"
+          },
+          {
+            "id": "C4",
+            "class": "CONFIRMED_FACT",
+            "source": "Wikipedia — Air France Flight 447"
+          }
+        ]
+      },
+      {
+        "section": "WHAT_HAPPENED",
+        "excerpt": "To see why, look at the structure itself. Jun 1, 2009: Pitot icing over the Atlantic; stal",
+        "claims": [
+          {
+            "id": "C12",
+            "class": "CONFIRMED_FACT",
+            "source": "Wikipedia — Air France Flight 447"
+          },
+          {
+            "id": "C13",
+            "class": "CONFIRMED_FACT",
+            "source": "editorial narration (case file)"
+          },
+          {
+            "id": "C14",
+            "class": "CONFIRMED_FACT",
+            "source": "editorial narration (case file)"
+          },
+          {
+            "id": "C15",
+            "class": "CONFIRMED_FACT",
+            "source": "editorial narration (case file)"
+          },
+          {
+            "id": "C16",
+            "class": "CONFIRMED_FACT",
+            "source": "editorial narration (case file)"
+          },
+          {
+            "id": "C17",
+            "class": "CONFIRMED_FACT",
+            "source": "editorial narration (case file)"
+          },
+          {
+            "id": "C18",
+            "class": "CONFIRMED_FACT",
+            "source": "editorial narration (case file)"
+          },
+          {
+            "id": "C19",
+            "class": "CONFIRMED_FACT",
+            "source": "editorial narration (case file)"
+          },
+          {
+            "id": "C20",
+            "class": "CONFIRMED_FACT",
+            "source": "editorial narration (case file)"
+          }
+        ]
+      },
+      {
+        "section": "SYSTEM",
+        "excerpt": "And the warning signs were already there. The mechanism: pitot tube icing causing autopilo",
+        "claims": [
+          {
+            "id": "C3",
+            "class": "CONFIRMED_FACT",
+            "source": "Wikipedia — Air France Flight 447"
+          }
+        ]
+      },
+      {
+        "section": "HIDDEN_WEAKNESS",
+        "excerpt": "Then the chain began. The trigger: ice crystals blocking the airspeed sensors. The plane i",
+        "claims": [
+          {
+            "id": "C2",
+            "class": "CONFIRMED_FACT",
+            "source": "Wikipedia — Air France Flight 447"
+          },
+          {
+            "id": "C5",
+            "class": "CONFIRMED_FACT",
+            "source": "Wikipedia — Air France Flight 447"
+          },
+          {
+            "id": "C6",
+            "class": "CONFIRMED_FACT",
+            "source": "Wikipedia — Air France Flight 447"
+          }
+        ]
+      },
+      {
+        "section": "FAILURE_CHAIN",
+        "excerpt": "This is the moment it could no longer be stopped. Step 1 of the failure chain: ice blocks ",
+        "claims": [
+          {
+            "id": "C7",
+            "class": "CONFIRMED_FACT",
+            "source": "Wikipedia — Air France Flight 447"
+          },
+          {
+            "id": "C8",
+            "class": "CONFIRMED_FACT",
+            "source": "Wikipedia — Air France Flight 447"
+          },
+          {
+            "id": "C9",
+            "class": "CONFIRMED_FACT",
+            "source": "Wikipedia — Air France Flight 447"
+          },
+          {
+            "id": "C10",
+            "class": "CONFIRMED_FACT",
+            "source": "Wikipedia — Air France Flight 447"
+          },
+          {
+            "id": "C11",
+            "class": "CONFIRMED_FACT",
+            "source": "Wikipedia — Air France Flight 447"
+          }
+        ]
+      },
+      {
+        "section": "WHAT_CHANGED",
+        "excerpt": "Which leaves one question. What changed: pitot probes were replaced and crews now train on",
+        "claims": [
+          {
+            "id": "C21",
+            "class": "INTERPRETATION",
+            "source": "Wikipedia — Air France Flight 447"
+          }
+        ]
+      },
+      {
+        "section": "FINAL_TAKEAWAY",
+        "excerpt": "But that was only the visible part. The stall warning went quiet at very low airspeed, the",
+        "claims": [
+          {
+            "id": "C22",
+            "class": "INTERPRETATION",
+            "source": "Wikipedia — Air France Flight 447"
+          }
+        ]
+      }
+    ],
+    "unsupportedParagraphs": 0,
+    "unsupportedNumbers": [],
+    "copyRisks": []
+  },
+  "scenePlan": [
+    {
+      "scene": 1,
+      "narrationSpan": [
+        0,
+        4
+      ],
+      "section": "COLD_OPEN",
+      "visualPurpose": "show evidence",
+      "visualType": "REAL_ARCHIVAL",
+      "subject": "An airliner fell into the Atlantic Ocean.",
+      "asset": "Footage/air-france-447-1.jpg",
+      "sourceRequirement": "public-domain / licensed archival with attribution",
+      "durationEstimateSeconds": 4.4,
+      "motion": "slow push-in to detail",
+      "claimSupported": null,
+      "fallbackAssetStrategy": "labelled reconstruction diagram (never presented as archive)",
+      "disclosure": null
+    },
+    {
+      "scene": 2,
+      "narrationSpan": [
+        4,
+        14
+      ],
+      "section": "CONSEQUENCE",
+      "visualPurpose": "show evidence",
+      "visualType": "REAL_ARCHIVAL",
+      "subject": "It dropped for minutes in a deep stall, and all two hundred twenty eight aboard died.",
+      "asset": "Footage/air-france-447-2.jpg",
+      "sourceRequirement": "public-domain / licensed archival with attribution",
+      "durationEstimateSeconds": 9.2,
+      "motion": "slow push-in to detail",
+      "claimSupported": "C1",
+      "fallbackAssetStrategy": "labelled reconstruction diagram (never presented as archive)",
+      "disclosure": null
+    },
+    {
+      "scene": 3,
+      "narrationSpan": [
+        14,
+        31
+      ],
+      "section": "WHAT_HAPPENED",
+      "visualPurpose": "show evidence",
+      "visualType": "REAL_ARCHIVAL",
+      "subject": "It began with ice crystals.",
+      "asset": "Footage/air-france-447-3.jpg",
+      "sourceRequirement": "public-domain / licensed archival with attribution",
+      "durationEstimateSeconds": 17.8,
+      "motion": "slow push-in to detail",
+      "claimSupported": "C12",
+      "fallbackAssetStrategy": "labelled reconstruction diagram (never presented as archive)",
+      "disclosure": null
+    },
+    {
+      "scene": 4,
+      "narrationSpan": [
+        31,
+        49
+      ],
+      "section": "WHAT_HAPPENED",
+      "visualPurpose": "show evidence",
+      "visualType": "REAL_ARCHIVAL",
+      "subject": "They blocked the tubes that measure airspeed.",
+      "asset": "Footage/air-france-447-4.jpg",
+      "sourceRequirement": "public-domain / licensed archival with attribution",
+      "durationEstimateSeconds": 17.8,
+      "motion": "lateral reframe / crop to evidence",
+      "claimSupported": "C13",
+      "fallbackAssetStrategy": "labelled reconstruction diagram (never presented as archive)",
+      "disclosure": null
+    },
+    {
+      "scene": 5,
+      "narrationSpan": [
+        49,
+        58
+      ],
+      "section": "SYSTEM",
+      "visualPurpose": "visualise scenario",
+      "visualType": "TECHNICAL_ILLUSTRATION",
+      "subject": "The mechanism: pitot tube icing causing autopilot disconnect, followed by a sustained aerodynamic stall.",
+      "asset": "diagram:SYSTEM:C3",
+      "sourceRequirement": "procedural render, labelled on screen",
+      "durationEstimateSeconds": 8.4,
+      "motion": "slow push-in to detail",
+      "claimSupported": "C3",
+      "fallbackAssetStrategy": "labelled procedural diagram",
+      "disclosure": "on-screen label required"
+    },
+    {
+      "scene": 6,
+      "narrationSpan": [
+        58,
+        71
+      ],
+      "section": "HIDDEN_WEAKNESS",
+      "visualPurpose": "visualise scenario",
+      "visualType": "TECHNICAL_ILLUSTRATION",
+      "subject": "The trigger: ice crystals blocking the airspeed sensors.",
+      "asset": "diagram:HIDDEN_WEAKNESS:C2",
+      "sourceRequirement": "procedural render, labelled on screen",
+      "durationEstimateSeconds": 13.2,
+      "motion": "slow push-in to detail",
+      "claimSupported": "C2",
+      "fallbackAssetStrategy": "labelled procedural diagram",
+      "disclosure": "on-screen label required"
+    },
+    {
+      "scene": 7,
+      "narrationSpan": [
+        71,
+        82
+      ],
+      "section": "FAILURE_CHAIN",
+      "visualPurpose": "explain mechanism",
+      "visualType": "DIAGRAM",
+      "subject": "Step 1 of the failure chain: ice blocks pitot tubes.",
+      "asset": "diagram:FAILURE_CHAIN:C7",
+      "sourceRequirement": "procedural render, labelled on screen",
+      "durationEstimateSeconds": 11.4,
+      "motion": "slow push-in to detail",
+      "claimSupported": "C7",
+      "fallbackAssetStrategy": "labelled procedural diagram",
+      "disclosure": null
+    },
+    {
+      "scene": 8,
+      "narrationSpan": [
+        82,
+        94
+      ],
+      "section": "FAILURE_CHAIN",
+      "visualPurpose": "explain mechanism",
+      "visualType": "DIAGRAM",
+      "subject": "Step 2 of the failure chain: airspeed readings drop.",
+      "asset": "diagram:FAILURE_CHAIN:C8",
+      "sourceRequirement": "procedural render, labelled on screen",
+      "durationEstimateSeconds": 11.4,
+      "motion": "lateral reframe / crop to evidence",
+      "claimSupported": "C8",
+      "fallbackAssetStrategy": "labelled procedural diagram",
+      "disclosure": null
+    },
+    {
+      "scene": 9,
+      "narrationSpan": [
+        94,
+        101
+      ],
+      "section": "WHAT_CHANGED",
+      "visualPurpose": "visualise scenario",
+      "visualType": "TECHNICAL_ILLUSTRATION",
+      "subject": "What changed: pitot probes were replaced and crews now train on high-altitude stall recovery.",
+      "asset": "diagram:WHAT_CHANGED:C21",
+      "sourceRequirement": "procedural render, labelled on screen",
+      "durationEstimateSeconds": 7.2,
+      "motion": "slow push-in to detail",
+      "claimSupported": "C21",
+      "fallbackAssetStrategy": "labelled procedural diagram",
+      "disclosure": "on-screen label required"
+    },
+    {
+      "scene": 10,
+      "narrationSpan": [
+        101,
+        114
+      ],
+      "section": "FINAL_TAKEAWAY",
+      "visualPurpose": "visualise scenario",
+      "visualType": "TECHNICAL_ILLUSTRATION",
+      "subject": "The stall warning went quiet at very low airspeed, then sounded again when the",
+      "asset": "diagram:FINAL_TAKEAWAY:C22",
+      "sourceRequirement": "procedural render, labelled on screen",
+      "durationEstimateSeconds": 12.8,
+      "motion": "slow push-in to detail",
+      "claimSupported": "C22",
+      "fallbackAssetStrategy": "labelled procedural diagram",
+      "disclosure": "on-screen label required"
+    }
+  ],
+  "assetPlan": {
+    "byType": {
+      "REAL_ARCHIVAL": 4,
+      "TECHNICAL_ILLUSTRATION": 4,
+      "DIAGRAM": 2
+    },
+    "distinctSubjects": 10,
+    "archivalLeads": 26,
+    "articleImageCandidates": 18,
+    "overused": [],
+    "licensing": "record source, licence and URL per asset in GORSEL-KAYNAKLARI.txt (existing ledger)"
+  },
+  "thumbnails": {
+    "concepts": [
+      {
+        "id": "before-after",
+        "primarySubject": "Air France 447",
+        "background": "split frame intact vs failed (both real)",
+        "visualHierarchy": "50/50 split, thin divider",
+        "emotion": "loss",
+        "text": "BEFORE / AFTER",
+        "textLength": 14,
+        "textWords": 3,
+        "contrast": "light subject on dark field; single accent colour",
+        "truthfulness": "evidence-consistent",
+        "mobileReadability": 100,
+        "scores": {
+          "Clarity": 95,
+          "Curiosity": 65,
+          "VisualImpact": 85,
+          "TopicRecognition": 90,
+          "MobileReadability": 100,
+          "Truthfulness": 100,
+          "ChannelFit": 86
+        },
+        "total": 89
+      },
+      {
+        "id": "mechanism-callout",
+        "primarySubject": "Airliner",
+        "background": "desaturated archival still",
+        "visualHierarchy": "one amber arrow to the failed component",
+        "emotion": "hidden cause",
+        "text": "ICED SENSORS",
+        "textLength": 12,
+        "textWords": 2,
+        "contrast": "light subject on dark field; single accent colour",
+        "truthfulness": "evidence-consistent",
+        "mobileReadability": 100,
+        "scores": {
+          "Clarity": 95,
+          "Curiosity": 75,
+          "VisualImpact": 85,
+          "TopicRecognition": 65,
+          "MobileReadability": 100,
+          "Truthfulness": 100,
+          "ChannelFit": 92
+        },
+        "total": 87
+      },
+      {
+        "id": "number-contrast",
+        "primarySubject": "228",
+        "background": "dark field, subject silhouette",
+        "visualHierarchy": "large number left, subject right",
+        "emotion": "contradiction",
+        "text": "228",
+        "textLength": 3,
+        "textWords": 1,
+        "contrast": "light subject on dark field; single accent colour",
+        "truthfulness": "evidence-consistent",
+        "mobileReadability": 100,
+        "scores": {
+          "Clarity": 95,
+          "Curiosity": 75,
+          "VisualImpact": 85,
+          "TopicRecognition": 65,
+          "MobileReadability": 100,
+          "Truthfulness": 100,
+          "ChannelFit": 86
+        },
+        "total": 87
+      },
+      {
+        "id": "chain-diagram",
+        "primarySubject": "failure chain",
+        "background": "technical drawing overlay on archival still",
+        "visualHierarchy": "3 linked nodes, last one red",
+        "emotion": "inevitability",
+        "text": "THE CHAIN",
+        "textLength": 9,
+        "textWords": 2,
+        "contrast": "light subject on dark field; single accent colour",
+        "truthfulness": "evidence-consistent",
+        "mobileReadability": 100,
+        "scores": {
+          "Clarity": 95,
+          "Curiosity": 80,
+          "VisualImpact": 75,
+          "TopicRecognition": 65,
+          "MobileReadability": 100,
+          "Truthfulness": 100,
+          "ChannelFit": 92
+        },
+        "total": 87
+      },
+      {
+        "id": "evidence-frame",
+        "primarySubject": "Airliner",
+        "background": "real archival frame of the failure",
+        "visualHierarchy": "subject 60% of frame, text top-left",
+        "emotion": "consequence",
+        "text": "STALL",
+        "textLength": 5,
+        "textWords": 1,
+        "contrast": "light subject on dark field; single accent colour",
+        "truthfulness": "evidence-consistent",
+        "mobileReadability": 100,
+        "scores": {
+          "Clarity": 95,
+          "Curiosity": 65,
+          "VisualImpact": 75,
+          "TopicRecognition": 65,
+          "MobileReadability": 100,
+          "Truthfulness": 100,
+          "ChannelFit": 92
+        },
+        "total": 85
+      }
+    ],
+    "selected": {
+      "id": "before-after",
+      "primarySubject": "Air France 447",
+      "background": "split frame intact vs failed (both real)",
+      "visualHierarchy": "50/50 split, thin divider",
+      "emotion": "loss",
+      "text": "BEFORE / AFTER",
+      "textLength": 14,
+      "textWords": 3,
+      "contrast": "light subject on dark field; single accent colour",
+      "truthfulness": "evidence-consistent",
+      "mobileReadability": 100,
+      "scores": {
+        "Clarity": 95,
+        "Curiosity": 65,
+        "VisualImpact": 85,
+        "TopicRecognition": 90,
+        "MobileReadability": 100,
+        "Truthfulness": 100,
+        "ChannelFit": 86
+      },
+      "total": 89
+    },
+    "meetsMinimum": true
+  },
+  "titles": {
+    "selected": {
+      "title": "How Engineers Solved the Air France 447 Failure",
+      "source": "engineers-solved",
+      "pattern": "how",
+      "scores": {
+        "clarity": 100,
+        "curiosity": 58,
+        "specificity": 92,
+        "truthfulness": 100,
+        "searchIntent": 87,
+        "channelIdentity": 74,
+        "ctrPotential": 85,
+        "novelty": 90,
+        "evergreenPotential": 85,
+        "consequence": 95,
+        "compactness": 100,
+        "recognizability": 98,
+        "nonRedundancy": 90,
+        "factualIntegrity": 100,
+        "historicalPerformanceSimilarity": 50,
+        "patternFreshness": 100
+      },
+      "total": 86,
+      "patternPenalty": 0,
+      "templateNaturalnessPenalty": 0,
+      "genericTemplatePenalty": 0,
+      "adjustedTotal": 86,
+      "unsupportedWords": [],
+      "misleading": false,
+      "grammar": [],
+      "ungrammatical": false
+    },
+    "selectedScore": 86,
+    "count": 24,
+    "candidates": [
+      {
+        "title": "How Engineers Solved the Air France 447 Failure",
+        "source": "engineers-solved",
+        "pattern": "how",
+        "scores": {
+          "clarity": 100,
+          "curiosity": 58,
+          "specificity": 92,
+          "truthfulness": 100,
+          "searchIntent": 87,
+          "channelIdentity": 74,
+          "ctrPotential": 85,
+          "novelty": 90,
+          "evergreenPotential": 85,
+          "consequence": 95,
+          "compactness": 100,
+          "recognizability": 98,
+          "nonRedundancy": 90,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
+        },
+        "total": 86,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 86,
+        "unsupportedWords": [],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
+        "title": "The Hidden Weakness Inside Air France 447",
+        "source": "hidden-weakness",
+        "pattern": "statement",
+        "scores": {
+          "clarity": 100,
+          "curiosity": 76,
+          "specificity": 92,
+          "truthfulness": 100,
+          "searchIntent": 75,
+          "channelIdentity": 50,
+          "ctrPotential": 89,
+          "novelty": 82,
+          "evergreenPotential": 85,
+          "consequence": 57,
+          "compactness": 100,
+          "recognizability": 98,
+          "nonRedundancy": 82,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
+        },
+        "total": 85,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 85,
+        "unsupportedWords": [],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
+        "title": "What Really Destroyed Air France 447 — The Complete Investigation",
+        "source": "complete-investigation",
+        "pattern": "two-beat",
+        "scores": {
+          "clarity": 100,
+          "curiosity": 58,
+          "specificity": 92,
+          "truthfulness": 85,
+          "searchIntent": 87,
+          "channelIdentity": 62,
+          "ctrPotential": 85,
+          "novelty": 91,
+          "evergreenPotential": 85,
+          "consequence": 95,
+          "compactness": 90,
+          "recognizability": 98,
+          "nonRedundancy": 91,
+          "factualIntegrity": 85,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
+        },
+        "total": 83,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 83,
+        "unsupportedWords": [
+          "destroyed"
+        ],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
+        "title": "How Air France 447 Changed Engineering Forever",
+        "source": "changed-engineering",
+        "pattern": "how",
+        "scores": {
+          "clarity": 100,
+          "curiosity": 58,
+          "specificity": 92,
+          "truthfulness": 85,
+          "searchIntent": 95,
+          "channelIdentity": 62,
+          "ctrPotential": 77,
+          "novelty": 90,
+          "evergreenPotential": 85,
+          "consequence": 57,
+          "compactness": 100,
+          "recognizability": 98,
+          "nonRedundancy": 90,
+          "factualIntegrity": 85,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
+        },
+        "total": 83,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 83,
+        "unsupportedWords": [
+          "forever"
+        ],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
+        "title": "Why Air France 447 Should Never Have Happened",
+        "source": "never-happened",
+        "pattern": "why",
+        "scores": {
+          "clarity": 100,
+          "curiosity": 76,
+          "specificity": 92,
+          "truthfulness": 85,
+          "searchIntent": 95,
+          "channelIdentity": 50,
+          "ctrPotential": 97,
+          "novelty": 100,
+          "evergreenPotential": 85,
+          "consequence": 57,
+          "compactness": 100,
+          "recognizability": 98,
+          "nonRedundancy": 100,
+          "factualIntegrity": 85,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 70
+        },
+        "total": 86,
+        "patternPenalty": 4,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 82,
+        "unsupportedWords": [
+          "have"
+        ],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
+        "title": "Air France 447: What Failed, Why, and What Changed",
+        "source": "what-why-changed",
+        "pattern": "label-colon",
+        "scores": {
+          "clarity": 100,
+          "curiosity": 76,
+          "specificity": 92,
+          "truthfulness": 100,
+          "searchIntent": 83,
+          "channelIdentity": 62,
+          "ctrPotential": 97,
+          "novelty": 89,
+          "evergreenPotential": 85,
+          "consequence": 95,
+          "compactness": 100,
+          "recognizability": 98,
+          "nonRedundancy": 89,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 70
+        },
+        "total": 89,
+        "patternPenalty": 7,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 82,
+        "unsupportedWords": [],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
+        "title": "Why Air France 447 Fell From the Sky",
+        "source": "editorial",
+        "pattern": "why",
+        "scores": {
+          "clarity": 94,
+          "curiosity": 58,
+          "specificity": 92,
+          "truthfulness": 100,
+          "searchIntent": 95,
+          "channelIdentity": 60,
+          "ctrPotential": 77,
+          "novelty": 100,
+          "evergreenPotential": 85,
+          "consequence": 57,
+          "compactness": 100,
+          "recognizability": 98,
+          "nonRedundancy": 100,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 70
+        },
+        "total": 85,
+        "patternPenalty": 4,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 81,
+        "unsupportedWords": [],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
+        "title": "How One Weakness Brought Down Air France 447",
+        "source": "one-weakness",
+        "pattern": "how",
+        "scores": {
+          "clarity": 100,
+          "curiosity": 58,
+          "specificity": 92,
+          "truthfulness": 85,
+          "searchIntent": 87,
+          "channelIdentity": 50,
+          "ctrPotential": 77,
+          "novelty": 100,
+          "evergreenPotential": 85,
+          "consequence": 57,
+          "compactness": 100,
+          "recognizability": 98,
+          "nonRedundancy": 100,
+          "factualIntegrity": 85,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
+        },
+        "total": 81,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 81,
+        "unsupportedWords": [
+          "brought"
+        ],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
+        "title": "Inside the Engineering Failure of Air France 447",
+        "source": "inside-engineering",
+        "pattern": "inside",
+        "scores": {
+          "clarity": 100,
+          "curiosity": 58,
+          "specificity": 92,
+          "truthfulness": 100,
+          "searchIntent": 75,
+          "channelIdentity": 74,
+          "ctrPotential": 85,
+          "novelty": 80,
+          "evergreenPotential": 85,
+          "consequence": 95,
+          "compactness": 100,
+          "recognizability": 98,
+          "nonRedundancy": 80,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 70
+        },
+        "total": 85,
+        "patternPenalty": 4,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 81,
+        "unsupportedWords": [],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
+        "title": "Why Air France 447 Failed",
+        "source": "why-failed",
+        "pattern": "why",
+        "scores": {
+          "clarity": 78,
+          "curiosity": 58,
+          "specificity": 92,
+          "truthfulness": 100,
+          "searchIntent": 95,
+          "channelIdentity": 62,
+          "ctrPotential": 85,
+          "novelty": 87,
+          "evergreenPotential": 85,
+          "consequence": 95,
+          "compactness": 100,
+          "recognizability": 98,
+          "nonRedundancy": 87,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 70
+        },
+        "total": 84,
+        "patternPenalty": 4,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 80,
+        "unsupportedWords": [],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
+        "title": "The Engineering Mistakes Behind Air France 447",
+        "source": "engineering-mistakes",
+        "pattern": "statement",
+        "scores": {
+          "clarity": 100,
+          "curiosity": 58,
+          "specificity": 92,
+          "truthfulness": 85,
+          "searchIntent": 75,
+          "channelIdentity": 62,
+          "ctrPotential": 77,
+          "novelty": 100,
+          "evergreenPotential": 85,
+          "consequence": 57,
+          "compactness": 100,
+          "recognizability": 98,
+          "nonRedundancy": 100,
+          "factualIntegrity": 85,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
+        },
+        "total": 80,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 80,
+        "unsupportedWords": [
+          "mistakes"
+        ],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
+        "title": "The Failure Chain That Destroyed Air France 447",
+        "source": "failure-chain",
+        "pattern": "the-x-that",
+        "scores": {
+          "clarity": 100,
+          "curiosity": 40,
+          "specificity": 92,
+          "truthfulness": 85,
+          "searchIntent": 75,
+          "channelIdentity": 74,
+          "ctrPotential": 73,
+          "novelty": 80,
+          "evergreenPotential": 85,
+          "consequence": 95,
+          "compactness": 100,
+          "recognizability": 98,
+          "nonRedundancy": 80,
+          "factualIntegrity": 85,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
+        },
+        "total": 79,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 79,
+        "unsupportedWords": [
+          "destroyed"
+        ],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
+        "title": "The Physics Behind the Air France 447 Disaster",
+        "source": "physics-behind",
+        "pattern": "statement",
+        "scores": {
+          "clarity": 100,
+          "curiosity": 58,
+          "specificity": 92,
+          "truthfulness": 85,
+          "searchIntent": 75,
+          "channelIdentity": 50,
+          "ctrPotential": 77,
+          "novelty": 91,
+          "evergreenPotential": 85,
+          "consequence": 95,
+          "compactness": 100,
+          "recognizability": 98,
+          "nonRedundancy": 91,
+          "factualIntegrity": 85,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
+        },
+        "total": 79,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 79,
+        "unsupportedWords": [
+          "disaster"
+        ],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
+        "title": "Could Air France 447 Have Been Prevented?",
+        "source": "prevented",
+        "pattern": "question",
+        "scores": {
+          "clarity": 100,
+          "curiosity": 66,
+          "specificity": 92,
+          "truthfulness": 70,
+          "searchIntent": 83,
+          "channelIdentity": 50,
+          "ctrPotential": 77,
+          "novelty": 100,
+          "evergreenPotential": 85,
+          "consequence": 57,
+          "compactness": 100,
+          "recognizability": 98,
+          "nonRedundancy": 100,
+          "factualIntegrity": 70,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
+        },
+        "total": 78,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 78,
+        "unsupportedWords": [
+          "have",
+          "prevented"
+        ],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
+        "title": "Air France 447 — A Forensic Engineering Documentary",
+        "source": "documentary",
+        "pattern": "two-beat",
+        "scores": {
+          "clarity": 100,
+          "curiosity": 40,
+          "specificity": 92,
+          "truthfulness": 85,
+          "searchIntent": 83,
+          "channelIdentity": 62,
+          "ctrPotential": 65,
+          "novelty": 100,
+          "evergreenPotential": 85,
+          "consequence": 57,
+          "compactness": 100,
+          "recognizability": 98,
+          "nonRedundancy": 100,
+          "factualIntegrity": 85,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
+        },
+        "total": 77,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 77,
+        "unsupportedWords": [
+          "forensic"
+        ],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
+        "title": "Air France 447: From First Warning to Final Failure",
+        "source": "warning-to-failure",
+        "pattern": "label-colon",
+        "scores": {
+          "clarity": 100,
+          "curiosity": 58,
+          "specificity": 92,
+          "truthfulness": 85,
+          "searchIntent": 83,
+          "channelIdentity": 74,
+          "ctrPotential": 85,
+          "novelty": 92,
+          "evergreenPotential": 85,
+          "consequence": 95,
+          "compactness": 100,
+          "recognizability": 98,
+          "nonRedundancy": 92,
+          "factualIntegrity": 85,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 70
+        },
+        "total": 83,
+        "patternPenalty": 7,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 76,
+        "unsupportedWords": [
+          "warning"
+        ],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
+        "title": "Air France 447: The Full Failure Reconstructed",
+        "source": "full-reconstruction",
+        "pattern": "label-colon",
+        "scores": {
+          "clarity": 100,
+          "curiosity": 40,
+          "specificity": 92,
+          "truthfulness": 100,
+          "searchIntent": 83,
+          "channelIdentity": 62,
+          "ctrPotential": 73,
+          "novelty": 91,
+          "evergreenPotential": 85,
+          "consequence": 95,
+          "compactness": 100,
+          "recognizability": 98,
+          "nonRedundancy": 91,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 70
+        },
+        "total": 81,
+        "patternPenalty": 7,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 74,
+        "unsupportedWords": [],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
+        "title": "Air France 447: Every Link in the Failure Chain",
+        "source": "every-link",
+        "pattern": "label-colon",
+        "scores": {
+          "clarity": 100,
+          "curiosity": 40,
+          "specificity": 92,
+          "truthfulness": 85,
+          "searchIntent": 83,
+          "channelIdentity": 74,
+          "ctrPotential": 73,
+          "novelty": 82,
+          "evergreenPotential": 85,
+          "consequence": 95,
+          "compactness": 100,
+          "recognizability": 98,
+          "nonRedundancy": 82,
+          "factualIntegrity": 85,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 70
+        },
+        "total": 80,
+        "patternPenalty": 7,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 73,
+        "unsupportedWords": [
+          "link"
+        ],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
+        "title": "Reconstructing Air France 447: Cause, Chain, Consequence",
+        "source": "reconstructing",
+        "pattern": "label-colon",
+        "scores": {
+          "clarity": 100,
+          "curiosity": 40,
+          "specificity": 92,
+          "truthfulness": 100,
+          "searchIntent": 83,
+          "channelIdentity": 62,
+          "ctrPotential": 65,
+          "novelty": 92,
+          "evergreenPotential": 85,
+          "consequence": 95,
+          "compactness": 100,
+          "recognizability": 98,
+          "nonRedundancy": 92,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 70
+        },
+        "total": 80,
+        "patternPenalty": 7,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 73,
+        "unsupportedWords": [],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
+        "title": "Air France 447: The Investigation, Explained",
+        "source": "investigation-explained",
+        "pattern": "label-colon",
+        "scores": {
+          "clarity": 100,
+          "curiosity": 40,
+          "specificity": 92,
+          "truthfulness": 100,
+          "searchIntent": 83,
+          "channelIdentity": 62,
+          "ctrPotential": 65,
+          "novelty": 100,
+          "evergreenPotential": 85,
+          "consequence": 57,
+          "compactness": 100,
+          "recognizability": 98,
+          "nonRedundancy": 100,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 70
+        },
+        "total": 80,
+        "patternPenalty": 7,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 73,
+        "unsupportedWords": [],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
+        "title": "Pitot Tube Icing Causing Autopilot Disconnect: How It Destroyed Air France 447",
+        "source": "mechanism-long",
+        "pattern": "label-colon",
+        "scores": {
+          "clarity": 83,
+          "curiosity": 58,
+          "specificity": 92,
+          "truthfulness": 85,
+          "searchIntent": 75,
+          "channelIdentity": 50,
+          "ctrPotential": 75,
+          "novelty": 94,
+          "evergreenPotential": 85,
+          "consequence": 95,
+          "compactness": 50,
+          "recognizability": 98,
+          "nonRedundancy": 94,
+          "factualIntegrity": 85,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 70
+        },
+        "total": 77,
+        "patternPenalty": 7,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 70,
+        "unsupportedWords": [
+          "destroyed"
+        ],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
+        "title": "Iced Sensors and a Stall Nobody Recognized",
+        "source": "editorial",
+        "pattern": "statement",
+        "scores": {
+          "clarity": 100,
+          "curiosity": 58,
+          "specificity": 47,
+          "truthfulness": 100,
+          "searchIntent": 30,
+          "channelIdentity": 60,
+          "ctrPotential": 57,
+          "novelty": 92,
+          "evergreenPotential": 75,
+          "consequence": 42,
+          "compactness": 100,
+          "recognizability": 56,
+          "nonRedundancy": 92,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
+        },
+        "total": 67,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 67,
+        "unsupportedWords": [],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
+        "title": "The Stall That Lasted Minutes",
+        "source": "editorial",
+        "pattern": "the-x-that",
+        "scores": {
+          "clarity": 84,
+          "curiosity": 40,
+          "specificity": 47,
+          "truthfulness": 100,
+          "searchIntent": 30,
+          "channelIdentity": 60,
+          "ctrPotential": 45,
+          "novelty": 100,
+          "evergreenPotential": 75,
+          "consequence": 42,
+          "compactness": 100,
+          "recognizability": 56,
+          "nonRedundancy": 100,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
+        },
+        "total": 62,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 62,
+        "unsupportedWords": [],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
+        "title": "The 2009 Disaster Engineers Still Study: Air France 447",
+        "source": "still-study",
+        "pattern": "label-colon",
+        "scores": {
+          "clarity": 100,
+          "curiosity": 40,
+          "specificity": 92,
+          "truthfulness": 55,
+          "searchIntent": 75,
+          "channelIdentity": 62,
+          "ctrPotential": 65,
+          "novelty": 92,
+          "evergreenPotential": 85,
+          "consequence": 95,
+          "compactness": 100,
+          "recognizability": 98,
+          "nonRedundancy": 92,
+          "factualIntegrity": 55,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 70
+        },
+        "total": 71,
+        "patternPenalty": 7,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 64,
+        "unsupportedWords": [
+          "disaster",
+          "still",
+          "study"
+        ],
+        "misleading": true,
+        "grammar": [],
+        "ungrammatical": false
+      }
+    ]
+  },
+  "derivedShorts": {
+    "shorts": [
+      {
+        "angle": "failure-chain",
+        "hook": "Step 2 of the failure chain: airspeed readings drop.",
+        "hookFamily": "impossible_sounding_fact",
+        "hookScore": 79,
+        "first3SecondPlan": {
+          "narration": "Step 2 of the failure chain: airspeed readings drop.",
+          "firstFrame": {
+            "description": "Evidence frame for: \"An airliner fell into the Atlantic Ocean.\"",
+            "source": "Footage/air-france-447-1.jpg",
+            "startAtSeconds": null,
+            "sourceClass": "REAL_ARCHIVAL",
+            "communicates": "consequence",
+            "rule": "opens on the most striking evidence moment, never the reel's leader"
+          },
+          "visual": "Evidence frame for: \"An airliner fell into the Atlantic Ocean.\"",
+          "onScreenText": "STALL",
+          "motion": "slow push-in 100→112% on the still, hard cut at the first beat",
+          "cutTiming": [
+            0,
+            0.8,
+            1.6
+          ],
+          "soundCue": "single low hit on the first cut",
+          "communicates": "consequence"
+        },
+        "miniNarrative": [
+          "Step 1 of the failure chain: ice blocks pitot tubes.",
+          "Step 2 of the failure chain: airspeed readings drop.",
+          "Step 3 of the failure chain: autopilot disconnects.",
+          "Step 4 of the failure chain: nose held up."
+        ],
+        "payoff": "Step 5 of the failure chain: stall all the way down.",
+        "captionPlan": "semantic 2–3 word chunks, ≤ 2 lines, raised above Shorts UI (config.captions)",
+        "visualRhythm": "cut ≤ 1.4 s in the first 3 s, 1.6–2.4 s to 10 s, then 2.6–3.5 s",
+        "standalone": true,
+        "longformBridge": "That was only the final failure. The full chain is in the linked episode.",
+        "claimIds": [
+          "C7",
+          "C8",
+          "C9",
+          "C10",
+          "C11"
+        ]
+      },
+      {
+        "angle": "engineering-explanation",
+        "hook": "Among the 216 passengers were 126 men.",
+        "hookFamily": "shocking_consequence",
+        "hookScore": 78,
+        "first3SecondPlan": {
+          "narration": "Among the 216 passengers were 126 men.",
+          "firstFrame": {
+            "description": "Evidence frame for: \"An airliner fell into the Atlantic Ocean.\"",
+            "source": "Footage/air-france-447-1.jpg",
+            "startAtSeconds": null,
+            "sourceClass": "REAL_ARCHIVAL",
+            "communicates": "consequence",
+            "rule": "opens on the most striking evidence moment, never the reel's leader"
+          },
+          "visual": "Evidence frame for: \"An airliner fell into the Atlantic Ocean.\"",
+          "onScreenText": "216",
+          "motion": "slow push-in 100→112% on the still, hard cut at the first beat",
+          "cutTiming": [
+            0,
+            0.8,
+            1.6
+          ],
+          "soundCue": "single low hit on the first cut",
+          "communicates": "consequence"
+        },
+        "miniNarrative": [
+          "The aircraft involved was a four-year-old Airbus A330-203, with serial number 0660, registered as F-GZCP.",
+          "It was delivered to the airline in April 2005.",
+          "The aircraft underwent a major overhaul on 16 April 2009, and at the time of the accident it had accumulated about 18,870 flying hours.",
+          "It was the last Airbus A330 delivered to the airline."
+        ],
+        "payoff": "At that time, the investigation had established only two facts—the weather near the aircraft's planned route included significant convective cells typical of the equatorial regions, and the speeds measured by the three pitot tubes differed from each other during the last few minutes of the flight.",
+        "captionPlan": "semantic 2–3 word chunks, ≤ 2 lines, raised above Shorts UI (config.captions)",
+        "visualRhythm": "cut ≤ 1.4 s in the first 3 s, 1.6–2.4 s to 10 s, then 2.6–3.5 s",
+        "standalone": true,
+        "longformBridge": "That was only the final failure. The full chain is in the linked episode.",
+        "claimIds": [
+          "C32",
+          "C33",
+          "C34",
+          "C35",
+          "C36",
+          "C37",
+          "C38",
+          "C39",
+          "C40",
+          "C41",
+          "C42",
+          "C43",
+          "C44",
+          "C45",
+          "C46",
+          "C47",
+          "C48",
+          "C49",
+          "C50",
+          "C51",
+          "C52",
+          "C53",
+          "C54",
+          "C55",
+          "C56",
+          "C85",
+          "C86",
+          "C87",
+          "C88",
+          "C89",
+          "C90",
+          "C91",
+          "C92",
+          "C93",
+          "C94",
+          "C95",
+          "C96",
+          "C97",
+          "C98",
+          "C99",
+          "C100",
+          "C101",
+          "C102",
+          "C103",
+          "C104",
+          "C105",
+          "C106",
+          "C107",
+          "C108",
+          "C109",
+          "C110",
+          "C111",
+          "C112",
+          "C113",
+          "C114",
+          "C115",
+          "C116",
+          "C117",
+          "C118",
+          "C119",
+          "C120",
+          "C121",
+          "C122",
+          "C123",
+          "C124",
+          "C125",
+          "C126",
+          "C127",
+          "C128",
+          "C129",
+          "C130",
+          "C131",
+          "C132",
+          "C133",
+          "C134",
+          "C135",
+          "C136",
+          "C137",
+          "C138",
+          "C139",
+          "C140",
+          "C141",
+          "C142",
+          "C143",
+          "C144",
+          "C145",
+          "C146",
+          "C147",
+          "C148",
+          "C149",
+          "C150",
+          "C151",
+          "C152",
+          "C153",
+          "C154",
+          "C155",
+          "C156",
+          "C157",
+          "C158",
+          "C159",
+          "C160",
+          "C161",
+          "C162",
+          "C163",
+          "C164",
+          "C165",
+          "C166",
+          "C167",
+          "C168",
+          "C169",
+          "C170",
+          "C171",
+          "C172",
+          "C173",
+          "C174",
+          "C175",
+          "C176",
+          "C177",
+          "C178",
+          "C179",
+          "C180",
+          "C181",
+          "C182"
+        ]
+      }
+    ],
+    "count": 2,
+    "meetsMinimum": false
+  },
+  "relatedShorts": [
+    {
+      "short_video_id": "PGOKZhPYo7c",
+      "short_slug": "hindenburg",
+      "relationship_type": "SAME_SERIES",
+      "relationship_reason": "same series; subject overlap 0.00, same cluster aviation-failures",
+      "score": 0.4
+    },
+    {
+      "short_video_id": "rgSsk8q6eyM",
+      "short_slug": "eastern-212-1974",
+      "relationship_type": "SAME_SERIES",
+      "relationship_reason": "same series; subject overlap 0.00, same cluster aviation-failures",
+      "score": 0.4
+    },
+    {
+      "short_video_id": "BukKRJfO7zI",
+      "short_slug": "united-232-1989",
+      "relationship_type": "SAME_SERIES",
+      "relationship_reason": "same series; subject overlap 0.00, same cluster aviation-failures",
+      "score": 0.4
+    },
+    {
+      "short_video_id": "uuJwJwP-rzw",
+      "short_slug": "colgan-3407-2009",
+      "relationship_type": "SAME_SERIES",
+      "relationship_reason": "same series; subject overlap 0.00, same cluster aviation-failures",
+      "score": 0.4
+    }
+  ],
+  "nextVideos": {
+    "primary_next_video": {
+      "slug": "colgan-3407-2009",
+      "videoId": null,
+      "title": "The Stall Warning Pilots Pulled Against",
+      "reason": "same series; subject overlap 0.00, same cluster aviation-failures",
+      "score": 0.44
+    },
+    "secondary_next_video": {
+      "slug": "continental-1713-1987",
+      "videoId": null,
+      "title": "Twenty-Seven Minutes of Snow After De-icing",
+      "reason": "same series; subject overlap 0.00, same cluster aviation-failures",
+      "score": 0.44
+    }
+  },
+  "endScreenPlan": {
+    "primary_next_video": {
+      "slug": "colgan-3407-2009",
+      "videoId": null,
+      "title": "The Stall Warning Pilots Pulled Against",
+      "reason": "same series; subject overlap 0.00, same cluster aviation-failures",
+      "score": 0.44
+    },
+    "secondary_next_video": {
+      "slug": "continental-1713-1987",
+      "videoId": null,
+      "title": "Twenty-Seven Minutes of Snow After De-icing",
+      "reason": "same series; subject overlap 0.00, same cluster aviation-failures",
+      "score": 0.44
+    },
+    "playlist": "aviation-failures",
+    "subscribe_element": true,
+    "timing": {
+      "startSeconds": 94,
+      "durationSeconds": 20,
+      "note": "final 20 s; narration must not end abruptly"
+    },
+    "final_narration_transition": "And Air France 447 wasn't the only time a hidden weakness decided everything — The Stall Warning Pilots Pulled Against is next.",
+    "apiSupport": "UNSUPPORTED — YouTube Data API v3 has no end-screen write endpoint; configure in Studio (task emitted)."
+  },
+  "cost": {
+    "estimated_production_cost": 0.06,
+    "currency": "USD",
+    "breakdown": {
+      "llmTokens": 0,
+      "ttsMinutes": 1.9,
+      "renderMinutesCpu": 5.7,
+      "assets": 10,
+      "youtubeQuotaUnits": 1650
+    },
+    "note": "approximate; update config/growth-engine.json cost units from invoices"
+  },
+  "readiness": {
+    "LongFormProductionReadinessScore": 83,
+    "decision": "BLOCK",
+    "dimensions": {
+      "TopicDepth": 97,
+      "NarrativeQuality": 86,
+      "Hook": 77,
+      "ResearchQuality": 85,
+      "SourceCoverage": 57,
+      "FactualAccuracy": 100,
+      "ScriptRetention": 51,
+      "VisualCoverage": 90,
+      "AudioQuality": null,
+      "Editing": null,
+      "Thumbnail": 89,
+      "Title": 86,
+      "CopyrightSafety": 90,
+      "Disclosure": 95,
+      "EndScreenPlan": 90,
+      "ShortFunnelPotential": 60
+    },
+    "unmeasured": [
+      "AudioQuality",
+      "Editing"
+    ],
+    "hardFails": [
+      "INSUFFICIENT_DEPTH: evidence supports ~1.9 min; target 8–12 min — not padded",
+      "LLM generation failed safely (REQUEST_TOO_LARGE); deterministic evidence draft retained"
+    ],
+    "notes": [
+      "2 sources (preferred 3): add an independent source before the next revision",
+      "160 deep-research claims need the LLM writer via a configured long-form provider (LONGFORM_LLM_PROVIDER + provider key); the deterministic writer never narrates encyclopedia text verbatim"
+    ],
+    "thresholds": {
+      "publish": 85,
+      "review": 70
+    }
+  },
+  "targetMinutes": [
+    8,
+    12
+  ],
+  "summary": {
+    "Channel": "Failure Reconstructed",
+    "Content Type": "LONG_FORM",
+    "Topic": "Iced Sensors and a Stall Nobody Recognized",
+    "LongFormPotentialScore": 86,
+    "Topic Bucket": "A",
+    "Cold Open": "Air France Flight 447 fell into the Atlantic in a stall.",
+    "Target Duration": "8–12 min",
+    "Actual Duration": "~1.9 min (script estimate, deterministic-evidence)",
+    "Scenes": 10,
+    "Thumbnail Score": 89,
+    "Title Score": 86,
+    "LongFormProductionReadinessScore": "83 → BLOCK",
+    "Related Shorts": "hindenburg, eastern-212-1974, united-232-1989, colgan-3407-2009",
+    "Primary Next Video": "The Stall Warning Pilots Pulled Against"
+  }
+}

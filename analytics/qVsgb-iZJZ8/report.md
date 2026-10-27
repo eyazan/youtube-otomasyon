@@ -8,8 +8,9 @@ https://youtu.be/qVsgb-iZJZ8
 |---|---|---:|---:|---:|---:|---:|---|
 | 1d | 2026-10-19 | 260 | 6 | 1 | — | — |  |
 | 3d | 2026-10-21 | 277 | 6 | 1 | 70.53 | 0 | Shorts feed 90%, Search 7% |
+| 7d | 2026-10-25 | 277 | 6 | 1 | 66.72 | 0 | Shorts feed 82%, Search 15% |
 
-## Diagnosis at 3d
+## Diagnosis at 7d
 
 - **WEAK_TOPIC_PACKAGING** (low) — Current title scores 24.1/100 in the title engine; best editorial option scores 42.3.
 
@@ -19,9 +20,9 @@ https://youtu.be/qVsgb-iZJZ8
 
 ## First major observed retention drop
 
-- Timestamp: 9s; magnitude: 12 percentage points.
+- Timestamp: 9s; magnitude: 11 percentage points.
 - Active sentence: That rod had to be lifted by hand.
 - Visual type: REAL ARCHIVAL IMAGE
 - This is an observed alignment, not proof that the sentence or visual caused the drop.
 
-Views gained between 1d and 3d: 17.
+Views gained between 3d and 7d: 0.

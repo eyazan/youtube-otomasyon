@@ -10,8 +10,9 @@ https://youtu.be/qkzRUqlEy5I
 | 3d | 2026-09-26 | 183 | 5 | 2 | 65.2 | 0 | Shorts feed 54%, Search 43% |
 | 7d | 2026-09-29 | 186 | 5 | 2 | 65.29 | 0 | Shorts feed 51%, Search 44% |
 | 14d | 2026-10-06 | 189 | 5 | 2 | 64.36 | 0 | Shorts feed 50%, Search 44% |
+| 30d | 2026-10-22 | 189 | 5 | 2 | 64.36 | 0 | Shorts feed 50%, Search 44% |
 
-## Diagnosis at 14d
+## Diagnosis at 30d
 
 - **SHORTS_FEED_NOT_PICKED_UP** (low) — Most views are not from the Shorts feed.
 
@@ -26,4 +27,4 @@ https://youtu.be/qkzRUqlEy5I
 - Visual type: REAL ARCHIVAL/LICENCED FOOTAGE
 - This is an observed alignment, not proof that the sentence or visual caused the drop.
 
-Views gained between 7d and 14d: 3.
+Views gained between 14d and 30d: 0.
