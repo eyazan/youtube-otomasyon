@@ -1,6 +1,6 @@
 # Daily operations report
 
-Generated: 2026-10-27T16:39:06.379Z
+Generated: 2026-10-27T17:11:07.570Z
 
 Missing API-only metrics are reported as `unavailable`, never as zero.
 
@@ -9,7 +9,7 @@ Missing API-only metrics are reported as `unavailable`, never as zero.
 | Signal | Status |
 |---|---|
 | Today topic | unavailable |
-| Short | due-not-produced |
+| Short | not-due |
 | Long | due-not-produced |
 | Quality | unavailable / unavailable |
 | YouTube | not-uploaded |
@@ -32,7 +32,7 @@ Missing API-only metrics are reported as `unavailable`, never as zero.
 | Signal | Status |
 |---|---|
 | Today topic | unavailable |
-| Short | due-not-produced |
+| Short | not-due |
 | Long | due-not-produced |
 | Quality | unavailable / unavailable |
 | YouTube | not-uploaded |
@@ -45,7 +45,7 @@ Missing API-only metrics are reported as `unavailable`, never as zero.
 | Analytics warehouse | through 2026-10-25 (lag 2 d) |
 | Ops (24 h) | analytics.load 1 |
 | Scheduler queue | 2 queued, oldest 2026-10-27 (0 d) |
-| API quota today | 61 / 9800 units (project 684098966511) |
+| API quota today | 0 / 9800 units (project channel:impossible-brief) |
 | YPP readiness (estimate) | subs 13/1,000 · long-form watch h (365 d) unavailable/4,000 · Shorts views (90 d) unavailable/10M |
 
 ## CriticalThread
@@ -53,7 +53,7 @@ Missing API-only metrics are reported as `unavailable`, never as zero.
 | Signal | Status |
 |---|---|
 | Today topic | unavailable |
-| Short | due-not-produced |
+| Short | not-due |
 | Long | due-not-produced |
 | Quality | unavailable / unavailable |
 | YouTube | not-uploaded |
@@ -66,6 +66,6 @@ Missing API-only metrics are reported as `unavailable`, never as zero.
 | Analytics warehouse | through 2026-10-25 (lag 2 d) |
 | Ops (24 h) | analytics.load 1 |
 | Scheduler queue | 2 queued, oldest 2026-10-27 (0 d) |
-| API quota today | 0 / 9800 units (project channel:critical-thread) |
+| API quota today | 52 / 9800 units (project 208987599838) |
 | YPP readiness (estimate) | subs 0/1,000 · long-form watch h (365 d) unavailable/4,000 · Shorts views (90 d) unavailable/10M |
 
