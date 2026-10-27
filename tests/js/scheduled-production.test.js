@@ -410,7 +410,7 @@ test("GITHUB BACKUP: schedule runs still publish; manual runs stay opt-in; dispa
 test("REVIEW: publishing follows an explicit event allow-list; a new trigger type would not publish", () => {
   const wf = read(".github/workflows/portfolio-production.yml");
   const publishLines = wf.split("\n").filter((line) => /PUBLISH: \$\{\{/.test(line) && /'1'/.test(line));
-  assert.ok(publishLines.length >= 4);
+  assert.ok(publishLines.length >= 3, "FR, IB and BTO steps (CriticalThread retired 2026-10-27)");
   for (const line of publishLines) {
     if (/BTO_PUBLISH/.test(line)) continue;
     assert.match(line, /\(github\.event_name == 'schedule' \|\| github\.event_name == 'repository_dispatch'\) && '1'/, line.trim());

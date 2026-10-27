@@ -103,7 +103,6 @@ jobs:
         run: |
           node bildirim.js --channel failure-reconstructed --gun-kontrol || true
           if [ "${{ vars.IB_PUBLISH }}" = "1" ]; then node bildirim.js --channel impossible-brief --gun-kontrol || true; fi
-          if [ "${{ vars.CT_PUBLISH }}" = "1" ]; then node bildirim.js --channel critical-thread --gun-kontrol || true; fi
           if [ "${{ vars.BTO_PUBLISH }}" = "1" ]; then node bildirim.js --channel behind-the-ordinary --gun-kontrol || true; fi
       # SCHEDULED is not published: only a YouTube-API "public" observation (publish.public, written by
       # the step above) makes a Short PUBLICATION_CONFIRMED (lib/publication-evidence.js).

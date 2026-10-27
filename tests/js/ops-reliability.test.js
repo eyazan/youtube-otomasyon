@@ -76,7 +76,7 @@ test("every watchdog state commit uses the push helper (no retry loop left that 
   assert.ok(!/git pull --rebase/.test(yml), "no raw pull --rebase loop remains");
   const commits = (yml.match(/git commit -m/g) || []).length;
   const helpers = (yml.match(/bash scripts\/ops\/push-state\.sh "\$GITHUB_REF_NAME" 5/g) || []).length;
-  assert.ok(commits >= 6);
+  assert.ok(commits >= 4, "FR, IB and BTO watchdog state commits (CriticalThread retired 2026-10-27)");
   assert.equal(helpers, commits, "each committing step pushes through the helper");
 });
 

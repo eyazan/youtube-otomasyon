@@ -62,12 +62,7 @@ jobs:
           node yorum-yanitla.js --channel impossible-brief --limit 4 || true
           node seed-comment.js --channel impossible-brief
 
-      - name: CriticalThread replies and seed comment
-        if: ${{ always() && vars.CT_PUBLISH == '1' }}
-        continue-on-error: true
-        run: |
-          node yorum-yanitla.js --channel critical-thread --limit 4 || true
-          node seed-comment.js --channel critical-thread
+      # CriticalThread retired 2026-10-27 (config/channels.json): no replies or seed comments in its name.
 
       - name: The Hidden Logic of Things replies and seed comment
         if: ${{ always() && vars.BTO_PUBLISH == '1' }}

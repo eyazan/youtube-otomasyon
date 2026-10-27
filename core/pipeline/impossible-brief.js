@@ -164,6 +164,7 @@ function chooseTopic(channel, explicit, universe) {
 function runChannel(slug, argv = []) {
   const channel = Channel.getChannel(slug);
   if (channel.config.pathMode === "legacy-adapter") throw new Error(`Isolated documentary pipeline cannot run legacy channel: ${slug}`);
+  if (channel.retired) { console.log(`[${channel.name}] retired since ${channel.retired.since}; no content produced.`); return 0; }
   const explicit = argv.find((arg) => !arg.startsWith("--"));
   const run = require("../../lib/run-stages").start(channel);
   let targetDay = null;

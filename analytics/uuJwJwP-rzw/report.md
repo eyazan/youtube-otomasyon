@@ -8,11 +8,12 @@ https://youtu.be/uuJwJwP-rzw
 |---|---|---:|---:|---:|---:|---:|---|
 | 1d | 2026-10-21 | 1063 | 7 | 1 | — | — |  |
 | 3d | 2026-10-23 | 1078 | 7 | 1 | 67.21 | 0 | Shorts feed 96%, Search 3% |
+| 7d | 2026-10-27 | 1091 | 7 | 1 | 66.6 | 0 | Shorts feed 93%, Search 6% |
 
-## Diagnosis at 3d
+## Diagnosis at 7d
 
 - **HIGH_VIEWS_LOW_SUB_CONVERSION** (medium) — 0.0 subscribers per 1,000 views.
-- **OUTPERFORMER** (medium) — 1078 views vs channel median 457 (n=30 videos).
+- **OUTPERFORMER** (medium) — 1091 views vs channel median 458 (n=30 videos).
 
 ## Suggested interventions
 
@@ -26,4 +27,4 @@ https://youtu.be/uuJwJwP-rzw
 - Visual type: REAL ARCHIVAL IMAGE
 - This is an observed alignment, not proof that the sentence or visual caused the drop.
 
-Views gained between 1d and 3d: 15.
+Views gained between 3d and 7d: 13.

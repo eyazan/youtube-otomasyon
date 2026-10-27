@@ -133,6 +133,7 @@ function hataYaz(BASE, IS, neden) {
 
 // --- Resumable upload -----------------------------------------------------
 async function yuklemeOturumu(token, snippet, status) {
+  Channel.assertWritable(CHANNEL);
   const meta = JSON.stringify({ snippet, status });
   const y = await istek({
     hostname: "www.googleapis.com",
@@ -176,6 +177,8 @@ function oturumPut(yuklemeUrl, headers) {
 
 // --- Ana akis -------------------------------------------------------------
 async function main() {
+  // A retired channel (CriticalThread since 2026-10-27) never uploads, verifies or schedules anything: fail closed.
+  Channel.assertWritable(CHANNEL);
   const argv = SELECTED.argv;
   const IS = argv.find((a) => !a.startsWith("--"));
   const kuru = argv.includes("--dogrula");
