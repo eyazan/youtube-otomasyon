@@ -1,4 +1,4 @@
-# Premium engine: four-channel readiness report (2026-10-22, PR #316)
+# Premium engine: four-channel readiness report (2026-10-22, updated 2026-10-27, PR #316)
 
 Every verdict below rests on real renders whose GitHub Actions logs were read, not on job status or storyboard
 validation. **Pilot success is not production readiness**: a channel is production-ready only when its own daily entry
@@ -22,7 +22,25 @@ flag in production or uploads.
 | **Premium shadow, daily** | **READY after merge** | **READY after merge** | built, BLOCKED (channel state, research) | BLOCKED (no lane) |
 | **Premium publishing** | adapter built, off; needs approvals | adapter built, off; needs approvals | adapter built, off; channel publishing disabled | not possible (no lane) |
 
-## 2. Latest CI results (head `a955dce`, all green; logs read)
+## 2. Latest CI results
+
+### 2026-10-27: Edge outage and recovery (head `91b9edf`, logs read)
+
+From about 13:00 UTC on 2026-10-27 Edge refused every msedge-tts 2.1.0 handshake (`Unexpected server response: 200`).
+Every scheduled production run stopped at the health pre-flight with NARRATION_UNAVAILABLE for Failure Reconstructed,
+ImpossibleBrief and CriticalThread (e.g. run 40535551278): nothing was uploaded and no other voice was used. The premium
+render check failed the same way on `2a0dc53` (run 40551448475). `91b9edf` pins msedge-tts 2.1.1 (new endpoint,
+Sec-MS-GEC v2). **This fix exists only on the PR branch; production on `main` stays without narration until it lands.**
+
+| Run | Workflow | Result |
+|---|---|---|
+| 40552102905 | TTS availability check | production client: handshake 101, voices 200, 6/6 syntheses on each of three runners; Python edge-tts 7.3.1 6/6 |
+| 40552102932 | FR dry run | live lane narration check passed (Edge en-US-AndrewNeural); mars-96-1996 rendered, quality gate PUBLISH 87, upload skipped (PUBLISH=0); alaska-261-2000 held for review (REVIEW 86); shadow on mars-96-1996: Edge Andrew Multilingual (approved), objective PASS, 174 s, **9 fresh Edge requests**, 32 MB intermediates removed |
+| 40552102846 | Premium render check | BTO-301: Edge Emma (approved), objective PASS, READY_FOR_HUMAN_REVIEW, render 118.8 s; GLL-P01: Edge Ryan, objective PASS, PILOT_NOT_APPROVED_FOR_PUBLICATION, render 77.1 s |
+| 40552102862 | Testler | green |
+| 40552102872 | IB dry run | IB_RESULT |
+
+### 2026-10-22 (head `a955dce`, all green; logs read)
 
 | Run | Workflow | Result |
 |---|---|---|
@@ -42,7 +60,7 @@ Earlier confirmations: BTO-301 QR decode first passed in run 39840693330 attempt
 | Requirement | Implementation | Evidence |
 |---|---|---|
 | Bounded concurrency | `EDGE_TTS_MAX_CONCURRENCY` (default 1) lock slots per machine (`lib/slot-lock.js`, dead holders reclaimed) | `tests/js/edge-client.test.js` |
-| Retry-After | honoured when the error carries it (seconds or HTTP date) | test; note: msedge-tts 2.1.0 keeps the status code but drops the header, so on Edge today the backoff applies |
+| Retry-After | honoured when the error carries it (seconds or HTTP date) | test; note: msedge-tts 2.1.x keeps the status code but drops the header, so on Edge today the backoff applies |
 | Exponential backoff with jitter | rate limit from 15 s, other failures from 2.5 s, doubling, half fixed + half random, cap 120 s | test |
 | Maximum retry budget | `EDGE_TTS_RETRY_BUDGET_S` (default 180 s, 30–900) shared by all beats, plus attempt caps; the narrator's timeout grows with it | tests; offline run: 3 bounded attempts then one named error |
 | Narration caching / reuse | content-addressed beats (voice, rate, text, format, client version) in `.cache/edge-tts`, LRU under 200 MB, git-ignored; restored and saved by `actions/cache` in the three premium workflows | **FR run 39851796007: 8 beats cached, 0 requested, 90 s vs 142 s for the same case one run earlier** |
@@ -115,6 +133,9 @@ set in `portfolio-production.yml`.
 - **GoalLore Lab:** identity decision (the CriticalThread credentials sign in to a channel titled GoalLore Lab; its 8
   recorded videos are not publicly visible); the CriticalThread lane still runs with PUBLISH=1; no registry entry or
   lane; no quoted research; voice not approved by listening test.
+- **Production on `main` (urgent):** narration has been unavailable since 2026-10-27 13:00 UTC; the msedge-tts 2.1.1
+  pin (`91b9edf`) restores it and is verified in CI on this branch, but must reach `main` (this PR or a one-commit
+  hotfix) before any channel produces again.
 - **Infrastructure:** Edge does not expose Retry-After through the client; the first run after a cache-key change still
   downloads from the mirror.
 
