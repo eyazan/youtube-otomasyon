@@ -292,7 +292,7 @@ jobs:
           if-no-files-found: error
           retention-days: 30
 
-  # CriticalThread was retired on 2026-10-27 (config/channels.json): its YouTube channel now belongs to GoalLore Lab,
+  # CriticalThread was retired on 2026-10-27 (config/channels.json): its YouTube channel passed to its registry successor,
   # so it has no SLA check, recovery or verification here; youtube-yukle.js refuses it regardless.
 
   # The Hidden Logic of Things remains dormant until its own publish flag and OAuth
