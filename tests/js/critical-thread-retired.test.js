@@ -87,3 +87,12 @@ test("the one-off replacement and long-form uploaders go through the guarded upl
   assert.ok(uploader.indexOf("Channel.assertWritable(CHANNEL)") < uploader.indexOf("const argv = SELECTED.argv;"), "checked before any argument handling");
   assert.match(uploader, /async function yuklemeOturumu[^]*?Channel\.assertWritable\(CHANNEL\)/, "and again before the resumable upload session");
 });
+
+test("the 30-day portfolio model publishes nothing for the retired channel and still passes on the others", () => {
+  const Simulation = require("../../core/simulation/two-channel");
+  const r = Simulation.simulate30Days({ retired: ["critical-thread"] });
+  assert.equal(r.pass, true, JSON.stringify(Object.entries(r.checks).filter(([, v]) => !v)));
+  assert.deepEqual([r.channels["critical-thread"].shorts, r.channels["critical-thread"].longForm], [0, 0]);
+  assert.equal(r.channels["failure-reconstructed"].shorts, 30); assert.equal(r.channels["impossible-brief"].shorts, 30);
+  assert.ok(!r.events.some((e) => e.channel === "critical-thread" && e.status === "published"));
+});

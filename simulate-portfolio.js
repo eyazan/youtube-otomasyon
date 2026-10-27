@@ -26,6 +26,7 @@ const result = Simulation.simulate30Days({
   externalWatchdogDeployed: true,
   allFourOAuthIdentitiesConfigured: false,
   inactive: MODELED.filter((slug) => !active.has(slug)),
+  retired: MODELED.filter((slug) => Channel.getChannel(slug).retired),
 });
 const markdown = Simulation.markdown(result);
 const markdownFile = markdown.replace(/\s+$/, "") + "\n";
