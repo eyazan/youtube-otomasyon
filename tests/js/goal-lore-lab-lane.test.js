@@ -83,7 +83,8 @@ test("workflow: one GoalLore Lab step, never scheduled unless GLL_ACTIVE=1, neve
   assert.equal((wf.match(/--channel goal-lore-lab/g) || []).length, 1);
   const step = wf.slice(wf.indexOf("- name: GoalLore Lab Short (premium)"), wf.indexOf("node shorts-sira.js --channel goal-lore-lab"));
   assert.match(step, /vars\.GLL_ACTIVE == '1'/); assert.match(step, /PUBLISH: \$\{\{ vars\.GLL_PUBLISH == '1' && '1' \|\| '0' \}\}/);
-  assert.doesNotMatch(wf, /--channel critical-thread|_PREMIUM_PUBLISH/);
+  assert.doesNotMatch(wf, /--channel critical-thread/);
+  assert.match(step, /GLL_PREMIUM_PUBLISH: \$\{\{ vars\.GLL_PREMIUM_PUBLISH == '1' && '1' \|\| 'off' \}\}/, "publishing needs the owner's repository variable");
   for (const f of fs.readdirSync(path.join(ROOT, ".github", "workflows"))) {
     const y = fs.readFileSync(path.join(ROOT, ".github", "workflows", f), "utf8");
     if (f !== "portfolio-production.yml") assert.doesNotMatch(y, /shorts-sira\.js --channel goal-lore-lab|youtube-yukle\.js[^\n]*goal-lore-lab/, `${f}: GoalLore Lab is produced from one lane only`);

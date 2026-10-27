@@ -20,6 +20,15 @@
 //                runs unchanged: channel identity check, quality gate, narration approval, idempotent upload journal and
 //                remote duplicate reconciliation, target-day publishAt, quota. PUBLISH!=1 runs the uploader's --dogrula.
 // Any refusal before the upload leaves the day to the live lane; the reservation stays for the next run.
+//
+// Unattended operation (premium primary, core/pipeline/premium-lane.js): the owner may sign the channel's publication
+// policy once (channels/<c>/premium/publication-policy.json: status SIGNED, signedBy, signedAt). While it is signed, a due
+// day with no owner-approved package reserves the next qualified topic itself and binds the policy as its creative,
+// factual and publish sign-off: each sign-off names the policy and its sha256, never a person who did not sign. Every
+// other check above still applies unchanged (fresh final render, approved voice, objective QA, publish gate with channel
+// publishing enabled and licensed media, duplicates, the uploader's own gates). A topic the checks refuse for its content
+// stays reserved with the reason (never picked again by either lane); the next run takes the next qualified topic.
+// Dry runs (PUBLISH!=1) write nothing. The policy ships UNSIGNED: code never signs it.
 const crypto = require("crypto");
 const fs = require("fs");
 const path = require("path");
@@ -57,6 +66,55 @@ function contentHash(channel, topicId, pkg) {
 }
 
 const signed = (s) => !!(s && typeof s.by === "string" && s.by.trim() && s.at);
+
+// the owner-signed publication policy for unattended operation; { ok, sha256, policy, why }
+const policyFile = (channel) => path.join(approvalsDir(channel), "..", "publication-policy.json");
+function policy(channel) {
+  const file = policyFile(channel);
+  if (!fs.existsSync(file)) return { ok: false, why: "no publication policy" };
+  const raw = fs.readFileSync(file); const p = J(file, {}); const why = [];
+  if (p.channel !== channel.slug) why.push(`policy is for ${p.channel}, not ${channel.slug}`);
+  if (p.status !== "SIGNED") why.push(`policy status is ${p.status || "missing"}, not SIGNED`);
+  if (!String(p.signedBy || "").trim()) why.push("policy signedBy missing");
+  if (!p.signedAt || Number.isNaN(Date.parse(p.signedAt))) why.push("policy signedAt missing");
+  return { ok: why.length === 0, why: why.join("; "), policy: p, sha256: crypto.createHash("sha256").update(raw).digest("hex"), file: path.relative(ROOT, file) };
+}
+const policyActive = (channel, env = process.env) => enabled(channel, env) && policy(channel).ok;
+
+// upload metadata from the topic's own research (no invented claims): title, the question, the cited sources, disclosure
+function metadata(channel, topic) {
+  const clean = (x) => String(x || "").replace(/[<>]/g, "").replace(/\s+/g, " ").trim();
+  if (channel.slug === "failure-reconstructed") {
+    const konu = J(path.join(channel.paths.state, "konular", `${topic.slug}.json`));
+    if (konu) { const d = require("../../description-engine").olustur(konu); return { title: clean(konu.baslik).slice(0, 100), description: d.metin, tags: d.etiketler }; }
+  }
+  const Hashtags = require("../hashtags");
+  const sources = []; for (const f of [...(topic.facts || []), ...(topic.sources || [])]) { const url = f.url; const name = clean(f.sourceTitle || f.source || f.name || ""); if (url && !sources.some((x) => x.url === url)) sources.push({ name: name.replace(/ \(revision.*$/, "") || url, url }); }
+  const hashtags = Hashtags.forTopic(channel.slug, topic, { format: "short" });
+  const question = clean(topic.coreQuestion || topic.hook || topic.title);
+  const description = [question, sources.length ? `Sources:\n${sources.map((x) => `- ${x.name}: ${x.url}`).join("\n")}` : null,
+    `Original animation; no broadcast footage. Narration: synthetic voice (Microsoft Edge neural TTS). Claims are mapped to the sources above.`, hashtags.join(" ")].filter(Boolean).join("\n\n");
+  const subject = Hashtags.subjectPhrase(topic);
+  const tags = [...new Set([subject, clean(topic.pillar || topic.category || "").toLowerCase(), channel.name].filter(Boolean))];
+  return { title: clean(topic.title).slice(0, 100), description, tags };
+}
+
+// an automatic reservation under the signed policy (written only on publication runs)
+function autoReserve(channel, topic, pol, persist) {
+  const file = path.join(approvalsDir(channel), `${topic.id}.json`);
+  const rec = { topicId: topic.id, slug: topic.slug, auto: true, reservedBy: `publication policy ${pol.sha256.slice(0, 12)} (signed by ${pol.policy.signedBy})`, reservedAt: new Date().toISOString(),
+    basis: { policy: pol.file, policySha256: pol.sha256, signedBy: pol.policy.signedBy, signedAt: pol.policy.signedAt }, contentSha256: null, creative: null, factual: null, publish: null, metadata: metadata(channel, topic) };
+  if (persist) { fs.mkdirSync(approvalsDir(channel), { recursive: true }); fs.writeFileSync(file, JSON.stringify(rec, null, 2) + "\n"); }
+  return { file, ...rec };
+}
+// the policy's sign-off for exactly the rendered content (bound once; a later render must match it)
+function bindPolicy(a, hash, pol, persist) {
+  const at = new Date().toISOString(); const by = `publication policy ${pol.sha256.slice(0, 12)} (signed by ${pol.policy.signedBy} ${pol.policy.signedAt})`;
+  const sign = { by, at, basis: "publication-policy", policySha256: pol.sha256 };
+  Object.assign(a, { contentSha256: hash, creative: sign, factual: sign, publish: sign });
+  if (persist) { const { file, ...rec } = a; fs.writeFileSync(file, JSON.stringify(rec, null, 2) + "\n"); }
+  return a;
+}
 // why an approvals record is not (yet) a publishing approval; [] when it is
 function approvalProblems(a) {
   const p = [];
@@ -92,15 +150,27 @@ function stage(channel, a, pkgFile, pkg, mediaSha) {
 
 // The daily hook. Returns null when the lane should continue as usual (flag off, nothing approved, or a refusal before
 // any upload); otherwise { exitCode, uploaded, topicId, slug, videoId } and the lane's day is done.
-function run(channel, { env = process.env, targetDay = null, spawn = cp.spawnSync, gate = require("../../scripts/bto-studio/publish-gate").evaluate, log = console.log } = {}) {
+function run(channel, { env = process.env, targetDay = null, spawn = cp.spawnSync, gate = require("../../scripts/bto-studio/publish-gate").evaluate, log = console.log, nextTopic = null } = {}) {
   if (!enabled(channel, env)) return null;
   const tag = `[${channel.name}] premium publish`;
-  const ready = approvals(channel).filter((a) => !isPublished(channel, a));
-  const candidates = ready.filter((a) => approvalProblems(a).length === 0);
+  const persist = env.PUBLISH === "1";
+  const pol = policy(channel);
+  const ready = approvals(channel).filter((a) => !isPublished(channel, a) && !a.refused);
+  const unbound = (a) => a.auto && !a.contentSha256 && pol.ok;
+  const candidates = ready.filter((a) => approvalProblems(a).length === 0 || unbound(a));
   for (const a of ready.filter((x) => !candidates.includes(x))) log(`${tag}: ${a.topicId} reserved, not publishable yet: ${approvalProblems(a).join("; ")}`);
-  if (!candidates.length) { log(`${tag}: no approved premium package; the live lane continues`); return null; }
-  const a = candidates.sort((x, y) => String(x.publish.at).localeCompare(String(y.publish.at)))[0];
-  const refuse = (why) => { log(`${tag}: ${a.topicId} not handed to the uploader: ${why}; the live lane continues, the reservation stays`); return null; };
+  let a = candidates.sort((x, y) => String((x.publish || {}).at || x.reservedAt).localeCompare(String((y.publish || {}).at || y.reservedAt)))[0];
+  if (!a && pol.ok && nextTopic) {
+    const t = nextTopic();
+    if (!t) { log(`${tag}: publication policy signed, but no qualified topic; nothing produced (the bar is not lowered)`); return { exitCode: 0, uploaded: false, noTopic: true, topicId: null, slug: null, videoId: null }; }
+    a = autoReserve(channel, t, pol, persist);
+    log(`${tag}: ${t.id} reserved under the signed publication policy ${pol.sha256.slice(0, 12)}${persist ? "" : " (dry run: not written)"}`);
+  }
+  if (!a) { log(`${tag}: no approved premium package${pol.ok ? "" : ` and no signed publication policy (${pol.why})`}; nothing to publish`); return null; }
+  const refuse = (why, content = false) => {
+    if (content && a.auto && persist) { const { file, ...rec } = a; rec.refused = { at: new Date().toISOString(), why }; fs.writeFileSync(file, JSON.stringify(rec, null, 2) + "\n"); }
+    log(`${tag}: ${a.topicId} not handed to the uploader: ${why}; ${content && a.auto ? "the topic stays reserved and is not picked again; the next run takes the next qualified topic" : "the reservation stays"}`); return null;
+  };
 
   // fresh final render of the approved content, approved Edge voice only (BTO_PREMIUM_RENDER=final never falls back)
   const res = Shadow.resources(channel, (k) => env[`${PREFIX[channel.slug]}_PREMIUM_${k}`]);
@@ -114,13 +184,14 @@ function run(channel, { env = process.env, targetDay = null, spawn = cp.spawnSyn
   } finally { Slots.release(slot); }
   if (!child || child.status !== 0) return refuse(`final render failed (${child && child.error ? child.error.code || child.error.message : `exit ${child && child.status}`})`);
   const pkgFile = path.join(topicDir(channel, a.topicId), "out", "review-package.json"); const pkg = J(pkgFile);
-  if (!pkg || pkg.verdict !== "READY_FOR_HUMAN_REVIEW") return refuse(`package verdict ${pkg ? pkg.verdict : "missing"}`);
+  if (!pkg || pkg.verdict !== "READY_FOR_HUMAN_REVIEW") return refuse(`package verdict ${pkg ? pkg.verdict : "missing"}`, true);
   if (!pkg.voice || pkg.voice.approved !== true) return refuse("narration is not the approved voice");
   const hash = contentHash(channel, a.topicId, pkg);
-  if (hash !== a.contentSha256) return refuse(`content changed since approval (approved ${a.contentSha256.slice(0, 12)}, rendered ${String(hash).slice(0, 12)}); re-review needed`);
+  if (unbound(a) && hash) bindPolicy(a, hash, pol, persist);
+  if (hash !== a.contentSha256) return refuse(`content changed since approval (approved ${String(a.contentSha256).slice(0, 12)}, rendered ${String(hash).slice(0, 12)}); re-review needed`);
   const g = gate(pkgFile, { creative: a.creative, factual: a.factual, publish: a.publish });
-  if (g.furthestState !== "PUBLISH_APPROVED") return refuse(`publish gate stops at ${g.furthestState || "TOPIC_READY"}: ${g.steps.filter((s) => !s.ok).map((s) => s.reasons.join("; ")).join("; ")}`);
-  if (g.duplicates && g.duplicates.length) return refuse(`duplicate of ${g.duplicates.join(", ")}`);
+  if (g.furthestState !== "PUBLISH_APPROVED") return refuse(`publish gate stops at ${g.furthestState || "TOPIC_READY"}: ${g.steps.filter((s) => !s.ok).map((s) => s.reasons.join("; ")).join("; ")}`, g.furthestState !== "QA_PASSED");
+  if (g.duplicates && g.duplicates.length) return refuse(`duplicate of ${g.duplicates.join(", ")}`, true);
   const mediaSha = sha256File(path.join(ROOT, pkg.video));
   const st = stage(channel, a, pkgFile, pkg, mediaSha); if (!st.ok) return refuse(st.reason);
 
@@ -142,6 +213,35 @@ function run(channel, { env = process.env, targetDay = null, spawn = cp.spawnSyn
   return { exitCode: up.status === 15 ? 1 : 0, uploaded: true, verified: up.status === 0, topicId: a.topicId, slug: a.slug, videoId: entry.videoId || null };
 }
 
+// Review candidates (no approval yet): evaluate the publish gate as it stands and run the existing uploader in --dogrula
+// mode on the candidate, staged in a production folder that did not exist before and is removed afterwards. Nothing is
+// uploaded, scheduled or approved: the staged package carries no quality-gate decision and no approval.
+function uploaderDryRun(channel, topic, pkgFile, { env = process.env, spawn = cp.spawnSync, gate = require("../../scripts/bto-studio/publish-gate").evaluate, log = console.log } = {}) {
+  const tag = `[${channel.name}] uploader dry run`; const pkg = J(pkgFile); const blockers = [];
+  if (!pkg || !pkg.video) return { gate: null, blockers: ["no review package"], uploaderExit: null };
+  let g = null; try { g = gate(pkgFile, {}); } catch (e) { blockers.push(`publish gate error: ${e.message}`); }
+  if (g) { for (const st of g.steps.filter((x) => !x.ok)) blockers.push(...st.reasons); if (g.duplicates && g.duplicates.length) blockers.push(`duplicate of ${g.duplicates.join(", ")}`); }
+  const pol = policy(channel);
+  if (!pol.ok) blockers.push(`publication policy: ${pol.why}`);
+  if (!enabled(channel, env)) blockers.push(`${PREFIX[channel.slug]}_PREMIUM_PUBLISH is not 1`);
+  if (!(channel.entry && channel.entry.enabled === true)) blockers.push("registry publishing disabled (config/channels.json enabled: false)");
+  const out = path.join(channel.paths.production, topic.slug);
+  if (fs.existsSync(out)) { blockers.push(`production folder for ${topic.slug} already exists; uploader dry run skipped, nothing touched`); return { gate: g && g.furthestState, blockers, uploaderExit: null }; }
+  let code = null;
+  try {
+    const m = metadata(channel, topic);
+    fs.mkdirSync(path.join(out, "Videos"), { recursive: true });
+    fs.copyFileSync(path.join(ROOT, pkg.video), path.join(out, "Videos", `${topic.slug}.mp4`));
+    fs.writeFileSync(path.join(out, "konu.json"), JSON.stringify({ channel: channel.slug, slug: topic.slug, format: "short", baslik: m.title, premium: { topicId: topic.id, dryRun: true } }, null, 2) + "\n");
+    fs.writeFileSync(path.join(out, "YUKLEME.json"), JSON.stringify({ baslik: m.title, aciklama: m.description, etiketler: m.tags }, null, 2) + "\n");
+    log(`${tag}: ${topic.id} -> youtube-yukle.js --dogrula (gate ${g ? g.furthestState : "?"}; title "${m.title}")`);
+    const up = spawn(process.execPath, [path.join(ROOT, "youtube-yukle.js"), "--channel", channel.slug, topic.slug, "--dogrula"], { cwd: ROOT, stdio: "inherit", env: { ...env, PUBLISH: "0" } });
+    code = up.status;
+  } finally { fs.rmSync(out, { recursive: true, force: true }); }
+  log(`${tag}: uploader --dogrula exit ${code}; publication blocked by: ${blockers.join("; ") || "nothing"}`);
+  return { gate: g && g.furthestState, blockers, uploaderExit: code };
+}
+
 // owner CLI (read-only except `reserve`): status | reserve --topic <id> --by <name> | hash --topic <id>
 if (require.main === module) {
   const args = process.argv.slice(2); const opt = (k) => (args.includes(k) ? args[args.indexOf(k) + 1] : null);
@@ -149,6 +249,7 @@ if (require.main === module) {
   if (cmd === "status") {
     for (const a of approvals(channel)) console.log(`${a.topicId}  ${a.publishedVideoId ? `published ${a.publishedVideoId}` : approvalProblems(a).length ? `reserved: ${approvalProblems(a).join("; ")}` : "APPROVED, waiting for a due day"}`);
     console.log(`flag ${PREFIX[channel.slug] || "?"}_PREMIUM_PUBLISH: ${enabled(channel) ? "ON" : "off"}`);
+    const pol = policy(channel); console.log(`publication policy: ${pol.ok ? `SIGNED by ${pol.policy.signedBy} (${pol.sha256.slice(0, 12)})` : pol.why}`);
   } else if (cmd === "reserve") {
     const { topic } = require("../../scripts/bto-studio/adapter").loadTopic(channel.slug, opt("--topic")); const by = opt("--by");
     if (!by) throw new Error("--by <name> is required: a reservation is an owner decision");
@@ -165,4 +266,4 @@ if (require.main === module) {
   } else { console.error("usage: node core/pipeline/premium-publish.js status|reserve|hash --channel <slug> [--topic <id>] [--by <name>]"); process.exit(1); }
 }
 
-module.exports = { run, enabled, approvals, reserved, contentHash, approvalProblems, stage };
+module.exports = { run, enabled, approvals, reserved, contentHash, approvalProblems, stage, policy, policyActive, metadata, uploaderDryRun };

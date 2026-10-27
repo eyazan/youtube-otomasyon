@@ -73,7 +73,10 @@ test("cleanup removes this render's intermediates only, and keeps the MP4 and re
 
 test("the live workflows still do not enable any premium flag, and production installs packages through the cache", () => {
   const wf = fs.readFileSync(path.join(__dirname, "../../.github/workflows/portfolio-production.yml"), "utf8");
-  for (const flag of ["IB_PREMIUM_RENDER", "FR_PREMIUM_RENDER", "HLT_PREMIUM_RENDER", "IB_PREMIUM_PUBLISH", "FR_PREMIUM_PUBLISH", "HLT_PREMIUM_PUBLISH"]) assert.ok(!wf.includes(flag), flag);
+  // publishing flags appear only as a pass-through of the owner's repository variable, never as a literal "1"
+  const passThrough = /^ +(IB|FR|HLT|GLL)_PREMIUM_PUBLISH: \$\{\{ vars\.\1_PREMIUM_PUBLISH == '1' && '1' \|\| 'off' \}\}$/gm;
+  const rest = wf.replace(passThrough, "");
+  for (const flag of ["IB_PREMIUM_RENDER", "FR_PREMIUM_RENDER", "HLT_PREMIUM_RENDER", "IB_PREMIUM_PUBLISH: ", "FR_PREMIUM_PUBLISH: ", "HLT_PREMIUM_PUBLISH: ", "GLL_PREMIUM_PUBLISH: "]) assert.ok(!rest.includes(flag), flag);
   assert.match(wf, /CI_APT_ARCHIVES="\$GITHUB_WORKSPACE\/\.cache\/apt" bash scripts\/ci-apt\.sh/);
   const ignore = fs.readFileSync(path.join(__dirname, "../../.gitignore"), "utf8"); assert.match(ignore, /^\/\.cache\/$/m, "caches are never committed by the production git add");
 });

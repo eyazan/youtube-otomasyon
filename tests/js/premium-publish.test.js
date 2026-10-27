@@ -48,7 +48,13 @@ test("disabled by default: without IB_PREMIUM_PUBLISH=1 nothing renders, stages 
   assert.equal(Publish.run(ch, { env: {}, spawn, gate: gateOk, log: quiet }), null);
   assert.equal(Publish.run(ch, { env: { IB_PREMIUM_PUBLISH: "true", IB_PREMIUM_RENDER: "preview" }, spawn, gate: gateOk, log: quiet }), null);
   assert.equal(calls.length, 0); assert.equal(fs.readdirSync(ch.paths.production).length, 0);
-  for (const wf of fs.readdirSync(path.join(ROOT, ".github", "workflows"))) assert.doesNotMatch(fs.readFileSync(path.join(ROOT, ".github", "workflows", wf), "utf8"), /_PREMIUM_PUBLISH/, wf);
+  // a workflow may only pass the owner's repository variable through; no workflow turns publishing on by itself
+  const passThrough = /^ +(IB|FR|HLT|GLL)_PREMIUM_PUBLISH: \$\{\{ vars\.\1_PREMIUM_PUBLISH == '1' && '1' \|\| 'off' \}\}$/gm;
+  for (const wf of fs.readdirSync(path.join(ROOT, ".github", "workflows"))) {
+    const y = fs.readFileSync(path.join(ROOT, ".github", "workflows", wf), "utf8");
+    assert.doesNotMatch(y.replace(passThrough, ""), /_PREMIUM_PUBLISH: /, wf);
+    if (wf !== "portfolio-production.yml") assert.doesNotMatch(y, passThrough, `${wf}: only the production workflow passes the variable`);
+  }
 });
 
 test("an incomplete approval (any sign-off, hash or metadata missing) never renders or uploads", () => {

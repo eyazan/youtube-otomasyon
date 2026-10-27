@@ -1,0 +1,25 @@
+{
+  "schema": "premium.publication-policy.v1",
+  "channel": "impossible-brief",
+  "status": "UNSIGNED",
+  "signedBy": null,
+  "signedAt": null,
+  "grants": "Unattended publication, on the channel's due day and at most one Short per day, of a premium Short that passes every check under requires, without a per-video review. For such a Short this policy is the creative, factual and publish sign-off; each approval record names this file's sha256. Code never signs this file.",
+  "requires": [
+    "research: an ImpossibleBrief record that is researched and qualified, every fact with a source URL whose numbers were checked against that source at research time, narration layered KNOWN SCIENCE / ESTIMATED CONSEQUENCE / SPECULATIVE SCENARIO: the IB live research standard",
+    "topic: unpublished, not generated or failed in the live pipeline, not reserved, not blocked for its content",
+    "render: a fresh final render by the premium studio (automatic storyboard) with the channel's owner-approved voice only; no preview fallback voice",
+    "objective QA: PASS on every hard check (resolution, decode, black and frozen frames, loudness and true peak, captions, text layout, real speech, determinism)",
+    "publish gate (scripts/bto-studio/publish-gate.js): PUBLISH_APPROVED, which includes registry publishing enabled and every image plate licensed in the asset registry",
+    "duplicates: neither the topic nor the exact media in published.json; the uploader's own identity check, journal and remote reconciliation",
+    "upload: private with the channel's scheduled publishAt on the due day, through youtube-yukle.js; metadata from the topic's own research and sources"
+  ],
+  "doesNotCover": [
+    "topics whose research is below the standard above",
+    "licensing or factual uncertainty flagged by any gate",
+    "a new or changed narration voice",
+    "any change to channel identity or credentials"
+  ],
+  "activation": "sign: set status SIGNED, signedBy and signedAt (ISO time). It takes effect only with IB_PREMIUM_PUBLISH=1 and, for this channel, IB_PREMIUM_PRIMARY=1, plus config/channels.json enabled: true.",
+  "revoke": "set status REVOKED (or unset the repository variable). Records already bound keep naming the sha256 they were bound to."
+}

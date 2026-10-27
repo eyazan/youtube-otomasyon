@@ -409,7 +409,7 @@ test("GITHUB BACKUP: schedule runs still publish; manual runs stay opt-in; dispa
 
 test("REVIEW: publishing follows an explicit event allow-list; a new trigger type would not publish", () => {
   const wf = read(".github/workflows/portfolio-production.yml");
-  const publishLines = wf.split("\n").filter((line) => /PUBLISH: \$\{\{/.test(line) && /'1'/.test(line));
+  const publishLines = wf.split("\n").filter((line) => /^ +PUBLISH: \$\{\{/.test(line) && /'1'/.test(line));
   assert.ok(publishLines.length >= 3, "FR, IB and BTO steps (CriticalThread retired 2026-10-27)");
   for (const line of publishLines) {
     // inactive or not-yet-activated channels publish only on their own variable, even on schedule

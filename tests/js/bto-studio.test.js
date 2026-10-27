@@ -123,13 +123,17 @@ test("skills: the seven studio Skills exist with valid frontmatter whose name ma
 // The only studio entry points outside scripts/bto-studio are the default-OFF ImpossibleBrief shadow in
 // core/pipeline/impossible-brief.js (IB_PREMIUM_RENDER=preview) and the read-only, no-upload dry-run workflow.
 const STUDIO_ALLOWED = new Set(["ib-premium-dry-run.yml", "fr-studio-dry-run.yml", "premium-render-check.yml", "gll-research.yml", path.join("pipeline", "impossible-brief.js"), path.join("pipeline", "premium-shadow.js"), path.join("pipeline", "goal-lore-lab.js"),
+  // the premium-primary lane: only when <PREFIX>_PREMIUM_PRIMARY=1 (a repository variable) or for the premium-only GoalLore Lab
+  path.join("pipeline", "premium-lane.js"),
   // the publishing adapter: flag-gated (<PREFIX>_PREMIUM_PUBLISH=1, set nowhere), renders through the studio and hands the
   // MP4 to the existing uploader only after the publish gate (tests/js/premium-publish.test.js)
   path.join("pipeline", "premium-publish.js")]);
 test("isolation: no live workflow, root production script or channel config references the studio; BTO stays disabled", () => {
   const wf = path.join(ROOT, ".github/workflows");
   // the live portfolio workflow may reference the studio only inside the GoalLore Lab premium step (its own lane)
-  const live = (f) => { const y = fs.readFileSync(path.join(wf, f), "utf8"); if (f !== "portfolio-production.yml") return y; const a = y.indexOf("- name: GoalLore Lab Short (premium)"); return a < 0 ? y : y.slice(0, a) + y.slice(y.indexOf("node shorts-sira.js --channel goal-lore-lab", a)); };
+  // and, for FR/IB/HLT, only the studio dependency install that runs when premium is the channel's primary renderer
+  const PRIMARY_DEPS = /^ +if \[ "\$(FR|IB|HLT)_PREMIUM_PRIMARY" = "1" \]; then python -m pip install --quiet -r scripts\/bto-studio\/requirements\.txt && node scripts\/bto-studio\/preflight-deps\.js; fi$/gm;
+  const live = (f) => { const y = fs.readFileSync(path.join(wf, f), "utf8"); if (f !== "portfolio-production.yml") return y; const a = y.indexOf("- name: GoalLore Lab Short (premium)"); return (a < 0 ? y : y.slice(0, a) + y.slice(y.indexOf("node shorts-sira.js --channel goal-lore-lab", a))).replace(PRIMARY_DEPS, ""); };
   for (const f of fs.readdirSync(wf).filter((x) => !STUDIO_ALLOWED.has(x))) assert.doesNotMatch(live(f), /bto-studio|BTO_PREMIUM_RENDER|IB_PREMIUM_RENDER|premium:video/, f);
   for (const name of ["ib-premium-dry-run.yml", "fr-studio-dry-run.yml", "premium-render-check.yml"]) { const dry = fs.readFileSync(path.join(wf, name), "utf8");
     assert.match(dry, /PUBLISH: '0'/, name); assert.match(dry, /contents: read/, name); assert.doesNotMatch(dry, /_YT_REFRESH_TOKEN|_CLIENT_SECRET|git push|group: portfolio-production/, `${name}: no credentials, no push, own concurrency group`); }
