@@ -260,6 +260,6 @@ test("ct-research stops the batch when the run budget cannot hold another reques
 test("the CT research workflow sets the token ceilings and keeps a dry run free of writes", () => {
   const workflow = fs.readFileSync(path.join(__dirname, "..", "..", ".github", "workflows", "ct-research.yml"), "utf8");
   for (const line of ["CT_RESEARCH_MAX_TOKENS: '3200'", "CT_RESEARCH_TOPIC_TOKEN_BUDGET: '16000'", "CT_RESEARCH_RUN_TOKEN_BUDGET: '45000'", "LONGFORM_LLM_TPM: '8000'", "LONGFORM_LLM_JSON_RECOVERIES: '1'"]) assert.ok(workflow.includes(line), line);
-  assert.match(workflow, /if: github\.event_name == 'workflow_dispatch' \|\| vars\.CT_RESEARCH_AUTO == 'true'/, "scheduled runs stay behind CT_RESEARCH_AUTO");
+  assert.match(workflow, /if: github\.event_name == 'workflow_dispatch'\n/, "retired with CriticalThread: manual runs only"); assert.doesNotMatch(workflow, /^  schedule:/m);
   assert.match(workflow, /WRITE: \$\{\{ github\.event_name == 'schedule' \|\| inputs\.write == 'true' \}\}/);
 });
