@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-27T15:56:04.815Z",
+  "generatedAt": "2026-10-27T18:07:42.893Z",
   "note": "Per-channel baselines are computed separately and never blended.",
   "channels": [
     {
@@ -29,9 +29,9 @@
           "n": 31,
           "views": 446,
           "averagePercentageViewed": 64.65,
-          "subscribersPer1000Views": 0.83,
+          "subscribersPer1000Views": 0,
           "engagementPer1000Views": 25.27,
-          "watchHoursPer1000Views": 2.05
+          "watchHoursPer1000Views": 2.02
         }
       },
       "longform": {
@@ -94,32 +94,32 @@
         "episodes": 0,
         "backlog": [
           {
-            "slug": "air-france-447-2009",
-            "LongFormPotentialScore": 86,
-            "bucket": "A",
-            "mode": "B_SHORT_PROVES_DEMAND"
-          },
-          {
             "slug": "challenger-1986",
-            "LongFormPotentialScore": 86,
+            "LongFormPotentialScore": 85,
             "bucket": "A",
             "mode": "B_SHORT_PROVES_DEMAND"
           },
           {
             "slug": "chernobyl-1986",
-            "LongFormPotentialScore": 86,
+            "LongFormPotentialScore": 85,
+            "bucket": "A",
+            "mode": "B_SHORT_PROVES_DEMAND"
+          },
+          {
+            "slug": "air-france-447-2009",
+            "LongFormPotentialScore": 84,
             "bucket": "A",
             "mode": "B_SHORT_PROVES_DEMAND"
           },
           {
             "slug": "columbia-2003",
-            "LongFormPotentialScore": 85,
+            "LongFormPotentialScore": 84,
             "bucket": "A",
             "mode": "B_SHORT_PROVES_DEMAND"
           },
           {
             "slug": "fairchild-b52-1994",
-            "LongFormPotentialScore": 85,
+            "LongFormPotentialScore": 84,
             "bucket": "A",
             "mode": "B_SHORT_PROVES_DEMAND"
           }
@@ -152,7 +152,7 @@
       "growth": {
         "trackedVideos": 32,
         "subscriberConversion": {
-          "shorts": 0.83,
+          "shorts": 0,
           "longform": null
         }
       },
@@ -161,7 +161,7 @@
           "status": "adaptive",
           "sampleSize": 31,
           "adopted": 0,
-          "hypotheses": 6
+          "hypotheses": 7
         },
         "longform": {
           "status": "heuristics-only",
@@ -197,17 +197,17 @@
           "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
         },
         {
+          "slug": "new-london-school-1937",
+          "bucket": "C",
+          "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
+        },
+        {
           "slug": "controlled-impact-1984",
           "bucket": "C",
           "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
         },
         {
           "slug": "eastland-1915",
-          "bucket": "C",
-          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
-        },
-        {
-          "slug": "new-london-school-1937",
           "bucket": "C",
           "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
         },
@@ -418,8 +418,8 @@
         "lastPublished": "2026-10-19T18:00:00.000Z",
         "published": 19,
         "inventory": {
-          "A": 113,
-          "B": 21,
+          "A": 111,
+          "B": 23,
           "C": 140,
           "D": 206
         },
@@ -437,7 +437,7 @@
         "baseline": {
           "n": 17,
           "views": 920,
-          "averagePercentageViewed": 61.38,
+          "averagePercentageViewed": 61.79,
           "subscribersPer1000Views": 0,
           "engagementPer1000Views": 19.42,
           "watchHoursPer1000Views": 2.52
@@ -596,6 +596,11 @@
           "reason": "VideoPotential 70 in experimental band 58–71; boilerplate 0.5"
         },
         {
+          "slug": "what-happens-if-the-global-ocean-doubles",
+          "bucket": "C",
+          "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
+        },
+        {
           "slug": "what-if-the-brain-s-energy-use-doubled-overnight",
           "bucket": "C",
           "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
@@ -609,11 +614,6 @@
           "slug": "if-a-rogue-planet-vanished-right-now-what-would-change-first",
           "bucket": "C",
           "reason": "VideoPotential 72 in experimental band 58–71; boilerplate 0.5"
-        },
-        {
-          "slug": "what-happens-if-the-global-ocean-doubles",
-          "bucket": "C",
-          "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
         },
         {
           "slug": "would-doubling-all-synthetic-fertilizers-help-or-harm-us",
