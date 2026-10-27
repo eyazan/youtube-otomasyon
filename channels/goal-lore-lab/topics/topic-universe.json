@@ -3,8 +3,8 @@
  "channel": "goal-lore-lab",
  "generatedBy": "scripts/gll-research/verify.js",
  "counts": {
-  "VERIFIED": 7,
-  "RESEARCHED": 2
+  "VERIFIED": 8,
+  "RESEARCHED": 1
  },
  "topics": [
   {
@@ -17,7 +17,7 @@
    "hypothetical": false,
    "researchStatus": "VERIFIED",
    "productionReady": true,
-   "researchedAt": "2026-10-27T19:12:19.620Z",
+   "researchedAt": "2026-10-27T19:22:16.905Z",
    "researchMethod": "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live Wikipedia article at the pinned revision; claim and narration numbers checked against the quotes",
    "rights": {
     "footage": "none (original animation only)",
@@ -135,7 +135,7 @@
    "hypothetical": false,
    "researchStatus": "RESEARCHED",
    "productionReady": false,
-   "researchedAt": "2026-10-27T19:12:19.942Z",
+   "researchedAt": "2026-10-27T19:22:17.605Z",
    "researchMethod": "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live Wikipedia article at the pinned revision; claim and narration numbers checked against the quotes",
    "rights": {
     "footage": "none (original animation only)",
@@ -193,7 +193,7 @@
     },
     {
      "role": "PAYOFF",
-     "text": "A kick so cheeky it now carries his name. Every goal has a story.",
+     "text": "Only confident penalty takers dare to try it. Every goal has a story.",
      "layer": "VERIFIED FACT",
      "facts": [
       "F5"
@@ -225,7 +225,7 @@
     },
     {
      "id": "F3",
-     "claim": "Hoeneß's penalty went over the bar, giving Panenka the chance to win the title.",
+     "claim": "West Germany's fourth penalty taker, Uli Hoeneß, ballooned his shot over the bar.",
      "quote": "",
      "layer": "UNVERIFIED",
      "source": "Wikipedia: UEFA Euro 1976 final",
@@ -244,31 +244,27 @@
     },
     {
      "id": "F5",
-     "claim": "A Panenka is a penalty in which the taker delicately chips the ball over a diving goalkeeper.",
-     "quote": "",
-     "layer": "UNVERIFIED",
-     "source": "Wikipedia: Panenka (penalty kick)",
-     "url": "https://en.wikipedia.org/w/index.php?title=Panenka_(penalty_kick)&oldid=1381624147"
+     "role": null,
+     "claim": "The move is generally only used by confident penalty takers who dare to risk missing the kick.",
+     "quote": "The move is generally only used by confident penalty takers who dare to risk missing the kick.",
+     "source": "Wikipedia: Panenka (penalty kick) (revision 1381624147, 2026-10-23T19:09:18Z)",
+     "url": "https://en.wikipedia.org/w/index.php?title=Panenka_(penalty_kick)&oldid=1381624147",
+     "sourceTitle": "Panenka (penalty kick)",
+     "revid": 1381624147,
+     "layer": "VERIFIED FACT"
     }
    ],
    "verification": {
     "ok": false,
     "errors": [
-     "fact F3: no sentence contains all of: chance + Panenka",
-     "fact F5: no sentence contains all of: taker + chips",
-     "line 4: cites an unverified fact",
-     "line 7: cites an unverified fact"
+     "fact F3: no sentence contains all of: Hoeneß + over the bar",
+     "line 4: cites an unverified fact"
     ],
     "near": {
      "F3": [
-      "Schön was confident of his side's chance to win: \"We have a wonderful team.",
-      "There was absolute peace, cohesion.\"  Panenka agreed, stating that the team \"was an excellent bunch, cohesive.",
-      "Antonín Panenka scored twice before half-time before completing his hat-trick five minutes after the interval with a penalty."
-     ],
-     "F5": [
-      "The move is generally only used by confident penalty takers who dare to risk missing the kick.",
-      "The first seven kicks were converted, until West Germany's fourth penalty taker, Uli Hoeneß, ballooned his shot over the bar.",
-      "In addition, the subtle touch is most easily applied by a taker who slows down as they are about to strike the ball, making it possible for the goalkeeper to recognize what the taker is intending."
+      "Hoeneß later described how he had approached his penalty: \"I was so exhausted, I was taking no chances, and I hit it with full force.",
+      "In the 60th minute, a shot from Hoeneß hit a defender and Beer's strike from the rebound was saved by Viktor before Hoeneß then struck the post.",
+      "Nehoda, Ondruš and Jurkemik then all scored for Czechoslovakia while Flohe and Bongartz converted their penalties to make it 4–3 as Hoeneß stepped up to take his kick."
      ]
     }
    }
@@ -281,9 +277,9 @@
    "pillar": "MOMENTS",
    "channel": "goal-lore-lab",
    "hypothetical": false,
-   "researchStatus": "RESEARCHED",
-   "productionReady": false,
-   "researchedAt": "2026-10-27T19:12:20.155Z",
+   "researchStatus": "VERIFIED",
+   "productionReady": true,
+   "researchedAt": "2026-10-27T19:22:17.734Z",
    "researchMethod": "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live Wikipedia article at the pinned revision; claim and narration numbers checked against the quotes",
    "rights": {
     "footage": "none (original animation only)",
@@ -292,7 +288,7 @@
    "narration": [
     {
      "role": "HOOK",
-     "text": "This free kick looked like it was going wide. Then it turned.",
+     "text": "One of the best free kicks of the modern game.",
      "layer": "VERIFIED FACT",
      "facts": [
       "F1"
@@ -300,16 +296,15 @@
     },
     {
      "role": "CONTEXT",
-     "text": "Lyon, 1997. Brazil against France.",
+     "text": "1997. The opening match, France against Brazil.",
      "layer": "VERIFIED FACT",
      "facts": [
-      "F1",
-      "F2"
+      "F1"
      ]
     },
     {
      "role": "SETUP",
-     "text": "Roberto Carlos struck it from far out.",
+     "text": "Roberto Carlos struck it from long distance.",
      "layer": "VERIFIED FACT",
      "facts": [
       "F1"
@@ -317,23 +312,15 @@
     },
     {
      "role": "BUILD",
-     "text": "The ball curled around the wall.",
+     "text": "It curled, and it became known as the Banana Shot.",
      "layer": "VERIFIED FACT",
      "facts": [
       "F1"
      ]
     },
     {
-     "role": "EXPLANATION",
-     "text": "Physicists later studied how a spinning ball can curve that way.",
-     "layer": "VERIFIED FACT",
-     "facts": [
-      "F3"
-     ]
-    },
-    {
      "role": "PAYOFF",
-     "text": "It is still called one of the best free kicks of the modern game. Every goal has a story.",
+     "text": "Every goal has a story.",
      "layer": "VERIFIED FACT",
      "facts": [
       "F1"
@@ -344,47 +331,19 @@
     {
      "id": "F1",
      "role": null,
-     "claim": "Roberto Carlos scored a curling free kick in the opening match between France and Brazil, often considered one of the best in the modern game.",
+     "claim": "In the 21st minute of the opening match between France and Brazil, Roberto Carlos scored his Banana Shot free kick, curling from long distance, often considered one of the best in the modern game.",
      "quote": "In the 21st minute of the opening match between France and Brazil, Roberto Carlos scored his famous Banana Shot free kick goal, curling from a 33.13-metre distance and often considered to be one of the best in the modern game.",
      "source": "Wikipedia: 1997 Tournoi de France (revision 1343109846, 2026-03-12T09:11:30Z)",
      "url": "https://en.wikipedia.org/w/index.php?title=1997_Tournoi_de_France&oldid=1343109846",
      "sourceTitle": "1997 Tournoi de France",
      "revid": 1343109846,
      "layer": "VERIFIED FACT"
-    },
-    {
-     "id": "F2",
-     "claim": "The opening match between France and Brazil was played in Lyon.",
-     "quote": "",
-     "layer": "UNVERIFIED",
-     "source": "Wikipedia: 1997 Tournoi de France",
-     "url": "https://en.wikipedia.org/w/index.php?title=1997_Tournoi_de_France&oldid=1343109846"
-    },
-    {
-     "id": "F3",
-     "claim": "Physicists studied the trajectory of his free kick against France.",
-     "quote": "",
-     "layer": "UNVERIFIED",
-     "source": "Wikipedia: Roberto Carlos",
-     "url": "https://en.wikipedia.org/w/index.php?title=Roberto_Carlos&oldid=1382135524"
     }
    ],
    "verification": {
-    "ok": false,
-    "errors": [
-     "fact F2: no sentence contains all of: Lyon",
-     "fact F3: a sentence has the terms but not every claim number (none), is not 5-80 words of prose, or shares under 50% of the claim's content words",
-     "line 2: cites an unverified fact",
-     "line 5: cites an unverified fact"
-    ],
-    "near": {
-     "F2": [],
-     "F3": [
-      "In 2017, a report of investigative journalists of German broadcasting station ARD revealed doping practices in Brazil, including physician Júlio César Alves who claims to have treated Roberto Carlos for many years.",
-      "A talented and consistent player, with good dribbling skills at speed, as well as precise passing and crossing ability, he also possessed significant strength and excellent physical qualities, which along with his pace, work-rate, and energy, allowed him to cover the left flank effectively and assist at both ends of the pitch.",
-      "During his time at Inter, he was also used out of position as a winger in a 4–4–2 formation on occasion by manager Roy Hodgson, which had a negative impact on his performances, and often saw him caught out defensively; in his later career with Anzhi Makhachkala, he was instead deployed as a defensive midfielder in a three-man midfield, in order to compensate for his loss of pace and physical decline due to his advancing age."
-     ]
-    }
+    "ok": true,
+    "errors": [],
+    "near": {}
    }
   },
   {
@@ -397,7 +356,7 @@
    "hypothetical": false,
    "researchStatus": "VERIFIED",
    "productionReady": true,
-   "researchedAt": "2026-10-27T19:12:20.285Z",
+   "researchedAt": "2026-10-27T19:22:18.027Z",
    "researchMethod": "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live Wikipedia article at the pinned revision; claim and narration numbers checked against the quotes",
    "rights": {
     "footage": "none (original animation only)",
@@ -515,7 +474,7 @@
    "hypothetical": false,
    "researchStatus": "VERIFIED",
    "productionReady": true,
-   "researchedAt": "2026-10-27T19:12:20.595Z",
+   "researchedAt": "2026-10-27T19:22:18.534Z",
    "researchMethod": "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live Wikipedia article at the pinned revision; claim and narration numbers checked against the quotes",
    "rights": {
     "footage": "none (original animation only)",
@@ -633,7 +592,7 @@
    "hypothetical": false,
    "researchStatus": "VERIFIED",
    "productionReady": true,
-   "researchedAt": "2026-10-27T19:12:20.930Z",
+   "researchedAt": "2026-10-27T19:22:19.007Z",
    "researchMethod": "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live Wikipedia article at the pinned revision; claim and narration numbers checked against the quotes",
    "rights": {
     "footage": "none (original animation only)",
@@ -759,7 +718,7 @@
    "hypothetical": false,
    "researchStatus": "VERIFIED",
    "productionReady": true,
-   "researchedAt": "2026-10-27T19:12:21.045Z",
+   "researchedAt": "2026-10-27T19:22:19.280Z",
    "researchMethod": "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live Wikipedia article at the pinned revision; claim and narration numbers checked against the quotes",
    "rights": {
     "footage": "none (original animation only)",
@@ -878,7 +837,7 @@
    "hypothetical": false,
    "researchStatus": "VERIFIED",
    "productionReady": true,
-   "researchedAt": "2026-10-27T19:12:21.375Z",
+   "researchedAt": "2026-10-27T19:22:19.633Z",
    "researchMethod": "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live Wikipedia article at the pinned revision; claim and narration numbers checked against the quotes",
    "rights": {
     "footage": "none (original animation only)",
@@ -919,7 +878,7 @@
     },
     {
      "role": "PAYOFF",
-     "text": "Billy Heath of Wolves scored the first. Every goal has a story.",
+     "text": "Billy Heath of Wolves took one, and scored. Every goal has a story.",
      "layer": "VERIFIED FACT",
      "facts": [
       "F4"
@@ -963,7 +922,7 @@
     {
      "id": "F4",
      "role": null,
-     "claim": "The first penalty kick in a match was taken and scored by Billy Heath of Wolves.",
+     "claim": "A penalty was taken and scored by Billy Heath as Wolves won the game.",
      "quote": "The penalty was taken and scored by Billy Heath as Wolves went on to win the game 5–0.",
      "source": "Wikipedia: Penalty kick (association football) (revision 1380851913, 2026-10-18T10:04:41Z)",
      "url": "https://en.wikipedia.org/w/index.php?title=Penalty_kick_(association_football)&oldid=1380851913",
@@ -988,7 +947,7 @@
    "hypothetical": false,
    "researchStatus": "VERIFIED",
    "productionReady": true,
-   "researchedAt": "2026-10-27T19:12:21.447Z",
+   "researchedAt": "2026-10-27T19:22:19.768Z",
    "researchMethod": "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live Wikipedia article at the pinned revision; claim and narration numbers checked against the quotes",
    "rights": {
     "footage": "none (original animation only)",
