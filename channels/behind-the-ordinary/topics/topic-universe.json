@@ -17149,7 +17149,7 @@
         "avoidPairingWithinDays": 30,
         "compareAgainstPublished": true
       },
-      "researchStatus": "NEEDS_PRIMARY_SOURCE",
+      "researchStatus": "RESEARCHED",
       "productionReady": false,
       "facts": [
         {
@@ -17157,36 +17157,70 @@
           "role": null,
           "claim": "The door of a microwave oven usually has a window with a layer of conductive mesh to maintain the shielding.",
           "quote": "The oven door usually has a window for easy viewing, with a layer of conductive mesh some distance from the outer panel to maintain the shielding.",
-          "source": "Wikipedia: Microwave oven (revision 1381617068, 2026-10-23T18:18:51Z)",
+          "layer": "VERIFIED FACT",
           "url": "https://en.wikipedia.org/w/index.php?title=Microwave_oven&oldid=1381617068",
           "sourceTitle": "Microwave oven",
-          "revid": 1381617068,
-          "layer": "VERIFIED FACT"
+          "source": "Wikipedia: Microwave oven (revision 1381617068, 2026-10-23T18:18:51Z)",
+          "revid": 1381617068
         },
         {
           "id": "F2",
           "role": null,
           "claim": "The perforations in the mesh are much smaller than the microwaves' wavelength, so microwave radiation cannot pass through the door while visible light can.",
           "quote": "Because the size of the perforations in the mesh is much less than the microwaves' wavelength (12.2 cm for the usual 2.45 GHz), microwave radiation cannot pass through the door, while visible light (with its much shorter wavelength) can.",
-          "source": "Wikipedia: Microwave oven (revision 1381617068, 2026-10-23T18:18:51Z)",
+          "layer": "VERIFIED FACT",
           "url": "https://en.wikipedia.org/w/index.php?title=Microwave_oven&oldid=1381617068",
           "sourceTitle": "Microwave oven",
-          "revid": 1381617068,
-          "layer": "VERIFIED FACT"
+          "source": "Wikipedia: Microwave oven (revision 1381617068, 2026-10-23T18:18:51Z)",
+          "revid": 1381617068
         },
         {
           "id": "F3",
           "role": null,
           "claim": "A microwave oven uses a Faraday cage, partly visible covering the window, to contain the electromagnetic energy within the oven.",
           "quote": "A microwave oven uses a partial Faraday shield (on five of its interior six sides) and a partial Faraday cage, consisting of a wire mesh, on the sixth side (the transparent window), to contain the electromagnetic energy within the oven and to protect the user from exposure to microwave radiation.",
-          "source": "Wikipedia: Faraday cage (revision 1375090748, 2026-09-15T20:39:53Z)",
+          "layer": "VERIFIED FACT",
           "url": "https://en.wikipedia.org/w/index.php?title=Faraday_cage&oldid=1375090748",
           "sourceTitle": "Faraday cage",
-          "revid": 1375090748,
-          "layer": "VERIFIED FACT"
+          "source": "Wikipedia: Faraday cage (revision 1375090748, 2026-09-15T20:39:53Z)",
+          "revid": 1375090748
+        },
+        {
+          "id": "P1",
+          "claim": "Microwaves are produced inside the oven by an electron tube called a magnetron.",
+          "quote": "",
+          "layer": "UNVERIFIED",
+          "source": "https://www.fda.gov/radiation-emitting-products/resources-you-radiation-emitting-products/microwave-oven-radiation",
+          "url": null
+        },
+        {
+          "id": "P2",
+          "claim": "A federal standard limits the amount of microwaves that can leak from an oven throughout its lifetime to 5 milliwatts of microwave radiation per square centimeter at approximately 2 inches from the oven surface.",
+          "quote": "",
+          "layer": "UNVERIFIED",
+          "source": "https://www.fda.gov/radiation-emitting-products/resources-you-radiation-emitting-products/microwave-oven-radiation",
+          "url": null
+        },
+        {
+          "id": "P3",
+          "role": null,
+          "claim": "Microwave ovens shall have at least two operative safety interlocks.",
+          "quote": "(i) Microwave ovens shall have a minimum of two operative safety interlocks .",
+          "layer": "VERIFIED FACT",
+          "url": "https://www.law.cornell.edu/cfr/text/21/1030.10",
+          "sourceTitle": "21 CFR &sect; 1030.10 - Microwave ovens. | Electronic Code of Federal Regulations (e-CFR) | US Law | LII / Legal Information Institute",
+          "source": "21 CFR &sect; 1030.10 - Microwave ovens. | Electronic Code of Federal Regulations (e-CFR) | US Law | LII / Legal Information Institute (fetched 2026-10-28T08:04:56.856Z, text sha256 82ba102493318f86)",
+          "primary": true,
+          "textSha256": "82ba102493318f866da2671cfe2fa6a5c902958d44bc277bbe43c8e3b7e89469"
         }
       ],
-      "sources": [],
+      "sources": [
+        {
+          "name": "21 CFR &sect; 1030.10 - Microwave ovens. | Electronic Code of Federal Regulations (e-CFR) | US Law | LII / Legal Information Institute",
+          "url": "https://www.law.cornell.edu/cfr/text/21/1030.10",
+          "type": "primary source (verbatim quote verified)"
+        }
+      ],
       "quality": {
         "channelFit": 96,
         "centralQuestion": true,
@@ -17195,8 +17229,8 @@
         "validatedCandidate": true
       },
       "status": "qualified",
-      "researchedAt": "2026-10-28T04:06:39.124Z",
-      "researchMethod": "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live Wikipedia article at the pinned revision; claim and narration numbers checked against the quotes",
+      "researchedAt": "2026-10-28T08:04:56.860Z",
+      "researchMethod": "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live source (a Wikipedia article at the pinned revision, or a primary-host page pinned to its fetch time and text sha256); claim and narration numbers checked against the quotes",
       "rights": {
         "footage": "none (original animation only)",
         "likeness": "generic objects, no brands or logos"
@@ -17263,8 +17297,8 @@
       "verification": {
         "ok": false,
         "errors": [
-          "channel standard: 3 verified facts (the channel standard needs 5)",
-          "channel standard: fewer than two facts from primary (non-Wikipedia) sources"
+          "fact P1: Protocol \"http:\" not supported. Expected \"https:\"",
+          "fact P2: Protocol \"http:\" not supported. Expected \"https:\""
         ],
         "near": {}
       }
@@ -21899,44 +21933,73 @@
           "role": null,
           "claim": "Anti-fouling paint is applied as the outer layer to the hull of a ship to slow the growth of subaquatic organisms that attach to the hull.",
           "quote": "Anti-fouling paint is a specialized category of coatings applied as the outer (outboard) layer to the hull of a ship or boat, to slow the growth of and facilitate detachment of subaquatic organisms that attach to the hull and can affect a vessel's performance and durability.",
-          "source": "Wikipedia: Anti-fouling paint (revision 1379016946, 2026-10-07T11:41:08Z)",
+          "layer": "VERIFIED FACT",
           "url": "https://en.wikipedia.org/w/index.php?title=Anti-fouling_paint&oldid=1379016946",
           "sourceTitle": "Anti-fouling paint",
-          "revid": 1379016946,
-          "layer": "VERIFIED FACT"
+          "source": "Wikipedia: Anti-fouling paint (revision 1379016946, 2026-10-07T11:41:08Z)",
+          "revid": 1379016946
         },
         {
           "id": "F2",
           "role": null,
           "claim": "Those organisms can affect a vessel's performance and durability.",
           "quote": "Anti-fouling paint is a specialized category of coatings applied as the outer (outboard) layer to the hull of a ship or boat, to slow the growth of and facilitate detachment of subaquatic organisms that attach to the hull and can affect a vessel's performance and durability.",
-          "source": "Wikipedia: Anti-fouling paint (revision 1379016946, 2026-10-07T11:41:08Z)",
+          "layer": "VERIFIED FACT",
           "url": "https://en.wikipedia.org/w/index.php?title=Anti-fouling_paint&oldid=1379016946",
           "sourceTitle": "Anti-fouling paint",
-          "revid": 1379016946,
-          "layer": "VERIFIED FACT"
+          "source": "Wikipedia: Anti-fouling paint (revision 1379016946, 2026-10-07T11:41:08Z)",
+          "revid": 1379016946
         },
         {
           "id": "F3",
           "role": null,
           "claim": "Anti-fouling coatings belong to the underwater hull paints, also known as bottom paints.",
           "quote": "It falls into a category of commercially available underwater hull paints, also known as bottom paints.",
-          "source": "Wikipedia: Anti-fouling paint (revision 1379016946, 2026-10-07T11:41:08Z)",
+          "layer": "VERIFIED FACT",
           "url": "https://en.wikipedia.org/w/index.php?title=Anti-fouling_paint&oldid=1379016946",
           "sourceTitle": "Anti-fouling paint",
-          "revid": 1379016946,
-          "layer": "VERIFIED FACT"
+          "source": "Wikipedia: Anti-fouling paint (revision 1379016946, 2026-10-07T11:41:08Z)",
+          "revid": 1379016946
         },
         {
           "id": "F4",
+          "role": null,
           "claim": "In antiquity, copper plates and lead plates were used to protect the underwater hull.",
+          "quote": "In antiquity, ancient Vietnamese and later Chinese used copper plates while ancient Greeks used lead plates to protect the underwater hull.",
+          "layer": "VERIFIED FACT",
+          "url": "https://en.wikipedia.org/w/index.php?title=Copper_sheathing&oldid=1369660444",
+          "sourceTitle": "Copper sheathing",
+          "source": "Wikipedia: Copper sheathing (revision 1369660444, 2026-08-16T09:34:29Z)",
+          "revid": 1369660444
+        },
+        {
+          "id": "P1",
+          "claim": "Anti-fouling paints are used to coat the bottoms of ships to prevent sealife such as algae and molluscs attaching themselves to the hull, slowing down the ship and increasing fuel consumption.",
           "quote": "",
           "layer": "UNVERIFIED",
-          "source": "Copper sheathing",
-          "url": null
+          "source": "Anti-fouling systems",
+          "url": "https://www.imo.org/en/ourwork/environment/pages/anti-fouling.aspx"
+        },
+        {
+          "id": "P2",
+          "role": null,
+          "claim": "The convention prohibits the use of harmful organotins in anti-fouling paints used on ships.",
+          "quote": "The Convention prohibits the use of harmful organotins in anti-fouling paints used on ships and establishes a mechanism to prevent the potential future use of other harmful substances in anti-fouling systems.",
+          "layer": "VERIFIED FACT",
+          "url": "https://www.imo.org/en/about/conventions/pages/international-convention-on-the-control-of-harmful-anti-fouling-systems-on-ships-(afs).aspx",
+          "sourceTitle": "International Convention on the Control of Harmful Anti-fouling Systems on Ships",
+          "source": "International Convention on the Control of Harmful Anti-fouling Systems on Ships (fetched 2026-10-28T08:04:58.481Z, text sha256 6e8bd6601bbb54ac)",
+          "primary": true,
+          "textSha256": "6e8bd6601bbb54accdd053fd2b158a7432288371058a563a4dec898fb7b54a61"
         }
       ],
-      "sources": [],
+      "sources": [
+        {
+          "name": "International Convention on the Control of Harmful Anti-fouling Systems on Ships",
+          "url": "https://www.imo.org/en/about/conventions/pages/international-convention-on-the-control-of-harmful-anti-fouling-systems-on-ships-(afs).aspx",
+          "type": "primary source (verbatim quote verified)"
+        }
+      ],
       "quality": {
         "channelFit": 96,
         "centralQuestion": true,
@@ -21945,8 +22008,8 @@
         "validatedCandidate": true
       },
       "status": "qualified",
-      "researchedAt": "2026-10-28T04:06:40.342Z",
-      "researchMethod": "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live Wikipedia article at the pinned revision; claim and narration numbers checked against the quotes",
+      "researchedAt": "2026-10-28T08:04:58.482Z",
+      "researchMethod": "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live source (a Wikipedia article at the pinned revision, or a primary-host page pinned to its fetch time and text sha256); claim and narration numbers checked against the quotes",
       "rights": {
         "footage": "none (original animation only)",
         "likeness": "generic objects, no brands or logos"
@@ -22012,10 +22075,13 @@
       "verification": {
         "ok": false,
         "errors": [
-          "fact F4: HTTP 503 for https://en.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=extracts%7Crevisions%7Cinfo&inprop=url&rvprop=ids%7Ctimestamp&explaintext=1&redirects=1&titles=Copper+sheathing",
-          "line 6: cites an unverified fact"
+          "fact P1: no sentence contains all of: bottoms of ships + fuel consumption"
         ],
-        "near": {}
+        "near": {
+          "P1": [
+            "Anti-fouling paints are used to coat the underwater surfaces of ships to prevent sealife such as algae and molluscs attaching themselves to the hull, thereby slowing down the ship and increasing fuel consumption."
+          ]
+        }
       }
     },
     {
@@ -22211,36 +22277,71 @@
           "role": null,
           "claim": "Load lines are indicated by special markings on the hull.",
           "quote": "Load lines are indicated by special markings on the hull.",
-          "source": "Wikipedia: Load line (watercraft) (revision 1379042808, 2026-10-07T15:39:37Z)",
+          "layer": "VERIFIED FACT",
           "url": "https://en.wikipedia.org/w/index.php?title=Load_line_(watercraft)&oldid=1379042808",
           "sourceTitle": "Load line (watercraft)",
-          "revid": 1379042808,
-          "layer": "VERIFIED FACT"
+          "source": "Wikipedia: Load line (watercraft) (revision 1379042808, 2026-10-07T15:39:37Z)",
+          "revid": 1379042808
         },
         {
           "id": "F2",
           "role": null,
           "claim": "Additional marks have been added over the years, allowing for different water densities and expected sea conditions.",
           "quote": "Additional marks have been added over the years, allowing for different water densities and expected sea conditions.",
-          "source": "Wikipedia: Load line (watercraft) (revision 1379042808, 2026-10-07T15:39:37Z)",
+          "layer": "VERIFIED FACT",
           "url": "https://en.wikipedia.org/w/index.php?title=Load_line_(watercraft)&oldid=1379042808",
           "sourceTitle": "Load line (watercraft)",
-          "revid": 1379042808,
-          "layer": "VERIFIED FACT"
+          "source": "Wikipedia: Load line (watercraft) (revision 1379042808, 2026-10-07T15:39:37Z)",
+          "revid": 1379042808
         },
         {
           "id": "F3",
           "role": null,
           "claim": "This marking was invented in 1876 by Samuel Plimsoll.",
           "quote": "This marking was invented in 1876 by Samuel Plimsoll.",
-          "source": "Wikipedia: Load line (watercraft) (revision 1379042808, 2026-10-07T15:39:37Z)",
+          "layer": "VERIFIED FACT",
           "url": "https://en.wikipedia.org/w/index.php?title=Load_line_(watercraft)&oldid=1379042808",
           "sourceTitle": "Load line (watercraft)",
-          "revid": 1379042808,
-          "layer": "VERIFIED FACT"
+          "source": "Wikipedia: Load line (watercraft) (revision 1379042808, 2026-10-07T15:39:37Z)",
+          "revid": 1379042808
+        },
+        {
+          "id": "P1",
+          "role": null,
+          "claim": "It has long been recognized that limitations on the draught to which a ship may be loaded make a significant contribution to her safety.",
+          "quote": "It has long been recognized that limitations on the draught to which a ship may be loaded make a significant contribution to her safety.",
+          "layer": "VERIFIED FACT",
+          "url": "https://www.imo.org/en/about/conventions/pages/international-convention-on-load-lines.aspx",
+          "sourceTitle": "International Convention on Load Lines",
+          "source": "International Convention on Load Lines (fetched 2026-10-28T08:04:58.924Z, text sha256 2c85cbe3c4eb37b5)",
+          "primary": true,
+          "textSha256": "2c85cbe3c4eb37b5a4861e7cb6fd3aed7e60adc091e378f65511041224ed6140"
+        },
+        {
+          "id": "P2",
+          "role": null,
+          "claim": "Load lines set the minimum freeboard of a ship.",
+          "quote": "In the 1966 Load Lines convention, adopted by IMO, provisions are made determining the freeboard of ships by subdivision and damage stability calculations.",
+          "layer": "VERIFIED FACT",
+          "url": "https://www.imo.org/en/ourwork/safety/pages/loadlines.aspx",
+          "sourceTitle": "International Convention on Load Lines, 1966",
+          "source": "International Convention on Load Lines, 1966 (fetched 2026-10-28T08:04:59.283Z, text sha256 49139b186e826fce)",
+          "primary": true,
+          "textSha256": "49139b186e826fce2c507addddedeacc6a29bd43ba7504c28af4f99a66704a00"
         }
       ],
-      "sources": [],
+      "sources": [
+        {
+          "name": "International Convention on Load Lines",
+          "url": "https://www.imo.org/en/about/conventions/pages/international-convention-on-load-lines.aspx",
+          "type": "primary source (verbatim quote verified)"
+        },
+        {
+          "name": "International Convention on Load Lines, 1966",
+          "url": "https://www.imo.org/en/ourwork/safety/pages/loadlines.aspx",
+          "type": "primary source (verbatim quote verified)"
+        }
+      ],
       "quality": {
         "channelFit": 96,
         "centralQuestion": true,
@@ -22249,8 +22350,8 @@
         "validatedCandidate": true
       },
       "status": "qualified",
-      "researchedAt": "2026-10-28T04:06:40.690Z",
-      "researchMethod": "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live Wikipedia article at the pinned revision; claim and narration numbers checked against the quotes",
+      "researchedAt": "2026-10-28T08:04:59.284Z",
+      "researchMethod": "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live source (a Wikipedia article at the pinned revision, or a primary-host page pinned to its fetch time and text sha256); claim and narration numbers checked against the quotes",
       "rights": {
         "footage": "none (original animation only)",
         "likeness": "generic objects, no brands or logos"
@@ -22301,7 +22402,6 @@
       "verification": {
         "ok": false,
         "errors": [
-          "channel standard: 3 verified facts (the channel standard needs 5)",
           "channel standard: fewer than two facts from primary (non-Wikipedia) sources"
         ],
         "near": {}
