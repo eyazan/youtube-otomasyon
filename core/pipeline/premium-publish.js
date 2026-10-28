@@ -244,6 +244,12 @@ function uploaderDryRun(channel, topic, pkgFile, { env = process.env, spawn = cp
   if (!pkg.voice || pkg.voice.approved !== true) blockers.push(`narration voice ${(pkg.voice && pkg.voice.used) || "?"} is not the owner-approved channel voice`);
   const pol = policy(channel);
   if (!pol.ok) blockers.push(`publication policy: ${pol.why}`);
+  // what a signed policy would change: the same gate with the policy's sign-offs, evaluated and printed, never written
+  let ifSigned = null;
+  try { const sim = { by: "(simulation: publication policy not signed)", at: new Date().toISOString() }; const gs = gate(pkgFile, { creative: sim, factual: sim, publish: sim });
+    ifSigned = { state: gs.furthestState, reasons: gs.steps.filter((x) => !x.ok).flatMap((x) => x.reasons), duplicates: gs.duplicates || [] };
+    log(`${tag}: with a signed policy the publish gate would reach ${ifSigned.state || "TOPIC_READY"}${ifSigned.reasons.length ? ` (stops: ${ifSigned.reasons.join("; ")})` : ""}${ifSigned.duplicates.length ? `; duplicate of ${ifSigned.duplicates.join(", ")}` : ""} [simulation, nothing written]`);
+  } catch (e) { log(`${tag}: signed-policy simulation failed: ${e.message}`); }
   if (pol.policy && pol.policy.requireResearchReview && !researchReviewed(channel, topic)) blockers.push(`research of ${topic.id} not reviewed by the owner (node core/pipeline/premium-publish.js review-research --channel ${channel.slug} --topic ${topic.id} --by <name>)`);
   if (!enabled(channel, env)) blockers.push(`${PREFIX[channel.slug]}_PREMIUM_PUBLISH is not 1`);
   if (!(channel.entry && channel.entry.enabled === true)) blockers.push("registry publishing disabled (config/channels.json enabled: false)");
@@ -261,7 +267,7 @@ function uploaderDryRun(channel, topic, pkgFile, { env = process.env, spawn = cp
     code = up.status;
   } finally { fs.rmSync(out, { recursive: true, force: true }); }
   log(`${tag}: uploader --dogrula exit ${code}; publication blocked by: ${blockers.join("; ") || "nothing"}`);
-  return { gate: g && g.furthestState, blockers, uploaderExit: code };
+  return { gate: g && g.furthestState, gateIfSigned: ifSigned && ifSigned.state, blockers, uploaderExit: code };
 }
 
 // owner CLI (read-only except `reserve`): status | reserve --topic <id> --by <name> | hash --topic <id>
