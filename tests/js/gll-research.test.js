@@ -92,6 +92,7 @@ test("Hidden Logic of Things primary pages: a quote is the page's own sentence o
   assert.equal(r.facts[0].layer, "VERIFIED FACT"); assert.ok(html.includes(r.facts[0].quote)); assert.equal(r.facts[0].primary, true); assert.match(r.facts[0].textSha256, /^[0-9a-f]{64}$/);
   assert.equal(r.sources.length, 1, "one primary page"); assert.equal(r.researchStatus, "NEEDS_PRIMARY_SOURCE", "two facts and one page are still below the channel standard");
   assert.match(r.verification.errors.join(" "), /fewer than two distinct primary source pages/);
+  assert.ok(!r.verification.errors.some((e) => /fewer than two facts from primary/.test(e)), "two verified primary facts are counted as two");
   const off = await V.verifyDraft(draft({ facts: [{ ...facts[0], source: "https://example.com/load-lines" }], narration: [{ role: "H", text: "x.", facts: ["F1"] }] }), fetchJson, "behind-the-ordinary", fetchText);
   assert.match(off.verification.errors.join(" "), /not a primary host/);
   const gll = await V.verifyDraft(draft({ facts: [facts[0]], narration: [{ role: "H", text: "x.", facts: ["F1"] }] }), fetchJson, "goal-lore-lab", fetchText);

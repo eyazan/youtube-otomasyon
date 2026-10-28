@@ -48,7 +48,7 @@ function get(url) {
 function getText(url, redirects = 3) {
   return new Promise((resolve, reject) => {
     const req = https.get(url, { headers: { "User-Agent": UA, Accept: "text/html,application/xhtml+xml" }, timeout: 30000 }, (res) => {
-      if ([301, 302, 303, 307, 308].includes(res.statusCode) && res.headers.location && redirects > 0) { res.resume(); return resolve(getText(new URL(res.headers.location, url).href, redirects - 1)); }
+      if ([301, 302, 303, 307, 308].includes(res.statusCode) && res.headers.location && redirects > 0) { res.resume(); const next = new URL(res.headers.location, url); if (next.protocol === "http:") next.protocol = "https:"; return resolve(getText(next.href, redirects - 1)); }
       const chunks = []; res.on("data", (c) => chunks.push(c));
       res.on("end", () => (res.statusCode === 200 ? resolve({ url, html: Buffer.concat(chunks).toString("utf8") }) : reject(new Error(`HTTP ${res.statusCode} for ${url}`))));
     });
@@ -136,7 +136,7 @@ async function verifyDraft(draft, fetchJson = get, channel = "goal-lore-lab", fe
   const below = [];
   if (channel === "behind-the-ordinary") {
     if (facts.filter((f) => f.layer === "VERIFIED FACT").length < 5) below.push(`${facts.filter((f) => f.layer === "VERIFIED FACT").length} verified facts (the channel standard needs 5)`);
-    if (require("../../core/quality/behind-the-ordinary").authorityFacts(facts.filter((f) => f.layer === "VERIFIED FACT" && f.primary)) < 2) below.push("fewer than two facts from primary (non-Wikipedia) sources");
+    if (require("../../core/quality/behind-the-ordinary").authorityFacts({ facts: facts.filter((f) => f.layer === "VERIFIED FACT" && f.primary) }) < 2) below.push("fewer than two facts from primary (non-Wikipedia) sources");
     if (new Set(facts.filter((f) => f.primary && f.layer === "VERIFIED FACT").map((f) => f.url)).size < 2) below.push("fewer than two distinct primary source pages");
   }
   const ok = errors.length === 0;
