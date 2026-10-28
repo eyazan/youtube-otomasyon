@@ -103,7 +103,9 @@ function phrase(text, max = 5) {
   return clause.join(" ").toUpperCase();
 }
 
-const STEM = (w) => w.toLowerCase().replace(/[^a-z]/g, "").slice(0, 5);
+// irregular past forms map to their base, so "it gave way" meets "GIVES WAY" and "for years it crept" meets "CREEPS"
+const IRREG = { gave: "give", fell: "fall", broke: "break", swept: "sweep", crept: "creep", slid: "slide", built: "build", sank: "sink", struck: "strike", stuck: "stick", froze: "freeze", blew: "blow", tore: "tear", held: "hold", began: "begin", lost: "lose", ran: "run", flew: "fly", hit: "hit", split: "split", shook: "shake", rose: "rise", drove: "drive", grew: "grow", threw: "throw", wore: "wear" };
+const STEM = (w) => { const x = w.toLowerCase().replace(/[^a-z]/g, ""); return (IRREG[x] || x).slice(0, 4); };
 const SKIP = new Set(["the", "and", "that", "with", "from", "into", "this", "were", "was", "had", "have", "been", "their", "they", "after", "before", "about", "would", "could", "which", "then", "than", "when", "there"].map(STEM));
 const contentStems = (s) => new Set(String(s).split(/\s+/).map(STEM).filter((w) => w.length >= 4 && !SKIP.has(w)));
 const overlap = (a, b) => { const B = contentStems(b); return [...contentStems(a)].filter((w) => B.has(w)).length; };
@@ -150,7 +152,10 @@ function build(script, style, topic) {
   // the trigger headline is the chain's own label for the trigger (authored, grammatical), the contrast/payoff fallback
   // is the case's first thumbnail line
   const triggerLabel = String(chain.map((c) => [c, overlap(c, v.tetik || "")]).sort((a, b) => b[1] - a[1])[0]?.[0] || chain[0] || "").toUpperCase();
-  const kapak = String((v.kapak || [])[0] || stamp).toUpperCase(); const kapak2 = String((v.kapak || [])[1] || kapak).toUpperCase();
+  // a thumbnail line that is only a time marker ("HOURS LATER") says nothing as a headline: the chain's last link stands in
+  const TIME_ONLY = /^(\w+\s+)?(later|earlier|ago|before|after)$|^(minutes|hours|days|seconds|years) (later|earlier|before|after)$/i;
+  const kap = (v.kapak || []).map(String).filter((k) => !TIME_ONLY.test(k.trim()));
+  const kapak = String(kap[0] || stamp).toUpperCase(); const kapak2 = String(kap[1] || chain[chain.length - 1] || kapak).toUpperCase();
 
   // cause lines -> chain links, in order (a line maps to the best-overlapping link at or after the previous one)
   const roleOf = []; let link = -1; let triggerUsed = false; let contrastUsed = false;
@@ -163,7 +168,8 @@ function build(script, style, topic) {
     // (a narration that opens on the consequence, then returns to the cause: Vajont's chain stuck on "WAVE OVERTOPS DAM")
     const fwd = chain.map((c, k) => (k < Math.max(0, link) ? -1 : overlap(L.text, c))); const back = chain.map((c, k) => (k < Math.max(0, link) ? overlap(L.text, c) : -1));
     const scores = Math.max(...back) > Math.max(...fwd) ? back : fwd;
-    const best = scores.indexOf(Math.max(...scores)); link = scores[best] > 0 ? best : Math.min(chain.length - 1, link + 1);
+    // no shared word: the line continues the current link (it explains it), or opens the chain at its first link
+    const best = scores.indexOf(Math.max(...scores)); link = scores[best] > 0 ? best : Math.max(0, link);
     roleOf.push(`chain:${link}`);
   });
 
