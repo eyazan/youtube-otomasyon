@@ -109,7 +109,8 @@ upgrade is a listed blocker.
 4. Reserve the topic, sign `creative`, `factual` and `publish` against the printed content hash, and write the title,
    description and tags (`node core/pipeline/premium-publish.js reserve|hash --channel goal-lore-lab ...`).
 5. Set `config/channels.json` `goal-lore-lab.enabled: true` (this opens the publish gate). Set repository variables
-   `GLL_ACTIVE=1` and `GLL_PUBLISH=1`, and add `GLL_PREMIUM_PUBLISH: '1'` to the GoalLore Lab step.
+   `GLL_ACTIVE=1`, `GLL_PUBLISH=1` and `GLL_PREMIUM_PUBLISH=1` (the workflow passes the variable through). For unattended
+   operation instead of step 4, sign `channels/goal-lore-lab/premium/publication-policy.json` (see `go-live.md`).
 6. Watch one scheduled run, then the video id, the scheduled publish time (`publishAt`) and that YouTube reports it
    public.
 
