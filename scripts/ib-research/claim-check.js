@@ -25,7 +25,9 @@ async function check(id, fetchJson) {
   const verified = out.facts.filter((f) => f.quote); const quoted = verified.flatMap((f) => nums(f.quote));
   const src = [...cache.values()][0];
   for (const L of (topic.narration || [])) { const text = L.text || L.metin || L.line || ""; const layer = L.layer || "";
-    const n = nums(text); const missing = n.filter((x) => !quoted.includes(x));
+    // a spoken number may round a quoted one ("716 times a second" for 716.35 Hz), never change it
+    const has = (x) => quoted.some((q) => q === x || (q.includes(".") && Math.round(+q) === +x) || (q.includes(".") && Math.trunc(+q) === +x));
+    const n = nums(text); const missing = n.filter((x) => !has(x));
     const near = src ? V.sentences(src.text).map((s) => ({ s, sc: V.support(text, s) })).sort((a, b) => b.sc - a.sc).slice(0, 2).map((x) => x.s) : [];
     const status = n.length ? (missing.length ? "FAIL" : "VERIFIED-NUMBERS") : "HUMAN";
     if (status === "FAIL" && /KNOWN/i.test(layer)) out.ok = false;
