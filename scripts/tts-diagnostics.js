@@ -48,7 +48,8 @@ function handshake() {
 function voicesList() {
   return new Promise(async (resolve) => {
     const gec = await MsEdgeTTS.generateSecMsGec(MsEdgeTTS.TRUSTED_CLIENT_TOKEN);
-    const url = `${MsEdgeTTS.VOICES_URL}&Sec-MS-GEC=${gec}&Sec-MS-GEC-Version=1-143.0.3650.96`;
+    // msedge-tts 2.1.1 signs with Sec-MS-GEC v2 (the v1 token got "Unexpected server response: 200" from 2026-10-27)
+    const url = `${MsEdgeTTS.VOICES_URL}&Sec-MS-GEC=${gec}&Sec-MS-GEC-Version=2-143.0.3650.96`;
     const started = Date.now();
     https.get(url, { headers: HEADERS }, (res) => {
       let size = 0;

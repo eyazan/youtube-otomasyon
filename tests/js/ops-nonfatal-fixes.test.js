@@ -93,7 +93,7 @@ test("inactive The Hidden Logic of Things is skipped by the portfolio analytics 
 test("the Edge read-aloud client is pinned exactly, installed at that version and named in every narration health line", async () => {
   const pinned = JSON.parse(read("package.json")).dependencies["msedge-tts"];
   assert.match(pinned, /^\d+\.\d+\.\d+$/, "exact version: an unreviewed release can neither break nor silently fix narration");
-  assert.equal(pinned, "2.1.0", "2.1.0 moved to the endpoint that recovered production on 2026-10-13");
+  assert.equal(pinned, "2.1.1", "2.1.0 recovered production on 2026-10-13; 2.1.1 recovers it from the HTTP 200 handshake refusals of 2026-10-27");
   assert.equal(require("msedge-tts/package.json").version, pinned, "npm install resolved the pinned version");
   const TTS = require("../../lib/shorts-tts");
   assert.equal(TTS.edgeLibraryVersion(), pinned);
@@ -108,6 +108,6 @@ test("the Edge read-aloud client is pinned exactly, installed at that version an
       fallbackPolicy: { allowed: false, approved: false, voice: "am_fenrir", reason: "not approved" } });
     const voice = refused.bulgular.find((item) => item.ad === "seslendirme");
     assert.equal(voice.durum, "kritik", "the narration gate is unchanged");
-    assert.match(voice.mesaj, /NARRATION_UNAVAILABLE[\s\S]*msedge-tts 2\.1\.0/);
+    assert.match(voice.mesaj, /NARRATION_UNAVAILABLE[\s\S]*msedge-tts 2\.1\.1/);
   } finally { process.argv.splice(0, process.argv.length, ...keep); }
 });
