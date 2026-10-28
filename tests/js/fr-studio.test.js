@@ -132,3 +132,28 @@ test("Hidden Logic of Things shadow: OFF by default, HLT_PREMIUM_RENDER only, re
   assert.equal(Shadow.run(Channel.selectChannel("critical-thread"), { id: "x", slug: "x" }, { HLT_PREMIUM_RENDER: "preview", IB_PREMIUM_RENDER: "preview" }, spawn), null, "no shadow on other channels");
   assert.match(fs.readFileSync(path.join(ROOT, "scripts/bto-studio/studio.js"), "utf8"), /--shadow-dir is allowed only with --shadow/);
 });
+
+test("FR visual quality (#364): the right object class and motion, natural headlines, no card-scene runs, a safe object box", () => {
+  const load = (slug) => { const { channel, topic } = Adapter.loadTopic("failure-reconstructed", slug); return { script: Adapter.studioScript(channel, topic), topic }; };
+  // Gemini 8: a crewed capsule docked to its target, spinning out of control, not a finned rocket
+  const g = load("gemini-8-1966"); const gsb = Generator.build(g.script, style, g.topic);
+  const sil = gsb.scenes[0].layers.find((l) => l.component === "object-silhouette").props;
+  assert.equal(sil.kind, "capsule"); assert.equal(sil.motion, "spin"); assert.equal(sil.docked, true); assert.equal(sil.maxH, 640, "the object fits the safe box");
+  assert.equal(Generator.objectKind(Adapter.loadTopic("failure-reconstructed", "mars-climate-orbiter-1999").topic), "satellite");
+  assert.equal(Generator.objectKind(Adapter.loadTopic("failure-reconstructed", "columbia-2003").topic), "shuttle");
+  assert.equal(Generator.objectKind(Adapter.loadTopic("failure-reconstructed", "challenger-1986").topic), "shuttle");
+  assert.equal(Generator.objectKind(Adapter.loadTopic("failure-reconstructed", "ariane-5-flight-501").topic), "rocket", "a launch-vehicle failure stays a rocket");
+  for (const slug of slugs) {
+    const { channel, topic } = Adapter.loadTopic("failure-reconstructed", slug); if (!Adapter.readiness(channel, topic).ready) continue;
+    const sb = Generator.build(Adapter.studioScript(channel, topic), style, topic);
+    // every headline is a contiguous span of authored text, and none repeats (the validator enforces it; checked here too)
+    const heads = sb.scenes.flatMap((s) => s.layers.filter((l) => l.component === "kinetic-type").flatMap((l) => l.props.items));
+    for (const it of heads.filter((h) => h.source)) assert.ok(String(it.source).toUpperCase().replace(/[^A-Z0-9·%]+/g, " ").includes(String(it.text).toUpperCase().replace(/[^A-Z0-9·%]+/g, " ").trim()), `${slug}: "${it.text}"`);
+    assert.equal(new Set(heads.map((h) => h.text)).size, heads.length, `${slug}: a headline repeats`);
+    let run = 0; for (const s of sb.scenes) { run = s.id.endsWith("-chain") ? run + 1 : 0; assert.ok(run <= 2, `${slug}: three chain card scenes in a row`); }
+  }
+  // a word-picked headline is refused by the validator
+  const bad = JSON.parse(JSON.stringify(gsb)); const kt = bad.scenes.flatMap((s) => s.layers).find((l) => l.component === "kinetic-type" && l.props.items[0].source);
+  kt.props.items[0].text = "THRUSTER CIRCUITS REDESIGNED ISOLATE"; kt.props.items[0].source = "Thruster circuits were redesigned to isolate a failed jet.";
+  assert.ok(Validator.validateStoryboard(bad, { script: g.script, timeline: fakeTimeline(g.script), style, policy: profile.evidencePolicy.validator }).errors.some((e) => /not a contiguous span/.test(e)));
+});

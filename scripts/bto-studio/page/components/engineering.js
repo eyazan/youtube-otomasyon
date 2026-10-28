@@ -88,6 +88,21 @@
     terrain: { box: [1000, 600], fp: [0.42, 0.42], slide: true, paths: [
       "M40 540 L300 200 L420 120 L520 170 L760 420 L960 540", "M180 360 L400 250", "M240 420 L520 300", "M300 480 L640 380",
       "M700 540 L700 470 L780 470 L780 540", "M800 540 L800 490 L880 490 L880 540", "M600 540 L600 500 L660 500 L660 540", "M40 540 L960 540"] },
+    // crewed capsule, side view: crew cabin cone (heat shield on the left), nose section, wider equipment adapter behind;
+    // generic class, never a specific spacecraft's details. `docked` adds a generic target vehicle at the nose.
+    capsule: { box: [1000, 600], fp: [0.14, 0.38], spinnable: true, paths: [
+      "M260 170 L520 245 L520 355 L260 430 Z", "M520 255 L600 265 L600 335 L520 345", "M260 170 L70 135 L70 465 L260 430",
+      "M165 152 L165 448", "M380 232 L450 252 L450 276 L380 262 Z", "M260 170 Q240 300 260 430"],
+      docked: ["M600 280 L640 272 L640 328 L600 320", "M640 235 L960 235 L960 365 L640 365 Z", "M720 235 L720 365", "M880 235 L880 365"] },
+    // satellite or probe: bus, two solar arrays, antenna dish
+    satellite: { box: [1000, 600], fp: [0.5, 0.5], spinnable: true, paths: [
+      "M420 220 L580 220 L580 380 L420 380 Z", "M90 265 L400 265 L400 335 L90 335 Z", "M600 265 L910 265 L910 335 L600 335 Z",
+      "M400 300 L420 300", "M580 300 L600 300", "M168 265 L168 335", "M246 265 L246 335", "M324 265 L324 335", "M678 265 L678 335", "M756 265 L756 335", "M834 265 L834 335",
+      "M500 220 L500 170", "M450 170 C470 120 530 120 550 170 Z"] },
+    // winged orbiter (space shuttle class), side view
+    shuttle: { box: [1000, 600], fp: [0.42, 0.52], tilt: 6, paths: [
+      "M90 330 L700 330 C820 330 900 312 950 292 C900 272 820 262 700 262 L250 262 L150 150 L110 150 L140 262 L90 272 Z",
+      "M300 330 L640 330 L560 392 L360 392 Z", "M780 262 L800 300 L860 300", "M90 285 L50 270 L50 320 L90 310"] },
     structure: { box: [1000, 600], fp: [0.5, 0.45], tilt: 4, paths: [
       "M100 500 L900 500", "M160 500 L160 160 L840 160 L840 500", "M160 160 L380 500", "M380 160 L600 500", "M600 160 L840 500", "M380 160 L160 500", "M600 160 L380 500", "M840 160 L600 500"] },
   };
@@ -101,13 +116,32 @@
     const r = BTO.rng(o.seed || 31); const crack = []; let cx = 0, cy = 0; for (let i = 0; i < 9; i += 1) { cx += (r() - 0.35) * 46; cy += 22 + r() * 30; crack.push([cx, cy]); }
     return { draw: (t) => {
       const op = fade(t, o.enterAt, o.outAt) * (o.opacity == null ? 1 : o.opacity); if (op <= 0) return "";
-      const [bw, bh] = K.box; const s = (o.w || 860) / bw; const x0 = (o.x || 540) - (bw * s) / 2, y0 = (o.y || 820) - (bh * s) / 2;
+      // the drawing fits a safe box (width w, height maxH): a tall class no longer overruns the chips, the watermark or
+      // the headline band (#364: a 600 x 1000 rocket at w=900 was 1500 px tall)
+      const [bw, bh] = K.box; const s = Math.min((o.w || 860) / bw, (o.maxH || 640) / bh); const x0 = (o.x || 540) - (bw * s) / 2, y0 = (o.y || 820) - (bh * s) / 2;
       const draw = o.drawAt == null ? 1 : BTO.ease("inOut", clamp((t - o.drawAt) / 0.9)); const f = o.failAt == null ? 0 : clamp((t - o.failAt) / 1.4); const fe = BTO.ease("inOut", f);
       const [fx, fy] = [K.fp[0] * bw, K.fp[1] * bh];
       const tilt = (K.tilt || 0) * fe, sink = (K.sink || 0) * fe, sag = (K.sag || 0) * fe;
+      // motion "spin": after failAt the object rotates about its centre faster and faster (an uncontrolled spin, shown in
+      // the drawing plane), with fading ghost copies at earlier angles so the rotation reads in a still frame
+      // the rate climbs from 40 to 400 deg/s over 1.5 s, then holds (about one turn per second): it keeps turning in later scenes
+      const spinAngle = (tt) => { if (o.motion !== "spin" || o.failAt == null) return 0; const tau = Math.max(0, tt - o.failAt), Tc = 1.5;
+        return tau < Tc ? 40 * tau + 120 * tau * tau : 40 * Tc + 120 * Tc * Tc + 400 * (tau - Tc); };
+      const spin = spinAngle(t); const [scx, scy] = [bw / 2, bh / 2];
+      const docked = K.docked && o.docked ? K.docked : [];
+      const body = (rot, alpha) => { let b = `<g transform="rotate(${n1(rot)} ${scx} ${scy})" opacity="${alpha.toFixed(3)}">`;
+        [...K.paths, ...docked].forEach((d, i) => { b += `<path d="${d}" fill="none" stroke="${i === 0 ? C.paper : C.teal}" stroke-width="${n1((i === 0 ? 7 : 5) / s)}" stroke-linecap="round" stroke-linejoin="round"/>`; });
+        return b + "</g>"; };
       let g = `<g transform="translate(${n1(x0)} ${n1(y0 + sink * s)}) scale(${s.toFixed(4)}) rotate(${n1(tilt)} ${n1(fx)} ${n1(fy)})">`;
+      if (spin > 0) {
+        [0.12, 0.24].forEach((dt, k) => { const a = spinAngle(t - dt); if (a > 0) g += body(a, 0.22 - 0.08 * k); });
+        const r = Math.max(bw, bh) * 0.56; const arc = (a0) => `M${n1(scx + r * Math.cos(a0))} ${n1(scy + r * Math.sin(a0))} A${n1(r)} ${n1(r)} 0 0 1 ${n1(scx + r * Math.cos(a0 + 1.1))} ${n1(scy + r * Math.sin(a0 + 1.1))}`;
+        const a0 = (spin * Math.PI) / 180;
+        [0, Math.PI].forEach((ph) => { g += `<path d="${arc(a0 + ph)}" fill="none" stroke="${C.amber}" stroke-width="${n1(6 / s)}" stroke-linecap="round" opacity="${clamp(spin / 90).toFixed(3)}"/>`; });
+        g += `<g transform="rotate(${n1(spin)} ${scx} ${scy})">`;
+      }
       // bridge: the deck lines (the first paths) sag at mid-span as the structure gives way
-      K.paths.forEach((d, i) => { const dd = sag && K.deckY && i < K.deckY.length ? `M20 ${K.deckY[i]} Q500 ${n1(K.deckY[i] + sag * 2)} 980 ${K.deckY[i]}` : d;
+      [...K.paths, ...docked].forEach((d, i) => { const dd = sag && K.deckY && i < K.deckY.length ? `M20 ${K.deckY[i]} Q500 ${n1(K.deckY[i] + sag * 2)} 980 ${K.deckY[i]}` : d;
         g += `<path d="${dd}" fill="none" stroke="${i === 0 ? C.paper : C.teal}" stroke-width="${n1((i === 0 ? 7 : 5) / s)}" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="${n1(1 - draw)}" opacity="${i === 0 ? 0.95 : 0.75}"/>`; });
       if (K.breach && f > 0) g += `<path d="M${fx - 40} ${fy} L${fx + 40} ${fy} L${n1(fx + 40 + 300 * fe)} 520 L${n1(fx - 40 - 120 * fe)} 520 Z" fill="${C.teal}" opacity="${(0.45 * fe).toFixed(3)}"/>`;
       if (K.slide && f > 0) g += `<path d="M330 190 C420 260 ${n1(480 + 220 * fe)} ${n1(360 + 120 * fe)} ${n1(560 + 260 * fe)} 540 L${n1(380 + 120 * fe)} 540 C380 420 320 300 300 200 Z" fill="${C.amber}" opacity="${(0.4 * fe).toFixed(3)}"/>`;
@@ -116,7 +150,7 @@
         g += `<circle cx="${n1(fx)}" cy="${n1(fy)}" r="${n1(lerp(10, 70, fe) / s * 2)}" fill="${C.coral}" opacity="${(0.28 * (1 - 0.4 * fe)).toFixed(3)}" filter="url(#soft)"/>`;
         g += `<path d="M${n1(fx)} ${n1(fy)} ${crack.slice(0, k).map(([a, b]) => `L${n1(fx + a)} ${n1(fy + b * 0.6)}`).join(" ")}" fill="none" stroke="${C.coral}" stroke-width="${n1(6 / s)}" stroke-linecap="round"/>`;
         g += `<circle cx="${n1(fx)}" cy="${n1(fy)}" r="${n1(14 / s)}" fill="${C.coral}"/>`; }
-      return `<g opacity="${op.toFixed(3)}">${g}</g></g>`;
+      return `<g opacity="${op.toFixed(3)}">${g}${spin > 0 ? "</g>" : ""}</g></g>`;
     } };
   });
 })(window.BTO);
