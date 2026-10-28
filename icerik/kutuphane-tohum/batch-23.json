@@ -1,0 +1,1217 @@
+[
+  {
+    "slug": "therac-25-1985",
+    "wiki": "Therac-25",
+    "commons": [
+      "Therac-25"
+    ],
+    "baslik": "The Cancer Machine That Trusted Its Own Software",
+    "ad": "the Therac-25 radiation overdoses",
+    "kisa": "Therac-25",
+    "nesne": "Radiation therapy machine",
+    "yil": 1985,
+    "kume": "software-and-control-failures",
+    "oncelik": 9,
+    "sonuc": "gave patients massive radiation overdoses",
+    "tetik": "software race conditions in a machine without hardware interlocks",
+    "mekanizma": "concurrent programming errors delivering doses hundreds of times greater than normal, with no hardware interlock to stop them",
+    "sayi": "SIX ACCIDENTS",
+    "ders": "safety-critical machines keep independent hardware interlocks instead of trusting software alone",
+    "zincir": [
+      "HARDWARE INTERLOCKS REMOVED",
+      "SOFTWARE CHECKS ONLY",
+      "RACE CONDITION",
+      "MASSIVE OVERDOSE",
+      "AT LEAST SIX ACCIDENTS"
+    ],
+    "yanilgi": "The machine wasn't broken in any obvious way. Its software sometimes ran steps in the wrong order.",
+    "tartisma": "Should a machine that can kill ever trust software alone?",
+    "basliklar": [
+      "The Cancer Machine That Trusted Its Own Software",
+      "Why the Therac-25 Overdosed Its Patients",
+      "The Race Condition That Burned Patients"
+    ],
+    "kapak": [
+      "SOFTWARE ONLY",
+      "100X DOSE"
+    ],
+    "hook": "No hardware backup",
+    "soru": "Would you trust the software?",
+    "sahneler": [
+      "A cancer machine's own software overdosed its patients.",
+      "Some doses exploded to hundreds of times the normal amount.",
+      "It was the Therac-25, a computer-controlled radiation therapy machine.",
+      "Earlier models had hardware interlocks to stop such faults.",
+      "This one removed them and relied on software checks.",
+      "Concurrent programming errors, called race conditions, slipped past those checks.",
+      "At least six accidents followed between 1985 and 1987.",
+      "Now safety-critical machines keep independent hardware protection."
+    ],
+    "kanit": [
+      {
+        "iddia": "It was a computer-controlled radiation therapy machine.",
+        "terimler": [
+          "computer-controlled radiation therapy machine"
+        ],
+        "sahneler": [
+          2
+        ]
+      },
+      {
+        "iddia": "Because of concurrent programming errors, also known as race conditions, it sometimes gave its patients radiation doses that were hundreds of times greater than normal.",
+        "terimler": [
+          "race conditions",
+          "hundreds of times"
+        ],
+        "sahneler": [
+          0,
+          1,
+          5
+        ]
+      },
+      {
+        "iddia": "Previous models had hardware interlocks to prevent such faults, but this one removed them and depended on software checks for safety.",
+        "terimler": [
+          "hardware interlocks",
+          "software"
+        ],
+        "sahneler": [
+          3,
+          4,
+          7
+        ]
+      },
+      {
+        "iddia": "It was involved in at least six accidents between 1985 and 1987 in which patients were given massive overdoses of radiation.",
+        "terimler": [
+          "six accidents",
+          "overdoses"
+        ],
+        "sahneler": [
+          6
+        ]
+      }
+    ],
+    "kaynakca": [
+      {
+        "ad": "Wikipedia — Therac-25",
+        "url": "https://en.wikipedia.org/wiki/Therac-25"
+      }
+    ]
+  },
+  {
+    "slug": "northeast-blackout-2003",
+    "wiki": "Northeast_blackout_of_2003",
+    "commons": [
+      "Northeast blackout of 2003"
+    ],
+    "baslik": "A Silent Alarm Blacked Out 55 Million People",
+    "ad": "the Northeast blackout of 2003",
+    "kisa": "2003 blackout",
+    "nesne": "Power grid",
+    "yil": 2003,
+    "kume": "software-and-control-failures",
+    "oncelik": 9,
+    "sonuc": "cut power to an estimated 55 million people",
+    "tetik": "a software bug that silenced the alarm system in a control room",
+    "mekanizma": "power lines sagging into trees while a frozen alarm system hid the failures from operators, so the outage cascaded",
+    "sayi": "55 MILLION",
+    "ders": "grid operators were held to mandatory reliability standards",
+    "zincir": [
+      "ALARM SOFTWARE STALLS",
+      "LINES SAG INTO TREES",
+      "OPERATORS SEE NOTHING",
+      "FAILURES CASCADE",
+      "55 MILLION IN THE DARK"
+    ],
+    "yanilgi": "It didn't start with one huge failure. A software bug kept the control room from seeing small ones.",
+    "tartisma": "Who should be warned when the warning system itself fails?",
+    "basliklar": [
+      "A Silent Alarm Blacked Out 55 Million People",
+      "Why the 2003 Blackout Spread So Far",
+      "The Bug That Hid a Blackout"
+    ],
+    "kapak": [
+      "SILENT ALARM",
+      "55 MILLION"
+    ],
+    "hook": "The alarm stayed silent",
+    "soru": "Who watches the alarm?",
+    "sahneler": [
+      "A silent alarm let a blackout spread across North America.",
+      "The outage cascaded until about fifty five million people lost power.",
+      "It began in Ohio, in a utility's control room.",
+      "A software bug stalled the alarm system there.",
+      "Operators never learned that lines were failing.",
+      "Overloaded power lines had sagged into overgrown trees.",
+      "Each failure pushed more load onto the next line.",
+      "Afterwards, grid reliability standards became mandatory."
+    ],
+    "kanit": [
+      {
+        "iddia": "The outage affected an estimated 55 million people.",
+        "terimler": [
+          "55 million"
+        ],
+        "sahneler": [
+          1
+        ]
+      },
+      {
+        "iddia": "The blackout's primary cause was a software bug in the alarm system at the control room of FirstEnergy in Ohio.",
+        "terimler": [
+          "software bug",
+          "alarm system"
+        ],
+        "sahneler": [
+          0,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "iddia": "Power lines that were overloaded sagged into trees that had not been trimmed.",
+        "terimler": [
+          "trees"
+        ],
+        "sahneler": [
+          5,
+          6
+        ]
+      },
+      {
+        "iddia": "The blackout led to mandatory reliability standards for the grid.",
+        "terimler": [
+          "reliability standards"
+        ],
+        "sahneler": [
+          7
+        ]
+      }
+    ],
+    "kaynakca": [
+      {
+        "ad": "Wikipedia — Northeast blackout of 2003",
+        "url": "https://en.wikipedia.org/wiki/Northeast_blackout_of_2003"
+      }
+    ]
+  },
+  {
+    "slug": "piper-alpha-1988",
+    "wiki": "Piper_Alpha",
+    "commons": [
+      "Piper Alpha"
+    ],
+    "baslik": "The Missing Valve That Destroyed an Oil Platform",
+    "ad": "the Piper Alpha disaster",
+    "kisa": "Piper Alpha",
+    "nesne": "Oil platform",
+    "yil": 1988,
+    "kume": "industrial-disasters",
+    "oncelik": 10,
+    "sonuc": "was destroyed by explosions and fire in the North Sea",
+    "tetik": "a pump restarted while its pressure safety valve was out for maintenance",
+    "mekanizma": "condensate leaking from a temporary blank flange, igniting, then oil and gas fires fed by connected pipelines",
+    "sayi": "167 DIED",
+    "ders": "offshore safety moved to formal safety cases",
+    "zincir": [
+      "SAFETY VALVE REMOVED",
+      "SHIFT CHANGE",
+      "PUMP RESTARTED",
+      "GAS LEAKS AND IGNITES",
+      "PLATFORM DESTROYED"
+    ],
+    "yanilgi": "The fatal leak came from a pump that was not supposed to be used: its safety valve had been removed.",
+    "tartisma": "How does a warning on paper get lost between two shifts?",
+    "basliklar": [
+      "The Missing Valve That Destroyed an Oil Platform",
+      "Why Piper Alpha Burned",
+      "The Paperwork That Lost a Platform"
+    ],
+    "kapak": [
+      "MISSING VALVE",
+      "167 DIED"
+    ],
+    "hook": "The valve was missing",
+    "soru": "Who knew the valve was gone?",
+    "sahneler": [
+      "A missing safety valve turned an oil platform into a fireball.",
+      "Explosions ripped through Piper Alpha, and one hundred sixty seven people died.",
+      "A pressure safety valve had been removed for maintenance.",
+      "Its pipe was sealed only with a temporary cover.",
+      "The next shift did not know, and restarted the pump.",
+      "Gas leaked out and ignited.",
+      "Pipelines from other platforms kept feeding the fire.",
+      "Offshore operators then had to prove their safety cases."
+    ],
+    "kanit": [
+      {
+        "iddia": "The explosion and resulting fire destroyed it in July 1988, killing 165 of the people on board and 2 crewmen of a rescue vessel.",
+        "terimler": [
+          "165",
+          "rescue vessel"
+        ],
+        "sahneler": [
+          0,
+          1
+        ]
+      },
+      {
+        "iddia": "A pressure safety valve had been removed from the pump for routine maintenance.",
+        "terimler": [
+          "pressure safety valve"
+        ],
+        "sahneler": [
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "iddia": "Gas leaked and ignited.",
+        "terimler": [
+          "ignit"
+        ],
+        "sahneler": [
+          5
+        ]
+      },
+      {
+        "iddia": "Pipelines from other platforms continued to feed oil and gas to the fire.",
+        "terimler": [
+          "platforms",
+          "fire"
+        ],
+        "sahneler": [
+          6
+        ]
+      },
+      {
+        "iddia": "The disaster led to safety cases for offshore installations.",
+        "terimler": [
+          "safety case"
+        ],
+        "sahneler": [
+          7
+        ]
+      }
+    ],
+    "kaynakca": [
+      {
+        "ad": "Wikipedia — Piper Alpha",
+        "url": "https://en.wikipedia.org/wiki/Piper_Alpha"
+      }
+    ]
+  },
+  {
+    "slug": "flixborough-1974",
+    "wiki": "Flixborough_disaster",
+    "commons": [
+      "Flixborough disaster"
+    ],
+    "baslik": "A Temporary Pipe Blew Up a Chemical Plant",
+    "ad": "the Flixborough disaster",
+    "kisa": "Flixborough",
+    "nesne": "Chemical plant",
+    "yil": 1974,
+    "kume": "industrial-disasters",
+    "oncelik": 9,
+    "sonuc": "was destroyed by a vapour cloud explosion",
+    "tetik": "a temporary bypass pipe installed between two reactors",
+    "mekanizma": "a makeshift bypass pipe failing and releasing cyclohexane, which formed a vapour cloud and exploded",
+    "sayi": "28 KILLED",
+    "ders": "the UK introduced new controls on major hazard sites",
+    "zincir": [
+      "REACTOR CRACKS",
+      "REACTOR REMOVED",
+      "TEMPORARY BYPASS PIPE",
+      "PIPE RUPTURES",
+      "VAPOUR CLOUD EXPLODES"
+    ],
+    "yanilgi": "The cracked reactor wasn't what failed. The quick fix built to bypass it did.",
+    "tartisma": "When is a quick fix too dangerous to start up?",
+    "basliklar": [
+      "A Temporary Pipe Blew Up a Chemical Plant",
+      "Why the Flixborough Plant Exploded",
+      "The Quick Fix That Levelled a Plant"
+    ],
+    "kapak": [
+      "QUICK FIX",
+      "28 KILLED"
+    ],
+    "hook": "A quick fix",
+    "soru": "Who signed off the fix?",
+    "sahneler": [
+      "A temporary pipe turned a chemical plant into a bomb.",
+      "A vapour cloud exploded at Flixborough, and twenty eight people were killed.",
+      "Weeks earlier, one reactor had developed a crack.",
+      "Workers removed it and joined the others with a bypass pipe.",
+      "The makeshift pipe failed.",
+      "Hot cyclohexane escaped and formed a cloud.",
+      "When it ignited, the plant was destroyed.",
+      "Britain then tightened control of major hazard sites."
+    ],
+    "kanit": [
+      {
+        "iddia": "The explosion killed 28 people.",
+        "terimler": [
+          "28"
+        ],
+        "sahneler": [
+          1
+        ]
+      },
+      {
+        "iddia": "A temporary bypass pipe had been installed to connect two reactors after one reactor was removed because of a crack.",
+        "terimler": [
+          "bypass",
+          "crack"
+        ],
+        "sahneler": [
+          0,
+          2,
+          3
+        ]
+      },
+      {
+        "iddia": "The bypass pipe failed and released cyclohexane which formed a vapour cloud.",
+        "terimler": [
+          "cyclohexane"
+        ],
+        "sahneler": [
+          4,
+          5,
+          6
+        ]
+      },
+      {
+        "iddia": "The disaster led to new controls on major hazard sites in the UK.",
+        "terimler": [
+          "major hazard"
+        ],
+        "sahneler": [
+          7
+        ]
+      }
+    ],
+    "kaynakca": [
+      {
+        "ad": "Wikipedia — Flixborough disaster",
+        "url": "https://en.wikipedia.org/wiki/Flixborough_disaster"
+      }
+    ]
+  },
+  {
+    "slug": "ronan-point-1968",
+    "wiki": "Ronan_Point",
+    "commons": [
+      "Ronan Point"
+    ],
+    "baslik": "A Gas Explosion Brought Down a Whole Corner of a Tower",
+    "ad": "the Ronan Point collapse",
+    "kisa": "Ronan Point",
+    "nesne": "Tower block",
+    "yil": 1968,
+    "kume": "structural-failures",
+    "oncelik": 9,
+    "sonuc": "lost an entire corner after a gas explosion",
+    "tetik": "a gas explosion blowing out a load-bearing wall panel",
+    "mekanizma": "progressive collapse: prefabricated panels held by gravity and small joints, so one lost panel brought down those above and below",
+    "sayi": "FOUR DIED",
+    "ders": "UK building regulations were changed to prevent disproportionate collapse",
+    "zincir": [
+      "GAS LEAK",
+      "WALL PANEL BLOWN OUT",
+      "FLOORS ABOVE DROP",
+      "CORNER COLLAPSES",
+      "REGULATIONS CHANGED"
+    ],
+    "yanilgi": "The explosion wasn't big enough to bring down a building. The building's design did the rest.",
+    "tartisma": "Should one wall ever be able to bring down a whole corner?",
+    "basliklar": [
+      "A Gas Explosion Brought Down a Whole Corner of a Tower",
+      "Why Ronan Point Collapsed",
+      "The Tower That Fell Like Cards"
+    ],
+    "kapak": [
+      "ONE WALL",
+      "WHOLE CORNER"
+    ],
+    "hook": "One wall, whole corner",
+    "soru": "Why did one wall matter?",
+    "sahneler": [
+      "One kitchen gas explosion brought down a tower block's corner.",
+      "The floors collapsed one after another, and four people died.",
+      "Ronan Point had just opened in east London.",
+      "It was built from large prefabricated concrete panels.",
+      "The blast pushed out one load-bearing wall.",
+      "With nothing holding them, the floors above fell.",
+      "Their weight crushed the floors below.",
+      "Building rules were rewritten to stop disproportionate collapse."
+    ],
+    "kanit": [
+      {
+        "iddia": "A gas explosion knocked out a load-bearing wall, causing the collapse of one entire corner of the building.",
+        "terimler": [
+          "gas explosion",
+          "corner"
+        ],
+        "sahneler": [
+          0,
+          4,
+          5,
+          6
+        ]
+      },
+      {
+        "iddia": "Four people were killed in the collapse.",
+        "terimler": [
+          "four"
+        ],
+        "sahneler": [
+          1
+        ]
+      },
+      {
+        "iddia": "It was built using the large panel system of prefabricated concrete panels.",
+        "terimler": [
+          "panel"
+        ],
+        "sahneler": [
+          2,
+          3
+        ]
+      },
+      {
+        "iddia": "The collapse led to changes in building regulations to prevent disproportionate collapse.",
+        "terimler": [
+          "disproportionate collapse"
+        ],
+        "sahneler": [
+          7
+        ]
+      }
+    ],
+    "kaynakca": [
+      {
+        "ad": "Wikipedia — Ronan Point",
+        "url": "https://en.wikipedia.org/wiki/Ronan_Point"
+      }
+    ]
+  },
+  {
+    "slug": "sampoong-1995",
+    "wiki": "Sampoong_Department_Store_collapse",
+    "commons": [
+      "Sampoong Department Store"
+    ],
+    "baslik": "The Department Store That Collapsed in Twenty Seconds",
+    "ad": "the Sampoong Department Store collapse",
+    "kisa": "Sampoong",
+    "nesne": "Department store",
+    "yil": 1995,
+    "kume": "structural-failures",
+    "oncelik": 10,
+    "sonuc": "collapsed in seconds during a busy afternoon in Seoul",
+    "tetik": "an extra floor and heavy rooftop air-conditioning units on weakened columns",
+    "mekanizma": "columns thinned and removed for shop space while loads grew, until the slabs punched through and the building collapsed",
+    "sayi": "502 DIED",
+    "ders": "South Korea tightened building safety inspections",
+    "zincir": [
+      "COLUMNS THINNED",
+      "EXTRA FLOOR ADDED",
+      "AC UNITS ON THE ROOF",
+      "CRACKS APPEAR",
+      "STORE COLLAPSES"
+    ],
+    "yanilgi": "It didn't fail without warning. Cracks had appeared for months, and managers kept the store open.",
+    "tartisma": "Who decides to keep a cracking building open?",
+    "basliklar": [
+      "The Department Store That Collapsed in Twenty Seconds",
+      "Why the Sampoong Store Fell",
+      "The Cracks Managers Ignored"
+    ],
+    "kapak": [
+      "IGNORED CRACKS",
+      "502 DIED"
+    ],
+    "hook": "Cracks, and the doors stayed open",
+    "soru": "Why stay open?",
+    "sahneler": [
+      "Cracks spread for months, and the store stayed open.",
+      "Then it collapsed in seconds, and five hundred two people died.",
+      "The Sampoong Department Store stood in Seoul.",
+      "A fifth floor had been added that it was never designed for.",
+      "Columns were made thinner to fit more shops.",
+      "Heavy air-conditioning units sat on the roof.",
+      "The slabs finally punched through the columns.",
+      "Executives were convicted, and inspections were tightened."
+    ],
+    "kanit": [
+      {
+        "iddia": "The collapse killed 502 people.",
+        "terimler": [
+          "502"
+        ],
+        "sahneler": [
+          1
+        ]
+      },
+      {
+        "iddia": "Cracks appeared in the building but managers did not evacuate it.",
+        "terimler": [
+          "cracks"
+        ],
+        "sahneler": [
+          0
+        ]
+      },
+      {
+        "iddia": "A fifth floor was added to the building.",
+        "terimler": [
+          "fifth floor"
+        ],
+        "sahneler": [
+          2,
+          3
+        ]
+      },
+      {
+        "iddia": "Columns were thinner than the original design required.",
+        "terimler": [
+          "columns"
+        ],
+        "sahneler": [
+          4,
+          6
+        ]
+      },
+      {
+        "iddia": "Air conditioning units were installed on the roof.",
+        "terimler": [
+          "air conditioning"
+        ],
+        "sahneler": [
+          5
+        ]
+      },
+      {
+        "iddia": "The chairman and his son were convicted.",
+        "terimler": [
+          "convicted"
+        ],
+        "sahneler": [
+          7
+        ]
+      }
+    ],
+    "kaynakca": [
+      {
+        "ad": "Wikipedia — Sampoong Department Store collapse",
+        "url": "https://en.wikipedia.org/wiki/Sampoong_Department_Store_collapse"
+      }
+    ]
+  },
+  {
+    "slug": "kings-cross-fire-1987",
+    "wiki": "King's_Cross_fire",
+    "commons": [
+      "King's Cross fire"
+    ],
+    "baslik": "The Escalator Fire That Exploded Into a Ticket Hall",
+    "ad": "the King's Cross fire",
+    "kisa": "King's Cross",
+    "nesne": "Wooden escalator",
+    "yil": 1987,
+    "kume": "fire-and-explosions",
+    "oncelik": 10,
+    "sonuc": "sent a flashover into the ticket hall of a London Underground station",
+    "tetik": "a lit match dropped onto a wooden escalator",
+    "mekanizma": "grease and debris under a wooden escalator burning, then the trench effect driving flames up the escalator into the ticket hall",
+    "sayi": "31 DIED",
+    "ders": "wooden escalators were replaced and smoking was banned across the Underground",
+    "zincir": [
+      "MATCH DROPPED",
+      "GREASE UNDER ESCALATOR",
+      "FIRE GROWS",
+      "TRENCH EFFECT",
+      "FLASHOVER IN TICKET HALL"
+    ],
+    "yanilgi": "It looked like a small fire. A previously unknown effect drove it up the escalator in seconds.",
+    "tartisma": "How do you prepare for a fire behaviour nobody knew existed?",
+    "basliklar": [
+      "The Escalator Fire That Exploded Into a Ticket Hall",
+      "Why the King's Cross Fire Spread So Fast",
+      "The Trench Effect Nobody Knew"
+    ],
+    "kapak": [
+      "TRENCH EFFECT",
+      "31 DIED"
+    ],
+    "hook": "A small fire, then a fireball",
+    "soru": "How did it spread so fast?",
+    "sahneler": [
+      "A small escalator fire suddenly burst into a fireball.",
+      "Flames swept into the ticket hall at King's Cross, and thirty one people died.",
+      "It probably started with a discarded match.",
+      "Grease and fluff under the wooden escalator caught fire.",
+      "Investigators later found the trench effect.",
+      "The sloped escalator channelled flames upward along its trench.",
+      "Then flashover filled the ticket hall.",
+      "Wooden escalators were replaced, and smoking was banned."
+    ],
+    "kanit": [
+      {
+        "iddia": "The fire killed 31 people.",
+        "terimler": [
+          "31"
+        ],
+        "sahneler": [
+          1
+        ]
+      },
+      {
+        "iddia": "The fire is believed to have started when a lit match was dropped onto the escalator.",
+        "terimler": [
+          "match"
+        ],
+        "sahneler": [
+          2
+        ]
+      },
+      {
+        "iddia": "Grease and debris beneath the wooden escalator caught fire.",
+        "terimler": [
+          "grease"
+        ],
+        "sahneler": [
+          3
+        ]
+      },
+      {
+        "iddia": "Computer modelling revealed the trench effect, which drove the flames up the escalator.",
+        "terimler": [
+          "trench effect"
+        ],
+        "sahneler": [
+          0,
+          4,
+          5,
+          6
+        ]
+      },
+      {
+        "iddia": "Wooden escalators were replaced and smoking was banned on the Underground.",
+        "terimler": [
+          "smoking"
+        ],
+        "sahneler": [
+          7
+        ]
+      }
+    ],
+    "kaynakca": [
+      {
+        "ad": "Wikipedia — King's Cross fire",
+        "url": "https://en.wikipedia.org/wiki/King's_Cross_fire"
+      }
+    ]
+  },
+  {
+    "slug": "tokaimura-1999",
+    "wiki": "Tokaimura_nuclear_accidents",
+    "commons": [
+      "Tokaimura"
+    ],
+    "baslik": "Workers Mixed Uranium in Buckets",
+    "ad": "the 1999 Tokaimura criticality accident",
+    "kisa": "Tokaimura",
+    "nesne": "Fuel processing plant",
+    "yil": 1999,
+    "kume": "nuclear-accidents",
+    "oncelik": 9,
+    "sonuc": "started an uncontrolled nuclear chain reaction in a fuel plant",
+    "tetik": "workers pouring uranium solution by hand from stainless steel buckets",
+    "mekanizma": "far more uranium than allowed poured into a precipitation tank, reaching criticality",
+    "sayi": "TWO WORKERS DIED",
+    "ders": "the company's licence was revoked",
+    "zincir": [
+      "SHORTCUT PROCEDURE",
+      "STAINLESS STEEL BUCKETS",
+      "TOO MUCH URANIUM IN ONE TANK",
+      "CRITICALITY",
+      "WORKERS EXPOSED"
+    ],
+    "yanilgi": "No reactor was involved. The chain reaction started in a tank at a fuel processing plant.",
+    "tartisma": "How does a shortcut become the normal way to work?",
+    "basliklar": [
+      "Workers Mixed Uranium in Buckets",
+      "Why a Japanese Fuel Plant Went Critical",
+      "The Shortcut That Started a Chain Reaction"
+    ],
+    "kapak": [
+      "BUCKETS",
+      "CRITICALITY"
+    ],
+    "hook": "Uranium in buckets",
+    "soru": "Why buckets?",
+    "sahneler": [
+      "Workers mixed uranium by hand, using stainless steel buckets.",
+      "Suddenly the tank went critical, starting a nuclear chain reaction.",
+      "It happened at a fuel processing plant in Tokaimura, Japan.",
+      "They were following an unapproved shortcut procedure.",
+      "Far too much uranium went into one precipitation tank.",
+      "The workers were exposed to intense radiation.",
+      "Two of them died.",
+      "The plant operator later lost its licence."
+    ],
+    "kanit": [
+      {
+        "iddia": "Workers mixed uranyl nitrate solution in stainless steel buckets.",
+        "terimler": [
+          "stainless steel buckets"
+        ],
+        "sahneler": [
+          0,
+          3
+        ]
+      },
+      {
+        "iddia": "The uranium in the precipitation tank reached criticality.",
+        "terimler": [
+          "precipitation tank",
+          "critical"
+        ],
+        "sahneler": [
+          1,
+          2,
+          4
+        ]
+      },
+      {
+        "iddia": "Two of the workers died.",
+        "terimler": [
+          "died"
+        ],
+        "sahneler": [
+          5,
+          6
+        ]
+      },
+      {
+        "iddia": "The company's operating licence was revoked.",
+        "terimler": [
+          "licen"
+        ],
+        "sahneler": [
+          7
+        ]
+      }
+    ],
+    "kaynakca": [
+      {
+        "ad": "Wikipedia — Tokaimura nuclear accidents",
+        "url": "https://en.wikipedia.org/wiki/Tokaimura_nuclear_accidents"
+      }
+    ]
+  },
+  {
+    "slug": "hatfield-rail-crash-2000",
+    "wiki": "Hatfield_rail_crash",
+    "commons": [
+      "Hatfield rail crash"
+    ],
+    "baslik": "A Cracked Rail Shattered Under an Express Train",
+    "ad": "the Hatfield rail crash",
+    "kisa": "Hatfield",
+    "nesne": "Rail",
+    "yil": 2000,
+    "kume": "rail-disasters",
+    "oncelik": 9,
+    "sonuc": "derailed an express train when a rail shattered",
+    "tetik": "a rail weakened by fatigue cracks fragmenting under a train",
+    "mekanizma": "gauge corner cracking from rolling contact fatigue, left unrepaired, until the rail broke into many pieces",
+    "sayi": "FOUR KILLED",
+    "ders": "emergency speed limits and rail replacement across Britain's network",
+    "zincir": [
+      "FATIGUE CRACKS",
+      "RAIL NOT REPLACED",
+      "TRAIN AT SPEED",
+      "RAIL SHATTERS",
+      "DERAILMENT"
+    ],
+    "yanilgi": "The rail didn't snap in one place. It shattered into hundreds of pieces.",
+    "tartisma": "How many cracks are too many before a rail is replaced?",
+    "basliklar": [
+      "A Cracked Rail Shattered Under an Express Train",
+      "Why the Hatfield Crash Happened",
+      "The Rail That Broke Into Pieces"
+    ],
+    "kapak": [
+      "SHATTERED RAIL",
+      "FOUR KILLED"
+    ],
+    "hook": "The rail shattered",
+    "soru": "Why wasn't it replaced?",
+    "sahneler": [
+      "One cracked rail shattered under an express train.",
+      "The train derailed at Hatfield, and four people were killed.",
+      "The rail had been weakened by fatigue cracking.",
+      "Tiny cracks had grown along the rail's corner.",
+      "The problem was known, but the rail was not replaced.",
+      "Under the train, it broke into many pieces.",
+      "Afterwards, emergency speed limits spread across the network.",
+      "The crisis contributed to the end of Railtrack."
+    ],
+    "kanit": [
+      {
+        "iddia": "The rail fragmented as the train passed over it, killing four people.",
+        "terimler": [
+          "four"
+        ],
+        "sahneler": [
+          0,
+          1,
+          5
+        ]
+      },
+      {
+        "iddia": "The derailment was caused by rolling contact fatigue, known as gauge corner cracking.",
+        "terimler": [
+          "gauge corner cracking"
+        ],
+        "sahneler": [
+          2,
+          3
+        ]
+      },
+      {
+        "iddia": "The problem had been identified but the rail had not been replaced.",
+        "terimler": [
+          "replace"
+        ],
+        "sahneler": [
+          4
+        ]
+      },
+      {
+        "iddia": "Emergency speed restrictions were imposed across the network.",
+        "terimler": [
+          "speed restrictions"
+        ],
+        "sahneler": [
+          6
+        ]
+      },
+      {
+        "iddia": "The crash led to the collapse of Railtrack.",
+        "terimler": [
+          "Railtrack"
+        ],
+        "sahneler": [
+          7
+        ]
+      }
+    ],
+    "kaynakca": [
+      {
+        "ad": "Wikipedia — Hatfield rail crash",
+        "url": "https://en.wikipedia.org/wiki/Hatfield_rail_crash"
+      }
+    ]
+  },
+  {
+    "slug": "clapham-junction-1988",
+    "wiki": "Clapham_Junction_rail_crash",
+    "commons": [
+      "Clapham Junction rail crash"
+    ],
+    "baslik": "A Loose Wire Turned a Signal Green",
+    "ad": "the Clapham Junction rail crash",
+    "kisa": "Clapham Junction",
+    "nesne": "Railway signal",
+    "yil": 1988,
+    "kume": "rail-disasters",
+    "oncelik": 10,
+    "sonuc": "saw a train run into another that had stopped at a signal",
+    "tetik": "an old wire left connected during signalling work",
+    "mekanizma": "a wiring fault after re-signalling work keeping a signal at green behind a stopped train",
+    "sayi": "35 DIED",
+    "ders": "signalling work had to be independently tested before use",
+    "zincir": [
+      "SIGNALLING WORK",
+      "OLD WIRE LEFT CONNECTED",
+      "SIGNAL SHOWS GREEN",
+      "TRAIN STOPPED AHEAD",
+      "COLLISION"
+    ],
+    "yanilgi": "The signal wasn't broken by the trains. It was miswired days earlier during maintenance.",
+    "tartisma": "Who checks the work of a tired technician?",
+    "basliklar": [
+      "A Loose Wire Turned a Signal Green",
+      "Why the Clapham Junction Crash Happened",
+      "The Wire Nobody Cut"
+    ],
+    "kapak": [
+      "ONE WIRE",
+      "35 DIED"
+    ],
+    "hook": "One wire left in place",
+    "soru": "Who checked the wiring?",
+    "sahneler": [
+      "One old wire kept a railway signal showing green.",
+      "A packed train crashed into another near Clapham Junction, and thirty five people died.",
+      "The signal should have turned red behind the stopped train.",
+      "Days earlier, technicians had rewired that signal.",
+      "An old wire had not been disconnected or cut back.",
+      "It fed false current to the signal.",
+      "The work had not been independently tested.",
+      "Testing of signalling work became mandatory."
+    ],
+    "kanit": [
+      {
+        "iddia": "The collision killed 35 people.",
+        "terimler": [
+          "35"
+        ],
+        "sahneler": [
+          1
+        ]
+      },
+      {
+        "iddia": "A wiring fault meant the signal showed green when it should have shown red.",
+        "terimler": [
+          "signal",
+          "wir"
+        ],
+        "sahneler": [
+          0,
+          2,
+          5
+        ]
+      },
+      {
+        "iddia": "An old wire had not been disconnected after new signalling work.",
+        "terimler": [
+          "wire"
+        ],
+        "sahneler": [
+          3,
+          4
+        ]
+      },
+      {
+        "iddia": "The work had not been independently tested.",
+        "terimler": [
+          "test"
+        ],
+        "sahneler": [
+          6,
+          7
+        ]
+      }
+    ],
+    "kaynakca": [
+      {
+        "ad": "Wikipedia — Clapham Junction rail crash",
+        "url": "https://en.wikipedia.org/wiki/Clapham_Junction_rail_crash"
+      }
+    ]
+  },
+  {
+    "slug": "teton-dam-1976",
+    "wiki": "Teton_Dam",
+    "commons": [
+      "Teton Dam"
+    ],
+    "baslik": "The New Dam That Failed While Filling",
+    "ad": "the Teton Dam failure",
+    "kisa": "Teton Dam",
+    "nesne": "Earthen dam",
+    "yil": 1976,
+    "kume": "infrastructure-failures",
+    "oncelik": 9,
+    "sonuc": "collapsed while its reservoir was filling for the first time",
+    "tetik": "water seeping through the dam's foundation and embankment",
+    "mekanizma": "seepage through fissured rock and erodible wind-blown soil piping through the embankment",
+    "sayi": "11 DIED",
+    "ders": "US federal dam safety reviews were strengthened",
+    "zincir": [
+      "FISSURED ROCK",
+      "ERODIBLE FILL",
+      "FIRST FILLING",
+      "SEEPAGE AND PIPING",
+      "DAM BREACHES"
+    ],
+    "yanilgi": "The dam wasn't old or neglected. It failed before it was even finished filling.",
+    "tartisma": "How much testing should a new dam get before it holds a full reservoir?",
+    "basliklar": [
+      "The New Dam That Failed While Filling",
+      "Why the Teton Dam Collapsed",
+      "The Leak That Became a Flood"
+    ],
+    "kapak": [
+      "BRAND NEW",
+      "FIRST FILLING"
+    ],
+    "hook": "It never finished filling",
+    "soru": "Why did a new dam fail?",
+    "sahneler": [
+      "A brand-new dam failed before its reservoir was even full.",
+      "Water burst through the Teton Dam and flooded the valley below.",
+      "It was filling for the first time in June 1976.",
+      "Water had begun seeping through the dam.",
+      "The leak grew and eroded the earthen embankment.",
+      "Within hours, the dam was breached.",
+      "Eleven people died in the flood.",
+      "Federal dam safety reviews were strengthened afterwards."
+    ],
+    "kanit": [
+      {
+        "iddia": "The dam failed on June 5, 1976, as it was filling for the first time.",
+        "terimler": [
+          "filling"
+        ],
+        "sahneler": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "iddia": "Water seeped through the dam and eroded the embankment.",
+        "terimler": [
+          "seep"
+        ],
+        "sahneler": [
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "iddia": "The flood killed 11 people.",
+        "terimler": [
+          "11"
+        ],
+        "sahneler": [
+          6
+        ]
+      },
+      {
+        "iddia": "The failure led to dam safety programs being strengthened.",
+        "terimler": [
+          "dam safety"
+        ],
+        "sahneler": [
+          7
+        ]
+      }
+    ],
+    "kaynakca": [
+      {
+        "ad": "Wikipedia — Teton Dam",
+        "url": "https://en.wikipedia.org/wiki/Teton_Dam"
+      }
+    ]
+  },
+  {
+    "slug": "herald-of-free-enterprise-1987",
+    "wiki": "MS_Herald_of_Free_Enterprise",
+    "commons": [
+      "MS Herald of Free Enterprise"
+    ],
+    "baslik": "The Ferry That Left Port With Its Bow Doors Open",
+    "ad": "the Herald of Free Enterprise capsizing",
+    "kisa": "Herald of Free Enterprise",
+    "nesne": "Car ferry",
+    "yil": 1987,
+    "kume": "maritime-disasters",
+    "oncelik": 10,
+    "sonuc": "capsized minutes after leaving Zeebrugge",
+    "tetik": "the ferry sailing with its inner and outer bow doors open",
+    "mekanizma": "sea water flooding the open car deck, destabilising the ship until it capsized",
+    "sayi": "193 DIED",
+    "ders": "indicator lights for bow doors and new ferry safety rules",
+    "zincir": [
+      "BOW DOORS LEFT OPEN",
+      "FERRY SAILS",
+      "WATER FLOODS CAR DECK",
+      "SHIP CAPSIZES",
+      "193 DIED"
+    ],
+    "yanilgi": "It wasn't a storm or a collision. The ship sailed with its bow doors open.",
+    "tartisma": "Whose job is it to check what nobody is assigned to check?",
+    "basliklar": [
+      "The Ferry That Left Port With Its Bow Doors Open",
+      "Why the Herald of Free Enterprise Capsized",
+      "The Doors Nobody Closed"
+    ],
+    "kapak": [
+      "DOORS OPEN",
+      "193 DIED"
+    ],
+    "hook": "The doors were open",
+    "soru": "Who should have closed them?",
+    "sahneler": [
+      "A ferry left port with its bow doors wide open.",
+      "Within minutes it capsized off Zeebrugge, and one hundred ninety three people died.",
+      "Sea water poured into the open car deck.",
+      "The water sloshed sideways and the ship rolled over.",
+      "The crew member responsible for the doors was asleep.",
+      "From the bridge, nobody could see the doors.",
+      "There was no indicator to warn them.",
+      "Ferries then got bow door indicator lights."
+    ],
+    "kanit": [
+      {
+        "iddia": "The ferry capsized moments after leaving the Belgian port of Zeebrugge, killing 193 passengers and crew.",
+        "terimler": [
+          "193",
+          "Zeebrugge"
+        ],
+        "sahneler": [
+          1
+        ]
+      },
+      {
+        "iddia": "The ship left harbour with her inner and outer bow doors open.",
+        "terimler": [
+          "bow door"
+        ],
+        "sahneler": [
+          0,
+          2,
+          3
+        ]
+      },
+      {
+        "iddia": "The assistant boatswain who should have closed the doors was asleep.",
+        "terimler": [
+          "asleep"
+        ],
+        "sahneler": [
+          4
+        ]
+      },
+      {
+        "iddia": "The bridge could not see whether the bow doors were closed and there were no indicator lights.",
+        "terimler": [
+          "indicator"
+        ],
+        "sahneler": [
+          5,
+          6,
+          7
+        ]
+      }
+    ],
+    "kaynakca": [
+      {
+        "ad": "Wikipedia — MS Herald of Free Enterprise",
+        "url": "https://en.wikipedia.org/wiki/MS_Herald_of_Free_Enterprise"
+      }
+    ]
+  }
+]
