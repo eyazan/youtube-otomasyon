@@ -70,6 +70,9 @@ test("auto storyboard: a line about another body draws that body; no flowing roc
   assert.ok(!sb.scenes.some((s) => /-flow$/.test(s.id)), "'keeps the metal from melting' is not flowing rock");
   assert.ok(!sb.scenes[4].layers.some((l) => l.component === "depth-probe"), "the inner core's 1,230 km radius is not a depth under the surface");
   assert.ok(sb.scenes[4].layers.some((l) => l.component === "planet" && l.props.cutaway), "the radius is shown on the opened planet");
+  assert.ok(!sb.scenes[5].layers.some((l) => l.component === "depth-probe"), "'shear waves were detected passing through it' is not a drill reaching the core");
+  const s7 = sb.scenes[6].layers.find((l) => l.component === "kinetic-type").props.items[0];
+  assert.equal(s7.outAt, "L7.end-0.25", "a top headline leaves before the payoff headline arrives");
   assert.ok(!texts.includes("METAL FROM MELTING"));
   assert.equal(Generator.keyPhrase("Crushing pressure keeps the metal from melting."), "");
   assert.equal(Generator.keyPhrase("Why Earth's core matches the Sun's surface heat."), "SUN'S SURFACE HEAT");

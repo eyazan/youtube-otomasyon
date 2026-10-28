@@ -251,7 +251,10 @@ function build(script, style, topic) {
       // the axis spans x 150-850: a gentle push keeps its end labels inside the safe margins (x >= 72) while it moves
       camera = [{ at: start, x: 520, y: 900, z: 1.0 }, { at: `${L.id}.end`, x: 560, y: 940, z: 1.08 }];
     } else if (year) {
-      kind = "year"; layers = [stars(20 + i), ...(depthWorld ? [probeSlice(L, { from: 0, to: qty && (qty.unit === "m" || qty.unit === "km") ? (qty.unit === "km" ? qty.value * 1000 : qty.value) : maxDepth * 0.82 })] : signature(`${L.id}`)),
+      // a probe descends only for a line about going down (a drill, a dive); a detection ("shear waves were detected passing
+      // through it", IB-PHY-065) keeps the planet on screen, never a drill that reached the core
+      const descent = depthWorld && !/\b(waves?|seismic|detected|detection|signal|echo|measured|recorded)\b/i.test(L.text);
+      kind = "year"; layers = [stars(20 + i), ...(descent ? [probeSlice(L, { from: 0, to: qty && (qty.unit === "m" || qty.unit === "km") ? (qty.unit === "km" ? qty.value * 1000 : qty.value) : maxDepth * 0.82 })] : signature(`${L.id}`)),
         { component: "timeline-ruler", screen: true, props: { theme: "dark", y: 1250, fromYear: year.value - 6, year: year.value, enterAt: `${L.id}-0.1`, arriveAt: `${L.id}+0.6`, outAt: `${L.id}.end` } }];
       purpose = `Time: the ruler lands on ${year.raw} while the scene shows what started then (the probe begins its descent); the year is from the cited fact.`;
       camera = cam(1.0, 1.12, 800, 840);
@@ -332,6 +335,10 @@ function build(script, style, topic) {
   // a line with no natural short phrase gets no headline: empty text items (and then empty text layers) are removed
   scenes.forEach((sc) => { sc.layers.forEach((l) => { if (l.component === "kinetic-type") l.props.items = l.props.items.filter((it) => String(it.text || "").trim()); });
     sc.layers = sc.layers.filter((l) => l.component !== "kinetic-type" || l.props.items.length); });
+  // a top-band headline leaves before the next scene's top headline arrives, so two never overlap during the cut
+  // (IB-PHY-065 review render: TOUCHING IT IS IMPOSSIBLE still on screen as PRESSURE, NOT HEAT came in)
+  const tops = (sc) => sc.layers.filter((l) => l.component === "kinetic-type").flatMap((l) => l.props.items).filter((it) => it.y <= 480);
+  scenes.forEach((sc, k) => { if (k < scenes.length - 1 && tops(scenes[k + 1]).length) tops(sc).forEach((it) => { if (it.outAt == null) it.outAt = off(`${sc.lines[0]}.end`, -0.25); }); });
   return {
     schema: "bto-studio.storyboard.v1", channel: script.channel, topicId: script.topicId, slug: script.slug, version: 1,
     author: `auto/impossible-brief (deterministic scene grammar, world ${W}; needs creative review before publication)`,
