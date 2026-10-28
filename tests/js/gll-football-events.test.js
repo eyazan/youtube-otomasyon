@@ -36,5 +36,5 @@ test("GLL-025 (Panenka): penalties from the spot, the miss over the bar, the chi
 
 test("the dot-matrix board always fits the frame", () => {
   const src = require("fs").readFileSync(path.join(ROOT, "scripts/bto-studio/page/components/football-atmos.js"), "utf8");
-  assert.match(src, /o\.maxW \|\| 960/);
+  assert.match(src, /o\.maxW \|\| 880/);
 });

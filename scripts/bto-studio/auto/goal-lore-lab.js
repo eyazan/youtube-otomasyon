@@ -196,6 +196,9 @@ function build(script, style, topic) {
   // plates: never the same twice in a row (the payoff returns to the hook's desk)
   scenes.forEach((sc, k) => { if (k && k < scenes.length - 1 && sc.env === scenes[k - 1].env) sc.env = sc.env === "desk" ? "spot" : "desk"; });
   if (scenes.length > 2 && scenes[scenes.length - 2].env === "desk") scenes[scenes.length - 2].env = "spot";
+  // a headline followed by another headline (or a board) clears before its line ends, so the cut never overlays the two
+  const tops = (sc) => sc.layers.filter((l) => l.component === "kinetic-type").flatMap((l) => l.props.items).filter((it) => it.y <= 500);
+  scenes.forEach((sc, k) => { const nx = scenes[k + 1]; if (nx && (tops(nx).length || nx.layers.some((l) => l.component === "dot-board"))) tops(sc).forEach((it) => { if (it.outAt == null) it.outAt = off(`${sc.lines[0]}.end`, -0.25); }); });
   // digits on screen must occur in a cited fact (validator rule): failing type becomes the key phrase
   const cited = (sc) => sc.evidence.map((id) => facts.find((f) => f.id === id)).filter(Boolean).map((f) => f.claim + " " + (f.quote || "")).join(" ");
   const ok = (sc, s) => (String(s).match(/\d+/g) || []).every((d) => new RegExp(`(^|\\D)${d}(\\D|$)`).test(cited(sc)));
