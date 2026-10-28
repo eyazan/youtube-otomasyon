@@ -173,3 +173,18 @@ test("premium applies the channel's own topic bar (viral minimum, selectable buc
   }
   assert.equal(Lane.growthBar(Channel.getChannel("goal-lore-lab")), null, "GoalLore Lab's bar is its verified research");
 });
+
+test("upload metadata always has a title from the record itself, on every channel's qualified topics", () => {
+  for (const slug of ["failure-reconstructed", "impossible-brief", "goal-lore-lab"]) {
+    const ch = Channel.getChannel(slug);
+    for (const r of Lane.qualified(ch).ok) { const m = Publish.metadata(ch, r.topic); assert.ok(m.title.length > 3 && m.title.length <= 100, `${slug} ${r.topic.id}: "${m.title}"`); assert.ok(m.description.length > 20, r.topic.id); }
+  }
+  assert.equal(Publish.metadata(Channel.getChannel("impossible-brief"), { id: "IB-X", topic: "What If?", editorialTitles: ["Why We Can't Drill Through the Earth"], facts: [] }).title, "Why We Can't Drill Through the Earth");
+});
+
+test("premium descriptions never claim archival or stock footage", () => {
+  for (const slug of ["failure-reconstructed", "impossible-brief", "goal-lore-lab"]) {
+    const ch = Channel.getChannel(slug);
+    for (const r of Lane.qualified(ch).ok) { const d = Publish.metadata(ch, r.topic).description; assert.doesNotMatch(d, /real archival film|licensed stock|Stock footage: Pexels/, `${slug} ${r.topic.id}`); assert.match(d, /synthetic voice/i); }
+  }
+});

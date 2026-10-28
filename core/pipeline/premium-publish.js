@@ -99,7 +99,12 @@ function metadata(channel, topic) {
   const clean = (x) => String(x || "").replace(/[<>]/g, "").replace(/\s+/g, " ").trim();
   if (channel.slug === "failure-reconstructed") {
     const konu = J(path.join(channel.paths.state, "konular", `${topic.slug}.json`));
-    if (konu) { const d = require("../../description-engine").olustur(konu); return { title: clean(konu.baslik).slice(0, 100), description: d.metin, tags: d.etiketler }; }
+    // the live description engine on the case file, without its stock and archival footage credits: the premium video
+    // is original animation
+    if (konu) { const d = require("../../description-engine").olustur({ ...konu, slug: topic.slug, tur: "premium", kaynaklar: [] });
+      const ANIMATION = "Original animation: no archival or stock footage; reconstructions and illustrations are labelled on screen.";
+      const metin = /Footage is real archival film or licensed stock[^\n]*/.test(d.metin) ? d.metin.replace(/Footage is real archival film or licensed stock[^\n]*/, ANIMATION) : `${d.metin}\n\n${ANIMATION}`;
+      return { title: clean(konu.baslik).slice(0, 100), description: metin, tags: d.etiketler }; }
   }
   const Hashtags = require("../hashtags");
   const sources = []; for (const f of [...(topic.facts || []), ...(topic.sources || [])]) { const url = f.url; const name = clean(f.sourceTitle || f.source || f.name || ""); if (url && !sources.some((x) => x.url === url)) sources.push({ name: name.replace(/ \(revision.*$/, "") || url, url }); }
@@ -109,7 +114,9 @@ function metadata(channel, topic) {
     `Original animation; no broadcast footage. Narration: synthetic voice (Microsoft Edge neural TTS). Claims are mapped to the sources above.`, hashtags.join(" ")].filter(Boolean).join("\n\n");
   const subject = Hashtags.subjectPhrase(topic);
   const tags = [...new Set([subject, clean(topic.pillar || topic.category || "").toLowerCase(), channel.name].filter(Boolean))];
-  return { title: clean(topic.title).slice(0, 100), description, tags };
+  // the channel's editorial title when the record carries one (ImpossibleBrief), else the record's own title
+  const title = clean(topic.title || (topic.editorialTitles || [])[0] || topic.topic || topic.coreQuestion).slice(0, 100);
+  return { title, description, tags };
 }
 
 // an automatic reservation under the signed policy (written only on publication runs)
