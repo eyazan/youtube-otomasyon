@@ -226,7 +226,8 @@ test("ImpossibleBrief pipeline persists named validation evidence", () => {
 
 test("portfolio scheduling serializes shared render/upload resources", () => {
   const plan = Scheduler.portfolioPlan(new Date("2030-01-01T12:00:00Z"));
-  assert.equal(plan.channels.length, 3, "FR, IB and CT; The Hidden Logic of Things is inactive");
+  assert.equal(plan.channels.length, 2, "FR and IB; The Hidden Logic of Things is inactive and CriticalThread is retired");
+  assert.ok(!plan.channels.some((c) => (c.slug || c.channel || c) === "critical-thread"), "the retired CriticalThread is never scheduled");
   assert.equal(plan.resourceLimits.maxConcurrentRenders, 1);
   assert.equal(plan.resourceLimits.maxConcurrentUploads, 1);
   assert.ok(plan.queue.every((task) => task.renderLane === 0 && task.uploadLane === 0));

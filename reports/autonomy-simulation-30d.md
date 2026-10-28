@@ -10,8 +10,10 @@ Window: 2026-10-01 for 30 days. Uploads and renders were simulated; no external 
 |---|---:|---:|---:|---:|
 | failure-reconstructed | 30 | 6 | 30 | 4 |
 | impossible-brief | 30 | 5 | 30 | 4 |
-| critical-thread | 30 | 5 | 30 | 3 |
+| critical-thread | 0 | 0 | 0 | 0 |
 | behind-the-ordinary | 0 | 0 | 0 | 0 |
+
+CriticalThread is retired (config/channels.json, 2026-10-27): it is modelled publishing nothing; its YouTube channel now belongs to its registry successor.
 
 The Hidden Logic of Things is inactive (config/channels.json enabled:false): it is modelled with no inventory and publishes nothing; the other channels pass on their own.
 
