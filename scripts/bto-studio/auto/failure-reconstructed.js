@@ -14,7 +14,8 @@
 // RECONSTRUCTION chip and the CASE FILE chip. On-screen digits must occur in a cited case-file fact.
 const { keyPhrase } = require("./impossible-brief");
 
-const TRANSITIONS = ["scan-wipe", "iris"];
+// clip reveals only (no push/match-zoom/whip): they never drag on-screen text across the frame edge; three types for variety (#357)
+const TRANSITIONS = ["scan-wipe", "iris", "square-iris"];
 const KIND = [
   [/airship|zeppelin|dirigible|balloon/i, "airship"],
   [/rocket|spacecraft|lander|shuttle|capsule|launch|satellite|probe|space station|booster/i, "rocket"],
@@ -113,6 +114,8 @@ function build(script, style, topic) {
   });
   // consecutive chain scenes share one continuous camera move, so they are joined with a continuity cut; plates alternate
   scenes.forEach((sc, k) => { if (k && sc.id.endsWith("-chain") && scenes[k - 1].id.endsWith("-chain")) sc.transition = { type: "continuity", dur: 0.3 }; });
+  // the remaining real cuts cycle the clip reveals in order, so a chain run does not use up the variety (#357)
+  ti = 0; scenes.forEach((sc, k) => { if (k && sc.transition.type !== "continuity") sc.transition.type = nextTransition(); });
   // plates alternate blueprint / void at every cut; a continuity cut keeps its group's plate; the payoff returns to the
   // hook's blueprint, and when that would repeat the previous plate, the previous group takes the teal plate
   const cont = (sc) => sc.transition && sc.transition.type === "continuity";

@@ -48,6 +48,9 @@ test("FR automatic storyboard: valid for every ready case, follows the case spin
     const script = Adapter.studioScript(channel, topic); const sb = Generator.build(script, style, topic); kinds.add(Generator.objectKind(topic));
     const v = Validator.validateStoryboard(sb, { script, timeline: fakeTimeline(script), style, policy: profile.evidencePolicy.validator });
     assert.deepEqual(v.errors, [], slug);
+    const real = sb.scenes.slice(1).map((s) => s.transition.type).filter((t) => t !== "continuity");
+    assert.equal(new Set(real).size, Math.min(3, real.length), `${slug}: transition variety (#357)`);
+    assert.ok(sb.scenes.slice(1).every((s) => ["scan-wipe", "iris", "square-iris", "continuity"].includes(s.transition.type)), `${slug}: text-safe transitions only`);
     sb.scenes.forEach((s, k) => { if (k && !(s.transition && s.transition.type === "continuity")) assert.notEqual(s.env, sb.scenes[k - 1].env, `${slug} ${s.id}: plate repeats across a cut`); });
     assert.ok(sb.scenes.every((s) => s.chips.includes("conceptualLabel") && s.chips.includes("factLabel")), `${slug}: RECONSTRUCTION + CASE FILE chips`);
   }
