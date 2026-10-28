@@ -348,6 +348,22 @@ function claimEvidence(seed, art) {
   return { kanitlar, errors };
 }
 
+// A written topic joins the FR topic universe with the same row the inventory builder derives from a case file
+// (scripts/fr-library/build-inventory.js existingTopics); premiumOnly is carried so no legacy reader mistakes it.
+function addUniverseRows(slugs) {
+  const UNIVERSE = path.join(ROOT, "channels", "failure-reconstructed", "topics", "topic-universe.json");
+  const universe = JSON.parse(fs.readFileSync(UNIVERSE, "utf8"));
+  const rows = require("./build-inventory").existingTopics().filter((r) => slugs.includes(r.topic_id));
+  for (const row of rows) {
+    const spec = JSON.parse(fs.readFileSync(path.join(TOPICS, row.topic_id + ".json"), "utf8"));
+    if (spec.premiumOnly) row.premium_only = true;
+    const i = universe.topics.findIndex((t) => t.topic_id === row.topic_id);
+    if (i >= 0) universe.topics[i] = row; else universe.topics.push(row);
+  }
+  if (universe.stats) { universe.stats.total = universe.topics.length; universe.stats.production_ready = universe.topics.filter((t) => t.production_ready).length; }
+  fs.writeFileSync(UNIVERSE, JSON.stringify(universe, null, 2) + "\n");
+}
+
 // Batches from batch-23 on must carry claim evidence (seed.kanit); earlier batches predate the rule.
 function needsEvidence(batch) { const m = /^batch-(\d+)$/.exec(batch); return !!m && Number(m[1]) >= 23; }
 
@@ -384,7 +400,8 @@ function toSpec(seed, stills) {
     oncelik: seed.oncelik || 7,
     baslik: seed.baslik,
     kaynaklar: files,
-    sahneler: seed.sahneler.map((metin, i) => ({ metin, kaynak: "Footage/" + files[i % files.length].ad })),
+    sahneler: seed.sahneler.map((metin, i) => (files.length ? { metin, kaynak: "Footage/" + files[i % files.length].ad } : { metin })),
+    ...(seed.premiumOnly ? { premiumOnly: true } : {}),
     aciklama,
     etiketler: (seed.etiketler && seed.etiketler.length ? seed.etiketler : [seed.kisa, String(seed.yil), seed.nesne.toLowerCase(), "engineering failure"]).slice(0, 10),
     hook: seed.hook,
@@ -481,11 +498,14 @@ async function main() {
       if (!official.length) row.errors.push("no verifiable authoritative source (none reachable, none cited officially)");
       seed.kaynakca = verified.map(({ ad, url }) => ({ ad, url }));
       row.sources = verified;
-      row.stills = await commonsStills([seed.commons, seed.kisa, seed.wiki.replace(/_/g, " ").replace(/\(.*\)/, "")].flat(), 7, seed.wiki,
+      // premiumOnly (owner decision 2026-10-28): the premium studio draws every visual, so no Commons still is fetched or
+      // required and no third-party image enters the spec; every research and source check above still applies
+      if (seed.premiumOnly) row.stills = [];
+      else row.stills = await commonsStills([seed.commons, seed.kisa, seed.wiki.replace(/_/g, " ").replace(/\(.*\)/, "")].flat(), 7, seed.wiki,
         { keywords: [seed.commons, seed.kisa].flat(), year: seed.yil, exclude: usedFiles, reject: seed.excludeStills, strict: seed.strictStills,
           phrases: [seed.kisa, seed.wiki.replace(/_/g, " ").replace(/\s*\(.*\)/, ""), ...[seed.commons].flat().filter((q) => q && !/^Category:/i.test(q))] });
       for (const still of row.stills) usedFiles.add(still.file);
-      if (row.stills.length < 3) row.errors.push(`only ${row.stills.length} licence-clean archival still(s) on Commons (PD/CC0/CC BY)`);
+      if (!seed.premiumOnly && row.stills.length < 3) row.errors.push(`only ${row.stills.length} licence-clean archival still(s) on Commons (PD/CC0/CC BY)`);
       await sleep(250);
     }
     // The legacy title engine (title-engine.js) needs a 20+ candidate pool.
@@ -502,10 +522,11 @@ async function main() {
     report.push(row);
     console.log(`${row.errors.length ? "✗" : "✓"} ${seed.slug}${row.errors.length ? " — " + row.errors.join(" | ") : ` (${(row.stills || []).length} stills)`}${row.warnings.length ? " [" + row.warnings.join("; ") + "]" : ""}`);
   }
+  if (write && report.some((r) => r.written)) addUniverseRows(report.filter((r) => r.written).map((r) => r.slug));
   fs.writeFileSync(file.replace(/\.json$/, ".report.json"), JSON.stringify(report, null, 2) + "\n");
   const ok = report.filter((r) => !r.errors.length).length;
   console.log(`\n${ok}/${report.length} passed${write ? `, ${report.filter((r) => r.written).length} written` : " (dry run; add --write)"}`);
 }
 
 if (require.main === module) main().catch((e) => { console.error(e); process.exit(1); });
-module.exports = { numbersIn, spelledNumbers, supported, get, lint, toSpec, commonsStills, citedOfficialLinks, needsEvidence, claimEvidence, LICENCE_OK };
+module.exports = { numbersIn, spelledNumbers, supported, get, lint, toSpec, commonsStills, citedOfficialLinks, needsEvidence, claimEvidence, addUniverseRows, LICENCE_OK };
