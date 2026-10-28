@@ -32,7 +32,7 @@ jobs:
       - run: npm ci --no-audit --no-fund
       - name: Claim check
         env:
-          TOPICS: ${{ inputs.topics || 'IB-EXT-050' }}
+          TOPICS: ${{ inputs.topics || 'IB-EXT-050 IB-HUM-025 IB-EXT-047 IB-HUM-004 IB-PHY-065' }}
         run: |
           set -o pipefail
           # shellcheck disable=SC2086  # TOPICS is a space-separated list of ids
