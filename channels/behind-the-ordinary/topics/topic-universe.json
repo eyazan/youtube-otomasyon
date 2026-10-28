@@ -12726,7 +12726,7 @@
         "validatedCandidate": true
       },
       "status": "qualified",
-      "researchedAt": "2026-10-28T03:58:18.393Z",
+      "researchedAt": "2026-10-28T04:02:59.508Z",
       "researchMethod": "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live Wikipedia article at the pinned revision; claim and narration numbers checked against the quotes",
       "rights": {
         "footage": "none (original animation only)",
@@ -12751,7 +12751,7 @@
         },
         {
           "role": "MECHANISM",
-          "text": "Matter grows in length as its temperature rises. That is thermal expansion.",
+          "text": "Matter grows in size as its temperature rises. That is thermal expansion.",
           "layer": "VERIFIED FACT",
           "facts": [
             "F3"
@@ -16065,17 +16065,9 @@
         "avoidPairingWithinDays": 30,
         "compareAgainstPublished": true
       },
-      "researchStatus": "RESEARCHED",
-      "productionReady": false,
+      "researchStatus": "VERIFIED",
+      "productionReady": true,
       "facts": [
-        {
-          "id": "F1",
-          "claim": "Laminated glass is a type of safety glass that holds together when shattered.",
-          "quote": "",
-          "layer": "UNVERIFIED",
-          "source": "Wikipedia: Laminated glass",
-          "url": "https://en.wikipedia.org/w/index.php?title=Laminated_glass&oldid=1379873589"
-        },
         {
           "id": "F2",
           "role": null,
@@ -16108,7 +16100,7 @@
         "validatedCandidate": true
       },
       "status": "qualified",
-      "researchedAt": "2026-10-28T03:58:18.450Z",
+      "researchedAt": "2026-10-28T04:02:59.972Z",
       "researchMethod": "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live Wikipedia article at the pinned revision; claim and narration numbers checked against the quotes",
       "rights": {
         "footage": "none (original animation only)",
@@ -16117,39 +16109,23 @@
       "narration": [
         {
           "role": "VISUAL_MYSTERY",
-          "text": "Crack a car windshield and it stays in one piece.",
+          "text": "Why does a cracked windshield stay in one piece?",
           "layer": "VERIFIED FACT",
           "facts": [
-            "F1"
-          ]
-        },
-        {
-          "role": "CLEAR_PROMISE",
-          "text": "That is because the glass is a sandwich.",
-          "layer": "VERIFIED FACT",
-          "facts": [
-            "F2"
-          ]
-        },
-        {
-          "role": "MECHANISM",
-          "text": "Between its layers of glass sits a plastic interlayer, usually polyvinyl butyral.",
-          "layer": "VERIFIED FACT",
-          "facts": [
-            "F2"
-          ]
-        },
-        {
-          "role": "MECHANISM",
-          "text": "When the glass breaks, the interlayer holds it in place.",
-          "layer": "VERIFIED FACT",
-          "facts": [
-            "F2"
+            "F3"
           ]
         },
         {
           "role": "ORIGIN",
-          "text": "The idea goes back to 1903, when the chemist Édouard Bénédictus dropped a coated glass flask.",
+          "text": "The answer began with a laboratory accident in 1903.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F3"
+          ]
+        },
+        {
+          "role": "ORIGIN",
+          "text": "The French chemist Édouard Bénédictus dropped a glass flask coated with a plastic.",
           "layer": "VERIFIED FACT",
           "facts": [
             "F3"
@@ -16164,26 +16140,35 @@
           ]
         },
         {
-          "role": "PAYOFF",
-          "text": "So the layers are there for the moment the glass breaks: it holds together.",
+          "role": "ANSWER",
+          "text": "That accident became laminated glass.",
           "layer": "VERIFIED FACT",
           "facts": [
-            "F1"
+            "F3"
+          ]
+        },
+        {
+          "role": "MECHANISM",
+          "text": "Today the glass layers sandwich a plastic interlayer, typically polyvinyl butyral.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F2"
+          ]
+        },
+        {
+          "role": "PAYOFF",
+          "text": "Glass bonded to plastic: it can shatter without falling apart.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F2",
+            "F3"
           ]
         }
       ],
       "verification": {
-        "ok": false,
-        "errors": [
-          "fact F1: no sentence contains all of: holds together + shattered",
-          "line 1: cites an unverified fact",
-          "line 7: cites an unverified fact"
-        ],
-        "near": {
-          "F1": [
-            "Laminated glass was invented in 1903 by the French chemist Édouard Bénédictus (1878–1930), inspired by a laboratory accident: a glass flask had become coated with the plastic cellulose nitrate, and when dropped it shattered but did not break into pieces."
-          ]
-        }
+        "ok": true,
+        "errors": [],
+        "near": {}
       }
     },
     {
@@ -17204,7 +17189,7 @@
         "validatedCandidate": true
       },
       "status": "qualified",
-      "researchedAt": "2026-10-28T03:58:18.722Z",
+      "researchedAt": "2026-10-28T04:03:00.372Z",
       "researchMethod": "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live Wikipedia article at the pinned revision; claim and narration numbers checked against the quotes",
       "rights": {
         "footage": "none (original animation only)",
@@ -18265,17 +18250,6 @@
           "sourceTitle": "BS 1363",
           "revid": 1377545090,
           "layer": "VERIFIED FACT"
-        },
-        {
-          "id": "F2",
-          "role": null,
-          "claim": "Sockets have shutters over the line and neutral contacts, which are opened by the earth pin.",
-          "quote": "Alternatively, shutters may be opened by simultaneous insertion of line and neutral pins.",
-          "source": "Wikipedia: BS 1363 (revision 1377545090, 2026-09-29T23:30:09Z)",
-          "url": "https://en.wikipedia.org/w/index.php?title=BS_1363&oldid=1377545090",
-          "sourceTitle": "BS 1363",
-          "revid": 1377545090,
-          "layer": "VERIFIED FACT"
         }
       ],
       "sources": [],
@@ -18287,7 +18261,7 @@
         "validatedCandidate": true
       },
       "status": "qualified",
-      "researchedAt": "2026-10-28T03:58:18.882Z",
+      "researchedAt": "2026-10-28T04:03:00.475Z",
       "researchMethod": "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live Wikipedia article at the pinned revision; claim and narration numbers checked against the quotes",
       "rights": {
         "footage": "none (original animation only)",
@@ -18312,27 +18286,26 @@
         },
         {
           "role": "MECHANISM",
-          "text": "The socket's line and neutral holes are covered by shutters.",
+          "text": "Because it is longer, the earth connects before the live pins do.",
           "layer": "VERIFIED FACT",
           "facts": [
-            "F2"
+            "F1"
           ]
         },
         {
-          "role": "ANSWER",
-          "text": "The long earth pin goes in first and opens them.",
+          "role": "MECHANISM",
+          "text": "Pull the plug out and it stays connected until after the live pins let go.",
           "layer": "VERIFIED FACT",
           "facts": [
-            "F1",
-            "F2"
+            "F1"
           ]
         },
         {
           "role": "PAYOFF",
-          "text": "So the live contacts are only uncovered when a plug is going in.",
+          "text": "So whenever power can flow, there is already a path to earth.",
           "layer": "VERIFIED FACT",
           "facts": [
-            "F2"
+            "F1"
           ]
         }
       ],
@@ -19319,24 +19292,52 @@
         "avoidPairingWithinDays": 30,
         "compareAgainstPublished": true
       },
-      "researchStatus": "RESEARCHED",
-      "productionReady": false,
+      "researchStatus": "VERIFIED",
+      "productionReady": true,
       "facts": [
         {
           "id": "F1",
-          "claim": "Early pull-tabs came off the can and became a common form of litter.",
-          "quote": "",
-          "layer": "UNVERIFIED",
-          "source": "Wikipedia: Drink can",
-          "url": "https://en.wikipedia.org/w/index.php?title=Drink_can&oldid=1376636475"
+          "role": null,
+          "claim": "In the 1960s, at least one inventor attempted to solve the litter problem by having the tab retained by a stationary key, which was unsuccessful commercially.",
+          "quote": "In the 1960s, at least one inventor attempted to solve the litter problem, by having the tab be retained by a stationary key that would wrap the tab around itself, which was unsuccessful commercially.",
+          "source": "Wikipedia: Drink can (revision 1376636475, 2026-09-25T10:08:30Z)",
+          "url": "https://en.wikipedia.org/w/index.php?title=Drink_can&oldid=1376636475",
+          "sourceTitle": "Drink can",
+          "revid": 1376636475,
+          "layer": "VERIFIED FACT"
         },
         {
           "id": "F2",
-          "claim": "Daniel F. Cudzik of Reynolds Metals developed the stay-on tab in 1975.",
-          "quote": "",
-          "layer": "UNVERIFIED",
-          "source": "Wikipedia: Drink can",
-          "url": "https://en.wikipedia.org/w/index.php?title=Drink_can&oldid=1376636475"
+          "role": null,
+          "claim": "Cudzik invented the non-removing Stay-Tab.",
+          "quote": "Cudzik's invention of the non-removing \"Stay-Tab\".",
+          "source": "Wikipedia: Drink can (revision 1376636475, 2026-09-25T10:08:30Z)",
+          "url": "https://en.wikipedia.org/w/index.php?title=Drink_can&oldid=1376636475",
+          "sourceTitle": "Drink can",
+          "revid": 1376636475,
+          "layer": "VERIFIED FACT"
+        },
+        {
+          "id": "F3",
+          "role": null,
+          "claim": "Cudzik, an engineer with Reynolds Metals, filed a design patent application for an end closure for a container.",
+          "quote": "Cudzik, an engineer with Reynolds Metals, filed a design patent application for an \"End closure for a container\".",
+          "source": "Wikipedia: Drink can (revision 1376636475, 2026-09-25T10:08:30Z)",
+          "url": "https://en.wikipedia.org/w/index.php?title=Drink_can&oldid=1376636475",
+          "sourceTitle": "Drink can",
+          "revid": 1376636475,
+          "layer": "VERIFIED FACT"
+        },
+        {
+          "id": "F4",
+          "role": null,
+          "claim": "The safety and litter problems were eventually solved later in the 1970s.",
+          "quote": "The safety and litter problems were eventually solved later in the 1970s with Daniel F.",
+          "source": "Wikipedia: Drink can (revision 1376636475, 2026-09-25T10:08:30Z)",
+          "url": "https://en.wikipedia.org/w/index.php?title=Drink_can&oldid=1376636475",
+          "sourceTitle": "Drink can",
+          "revid": 1376636475,
+          "layer": "VERIFIED FACT"
         }
       ],
       "sources": [],
@@ -19348,7 +19349,7 @@
         "validatedCandidate": true
       },
       "status": "qualified",
-      "researchedAt": "2026-10-28T03:58:18.962Z",
+      "researchedAt": "2026-10-28T04:03:00.599Z",
       "researchMethod": "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live Wikipedia article at the pinned revision; claim and narration numbers checked against the quotes",
       "rights": {
         "footage": "none (original animation only)",
@@ -19365,15 +19366,16 @@
         },
         {
           "role": "CONTEXT",
-          "text": "Early can tabs came right off.",
+          "text": "Early tabs came off, and loose tabs were a litter problem.",
           "layer": "VERIFIED FACT",
           "facts": [
-            "F1"
+            "F1",
+            "F4"
           ]
         },
         {
-          "role": "STAKES",
-          "text": "Those loose tabs became a common form of litter.",
+          "role": "CONTEXT",
+          "text": "In the 1960s, at least one inventor tried to solve it, without commercial success.",
           "layer": "VERIFIED FACT",
           "facts": [
             "F1"
@@ -19381,46 +19383,35 @@
         },
         {
           "role": "ANSWER",
-          "text": "In 1975, Daniel Cudzik of Reynolds Metals developed a tab that stays on.",
+          "text": "The safety and litter problems were solved later in the 1970s.",
           "layer": "VERIFIED FACT",
           "facts": [
-            "F2"
+            "F4"
+          ]
+        },
+        {
+          "role": "ANSWER",
+          "text": "Daniel Cudzik, an engineer with Reynolds Metals, invented a tab that does not come off.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F2",
+            "F3"
           ]
         },
         {
           "role": "PAYOFF",
-          "text": "The tab stays with the can so it never ends up on the ground.",
+          "text": "So the tab stays on the can instead of on the ground.",
           "layer": "VERIFIED FACT",
           "facts": [
-            "F1",
-            "F2"
+            "F2",
+            "F4"
           ]
         }
       ],
       "verification": {
-        "ok": false,
-        "errors": [
-          "fact F1: a sentence has the terms but not every claim number (none), is not 5-80 words of prose, or shares under 50% of the claim's content words",
-          "fact F2: a sentence has the terms but not every claim number (1975), is not 5-80 words of prose, or shares under 50% of the claim's content words",
-          "line 1: cites an unverified fact",
-          "line 2: cites an unverified fact",
-          "line 3: cites an unverified fact",
-          "line 4: number(s) 1975 not in the quotes of its cited facts",
-          "line 4: cites an unverified fact",
-          "line 5: cites an unverified fact"
-        ],
-        "near": {
-          "F1": [
-            "The safety and litter problems were eventually solved later in the 1970s with Daniel F.",
-            "In the 1960s, at least one inventor attempted to solve the litter problem, by having the tab be retained by a stationary key that would wrap the tab around itself, which was unsuccessful commercially.",
-            "Push-tabs never gained wide popularity because while they had solved the litter problem of the pull-tab, they created a safety hazard where the person's finger upon pushing the tab into the can was immediately exposed to the sharp edges of the opening."
-          ],
-          "F2": [
-            "Cudzik's invention of the non-removing \"Stay-Tab\".",
-            "Cudzik, an engineer with Reynolds Metals, filed a design patent application for an \"End closure for a container\".",
-            "Cudzik later received patents for this \"Easy Open Wall\" (US 3967752, issued 1976-07-06  US 3967753, issued 1976-07-06 )."
-          ]
-        }
+        "ok": true,
+        "errors": [],
+        "near": {}
       }
     },
     {
@@ -21885,8 +21876,8 @@
         "avoidPairingWithinDays": 30,
         "compareAgainstPublished": true
       },
-      "researchStatus": "RESEARCHED",
-      "productionReady": false,
+      "researchStatus": "VERIFIED",
+      "productionReady": true,
       "facts": [
         {
           "id": "F1",
@@ -21923,11 +21914,14 @@
         },
         {
           "id": "F4",
-          "claim": "Copper sheathing protected the under-water hull of a ship from salt water and biofouling with copper plates fixed to the outside of the hull.",
-          "quote": "",
-          "layer": "UNVERIFIED",
-          "source": "Wikipedia: Copper sheathing",
-          "url": "https://en.wikipedia.org/w/index.php?title=Copper_sheathing&oldid=1369660444"
+          "role": null,
+          "claim": "In antiquity, copper plates and lead plates were used to protect the underwater hull.",
+          "quote": "In antiquity, ancient Vietnamese and later Chinese used copper plates while ancient Greeks used lead plates to protect the underwater hull.",
+          "source": "Wikipedia: Copper sheathing (revision 1369660444, 2026-08-16T09:34:29Z)",
+          "url": "https://en.wikipedia.org/w/index.php?title=Copper_sheathing&oldid=1369660444",
+          "sourceTitle": "Copper sheathing",
+          "revid": 1369660444,
+          "layer": "VERIFIED FACT"
         }
       ],
       "sources": [],
@@ -21939,7 +21933,7 @@
         "validatedCandidate": true
       },
       "status": "qualified",
-      "researchedAt": "2026-10-28T03:58:19.130Z",
+      "researchedAt": "2026-10-28T04:03:00.924Z",
       "researchMethod": "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live Wikipedia article at the pinned revision; claim and narration numbers checked against the quotes",
       "rights": {
         "footage": "none (original animation only)",
@@ -21988,7 +21982,7 @@
         },
         {
           "role": "ORIGIN",
-          "text": "Before modern paint, ships carried copper plates on the hull for the same job.",
+          "text": "Long before modern paint, shipbuilders protected the underwater hull with copper or lead plates.",
           "layer": "VERIFIED FACT",
           "facts": [
             "F4"
@@ -22004,18 +21998,9 @@
         }
       ],
       "verification": {
-        "ok": false,
-        "errors": [
-          "fact F4: no sentence contains all of: copper plates + biofouling",
-          "line 6: cites an unverified fact"
-        ],
-        "near": {
-          "F4": [
-            "Before the copper plates were applied, the hull was covered with \"soft stuff\", which was simply hair, yarn and brown paper.",
-            "In antiquity, ancient Vietnamese and later Chinese used copper plates while ancient Greeks used lead plates to protect the underwater hull.",
-            "The first experiments with copper sheathing were made in the late 1750s: the bottoms and sides of several ships' keels and false keels were sheathed with copper plates."
-          ]
-        }
+        "ok": true,
+        "errors": [],
+        "near": {}
       }
     },
     {
@@ -22203,29 +22188,35 @@
         "avoidPairingWithinDays": 30,
         "compareAgainstPublished": true
       },
-      "researchStatus": "RESEARCHED",
-      "productionReady": false,
+      "researchStatus": "VERIFIED",
+      "productionReady": true,
       "facts": [
         {
           "id": "F1",
-          "claim": "A load line is a reference mark on a ship's hull that indicates the maximum depth to which the vessel may be safely immersed when loaded with cargo.",
-          "quote": "",
-          "layer": "UNVERIFIED",
-          "source": "Wikipedia: Load line (watercraft)",
-          "url": "https://en.wikipedia.org/w/index.php?title=Load_line_(watercraft)&oldid=1379042808"
+          "role": null,
+          "claim": "Load lines are indicated by special markings on the hull.",
+          "quote": "Load lines are indicated by special markings on the hull.",
+          "source": "Wikipedia: Load line (watercraft) (revision 1379042808, 2026-10-07T15:39:37Z)",
+          "url": "https://en.wikipedia.org/w/index.php?title=Load_line_(watercraft)&oldid=1379042808",
+          "sourceTitle": "Load line (watercraft)",
+          "revid": 1379042808,
+          "layer": "VERIFIED FACT"
         },
         {
           "id": "F2",
-          "claim": "This depth varies with a ship's dimensions, type of cargo, time of year and the water densities encountered.",
-          "quote": "",
-          "layer": "UNVERIFIED",
-          "source": "Wikipedia: Load line (watercraft)",
-          "url": "https://en.wikipedia.org/w/index.php?title=Load_line_(watercraft)&oldid=1379042808"
+          "role": null,
+          "claim": "Additional marks have been added over the years, allowing for different water densities and expected sea conditions.",
+          "quote": "Additional marks have been added over the years, allowing for different water densities and expected sea conditions.",
+          "source": "Wikipedia: Load line (watercraft) (revision 1379042808, 2026-10-07T15:39:37Z)",
+          "url": "https://en.wikipedia.org/w/index.php?title=Load_line_(watercraft)&oldid=1379042808",
+          "sourceTitle": "Load line (watercraft)",
+          "revid": 1379042808,
+          "layer": "VERIFIED FACT"
         },
         {
           "id": "F3",
           "role": null,
-          "claim": "The mark is named after Samuel Plimsoll.",
+          "claim": "This marking was invented in 1876 by Samuel Plimsoll.",
           "quote": "This marking was invented in 1876 by Samuel Plimsoll.",
           "source": "Wikipedia: Load line (watercraft) (revision 1379042808, 2026-10-07T15:39:37Z)",
           "url": "https://en.wikipedia.org/w/index.php?title=Load_line_(watercraft)&oldid=1379042808",
@@ -22243,7 +22234,7 @@
         "validatedCandidate": true
       },
       "status": "qualified",
-      "researchedAt": "2026-10-28T03:58:19.200Z",
+      "researchedAt": "2026-10-28T04:03:01.032Z",
       "researchMethod": "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live Wikipedia article at the pinned revision; claim and narration numbers checked against the quotes",
       "rights": {
         "footage": "none (original animation only)",
@@ -22252,47 +22243,39 @@
       "narration": [
         {
           "role": "VISUAL_MYSTERY",
-          "text": "That painted mark on the side of a ship is a load line.",
+          "text": "Those painted marks on a ship's side are load lines.",
           "layer": "VERIFIED FACT",
           "facts": [
             "F1"
           ]
         },
         {
-          "role": "CLEAR_PROMISE",
-          "text": "It shows how deep the ship may safely sit in the water.",
-          "layer": "VERIFIED FACT",
-          "facts": [
-            "F1"
-          ]
-        },
-        {
-          "role": "MECHANISM",
-          "text": "Load the ship past it and it is sitting deeper than is safe.",
-          "layer": "VERIFIED FACT",
-          "facts": [
-            "F1"
-          ]
-        },
-        {
-          "role": "DETAIL",
-          "text": "The safe depth changes with the ship, its cargo, the time of year and the water's density.",
-          "layer": "VERIFIED FACT",
-          "facts": [
-            "F2"
-          ]
-        },
-        {
-          "role": "ORIGIN",
-          "text": "The mark carries the name of Samuel Plimsoll.",
+          "role": "CONTEXT",
+          "text": "The marking was invented in 1876 by Samuel Plimsoll.",
           "layer": "VERIFIED FACT",
           "facts": [
             "F3"
           ]
         },
         {
+          "role": "MECHANISM",
+          "text": "Over the years, extra marks were added for different water densities.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F2"
+          ]
+        },
+        {
+          "role": "MECHANISM",
+          "text": "They also allow for the sea conditions a ship expects to meet.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F2"
+          ]
+        },
+        {
           "role": "PAYOFF",
-          "text": "A few painted lines decide how much a ship can carry.",
+          "text": "A few painted lines on the hull, each one for a different sea.",
           "layer": "VERIFIED FACT",
           "facts": [
             "F1",
@@ -22301,26 +22284,9 @@
         }
       ],
       "verification": {
-        "ok": false,
-        "errors": [
-          "fact F1: no sentence contains all of: maximum depth + hull",
-          "fact F2: no sentence contains all of: time of year + water densities",
-          "line 1: cites an unverified fact",
-          "line 2: cites an unverified fact",
-          "line 3: cites an unverified fact",
-          "line 4: cites an unverified fact",
-          "line 6: cites an unverified fact"
-        ],
-        "near": {
-          "F1": [
-            "Load lines are indicated by special markings on the hull.",
-            "Lloyd's Register were continuing to improve their own freeboard calculations, and by 1882 had settled on Freeboard Tables that took more hull form factors into account.",
-            "The creators of the 'rule' did not enjoy the prominence it gained, knowing it was an oversimplification that did not take into account depth, sheer, and other form factors relating to the size and shape of the hull."
-          ],
-          "F2": [
-            "Additional marks have been added over the years, allowing for different water densities and expected sea conditions."
-          ]
-        }
+        "ok": true,
+        "errors": [],
+        "near": {}
       }
     },
     {
