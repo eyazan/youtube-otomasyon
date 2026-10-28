@@ -1,0 +1,23 @@
+name: Repository variables check (read-only)
+
+# Diagnostic only: prints whether the premium repository variables evaluate to '1' exactly as
+# portfolio-production.yml reads them. No checkout, no secrets' values, no render, no upload.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Premium variables as the production workflow sees them
+        run: |
+          echo "vars.FR_PREMIUM_PRIMARY == '1': ${{ vars.FR_PREMIUM_PRIMARY == '1' }}"
+          echo "vars.FR_PREMIUM_PUBLISH == '1': ${{ vars.FR_PREMIUM_PUBLISH == '1' }}"
+          echo "vars.FR_PREMIUM_PUBLISH is set: ${{ vars.FR_PREMIUM_PUBLISH != '' }}"
+          echo "a secret named FR_PREMIUM_PUBLISH exists: ${{ secrets.FR_PREMIUM_PUBLISH != '' }}"
+          echo "vars.IB_PREMIUM_PRIMARY == '1': ${{ vars.IB_PREMIUM_PRIMARY == '1' }}"
+          echo "vars.IB_PREMIUM_PUBLISH == '1': ${{ vars.IB_PREMIUM_PUBLISH == '1' }}"
