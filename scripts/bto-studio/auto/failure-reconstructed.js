@@ -20,7 +20,8 @@ const KIND = [
   [/airship|zeppelin|dirigible|balloon/i, "airship"],
   [/rocket|spacecraft|lander|shuttle|capsule|launch|satellite|probe|space station|booster/i, "rocket"],
   [/airliner|aircraft|plane|jet|fuselage|wing|airspace|runway|transport|helicopter|engine control|cockpit/i, "aircraft"],
-  [/bridge|viaduct|walkway/i, "bridge"],
+  [/walkway|skywalk/i, "walkway"],
+  [/bridge|viaduct/i, "bridge"],
   [/tailings|levee|dam|reservoir|dyke|dike|embankment/i, "dam"],
   [/spoil tip|tip\b|landslide|avalanche|slope|ground|mud|volcano|lahar|hillside|mountain|quake|earthquake/i, "terrain"],
   [/ship|liner|ferry|freighter|warship|destroyer|steamboat|submarine|boat|tanker|vessel|barge|platform/i, "ship"],
@@ -46,11 +47,42 @@ function spaceKind(v, title) {
   if (SATELLITE.test(all)) return "satellite";
   return "rocket";
 }
-function objectKind(topic) {
+// A bridge or dam is drawn as the structural type its own verified text names, never a default type with invented
+// detail (#364: the I-35W deck-truss bridge was drawn as a suspension bridge): a truss (gusset plates, chords), a
+// suspension bridge (eyebar chain, cables), otherwise a plain girder bridge; an earth-fill embankment dam, otherwise
+// the generic concrete dam.
+const TRUSS = /\b(truss\w*|gusset\w*|chords?|cantilever)\b/i;
+const SUSPENSION = /\b(suspension|eyebars?|chain|cables?|suspender\w*|hangers?)\b/i;
+const EARTH = /\b(earth\w*|embankment|earth-?fill|fill dam|tailings|levee|dyke|dike|clay core|rockfill)\b/i;
+const caseText = (topic, lines = []) => { const v = topic.case || {};
+  return [v.nesne, v.ad, v.sonuc, v.tetik, v.mekanizma, v.ders, v.yanilgi, ...(v.zincir || []), ...lines.map((l) => l.text || l.metin || "")].join(" "); };
+function objectKind(topic, lines = []) {
   const v = topic.case || {}; const hit = KIND.find(([re]) => re.test(`${v.nesne || ""}`)) || KIND.find(([re]) => re.test(`${v.ad || ""} ${topic.title || ""}`));
   const kind = hit ? hit[1] : CLUSTER_KIND[v.kume] || "structure";
-  return kind === "rocket" ? spaceKind(v, topic.title) : kind;
+  if (kind === "rocket") return spaceKind(v, topic.title);
+  const text = caseText(topic, lines);
+  if (kind === "bridge") return TRUSS.test(text) ? "truss-bridge" : SUSPENSION.test(text) ? "bridge" : "girder-bridge";
+  if (kind === "dam") return EARTH.test(text) ? "embankment-dam" : "dam";
+  return kind;
 }
+// the mechanism the case file names, shown on the drawing (props.mech), only for the classes that can show it
+function structureMechanism(topic, kind, lines = []) {
+  const v = topic.case || {}; const text = [v.tetik, v.mekanizma, ...(v.zincir || [])].join(" ");
+  if (/dam$/.test(kind)) {
+    if (/\bovertop\w*|\bover the (crest|top|dam)\b|\bspill\w* over\b/i.test(text)) return "overtop";
+    if (/\b(seep\w*|piping|leak\w*|internal erosion)\b/i.test(text)) return kind === "embankment-dam" ? "seepage" : "uplift";
+    if (/\b(uplift|foundation|abutment|underneath|under the dam)\b/i.test(text)) return "uplift";
+    return null;
+  }
+  if (/bridge$|walkway/.test(kind)) {
+    if (/\b(wind\w*|gale|gust\w*|storm)\b/i.test(text)) return "wind";
+    if (/\b(load\w*|weight|overload\w*|heav\w*|traffic|buckl\w*|compression|concrete)\b/i.test(text)) return "load";
+  }
+  return null;
+}
+// the structure itself survived (Vajont: the slope failed, the wave went over a dam that still stands)
+const HOLDS = /\b(dam|bridge|structure) (itself )?(survived|held|still stands|stayed standing|remained standing)\b/i;
+const WATER = /\b(river|sea|bay|lake|estuary|harbou?r|channel|reservoir|creek|water)\b/i;
 // the case's own mechanism decides the motion: an uncontrolled spin or tumble of a spacecraft rotates the drawing
 function objectMotion(topic, kind) {
   const v = topic.case || {}; const text = [v.sonuc, v.tetik, v.mekanizma, ...(v.zincir || [])].join(" ");
@@ -82,13 +114,27 @@ function off(a, d) { const m = String(a).match(/^(.*?)([+-]\d+(?:\.\d+)?)?$/); c
 function build(script, style, topic) {
   const v = topic.case || {}; const lines = script.lines; const facts = script.facts; const S = style.type.scale;
   const F = (role) => (facts.find((f) => f.role === role) || facts[0]).id;
-  const kind = objectKind(topic); const chain = (v.zincir || []).slice(0, 5);
+  const kind = objectKind(topic, lines); const chain = (v.zincir || []).slice(0, 5);
   const CH = { x: 540, gap: 230 };
   // no dissolve: it overlays the outgoing headline on the incoming chain links for a few frames (text gate FAIL, FR-aberfan)
   let ti = 0; const nextTransition = () => TRANSITIONS[(ti++) % TRANSITIONS.length];
   const motion = objectMotion(topic, kind); const docked = kind === "capsule" && DOCKED.test([v.sonuc, v.tetik, v.mekanizma, ...(v.zincir || [])].join(" "));
   // the object fits 900 x 640 around y 820 (y 500-1140): clear of the chips, the watermark, the y 330 headlines and the captions
-  const silhouette = (props) => ({ component: "object-silhouette", props: { kind, x: 540, y: 820, w: 900, maxH: 640, seed: 31, ...(motion ? { motion } : {}), ...(docked ? { docked: true } : {}), ...props } });
+  const mech = structureMechanism(topic, kind, lines); const water = /bridge$/.test(kind) && WATER.test(caseText(topic, lines));
+  const holds = HOLDS.test(caseText(topic, lines));
+  // spacecraft cases: a star field when the case is in orbit or space; a stuck thruster drawn firing when the case file
+  // names one; the docked target separates on the line that says it undocked and is gone after it
+  const space = ["capsule", "satellite", "shuttle"].includes(kind) && /\b(orbit\w*|space|spacewalk)\b/i.test(caseText(topic, lines));
+  const plume = motion === "spin" && /\bthrusters?\b/i.test([v.tetik, v.mekanizma].join(" "));
+  const undockLine = docked ? lines.findIndex((L) => /\b(undock\w*|separat\w*|cast off)\b/i.test(L.text)) : -1;
+  // the line where the crew stops the spin: it slows to a halt there, the stuck thruster's jet is off, and the object is
+  // still from then on (#364: Gemini 8 kept spinning through "Armstrong used the re-entry thrusters to stop it")
+  const stopLine = motion === "spin" ? lines.findIndex((L) => /\b(stop(ped|s)? (it|the spin|the roll)|regain\w* control|stabili[sz]\w*|halt\w* (it|the spin)|brought it under control)\b/i.test(L.text)) : -1;
+  const spinAt = (i) => (!motion ? {} : stopLine < 0 || i < stopLine ? { motion } : i === stopLine ? { motion, stopAt: off(lines[i].id, 0.8) } : { motion: null });
+  let cur = 0; const dockAt = (i) => (!docked ? {} : undockLine < 0 || i < undockLine ? { docked: true } : i === undockLine ? { docked: true, undockAt: off(lines[i].id, 0.3) } : { docked: false });
+  const silhouette = (props) => ({ component: "object-silhouette", props: { kind, x: 540, y: 820, w: 900, maxH: 640, seed: 31, ...spinAt(cur), ...dockAt(cur), ...(water ? { water: true } : {}), ...(holds ? { holds: true } : {}), ...(space ? { stars: true } : {}), ...(plume && (stopLine < 0 || cur <= stopLine) ? { plume: true } : {}), ...props,
+    // one continuous spin: it began at the hook's failure (0.6 s) and every later drawing continues it at the same angle
+    ...(motion && spinAt(cur).motion && props.failAt != null ? { failAt: 0.6 } : {}) } });
   // headlines sit below the chip column (y >= 460) and shrink with length so they never reach the frame edge
   const headline = (at, text, y = 470, size = S.title, source = null) => ({ component: "kinetic-type", screen: true, props: { items: [{ at, text, x: 540, y: Math.max(460, y), size: text.length > 22 ? Math.max(44, Math.round(size * 22 / text.length)) : size, family: "sans", ...(source ? { source } : {}) }] } });
   const readout = (at, text, y = 1200) => ({ component: "kinetic-type", screen: true, props: { items: [{ at, text, x: 540, y, size: S.display, family: "num", style: "pop" }] } });
@@ -116,23 +162,27 @@ function build(script, style, topic) {
 
   // position of line i inside its run of consecutive chain lines (0 for the first)
   const runIndex = (i) => { let n = 0; for (let j = i - 1; j >= 0 && String(roleOf[j]).startsWith("chain:"); j -= 1) n += 1; return String(roleOf[i]).startsWith("chain:") ? n : -1; };
+  let prevKind = null; let mechCount = 0; const hookZ = motion === "spin" ? 1.45 : 1.18;
   const scenes = lines.map((L, i) => {
-    const role = roleOf[i]; const start = i === 0 ? 0 : `${L.id}-0.15`; const end = `${L.id}.end`;
+    cur = i; const role = roleOf[i]; const start = i === 0 ? 0 : `${L.id}-0.15`; const end = `${L.id}.end`;
     const drift = i % 2 ? 30 : -30; let kind_, layers, purpose, camera, evidence = [F("case")], chips = ["conceptualLabel", "factLabel"];
     if (role === "hook") {
       // frame 0 must show the object (QA: first frame not empty): it is drawn whole at t=0 and gives way at 0.6 s
-      kind_ = "hook"; layers = [silhouette({ failAt: 0.6 }), ...(stamp ? [headline(`${L.id}+0.3`, stamp, 330, S.title)] : [])];
+      // with a named mechanism the load (wind, water) is already on the object at frame 0 and it gives way at 0.9 s
+      kind_ = "hook"; layers = [silhouette(mech ? { failAt: 0.9, mech, mechAt: -0.4 } : { failAt: 0.6, ...(plume ? { plumeAt: 0 } : {}) }), ...(stamp ? [headline(`${L.id}+0.3`, stamp, 330, S.title)] : [])];
       purpose = `Hook: frame 0 draws the ${kind} as clean line work and it gives way at the failure point within the first second, with the case stamp (${stamp || "case"}), so the consequence is on screen before any cause.`;
-      camera = [{ at: start, x: 540, y: 820, z: 1.18 }, { at: end, x: 540 - drift, y: 830, z: 1.02 }];
+      // a spin starts close on the still object and pulls back as it spins up, so the turning circle stays in frame
+      camera = [{ at: start, x: 540, y: 820, z: hookZ }, { at: end, x: 540 - drift, y: 830, z: 1.02 }];
     } else if (role === "toll") {
       kind_ = "toll"; layers = [silhouette({ failAt: -1, enterAt: undefined }), readout(`${L.id}+0.25`, toll, 1210)];
       purpose = `Toll: the broken ${kind} holds while the case's count (${toll}) is stamped below it; the number is the case file's, not computed.`;
       camera = [{ at: start, x: 540, y: 860, z: 1.0 }, { at: end, x: 540 + drift, y: 880, z: 1.16 }];
     } else if (role === "trigger") {
       kind_ = "trigger"; evidence = [F("trigger"), F("case")];
-      layers = [silhouette({ failAt: off(L.id, 0.3) }), headline(`${L.id}+0.2`, triggerLabel, 330, S.title, triggerLabel)];
+      layers = [silhouette({ failAt: off(L.id, mech ? 1.2 : 0.3), ...(mech ? { mech, mechAt: start } : {}) }), headline(`${L.id}+0.2`, triggerLabel, 330, S.title, triggerLabel)];
       purpose = `Trigger: the camera closes in on the failure point of the intact ${kind} as the crack starts there, while the case file's trigger is set in three words.`;
-      camera = [{ at: start, x: 540, y: 820, z: 1.0 }, { at: end, x: 540, y: 800, z: 1.85 }];
+      // a spinning object sweeps its whole turning circle: a gentler push keeps it in frame
+      camera = [{ at: start, x: 540, y: 820, z: 1.0 }, { at: end, x: 540, y: 800, z: motion === "spin" ? 1.3 : 1.85 }];
     } else if (role === "contrast") {
       kind_ = "contrast"; evidence = [F("misconception"), F("case")];
       layers = [silhouette({ drawAt: off(L.id, -0.1) }), headline(`${L.id}+0.25`, phrase(L.text) || kapak, 330, S.title, phrase(L.text) ? L.text : kapak)];
@@ -143,15 +193,20 @@ function build(script, style, topic) {
       const lesson = headline(`${L.id}+0.3`, phrase(L.text) || kapak2, 330, S.title, phrase(L.text) ? L.text : kapak2); lesson.props.items[0].outAt = "end-0.45";
       layers = [silhouette({ drawAt: off(L.id, -0.1) }), lesson];
       purpose = "Payoff: the lesson in a few of the line's words over the object redrawn whole; the camera returns to the exact frame-0 framing and the lesson clears before the end, so the last frame matches the first and the Short loops (#357).";
-      camera = [{ at: start, x: 540 - drift * 2, y: 860, z: 1.32 }, { at: "end-0.6", x: 540, y: 820, z: 1.18 }];
-    } else if (runIndex(i) >= 2) {
-      // a third chain line in a row is a close-up of the mechanism, not a third card scene (#364: four card scenes in a row)
+      camera = [{ at: start, x: 540 - drift * 2, y: 860, z: 1.32 }, { at: "end-0.6", x: 540, y: 820, z: hookZ }];
+    } else if (String(role).startsWith("chain:") && ((runIndex(i) >= 2 && prevKind !== "mechanism") || i === undockLine || i === stopLine)) {
+      // a third (fifth) chain line in a row is a close-up of the mechanism, not a third card scene (#364: four card scenes
+      // in a row); the lines between go back to the chain, so mechanism scenes never repeat back to back. The lines where
+      // a spacecraft undocks or is brought back under control are seen on the object too, not on a dimmed card
       const k = +role.split(":")[1]; kind_ = "mechanism"; evidence = [F("chain"), F("mechanism"), F("case")];
       const label = String(chain[k] || "").toUpperCase();
-      layers = [silhouette({ failAt: -1 }), ...(label ? [headline(`${L.id}+0.2`, label, 330, S.title, chain[k])] : [])];
+      // with a named mechanism the scene plays cause -> effect: the intact object under its load (load path, wind,
+      // water), then it gives way at the failure point; without one, the broken object is examined
+      layers = [silhouette(mech ? { failAt: off(L.id, 1.4), mech, mechAt: start } : { failAt: -1 }), ...(label ? [headline(`${L.id}+0.2`, label, 330, S.title, chain[k])] : [])];
       purpose = `Mechanism close-up: the camera closes in on the failure point of the ${kind} while chain link ${k + 1} ("${chain[k]}") is named, so the cause is seen on the object, not only read on a card.`;
-      const [fx, fy] = [540, 820];
-      camera = [{ at: start, x: fx + drift, y: fy, z: 1.15 }, { at: end, x: fx, y: fy - 20, z: 1.6 }];
+      // alternate push-in and pull-back, so two mechanism scenes in a row never repeat the same move
+      const [fx, fy] = [540, 820]; const push = mechCount++ % 2 === 0;
+      camera = push ? [{ at: start, x: fx + drift, y: fy, z: 1.15 }, { at: end, x: fx, y: fy - 20, z: 1.6 }] : [{ at: start, x: fx, y: fy - 20, z: 1.55 }, { at: end, x: fx - drift, y: fy, z: 1.0 }];
     } else {
       const k = +role.split(":")[1]; kind_ = "chain"; evidence = [F("chain"), F("case")];
       const prev = i > 0 && String(roleOf[i - 1]).startsWith("chain:") ? +roleOf[i - 1].split(":")[1] : Math.max(0, k - 1);
@@ -162,6 +217,7 @@ function build(script, style, topic) {
       camera = [{ at: start, x: 540 + drift * 2, y: 860, z: 1.05 }, { at: end, x: 540 - drift * 2, y: 820, z: 1.22 }];
       chips = ["conceptualLabel", "factLabel"];
     }
+    prevKind = kind_;
     return { id: `s${i + 1}-${kind_}`, lines: [L.id], start, env: "blueprint", ...(i === 0 ? {} : { transition: { type: nextTransition(i), dur: 0.5 } }), evidence: [...new Set(evidence)], chips, conceptual: true, visualPurpose: purpose, camera, layers };
   });
   // consecutive chain scenes share one continuous camera move, so they are joined with a continuity cut; plates alternate
@@ -177,6 +233,10 @@ function build(script, style, topic) {
   // no headline text twice in one Short (#364: "583 KILLED" as toll and again as payoff): later copies are dropped
   const seen = new Set();
   scenes.forEach((sc) => sc.layers.forEach((l) => { if (l.component === "kinetic-type") l.props.items = l.props.items.filter((it) => { const k = String(it.text).trim(); if (!k || seen.has(k)) return false; seen.add(k); return true; }); }));
+  // a headline followed by another headline clears before its line ends: the transition never overlays the two in the
+  // same band (#364: "THRUSTER STICKS ON" x "UNDOCKING MAKES IT WORSE" during the cut)
+  const heads = (sc) => sc.layers.filter((l) => l.component === "kinetic-type").flatMap((l) => l.props.items).filter((it) => it.y <= 480);
+  scenes.forEach((sc, k) => { if (k < last && heads(scenes[k + 1]).length) heads(sc).forEach((it) => { if (it.outAt == null) it.outAt = off(`${sc.lines[0]}.end`, -0.25); }); });
   // drop on-screen text whose digits are not in a cited fact (validator rule): the scene keeps its drawing
   const cited = (sc) => sc.evidence.map((id) => facts.find((f) => f.id === id)).filter(Boolean).map((f) => f.claim).join(" ");
   scenes.forEach((sc) => sc.layers.forEach((l) => { if (l.component === "kinetic-type") l.props.items = l.props.items.filter((it) => (String(it.text).match(/\d+/g) || []).every((d) => new RegExp(`(^|\\D)${d}(\\D|$)`).test(cited(sc)))); }));
@@ -195,4 +255,4 @@ function build(script, style, topic) {
   };
 }
 
-module.exports = { build, objectKind };
+module.exports = { build, objectKind, structureMechanism };

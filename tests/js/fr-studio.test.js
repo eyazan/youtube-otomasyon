@@ -158,6 +158,42 @@ test("FR visual quality (#364): the right object class and motion, natural headl
   assert.ok(Validator.validateStoryboard(bad, { script: g.script, timeline: fakeTimeline(g.script), style, policy: profile.evidencePolicy.validator }).errors.some((e) => /not a contiguous span/.test(e)));
 });
 
+test("FR structures and spacecraft (#364): the structural type the case names, its mechanism, and the event's own motion", () => {
+  const load = (slug) => { const { channel, topic } = Adapter.loadTopic("failure-reconstructed", slug); const script = Adapter.studioScript(channel, topic); return { script, topic, sb: Generator.build(script, style, topic) }; };
+  const sil = (sc) => sc.layers.find((l) => l.component === "object-silhouette").props;
+  // the structural type comes from the case's own text, never a default with invented detail
+  const want = { "i-35w-bridge-2007": ["truss-bridge", "load"], "quebec-bridge-1907": ["truss-bridge", "load"], "silver-bridge-1967": ["bridge", null],
+    "tay-bridge-1879": ["girder-bridge", "wind"], "st-francis-dam-1928": ["dam", "uplift"], "johnstown-flood-1889": ["embankment-dam", "overtop"],
+    "vajont-dam-1963": ["dam", "overtop"], "hyatt-regency-walkway-1981": ["walkway", "load"] };
+  for (const [slug, [kind, mech]] of Object.entries(want)) {
+    const { script, topic, sb } = load(slug); assert.equal(Generator.objectKind(topic, script.lines), kind, slug);
+    assert.equal(Generator.structureMechanism(topic, kind, script.lines), mech, slug);
+    const h = sil(sb.scenes[0]); assert.equal(h.kind, kind);
+    // the load (water, wind) is on the object at frame 0 and it gives way within the first second
+    if (mech) { assert.equal(h.mech, mech); assert.ok(h.mechAt < 0 && h.failAt < 1, `${slug}: mechanism visible from frame 0`); }
+  }
+  assert.equal(sil(load("vajont-dam-1963").sb.scenes[0]).holds, true, "Vajont: the dam itself survived - no breach is drawn");
+  assert.equal(sil(load("i-35w-bridge-2007").sb.scenes[0]).water, true, "the river under the bridge is in the case file");
+  // a mechanism scene plays cause -> effect on the intact object, and mechanism scenes alternate their camera move
+  const mechs = load("st-francis-dam-1928").sb.scenes.filter((s) => s.id.endsWith("-mechanism"));
+  assert.ok(mechs.length >= 2 && mechs.every((s) => typeof sil(s).failAt === "string" && sil(s).mech));
+  assert.notDeepEqual(mechs[0].camera.map((c) => c.z), mechs[1].camera.map((c) => c.z));
+  // Gemini 8: one continuous spin from the hook, the stuck thruster firing, the target separating on the undocking line,
+  // the spin stopped on the line where the crew stops it, and the capsule still (no jet) after that
+  const g = load("gemini-8-1966"); const by = (re) => g.sb.scenes.find((s) => re.test(g.script.lines.find((l) => l.id === s.lines[0]).text));
+  const und = sil(by(/undock/i)), stop = sil(by(/stop it/i)), pay = sil(g.sb.scenes[g.sb.scenes.length - 1]);
+  assert.ok(und.undockAt && und.docked && und.motion === "spin" && und.failAt === 0.6);
+  assert.ok(stop.stopAt && stop.docked === false && stop.plume);
+  assert.ok(!pay.motion && !pay.plume && pay.docked === false, "after the spin is stopped the capsule is still and alone");
+  assert.equal(sil(g.sb.scenes[0]).plumeAt, 0, "the stuck thruster fires from frame 0");
+  let prev = ""; for (const s of [...load("vajont-dam-1963").sb.scenes, ...load("hyatt-regency-walkway-1981").sb.scenes]) { const k = s.id.replace(/^s\d+-/, "");
+    assert.ok(!(k === "mechanism" && prev === "mechanism" && !/undock|stop/i.test(s.visualPurpose)), "no two ordinary mechanism scenes in a row"); prev = k; }
+  // headlines that would meet in the same band during a cut: the outgoing one clears before its line ends
+  for (const [k, s] of g.sb.scenes.entries()) { const next = g.sb.scenes[k + 1]; if (!next) continue;
+    const hd = (sc) => sc.layers.filter((l) => l.component === "kinetic-type").flatMap((l) => l.props.items).filter((it) => it.y <= 480);
+    if (hd(next).length) hd(s).forEach((it) => assert.ok(it.outAt, `${s.id}: "${it.text}" has no exit before the next headline`)); }
+});
+
 test("IB, GoalLore Lab and HLT headlines are contiguous pieces of the narration, never word-picked (#364)", () => {
   const N = (x) => " " + String(x || "").toUpperCase().replace(/[’']/g, "'").replace(/[^A-Z0-9'%ÁÉÍÓÚÄÖÜÑ]+/g, " ").trim() + " ";
   const cases = [["impossible-brief", "impossible-brief", ["IB-EXT-050", "IB-HUM-025", "IB-EXT-047", "IB-HUM-004", "IB-PHY-065"]],
