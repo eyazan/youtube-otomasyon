@@ -27,6 +27,10 @@ const dirs = (channel) => { const base = path.join(ROOT, "channels", channel); r
 const RIGHTS = { "goal-lore-lab": { footage: "none (original animation only)", likeness: "generic player tokens, no kits or crests" }, "behind-the-ordinary": { footage: "none (original animation only)", likeness: "generic objects, no brands or logos" } };
 // the research fields --write sets on a Hidden Logic of Things universe row
 const RESEARCH_FIELDS = ["researchStatus", "productionReady", "researchedAt", "researchMethod", "rights", "narration", "facts", "sources", "verification"];
+// The Hidden Logic of Things production package (core/quality/behind-the-ordinary.js): hand-written in the draft's
+// "editorial" block from the verified narration; a VERIFIED record without it is not productionReady
+const BTO_EDITORIAL = ["hook", "openingLine", "secondBeat", "mechanism", "expectedConsequence", "misconception", "payoff", "thumbnailText", "editorialTitles"];
+const editorialGaps = (e) => BTO_EDITORIAL.filter((k) => (k === "editorialTitles" ? !(Array.isArray(e[k]) && e[k].length >= 3) : !(typeof e[k] === "string" && e[k].trim())));
 const UA = "youtube-otomasyon-research/1.0 (GoalLore Lab fact verification; https://github.com/eyazan/youtube-otomasyon)";
 const isYear = (n) => Number.isInteger(n) && n >= 1800 && n <= 2100;
 const fold = (s) => normalizeQuote(String(s).normalize("NFD").replace(/[̀-ͯ]/g, ""));
@@ -142,9 +146,12 @@ async function verifyDraft(draft, fetchJson = get, channel = "goal-lore-lab", fe
   const ok = errors.length === 0;
   const status = !ok ? "RESEARCHED" : below.length ? "NEEDS_PRIMARY_SOURCE" : "VERIFIED";
   if (ok && below.length) errors.push(...below.map((b) => `channel standard: ${b}`));
+  const editorial = channel === "behind-the-ordinary" ? Object.fromEntries(BTO_EDITORIAL.filter((k) => draft.editorial && draft.editorial[k] !== undefined).map((k) => [k, draft.editorial[k]])) : {};
+  const gaps = channel === "behind-the-ordinary" ? editorialGaps(editorial) : [];
+  if (status === "VERIFIED" && gaps.length) errors.push(`editorial package incomplete (${gaps.join(", ")}): research VERIFIED, not productionReady`);
   return {
     id: draft.id, slug: draft.slug, title: draft.title, coreQuestion: draft.coreQuestion, pillar: draft.pillar, channel,
-    hypothetical: false, researchStatus: status, productionReady: status === "VERIFIED", researchedAt: new Date().toISOString(),
+    hypothetical: false, researchStatus: status, productionReady: status === "VERIFIED" && gaps.length === 0, ...editorial, researchedAt: new Date().toISOString(),
     researchMethod: "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live source (a Wikipedia article at the pinned revision, or a primary-host page pinned to its fetch time and text sha256); claim and narration numbers checked against the quotes",
     rights: RIGHTS[channel],
     ...(channel === "behind-the-ordinary" ? { sources: [...new Map(facts.filter((f) => f.primary && f.layer === "VERIFIED FACT").map((f) => [f.url, { name: f.sourceTitle, url: f.url, type: "primary source (verbatim quote verified)" }])).values()] } : {}),
@@ -172,7 +179,7 @@ async function run(argv = process.argv.slice(2), { fetchJson = get, fetchText = 
     // fill only the research fields of the drafted rows; never downgrade a row researched by another pipeline
     const prev = JSON.parse(fs.readFileSync(UNIVERSE, "utf8")); const byId = new Map(records.map((r) => [r.id, r]));
     prev.topics = prev.topics.map((t) => { const r = byId.get(t.id); if (!r || (t.researchStatus !== "QUESTION_ONLY" && !String(t.researchMethod || "").startsWith("scripts/gll-research/verify.js"))) return t;
-      return { ...t, ...Object.fromEntries(RESEARCH_FIELDS.map((k) => [k, r[k]])) }; });
+      return { ...t, ...Object.fromEntries([...RESEARCH_FIELDS, ...BTO_EDITORIAL.filter((k) => r[k] !== undefined)].map((k) => [k, r[k]])) }; });
     fs.writeFileSync(UNIVERSE, JSON.stringify(prev, null, 2) + "\n");
     log(`wrote ${path.relative(ROOT, UNIVERSE)} (${records.length} row(s))`);
   } else if (argv.includes("--write")) {

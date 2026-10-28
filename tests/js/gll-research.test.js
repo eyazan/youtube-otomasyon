@@ -99,3 +99,19 @@ test("Hidden Logic of Things primary pages: a quote is the page's own sentence o
   assert.match(gll.verification.errors.join(" "), /not a primary host for goal-lore-lab/);
   assert.doesNotMatch(V.pageText(html).text, /ignore me/, "scripts are never quoted");
 });
+
+test("Hidden Logic of Things: a VERIFIED record is productionReady only with its full editorial package", async () => {
+  const html = "<html><head><title>Load Lines</title></head><body><p>It has long been recognized that limitations on the draught to which a ship may be loaded make a significant contribution to her safety.</p>"
+    + "<p>The first International Convention on Load Lines, adopted in 1930, was based on the principle of reserve buoyancy.</p></body></html>";
+  const fetchText = async (url) => ({ url, html });
+  const A = "https://www.imo.org/en/About/Conventions/Pages/International-Convention-on-Load-Lines.aspx", B = "https://www.imo.org/en/OurWork/Safety/Pages/LoadLines.aspx";
+  const one = (id, source) => ({ id, source, claim: "Limitations on the draught to which a ship may be loaded make a significant contribution to her safety.", terms: ["draught", "safety"] });
+  const facts = [one("F1", A), one("F2", B), one("F3", A), one("F4", B), one("F5", A)];
+  const narration = facts.map((f) => ({ role: "X", text: "A ship's safe draught matters for her safety.", facts: [f.id] }));
+  const bare = await V.verifyDraft(draft({ facts, narration }), fetchJson, "behind-the-ordinary", fetchText);
+  assert.equal(bare.researchStatus, "VERIFIED"); assert.equal(bare.productionReady, false);
+  assert.match(bare.verification.errors.join(" "), /editorial package incomplete \(hook, openingLine/);
+  const editorial = { hook: "h.", openingLine: "h.", secondBeat: "s.", mechanism: "m", expectedConsequence: "c", misconception: "x.", payoff: "p.", thumbnailText: "T", editorialTitles: ["a", "b", "c"] };
+  const full = await V.verifyDraft(draft({ facts, narration, editorial }), fetchJson, "behind-the-ordinary", fetchText);
+  assert.equal(full.productionReady, true); assert.equal(full.payoff, "p."); assert.deepEqual(full.editorialTitles, ["a", "b", "c"]);
+});
