@@ -227,3 +227,27 @@ test("advisory creative checks (#364): measured apart from the objective verdict
   // the objective verdict ignores them
   assert.match(fs.readFileSync(path.join(ROOT, "scripts/bto-studio/qa.js"), "utf8"), /const objectivePass = objective\.filter/);
 });
+
+test("FR object class is word-bounded and identity-first (#364 review: Adam Air as a dam, Knight Capital as a mine)", () => {
+  const k = (slug) => { const r = JSON.parse(fs.readFileSync(path.join(ROOT, "icerik/konular", slug + ".json"), "utf8")); return Generator.objectKind({ case: r.vaka, title: r.baslik }, (r.sahneler || []).map((s, i) => ({ id: `L${i + 1}`, text: s.metin }))); };
+  const want = { "adam-air-574-2007": "aircraft", "notre-dame-fire-2019": "structure", "knight-capital-2012": "structure", "browns-ferry-fire-1975": "plant",
+    "soyuz-ms-10-2018": "capsule", "uss-fitzgerald-collision-2017": "ship", "uss-forrestal-1967": "ship", "national-airlines-102-2013": "aircraft",
+    "i-95-philadelphia-collapse-2023": "girder-bridge", "hubble-mirror-1990": "satellite", "piper-alpha-1988": "plant", "apollo-1-1967": "capsule", "ctv-building-2011": "building" };
+  for (const [slug, kind] of Object.entries(want)) assert.equal(k(slug), kind, slug);
+  // a strike is not a load: no load path for a truck hitting the truss
+  const sk = Adapter.loadTopic("failure-reconstructed", "skagit-river-bridge-2013").topic; assert.equal(Generator.structureMechanism(sk, "truss-bridge"), null);
+});
+
+test("FR animation scoring (#364 review): what the premium animation can show, never lower than archival, never a generic drawing", () => {
+  const A = require("../../core/growth/animation-potential");
+  const raw = (slug) => ({ channel: "failure-reconstructed", raw: JSON.parse(fs.readFileSync(path.join(ROOT, "icerik/konular", slug + ".json"), "utf8")) });
+  const teton = A.animationPotential(raw("teton-dam-1976")); assert.equal(teton.kind, "embankment-dam"); assert.ok(teton.score >= 80 && teton.reasons.some((r) => /seepage/.test(r)));
+  const knight = A.animationPotential(raw("knight-capital-2012")); assert.equal(knight.drawable, false); assert.ok(knight.score <= 40, "a case the studio can only draw generically is not lifted");
+  // a class drawing with no mechanism it can show scores as the class only (below archival stills, 80)
+  const alaska = A.animationPotential(raw("alaska-261-2000")); assert.ok(alaska.score <= 70, JSON.stringify(alaska));
+  assert.equal(require("../../channels/failure-reconstructed/growth-engine.json").visuals.source, "animation");
+  const ts = fs.readFileSync(path.join(ROOT, "core/growth/topic-scoring.js"), "utf8");
+  assert.match(ts, /Math\.min\(archivalRisk, 100 - anim\.score\)/, "the footage risk is never raised by the animation signal");
+  assert.match(ts, /Math\.max\(archivalPotential, anim\.score\)/, "archival potential is never lowered");
+  assert.equal(require("../../config/viral-quality-v2.json").viralScoring.minimumToProduce, 75, "the viral minimum is unchanged");
+});

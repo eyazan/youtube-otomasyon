@@ -16,21 +16,25 @@ const { keyPhrase } = require("./impossible-brief");
 
 // clip reveals only (no push/match-zoom/whip): they never drag on-screen text across the frame edge; three types for variety (#357)
 const TRANSITIONS = ["scan-wipe", "iris", "square-iris"];
+// the whole object a case is about, as word-bounded nouns (#364 review: substring matches drew "Adam Air" and
+// "Notre-Dame" as dams, "Knight Capital" as a mine, USS Fitzgerald's "bridge team" as a bridge)
 const KIND = [
-  [/airship|zeppelin|dirigible|balloon/i, "airship"],
-  [/rocket|spacecraft|lander|shuttle|capsule|launch|satellite|probe|space station|booster/i, "rocket"],
-  [/airliner|aircraft|plane|jet|fuselage|wing|airspace|runway|transport|helicopter|engine control|cockpit/i, "aircraft"],
-  [/walkway|skywalk/i, "walkway"],
-  [/bridge|viaduct/i, "bridge"],
-  [/tailings|levee|dam|reservoir|dyke|dike|embankment/i, "dam"],
-  [/spoil tip|tip\b|landslide|avalanche|slope|ground|mud|volcano|lahar|hillside|mountain|quake|earthquake/i, "terrain"],
-  [/ship|liner|ferry|freighter|warship|destroyer|steamboat|submarine|boat|tanker|vessel|barge|platform/i, "ship"],
-  [/train|rail|tram|metro|locomotive|curve|carriage/i, "train"],
-  [/mine|pit|colliery|coal pillars|shaft|tunnel/i, "mine"],
-  [/reactor|plant|refinery|chemical|power grid|nuclear|factory|works|smelter/i, "plant"],
-  [/tank|silo|boiler|pipeline|well|gas holder|storage/i, "tank"],
-  [/building|school|hospital|house|warehouse|hotel|tower|stadium|church|city|mall|roof|apartment|theatre|club/i, "building"],
+  [/\baircraft carriers?\b/i, "ship"],
+  [/\b(airships?|zeppelins?|dirigibles?|balloons?)\b/i, "airship"],
+  [/\b(rockets?|spacecraft|landers?|shuttles?|capsules?|satellites?|probes?|space station|boosters?|launch vehicle|telescope|command module|orbiter)\b/i, "rocket"],
+  [/\b(airliners?|aircraft|airplanes?|planes?|jets?|jetliner|bombers?|helicopters?|flight \d+|airlines?|airways)\b/i, "aircraft"],
+  [/\b(walkways?|skywalks?)\b/i, "walkway"],
+  [/\b(bridges?|viaducts?|overpass(es)?|footbridge|causeway|expressway|interchange|flyover|ramps?)\b(?!\s+(team|crew|watch|officer))/i, "bridge"],
+  [/\b(dams?|levees?|dikes?|dykes?|reservoirs?|tailings|embankments?|floodwall|spillways?)\b/i, "dam"],
+  [/\b(ships?|liners?|ferry|ferries|freighters?|warships?|destroyers?|cruisers?|steamboats?|steamships?|steamers?|submarines?|submersibles?|boats?|vessels?|barges?|carriers?|frigates?|schooners?|uss|hms|rms|ss|ms)\b/i, "ship"],
+  [/\b(trains?|railways?|railroads?|rail|trams?|metro|subway|locomotives?|derailment|carriages?)\b/i, "train"],
+  [/\b(mines?|colliery|collieries|coal pillars|shafts?|tunnels?)\b/i, "mine"],
+  [/\b(reactors?|power plant|nuclear plant|refinery|chemical plant|factory|plant|smelter|power grid|grid|oil rig|drilling rig|oil platform|platform|distillation)\b/i, "plant"],
+  [/\b(tanks?|silos?|boilers?|pipelines?|wells?|gas holder|storage)\b/i, "tank"],
+  [/\b(buildings?|school|schools|hospital|house|houses|homes|warehouse|hotel|tower|tower block|stadium|church|cathedral|mall|store|roof|apartments?|condominium|theatre|theater|nightclub|club|high-rise|skyscraper|ice rink|office)\b/i, "building"],
+  [/\b(spoil tip|landslides?|avalanches?|slopes?|mudslides?|volcano|volcanoes|lahar|hillside|mountainside|mountain|earthquake|glacier|wildfire|tsunami)\b/i, "terrain"],
 ];
+const SPECIFIC_CLUSTER = new Set(["aviation-failures", "maritime-disasters", "spaceflight-disasters", "bridge-failures", "rail-disasters", "nuclear-accidents"]);
 const CLUSTER_KIND = { "aviation-failures": "aircraft", "maritime-disasters": "ship", "spaceflight-disasters": "rocket", "bridge-failures": "bridge", "rail-disasters": "train", "nuclear-accidents": "plant", "industrial-disasters": "plant", "natural-hazards": "terrain", "structural-failures": "building", "infrastructure-failures": "structure" };
 // A space case's object field often names a part ("Thruster", "Wiring", "Heat shield"); the vehicle class comes from the
 // whole case: a launch vehicle stays a rocket, a crewed capsule, a satellite or probe, and the shuttle orbiter get their
@@ -57,8 +61,15 @@ const EARTH = /\b(earth\w*|embankment|earth-?fill|fill dam|tailings|levee|dyke|d
 const caseText = (topic, lines = []) => { const v = topic.case || {};
   return [v.nesne, v.ad, v.sonuc, v.tetik, v.mekanizma, v.ders, v.yanilgi, ...(v.zincir || []), ...lines.map((l) => l.text || l.metin || "")].join(" "); };
 function objectKind(topic, lines = []) {
-  const v = topic.case || {}; const hit = KIND.find(([re]) => re.test(`${v.nesne || ""}`)) || KIND.find(([re]) => re.test(`${v.ad || ""} ${topic.title || ""}`));
-  const kind = hit ? hit[1] : CLUSTER_KIND[v.kume] || "structure";
+  // the object field names the whole thing ("Airship", "Overpass") or a part of it ("Cargo restraints", "Primary mirror"):
+  // a whole-object noun there wins, then the case's own name ("National Airlines Flight 102", "the CTV Building"), then
+  // the cluster; a case with no drawable object (software, a clock) stays the generic class
+  const v = topic.case || {}; const own = KIND.find(([re]) => re.test(`${v.nesne || ""}`));
+  let hit = own || KIND.find(([re]) => re.test(`${v.ad || ""} ${v.kisa || ""} ${topic.title || ""}`));
+  // a name can carry a misleading word ("Browns Ferry" is a nuclear plant, "Soyuz MS-10" a spacecraft): when only the
+  // name matched and the case's own cluster names a different vehicle or structure class, the cluster wins
+  const byCluster = CLUSTER_KIND[v.kume]; if (!own && hit && SPECIFIC_CLUSTER.has(v.kume) && byCluster !== hit[1]) hit = null;
+  const kind = hit ? hit[1] : byCluster || "structure";
   if (kind === "rocket") return spaceKind(v, topic.title);
   const text = caseText(topic, lines);
   if (kind === "bridge") return TRUSS.test(text) ? "truss-bridge" : SUSPENSION.test(text) ? "bridge" : "girder-bridge";
@@ -76,7 +87,9 @@ function structureMechanism(topic, kind, lines = []) {
   }
   if (/bridge$|walkway/.test(kind)) {
     if (/\b(wind\w*|gale|gust\w*|storm)\b/i.test(text)) return "wind";
-    if (/\b(load\w*|weight|overload\w*|heav\w*|traffic|buckl\w*|compression|concrete)\b/i.test(text)) return "load";
+    // a strike as the cause (a truck or a ship hitting the structure) is not a load on the deck: no load path for it
+    if (/\b(hit\w*|struck|strikes?|collid\w*|rammed|allision)\b/i.test([v.tetik, v.mekanizma].join(" "))) return null;
+    if (/\b(load\w*|weight|overload\w*|heav\w*|traffic|buckl\w*|compression)\b/i.test(text)) return "load";
   }
   return null;
 }
@@ -155,7 +168,7 @@ function build(script, style, topic) {
   // a thumbnail line that is only a time marker ("HOURS LATER") says nothing as a headline: the chain's last link stands in
   const TIME_ONLY = /^(\w+\s+)?(later|earlier|ago|before|after)$|^(minutes|hours|days|seconds|years) (later|earlier|before|after)$/i;
   const kap = (v.kapak || []).map(String).filter((k) => !TIME_ONLY.test(k.trim()));
-  const kapak = String(kap[0] || stamp).toUpperCase(); const kapak2 = String(kap[1] || chain[chain.length - 1] || kapak).toUpperCase();
+  const kapak = String(kap[0] || stamp).toUpperCase();
 
   // cause lines -> chain links, in order (a line maps to the best-overlapping link at or after the previous one)
   const roleOf = []; let link = -1; let triggerUsed = false; let contrastUsed = false;
@@ -204,8 +217,9 @@ function build(script, style, topic) {
       camera = [{ at: start, x: 540 + drift * 2, y: 840, z: 1.3 }, { at: end, x: 540 - drift * 2, y: 800, z: 1.0 }];
     } else if (role === "payoff") {
       kind_ = "payoff"; evidence = [F("lesson"), F("case")];
-      const lesson = headline(`${L.id}+0.3`, phrase(L.text) || kapak2, 330, S.title, phrase(L.text) ? L.text : kapak2); lesson.props.items[0].outAt = "end-0.45";
-      layers = [silhouette({ drawAt: off(L.id, -0.1) }), lesson];
+            // the lesson in the line's own words, or no headline: a thumbnail line ("WHOLE TRAIN") is not the lesson (#364 review)
+      const lesson = phrase(L.text) ? headline(`${L.id}+0.3`, phrase(L.text), 330, S.title, L.text) : null; if (lesson) lesson.props.items[0].outAt = "end-0.45";
+      layers = [silhouette({ drawAt: off(L.id, -0.1) }), ...(lesson ? [lesson] : [])];
       purpose = "Payoff: the lesson in a few of the line's words over the object redrawn whole; the camera returns to the exact frame-0 framing and the lesson clears before the end, so the last frame matches the first and the Short loops (#357).";
       camera = [{ at: start, x: 540 - drift * 2, y: 860, z: 1.32 }, { at: "end-0.6", x: 540, y: 820, z: hookZ }];
     } else if (String(role).startsWith("chain:") && ((runIndex(i) >= 2 && prevKind !== "mechanism") || i === undockLine || i === stopLine)) {
@@ -251,7 +265,9 @@ function build(script, style, topic) {
   // a headline followed by another headline clears before its line ends: the transition never overlays the two in the
   // same band (#364: "THRUSTER STICKS ON" x "UNDOCKING MAKES IT WORSE" during the cut)
   const heads = (sc) => sc.layers.filter((l) => l.component === "kinetic-type").flatMap((l) => l.props.items).filter((it) => it.y <= 480);
-  scenes.forEach((sc, k) => { if (k < last && heads(scenes[k + 1]).length) heads(sc).forEach((it) => { if (it.outAt == null) it.outAt = off(`${sc.lines[0]}.end`, -0.25); }); });
+  // the next scene's failure chain also occupies that band (its window starts at y 300)
+  const topBand = (sc) => heads(sc).length || sc.layers.some((l) => l.component === "failure-chain");
+  scenes.forEach((sc, k) => { if (k < last && topBand(scenes[k + 1])) heads(sc).forEach((it) => { if (it.outAt == null) it.outAt = off(`${sc.lines[0]}.end`, -0.25); }); });
   // drop on-screen text whose digits are not in a cited fact (validator rule): the scene keeps its drawing
   const cited = (sc) => sc.evidence.map((id) => facts.find((f) => f.id === id)).filter(Boolean).map((f) => f.claim).join(" ");
   scenes.forEach((sc) => sc.layers.forEach((l) => { if (l.component === "kinetic-type") l.props.items = l.props.items.filter((it) => (String(it.text).match(/\d+/g) || []).every((d) => new RegExp(`(^|\\D)${d}(\\D|$)`).test(cited(sc)))); }));
