@@ -155,7 +155,7 @@ function runChannel(slug, argv = [], { env = process.env, spawn = cp.spawnSync, 
   const pick = explicit ? ok.find((r) => r.topic.id === explicit || r.topic.slug === explicit) : ok.find((r) => force || !rendered(channel, r.topic));
   if (!pick) {
     const why = explicit ? `${explicit} is not a qualified ${channel.name} topic${(refused.find((r) => r.topic.id === explicit || r.topic.slug === explicit) || { why: [] }).why.map((w) => "; " + w).join("")}`
-      : `${ok.length} qualified topic(s), all already rendered for review; ${refused.length} not qualified (research below the channel standard, published, generated or reserved)`;
+      : `${ok.length ? `${ok.length} qualified topic(s), all already rendered for review` : "no qualified topic"}; ${refused.length} not qualified (research below the channel standard, below its topic bar, published, generated or reserved)`;
     run.skip("RESEARCH", why).outcome("NO_TOPIC", why); log(`[${channel.name}] NO_TOPIC: ${why}`); return 0;
   }
   log(`[${channel.name}] premium primary: ${ok.length} qualified topic(s); review candidate ${pick.topic.id}`);
