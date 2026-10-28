@@ -1,0 +1,265 @@
+{
+ "schema": "bto-studio.review-package.v1",
+ "channel": "failure-reconstructed",
+ "topicId": "FR-gemini-8-1966",
+ "slug": "gemini-8-1966",
+ "title": "Neil Armstrong's Spacecraft Spun Out of Control",
+ "verdict": "SHADOW_OF_LIVE_NOT_PUBLISHABLE",
+ "pilot": null,
+ "researchPending": null,
+ "shadow": true,
+ "autoPublish": false,
+ "uploadAttempted": false,
+ "mode": "preview",
+ "quality": "final",
+ "createdAt": "2026-10-28T14:30:45.007Z",
+ "video": "../../_temp/review/FR-gemini-8-1966/out/gemini-8-1966-premium-final.mp4",
+ "voice": {
+  "used": "en-US-AndrewMultilingualNeural",
+  "approved": true,
+  "approvedVoice": {
+   "provider": "edge-tts",
+   "voice": "en-US-AndrewMultilingualNeural",
+   "rate": "+1%"
+  },
+  "note": null,
+  "wordTiming": "measured (Edge word boundaries)"
+ },
+ "narrationUnchanged": {
+  "sourceHash": "faa3e43196f7f3ac",
+  "lines": [
+   "In orbit, Neil Armstrong's spacecraft began spinning out of control.",
+   "Suddenly, it rolled faster and faster, close to making the crew black out.",
+   "They had just docked with a target vehicle.",
+   "One of Gemini's own thrusters was stuck on.",
+   "Undocking only made the spin faster.",
+   "Armstrong used the re-entry thrusters to stop it.",
+   "The mission had to end early.",
+   "Thruster circuits were redesigned to isolate a single fault."
+  ]
+ },
+ "traceability": [
+  {
+   "scene": "s1-hook",
+   "lines": [
+    "L1"
+   ],
+   "purpose": "Hook: frame 0 draws the capsule as clean line work and it gives way at the failure point within the first second, with the case stamp (GEMINI 8 · 1966), so the consequence is on screen before any cause.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "Gemini 8 (1966): began spinning violently in orbit. STUCK THRUSTER",
+     "source": "Wikipedia — Gemini 8",
+     "url": "https://en.wikipedia.org/wiki/Gemini_8"
+    }
+   ]
+  },
+  {
+   "scene": "s2-toll",
+   "lines": [
+    "L2"
+   ],
+   "purpose": "Toll: the broken capsule holds while the case's count (STUCK THRUSTER) is stamped below it; the number is the case file's, not computed.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "Gemini 8 (1966): began spinning violently in orbit. STUCK THRUSTER",
+     "source": "Wikipedia — Gemini 8",
+     "url": "https://en.wikipedia.org/wiki/Gemini_8"
+    }
+   ]
+  },
+  {
+   "scene": "s3-chain",
+   "lines": [
+    "L3"
+   ],
+   "purpose": "Chain: the case's failure chain scrolls from link 1 to link 1 (\"DOCKED WITH TARGET\"), which lights as the line describes it, so consecutive causes read as one continuous investigation.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "DOCKED WITH TARGET -> THRUSTER STICKS ON -> UNDOCKING MAKES IT WORSE -> SPIN NEARS BLACKOUT LEVELS -> RE-ENTRY THRUSTERS USED TO STOP IT",
+     "source": "Wikipedia — Gemini 8",
+     "url": "https://en.wikipedia.org/wiki/Gemini_8"
+    },
+    {
+     "id": "F1",
+     "claim": "Gemini 8 (1966): began spinning violently in orbit. STUCK THRUSTER",
+     "source": "Wikipedia — Gemini 8",
+     "url": "https://en.wikipedia.org/wiki/Gemini_8"
+    }
+   ]
+  },
+  {
+   "scene": "s4-trigger",
+   "lines": [
+    "L4"
+   ],
+   "purpose": "Trigger: the camera closes in on the failure point of the intact capsule as the crack starts there, while the case file's trigger is set in three words.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F2",
+     "claim": "a thruster stuck on after an electrical short",
+     "source": "Wikipedia — Gemini 8",
+     "url": "https://en.wikipedia.org/wiki/Gemini_8"
+    },
+    {
+     "id": "F1",
+     "claim": "Gemini 8 (1966): began spinning violently in orbit. STUCK THRUSTER",
+     "source": "Wikipedia — Gemini 8",
+     "url": "https://en.wikipedia.org/wiki/Gemini_8"
+    }
+   ]
+  },
+  {
+   "scene": "s5-mechanism",
+   "lines": [
+    "L5"
+   ],
+   "purpose": "Mechanism close-up: the camera closes in on the failure point of the capsule while chain link 3 (\"UNDOCKING MAKES IT WORSE\") is named, so the cause is seen on the object, not only read on a card.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "DOCKED WITH TARGET -> THRUSTER STICKS ON -> UNDOCKING MAKES IT WORSE -> SPIN NEARS BLACKOUT LEVELS -> RE-ENTRY THRUSTERS USED TO STOP IT",
+     "source": "Wikipedia — Gemini 8",
+     "url": "https://en.wikipedia.org/wiki/Gemini_8"
+    },
+    {
+     "id": "F3",
+     "claim": "a stuck-open orbital attitude thruster causing a rapidly increasing spin",
+     "source": "NASA — 25015 (cited by Wikipedia)",
+     "url": "https://mira.hq.nasa.gov/history/ws/hdmshrc/all/main/DDD/25015.PDF"
+    },
+    {
+     "id": "F1",
+     "claim": "Gemini 8 (1966): began spinning violently in orbit. STUCK THRUSTER",
+     "source": "Wikipedia — Gemini 8",
+     "url": "https://en.wikipedia.org/wiki/Gemini_8"
+    }
+   ]
+  },
+  {
+   "scene": "s6-mechanism",
+   "lines": [
+    "L6"
+   ],
+   "purpose": "Mechanism close-up: the camera closes in on the failure point of the capsule while chain link 5 (\"RE-ENTRY THRUSTERS USED TO STOP IT\") is named, so the cause is seen on the object, not only read on a card.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "DOCKED WITH TARGET -> THRUSTER STICKS ON -> UNDOCKING MAKES IT WORSE -> SPIN NEARS BLACKOUT LEVELS -> RE-ENTRY THRUSTERS USED TO STOP IT",
+     "source": "Wikipedia — Gemini 8",
+     "url": "https://en.wikipedia.org/wiki/Gemini_8"
+    },
+    {
+     "id": "F3",
+     "claim": "a stuck-open orbital attitude thruster causing a rapidly increasing spin",
+     "source": "NASA — 25015 (cited by Wikipedia)",
+     "url": "https://mira.hq.nasa.gov/history/ws/hdmshrc/all/main/DDD/25015.PDF"
+    },
+    {
+     "id": "F1",
+     "claim": "Gemini 8 (1966): began spinning violently in orbit. STUCK THRUSTER",
+     "source": "Wikipedia — Gemini 8",
+     "url": "https://en.wikipedia.org/wiki/Gemini_8"
+    }
+   ]
+  },
+  {
+   "scene": "s7-chain",
+   "lines": [
+    "L7"
+   ],
+   "purpose": "Chain: the case's failure chain scrolls from link 5 to link 5 (\"RE-ENTRY THRUSTERS USED TO STOP IT\"), which lights as the line describes it, so consecutive causes read as one continuous investigation.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "DOCKED WITH TARGET -> THRUSTER STICKS ON -> UNDOCKING MAKES IT WORSE -> SPIN NEARS BLACKOUT LEVELS -> RE-ENTRY THRUSTERS USED TO STOP IT",
+     "source": "Wikipedia — Gemini 8",
+     "url": "https://en.wikipedia.org/wiki/Gemini_8"
+    },
+    {
+     "id": "F1",
+     "claim": "Gemini 8 (1966): began spinning violently in orbit. STUCK THRUSTER",
+     "source": "Wikipedia — Gemini 8",
+     "url": "https://en.wikipedia.org/wiki/Gemini_8"
+    }
+   ]
+  },
+  {
+   "scene": "s8-payoff",
+   "lines": [
+    "L8"
+   ],
+   "purpose": "Payoff: the lesson in a few of the line's words over the object redrawn whole; the camera returns to the exact frame-0 framing and the lesson clears before the end, so the last frame matches the first and the Short loops (#357).",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F6",
+     "claim": "thruster circuits were changed so a single fault could be isolated",
+     "source": "NASA — 25015 (cited by Wikipedia)",
+     "url": "https://mira.hq.nasa.gov/history/ws/hdmshrc/all/main/DDD/25015.PDF"
+    },
+    {
+     "id": "F1",
+     "claim": "Gemini 8 (1966): began spinning violently in orbit. STUCK THRUSTER",
+     "source": "Wikipedia — Gemini 8",
+     "url": "https://en.wikipedia.org/wiki/Gemini_8"
+    }
+   ]
+  }
+ ],
+ "licensing": {
+  "visuals": "all visuals drawn in-house from code (SVG): generic object-class line drawings, failure chain and stamps; no photographs, footage or third-party media",
+  "fonts": "SIL OFL 1.1 (@fontsource Inter, Source Serif 4, Barlow Semi Condensed 5.3.0)",
+  "audio": "narration TTS + effects/music synthesised by scripts/bto-studio/audio/sound_design.py (no samples)",
+  "thirdPartyMedia": []
+ },
+ "qa": {
+  "objectivePass": true,
+  "report": "../../_temp/review/FR-gemini-8-1966/out/qa-report.md",
+  "contactSheet": "../../_temp/review/FR-gemini-8-1966/out/contact-sheet.png",
+  "sceneSheet": "../../_temp/review/FR-gemini-8-1966/out/scene-sheet.png",
+  "failures": [
+   "UNVERIFIED audio samples clipped: not reported by this FFmpeg build (astats has no clipped-sample count)",
+   "WARN caption reading speed: 1 cues over 22 chars/s (max 29.7)",
+   "WARN loop continuity (last -> first frame): whole 6.13, photo region 14.34, final-second step 0.01, ratio 13.13"
+  ],
+  "unverified": [
+   "audio samples clipped"
+  ]
+ },
+ "audio": {
+  "integratedLufs": -14.2,
+  "truePeakDbtp": -2
+ },
+ "performance": {
+  "renderWallSec": 105.1,
+  "msPerFrame": 129.4,
+  "workers": 3,
+  "peakChromiumRssMb": 3739,
+  "cachedSegments": 0,
+  "segments": 8,
+  "host": "linux x64 4 cpu 16 GB",
+  "totalPipelineSec": 155.7
+ },
+ "cost": {
+  "llmUsd": 0,
+  "ttsUsd": 0,
+  "renderUsd": 0,
+  "note": "local rendering and free/offline TTS; LLM use only when a Claude storyboard draft was requested and approved"
+ },
+ "approvalsNeeded": [
+  "voice: re-narrate with the approved Edge voice (if PREVIEW_ONLY)",
+  "creative sign-off (video-quality-review findings)",
+  "factual sign-off on the traceability table",
+  "owner decision to hand the MP4 to the normal pipeline (never automatic)"
+ ]
+}

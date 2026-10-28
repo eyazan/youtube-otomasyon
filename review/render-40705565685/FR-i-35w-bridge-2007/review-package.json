@@ -1,0 +1,258 @@
+{
+ "schema": "bto-studio.review-package.v1",
+ "channel": "failure-reconstructed",
+ "topicId": "FR-i-35w-bridge-2007",
+ "slug": "i-35w-bridge-2007",
+ "title": "The Undersized Steel Plate That Dropped a Freeway",
+ "verdict": "SHADOW_OF_LIVE_NOT_PUBLISHABLE",
+ "pilot": null,
+ "researchPending": null,
+ "shadow": true,
+ "autoPublish": false,
+ "uploadAttempted": false,
+ "mode": "preview",
+ "quality": "final",
+ "createdAt": "2026-10-28T14:33:27.581Z",
+ "video": "../../_temp/review/FR-i-35w-bridge-2007/out/i-35w-bridge-2007-premium-final.mp4",
+ "voice": {
+  "used": "en-US-AndrewMultilingualNeural",
+  "approved": true,
+  "approvedVoice": {
+   "provider": "edge-tts",
+   "voice": "en-US-AndrewMultilingualNeural",
+   "rate": "+1%"
+  },
+  "note": null,
+  "wordTiming": "measured (Edge word boundaries)"
+ },
+ "narrationUnchanged": {
+  "sourceHash": "406808b74b0bb1c3",
+  "lines": [
+   "Undersized steel plates collapsed a Minneapolis bridge at rush hour.",
+   "Cars plunged into the Mississippi River, and thirteen people were killed.",
+   "The cause had been in the drawings for forty years.",
+   "Steel gusset plates were designed only half as thick as needed.",
+   "Over time, extra concrete added weight to the deck.",
+   "That day, construction materials were parked right above a weak plate.",
+   "The plate buckled, and the main span fell.",
+   "Now gusset plates are checked in every truss bridge rating."
+  ]
+ },
+ "traceability": [
+  {
+   "scene": "s1-hook",
+   "lines": [
+    "L1"
+   ],
+   "purpose": "Hook: frame 0 draws the truss-bridge as clean line work and it gives way at the failure point within the first second, with the case stamp (I-35W BRIDGE · 2007), so the consequence is on screen before any cause.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "the I-35W bridge (2007): dropped into the Mississippi River during rush hour. 13 DEAD",
+     "source": "Wikipedia — I-35W Mississippi River bridge",
+     "url": "https://en.wikipedia.org/wiki/I-35W_Mississippi_River_bridge"
+    }
+   ]
+  },
+  {
+   "scene": "s2-toll",
+   "lines": [
+    "L2"
+   ],
+   "purpose": "Toll: the broken truss-bridge holds while the case's count (13 DEAD) is stamped below it; the number is the case file's, not computed.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "the I-35W bridge (2007): dropped into the Mississippi River during rush hour. 13 DEAD",
+     "source": "Wikipedia — I-35W Mississippi River bridge",
+     "url": "https://en.wikipedia.org/wiki/I-35W_Mississippi_River_bridge"
+    }
+   ]
+  },
+  {
+   "scene": "s3-chain",
+   "lines": [
+    "L3"
+   ],
+   "purpose": "Chain: the case's failure chain scrolls from link 1 to link 1 (\"GUSSET PLATES DESIGNED TOO THIN\"), which lights as the line describes it, so consecutive causes read as one continuous investigation.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "GUSSET PLATES DESIGNED TOO THIN -> DECADES OF ADDED CONCRETE WEIGHT -> CONSTRUCTION LOAD PARKED ON DECK -> PLATE AT U10 GIVES WAY -> MAIN SPAN FALLS",
+     "source": "Wikipedia — I-35W Mississippi River bridge",
+     "url": "https://en.wikipedia.org/wiki/I-35W_Mississippi_River_bridge"
+    },
+    {
+     "id": "F1",
+     "claim": "the I-35W bridge (2007): dropped into the Mississippi River during rush hour. 13 DEAD",
+     "source": "Wikipedia — I-35W Mississippi River bridge",
+     "url": "https://en.wikipedia.org/wiki/I-35W_Mississippi_River_bridge"
+    }
+   ]
+  },
+  {
+   "scene": "s4-trigger",
+   "lines": [
+    "L4"
+   ],
+   "purpose": "Trigger: the camera closes in on the failure point of the intact truss-bridge as the crack starts there, while the case file's trigger is set in three words.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F2",
+     "claim": "gusset plates designed half as thick as needed",
+     "source": "Wikipedia — I-35W Mississippi River bridge",
+     "url": "https://en.wikipedia.org/wiki/I-35W_Mississippi_River_bridge"
+    },
+    {
+     "id": "F1",
+     "claim": "the I-35W bridge (2007): dropped into the Mississippi River during rush hour. 13 DEAD",
+     "source": "Wikipedia — I-35W Mississippi River bridge",
+     "url": "https://en.wikipedia.org/wiki/I-35W_Mississippi_River_bridge"
+    }
+   ]
+  },
+  {
+   "scene": "s5-chain",
+   "lines": [
+    "L5"
+   ],
+   "purpose": "Chain: the case's failure chain scrolls from link 1 to link 2 (\"DECADES OF ADDED CONCRETE WEIGHT\"), which lights as the line describes it, so consecutive causes read as one continuous investigation.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "GUSSET PLATES DESIGNED TOO THIN -> DECADES OF ADDED CONCRETE WEIGHT -> CONSTRUCTION LOAD PARKED ON DECK -> PLATE AT U10 GIVES WAY -> MAIN SPAN FALLS",
+     "source": "Wikipedia — I-35W Mississippi River bridge",
+     "url": "https://en.wikipedia.org/wiki/I-35W_Mississippi_River_bridge"
+    },
+    {
+     "id": "F1",
+     "claim": "the I-35W bridge (2007): dropped into the Mississippi River during rush hour. 13 DEAD",
+     "source": "Wikipedia — I-35W Mississippi River bridge",
+     "url": "https://en.wikipedia.org/wiki/I-35W_Mississippi_River_bridge"
+    }
+   ]
+  },
+  {
+   "scene": "s6-chain",
+   "lines": [
+    "L6"
+   ],
+   "purpose": "Chain: the case's failure chain scrolls from link 2 to link 3 (\"CONSTRUCTION LOAD PARKED ON DECK\"), which lights as the line describes it, so consecutive causes read as one continuous investigation.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "GUSSET PLATES DESIGNED TOO THIN -> DECADES OF ADDED CONCRETE WEIGHT -> CONSTRUCTION LOAD PARKED ON DECK -> PLATE AT U10 GIVES WAY -> MAIN SPAN FALLS",
+     "source": "Wikipedia — I-35W Mississippi River bridge",
+     "url": "https://en.wikipedia.org/wiki/I-35W_Mississippi_River_bridge"
+    },
+    {
+     "id": "F1",
+     "claim": "the I-35W bridge (2007): dropped into the Mississippi River during rush hour. 13 DEAD",
+     "source": "Wikipedia — I-35W Mississippi River bridge",
+     "url": "https://en.wikipedia.org/wiki/I-35W_Mississippi_River_bridge"
+    }
+   ]
+  },
+  {
+   "scene": "s7-mechanism",
+   "lines": [
+    "L7"
+   ],
+   "purpose": "Mechanism close-up: the camera closes in on the failure point of the truss-bridge while chain link 5 (\"MAIN SPAN FALLS\") is named, so the cause is seen on the object, not only read on a card.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "GUSSET PLATES DESIGNED TOO THIN -> DECADES OF ADDED CONCRETE WEIGHT -> CONSTRUCTION LOAD PARKED ON DECK -> PLATE AT U10 GIVES WAY -> MAIN SPAN FALLS",
+     "source": "Wikipedia — I-35W Mississippi River bridge",
+     "url": "https://en.wikipedia.org/wiki/I-35W_Mississippi_River_bridge"
+    },
+    {
+     "id": "F3",
+     "claim": "undersized gusset plates failing under added dead load and construction materials",
+     "source": "NTSB Highway Accident Report HAR-08-03 — Collapse of I-35W Highway Bridge",
+     "url": "https://www.ntsb.gov/investigations/AccidentReports/Reports/HAR0803.pdf"
+    },
+    {
+     "id": "F1",
+     "claim": "the I-35W bridge (2007): dropped into the Mississippi River during rush hour. 13 DEAD",
+     "source": "Wikipedia — I-35W Mississippi River bridge",
+     "url": "https://en.wikipedia.org/wiki/I-35W_Mississippi_River_bridge"
+    }
+   ]
+  },
+  {
+   "scene": "s8-payoff",
+   "lines": [
+    "L8"
+   ],
+   "purpose": "Payoff: the lesson in a few of the line's words over the object redrawn whole; the camera returns to the exact frame-0 framing and the lesson clears before the end, so the last frame matches the first and the Short loops (#357).",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F7",
+     "claim": "gusset plates are now checked in load ratings of truss bridges",
+     "source": "NTSB Highway Accident Report HAR-08-03 — Collapse of I-35W Highway Bridge",
+     "url": "https://www.ntsb.gov/investigations/AccidentReports/Reports/HAR0803.pdf"
+    },
+    {
+     "id": "F1",
+     "claim": "the I-35W bridge (2007): dropped into the Mississippi River during rush hour. 13 DEAD",
+     "source": "Wikipedia — I-35W Mississippi River bridge",
+     "url": "https://en.wikipedia.org/wiki/I-35W_Mississippi_River_bridge"
+    }
+   ]
+  }
+ ],
+ "licensing": {
+  "visuals": "all visuals drawn in-house from code (SVG): generic object-class line drawings, failure chain and stamps; no photographs, footage or third-party media",
+  "fonts": "SIL OFL 1.1 (@fontsource Inter, Source Serif 4, Barlow Semi Condensed 5.3.0)",
+  "audio": "narration TTS + effects/music synthesised by scripts/bto-studio/audio/sound_design.py (no samples)",
+  "thirdPartyMedia": []
+ },
+ "qa": {
+  "objectivePass": true,
+  "report": "../../_temp/review/FR-i-35w-bridge-2007/out/qa-report.md",
+  "contactSheet": "../../_temp/review/FR-i-35w-bridge-2007/out/contact-sheet.png",
+  "sceneSheet": "../../_temp/review/FR-i-35w-bridge-2007/out/scene-sheet.png",
+  "failures": [
+   "UNVERIFIED audio samples clipped: not reported by this FFmpeg build (astats has no clipped-sample count)",
+   "WARN caption reading speed: 1 cues over 22 chars/s (max 32.6)"
+  ],
+  "unverified": [
+   "audio samples clipped"
+  ]
+ },
+ "audio": {
+  "integratedLufs": -14.1,
+  "truePeakDbtp": -1.9
+ },
+ "performance": {
+  "renderWallSec": 107.9,
+  "msPerFrame": 114,
+  "workers": 3,
+  "peakChromiumRssMb": 3851,
+  "cachedSegments": 0,
+  "segments": 8,
+  "host": "linux x64 4 cpu 16 GB",
+  "totalPipelineSec": 158.7
+ },
+ "cost": {
+  "llmUsd": 0,
+  "ttsUsd": 0,
+  "renderUsd": 0,
+  "note": "local rendering and free/offline TTS; LLM use only when a Claude storyboard draft was requested and approved"
+ },
+ "approvalsNeeded": [
+  "voice: re-narrate with the approved Edge voice (if PREVIEW_ONLY)",
+  "creative sign-off (video-quality-review findings)",
+  "factual sign-off on the traceability table",
+  "owner decision to hand the MP4 to the normal pipeline (never automatic)"
+ ]
+}

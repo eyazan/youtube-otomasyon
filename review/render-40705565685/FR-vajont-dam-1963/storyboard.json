@@ -1,0 +1,625 @@
+{
+ "schema": "bto-studio.storyboard.v1",
+ "channel": "failure-reconstructed",
+ "topicId": "FR-vajont-dam-1963",
+ "slug": "vajont-dam-1963",
+ "version": 1,
+ "author": "auto/failure-reconstructed (deterministic forensic grammar, object class dam; needs creative review before publication)",
+ "licensingNote": "all visuals drawn in-house from code (SVG): generic object-class line drawings, failure chain and stamps; no photographs, footage or third-party media",
+ "treatment": {
+  "educationalObjective": "Reconstruct, from the case file: The Dam Survived — the Valley Didn't",
+  "visualHook": "Frame 0: a dam drawn as line work gives way at its failure point within the first second.",
+  "mechanismsToAnimate": [
+   "hook",
+   "chain",
+   "mechanism",
+   "trigger",
+   "payoff"
+  ],
+  "factualRisks": [
+   "the dam is a generic class drawing, not the actual vehicle or structure (RECONSTRUCTION chip)",
+   "the failure point on the drawing is illustrative",
+   "case-file facts carry researched claims without stored verbatim quotes (FR live standard)"
+  ]
+ },
+ "tail": 0.6,
+ "scenes": [
+  {
+   "id": "s1-hook",
+   "lines": [
+    "L1"
+   ],
+   "start": 0,
+   "env": "blueprint",
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Hook: frame 0 draws the dam as clean line work and it gives way at the failure point within the first second, with the case stamp (VAJONT DAM · 1963), so the consequence is on screen before any cause.",
+   "camera": [
+    {
+     "at": 0,
+     "x": 540,
+     "y": 820,
+     "z": 1.18
+    },
+    {
+     "at": "L1.end",
+     "x": 570,
+     "y": 830,
+     "z": 1.02
+    }
+   ],
+   "layers": [
+    {
+     "component": "object-silhouette",
+     "props": {
+      "kind": "dam",
+      "x": 600,
+      "y": 820,
+      "w": 840,
+      "maxH": 640,
+      "seed": 31,
+      "holds": true,
+      "failPart": "slope",
+      "failAt": 0.9,
+      "mech": "overtop",
+      "mechAt": -0.4
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L1+0.3",
+        "text": "VAJONT DAM · 1963",
+        "x": 540,
+        "y": 460,
+        "size": 60,
+        "family": "sans"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s2-chain",
+   "lines": [
+    "L2"
+   ],
+   "start": "L2-0.15",
+   "env": "void",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F4",
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Chain: the case's failure chain scrolls from link 4 to link 5 (\"TOWNS BELOW DESTROYED\"), which lights as the line describes it, so consecutive causes read as one continuous investigation.",
+   "camera": [
+    {
+     "at": "L2-0.15",
+     "x": 600,
+     "y": 860,
+     "z": 1.05
+    },
+    {
+     "at": "L2.end",
+     "x": 480,
+     "y": 820,
+     "z": 1.22
+    }
+   ],
+   "layers": [
+    {
+     "component": "object-silhouette",
+     "props": {
+      "kind": "dam",
+      "x": 600,
+      "y": 900,
+      "w": 1160,
+      "maxH": 640,
+      "seed": 31,
+      "holds": true,
+      "failPart": "slope",
+      "failAt": -1,
+      "opacity": 0.16
+     }
+    },
+    {
+     "component": "failure-chain",
+     "screen": true,
+     "props": {
+      "x": 540,
+      "gap": 230,
+      "w": 780,
+      "steps": [
+       "RESERVOIR FILLED AGAINST WEAK SLOPE",
+       "SLOPE CREEPS FOR YEARS",
+       "LANDSLIDE FALLS INTO LAKE",
+       "WAVE OVERTOPS DAM",
+       "TOWNS BELOW DESTROYED"
+      ],
+      "activeKeys": [
+       [
+        "L2-0.15",
+        3
+       ],
+       [
+        "L2+1.1",
+        4
+       ]
+      ],
+      "window": {
+       "center": 800,
+       "top": 300,
+       "bottom": 1250
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s3-chain",
+   "lines": [
+    "L3"
+   ],
+   "start": "L3-0.15",
+   "env": "void",
+   "transition": {
+    "type": "continuity",
+    "dur": 0.3
+   },
+   "evidence": [
+    "F4",
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Chain: the case's failure chain scrolls from link 5 to link 5 (\"TOWNS BELOW DESTROYED\"), which lights as the line describes it, so consecutive causes read as one continuous investigation.",
+   "camera": [
+    {
+     "at": "L3-0.15",
+     "x": 480,
+     "y": 860,
+     "z": 1.05
+    },
+    {
+     "at": "L3.end",
+     "x": 600,
+     "y": 820,
+     "z": 1.22
+    }
+   ],
+   "layers": [
+    {
+     "component": "object-silhouette",
+     "props": {
+      "kind": "dam",
+      "x": 600,
+      "y": 900,
+      "w": 1160,
+      "maxH": 640,
+      "seed": 31,
+      "holds": true,
+      "failPart": "slope",
+      "failAt": -1,
+      "opacity": 0.16
+     }
+    },
+    {
+     "component": "failure-chain",
+     "screen": true,
+     "props": {
+      "x": 540,
+      "gap": 230,
+      "w": 780,
+      "steps": [
+       "RESERVOIR FILLED AGAINST WEAK SLOPE",
+       "SLOPE CREEPS FOR YEARS",
+       "LANDSLIDE FALLS INTO LAKE",
+       "WAVE OVERTOPS DAM",
+       "TOWNS BELOW DESTROYED"
+      ],
+      "activeKeys": [
+       [
+        "L3-0.15",
+        4
+       ],
+       [
+        "L3+1.1",
+        4
+       ]
+      ],
+      "window": {
+       "center": 800,
+       "top": 300,
+       "bottom": 1250
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s4-mechanism",
+   "lines": [
+    "L4"
+   ],
+   "start": "L4-0.15",
+   "env": "blueprint",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F4",
+    "F3",
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Mechanism close-up: the camera closes in on the failure point of the dam while chain link 1 (\"RESERVOIR FILLED AGAINST WEAK SLOPE\") is named, so the cause is seen on the object, not only read on a card.",
+   "camera": [
+    {
+     "at": "L4-0.15",
+     "x": 410,
+     "y": 760,
+     "z": 1.15
+    },
+    {
+     "at": "L4.end",
+     "x": 380,
+     "y": 740,
+     "z": 1.6
+    }
+   ],
+   "layers": [
+    {
+     "component": "object-silhouette",
+     "props": {
+      "kind": "dam",
+      "x": 600,
+      "y": 820,
+      "w": 840,
+      "maxH": 640,
+      "seed": 31,
+      "holds": true,
+      "failPart": "slope",
+      "failAt": "L4+1.4",
+      "mech": "overtop",
+      "mechAt": "L4-0.15"
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L4+0.2",
+        "text": "RESERVOIR FILLED AGAINST WEAK SLOPE",
+        "x": 540,
+        "y": 460,
+        "size": 44,
+        "family": "sans",
+        "source": "RESERVOIR FILLED AGAINST WEAK SLOPE"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s5-trigger",
+   "lines": [
+    "L5"
+   ],
+   "start": "L5-0.15",
+   "env": "void",
+   "transition": {
+    "type": "square-iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F2",
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Trigger: the camera closes in on the failure point of the intact dam as the crack starts there, while the case file's trigger is set in three words.",
+   "camera": [
+    {
+     "at": "L5-0.15",
+     "x": 540,
+     "y": 820,
+     "z": 1
+    },
+    {
+     "at": "L5.end",
+     "x": 380,
+     "y": 760,
+     "z": 1.45
+    }
+   ],
+   "layers": [
+    {
+     "component": "object-silhouette",
+     "props": {
+      "kind": "dam",
+      "x": 600,
+      "y": 820,
+      "w": 840,
+      "maxH": 640,
+      "seed": 31,
+      "holds": true,
+      "failPart": "slope",
+      "failAt": "L5+1.2",
+      "mech": "overtop",
+      "mechAt": "L5-0.15"
+     }
+    }
+   ]
+  },
+  {
+   "id": "s6-chain",
+   "lines": [
+    "L6"
+   ],
+   "start": "L6-0.15",
+   "env": "teal",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F4",
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Chain: the case's failure chain scrolls from link 1 to link 2 (\"SLOPE CREEPS FOR YEARS\"), which lights as the line describes it, so consecutive causes read as one continuous investigation.",
+   "camera": [
+    {
+     "at": "L6-0.15",
+     "x": 600,
+     "y": 860,
+     "z": 1.05
+    },
+    {
+     "at": "L6.end",
+     "x": 480,
+     "y": 820,
+     "z": 1.22
+    }
+   ],
+   "layers": [
+    {
+     "component": "object-silhouette",
+     "props": {
+      "kind": "dam",
+      "x": 600,
+      "y": 900,
+      "w": 1160,
+      "maxH": 640,
+      "seed": 31,
+      "holds": true,
+      "failPart": "slope",
+      "failAt": -1,
+      "opacity": 0.16
+     }
+    },
+    {
+     "component": "failure-chain",
+     "screen": true,
+     "props": {
+      "x": 540,
+      "gap": 230,
+      "w": 780,
+      "steps": [
+       "RESERVOIR FILLED AGAINST WEAK SLOPE",
+       "SLOPE CREEPS FOR YEARS",
+       "LANDSLIDE FALLS INTO LAKE",
+       "WAVE OVERTOPS DAM",
+       "TOWNS BELOW DESTROYED"
+      ],
+      "activeKeys": [
+       [
+        "L6-0.15",
+        0
+       ],
+       [
+        "L6+1.1",
+        1
+       ]
+      ],
+      "window": {
+       "center": 800,
+       "top": 300,
+       "bottom": 1250
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s7-chain",
+   "lines": [
+    "L7"
+   ],
+   "start": "L7-0.15",
+   "env": "teal",
+   "transition": {
+    "type": "continuity",
+    "dur": 0.3
+   },
+   "evidence": [
+    "F4",
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Chain: the case's failure chain scrolls from link 2 to link 4 (\"WAVE OVERTOPS DAM\"), which lights as the line describes it, so consecutive causes read as one continuous investigation.",
+   "camera": [
+    {
+     "at": "L7-0.15",
+     "x": 480,
+     "y": 860,
+     "z": 1.05
+    },
+    {
+     "at": "L7.end",
+     "x": 600,
+     "y": 820,
+     "z": 1.22
+    }
+   ],
+   "layers": [
+    {
+     "component": "object-silhouette",
+     "props": {
+      "kind": "dam",
+      "x": 600,
+      "y": 900,
+      "w": 1160,
+      "maxH": 640,
+      "seed": 31,
+      "holds": true,
+      "failPart": "slope",
+      "failAt": -1,
+      "opacity": 0.16
+     }
+    },
+    {
+     "component": "failure-chain",
+     "screen": true,
+     "props": {
+      "x": 540,
+      "gap": 230,
+      "w": 780,
+      "steps": [
+       "RESERVOIR FILLED AGAINST WEAK SLOPE",
+       "SLOPE CREEPS FOR YEARS",
+       "LANDSLIDE FALLS INTO LAKE",
+       "WAVE OVERTOPS DAM",
+       "TOWNS BELOW DESTROYED"
+      ],
+      "activeKeys": [
+       [
+        "L7-0.15",
+        1
+       ],
+       [
+        "L7+1.1",
+        3
+       ]
+      ],
+      "window": {
+       "center": 800,
+       "top": 300,
+       "bottom": 1250
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s8-payoff",
+   "lines": [
+    "L8"
+   ],
+   "start": "L8-0.15",
+   "env": "blueprint",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F7",
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Payoff: the lesson in a few of the line's words over the object redrawn whole; the camera returns to the exact frame-0 framing and the lesson clears before the end, so the last frame matches the first and the Short loops (#357).",
+   "camera": [
+    {
+     "at": "L8-0.15",
+     "x": 480,
+     "y": 860,
+     "z": 1.32
+    },
+    {
+     "at": "end-0.6",
+     "x": 540,
+     "y": 820,
+     "z": 1.18
+    }
+   ],
+   "layers": [
+    {
+     "component": "object-silhouette",
+     "props": {
+      "kind": "dam",
+      "x": 600,
+      "y": 820,
+      "w": 840,
+      "maxH": 640,
+      "seed": 31,
+      "holds": true,
+      "failPart": "slope",
+      "drawAt": "L8-0.1"
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L8+0.3",
+        "text": "THE MOUNTAIN FELL",
+        "x": 540,
+        "y": 460,
+        "size": 60,
+        "family": "sans",
+        "source": "THE MOUNTAIN FELL",
+        "outAt": "end-0.45"
+       }
+      ]
+     }
+    }
+   ]
+  }
+ ]
+}
