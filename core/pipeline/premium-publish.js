@@ -81,6 +81,19 @@ function policy(channel) {
 }
 const policyActive = (channel, env = process.env) => enabled(channel, env) && policy(channel).ok;
 
+// Research review (policy "requireResearchReview": GoalLore Lab and The Hidden Logic of Things, whose research is new):
+// code verifies that every quote is the source's own sentence and every number is in it, but whether a narration line
+// says no more than its quotes is a reading. The owner reads each researched topic once (in batches, before it can
+// be published unattended); the review is bound to the hash of its narration and quotes, so any change needs a new one.
+const reviewsFile = (channel) => path.join(approvalsDir(channel), "..", "research-reviews.json");
+function researchHash(topic) {
+  return crypto.createHash("sha256").update(JSON.stringify({ v: 1, narration: (topic.narration || []).map((l) => [l.text, l.facts || []]), facts: (topic.facts || []).map((f) => [f.id || null, f.quote || "", f.url || ""]) })).digest("hex");
+}
+function researchReviewed(channel, topic) {
+  const r = (J(reviewsFile(channel), {}) || {})[topic.id];
+  return !!(r && signed(r) && r.sha256 === researchHash(topic));
+}
+
 // upload metadata from the topic's own research (no invented claims): title, the question, the cited sources, disclosure
 function metadata(channel, topic) {
   const clean = (x) => String(x || "").replace(/[<>]/g, "").replace(/\s+/g, " ").trim();
@@ -161,8 +174,8 @@ function run(channel, { env = process.env, targetDay = null, spawn = cp.spawnSyn
   for (const a of ready.filter((x) => !candidates.includes(x))) log(`${tag}: ${a.topicId} reserved, not publishable yet: ${approvalProblems(a).join("; ")}`);
   let a = candidates.sort((x, y) => String((x.publish || {}).at || x.reservedAt).localeCompare(String((y.publish || {}).at || y.reservedAt)))[0];
   if (!a && pol.ok && nextTopic) {
-    const t = nextTopic();
-    if (!t) { log(`${tag}: publication policy signed, but no qualified topic; nothing produced (the bar is not lowered)`); return { exitCode: 0, uploaded: false, noTopic: true, topicId: null, slug: null, videoId: null }; }
+    const t = nextTopic(pol.policy.requireResearchReview ? (x) => researchReviewed(channel, x) : null);
+    if (!t) { log(`${tag}: publication policy signed, but no qualified topic${pol.policy.requireResearchReview ? " whose research the owner has reviewed" : ""}; nothing produced (the bar is not lowered)`); return { exitCode: 0, uploaded: false, noTopic: true, topicId: null, slug: null, videoId: null }; }
     a = autoReserve(channel, t, pol, persist);
     log(`${tag}: ${t.id} reserved under the signed publication policy ${pol.sha256.slice(0, 12)}${persist ? "" : " (dry run: not written)"}`);
   }
@@ -224,6 +237,7 @@ function uploaderDryRun(channel, topic, pkgFile, { env = process.env, spawn = cp
   if (!pkg.voice || pkg.voice.approved !== true) blockers.push(`narration voice ${(pkg.voice && pkg.voice.used) || "?"} is not the owner-approved channel voice`);
   const pol = policy(channel);
   if (!pol.ok) blockers.push(`publication policy: ${pol.why}`);
+  if (pol.policy && pol.policy.requireResearchReview && !researchReviewed(channel, topic)) blockers.push(`research of ${topic.id} not reviewed by the owner (node core/pipeline/premium-publish.js review-research --channel ${channel.slug} --topic ${topic.id} --by <name>)`);
   if (!enabled(channel, env)) blockers.push(`${PREFIX[channel.slug]}_PREMIUM_PUBLISH is not 1`);
   if (!(channel.entry && channel.entry.enabled === true)) blockers.push("registry publishing disabled (config/channels.json enabled: false)");
   const out = path.join(channel.paths.production, topic.slug);
@@ -260,11 +274,19 @@ if (require.main === module) {
     fs.writeFileSync(file, JSON.stringify({ topicId: topic.id, slug: topic.slug, reservedBy: by, reservedAt: new Date().toISOString(), contentSha256: null,
       creative: null, factual: null, publish: null, metadata: { title: "", description: "", tags: [] } }, null, 2) + "\n");
     console.log(`reserved ${topic.id} (${path.relative(ROOT, file)}); the live lane will not pick it`);
+  } else if (cmd === "review-research") {
+    // prints every narration line with the verbatim quotes it cites; with --by, records the owner's review of exactly this text
+    const { topic } = require("../../scripts/bto-studio/adapter").loadTopic(channel.slug, opt("--topic")); const byId = new Map((topic.facts || []).map((f) => [f.id, f]));
+    for (const l of topic.narration || []) { console.log(`\n${l.text}`); for (const id of l.facts || []) { const f = byId.get(id) || {}; console.log(`   ${id}: "${f.quote || "(no quote)"}" ${f.url || ""}`); } }
+    const sha = researchHash(topic); console.log(`\nresearch sha256 ${sha}`);
+    const by = opt("--by");
+    if (by) { const all = J(reviewsFile(channel), {}) || {}; all[topic.id] = { by, at: new Date().toISOString(), sha256: sha }; fs.mkdirSync(path.dirname(reviewsFile(channel)), { recursive: true }); fs.writeFileSync(reviewsFile(channel), JSON.stringify(all, null, 2) + "\n"); console.log(`recorded: ${topic.id} research reviewed by ${by}`); }
+    else console.log("read every line against its quotes; record with --by <name> only if each line says no more than they do");
   } else if (cmd === "hash") {
     const pkg = J(path.join(topicDir(channel, opt("--topic")), "out", "review-package.json"));
     if (!pkg || pkg.verdict !== "READY_FOR_HUMAN_REVIEW") throw new Error(`no reviewable package (verdict ${pkg ? pkg.verdict : "missing"})`);
     console.log(contentHash(channel, opt("--topic"), pkg));
-  } else { console.error("usage: node core/pipeline/premium-publish.js status|reserve|hash --channel <slug> [--topic <id>] [--by <name>]"); process.exit(1); }
+  } else { console.error("usage: node core/pipeline/premium-publish.js status|reserve|hash|review-research --channel <slug> [--topic <id>] [--by <name>]"); process.exit(1); }
 }
 
-module.exports = { run, enabled, approvals, reserved, contentHash, approvalProblems, stage, policy, policyActive, metadata, uploaderDryRun };
+module.exports = { run, enabled, approvals, reserved, contentHash, approvalProblems, stage, policy, policyActive, metadata, uploaderDryRun, researchHash, researchReviewed };

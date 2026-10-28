@@ -112,7 +112,7 @@ function runChannel(slug, argv = [], { env = process.env, spawn = cp.spawnSync, 
   }
   // 1. an approved premium Short (owner sign-offs, or the owner-signed publication policy) through the existing uploader
   if (!explicit) {
-    const p = premium.run(channel, { env, targetDay, log, nextTopic: () => (qualified(channel).ok[0] || {}).topic || null });
+    const p = premium.run(channel, { env, targetDay, log, nextTopic: (accept) => (qualified(channel).ok.find((r) => !accept || accept(r.topic)) || {}).topic || null });
     if (p && p.noTopic) { const why = "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)"; run.skip("RESEARCH", why).outcome("NO_TOPIC", why); return 0; }
     if (p && (p.uploaded || p.dryRun)) {
       run.topic(p.slug).done("RESEARCH", p.topicId).done("RENDER", "premium final").done("QA", "objective PASS, publish gate PUBLISH_APPROVED")

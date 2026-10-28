@@ -12680,8 +12680,8 @@
         "avoidPairingWithinDays": 30,
         "compareAgainstPublished": true
       },
-      "researchStatus": "VERIFIED",
-      "productionReady": true,
+      "researchStatus": "NEEDS_PRIMARY_SOURCE",
+      "productionReady": false,
       "facts": [
         {
           "id": "F1",
@@ -12792,8 +12792,11 @@
         }
       ],
       "verification": {
-        "ok": true,
-        "errors": [],
+        "ok": false,
+        "errors": [
+          "channel standard: 3 verified facts (the channel standard needs 5)",
+          "channel standard: fewer than two facts from primary (non-Wikipedia) sources"
+        ],
         "near": {}
       }
     },
@@ -17143,8 +17146,8 @@
         "avoidPairingWithinDays": 30,
         "compareAgainstPublished": true
       },
-      "researchStatus": "VERIFIED",
-      "productionReady": true,
+      "researchStatus": "NEEDS_PRIMARY_SOURCE",
+      "productionReady": false,
       "facts": [
         {
           "id": "F1",
@@ -17255,8 +17258,11 @@
         }
       ],
       "verification": {
-        "ok": true,
-        "errors": [],
+        "ok": false,
+        "errors": [
+          "channel standard: 3 verified facts (the channel standard needs 5)",
+          "channel standard: fewer than two facts from primary (non-Wikipedia) sources"
+        ],
         "near": {}
       }
     },
@@ -18237,8 +18243,8 @@
         "avoidPairingWithinDays": 30,
         "compareAgainstPublished": true
       },
-      "researchStatus": "VERIFIED",
-      "productionReady": true,
+      "researchStatus": "NEEDS_PRIMARY_SOURCE",
+      "productionReady": false,
       "facts": [
         {
           "id": "F1",
@@ -18310,8 +18316,11 @@
         }
       ],
       "verification": {
-        "ok": true,
-        "errors": [],
+        "ok": false,
+        "errors": [
+          "channel standard: 2 verified facts (the channel standard needs 5)",
+          "channel standard: fewer than two facts from primary (non-Wikipedia) sources"
+        ],
         "near": {}
       }
     },

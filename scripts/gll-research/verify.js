@@ -97,13 +97,22 @@ async function verifyDraft(draft, fetchJson = get, channel = "goal-lore-lab") {
     if (/["“”]/.test(l.text)) errors.push(`line ${i + 1}: narration must not quote anyone (no quotation marks)`);
     return { role: l.role, text: l.text, layer: "VERIFIED FACT", facts: l.facts || [] };
   });
+  // The Hidden Logic of Things launch standard (tests/js/behind-ordinary-content.test.js): at least five quoted facts and
+  // two facts from non-Wikipedia (primary) sources. Wikipedia-verified research below it is kept as NEEDS_PRIMARY_SOURCE.
+  const below = [];
+  if (channel === "behind-the-ordinary") {
+    if (facts.filter((f) => f.layer === "VERIFIED FACT").length < 5) below.push(`${facts.filter((f) => f.layer === "VERIFIED FACT").length} verified facts (the channel standard needs 5)`);
+    if (require("../../core/quality/behind-the-ordinary").authorityFacts(facts.filter((f) => f.layer === "VERIFIED FACT")) < 2) below.push("fewer than two facts from primary (non-Wikipedia) sources");
+  }
   const ok = errors.length === 0;
+  const status = !ok ? "RESEARCHED" : below.length ? "NEEDS_PRIMARY_SOURCE" : "VERIFIED";
+  if (ok && below.length) errors.push(...below.map((b) => `channel standard: ${b}`));
   return {
     id: draft.id, slug: draft.slug, title: draft.title, coreQuestion: draft.coreQuestion, pillar: draft.pillar, channel,
-    hypothetical: false, researchStatus: ok ? "VERIFIED" : "RESEARCHED", productionReady: ok, researchedAt: new Date().toISOString(),
+    hypothetical: false, researchStatus: status, productionReady: status === "VERIFIED", researchedAt: new Date().toISOString(),
     researchMethod: "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live Wikipedia article at the pinned revision; claim and narration numbers checked against the quotes",
     rights: RIGHTS[channel],
-    narration, facts: facts.map(({ near, ...f }) => f), verification: { ok, errors, near: Object.fromEntries(facts.filter((f) => f.near).map((f) => [f.id, f.near])) },
+    narration, facts: facts.map(({ near, ...f }) => f), verification: { ok: status === "VERIFIED", errors, near: Object.fromEntries(facts.filter((f) => f.near).map((f) => [f.id, f.near])) },
   };
 }
 
@@ -139,6 +148,7 @@ async function run(argv = process.argv.slice(2), { fetchJson = get, log = consol
     log(`wrote ${path.relative(ROOT, UNIVERSE)}`);
   }
   const verified = records.filter((r) => r.productionReady).length;
+  for (const r of records.filter((x) => x.researchStatus === "NEEDS_PRIMARY_SOURCE")) log(`${r.id}: quotes verified, below the channel standard (${r.verification.errors.join("; ")})`);
   log(`verified ${verified}/${records.length}`);
   return { records, verified };
 }

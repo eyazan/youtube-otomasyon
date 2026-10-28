@@ -147,3 +147,18 @@ test("workflow: FR, IB and HLT choose their renderer by variable or the engine i
   assert.match(wf, /- name: The Hidden Logic of Things Short\n +if: \$\{\{ always\(\) && \(\(\(github\.event_name == 'schedule' \|\| github\.event_name == 'repository_dispatch'\) && vars\.HLT_PREMIUM_PRIMARY == '1'\)/);
   assert.match(wf, /channels\/\*\/premium\/\*\/out\/\*\.mp4/, "every channel's premium MP4 is a preview artifact (never committed: out/ is git-ignored)");
 });
+
+test("a policy that requires research review publishes only topics whose exact narration and quotes the owner reviewed", () => {
+  const t1 = topic(); const ch = fakeChannel([t1], { policy: POLICY({ requireResearchReview: true }) });
+  const next = (accept) => (Lane.qualified(ch).ok.find((r) => !accept || accept(r.topic)) || {}).topic || null;
+  const none = fakeSpawn(ch);
+  assert.equal(Publish.run(ch, { env: { ...ON, PUBLISH: "1" }, spawn: none.spawn, gate: gateOk, log: quiet, nextTopic: next }).noTopic, true, "unreviewed research is never published unattended");
+  assert.equal(none.calls.length, 0);
+  const reviews = path.join(ch.paths.base, "premium", "research-reviews.json");
+  W(reviews, { "HLT-T1": { by: "owner", at: "2026-10-28T08:00:00Z", sha256: Publish.researchHash({ ...t1, narration: [{ text: "Another line.", facts: [] }] }) } });
+  assert.equal(Publish.researchReviewed(ch, t1), false, "a review of different text does not count");
+  W(reviews, { "HLT-T1": { by: "owner", at: "2026-10-28T08:00:00Z", sha256: Publish.researchHash(t1) } });
+  const ok = fakeSpawn(ch); const r = Publish.run(ch, { env: { ...ON, PUBLISH: "1" }, spawn: ok.spawn, gate: gateOk, log: quiet, nextTopic: next });
+  assert.equal(r.uploaded, true); assert.equal(r.topicId, "HLT-T1");
+  for (const c of ["goal-lore-lab", "behind-the-ordinary"]) assert.equal(Publish.policy(Channel.getChannel(c)).policy.requireResearchReview, true, `${c}: its new research needs the owner's reading`);
+});
