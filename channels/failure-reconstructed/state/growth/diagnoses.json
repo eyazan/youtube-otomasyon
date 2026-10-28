@@ -2882,5 +2882,60 @@
       }
     ],
     "at": "2026-10-27T18:07:24.835Z"
+  },
+  {
+    "videoId": "JAKAYnkbxd8",
+    "channel": "failure-reconstructed",
+    "contentType": "short",
+    "checkpoint": "7d",
+    "diagnoses": [
+      {
+        "code": "INSUFFICIENT_DATA",
+        "confidence": "high",
+        "evidence": "40 views < 100",
+        "recommendation": "No intervention; wait for the next checkpoint.",
+        "specCode": "INSUFFICIENT_DATA"
+      }
+    ],
+    "at": "2026-10-28T18:24:30.456Z"
+  },
+  {
+    "videoId": "gC62R2vVYcs",
+    "channel": "failure-reconstructed",
+    "contentType": "short",
+    "checkpoint": "14d",
+    "diagnoses": [
+      {
+        "code": "INSUFFICIENT_DATA",
+        "confidence": "high",
+        "evidence": "13 views < 100",
+        "recommendation": "No intervention; wait for the next checkpoint.",
+        "specCode": "INSUFFICIENT_DATA"
+      }
+    ],
+    "at": "2026-10-28T18:24:30.456Z"
+  },
+  {
+    "videoId": "I86SnrokHMk",
+    "channel": "failure-reconstructed",
+    "contentType": "short",
+    "checkpoint": "30d",
+    "diagnoses": [
+      {
+        "code": "BREAKOUT",
+        "confidence": "medium",
+        "evidence": "subscriber conversion in channel p96.3",
+        "recommendation": "Nominate adjacent same-cluster topics without duplicating this event.",
+        "specCode": "POTENTIAL_BREAKOUT"
+      },
+      {
+        "code": "STRONG_DISCOVERY",
+        "confidence": "medium",
+        "evidence": "1486 views vs channel Shorts median 446",
+        "recommendation": "Study the opening and topic; replicate one variable at a time.",
+        "specCode": "STRONG_DISCOVERY"
+      }
+    ],
+    "at": "2026-10-28T18:24:30.456Z"
   }
 ]

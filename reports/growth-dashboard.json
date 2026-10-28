@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-28T17:13:33.818Z",
+  "generatedAt": "2026-10-28T18:24:49.449Z",
   "note": "Per-channel baselines are computed separately and never blended.",
   "channels": [
     {
@@ -9,8 +9,8 @@
         "lastPublished": "2026-10-28T18:00:00.000Z",
         "published": 33,
         "inventory": {
-          "A": 110,
-          "B": 126,
+          "A": 98,
+          "B": 138,
           "C": 60,
           "D": 59
         },
@@ -30,7 +30,7 @@
           "views": 446,
           "averagePercentageViewed": 64.65,
           "subscribersPer1000Views": 0,
-          "engagementPer1000Views": 25.27,
+          "engagementPer1000Views": 25,
           "watchHoursPer1000Views": 2.02
         }
       },
@@ -161,7 +161,7 @@
           "status": "adaptive",
           "sampleSize": 31,
           "adopted": 0,
-          "hypotheses": 7
+          "hypotheses": 11
         },
         "longform": {
           "status": "heuristics-only",
@@ -177,11 +177,6 @@
           "reason": "VideoPotential 87 in experimental band 58–71; sources 41 < 62"
         },
         {
-          "slug": "skylab-1973",
-          "bucket": "C",
-          "reason": "VideoPotential 85 in experimental band 58–71; sources 41 < 62"
-        },
-        {
           "slug": "munich-1958",
           "bucket": "C",
           "reason": "VideoPotential 86 in experimental band 58–71; sources 41 < 62"
@@ -192,6 +187,11 @@
           "reason": "VideoPotential 84 in experimental band 58–71; sources 55 < 62"
         },
         {
+          "slug": "skylab-1973",
+          "bucket": "C",
+          "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
+        },
+        {
           "slug": "vanguard-1957",
           "bucket": "C",
           "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
@@ -199,7 +199,7 @@
         {
           "slug": "new-london-school-1937",
           "bucket": "C",
-          "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
+          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
         },
         {
           "slug": "castle-bravo-1954",
@@ -217,9 +217,9 @@
           "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
         },
         {
-          "slug": "b2-guam-2008",
+          "slug": "uss-forrestal-1967",
           "bucket": "C",
-          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
+          "reason": "VideoPotential 82 in experimental band 58–71; sources 41 < 62"
         }
       ],
       "alerts": [
@@ -506,7 +506,7 @@
             "slug": "what-if-we-mined-a-metal-asteroid",
             "LongFormPotentialScore": 83,
             "bucket": "A",
-            "mode": "A_LONG_FIRST"
+            "mode": "B_SHORT_PROVES_DEMAND"
           },
           {
             "slug": "what-if-the-ozone-hole-never-closed",
@@ -570,7 +570,7 @@
           "status": "adaptive",
           "sampleSize": 17,
           "adopted": 0,
-          "hypotheses": 6
+          "hypotheses": 5
         },
         "longform": {
           "status": "heuristics-only",

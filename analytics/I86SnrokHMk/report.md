@@ -10,20 +10,21 @@ https://youtu.be/I86SnrokHMk
 | 3d | 2026-10-01 | 1272 | 47 | 0 | 73.68 | 5 | Shorts feed 89%, Search 10% |
 | 7d | 2026-10-05 | 1318 | 48 | 1 | 71.74 | 7 | Shorts feed 80%, Search 18% |
 | 14d | 2026-10-12 | 1347 | 48 | 1 | 71.82 | 7 | Shorts feed 78%, Search 20% |
+| 30d | 2026-10-28 | 1486 | 48 | 1 | 72.67 | 7 | Shorts feed 72%, Search 27% |
 
-## Diagnosis at 14d
+## Diagnosis at 30d
 
-- **WEAK_TOPIC_PACKAGING** (low) — Current title scores 31.3/100 in the title engine; best editorial option scores 54.
+- **OUTPERFORMER** (medium) — 1486 views vs channel median 447 (n=31 videos).
 
 ## Suggested interventions
 
-- WEAK PACKAGING (heuristic) → candidate for a logged title experiment once data exists.
+- OUTPERFORMER → keep as is; reuse its subject/hook shape in the next episode.
 
 ## First major observed retention drop
 
-- Timestamp: 5s; magnitude: 9 percentage points.
-- Active sentence: Lava swallowed whole villages while Allied troops looked on.
+- Timestamp: 3s; magnitude: 10 percentage points.
+- Active sentence: This volcano erupted in the middle of World War Two.
 - Visual type: REAL ARCHIVAL/LICENCED FOOTAGE
 - This is an observed alignment, not proof that the sentence or visual caused the drop.
 
-Views gained between 7d and 14d: 29.
+Views gained between 14d and 30d: 139.
