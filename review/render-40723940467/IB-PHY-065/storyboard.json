@@ -1,0 +1,700 @@
+{
+ "schema": "bto-studio.storyboard.v1",
+ "channel": "impossible-brief",
+ "topicId": "IB-PHY-065",
+ "slug": "what-if-you-could-touch-earths-core",
+ "version": 1,
+ "author": "auto/impossible-brief (deterministic scene grammar, world earth-interior; needs creative review before publication)",
+ "licensingNote": "all visuals drawn in-house from code (SVG): starfield, bodies, slices, ladders and orbits are original; no photographs or third-party media",
+ "treatment": {
+  "educationalObjective": "Answer, with the record's own sourced numbers: If you could touch Earth's core, how hot would it be, and why is it solid?",
+  "visualHook": "Frame 0: the earth interior drawn in light against deep space, with the hook's number landing as the first readout.",
+  "mechanismsToAnimate": [
+   "hook",
+   "measure",
+   "cut",
+   "flow",
+   "year",
+   "mechanism",
+   "payoff"
+  ],
+  "factualRisks": [
+   "probe depth on the planet is exaggerated for visibility (ILLUSTRATION)",
+   "auto storyboard: scale drawings are illustrative unless computed from a cited number (ILLUSTRATION chip)",
+   "IB facts carry sourced claims without stored verbatim quotes (channel standard; see readiness warnings)"
+  ]
+ },
+ "tail": 0.6,
+ "scenes": [
+  {
+   "id": "s1-hook",
+   "lines": [
+    "L1"
+   ],
+   "start": 0,
+   "env": "space",
+   "evidence": [
+    "F2"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "factLabel"
+   ],
+   "visualPurpose": "Hook: frame 0 shows the earth interior itself, so the scale of the question is visible before it is explained.",
+   "camera": [
+    {
+     "at": 0,
+     "x": 576,
+     "y": 800,
+     "z": 1.12
+    },
+    {
+     "at": "L1.end",
+     "x": 504,
+     "y": 800,
+     "z": 1.2600000000000002
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 11,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "planet",
+     "props": {
+      "kind": "earth",
+      "spin": 0.32,
+      "seed": 4,
+      "x": 540,
+      "y": 820,
+      "r": 330,
+      "probe": {
+       "at": 0.15,
+       "f": 0.03,
+       "dur": 1.4,
+       "angle": -90,
+       "width": 8
+      }
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L1+0.2",
+        "text": "SUN'S SURFACE HEAT",
+        "x": 540,
+        "y": 420,
+        "size": 78,
+        "family": "sans"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s2-measure",
+   "lines": [
+    "L2"
+   ],
+   "start": "L2-0.15",
+   "env": "void",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F2",
+    "F1"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "factLabel"
+   ],
+   "visualPurpose": "Number: the cited value (5,700) lands as a large readout over the subject while the camera pushes in, so the quantity is held on screen as it is spoken.",
+   "camera": [
+    {
+     "at": "L2-0.15",
+     "x": 504,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L2.end",
+     "x": 576,
+     "y": 800,
+     "z": 1.1400000000000001
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 41,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "planet",
+     "props": {
+      "kind": "earth",
+      "spin": 0.32,
+      "seed": 4,
+      "x": 540,
+      "y": 820,
+      "r": 330
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L2+0.3",
+        "text": "5,700",
+        "x": 540,
+        "y": 1230,
+        "size": 104,
+        "family": "num"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s3-cut",
+   "lines": [
+    "L3"
+   ],
+   "start": "L3-0.15",
+   "env": "space",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F3",
+    "F1",
+    "F4"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Mechanism: the planet opens into its layers so the depth beyond the hole is visible; known science.",
+   "camera": [
+    {
+     "at": "L3-0.15",
+     "x": 576,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L3.end",
+     "x": 504,
+     "y": 780,
+     "z": 1.1400000000000001
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 52,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "planet",
+     "props": {
+      "kind": "earth",
+      "spin": 0.32,
+      "seed": 4,
+      "x": 400,
+      "y": 820,
+      "r": 280,
+      "cutaway": {
+       "at": "L3",
+       "angle": -30,
+       "open": 32,
+       "layers": [
+        {
+         "f": 0.99,
+         "color": "#7a4a2a",
+         "label": "CRUST",
+         "labelAt": "L3+0.6",
+         "lx": 690,
+         "ly": 600
+        },
+        {
+         "f": 0.88,
+         "color": "#c0501f",
+         "label": "MANTLE",
+         "labelAt": "L3+0.9",
+         "lx": 690,
+         "ly": 690
+        },
+        {
+         "f": 0.47,
+         "color": "#ff8a2a",
+         "label": "CORE",
+         "labelAt": "L3+1.2",
+         "lx": 690,
+         "ly": 780
+        },
+        {
+         "f": 0.2,
+         "color": "#ffd06a"
+        }
+       ]
+      }
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L3+0.25",
+        "text": "SOLID IRON BALL",
+        "x": 540,
+        "y": 360,
+        "size": 60,
+        "family": "sans"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s4-flow",
+   "lines": [
+    "L4"
+   ],
+   "start": "L4-0.15",
+   "env": "void",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Mechanism: the rock slice heats and its strata bend and travel like a slow fluid (conceptual); known science.",
+   "camera": [
+    {
+     "at": "L4-0.15",
+     "x": 504,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L4.end",
+     "x": 576,
+     "y": 780,
+     "z": 1.1400000000000001
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 53,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "depth-probe",
+     "props": {
+      "x": 470,
+      "y": 450,
+      "w": 420,
+      "h": 770,
+      "maxDepth": 1451400,
+      "surface": "SURFACE",
+      "heat": true,
+      "heatAt": "L4+0.2",
+      "flow": {
+       "at": "L4+0.3",
+       "amp": 30
+      },
+      "markers": [],
+      "readouts": []
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L4+0.25",
+        "text": "METAL FROM MELTING",
+        "x": 540,
+        "y": 360,
+        "size": 60,
+        "family": "sans"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s5-measure",
+   "lines": [
+    "L5"
+   ],
+   "start": "L5-0.15",
+   "env": "space",
+   "transition": {
+    "type": "dissolve",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "factLabel"
+   ],
+   "visualPurpose": "Measure: a dashed marker at 1,230 km while the probe descends; depth is drawn to the scale of the slice.",
+   "camera": [
+    {
+     "at": "L5-0.15",
+     "x": 576,
+     "y": 820,
+     "z": 1
+    },
+    {
+     "at": "L5.end",
+     "x": 504,
+     "y": 860,
+     "z": 1.1400000000000001
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 44,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "depth-probe",
+     "props": {
+      "x": 470,
+      "y": 450,
+      "w": 420,
+      "h": 770,
+      "maxDepth": 1451400,
+      "heat": false,
+      "probeKeys": [
+       [
+        "L5-0.1",
+        290280
+       ],
+       [
+        "L5.end",
+        1230000
+       ]
+      ],
+      "markers": [
+       {
+        "depth": 1230000,
+        "label": "1,230 km",
+        "at": "L5+0.3"
+       }
+      ],
+      "readouts": []
+     }
+    }
+   ]
+  },
+  {
+   "id": "s6-year",
+   "lines": [
+    "L6"
+   ],
+   "start": "L6-0.15",
+   "env": "void",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F4"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "factLabel"
+   ],
+   "visualPurpose": "Time: the ruler lands on 2005 while the scene shows what started then (the probe begins its descent); the year is from the cited fact.",
+   "camera": [
+    {
+     "at": "L6-0.15",
+     "x": 504,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L6.end",
+     "x": 576,
+     "y": 840,
+     "z": 1.1400000000000001
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 25,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "depth-probe",
+     "props": {
+      "x": 470,
+      "y": 450,
+      "w": 420,
+      "h": 770,
+      "maxDepth": 1451400,
+      "heat": false,
+      "probeKeys": [
+       [
+        "L6-0.1",
+        0
+       ],
+       [
+        "L6.end",
+        1190148
+       ]
+      ],
+      "markers": [],
+      "readouts": []
+     }
+    },
+    {
+     "component": "timeline-ruler",
+     "screen": true,
+     "props": {
+      "theme": "dark",
+      "y": 1250,
+      "fromYear": 1999,
+      "year": 2005,
+      "enterAt": "L6-0.1",
+      "arriveAt": "L6+0.6",
+      "outAt": "L6.end"
+     }
+    }
+   ]
+  },
+  {
+   "id": "s7-mechanism",
+   "lines": [
+    "L7"
+   ],
+   "start": "L7-0.15",
+   "env": "teal",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "estimateLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Mechanism: the subject stays on screen while the key idea is set in two or three words; an estimate, chipped as such.",
+   "camera": [
+    {
+     "at": "L7-0.15",
+     "x": 576,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L7.end",
+     "x": 504,
+     "y": 780,
+     "z": 1.1400000000000001
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 56,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "planet",
+     "props": {
+      "kind": "earth",
+      "spin": -0.32,
+      "seed": 4,
+      "x": 250,
+      "y": 860,
+      "r": 560
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L7+0.25",
+        "text": "TOUCHING IT IS IMPOSSIBLE",
+        "x": 540,
+        "y": 360,
+        "size": 48,
+        "family": "sans"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s8-payoff",
+   "lines": [
+    "L8"
+   ],
+   "start": "L8-0.15",
+   "env": "space",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "estimateLabel"
+   ],
+   "visualPurpose": "Payoff: the answer in a few words over the opening composition; the camera eases back to the frame-0 framing so the Short loops on its first image.",
+   "camera": [
+    {
+     "at": "L8-0.15",
+     "x": 540,
+     "y": 800,
+     "z": 1.06
+    },
+    {
+     "at": "end-0.6",
+     "x": 540,
+     "y": 800,
+     "z": 1.12
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 11,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "planet",
+     "props": {
+      "kind": "earth",
+      "spin": 0.32,
+      "seed": 4,
+      "x": 540,
+      "y": 820,
+      "r": 330,
+      "probe": {
+       "at": "L8+0.2",
+       "f": 0.03,
+       "dur": 1.4,
+       "angle": -90,
+       "width": 8
+      }
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L8+0.3",
+        "text": "PRESSURE, NOT HEAT",
+        "x": 540,
+        "y": 420,
+        "size": 60,
+        "family": "sans"
+       }
+      ]
+     }
+    }
+   ]
+  }
+ ]
+}

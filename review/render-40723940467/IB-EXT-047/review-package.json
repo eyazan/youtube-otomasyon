@@ -1,0 +1,227 @@
+{
+ "schema": "bto-studio.review-package.v1",
+ "channel": "impossible-brief",
+ "topicId": "IB-EXT-047",
+ "slug": "what-if-earth-spun-like-the-fastest-pulsar",
+ "verdict": "BLOCKED",
+ "pilot": null,
+ "researchPending": null,
+ "shadow": true,
+ "autoPublish": false,
+ "uploadAttempted": false,
+ "mode": "preview",
+ "quality": "final",
+ "createdAt": "2026-10-28T16:18:48.701Z",
+ "video": "../../_temp/review/IB-EXT-047/out/what-if-earth-spun-like-the-fastest-pulsar-premium-final.mp4",
+ "voice": {
+  "used": "en-US-BrianMultilingualNeural",
+  "approved": true,
+  "approvedVoice": {
+   "provider": "edge-tts",
+   "voice": "en-US-BrianMultilingualNeural",
+   "rate": "+2%"
+  },
+  "note": null,
+  "wordTiming": "measured (Edge word boundaries)"
+ },
+ "narrationUnchanged": {
+  "sourceHash": "c57a1f45aa73a992",
+  "lines": [
+   "One dead star spins 716 times a second.",
+   "Its equator moves at about 24% of light speed.",
+   "That's over 70,000 kilometres per second.",
+   "It's a neutron star under 16 kilometres in radius.",
+   "It sits about 18,000 light-years away, in Terzan 5.",
+   "Earth spinning that fast would fly apart instantly.",
+   "Only a neutron star's gravity can hold such spin together.",
+   "So the fastest spinners in the universe are also the densest."
+  ]
+ },
+ "traceability": [
+  {
+   "scene": "s1-hook",
+   "lines": [
+    "L1"
+   ],
+   "purpose": "Hook: frame 0 shows the orbit itself and the claim's number (716 times) lands as a readout, so the scale of the question is visible before it is explained.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "PSR J1748−2446ad is the fastest-spinning pulsar known, at 716.35 Hz (times per second), or 42,981 revolutions per minute.",
+     "source": "Wikipedia — PSR J1748−2446ad",
+     "url": "https://en.wikipedia.org/wiki/PSR_J1748−2446ad"
+    },
+    {
+     "id": "F3",
+     "claim": "If the neutron star is assumed to contain less than two times the mass of the Sun, its radius is constrained to be less than 16 km.",
+     "source": "Wikipedia — PSR J1748−2446ad",
+     "url": "https://en.wikipedia.org/wiki/PSR_J1748−2446ad"
+    }
+   ]
+  },
+  {
+   "scene": "s2-measure",
+   "lines": [
+    "L2"
+   ],
+   "purpose": "Number: the cited value (24 %) lands as a large readout over the subject while the camera pushes in, so the quantity is held on screen as it is spoken.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F2",
+     "claim": "At its equator it is spinning at approximately 24% of the speed of light, or over 70,000 km per second.",
+     "source": "Wikipedia — PSR J1748−2446ad",
+     "url": "https://en.wikipedia.org/wiki/PSR_J1748−2446ad"
+    }
+   ]
+  },
+  {
+   "scene": "s3-measure",
+   "lines": [
+    "L3"
+   ],
+   "purpose": "Scale: the topic's own km side by side as growing bars, so the size of the change is seen, not read.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F2",
+     "claim": "At its equator it is spinning at approximately 24% of the speed of light, or over 70,000 km per second.",
+     "source": "Wikipedia — PSR J1748−2446ad",
+     "url": "https://en.wikipedia.org/wiki/PSR_J1748−2446ad"
+    },
+    {
+     "id": "F3",
+     "claim": "If the neutron star is assumed to contain less than two times the mass of the Sun, its radius is constrained to be less than 16 km.",
+     "source": "Wikipedia — PSR J1748−2446ad",
+     "url": "https://en.wikipedia.org/wiki/PSR_J1748−2446ad"
+    }
+   ]
+  },
+  {
+   "scene": "s4-measure",
+   "lines": [
+    "L4"
+   ],
+   "purpose": "Number: the cited value (16 km) lands as a large readout over the subject while the camera pushes in, so the quantity is held on screen as it is spoken.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F3",
+     "claim": "If the neutron star is assumed to contain less than two times the mass of the Sun, its radius is constrained to be less than 16 km.",
+     "source": "Wikipedia — PSR J1748−2446ad",
+     "url": "https://en.wikipedia.org/wiki/PSR_J1748−2446ad"
+    }
+   ]
+  },
+  {
+   "scene": "s5-measure",
+   "lines": [
+    "L5"
+   ],
+   "purpose": "Number: the cited value (18,000) lands as a large readout over the subject while the camera pushes in, so the quantity is held on screen as it is spoken.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "The pulsar is located in a globular cluster of stars called Terzan 5, located approximately 18,000 light-years from Earth.",
+     "source": "Wikipedia — PSR J1748−2446ad",
+     "url": "https://en.wikipedia.org/wiki/PSR_J1748−2446ad"
+    }
+   ]
+  },
+  {
+   "scene": "s6-mechanism",
+   "lines": [
+    "L6"
+   ],
+   "purpose": "Mechanism: the subject stays on screen while the key idea is set in two or three words; speculative, chipped as such.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "PSR J1748−2446ad is the fastest-spinning pulsar known, at 716.35 Hz (times per second), or 42,981 revolutions per minute.",
+     "source": "Wikipedia — PSR J1748−2446ad",
+     "url": "https://en.wikipedia.org/wiki/PSR_J1748−2446ad"
+    }
+   ]
+  },
+  {
+   "scene": "s7-mechanism",
+   "lines": [
+    "L7"
+   ],
+   "purpose": "Mechanism: the subject stays on screen while the key idea is set in two or three words; an estimate, chipped as such.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F3",
+     "claim": "If the neutron star is assumed to contain less than two times the mass of the Sun, its radius is constrained to be less than 16 km.",
+     "source": "Wikipedia — PSR J1748−2446ad",
+     "url": "https://en.wikipedia.org/wiki/PSR_J1748−2446ad"
+    }
+   ]
+  },
+  {
+   "scene": "s8-payoff",
+   "lines": [
+    "L8"
+   ],
+   "purpose": "Payoff: the answer in a few words over the opening composition; the camera eases back to the frame-0 framing so the Short loops on its first image.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "PSR J1748−2446ad is the fastest-spinning pulsar known, at 716.35 Hz (times per second), or 42,981 revolutions per minute.",
+     "source": "Wikipedia — PSR J1748−2446ad",
+     "url": "https://en.wikipedia.org/wiki/PSR_J1748−2446ad"
+    }
+   ]
+  }
+ ],
+ "licensing": {
+  "visuals": "all visuals drawn in-house from code (SVG): starfield, bodies, slices, ladders and orbits are original; no photographs or third-party media",
+  "fonts": "SIL OFL 1.1 (@fontsource Inter, Source Serif 4, Barlow Semi Condensed 5.3.0)",
+  "audio": "narration TTS + effects/music synthesised by scripts/bto-studio/audio/sound_design.py (no samples)",
+  "thirdPartyMedia": []
+ },
+ "qa": {
+  "objectivePass": false,
+  "report": "../../_temp/review/IB-EXT-047/out/qa-report.md",
+  "contactSheet": "../../_temp/review/IB-EXT-047/out/contact-sheet.png",
+  "sceneSheet": "../../_temp/review/IB-EXT-047/out/scene-sheet.png",
+  "failures": [
+   "FAIL first frame not empty: mean luma 26.3, detail sd 15.7, edge 1.05",
+   "UNVERIFIED audio samples clipped: not reported by this FFmpeg build (astats has no clipped-sample count)"
+  ],
+  "unverified": [
+   "audio samples clipped"
+  ]
+ },
+ "audio": {
+  "integratedLufs": -14.1,
+  "truePeakDbtp": -1.9
+ },
+ "performance": {
+  "renderWallSec": 118.1,
+  "msPerFrame": 125.9,
+  "workers": 3,
+  "peakChromiumRssMb": 3947,
+  "cachedSegments": 0,
+  "segments": 8,
+  "host": "linux x64 4 cpu 16 GB",
+  "totalPipelineSec": 213.4
+ },
+ "cost": {
+  "llmUsd": 0,
+  "ttsUsd": 0,
+  "renderUsd": 0,
+  "note": "local rendering and free/offline TTS; LLM use only when a Claude storyboard draft was requested and approved"
+ },
+ "approvalsNeeded": [
+  "voice: re-narrate with the approved Edge voice (if PREVIEW_ONLY)",
+  "creative sign-off (video-quality-review findings)",
+  "factual sign-off on the traceability table",
+  "owner decision to hand the MP4 to the normal pipeline (never automatic)"
+ ]
+}

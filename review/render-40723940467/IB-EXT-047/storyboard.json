@@ -1,0 +1,647 @@
+{
+ "schema": "bto-studio.storyboard.v1",
+ "channel": "impossible-brief",
+ "topicId": "IB-EXT-047",
+ "slug": "what-if-earth-spun-like-the-fastest-pulsar",
+ "version": 1,
+ "author": "auto/impossible-brief (deterministic scene grammar, world orbit; needs creative review before publication)",
+ "licensingNote": "all visuals drawn in-house from code (SVG): starfield, bodies, slices, ladders and orbits are original; no photographs or third-party media",
+ "treatment": {
+  "educationalObjective": "Answer, with the record's own sourced numbers: If Earth spun like the fastest pulsar, what would hold it together?",
+  "visualHook": "Frame 0: the orbit drawn in light against deep space, with the hook's number landing as the first readout.",
+  "mechanismsToAnimate": [
+   "hook",
+   "measure",
+   "mechanism",
+   "payoff"
+  ],
+  "factualRisks": [
+   "probe depth on the planet is exaggerated for visibility (ILLUSTRATION)",
+   "auto storyboard: scale drawings are illustrative unless computed from a cited number (ILLUSTRATION chip)",
+   "IB facts carry sourced claims without stored verbatim quotes (channel standard; see readiness warnings)"
+  ]
+ },
+ "tail": 0.6,
+ "scenes": [
+  {
+   "id": "s1-hook",
+   "lines": [
+    "L1"
+   ],
+   "start": 0,
+   "env": "space",
+   "evidence": [
+    "F1",
+    "F3"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "factLabel"
+   ],
+   "visualPurpose": "Hook: frame 0 shows the orbit itself and the claim's number (716 times) lands as a readout, so the scale of the question is visible before it is explained.",
+   "camera": [
+    {
+     "at": 0,
+     "x": 576,
+     "y": 800,
+     "z": 1.12
+    },
+    {
+     "at": "L1.end",
+     "x": 504,
+     "y": 800,
+     "z": 1.2600000000000002
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 11,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "orbit",
+     "props": {
+      "cx": 540,
+      "cy": 800,
+      "a": 360,
+      "e": 0.18,
+      "tilt": -8,
+      "period": 7,
+      "trail": 0.22,
+      "central": {
+       "r": 74
+      },
+      "body": {
+       "r": 26
+      },
+      "enterAt": 0
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L1+0.25",
+        "text": "716 times",
+        "x": 540,
+        "y": 1230,
+        "size": 104,
+        "family": "num"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s2-measure",
+   "lines": [
+    "L2"
+   ],
+   "start": "L2-0.15",
+   "env": "void",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F2"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "factLabel"
+   ],
+   "visualPurpose": "Number: the cited value (24 %) lands as a large readout over the subject while the camera pushes in, so the quantity is held on screen as it is spoken.",
+   "camera": [
+    {
+     "at": "L2-0.15",
+     "x": 504,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L2.end",
+     "x": 576,
+     "y": 800,
+     "z": 1.1400000000000001
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 41,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "orbit",
+     "props": {
+      "cx": 540,
+      "cy": 800,
+      "a": 360,
+      "e": 0.18,
+      "tilt": -8,
+      "period": 7,
+      "trail": 0.22,
+      "central": {
+       "r": 74
+      },
+      "body": {
+       "r": 26
+      },
+      "enterAt": 0
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L2+0.3",
+        "text": "24 %",
+        "x": 540,
+        "y": 1230,
+        "size": 104,
+        "family": "num"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s3-measure",
+   "lines": [
+    "L3"
+   ],
+   "start": "L3-0.15",
+   "env": "teal",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F2",
+    "F3"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "factLabel"
+   ],
+   "visualPurpose": "Scale: the topic's own km side by side as growing bars, so the size of the change is seen, not read.",
+   "camera": [
+    {
+     "at": "L3-0.15",
+     "x": 576,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L3.end",
+     "x": 504,
+     "y": 800,
+     "z": 1.1400000000000001
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 42,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "scale-ladder",
+     "props": {
+      "x": 110,
+      "y": 560,
+      "w": 700,
+      "log": true,
+      "items": [
+       {
+        "label": "",
+        "value": 16,
+        "valueText": "16 km",
+        "at": "L3+0.20"
+       },
+       {
+        "label": "",
+        "value": 70000,
+        "valueText": "70,000 km",
+        "at": "L3+0.65"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s4-measure",
+   "lines": [
+    "L4"
+   ],
+   "start": "L4-0.15",
+   "env": "space",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F3"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "factLabel"
+   ],
+   "visualPurpose": "Number: the cited value (16 km) lands as a large readout over the subject while the camera pushes in, so the quantity is held on screen as it is spoken.",
+   "camera": [
+    {
+     "at": "L4-0.15",
+     "x": 504,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L4.end",
+     "x": 576,
+     "y": 800,
+     "z": 1.1400000000000001
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 43,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "orbit",
+     "props": {
+      "cx": 540,
+      "cy": 800,
+      "a": 360,
+      "e": 0.18,
+      "tilt": -8,
+      "period": 7,
+      "trail": 0.22,
+      "central": {
+       "r": 74
+      },
+      "body": {
+       "r": 26
+      },
+      "enterAt": 0
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L4+0.3",
+        "text": "16 km",
+        "x": 540,
+        "y": 1230,
+        "size": 104,
+        "family": "num"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s5-measure",
+   "lines": [
+    "L5"
+   ],
+   "start": "L5-0.15",
+   "env": "void",
+   "transition": {
+    "type": "dissolve",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F4"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "factLabel"
+   ],
+   "visualPurpose": "Number: the cited value (18,000) lands as a large readout over the subject while the camera pushes in, so the quantity is held on screen as it is spoken.",
+   "camera": [
+    {
+     "at": "L5-0.15",
+     "x": 576,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L5.end",
+     "x": 504,
+     "y": 800,
+     "z": 1.1400000000000001
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 44,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "orbit",
+     "props": {
+      "cx": 540,
+      "cy": 800,
+      "a": 360,
+      "e": 0.18,
+      "tilt": -8,
+      "period": 7,
+      "trail": 0.22,
+      "central": {
+       "r": 74
+      },
+      "body": {
+       "r": 26
+      },
+      "enterAt": 0
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L5+0.3",
+        "text": "18,000",
+        "x": 540,
+        "y": 1230,
+        "size": 104,
+        "family": "num"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s6-mechanism",
+   "lines": [
+    "L6"
+   ],
+   "start": "L6-0.15",
+   "env": "space",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "speculativeLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Mechanism: the subject stays on screen while the key idea is set in two or three words; speculative, chipped as such.",
+   "camera": [
+    {
+     "at": "L6-0.15",
+     "x": 504,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L6.end",
+     "x": 576,
+     "y": 780,
+     "z": 1.1400000000000001
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 55,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "orbit",
+     "props": {
+      "cx": 540,
+      "cy": 800,
+      "a": 360,
+      "e": 0.18,
+      "tilt": -8,
+      "period": 7,
+      "trail": 0.22,
+      "central": {
+       "r": 74
+      },
+      "body": {
+       "r": 26
+      },
+      "enterAt": 0
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L6+0.25",
+        "text": "FLY APART INSTANTLY",
+        "x": 540,
+        "y": 360,
+        "size": 60,
+        "family": "sans"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s7-mechanism",
+   "lines": [
+    "L7"
+   ],
+   "start": "L7-0.15",
+   "env": "void",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F3"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "estimateLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Mechanism: the subject stays on screen while the key idea is set in two or three words; an estimate, chipped as such.",
+   "camera": [
+    {
+     "at": "L7-0.15",
+     "x": 576,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L7.end",
+     "x": 504,
+     "y": 780,
+     "z": 1.1400000000000001
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 56,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "orbit",
+     "props": {
+      "cx": 540,
+      "cy": 800,
+      "a": 360,
+      "e": 0.18,
+      "tilt": -8,
+      "period": 7,
+      "trail": 0.22,
+      "central": {
+       "r": 74
+      },
+      "body": {
+       "r": 26
+      },
+      "enterAt": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "s8-payoff",
+   "lines": [
+    "L8"
+   ],
+   "start": "L8-0.15",
+   "env": "space",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "estimateLabel"
+   ],
+   "visualPurpose": "Payoff: the answer in a few words over the opening composition; the camera eases back to the frame-0 framing so the Short loops on its first image.",
+   "camera": [
+    {
+     "at": "L8-0.15",
+     "x": 540,
+     "y": 800,
+     "z": 1.06
+    },
+    {
+     "at": "end-0.6",
+     "x": 540,
+     "y": 800,
+     "z": 1.12
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 11,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "orbit",
+     "props": {
+      "cx": 540,
+      "cy": 800,
+      "a": 360,
+      "e": 0.18,
+      "tilt": -8,
+      "period": 7,
+      "trail": 0.22,
+      "central": {
+       "r": 74
+      },
+      "body": {
+       "r": 26
+      },
+      "enterAt": 0
+     }
+    }
+   ]
+  }
+ ]
+}
