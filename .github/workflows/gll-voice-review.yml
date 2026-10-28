@@ -28,7 +28,7 @@ jobs:
       - name: Commit the samples to review/goal-lore-lab
         run: |
           set -euo pipefail
-          ls -la voices; [ "$(ls voices/*.mp3 | wc -l)" -ge 3 ] || { echo "::error::expected three MP3 samples"; exit 1; }
+          ls -la voices; [ "$(find voices -maxdepth 1 -name "*.mp3" | wc -l)" -ge 3 ] || { echo "::error::expected three MP3 samples"; exit 1; }
           OUT=review/goal-lore-lab; mkdir -p "$OUT/voices"; cp voices/*.mp3 "$OUT/voices/"
           cp docs/review/goal-lore-lab-approval.md "$OUT/README.md"
           { echo; echo "## Listen (run ${{ inputs.run_id }})"; echo

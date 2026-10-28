@@ -65,7 +65,7 @@ jobs:
           ffmpeg -hide_banner -loglevel error -i "$MP4" -frames:v 1 -vf scale=540:-2 "$OUT/frames/first.jpg"
           ffmpeg -hide_banner -loglevel error -sseof -0.05 -i "$MP4" -frames:v 1 -vf scale=540:-2 "$OUT/frames/last.jpg"
           ffmpeg -hide_banner -loglevel error -i "$MP4" -vf "fps=1/2,scale=270:-2,tile=6x3" -frames:v 1 "$OUT/contact-sheet.jpg"
-          ls "$OUT/frames" | wc -l; cat "$OUT/measurements.md"
+          find "$OUT/frames" -name "*.jpg" | wc -l; cat "$OUT/measurements.md"
           echo "OUT=$OUT" >> "$GITHUB_ENV"
       - name: Publish the exact MP4 and its review package (90 days)
         uses: actions/upload-artifact@v4
