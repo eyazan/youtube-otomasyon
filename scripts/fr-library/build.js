@@ -333,6 +333,24 @@ async function commonsStills(queries, need = 7, wiki = null, options = {}) {
   return picked;
 }
 
+// seed.kanit: [{ iddia, terimler, sahneler: [scene index] }] -> { kanitlar (with the verbatim article sentence), errors }
+function claimEvidence(seed, art) {
+  const { evidenceFor } = require("../gll-research/verify");
+  const kanitlar = [], errors = [], covered = new Set();
+  for (const k of Array.isArray(seed.kanit) ? seed.kanit : []) {
+    const ev = evidenceFor({ claim: k.iddia, terms: k.terimler || [] }, { title: art.title, text: art.text });
+    if (ev.error) { errors.push(`claim not in the article: "${k.iddia}" (${ev.error})${(ev.near || []).length ? " — nearest: " + ev.near[0].slice(0, 160) : ""}`); continue; }
+    kanitlar.push({ iddia: k.iddia, alinti: ev.quote, kaynak: `Wikipedia — ${art.title}`, sahneler: k.sahneler || [] });
+    for (const i of k.sahneler || []) covered.add(i);
+  }
+  const uncovered = (seed.sahneler || []).map((_, i) => i).filter((i) => !covered.has(i));
+  if (uncovered.length) errors.push(`scene line(s) ${uncovered.map((i) => i + 1).join(", ")} rest on no verified article sentence`);
+  return { kanitlar, errors };
+}
+
+// Batches from batch-23 on must carry claim evidence (seed.kanit); earlier batches predate the rule.
+function needsEvidence(batch) { const m = /^batch-(\d+)$/.exec(batch); return !!m && Number(m[1]) >= 23; }
+
 function lint(seed) {
   const errors = [];
   for (const key of ["slug", "wiki", "ad", "kisa", "nesne", "yil", "kume", "sonuc", "tetik", "mekanizma", "sayi", "ders", "zincir", "yanilgi", "tartisma", "basliklar", "kapak", "hook", "soru", "sahneler", "kaynakca", "baslik"]) {
@@ -374,7 +392,7 @@ function toSpec(seed, stills) {
     vaka: {
       kume: seed.kume, tip: "vaka", ad: seed.ad, kisa: seed.kisa, nesne: seed.nesne, yil: seed.yil, sonuc: seed.sonuc, tetik: seed.tetik,
       mekanizma: seed.mekanizma, sayi: seed.sayi, ders: seed.ders, zincir: seed.zincir, zaman: seed.zaman || [], yanilgi: seed.yanilgi,
-      tartisma: seed.tartisma, basliklar: seed.basliklar, kapak: seed.kapak, kaynakca: seed.kaynakca,
+      tartisma: seed.tartisma, basliklar: seed.basliklar, kapak: seed.kapak, kaynakca: seed.kaynakca, ...(seed.kanitlar ? { kanitlar: seed.kanitlar } : {}),
     },
     tohum: { batch: seed.__batch, wiki: seed.wiki, olusturuldu: new Date().toISOString().slice(0, 10), gorselLisanslari: stills.map((s) => `${s.file} [${s.licence}]`) },
   };
@@ -409,6 +427,7 @@ async function main() {
     if (!seed.basliklar && seed.baslik) seed.basliklar = [seed.baslik];
     if (seed.basliklar && seed.baslik && !seed.basliklar.includes(seed.baslik)) seed.basliklar.unshift(seed.baslik);
     const row = { slug: seed.slug, errors: lint(seed), warnings: [] };
+    if (needsEvidence(batch) && !(seed.kanit || []).length) row.errors.push("no claim evidence (kanit): every scene line must rest on a verbatim article sentence");
     const norm = (value) => String(value || "").toLowerCase().replace(/ /g, "_");
     const wikiKey = norm(seed.wiki);
     // Rebuilding a spec that this builder generated earlier (same slug) is allowed.
@@ -428,6 +447,10 @@ async function main() {
         const bad = numbersIn(factText).filter((n) => n !== seed.yil && !supported(n, articleNumbers) && !extraNumbers.has(n));
         if (bad.length) row.errors.push("numbers not found in Wikipedia article: " + [...new Set(bad)].join(", "));
         if (!articleNumbers.has(seed.yil)) row.warnings.push("year not in article text");
+        // claim evidence (batch-23 onwards): every scene line rests on at least one verbatim sentence of the article,
+        // found with the research verifier's rules (scripts/gll-research/verify.js evidenceFor: all terms and numbers
+        // in one 5-80 word prose sentence sharing half the claim's content words). Numbers alone are not evidence.
+        if (needsEvidence(batch)) { const ev = claimEvidence(seed, art); seed.kanitlar = ev.kanitlar; row.errors.push(...ev.errors); row.evidence = ev.kanitlar.length; }
       }
       const cited = await citedOfficialLinks(seed.wiki);
       const citedSet = new Set(cited.map((item) => item.url.replace(/^http:/, "https:")));
@@ -485,4 +508,4 @@ async function main() {
 }
 
 if (require.main === module) main().catch((e) => { console.error(e); process.exit(1); });
-module.exports = { numbersIn, spelledNumbers, supported, get, lint, toSpec, commonsStills, citedOfficialLinks, LICENCE_OK };
+module.exports = { numbersIn, spelledNumbers, supported, get, lint, toSpec, commonsStills, citedOfficialLinks, needsEvidence, claimEvidence, LICENCE_OK };
