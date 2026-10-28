@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Refuses a push to main while the repository's JS tests fail. Opt in once per clone:
+#   git config core.hooksPath .githooks
+# (CI enforces the same with test.yml; content bots use scripts/ci/push-if-green.sh.)
+while read -r local_ref local_sha remote_ref remote_sha; do
+  [ "$remote_ref" = "refs/heads/main" ] || continue
+  if ! node --test tests/js/*.test.js > /tmp/pre-push-tests.log 2>&1; then
+    grep -E "^not ok|^# (pass|fail)" /tmp/pre-push-tests.log | head -20
+    echo "pre-push: tests fail; not pushing to main" >&2
+    exit 1
+  fi
+done
+exit 0
