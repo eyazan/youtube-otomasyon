@@ -350,3 +350,14 @@ test("daily readiness matrix: every dimension for every strategic channel, legac
   const gll = r.channels.find((c) => c.channel === "goal-lore-lab"); assert.notEqual(gll.matrix.credentials.status, "ready", "no identity check recorded yet"); assert.equal(gll.matrix.publishingPermission.status, "blocked");
   const fr = r.channels.find((c) => c.channel === "failure-reconstructed"); assert.ok(fr.topics.published > 0, "FR publish history read from its legacy state (icerik/)");
 });
+
+test("captions: a short fast cue stays up into the following pause until it reads at <= 22 chars/s, never over the next cue (#357)", () => {
+  const B = motion(); const w = (text, start, end, line = "L1") => ({ text, start, end, line });
+  B.captionsOff = [];
+  B.tl = { words: [w("Gemini", 0, 0.15), w("eight", 0.15, 0.3), w("tumbled", 0.3, 0.45), w("out.", 0.45, 0.6), w("Then", 1.4, 1.6, "L2"), w("it", 1.6, 1.7, "L2"), w("spun.", 1.7, 2.0, "L2"), w("Fast", 2.1, 2.3, "L3"), w("cut.", 2.3, 2.5, "L3")] };
+  B.buildCaptions();
+  const [a, b, c] = B.cues; const cps = (q) => q.lines.map((l) => l.map((x) => x.text).join(" ")).join(" ").length / (q.end - q.shown);
+  assert.ok(cps(a) <= 22 + 1e-9, `first cue ${cps(a).toFixed(1)} chars/s`); assert.ok(a.end <= b.start, "no overlap with the next cue");
+  assert.equal(b.end, c.start, "a cue with no pause after it ends where the next begins");
+  assert.equal(c.end, 2.5 + 0.4, "the last cue keeps its end");
+});

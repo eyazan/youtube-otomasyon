@@ -182,7 +182,9 @@
     BTO.cues = cues.map((c, i) => { const txt = c.map((w) => w.text); let lines = [c];
       if (txt.join(" ").length > maxChars) { let best = null; for (let k = 1; k < c.length; k += 1) { const sc = Math.max(txt.slice(0, k).join(" ").length, txt.slice(k).join(" ").length); if (!best || sc < best.sc) best = { sc, k }; } lines = [c.slice(0, best.k), c.slice(best.k)]; }
       const next = cues[i + 1] ? cues[i + 1][0].start : Infinity; const offAfter = BTO.captionsOff.map(([a]) => a).filter((a) => a > c[0].start);
-      return { start: c[0].start, shown: c[0].start, end: Math.min(next, c[c.length - 1].end + 0.4, ...offAfter), lines }; });
+      // a short, fast cue stays up into the pause before the next one until it reads at <= 22 chars/s (#357); never past the next cue
+      const read = Number.isFinite(next) ? c[0].start + txt.join(" ").length / 22 : 0;
+      return { start: c[0].start, shown: c[0].start, end: Math.min(next, Math.max(c[c.length - 1].end + 0.4, read), ...offAfter), lines }; });
   };
   const captionAt = (t) => {
     const cue = BTO.cues.find((c) => t >= c.start - 0.03 && t < c.end); if (!cue) return ""; const S = BTO.style.captions;

@@ -14,7 +14,8 @@
 // RECONSTRUCTION chip and the CASE FILE chip. On-screen digits must occur in a cited case-file fact.
 const { keyPhrase } = require("./impossible-brief");
 
-const TRANSITIONS = ["scan-wipe", "iris"];
+// clip reveals only (no push/match-zoom/whip): they never drag on-screen text across the frame edge; three types for variety (#357)
+const TRANSITIONS = ["scan-wipe", "iris", "square-iris"];
 const KIND = [
   [/airship|zeppelin|dirigible|balloon/i, "airship"],
   [/rocket|spacecraft|lander|shuttle|capsule|launch|satellite|probe|space station|booster/i, "rocket"],
@@ -96,9 +97,10 @@ function build(script, style, topic) {
       camera = [{ at: start, x: 540 + drift * 2, y: 840, z: 1.3 }, { at: end, x: 540 - drift * 2, y: 800, z: 1.0 }];
     } else if (role === "payoff") {
       kind_ = "payoff"; evidence = [F("lesson"), F("case")];
-      layers = [silhouette({ drawAt: off(L.id, -0.1) }), headline(`${L.id}+0.3`, keyPhrase(L.text, 4), 330, S.title)];
-      purpose = "Payoff: the lesson in a few of the line's words over the object redrawn whole; the camera eases back toward the frame-0 framing so the Short loops.";
-      camera = [{ at: start, x: 540 - drift * 2, y: 860, z: 1.32 }, { at: "end-0.6", x: 540, y: 820, z: 1.06 }];
+      const lesson = headline(`${L.id}+0.3`, keyPhrase(L.text, 4), 330, S.title); lesson.props.items[0].outAt = "end-0.45";
+      layers = [silhouette({ drawAt: off(L.id, -0.1) }), lesson];
+      purpose = "Payoff: the lesson in a few of the line's words over the object redrawn whole; the camera returns to the exact frame-0 framing and the lesson clears before the end, so the last frame matches the first and the Short loops (#357).";
+      camera = [{ at: start, x: 540 - drift * 2, y: 860, z: 1.32 }, { at: "end-0.6", x: 540, y: 820, z: 1.18 }];
     } else {
       const k = +role.split(":")[1]; kind_ = "chain"; evidence = [F("chain"), F("case")];
       const prev = i > 0 && String(roleOf[i - 1]).startsWith("chain:") ? +roleOf[i - 1].split(":")[1] : Math.max(0, k - 1);
@@ -113,6 +115,8 @@ function build(script, style, topic) {
   });
   // consecutive chain scenes share one continuous camera move, so they are joined with a continuity cut; plates alternate
   scenes.forEach((sc, k) => { if (k && sc.id.endsWith("-chain") && scenes[k - 1].id.endsWith("-chain")) sc.transition = { type: "continuity", dur: 0.3 }; });
+  // the remaining real cuts cycle the clip reveals in order, so a chain run does not use up the variety (#357)
+  ti = 0; scenes.forEach((sc, k) => { if (k && sc.transition.type !== "continuity") sc.transition.type = nextTransition(); });
   // plates alternate blueprint / void at every cut; a continuity cut keeps its group's plate; the payoff returns to the
   // hook's blueprint, and when that would repeat the previous plate, the previous group takes the teal plate
   const cont = (sc) => sc.transition && sc.transition.type === "continuity";
