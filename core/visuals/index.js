@@ -34,7 +34,9 @@ function plan(topic, script) {
       animationInstruction: explainers[index] ? `Animate the ${explainers[index].kind} in beats that follow the narration.` : index === 0 ? "Open on the real detail; add one restrained amber isolation marker." : index === 1 ? "Zoom to the relevant detail and add one concise label." : "Use motion, arrows or a cutaway only when they explain the narrated mechanism.",
       onScreenText: index === 0 ? (topic.thumbnailText || "").split(/\s+/).slice(0, 4).join(" ") : "",
       evidenceReference: (() => {
-        const matched = facts.find((fact) => fact.role && claim.role && String(fact.role).toLowerCase() === String(claim.role).toLowerCase()) || facts[index] || null;
+        const matched = facts.find((fact) => fact.role && claim.role && String(fact.role).toLowerCase() === String(claim.role).toLowerCase()) || facts[index]
+          // more narration lines than facts: the fact the line itself cites
+          || facts.find((fact) => (((topic.narration || [])[index] || {}).facts || []).includes(fact.id)) || null;
         return matched ? { claim: matched.claim, source: matched.source, url: matched.url || null } : null;
       })(),
       transition: index === 0 ? "hard open" : index === script.claims.length - 1 ? "resolve to the opening object for a clean payoff" : "motivated cut on the next explanatory beat",
