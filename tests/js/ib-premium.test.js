@@ -20,7 +20,7 @@ function fakeTimeline(script) {
 }
 
 test("auto storyboard: valid for topics across worlds, every number evidenced, layer chips, text-safe transitions", () => {
-  const ids = ["IB-EXT-050", "IB-HUM-050", "IB-EXT-047", "IB-EAR-071", "IB-PHY-020"];
+  const ids = ["IB-EXT-050", "IB-HUM-050", "IB-EXT-047", "IB-EAR-071", "IB-PHY-020", "IB-PHY-065"];
   const worlds = new Set();
   for (const id of ids) {
     const { channel, topic } = Adapter.loadTopic("impossible-brief", id);
@@ -56,6 +56,21 @@ test("auto storyboard: earth-interior grammar varies its mechanism visuals and u
   assert.equal(Generator.keyPhrase("Rock that hot starts behaving more like plastic than stone."), "MORE LIKE PLASTIC THAN STONE");
   assert.equal(Generator.keyPhrase("Deeper down, the heat and pressure only climb.", 3), "", "never half of a joined subject (PRESSURE ONLY CLIMB)");
   assert.equal(Generator.keyPhrase("Deeper down, the heat and pressure only climb.", 5), "HEAT AND PRESSURE ONLY CLIMB");
+});
+
+test("auto storyboard: a line about another body draws that body; no flowing rock for a negated melt (IB-PHY-065 review render)", () => {
+  const { channel, topic } = Adapter.loadTopic("impossible-brief", "IB-PHY-065");
+  const sb = Generator.build(Adapter.studioScript(channel, topic), style, topic);
+  const kinds = (s) => s.layers.filter((l) => l.component === "planet").map((l) => l.props.kind);
+  const texts = sb.scenes.flatMap((s) => s.layers.filter((l) => l.component === "kinetic-type").flatMap((l) => l.props.items.map((it) => it.text)));
+  assert.deepEqual(kinds(sb.scenes[0]), ["sun", "earth"], "hook comparing Earth's core with the Sun draws both");
+  assert.deepEqual(kinds(sb.scenes[1]), ["sun"], "'Its surface is about 5,700 kelvin' is the Sun's surface");
+  assert.ok(texts.includes("5,700 K"), texts.join(" | "));
+  assert.ok(!sb.scenes[4].layers.some((l) => l.component === "planet" && l.props.kind === "moon"), "the Moon named after the number is a comparison, not the subject");
+  assert.ok(!sb.scenes.some((s) => /-flow$/.test(s.id)), "'keeps the metal from melting' is not flowing rock");
+  assert.ok(!texts.includes("METAL FROM MELTING"));
+  assert.equal(Generator.keyPhrase("Crushing pressure keeps the metal from melting."), "");
+  assert.equal(Generator.keyPhrase("Why Earth's core matches the Sun's surface heat."), "SUN'S SURFACE HEAT");
 });
 
 test("auto storyboard: the subject picks the visual, plates never repeat back to back, a ladder is shown once", () => {

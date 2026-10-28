@@ -54,9 +54,9 @@ function world(topic) {
 }
 
 // numbers spoken in a line with their unit, kept only when a fact contains the same digits
-const NUM = /(\d{1,3}(?:,\d{3})+|\d+(?:\.\d+)?)(\s+(?:million|billion|thousand|trillion)\b)?\s*(°\s?C|°\s?F|degrees|metres|meters|kilometres|kilometers|km|m\b|cm|centimetres|percent|%|years?|hours?|days?|minutes?|seconds?|times)?/gi;
+const NUM = /(\d{1,3}(?:,\d{3})+|\d+(?:\.\d+)?)(\s+(?:million|billion|thousand|trillion)\b)?\s*(°\s?C|°\s?F|degrees|metres|meters|kilometres|kilometers|km|m\b|cm|centimetres|percent|%|kelvin|years?|hours?|days?|minutes?|seconds?|times)?/gi;
 const MULT = { thousand: 1e3, million: 1e6, billion: 1e9, trillion: 1e12 };
-const UNIT = { metres: "m", meters: "m", kilometres: "km", kilometers: "km", centimetres: "cm", degrees: "°", percent: "%" };
+const UNIT = { metres: "m", meters: "m", kilometres: "km", kilometers: "km", centimetres: "cm", degrees: "°", percent: "%", kelvin: "K" };
 function numbersIn(text) {
   const out = []; let m; NUM.lastIndex = 0;
   while ((m = NUM.exec(text))) { const mult = (m[2] || "").trim().toLowerCase(); const raw = m[1] + (mult ? ` ${mult}` : ""); const unit = (m[3] || "").replace(/\s/g, ""); const value = Number(m[1].replace(/,/g, "")) * (MULT[mult] || 1);
@@ -103,6 +103,9 @@ function keyPhrase(text, max = 3) {
     // preposition ("DIEGO MARADONA PUT", "STORED FAT CAN FUEL") and is never shown
     const next = seg[i + len]; if (next && !["and", "but", "or"].includes(next.toLowerCase())) continue;
     const prev = seg[i - 1]; if (prev && !STOP.has(prev.toLowerCase()) && !WEAK_END.has(prev.toLowerCase())) continue;
+    // never an object + preposition cut off the verb that governs both ("keeps the metal from melting" -> "METAL FROM
+    // MELTING", IB-PHY-065 review render); a plain object phrase ("matches the Sun's surface heat") is fine
+    const before = seg[i - 2]; if (prev && ["the", "a", "an"].includes(prev.toLowerCase()) && before && !STOP.has(before.toLowerCase()) && !WEAK_END.has(before.toLowerCase()) && w.slice(1, -1).some((x) => STOP.has(x.toLowerCase()))) continue;
     // never right after "and"/"or": that cuts a joined subject in half ("the heat and pressure only climb" ->
     // "PRESSURE ONLY CLIMB", IB-EXT-050 review render)
     if (prev && ["and", "or", "nor"].includes(prev.toLowerCase())) continue;
@@ -119,6 +122,17 @@ function build(script, style, topic) {
   const BODY = [[/\bvenus\b/i, "venus"], [/\bmars\b/i, "rocky"], [/\bmercury\b/i, "moon"], [/\b(the moon|moon's|lunar)\b/i, "moon"], [/\b(jupiter|saturn|neptune|uranus)\b/i, "gas"], [/\bthe sun\b|\bsun's\b/i, "sun"]];
   const body = (BODY.find(([re]) => re.test([topic.title, topic.topic].join(" "))) || [])[1] || null;
   const depthWorld = W === "earth-interior" || W === "ocean-depth" || W === "lake";
+  // a line about another named body ("the Sun's surface", or "Its surface ..." right after it) shows that body, not the
+  // world's drawing (IB-PHY-065 review render: the Sun's 5,700 K landed as a readout on Earth). The body named last in
+  // the previous line is what "its" refers to.
+  const OTHER = [[/\b(sun|sun's)\b/gi, "sun"], [/\b(moon|moon's)\b/gi, "moon"], [/\bvenus\b/gi, "venus"], [/\bmars\b/gi, "rocky"], [/\b(jupiter|saturn)\b/gi, "gas"], [/\b(earth|earth's)\b/gi, "earth"]];
+  const lastBody = (t) => OTHER.flatMap(([re, k]) => [...String(t).matchAll(re)].map((m) => [m.index, k])).sort((a, b) => b[0] - a[0]).map(([, k]) => k)[0] || null;
+  // a body named only after the line's number is a comparison ("1,230 kilometres, 70% of the Moon's"), not the subject
+  const otherBody = (i) => { const t = lines[i].text; const n0 = t.search(/\d/); const head = n0 < 0 ? t : t.slice(0, n0);
+    const own = OTHER.filter(([re, k]) => k !== "earth" && new RegExp(re.source, "i").test(head)).map(([, k]) => k)[0];
+    const k = own || (i > 0 && /^\s*(its|it's|it)\b/i.test(t) ? lastBody(lines[i - 1].text) : null);
+    return k && k !== "earth" && k !== body ? k : null; };
+  const bothNamed = (t) => /\bearth\b/i.test(t);
   const evidenced = (line) => numbersIn(line.text).map((n) => ({ ...n, facts: facts.filter((f) => factHas(f, n.raw) && (!n.upto || factHas(f, n.upto.raw))).map((f) => f.id) })).filter((n) => n.facts.length);
   const valueLabel = (n) => { const r = n.upto ? `${n.raw}–${n.upto.raw}` : n.raw; return n.unit === "°C" || n.unit === "°" ? `${r} °C` : n.unit === "°F" ? `${r} °F` : n.unit ? `${r} ${n.unit}` : r; };
   // the line rejects the figure it states ("claims of a 15 to 20 °C crash are considered incorrect"): strike it through
@@ -170,8 +184,9 @@ function build(script, style, topic) {
     return { to: gone ? removed.to : weak ? 0.4 : 0.25, from: was ? was.to : 1, wind };
   };
   let removed = null;
-  // subject views rotate through three framings of the world's body so consecutive "subject" scenes never repeat
-  const FRAMINGS = [{ x: 540, y: 820, r: 330 }, { x: 250, y: 860, r: 560 }, { x: 540, y: 1500, r: 820 }];
+  // subject views rotate through three framings of the world's body so consecutive "subject" scenes never repeat; the
+  // close framing sits low enough that its top (an ice cap) stays clear of a headline at y 360 (IB-PHY-065 review render)
+  const FRAMINGS = [{ x: 540, y: 820, r: 330 }, { x: 250, y: 1000, r: 560 }, { x: 540, y: 1500, r: 820 }];
   // composite worlds (planet + field lines / streams, or a microbe cluster) are reframed as one unit so they stay
   // registered: every layer is scaled about the world centre (540, 820) and moved to the framing's centre
   const C_FRAMES = [{ x: 540, y: 820, k: 1 }, { x: 560, y: 1080, k: 1.55 }, { x: 400, y: 760, k: 0.8 }];
@@ -212,15 +227,22 @@ function build(script, style, topic) {
     // every scene pushes in by at least 14% and drifts sideways, alternating direction
     const drift = i % 2 ? 36 : -36;
     const cam = (z0, z1, y0 = 800, y1 = 800) => [{ at: start, x: 540 - drift, y: y0, z: z0 }, { at: `${L.id}.end`, x: 540 + drift, y: y1, z: Math.max(z1, z0 + 0.14) }];
+    const other = last ? null : otherBody(i);
+    const pair = (k) => [{ component: "planet", props: { kind: k, x: 300, y: 860, r: 220, spin: 0.18, seed: 7 } }, { component: "planet", props: { kind: "earth", x: 790, y: 860, r: 230, spin: 0.3, seed: 3 } }];
     if (first) {
       kind = "hook"; const n = qty || temp || year;
-      layers = [stars(11), ...signature(0.15, { probe: W === "earth-interior", field: fieldFor(L) }), ...(n ? [readout(`${L.id}+0.25`, valueLabel(n), 1230)] : [headline(`${L.id}+0.2`, keyPhrase(L.text), 420)])];
+      // a hook comparing Earth with another body draws both, side by side (sizes illustrative)
+      layers = [stars(11), ...(other && bothNamed(L.text) ? pair(other) : signature(0.15, { probe: W === "earth-interior", field: fieldFor(L) })), ...(n ? [readout(`${L.id}+0.25`, valueLabel(n), 1230)] : [headline(`${L.id}+0.2`, keyPhrase(L.text), 420)])];
       purpose = `Hook: frame 0 shows the ${W.replace("-", " ")} itself${n ? ` and the claim's number (${valueLabel(n)}) lands as a readout` : ""}, so the scale of the question is visible before it is explained.`;
       camera = cam(1.12, 1.0);
     } else if (last) {
       kind = "payoff"; layers = [stars(11), ...signature(`${L.id}+0.2`, { probe: W === "earth-interior" }), headline(`${L.id}+0.3`, keyPhrase(L.text, 4), 420, S.title)];
       purpose = "Payoff: the answer in a few words over the opening composition; the camera eases back to the frame-0 framing so the Short loops on its first image.";
       camera = [{ at: start, x: 540, y: 800, z: 1.06 }, { at: "end-0.6", x: 540, y: 800, z: 1.12 }];
+    } else if (other && (temp || qty)) {
+      const n = temp || qty; kind = temp || n.unit === "K" ? "heat" : "measure";
+      layers = [stars(30 + i), ...(bothNamed(L.text) ? pair(other) : [{ component: "planet", props: { kind: other, x: 540, y: 820, r: 330, spin: 0.18, seed: 7 } }]), readout(`${L.id}+0.4`, valueLabel(n), 1230, rejects(L))];
+      purpose = `Other body: the line is about the ${other === "rocky" ? "planet" : other}, so that body is drawn (not the topic's world) and its cited value (${valueLabel(n)}) lands as the readout.`; camera = cam(1.0, 1.08);
     } else if (count) {
       // "N times in M years": N evenly spaced ticks on a long axis (spacing illustrative, count and span from the cited fact)
       kind = "count"; layers = [stars(60 + i), { component: "event-ticks", props: { x: 150, y: 980, w: 700, count: count.n, at: `${L.id}+0.2`, dur: 2.6, startLabel: count.span, endLabel: "NOW", seed: 7 + i } },
@@ -263,7 +285,8 @@ function build(script, style, topic) {
       // a drawn mechanism only when the line names it (rock flowing, layers inside); anything else keeps the subject on
       // screen (IB-EAR-019: magnetic-field lines fell through to "flowing strata", which says something they do not)
       const v = W !== "earth-interior" ? "subject" : /\b(scratch|scratched|crust|surface|barely|thin|skin)\b/i.test(L.text) ? "zoom"
-        : /\b(plastic|flow|flows|soft|melt|melts|bend|deform|behav)/i.test(L.text) ? "flow"
+        // a negated melt ("keeps the metal from melting", "never melts") is the opposite of flowing rock (IB-PHY-065)
+        : /\b(plastic|flow|flows|soft|melt|melts|bend|deform|behav)/i.test(L.text) && !/\b(from|not|never|without|no longer|stops?|prevents?)\s+(\w+\s+){0,1}melt/i.test(L.text) ? "flow"
         : !cutUsed && /\b(deep|deeper|inside|core|mantle|layer|layers|interior|pressure|centre|center)\b/i.test(L.text) ? "cut" : "subject";
       if (v === "cut") cutUsed = true;
       kind = v === "subject" ? "mechanism" : v;
