@@ -12680,9 +12680,43 @@
         "avoidPairingWithinDays": 30,
         "compareAgainstPublished": true
       },
-      "researchStatus": "QUESTION_ONLY",
-      "productionReady": false,
-      "facts": [],
+      "researchStatus": "VERIFIED",
+      "productionReady": true,
+      "facts": [
+        {
+          "id": "F1",
+          "role": null,
+          "claim": "An expansion joint is an assembly designed to hold parts together while safely absorbing temperature-induced expansion and contraction of building materials.",
+          "quote": "An expansion joint, or movement joint, is an assembly designed to hold parts together while safely absorbing temperature-induced expansion and contraction of building materials.",
+          "source": "Wikipedia: Expansion joint (revision 1376509420, 2026-09-24T16:01:53Z)",
+          "url": "https://en.wikipedia.org/w/index.php?title=Expansion_joint&oldid=1376509420",
+          "sourceTitle": "Expansion joint",
+          "revid": 1376509420,
+          "layer": "VERIFIED FACT"
+        },
+        {
+          "id": "F2",
+          "role": null,
+          "claim": "Bridge expansion joints are designed to allow continuous traffic between structures while accommodating movement, shrinkage and temperature variations.",
+          "quote": "Bridge expansion joints are designed to allow for continuous traffic between structures while accommodating movement, shrinkage, and temperature variations on reinforced and prestressed concrete, composite, and steel structures.",
+          "source": "Wikipedia: Expansion joint (revision 1376509420, 2026-09-24T16:01:53Z)",
+          "url": "https://en.wikipedia.org/w/index.php?title=Expansion_joint&oldid=1376509420",
+          "sourceTitle": "Expansion joint",
+          "revid": 1376509420,
+          "layer": "VERIFIED FACT"
+        },
+        {
+          "id": "F3",
+          "role": null,
+          "claim": "Thermal expansion is the tendency of matter to increase in length, area or volume in response to an increase in temperature.",
+          "quote": "Thermal expansion is the tendency of matter to increase in size with increasing temperature.",
+          "source": "Wikipedia: Thermal expansion (revision 1381860671, 2026-10-25T07:07:05Z)",
+          "url": "https://en.wikipedia.org/w/index.php?title=Thermal_expansion&oldid=1381860671",
+          "sourceTitle": "Thermal expansion",
+          "revid": 1381860671,
+          "layer": "VERIFIED FACT"
+        }
+      ],
       "sources": [],
       "quality": {
         "channelFit": 96,
@@ -12691,7 +12725,77 @@
         "distinctFromOtherChannels": true,
         "validatedCandidate": true
       },
-      "status": "qualified"
+      "status": "qualified",
+      "researchedAt": "2026-10-28T03:58:18.393Z",
+      "researchMethod": "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live Wikipedia article at the pinned revision; claim and narration numbers checked against the quotes",
+      "rights": {
+        "footage": "none (original animation only)",
+        "likeness": "generic objects, no brands or logos"
+      },
+      "narration": [
+        {
+          "role": "VISUAL_MYSTERY",
+          "text": "Those metal gaps you drive over on a bridge are there on purpose.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F2"
+          ]
+        },
+        {
+          "role": "CLEAR_PROMISE",
+          "text": "They give the bridge room to change size.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F1"
+          ]
+        },
+        {
+          "role": "MECHANISM",
+          "text": "Matter grows in length as its temperature rises. That is thermal expansion.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F3"
+          ]
+        },
+        {
+          "role": "MECHANISM",
+          "text": "A long deck of steel and concrete grows on a hot day and shrinks on a cold one.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F3"
+          ]
+        },
+        {
+          "role": "ANSWER",
+          "text": "An expansion joint holds the parts together while safely absorbing that movement.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F1"
+          ]
+        },
+        {
+          "role": "DETAIL",
+          "text": "On a bridge, the joint also has to keep traffic moving across it.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F2"
+          ]
+        },
+        {
+          "role": "PAYOFF",
+          "text": "The gap is the bridge making room for the weather.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F1",
+            "F3"
+          ]
+        }
+      ],
+      "verification": {
+        "ok": true,
+        "errors": [],
+        "near": {}
+      }
     },
     {
       "id": "BTO-117",
@@ -15961,9 +16065,40 @@
         "avoidPairingWithinDays": 30,
         "compareAgainstPublished": true
       },
-      "researchStatus": "QUESTION_ONLY",
+      "researchStatus": "RESEARCHED",
       "productionReady": false,
-      "facts": [],
+      "facts": [
+        {
+          "id": "F1",
+          "claim": "Laminated glass is a type of safety glass that holds together when shattered.",
+          "quote": "",
+          "layer": "UNVERIFIED",
+          "source": "Wikipedia: Laminated glass",
+          "url": "https://en.wikipedia.org/w/index.php?title=Laminated_glass&oldid=1379873589"
+        },
+        {
+          "id": "F2",
+          "role": null,
+          "claim": "When it breaks, laminated glass is held in place by an interlayer, typically of polyvinyl butyral, between its layers of glass.",
+          "quote": "The interlayer is typically of polyvinyl butyral (PVB), ethylene-vinyl acetate (EVA), ionoplast polymers, cast in place (CIP) liquid resin, or thermoplastic polyurethane (TPU).",
+          "source": "Wikipedia: Laminated glass (revision 1379873589, 2026-10-12T11:12:26Z)",
+          "url": "https://en.wikipedia.org/w/index.php?title=Laminated_glass&oldid=1379873589",
+          "sourceTitle": "Laminated glass",
+          "revid": 1379873589,
+          "layer": "VERIFIED FACT"
+        },
+        {
+          "id": "F3",
+          "role": null,
+          "claim": "In 1903 the French chemist Édouard Bénédictus dropped a glass flask coated with cellulose nitrate, and it shattered but did not break into pieces.",
+          "quote": "Laminated glass was invented in 1903 by the French chemist Édouard Bénédictus (1878–1930), inspired by a laboratory accident: a glass flask had become coated with the plastic cellulose nitrate, and when dropped it shattered but did not break into pieces.",
+          "source": "Wikipedia: Laminated glass (revision 1379873589, 2026-10-12T11:12:26Z)",
+          "url": "https://en.wikipedia.org/w/index.php?title=Laminated_glass&oldid=1379873589",
+          "sourceTitle": "Laminated glass",
+          "revid": 1379873589,
+          "layer": "VERIFIED FACT"
+        }
+      ],
       "sources": [],
       "quality": {
         "channelFit": 96,
@@ -15972,7 +16107,84 @@
         "distinctFromOtherChannels": true,
         "validatedCandidate": true
       },
-      "status": "qualified"
+      "status": "qualified",
+      "researchedAt": "2026-10-28T03:58:18.450Z",
+      "researchMethod": "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live Wikipedia article at the pinned revision; claim and narration numbers checked against the quotes",
+      "rights": {
+        "footage": "none (original animation only)",
+        "likeness": "generic objects, no brands or logos"
+      },
+      "narration": [
+        {
+          "role": "VISUAL_MYSTERY",
+          "text": "Crack a car windshield and it stays in one piece.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F1"
+          ]
+        },
+        {
+          "role": "CLEAR_PROMISE",
+          "text": "That is because the glass is a sandwich.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F2"
+          ]
+        },
+        {
+          "role": "MECHANISM",
+          "text": "Between its layers of glass sits a plastic interlayer, usually polyvinyl butyral.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F2"
+          ]
+        },
+        {
+          "role": "MECHANISM",
+          "text": "When the glass breaks, the interlayer holds it in place.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F2"
+          ]
+        },
+        {
+          "role": "ORIGIN",
+          "text": "The idea goes back to 1903, when the chemist Édouard Bénédictus dropped a coated glass flask.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F3"
+          ]
+        },
+        {
+          "role": "ORIGIN",
+          "text": "It shattered, but it did not break into pieces.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F3"
+          ]
+        },
+        {
+          "role": "PAYOFF",
+          "text": "So the layers are there for the moment the glass breaks: it holds together.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F1"
+          ]
+        }
+      ],
+      "verification": {
+        "ok": false,
+        "errors": [
+          "fact F1: no sentence contains all of: holds together + shattered",
+          "line 1: cites an unverified fact",
+          "line 7: cites an unverified fact"
+        ],
+        "near": {
+          "F1": [
+            "Laminated glass was invented in 1903 by the French chemist Édouard Bénédictus (1878–1930), inspired by a laboratory accident: a glass flask had become coated with the plastic cellulose nitrate, and when dropped it shattered but did not break into pieces."
+          ]
+        }
+      }
     },
     {
       "id": "BTO-148",
@@ -16654,9 +16866,29 @@
         "avoidPairingWithinDays": 30,
         "compareAgainstPublished": true
       },
-      "researchStatus": "QUESTION_ONLY",
+      "researchStatus": "RESEARCHED",
       "productionReady": false,
-      "facts": [],
+      "facts": [
+        {
+          "id": "F1",
+          "claim": "Tread wear indicators are raised bars in the bottom of the tread grooves that become flush with the tread surface when the tread is worn down.",
+          "quote": "",
+          "layer": "UNVERIFIED",
+          "source": "Wikipedia: Tire",
+          "url": "https://en.wikipedia.org/w/index.php?title=Tire&oldid=1375670987"
+        },
+        {
+          "id": "F2",
+          "role": null,
+          "claim": "Aquaplaning occurs when a layer of water builds between the tires and the road surface, leading to a loss of traction.",
+          "quote": "Aquaplaning or hydroplaning by the tires of a road vehicle, aircraft or other wheeled vehicle occurs when a layer of water builds between the wheels of the vehicle and the road surface, leading to a loss of traction that prevents the vehicle from responding to control inputs.",
+          "source": "Wikipedia: Aquaplaning (revision 1374866388, 2026-09-14T14:26:41Z)",
+          "url": "https://en.wikipedia.org/w/index.php?title=Aquaplaning&oldid=1374866388",
+          "sourceTitle": "Aquaplaning",
+          "revid": 1374866388,
+          "layer": "VERIFIED FACT"
+        }
+      ],
       "sources": [],
       "quality": {
         "channelFit": 96,
@@ -16665,7 +16897,81 @@
         "distinctFromOtherChannels": true,
         "validatedCandidate": true
       },
-      "status": "qualified"
+      "status": "qualified",
+      "researchedAt": "2026-10-28T03:58:18.579Z",
+      "researchMethod": "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live Wikipedia article at the pinned revision; claim and narration numbers checked against the quotes",
+      "rights": {
+        "footage": "none (original animation only)",
+        "likeness": "generic objects, no brands or logos"
+      },
+      "narration": [
+        {
+          "role": "VISUAL_MYSTERY",
+          "text": "See those little rubber bars at the bottom of a tyre's grooves?",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F1"
+          ]
+        },
+        {
+          "role": "CLEAR_PROMISE",
+          "text": "They are tread wear indicators.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F1"
+          ]
+        },
+        {
+          "role": "MECHANISM",
+          "text": "As the tyre wears, the tread surface sinks closer to them.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F1"
+          ]
+        },
+        {
+          "role": "ANSWER",
+          "text": "When the tread is flush with the bars, the tread is worn down.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F1"
+          ]
+        },
+        {
+          "role": "STAKES",
+          "text": "Worn grooves clear less water, and a layer of water under a tyre means lost traction.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F2"
+          ]
+        },
+        {
+          "role": "PAYOFF",
+          "text": "So the bars are a built-in gauge for when the grooves are too shallow.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F1"
+          ]
+        }
+      ],
+      "verification": {
+        "ok": false,
+        "errors": [
+          "fact F1: no sentence contains all of: grooves + flush",
+          "line 1: cites an unverified fact",
+          "line 2: cites an unverified fact",
+          "line 3: cites an unverified fact",
+          "line 4: cites an unverified fact",
+          "line 6: cites an unverified fact"
+        ],
+        "near": {
+          "F1": [
+            "Grooves, sipes, and slots allow tires to evacuate water.",
+            "Grooves run circumferentially around the tire and are needed to channel away water.",
+            "Although hydroplaning is a concern for aircraft tires, they typically have circumferential grooves and no lateral grooves or sipes."
+          ]
+        }
+      }
     },
     {
       "id": "BTO-155",
@@ -16852,9 +17158,43 @@
         "avoidPairingWithinDays": 30,
         "compareAgainstPublished": true
       },
-      "researchStatus": "QUESTION_ONLY",
-      "productionReady": false,
-      "facts": [],
+      "researchStatus": "VERIFIED",
+      "productionReady": true,
+      "facts": [
+        {
+          "id": "F1",
+          "role": null,
+          "claim": "The door of a microwave oven usually has a window with a layer of conductive mesh to maintain the shielding.",
+          "quote": "The oven door usually has a window for easy viewing, with a layer of conductive mesh some distance from the outer panel to maintain the shielding.",
+          "source": "Wikipedia: Microwave oven (revision 1381617068, 2026-10-23T18:18:51Z)",
+          "url": "https://en.wikipedia.org/w/index.php?title=Microwave_oven&oldid=1381617068",
+          "sourceTitle": "Microwave oven",
+          "revid": 1381617068,
+          "layer": "VERIFIED FACT"
+        },
+        {
+          "id": "F2",
+          "role": null,
+          "claim": "The perforations in the mesh are much smaller than the microwaves' wavelength, so microwave radiation cannot pass through the door while visible light can.",
+          "quote": "Because the size of the perforations in the mesh is much less than the microwaves' wavelength (12.2 cm for the usual 2.45 GHz), microwave radiation cannot pass through the door, while visible light (with its much shorter wavelength) can.",
+          "source": "Wikipedia: Microwave oven (revision 1381617068, 2026-10-23T18:18:51Z)",
+          "url": "https://en.wikipedia.org/w/index.php?title=Microwave_oven&oldid=1381617068",
+          "sourceTitle": "Microwave oven",
+          "revid": 1381617068,
+          "layer": "VERIFIED FACT"
+        },
+        {
+          "id": "F3",
+          "role": null,
+          "claim": "A microwave oven uses a Faraday cage, partly visible covering the window, to contain the electromagnetic energy within the oven.",
+          "quote": "A microwave oven uses a partial Faraday shield (on five of its interior six sides) and a partial Faraday cage, consisting of a wire mesh, on the sixth side (the transparent window), to contain the electromagnetic energy within the oven and to protect the user from exposure to microwave radiation.",
+          "source": "Wikipedia: Faraday cage (revision 1375090748, 2026-09-15T20:39:53Z)",
+          "url": "https://en.wikipedia.org/w/index.php?title=Faraday_cage&oldid=1375090748",
+          "sourceTitle": "Faraday cage",
+          "revid": 1375090748,
+          "layer": "VERIFIED FACT"
+        }
+      ],
       "sources": [],
       "quality": {
         "channelFit": 96,
@@ -16863,7 +17203,77 @@
         "distinctFromOtherChannels": true,
         "validatedCandidate": true
       },
-      "status": "qualified"
+      "status": "qualified",
+      "researchedAt": "2026-10-28T03:58:18.722Z",
+      "researchMethod": "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live Wikipedia article at the pinned revision; claim and narration numbers checked against the quotes",
+      "rights": {
+        "footage": "none (original animation only)",
+        "likeness": "generic objects, no brands or logos"
+      },
+      "narration": [
+        {
+          "role": "VISUAL_MYSTERY",
+          "text": "Look closely at a microwave door and you will see a metal mesh.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F1"
+          ]
+        },
+        {
+          "role": "CLEAR_PROMISE",
+          "text": "It is not decoration. It is part of the shield.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F1"
+          ]
+        },
+        {
+          "role": "MECHANISM",
+          "text": "The oven works as a Faraday cage that keeps the energy inside.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F3"
+          ]
+        },
+        {
+          "role": "MECHANISM",
+          "text": "The holes in the mesh are much smaller than the wavelength of the microwaves.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F2"
+          ]
+        },
+        {
+          "role": "ANSWER",
+          "text": "So the microwaves cannot pass through the door.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F2"
+          ]
+        },
+        {
+          "role": "DETAIL",
+          "text": "Visible light has a far shorter wavelength, so it passes straight through.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F2"
+          ]
+        },
+        {
+          "role": "PAYOFF",
+          "text": "That is why you can watch your food while the energy stays in.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F2",
+            "F3"
+          ]
+        }
+      ],
+      "verification": {
+        "ok": true,
+        "errors": [],
+        "near": {}
+      }
     },
     {
       "id": "BTO-157",
@@ -17842,9 +18252,32 @@
         "avoidPairingWithinDays": 30,
         "compareAgainstPublished": true
       },
-      "researchStatus": "QUESTION_ONLY",
-      "productionReady": false,
-      "facts": [],
+      "researchStatus": "VERIFIED",
+      "productionReady": true,
+      "facts": [
+        {
+          "id": "F1",
+          "role": null,
+          "claim": "The earth pin is longer than the line and neutral pins.",
+          "quote": "The longer earth pin ensures that the earth path is connected before the live pins, and that it remains connected until after the live pins are disconnected.",
+          "source": "Wikipedia: BS 1363 (revision 1377545090, 2026-09-29T23:30:09Z)",
+          "url": "https://en.wikipedia.org/w/index.php?title=BS_1363&oldid=1377545090",
+          "sourceTitle": "BS 1363",
+          "revid": 1377545090,
+          "layer": "VERIFIED FACT"
+        },
+        {
+          "id": "F2",
+          "role": null,
+          "claim": "Sockets have shutters over the line and neutral contacts, which are opened by the earth pin.",
+          "quote": "Alternatively, shutters may be opened by simultaneous insertion of line and neutral pins.",
+          "source": "Wikipedia: BS 1363 (revision 1377545090, 2026-09-29T23:30:09Z)",
+          "url": "https://en.wikipedia.org/w/index.php?title=BS_1363&oldid=1377545090",
+          "sourceTitle": "BS 1363",
+          "revid": 1377545090,
+          "layer": "VERIFIED FACT"
+        }
+      ],
       "sources": [],
       "quality": {
         "channelFit": 96,
@@ -17853,7 +18286,61 @@
         "distinctFromOtherChannels": true,
         "validatedCandidate": true
       },
-      "status": "qualified"
+      "status": "qualified",
+      "researchedAt": "2026-10-28T03:58:18.882Z",
+      "researchMethod": "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live Wikipedia article at the pinned revision; claim and narration numbers checked against the quotes",
+      "rights": {
+        "footage": "none (original animation only)",
+        "likeness": "generic objects, no brands or logos"
+      },
+      "narration": [
+        {
+          "role": "VISUAL_MYSTERY",
+          "text": "On a British plug, one pin is longer than the other two.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F1"
+          ]
+        },
+        {
+          "role": "CLEAR_PROMISE",
+          "text": "That longer pin is the earth.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F1"
+          ]
+        },
+        {
+          "role": "MECHANISM",
+          "text": "The socket's line and neutral holes are covered by shutters.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F2"
+          ]
+        },
+        {
+          "role": "ANSWER",
+          "text": "The long earth pin goes in first and opens them.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "role": "PAYOFF",
+          "text": "So the live contacts are only uncovered when a plug is going in.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F2"
+          ]
+        }
+      ],
+      "verification": {
+        "ok": true,
+        "errors": [],
+        "near": {}
+      }
     },
     {
       "id": "BTO-167",
@@ -18832,9 +19319,26 @@
         "avoidPairingWithinDays": 30,
         "compareAgainstPublished": true
       },
-      "researchStatus": "QUESTION_ONLY",
+      "researchStatus": "RESEARCHED",
       "productionReady": false,
-      "facts": [],
+      "facts": [
+        {
+          "id": "F1",
+          "claim": "Early pull-tabs came off the can and became a common form of litter.",
+          "quote": "",
+          "layer": "UNVERIFIED",
+          "source": "Wikipedia: Drink can",
+          "url": "https://en.wikipedia.org/w/index.php?title=Drink_can&oldid=1376636475"
+        },
+        {
+          "id": "F2",
+          "claim": "Daniel F. Cudzik of Reynolds Metals developed the stay-on tab in 1975.",
+          "quote": "",
+          "layer": "UNVERIFIED",
+          "source": "Wikipedia: Drink can",
+          "url": "https://en.wikipedia.org/w/index.php?title=Drink_can&oldid=1376636475"
+        }
+      ],
       "sources": [],
       "quality": {
         "channelFit": 96,
@@ -18843,7 +19347,81 @@
         "distinctFromOtherChannels": true,
         "validatedCandidate": true
       },
-      "status": "qualified"
+      "status": "qualified",
+      "researchedAt": "2026-10-28T03:58:18.962Z",
+      "researchMethod": "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live Wikipedia article at the pinned revision; claim and narration numbers checked against the quotes",
+      "rights": {
+        "footage": "none (original animation only)",
+        "likeness": "generic objects, no brands or logos"
+      },
+      "narration": [
+        {
+          "role": "VISUAL_MYSTERY",
+          "text": "Why does a can's tab stay attached after you open it?",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F2"
+          ]
+        },
+        {
+          "role": "CONTEXT",
+          "text": "Early can tabs came right off.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F1"
+          ]
+        },
+        {
+          "role": "STAKES",
+          "text": "Those loose tabs became a common form of litter.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F1"
+          ]
+        },
+        {
+          "role": "ANSWER",
+          "text": "In 1975, Daniel Cudzik of Reynolds Metals developed a tab that stays on.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F2"
+          ]
+        },
+        {
+          "role": "PAYOFF",
+          "text": "The tab stays with the can so it never ends up on the ground.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F1",
+            "F2"
+          ]
+        }
+      ],
+      "verification": {
+        "ok": false,
+        "errors": [
+          "fact F1: a sentence has the terms but not every claim number (none), is not 5-80 words of prose, or shares under 50% of the claim's content words",
+          "fact F2: a sentence has the terms but not every claim number (1975), is not 5-80 words of prose, or shares under 50% of the claim's content words",
+          "line 1: cites an unverified fact",
+          "line 2: cites an unverified fact",
+          "line 3: cites an unverified fact",
+          "line 4: number(s) 1975 not in the quotes of its cited facts",
+          "line 4: cites an unverified fact",
+          "line 5: cites an unverified fact"
+        ],
+        "near": {
+          "F1": [
+            "The safety and litter problems were eventually solved later in the 1970s with Daniel F.",
+            "In the 1960s, at least one inventor attempted to solve the litter problem, by having the tab be retained by a stationary key that would wrap the tab around itself, which was unsuccessful commercially.",
+            "Push-tabs never gained wide popularity because while they had solved the litter problem of the pull-tab, they created a safety hazard where the person's finger upon pushing the tab into the can was immediately exposed to the sharp edges of the opening."
+          ],
+          "F2": [
+            "Cudzik's invention of the non-removing \"Stay-Tab\".",
+            "Cudzik, an engineer with Reynolds Metals, filed a design patent application for an \"End closure for a container\".",
+            "Cudzik later received patents for this \"Easy Open Wall\" (US 3967752, issued 1976-07-06  US 3967753, issued 1976-07-06 )."
+          ]
+        }
+      }
     },
     {
       "id": "BTO-177",
@@ -21307,9 +21885,51 @@
         "avoidPairingWithinDays": 30,
         "compareAgainstPublished": true
       },
-      "researchStatus": "QUESTION_ONLY",
+      "researchStatus": "RESEARCHED",
       "productionReady": false,
-      "facts": [],
+      "facts": [
+        {
+          "id": "F1",
+          "role": null,
+          "claim": "Anti-fouling paint is applied as the outer layer to the hull of a ship to slow the growth of subaquatic organisms that attach to the hull.",
+          "quote": "Anti-fouling paint is a specialized category of coatings applied as the outer (outboard) layer to the hull of a ship or boat, to slow the growth of and facilitate detachment of subaquatic organisms that attach to the hull and can affect a vessel's performance and durability.",
+          "source": "Wikipedia: Anti-fouling paint (revision 1379016946, 2026-10-07T11:41:08Z)",
+          "url": "https://en.wikipedia.org/w/index.php?title=Anti-fouling_paint&oldid=1379016946",
+          "sourceTitle": "Anti-fouling paint",
+          "revid": 1379016946,
+          "layer": "VERIFIED FACT"
+        },
+        {
+          "id": "F2",
+          "role": null,
+          "claim": "Those organisms can affect a vessel's performance and durability.",
+          "quote": "Anti-fouling paint is a specialized category of coatings applied as the outer (outboard) layer to the hull of a ship or boat, to slow the growth of and facilitate detachment of subaquatic organisms that attach to the hull and can affect a vessel's performance and durability.",
+          "source": "Wikipedia: Anti-fouling paint (revision 1379016946, 2026-10-07T11:41:08Z)",
+          "url": "https://en.wikipedia.org/w/index.php?title=Anti-fouling_paint&oldid=1379016946",
+          "sourceTitle": "Anti-fouling paint",
+          "revid": 1379016946,
+          "layer": "VERIFIED FACT"
+        },
+        {
+          "id": "F3",
+          "role": null,
+          "claim": "Anti-fouling coatings belong to the underwater hull paints, also known as bottom paints.",
+          "quote": "It falls into a category of commercially available underwater hull paints, also known as bottom paints.",
+          "source": "Wikipedia: Anti-fouling paint (revision 1379016946, 2026-10-07T11:41:08Z)",
+          "url": "https://en.wikipedia.org/w/index.php?title=Anti-fouling_paint&oldid=1379016946",
+          "sourceTitle": "Anti-fouling paint",
+          "revid": 1379016946,
+          "layer": "VERIFIED FACT"
+        },
+        {
+          "id": "F4",
+          "claim": "Copper sheathing protected the under-water hull of a ship from salt water and biofouling with copper plates fixed to the outside of the hull.",
+          "quote": "",
+          "layer": "UNVERIFIED",
+          "source": "Wikipedia: Copper sheathing",
+          "url": "https://en.wikipedia.org/w/index.php?title=Copper_sheathing&oldid=1369660444"
+        }
+      ],
       "sources": [],
       "quality": {
         "channelFit": 96,
@@ -21318,7 +21938,85 @@
         "distinctFromOtherChannels": true,
         "validatedCandidate": true
       },
-      "status": "qualified"
+      "status": "qualified",
+      "researchedAt": "2026-10-28T03:58:19.130Z",
+      "researchMethod": "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live Wikipedia article at the pinned revision; claim and narration numbers checked against the quotes",
+      "rights": {
+        "footage": "none (original animation only)",
+        "likeness": "generic objects, no brands or logos"
+      },
+      "narration": [
+        {
+          "role": "VISUAL_MYSTERY",
+          "text": "Why is the bottom of a ship painted a different colour?",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F3"
+          ]
+        },
+        {
+          "role": "CLEAR_PROMISE",
+          "text": "That lower coat is a working paint, called bottom paint.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F3"
+          ]
+        },
+        {
+          "role": "MECHANISM",
+          "text": "Underwater, tiny organisms try to attach themselves to the hull.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F1"
+          ]
+        },
+        {
+          "role": "ANSWER",
+          "text": "Anti-fouling paint slows their growth on the hull.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F1"
+          ]
+        },
+        {
+          "role": "STAKES",
+          "text": "Left alone, they can affect a ship's performance and durability.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F2"
+          ]
+        },
+        {
+          "role": "ORIGIN",
+          "text": "Before modern paint, ships carried copper plates on the hull for the same job.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F4"
+          ]
+        },
+        {
+          "role": "PAYOFF",
+          "text": "The colour line marks where the fight against the sea's hitchhikers begins.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F1"
+          ]
+        }
+      ],
+      "verification": {
+        "ok": false,
+        "errors": [
+          "fact F4: no sentence contains all of: copper plates + biofouling",
+          "line 6: cites an unverified fact"
+        ],
+        "near": {
+          "F4": [
+            "Before the copper plates were applied, the hull was covered with \"soft stuff\", which was simply hair, yarn and brown paper.",
+            "In antiquity, ancient Vietnamese and later Chinese used copper plates while ancient Greeks used lead plates to protect the underwater hull.",
+            "The first experiments with copper sheathing were made in the late 1750s: the bottoms and sides of several ships' keels and false keels were sheathed with copper plates."
+          ]
+        }
+      }
     },
     {
       "id": "BTO-202",
@@ -21505,9 +22203,37 @@
         "avoidPairingWithinDays": 30,
         "compareAgainstPublished": true
       },
-      "researchStatus": "QUESTION_ONLY",
+      "researchStatus": "RESEARCHED",
       "productionReady": false,
-      "facts": [],
+      "facts": [
+        {
+          "id": "F1",
+          "claim": "A load line is a reference mark on a ship's hull that indicates the maximum depth to which the vessel may be safely immersed when loaded with cargo.",
+          "quote": "",
+          "layer": "UNVERIFIED",
+          "source": "Wikipedia: Load line (watercraft)",
+          "url": "https://en.wikipedia.org/w/index.php?title=Load_line_(watercraft)&oldid=1379042808"
+        },
+        {
+          "id": "F2",
+          "claim": "This depth varies with a ship's dimensions, type of cargo, time of year and the water densities encountered.",
+          "quote": "",
+          "layer": "UNVERIFIED",
+          "source": "Wikipedia: Load line (watercraft)",
+          "url": "https://en.wikipedia.org/w/index.php?title=Load_line_(watercraft)&oldid=1379042808"
+        },
+        {
+          "id": "F3",
+          "role": null,
+          "claim": "The mark is named after Samuel Plimsoll.",
+          "quote": "This marking was invented in 1876 by Samuel Plimsoll.",
+          "source": "Wikipedia: Load line (watercraft) (revision 1379042808, 2026-10-07T15:39:37Z)",
+          "url": "https://en.wikipedia.org/w/index.php?title=Load_line_(watercraft)&oldid=1379042808",
+          "sourceTitle": "Load line (watercraft)",
+          "revid": 1379042808,
+          "layer": "VERIFIED FACT"
+        }
+      ],
       "sources": [],
       "quality": {
         "channelFit": 96,
@@ -21516,7 +22242,86 @@
         "distinctFromOtherChannels": true,
         "validatedCandidate": true
       },
-      "status": "qualified"
+      "status": "qualified",
+      "researchedAt": "2026-10-28T03:58:19.200Z",
+      "researchMethod": "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live Wikipedia article at the pinned revision; claim and narration numbers checked against the quotes",
+      "rights": {
+        "footage": "none (original animation only)",
+        "likeness": "generic objects, no brands or logos"
+      },
+      "narration": [
+        {
+          "role": "VISUAL_MYSTERY",
+          "text": "That painted mark on the side of a ship is a load line.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F1"
+          ]
+        },
+        {
+          "role": "CLEAR_PROMISE",
+          "text": "It shows how deep the ship may safely sit in the water.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F1"
+          ]
+        },
+        {
+          "role": "MECHANISM",
+          "text": "Load the ship past it and it is sitting deeper than is safe.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F1"
+          ]
+        },
+        {
+          "role": "DETAIL",
+          "text": "The safe depth changes with the ship, its cargo, the time of year and the water's density.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F2"
+          ]
+        },
+        {
+          "role": "ORIGIN",
+          "text": "The mark carries the name of Samuel Plimsoll.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F3"
+          ]
+        },
+        {
+          "role": "PAYOFF",
+          "text": "A few painted lines decide how much a ship can carry.",
+          "layer": "VERIFIED FACT",
+          "facts": [
+            "F1",
+            "F2"
+          ]
+        }
+      ],
+      "verification": {
+        "ok": false,
+        "errors": [
+          "fact F1: no sentence contains all of: maximum depth + hull",
+          "fact F2: no sentence contains all of: time of year + water densities",
+          "line 1: cites an unverified fact",
+          "line 2: cites an unverified fact",
+          "line 3: cites an unverified fact",
+          "line 4: cites an unverified fact",
+          "line 6: cites an unverified fact"
+        ],
+        "near": {
+          "F1": [
+            "Load lines are indicated by special markings on the hull.",
+            "Lloyd's Register were continuing to improve their own freeboard calculations, and by 1882 had settled on Freeboard Tables that took more hull form factors into account.",
+            "The creators of the 'rule' did not enjoy the prominence it gained, knowing it was an oversimplification that did not take into account depth, sheer, and other form factors relating to the size and shape of the hull."
+          ],
+          "F2": [
+            "Additional marks have been added over the years, allowing for different water densities and expected sea conditions."
+          ]
+        }
+      }
     },
     {
       "id": "BTO-204",
