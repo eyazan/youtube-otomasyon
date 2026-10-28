@@ -96,6 +96,13 @@ function validateStoryboard(sb, { script, timeline, style, pilot = false, policy
   });
   const lines = timeline.lines.map((l) => l.id);
   if (JSON.stringify([...new Set(covered)]) !== JSON.stringify(lines)) errors.push(`scenes cover narration ${[...new Set(covered)].join(",")} but the narration is ${lines.join(",")} (every line, in order)`);
+  // headline text quality (#364): a headline that names its authored source must be a contiguous span of it (no words
+  // picked out of a sentence: "THRUSTER CIRCUITS REDESIGNED ISOLATE"); no headline twice in one video
+  const headNorm = (x) => String(x || "").toUpperCase().replace(/[“”"’']/g, "").replace(/[^A-Z0-9·%]+/g, " ").trim();
+  const heads = [];
+  sb.scenes.forEach((s) => (s.layers || []).forEach((l) => { if (l.component !== "kinetic-type") return; for (const it of (l.props && l.props.items) || []) {
+    if (it.source != null && !(" " + headNorm(it.source) + " ").includes(" " + headNorm(it.text) + " ")) errors.push(`${s.id}: headline "${it.text}" is not a contiguous span of its source text`);
+    if (it.source != null) { if (heads.includes(headNorm(it.text))) errors.push(`${s.id}: headline "${it.text}" repeats an earlier headline`); heads.push(headNorm(it.text)); } } }));
   // transitions
   const types = sb.scenes.slice(1).map((s) => (s.transition || { type: "cut" }).type);
   types.forEach((t, i) => { if (i && t === types[i - 1] && !["cut", "continuity"].includes(t) && style.motion.noRepeatedTransitionInARow) errors.push(`${sb.scenes[i + 1].id}: repeats the ${t} transition of the previous scene`); });

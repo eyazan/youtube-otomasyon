@@ -84,6 +84,9 @@ function build(script, style, topic, context = {}) {
   // last guard (validator rule): on-screen digits must occur in a cited fact; failing type becomes the key phrase
   const cited = (sc) => sc.evidence.map((id) => facts.find((f) => f.id === id)).filter(Boolean).map((f) => f.claim + " " + (f.quote || "")).join(" ");
   scenes.forEach((sc, k) => sc.layers.forEach((l) => { if (l.component === "kinetic-type") l.props.items = l.props.items.map((it) => ((String(it.text).match(/\d+/g) || []).every((d) => new RegExp(`(^|\\D)${d}(\\D|$)`).test(cited(sc))) ? it : { ...it, text: keyPhrase(lines[k].text), family: "sans", size: S.title })); }));
+  // a line with no natural short phrase gets no headline: empty text items (and then empty text layers) are removed
+  scenes.forEach((sc) => { sc.layers.forEach((l) => { if (l.component === "kinetic-type") l.props.items = l.props.items.filter((it) => String(it.text || "").trim()); });
+    sc.layers = sc.layers.filter((l) => l.component !== "kinetic-type" || l.props.items.length); });
   return {
     schema: "bto-studio.storyboard.v1", channel: script.channel, topicId: script.topicId, slug: script.slug, version: 1,
     author: "auto/behind-the-ordinary (deterministic documentary-desk grammar; needs creative review before publication)",
