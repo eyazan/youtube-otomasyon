@@ -36,7 +36,9 @@
       if (o.follow && kicks[o.follow.kick || 0] && t >= o.follow.at) { const b = kickPos(kicks[o.follow.kick || 0], t); const k = BTO.ease("inOut", clamp((t - o.follow.at) / (o.follow.ease || 0.4))) * (o.follow.blend == null ? 0.7 : o.follow.blend) * (o.follow.outAt == null ? 1 : 1 - BTO.ease("inOut", clamp((t - o.follow.outAt) / 0.5)));
         return [lerp(base[0], b.x, k), lerp(base[1], b.y, k)]; } return base; };
     // pitch coords: x across (-34..34 m), y along (-52.5..52.5 m), top goal at y = -52.5
-    const players = (o.players || []).map((pl) => ({ ...pl, path: pl.path }));
+    // a player's path is [[t, x, y], ...]; pathKeys is the same with time anchors (resolved by BTO.resolve), so a run can be
+    // timed to a narration line
+    const players = (o.players || []).map((pl) => ({ ...pl, path: pl.pathKeys || pl.path }));
     const posOf = (pl, t) => { const k = pl.path; if (t <= k[0][0]) return [k[0][1], k[0][2]]; for (let i = 1; i < k.length; i += 1) if (t < k[i][0]) { const e = BTO.ease("inOut", p(t, k[i - 1][0], k[i][0])); return [lerp(k[i - 1][1], k[i][1], e), lerp(k[i - 1][2], k[i][2], e)]; } const z = k[k.length - 1]; return [z[1], z[2]]; };
     const byId = Object.fromEntries(players.map((pl) => [pl.id, pl]));
     // ball events: pass (ground, straight) or flight (parabola apex `height` m); src/dst are player ids or [x, y] metres
@@ -44,7 +46,8 @@
     const where = (ref, t) => (Array.isArray(ref) ? ref : posOf(byId[ref], t));
     const events = (o.ball || []).map((e) => ({ ...e, dur: e.dur || 0.6 }));
     events.forEach((e) => BTO.cue(e.at, e.height ? "whoosh" : "tick", e.height ? 0.5 : 0.35));
-    const ballAt = (t) => { let last = null; for (const e of events) { if (t >= e.at && t < e.at + e.dur) { const a = where(e.src, e.at), b = where(e.dst, e.at + e.dur); const k = (t - e.at) / e.dur;
+    // ballOutAt: the event ball leaves the scene (a shot takes over as a simulated kick, which draws its own ball)
+    const ballAt = (t) => { if (o.ballOutAt != null && t >= o.ballOutAt) return null; let last = null; for (const e of events) { if (t >= e.at && t < e.at + e.dur) { const a = where(e.src, e.at), b = where(e.dst, e.at + e.dur); const k = (t - e.at) / e.dur;
           return { x: lerp(a[0], b[0], k), y: lerp(a[1], b[1], k), z: e.height ? 4 * e.height * k * (1 - k) : 0, e }; } if (t >= e.at + e.dur) last = e; }
       if (last) { const b = where(last.dst, last.at + last.dur); return { x: b[0], y: b[1], z: 0, e: null }; } const f = events[0]; if (!f) return null; const a = where(f.src, f.at); return { x: a[0], y: a[1], z: 0, e: null }; };
     return { draw: (t) => {
@@ -92,7 +95,8 @@
         g += `<ellipse cx="${sh[0].toFixed(1)}" cy="${sh[1].toFixed(1)}" rx="${(r * 1.1).toFixed(1)}" ry="${(r * 0.5).toFixed(1)}" fill="#000" opacity="${(0.45 - Math.min(0.3, b.z * 0.02)).toFixed(3)}"/>`;
         g += `<circle cx="${q[0].toFixed(1)}" cy="${q[1].toFixed(1)}" r="${r.toFixed(1)}" fill="#ffffff" stroke="${C.ink}" stroke-width="1.5"/>`; }
       // kicks: spin-free ghost (dashed), the flight so far (amber), the ball with a rotating seam
-      for (const k of kicks) { if (t < k.at) { const q = P(k.x0, k.y0, MODEL.radius); g += `<circle cx="${q[0].toFixed(1)}" cy="${q[1].toFixed(1)}" r="${(MODEL.radius * ppm * 1.6 * q[2]).toFixed(1)}" fill="#fff" stroke="${C.ink}" stroke-width="1.5"/>`; continue; }
+      // hideBefore: the kick's ball is not drawn at rest before the kick (it is carried there by a player, e.g. a solo run)
+      for (const k of kicks) { if (t < k.at) { if (k.hideBefore) continue; const q = P(k.x0, k.y0, MODEL.radius); g += `<circle cx="${q[0].toFixed(1)}" cy="${q[1].toFixed(1)}" r="${(MODEL.radius * ppm * 1.6 * q[2]).toFixed(1)}" fill="#fff" stroke="${C.ink}" stroke-width="1.5"/>`; continue; }
         const lt = (t - k.at) * (k.timeScale || 1); const n = Math.min(k.path.length, Math.floor(lt * 240) + 1);
         if (k.ghost && t >= k.ghostAt) { const gk = clamp((t - k.ghostAt) / 0.4); g += `<path d="${"M" + k.ghost.filter((_, i) => i % 4 === 0).map((q) => P(q.x, q.y, q.z)).map((q) => `${q[0].toFixed(1)} ${q[1].toFixed(1)}`).join("L")}" fill="none" stroke="${C.paper}" stroke-width="4" stroke-dasharray="12 12" opacity="${(0.75 * gk).toFixed(3)}"/>`; }
         const pts = k.path.slice(0, n).filter((_, i) => i % 3 === 0 || i === n - 1).map((q) => P(q.x, q.y, q.z));
