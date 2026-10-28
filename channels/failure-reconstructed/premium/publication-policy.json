@@ -1,9 +1,9 @@
 {
   "schema": "premium.publication-policy.v1",
   "channel": "failure-reconstructed",
-  "status": "UNSIGNED",
-  "signedBy": null,
-  "signedAt": null,
+  "status": "SIGNED",
+  "signedBy": "eyazan",
+  "signedAt": "2026-10-28T06:40:22.141Z",
   "grants": "Unattended publication, on the channel's due day and at most one Short per day, of a premium Short that passes every check under requires, without a per-video review. For such a Short this policy is the creative, factual and publish sign-off; each approval record names this file's sha256. Code never signs this file.",
   "requires": [
     "research: the researched case file (icerik/konular/<slug>.json) qualified in the Failure Reconstructed topic universe (QUALIFIED, production_ready) with its source URLs and failure chain: the FR live research standard, no stored verbatim quotes",
@@ -21,5 +21,6 @@
     "any change to channel identity or credentials"
   ],
   "activation": "sign: set status SIGNED, signedBy and signedAt (ISO time). It takes effect only with FR_PREMIUM_PUBLISH=1 and, for this channel, FR_PREMIUM_PRIMARY=1, plus config/channels.json enabled: true.",
-  "revoke": "set status REVOKED (or unset the repository variable). Records already bound keep naming the sha256 they were bound to."
+  "revoke": "set status REVOKED (or unset the repository variable). Records already bound keep naming the sha256 they were bound to.",
+  "approval": "Owner approval 2026-10-28 in the Claude Code session (decision B: Premium Engine primary for Failure Reconstructed; policy signed within the stated scope). Applied by Claude on the owner's instruction."
 }
