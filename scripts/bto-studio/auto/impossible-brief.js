@@ -239,6 +239,12 @@ function build(script, style, topic) {
       kind = "payoff"; layers = [stars(11), ...signature(`${L.id}+0.2`, { probe: W === "earth-interior" }), headline(`${L.id}+0.3`, keyPhrase(L.text, 4), 420, S.title)];
       purpose = "Payoff: the answer in a few words over the opening composition; the camera eases back to the frame-0 framing so the Short loops on its first image.";
       camera = [{ at: start, x: 540, y: 800, z: 1.06 }, { at: "end-0.6", x: 540, y: 800, z: 1.12 }];
+    } else if (W === "earth-interior" && !cutUsed && (temp || (qty && qty.unit === "K")) && /\bcore\b/i.test(L.text.slice(0, Math.max(0, L.text.search(/\d/))))) {
+      // a temperature of the core ("Earth's inner core is estimated to reach about 5,700 kelvin") is shown on the opened
+      // planet, at the layer it belongs to, not on a drilled slice or on a body named only as a comparison
+      const n = temp || qty; cutUsed = true; kind = "heat"; chips[0] = "conceptualLabel";
+      layers = [stars(30 + i), ...signature(`${L.id}`, { cut: true }), readout(`${L.id}+0.5`, valueLabel(n), 1230, rejects(L))];
+      purpose = `Heat: the planet opens into its layers and the core's cited temperature (${valueLabel(n)}) lands beside them; layer proportions are illustrative.`; camera = cam(1.0, 1.08);
     } else if (other && (temp || qty)) {
       const n = temp || qty; kind = temp || n.unit === "K" ? "heat" : "measure";
       layers = [stars(30 + i), ...(bothNamed(L.text) ? pair(other) : [{ component: "planet", props: { kind: other, x: 540, y: 820, r: 330, spin: 0.18, seed: 7 } }]), readout(`${L.id}+0.4`, valueLabel(n), 1230, rejects(L))];

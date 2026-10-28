@@ -64,13 +64,15 @@ test("auto storyboard: a line about another body draws that body; no flowing roc
   const kinds = (s) => s.layers.filter((l) => l.component === "planet").map((l) => l.props.kind);
   const texts = sb.scenes.flatMap((s) => s.layers.filter((l) => l.component === "kinetic-type").flatMap((l) => l.props.items.map((it) => it.text)));
   assert.deepEqual(kinds(sb.scenes[0]), ["sun", "earth"], "hook comparing Earth's core with the Sun draws both");
-  assert.deepEqual(kinds(sb.scenes[1]), ["sun"], "'Its surface is about 5,700 kelvin' is the Sun's surface");
+  // owner-corrected L2: "Earth's inner core is estimated to reach about 5,700 kelvin — nearly as hot as the Sun's surface"
+  assert.deepEqual(kinds(sb.scenes[1]), ["earth"]); assert.ok(sb.scenes[1].layers.some((l) => l.component === "planet" && l.props.cutaway), "the core's temperature is shown on the opened planet");
+  assert.ok(!sb.scenes[1].layers.some((l) => l.props && l.props.kind === "sun"), "the Sun named after the number is a comparison");
   assert.ok(texts.includes("5,700 K"), texts.join(" | "));
   assert.ok(!sb.scenes[4].layers.some((l) => l.component === "planet" && l.props.kind === "moon"), "the Moon named after the number is a comparison, not the subject");
   assert.ok(!sb.scenes.some((s) => /-flow$/.test(s.id)), "'keeps the metal from melting' is not flowing rock");
   assert.ok(!sb.scenes[4].layers.some((l) => l.component === "depth-probe"), "the inner core's 1,230 km radius is not a depth under the surface");
   assert.ok(sb.scenes[4].layers.some((l) => l.component === "planet" && l.props.cutaway), "the radius is shown on the opened planet");
-  assert.ok(!sb.scenes[5].layers.some((l) => l.component === "depth-probe"), "'shear waves were detected passing through it' is not a drill reaching the core");
+  assert.ok(!sb.scenes[5].layers.some((l) => l.component === "depth-probe"), "'seismic evidence of shear waves crossing Earth's inner core' is not a drill reaching the core");
   const s7 = sb.scenes[6].layers.find((l) => l.component === "kinetic-type").props.items[0];
   assert.equal(s7.outAt, "L7.end-0.25", "a top headline leaves before the payoff headline arrives");
   assert.ok(!texts.includes("METAL FROM MELTING"));
