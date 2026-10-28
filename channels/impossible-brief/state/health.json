@@ -1,9 +1,9 @@
 {
   "channel": "impossible-brief",
   "channelName": "ImpossibleBrief",
-  "tarih": "2026-10-27T20:50:21.186Z",
+  "tarih": "2026-10-28T12:34:01.402Z",
   "aggregateManaged": true,
-  "yuklemeUygun": false,
+  "yuklemeUygun": true,
   "bulgular": [
     {
       "ad": "youtube-yetki",
@@ -39,13 +39,12 @@
       "ad": "nitelikli-konu",
       "durum": "kritik",
       "mesaj": "kalite çubuğunu geçen konu yok — NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [105 unused A topic(s), best viral score 74 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]",
-      "cozum": "Konu araştırması/görsel kürasyonu gerekiyor; eşik düşürülmez."
+      "cozum": "Konu araştırması/görsel kürasyonu gerekiyor; eşik düşürülmez. Görsel ölçümü: Actions → Topic buffer (visual survey + preflight)."
     },
     {
       "ad": "seslendirme",
-      "durum": "kritik",
-      "mesaj": "NARRATION_UNAVAILABLE: Edge sesi reddedildi (Edge TTS WebSocket error: Unexpected server response: 200, Edge TTS WebSocket error: Unexpected server response: 200, Edge TTS WebSocket error: Unexpected server response: 200; msedge-tts 2.1.0); yedek ses yok — fallback voice am_fenrir is not approved for publishing (config.voice.fallback.approved)",
-      "cozum": "Yedek sesi (config.voice.fallback) dinleyip onaylayın ya da Edge'in düzelmesini bekleyin. Konu harcanmaz, hiçbir şey render edilmez."
+      "durum": "ok",
+      "mesaj": "Edge sesi çalışıyor (en-US-BrianMultilingualNeural; msedge-tts 2.1.1)"
     },
     {
       "ad": "render-araclari",
