@@ -83,7 +83,9 @@ jobs:
           SLUGS=$(node -e '
             const fs=require("fs");const bitti=new Set(JSON.parse(fs.readFileSync("icerik/uretilenler.json","utf8")));
             const l=["vesuvius-1944","why-ships-sink",...process.argv[1].split(/\s+/).filter(Boolean)]
-              .filter((s,i,a)=>a.indexOf(s)===i && fs.existsSync("icerik/konular/"+s+".json") && (i<2 || !bitti.has(s)));
+              .filter((s,i,a)=>a.indexOf(s)===i && fs.existsSync("icerik/konular/"+s+".json") && (i<2 || !bitti.has(s)))
+              // premiumOnly konular legacy motorla uretilemez (tasarim geregi); premium studio dry-run kapsar
+              .filter(s=>JSON.parse(fs.readFileSync("icerik/konular/"+s+".json","utf8")).premiumOnly!==true);
             console.log(JSON.stringify(l.slice(0,24)));' "$DEGISEN")
           echo "slugs=$SLUGS" >> "$GITHUB_OUTPUT"
           echo "Uctan uca test edilecek: $SLUGS"
