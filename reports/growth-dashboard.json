@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-28T18:56:02.050Z",
+  "generatedAt": "2026-10-28T19:38:26.497Z",
   "note": "Per-channel baselines are computed separately and never blended.",
   "channels": [
     {
@@ -26,11 +26,11 @@
           "reason": "EXPLOIT (0.75): best A topic by SelectionScore"
         },
         "baseline": {
-          "n": 31,
+          "n": 32,
           "views": 446,
           "averagePercentageViewed": 64.65,
           "subscribersPer1000Views": 0,
-          "engagementPer1000Views": 25,
+          "engagementPer1000Views": 25.27,
           "watchHoursPer1000Views": 2.02
         }
       },
@@ -95,7 +95,7 @@
         "backlog": [
           {
             "slug": "challenger-1986",
-            "LongFormPotentialScore": 86,
+            "LongFormPotentialScore": 87,
             "bucket": "A",
             "mode": "B_SHORT_PROVES_DEMAND"
           },
@@ -107,18 +107,18 @@
           },
           {
             "slug": "columbia-2003",
+            "LongFormPotentialScore": 86,
+            "bucket": "A",
+            "mode": "B_SHORT_PROVES_DEMAND"
+          },
+          {
+            "slug": "apollo-13-1970",
             "LongFormPotentialScore": 85,
             "bucket": "A",
             "mode": "B_SHORT_PROVES_DEMAND"
           },
           {
             "slug": "air-france-447-2009",
-            "LongFormPotentialScore": 84,
-            "bucket": "A",
-            "mode": "B_SHORT_PROVES_DEMAND"
-          },
-          {
-            "slug": "apollo-13-1970",
             "LongFormPotentialScore": 84,
             "bucket": "A",
             "mode": "B_SHORT_PROVES_DEMAND"
@@ -150,7 +150,7 @@
         "pendingRelatedVideoManualActions": 0
       },
       "growth": {
-        "trackedVideos": 32,
+        "trackedVideos": 33,
         "subscriberConversion": {
           "shorts": 0,
           "longform": null
@@ -159,9 +159,9 @@
       "learning": {
         "shorts": {
           "status": "adaptive",
-          "sampleSize": 31,
+          "sampleSize": 32,
           "adopted": 0,
-          "hypotheses": 11
+          "hypotheses": 17
         },
         "longform": {
           "status": "heuristics-only",
@@ -192,12 +192,12 @@
           "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
         },
         {
-          "slug": "vanguard-1957",
+          "slug": "new-london-school-1937",
           "bucket": "C",
           "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
         },
         {
-          "slug": "new-london-school-1937",
+          "slug": "vanguard-1957",
           "bucket": "C",
           "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
         },
@@ -217,7 +217,7 @@
           "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
         },
         {
-          "slug": "uss-forrestal-1967",
+          "slug": "b2-guam-2008",
           "bucket": "C",
           "reason": "VideoPotential 82 in experimental band 58–71; sources 41 < 62"
         }

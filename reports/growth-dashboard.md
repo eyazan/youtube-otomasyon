@@ -1,6 +1,6 @@
 # Growth dashboard
 
-Generated 2026-10-28T18:56:02.050Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-10-28T19:38:26.497Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
@@ -8,13 +8,13 @@ Generated 2026-10-28T18:56:02.050Z. Per-channel baselines are computed separatel
 
 **Long-form health** — cycle 2026-W44: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W44 already QUALITY_BLOCKED)
 
-**Long-form backlog** — challenger-1986 86/A, chernobyl-1986 86/A, columbia-2003 85/A, air-france-447-2009 84/A, apollo-13-1970 84/A
+**Long-form backlog** — challenger-1986 87/A, chernobyl-1986 86/A, columbia-2003 86/A, apollo-13-1970 85/A, air-france-447-2009 84/A
 
 **Content clusters** — 12 · integrity OK
 
-**Growth / subscriber conversion** — tracked 32 · subs/1k Shorts 0 · subs/1k long n/a
+**Growth / subscriber conversion** — tracked 33 · subs/1k Shorts 0 · subs/1k long n/a
 
-**Learning** — Shorts adaptive (n=31, adopted 0) · Long-form heuristics-only (n=0)
+**Learning** — Shorts adaptive (n=32, adopted 0) · Long-form heuristics-only (n=0)
 
 **Short → Long funnel** — 0 link(s), 0 long→long, 0 pending RELATED_VIDEO_MANUAL_ACTION_REQUIRED
 
@@ -24,7 +24,7 @@ Generated 2026-10-28T18:56:02.050Z. Per-channel baselines are computed separatel
 - munich-1958 (C): VideoPotential 86 in experimental band 58–71; sources 41 < 62
 - quebec-bridge-1907 (C): VideoPotential 84 in experimental band 58–71; sources 55 < 62
 - skylab-1973 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
-- vanguard-1957 (C): VideoPotential 83 in experimental band 58–71; sources 41 < 62
+- new-london-school-1937 (C): VideoPotential 83 in experimental band 58–71; sources 41 < 62
 
 **Recent alerts**
 
