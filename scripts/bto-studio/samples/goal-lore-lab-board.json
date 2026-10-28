@@ -1,0 +1,331 @@
+{
+ "schema": "premium-studio.design-sample.v1",
+ "channel": "goal-lore-lab",
+ "purpose": "DESIGN SAMPLE ONLY: shows the GoalLore Lab visual language and the football-pitch component. Illustrative play, not a real match, no narration, never published.",
+ "stylePack": "channels/goal-lore-lab/premium/style-pack.json",
+ "duration": 7.0,
+ "storyboard": {
+  "schema": "bto-studio.storyboard.v1",
+  "channel": "goal-lore-lab",
+  "topicId": "GLL-SAMPLE",
+  "version": 1,
+  "author": "design sample",
+  "treatment": {
+   "educationalObjective": "design sample",
+   "visualHook": "design sample",
+   "mechanismsToAnimate": [
+    "counter-attack"
+   ],
+   "factualRisks": [
+    "illustrative play; not a real match"
+   ]
+  },
+  "scenes": [
+   {
+    "id": "s1-counter",
+    "lines": [
+     "L1"
+    ],
+    "start": 0,
+    "env": "desk",
+    "visualPurpose": "Design sample: a counter-attack on a floodlit tactics-camera pitch.",
+    "evidence": [
+     "F1"
+    ],
+    "chips": [
+     "illustrationLabel",
+     "conceptualLabel"
+    ],
+    "camera": [
+     {
+      "at": 0,
+      "x": 540,
+      "y": 700,
+      "z": 1.15
+     },
+     {
+      "at": 3.0,
+      "x": 540,
+      "y": 430,
+      "z": 1.6
+     },
+     {
+      "at": 5.2,
+      "x": 540,
+      "y": 390,
+      "z": 1.7
+     }
+    ],
+    "layers": [
+     {
+      "component": "football-pitch",
+      "props": {
+       "x": 540,
+       "y": 820,
+       "pxPerMetre": 12,
+       "rxKeys": [
+        [
+         0,
+         58
+        ],
+        [
+         4.5,
+         48
+        ]
+       ],
+       "rzKeys": [
+        [
+         0,
+         0
+        ],
+        [
+         4.5,
+         -6
+        ]
+       ],
+       "D": 1700,
+       "players": [
+        {
+         "id": "h6",
+         "team": "home",
+         "number": 6,
+         "path": [
+          [
+           0,
+           -4,
+           18
+          ],
+          [
+           1.0,
+           -3,
+           14
+          ]
+         ]
+        },
+        {
+         "id": "h10",
+         "team": "home",
+         "number": 10,
+         "path": [
+          [
+           0,
+           6,
+           10
+          ],
+          [
+           1.0,
+           4,
+           2
+          ],
+          [
+           2.2,
+           2,
+           -12
+          ]
+         ]
+        },
+        {
+         "id": "h7",
+         "team": "home",
+         "number": 7,
+         "path": [
+          [
+           0,
+           24,
+           6
+          ],
+          [
+           2.0,
+           26,
+           -18
+          ],
+          [
+           3.2,
+           24,
+           -36
+          ]
+         ]
+        },
+        {
+         "id": "h9",
+         "team": "home",
+         "number": 9,
+         "path": [
+          [
+           0,
+           -2,
+           2
+          ],
+          [
+           2.4,
+           -6,
+           -24
+          ],
+          [
+           3.6,
+           -3,
+           -44
+          ]
+         ],
+         "highlightAt": 3.6
+        },
+        {
+         "id": "h11",
+         "team": "home",
+         "number": 11,
+         "path": [
+          [
+           0,
+           -22,
+           8
+          ],
+          [
+           3.0,
+           -18,
+           -30
+          ]
+         ]
+        },
+        {
+         "id": "a4",
+         "team": "away",
+         "number": 4,
+         "path": [
+          [
+           0,
+           -8,
+           -8
+          ],
+          [
+           3.2,
+           -6,
+           -40
+          ]
+         ]
+        },
+        {
+         "id": "a5",
+         "team": "away",
+         "number": 5,
+         "path": [
+          [
+           0,
+           8,
+           -10
+          ],
+          [
+           3.2,
+           6,
+           -41
+          ]
+         ]
+        },
+        {
+         "id": "a2",
+         "team": "away",
+         "number": 2,
+         "path": [
+          [
+           0,
+           20,
+           -14
+          ],
+          [
+           3.2,
+           18,
+           -38
+          ]
+         ]
+        },
+        {
+         "id": "a3",
+         "team": "away",
+         "number": 3,
+         "path": [
+          [
+           0,
+           -20,
+           -12
+          ],
+          [
+           3.2,
+           -16,
+           -37
+          ]
+         ]
+        },
+        {
+         "id": "a1",
+         "team": "away",
+         "number": 1,
+         "path": [
+          [
+           0,
+           0,
+           -50
+          ],
+          [
+           4.0,
+           -1,
+           -49
+          ]
+         ]
+        }
+       ],
+       "ball": [
+        {
+         "at": 0.6,
+         "src": "h6",
+         "dst": "h10",
+         "dur": 0.5
+        },
+        {
+         "at": 1.4,
+         "src": "h10",
+         "dst": "h7",
+         "dur": 0.7
+        },
+        {
+         "at": 3.0,
+         "src": "h7",
+         "dst": "h9",
+         "dur": 0.7,
+         "height": 6
+        },
+        {
+         "at": 3.8,
+         "src": "h9",
+         "dst": [
+          2.0,
+          -52.5
+         ],
+         "dur": 0.45,
+         "height": 1.2
+        }
+       ],
+       "tokenScale": 1.9
+      }
+     },
+     {
+      "component": "kinetic-type",
+      "screen": true,
+      "props": {
+       "items": [
+        {
+         "at": 4.6,
+         "text": "Every Goal Has a Story.",
+         "family": "serif",
+         "x": 540,
+         "y": 470,
+         "size": 80,
+         "weight": 700,
+         "color": "paper"
+        }
+       ]
+      }
+     }
+    ]
+   }
+  ]
+ }
+}

@@ -1,0 +1,49 @@
+{
+ "schema": "premium-studio.channel-profile.v1",
+ "channel": "impossible-brief",
+ "name": "ImpossibleBrief",
+ "premiumMode": "studio-preview",
+ "studioRenders": true,
+ "rolloutStage": 5,
+ "refusal": "ImpossibleBrief renders in the shared studio in preview/dry-run mode only (IB_PREMIUM_RENDER=preview in the live pipeline, off by default). Publishing a premium IB Short needs the approved Edge voice and the owner go-live switch.",
+ "visualProfile": [
+  "science, space, physics what-ifs",
+  "scale comparisons",
+  "simulations driven by stated assumptions",
+  "cinematic scientific storytelling",
+  "every frame labelled FACT or PROJECTION"
+ ],
+ "components": {
+  "built": [
+   "starfield",
+   "planet",
+   "depth-probe",
+   "scale-ladder",
+   "orbit",
+   "kinetic-type",
+   "labels"
+  ],
+  "toBuild": [
+   "timeline-of-consequences"
+  ]
+ },
+ "evidencePolicy": {
+  "factVsHypothesis": "mandatory on-screen layer chip from each narration line layer (KNOWN SCIENCE / ESTIMATE / SPECULATIVE)",
+  "validator": {
+   "factLayers": [
+    "KNOWN SCIENCE",
+    "ESTIMATED CONSEQUENCE"
+   ],
+   "requireQuote": false
+  },
+  "quotes": "IB records carry sourced claims with numbers checked against the source text at research time (scripts/ib-ct-library/build.js); stored verbatim quotes are not required for IB, missing ones are reported"
+ },
+ "publishing": {
+  "autoPublish": false,
+  "goLive": "vars.IB_PREMIUM_PUBLISH (unset)"
+ },
+ "storyboard": {
+  "generator": "scripts/bto-studio/auto/impossible-brief.js",
+  "note": "deterministic scene grammar from the researched record; no model call"
+ }
+}

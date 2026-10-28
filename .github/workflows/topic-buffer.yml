@@ -1,0 +1,70 @@
+name: Topic buffer (visual survey + preflight)
+
+# Measures licensed-picture availability for the topics nearest the selection bar
+# (scripts/growth/visual-survey.js) and reports the qualified topic buffer per channel
+# (scripts/growth/topic-buffer.js). Read-only unless `commit` is true, in which case it commits
+# only channels/<channel>/state/visual-survey.json. Never renders, uploads or changes a threshold.
+#
+# Manual only. To make it a daily preflight, the owner adds a schedule (e.g. '41 4 * * *',
+# before the 06:00 UTC production slots) — that is a production schedule change and needs approval.
+on:
+  workflow_dispatch:
+    inputs:
+      channel:
+        description: Channel to survey
+        type: choice
+        options: [impossible-brief]
+        default: impossible-brief
+      limit:
+        description: Topics to survey
+        default: '30'
+      commit:
+        description: Commit the measured survey to main
+        type: boolean
+        default: false
+
+concurrency:
+  group: portfolio-production
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  survey:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      PEXELS_KEY: ${{ secrets.PEXELS_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Runtime dependencies
+        run: |
+          bash scripts/ci-apt.sh --no-install-recommends ffmpeg python3-pil
+          npm ci --no-audit --no-fund
+      - name: Visual survey
+        run: node scripts/growth/visual-survey.js --channel "${{ inputs.channel }}" --limit "${{ inputs.limit }}" --report visual-survey-report.json
+      - name: Qualified topic buffer
+        run: node scripts/growth/topic-buffer.js | tee -a "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: visual-survey
+          path: |
+            visual-survey-report.json
+            channels/*/state/visual-survey.json
+          retention-days: 14
+      - name: Commit survey
+        if: ${{ inputs.commit }}
+        run: |
+          git config user.name "topic-buffer-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add "channels/${{ inputs.channel }}/state/visual-survey.json"
+          if git diff --cached --quiet; then echo "unchanged"; exit 0; fi
+          git commit -m "chore: visual survey for ${{ inputs.channel }}"
+          for i in 1 2 3 4 5; do git pull --rebase --autostash origin "$GITHUB_REF_NAME" && git push origin "HEAD:$GITHUB_REF_NAME" && exit 0; sleep $((i * 5)); done
+          exit 1

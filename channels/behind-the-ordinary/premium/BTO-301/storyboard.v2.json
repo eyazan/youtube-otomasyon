@@ -1,0 +1,1332 @@
+{
+ "schema": "bto-studio.storyboard.v1",
+ "channel": "behind-the-ordinary",
+ "topicId": "BTO-301",
+ "slug": "why-qr-codes-have-three-corner-squares",
+ "version": 2,
+ "author": "visual-director skill, V2 direction after owner review of V1 (2026-10-20)",
+ "treatment": {
+  "educationalObjective": "The viewer leaves knowing that the three corner squares are position detection patterns, that a scanner finds them by reading rows of black and white and looking for a dark-light-dark-light-dark run of 1:1:3:1:1, that this ratio was chosen because it is rare in print, and that three found corners (with one empty) give the code's orientation.",
+  "visualHook": "Frame 0 is a phone viewfinder already locked onto a real, scannable QR code printed on a tilted package, in perspective. On 'QR' every data module peels off towards the camera and blows away; the camera straightens to look straight down and only the three squares remain, with a question mark where a fourth corner would be.",
+  "throughLine": "One real symbol, seen first as a product, then through the scanner's own eyes (rows of black and white), then as an object with layers, then as a measurement; the empty fourth corner planted in the hook is resolved in the payoff, and the last frame returns to the first.",
+  "mechanismsToAnimate": [
+   "what a scanner actually reads: one row of black and white runs at a time",
+   "the 1:1:3:1:1 signature found exactly in the real code's rows",
+   "the three stacked layers of one pattern, physically lifted in perspective",
+   "look-alike squares in print failing the template",
+   "invariance of the ratio as the code turns",
+   "orientation from three corners plus one empty corner"
+  ],
+  "factualRisks": [
+   "Row runs in the scanner-vision scene are computed from the real encoded matrix (segno); the 1:1:3:1:1 match is exact module counts, not an illustration.",
+   "The layer stack is the real finder geometry; layer labels name what is visible (dark ring, light ring, dark core) and carry no dimensions.",
+   "Ratio invariance is shown only for in-plane rotation, where it is exact; perspective tilt is used only for the packaging shots, never while measuring.",
+   "Printed-matter samples and the business-form search are conceptual depictions (CONCEPTUAL chip); no survey data or frequencies are shown.",
+   "The code encodes 'HIDDEN LOGIC' (no URL) and is decoded in QA."
+  ]
+ },
+ "captionsOff": [
+  {
+   "from": "L3:QR#2",
+   "to": "L3.end+0.2",
+   "reason": "kinetic 'QR -> Quick Response' carries these words"
+  },
+  {
+   "from": "L4:position",
+   "to": "L4:patterns.end+0.05",
+   "reason": "the term label 'position detection pattern' carries these words"
+  },
+  {
+   "from": "L5:Why",
+   "to": "L5:squares.end+0.05",
+   "reason": "headline 'Why squares?' carries these words"
+  },
+  {
+   "from": "L5:least",
+   "to": "L5.end+0.25",
+   "reason": "the verbatim quote card carries this clause"
+  }
+ ],
+ "scenes": [
+  {
+   "id": "s1-hook",
+   "lines": [
+    "L1"
+   ],
+   "start": 0,
+   "env": "desk",
+   "visualPurpose": "Open inside the act of scanning: a phone has already locked onto three squares of a real code on a tilted package. The data peels away towards the viewer and the camera straightens, so the viewer sees that the three squares are a separate system before the narration explains it. Plants the empty fourth corner.",
+   "evidence": [
+    "F3",
+    "F11"
+   ],
+   "chips": [
+    "illustrationLabel"
+   ],
+   "camera": [
+    {
+     "at": 0,
+     "x": 540,
+     "y": 800,
+     "z": 1.0
+    },
+    {
+     "at": "L2-0.05",
+     "x": 540,
+     "y": 790,
+     "z": 1.05
+    }
+   ],
+   "layers": [
+    {
+     "component": "desk-grain",
+     "depth": 0.3,
+     "props": {
+      "seed": 11
+     }
+    },
+    {
+     "component": "qr-3d",
+     "props": {
+      "asset": "qr-hidden-logic",
+      "id": "q1",
+      "cx": 540,
+      "cy": 780,
+      "module": 34,
+      "D": 1700,
+      "rxKeys": [
+       [
+        0,
+        32
+       ],
+       [
+        "L1:squares",
+        32
+       ],
+       [
+        "L1:squares+0.9",
+        0
+       ]
+      ],
+      "rzKeys": [
+       [
+        0,
+        -14
+       ],
+       [
+        "L1:squares",
+        -14
+       ],
+       [
+        "L1:squares+0.9",
+        0
+       ]
+      ],
+      "surface": {
+       "w": 1500,
+       "h": 1800,
+       "fill": "#c79c6b",
+       "bars": 5,
+       "seed": 4,
+       "blocks": [
+        {
+         "x": -700,
+         "y": 560,
+         "w": 640,
+         "h": 110,
+         "fill": "coral"
+        },
+        {
+         "x": 120,
+         "y": 560,
+         "w": 300,
+         "h": 110,
+         "fill": "ink",
+         "op": 0.7
+        }
+       ]
+      },
+      "surfaceOpacityKeys": [
+       [
+        0,
+        1
+       ],
+       [
+        "L1:squares+0.2",
+        1
+       ],
+       [
+        "L1:decoration",
+        0
+       ]
+      ],
+      "peel": {
+       "at": "L1:QR",
+       "dur": 1.1
+      },
+      "locks": [
+       {
+        "at": 0,
+        "finder": 0,
+        "outAt": "L1:squares"
+       },
+       {
+        "at": 0,
+        "finder": 1,
+        "outAt": "L1:squares"
+       },
+       {
+        "at": 0,
+        "finder": 2,
+        "outAt": "L1:squares"
+       }
+      ],
+      "finderHighlight": {
+       "at": "L1:squares+0.35"
+      },
+      "ghostCorner": {
+       "at": "L1:decoration"
+      }
+     }
+    },
+    {
+     "component": "reticle",
+     "screen": true,
+     "props": {
+      "enterAt": -1,
+      "outAt": "L1:squares",
+      "x": 120,
+      "y": 330,
+      "w": 840,
+      "h": 900
+     }
+    }
+   ]
+  },
+  {
+   "id": "s2-scanner-view",
+   "lines": [
+    "L2"
+   ],
+   "start": "L2-0.12",
+   "env": "scanner",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.45,
+    "color": "#7fe3ff"
+   },
+   "visualPurpose": "Show the scanner's own view: the world becomes black and white, a line steps through the real code's rows, and the strip below shows exactly what that row reads. When a row crosses a corner square the dark-light-dark-light-dark signature lights up and that square is marked; all three marked = 'where to look'.",
+   "evidence": [
+    "F3",
+    "F11"
+   ],
+   "chips": [
+    "illustrationLabel"
+   ],
+   "camera": [
+    {
+     "at": "L2-0.12",
+     "x": 540,
+     "y": 800,
+     "z": 1.0
+    }
+   ],
+   "layers": [
+    {
+     "component": "qr-3d",
+     "props": {
+      "asset": "qr-hidden-logic",
+      "id": "q2",
+      "cx": 540,
+      "cy": 650,
+      "module": 32,
+      "mono": true,
+      "assemble": {
+       "at": "L2-0.12",
+       "dur": 0.5
+      },
+      "locks": [
+       {
+        "at": "L2:where+0.05",
+        "finder": 0
+       },
+       {
+        "at": "L2:where+0.13",
+        "finder": 1
+       },
+       {
+        "at": "L2:where+0.21",
+        "finder": 2
+       }
+      ],
+      "links": {
+       "at": "L2:look"
+      }
+     }
+    },
+    {
+     "component": "row-signal",
+     "props": {
+      "geo": "q2",
+      "asset": "qr-hidden-logic",
+      "passes": [
+       {
+        "at": "L2:tell",
+        "dur": 0.75
+       }
+      ],
+      "hold": {
+       "at": "L2:tell+0.75",
+       "row": 3
+      },
+      "x": 540,
+      "y": 1170,
+      "width": 940,
+      "height": 76,
+      "enterAt": "L2:tell-0.1"
+     }
+    }
+   ]
+  },
+  {
+   "id": "s3-origin",
+   "lines": [
+    "L3"
+   ],
+   "start": "L3-0.22",
+   "env": "paper",
+   "transition": {
+    "type": "decode-flash",
+    "dur": 0.6,
+    "focus": [
+     540,
+     650
+    ]
+   },
+   "visualPurpose": "The scan 'decodes' into its origin story on bright paper: the camera tracks a tape-measure timeline that runs diagonally and lands on 1994 as it is spoken, the code is stamped onto it, then the camera drops to the letters QR as they unfold into the words they stand for.",
+   "evidence": [
+    "F1",
+    "F2"
+   ],
+   "chips": [
+    "illustrationLabel"
+   ],
+   "camera": [
+    {
+     "at": "L3-0.22",
+     "x": 600,
+     "y": 640,
+     "z": 1.12,
+     "r": -2
+    },
+    {
+     "at": "L3:1994",
+     "x": 520,
+     "y": 760,
+     "z": 1.06,
+     "r": -0.5
+    },
+    {
+     "at": "L3:QR#2",
+     "x": 540,
+     "y": 900,
+     "z": 1.0,
+     "r": 0.5
+    },
+    {
+     "at": "L4",
+     "x": 560,
+     "y": 930,
+     "z": 1.03,
+     "r": 1
+    }
+   ],
+   "layers": [
+    {
+     "component": "kinetic-type",
+     "props": {
+      "items": [
+       {
+        "at": "L3:Denso",
+        "text": "DENSO WAVE",
+        "x": 200,
+        "y": 470,
+        "anchor": "start",
+        "size": 80,
+        "weight": 800,
+        "letterSpacing": 6,
+        "color": "ink",
+        "outAt": "L4-0.3"
+       }
+      ]
+     }
+    },
+    {
+     "component": "qr-3d",
+     "props": {
+      "asset": "qr-hidden-logic",
+      "id": "q3",
+      "cx": 805,
+      "cy": 640,
+      "module": 9,
+      "rz": 7,
+      "quiet": 2.4,
+      "enterAt": "L3:Code-0.12",
+      "scaleKeys": [
+       [
+        "L3:Code-0.12",
+        1.6
+       ],
+       [
+        "L3:Code+0.2",
+        1.0
+       ]
+      ]
+     }
+    },
+    {
+     "component": "timeline-ruler",
+     "props": {
+      "theme": "light",
+      "rotate": -6,
+      "x": 540,
+      "y": 1000,
+      "fromYear": 1979,
+      "year": 1994,
+      "enterAt": "L3:released-0.2",
+      "arriveAt": "L3:1994",
+      "pxPerYear": 120
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "props": {
+      "items": [
+       {
+        "at": "L3:QR#2",
+        "expandAt": "L3:quick",
+        "text": "Quick Response",
+        "style": "expand",
+        "x": 540,
+        "y": 1225,
+        "size": 104,
+        "weight": 800,
+        "color": "ink",
+        "outAt": "L4-0.3"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s4-anatomy",
+   "lines": [
+    "L4"
+   ],
+   "start": "L4-0.2",
+   "env": "spot",
+   "transition": {
+    "type": "match-zoom",
+    "dur": 0.6,
+    "focus": [
+     805,
+     640
+    ]
+   },
+   "visualPurpose": "Name the corner mark and show it is built from three layers: the camera orbits as one pattern physically lifts out of the code into a dark ring, a light ring and a dark core, each labelled. Then it drops back, all three are found, and the data is read in one fast sweep.",
+   "evidence": [
+    "F4",
+    "F11"
+   ],
+   "chips": [
+    "illustrationLabel"
+   ],
+   "camera": [
+    {
+     "at": "L4-0.2",
+     "x": 540,
+     "y": 790,
+     "z": 1.0
+    },
+    {
+     "at": "L4:corner",
+     "x": 540,
+     "y": 790,
+     "z": 1.0
+    },
+    {
+     "at": "L4:position",
+     "x": 430,
+     "y": 580,
+     "z": 1.3
+    },
+    {
+     "at": "L4:Finding-0.35",
+     "x": 430,
+     "y": 580,
+     "z": 1.3
+    },
+    {
+     "at": "L4:them",
+     "x": 540,
+     "y": 790,
+     "z": 1.0
+    }
+   ],
+   "layers": [
+    {
+     "component": "desk-grain",
+     "depth": 0.3,
+     "props": {
+      "seed": 13
+     }
+    },
+    {
+     "component": "qr-3d",
+     "props": {
+      "asset": "qr-hidden-logic",
+      "id": "q4",
+      "cx": 540,
+      "cy": 780,
+      "module": 34,
+      "D": 1700,
+      "rxKeys": [
+       [
+        "L4:corner",
+        0
+       ],
+       [
+        "L4:position",
+        50
+       ],
+       [
+        "L4:Finding-0.35",
+        50
+       ],
+       [
+        "L4:them",
+        0
+       ]
+      ],
+      "rzKeys": [
+       [
+        "L4:corner",
+        0
+       ],
+       [
+        "L4:position",
+        -24
+       ],
+       [
+        "L4:Finding-0.35",
+        -24
+       ],
+       [
+        "L4:them",
+        0
+       ]
+      ],
+      "explode": {
+       "finder": 0,
+       "at": "L4:position",
+       "collapseAt": "L4:Finding-0.35",
+       "gap": 3.4,
+       "labels": [
+        {
+         "text": "dark ring",
+         "layer": 0,
+         "at": "L4:detection",
+         "lx": 520,
+         "size": 36
+        },
+        {
+         "text": "light ring",
+         "layer": 1,
+         "at": "L4:detection+0.15",
+         "lx": 520,
+         "size": 36
+        },
+        {
+         "text": "dark core",
+         "layer": 2,
+         "at": "L4:detection+0.3",
+         "lx": 520,
+         "size": 36
+        }
+       ]
+      },
+      "locks": [
+       {
+        "at": "L4:them",
+        "finder": 0
+       },
+       {
+        "at": "L4:them+0.08",
+        "finder": 1
+       },
+       {
+        "at": "L4:them+0.16",
+        "finder": 2
+       }
+      ],
+      "read": {
+       "at": "L4:high-speed",
+       "dur": 0.75
+      }
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L4:position",
+        "outAt": "L4:Finding-0.35",
+        "text": "position detection pattern",
+        "x": 540,
+        "y": 340,
+        "size": 56,
+        "weight": 800,
+        "color": "amber"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s5-why-squares",
+   "lines": [
+    "L5"
+   ],
+   "start": "L5-0.2",
+   "env": "teal",
+   "transition": {
+    "type": "square-iris",
+    "dur": 0.6,
+    "focus": [
+     302,
+     542
+    ],
+    "rotate": 12
+   },
+   "visualPurpose": "The square itself opens into a business form. The camera follows a template of the nested-square pattern as it hunts the form; every square-ish feature fails to match. The team's words then appear verbatim, pinned to the form, underlined as they are spoken.",
+   "evidence": [
+    "F5",
+    "F6"
+   ],
+   "conceptual": true,
+   "chips": [
+    "illustrationLabel",
+    "conceptualLabel"
+   ],
+   "camera": [
+    {
+     "at": "L5-0.2",
+     "x": 540,
+     "y": 820,
+     "z": 1.0,
+     "r": 0
+    },
+    {
+     "at": "L5:team",
+     "x": 640,
+     "y": 720,
+     "z": 1.1,
+     "r": 2
+    },
+    {
+     "at": "L5:pattern",
+     "x": 500,
+     "y": 860,
+     "z": 1.1,
+     "r": -1
+    },
+    {
+     "at": "L5:least",
+     "x": 480,
+     "y": 1010,
+     "z": 1.06,
+     "r": 0
+    },
+    {
+     "at": "L6",
+     "x": 520,
+     "y": 1000,
+     "z": 1.12,
+     "r": 1
+    }
+   ],
+   "layers": [
+    {
+     "component": "print-surface",
+     "props": {
+      "id": "form5",
+      "kind": "form",
+      "x": 140,
+      "y": 430,
+      "w": 800,
+      "h": 920,
+      "rotate": -5,
+      "seed": 3
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L5:Why",
+        "outAt": "L5:least-0.1",
+        "text": "Why squares?",
+        "family": "serif",
+        "x": 90,
+        "y": 345,
+        "anchor": "start",
+        "size": 92,
+        "weight": 700,
+        "color": "paper"
+       }
+      ]
+     }
+    },
+    {
+     "component": "search-window",
+     "props": {
+      "candidatesFrom": "form5",
+      "outAt": "L5:least+0.2",
+      "stops": [
+       {
+        "at": "L5:squares.end+0.15",
+        "candidate": 0,
+        "verdict": "reject"
+       },
+       {
+        "at": "L5:team",
+        "candidate": 1,
+        "verdict": "reject"
+       },
+       {
+        "at": "L5:pattern",
+        "candidate": 2,
+        "verdict": "reject"
+       }
+      ]
+     }
+    },
+    {
+     "component": "quote-card",
+     "screen": true,
+     "props": {
+      "at": "L5:least-0.05",
+      "y": 905,
+      "size": 56,
+      "rotate": -1,
+      "lines": [
+       "\u2026the pattern least likely",
+       "to appear on various",
+       "business forms\u2026"
+      ],
+      "attribution": "MASAHIRO HARA \u00b7 DENSO WAVE",
+      "quoteOf": "F5",
+      "emphasis": {
+       "at": "L5:least",
+       "line": 0,
+       "text": "least likely",
+       "dur": 0.5
+      },
+      "lineHeight": 1.48
+     }
+    }
+   ]
+  },
+  {
+   "id": "s6-ratio",
+   "lines": [
+    "L6"
+   ],
+   "start": "L6-0.2",
+   "env": "amber",
+   "transition": {
+    "type": "whip",
+    "dur": 0.5
+   },
+   "visualPurpose": "The survey widens: flyers, magazines and boxes are thrown onto the table, a scan line turns each into its own runs of black and white, then they are swept away and the corner pattern alone measures exactly 1:1:3:1:1.",
+   "evidence": [
+    "F7",
+    "F8"
+   ],
+   "conceptual": true,
+   "chips": [
+    "illustrationLabel",
+    "conceptualLabel"
+   ],
+   "camera": [
+    {
+     "at": "L6-0.2",
+     "x": 540,
+     "y": 800,
+     "z": 1.04
+    },
+    {
+     "at": "L6:ratio-0.3",
+     "x": 540,
+     "y": 800,
+     "z": 1.0
+    }
+   ],
+   "layers": [
+    {
+     "component": "print-surface",
+     "props": {
+      "kind": "flyer",
+      "x": 60,
+      "y": 470,
+      "w": 300,
+      "h": 420,
+      "rotate": -8,
+      "seed": 21,
+      "enterAt": "L6:surveyed",
+      "enterFrom": "left",
+      "spin": -20,
+      "outAt": "L6:ratio-0.25"
+     }
+    },
+    {
+     "component": "print-surface",
+     "props": {
+      "kind": "magazine",
+      "x": 390,
+      "y": 400,
+      "w": 300,
+      "h": 420,
+      "rotate": 3,
+      "seed": 22,
+      "enterAt": "L6:magazines",
+      "enterFrom": "top",
+      "spin": 14,
+      "outAt": "L6:ratio-0.2"
+     }
+    },
+    {
+     "component": "print-surface",
+     "props": {
+      "kind": "box",
+      "x": 720,
+      "y": 500,
+      "w": 300,
+      "h": 400,
+      "rotate": -4,
+      "seed": 23,
+      "enterAt": "L6:cardboard",
+      "enterFrom": "right",
+      "spin": 22,
+      "outAt": "L6:ratio-0.15"
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "props": {
+      "items": [
+       {
+        "at": "L6:surveyed+0.2",
+        "outAt": "L6:ratio-0.25",
+        "text": "FLYERS",
+        "x": 210,
+        "y": 975,
+        "size": 40,
+        "weight": 800,
+        "letterSpacing": 3,
+        "color": "ink"
+       },
+       {
+        "at": "L6:magazines+0.2",
+        "outAt": "L6:ratio-0.2",
+        "text": "MAGAZINES",
+        "x": 540,
+        "y": 915,
+        "size": 40,
+        "weight": 800,
+        "letterSpacing": 3,
+        "color": "ink"
+       },
+       {
+        "at": "L6:cardboard+0.2",
+        "outAt": "L6:ratio-0.15",
+        "text": "BOXES",
+        "x": 870,
+        "y": 975,
+        "size": 40,
+        "weight": 800,
+        "letterSpacing": 3,
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "component": "scan-line",
+     "props": {
+      "passes": [
+       {
+        "at": "L6:for-0.2",
+        "dur": 0.6,
+        "y0": 470,
+        "y1": 760
+       }
+      ],
+      "hold": {
+       "at": "L6:for+0.4",
+       "outAt": "L6:ratio-0.3",
+       "y": 760
+      },
+      "x0": 40,
+      "x1": 1040,
+      "color": "ink"
+     }
+    },
+    {
+     "component": "run-length-strip",
+     "props": {
+      "enterAt": "L6:for+0.3",
+      "outAt": "L6:ratio-0.25",
+      "x": 210,
+      "y": 1070,
+      "width": 270,
+      "height": 50,
+      "runs": [
+       2,
+       1,
+       1,
+       3,
+       2,
+       1,
+       4,
+       1,
+       2,
+       2,
+       1,
+       3
+      ]
+     }
+    },
+    {
+     "component": "run-length-strip",
+     "props": {
+      "enterAt": "L6:for+0.4",
+      "outAt": "L6:ratio-0.2",
+      "x": 540,
+      "y": 1070,
+      "width": 270,
+      "height": 50,
+      "runs": [
+       1,
+       2,
+       1,
+       1,
+       5,
+       1,
+       2,
+       3,
+       1,
+       1,
+       2
+      ],
+      "firstLight": true
+     }
+    },
+    {
+     "component": "run-length-strip",
+     "props": {
+      "enterAt": "L6:for+0.5",
+      "outAt": "L6:ratio-0.15",
+      "x": 870,
+      "y": 1070,
+      "width": 270,
+      "height": 50,
+      "runs": [
+       3,
+       2,
+       1,
+       1,
+       1,
+       4,
+       2,
+       2,
+       1,
+       3
+      ]
+     }
+    },
+    {
+     "component": "paper-card",
+     "props": {
+      "enterAt": "L6:ratio-0.15",
+      "x": 370,
+      "y": 470,
+      "w": 340,
+      "h": 340,
+      "r": 14
+     }
+    },
+    {
+     "component": "qr-symbol",
+     "props": {
+      "asset": "qr-hidden-logic",
+      "id": "qr6",
+      "cx": 820,
+      "cy": 920,
+      "module": 40,
+      "card": false,
+      "enterAt": "L6:ratio-0.1",
+      "show": {
+       "data": false,
+       "finders": [
+        0
+       ]
+      }
+     }
+    },
+    {
+     "component": "scan-line",
+     "props": {
+      "hold": {
+       "at": "L6:ratio",
+       "y": 640
+      },
+      "x0": 300,
+      "x1": 780,
+      "color": "#fffaf0",
+      "width": 7
+     }
+    },
+    {
+     "component": "run-length-strip",
+     "props": {
+      "enterAt": "L6:ratio+0.05",
+      "drawDur": 0.45,
+      "x": 540,
+      "y": 1135,
+      "width": 600,
+      "height": 92,
+      "runs": [
+       1,
+       1,
+       3,
+       1,
+       1
+      ],
+      "labelsAt": "L6:ratio+0.35",
+      "labelStagger": 0.11,
+      "labels": [
+       1,
+       1,
+       3,
+       1,
+       1
+      ],
+      "labelSize": 76,
+      "labelColor": "ink",
+      "labelPanel": true,
+      "panelWidth": 820,
+      "caption": "ALONG A LINE THROUGH THE CENTRE",
+      "captionSize": 36,
+      "captionColor": "ink"
+     }
+    }
+   ]
+  },
+  {
+   "id": "s7-any-angle",
+   "lines": [
+    "L7"
+   ],
+   "start": "L7-0.15",
+   "env": "amber",
+   "envShift": {
+    "to": "desk",
+    "at": "L7:lets",
+    "dur": 0.8
+   },
+   "transition": {
+    "type": "continuity",
+    "dur": 0
+   },
+   "visualPurpose": "Prove the payoff: the code grows back around the pattern as the lights go down, then turns to different angles while the line through the corner keeps reading exactly 1:1:3:1:1. Three found corners plus the empty one fix which way is up; the code settles upright and tilts back onto its package, returning to the first frame.",
+   "evidence": [
+    "F9",
+    "F8",
+    "F11"
+   ],
+   "chips": [
+    "illustrationLabel"
+   ],
+   "camera": [
+    {
+     "at": "L7-0.15",
+     "x": 302,
+     "y": 678,
+     "z": 1.1765
+    },
+    {
+     "at": "L7:lets",
+     "x": 302,
+     "y": 678,
+     "z": 1.1765
+    },
+    {
+     "at": "L7:orient",
+     "x": 540,
+     "y": 1073,
+     "z": 0.58
+    },
+    {
+     "at": "L7:angle.end+0.6",
+     "x": 540,
+     "y": 1073,
+     "z": 0.58
+    },
+    {
+     "at": "end-0.08",
+     "x": 540,
+     "y": 800,
+     "z": 1.0
+    }
+   ],
+   "layers": [
+    {
+     "component": "desk-grain",
+     "depth": 0.3,
+     "props": {
+      "seed": 11
+     }
+    },
+    {
+     "component": "paper-card",
+     "props": {
+      "x": 157.5,
+      "y": 397.5,
+      "w": 289,
+      "h": 289,
+      "r": 11.9,
+      "outAt": "L7:lets+0.35"
+     }
+    },
+    {
+     "component": "qr-3d",
+     "props": {
+      "asset": "qr-hidden-logic",
+      "id": "q7",
+      "cx": 540,
+      "cy": 780,
+      "module": 34,
+      "D": 1700,
+      "stripScale": 2.521,
+      "cardOpacityKeys": [
+       [
+        "L7:lets",
+        0
+       ],
+       [
+        "L7:lets+0.4",
+        1
+       ]
+      ],
+      "assemble": {
+       "at": "L7:lets",
+       "dur": 0.75,
+       "origin": "finder0"
+      },
+      "finderOpacity": {
+       "1": [
+        [
+         "L7:lets+0.25",
+         0
+        ],
+        [
+         "L7:lets+0.55",
+         1
+        ]
+       ],
+       "2": [
+        [
+         "L7:lets+0.3",
+         0
+        ],
+        [
+         "L7:lets+0.6",
+         1
+        ]
+       ]
+      },
+      "rzKeys": [
+       [
+        "L7:orient",
+        0
+       ],
+       [
+        "L7:code.end",
+        -33
+       ],
+       [
+        "L7:any",
+        -33
+       ],
+       [
+        "L7:angle",
+        27
+       ],
+       [
+        "L7:angle.end+0.1",
+        27
+       ],
+       [
+        "L7:angle.end+0.6",
+        0
+       ],
+       [
+        "end-0.75",
+        0
+       ],
+       [
+        "end-0.08",
+        -14
+       ]
+      ],
+      "rxKeys": [
+       [
+        "end-0.75",
+        0
+       ],
+       [
+        "end-0.08",
+        32
+       ]
+      ],
+      "surface": {
+       "w": 1500,
+       "h": 1800,
+       "fill": "#c79c6b",
+       "bars": 5,
+       "seed": 4,
+       "blocks": [
+        {
+         "x": -700,
+         "y": 560,
+         "w": 640,
+         "h": 110,
+         "fill": "coral"
+        },
+        {
+         "x": 120,
+         "y": 560,
+         "w": 300,
+         "h": 110,
+         "fill": "ink",
+         "op": 0.7
+        }
+       ]
+      },
+      "surfaceOpacityKeys": [
+       [
+        "end-0.75",
+        0
+       ],
+       [
+        "end-0.15",
+        1
+       ]
+      ],
+      "ghostCorner": {
+       "at": "L7:angle.end+0.15",
+       "resolveAt": "L7:angle.end+0.55",
+       "outAt": "end-0.7",
+       "fill": false
+      },
+      "links": {
+       "at": "L7:angle.end+0.6",
+       "outAt": "end-0.7"
+      },
+      "locks": [
+       {
+        "at": "L7:angle.end+0.6",
+        "finder": 0
+       },
+       {
+        "at": "L7:angle.end+0.65",
+        "finder": 1
+       },
+       {
+        "at": "L7:angle.end+0.7",
+        "finder": 2
+       }
+      ]
+     }
+    },
+    {
+     "component": "scan-line",
+     "props": {
+      "hold": {
+       "at": 0,
+       "y": 0
+      },
+      "track": {
+       "geo": "q7",
+       "finder": 0,
+       "halfWidth": 204
+      },
+      "outAt": "L7:angle.end+0.2",
+      "color": "#fffaf0",
+      "width": 7
+     }
+    },
+    {
+     "component": "run-length-strip",
+     "screen": true,
+     "props": {
+      "enterAt": 0,
+      "drawDur": 0.01,
+      "source": "q7:finder0",
+      "x": 540,
+      "y": 1135,
+      "width": 600,
+      "height": 92,
+      "labelsAt": 0,
+      "labelStagger": 0,
+      "labels": [
+       1,
+       1,
+       3,
+       1,
+       1
+      ],
+      "labelSize": 76,
+      "labelColor": "ink",
+      "labelPanel": true,
+      "panelWidth": 820,
+      "outAt": "L7:angle.end+0.2",
+      "caption": "SAME RATIO AT EVERY ANGLE",
+      "captionSize": 36,
+      "captionColor": "ink",
+      "silent": true
+     }
+    },
+    {
+     "component": "reticle",
+     "screen": true,
+     "props": {
+      "enterAt": "end-0.55",
+      "x": 120,
+      "y": 330,
+      "w": 840,
+      "h": 900
+     }
+    }
+   ]
+  }
+ ],
+ "tail": 1.2
+}

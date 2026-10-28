@@ -1,0 +1,32 @@
+{
+  "slug": "goal-lore-lab",
+  "name": "GoalLore Lab",
+  "handle": "@GoalLoreLab",
+  "tagline": "Every Goal Has a Story.",
+  "corePromise": "The stories, mysteries, physics and tactics behind football's greatest players and moments, told with original animation.",
+  "status": "PROPOSED: not registered in config/channels.json, no YouTube channel, no credentials, no schedules. Registration is a separate owner decision (docs/premium-studio/goal-lore-lab.md).",
+  "enabled": false,
+  "publishingEnabled": false,
+  "replacesStrategically": "critical-thread (strategic direction only; CriticalThread stays registered and running until an explicit migration decision)",
+  "credentialsPrefix": "GLL",
+  "credentialEnv": { "clientId": ["GLL_YT_CLIENT_ID"], "clientSecret": ["GLL_YT_CLIENT_SECRET"], "refreshToken": ["GLL_YT_REFRESH_TOKEN"], "channelId": ["GLL_YT_CHANNEL_ID"] },
+  "credentialsCreated": false,
+  "pathMode": "isolated",
+  "audience": "broad international football audience, teens to adults; English first",
+  "voice": { "provider": "edge-tts", "voice": "en-GB-RyanNeural", "status": "CANDIDATE: not approved; choose by blind listening test before any production" },
+  "publishingCadence": { "shorts": { "everyDays": 1, "targetDurationSeconds": [35, 55], "skipWhenQualityFails": true }, "longForm": { "everyDays": 7, "targetDurationMinutes": [8, 14] } },
+  "contentPillars": ["LEGENDS", "MOMENTS", "MYSTERIES", "HISTORY", "PHYSICS", "TACTICS", "WHAT_IF"],
+  "topicRules": {
+    "requiresVerifiedEvidenceBeforeProduction": true,
+    "requiresVerbatimQuotes": true,
+    "noBroadcastFootage": true,
+    "noUnlicensedPlayerPhotos": true,
+    "noClubCrestsOrKitsAsBranding": true,
+    "whatIfMustBeLabelled": "WHAT IF",
+    "noClipReposting": true,
+    "noTransferRumours": true,
+    "noLiveResultsChasing": true
+  },
+  "qualityThresholds": { "publish": 88, "review": 78, "sourceQualityMinimum": 90, "hookMinimum": 85, "visualRelevanceMinimum": 90, "copyrightRiskMaximum": "low" },
+  "platforms": { "youtube": { "enabled": false }, "instagram": { "enabled": false }, "tiktok": { "enabled": false } }
+}

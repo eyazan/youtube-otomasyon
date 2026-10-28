@@ -1,0 +1,256 @@
+{
+ "schema": "bto-studio.narration-script.v1",
+ "channel": "goal-lore-lab",
+ "topicId": "GLL-P01",
+ "slug": "the-free-kick-that-turned-into-a-spiral",
+ "title": "The Free Kick That Turned Into a Spiral",
+ "coreQuestion": "Why did Roberto Carlos's 1997 free kick against France bend so late?",
+ "sourceHash": "3eb669084858d9a2",
+ "voice": {
+  "approved": {
+   "provider": "edge-tts",
+   "voice": "en-GB-RyanNeural"
+  }
+ },
+ "lines": [
+  {
+   "id": "L1",
+   "role": "HOOK",
+   "text": "This free kick was flying wide. Then it turned.",
+   "evidenceSuggested": [
+    "F6",
+    "F1"
+   ]
+  },
+  {
+   "id": "L2",
+   "role": "CONTEXT",
+   "text": "Lyon, June 1997. Brazil against France.",
+   "evidenceSuggested": [
+    "F1"
+   ]
+  },
+  {
+   "id": "L3",
+   "role": "SETUP",
+   "text": "Roberto Carlos hit it with the outside of his left foot, from far out.",
+   "evidenceSuggested": [
+    "F2",
+    "F7",
+    "F1"
+   ]
+  },
+  {
+   "id": "L4",
+   "role": "BUILD",
+   "text": "The ball swung around the wall and kept heading wide.",
+   "evidenceSuggested": [
+    "F3",
+    "F6"
+   ]
+  },
+  {
+   "id": "L5",
+   "role": "TWIST",
+   "text": "Then it bent back in, past a goalkeeper who never moved.",
+   "evidenceSuggested": []
+  },
+  {
+   "id": "L6",
+   "role": "ORIGIN",
+   "text": "In 2010, French physicists showed why.",
+   "evidenceSuggested": []
+  },
+  {
+   "id": "L7",
+   "role": "EXPLANATION",
+   "text": "Spin pushes the ball sideways. Drag slows the ball down, but the spin keeps going.",
+   "evidenceSuggested": [
+    "F6",
+    "F7"
+   ]
+  },
+  {
+   "id": "L8",
+   "role": "MECHANISM",
+   "text": "So the slower it flies, the tighter it curves, into a spiral.",
+   "evidenceSuggested": [
+    "F6"
+   ]
+  },
+  {
+   "id": "L9",
+   "role": "PAYOFF",
+   "text": "That is why the bend came so late. Every goal has a story.",
+   "evidenceSuggested": [
+    "F6"
+   ]
+  }
+ ],
+ "beats": [
+  {
+   "id": "b1",
+   "rate": "+0%",
+   "pauseAfterMs": 200,
+   "lines": [
+    {
+     "id": "L1",
+     "text": "This free kick was flying wide. Then it turned."
+    }
+   ]
+  },
+  {
+   "id": "b2",
+   "rate": "+0%",
+   "pauseAfterMs": 200,
+   "lines": [
+    {
+     "id": "L2",
+     "text": "Lyon, June 1997. Brazil against France."
+    }
+   ]
+  },
+  {
+   "id": "b3",
+   "rate": "+0%",
+   "pauseAfterMs": 200,
+   "lines": [
+    {
+     "id": "L3",
+     "text": "Roberto Carlos hit it with the outside of his left foot, from far out."
+    }
+   ]
+  },
+  {
+   "id": "b4",
+   "rate": "+0%",
+   "pauseAfterMs": 200,
+   "lines": [
+    {
+     "id": "L4",
+     "text": "The ball swung around the wall and kept heading wide."
+    }
+   ]
+  },
+  {
+   "id": "b5",
+   "rate": "+0%",
+   "pauseAfterMs": 200,
+   "lines": [
+    {
+     "id": "L5",
+     "text": "Then it bent back in, past a goalkeeper who never moved."
+    }
+   ]
+  },
+  {
+   "id": "b6",
+   "rate": "+0%",
+   "pauseAfterMs": 200,
+   "lines": [
+    {
+     "id": "L6",
+     "text": "In 2010, French physicists showed why."
+    }
+   ]
+  },
+  {
+   "id": "b7",
+   "rate": "+0%",
+   "pauseAfterMs": 200,
+   "lines": [
+    {
+     "id": "L7",
+     "text": "Spin pushes the ball sideways. Drag slows the ball down, but the spin keeps going."
+    }
+   ]
+  },
+  {
+   "id": "b8",
+   "rate": "+0%",
+   "pauseAfterMs": 360,
+   "lines": [
+    {
+     "id": "L8",
+     "text": "So the slower it flies, the tighter it curves, into a spiral."
+    }
+   ]
+  },
+  {
+   "id": "b9",
+   "rate": "+0%",
+   "pauseAfterMs": 0,
+   "lines": [
+    {
+     "id": "L9",
+     "text": "That is why the bend came so late. Every goal has a story."
+    }
+   ]
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "hash": "e3b0c44298",
+   "claim": "Roberto Carlos scored a free kick for Brazil against France on 3 June 1997 at the Stade de Gerland in Lyon, in the opening match of the Tournoi de France, which ended 1-1.",
+   "quote": "",
+   "source": "Wikipedia, 1997 Tournoi de France; Sky Sports (skysports.com/football/news/11095/10899358)",
+   "url": "https://en.wikipedia.org/wiki/1997_Tournoi_de_France",
+   "layer": "SEARCH-CORROBORATED (no verbatim quote captured)"
+  },
+  {
+   "id": "F2",
+   "hash": "e3b0c44298",
+   "claim": "He struck the ball with the outside of his left foot from long range; reported distances vary from about 33 metres to 40 yards.",
+   "quote": "",
+   "source": "What A Howler; Sky Sports; Chalkdust Magazine",
+   "url": "https://www.whatahowler.com/the-20th-anniversary-of-when-roberto-carlos-bent-time-and-space/",
+   "layer": "SEARCH-CORROBORATED (no verbatim quote captured)"
+  },
+  {
+   "id": "F3",
+   "hash": "e3b0c44298",
+   "claim": "The ball swerved around the French wall and appeared to be heading wide before bending back into the goal.",
+   "quote": "",
+   "source": "Sky Sports; What A Howler; ESPN",
+   "url": "https://www.skysports.com/football/news/11095/10899358/roberto-carlos-brilliant-brazil-free-kick-against-france-remembered",
+   "layer": "SEARCH-CORROBORATED (no verbatim quote captured)"
+  },
+  {
+   "id": "F4",
+   "hash": "e3b0c44298",
+   "claim": "France goalkeeper Fabien Barthez did not move as the ball went in.",
+   "quote": "",
+   "source": "What A Howler (single outlet in search; re-check)",
+   "url": "https://www.whatahowler.com/the-20th-anniversary-of-when-roberto-carlos-bent-time-and-space/",
+   "layer": "SINGLE-SOURCE (no verbatim quote captured)"
+  },
+  {
+   "id": "F5",
+   "hash": "e3b0c44298",
+   "claim": "In 2010 Guillaume Dupeux, Anne Le Goff, David Quere and Christophe Clanet published 'The spinning ball spiral' in New Journal of Physics 12, 093004.",
+   "quote": "",
+   "source": "HAL (Ecole polytechnique); ScienceDaily, 2 September 2010",
+   "url": "https://hal-polytechnique.archives-ouvertes.fr/hal-01021119",
+   "layer": "SEARCH-CORROBORATED (no verbatim quote captured)"
+  },
+  {
+   "id": "F6",
+   "hash": "e3b0c44298",
+   "claim": "The paper shows that a spinning ball slowed by drag, while its spin stays nearly constant, follows a path that curves more and more tightly, a spiral; the authors use Roberto Carlos's 1997 free kick as the example of a ball that began to follow this spiral.",
+   "quote": "",
+   "source": "ScienceDaily; Physics World; APS DFD 2009 abstract 'The Roberto Carlos Spiral'",
+   "url": "https://www.sciencedaily.com/releases/2010/09/100902073509.htm",
+   "layer": "SEARCH-CORROBORATED (no verbatim quote captured)"
+  },
+  {
+   "id": "F7",
+   "hash": "e3b0c44298",
+   "claim": "Model used for the animated trajectories: point ball with quadratic drag (Cd 0.25) and Magnus lift from the spin ratio, integrated with RK4; launch values are chosen for the illustration, not measured from the 1997 kick.",
+   "quote": "",
+   "source": "studio model (scripts/bto-studio/page/components/football.js)",
+   "url": "https://hal-polytechnique.archives-ouvertes.fr/hal-01021119",
+   "layer": "MODEL (illustrative parameters)"
+  }
+ ]
+}

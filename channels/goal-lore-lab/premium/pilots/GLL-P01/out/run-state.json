@@ -1,0 +1,74 @@
+{
+ "stages": {
+  "load": {
+   "status": "done",
+   "hash": "3eb669084858d9a2",
+   "at": "2026-10-21T16:46:47.206Z",
+   "readiness": {
+    "ready": true,
+    "errors": [],
+    "warnings": [
+     "fact 1 has no verbatim quote (blocks production, allowed in a pilot)",
+     "fact 2 has no verbatim quote (blocks production, allowed in a pilot)",
+     "fact 3 has no verbatim quote (blocks production, allowed in a pilot)",
+     "fact 4 has no verbatim quote (blocks production, allowed in a pilot)",
+     "fact 5 has no verbatim quote (blocks production, allowed in a pilot)",
+     "fact 6 has no verbatim quote (blocks production, allowed in a pilot)",
+     "fact 7 has no verbatim quote (blocks production, allowed in a pilot)"
+    ],
+    "publishedRows": 0
+   }
+  },
+  "storyboard": {
+   "status": "done",
+   "hash": "38f791b04bb8b4ca",
+   "at": "2026-10-21T16:46:47.207Z"
+  },
+  "narrate": {
+   "status": "done",
+   "hash": "8645077816552741",
+   "at": "2026-10-21T16:21:39.113Z",
+   "voice": "kokoro bm_george",
+   "approved": false,
+   "sec": 32.433
+  },
+  "validate": {
+   "status": "done",
+   "hash": "9bd8f4606cbd69e8",
+   "at": "2026-10-21T16:46:47.216Z"
+  },
+  "render": {
+   "status": "done",
+   "hash": "5e815e4e309286a8",
+   "at": "2026-10-21T16:32:57.382Z",
+   "perf": {
+    "quality": "final",
+    "resolution": "1080x1920",
+    "workers": 3,
+    "segments": 9,
+    "cachedSegments": 0,
+    "framesRendered": 1154,
+    "wallSec": 111.8,
+    "msPerFrameWall": 96.9,
+    "peakChromiumRssMb": 3904,
+    "host": "linux x64 4 cpu 16 GB"
+   }
+  },
+  "audio": {
+   "status": "done",
+   "hash": "d64b33cf1753d4c1",
+   "at": "2026-10-21T16:33:10.236Z"
+  },
+  "qa": {
+   "status": "done",
+   "hash": "0bf77ab8563d760a",
+   "at": "2026-10-21T16:33:54.784Z",
+   "pass": true
+  },
+  "package": {
+   "status": "done",
+   "hash": "009eec022004c668",
+   "at": "2026-10-21T16:33:54.790Z"
+  }
+ }
+}

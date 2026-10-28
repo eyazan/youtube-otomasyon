@@ -1,0 +1,50 @@
+{
+ "schema": "premium-studio.channel-profile.v1",
+ "channel": "failure-reconstructed",
+ "name": "Failure Reconstructed",
+ "premiumMode": "studio-preview",
+ "studioRenders": true,
+ "rolloutStage": 5,
+ "refusal": "Failure Reconstructed renders in the shared studio in preview/dry-run mode only (automatic forensic grammar from the researched case file). Publishing a premium FR Short needs the approved Edge voice, creative sign-off and the owner go-live switch.",
+ "visualProfile": [
+  "engineering failures",
+  "disaster reconstructions",
+  "exploded technical diagrams",
+  "chronology animations",
+  "failure-chain storytelling",
+  "early high-impact hook showing the consequence or the critical fault",
+  "archival media with provenance chips"
+ ],
+ "components": {
+  "built": [
+   "failure-chain",
+   "object-silhouette",
+   "kinetic-type",
+   "blueprint plate"
+  ],
+  "existing": "scripts/fr-premium/engine/templates/* (joint-section, component-section, event-sequence, timeline, document-*, archival-plate, trace-over-photo, payoff)",
+  "toBuild": [
+   "licensed archival plates in the automatic grammar (needs reviewed assets in channels/failure-reconstructed/premium/assets.json)",
+   "pressure-or-load-gauge"
+  ]
+ },
+ "evidencePolicy": {
+  "source": "icerik/konular/<slug>.json case file (vaka + kaynakca), the record the live FR pipeline publishes from",
+  "validator": {
+   "factLayers": [
+    "CASE FILE"
+   ],
+   "requireQuote": false
+  },
+  "quotes": "case-file facts carry researched claims with the case sources, no stored verbatim quotes (FR live standard); missing quotes are reported",
+  "remakesOfPublishedTopics": "never: published, produced, failed, in-review and non-visual blocked topics are refused by adapter readiness"
+ },
+ "publishing": {
+  "autoPublish": false,
+  "contract": "scripts/bto-studio/publish-gate.js (lifecycle) + owner go-live switch"
+ },
+ "storyboard": {
+  "generator": "scripts/bto-studio/auto/failure-reconstructed.js",
+  "mode": "deterministic"
+ }
+}

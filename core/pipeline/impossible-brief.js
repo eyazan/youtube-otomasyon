@@ -134,6 +134,13 @@ function llmShadow(channel, topic, output, env = process.env, spawn = cp.spawnSy
   }
 }
 
+// Premium studio shadow for ImpossibleBrief (IB_PREMIUM_RENDER=preview) and The Hidden Logic of Things
+// (HLT_PREMIUM_RENDER=preview), default OFF: core/pipeline/premium-shadow.js. Other isolated channels have no shadow.
+function premiumShadow(channel, topic, env = process.env, spawn = cp.spawnSync, live = null) {
+  if (!["impossible-brief", "behind-the-ordinary"].includes(channel.slug)) return null;
+  return require("./premium-shadow").run(channel, topic, env, spawn, live);
+}
+
 function chooseTopic(channel, explicit, universe) {
   if (explicit) {
     const topic = universe.find((item) => item.slug === explicit || item.id === explicit);
@@ -181,6 +188,17 @@ function runChannel(slug, argv = []) {
     run.record.targetDay = targetDay;
     console.log(`[${channel.name}] ${due.reason} · target publication day ${targetDay} (${due.targetPublishAt || "?"})`);
   }
+  // Premium publishing adapter (core/pipeline/premium-publish.js; IB_/HLT_PREMIUM_PUBLISH=1 only, no workflow sets it):
+  // an owner-approved premium Short for a reserved topic takes the due slot through the existing uploader. With the flag
+  // off, or nothing approved, or any refusal before an upload, it returns null and the live lane below runs unchanged.
+  if (!explicit) {
+    const premium = require("./premium-publish").run(channel, { targetDay });
+    if (premium) {
+      if (premium.uploaded) { recordGenerated(channel, { id: premium.topicId, slug: premium.slug }, true); run.topic(premium.slug).outcome("UPLOADED", `premium ${premium.topicId} ${premium.videoId || ""}`.trim()); }
+      else run.topic(premium.slug).outcome(premium.dryRun ? "DRY_RUN" : "FAILED", `premium ${premium.topicId}: ${premium.dryRun ? "uploader --dogrula" : "not uploaded, reservation kept"}`);
+      return premium.exitCode;
+    }
+  }
   // Per-channel, per-target-day retry budget (lib/attempt-budget.js); only in scheduled publishing runs.
   const budget = (kind) => {
     if (!targetDay) return true;
@@ -195,6 +213,7 @@ function runChannel(slug, argv = []) {
   const noRender = argv.includes("--no-render");
   let choice, topic, output, result, finalPlan;
   let prechecks = 0;
+  let renderSec = null;
   for (let attempt = 1; ; attempt += 1) {
     choice = chooseTopic(channel, explicit, universe);
     if (!choice.topic) {
@@ -224,6 +243,7 @@ function runChannel(slug, argv = []) {
       continue;
     }
     if (!budget("topics") || (!noRender && !budget("render"))) return 1;
+    const renderStarted = Date.now();
     try { result = Rendering.buildPackage(topic, channel, output, { render: !noRender, growthPlan: choice.plan }); }
     catch (error) {
       if (error.code === "NARRATION_UNAVAILABLE") {
@@ -237,6 +257,7 @@ function runChannel(slug, argv = []) {
       run.fail("RENDER", error.message).outcome("FAILED", `${topic.slug}: ${error.message}`);
       throw error;
     }
+    renderSec = Math.round((Date.now() - renderStarted) / 1000);
     if (!noRender) {
       run.done("ASSETS");
       const audio = result.render.audio || {};
@@ -321,6 +342,17 @@ function runChannel(slug, argv = []) {
   const videoId = uploadStatus === "uploaded" ? GrowthRuntime.afterUpload(channel, topic.slug, finalPlan) : null;
   console.log(`[${channel.name}] ${topic.topic} — ${noRender ? "package only" : "rendered"}${process.env.PUBLISH === "1" ? " and uploaded" : "; upload skipped"}`);
   console.log(GrowthRuntime.shortSummary(finalPlan, { "Upload Status": uploadStatus, "Video ID": videoId || "—" }));
+  // after the live lane is finished, so the shadow can neither delay nor change it (nor its exit status)
+  if (!noRender) {
+    try {
+      const video = (result.render || {}).video || {};
+      premiumShadow(channel, topic, process.env, cp.spawnSync, {
+        output, decision: finalPlan.readiness.decision, score: finalPlan.readiness.ProductionReadinessScore, validationsPassed: true,
+        durationSeconds: video.durationSeconds ?? null, resolution: video.width ? `${video.width}x${video.height}` : null,
+        voice: ((result.render || {}).audio || {}).provider || null, renderSec, upload: uploadStatus,
+      });
+    } catch (error) { console.log(`[${channel.name}] premium shadow skipped: ${error.message}; live production unaffected`); }
+  }
   return 0;
 }
 
@@ -333,4 +365,4 @@ function recordGenerated(channel, topic, uploaded) {
 
 function main(argv = []) { return runChannel("impossible-brief", argv); }
 
-module.exports = { llmShadow, MIN_PRECHECK_VISUALS, MAX_VISUAL_PRECHECKS, visualShortfall, writeCompatibilityFiles, writeValidationEvidence, visualRejection, runChannel, main };
+module.exports = { llmShadow, premiumShadow, MIN_PRECHECK_VISUALS, MAX_VISUAL_PRECHECKS, visualShortfall, writeCompatibilityFiles, writeValidationEvidence, visualRejection, runChannel, main };

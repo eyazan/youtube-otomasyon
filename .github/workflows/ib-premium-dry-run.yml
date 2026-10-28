@@ -1,0 +1,130 @@
+name: ImpossibleBrief dry run (selection + live render + premium shadow)
+
+# End-to-end dry run of the ImpossibleBrief production entry point WITHOUT uploading:
+#   1. visual survey of the topics nearest the bar (scripts/growth/visual-survey.js; runner-local, not committed)
+#   2. qualified topic buffer (scripts/growth/topic-buffer.js)
+#   3. node shorts-sira.js --channel impossible-brief with PUBLISH=0 and IB_PREMIUM_RENDER=preview: the live topic
+#      selection, the live stock renderer and its gates, then (after the live lane finished) the premium studio shadow
+#      on the topic the live lane produced
+#   4. live vs premium side-by-side (premium-shadow.json: gates, duration, runtime, peak memory), premium publish gate,
+#      Creative Director frame review; artifacts for human review
+# No YouTube credentials are given to this job, contents permission is read-only, nothing is committed or uploaded,
+# and it uses its own concurrency group so it never queues behind or blocks portfolio-production.
+on:
+  pull_request:
+    paths:
+      - 'core/**'
+      - 'scripts/bto-studio/**'
+      - 'scripts/growth/**'
+      - 'channels/impossible-brief/**'
+      - 'shorts-sira.js'
+      - '.github/workflows/ib-premium-dry-run.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: ib-premium-dry-run-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  dry-run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      PUBLISH: '0'
+      # Edge is shared with the other premium checks on the same push (HTTP 429 on run 39834813659): up to 6
+      # rate-limit retries for the shadow's narration (20..120 s, bounded); production keeps the default 3
+      EDGE_RATE_LIMIT_RETRIES: '6'
+      PEXELS_KEY: ${{ secrets.PEXELS_KEY }}
+      SHORTS_FONT: DejaVu Sans
+      PD_CHROMIUM: /usr/bin/google-chrome
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: scripts/bto-studio/requirements.txt
+      # apt .deb files under a weekly key (restored on every run: a stalled Ubuntu mirror no longer blocks it) and Edge
+      # narration beats under a per-run key that accumulates (a re-run reuses identical narration)
+      - name: Cache week
+        id: week
+        run: echo "iso=$(date -u +%G-%V)" >> "$GITHUB_OUTPUT"
+      - name: Dependency cache (apt packages)
+        uses: actions/cache@v4
+        with:
+          path: .cache/apt
+          # one save per ISO week: a newer runner image's package versions are picked up within a week
+          key: apt-debs-v1-${{ runner.os }}-premium-${{ hashFiles('scripts/ci-apt.sh') }}-${{ steps.week.outputs.iso }}
+          restore-keys: apt-debs-v1-${{ runner.os }}-
+      - name: Narration cache (Edge beats)
+        uses: actions/cache@v4
+        with:
+          path: .cache/edge-tts
+          key: edge-tts-v1-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: edge-tts-v1-
+      - name: Runtime dependencies
+        run: |
+          CI_APT_ARCHIVES="$GITHUB_WORKSPACE/.cache/apt" bash scripts/ci-apt.sh --no-install-recommends ffmpeg fonts-dejavu-core fonts-liberation python3-pil time
+          npm ci --no-audit --no-fund
+          python -m pip install --quiet -r scripts/bto-studio/requirements.txt
+          # fail here, by name, rather than as a misleading QA result later (run 39835922184: no QR decoder)
+          node scripts/bto-studio/preflight-deps.js
+      - name: Visual survey (runner-local)
+        run: node scripts/growth/visual-survey.js --channel impossible-brief --limit 30 --report visual-survey-report.json
+      - name: Qualified topic buffer
+        run: node scripts/growth/topic-buffer.js | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Scheduled-production entry point, dry run (no upload) + premium shadow
+        env:
+          IB_PREMIUM_RENDER: preview
+          IB_PREMIUM_QUALITY: final
+        run: |
+          node shorts-sira.js --channel impossible-brief 2>&1 | tee ib-dry-run.log
+          # green only when the premium shadow actually rendered and passed its objective QA
+          node scripts/bto-studio/tools/shadow-check.js channels/impossible-brief/state/production
+      - name: Premium gate and creative review
+        if: always()
+        run: |
+          for cmp in channels/impossible-brief/state/production/*/premium-shadow.json; do
+            [ -f "$cmp" ] || continue
+            echo "### live vs premium: $cmp" | tee -a "$GITHUB_STEP_SUMMARY"
+            # shellcheck disable=SC2016  # the single-quoted program is JavaScript (template literals), not shell
+            node -e 'const r=require(require("path").resolve(process.argv[1]));const l=r.live||{},p=r.premium;console.log(["| | live (stock) | premium (shadow) |","|---|---|---|",`| gate | ${l.decision} ${l.productionScore} | ${p.verdict} (objective ${p.objectivePass?"PASS":"FAIL"}${p.hardFailures.length?": "+p.hardFailures.join(", "):""}) |`,`| duration | ${l.durationSeconds} s | ${p.durationSeconds} s |`,`| voice | ${l.voice} | ${p.voice&&p.voice.used} (approved ${p.voice&&p.voice.approved}) |`,`| runtime | render ${l.renderSec} s | ${p.runtimeSec} s (render ${p.renderWallSec} s) |`,`| peak memory | n/a | Chromium tree ${p.peakChromiumRssMb} MB (PSS); largest single process ${p.peakMemoryMB} MB |`,`| upload | ${l.upload} | never |`].join("\n"))' "$cmp" | tee -a "$GITHUB_STEP_SUMMARY" || true
+          done
+          for pkg in channels/impossible-brief/premium/*/out/review-package.json; do
+            [ -f "$pkg" ] || continue
+            echo "### $pkg" | tee -a "$GITHUB_STEP_SUMMARY"
+            node scripts/bto-studio/publish-gate.js "$pkg" | tee -a "$GITHUB_STEP_SUMMARY" || true
+            # QA verdict lines and the end of the studio log, so a BLOCKED package is diagnosable from the job log
+            grep -E "Objective verdict|\*\*(FAIL|WARN)\*\*|^- FAIL" "$(dirname "$pkg")/qa-report.md" 2>/dev/null | head -30 | tee -a "$GITHUB_STEP_SUMMARY" || true
+            tail -25 "$(dirname "$pkg")/production.log" 2>/dev/null || true
+            # frame review needs the rendered MP4 (never committed): only packages rendered in this run have one
+            if ls "$(dirname "$pkg")"/*.mp4 >/dev/null 2>&1; then node scripts/bto-studio/creative-director.js review --out "$(dirname "$pkg")" | tail -14 | tee -a "$GITHUB_STEP_SUMMARY" || true; fi
+          done
+          git status --short | tee state-diff.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ib-dry-run
+          path: |
+            ib-dry-run.log
+            state-diff.txt
+            visual-survey-report.json
+            channels/impossible-brief/state/visual-survey.json
+            channels/impossible-brief/state/growth/latest-decision.json
+            channels/impossible-brief/premium/*/storyboard.json
+            channels/impossible-brief/premium/*/out/*.mp4
+            channels/impossible-brief/premium/*/out/*.md
+            channels/impossible-brief/premium/*/out/*.json
+            channels/impossible-brief/premium/*/out/production.log
+            channels/impossible-brief/state/production/*/*.mp4
+            channels/impossible-brief/state/production/*/quality-gate.json
+            channels/impossible-brief/state/production/*/premium-shadow.json
+            channels/impossible-brief/state/production/*/render.json
+          retention-days: 14
+          if-no-files-found: warn

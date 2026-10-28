@@ -1,0 +1,277 @@
+{
+ "schema": "bto-studio.narration-script.v1",
+ "channel": "behind-the-ordinary",
+ "topicId": "BTO-301",
+ "slug": "why-qr-codes-have-three-corner-squares",
+ "title": "Why QR Codes Have Three Corner Squares",
+ "coreQuestion": "Why does every QR code have three large squares in its corners?",
+ "sourceHash": "13e0e90af8c1d439",
+ "voice": {
+  "approved": {
+   "provider": "edge-tts",
+   "voice": "en-US-EmmaMultilingualNeural",
+   "rate": "+1%"
+  }
+ },
+ "lines": [
+  {
+   "id": "L1",
+   "role": "VISUAL_MYSTERY",
+   "layer": "VERIFIED FACT",
+   "text": "Those three QR squares aren't decoration.",
+   "evidenceSuggested": []
+  },
+  {
+   "id": "L2",
+   "role": "CLEAR_PROMISE",
+   "layer": "VERIFIED FACT",
+   "text": "They tell the scanner where to look.",
+   "evidenceSuggested": []
+  },
+  {
+   "id": "L3",
+   "role": "ORIGIN",
+   "layer": "VERIFIED FACT",
+   "text": "Denso Wave released the QR Code in 1994, and QR means quick response.",
+   "evidenceSuggested": [
+    "F1",
+    "F10",
+    "F2"
+   ]
+  },
+  {
+   "id": "L4",
+   "role": "EXPLANATION",
+   "layer": "VERIFIED FACT",
+   "text": "The corner marks are position detection patterns. Finding them made high-speed reading possible.",
+   "evidenceSuggested": [
+    "F4",
+    "F6",
+    "F2"
+   ]
+  },
+  {
+   "id": "L5",
+   "role": "SURPRISING_DETAIL",
+   "layer": "VERIFIED FACT",
+   "text": "Why squares? The team said that pattern was least likely to appear on business forms.",
+   "evidenceSuggested": [
+    "F5",
+    "F6",
+    "F8"
+   ]
+  },
+  {
+   "id": "L6",
+   "role": "SURPRISING_DETAIL",
+   "layer": "VERIFIED FACT",
+   "text": "They surveyed flyers, magazines and cardboard boxes for the rarest black-and-white ratio.",
+   "evidenceSuggested": [
+    "F7",
+    "F8"
+   ]
+  },
+  {
+   "id": "L7",
+   "role": "PAYOFF",
+   "layer": "VERIFIED FACT",
+   "text": "That rare ratio lets a scanner orient the code from any angle.",
+   "evidenceSuggested": [
+    "F9",
+    "F3",
+    "F8"
+   ]
+  }
+ ],
+ "beats": [
+  {
+   "id": "b1",
+   "rate": "+1%",
+   "pauseAfterMs": 200,
+   "lines": [
+    {
+     "id": "L1",
+     "text": "Those three QR squares aren't decoration."
+    }
+   ]
+  },
+  {
+   "id": "b2",
+   "rate": "+1%",
+   "pauseAfterMs": 360,
+   "lines": [
+    {
+     "id": "L2",
+     "text": "They tell the scanner where to look."
+    }
+   ]
+  },
+  {
+   "id": "b3",
+   "rate": "+1%",
+   "pauseAfterMs": 200,
+   "lines": [
+    {
+     "id": "L3",
+     "text": "Denso Wave released the QR Code in 1994, and QR means quick response."
+    }
+   ]
+  },
+  {
+   "id": "b4",
+   "rate": "+1%",
+   "pauseAfterMs": 200,
+   "lines": [
+    {
+     "id": "L4",
+     "text": "The corner marks are position detection patterns. Finding them made high-speed reading possible."
+    }
+   ]
+  },
+  {
+   "id": "b5",
+   "rate": "+1%",
+   "pauseAfterMs": 200,
+   "lines": [
+    {
+     "id": "L5",
+     "text": "Why squares? The team said that pattern was least likely to appear on business forms."
+    }
+   ]
+  },
+  {
+   "id": "b6",
+   "rate": "+1%",
+   "pauseAfterMs": 360,
+   "lines": [
+    {
+     "id": "L6",
+     "text": "They surveyed flyers, magazines and cardboard boxes for the rarest black-and-white ratio."
+    }
+   ]
+  },
+  {
+   "id": "b7",
+   "rate": "+1%",
+   "pauseAfterMs": 0,
+   "lines": [
+    {
+     "id": "L7",
+     "text": "That rare ratio lets a scanner orient the code from any angle."
+    }
+   ]
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "hash": "b5c943ae9b",
+   "role": "origin",
+   "claim": "Denso Wave, then a division of Denso Corporation, announced the release of the QR Code in 1994.",
+   "quote": "In 1994, DENSO WAVE (then a division of DENSO CORPORATION) announced the release of its QR Code",
+   "source": "DENSO WAVE — History of QR Code",
+   "url": "https://www.qrcode.com/en/history/",
+   "layer": "VERIFIED FACT"
+  },
+  {
+   "id": "F2",
+   "hash": "d89941ea80",
+   "role": "context",
+   "claim": "QR stands for quick response, reflecting a development focus on high-speed reading.",
+   "quote": "The QR in the name stands for quick response",
+   "source": "DENSO WAVE — History of QR Code",
+   "url": "https://www.qrcode.com/en/history/",
+   "layer": "VERIFIED FACT"
+  },
+  {
+   "id": "F3",
+   "hash": "d359f94441",
+   "role": "problem",
+   "claim": "The developers added positional information indicating that a code is present and should be read.",
+   "quote": "adding positional information indicating the existence of a code to be read",
+   "source": "DENSO WAVE — History of QR Code",
+   "url": "https://www.qrcode.com/en/history/",
+   "layer": "VERIFIED FACT"
+  },
+  {
+   "id": "F4",
+   "hash": "8c0a338c1d",
+   "role": "explanation",
+   "claim": "The square position detection marks made high-speed reading possible.",
+   "quote": "By incorporating these marks into their code, high-speed reading became possible",
+   "source": "DENSO WAVE — History of QR Code",
+   "url": "https://www.qrcode.com/en/history/",
+   "layer": "VERIFIED FACT"
+  },
+  {
+   "id": "F5",
+   "hash": "a108978386",
+   "role": "surprising-detail",
+   "claim": "Masahiro Hara said square marks were chosen because that pattern was least likely to appear on business forms.",
+   "quote": "it was the pattern least likely to appear on various business forms and the like",
+   "source": "DENSO WAVE — History of QR Code",
+   "url": "https://www.qrcode.com/en/history/",
+   "layer": "VERIFIED FACT"
+  },
+  {
+   "id": "F6",
+   "hash": "188148bd57",
+   "role": "problem",
+   "claim": "A similar-looking mark near the code could be mistaken for a position detection pattern, so the pattern had to be unique.",
+   "quote": "their position detection patterns had to be truly unique",
+   "source": "DENSO WAVE — History of QR Code",
+   "url": "https://www.qrcode.com/en/history/",
+   "layer": "VERIFIED FACT"
+  },
+  {
+   "id": "F7",
+   "hash": "f49e988d42",
+   "role": "surprising-detail",
+   "claim": "The team surveyed the ratio of white to black areas in printing on fliers, magazines and cardboard boxes.",
+   "quote": "an exhaustive survey of the ratio of white to black areas in pictures and symbols printed on fliers, magazines, cardboard boxes",
+   "source": "DENSO WAVE — History of QR Code",
+   "url": "https://www.qrcode.com/en/history/",
+   "layer": "VERIFIED FACT"
+  },
+  {
+   "id": "F8",
+   "hash": "18e63b1c49",
+   "role": "payoff",
+   "claim": "The least-used black-and-white ratio on printed matter, 1:1:3:1:1, set the widths of the position detection patterns.",
+   "quote": "came up with the least used ratio of black and white areas on printed matter. This ratio was 1:1:3:1:1",
+   "source": "DENSO WAVE — History of QR Code",
+   "url": "https://www.qrcode.com/en/history/",
+   "layer": "VERIFIED FACT"
+  },
+  {
+   "id": "F9",
+   "hash": "45fc5769b6",
+   "role": "consequence",
+   "claim": "Searching for this unique ratio lets a reader determine the code's orientation at any scanning angle.",
+   "quote": "the orientation of their code could be determined regardless of the angle of scanning",
+   "source": "DENSO WAVE — History of QR Code",
+   "url": "https://www.qrcode.com/en/history/",
+   "layer": "VERIFIED FACT"
+  },
+  {
+   "id": "F10",
+   "hash": "e841dc0773",
+   "role": "origin",
+   "claim": "The QR code was invented by Masahiro Hara of Denso Wave for labelling automobile parts.",
+   "quote": "invented in 1994 by Masahiro Hara of the Japanese company Denso Wave for labelling automobile parts",
+   "source": "Wikipedia — QR code",
+   "url": "https://en.wikipedia.org/wiki/QR_code",
+   "layer": "VERIFIED FACT"
+  },
+  {
+   "id": "F11",
+   "hash": "167843ba70",
+   "role": "explanation",
+   "claim": "The three finder patterns sit at the upper left, upper right and lower left corners.",
+   "quote": "at the upper left, upper right and lower left corners of the QR code image",
+   "source": "Wikipedia — QR code",
+   "url": "https://en.wikipedia.org/wiki/QR_code",
+   "layer": "VERIFIED FACT"
+  }
+ ]
+}

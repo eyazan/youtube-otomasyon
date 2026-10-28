@@ -1,0 +1,150 @@
+{
+  "schema": "bto-studio.style-pack.v1",
+  "channel": "impossible-brief",
+  "name": "ImpossibleBrief — premium science motion style",
+  "concept": "Cinematic science in deep space blue: bodies, slices and scales drawn as clean luminous geometry against a dark cosmic field. Cyan marks the measured and known; sun-orange marks the change the scenario makes; every frame states whether it shows known science, an estimate or a speculative scenario.",
+  "distinctFrom": "The Hidden Logic of Things (warm desk, printed matter, amber pencil) and Failure Reconstructed (blueprint grid, forensic chips, archival plates): no paper, no desk, no blueprint grid.",
+  "palette": {
+    "desk": "#04070f",
+    "desk2": "#0a1430",
+    "lamp": "#1b2d5c",
+    "paper": "#e8f1ff",
+    "paper2": "#c9d8f0",
+    "ink": "#0b1020",
+    "inkSoft": "#1d2a4a",
+    "amber": "#ff9e3d",
+    "amberDeep": "#e0701f",
+    "teal": "#4fd1e8",
+    "coral": "#ff5d6c",
+    "text": "#f4f8ff",
+    "muted": "#9fb3d6"
+  },
+  "type": {
+    "sans": "'PD Sans', 'Inter', sans-serif",
+    "serif": "'PD Serif', 'Source Serif 4', serif",
+    "num": "'PD Num', 'Barlow Semi Condensed', sans-serif",
+    "scale": {
+      "display": 104,
+      "headline": 78,
+      "title": 60,
+      "label": 40,
+      "small": 34,
+      "credit": 30
+    },
+    "minEssentialPx": 30,
+    "minLabelPx": 40,
+    "labelTracking": 1.5,
+    "maxWordsPerLabel": 6
+  },
+  "frame": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "worldCenter": [
+      540,
+      800
+    ],
+    "safe": {
+      "top": 220,
+      "bottom": 1290,
+      "left": 72,
+      "right": 1008
+    },
+    "captionBand": [
+      1318,
+      1470
+    ],
+    "bottomUiY": 1600
+  },
+  "motion": {
+    "ease": {
+      "standard": [
+        0.2,
+        0,
+        0,
+        1
+      ],
+      "decelerate": [
+        0.05,
+        0.7,
+        0.1,
+        1
+      ],
+      "accelerate": [
+        0.3,
+        0,
+        0.8,
+        0.15
+      ],
+      "inOut": [
+        0.65,
+        0,
+        0.35,
+        1
+      ],
+      "camera": [
+        0.45,
+        0,
+        0.15,
+        1
+      ]
+    },
+    "spring": {
+      "snap": {
+        "stiffness": 420,
+        "damping": 28,
+        "mass": 1
+      },
+      "settle": {
+        "stiffness": 170,
+        "damping": 20,
+        "mass": 1
+      },
+      "soft": {
+        "stiffness": 90,
+        "damping": 17,
+        "mass": 1
+      }
+    },
+    "durations": {
+      "micro": 0.18,
+      "enter": 0.45,
+      "move": 0.8,
+      "camera": 1.1,
+      "transition": 0.5
+    },
+    "staggerMax": 0.9,
+    "cameraMaxZoomRate": 0.9,
+    "noRepeatedTransitionInARow": true,
+    "maxDissolves": 1
+  },
+  "captions": {
+    "font": "800 62px/1.14 'PD Sans', sans-serif",
+    "top": 1318,
+    "maxChars": 24,
+    "maxWords": 6,
+    "current": "#4fd1e8",
+    "spoken": "#f4f8ff",
+    "upcoming": "rgba(244,248,255,0.72)"
+  },
+  "identity": {
+    "handle": "@ImpossibleBrief",
+    "illustrationLabel": "ILLUSTRATION",
+    "conceptualLabel": "CONCEPTUAL",
+    "photoLabel": "PHOTO",
+    "modelLabel": "MODEL",
+    "factLabel": "KNOWN SCIENCE",
+    "estimateLabel": "ESTIMATE",
+    "speculativeLabel": "SPECULATIVE"
+  },
+  "rules": [
+    "Every scene states a visualPurpose that narration alone cannot deliver.",
+    "Every scene cites evidence fact ids; on-screen numbers must appear in a cited fact.",
+    "Drawn objects whose real geometry is not in the evidence are marked conceptual and show the CONCEPTUAL chip.",
+    "No two consecutive scenes use the same transition; at most one plain dissolve per Short.",
+    "Text on screen never duplicates the caption at the same moment: a headline or quote card switches captions off for its words.",
+    "Essential text >= 30 px at 1080 width, >= 32 px from the frame edge, outside the caption band and the bottom UI zone.",
+    "Every scene shows the evidence layer of what it says: KNOWN SCIENCE, ESTIMATE or SPECULATIVE (from the narration line layer).",
+    "Scale drawings that are not computed from cited numbers carry the ILLUSTRATION chip."
+  ]
+}

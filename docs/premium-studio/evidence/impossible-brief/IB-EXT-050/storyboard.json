@@ -1,0 +1,734 @@
+{
+ "schema": "bto-studio.storyboard.v1",
+ "channel": "impossible-brief",
+ "topicId": "IB-EXT-050",
+ "slug": "what-if-we-tried-to-drill-through-the-earth",
+ "version": 1,
+ "author": "auto/impossible-brief (deterministic scene grammar, world earth-interior; needs creative review before publication)",
+ "licensingNote": "all visuals drawn in-house from code (SVG): starfield, bodies, slices, ladders and orbits are original; no photographs or third-party media",
+ "treatment": {
+  "educationalObjective": "Answer, with the record's own sourced numbers: If we tried to drill through the Earth, what would stop us first: rock or heat?",
+  "visualHook": "Frame 0: the earth interior drawn in light against deep space, with the hook's number landing as the first readout.",
+  "mechanismsToAnimate": [
+   "hook",
+   "zoom",
+   "year",
+   "measure",
+   "heat",
+   "flow",
+   "cut",
+   "payoff"
+  ],
+  "factualRisks": [
+   "probe depth on the planet is exaggerated for visibility (ILLUSTRATION)",
+   "auto storyboard: scale drawings are illustrative unless computed from a cited number (ILLUSTRATION chip)",
+   "IB facts carry sourced claims without stored verbatim quotes (channel standard; see readiness warnings)"
+  ]
+ },
+ "tail": 0.6,
+ "scenes": [
+  {
+   "id": "s1-hook",
+   "lines": [
+    "L1"
+   ],
+   "start": 0,
+   "env": "space",
+   "evidence": [
+    "F3",
+    "F4"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "factLabel"
+   ],
+   "visualPurpose": "Hook: frame 0 shows the earth interior itself and the claim's number (12,262 m) lands as a readout, so the scale of the question is visible before it is explained.",
+   "camera": [
+    {
+     "at": 0,
+     "x": 576,
+     "y": 800,
+     "z": 1.12
+    },
+    {
+     "at": "L1.end",
+     "x": 504,
+     "y": 800,
+     "z": 1.2600000000000002
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 11,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "planet",
+     "props": {
+      "kind": "earth",
+      "spin": 0.32,
+      "seed": 4,
+      "x": 540,
+      "y": 820,
+      "r": 330,
+      "probe": {
+       "at": 0.15,
+       "f": 0.03,
+       "dur": 1.4,
+       "angle": -90,
+       "width": 8
+      }
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L1+0.25",
+        "text": "12,262 m",
+        "x": 540,
+        "y": 1230,
+        "size": 104,
+        "family": "num"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s2-zoom",
+   "lines": [
+    "L2"
+   ],
+   "start": "L2-0.15",
+   "env": "space",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "factLabel"
+   ],
+   "visualPurpose": "Mechanism: the camera dives at the planet until its curve fills the frame and the deepest hole is a single scratch on the surface; known science.",
+   "camera": [
+    {
+     "at": "L2-0.15",
+     "x": 504,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L2.end",
+     "x": 576,
+     "y": 780,
+     "z": 1.1400000000000001
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 51,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "planet",
+     "props": {
+      "kind": "earth",
+      "spin": 0.25,
+      "seed": 4,
+      "ice": false,
+      "grid": true,
+      "x": 540,
+      "rKeys": [
+       [
+        "L2+0.1",
+        330
+       ],
+       [
+        "L2.end",
+        2600
+       ]
+      ],
+      "yKeys": [
+       [
+        "L2+0.1",
+        820
+       ],
+       [
+        "L2.end",
+        3160
+       ]
+      ],
+      "probe": {
+       "at": "L2+0.1",
+       "f": 0.004,
+       "dur": 0.6,
+       "angle": -90,
+       "width": 8,
+       "label": "DEEPEST HOLE",
+       "lx": 170,
+       "ly": 700
+      }
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L2+0.25",
+        "text": "BARELY SCRATCHED CRUST",
+        "x": 540,
+        "y": 360,
+        "size": 60,
+        "family": "sans"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s3-year",
+   "lines": [
+    "L3"
+   ],
+   "start": "L3-0.15",
+   "env": "space",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "factLabel"
+   ],
+   "visualPurpose": "Time: the ruler lands on 1970 while the scene shows what started then (the probe begins its descent); the year is from the cited fact.",
+   "camera": [
+    {
+     "at": "L3-0.15",
+     "x": 576,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L3.end",
+     "x": 504,
+     "y": 840,
+     "z": 1.1400000000000001
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 22,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "depth-probe",
+     "props": {
+      "x": 470,
+      "y": 450,
+      "w": 420,
+      "h": 770,
+      "maxDepth": 17700,
+      "surface": "SURFACE",
+      "heat": false,
+      "probeKeys": [
+       [
+        "L3-0.1",
+        0
+       ],
+       [
+        "L3.end",
+        14514
+       ]
+      ],
+      "markers": [],
+      "readouts": []
+     }
+    },
+    {
+     "component": "timeline-ruler",
+     "screen": true,
+     "props": {
+      "theme": "dark",
+      "y": 1250,
+      "fromYear": 1964,
+      "year": 1970,
+      "enterAt": "L3-0.1",
+      "arriveAt": "L3+0.6",
+      "outAt": "L3.end"
+     }
+    }
+   ]
+  },
+  {
+   "id": "s4-measure",
+   "lines": [
+    "L4"
+   ],
+   "start": "L4-0.15",
+   "env": "space",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1",
+    "F2",
+    "F3"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "factLabel"
+   ],
+   "visualPurpose": "Measure: a dashed marker at 15,000 m while the probe descends and stops short at the depth actually reached (cited); depth is drawn to the scale of the slice.",
+   "camera": [
+    {
+     "at": "L4-0.15",
+     "x": 504,
+     "y": 820,
+     "z": 1
+    },
+    {
+     "at": "L4.end",
+     "x": 576,
+     "y": 860,
+     "z": 1.1400000000000001
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 43,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "depth-probe",
+     "props": {
+      "x": 470,
+      "y": 450,
+      "w": 420,
+      "h": 770,
+      "maxDepth": 17700,
+      "heat": false,
+      "probeKeys": [
+       [
+        "L4-0.1",
+        3065.5
+       ],
+       [
+        "L4.end",
+        12262
+       ]
+      ],
+      "markers": [
+       {
+        "depth": 15000,
+        "label": "15,000 m",
+        "at": "L4+0.3"
+       }
+      ],
+      "readouts": []
+     }
+    }
+   ]
+  },
+  {
+   "id": "s5-heat",
+   "lines": [
+    "L5"
+   ],
+   "start": "L5-0.15",
+   "env": "space",
+   "transition": {
+    "type": "dissolve",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F4"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "factLabel"
+   ],
+   "visualPurpose": "Heat: the camera dives to the bottom of the hole, where the slice glows around the stalled probe tip; the measured temperature (180 °C) is the only number on screen.",
+   "camera": [
+    {
+     "at": "L5-0.15",
+     "x": 470,
+     "y": 900,
+     "z": 1.05
+    },
+    {
+     "at": "L5.end",
+     "x": 470,
+     "y": 1060,
+     "z": 1.7
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 34,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "depth-probe",
+     "props": {
+      "x": 470,
+      "y": 450,
+      "w": 420,
+      "h": 770,
+      "maxDepth": 17700,
+      "heat": true,
+      "heatAt": "L5+0.2",
+      "probeKeys": [
+       [
+        "L5-0.1",
+        3540
+       ],
+       [
+        "L5.end",
+        15000
+       ]
+      ],
+      "markers": [],
+      "readouts": [
+       {
+        "at": "L5+0.5",
+        "text": "180 °C",
+        "y": 1250,
+        "color": "amber"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s6-flow",
+   "lines": [
+    "L6"
+   ],
+   "start": "L6-0.15",
+   "env": "space",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "estimateLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Mechanism: the rock slice heats and its strata bend and travel like a slow fluid (conceptual); an estimate, chipped as such.",
+   "camera": [
+    {
+     "at": "L6-0.15",
+     "x": 504,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L6.end",
+     "x": 576,
+     "y": 780,
+     "z": 1.1400000000000001
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 55,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "depth-probe",
+     "props": {
+      "x": 470,
+      "y": 450,
+      "w": 420,
+      "h": 770,
+      "maxDepth": 17700,
+      "heat": true,
+      "heatAt": "L6+0.2",
+      "flow": {
+       "at": "L6+0.3",
+       "amp": 30
+      },
+      "markers": [],
+      "readouts": []
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L6+0.25",
+        "text": "MORE PLASTIC THAN STONE",
+        "x": 540,
+        "y": 360,
+        "size": 60,
+        "family": "sans"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s7-cut",
+   "lines": [
+    "L7"
+   ],
+   "start": "L7-0.15",
+   "env": "space",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "estimateLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Mechanism: the planet opens into its layers so the depth beyond the hole is visible; an estimate, chipped as such.",
+   "camera": [
+    {
+     "at": "L7-0.15",
+     "x": 576,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L7.end",
+     "x": 504,
+     "y": 780,
+     "z": 1.1400000000000001
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 56,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "planet",
+     "props": {
+      "kind": "earth",
+      "spin": 0.32,
+      "seed": 4,
+      "x": 400,
+      "y": 820,
+      "r": 280,
+      "cutaway": {
+       "at": "L7",
+       "angle": -30,
+       "open": 32,
+       "layers": [
+        {
+         "f": 0.99,
+         "color": "#7a4a2a",
+         "label": "CRUST",
+         "labelAt": "L7+0.6",
+         "lx": 690,
+         "ly": 600
+        },
+        {
+         "f": 0.88,
+         "color": "#c0501f",
+         "label": "MANTLE",
+         "labelAt": "L7+0.9",
+         "lx": 690,
+         "ly": 690
+        },
+        {
+         "f": 0.47,
+         "color": "#ff8a2a",
+         "label": "CORE",
+         "labelAt": "L7+1.2",
+         "lx": 690,
+         "ly": 780
+        },
+        {
+         "f": 0.2,
+         "color": "#ffd06a"
+        }
+       ]
+      }
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L7+0.25",
+        "text": "DEEPER HEAT PRESSURE",
+        "x": 540,
+        "y": 360,
+        "size": 60,
+        "family": "sans"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s8-payoff",
+   "lines": [
+    "L8"
+   ],
+   "start": "L8-0.15",
+   "env": "space",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "estimateLabel"
+   ],
+   "visualPurpose": "Payoff: the answer in a few words over the opening composition; the camera eases back to the frame-0 framing so the Short loops on its first image.",
+   "camera": [
+    {
+     "at": "L8-0.15",
+     "x": 540,
+     "y": 800,
+     "z": 1.06
+    },
+    {
+     "at": "end-0.6",
+     "x": 540,
+     "y": 800,
+     "z": 1.12
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 11,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "planet",
+     "props": {
+      "kind": "earth",
+      "spin": 0.32,
+      "seed": 4,
+      "x": 540,
+      "y": 820,
+      "r": 330,
+      "probe": {
+       "at": "L8+0.2",
+       "f": 0.03,
+       "dur": 1.4,
+       "angle": -90,
+       "width": 8
+      }
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L8+0.3",
+        "text": "HEAT, NOT HARDNESS",
+        "x": 540,
+        "y": 420,
+        "size": 60,
+        "family": "sans"
+       }
+      ]
+     }
+    }
+   ]
+  }
+ ]
+}
