@@ -138,6 +138,9 @@ function runChannel(slug, argv = [], { env = process.env, spawn = cp.spawnSync, 
     if (p && (p.uploaded || p.dryRun)) {
       run.topic(p.slug).done("RESEARCH", p.topicId).done("RENDER", "premium final").done("QA", "objective PASS, publish gate PUBLISH_APPROVED")
         [p.uploaded ? "done" : "skip"]("UPLOAD", p.uploaded ? p.videoId || "uploaded" : "uploader --dogrula (PUBLISH!=1)");
+      // as the legacy lane records it: the verified YouTube schedule, or the verification failure
+      if (p.uploaded && p.verified && p.publishAt) run.done("SCHEDULE", p.publishAt).scheduled("PUBLISH", "YouTube makes it public at " + p.publishAt);
+      else if (p.uploaded) run.fail("SCHEDULE", "PUBLISH_VERIFICATION_FAILED");
       run.outcome(p.uploaded ? "UPLOADED" : "DRY_RUN", `premium ${p.topicId}${p.videoId ? " " + p.videoId : ""}`);
       return p.exitCode;
     }

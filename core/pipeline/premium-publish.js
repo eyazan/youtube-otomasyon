@@ -230,7 +230,7 @@ function run(channel, { env = process.env, targetDay = null, spawn = cp.spawnSyn
   const entry = [].concat(publishedList(channel)).reverse().find((p) => p && p.slug === a.slug) || {};
   const rec = J(a.file, {}); rec.publishedVideoId = entry.videoId || "uploaded (see published.json)"; rec.publishedAt = new Date().toISOString(); rec.mediaSha256 = mediaSha;
   fs.writeFileSync(a.file, JSON.stringify(rec, null, 2) + "\n");
-  return { exitCode: up.status === 15 ? 1 : 0, uploaded: true, verified: up.status === 0, topicId: a.topicId, slug: a.slug, videoId: entry.videoId || null };
+  return { exitCode: up.status === 15 ? 1 : 0, uploaded: true, verified: up.status === 0, topicId: a.topicId, slug: a.slug, videoId: entry.videoId || null, publishAt: entry.publishAt || null };
 }
 
 // Review candidates (no approval yet): evaluate the publish gate as it stands and run the existing uploader in --dogrula

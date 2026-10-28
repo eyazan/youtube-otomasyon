@@ -192,3 +192,17 @@ test("premium descriptions never claim archival or stock footage", () => {
     for (const r of Lane.qualified(ch).ok) { const d = Publish.metadata(ch, r.topic).description; assert.doesNotMatch(d, /real archival film|licensed stock|Stock footage: Pexels/, `${slug} ${r.topic.id}`); assert.match(d, /synthetic voice/i); }
   }
 });
+
+test("a premium upload records the verified YouTube schedule, so the run is reported SCHEDULED (not PUBLISH_VERIFICATION_FAILED)", () => {
+  const Outcome = require("../../scripts/production-outcome");
+  const ch = fakeChannel([topic()], { policy: POLICY() });
+  const plan = require("../../core/scheduling"); const orig = plan.channelPlan; plan.channelPlan = () => ({ short: { due: true, targetDay: "2026-10-28" } });
+  const run = (p) => { try { return Lane.runChannel("behind-the-ordinary", [], { env: { ...ON, HLT_PREMIUM_PRIMARY: "1", PUBLISH: "1" }, spawn: () => ({ status: 0 }), log: quiet, channel: ch, premium: { ...Publish, run: () => p }, bar: null }); } finally { plan.channelPlan = orig; } };
+  run({ exitCode: 0, uploaded: true, verified: true, topicId: "HLT-T1", slug: "t1", videoId: "QLSnrXyCJgw", publishAt: "2026-10-28T18:00:00.000Z" });
+  let last = J(path.join(ch.paths.state, "ops", "production-stages.json")).runs.pop();
+  assert.equal(last.stages.SCHEDULE.status, "done"); assert.equal(last.stages.SCHEDULE.detail, "2026-10-28T18:00:00.000Z"); assert.equal(Outcome.classify(last), "SCHEDULED");
+  plan.channelPlan = () => ({ short: { due: true, targetDay: "2026-10-28" } });
+  run({ exitCode: 1, uploaded: true, verified: false, topicId: "HLT-T1", slug: "t1", videoId: "QLSnrXyCJgw", publishAt: null });
+  last = J(path.join(ch.paths.state, "ops", "production-stages.json")).runs.pop();
+  assert.equal(last.stages.SCHEDULE.status, "failed"); assert.equal(Outcome.classify(last), "PUBLISH_VERIFICATION_FAILED");
+});
