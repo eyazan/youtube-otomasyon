@@ -13,14 +13,6 @@
     "earth pin",
     "longer"
    ]
-  },
-  {
-   "id": "F2",
-   "source": "BS 1363",
-   "claim": "Sockets have shutters over the line and neutral contacts, which are opened by the earth pin.",
-   "terms": [
-    "shutters"
-   ]
   }
  ],
  "narration": [
@@ -40,24 +32,23 @@
   },
   {
    "role": "MECHANISM",
-   "text": "The socket's line and neutral holes are covered by shutters.",
+   "text": "Because it is longer, the earth connects before the live pins do.",
    "facts": [
-    "F2"
+    "F1"
    ]
   },
   {
-   "role": "ANSWER",
-   "text": "The long earth pin goes in first and opens them.",
+   "role": "MECHANISM",
+   "text": "Pull the plug out and it stays connected until after the live pins let go.",
    "facts": [
-    "F1",
-    "F2"
+    "F1"
    ]
   },
   {
    "role": "PAYOFF",
-   "text": "So the live contacts are only uncovered when a plug is going in.",
+   "text": "So whenever power can flow, there is already a path to earth.",
    "facts": [
-    "F2"
+    "F1"
    ]
   }
  ],

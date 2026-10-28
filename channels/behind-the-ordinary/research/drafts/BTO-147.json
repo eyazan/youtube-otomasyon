@@ -6,15 +6,6 @@
  "coreQuestion": "Why does a cracked car windshield stay in one piece?",
  "facts": [
   {
-   "id": "F1",
-   "source": "Laminated glass",
-   "claim": "Laminated glass is a type of safety glass that holds together when shattered.",
-   "terms": [
-    "holds together",
-    "shattered"
-   ]
-  },
-  {
    "id": "F2",
    "source": "Laminated glass",
    "claim": "When it breaks, laminated glass is held in place by an interlayer, typically of polyvinyl butyral, between its layers of glass.",
@@ -36,35 +27,21 @@
  "narration": [
   {
    "role": "VISUAL_MYSTERY",
-   "text": "Crack a car windshield and it stays in one piece.",
+   "text": "Why does a cracked windshield stay in one piece?",
    "facts": [
-    "F1"
-   ]
-  },
-  {
-   "role": "CLEAR_PROMISE",
-   "text": "That is because the glass is a sandwich.",
-   "facts": [
-    "F2"
-   ]
-  },
-  {
-   "role": "MECHANISM",
-   "text": "Between its layers of glass sits a plastic interlayer, usually polyvinyl butyral.",
-   "facts": [
-    "F2"
-   ]
-  },
-  {
-   "role": "MECHANISM",
-   "text": "When the glass breaks, the interlayer holds it in place.",
-   "facts": [
-    "F2"
+    "F3"
    ]
   },
   {
    "role": "ORIGIN",
-   "text": "The idea goes back to 1903, when the chemist Édouard Bénédictus dropped a coated glass flask.",
+   "text": "The answer began with a laboratory accident in 1903.",
+   "facts": [
+    "F3"
+   ]
+  },
+  {
+   "role": "ORIGIN",
+   "text": "The French chemist Édouard Bénédictus dropped a glass flask coated with a plastic.",
    "facts": [
     "F3"
    ]
@@ -77,10 +54,25 @@
    ]
   },
   {
-   "role": "PAYOFF",
-   "text": "So the layers are there for the moment the glass breaks: it holds together.",
+   "role": "ANSWER",
+   "text": "That accident became laminated glass.",
    "facts": [
-    "F1"
+    "F3"
+   ]
+  },
+  {
+   "role": "MECHANISM",
+   "text": "Today the glass layers sandwich a plastic interlayer, typically polyvinyl butyral.",
+   "facts": [
+    "F2"
+   ]
+  },
+  {
+   "role": "PAYOFF",
+   "text": "Glass bonded to plastic: it can shatter without falling apart.",
+   "facts": [
+    "F2",
+    "F3"
    ]
   }
  ],

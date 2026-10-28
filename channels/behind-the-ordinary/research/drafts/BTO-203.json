@@ -8,69 +8,61 @@
   {
    "id": "F1",
    "source": "Load line (watercraft)",
-   "claim": "A load line is a reference mark on a ship's hull that indicates the maximum depth to which the vessel may be safely immersed when loaded with cargo.",
+   "claim": "Load lines are indicated by special markings on the hull.",
    "terms": [
-    "maximum depth",
-    "hull"
+    "special markings"
    ]
   },
   {
    "id": "F2",
    "source": "Load line (watercraft)",
-   "claim": "This depth varies with a ship's dimensions, type of cargo, time of year and the water densities encountered.",
+   "claim": "Additional marks have been added over the years, allowing for different water densities and expected sea conditions.",
    "terms": [
-    "time of year",
     "water densities"
    ]
   },
   {
    "id": "F3",
    "source": "Load line (watercraft)",
-   "claim": "The mark is named after Samuel Plimsoll.",
+   "claim": "This marking was invented in 1876 by Samuel Plimsoll.",
    "terms": [
-    "Samuel Plimsoll"
+    "Samuel Plimsoll",
+    "1876"
    ]
   }
  ],
  "narration": [
   {
    "role": "VISUAL_MYSTERY",
-   "text": "That painted mark on the side of a ship is a load line.",
+   "text": "Those painted marks on a ship's side are load lines.",
    "facts": [
     "F1"
    ]
   },
   {
-   "role": "CLEAR_PROMISE",
-   "text": "It shows how deep the ship may safely sit in the water.",
-   "facts": [
-    "F1"
-   ]
-  },
-  {
-   "role": "MECHANISM",
-   "text": "Load the ship past it and it is sitting deeper than is safe.",
-   "facts": [
-    "F1"
-   ]
-  },
-  {
-   "role": "DETAIL",
-   "text": "The safe depth changes with the ship, its cargo, the time of year and the water's density.",
-   "facts": [
-    "F2"
-   ]
-  },
-  {
-   "role": "ORIGIN",
-   "text": "The mark carries the name of Samuel Plimsoll.",
+   "role": "CONTEXT",
+   "text": "The marking was invented in 1876 by Samuel Plimsoll.",
    "facts": [
     "F3"
    ]
   },
   {
+   "role": "MECHANISM",
+   "text": "Over the years, extra marks were added for different water densities.",
+   "facts": [
+    "F2"
+   ]
+  },
+  {
+   "role": "MECHANISM",
+   "text": "They also allow for the sea conditions a ship expects to meet.",
+   "facts": [
+    "F2"
+   ]
+  },
+  {
    "role": "PAYOFF",
-   "text": "A few painted lines decide how much a ship can carry.",
+   "text": "A few painted lines on the hull, each one for a different sea.",
    "facts": [
     "F1",
     "F2"
