@@ -1,0 +1,31 @@
+{
+  "topicId": "IB-PHY-065",
+  "slug": "what-if-you-could-touch-earths-core",
+  "purpose": "final review render before the first ImpossibleBrief publication; record only, not an approval and not a publication-policy signature",
+  "recordedAt": "2026-10-28T22:55:00Z",
+  "source": { "branch": "ib/phy065-narration", "commit": "b3f8471babe3a11904f1e278779ac0644b7b0a66", "narration": "owner-corrected L2 and L6 (2026-10-28)" },
+  "render": {
+    "workflowRun": 40782026744,
+    "runUrl": "https://github.com/eyazan/youtube-otomasyon/actions/runs/40782026744",
+    "artifactId": 12857996409,
+    "artifactUrl": "https://github.com/eyazan/youtube-otomasyon/actions/runs/40782026744/artifacts/12857996409",
+    "reviewBranch": "review/render-40782026744",
+    "mp4Sha256": "26cc4e941cd2ec9efc22112503a602b9d02eb84c2e2218d41d1291e9f5cf1ef0",
+    "voice": "en-US-BrianMultilingualNeural (approved)",
+    "durationSeconds": 37.6
+  },
+  "objectiveQa": {
+    "verdict": "PASS (hard checks)",
+    "loudness": "-14.1 LUFS, true peak -1.9 dBTP",
+    "textGate": "0 FAIL / 0 WARN",
+    "warnings": ["loop continuity: last frame (Earth) differs from frame 0 (Sun beside Earth)", "static hold 1.8 s in s5-measure"],
+    "unverified": ["audio samples clipped (not reported by this FFmpeg build)"]
+  },
+  "creativeChecks": { "first2sMotion": 0.491, "sceneVariety": "6 types, longest run 2", "headlines": "4, complete phrases", "headlineHandOver": "clean", "objectOnScreen": "8/8" },
+  "claimCheck": {
+    "workflowRun": 40781943413,
+    "runUrl": "https://github.com/eyazan/youtube-otomasyon/actions/runs/40781943413",
+    "result": "PASS: F1-F4 VERIFIED against Earth's inner core rev 1379194714; L2, L5, L6 VERIFIED-NUMBERS; L1, L3, L4, L7, L8 HUMAN (reviewed: L4 and L8 match the Simon-Glatzel sentence; L7 and L8 are chipped ESTIMATE)"
+  },
+  "note": "the publish path renders the Short afresh at upload time (publication policy: fresh final render), so the uploaded file's sha256 will be recorded by the uploader, not this one"
+}

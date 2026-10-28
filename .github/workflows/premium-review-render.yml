@@ -66,6 +66,7 @@ jobs:
             MP4=$(find "$D/out" -maxdepth 1 -name "*.mp4" | head -1)
             [ -n "$MP4" ] || { echo "no MP4 for $T" | tee -a "$GITHUB_STEP_SUMMARY"; continue; }
             O="review-out/$T"; mkdir -p "$O/frames"
+            (cd "$(dirname "$MP4")" && sha256sum "$(basename "$MP4")") | tee "$O/mp4.sha256" | tee -a "$GITHUB_STEP_SUMMARY"
             cp "$MP4" "$O/"; cp "$D/out/qa-report.md" "$D/out/review-package.json" "$D/storyboard.json" "$D/out/contact-sheet.png" "$D/out/scene-sheet.png" "$O/" 2>/dev/null || true
             ffmpeg -hide_banner -loglevel error -i "$MP4" -vf "fps=2/3,scale=540:-2" -q:v 4 "$O/frames/t%03d.jpg"
             ffmpeg -hide_banner -loglevel error -i "$MP4" -vf "fps=1/2,scale=270:-2,tile=6x3" -frames:v 1 "$O/contact-sheet.jpg"

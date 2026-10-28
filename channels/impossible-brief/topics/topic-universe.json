@@ -33577,7 +33577,7 @@
       "category": "PHYSICS",
       "hook": "Why Earth's core matches the Sun's surface heat.",
       "openingLine": "Why Earth's core matches the Sun's surface heat.",
-      "secondBeat": "Its surface is about 5,700 kelvin.",
+      "secondBeat": "Earth's inner core is estimated to reach about 5,700 kelvin — nearly as hot as the Sun's surface.",
       "scientificMechanism": "enormous pressure keeps the iron inner core solid despite temperatures like the Sun's surface",
       "coreQuestion": "If you could touch Earth's core, how hot would it be, and why is it solid?",
       "scenarioChange": "someone reached Earth's inner core",
@@ -33679,7 +33679,28 @@
           "claim": "The temperature at its surface is estimated to be approximately 5,700 K (5,430 °C; 9,800 °F), about the temperature at the surface of the Sun.",
           "layer": "KNOWN SCIENCE",
           "source": "Wikipedia — Earth's inner core",
-          "url": "https://en.wikipedia.org/wiki/Earth's_inner_core"
+          "url": "https://en.wikipedia.org/wiki/Earth's_inner_core",
+          "primaryLiterature": {
+            "note": "primary literature recorded 2026-10-28 from bibliographic search (abstract-level); the code-verified quote for this fact is the Wikipedia sentence above",
+            "refs": [
+              {
+                "citation": "Anzellini S., Dewaele A., Mezouar M., Loubeyre P., Morard G. (2013). Melting of Iron at Earth's Inner Core Boundary Based on Fast X-ray Diffraction. Science 340(6131): 464-466",
+                "doi": "10.1126/science.1233514",
+                "finding": "pure iron melts at 6230 +/- 500 K at inner-core-boundary pressure; the ESRF highlight of this work gives about 5500 K at the boundary after a 700 +/- 200 K light-element correction"
+              },
+              {
+                "citation": "Li J. et al. (2020). Shock Melting Curve of Iron: A Consensus on the Temperature at the Earth's Inner Core Boundary. Geophysical Research Letters",
+                "doi": "10.1029/2020GL087758",
+                "finding": "iron melting temperature 5950 +/- 400 K at the inner core boundary"
+              },
+              {
+                "citation": "Alfe D. (2009). Temperature of the inner-core boundary of the Earth: Melting of iron at high pressure from first-principles coexistence simulations. Physical Review B 79, 060101(R)",
+                "doi": "10.1103/PhysRevB.79.060101",
+                "finding": "iron melts at about 6370 +/- 100 K at about 328 GPa (pure iron, no light-element correction)"
+              }
+            ],
+            "reading": "published inner-core-boundary estimates span roughly 5500-6400 K depending on method and light-element correction; 'estimated to reach about 5,700 kelvin' sits inside that range and matches the cited secondary source. The Sun's photosphere is about 5,772 K (IAU 2015 nominal effective temperature), so 'nearly as hot as the Sun's surface' holds"
+          }
         },
         {
           "claim": "In 1952, Francis Birch published a detailed analysis of the available data and concluded that the inner core was probably crystalline iron.",
@@ -33691,7 +33712,18 @@
           "claim": "In 2005, shear waves were detected passing through the inner core; these claims were initially controversial, but are now gaining acceptance.",
           "layer": "KNOWN SCIENCE",
           "source": "Wikipedia — Earth's inner core",
-          "url": "https://en.wikipedia.org/wiki/Earth's_inner_core"
+          "url": "https://en.wikipedia.org/wiki/Earth's_inner_core",
+          "primaryLiterature": {
+            "note": "primary literature recorded 2026-10-28 from bibliographic search (abstract-level); the code-verified quote for this fact is the Wikipedia sentence above",
+            "refs": [
+              {
+                "citation": "Cao A., Romanowicz B., Takeuchi N. (2005). An Observation of PKJKP: Inferences on Inner Core Shear Properties. Science 308(5727): 1453-1455",
+                "doi": "10.1126/science.1109134",
+                "finding": "a high signal-to-noise phase in stacked Grafenberg-array broadband records matches PKJKP (a shear wave through the inner core) in timing, slowness and back-azimuth"
+              }
+            ],
+            "reading": "earlier PKJKP claims (Julian et al.; Okal and Cansi) were disputed as misidentifications (Deuss et al.); the narration therefore says 'researchers reported seismic evidence', not that detection is settled"
+          }
         }
       ],
       "narration": [
@@ -33701,7 +33733,7 @@
           "role": "IMPOSSIBLE_QUESTION"
         },
         {
-          "text": "Its surface is about 5,700 kelvin.",
+          "text": "Earth's inner core is estimated to reach about 5,700 kelvin — nearly as hot as the Sun's surface.",
           "layer": "KNOWN SCIENCE",
           "role": "FIRST_EFFECT"
         },
@@ -33721,7 +33753,7 @@
           "role": "SCIENCE_EXPLANATION"
         },
         {
-          "text": "In 2005, shear waves were detected passing through it.",
+          "text": "In 2005, researchers reported seismic evidence of shear waves crossing Earth's inner core.",
           "layer": "KNOWN SCIENCE",
           "role": "SECOND_ORDER_EFFECT"
         },
