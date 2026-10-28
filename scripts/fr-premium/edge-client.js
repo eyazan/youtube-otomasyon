@@ -23,7 +23,8 @@ function settings(env = process.env) {
     maxConcurrency: clamp(env.EDGE_TTS_MAX_CONCURRENCY, 1, 4, 1),
     budgetSec: clamp(env.EDGE_TTS_RETRY_BUDGET_S, 30, 900, 180),
     rateLimitAttempts: clamp(env.EDGE_RATE_LIMIT_RETRIES, 3, 8, 3) + 1,
-    otherAttempts: 3,
+    // a dropped stream ("no turn.end") is transient: production runs allow a few more attempts (EDGE_TRANSIENT_RETRIES)
+    otherAttempts: clamp(env.EDGE_TRANSIENT_RETRIES, 2, 8, 2) + 1,
     baseMs: 2500, rateBaseMs: 15000, capMs: 120000,
     cacheDir: env.EDGE_TTS_CACHE === "off" ? null : path.resolve(env.EDGE_TTS_CACHE_DIR || path.join(ROOT, ".cache", "edge-tts")),
     cacheMaxMb: clamp(env.EDGE_TTS_CACHE_MAX_MB, 10, 2000, 200),

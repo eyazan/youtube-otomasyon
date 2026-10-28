@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 "use strict";
-// GoalLore Lab research verification: turns hand-drafted football research (channels/goal-lore-lab/research/drafts/*.json)
+// Research verification (GoalLore Lab, and The Hidden Logic of Things with --channel behind-the-ordinary): turns
+// hand-drafted research (channels/<channel>/research/drafts/*.json)
 // into studio-ready topic records ONLY from text the source itself contains. Nothing here writes a quote: for every fact the
 // draft names the source article and the words the evidence must contain; this script fetches the live article (Wikipedia
 // API plain text, pinned to the revision it read) and copies the shortest sentence that contains all of them, verbatim.
@@ -11,7 +12,9 @@
 //   - a topic is VERIFIED and productionReady only when every fact and every line passes; otherwise it stays RESEARCHED
 //     with the reasons, and the studio refuses it (scripts/bto-studio/adapter.js readiness)
 // No model is involved and nothing is paraphrased into a quote. Requires network (GitHub Actions); offline it fails closed.
-//   node scripts/gll-research/verify.js [--write] [--report <file>] [--only GLL-037,GLL-031]
+//   node scripts/gll-research/verify.js [--channel goal-lore-lab|behind-the-ordinary] [--write] [--report <file>] [--only GLL-037,GLL-031]
+// GoalLore Lab records form channels/goal-lore-lab/topics/topic-universe.json; a Hidden Logic of Things draft names an
+// existing universe question (its id) and --write fills that row's research fields, every other field and row untouched.
 const fs = require("fs");
 const path = require("path");
 const https = require("https");
@@ -19,9 +22,11 @@ const FR = require("../fr-library/build");
 const { quoteFound, normalizeQuote } = require("../ib-ct-library/build");
 
 const ROOT = path.resolve(__dirname, "..", "..");
-const BASE = path.join(ROOT, "channels", "goal-lore-lab");
-const DRAFTS = path.join(BASE, "research", "drafts");
-const UNIVERSE = path.join(BASE, "topics", "topic-universe.json");
+const CHANNELS = ["goal-lore-lab", "behind-the-ordinary"];
+const dirs = (channel) => { const base = path.join(ROOT, "channels", channel); return { drafts: path.join(base, "research", "drafts"), universe: path.join(base, "topics", "topic-universe.json") }; };
+const RIGHTS = { "goal-lore-lab": { footage: "none (original animation only)", likeness: "generic player tokens, no kits or crests" }, "behind-the-ordinary": { footage: "none (original animation only)", likeness: "generic objects, no brands or logos" } };
+// the research fields --write sets on a Hidden Logic of Things universe row
+const RESEARCH_FIELDS = ["researchStatus", "productionReady", "researchedAt", "researchMethod", "rights", "narration", "facts", "verification"];
 const UA = "youtube-otomasyon-research/1.0 (GoalLore Lab fact verification; https://github.com/eyazan/youtube-otomasyon)";
 const isYear = (n) => Number.isInteger(n) && n >= 1800 && n <= 2100;
 const fold = (s) => normalizeQuote(String(s).normalize("NFD").replace(/[̀-ͯ]/g, ""));
@@ -69,7 +74,7 @@ function evidenceFor(fact, src) {
   return { error: candidates.length ? `a sentence has the terms but not every claim number (${nums.join(", ") || "none"}), is not 5-80 words of prose, or shares under ${MIN_SUPPORT * 100}% of the claim's content words` : `no sentence contains all of: ${fact.terms.join(" + ")}`, near };
 }
 
-async function verifyDraft(draft, fetchJson = get) {
+async function verifyDraft(draft, fetchJson = get, channel = "goal-lore-lab") {
   const errors = []; const cache = new Map(); const facts = [];
   for (const [i, f] of draft.facts.entries()) {
     const id = f.id || `F${i + 1}`;
@@ -94,24 +99,38 @@ async function verifyDraft(draft, fetchJson = get) {
   });
   const ok = errors.length === 0;
   return {
-    id: draft.id, slug: draft.slug, title: draft.title, coreQuestion: draft.coreQuestion, pillar: draft.pillar, channel: "goal-lore-lab",
+    id: draft.id, slug: draft.slug, title: draft.title, coreQuestion: draft.coreQuestion, pillar: draft.pillar, channel,
     hypothetical: false, researchStatus: ok ? "VERIFIED" : "RESEARCHED", productionReady: ok, researchedAt: new Date().toISOString(),
     researchMethod: "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live Wikipedia article at the pinned revision; claim and narration numbers checked against the quotes",
-    rights: { footage: "none (original animation only)", likeness: "generic player tokens, no kits or crests" },
+    rights: RIGHTS[channel],
     narration, facts: facts.map(({ near, ...f }) => f), verification: { ok, errors, near: Object.fromEntries(facts.filter((f) => f.near).map((f) => [f.id, f.near])) },
   };
 }
 
 async function run(argv = process.argv.slice(2), { fetchJson = get, log = console.log } = {}) {
   const only = (argv[argv.indexOf("--only") + 1] || "").split(",").filter((x) => argv.includes("--only") && x);
-  const drafts = fs.readdirSync(DRAFTS).filter((f) => f.endsWith(".json")).map((f) => JSON.parse(fs.readFileSync(path.join(DRAFTS, f), "utf8")))
+  const channel = argv.includes("--channel") ? argv[argv.indexOf("--channel") + 1] : "goal-lore-lab";
+  if (!CHANNELS.includes(channel)) throw new Error(`--channel must be one of ${CHANNELS.join(", ")}`);
+  const { drafts: DRAFTS, universe: UNIVERSE } = dirs(channel);
+  const drafts = (fs.existsSync(DRAFTS) ? fs.readdirSync(DRAFTS) : []).filter((f) => f.endsWith(".json")).map((f) => JSON.parse(fs.readFileSync(path.join(DRAFTS, f), "utf8")))
     .filter((d) => !only.length || only.includes(d.id)).sort((a, b) => a.id.localeCompare(b.id));
+  const rows = channel === "goal-lore-lab" ? null : new Map((JSON.parse(fs.readFileSync(UNIVERSE, "utf8")).topics || []).map((t) => [t.id, t]));
   const records = [];
-  for (const d of drafts) { const r = await verifyDraft(d, fetchJson); records.push(r); log(`${r.id} ${r.researchStatus}${r.verification.errors.length ? ": " + r.verification.errors.join("; ") : ""}`); }
+  for (const d of drafts) {
+    if (rows && (!rows.has(d.id) || rows.get(d.id).slug !== d.slug)) { log(`${d.id} SKIPPED: not a question of the ${channel} universe (id and slug must match a row)`); continue; }
+    const r = await verifyDraft(d, fetchJson, channel); records.push(r); log(`${r.id} ${r.researchStatus}${r.verification.errors.length ? ": " + r.verification.errors.join("; ") : ""}`);
+  }
   const report = records.map((r) => ({ id: r.id, status: r.researchStatus, errors: r.verification.errors, near: r.verification.near, quotes: r.facts.map((f) => ({ id: f.id, quote: f.quote, url: f.url })) }));
   const reportAt = argv.includes("--report") ? argv[argv.indexOf("--report") + 1] : null;
   if (reportAt) fs.writeFileSync(reportAt, JSON.stringify(report, null, 1) + "\n");
-  if (argv.includes("--write")) {
+  if (argv.includes("--write") && rows) {
+    // fill only the research fields of the drafted rows; never downgrade a row researched by another pipeline
+    const prev = JSON.parse(fs.readFileSync(UNIVERSE, "utf8")); const byId = new Map(records.map((r) => [r.id, r]));
+    prev.topics = prev.topics.map((t) => { const r = byId.get(t.id); if (!r || (t.researchStatus !== "QUESTION_ONLY" && t.researchMethod !== r.researchMethod)) return t;
+      return { ...t, ...Object.fromEntries(RESEARCH_FIELDS.map((k) => [k, r[k]])) }; });
+    fs.writeFileSync(UNIVERSE, JSON.stringify(prev, null, 2) + "\n");
+    log(`wrote ${path.relative(ROOT, UNIVERSE)} (${records.length} row(s))`);
+  } else if (argv.includes("--write")) {
     const prev = fs.existsSync(UNIVERSE) ? JSON.parse(fs.readFileSync(UNIVERSE, "utf8")) : { topics: [] };
     const keep = (prev.topics || []).filter((t) => !records.some((r) => r.id === t.id));
     const topics = [...keep, ...records].sort((a, b) => a.id.localeCompare(b.id));

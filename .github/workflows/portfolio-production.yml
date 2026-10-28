@@ -195,6 +195,7 @@ jobs:
           FR_PREMIUM_PUBLISH: ${{ vars.FR_PREMIUM_PUBLISH == '1' && '1' || 'off' }}
           PD_CHROMIUM: /usr/bin/google-chrome
           EDGE_RATE_LIMIT_RETRIES: '6'
+          EDGE_TRANSIENT_RETRIES: '5'
         run: |
           if [ "${{ inputs.dry_run }}" = "true" ]; then export PUBLISH=0; fi
           if [ "$FR_PREMIUM_PRIMARY" = "1" ]; then python -m pip install --quiet -r scripts/bto-studio/requirements.txt && node scripts/bto-studio/preflight-deps.js; fi
@@ -212,6 +213,7 @@ jobs:
           IB_PREMIUM_PUBLISH: ${{ vars.IB_PREMIUM_PUBLISH == '1' && '1' || 'off' }}
           PD_CHROMIUM: /usr/bin/google-chrome
           EDGE_RATE_LIMIT_RETRIES: '6'
+          EDGE_TRANSIENT_RETRIES: '5'
         run: |
           if [ "${{ inputs.dry_run }}" = "true" ]; then export PUBLISH=0; fi
           if [ "$IB_PREMIUM_PRIMARY" = "1" ]; then python -m pip install --quiet -r scripts/bto-studio/requirements.txt && node scripts/bto-studio/preflight-deps.js; fi
@@ -231,6 +233,7 @@ jobs:
           GLL_PREMIUM_PUBLISH: ${{ vars.GLL_PREMIUM_PUBLISH == '1' && '1' || 'off' }}
           PD_CHROMIUM: /usr/bin/google-chrome
           EDGE_RATE_LIMIT_RETRIES: '6'
+          EDGE_TRANSIENT_RETRIES: '5'
         run: |
           if [ "${{ inputs.dry_run }}" = "true" ]; then export PUBLISH=0; fi
           python -m pip install --quiet -r scripts/bto-studio/requirements.txt
@@ -250,6 +253,7 @@ jobs:
           HLT_PREMIUM_PUBLISH: ${{ vars.HLT_PREMIUM_PUBLISH == '1' && '1' || 'off' }}
           PD_CHROMIUM: /usr/bin/google-chrome
           EDGE_RATE_LIMIT_RETRIES: '6'
+          EDGE_TRANSIENT_RETRIES: '5'
         run: |
           if [ "${{ inputs.dry_run }}" = "true" ]; then export PUBLISH=0; fi
           if [ "$HLT_PREMIUM_PRIMARY" = "1" ]; then python -m pip install --quiet -r scripts/bto-studio/requirements.txt && node scripts/bto-studio/preflight-deps.js; fi

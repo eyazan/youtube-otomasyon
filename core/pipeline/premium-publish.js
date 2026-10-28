@@ -221,6 +221,7 @@ function uploaderDryRun(channel, topic, pkgFile, { env = process.env, spawn = cp
   if (!pkg || !pkg.video) return { gate: null, blockers: ["no review package"], uploaderExit: null };
   let g = null; try { g = gate(pkgFile, {}); } catch (e) { blockers.push(`publish gate error: ${e.message}`); }
   if (g) { for (const st of g.steps.filter((x) => !x.ok)) blockers.push(...st.reasons); if (g.duplicates && g.duplicates.length) blockers.push(`duplicate of ${g.duplicates.join(", ")}`); }
+  if (!pkg.voice || pkg.voice.approved !== true) blockers.push(`narration voice ${(pkg.voice && pkg.voice.used) || "?"} is not the owner-approved channel voice`);
   const pol = policy(channel);
   if (!pol.ok) blockers.push(`publication policy: ${pol.why}`);
   if (!enabled(channel, env)) blockers.push(`${PREFIX[channel.slug]}_PREMIUM_PUBLISH is not 1`);

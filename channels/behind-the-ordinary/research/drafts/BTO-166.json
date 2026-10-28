@@ -1,0 +1,65 @@
+{
+ "id": "BTO-166",
+ "slug": "electrical-plugs-what-explains-different-pin-lengths",
+ "pillar": "HIDDEN ENGINEERING",
+ "title": "Why One Plug Pin Is Longer",
+ "coreQuestion": "Why is one pin of a British plug longer than the others?",
+ "facts": [
+  {
+   "id": "F1",
+   "source": "BS 1363",
+   "claim": "The earth pin is longer than the line and neutral pins.",
+   "terms": [
+    "earth pin",
+    "longer"
+   ]
+  },
+  {
+   "id": "F2",
+   "source": "BS 1363",
+   "claim": "Sockets have shutters over the line and neutral contacts, which are opened by the earth pin.",
+   "terms": [
+    "shutters"
+   ]
+  }
+ ],
+ "narration": [
+  {
+   "role": "VISUAL_MYSTERY",
+   "text": "On a British plug, one pin is longer than the other two.",
+   "facts": [
+    "F1"
+   ]
+  },
+  {
+   "role": "CLEAR_PROMISE",
+   "text": "That longer pin is the earth.",
+   "facts": [
+    "F1"
+   ]
+  },
+  {
+   "role": "MECHANISM",
+   "text": "The socket's line and neutral holes are covered by shutters.",
+   "facts": [
+    "F2"
+   ]
+  },
+  {
+   "role": "ANSWER",
+   "text": "The long earth pin goes in first and opens them.",
+   "facts": [
+    "F1",
+    "F2"
+   ]
+  },
+  {
+   "role": "PAYOFF",
+   "text": "So the live contacts are only uncovered when a plug is going in.",
+   "facts": [
+    "F2"
+   ]
+  }
+ ],
+ "channel": "behind-the-ordinary"
+}

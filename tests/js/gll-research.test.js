@@ -63,3 +63,17 @@ test("a heading, a list lead-in, or a sentence sharing too few of the claim's wo
   assert.ok(V.evidenceFor({ claim: "The 1891 law.", terms: ["1891"] }, src).error, "a list lead-in ending with a colon is refused");
   assert.ok(V.evidenceFor({ claim: "Brazil beat Italy in the final at Estadio Azteca in Mexico City in front of a record crowd.", terms: ["Azteca"] }, src).error, "a sentence about another match shares too few words");
 });
+
+test("Hidden Logic of Things drafts answer existing universe questions, carry no quote, and every line cites a draft fact", async () => {
+  const dir = path.join(ROOT, "channels", "behind-the-ordinary", "research", "drafts");
+  const rows = new Map(JSON.parse(fs.readFileSync(path.join(ROOT, "channels", "behind-the-ordinary", "topics", "topic-universe.json"), "utf8")).topics.map((t) => [t.id, t]));
+  for (const f of fs.readdirSync(dir).filter((x) => x.endsWith(".json"))) {
+    const d = JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")); const row = rows.get(d.id);
+    assert.ok(row && row.slug === d.slug, `${d.id} is a universe question`); assert.equal(d.channel, "behind-the-ordinary");
+    const ids = new Set(d.facts.map((x) => x.id));
+    for (const x of d.facts) { assert.ok(!("quote" in x), `${d.id} ${x.id}`); assert.ok(x.terms.length); }
+    for (const l of d.narration) assert.ok(l.facts.length && l.facts.every((id) => ids.has(id)), `${d.id}: ${l.text}`);
+  }
+  const r = await V.verifyDraft(draft(), fetchJson, "behind-the-ordinary");
+  assert.equal(r.channel, "behind-the-ordinary"); assert.match(r.rights.likeness, /no brands/);
+});
