@@ -1,0 +1,92 @@
+name: Premium review render (real MP4s, never publishable)
+
+# Renders chosen topics with the current premium studio at final picture quality and the channel's approved Edge
+# voice, as SHADOW packages (studio.js --shadow: preview mode, the publish gate always blocks them, nothing is uploaded
+# or reserved), so a visual change can be judged on real frames before it reaches production. Per topic it keeps the
+# MP4, the QA report and the storyboard; frames, a contact sheet and motion/loudness measurements go to the
+# review/render-<run id> branch (never main). Already-published topics render too (shadow tolerates "already published").
+on:
+  workflow_dispatch:
+    inputs:
+      channel: { description: "channel slug", required: true, default: failure-reconstructed }
+      topics: { description: "space-separated topic ids (e.g. FR-gemini-8-1966 FR-silver-bridge-1967)", required: true }
+
+permissions:
+  contents: write
+
+concurrency:
+  group: premium-review-render
+  cancel-in-progress: false
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      PUBLISH: '0'
+      BTO_PREMIUM_RENDER: preview
+      EDGE_RATE_LIMIT_RETRIES: '6'
+      PD_CHROMIUM: /usr/bin/google-chrome
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: scripts/bto-studio/requirements.txt
+      - name: Cache week
+        id: week
+        run: echo "iso=$(date -u +%G-%V)" >> "$GITHUB_OUTPUT"
+      - name: Dependency cache (apt packages)
+        uses: actions/cache@v4
+        with:
+          path: .cache/apt
+          key: apt-debs-v1-${{ runner.os }}-premium-${{ hashFiles('scripts/ci-apt.sh') }}-${{ steps.week.outputs.iso }}
+          restore-keys: apt-debs-v1-${{ runner.os }}-
+      - name: Runtime dependencies
+        run: |
+          CI_APT_ARCHIVES="$GITHUB_WORKSPACE/.cache/apt" bash scripts/ci-apt.sh --no-install-recommends ffmpeg fonts-dejavu-core fonts-liberation python3-pil time
+          npm ci --no-audit --no-fund
+          python -m pip install --quiet -r scripts/bto-studio/requirements.txt
+          node scripts/bto-studio/preflight-deps.js
+      - name: Render each topic (shadow, final picture quality, approved voice)
+        env:
+          CHANNEL: ${{ inputs.channel }}
+          TOPICS: ${{ inputs.topics }}
+        run: |
+          set -o pipefail
+          mkdir -p review-out
+          for T in $TOPICS; do
+            D="$RUNNER_TEMP/review/$T"
+            echo "### $T" | tee -a "$GITHUB_STEP_SUMMARY"
+            node scripts/bto-studio/studio.js --channel "$CHANNEL" --topic "$T" --shadow --shadow-dir "$D" --regenerate --quality final --voice edge 2>&1 | tail -25 || echo "render failed: $T" | tee -a "$GITHUB_STEP_SUMMARY"
+            MP4=$(find "$D/out" -maxdepth 1 -name "*.mp4" | head -1)
+            [ -n "$MP4" ] || { echo "no MP4 for $T" | tee -a "$GITHUB_STEP_SUMMARY"; continue; }
+            O="review-out/$T"; mkdir -p "$O/frames"
+            cp "$MP4" "$O/"; cp "$D/out/qa-report.md" "$D/out/review-package.json" "$D/storyboard.json" "$O/" 2>/dev/null || true
+            ffmpeg -hide_banner -loglevel error -i "$MP4" -vf "fps=2/3,scale=540:-2" -q:v 4 "$O/frames/t%03d.jpg"
+            ffmpeg -hide_banner -loglevel error -i "$MP4" -vf "fps=1/2,scale=270:-2,tile=6x3" -frames:v 1 "$O/contact-sheet.jpg"
+            ffmpeg -hide_banner -loglevel error -i "$MP4" -t 2 -vf "fps=6,scale=270:-2,tile=6x2" -frames:v 1 "$O/first-2s.jpg"
+            grep -E "^\| (s[0-9]|Scene)" "$D/out/qa-report.md" | head -14 | tee -a "$GITHUB_STEP_SUMMARY" || true
+            grep -E "Objective verdict|WARN|FAIL" "$D/out/qa-report.md" | head -8 | tee -a "$GITHUB_STEP_SUMMARY" || true
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: premium-review-render
+          path: review-out
+          retention-days: 30
+          if-no-files-found: warn
+      - name: Frames to the review branch (never main)
+        if: always()
+        run: |
+          [ -d review-out ] || exit 0
+          find review-out -name "*.mp4" -delete
+          git config user.name "premium-review-bot"; git config user.email "actions@users.noreply.github.com"
+          B="review/render-${{ github.run_id }}"
+          git checkout -q -B "$B"; mkdir -p review; rm -rf "review/render-${{ github.run_id }}"; mv review-out "review/render-${{ github.run_id }}"
+          git add -f "review/render-${{ github.run_id }}"; git commit -q -m "review: premium render frames (run ${{ github.run_id }})"
+          git push -q -f origin "$B"
