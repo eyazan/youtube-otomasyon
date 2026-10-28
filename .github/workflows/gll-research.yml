@@ -42,6 +42,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+      # the tests that gate the commit load the runtime modules
+      - run: npm ci --no-audit --no-fund
       - name: Verify drafts against the live sources
         env:
           ONLY: ${{ inputs.only }}
@@ -69,10 +71,7 @@ jobs:
           git config user.name "gll-research-bot"
           git config user.email "actions@users.noreply.github.com"
           git add channels/goal-lore-lab/topics/topic-universe.json channels/behind-the-ordinary/topics/topic-universe.json
-          if git diff --cached --quiet; then echo "unchanged"; exit 0; fi
-          git commit -m "chore: GoalLore Lab and Hidden Logic of Things verified research records"
-          for i in 1 2 3 4 5; do git pull --rebase --autostash origin "$GITHUB_REF_NAME" && git push origin "HEAD:$GITHUB_REF_NAME" && exit 0; sleep $((i * 5)); done
-          exit 1
+          bash scripts/ci/push-if-green.sh "chore: GoalLore Lab and Hidden Logic of Things verified research records"
 
   # Listening samples for the owner: the same verified script read by each candidate Edge voice (the approved Edge
   # infrastructure through scripts/bto-studio/narrate.js). Nothing here marks a voice approved; the owner chooses by ear

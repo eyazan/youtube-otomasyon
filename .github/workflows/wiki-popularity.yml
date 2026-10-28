@@ -25,6 +25,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+      - run: npm ci --no-audit --no-fund
       - name: Fetch pageviews
         run: node scripts/wiki-popularity.js
       - name: Commit
@@ -33,7 +34,4 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
           git config merge.json-union.driver "node scripts/git-json-merge.js %O %A %B"
           git add config/wiki-popularity.json
-          if git diff --cached --quiet; then echo "unchanged"; exit 0; fi
-          git commit -m "chore: refresh topic popularity (Wikipedia pageviews)"
-          for i in 1 2 3 4 5; do git pull --rebase --autostash origin "$GITHUB_REF_NAME" && git push origin "HEAD:$GITHUB_REF_NAME" && exit 0; sleep $((i * 5)); done
-          exit 1
+          bash scripts/ci/push-if-green.sh "chore: refresh topic popularity (Wikipedia pageviews)"
