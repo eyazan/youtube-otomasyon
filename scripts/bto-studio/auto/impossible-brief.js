@@ -185,7 +185,7 @@ function build(script, style, topic) {
   };
   let removed = null;
   // subject views rotate through three framings of the world's body so consecutive "subject" scenes never repeat; the
-  // close framing sits low enough that its top (an ice cap) stays clear of a headline at y 360 (IB-PHY-065 review render)
+  // close framing sits low and drops the ice cap, so no white cap sits under a headline at y 360 (IB-PHY-065 review render)
   const FRAMINGS = [{ x: 540, y: 820, r: 330 }, { x: 250, y: 1000, r: 560 }, { x: 540, y: 1500, r: 820 }];
   // composite worlds (planet + field lines / streams, or a microbe cluster) are reframed as one unit so they stay
   // registered: every layer is scaled about the world centre (540, 820) and moved to the framing's centre
@@ -200,7 +200,7 @@ function build(script, style, topic) {
   const subjectView = (at, n, field = null) => (COMPOSITE.has(W) ? reframe(signature(at, { field }), C_FRAMES[n % C_FRAMES.length])
     // a named body alternates with a side-by-side beside Earth (sizes illustrative)
     : body && n % 2 === 1 ? [{ component: "planet", props: { kind: body, x: 300, y: 860, r: 220, spin: 0.18, seed: 7 } }, { component: "planet", props: { kind: "earth", x: 790, y: 860, r: 230, spin: 0.3, seed: 3 } }]
-    : signature(at).map((l) => (l.component === "planet" ? { ...l, props: { ...l.props, ...FRAMINGS[n % FRAMINGS.length], spin: l.props.spin * (n % 2 ? -1 : 1) } } : l)));
+    : signature(at).map((l) => (l.component === "planet" ? { ...l, props: { ...l.props, ...FRAMINGS[n % FRAMINGS.length], spin: l.props.spin * (n % 2 ? -1 : 1), ...(n % FRAMINGS.length === 1 ? { ice: false } : {}) } } : l)));
   let subjectN = 0;
   const stars = (seed) => ({ component: "starfield", screen: true, props: { seed, count: 300, drift: [22, 9] } });
   // a long key phrase shrinks so it never reaches the frame edge (IB-SPA-031 payoff: 26 characters at 60 px overflowed)
@@ -263,7 +263,9 @@ function build(script, style, topic) {
     } else if (temp) {
       kind = "heat"; layers = [stars(30 + i), ...subjectView(`${L.id}`, subjectN++, fieldFor(L)), readout(`${L.id}+0.4`, valueLabel(temp), 1230, rejects(L))];
       purpose = `Heat: the cited temperature (${valueLabel(temp)}) lands as a large readout over the subject while the camera pushes in.`; camera = cam(1.0, 1.08);
-    } else if (qty && depthWorld && (qty.unit === "m" || qty.unit === "km")) {
+    // a radius / diameter / width is a size, not a depth below the surface (IB-PHY-065: the inner core's 1,230 km radius
+    // was drawn as a probe 1,230 km under the surface)
+    } else if (qty && depthWorld && (qty.unit === "m" || qty.unit === "km") && !/\b(radius|radii|diameter|across|wide|width)\b/i.test(L.text)) {
       const d = qty.unit === "km" ? qty.value * 1000 : qty.value; const others = nums.filter((n) => n !== qty && (n.unit === "m" || n.unit === "km"));
       const depthsInTopic = facts.flatMap((f) => numbersIn(f.claim).filter((n) => n.unit === "m").map((n) => ({ ...n, fact: f.id })));
       const reached = depthsInTopic.filter((n) => n.value < d).sort((a, b) => b.value - a.value)[0];
@@ -278,6 +280,8 @@ function build(script, style, topic) {
       const ladderKey = same.map((n) => n.value).sort((a, b) => a - b).join("|");
       kind = "measure"; if (same.length >= 2 && !laddersShown.has(ladderKey) && laddersShown.add(ladderKey)) { layers = [stars(40 + i), { component: "scale-ladder", props: { x: 110, y: 560, w: 700, log: Math.max(...same.map((n) => n.value)) / Math.max(1e-9, Math.min(...same.map((n) => n.value))) > 50, items: same.sort((a, b) => a.value - b.value).map((n, k) => ({ label: `FACT ${n.fact}`.replace("FACT ", ""), value: n.value, valueText: valueLabel(n), at: `${L.id}+${(0.2 + k * 0.45).toFixed(2)}` })) } }];
         same.forEach((n) => { if (!evidence.includes(n.fact)) evidence.push(n.fact); }); purpose = `Scale: the topic's own ${qty.unit || "values"} side by side as growing bars, so the size of the change is seen, not read.`; }
+      // the size of an inner layer ("its radius is about 1,230 kilometres") is shown on the opened planet, where that layer is
+      else if (W === "earth-interior" && /\b(radius|radii|diameter)\b/i.test(L.text)) { layers = [stars(40 + i), ...signature(`${L.id}`, { cut: true }), readout(`${L.id}+0.5`, valueLabel(qty), 1230, rejects(L))]; chips[0] = "conceptualLabel"; purpose = `Size: the planet opens into its layers and the cited size (${valueLabel(qty)}) lands beside them; layer proportions are illustrative.`; }
       else { layers = [stars(40 + i), ...subjectView(`${L.id}`, subjectN++, fieldFor(L)), readout(`${L.id}+0.3`, valueLabel(qty), 1230, rejects(L))]; purpose = `Number: the cited value (${valueLabel(qty)}) lands as a large readout over the subject while the camera pushes in, so the quantity is held on screen as it is spoken.`; }
       camera = cam(1.0, 1.05);
     } else {
