@@ -1,0 +1,39 @@
+name: ImpossibleBrief claim check (sources, read-only)
+
+# Matches every fact of the named ImpossibleBrief topics against the current text of its source article, sentence by
+# sentence (scripts/ib-research/claim-check.js), and lists narration lines a person must check. Owner condition for
+# the first real IB upload. No secrets, read-only contents, nothing committed or uploaded.
+on:
+  pull_request:
+    paths:
+      - 'scripts/ib-research/**'
+      - 'channels/impossible-brief/premium/publication-policy.json'
+      - '.github/workflows/ib-claim-check.yml'
+  workflow_dispatch:
+    inputs:
+      topics: { description: "space-separated IB topic ids", required: true, default: IB-EXT-050 }
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ib-claim-check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci --no-audit --no-fund
+      - name: Claim check
+        env:
+          TOPICS: ${{ inputs.topics || 'IB-EXT-050' }}
+        run: |
+          set -o pipefail
+          # shellcheck disable=SC2086  # TOPICS is a space-separated list of ids
+          node scripts/ib-research/claim-check.js $TOPICS | tee -a "$GITHUB_STEP_SUMMARY"
