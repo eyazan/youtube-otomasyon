@@ -53,7 +53,7 @@ test("auto storyboard: earth-interior grammar varies its mechanism visuals and u
   const earKinds = Generator.build(Adapter.studioScript(ear.channel, ear.topic), style, ear.topic).scenes.map((s) => s.id.replace(/^s\d+-/, ""));
   assert.ok(!earKinds.includes("flow"), earKinds.join(","));
   assert.equal(Generator.keyPhrase("So the planet's first defence against drilling is heat, not hardness."), "HEAT, NOT HARDNESS");
-  assert.equal(Generator.keyPhrase("Rock that hot starts behaving more like plastic than stone."), "MORE PLASTIC THAN STONE");
+  assert.equal(Generator.keyPhrase("Rock that hot starts behaving more like plastic than stone."), "MORE LIKE PLASTIC THAN STONE");
 });
 
 test("auto storyboard: the subject picks the visual, plates never repeat back to back, a ladder is shown once", () => {

@@ -80,17 +80,32 @@ function off(a, d) {
   return v ? `${m[1]}${v > 0 ? "+" : ""}${v}` : m[1];
 }
 
+// The words a viewer reads must be a contiguous piece of the line, never words picked out of it (#364: "ANGUS BARBIERI
+// DID", "FASTEST SPINNERS UNIVERSE DENSEST"). A stated contrast or comparison keeps its own short form; otherwise a whole
+// short clause of the line; otherwise the contiguous window that carries the most content words and neither starts nor
+// ends on a function word, an auxiliary or a possessive.
+const WEAK_END = new Set("while when because until if after before then did does do done has had have having was were is are be been being can could may might will would should must shall his her hers their its our my your whose not no nor".split(" "));
 function keyPhrase(text, max = 3) {
   // a contrast the line states ("heat, not hardness") is the strongest short form; it keeps the line's own words
   const contrast = String(text).match(/\b([A-Za-z]+),?\s+not\s+(?:(?:a|an|the|just|only|simply)\s+)?([A-Za-z]+)/i);
-  if (contrast && !STOP.has(contrast[1].toLowerCase())) return `${contrast[1]}, NOT ${contrast[2]}`.toUpperCase();
+  if (contrast && !STOP.has(contrast[1].toLowerCase())) return contrast[0].toUpperCase();
   const comparison = String(text).match(/\bmore\s+(?:like\s+)?([A-Za-z]+)\s+than\s+([A-Za-z]+)/i);
-  if (comparison) return `MORE ${comparison[1]} THAN ${comparison[2]}`.toUpperCase();
-  text = String(text).replace(/['’]s\b/g, "").replace(/’/g, "'");
-  // contractions stay whole ("wouldn't"); a pronoun contraction ("we'd", "it'll") is a stop word like its pronoun
-  const ws = text.replace(/[“”".,;:!?()]/g, " ").split(/\s+/).map((w) => w.replace(/^'+|'+$/g, "")).filter(Boolean);
-  const keep = ws.filter((w) => !STOP.has(w.toLowerCase().split("'")[0]) && !/\d/.test(w));
-  return (keep.length ? keep : ws.filter((w) => !/\d/.test(w))).slice(0, max).join(" ").toUpperCase();
+  if (comparison) return comparison[0].toUpperCase();
+  const clean = (w) => w.replace(/^['"“”‘’(]+|['"“”‘’)]+$/g, "");
+  const weak = (w) => { const l = w.toLowerCase().split("'")[0]; return STOP.has(l) || WEAK_END.has(l); };
+  const segments = String(text).replace(/’/g, "'").split(/[,;:.!?—–]+/).map((seg) => seg.split(/\s+/).map(clean).filter(Boolean)).filter((seg) => seg.length);
+  // a whole short clause without numbers (numbers are shown by readouts, never inside a headline)
+  for (const seg of segments) if (seg.length >= 2 && seg.length <= max + 1 && !weak(seg[0]) && !weak(seg[seg.length - 1]) && !seg.some((w) => /\d/.test(w))) return seg.join(" ").toUpperCase();
+  let best = null;
+  segments.forEach((seg, si) => { for (let len = Math.min(max, seg.length); len >= 2; len -= 1) for (let i = 0; i + len <= seg.length; i += 1) {
+    const w = seg.slice(i, i + len); if (weak(w[0]) || weak(w[w.length - 1]) || w.some((x) => /\d/.test(x))) continue;
+    // a phrase ends where its clause ends (or before and/but/or): one cut inside a clause can end on a verb or a
+    // preposition ("DIEGO MARADONA PUT", "STORED FAT CAN FUEL") and is never shown
+    const next = seg[i + len]; if (next && !["and", "but", "or"].includes(next.toLowerCase())) continue;
+    const prev = seg[i - 1]; if (prev && !STOP.has(prev.toLowerCase()) && !WEAK_END.has(prev.toLowerCase())) continue;
+    const score = w.filter((x) => !weak(x)).length * 10 + len + (next ? 0 : 5) - si * 0.5 - i * 0.1; if (!best || score > best.score) best = { score, w }; } });
+  // no natural phrase: no headline (the caption still carries the line)
+  return best ? best.w.join(" ").toUpperCase() : "";
 }
 
 function build(script, style, topic) {
@@ -284,6 +299,9 @@ function build(script, style, topic) {
   });
   // the ladder's bar labels must not carry fact ids as text: replace with nothing (value text carries the number)
   scenes.forEach((s) => s.layers.forEach((l) => { if (l.component === "scale-ladder") l.props.items.forEach((it) => { it.label = ""; }); }));
+  // a line with no natural short phrase gets no headline: empty text items (and then empty text layers) are removed
+  scenes.forEach((sc) => { sc.layers.forEach((l) => { if (l.component === "kinetic-type") l.props.items = l.props.items.filter((it) => String(it.text || "").trim()); });
+    sc.layers = sc.layers.filter((l) => l.component !== "kinetic-type" || l.props.items.length); });
   return {
     schema: "bto-studio.storyboard.v1", channel: script.channel, topicId: script.topicId, slug: script.slug, version: 1,
     author: `auto/impossible-brief (deterministic scene grammar, world ${W}; needs creative review before publication)`,

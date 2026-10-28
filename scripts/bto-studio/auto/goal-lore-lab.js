@@ -107,6 +107,9 @@ function build(script, style, topic) {
     if (l.component === "kinetic-type") l.props.items = l.props.items.map((it) => (ok(sc, it.text) ? it : { ...it, text: keyPhrase(lines[k].text) }));
     if (l.component === "dot-board") l.props.rows = l.props.rows.filter((r) => ok(sc, r.text));
   }));
+  // a line with no natural short phrase gets no headline: empty text items (and then empty text layers) are removed
+  scenes.forEach((sc) => { sc.layers.forEach((l) => { if (l.component === "kinetic-type") l.props.items = l.props.items.filter((it) => String(it.text || "").trim()); });
+    sc.layers = sc.layers.filter((l) => l.component !== "kinetic-type" || l.props.items.length); });
   return {
     schema: "bto-studio.storyboard.v1", channel: script.channel, topicId: script.topicId, slug: script.slug, version: 1,
     author: "auto/goal-lore-lab (deterministic football grammar; needs creative review before publication)",

@@ -157,3 +157,20 @@ test("FR visual quality (#364): the right object class and motion, natural headl
   kt.props.items[0].text = "THRUSTER CIRCUITS REDESIGNED ISOLATE"; kt.props.items[0].source = "Thruster circuits were redesigned to isolate a failed jet.";
   assert.ok(Validator.validateStoryboard(bad, { script: g.script, timeline: fakeTimeline(g.script), style, policy: profile.evidencePolicy.validator }).errors.some((e) => /not a contiguous span/.test(e)));
 });
+
+test("IB, GoalLore Lab and HLT headlines are contiguous pieces of the narration, never word-picked (#364)", () => {
+  const N = (x) => " " + String(x || "").toUpperCase().replace(/[’']/g, "'").replace(/[^A-Z0-9'%ÁÉÍÓÚÄÖÜÑ]+/g, " ").trim() + " ";
+  const cases = [["impossible-brief", "impossible-brief", ["IB-EXT-050", "IB-HUM-025", "IB-EXT-047", "IB-HUM-004", "IB-PHY-065"]],
+    ["goal-lore-lab", "goal-lore-lab", ["GLL-021", "GLL-025"]], ["behind-the-ordinary", "behind-the-ordinary", ["BTO-156"]]];
+  for (const [ch, gen, ids] of cases) {
+    const G = require(`../../scripts/bto-studio/auto/${gen}`); const st = require(`../../channels/${ch}/premium/style-pack.json`);
+    for (const id of ids) {
+      const { channel, topic } = Adapter.loadTopic(ch, id); const script = Adapter.studioScript(channel, topic); const sb = G.build(script, st, topic);
+      const all = N(script.lines.map((l) => l.text).join(" "));
+      for (const it of sb.scenes.flatMap((s) => s.layers.filter((l) => l.component === "kinetic-type").flatMap((l) => l.props.items))) {
+        assert.ok(String(it.text).trim(), `${id}: empty headline item`);
+        if (/[A-Z]{3,}/.test(it.text) && it.style !== "pop" && !/·/.test(it.text)) assert.ok(all.includes(N(it.text)), `${id}: "${it.text}" is not a contiguous piece of the narration`);
+      }
+    }
+  }
+});
