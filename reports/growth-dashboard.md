@@ -1,14 +1,14 @@
 # Growth dashboard
 
-Generated 2026-10-28T07:15:05.803Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-10-28T07:29:58.715Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
-**Shorts health** — last published 2026-10-23T18:00:00.000Z · 32 published · inventory A101/B126/C59/D59 · next: titanic-1912 (EXPLOIT (0.75): best A topic by SelectionScore)
+**Shorts health** — last published 2026-10-28T18:00:00.000Z · 33 published · inventory A100/B126/C59/D59 · next: titanic-1912 (EXPLOIT (0.75): best A topic by SelectionScore)
 
 **Long-form health** — cycle 2026-W44: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W44 already QUALITY_BLOCKED)
 
-**Long-form backlog** — challenger-1986 85/A, chernobyl-1986 85/A, air-france-447-2009 84/A, columbia-2003 84/A, fairchild-b52-1994 84/A
+**Long-form backlog** — challenger-1986 86/A, chernobyl-1986 85/A, columbia-2003 85/A, air-france-447-2009 84/A, apollo-13-1970 84/A
 
 **Content clusters** — 12 · integrity OK
 
@@ -78,5 +78,5 @@ Generated 2026-10-28T07:15:05.803Z. Per-channel baselines are computed separatel
 
 ## Cross-channel infrastructure
 
-Channels: failure-reconstructed, impossible-brief · workflows: 34 · growth config present: true
+Channels: failure-reconstructed, impossible-brief · workflows: 35 · growth config present: true
 

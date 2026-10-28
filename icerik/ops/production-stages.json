@@ -2,50 +2,6 @@
   "channel": "failure-reconstructed",
   "runs": [
     {
-      "runId": "40330027337",
-      "attempt": "1",
-      "startedAt": "2026-10-26T13:23:39.410Z",
-      "publish": true,
-      "trigger": {
-        "event": "schedule",
-        "correlationId": null
-      },
-      "targetDay": "2026-10-26",
-      "slug": null,
-      "outcome": "FAILED",
-      "reason": "health pre-flight: seslendirme: NARRATION_UNAVAILABLE: Edge sesi reddedildi (Edge TTS WebSocket error: Unexpected server response: 200, Edge TTS WebSocket error: Unexpected server response: 200, Edge TTS WebSocket error: Unexpected server response: 200; msedge-tts 2.1.0); yedek ses yok — fallback voice am_michael is not approved for publishing (config.voice.fallback.approved)",
-      "stages": {
-        "RESEARCH": {
-          "status": "not-reached"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "not-reached"
-        },
-        "QA": {
-          "status": "not-reached"
-        },
-        "UPLOAD": {
-          "status": "not-reached"
-        },
-        "SCHEDULE": {
-          "status": "not-reached"
-        },
-        "PUBLISH": {
-          "status": "not-reached"
-        }
-      },
-      "finishedAt": "2026-10-26T13:23:49.696Z"
-    },
-    {
       "runId": "40334196450",
       "attempt": "1",
       "startedAt": "2026-10-26T13:51:58.714Z",
@@ -1332,6 +1288,58 @@
         }
       },
       "finishedAt": "2026-10-28T07:14:54.278Z"
+    },
+    {
+      "runId": "40650009127",
+      "attempt": "1",
+      "startedAt": "2026-10-28T07:26:53.622Z",
+      "publish": true,
+      "trigger": {
+        "event": "workflow_dispatch",
+        "correlationId": null
+      },
+      "targetDay": "2026-10-28",
+      "slug": "gemini-8-1966",
+      "outcome": "UPLOADED",
+      "reason": "premium FR-gemini-8-1966 QLSnrXyCJgw",
+      "stages": {
+        "RESEARCH": {
+          "status": "done",
+          "detail": "FR-gemini-8-1966",
+          "at": "2026-10-28T07:29:45.468Z"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "done",
+          "detail": "premium final",
+          "at": "2026-10-28T07:29:45.469Z"
+        },
+        "QA": {
+          "status": "done",
+          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
+          "at": "2026-10-28T07:29:45.470Z"
+        },
+        "UPLOAD": {
+          "status": "done",
+          "detail": "QLSnrXyCJgw",
+          "at": "2026-10-28T07:29:45.470Z"
+        },
+        "SCHEDULE": {
+          "status": "not-reached"
+        },
+        "PUBLISH": {
+          "status": "not-reached"
+        }
+      },
+      "finishedAt": "2026-10-28T07:29:45.471Z"
     }
   ]
 }

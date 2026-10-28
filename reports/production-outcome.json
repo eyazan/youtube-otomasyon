@@ -1,15 +1,15 @@
 {
-  "at": "2026-10-28T07:15:08.544Z",
-  "runId": "40648404970",
+  "at": "2026-10-28T07:30:01.581Z",
+  "runId": "40650009127",
   "rows": [
     {
       "channel": "failure-reconstructed",
-      "outcome": "DRY_RUN",
-      "category": "DRY_RUN",
+      "outcome": "UPLOADED",
+      "category": "PUBLISH_VERIFICATION_FAILED",
       "scheduled": false,
       "publication": "NOT_SCHEDULED",
       "publishAt": null,
-      "reason": "review candidate FR-gemini-8-1966 READY_FOR_HUMAN_REVIEW; not uploaded; blocked by: creative review sign-off missing; FR_PREMIUM_PUBLISH is not 1",
+      "reason": "premium FR-gemini-8-1966 QLSnrXyCJgw",
       "slug": "gemini-8-1966",
       "videoId": null,
       "targetDay": "2026-10-28",
@@ -20,36 +20,32 @@
       "stages": {
         "RESEARCH": {
           "status": "done",
-          "detail": "FR-gemini-8-1966 qualified (6 sourced facts)",
-          "at": "2026-10-28T07:12:01.821Z"
+          "detail": "FR-gemini-8-1966",
+          "at": "2026-10-28T07:29:45.468Z"
         },
         "SCRIPT": {
-          "status": "done",
-          "detail": "studio adapter",
-          "at": "2026-10-28T07:12:01.822Z"
+          "status": "not-reached"
         },
         "ASSETS": {
           "status": "not-reached"
         },
         "NARRATION": {
-          "status": "done",
-          "detail": "en-US-AndrewMultilingualNeural",
-          "at": "2026-10-28T07:14:53.775Z"
+          "status": "not-reached"
         },
         "RENDER": {
           "status": "done",
-          "detail": "172 s",
-          "at": "2026-10-28T07:14:53.776Z"
+          "detail": "premium final",
+          "at": "2026-10-28T07:29:45.469Z"
         },
         "QA": {
           "status": "done",
-          "detail": "objective PASS",
-          "at": "2026-10-28T07:14:53.777Z"
+          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
+          "at": "2026-10-28T07:29:45.470Z"
         },
         "UPLOAD": {
-          "status": "skipped",
-          "detail": "review candidate: gate RENDERED; uploader --dogrula exit 0",
-          "at": "2026-10-28T07:14:54.277Z"
+          "status": "done",
+          "detail": "QLSnrXyCJgw",
+          "at": "2026-10-28T07:29:45.470Z"
         },
         "SCHEDULE": {
           "status": "not-reached"

@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-10-28T07:15:05.803Z",
+  "generatedAt": "2026-10-28T07:29:58.715Z",
   "note": "Per-channel baselines are computed separately and never blended.",
   "channels": [
     {
       "channel": "failure-reconstructed",
       "name": "Failure Reconstructed",
       "shorts": {
-        "lastPublished": "2026-10-23T18:00:00.000Z",
-        "published": 32,
+        "lastPublished": "2026-10-28T18:00:00.000Z",
+        "published": 33,
         "inventory": {
-          "A": 101,
+          "A": 100,
           "B": 126,
           "C": 59,
           "D": 59
@@ -95,12 +95,18 @@
         "backlog": [
           {
             "slug": "challenger-1986",
-            "LongFormPotentialScore": 85,
+            "LongFormPotentialScore": 86,
             "bucket": "A",
             "mode": "B_SHORT_PROVES_DEMAND"
           },
           {
             "slug": "chernobyl-1986",
+            "LongFormPotentialScore": 85,
+            "bucket": "A",
+            "mode": "B_SHORT_PROVES_DEMAND"
+          },
+          {
+            "slug": "columbia-2003",
             "LongFormPotentialScore": 85,
             "bucket": "A",
             "mode": "B_SHORT_PROVES_DEMAND"
@@ -112,13 +118,7 @@
             "mode": "B_SHORT_PROVES_DEMAND"
           },
           {
-            "slug": "columbia-2003",
-            "LongFormPotentialScore": 84,
-            "bucket": "A",
-            "mode": "B_SHORT_PROVES_DEMAND"
-          },
-          {
-            "slug": "fairchild-b52-1994",
+            "slug": "apollo-13-1970",
             "LongFormPotentialScore": 84,
             "bucket": "A",
             "mode": "B_SHORT_PROVES_DEMAND"
@@ -792,6 +792,7 @@
       "tts-fallback-check.yml",
       "uretim-is.yml",
       "uretim.yml",
+      "variables-check.yml",
       "watchdog-self-test.yml",
       "wiki-popularity.yml",
       "yayin-kontrol.yml",
