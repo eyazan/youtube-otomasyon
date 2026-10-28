@@ -206,6 +206,10 @@ function run(channel, { env = process.env, targetDay = null, spawn = cp.spawnSyn
   const pkgFile = path.join(topicDir(channel, a.topicId), "out", "review-package.json"); const pkg = J(pkgFile);
   if (!pkg || pkg.verdict !== "READY_FOR_HUMAN_REVIEW") return refuse(`package verdict ${pkg ? pkg.verdict : "missing"}`, true);
   if (!pkg.voice || pkg.voice.approved !== true) return refuse("narration is not the approved voice");
+  // soft QA findings are reported, never hidden (they do not block: the hard checks did); #357 tracks FR's
+  const qa = J(path.join(topicDir(channel, a.topicId), "out", "qa-report.json")) || {};
+  const soft = (qa.objective || []).filter((c) => !c.hard && !c.ok).map((c) => `${c.name}: ${c.measured}`);
+  log(`${tag}: ${a.topicId} objective QA ${qa.objectivePass === false ? "FAIL" : "PASS"}; warnings ${soft.length ? soft.join(" | ") : "none"}`);
   const hash = contentHash(channel, a.topicId, pkg);
   if (unbound(a) && hash) bindPolicy(a, hash, pol, persist);
   if (hash !== a.contentSha256) return refuse(`content changed since approval (approved ${String(a.contentSha256).slice(0, 12)}, rendered ${String(hash).slice(0, 12)}); re-review needed`);
