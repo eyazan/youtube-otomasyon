@@ -1,0 +1,53 @@
+name: FR library build (seed batch)
+
+# Runs the existing FR library builder (scripts/fr-library/build.js) on one hand-written seed batch. The builder
+# checks every number against the Wikipedia article, requires an HTTP-reachable authoritative source (or one the
+# article cites), licence-clean Commons stills and uniqueness against the whole library; a seed that fails any check
+# is reported, never written. With write=true the passing specs are committed through scripts/ci/push-if-green.sh,
+# i.e. only if the repository tests pass on the rebased tree. Nothing is rendered or uploaded.
+on:
+  workflow_dispatch:
+    inputs:
+      batch: { description: "seed batch under icerik/kutuphane-tohum (e.g. batch-23.json)", required: true }
+      write: { description: "write passing topics to icerik/konular", type: boolean, default: false }
+
+concurrency:
+  group: fr-library
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci --no-audit --no-fund
+      - name: Build the batch
+        env:
+          BATCH: ${{ inputs.batch }}
+          WRITE: ${{ inputs.write }}
+        run: |
+          set -o pipefail
+          ARGS=("icerik/kutuphane-tohum/$BATCH"); if [ "$WRITE" = "true" ]; then ARGS+=(--write); fi
+          node scripts/fr-library/build.js "${ARGS[@]}" | tee -a "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fr-library-report
+          path: icerik/kutuphane-tohum/*.report.json
+          retention-days: 30
+      - name: Commit passing topics (tests must pass)
+        if: ${{ inputs.write }}
+        env:
+          BATCH: ${{ inputs.batch }}
+        run: |
+          git config user.name "fr-library-bot"; git config user.email "actions@users.noreply.github.com"
+          git add icerik/konular "icerik/kutuphane-tohum/${BATCH%.json}.report.json"
+          bash scripts/ci/push-if-green.sh "content(FR): library topics from $BATCH"

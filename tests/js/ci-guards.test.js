@@ -9,7 +9,7 @@ const ROOT = path.resolve(__dirname, "..", "..");
 const wf = (f) => fs.readFileSync(path.join(ROOT, ".github", "workflows", f), "utf8");
 
 test("content bots push to main only when the repository tests pass", () => {
-  for (const f of ["gll-research.yml", "bto-research.yml", "topic-buffer.yml", "wiki-popularity.yml", "competitor-intelligence.yml"]) {
+  for (const f of ["gll-research.yml", "bto-research.yml", "topic-buffer.yml", "wiki-popularity.yml", "competitor-intelligence.yml", "fr-library.yml"]) {
     const y = wf(f);
     assert.match(y, /bash scripts\/ci\/push-if-green\.sh /, `${f} commits through push-if-green`);
     assert.doesNotMatch(y, /git push/, `${f} has no direct git push`);
