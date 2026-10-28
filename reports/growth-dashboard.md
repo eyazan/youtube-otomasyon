@@ -1,6 +1,6 @@
 # Growth dashboard
 
-Generated 2026-10-27T20:50:51.135Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-10-28T07:15:05.803Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
@@ -76,36 +76,7 @@ Generated 2026-10-27T20:50:51.135Z. Per-channel baselines are computed separatel
 - 2026-10-23 NO_QUALIFIED_TOPIC: NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [103 unused A topic(s), best viral score 74 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]
 - 2026-10-25 NO_QUALIFIED_TOPIC: NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [102 unused A topic(s), best viral score 74 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]
 
-## CriticalThread
-
-**Shorts health** — last published 2026-10-13T18:00:00.000Z · 8 published · inventory A8/B144/C0/D362 · next: the-hidden-system-behind-border-gateway-routing-system (EXPLOIT (0.75): best A topic by SelectionScore)
-
-**Long-form health** — cycle 2026-W44: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W44 already QUALITY_BLOCKED)
-
-**Long-form backlog** — the-critical-role-of-urban-traffic-control-network 79/A, why-submarine-fiber-optic-cable-is-so-hard-to-replace 78/A, what-quietly-depends-on-cable-landing-station 78/A, the-critical-role-of-cable-laying-ship 78/A, inside-the-system-built-around-road-tunnel-ventilation-system 78/A
-
-**Content clusters** — 6 · integrity OK
-
-**Growth / subscriber conversion** — tracked 7 · subs/1k Shorts 0 · subs/1k long n/a
-
-**Learning** — Shorts observing (n=6, adopted 0) · Long-form heuristics-only (n=0)
-
-**Short → Long funnel** — 0 link(s), 0 long→long, 0 pending RELATED_VIDEO_MANUAL_ACTION_REQUIRED
-
-**Recent alerts**
-
-- 2026-10-14 NO_QUALIFIED_TOPIC: NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [6 unused A topic(s), best viral score 73 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]
-- 2026-10-15 NO_QUALIFIED_TOPIC: NO_EXPLORE_CANDIDATE
-- 2026-10-16 NO_QUALIFIED_TOPIC: NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [6 unused A topic(s), best viral score 73 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]
-- 2026-10-17 NO_QUALIFIED_TOPIC: NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [6 unused A topic(s), best viral score 73 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]
-- 2026-10-18 NO_QUALIFIED_TOPIC: NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [6 unused A topic(s), best viral score 73 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]
-- 2026-10-19 NO_QUALIFIED_TOPIC: NO_EXPLORE_CANDIDATE
-- 2026-10-20 NO_QUALIFIED_TOPIC: NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [6 unused A topic(s), best viral score 73 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]
-- 2026-10-21 NO_QUALIFIED_TOPIC: NO_EXPLORE_CANDIDATE
-- 2026-10-22 NO_QUALIFIED_TOPIC: NO_EXPLORE_CANDIDATE
-- 2026-10-23 NO_QUALIFIED_TOPIC: NO_EXPLORE_CANDIDATE
-
 ## Cross-channel infrastructure
 
-Channels: failure-reconstructed, impossible-brief, critical-thread · workflows: 29 · growth config present: true
+Channels: failure-reconstructed, impossible-brief · workflows: 34 · growth config present: true
 

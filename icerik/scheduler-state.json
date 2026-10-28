@@ -616,7 +616,8 @@
       "renderLane": 0,
       "uploadLane": 0,
       "date": "2026-10-27",
-      "status": "queued"
+      "status": "expired",
+      "settledOn": "2026-10-28"
     },
     {
       "channel": "failure-reconstructed",
@@ -626,6 +627,27 @@
       "renderLane": 0,
       "uploadLane": 0,
       "date": "2026-10-27",
+      "status": "missed",
+      "settledOn": "2026-10-28"
+    },
+    {
+      "channel": "failure-reconstructed",
+      "format": "short",
+      "key": "failure-reconstructed:short",
+      "position": 1,
+      "renderLane": 0,
+      "uploadLane": 0,
+      "date": "2026-10-28",
+      "status": "queued"
+    },
+    {
+      "channel": "failure-reconstructed",
+      "format": "long",
+      "key": "failure-reconstructed:long",
+      "position": 3,
+      "renderLane": 0,
+      "uploadLane": 0,
+      "date": "2026-10-28",
       "status": "queued"
     }
   ]

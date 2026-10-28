@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-27T20:50:51.135Z",
+  "generatedAt": "2026-10-28T07:15:05.803Z",
   "note": "Per-channel baselines are computed separately and never blended.",
   "channels": [
     {
@@ -759,328 +759,6 @@
         }
       ],
       "legacyPaths": false
-    },
-    {
-      "channel": "critical-thread",
-      "name": "CriticalThread",
-      "shorts": {
-        "lastPublished": "2026-10-13T18:00:00.000Z",
-        "published": 8,
-        "inventory": {
-          "A": 8,
-          "B": 144,
-          "C": 0,
-          "D": 362
-        },
-        "durableInventory": {
-          "total": 0,
-          "qualified": 0,
-          "production_ready": 0,
-          "research_backlog": 0,
-          "used": 0
-        },
-        "nextSelection": {
-          "slug": "the-hidden-system-behind-border-gateway-routing-system",
-          "reason": "EXPLOIT (0.75): best A topic by SelectionScore"
-        },
-        "baseline": {
-          "n": 6,
-          "views": 63,
-          "averagePercentageViewed": 63.62,
-          "subscribersPer1000Views": 0,
-          "engagementPer1000Views": 21.15,
-          "watchHoursPer1000Views": 1.89
-        }
-      },
-      "longform": {
-        "lane": {
-          "cycleId": "2026-W44",
-          "due": false,
-          "reason": "cycle 2026-W44 already QUALITY_BLOCKED",
-          "lastPublished": null
-        },
-        "lastCycle": {
-          "cycleId": "2026-W44",
-          "channel": "critical-thread",
-          "startedAt": "2026-10-26T12:42:20.041Z",
-          "status": "QUALITY_BLOCKED",
-          "evaluated": [
-            {
-              "slug": "the-critical-role-of-urban-traffic-control-network",
-              "mode": "B_SHORT_PROVES_DEMAND",
-              "LongFormPotentialScore": 79,
-              "bucket": "A",
-              "decision": "BLOCK",
-              "score": 81,
-              "hardFails": [
-                "INSUFFICIENT_DEPTH: evidence supports ~1.2 min; target 8–12 min — not padded"
-              ],
-              "generationStatus": "QUALITY_REVIEW"
-            },
-            {
-              "slug": "why-submarine-fiber-optic-cable-is-so-hard-to-replace",
-              "mode": "A_LONG_FIRST",
-              "LongFormPotentialScore": 78,
-              "bucket": "A",
-              "decision": "BLOCK",
-              "score": 84,
-              "hardFails": [
-                "INSUFFICIENT_DEPTH: evidence supports ~1.5 min; target 8–12 min — not padded",
-                "LLM generation failed safely (REQUEST_TOO_LARGE); deterministic evidence draft retained"
-              ],
-              "generationStatus": "FAILED"
-            },
-            {
-              "slug": "what-quietly-depends-on-cable-landing-station",
-              "mode": "A_LONG_FIRST",
-              "LongFormPotentialScore": 78,
-              "bucket": "A",
-              "decision": "BLOCK",
-              "score": 74,
-              "hardFails": [
-                "unsupported central claim/number: 3, 000, 000 V",
-                "INSUFFICIENT_DEPTH: evidence supports ~2 min; target 8–12 min — not padded"
-              ],
-              "generationStatus": "QUALITY_REVIEW"
-            }
-          ],
-          "selected": null,
-          "reason": "no candidate passed the long-form quality gate; cadence does not override quality",
-          "finishedAt": "2026-10-26T12:42:20.562Z"
-        },
-        "episodes": 0,
-        "backlog": [
-          {
-            "slug": "the-critical-role-of-urban-traffic-control-network",
-            "LongFormPotentialScore": 79,
-            "bucket": "A",
-            "mode": "B_SHORT_PROVES_DEMAND"
-          },
-          {
-            "slug": "why-submarine-fiber-optic-cable-is-so-hard-to-replace",
-            "LongFormPotentialScore": 78,
-            "bucket": "A",
-            "mode": "A_LONG_FIRST"
-          },
-          {
-            "slug": "what-quietly-depends-on-cable-landing-station",
-            "LongFormPotentialScore": 78,
-            "bucket": "A",
-            "mode": "A_LONG_FIRST"
-          },
-          {
-            "slug": "the-critical-role-of-cable-laying-ship",
-            "LongFormPotentialScore": 78,
-            "bucket": "A",
-            "mode": "A_LONG_FIRST"
-          },
-          {
-            "slug": "inside-the-system-built-around-road-tunnel-ventilation-system",
-            "LongFormPotentialScore": 78,
-            "bucket": "A",
-            "mode": "B_SHORT_PROVES_DEMAND"
-          }
-        ],
-        "baseline": {
-          "n": 0,
-          "views": null,
-          "averagePercentageViewed": null,
-          "subscribersPer1000Views": null,
-          "engagementPer1000Views": null,
-          "watchHoursPer1000Views": null
-        }
-      },
-      "tiktok": {
-        "enabled": false
-      },
-      "clusters": {
-        "count": 6,
-        "integrity": {
-          "ok": true,
-          "problems": [],
-          "count": 6
-        }
-      },
-      "funnel": {
-        "shortToLong": 0,
-        "longToLong": 0,
-        "pendingRelatedVideoManualActions": 0
-      },
-      "growth": {
-        "trackedVideos": 7,
-        "subscriberConversion": {
-          "shorts": 0,
-          "longform": null
-        }
-      },
-      "learning": {
-        "shorts": {
-          "status": "observing",
-          "sampleSize": 6,
-          "adopted": 0,
-          "hypotheses": 3
-        },
-        "longform": {
-          "status": "heuristics-only",
-          "sampleSize": 0,
-          "adopted": 0
-        }
-      },
-      "experiments": [],
-      "enrichmentTasks": [],
-      "alerts": [
-        {
-          "channel": "critical-thread",
-          "code": "NO_QUALIFIED_TOPIC",
-          "message": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [6 unused A topic(s), best viral score 73 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]",
-          "details": {
-            "inventory": {
-              "A": 6,
-              "B": 144,
-              "C": 0,
-              "D": 362
-            }
-          },
-          "date": "2026-10-14",
-          "at": "2026-10-14T11:42:34.698Z"
-        },
-        {
-          "channel": "critical-thread",
-          "code": "NO_QUALIFIED_TOPIC",
-          "message": "NO_EXPLORE_CANDIDATE",
-          "details": {
-            "inventory": {
-              "A": 6,
-              "B": 144,
-              "C": 0,
-              "D": 362
-            }
-          },
-          "date": "2026-10-15",
-          "at": "2026-10-15T11:21:30.241Z"
-        },
-        {
-          "channel": "critical-thread",
-          "code": "NO_QUALIFIED_TOPIC",
-          "message": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [6 unused A topic(s), best viral score 73 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]",
-          "details": {
-            "inventory": {
-              "A": 6,
-              "B": 144,
-              "C": 0,
-              "D": 362
-            }
-          },
-          "date": "2026-10-16",
-          "at": "2026-10-16T11:25:56.384Z"
-        },
-        {
-          "channel": "critical-thread",
-          "code": "NO_QUALIFIED_TOPIC",
-          "message": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [6 unused A topic(s), best viral score 73 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]",
-          "details": {
-            "inventory": {
-              "A": 6,
-              "B": 144,
-              "C": 0,
-              "D": 362
-            }
-          },
-          "date": "2026-10-17",
-          "at": "2026-10-17T10:35:18.075Z"
-        },
-        {
-          "channel": "critical-thread",
-          "code": "NO_QUALIFIED_TOPIC",
-          "message": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [6 unused A topic(s), best viral score 73 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]",
-          "details": {
-            "inventory": {
-              "A": 6,
-              "B": 144,
-              "C": 0,
-              "D": 362
-            }
-          },
-          "date": "2026-10-18",
-          "at": "2026-10-18T10:54:06.398Z"
-        },
-        {
-          "channel": "critical-thread",
-          "code": "NO_QUALIFIED_TOPIC",
-          "message": "NO_EXPLORE_CANDIDATE",
-          "details": {
-            "inventory": {
-              "A": 6,
-              "B": 144,
-              "C": 0,
-              "D": 362
-            }
-          },
-          "date": "2026-10-19",
-          "at": "2026-10-19T12:54:08.010Z"
-        },
-        {
-          "channel": "critical-thread",
-          "code": "NO_QUALIFIED_TOPIC",
-          "message": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [6 unused A topic(s), best viral score 73 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]",
-          "details": {
-            "inventory": {
-              "A": 6,
-              "B": 144,
-              "C": 0,
-              "D": 362
-            }
-          },
-          "date": "2026-10-20",
-          "at": "2026-10-20T11:23:57.436Z"
-        },
-        {
-          "channel": "critical-thread",
-          "code": "NO_QUALIFIED_TOPIC",
-          "message": "NO_EXPLORE_CANDIDATE",
-          "details": {
-            "inventory": {
-              "A": 6,
-              "B": 144,
-              "C": 0,
-              "D": 362
-            }
-          },
-          "date": "2026-10-21",
-          "at": "2026-10-21T11:39:35.070Z"
-        },
-        {
-          "channel": "critical-thread",
-          "code": "NO_QUALIFIED_TOPIC",
-          "message": "NO_EXPLORE_CANDIDATE",
-          "details": {
-            "inventory": {
-              "A": 6,
-              "B": 144,
-              "C": 0,
-              "D": 362
-            }
-          },
-          "date": "2026-10-22",
-          "at": "2026-10-22T11:40:00.503Z"
-        },
-        {
-          "channel": "critical-thread",
-          "code": "NO_QUALIFIED_TOPIC",
-          "message": "NO_EXPLORE_CANDIDATE",
-          "details": {
-            "inventory": {
-              "A": 6,
-              "B": 144,
-              "C": 0,
-              "D": 362
-            }
-          },
-          "date": "2026-10-23",
-          "at": "2026-10-23T11:33:49.948Z"
-        }
-      ],
-      "legacyPaths": false
     }
   ],
   "infrastructure": {
@@ -1093,10 +771,14 @@
       "competitor-intelligence.yml",
       "ct-research.yml",
       "deploy-watchdog.yml",
+      "fr-studio-dry-run.yml",
+      "gll-research.yml",
       "growth-feedback-loop.yml",
+      "ib-premium-dry-run.yml",
       "live-replacements-2026-10-04.yml",
       "manual-fr-ib-groq-check.yml",
       "portfolio-production.yml",
+      "premium-render-check.yml",
       "production-watchdog.yml",
       "profitdecoded-competitors.yml",
       "profitdecoded-produce.yml",
@@ -1106,6 +788,7 @@
       "quality-preview.yml",
       "shorts-recovery-preview.yml",
       "test.yml",
+      "topic-buffer.yml",
       "tts-fallback-check.yml",
       "uretim-is.yml",
       "uretim.yml",
@@ -1117,8 +800,7 @@
     ],
     "channels": [
       "failure-reconstructed",
-      "impossible-brief",
-      "critical-thread"
+      "impossible-brief"
     ],
     "growthEngineConfig": true,
     "analyticsSupport": {
