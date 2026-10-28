@@ -37,3 +37,18 @@ test("FR library: from batch-23 every scene line rests on a verbatim article sen
   const bad = B.claimEvidence({ ...seed, kanit: [seed.kanit[0], { iddia: "The Therac-25 killed twelve patients.", terimler: ["twelve"], sahneler: [2] }] }, art);
   assert.match(bad.errors.join(" "), /claim not in the article/); assert.match(bad.errors.join(" "), /scene line\(s\) 3 rest on no verified article sentence/);
 });
+
+test("FR premiumOnly: no stills are fetched or written, research checks stay, and the legacy lane can never pick the topic", () => {
+  const B = require("../../scripts/fr-library/build");
+  const seed = { slug: "x-case-2000", wiki: "X", baslik: "T", ad: "x", kisa: "X", nesne: "Dam", yil: 2000, kume: "infrastructure-failures", sonuc: "s", tetik: "t", mekanizma: "m", sayi: "N", ders: "d",
+    zincir: ["A", "B", "C"], yanilgi: "y", tartisma: "q", basliklar: ["T"], kapak: ["K"], hook: "h", soru: "q?", sahneler: ["a b c", "d e f"], kaynakca: [{ ad: "W", url: "https://en.wikipedia.org/wiki/X" }], premiumOnly: true };
+  const spec = B.toSpec(seed, []);
+  assert.equal(spec.premiumOnly, true); assert.deepEqual(spec.kaynaklar, []); assert.ok(spec.sahneler.every((s) => !("kaynak" in s)), "no image source in any scene");
+  const src = fs.readFileSync(path.join(ROOT, "scripts", "fr-library", "build.js"), "utf8");
+  assert.match(src, /if \(!seed\.premiumOnly && row\.stills\.length < 3\)/, "only the still minimum is waived");
+  assert.match(src, /if \(needsEvidence\(batch\)\) \{ const ev = claimEvidence/, "claim evidence still applies");
+  const sira = fs.readFileSync(path.join(ROOT, "shorts-sira.js"), "utf8");
+  assert.match(sira, /\.\.\.tum\.filter\(premiumOnlyMi\)/, "the legacy queue skips premiumOnly topics");
+  assert.match(sira, /if \(premiumOnlyMi\(slug\)\) throw new Error/, "an explicit legacy run refuses a premiumOnly topic");
+  assert.match(fs.readFileSync(path.join(ROOT, "lib", "kutuphane.js"), "utf8"), /k\.premiumOnly !== true/);
+});

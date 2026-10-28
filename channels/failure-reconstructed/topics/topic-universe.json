@@ -4,9 +4,9 @@
   "channel": "failure-reconstructed",
   "qualification_policy": "Every record has at least one explicit source URL. Backlog records are admitted only after Wikipedia API page verification and are not production-ready until deeper sourcing, licensed visuals, scripting and quality gates pass.",
   "stats": {
-    "total": 500,
+    "total": 501,
     "qualified": 500,
-    "production_ready": 377,
+    "production_ready": 378,
     "research_backlog": 123,
     "used": 10
   },
@@ -17279,6 +17279,40 @@
       },
       "duplicate_risk": "LOW_API_CANONICALIZED",
       "source_file": "icerik/kutuphane-tohum/candidates-01.json"
+    },
+    {
+      "topic_id": "northeast-blackout-2003",
+      "canonical_name": "the Northeast blackout of 2003",
+      "cluster": "software-and-control-failures",
+      "event_year": 2003,
+      "country": null,
+      "viral_score": null,
+      "visual_score": 72,
+      "source_confidence": 95,
+      "recognizability": 90,
+      "used": false,
+      "last_scored_at": null,
+      "qualification_status": "QUALIFIED_SOURCE_VERIFIED",
+      "production_ready": true,
+      "sources": [
+        {
+          "name": "Wikipedia — Northeast blackout of 2003",
+          "url": "https://en.wikipedia.org/wiki/Northeast_blackout_of_2003",
+          "verification": "CASE_FILE_SOURCE"
+        },
+        {
+          "name": "US Department of Energy — BlackoutFinal Web (cited by Wikipedia)",
+          "url": "https://www.energy.gov/sites/prod/files/oeprod/DocumentsandMedia/BlackoutFinal-Web.pdf",
+          "verification": "CASE_FILE_SOURCE"
+        }
+      ],
+      "verification": {
+        "method": "existing sourced production case file",
+        "checked_at": null,
+        "official_source_count": 1
+      },
+      "duplicate_risk": "NONE",
+      "source_file": "icerik/konular/northeast-blackout-2003.json"
     }
   ]
 }

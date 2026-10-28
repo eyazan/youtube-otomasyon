@@ -1,0 +1,131 @@
+{
+  "kanal": "Failure Reconstructed",
+  "ses": "en-US-AndrewNeural",
+  "sesHizi": "+6%",
+  "altyaziFont": "Arial Black",
+  "oncelik": 9,
+  "baslik": "The Cancer Machine That Trusted Its Own Software",
+  "kaynaklar": [],
+  "sahneler": [
+    {
+      "metin": "A cancer machine's own software overdosed its patients."
+    },
+    {
+      "metin": "It released up to two hundred fifty times the normal dose."
+    },
+    {
+      "metin": "It was the Therac-25, a computer-controlled radiation therapy machine."
+    },
+    {
+      "metin": "Earlier models had hardware interlocks to stop such faults."
+    },
+    {
+      "metin": "This one removed them and relied on software checks."
+    },
+    {
+      "metin": "Concurrent programming errors, called race conditions, slipped past those checks."
+    },
+    {
+      "metin": "At least six accidents followed."
+    },
+    {
+      "metin": "Now safety-critical machines keep independent hardware protection."
+    }
+  ],
+  "premiumOnly": true,
+  "aciklama": "Therac-25 gave patients massive radiation overdoses. The cause: concurrent programming errors delivering doses up to 250 times higher than normal, with no hardware interlock to stop them.\n\n#shorts #engineering #software",
+  "etiketler": [
+    "Therac-25",
+    "1985",
+    "radiation therapy machine",
+    "engineering failure"
+  ],
+  "hook": "No hardware backup",
+  "soru": "Would you trust the software?",
+  "vaka": {
+    "kume": "software-and-control-failures",
+    "tip": "vaka",
+    "ad": "the Therac-25 radiation overdoses",
+    "kisa": "Therac-25",
+    "nesne": "Radiation therapy machine",
+    "yil": 1985,
+    "sonuc": "gave patients massive radiation overdoses",
+    "tetik": "software race conditions in a machine without hardware interlocks",
+    "mekanizma": "concurrent programming errors delivering doses up to 250 times higher than normal, with no hardware interlock to stop them",
+    "sayi": "SIX ACCIDENTS",
+    "ders": "safety-critical machines keep independent hardware interlocks instead of trusting software alone",
+    "zincir": [
+      "HARDWARE INTERLOCKS REMOVED",
+      "SOFTWARE CHECKS ONLY",
+      "RACE CONDITION",
+      "MASSIVE OVERDOSE",
+      "AT LEAST SIX ACCIDENTS"
+    ],
+    "zaman": [],
+    "yanilgi": "The machine wasn't broken in any obvious way. Its software sometimes ran steps in the wrong order.",
+    "tartisma": "Should a machine that can kill ever trust software alone?",
+    "basliklar": [
+      "The Cancer Machine That Trusted Its Own Software",
+      "Why the Therac-25 Overdosed Its Patients",
+      "The Race Condition That Burned Patients"
+    ],
+    "kapak": [
+      "SOFTWARE ONLY",
+      "250X DOSE"
+    ],
+    "kaynakca": [
+      {
+        "ad": "Wikipedia — Therac-25",
+        "url": "https://en.wikipedia.org/wiki/Therac-25"
+      },
+      {
+        "ad": "Government source — 2012020988 (cited by Wikipedia)",
+        "url": "https://lccn.loc.gov/2012020988"
+      }
+    ],
+    "kanitlar": [
+      {
+        "iddia": "It was a computer-controlled radiation therapy machine.",
+        "alinti": "The Therac-25 was a computer-controlled radiation therapy machine produced by Atomic Energy of Canada Limited (AECL) in 1982 after the Therac-6 (neptune) and Therac-20 units (the earlier units had been produced in partnership with Compagnie générale de radiologie (CGR) of France).",
+        "kaynak": "Wikipedia — Therac-25",
+        "sahneler": [
+          2
+        ]
+      },
+      {
+        "iddia": "Because of concurrent programming errors (also known as race conditions), it sometimes gave its patients radiation doses that were up to 250 times higher than normal.",
+        "alinti": "Because of concurrent programming errors (also known as race conditions), it sometimes gave its patients radiation doses that were up to 250 times higher than normal, resulting in death or serious injury.",
+        "kaynak": "Wikipedia — Therac-25",
+        "sahneler": [
+          0,
+          1,
+          5
+        ]
+      },
+      {
+        "iddia": "Previous models had hardware interlocks to prevent such faults, but this one removed them and depended on software checks for safety.",
+        "alinti": "Previous models had hardware interlocks to prevent such faults, but the Therac-25 had removed them, depending instead on software checks for safety.",
+        "kaynak": "Wikipedia — Therac-25",
+        "sahneler": [
+          3,
+          4,
+          7
+        ]
+      },
+      {
+        "iddia": "It was involved in at least six accidents in which patients were given massive overdoses of radiation.",
+        "alinti": "The Therac-25 was involved in at least six incident overdoses of radiation between 1985 and 1987, leading to patient death, and contending what was, at that time, described as \"the worst series of radiation accidents in the 35-year history of medical accelerators\".",
+        "kaynak": "Wikipedia — Therac-25",
+        "sahneler": [
+          6
+        ]
+      }
+    ]
+  },
+  "tohum": {
+    "batch": "batch-23",
+    "wiki": "Therac-25",
+    "olusturuldu": "2026-10-28",
+    "gorselLisanslari": []
+  }
+}

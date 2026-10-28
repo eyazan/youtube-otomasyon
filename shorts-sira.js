@@ -149,6 +149,10 @@ function kapi(slug, final) {
   return r;
 }
 
+function premiumOnlyMi(slug) {
+  try { return JSON.parse(fs.readFileSync(path.join(KONULAR, slug + ".json"), "utf8")).premiumOnly === true; } catch (e) { return false; }
+}
+
 function konuListesi() {
   if (!fs.existsSync(KONULAR)) return [];
   return fs.readdirSync(KONULAR).filter(f => f.endsWith(".json")).map(f => f.replace(/\.json$/, "")).sort();
@@ -209,6 +213,8 @@ function uretBir(slug) {
   if (!slugGecerli(slug)) throw new Error("Gecersiz slug: " + slug);
   const spec = path.join(KONULAR, slug + ".json");
   if (!fs.existsSync(spec)) throw new Error("Konu bulunamadi: " + spec);
+  // premiumOnly case files have no licensed stills: only the premium studio (core/pipeline/premium-lane.js) may render them
+  if (premiumOnlyMi(slug)) throw new Error("premiumOnly konu: legacy (stok) motor uretemez: " + slug);
   const job = path.join(KOK, "uretim", slug);
   fs.mkdirSync(job, { recursive: true });
   // spec -> konu.json (uretim slug'a sabit)
@@ -345,7 +351,7 @@ function main() {
   // video uretilenler listesinde olmasa bile IKINCI KEZ yuklenmez.
   const yuklenmis = require("./lib/kutuphane").yayinlananlar().map((y) => y.slug).filter(Boolean);
   // Konular reserved for an owner-approved premium Short (core/pipeline/premium-publish.js) are never produced here.
-  const atla = new Set([...uretilenler(), ...basarisizlar(), ...yuklenmis, ...require("./core/pipeline/premium-publish").reserved(CHANNEL),
+  const atla = new Set([...uretilenler(), ...basarisizlar(), ...yuklenmis, ...require("./core/pipeline/premium-publish").reserved(CHANNEL), ...tum.filter(premiumOnlyMi),
     ...Object.keys(engellenenler()).filter(engelliMi), ...Object.keys(incelemedekiler()).filter(incelemedeMi)]);
   // Siralama: growth engine (A/B once, C yalnizca deney gunu ya da kanal izin
   // veriyorsa yedek; D asla). Growth kuyrugu bossa eski kutuphane sirasi DEGIL,
