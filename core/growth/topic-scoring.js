@@ -14,6 +14,7 @@ const M = require("../../lib/metin");
 const Model = require("./topic-model");
 const Sources = require("./sources");
 const Hooks = require("./hooks");
+const Anim = require("./animation-potential");
 
 const clamp = (value) => Math.max(0, Math.min(100, Math.round(value)));
 const has = (value) => value != null && Number.isFinite(+value);
@@ -80,7 +81,11 @@ function factors(topic, context) {
 
   let visual = has(s.visual) ? s.visual : topic.archivalFilm ? 90 : topic.archival ? 78 : topic.stock ? 62 : 55;
   if (topic.channel === "failure-reconstructed" && topic.stock) visual = 64;
-  f.VisualImpactScore = factor(visual - generic * 15, has(s.visual) ? "inventory-signal" : "derived", topic.archivalFilm ? "real archival film" : topic.archival ? "archival stills" : undefined);
+  // a channel whose premium engine draws its own animation is scored on what that animation can show, never lower
+  // than its archival media would score (growth-engine.json visuals.source = "animation", core/growth/animation-potential.js)
+  const anim = context.config.visuals && context.config.visuals.source === "animation" ? Anim.animationPotential(topic) : null;
+  if (anim && !has(s.visual) && anim.score > visual) visual = anim.score;
+  f.VisualImpactScore = factor(visual - generic * 15, has(s.visual) ? "inventory-signal" : "derived", anim && visual === anim.score ? `animation: ${anim.reasons.join(", ")}` : topic.archivalFilm ? "real archival film" : topic.archival ? "archival stills" : undefined);
 
   const stakes = count(text, HUMAN_STAKES);
   f.EmotionalImpactScore = factor(45 + Math.min(5, stakes) * 8 + Math.min(3, count(text, Hooks.TENSION)) * 4 - generic * 20, "derived");
@@ -135,7 +140,12 @@ function viralFactors(topic, context, parts) {
   const saturationRisk = performance.n ? Math.min(100, performance.n / Math.max(1, context.clusterSizes && context.clusterSizes[topic.cluster] || 1) * 300) : 0;
   const recentFatigueRisk = performance.recentN ? Math.min(100, performance.recentN * 22) : 0;
   const sourceRisk = 100 - context.sourceQuality.score;
-  const weakFootageRisk = topic.archivalFilm ? 0 : topic.archival ? 15 : topic.stock ? 45 : Math.max(20, 75 - (topic.visualScenes || []).length * 7);
+  const anim = context.config.visuals && context.config.visuals.source === "animation" ? Anim.animationPotential(topic) : null;
+  const archivalRisk = topic.archivalFilm ? 0 : topic.archival ? 15 : topic.stock ? 45 : Math.max(20, 75 - (topic.visualScenes || []).length * 7);
+  // with the premium engine drawing the visuals, the risk is that the animation cannot show the case, not missing footage
+  const weakFootageRisk = anim ? Math.min(archivalRisk, 100 - anim.score) : archivalRisk;
+  const archivalPotential = topic.archivalFilm ? 100 : topic.archival ? 80 : topic.stock ? 45 : 35;
+  const archivalFirstFrame = (topic.visualScenes || []).length ? (topic.archivalFilm ? 95 : topic.archival ? 82 : 68) : 30;
   const components = {
     curiosity_gap: component(parts.factors.CuriosityScore.value, "derived"),
     immediate_stakes: component(45 + (topic.consequence ? 25 : 0) + Math.min(3, humans) * 8, "derived"),
@@ -144,8 +154,8 @@ function viralFactors(topic, context, parts) {
       has(topic.signals && topic.signals.popularity) ? "measured" : has(topic.signals && (topic.signals.searchDemand != null || topic.signals.priority != null)) ? "inventory-signal" : "derived"),
     surprise: component(40 + Math.min(4, surprises) * 10 + (topic.misconception ? 10 : 0), "derived"),
     visual_potential: component(parts.factors.VisualImpactScore.value, parts.factors.VisualImpactScore.basis),
-    archival_footage_potential: component(topic.archivalFilm ? 100 : topic.archival ? 80 : topic.stock ? 45 : 35, "inventory-signal"),
-    first_frame_potential: component((topic.visualScenes || []).length ? (topic.archivalFilm ? 95 : topic.archival ? 82 : 68) : 30, "derived"),
+    archival_footage_potential: component(anim ? Math.max(archivalPotential, anim.score) : archivalPotential, anim ? "animation-potential" : "inventory-signal"),
+    first_frame_potential: component(anim && (topic.visualScenes || []).length ? Math.max(archivalFirstFrame, anim.score) : archivalFirstFrame, anim ? "animation-potential" : "derived"),
     title_potential: component(45 + Math.min(5, titleCount) * 8 + (topic.number ? 8 : 0) + (topic.misconception ? 7 : 0), "derived", `${titleCount} source-backed title seeds`),
     emotional_tension: component(parts.factors.EmotionalImpactScore.value, "derived"),
     contradiction: component(topic.misconception ? 85 : topic.debate ? 68 : surprises ? 50 : 30, "derived"),
@@ -167,7 +177,7 @@ function viralFactors(topic, context, parts) {
     saturation_risk: component(-saturationRisk, "penalty", `${performance.n || 0} published / ${context.clusterSizes && context.clusterSizes[topic.cluster] || 1} inventory in cluster`),
     recent_fatigue_risk: component(-recentFatigueRisk, "penalty", `${performance.recentN || 0} same-family upload(s) in the last 30 days`),
     source_confidence_risk: component(-sourceRisk, "penalty", context.sourceQuality.notes.join("; ") || `${context.sourceQuality.score}/100 source quality`),
-    weak_footage_risk: component(-weakFootageRisk, "penalty", topic.archivalFilm ? "archival film available" : topic.archival ? "archival stills available" : "no archival footage confirmed"),
+    weak_footage_risk: component(-weakFootageRisk, "penalty", anim && weakFootageRisk < archivalRisk ? `premium animation: ${anim.reasons.join(", ")}` : topic.archivalFilm ? "archival film available" : topic.archival ? "archival stills available" : "no archival footage confirmed"),
   };
   const weights = config.viralScoring.weights;
   let positiveSum = 0;
