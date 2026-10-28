@@ -132,7 +132,9 @@
     "M40 60 L960 60", "M360 60 L360 380", "M640 60 L640 380", "M120 520 L880 520"],
     drop: [{ d: "M180 190 L820 190", main: true }, "M180 210 L820 210", "M180 360 L820 360", "M180 380 L820 380", "M180 190 L180 210", "M820 190 L820 210", "M180 360 L180 380", "M820 360 L820 380"] };
   // suspension (chain or cable) bridge: the deck is the first two paths and sags at mid-span when the chain lets go
-  KINDS.bridge.deckTop = 320;
+  // props.failPart "chain": the failure is in the chain or cable (an eyebar, a hanger), not the deck - the failure point moves
+  // onto the main chain beside a tower and the chain itself drops with the deck
+  KINDS.bridge.deckTop = 320; KINDS.bridge.fpChain = [0.33, 0.255]; KINDS.bridge.chainPath = 5;
   BTO.silhouetteKinds = Object.keys(KINDS);
 
   // mechanism overlays (props.mech), in the drawing's own coordinates, all pure functions of t:
@@ -190,7 +192,7 @@
       // collapse, only the mechanism overlay
       const f = o.failAt == null || o.holds ? 0 : clamp((t - o.failAt) / 1.4); const fe = BTO.ease("inOut", f);
       // uplift acts under the base: the failure point moves down to the foundation
-      const [fx, fy] = [K.fp[0] * bw, (o.mech === "uplift" ? 0.84 : K.fp[1]) * bh];
+      const fpK = o.failPart === "chain" && K.fpChain ? K.fpChain : K.fp; const [fx, fy] = [fpK[0] * bw, (o.mech === "uplift" ? 0.84 : fpK[1]) * bh];
       const tilt = (K.tilt || 0) * fe, sink = (K.sink || 0) * fe, sag = (K.sag || 0) * fe;
       // motion "spin": after failAt the object rotates about its centre faster and faster (an uncontrolled spin, shown in
       // the drawing plane), with fading ghost copies at earlier angles so the rotation reads in a still frame
@@ -208,7 +210,7 @@
       const und = o.undockAt == null ? 0 : BTO.ease("inOut", clamp((t - o.undockAt) / 1.4));
       const docked = K.docked && o.docked ? K.docked : [];
       const dockWrap = (inner) => (docked.length ? `<g transform="translate(${n1(320 * und)} 0)" opacity="${(1 - 0.85 * und).toFixed(3)}">${inner}</g>` : "");
-      const body = (rot, alpha) => { const ln = (d, i) => `<path d="${d}" fill="none" stroke="${i === 0 ? C.paper : C.teal}" stroke-width="${n1((i === 0 ? 7 : 5) / s)}" stroke-linecap="round" stroke-linejoin="round"/>`;
+      const body = (rot, alpha) => { const ln = (d, i) => `<path d="${d}" fill="none" stroke="${i === 0 ? C.paper : C.teal}" stroke-width="${n1((i === 0 ? 10 : 7) / s)}" stroke-linecap="round" stroke-linejoin="round"/>`;
         return `<g transform="rotate(${n1(rot)} ${scx} ${scy}) ${roll(rot)}" opacity="${alpha.toFixed(3)}">${K.paths.map(ln).join("")}${dockWrap(docked.map((d) => ln(d, 1)).join(""))}</g>`; };
       let g = `<g transform="translate(${n1(x0)} ${n1(y0 + sink * s)}) scale(${s.toFixed(4)}) rotate(${n1(tilt)} ${n1(fx)} ${n1(fy)})">`;
       // props.stars: a fixed star field behind a spacecraft in space (screen-wide, never moves with the spin)
@@ -224,9 +226,11 @@
       // bridge: the deck lines (the first paths) sag at mid-span as the structure gives way
       // dams: the reservoir behind the dam is filled, so the drawing reads as water held back (it drains through a breach)
       if (K.reservoir) g += `<path d="${K.reservoir}" fill="${C.teal}" opacity="${n1((0.22 - 0.12 * (K.breach && !o.holds ? fe : 0)) * draw * 100) / 100}"/>`;
-      // closed outlines (hulls, bodies, cabins) carry a faint fill, so the object reads as a solid shape, not wire
-      const stroke = (dd, main) => `<path d="${dd}" fill="${/Z\s*$/.test(dd) ? C.paper : "none"}" fill-opacity="${/Z\s*$/.test(dd) ? (0.09 * draw).toFixed(3) : 0}" stroke="${main ? C.paper : C.teal}" stroke-width="${n1((main ? 7 : 5) / s)}" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="${n1(1 - draw)}" opacity="${main ? 0.95 : 0.75}"/>`;
-      K.paths.forEach((d, i) => { const dd = sag && K.deckY && i < K.deckY.length ? `M20 ${K.deckY[i]} Q500 ${n1(K.deckY[i] + sag * 2)} 980 ${K.deckY[i]}` : d;
+      // line weights 10 / 7 px at scale 1: read on a phone (5 px secondary lines vanished at Shorts size, and frame 0 read as empty)
+  // closed outlines (hulls, bodies, cabins) carry a faint fill, so the object reads as a solid shape, not wire
+      const stroke = (dd, main) => `<path d="${dd}" fill="${/Z\s*$/.test(dd) ? C.paper : "none"}" fill-opacity="${/Z\s*$/.test(dd) ? (0.09 * draw).toFixed(3) : 0}" stroke="${main ? C.paper : C.teal}" stroke-width="${n1((main ? 10 : 7) / s)}" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="${n1(1 - draw)}" opacity="${main ? 0.95 : 0.75}"/>`;
+      K.paths.forEach((d, i) => { const dd = sag && K.deckY && i < K.deckY.length ? `M20 ${K.deckY[i]} Q500 ${n1(K.deckY[i] + sag * 2)} 980 ${K.deckY[i]}`
+        : sag && o.failPart === "chain" && i === K.chainPath ? `M240 120 Q500 ${n1(330 + sag * 4)} 760 120` : d;
         g += stroke(dd, i === 0 && !K.halves); });
       g += dockWrap(docked.map((d) => stroke(d, false)).join(""));
       // props.plume: the stuck attitude thruster firing (from plumeAt, default failAt), a flickering jet on the nozzle

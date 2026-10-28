@@ -122,6 +122,8 @@ function build(script, style, topic) {
   // the object fits 900 x 640 around y 820 (y 500-1140): clear of the chips, the watermark, the y 330 headlines and the captions
   const mech = structureMechanism(topic, kind, lines); const water = /bridge$/.test(kind) && WATER.test(caseText(topic, lines));
   const holds = HOLDS.test(caseText(topic, lines));
+  // a suspension bridge whose case names the chain, an eyebar or a cable as what broke: the failure is drawn there
+  const atChain = kind === "bridge" && /\b(eyebars?|chain|cables?|hangers?|suspenders?)\b/i.test([v.tetik, v.mekanizma, ...(v.zincir || [])].join(" "));
   // spacecraft cases: a star field when the case is in orbit or space; a stuck thruster drawn firing when the case file
   // names one; the docked target separates on the line that says it undocked and is gone after it
   const space = ["capsule", "satellite", "shuttle"].includes(kind) && /\b(orbit\w*|space|spacewalk)\b/i.test(caseText(topic, lines));
@@ -132,7 +134,7 @@ function build(script, style, topic) {
   const stopLine = motion === "spin" ? lines.findIndex((L) => /\b(stop(ped|s)? (it|the spin|the roll)|regain\w* control|stabili[sz]\w*|halt\w* (it|the spin)|brought it under control)\b/i.test(L.text)) : -1;
   const spinAt = (i) => (!motion ? {} : stopLine < 0 || i < stopLine ? { motion } : i === stopLine ? { motion, stopAt: off(lines[i].id, 0.8) } : { motion: null });
   let cur = 0; const dockAt = (i) => (!docked ? {} : undockLine < 0 || i < undockLine ? { docked: true } : i === undockLine ? { docked: true, undockAt: off(lines[i].id, 0.3) } : { docked: false });
-  const silhouette = (props) => ({ component: "object-silhouette", props: { kind, x: 540, y: 820, w: 900, maxH: 640, seed: 31, ...spinAt(cur), ...dockAt(cur), ...(water ? { water: true } : {}), ...(holds ? { holds: true } : {}), ...(space ? { stars: true } : {}), ...(plume && (stopLine < 0 || cur <= stopLine) ? { plume: true } : {}), ...props,
+  const silhouette = (props) => ({ component: "object-silhouette", props: { kind, x: 540, y: 820, w: 900, maxH: 640, seed: 31, ...spinAt(cur), ...dockAt(cur), ...(water ? { water: true } : {}), ...(holds ? { holds: true } : {}), ...(atChain ? { failPart: "chain" } : {}), ...(space ? { stars: true } : {}), ...(plume && (stopLine < 0 || cur <= stopLine) ? { plume: true } : {}), ...props,
     // one continuous spin: it began at the hook's failure (0.6 s) and every later drawing continues it at the same angle
     ...(motion && spinAt(cur).motion && props.failAt != null ? { failAt: 0.6 } : {}) } });
   // headlines sit below the chip column (y >= 460) and shrink with length so they never reach the frame edge

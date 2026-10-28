@@ -174,6 +174,8 @@ test("FR structures and spacecraft (#364): the structural type the case names, i
   }
   assert.equal(sil(load("vajont-dam-1963").sb.scenes[0]).holds, true, "Vajont: the dam itself survived - no breach is drawn");
   assert.equal(sil(load("i-35w-bridge-2007").sb.scenes[0]).water, true, "the river under the bridge is in the case file");
+  assert.equal(sil(load("silver-bridge-1967").sb.scenes[0]).failPart, "chain", "Silver Bridge: an eyebar in the chain broke, not the deck");
+  assert.equal(sil(load("i-35w-bridge-2007").sb.scenes[0]).failPart, undefined);
   // a mechanism scene plays cause -> effect on the intact object, and mechanism scenes alternate their camera move
   const mechs = load("st-francis-dam-1928").sb.scenes.filter((s) => s.id.endsWith("-mechanism"));
   assert.ok(mechs.length >= 2 && mechs.every((s) => typeof sil(s).failAt === "string" && sil(s).mech));
