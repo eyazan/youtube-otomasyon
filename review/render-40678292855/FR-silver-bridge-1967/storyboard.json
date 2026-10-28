@@ -1,0 +1,608 @@
+{
+ "schema": "bto-studio.storyboard.v1",
+ "channel": "failure-reconstructed",
+ "topicId": "FR-silver-bridge-1967",
+ "slug": "silver-bridge-1967",
+ "version": 1,
+ "author": "auto/failure-reconstructed (deterministic forensic grammar, object class bridge; needs creative review before publication)",
+ "licensingNote": "all visuals drawn in-house from code (SVG): generic object-class line drawings, failure chain and stamps; no photographs, footage or third-party media",
+ "treatment": {
+  "educationalObjective": "Reconstruct, from the case file: A Crack Smaller Than a Coin Dropped a Whole Bridge",
+  "visualHook": "Frame 0: a bridge drawn as line work gives way at its failure point within the first second.",
+  "mechanismsToAnimate": [
+   "hook",
+   "toll",
+   "chain",
+   "trigger",
+   "payoff"
+  ],
+  "factualRisks": [
+   "the bridge is a generic class drawing, not the actual vehicle or structure (RECONSTRUCTION chip)",
+   "the failure point on the drawing is illustrative",
+   "case-file facts carry researched claims without stored verbatim quotes (FR live standard)"
+  ]
+ },
+ "tail": 0.6,
+ "scenes": [
+  {
+   "id": "s1-hook",
+   "lines": [
+    "L1"
+   ],
+   "start": 0,
+   "env": "blueprint",
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Hook: frame 0 draws the bridge as clean line work and it gives way at the failure point within the first second, with the case stamp (SILVER BRIDGE · 1967), so the consequence is on screen before any cause.",
+   "camera": [
+    {
+     "at": 0,
+     "x": 540,
+     "y": 820,
+     "z": 1.18
+    },
+    {
+     "at": "L1.end",
+     "x": 570,
+     "y": 830,
+     "z": 1.02
+    }
+   ],
+   "layers": [
+    {
+     "component": "object-silhouette",
+     "props": {
+      "kind": "bridge",
+      "x": 540,
+      "y": 820,
+      "w": 900,
+      "seed": 31,
+      "failAt": 0.6
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L1+0.3",
+        "text": "SILVER BRIDGE · 1967",
+        "x": 540,
+        "y": 460,
+        "size": 60,
+        "family": "sans"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s2-toll",
+   "lines": [
+    "L2"
+   ],
+   "start": "L2-0.15",
+   "env": "void",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Toll: the broken bridge holds while the case's count (46 DEAD) is stamped below it; the number is the case file's, not computed.",
+   "camera": [
+    {
+     "at": "L2-0.15",
+     "x": 540,
+     "y": 860,
+     "z": 1
+    },
+    {
+     "at": "L2.end",
+     "x": 570,
+     "y": 880,
+     "z": 1.16
+    }
+   ],
+   "layers": [
+    {
+     "component": "object-silhouette",
+     "props": {
+      "kind": "bridge",
+      "x": 540,
+      "y": 820,
+      "w": 900,
+      "seed": 31,
+      "failAt": -1
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L2+0.25",
+        "text": "46 DEAD",
+        "x": 540,
+        "y": 1210,
+        "size": 104,
+        "family": "num",
+        "style": "pop"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s3-chain",
+   "lines": [
+    "L3"
+   ],
+   "start": "L3-0.15",
+   "env": "blueprint",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F4",
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Chain: the case's failure chain scrolls from link 1 to link 1 (\"DEFECT IN ONE EYEBAR\"), which lights as the line describes it, so consecutive causes read as one continuous investigation.",
+   "camera": [
+    {
+     "at": "L3-0.15",
+     "x": 480,
+     "y": 860,
+     "z": 1.05
+    },
+    {
+     "at": "L3.end",
+     "x": 600,
+     "y": 820,
+     "z": 1.22
+    }
+   ],
+   "layers": [
+    {
+     "component": "object-silhouette",
+     "props": {
+      "kind": "bridge",
+      "x": 540,
+      "y": 900,
+      "w": 1160,
+      "seed": 31,
+      "failAt": -1,
+      "opacity": 0.16
+     }
+    },
+    {
+     "component": "failure-chain",
+     "screen": true,
+     "props": {
+      "x": 540,
+      "gap": 230,
+      "w": 780,
+      "steps": [
+       "DEFECT IN ONE EYEBAR",
+       "STRESS CORROSION GROWS THE CRACK",
+       "EYEBAR FRACTURES",
+       "CHAIN HAS NO BACKUP",
+       "WHOLE BRIDGE FALLS"
+      ],
+      "activeKeys": [
+       [
+        "L3-0.15",
+        0
+       ],
+       [
+        "L3+1.1",
+        0
+       ]
+      ],
+      "window": {
+       "center": 800,
+       "top": 300,
+       "bottom": 1250
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s4-trigger",
+   "lines": [
+    "L4"
+   ],
+   "start": "L4-0.15",
+   "env": "void",
+   "transition": {
+    "type": "square-iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F2",
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Trigger: the camera closes in on the failure point of the intact bridge as the crack starts there, while the case file's trigger is set in three words.",
+   "camera": [
+    {
+     "at": "L4-0.15",
+     "x": 540,
+     "y": 820,
+     "z": 1
+    },
+    {
+     "at": "L4.end",
+     "x": 540,
+     "y": 800,
+     "z": 1.85
+    }
+   ],
+   "layers": [
+    {
+     "component": "object-silhouette",
+     "props": {
+      "kind": "bridge",
+      "x": 540,
+      "y": 820,
+      "w": 900,
+      "seed": 31,
+      "failAt": "L4+0.3"
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L4+0.2",
+        "text": "TINY CRACK ONE",
+        "x": 540,
+        "y": 460,
+        "size": 60,
+        "family": "sans"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s5-chain",
+   "lines": [
+    "L5"
+   ],
+   "start": "L5-0.15",
+   "env": "teal",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F4",
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Chain: the case's failure chain scrolls from link 1 to link 2 (\"STRESS CORROSION GROWS THE CRACK\"), which lights as the line describes it, so consecutive causes read as one continuous investigation.",
+   "camera": [
+    {
+     "at": "L5-0.15",
+     "x": 480,
+     "y": 860,
+     "z": 1.05
+    },
+    {
+     "at": "L5.end",
+     "x": 600,
+     "y": 820,
+     "z": 1.22
+    }
+   ],
+   "layers": [
+    {
+     "component": "object-silhouette",
+     "props": {
+      "kind": "bridge",
+      "x": 540,
+      "y": 900,
+      "w": 1160,
+      "seed": 31,
+      "failAt": -1,
+      "opacity": 0.16
+     }
+    },
+    {
+     "component": "failure-chain",
+     "screen": true,
+     "props": {
+      "x": 540,
+      "gap": 230,
+      "w": 780,
+      "steps": [
+       "DEFECT IN ONE EYEBAR",
+       "STRESS CORROSION GROWS THE CRACK",
+       "EYEBAR FRACTURES",
+       "CHAIN HAS NO BACKUP",
+       "WHOLE BRIDGE FALLS"
+      ],
+      "activeKeys": [
+       [
+        "L5-0.15",
+        0
+       ],
+       [
+        "L5+1.1",
+        1
+       ]
+      ],
+      "window": {
+       "center": 800,
+       "top": 300,
+       "bottom": 1250
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s6-chain",
+   "lines": [
+    "L6"
+   ],
+   "start": "L6-0.15",
+   "env": "teal",
+   "transition": {
+    "type": "continuity",
+    "dur": 0.3
+   },
+   "evidence": [
+    "F4",
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Chain: the case's failure chain scrolls from link 2 to link 3 (\"EYEBAR FRACTURES\"), which lights as the line describes it, so consecutive causes read as one continuous investigation.",
+   "camera": [
+    {
+     "at": "L6-0.15",
+     "x": 600,
+     "y": 860,
+     "z": 1.05
+    },
+    {
+     "at": "L6.end",
+     "x": 480,
+     "y": 820,
+     "z": 1.22
+    }
+   ],
+   "layers": [
+    {
+     "component": "object-silhouette",
+     "props": {
+      "kind": "bridge",
+      "x": 540,
+      "y": 900,
+      "w": 1160,
+      "seed": 31,
+      "failAt": -1,
+      "opacity": 0.16
+     }
+    },
+    {
+     "component": "failure-chain",
+     "screen": true,
+     "props": {
+      "x": 540,
+      "gap": 230,
+      "w": 780,
+      "steps": [
+       "DEFECT IN ONE EYEBAR",
+       "STRESS CORROSION GROWS THE CRACK",
+       "EYEBAR FRACTURES",
+       "CHAIN HAS NO BACKUP",
+       "WHOLE BRIDGE FALLS"
+      ],
+      "activeKeys": [
+       [
+        "L6-0.15",
+        1
+       ],
+       [
+        "L6+1.1",
+        2
+       ]
+      ],
+      "window": {
+       "center": 800,
+       "top": 300,
+       "bottom": 1250
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s7-chain",
+   "lines": [
+    "L7"
+   ],
+   "start": "L7-0.15",
+   "env": "teal",
+   "transition": {
+    "type": "continuity",
+    "dur": 0.3
+   },
+   "evidence": [
+    "F4",
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Chain: the case's failure chain scrolls from link 3 to link 4 (\"CHAIN HAS NO BACKUP\"), which lights as the line describes it, so consecutive causes read as one continuous investigation.",
+   "camera": [
+    {
+     "at": "L7-0.15",
+     "x": 480,
+     "y": 860,
+     "z": 1.05
+    },
+    {
+     "at": "L7.end",
+     "x": 600,
+     "y": 820,
+     "z": 1.22
+    }
+   ],
+   "layers": [
+    {
+     "component": "object-silhouette",
+     "props": {
+      "kind": "bridge",
+      "x": 540,
+      "y": 900,
+      "w": 1160,
+      "seed": 31,
+      "failAt": -1,
+      "opacity": 0.16
+     }
+    },
+    {
+     "component": "failure-chain",
+     "screen": true,
+     "props": {
+      "x": 540,
+      "gap": 230,
+      "w": 780,
+      "steps": [
+       "DEFECT IN ONE EYEBAR",
+       "STRESS CORROSION GROWS THE CRACK",
+       "EYEBAR FRACTURES",
+       "CHAIN HAS NO BACKUP",
+       "WHOLE BRIDGE FALLS"
+      ],
+      "activeKeys": [
+       [
+        "L7-0.15",
+        2
+       ],
+       [
+        "L7+1.1",
+        3
+       ]
+      ],
+      "window": {
+       "center": 800,
+       "top": 300,
+       "bottom": 1250
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s8-payoff",
+   "lines": [
+    "L8"
+   ],
+   "start": "L8-0.15",
+   "env": "blueprint",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F7",
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Payoff: the lesson in a few of the line's words over the object redrawn whole; the camera returns to the exact frame-0 framing and the lesson clears before the end, so the last frame matches the first and the Short loops (#357).",
+   "camera": [
+    {
+     "at": "L8-0.15",
+     "x": 480,
+     "y": 860,
+     "z": 1.32
+    },
+    {
+     "at": "end-0.6",
+     "x": 540,
+     "y": 820,
+     "z": 1.18
+    }
+   ],
+   "layers": [
+    {
+     "component": "object-silhouette",
+     "props": {
+      "kind": "bridge",
+      "x": 540,
+      "y": 820,
+      "w": 900,
+      "seed": 31,
+      "drawAt": "L8-0.1"
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L8+0.3",
+        "text": "AMERICAN BRIDGES GET MANDATORY",
+        "x": 540,
+        "y": 460,
+        "size": 44,
+        "family": "sans",
+        "outAt": "end-0.45"
+       }
+      ]
+     }
+    }
+   ]
+  }
+ ]
+}
