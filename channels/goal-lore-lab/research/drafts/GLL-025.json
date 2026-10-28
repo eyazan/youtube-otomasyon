@@ -1,0 +1,117 @@
+{
+ "id": "GLL-025",
+ "slug": "panenka-penalty-1976",
+ "pillar": "MOMENTS",
+ "title": "The Penalty That Took a Name",
+ "coreQuestion": "What made Panenka's 1976 penalty so audacious?",
+ "facts": [
+  {
+   "id": "F1",
+   "source": "UEFA Euro 1976 final",
+   "claim": "The UEFA Euro 1976 final between Czechoslovakia and West Germany was played in Belgrade.",
+   "terms": [
+    "Belgrade"
+   ]
+  },
+  {
+   "id": "F2",
+   "source": "UEFA Euro 1976 final",
+   "claim": "Czechoslovakia won the final on penalties.",
+   "terms": [
+    "penalties",
+    "Czechoslovakia"
+   ]
+  },
+  {
+   "id": "F3",
+   "source": "Panenka (penalty kick)",
+   "claim": "West Germany's fourth penalty taker, Uli Hoeneß, ballooned his shot over the bar.",
+   "terms": [
+    "Hoeneß",
+    "over the bar"
+   ]
+  },
+  {
+   "id": "F4",
+   "source": "Antonín Panenka",
+   "claim": "Panenka feigned shooting to the side, Sepp Maier dived, and Panenka gently chipped the ball into the middle of the net.",
+   "terms": [
+    "Maier",
+    "chipped"
+   ]
+  },
+  {
+   "id": "F5",
+   "source": "Panenka (penalty kick)",
+   "claim": "The move is generally only used by confident penalty takers who dare to risk missing the kick.",
+   "terms": [
+    "confident",
+    "takers"
+   ]
+  },
+  {
+   "id": "F6",
+   "source": "UEFA Euro 1976 final",
+   "claim": "Antonín Panenka scored the decisive penalty for Czechoslovakia.",
+   "terms": [
+    "Panenka"
+   ]
+  }
+ ],
+ "narration": [
+  {
+   "role": "HOOK",
+   "text": "This penalty decided a European Championship final.",
+   "facts": [
+    "F2"
+   ]
+  },
+  {
+   "role": "CONTEXT",
+   "text": "Belgrade, 1976. Czechoslovakia against West Germany.",
+   "facts": [
+    "F1"
+   ]
+  },
+  {
+   "role": "SETUP",
+   "text": "The final went to penalties.",
+   "facts": [
+    "F2"
+   ]
+  },
+  {
+   "role": "BUILD",
+   "text": "West Germany's Uli Hoeneß sent his kick over the bar.",
+   "facts": [
+    "F3"
+   ]
+  },
+  {
+   "role": "TWIST",
+   "text": "Then Antonín Panenka stepped up, and the goalkeeper dived.",
+   "facts": [
+    "F4",
+    "F6"
+   ]
+  },
+  {
+   "role": "MECHANISM",
+   "text": "Panenka chipped it, gently, into the middle of the net.",
+   "facts": [
+    "F4",
+    "F6"
+   ]
+  },
+  {
+   "role": "PAYOFF",
+   "text": "Only confident penalty takers dare to try it. Every goal has a story.",
+   "facts": [
+    "F5"
+   ]
+  }
+ ],
+ "schema": "goal-lore-lab.research-draft.v1",
+ "channel": "goal-lore-lab",
+ "draftNote": "Claims drafted by hand from web search summaries, revised on 2026-10-27 against the sentences the first verification run copied from the live source. No quote is written here; scripts/gll-research/verify.js copies each one or leaves the fact UNVERIFIED."
+}

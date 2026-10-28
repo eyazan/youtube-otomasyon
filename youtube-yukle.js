@@ -282,6 +282,15 @@ async function main() {
     if (!kimlikVar) {
       console.log("  Gereken: " + [CHANNEL.credentialNames.clientId[0], CHANNEL.credentialNames.clientSecret[0], CHANNEL.credentialNames.refreshToken[0]].join(", "));
       console.log("  Kurulum: docs/OAUTH-THREE-CHANNELS.md");
+    } else if (process.env.YT_DRYRUN_IDENTITY !== "0") {
+      // Read-only: token refresh, upload scope and channels.list?mine=true against the expected channel id. No write.
+      try {
+        const auth = await require("./lib/yt").getYouTubeClient(CHANNEL);
+        console.log(`✓ Kanal kimligi dogrulandi (kuru calisma): ${auth.identity.title || auth.identity.actual} (${auth.identity.actual}); upload scope var`);
+      } catch (error) {
+        console.error(`⛔ Kanal kimligi dogrulanamadi (kuru calisma): ${error.code || "AUTH_FAILED"}: ${error.message}`);
+        process.exitCode = 11;
+      }
     }
     return;
   }

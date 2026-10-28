@@ -93,7 +93,7 @@ test("BTO automatic storyboard: valid for quoted VERIFIED records, quote cards v
   assert.equal(require("../../scripts/bto-studio/profiles/behind-the-ordinary.json").storyboard.generator, "scripts/bto-studio/auto/behind-the-ordinary.js");
 });
 
-test("GoalLore Lab automatic storyboard: valid on the pilot record, model/reconstruction chips on every kick, still not renderable outside --pilot", () => {
+test("GoalLore Lab automatic storyboard: valid on the pilot record, model/reconstruction chips on every kick; production renders verified topics only", () => {
   const G = require("../../scripts/bto-studio/auto/goal-lore-lab"); const st = require("../../channels/goal-lore-lab/premium/style-pack.json");
   const topic = JSON.parse(fs.readFileSync(path.join(ROOT, "channels/goal-lore-lab/premium/pilots/GLL-P01/topic.json"), "utf8"));
   const { channel } = Adapter.loadPilot("goal-lore-lab", topic); const script = Adapter.studioScript(channel, topic); const sb = G.build(script, st, topic);
@@ -101,7 +101,7 @@ test("GoalLore Lab automatic storyboard: valid on the pilot record, model/recons
   assert.deepEqual(v.errors, []);
   for (const s of sb.scenes) if (s.layers.some((l) => l.component === "football-pitch" && (l.props.kicks || []).length)) assert.ok(s.chips.includes("modelLabel") && s.chips.includes("conceptualLabel"), s.id);
   const kinds = sb.scenes.map((s) => s.id.replace(/^s\d+-/, "")); for (const k of ["hook", "when", "flight", "physics", "payoff"]) assert.ok(kinds.includes(k), k);
-  const prof = require("../../scripts/bto-studio/profiles/goal-lore-lab.json"); assert.equal(prof.studioRenders, false, "not registered: pilot renders only");
+  const prof = require("../../scripts/bto-studio/profiles/goal-lore-lab.json"); assert.equal(prof.studioRenders, true); assert.equal(prof.evidencePolicy.researchStatus, "VERIFIED"); assert.equal(prof.evidencePolicy.verbatimQuotes, true); assert.equal(prof.publishing.autoPublish, false);
 });
 
 test("dry-run verdict: green only when the premium shadow rendered and passed objective QA", () => {

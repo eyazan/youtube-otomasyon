@@ -8,9 +8,9 @@ name: CriticalThread research replenishment
 # Free provider only: Groq, no fallback, no paid key in this job. The schedule does nothing until
 # the repository variable CT_RESEARCH_AUTO is 'true' (owner approval); a manual run without
 # write=true is a dry run that changes nothing.
+# RETIRED 2026-10-27 with CriticalThread (config/channels.json): no schedule; a manual run only researches the
+# historical topic records, which nothing produces or uploads any more.
 on:
-  schedule:
-    - cron: '23 5 * * *'
   workflow_dispatch:
     inputs:
       limit:
@@ -29,7 +29,7 @@ permissions:
 
 jobs:
   research:
-    if: github.event_name == 'workflow_dispatch' || vars.CT_RESEARCH_AUTO == 'true'
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 90
     env:

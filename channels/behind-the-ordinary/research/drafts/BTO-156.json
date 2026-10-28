@@ -1,0 +1,88 @@
+{
+ "id": "BTO-156",
+ "slug": "microwave-doors-what-explains-metal-mesh",
+ "pillar": "HIDDEN ENGINEERING",
+ "title": "Why Microwave Doors Have a Mesh",
+ "coreQuestion": "Why is there a metal mesh in a microwave oven's door?",
+ "facts": [
+  {
+   "id": "F1",
+   "source": "Microwave oven",
+   "claim": "The door of a microwave oven usually has a window with a layer of conductive mesh to maintain the shielding.",
+   "terms": [
+    "conductive mesh"
+   ]
+  },
+  {
+   "id": "F2",
+   "source": "Microwave oven",
+   "claim": "The perforations in the mesh are much smaller than the microwaves' wavelength, so microwave radiation cannot pass through the door while visible light can.",
+   "terms": [
+    "perforations",
+    "wavelength"
+   ]
+  },
+  {
+   "id": "F3",
+   "source": "Faraday cage",
+   "claim": "A microwave oven uses a Faraday cage, partly visible covering the window, to contain the electromagnetic energy within the oven.",
+   "terms": [
+    "microwave oven",
+    "window"
+   ]
+  }
+ ],
+ "narration": [
+  {
+   "role": "VISUAL_MYSTERY",
+   "text": "Look closely at a microwave door and you will see a metal mesh.",
+   "facts": [
+    "F1"
+   ]
+  },
+  {
+   "role": "CLEAR_PROMISE",
+   "text": "It is not decoration. It is part of the shield.",
+   "facts": [
+    "F1"
+   ]
+  },
+  {
+   "role": "MECHANISM",
+   "text": "The oven works as a Faraday cage that keeps the energy inside.",
+   "facts": [
+    "F3"
+   ]
+  },
+  {
+   "role": "MECHANISM",
+   "text": "The holes in the mesh are much smaller than the wavelength of the microwaves.",
+   "facts": [
+    "F2"
+   ]
+  },
+  {
+   "role": "ANSWER",
+   "text": "So the microwaves cannot pass through the door.",
+   "facts": [
+    "F2"
+   ]
+  },
+  {
+   "role": "DETAIL",
+   "text": "Visible light has a far shorter wavelength, so it passes straight through.",
+   "facts": [
+    "F2"
+   ]
+  },
+  {
+   "role": "PAYOFF",
+   "text": "That is why you can watch your food while the energy stays in.",
+   "facts": [
+    "F2",
+    "F3"
+   ]
+  }
+ ],
+ "channel": "behind-the-ordinary"
+}

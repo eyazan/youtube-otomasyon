@@ -34,11 +34,12 @@ function failureLine(r) {
     || lines.filter((l) => !/^Node\.js v\d/.test(l) && !/^at /.test(l)).pop() || String(r.error || `exit ${r.status}`);
 }
 
-function edge(scriptFile, outDir, voice) {
+function edge(scriptFile, outDir, voice, ownerApproved = true) {
   const r = cp.spawnSync(process.execPath, [path.join(ROOT, "scripts/fr-premium/narrate-edge.js"), scriptFile, outDir, "--voice", voice], { encoding: "utf8", timeout: edgeTimeoutMs() });
   if (r.status !== 0) throw new Error(failureLine(r));
   const tl = JSON.parse(fs.readFileSync(path.join(outDir, "timeline.json"), "utf8"));
-  Object.assign(tl, { approved: true, wordTiming: "measured (Edge word boundaries)" });
+  Object.assign(tl, { approved: ownerApproved, wordTiming: "measured (Edge word boundaries)" },
+    ownerApproved ? {} : { approvalNote: `CANDIDATE voice ${voice}: not approved by the owner yet (listening test); never publishable` });
   fs.writeFileSync(path.join(outDir, "timeline.json"), JSON.stringify(tl, null, 1) + "\n");
   return tl;
 }
@@ -137,7 +138,7 @@ function narrate(script, outDir, { mode = "auto", preview = true, kokoroVoice = 
   const approved = script.voice.approved;
   let edgeError = null;
   if (mode !== "kokoro") {
-    try { log(`narration: approved voice ${approved.voice} (Edge)`); return edge(scriptFile, outDir, approved.voice); }
+    try { log(`narration: ${script.voice.ownerApproved === false ? "CANDIDATE (unapproved)" : "approved"} voice ${approved.voice} (Edge)`); return edge(scriptFile, outDir, approved.voice, script.voice.ownerApproved !== false); }
     catch (e) { edgeError = e.message; log(`narration: Edge unavailable: ${edgeError}`); if (mode === "edge") throw new Error("approved Edge voice unavailable: " + edgeError); }
   }
   if (!preview) throw new Error(`approved voice unavailable (${edgeError}); the unapproved Kokoro fallback is only allowed with BTO_PREMIUM_RENDER=preview`);

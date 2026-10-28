@@ -122,13 +122,19 @@ test("skills: the seven studio Skills exist with valid frontmatter whose name ma
 
 // The only studio entry points outside scripts/bto-studio are the default-OFF ImpossibleBrief shadow in
 // core/pipeline/impossible-brief.js (IB_PREMIUM_RENDER=preview) and the read-only, no-upload dry-run workflow.
-const STUDIO_ALLOWED = new Set(["ib-premium-dry-run.yml", "fr-studio-dry-run.yml", "premium-render-check.yml", path.join("pipeline", "impossible-brief.js"), path.join("pipeline", "premium-shadow.js"),
+const STUDIO_ALLOWED = new Set(["ib-premium-dry-run.yml", "fr-studio-dry-run.yml", "premium-render-check.yml", "gll-research.yml", path.join("pipeline", "impossible-brief.js"), path.join("pipeline", "premium-shadow.js"), path.join("pipeline", "goal-lore-lab.js"),
+  // the premium-primary lane: only when <PREFIX>_PREMIUM_PRIMARY=1 (a repository variable) or for the premium-only GoalLore Lab
+  path.join("pipeline", "premium-lane.js"),
   // the publishing adapter: flag-gated (<PREFIX>_PREMIUM_PUBLISH=1, set nowhere), renders through the studio and hands the
   // MP4 to the existing uploader only after the publish gate (tests/js/premium-publish.test.js)
   path.join("pipeline", "premium-publish.js")]);
 test("isolation: no live workflow, root production script or channel config references the studio; BTO stays disabled", () => {
   const wf = path.join(ROOT, ".github/workflows");
-  for (const f of fs.readdirSync(wf).filter((x) => !STUDIO_ALLOWED.has(x))) assert.doesNotMatch(fs.readFileSync(path.join(wf, f), "utf8"), /bto-studio|BTO_PREMIUM_RENDER|IB_PREMIUM_RENDER|premium:video/, f);
+  // the live portfolio workflow may reference the studio only inside the GoalLore Lab premium step (its own lane)
+  // and, for FR/IB/HLT, only the studio dependency install that runs when premium is the channel's primary renderer
+  const PRIMARY_DEPS = /^ +if \[ "\$(FR|IB|HLT)_PREMIUM_PRIMARY" = "1" \]; then python -m pip install --quiet -r scripts\/bto-studio\/requirements\.txt && node scripts\/bto-studio\/preflight-deps\.js; fi$/gm;
+  const live = (f) => { const y = fs.readFileSync(path.join(wf, f), "utf8"); if (f !== "portfolio-production.yml") return y; const a = y.indexOf("- name: GoalLore Lab Short (premium)"); return (a < 0 ? y : y.slice(0, a) + y.slice(y.indexOf("node shorts-sira.js --channel goal-lore-lab", a))).replace(PRIMARY_DEPS, ""); };
+  for (const f of fs.readdirSync(wf).filter((x) => !STUDIO_ALLOWED.has(x))) assert.doesNotMatch(live(f), /bto-studio|BTO_PREMIUM_RENDER|IB_PREMIUM_RENDER|premium:video/, f);
   for (const name of ["ib-premium-dry-run.yml", "fr-studio-dry-run.yml", "premium-render-check.yml"]) { const dry = fs.readFileSync(path.join(wf, name), "utf8");
     assert.match(dry, /PUBLISH: '0'/, name); assert.match(dry, /contents: read/, name); assert.doesNotMatch(dry, /_YT_REFRESH_TOKEN|_CLIENT_SECRET|git push|group: portfolio-production/, `${name}: no credentials, no push, own concurrency group`); }
   for (const f of fs.readdirSync(ROOT).filter((x) => x.endsWith(".js"))) assert.doesNotMatch(fs.readFileSync(path.join(ROOT, f), "utf8"), /scripts\/bto-studio/, f);
@@ -187,24 +193,27 @@ test("lifecycle: states advance one at a time and never past weak evidence, plac
   assert.equal(LC.bufferDays([{ state: "SCHEDULED" }, { state: "PUBLISH_APPROVED" }, { state: "QA_PASSED" }]), 2);
 });
 
-test("profiles: The Hidden Logic of Things and ImpossibleBrief (preview, no auto-publish) render in the studio; others refuse with their rollout stage", () => {
+test("profiles: every strategic channel renders in the studio (no auto-publish); an unknown profile is refused", () => {
   assert.equal(J("scripts/bto-studio/profiles/impossible-brief.json").publishing.autoPublish, false);
-  for (const [c, renders] of [["behind-the-ordinary", true], ["failure-reconstructed", true], ["impossible-brief", true], ["goal-lore-lab", false]]) {
+  for (const [c, renders] of [["behind-the-ordinary", true], ["failure-reconstructed", true], ["impossible-brief", true], ["goal-lore-lab", true]]) {
     const p = J(`scripts/bto-studio/profiles/${c}.json`); assert.equal(p.studioRenders, renders, c); assert.equal(p.channel, c);
     if (!renders) { const r = cp.spawnSync(process.execPath, [path.join(STUDIO, "studio.js"), "--channel", c, "--topic", "X"], { encoding: "utf8", env: { ...process.env, BTO_PREMIUM_RENDER: "preview" } }); assert.equal(r.status, 3, c); assert.match(r.stderr, /rollout stage/); }
   }
 });
 
-test("GoalLore Lab: proposed and inert (unregistered, disabled, no credentials, no state); inventory is honest", () => {
-  const reg = J("config/channels.json").channels; assert.equal(reg["goal-lore-lab"], undefined, "not registered");
-  assert.ok(reg["critical-thread"], "CriticalThread untouched");
-  const cfg = J("channels/goal-lore-lab/config.json"); assert.equal(cfg.enabled, false); assert.equal(cfg.publishingEnabled, false); assert.equal(cfg.credentialsCreated, false);
-  assert.equal(fs.existsSync(path.join(ROOT, "channels/goal-lore-lab/state")), false, "no state dir (workflow globs use channels/*/state)");
-  // only the pilot render check may name the channel, and it holds no GLL credentials, pushes nothing, publishes nothing
-  for (const f of fs.readdirSync(path.join(ROOT, ".github/workflows")).filter((x) => x !== "premium-render-check.yml")) assert.doesNotMatch(read(`.github/workflows/${f}`), /goal-lore-lab|GoalLore/, f);
+test("GoalLore Lab: registered successor of CriticalThread, publishing closed; research candidates stay honest", () => {
+  const reg = J("config/channels.json").channels;
+  assert.equal(reg["goal-lore-lab"].enabled, false, "registered, but out of portfolio loops and the publish gate until the owner enables it");
+  assert.equal(reg["goal-lore-lab"].lane, "premium"); assert.equal(reg["critical-thread"].retired.successor, "goal-lore-lab");
+  const cfg = J("channels/goal-lore-lab/config.json"); assert.equal(cfg.publishingEnabled, false); assert.match(String(cfg.credentialsCreated), /^reused/);
+  assert.equal(cfg.replaces.channel, "critical-thread"); assert.equal(cfg.voice.status.startsWith("CANDIDATE"), true, "the voice is not approved by code");
+  // only the research check, the pilot render check and the one production step name the channel; none holds GLL_ secrets or pushes to main
+  const named = fs.readdirSync(path.join(ROOT, ".github/workflows")).filter((f) => /goal-lore-lab|GoalLore/.test(read(`.github/workflows/${f}`))).sort();
+  assert.deepEqual(named, ["gll-research.yml", "portfolio-production.yml", "premium-render-check.yml"]);
   const rc = read(".github/workflows/premium-render-check.yml"); assert.doesNotMatch(rc, /GLL_|_YT_|git push|PUBLISH: '1'/); assert.match(rc, /--pilot/); assert.match(rc, /contents: read/);
+  assert.doesNotMatch(read(".github/workflows/gll-research.yml"), /_YT_|secrets\./, "research needs no credentials");
   const inv = J("channels/goal-lore-lab/topics/topic-candidates.json"); assert.ok(inv.topics.length >= 100);
-  assert.ok(inv.topics.every((t) => t.status === "IDEA" && t.evidence.length === 0), "no topic is claimed researched/verified without evidence");
+  assert.ok(inv.topics.every((t) => t.status === "IDEA" && t.evidence.length === 0), "the idea list claims no research; verified records live in topic-universe.json");
   assert.deepEqual(inv.statusCounts, { IDEA: inv.topics.length, RESEARCHED: 0, VERIFIED: 0, SCRIPT_READY: 0, PRODUCTION_READY: 0 });
   assert.ok(inv.topics.filter((t) => t.pillar === "WHAT_IF").every((t) => t.hypothetical));
   const { build } = require(path.join(ROOT, "scripts/goal-lore-lab/build-candidates.js")); assert.deepEqual(build().topics.map((t) => t.id), inv.topics.map((t) => t.id), "inventory file is reproducible");
@@ -334,10 +343,10 @@ test("creative director: V5 techniques are planned for people, assembly and plac
   }
 });
 
-test("daily readiness matrix: every dimension for every strategic channel, legacy FR state resolved, GLL blocked on identity", () => {
+test("daily readiness matrix: every dimension for every strategic channel, legacy FR state resolved, GLL publishing blocked until activation", () => {
   const r = require(path.join(STUDIO, "daily")).report({});
   const dims = ["topicReadiness", "researchCompleteness", "scriptReadiness", "narration", "premiumRenderer", "qualityGates", "credentials", "duplicatePrevention", "publishingPermission", "schedulerCompatibility"];
   for (const c of r.channels) for (const d of dims) assert.ok(["ready", "partial", "blocked", "unknown"].includes(c.matrix[d].status), `${c.channel}.${d}`);
-  const gll = r.channels.find((c) => c.channel === "goal-lore-lab"); assert.equal(gll.matrix.credentials.status, "blocked"); assert.equal(gll.matrix.publishingPermission.status, "blocked");
+  const gll = r.channels.find((c) => c.channel === "goal-lore-lab"); assert.notEqual(gll.matrix.credentials.status, "ready", "no identity check recorded yet"); assert.equal(gll.matrix.publishingPermission.status, "blocked");
   const fr = r.channels.find((c) => c.channel === "failure-reconstructed"); assert.ok(fr.topics.published > 0, "FR publish history read from its legacy state (icerik/)");
 });

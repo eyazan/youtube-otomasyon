@@ -114,7 +114,7 @@ async function main() {
     if (!pf.ok) throw new Error(`missing dependencies, nothing was rendered: ${pf.missing.join("; ")}`); log(`dependencies: OK (${pf.checked.python.join(", ")})`); }
 
   // ---- narrate ------------------------------------------------------------------------------------------------
-  const ndir = path.join(dir, "out", "narration"); const nHash = sha({ beats: script.beats, voiceMode, kv: opt("--kokoro-voice", "af_heart"), code: fs.readFileSync(path.join(__dirname, "narrate.js"), "utf8") });
+  const ndir = path.join(dir, "out", "narration"); const nHash = sha({ beats: script.beats, voiceMode, voice: script.voice, kv: opt("--kokoro-voice", "af_heart"), code: fs.readFileSync(path.join(__dirname, "narrate.js"), "utf8") });
   let timeline;
   const hashFile = path.join(ndir, "narration-hash.txt"); const sharedFresh = !flag("--force") && fs.existsSync(hashFile) && fs.readFileSync(hashFile, "utf8").trim() === nHash;
   if ((fresh("narrate", nHash) || sharedFresh) && fs.existsSync(path.join(ndir, "timeline.json"))) { timeline = J(path.join(ndir, "timeline.json")); log(`narration: cached (${timeline.voice}, ${timeline.duration} s)`); }

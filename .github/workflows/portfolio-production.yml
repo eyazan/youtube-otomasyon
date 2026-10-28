@@ -44,12 +44,17 @@ on:
       channel:
         description: Channel to run
         type: choice
-        options: [all, both, failure-reconstructed, impossible-brief, behind-the-ordinary]
+        options: [all, both, failure-reconstructed, impossible-brief, behind-the-ordinary, goal-lore-lab]
         default: all
       dry_run:
         description: Render and validate without upload
         type: boolean
         default: true
+      engine:
+        description: Renderer for FR, IB and The Hidden Logic of Things on this run (default = the channel's <PREFIX>_PREMIUM_PRIMARY variable)
+        type: choice
+        options: [default, premium, legacy]
+        default: default
 
 concurrency:
   group: portfolio-production
@@ -184,8 +189,16 @@ jobs:
         env:
           PUBLISH: ${{ (github.event_name == 'schedule' || github.event_name == 'repository_dispatch') && '1' || vars.FR_PUBLISH || vars.PUBLISH }}
           PRODUCTION_RESULT_PATH: ${{ runner.temp }}/fr-production-result.json
+          # Premium primary (core/pipeline/premium-lane.js) when FR_PREMIUM_PRIMARY=1 or engine=premium; the legacy
+          # renderer then does not run. FR_PREMIUM_PUBLISH passes the repository variable through, never a literal.
+          FR_PREMIUM_PRIMARY: ${{ inputs.engine == 'premium' && '1' || (inputs.engine != 'legacy' && vars.FR_PREMIUM_PRIMARY == '1') && '1' || 'off' }}
+          FR_PREMIUM_PUBLISH: ${{ vars.FR_PREMIUM_PUBLISH == '1' && '1' || 'off' }}
+          PD_CHROMIUM: /usr/bin/google-chrome
+          EDGE_RATE_LIMIT_RETRIES: '6'
+          EDGE_TRANSIENT_RETRIES: '5'
         run: |
           if [ "${{ inputs.dry_run }}" = "true" ]; then export PUBLISH=0; fi
+          if [ "$FR_PREMIUM_PRIMARY" = "1" ]; then python -m pip install --quiet -r scripts/bto-studio/requirements.txt && node scripts/bto-studio/preflight-deps.js; fi
           node saglik.js --channel failure-reconstructed || true
           node shorts-sira.js --channel failure-reconstructed
 
@@ -194,20 +207,56 @@ jobs:
         continue-on-error: true
         env:
           PUBLISH: ${{ (github.event_name == 'schedule' || github.event_name == 'repository_dispatch') && '1' || vars.IB_PUBLISH }}
+          # Premium primary (core/pipeline/premium-lane.js) when IB_PREMIUM_PRIMARY=1 or engine=premium; the legacy
+          # renderer then does not run. IB_PREMIUM_PUBLISH passes the repository variable through, never a literal.
+          IB_PREMIUM_PRIMARY: ${{ inputs.engine == 'premium' && '1' || (inputs.engine != 'legacy' && vars.IB_PREMIUM_PRIMARY == '1') && '1' || 'off' }}
+          IB_PREMIUM_PUBLISH: ${{ vars.IB_PREMIUM_PUBLISH == '1' && '1' || 'off' }}
+          PD_CHROMIUM: /usr/bin/google-chrome
+          EDGE_RATE_LIMIT_RETRIES: '6'
+          EDGE_TRANSIENT_RETRIES: '5'
         run: |
           if [ "${{ inputs.dry_run }}" = "true" ]; then export PUBLISH=0; fi
+          if [ "$IB_PREMIUM_PRIMARY" = "1" ]; then python -m pip install --quiet -r scripts/bto-studio/requirements.txt && node scripts/bto-studio/preflight-deps.js; fi
           node saglik.js --channel impossible-brief || true
           node shorts-sira.js --channel impossible-brief
 
-      # Inactive channel (config/channels.json enabled:false): only an explicit manual run produces it.
+      # GoalLore Lab: premium-only lane, successor of the retired CriticalThread on the same YouTube channel
+      # (config/channels.json). Scheduled runs produce it only when GLL_ACTIVE=1; a manual run is a dry run unless
+      # GLL_PUBLISH=1. Even then it uploads ONLY an approved premium package: core/pipeline/premium-publish.js needs
+      # the channel's premium publish variable, the owner's sign-offs or signed publication policy, the approved voice and
+      # the registry entry enabled. Otherwise it renders one review candidate, never uploaded (core/pipeline/goal-lore-lab.js).
+      - name: GoalLore Lab Short (premium)
+        if: ${{ always() && (((github.event_name == 'schedule' || github.event_name == 'repository_dispatch') && vars.GLL_ACTIVE == '1') || inputs.channel == 'goal-lore-lab') }}
+        continue-on-error: true
+        env:
+          PUBLISH: ${{ vars.GLL_PUBLISH == '1' && '1' || '0' }}
+          GLL_PREMIUM_PUBLISH: ${{ vars.GLL_PREMIUM_PUBLISH == '1' && '1' || 'off' }}
+          PD_CHROMIUM: /usr/bin/google-chrome
+          EDGE_RATE_LIMIT_RETRIES: '6'
+          EDGE_TRANSIENT_RETRIES: '5'
+        run: |
+          if [ "${{ inputs.dry_run }}" = "true" ]; then export PUBLISH=0; fi
+          python -m pip install --quiet -r scripts/bto-studio/requirements.txt
+          node scripts/bto-studio/preflight-deps.js
+          node shorts-sira.js --channel goal-lore-lab
+
+      # Scheduled only once premium is its primary renderer (HLT_PREMIUM_PRIMARY=1); otherwise only an explicit manual run.
       - name: The Hidden Logic of Things Short
-        if: ${{ always() && github.event_name == 'workflow_dispatch' && inputs.channel == 'behind-the-ordinary' }}
+        if: ${{ always() && (((github.event_name == 'schedule' || github.event_name == 'repository_dispatch') && vars.HLT_PREMIUM_PRIMARY == '1') || (github.event_name == 'workflow_dispatch' && inputs.channel == 'behind-the-ordinary')) }}
         continue-on-error: true
         env:
           # The Hidden Logic of Things publishes only when BTO_PUBLISH=1, scheduled or not.
           PUBLISH: ${{ vars.BTO_PUBLISH == '1' && '1' || '0' }}
+          # Premium primary (core/pipeline/premium-lane.js) when HLT_PREMIUM_PRIMARY=1 or engine=premium; the legacy
+          # renderer then does not run. HLT_PREMIUM_PUBLISH passes the repository variable through, never a literal.
+          HLT_PREMIUM_PRIMARY: ${{ inputs.engine == 'premium' && '1' || (inputs.engine != 'legacy' && vars.HLT_PREMIUM_PRIMARY == '1') && '1' || 'off' }}
+          HLT_PREMIUM_PUBLISH: ${{ vars.HLT_PREMIUM_PUBLISH == '1' && '1' || 'off' }}
+          PD_CHROMIUM: /usr/bin/google-chrome
+          EDGE_RATE_LIMIT_RETRIES: '6'
+          EDGE_TRANSIENT_RETRIES: '5'
         run: |
           if [ "${{ inputs.dry_run }}" = "true" ]; then export PUBLISH=0; fi
+          if [ "$HLT_PREMIUM_PRIMARY" = "1" ]; then python -m pip install --quiet -r scripts/bto-studio/requirements.txt && node scripts/bto-studio/preflight-deps.js; fi
           node saglik.js --channel behind-the-ordinary || true
           node shorts-sira.js --channel behind-the-ordinary
 
@@ -285,6 +334,9 @@ jobs:
             channels/*/state/production/*/validations.json
             channels/*/state/production/*/render.json
             channels/*/state/production/*/visual-attribution.json
+            channels/*/premium/*/out/*.mp4
+            channels/*/premium/*/out/*.md
+            channels/*/premium/*/out/review-package.json
           if-no-files-found: ignore
           retention-days: 7
 

@@ -155,7 +155,9 @@ function studioScript(channel, topic, { pauses = {} } = {}) {
     schema: "bto-studio.narration-script.v1",
     channel: channel.slug, topicId: topic.id, slug: topic.slug, title: topic.title, coreQuestion: topic.coreQuestion,
     sourceHash: sha(JSON.stringify(topic.narration)).slice(0, 16),
-    voice: { approved: { provider: voice.provider, voice: voice.voice, rate: voice.rate } },
+    // a channel voice still marked CANDIDATE (GoalLore Lab until the owner's listening test) is read with Edge but never
+    // counts as approved: narrate.js marks the timeline unapproved, so the package is PREVIEW_ONLY and the gate refuses
+    voice: { approved: { provider: voice.provider, voice: voice.voice, rate: voice.rate }, ownerApproved: !/^CANDIDATE/i.test(String(voice.status || "")) && voice.approved !== false },
     lines, beats, facts: facts.map(({ id, hash, role, claim, quote, source, url, layer }) => ({ id, hash, role, claim, quote, source, url, layer })),
   };
 }

@@ -4,18 +4,67 @@
   "handle": "@GoalLoreLab",
   "tagline": "Every Goal Has a Story.",
   "corePromise": "The stories, mysteries, physics and tactics behind football's greatest players and moments, told with original animation.",
-  "status": "PROPOSED: not registered in config/channels.json, no YouTube channel, no credentials, no schedules. Registration is a separate owner decision (docs/premium-studio/goal-lore-lab.md).",
+  "status": "REGISTERED 2026-10-27 (config/channels.json, enabled:false): replaces CriticalThread on the same YouTube channel, which the owner renamed GoalLore Lab. Premium lane only; publishing stays closed until owner approval.",
   "enabled": false,
   "publishingEnabled": false,
-  "replacesStrategically": "critical-thread (strategic direction only; CriticalThread stays registered and running until an explicit migration decision)",
   "credentialsPrefix": "GLL",
-  "credentialEnv": { "clientId": ["GLL_YT_CLIENT_ID"], "clientSecret": ["GLL_YT_CLIENT_SECRET"], "refreshToken": ["GLL_YT_REFRESH_TOKEN"], "channelId": ["GLL_YT_CHANNEL_ID"] },
-  "credentialsCreated": false,
+  "credentialEnv": {
+    "clientId": [
+      "GLL_YT_CLIENT_ID",
+      "CT_CLIENT_ID",
+      "CT_YT_CLIENT_ID"
+    ],
+    "clientSecret": [
+      "GLL_YT_CLIENT_SECRET",
+      "CT_CLIENT_SECRET",
+      "CT_YT_CLIENT_SECRET"
+    ],
+    "refreshToken": [
+      "GLL_YT_REFRESH_TOKEN",
+      "CT_YT_REFRESH_TOKEN",
+      "CT_REFRESH_TOKEN"
+    ],
+    "channelId": [
+      "GLL_YT_CHANNEL_ID",
+      "CT_YT_CHANNEL_ID"
+    ]
+  },
+  "credentialsCreated": "reused: the existing CriticalThread OAuth client, refresh token and channel id (CT_* secrets/variables) authorise the same, renamed YouTube channel; GLL_* names take precedence if the owner ever adds them",
   "pathMode": "isolated",
   "audience": "broad international football audience, teens to adults; English first",
-  "voice": { "provider": "edge-tts", "voice": "en-GB-RyanNeural", "status": "CANDIDATE: not approved; choose by blind listening test before any production" },
-  "publishingCadence": { "shorts": { "everyDays": 1, "targetDurationSeconds": [35, 55], "skipWhenQualityFails": true }, "longForm": { "everyDays": 7, "targetDurationMinutes": [8, 14] } },
-  "contentPillars": ["LEGENDS", "MOMENTS", "MYSTERIES", "HISTORY", "PHYSICS", "TACTICS", "WHAT_IF"],
+  "voice": {
+    "provider": "edge-tts",
+    "voice": "en-GB-RyanNeural",
+    "status": "CANDIDATE: not approved; choose by blind listening test before any production"
+  },
+  "publishingCadence": {
+    "shorts": {
+      "everyDays": 1,
+      "leadDays": 0,
+      "productionTime": "10:00",
+      "targetDurationSeconds": [
+        25,
+        55
+      ],
+      "skipWhenQualityFails": true
+    },
+    "longForm": {
+      "everyDays": 7,
+      "targetDurationMinutes": [
+        8,
+        14
+      ]
+    }
+  },
+  "contentPillars": [
+    "LEGENDS",
+    "MOMENTS",
+    "MYSTERIES",
+    "HISTORY",
+    "PHYSICS",
+    "TACTICS",
+    "WHAT_IF"
+  ],
   "topicRules": {
     "requiresVerifiedEvidenceBeforeProduction": true,
     "requiresVerbatimQuotes": true,
@@ -27,6 +76,36 @@
     "noTransferRumours": true,
     "noLiveResultsChasing": true
   },
-  "qualityThresholds": { "publish": 88, "review": 78, "sourceQualityMinimum": 90, "hookMinimum": 85, "visualRelevanceMinimum": 90, "copyrightRiskMaximum": "low" },
-  "platforms": { "youtube": { "enabled": false }, "instagram": { "enabled": false }, "tiktok": { "enabled": false } }
+  "qualityThresholds": {
+    "publish": 88,
+    "review": 78,
+    "sourceQualityMinimum": 90,
+    "hookMinimum": 85,
+    "visualRelevanceMinimum": 90,
+    "copyrightRiskMaximum": "low"
+  },
+  "platforms": {
+    "youtube": {
+      "enabled": true
+    },
+    "instagram": {
+      "enabled": false
+    },
+    "tiktok": {
+      "enabled": false
+    }
+  },
+  "replaces": {
+    "channel": "critical-thread",
+    "since": "2026-10-27",
+    "sameYouTubeChannel": true,
+    "note": "CriticalThread is retired (config/channels.json); its topics, scripts and branding are never used here and its state stays as history."
+  },
+  "allowLegacyYouTubeEnv": false,
+  "lane": "premium",
+  "publishTime": "21:00",
+  "publishTimeUtc": "18:00",
+  "publishTimeZone": "Europe/Istanbul",
+  "timezone": "Europe/Istanbul",
+  "youtubeChannelId": ""
 }

@@ -30,7 +30,8 @@ test("CT research runs on the free provider only: no paid primary, no paid fallb
 
 test("the workflow pins Groq with no fallback, carries no paid key, and its schedule is off until approved", () => {
   const yml = fs.readFileSync(path.join(ROOT, ".github", "workflows", "ct-research.yml"), "utf8");
-  assert.match(yml, /if: github\.event_name == 'workflow_dispatch' \|\| vars\.CT_RESEARCH_AUTO == 'true'/);
+  // CriticalThread is retired (2026-10-27): no schedule, manual runs only
+  assert.match(yml, /if: github\.event_name == 'workflow_dispatch'\n/); assert.doesNotMatch(yml, /^  schedule:/m);
   assert.match(yml, /LONGFORM_LLM_PROVIDER: groq/);
   assert.match(yml, /LONGFORM_LLM_FALLBACK_PROVIDER: ''/);
   assert.doesNotMatch(yml, /ANTHROPIC/);

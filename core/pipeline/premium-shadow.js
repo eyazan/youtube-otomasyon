@@ -17,7 +17,7 @@ const Slots = require("../../lib/slot-lock");
 // or the topic's state, and its package is a duplicate by construction (SHADOW_OF_LIVE_NOT_PUBLISHABLE; the publish
 // gate blocks it at TOPIC_READY). Publishing a premium Short is a separate owner go-live switch that does not exist yet.
 const TIME_BIN = "/usr/bin/time";
-const PREFIX = { "impossible-brief": "IB", "failure-reconstructed": "FR", "behind-the-ordinary": "HLT" };
+const PREFIX = { "impossible-brief": "IB", "failure-reconstructed": "FR", "behind-the-ordinary": "HLT", "goal-lore-lab": "GLL" };
 // channels whose premium/<topic>/ folders hold tracked, directed pilots render the shadow into a separate git-ignored folder
 // (premium/shadow/<topic>/, automatic storyboard, the topic's prepared assets): the pilot's storyboard and evidence stay untouched
 const SEPARATE_DIR = new Set(["behind-the-ordinary"]);

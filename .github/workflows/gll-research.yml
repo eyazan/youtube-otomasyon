@@ -1,0 +1,116 @@
+name: GoalLore Lab research verification
+
+# Verifies the hand-drafted football research (channels/goal-lore-lab/research/drafts) against the live sources:
+# scripts/gll-research/verify.js copies every quote verbatim from the Wikipedia article at a pinned revision and checks the
+# claim and narration numbers against it. Nothing is rendered or uploaded. On the migration branch a push to the drafts
+# re-verifies and records them; anywhere else it runs on demand, and only write=true records. It commits only
+# channels/goal-lore-lab/topics/topic-universe.json, to the branch it ran on.
+on:
+  # the migration branch verifies (and records) its drafts on every change to them; main runs it only on demand
+  push:
+    branches: [feat/goal-lore-lab-lane]
+    paths:
+      - 'channels/goal-lore-lab/research/drafts/**'
+      - 'channels/behind-the-ordinary/research/drafts/**'
+      - 'scripts/gll-research/**'
+      - '.github/workflows/gll-research.yml'
+  workflow_dispatch:
+    inputs:
+      only:
+        description: Comma-separated topic ids (empty = all drafts)
+        default: ''
+      write:
+        description: Commit the verified topic records
+        type: boolean
+        default: false
+
+concurrency:
+  group: gll-research
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Verify drafts against the live sources
+        env:
+          ONLY: ${{ inputs.only }}
+        run: |
+          set -o pipefail
+          ARGS=(--report gll-research-report.json)
+          if [ -n "$ONLY" ]; then ARGS+=(--only "$ONLY"); fi
+          if [ "${{ inputs.write }}" = "true" ] || [ "${{ github.event_name }}" = "push" ]; then ARGS+=(--write); fi
+          node scripts/gll-research/verify.js "${ARGS[@]}" | tee -a "$GITHUB_STEP_SUMMARY"
+          # The Hidden Logic of Things: hand-drafted answers to existing universe questions, same verbatim verification
+          node scripts/gll-research/verify.js --channel behind-the-ordinary "${ARGS[@]/gll-research-report.json/hlt-research-report.json}" | tee -a "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gll-research-report
+          path: |
+            gll-research-report.json
+            hlt-research-report.json
+            channels/goal-lore-lab/topics/topic-universe.json
+          if-no-files-found: warn
+          retention-days: 30
+      - name: Commit verified records
+        if: ${{ inputs.write || github.event_name == 'push' }}
+        run: |
+          git config user.name "gll-research-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add channels/goal-lore-lab/topics/topic-universe.json channels/behind-the-ordinary/topics/topic-universe.json
+          if git diff --cached --quiet; then echo "unchanged"; exit 0; fi
+          git commit -m "chore: GoalLore Lab and Hidden Logic of Things verified research records"
+          for i in 1 2 3 4 5; do git pull --rebase --autostash origin "$GITHUB_REF_NAME" && git push origin "HEAD:$GITHUB_REF_NAME" && exit 0; sleep $((i * 5)); done
+          exit 1
+
+  # Listening samples for the owner: the same verified script read by each candidate Edge voice (the approved Edge
+  # infrastructure through scripts/bto-studio/narrate.js). Nothing here marks a voice approved; the owner chooses by ear
+  # and records the choice in channels/goal-lore-lab/config.json.
+  voice-samples:
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        voice: [en-GB-RyanNeural, en-GB-ThomasNeural, en-US-ChristopherNeural]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Runtime dependencies
+        run: |
+          bash scripts/ci-apt.sh --no-install-recommends ffmpeg
+          npm ci --no-audit --no-fund
+          python -m pip install --quiet -r scripts/bto-studio/requirements.txt
+      - name: Read the verified GLL-021 script (CANDIDATE voice)
+        env:
+          VOICE: ${{ matrix.voice }}
+        run: |
+          git pull --quiet origin "$GITHUB_REF_NAME" || true
+          node scripts/gll-research/voice-samples.js "$VOICE" "voice-$VOICE" GLL-021
+          ffmpeg -loglevel error -y -i "voice-$VOICE/narration.wav" -codec:a libmp3lame -q:a 3 "GLL-voice-$VOICE.mp3"
+          echo "$VOICE: $(ffprobe -v error -show_entries format=duration -of csv=p=0 "GLL-voice-$VOICE.mp3") s" | tee -a "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gll-voice-${{ matrix.voice }}
+          path: GLL-voice-${{ matrix.voice }}.mp3
+          retention-days: 30

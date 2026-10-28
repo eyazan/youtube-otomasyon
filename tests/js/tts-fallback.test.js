@@ -61,7 +61,9 @@ test("upload guard: a package narrated by an unapproved fallback voice is refuse
   fs.writeFileSync(path.join(dir, "Videos", "denetim.json"), JSON.stringify({ voice: { provider: "edge-tts", voice: "en-US-AndrewMultilingualNeural" } }));
   assert.equal(TTS.uploadAllowed(channelWith(null), dir).ok, true, "the primary Edge voice is unaffected");
   const uploader = fs.readFileSync(path.join(ROOT, "youtube-yukle.js"), "utf8");
-  assert.ok(uploader.indexOf("uploadAllowed(CHANNEL, BASE)") > 0 && uploader.indexOf("uploadAllowed(CHANNEL, BASE)") < uploader.indexOf("getYouTubeClient"), "checked before any YouTube call");
+  // the upload path starts after the --dogrula dry run returns (that dry run only reads the channel identity)
+  const dry = uploader.indexOf("[--dogrula] KURU CALISMA"); const upload = uploader.slice(uploader.indexOf("return;", dry));
+  assert.ok(dry > 0 && upload.indexOf("uploadAllowed(CHANNEL, BASE)") > 0 && upload.indexOf("uploadAllowed(CHANNEL, BASE)") < upload.indexOf("getYouTubeClient"), "checked before any YouTube call");
 });
 
 test("speech check: real speech passes; a tone, silence or a truncated read fails", () => {
