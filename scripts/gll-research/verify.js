@@ -27,6 +27,10 @@ const dirs = (channel) => { const base = path.join(ROOT, "channels", channel); r
 const RIGHTS = { "goal-lore-lab": { footage: "none (original animation only)", likeness: "generic player tokens, no kits or crests" }, "behind-the-ordinary": { footage: "none (original animation only)", likeness: "generic objects, no brands or logos" } };
 // the research fields --write sets on a Hidden Logic of Things universe row
 const RESEARCH_FIELDS = ["researchStatus", "productionReady", "researchedAt", "researchMethod", "rights", "narration", "facts", "sources", "verification"];
+// The Hidden Logic of Things production package (core/quality/behind-the-ordinary.js): hand-written in the draft's
+// "editorial" block from the verified narration; a VERIFIED record without it is not productionReady
+const BTO_EDITORIAL = ["hook", "openingLine", "secondBeat", "mechanism", "expectedConsequence", "misconception", "payoff", "thumbnailText", "editorialTitles"];
+const editorialGaps = (e) => BTO_EDITORIAL.filter((k) => (k === "editorialTitles" ? !(Array.isArray(e[k]) && e[k].length >= 3) : !(typeof e[k] === "string" && e[k].trim())));
 const UA = "youtube-otomasyon-research/1.0 (GoalLore Lab fact verification; https://github.com/eyazan/youtube-otomasyon)";
 const isYear = (n) => Number.isInteger(n) && n >= 1800 && n <= 2100;
 const fold = (s) => normalizeQuote(String(s).normalize("NFD").replace(/[̀-ͯ]/g, ""));
@@ -48,7 +52,7 @@ function get(url) {
 function getText(url, redirects = 3) {
   return new Promise((resolve, reject) => {
     const req = https.get(url, { headers: { "User-Agent": UA, Accept: "text/html,application/xhtml+xml" }, timeout: 30000 }, (res) => {
-      if ([301, 302, 303, 307, 308].includes(res.statusCode) && res.headers.location && redirects > 0) { res.resume(); return resolve(getText(new URL(res.headers.location, url).href, redirects - 1)); }
+      if ([301, 302, 303, 307, 308].includes(res.statusCode) && res.headers.location && redirects > 0) { res.resume(); const next = new URL(res.headers.location, url); if (next.protocol === "http:") next.protocol = "https:"; return resolve(getText(next.href, redirects - 1)); }
       const chunks = []; res.on("data", (c) => chunks.push(c));
       res.on("end", () => (res.statusCode === 200 ? resolve({ url, html: Buffer.concat(chunks).toString("utf8") }) : reject(new Error(`HTTP ${res.statusCode} for ${url}`))));
     });
@@ -136,15 +140,18 @@ async function verifyDraft(draft, fetchJson = get, channel = "goal-lore-lab", fe
   const below = [];
   if (channel === "behind-the-ordinary") {
     if (facts.filter((f) => f.layer === "VERIFIED FACT").length < 5) below.push(`${facts.filter((f) => f.layer === "VERIFIED FACT").length} verified facts (the channel standard needs 5)`);
-    if (require("../../core/quality/behind-the-ordinary").authorityFacts(facts.filter((f) => f.layer === "VERIFIED FACT" && f.primary)) < 2) below.push("fewer than two facts from primary (non-Wikipedia) sources");
+    if (require("../../core/quality/behind-the-ordinary").authorityFacts({ facts: facts.filter((f) => f.layer === "VERIFIED FACT" && f.primary) }) < 2) below.push("fewer than two facts from primary (non-Wikipedia) sources");
     if (new Set(facts.filter((f) => f.primary && f.layer === "VERIFIED FACT").map((f) => f.url)).size < 2) below.push("fewer than two distinct primary source pages");
   }
   const ok = errors.length === 0;
   const status = !ok ? "RESEARCHED" : below.length ? "NEEDS_PRIMARY_SOURCE" : "VERIFIED";
   if (ok && below.length) errors.push(...below.map((b) => `channel standard: ${b}`));
+  const editorial = channel === "behind-the-ordinary" ? Object.fromEntries(BTO_EDITORIAL.filter((k) => draft.editorial && draft.editorial[k] !== undefined).map((k) => [k, draft.editorial[k]])) : {};
+  const gaps = channel === "behind-the-ordinary" ? editorialGaps(editorial) : [];
+  if (status === "VERIFIED" && gaps.length) errors.push(`editorial package incomplete (${gaps.join(", ")}): research VERIFIED, not productionReady`);
   return {
     id: draft.id, slug: draft.slug, title: draft.title, coreQuestion: draft.coreQuestion, pillar: draft.pillar, channel,
-    hypothetical: false, researchStatus: status, productionReady: status === "VERIFIED", researchedAt: new Date().toISOString(),
+    hypothetical: false, researchStatus: status, productionReady: status === "VERIFIED" && gaps.length === 0, ...editorial, researchedAt: new Date().toISOString(),
     researchMethod: "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live source (a Wikipedia article at the pinned revision, or a primary-host page pinned to its fetch time and text sha256); claim and narration numbers checked against the quotes",
     rights: RIGHTS[channel],
     ...(channel === "behind-the-ordinary" ? { sources: [...new Map(facts.filter((f) => f.primary && f.layer === "VERIFIED FACT").map((f) => [f.url, { name: f.sourceTitle, url: f.url, type: "primary source (verbatim quote verified)" }])).values()] } : {}),
@@ -172,7 +179,7 @@ async function run(argv = process.argv.slice(2), { fetchJson = get, fetchText = 
     // fill only the research fields of the drafted rows; never downgrade a row researched by another pipeline
     const prev = JSON.parse(fs.readFileSync(UNIVERSE, "utf8")); const byId = new Map(records.map((r) => [r.id, r]));
     prev.topics = prev.topics.map((t) => { const r = byId.get(t.id); if (!r || (t.researchStatus !== "QUESTION_ONLY" && !String(t.researchMethod || "").startsWith("scripts/gll-research/verify.js"))) return t;
-      return { ...t, ...Object.fromEntries(RESEARCH_FIELDS.map((k) => [k, r[k]])) }; });
+      return { ...t, ...Object.fromEntries([...RESEARCH_FIELDS, ...BTO_EDITORIAL.filter((k) => r[k] !== undefined)].map((k) => [k, r[k]])) }; });
     fs.writeFileSync(UNIVERSE, JSON.stringify(prev, null, 2) + "\n");
     log(`wrote ${path.relative(ROOT, UNIVERSE)} (${records.length} row(s))`);
   } else if (argv.includes("--write")) {
