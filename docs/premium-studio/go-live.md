@@ -44,6 +44,50 @@ uploader in `--dogrula` mode on a temporary copy. Nothing is uploaded or approve
 
    Only then is the channel LIVE. Move on to the next channel.
 
+## First controlled premium publication: Failure Reconstructed, then ImpossibleBrief
+
+Do FR first. Start IB only after FR's first premium Short is confirmed public.
+
+### Evidence before signing
+
+**Dry run 40638404814** (`engine=premium`), on the real packages FR-gemini-8-1966 and IB-EXT-050:
+- objective QA PASS, approved voice, READY_FOR_HUMAN_REVIEW;
+- the uploader's `--dogrula` exit 0, with identity verified;
+- with the policy's sign-offs simulated, the publish gate reaches **PUBLISH_APPROVED**.
+
+**Local staging test:** a package staged exactly as on a publication day passes every gate of the real uploader before OAuth:
+- quality gate PUBLISH;
+- approved narration voice;
+- the target day's 21:00 Istanbul `publishAt`.
+
+### Steps per channel (`P` = `FR`, then `IB`)
+
+1. **Sign the policy.** In `channels/<channel>/premium/publication-policy.json` on main, set:
+   - `"status": "SIGNED"`
+   - `"signedBy": "<your name>"`
+   - `"signedAt": "<ISO time>"`
+
+   Commit it. The commit is the authorization record, and every approval names this file's sha256.
+2. **Set the repository variables.** Under Settings → Secrets and variables → Actions → Variables, set `P_PREMIUM_PUBLISH=1` and `P_PREMIUM_PRIMARY=1`. From the next run, the legacy renderer stops for this channel.
+3. **Pre-flight.** Dispatch `portfolio-production.yml` with `channel=<channel>`, `dry_run=true` and `engine=default`. Expect these lines:
+   - `reserved under the signed publication policy <sha> (dry run: not written)`;
+   - a final render with the approved voice;
+   - `youtube-yukle.js --dogrula`.
+
+   Nothing is written. Any other outcome: stop and unset the two variables.
+4. **First publication.** The next scheduled run after the channel's production slot does it. FR's slot is 09:00 Istanbul and IB's is 09:30; the hourly schedule retries until 21:00. That run:
+   - reserves the best qualified topic and binds the policy to its rendered content hash;
+   - uploads it **private**, with `publishAt` on that day's 21:00 Istanbul slot.
+5. **Verify.** In the run summary, `production-outcome` shows `UPLOADED premium <topicId> <videoId>`. Then check:
+   - `channels/<channel>/premium/approvals/<topicId>.json` carries `publishedVideoId`, and the published ledger has the video id;
+   - YouTube Studio shows the video private and scheduled for 21:00;
+   - after 21:00, YouTube reports it public (`PUBLICATION_CONFIRMED`).
+
+   Only then is the channel LIVE on premium.
+6. **IB.** Repeat steps 1–5 for IB on a later day.
+
+**If a step fails:** unset `P_PREMIUM_PRIMARY` and the legacy lane takes the next run. Unset `P_PREMIUM_PUBLISH` to stop premium publication altogether. A reserved topic that was not published stays reserved. Delete its approvals file to release it.
+
 ## Rollback
 
 | Scope | Action |
