@@ -17149,8 +17149,8 @@
         "avoidPairingWithinDays": 30,
         "compareAgainstPublished": true
       },
-      "researchStatus": "RESEARCHED",
-      "productionReady": false,
+      "researchStatus": "VERIFIED",
+      "productionReady": true,
       "facts": [
         {
           "id": "F1",
@@ -17187,19 +17187,27 @@
         },
         {
           "id": "P1",
+          "role": null,
           "claim": "Microwaves are produced inside the oven by an electron tube called a magnetron.",
-          "quote": "",
-          "layer": "UNVERIFIED",
-          "source": "https://www.fda.gov/radiation-emitting-products/resources-you-radiation-emitting-products/microwave-oven-radiation",
-          "url": null
+          "quote": "A device called a magnetron inside the oven produces microwaves.",
+          "layer": "VERIFIED FACT",
+          "url": "https://www.fda.gov/radiation-emitting-products/resources-you-radiation-emitting-products/microwave-ovens",
+          "sourceTitle": "Microwave Ovens | FDA",
+          "source": "Microwave Ovens | FDA (fetched 2026-10-28T08:16:45.333Z, text sha256 ede428dc4d146722)",
+          "primary": true,
+          "textSha256": "ede428dc4d14672261e727adb05ab5860698c0913c37de5d6fcd44e7d349a596"
         },
         {
           "id": "P2",
+          "role": null,
           "claim": "A federal standard limits the amount of microwaves that can leak from an oven throughout its lifetime to 5 milliwatts of microwave radiation per square centimeter at approximately 2 inches from the oven surface.",
-          "quote": "",
-          "layer": "UNVERIFIED",
-          "source": "https://www.fda.gov/radiation-emitting-products/resources-you-radiation-emitting-products/microwave-oven-radiation",
-          "url": null
+          "quote": "A Federal standard (21 CFR 1030.10) limits the amount of microwaves that can leak from an oven throughout its lifetime to 5 milliwatts (mW) of microwave radiation per square centimeter at approximately 2 inches from the oven surface.",
+          "layer": "VERIFIED FACT",
+          "url": "https://www.fda.gov/radiation-emitting-products/resources-you-radiation-emitting-products/microwave-ovens",
+          "sourceTitle": "Microwave Ovens | FDA",
+          "source": "Microwave Ovens | FDA (fetched 2026-10-28T08:16:45.333Z, text sha256 ede428dc4d146722)",
+          "primary": true,
+          "textSha256": "ede428dc4d14672261e727adb05ab5860698c0913c37de5d6fcd44e7d349a596"
         },
         {
           "id": "P3",
@@ -17209,12 +17217,17 @@
           "layer": "VERIFIED FACT",
           "url": "https://www.law.cornell.edu/cfr/text/21/1030.10",
           "sourceTitle": "21 CFR &sect; 1030.10 - Microwave ovens. | Electronic Code of Federal Regulations (e-CFR) | US Law | LII / Legal Information Institute",
-          "source": "21 CFR &sect; 1030.10 - Microwave ovens. | Electronic Code of Federal Regulations (e-CFR) | US Law | LII / Legal Information Institute (fetched 2026-10-28T08:04:56.856Z, text sha256 82ba102493318f86)",
+          "source": "21 CFR &sect; 1030.10 - Microwave ovens. | Electronic Code of Federal Regulations (e-CFR) | US Law | LII / Legal Information Institute (fetched 2026-10-28T08:16:46.058Z, text sha256 82ba102493318f86)",
           "primary": true,
           "textSha256": "82ba102493318f866da2671cfe2fa6a5c902958d44bc277bbe43c8e3b7e89469"
         }
       ],
       "sources": [
+        {
+          "name": "Microwave Ovens | FDA",
+          "url": "https://www.fda.gov/radiation-emitting-products/resources-you-radiation-emitting-products/microwave-ovens",
+          "type": "primary source (verbatim quote verified)"
+        },
         {
           "name": "21 CFR &sect; 1030.10 - Microwave ovens. | Electronic Code of Federal Regulations (e-CFR) | US Law | LII / Legal Information Institute",
           "url": "https://www.law.cornell.edu/cfr/text/21/1030.10",
@@ -17229,7 +17242,7 @@
         "validatedCandidate": true
       },
       "status": "qualified",
-      "researchedAt": "2026-10-28T08:04:56.860Z",
+      "researchedAt": "2026-10-28T08:16:46.062Z",
       "researchMethod": "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live source (a Wikipedia article at the pinned revision, or a primary-host page pinned to its fetch time and text sha256); claim and narration numbers checked against the quotes",
       "rights": {
         "footage": "none (original animation only)",
@@ -17295,11 +17308,8 @@
         }
       ],
       "verification": {
-        "ok": false,
-        "errors": [
-          "fact P1: Protocol \"http:\" not supported. Expected \"https:\"",
-          "fact P2: Protocol \"http:\" not supported. Expected \"https:\""
-        ],
+        "ok": true,
+        "errors": [],
         "near": {}
       }
     },
@@ -21925,8 +21935,8 @@
         "avoidPairingWithinDays": 30,
         "compareAgainstPublished": true
       },
-      "researchStatus": "RESEARCHED",
-      "productionReady": false,
+      "researchStatus": "VERIFIED",
+      "productionReady": true,
       "facts": [
         {
           "id": "F1",
@@ -21974,11 +21984,15 @@
         },
         {
           "id": "P1",
-          "claim": "Anti-fouling paints are used to coat the bottoms of ships to prevent sealife such as algae and molluscs attaching themselves to the hull, slowing down the ship and increasing fuel consumption.",
-          "quote": "",
-          "layer": "UNVERIFIED",
-          "source": "Anti-fouling systems",
-          "url": "https://www.imo.org/en/ourwork/environment/pages/anti-fouling.aspx"
+          "role": null,
+          "claim": "Anti-fouling paints are used to coat the underwater surfaces of ships to prevent sealife such as algae and molluscs attaching themselves to the hull, thereby slowing down the ship and increasing fuel consumption.",
+          "quote": "Anti-fouling paints are used to coat the underwater surfaces of ships to prevent sealife such as algae and molluscs attaching themselves to the hull, thereby slowing down the ship and increasing fuel consumption.",
+          "layer": "VERIFIED FACT",
+          "url": "https://www.imo.org/en/ourwork/environment/pages/anti-fouling.aspx",
+          "sourceTitle": "Anti-fouling systems",
+          "source": "Anti-fouling systems (fetched 2026-10-28T08:16:47.886Z, text sha256 26013cd6ab7d2def)",
+          "primary": true,
+          "textSha256": "26013cd6ab7d2defa90f064ade8fbadbc6b655ed9b5030ad7789c4842da4015c"
         },
         {
           "id": "P2",
@@ -21988,12 +22002,17 @@
           "layer": "VERIFIED FACT",
           "url": "https://www.imo.org/en/about/conventions/pages/international-convention-on-the-control-of-harmful-anti-fouling-systems-on-ships-(afs).aspx",
           "sourceTitle": "International Convention on the Control of Harmful Anti-fouling Systems on Ships",
-          "source": "International Convention on the Control of Harmful Anti-fouling Systems on Ships (fetched 2026-10-28T08:04:58.481Z, text sha256 6e8bd6601bbb54ac)",
+          "source": "International Convention on the Control of Harmful Anti-fouling Systems on Ships (fetched 2026-10-28T08:16:48.480Z, text sha256 6e8bd6601bbb54ac)",
           "primary": true,
           "textSha256": "6e8bd6601bbb54accdd053fd2b158a7432288371058a563a4dec898fb7b54a61"
         }
       ],
       "sources": [
+        {
+          "name": "Anti-fouling systems",
+          "url": "https://www.imo.org/en/ourwork/environment/pages/anti-fouling.aspx",
+          "type": "primary source (verbatim quote verified)"
+        },
         {
           "name": "International Convention on the Control of Harmful Anti-fouling Systems on Ships",
           "url": "https://www.imo.org/en/about/conventions/pages/international-convention-on-the-control-of-harmful-anti-fouling-systems-on-ships-(afs).aspx",
@@ -22008,7 +22027,7 @@
         "validatedCandidate": true
       },
       "status": "qualified",
-      "researchedAt": "2026-10-28T08:04:58.482Z",
+      "researchedAt": "2026-10-28T08:16:48.481Z",
       "researchMethod": "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live source (a Wikipedia article at the pinned revision, or a primary-host page pinned to its fetch time and text sha256); claim and narration numbers checked against the quotes",
       "rights": {
         "footage": "none (original animation only)",
@@ -22073,15 +22092,9 @@
         }
       ],
       "verification": {
-        "ok": false,
-        "errors": [
-          "fact P1: no sentence contains all of: bottoms of ships + fuel consumption"
-        ],
-        "near": {
-          "P1": [
-            "Anti-fouling paints are used to coat the underwater surfaces of ships to prevent sealife such as algae and molluscs attaching themselves to the hull, thereby slowing down the ship and increasing fuel consumption."
-          ]
-        }
+        "ok": true,
+        "errors": [],
+        "near": {}
       }
     },
     {
@@ -22269,8 +22282,8 @@
         "avoidPairingWithinDays": 30,
         "compareAgainstPublished": true
       },
-      "researchStatus": "NEEDS_PRIMARY_SOURCE",
-      "productionReady": false,
+      "researchStatus": "VERIFIED",
+      "productionReady": true,
       "facts": [
         {
           "id": "F1",
@@ -22313,7 +22326,7 @@
           "layer": "VERIFIED FACT",
           "url": "https://www.imo.org/en/about/conventions/pages/international-convention-on-load-lines.aspx",
           "sourceTitle": "International Convention on Load Lines",
-          "source": "International Convention on Load Lines (fetched 2026-10-28T08:04:58.924Z, text sha256 2c85cbe3c4eb37b5)",
+          "source": "International Convention on Load Lines (fetched 2026-10-28T08:16:49.171Z, text sha256 2c85cbe3c4eb37b5)",
           "primary": true,
           "textSha256": "2c85cbe3c4eb37b5a4861e7cb6fd3aed7e60adc091e378f65511041224ed6140"
         },
@@ -22325,7 +22338,7 @@
           "layer": "VERIFIED FACT",
           "url": "https://www.imo.org/en/ourwork/safety/pages/loadlines.aspx",
           "sourceTitle": "International Convention on Load Lines, 1966",
-          "source": "International Convention on Load Lines, 1966 (fetched 2026-10-28T08:04:59.283Z, text sha256 49139b186e826fce)",
+          "source": "International Convention on Load Lines, 1966 (fetched 2026-10-28T08:16:49.813Z, text sha256 49139b186e826fce)",
           "primary": true,
           "textSha256": "49139b186e826fce2c507addddedeacc6a29bd43ba7504c28af4f99a66704a00"
         }
@@ -22350,7 +22363,7 @@
         "validatedCandidate": true
       },
       "status": "qualified",
-      "researchedAt": "2026-10-28T08:04:59.284Z",
+      "researchedAt": "2026-10-28T08:16:49.814Z",
       "researchMethod": "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live source (a Wikipedia article at the pinned revision, or a primary-host page pinned to its fetch time and text sha256); claim and narration numbers checked against the quotes",
       "rights": {
         "footage": "none (original animation only)",
@@ -22400,10 +22413,8 @@
         }
       ],
       "verification": {
-        "ok": false,
-        "errors": [
-          "channel standard: fewer than two facts from primary (non-Wikipedia) sources"
-        ],
+        "ok": true,
+        "errors": [],
         "near": {}
       }
     },
