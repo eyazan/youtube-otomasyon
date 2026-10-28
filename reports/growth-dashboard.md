@@ -1,14 +1,14 @@
 # Growth dashboard
 
-Generated 2026-10-28T15:14:06.125Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-10-28T16:11:12.335Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
-**Shorts health** — last published 2026-10-28T18:00:00.000Z · 33 published · inventory A103/B123/C59/D59 · next: i-35w-bridge-2007 (EXPLOIT (0.75): best A topic by SelectionScore)
+**Shorts health** — last published 2026-10-28T18:00:00.000Z · 33 published · inventory A110/B126/C60/D59 · next: i-35w-bridge-2007 (EXPLOIT (0.75): best A topic by SelectionScore)
 
 **Long-form health** — cycle 2026-W44: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W44 already QUALITY_BLOCKED)
 
-**Long-form backlog** — challenger-1986 86/A, chernobyl-1986 85/A, columbia-2003 85/A, air-france-447-2009 84/A, apollo-13-1970 84/A
+**Long-form backlog** — challenger-1986 86/A, chernobyl-1986 86/A, columbia-2003 85/A, air-france-447-2009 84/A, apollo-13-1970 84/A
 
 **Content clusters** — 12 · integrity OK
 
@@ -23,8 +23,8 @@ Generated 2026-10-28T15:14:06.125Z. Per-channel baselines are computed separatel
 - apollo-1-1967 (C): VideoPotential 87 in experimental band 58–71; sources 41 < 62
 - skylab-1973 (C): VideoPotential 85 in experimental band 58–71; sources 41 < 62
 - munich-1958 (C): VideoPotential 86 in experimental band 58–71; sources 41 < 62
+- quebec-bridge-1907 (C): VideoPotential 84 in experimental band 58–71; sources 55 < 62
 - vanguard-1957 (C): VideoPotential 83 in experimental band 58–71; sources 41 < 62
-- castle-bravo-1954 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
 
 **Recent alerts**
 
