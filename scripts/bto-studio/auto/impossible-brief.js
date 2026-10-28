@@ -103,6 +103,9 @@ function keyPhrase(text, max = 3) {
     // preposition ("DIEGO MARADONA PUT", "STORED FAT CAN FUEL") and is never shown
     const next = seg[i + len]; if (next && !["and", "but", "or"].includes(next.toLowerCase())) continue;
     const prev = seg[i - 1]; if (prev && !STOP.has(prev.toLowerCase()) && !WEAK_END.has(prev.toLowerCase())) continue;
+    // never right after "and"/"or": that cuts a joined subject in half ("the heat and pressure only climb" ->
+    // "PRESSURE ONLY CLIMB", IB-EXT-050 review render)
+    if (prev && ["and", "or", "nor"].includes(prev.toLowerCase())) continue;
     const score = w.filter((x) => !weak(x)).length * 10 + len + (next ? 0 : 5) - si * 0.5 - i * 0.1; if (!best || score > best.score) best = { score, w }; } });
   // no natural phrase: no headline (the caption still carries the line)
   return best ? best.w.join(" ").toUpperCase() : "";

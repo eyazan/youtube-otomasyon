@@ -54,6 +54,8 @@ test("auto storyboard: earth-interior grammar varies its mechanism visuals and u
   assert.ok(!earKinds.includes("flow"), earKinds.join(","));
   assert.equal(Generator.keyPhrase("So the planet's first defence against drilling is heat, not hardness."), "HEAT, NOT HARDNESS");
   assert.equal(Generator.keyPhrase("Rock that hot starts behaving more like plastic than stone."), "MORE LIKE PLASTIC THAN STONE");
+  assert.equal(Generator.keyPhrase("Deeper down, the heat and pressure only climb.", 3), "", "never half of a joined subject (PRESSURE ONLY CLIMB)");
+  assert.equal(Generator.keyPhrase("Deeper down, the heat and pressure only climb.", 5), "HEAT AND PRESSURE ONLY CLIMB");
 });
 
 test("auto storyboard: the subject picks the visual, plates never repeat back to back, a ladder is shown once", () => {
