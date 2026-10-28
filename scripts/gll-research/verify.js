@@ -26,7 +26,7 @@ const CHANNELS = ["goal-lore-lab", "behind-the-ordinary"];
 const dirs = (channel) => { const base = path.join(ROOT, "channels", channel); return { drafts: path.join(base, "research", "drafts"), universe: path.join(base, "topics", "topic-universe.json") }; };
 const RIGHTS = { "goal-lore-lab": { footage: "none (original animation only)", likeness: "generic player tokens, no kits or crests" }, "behind-the-ordinary": { footage: "none (original animation only)", likeness: "generic objects, no brands or logos" } };
 // the research fields --write sets on a Hidden Logic of Things universe row
-const RESEARCH_FIELDS = ["researchStatus", "productionReady", "researchedAt", "researchMethod", "rights", "narration", "facts", "verification"];
+const RESEARCH_FIELDS = ["researchStatus", "productionReady", "researchedAt", "researchMethod", "rights", "narration", "facts", "sources", "verification"];
 const UA = "youtube-otomasyon-research/1.0 (GoalLore Lab fact verification; https://github.com/eyazan/youtube-otomasyon)";
 const isYear = (n) => Number.isInteger(n) && n >= 1800 && n <= 2100;
 const fold = (s) => normalizeQuote(String(s).normalize("NFD").replace(/[̀-ͯ]/g, ""));
@@ -41,6 +41,33 @@ function get(url) {
     });
     req.on("timeout", () => req.destroy(new Error(`timeout for ${url}`))); req.on("error", reject);
   });
+}
+
+// A primary source page (an https URL on the channel's primary hosts): fetched as HTML, reduced to its visible text, and
+// pinned to the fetch time and the sha256 of that text (pages have no revision ids). The same sentence rules apply.
+function getText(url, redirects = 3) {
+  return new Promise((resolve, reject) => {
+    const req = https.get(url, { headers: { "User-Agent": UA, Accept: "text/html,application/xhtml+xml" }, timeout: 30000 }, (res) => {
+      if ([301, 302, 303, 307, 308].includes(res.statusCode) && res.headers.location && redirects > 0) { res.resume(); return resolve(getText(new URL(res.headers.location, url).href, redirects - 1)); }
+      const chunks = []; res.on("data", (c) => chunks.push(c));
+      res.on("end", () => (res.statusCode === 200 ? resolve({ url, html: Buffer.concat(chunks).toString("utf8") }) : reject(new Error(`HTTP ${res.statusCode} for ${url}`))));
+    });
+    req.on("timeout", () => req.destroy(new Error(`timeout for ${url}`))); req.on("error", reject);
+  });
+}
+const ENTITIES = { amp: "&", lt: "<", gt: ">", quot: '"', apos: "'", nbsp: " ", rsquo: "’", lsquo: "‘", rdquo: "”", ldquo: "“", ndash: "–", mdash: "—", hellip: "…" };
+function pageText(html) {
+  const decode = (s) => s.replace(/&#(\d+);/g, (m, n) => String.fromCodePoint(+n)).replace(/&#x([0-9a-f]+);/gi, (m, n) => String.fromCodePoint(parseInt(n, 16))).replace(/&([a-z]+);/gi, (m, n) => (n.toLowerCase() in ENTITIES ? ENTITIES[n.toLowerCase()] : m));
+  const title = decode(((html.match(/<title[^>]*>([\s\S]*?)<\/title>/i) || [])[1] || "").replace(/\s+/g, " ").trim());
+  const body = html.replace(/<(script|style|noscript|svg|template|head)[\s\S]*?<\/\1>/gi, " ").replace(/<!--[\s\S]*?-->/g, " ")
+    .replace(/<\/?(p|div|li|h[1-6]|br|tr|td|th|section|article|header|footer|blockquote|dd|dt|ul|ol|table)[^>]*>/gi, "\n").replace(/<[^>]+>/g, " ");
+  return { title, text: decode(body).replace(/[ \t\r\f\v]+/g, " ").replace(/ *\n[\n ]*/g, "\n").trim() };
+}
+async function page(url, fetchText = getText) {
+  const { url: final, html } = await fetchText(url); const { title, text } = pageText(html);
+  if (!text) throw new Error(`page ${url} has no text`);
+  const sha = require("crypto").createHash("sha256").update(text).digest("hex"); const at = new Date().toISOString();
+  return { title: title || new URL(final).hostname, text, revid: null, timestamp: at, url: final, sha256: sha, kind: "page" };
 }
 
 async function article(title, fetchJson = get) {
@@ -74,16 +101,23 @@ function evidenceFor(fact, src) {
   return { error: candidates.length ? `a sentence has the terms but not every claim number (${nums.join(", ") || "none"}), is not 5-80 words of prose, or shares under ${MIN_SUPPORT * 100}% of the claim's content words` : `no sentence contains all of: ${fact.terms.join(" + ")}`, near };
 }
 
-async function verifyDraft(draft, fetchJson = get, channel = "goal-lore-lab") {
+const isUrl = (s) => /^https:\/\//.test(String(s || ""));
+async function verifyDraft(draft, fetchJson = get, channel = "goal-lore-lab", fetchText = getText) {
   const errors = []; const cache = new Map(); const facts = [];
+  const { hostAllowed, BTO_PRIMARY_HOSTS } = require("../ib-ct-library/build");
   for (const [i, f] of draft.facts.entries()) {
     const id = f.id || `F${i + 1}`;
     try {
-      if (!cache.has(f.source)) cache.set(f.source, await article(f.source, fetchJson));
+      // a primary page must be on the channel's primary hosts; GoalLore Lab keeps to Wikipedia
+      if (isUrl(f.source) && (channel !== "behind-the-ordinary" || !hostAllowed(new URL(f.source).hostname, BTO_PRIMARY_HOSTS))) throw new Error(`${new URL(f.source).hostname} is not a primary host for ${channel}`);
+      if (!cache.has(f.source)) cache.set(f.source, isUrl(f.source) ? await page(f.source, fetchText) : await article(f.source, fetchJson));
       const src = cache.get(f.source); const ev = evidenceFor(f, src);
-      if (ev.error) { errors.push(`fact ${id}: ${ev.error}`); facts.push({ id, claim: f.claim, quote: "", layer: "UNVERIFIED", source: `Wikipedia: ${src.title}`, url: src.url, near: ev.near }); continue; }
+      const label = src.kind === "page" ? src.title : `Wikipedia: ${src.title}`;
+      if (ev.error) { errors.push(`fact ${id}: ${ev.error}`); facts.push({ id, claim: f.claim, quote: "", layer: "UNVERIFIED", source: label, url: src.url, near: ev.near }); continue; }
       if (!quoteFound(src.text, ev.quote)) { errors.push(`fact ${id}: extracted sentence not found verbatim (internal check)`); continue; }
-      facts.push({ id, role: f.role || null, claim: f.claim, quote: ev.quote, source: `Wikipedia: ${src.title} (revision ${src.revid}, ${src.timestamp})`, url: src.url, sourceTitle: src.title, revid: src.revid, layer: "VERIFIED FACT" });
+      facts.push({ id, role: f.role || null, claim: f.claim, quote: ev.quote, layer: "VERIFIED FACT", url: src.url, sourceTitle: src.title,
+        ...(src.kind === "page" ? { source: `${src.title} (fetched ${src.timestamp}, text sha256 ${src.sha256.slice(0, 16)})`, primary: true, textSha256: src.sha256 }
+          : { source: `Wikipedia: ${src.title} (revision ${src.revid}, ${src.timestamp})`, revid: src.revid }) });
     } catch (e) { errors.push(`fact ${id}: ${e.message}`); facts.push({ id, claim: f.claim, quote: "", layer: "UNVERIFIED", source: f.source, url: null }); }
   }
   const byId = new Map(facts.map((f) => [f.id, f]));
@@ -102,7 +136,8 @@ async function verifyDraft(draft, fetchJson = get, channel = "goal-lore-lab") {
   const below = [];
   if (channel === "behind-the-ordinary") {
     if (facts.filter((f) => f.layer === "VERIFIED FACT").length < 5) below.push(`${facts.filter((f) => f.layer === "VERIFIED FACT").length} verified facts (the channel standard needs 5)`);
-    if (require("../../core/quality/behind-the-ordinary").authorityFacts(facts.filter((f) => f.layer === "VERIFIED FACT")) < 2) below.push("fewer than two facts from primary (non-Wikipedia) sources");
+    if (require("../../core/quality/behind-the-ordinary").authorityFacts(facts.filter((f) => f.layer === "VERIFIED FACT" && f.primary)) < 2) below.push("fewer than two facts from primary (non-Wikipedia) sources");
+    if (new Set(facts.filter((f) => f.primary && f.layer === "VERIFIED FACT").map((f) => f.url)).size < 2) below.push("fewer than two distinct primary source pages");
   }
   const ok = errors.length === 0;
   const status = !ok ? "RESEARCHED" : below.length ? "NEEDS_PRIMARY_SOURCE" : "VERIFIED";
@@ -110,13 +145,14 @@ async function verifyDraft(draft, fetchJson = get, channel = "goal-lore-lab") {
   return {
     id: draft.id, slug: draft.slug, title: draft.title, coreQuestion: draft.coreQuestion, pillar: draft.pillar, channel,
     hypothetical: false, researchStatus: status, productionReady: status === "VERIFIED", researchedAt: new Date().toISOString(),
-    researchMethod: "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live Wikipedia article at the pinned revision; claim and narration numbers checked against the quotes",
+    researchMethod: "scripts/gll-research/verify.js: claims drafted by hand from search; every quote copied verbatim by code from the live source (a Wikipedia article at the pinned revision, or a primary-host page pinned to its fetch time and text sha256); claim and narration numbers checked against the quotes",
     rights: RIGHTS[channel],
+    ...(channel === "behind-the-ordinary" ? { sources: [...new Map(facts.filter((f) => f.primary && f.layer === "VERIFIED FACT").map((f) => [f.url, { name: f.sourceTitle, url: f.url, type: "primary source (verbatim quote verified)" }])).values()] } : {}),
     narration, facts: facts.map(({ near, ...f }) => f), verification: { ok: status === "VERIFIED", errors, near: Object.fromEntries(facts.filter((f) => f.near).map((f) => [f.id, f.near])) },
   };
 }
 
-async function run(argv = process.argv.slice(2), { fetchJson = get, log = console.log } = {}) {
+async function run(argv = process.argv.slice(2), { fetchJson = get, fetchText = getText, log = console.log } = {}) {
   const only = (argv[argv.indexOf("--only") + 1] || "").split(",").filter((x) => argv.includes("--only") && x);
   const channel = argv.includes("--channel") ? argv[argv.indexOf("--channel") + 1] : "goal-lore-lab";
   if (!CHANNELS.includes(channel)) throw new Error(`--channel must be one of ${CHANNELS.join(", ")}`);
@@ -127,7 +163,7 @@ async function run(argv = process.argv.slice(2), { fetchJson = get, log = consol
   const records = [];
   for (const d of drafts) {
     if (rows && (!rows.has(d.id) || rows.get(d.id).slug !== d.slug)) { log(`${d.id} SKIPPED: not a question of the ${channel} universe (id and slug must match a row)`); continue; }
-    const r = await verifyDraft(d, fetchJson, channel); records.push(r); log(`${r.id} ${r.researchStatus}${r.verification.errors.length ? ": " + r.verification.errors.join("; ") : ""}`);
+    const r = await verifyDraft(d, fetchJson, channel, fetchText); records.push(r); log(`${r.id} ${r.researchStatus}${r.verification.errors.length ? ": " + r.verification.errors.join("; ") : ""}`);
   }
   const report = records.map((r) => ({ id: r.id, status: r.researchStatus, errors: r.verification.errors, near: r.verification.near, quotes: r.facts.map((f) => ({ id: f.id, quote: f.quote, url: f.url })) }));
   const reportAt = argv.includes("--report") ? argv[argv.indexOf("--report") + 1] : null;
@@ -135,7 +171,7 @@ async function run(argv = process.argv.slice(2), { fetchJson = get, log = consol
   if (argv.includes("--write") && rows) {
     // fill only the research fields of the drafted rows; never downgrade a row researched by another pipeline
     const prev = JSON.parse(fs.readFileSync(UNIVERSE, "utf8")); const byId = new Map(records.map((r) => [r.id, r]));
-    prev.topics = prev.topics.map((t) => { const r = byId.get(t.id); if (!r || (t.researchStatus !== "QUESTION_ONLY" && t.researchMethod !== r.researchMethod)) return t;
+    prev.topics = prev.topics.map((t) => { const r = byId.get(t.id); if (!r || (t.researchStatus !== "QUESTION_ONLY" && !String(t.researchMethod || "").startsWith("scripts/gll-research/verify.js"))) return t;
       return { ...t, ...Object.fromEntries(RESEARCH_FIELDS.map((k) => [k, r[k]])) }; });
     fs.writeFileSync(UNIVERSE, JSON.stringify(prev, null, 2) + "\n");
     log(`wrote ${path.relative(ROOT, UNIVERSE)} (${records.length} row(s))`);
@@ -154,4 +190,4 @@ async function run(argv = process.argv.slice(2), { fetchJson = get, log = consol
 }
 
 if (require.main === module) run().catch((e) => { console.error(e.message); process.exit(1); });
-module.exports = { run, verifyDraft, evidenceFor, sentences, article, support };
+module.exports = { run, verifyDraft, evidenceFor, sentences, article, page, pageText, support };
