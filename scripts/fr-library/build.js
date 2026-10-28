@@ -339,7 +339,7 @@ function claimEvidence(seed, art) {
   const kanitlar = [], errors = [], covered = new Set();
   for (const k of Array.isArray(seed.kanit) ? seed.kanit : []) {
     const ev = evidenceFor({ claim: k.iddia, terms: k.terimler || [] }, { title: art.title, text: art.text });
-    if (ev.error) { errors.push(`claim not in the article: "${k.iddia}" (${ev.error})${(ev.near || []).length ? " — nearest: " + ev.near[0].slice(0, 160) : ""}`); continue; }
+    if (ev.error) { errors.push(`claim not in the article: "${k.iddia}" (${ev.error})${(ev.near || []).length ? " — nearest: " + ev.near.slice(0, 3).map((x) => `«${x.slice(0, 220)}»`).join(" ") : ""}`); continue; }
     kanitlar.push({ iddia: k.iddia, alinti: ev.quote, kaynak: `Wikipedia — ${art.title}`, sahneler: k.sahneler || [] });
     for (const i of k.sahneler || []) covered.add(i);
   }

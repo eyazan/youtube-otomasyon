@@ -14,7 +14,7 @@
     "oncelik": 9,
     "sonuc": "gave patients massive radiation overdoses",
     "tetik": "software race conditions in a machine without hardware interlocks",
-    "mekanizma": "concurrent programming errors delivering doses hundreds of times greater than normal, with no hardware interlock to stop them",
+    "mekanizma": "concurrent programming errors delivering doses up to 250 times higher than normal, with no hardware interlock to stop them",
     "sayi": "SIX ACCIDENTS",
     "ders": "safety-critical machines keep independent hardware interlocks instead of trusting software alone",
     "zincir": [
@@ -33,18 +33,18 @@
     ],
     "kapak": [
       "SOFTWARE ONLY",
-      "100X DOSE"
+      "250X DOSE"
     ],
     "hook": "No hardware backup",
     "soru": "Would you trust the software?",
     "sahneler": [
       "A cancer machine's own software overdosed its patients.",
-      "Some doses exploded to hundreds of times the normal amount.",
+      "It released up to two hundred fifty times the normal dose.",
       "It was the Therac-25, a computer-controlled radiation therapy machine.",
       "Earlier models had hardware interlocks to stop such faults.",
       "This one removed them and relied on software checks.",
       "Concurrent programming errors, called race conditions, slipped past those checks.",
-      "At least six accidents followed between 1985 and 1987.",
+      "At least six accidents followed.",
       "Now safety-critical machines keep independent hardware protection."
     ],
     "kanit": [
@@ -58,10 +58,10 @@
         ]
       },
       {
-        "iddia": "Because of concurrent programming errors, also known as race conditions, it sometimes gave its patients radiation doses that were hundreds of times greater than normal.",
+        "iddia": "Because of concurrent programming errors (also known as race conditions), it sometimes gave its patients radiation doses that were up to 250 times higher than normal.",
         "terimler": [
           "race conditions",
-          "hundreds of times"
+          "250 times"
         ],
         "sahneler": [
           0,
@@ -82,10 +82,9 @@
         ]
       },
       {
-        "iddia": "It was involved in at least six accidents between 1985 and 1987 in which patients were given massive overdoses of radiation.",
+        "iddia": "It was involved in at least six accidents in which patients were given massive overdoses of radiation.",
         "terimler": [
-          "six accidents",
-          "overdoses"
+          "six"
         ],
         "sahneler": [
           6
@@ -195,6 +194,9 @@
         "ad": "Wikipedia — Northeast blackout of 2003",
         "url": "https://en.wikipedia.org/wiki/Northeast_blackout_of_2003"
       }
+    ],
+    "dogrulanmisSayilar": [
+      55000000
     ]
   },
   {
@@ -213,7 +215,7 @@
     "sonuc": "was destroyed by explosions and fire in the North Sea",
     "tetik": "a pump restarted while its pressure safety valve was out for maintenance",
     "mekanizma": "condensate leaking from a temporary blank flange, igniting, then oil and gas fires fed by connected pipelines",
-    "sayi": "167 DIED",
+    "sayi": "165 DIED",
     "ders": "offshore safety moved to formal safety cases",
     "zincir": [
       "SAFETY VALVE REMOVED",
@@ -231,13 +233,13 @@
     ],
     "kapak": [
       "MISSING VALVE",
-      "167 DIED"
+      "165 DIED"
     ],
     "hook": "The valve was missing",
     "soru": "Who knew the valve was gone?",
     "sahneler": [
       "A missing safety valve turned an oil platform into a fireball.",
-      "Explosions ripped through Piper Alpha, and one hundred sixty seven people died.",
+      "Explosions ripped through Piper Alpha; of two hundred twenty six aboard, one hundred sixty five died.",
       "A pressure safety valve had been removed for maintenance.",
       "Its pipe was sealed only with a temporary cover.",
       "The next shift did not know, and restarted the pump.",
@@ -247,10 +249,10 @@
     ],
     "kanit": [
       {
-        "iddia": "The explosion and resulting fire destroyed it in July 1988, killing 165 of the people on board and 2 crewmen of a rescue vessel.",
+        "iddia": "At the time of the disaster, 226 people were on the platform; 165 died and 61 survived.",
         "terimler": [
           "165",
-          "rescue vessel"
+          "226"
         ],
         "sahneler": [
           0,
@@ -363,10 +365,9 @@
         ]
       },
       {
-        "iddia": "A temporary bypass pipe had been installed to connect two reactors after one reactor was removed because of a crack.",
+        "iddia": "Reactor 5 developed a crack and was removed, and a temporary pipe was installed to bypass it.",
         "terimler": [
-          "bypass",
-          "crack"
+          "bypass"
         ],
         "sahneler": [
           0,
@@ -375,9 +376,10 @@
         ]
       },
       {
-        "iddia": "The bypass pipe failed and released cyclohexane which formed a vapour cloud.",
+        "iddia": "The temporary pipe failed and released cyclohexane, which formed a vapour cloud and exploded.",
         "terimler": [
-          "cyclohexane"
+          "cyclohexane",
+          "cloud"
         ],
         "sahneler": [
           4,
@@ -654,11 +656,11 @@
     "sahneler": [
       "A small escalator fire suddenly burst into a fireball.",
       "Flames swept into the ticket hall at King's Cross, and thirty one people died.",
-      "It probably started with a discarded match.",
-      "Grease and fluff under the wooden escalator caught fire.",
-      "Investigators later found the trench effect.",
-      "The sloped escalator channelled flames upward along its trench.",
-      "Then flashover filled the ticket hall.",
+      "It probably started with a dropped match.",
+      "The match ignited contaminated grease under the wooden escalator.",
+      "Investigators found a newly discovered effect: the trench effect.",
+      "It made the fire flash over.",
+      "Flames suddenly filled the ticket hall.",
       "Wooden escalators were replaced, and smoking was banned."
     ],
     "kanit": [
@@ -672,25 +674,17 @@
         ]
       },
       {
-        "iddia": "The fire is believed to have started when a lit match was dropped onto the escalator.",
-        "terimler": [
-          "match"
-        ],
-        "sahneler": [
-          2
-        ]
-      },
-      {
-        "iddia": "Grease and debris beneath the wooden escalator caught fire.",
+        "iddia": "Dropped matches ignited the contaminated grease and the fire began spreading.",
         "terimler": [
           "grease"
         ],
         "sahneler": [
+          2,
           3
         ]
       },
       {
-        "iddia": "Computer modelling revealed the trench effect, which drove the flames up the escalator.",
+        "iddia": "This newly discovered trench effect had caused the fire to flash over.",
         "terimler": [
           "trench effect"
         ],
@@ -735,7 +729,7 @@
     "tetik": "workers pouring uranium solution by hand from stainless steel buckets",
     "mekanizma": "far more uranium than allowed poured into a precipitation tank, reaching criticality",
     "sayi": "TWO WORKERS DIED",
-    "ders": "the company's licence was revoked",
+    "ders": "criticality alarms and controls where regulators had assumed criticality was impossible",
     "zincir": [
       "SHORTCUT PROCEDURE",
       "STAINLESS STEEL BUCKETS",
@@ -764,13 +758,13 @@
       "Far too much uranium went into one precipitation tank.",
       "The workers were exposed to intense radiation.",
       "Two of them died.",
-      "The plant operator later lost its licence."
+      "There was no alarm: regulators believed criticality couldn't happen there."
     ],
     "kanit": [
       {
-        "iddia": "Workers mixed uranyl nitrate solution in stainless steel buckets.",
+        "iddia": "The workers mixed the uranium solution by hand in buckets.",
         "terimler": [
-          "stainless steel buckets"
+          "buckets"
         ],
         "sahneler": [
           0,
@@ -800,11 +794,13 @@
         ]
       },
       {
-        "iddia": "The company's operating licence was revoked.",
+        "iddia": "There was no criticality accident alarm because the licensing board incorrectly concluded that a criticality accident could not happen at the site.",
         "terimler": [
-          "licen"
+          "criticality accident alarm"
         ],
         "sahneler": [
+          5,
+          6,
           7
         ]
       }
@@ -862,11 +858,11 @@
       "The problem was known, but the rail was not replaced.",
       "Under the train, it broke into many pieces.",
       "Afterwards, emergency speed limits spread across the network.",
-      "The crisis contributed to the end of Railtrack."
+      "Railtrack later went into administration."
     ],
     "kanit": [
       {
-        "iddia": "The rail fragmented as the train passed over it, killing four people.",
+        "iddia": "Four people were killed.",
         "terimler": [
           "four"
         ],
@@ -877,9 +873,9 @@
         ]
       },
       {
-        "iddia": "The derailment was caused by rolling contact fatigue, known as gauge corner cracking.",
+        "iddia": "The derailment was caused by rolling contact fatigue.",
         "terimler": [
-          "gauge corner cracking"
+          "rolling contact fatigue"
         ],
         "sahneler": [
           2,
@@ -905,9 +901,9 @@
         ]
       },
       {
-        "iddia": "The crash led to the collapse of Railtrack.",
+        "iddia": "Railtrack subsequently went into administration and was replaced by Network Rail in 2002.",
         "terimler": [
-          "Railtrack"
+          "administration"
         ],
         "sahneler": [
           7
@@ -938,7 +934,7 @@
     "tetik": "an old wire left connected during signalling work",
     "mekanizma": "a wiring fault after re-signalling work keeping a signal at green behind a stopped train",
     "sayi": "35 DIED",
-    "ders": "signalling work had to be independently tested before use",
+    "ders": "signal testers had to be trained and certified",
     "zincir": [
       "SIGNALLING WORK",
       "OLD WIRE LEFT CONNECTED",
@@ -966,8 +962,8 @@
       "Days earlier, technicians had rewired that signal.",
       "An old wire had not been disconnected or cut back.",
       "It fed false current to the signal.",
-      "The work had not been independently tested.",
-      "Testing of signalling work became mandatory."
+      "Afterwards, testers had to be trained and certified.",
+      "Signal technicians had to retrain every five years."
     ],
     "kanit": [
       {
@@ -1002,9 +998,9 @@
         ]
       },
       {
-        "iddia": "The work had not been independently tested.",
+        "iddia": "Signal technicians needed to attend refresher courses every five years, and testers needed to be trained and certified.",
         "terimler": [
-          "test"
+          "testers"
         ],
         "sahneler": [
           6,
@@ -1062,10 +1058,10 @@
       "Water burst through the Teton Dam and flooded the valley below.",
       "It was filling for the first time in June 1976.",
       "Water had begun seeping through the dam.",
-      "The leak grew and eroded the earthen embankment.",
+      "It caused internal erosion, called piping.",
       "Within hours, the dam was breached.",
       "Eleven people died in the flood.",
-      "Federal dam safety reviews were strengthened afterwards."
+      "A new dam safety program then found other dangerous dams."
     ],
     "kanit": [
       {
@@ -1080,9 +1076,10 @@
         ]
       },
       {
-        "iddia": "Water seeped through the dam and eroded the embankment.",
+        "iddia": "These flaws allowed water to seep through the dam and lead to internal erosion, called piping, that eventually caused the failure.",
         "terimler": [
-          "seep"
+          "seep",
+          "piping"
         ],
         "sahneler": [
           3,
@@ -1100,9 +1097,9 @@
         ]
       },
       {
-        "iddia": "The failure led to dam safety programs being strengthened.",
+        "iddia": "The dam safety program identified two other dangerous dams.",
         "terimler": [
-          "dam safety"
+          "dam safety program"
         ],
         "sahneler": [
           7
@@ -1133,7 +1130,7 @@
     "tetik": "the ferry sailing with its inner and outer bow doors open",
     "mekanizma": "sea water flooding the open car deck, destabilising the ship until it capsized",
     "sayi": "193 DIED",
-    "ders": "indicator lights for bow doors and new ferry safety rules",
+    "ders": "ferries had to show the bridge whether the bow doors were shut",
     "zincir": [
       "BOW DOORS LEFT OPEN",
       "FERRY SAILS",
@@ -1160,9 +1157,8 @@
       "Sea water poured into the open car deck.",
       "The water sloshed sideways and the ship rolled over.",
       "The crew member responsible for the doors was asleep.",
-      "From the bridge, nobody could see the doors.",
-      "There was no indicator to warn them.",
-      "Ferries then got bow door indicator lights."
+      "The captain couldn't see the doors from the wheelhouse.",
+      "No indicator light told him they were open."
     ],
     "kanit": [
       {
@@ -1196,14 +1192,13 @@
         ]
       },
       {
-        "iddia": "The bridge could not see whether the bow doors were closed and there were no indicator lights.",
+        "iddia": "He could not see them from the wheelhouse owing to the ship's design, and had no indicator lights in the wheelhouse to tell him otherwise.",
         "terimler": [
-          "indicator"
+          "indicator lights"
         ],
         "sahneler": [
           5,
-          6,
-          7
+          6
         ]
       }
     ],
