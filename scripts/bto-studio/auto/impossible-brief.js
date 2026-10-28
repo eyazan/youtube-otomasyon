@@ -54,9 +54,9 @@ function world(topic) {
 }
 
 // numbers spoken in a line with their unit, kept only when a fact contains the same digits
-const NUM = /(\d{1,3}(?:,\d{3})+|\d+(?:\.\d+)?)(\s+(?:million|billion|thousand|trillion)\b)?\s*(°\s?C|°\s?F|degrees|metres|meters|kilometres|kilometers|km|m\b|cm|centimetres|percent|%|years?|hours?|days?|minutes?|seconds?|times)?/gi;
+const NUM = /(\d{1,3}(?:,\d{3})+|\d+(?:\.\d+)?)(\s+(?:million|billion|thousand|trillion)\b)?\s*(°\s?C|°\s?F|degrees|metres|meters|kilometres|kilometers|km|m\b|cm|centimetres|percent|%|kelvin|years?|hours?|days?|minutes?|seconds?|times)?/gi;
 const MULT = { thousand: 1e3, million: 1e6, billion: 1e9, trillion: 1e12 };
-const UNIT = { metres: "m", meters: "m", kilometres: "km", kilometers: "km", centimetres: "cm", degrees: "°", percent: "%" };
+const UNIT = { metres: "m", meters: "m", kilometres: "km", kilometers: "km", centimetres: "cm", degrees: "°", percent: "%", kelvin: "K" };
 function numbersIn(text) {
   const out = []; let m; NUM.lastIndex = 0;
   while ((m = NUM.exec(text))) { const mult = (m[2] || "").trim().toLowerCase(); const raw = m[1] + (mult ? ` ${mult}` : ""); const unit = (m[3] || "").replace(/\s/g, ""); const value = Number(m[1].replace(/,/g, "")) * (MULT[mult] || 1);
@@ -103,6 +103,9 @@ function keyPhrase(text, max = 3) {
     // preposition ("DIEGO MARADONA PUT", "STORED FAT CAN FUEL") and is never shown
     const next = seg[i + len]; if (next && !["and", "but", "or"].includes(next.toLowerCase())) continue;
     const prev = seg[i - 1]; if (prev && !STOP.has(prev.toLowerCase()) && !WEAK_END.has(prev.toLowerCase())) continue;
+    // never an object + preposition cut off the verb that governs both ("keeps the metal from melting" -> "METAL FROM
+    // MELTING", IB-PHY-065 review render); a plain object phrase ("matches the Sun's surface heat") is fine
+    const before = seg[i - 2]; if (prev && ["the", "a", "an"].includes(prev.toLowerCase()) && before && !STOP.has(before.toLowerCase()) && !WEAK_END.has(before.toLowerCase()) && w.slice(1, -1).some((x) => STOP.has(x.toLowerCase()))) continue;
     // never right after "and"/"or": that cuts a joined subject in half ("the heat and pressure only climb" ->
     // "PRESSURE ONLY CLIMB", IB-EXT-050 review render)
     if (prev && ["and", "or", "nor"].includes(prev.toLowerCase())) continue;
@@ -119,6 +122,17 @@ function build(script, style, topic) {
   const BODY = [[/\bvenus\b/i, "venus"], [/\bmars\b/i, "rocky"], [/\bmercury\b/i, "moon"], [/\b(the moon|moon's|lunar)\b/i, "moon"], [/\b(jupiter|saturn|neptune|uranus)\b/i, "gas"], [/\bthe sun\b|\bsun's\b/i, "sun"]];
   const body = (BODY.find(([re]) => re.test([topic.title, topic.topic].join(" "))) || [])[1] || null;
   const depthWorld = W === "earth-interior" || W === "ocean-depth" || W === "lake";
+  // a line about another named body ("the Sun's surface", or "Its surface ..." right after it) shows that body, not the
+  // world's drawing (IB-PHY-065 review render: the Sun's 5,700 K landed as a readout on Earth). The body named last in
+  // the previous line is what "its" refers to.
+  const OTHER = [[/\b(sun|sun's)\b/gi, "sun"], [/\b(moon|moon's)\b/gi, "moon"], [/\bvenus\b/gi, "venus"], [/\bmars\b/gi, "rocky"], [/\b(jupiter|saturn)\b/gi, "gas"], [/\b(earth|earth's)\b/gi, "earth"]];
+  const lastBody = (t) => OTHER.flatMap(([re, k]) => [...String(t).matchAll(re)].map((m) => [m.index, k])).sort((a, b) => b[0] - a[0]).map(([, k]) => k)[0] || null;
+  // a body named only after the line's number is a comparison ("1,230 kilometres, 70% of the Moon's"), not the subject
+  const otherBody = (i) => { const t = lines[i].text; const n0 = t.search(/\d/); const head = n0 < 0 ? t : t.slice(0, n0);
+    const own = OTHER.filter(([re, k]) => k !== "earth" && new RegExp(re.source, "i").test(head)).map(([, k]) => k)[0];
+    const k = own || (i > 0 && /^\s*(its|it's|it)\b/i.test(t) ? lastBody(lines[i - 1].text) : null);
+    return k && k !== "earth" && k !== body ? k : null; };
+  const bothNamed = (t) => /\bearth\b/i.test(t);
   const evidenced = (line) => numbersIn(line.text).map((n) => ({ ...n, facts: facts.filter((f) => factHas(f, n.raw) && (!n.upto || factHas(f, n.upto.raw))).map((f) => f.id) })).filter((n) => n.facts.length);
   const valueLabel = (n) => { const r = n.upto ? `${n.raw}–${n.upto.raw}` : n.raw; return n.unit === "°C" || n.unit === "°" ? `${r} °C` : n.unit === "°F" ? `${r} °F` : n.unit ? `${r} ${n.unit}` : r; };
   // the line rejects the figure it states ("claims of a 15 to 20 °C crash are considered incorrect"): strike it through
@@ -170,8 +184,9 @@ function build(script, style, topic) {
     return { to: gone ? removed.to : weak ? 0.4 : 0.25, from: was ? was.to : 1, wind };
   };
   let removed = null;
-  // subject views rotate through three framings of the world's body so consecutive "subject" scenes never repeat
-  const FRAMINGS = [{ x: 540, y: 820, r: 330 }, { x: 250, y: 860, r: 560 }, { x: 540, y: 1500, r: 820 }];
+  // subject views rotate through three framings of the world's body so consecutive "subject" scenes never repeat; the
+  // close framing sits low and drops the ice cap, so no white cap sits under a headline at y 360 (IB-PHY-065 review render)
+  const FRAMINGS = [{ x: 540, y: 820, r: 330 }, { x: 250, y: 1000, r: 560 }, { x: 540, y: 1500, r: 820 }];
   // composite worlds (planet + field lines / streams, or a microbe cluster) are reframed as one unit so they stay
   // registered: every layer is scaled about the world centre (540, 820) and moved to the framing's centre
   const C_FRAMES = [{ x: 540, y: 820, k: 1 }, { x: 560, y: 1080, k: 1.55 }, { x: 400, y: 760, k: 0.8 }];
@@ -185,7 +200,7 @@ function build(script, style, topic) {
   const subjectView = (at, n, field = null) => (COMPOSITE.has(W) ? reframe(signature(at, { field }), C_FRAMES[n % C_FRAMES.length])
     // a named body alternates with a side-by-side beside Earth (sizes illustrative)
     : body && n % 2 === 1 ? [{ component: "planet", props: { kind: body, x: 300, y: 860, r: 220, spin: 0.18, seed: 7 } }, { component: "planet", props: { kind: "earth", x: 790, y: 860, r: 230, spin: 0.3, seed: 3 } }]
-    : signature(at).map((l) => (l.component === "planet" ? { ...l, props: { ...l.props, ...FRAMINGS[n % FRAMINGS.length], spin: l.props.spin * (n % 2 ? -1 : 1) } } : l)));
+    : signature(at).map((l) => (l.component === "planet" ? { ...l, props: { ...l.props, ...FRAMINGS[n % FRAMINGS.length], spin: l.props.spin * (n % 2 ? -1 : 1), ...(n % FRAMINGS.length === 1 ? { ice: false } : {}) } } : l)));
   let subjectN = 0;
   const stars = (seed) => ({ component: "starfield", screen: true, props: { seed, count: 300, drift: [22, 9] } });
   // a long key phrase shrinks so it never reaches the frame edge (IB-SPA-031 payoff: 26 characters at 60 px overflowed)
@@ -212,15 +227,22 @@ function build(script, style, topic) {
     // every scene pushes in by at least 14% and drifts sideways, alternating direction
     const drift = i % 2 ? 36 : -36;
     const cam = (z0, z1, y0 = 800, y1 = 800) => [{ at: start, x: 540 - drift, y: y0, z: z0 }, { at: `${L.id}.end`, x: 540 + drift, y: y1, z: Math.max(z1, z0 + 0.14) }];
+    const other = last ? null : otherBody(i);
+    const pair = (k) => [{ component: "planet", props: { kind: k, x: 300, y: 860, r: 220, spin: 0.18, seed: 7 } }, { component: "planet", props: { kind: "earth", x: 790, y: 860, r: 230, spin: 0.3, seed: 3 } }];
     if (first) {
       kind = "hook"; const n = qty || temp || year;
-      layers = [stars(11), ...signature(0.15, { probe: W === "earth-interior", field: fieldFor(L) }), ...(n ? [readout(`${L.id}+0.25`, valueLabel(n), 1230)] : [headline(`${L.id}+0.2`, keyPhrase(L.text), 420)])];
+      // a hook comparing Earth with another body draws both, side by side (sizes illustrative)
+      layers = [stars(11), ...(other && bothNamed(L.text) ? pair(other) : signature(0.15, { probe: W === "earth-interior", field: fieldFor(L) })), ...(n ? [readout(`${L.id}+0.25`, valueLabel(n), 1230)] : [headline(`${L.id}+0.2`, keyPhrase(L.text), 420)])];
       purpose = `Hook: frame 0 shows the ${W.replace("-", " ")} itself${n ? ` and the claim's number (${valueLabel(n)}) lands as a readout` : ""}, so the scale of the question is visible before it is explained.`;
       camera = cam(1.12, 1.0);
     } else if (last) {
       kind = "payoff"; layers = [stars(11), ...signature(`${L.id}+0.2`, { probe: W === "earth-interior" }), headline(`${L.id}+0.3`, keyPhrase(L.text, 4), 420, S.title)];
       purpose = "Payoff: the answer in a few words over the opening composition; the camera eases back to the frame-0 framing so the Short loops on its first image.";
       camera = [{ at: start, x: 540, y: 800, z: 1.06 }, { at: "end-0.6", x: 540, y: 800, z: 1.12 }];
+    } else if (other && (temp || qty)) {
+      const n = temp || qty; kind = temp || n.unit === "K" ? "heat" : "measure";
+      layers = [stars(30 + i), ...(bothNamed(L.text) ? pair(other) : [{ component: "planet", props: { kind: other, x: 540, y: 820, r: 330, spin: 0.18, seed: 7 } }]), readout(`${L.id}+0.4`, valueLabel(n), 1230, rejects(L))];
+      purpose = `Other body: the line is about the ${other === "rocky" ? "planet" : other}, so that body is drawn (not the topic's world) and its cited value (${valueLabel(n)}) lands as the readout.`; camera = cam(1.0, 1.08);
     } else if (count) {
       // "N times in M years": N evenly spaced ticks on a long axis (spacing illustrative, count and span from the cited fact)
       kind = "count"; layers = [stars(60 + i), { component: "event-ticks", props: { x: 150, y: 980, w: 700, count: count.n, at: `${L.id}+0.2`, dur: 2.6, startLabel: count.span, endLabel: "NOW", seed: 7 + i } },
@@ -229,7 +251,10 @@ function build(script, style, topic) {
       // the axis spans x 150-850: a gentle push keeps its end labels inside the safe margins (x >= 72) while it moves
       camera = [{ at: start, x: 520, y: 900, z: 1.0 }, { at: `${L.id}.end`, x: 560, y: 940, z: 1.08 }];
     } else if (year) {
-      kind = "year"; layers = [stars(20 + i), ...(depthWorld ? [probeSlice(L, { from: 0, to: qty && (qty.unit === "m" || qty.unit === "km") ? (qty.unit === "km" ? qty.value * 1000 : qty.value) : maxDepth * 0.82 })] : signature(`${L.id}`)),
+      // a probe descends only for a line about going down (a drill, a dive); a detection ("shear waves were detected passing
+      // through it", IB-PHY-065) keeps the planet on screen, never a drill that reached the core
+      const descent = depthWorld && !/\b(waves?|seismic|detected|detection|signal|echo|measured|recorded)\b/i.test(L.text);
+      kind = "year"; layers = [stars(20 + i), ...(descent ? [probeSlice(L, { from: 0, to: qty && (qty.unit === "m" || qty.unit === "km") ? (qty.unit === "km" ? qty.value * 1000 : qty.value) : maxDepth * 0.82 })] : signature(`${L.id}`)),
         { component: "timeline-ruler", screen: true, props: { theme: "dark", y: 1250, fromYear: year.value - 6, year: year.value, enterAt: `${L.id}-0.1`, arriveAt: `${L.id}+0.6`, outAt: `${L.id}.end` } }];
       purpose = `Time: the ruler lands on ${year.raw} while the scene shows what started then (the probe begins its descent); the year is from the cited fact.`;
       camera = cam(1.0, 1.12, 800, 840);
@@ -241,7 +266,9 @@ function build(script, style, topic) {
     } else if (temp) {
       kind = "heat"; layers = [stars(30 + i), ...subjectView(`${L.id}`, subjectN++, fieldFor(L)), readout(`${L.id}+0.4`, valueLabel(temp), 1230, rejects(L))];
       purpose = `Heat: the cited temperature (${valueLabel(temp)}) lands as a large readout over the subject while the camera pushes in.`; camera = cam(1.0, 1.08);
-    } else if (qty && depthWorld && (qty.unit === "m" || qty.unit === "km")) {
+    // a radius / diameter / width is a size, not a depth below the surface (IB-PHY-065: the inner core's 1,230 km radius
+    // was drawn as a probe 1,230 km under the surface)
+    } else if (qty && depthWorld && (qty.unit === "m" || qty.unit === "km") && !/\b(radius|radii|diameter|across|wide|width)\b/i.test(L.text)) {
       const d = qty.unit === "km" ? qty.value * 1000 : qty.value; const others = nums.filter((n) => n !== qty && (n.unit === "m" || n.unit === "km"));
       const depthsInTopic = facts.flatMap((f) => numbersIn(f.claim).filter((n) => n.unit === "m").map((n) => ({ ...n, fact: f.id })));
       const reached = depthsInTopic.filter((n) => n.value < d).sort((a, b) => b.value - a.value)[0];
@@ -256,6 +283,8 @@ function build(script, style, topic) {
       const ladderKey = same.map((n) => n.value).sort((a, b) => a - b).join("|");
       kind = "measure"; if (same.length >= 2 && !laddersShown.has(ladderKey) && laddersShown.add(ladderKey)) { layers = [stars(40 + i), { component: "scale-ladder", props: { x: 110, y: 560, w: 700, log: Math.max(...same.map((n) => n.value)) / Math.max(1e-9, Math.min(...same.map((n) => n.value))) > 50, items: same.sort((a, b) => a.value - b.value).map((n, k) => ({ label: `FACT ${n.fact}`.replace("FACT ", ""), value: n.value, valueText: valueLabel(n), at: `${L.id}+${(0.2 + k * 0.45).toFixed(2)}` })) } }];
         same.forEach((n) => { if (!evidence.includes(n.fact)) evidence.push(n.fact); }); purpose = `Scale: the topic's own ${qty.unit || "values"} side by side as growing bars, so the size of the change is seen, not read.`; }
+      // the size of an inner layer ("its radius is about 1,230 kilometres") is shown on the opened planet, where that layer is
+      else if (W === "earth-interior" && /\b(radius|radii|diameter)\b/i.test(L.text)) { layers = [stars(40 + i), ...signature(`${L.id}`, { cut: true }), readout(`${L.id}+0.5`, valueLabel(qty), 1230, rejects(L))]; chips[0] = "conceptualLabel"; purpose = `Size: the planet opens into its layers and the cited size (${valueLabel(qty)}) lands beside them; layer proportions are illustrative.`; }
       else { layers = [stars(40 + i), ...subjectView(`${L.id}`, subjectN++, fieldFor(L)), readout(`${L.id}+0.3`, valueLabel(qty), 1230, rejects(L))]; purpose = `Number: the cited value (${valueLabel(qty)}) lands as a large readout over the subject while the camera pushes in, so the quantity is held on screen as it is spoken.`; }
       camera = cam(1.0, 1.05);
     } else {
@@ -263,7 +292,8 @@ function build(script, style, topic) {
       // a drawn mechanism only when the line names it (rock flowing, layers inside); anything else keeps the subject on
       // screen (IB-EAR-019: magnetic-field lines fell through to "flowing strata", which says something they do not)
       const v = W !== "earth-interior" ? "subject" : /\b(scratch|scratched|crust|surface|barely|thin|skin)\b/i.test(L.text) ? "zoom"
-        : /\b(plastic|flow|flows|soft|melt|melts|bend|deform|behav)/i.test(L.text) ? "flow"
+        // a negated melt ("keeps the metal from melting", "never melts") is the opposite of flowing rock (IB-PHY-065)
+        : /\b(plastic|flow|flows|soft|melt|melts|bend|deform|behav)/i.test(L.text) && !/\b(from|not|never|without|no longer|stops?|prevents?)\s+(\w+\s+){0,1}melt/i.test(L.text) ? "flow"
         : !cutUsed && /\b(deep|deeper|inside|core|mantle|layer|layers|interior|pressure|centre|center)\b/i.test(L.text) ? "cut" : "subject";
       if (v === "cut") cutUsed = true;
       kind = v === "subject" ? "mechanism" : v;
@@ -305,6 +335,10 @@ function build(script, style, topic) {
   // a line with no natural short phrase gets no headline: empty text items (and then empty text layers) are removed
   scenes.forEach((sc) => { sc.layers.forEach((l) => { if (l.component === "kinetic-type") l.props.items = l.props.items.filter((it) => String(it.text || "").trim()); });
     sc.layers = sc.layers.filter((l) => l.component !== "kinetic-type" || l.props.items.length); });
+  // a top-band headline leaves before the next scene's top headline arrives, so two never overlap during the cut
+  // (IB-PHY-065 review render: TOUCHING IT IS IMPOSSIBLE still on screen as PRESSURE, NOT HEAT came in)
+  const tops = (sc) => sc.layers.filter((l) => l.component === "kinetic-type").flatMap((l) => l.props.items).filter((it) => it.y <= 480);
+  scenes.forEach((sc, k) => { if (k < scenes.length - 1 && tops(scenes[k + 1]).length) tops(sc).forEach((it) => { if (it.outAt == null) it.outAt = off(`${sc.lines[0]}.end`, -0.25); }); });
   return {
     schema: "bto-studio.storyboard.v1", channel: script.channel, topicId: script.topicId, slug: script.slug, version: 1,
     author: `auto/impossible-brief (deterministic scene grammar, world ${W}; needs creative review before publication)`,

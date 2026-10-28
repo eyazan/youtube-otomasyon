@@ -212,6 +212,18 @@ async function main() {
     dosya = path.join(VID, mp4ler.sort().pop());
   }
   const boyut = fs.statSync(dosya).size;
+  // A premium-only channel (config premiumOnlyUploads: ImpossibleBrief) uploads only an MP4 the premium publish path
+  // staged (core/pipeline/premium-publish.js stage(): PREMIUM-STAGED.json carrying this file's sha256), whatever started
+  // the run (scheduler, SLA watchdog recovery, manual dispatch, a local call). A legacy render is refused before any API
+  // call; --dogrula still reports.
+  if (CHANNEL.config.premiumOnlyUploads && !kuru) {
+    let staged = null; try { staged = JSON.parse(fs.readFileSync(path.join(BASE, "PREMIUM-STAGED.json"), "utf8")); } catch (e) {}
+    const sha = require("crypto").createHash("sha256").update(fs.readFileSync(dosya)).digest("hex");
+    if (!staged || staged.mediaSha256 !== sha) {
+      console.error(`⛔ LEGACY_UPLOAD_REFUSED: [${CHANNEL.name}] uploads premium-staged videos only; ${path.relative(KOK, dosya)} ${staged ? "does not match the staged media" : "was not staged by the premium publish path"}. Nothing uploaded.`);
+      process.exit(17);
+    }
+  }
 
   const metin = yuklemeMetni(BASE);
   const snippet = {

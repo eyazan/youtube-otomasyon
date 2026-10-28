@@ -199,6 +199,13 @@ function runChannel(slug, argv = []) {
       return premium.exitCode;
     }
   }
+  // A premium-only channel (config premiumOnlyUploads: ImpossibleBrief) never uploads from this legacy lane, whatever
+  // started it (scheduler, SLA watchdog recovery, a manual dispatch with engine=legacy): only the premium publish path
+  // above takes the day. The uploader refuses a non-premium MP4 as well (youtube-yukle.js LEGACY_UPLOAD_REFUSED).
+  if (channel.config.premiumOnlyUploads && process.env.PUBLISH === "1") {
+    const why = "LEGACY_UPLOAD_RETIRED: this channel publishes premium Shorts only (premium publish path); the legacy renderer does not run with PUBLISH=1";
+    run.outcome("BLOCKED", why); console.log(`[${channel.name}] ${why}`); return 0;
+  }
   // Per-channel, per-target-day retry budget (lib/attempt-budget.js); only in scheduled publishing runs.
   const budget = (kind) => {
     if (!targetDay) return true;
