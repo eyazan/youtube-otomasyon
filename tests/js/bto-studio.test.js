@@ -125,6 +125,9 @@ test("skills: the seven studio Skills exist with valid frontmatter whose name ma
 const STUDIO_ALLOWED = new Set(["ib-premium-dry-run.yml", "fr-studio-dry-run.yml", "premium-render-check.yml", "gll-research.yml", "premium-review-render.yml", path.join("pipeline", "impossible-brief.js"), path.join("pipeline", "premium-shadow.js"), path.join("pipeline", "goal-lore-lab.js"),
   // the premium-primary lane: only when <PREFIX>_PREMIUM_PRIMARY=1 (a repository variable) or for the premium-only GoalLore Lab
   path.join("pipeline", "premium-lane.js"),
+  // FR topic scoring reads the automatic storyboard's object class and mechanism (pure functions, no render) to score what
+  // the premium animation can show (channels/failure-reconstructed/growth-engine.json visuals.source = "animation")
+  path.join("growth", "animation-potential.js"),
   // the publishing adapter: flag-gated (<PREFIX>_PREMIUM_PUBLISH=1, set nowhere), renders through the studio and hands the
   // MP4 to the existing uploader only after the publish gate (tests/js/premium-publish.test.js)
   path.join("pipeline", "premium-publish.js")]);

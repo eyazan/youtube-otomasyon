@@ -105,7 +105,9 @@
     const C = BTO.style.palette; (o.rows || []).forEach((r) => BTO.cue(r.at, "tick", 0.35));
     return { draw: (t) => {
       const op = (o.enterAt == null ? 1 : clamp((t - o.enterAt) / 0.3)) * (o.outAt == null ? 1 : 1 - clamp((t - o.outAt) / 0.3)); if (op <= 0) return "";
-      const d = o.dot || 14, gap = o.gap || 4, pitch = d + gap; const rows = o.rows || []; const cols = Math.max(...rows.map((r) => r.text.length)) * 6 - 1;
+      const rows = o.rows || []; const cols = Math.max(...rows.map((r) => r.text.length)) * 6 - 1;
+      // the board always fits the frame (maxW, default 880 px): long rows shrink the dots (#364 review: the 1986 board ran off screen)
+      const k0 = Math.min(1, ((o.maxW || 880) - 60) / (cols * ((o.dot || 14) + (o.gap || 4)))); const d = (o.dot || 14) * k0, gap = (o.gap || 4) * k0, pitch = d + gap;
       const W = cols * pitch + 60, H = rows.length * 8 * pitch + 40; const x0 = (o.x || 540) - W / 2, y0 = (o.y || 800) - H / 2;
       let g = `<rect x="${x0}" y="${y0}" width="${W}" height="${H}" rx="16" fill="#060807" stroke="#20261f" stroke-width="6" filter="url(#shadow)"/>`; let on = "", off = "";
       rows.forEach((r, ri) => { const txt = r.text.toUpperCase(); const lit = r.at == null ? cols : (t - r.at) * (r.speed || 60); const col = (r.color && C[r.color]) || r.color || C.amber;

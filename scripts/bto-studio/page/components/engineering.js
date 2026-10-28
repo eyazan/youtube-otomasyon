@@ -125,9 +125,16 @@
     "M20 250 L220 250", "M780 250 L980 250", "M20 270 L220 270", "M780 270 L980 270", "M120 270 L120 560", "M880 270 L880 560",
     "M220 270 L220 560", "M780 270 L780 560", "M180 560 L260 560", "M740 560 L820 560"],
     halves: [half(220, 460, 250, 270, 400, true), half(460, 780, 250, 270, 400, true)] };
-  KINDS["girder-bridge"] = { box: [1000, 600], fp: [0.5, 0.48], split: 500, pivots: [[340, 330], [660, 330]], deckTop: 260, paths: [
-    "M20 260 L340 260", "M660 260 L980 260", "M20 320 L340 320", "M660 320 L980 320", "M60 320 L60 560", "M340 320 L340 560", "M660 320 L660 560", "M940 320 L940 560",
-    "M300 560 L380 560", "M620 560 L700 560"], halves: [half(340, 500, 260, 280, 320, false), half(500, 660, 260, 280, 320, false)] };
+  // girder-bridge: a multi-span plate-girder bridge (deck slab over deep girders with web stiffeners, on tapered piers);
+  // the drawing has the depth and repetition of the real structure type, so it reads at Shorts size (#364: the
+  // two-line girder drawing read as an empty frame)
+  const girder = (xa, xb, top, bot) => [`M${xa} ${top} L${xb} ${top}`, `M${xa} ${top + 14} L${xb} ${top + 14}`, `M${xa} ${bot} L${xb} ${bot}`,
+    ...Array.from({ length: Math.max(1, Math.round((xb - xa) / 40)) - 1 }, (_, i) => { const x = n1(xa + (i + 1) * (xb - xa) / Math.round((xb - xa) / 40)); return `M${x} ${top + 14} L${x} ${bot}`; })];
+  const pier = (x) => `M${x - 22} 330 L${x - 34} 560 L${x + 34} 560 L${x + 22} 330 Z`;
+  KINDS["girder-bridge"] = { box: [1000, 600], fp: [0.5, 0.45], split: 500, pivots: [[340, 330], [660, 330]], deckTop: 250, paths: [
+    { d: "M20 250 L340 250" }, "M660 250 L980 250", ...girder(20, 340, 250, 330).slice(1), ...girder(660, 980, 250, 330).slice(1),
+    pier(180), pier(340), pier(660), pier(820), "M20 560 L980 560"],
+    halves: [[{ d: "M340 250 L500 250", main: true }, ...girder(340, 500, 250, 330).slice(1)], [{ d: "M500 250 L660 250", main: true }, ...girder(500, 660, 250, 330).slice(1)]] };
   // walkways hung from a ceiling on rods (box beams on hanger rods): the walkway decks drop when a connection lets go
   KINDS.walkway = { box: [1000, 600], fp: [0.36, 0.3], deckTop: 170, paths: [
     "M40 60 L960 60", "M360 60 L360 380", "M640 60 L640 380", "M120 520 L880 520"],
@@ -161,7 +168,10 @@
       const p = `M${n1(fx - 0.32 * bw)} ${top + 10} L${n1(fx)} ${n1(fy)} L${n1(fx + 0.32 * bw)} ${top + 10}`;
       g += `<path d="${p}" fill="none" stroke="${C.amber}" stroke-width="${n1(w * 1.3)}" stroke-dasharray="${n1(22 / s)} ${n1(18 / s)}" stroke-dashoffset="${n1(-since * 80 / s)}" opacity="${(op * 0.9).toFixed(3)}"/>`;
     } else if (o.mech === "wind") {
-      [0.3, 0.42, 0.54, 0.66].forEach((k, j) => { const y = k * bh; const x0 = -60 + 120 * ((ph + j * 0.27) % 1); g += arrow(x0, y, x0 + 0.22 * bw, y, C.amber, w, op * 0.9); });
+      // the gale streams side-on across the structure's exposed face (the deck and girders for a bridge)
+      const yc = K.deckTop != null ? K.deckTop + 30 : 0.48 * bh; const span = K.deckTop != null ? 150 : 0.36 * bh;
+      [0, 1, 2, 3, 4].forEach((j) => { const y = yc - span / 2 + (j * span) / 4; const x0 = -40 + 0.9 * bw * ((ph + j * 0.21) % 1);
+        g += arrow(x0, y, x0 + 0.18 * bw, y, C.amber, w * 1.4, op * 0.9 * (1 - 0.6 * ((ph + j * 0.21) % 1))); });
     } else if (o.mech === "overtop" && K.face) { const [[cx, cy], [tx, ty]] = K.face;
       // the water sheet: across the reservoir, over the crest and down the downstream face to the toe
       g += `<path d="M20 ${cy - 8} L${cx} ${cy - 8} L${tx + 14} ${ty - 4}" fill="none" stroke="${C.teal}" stroke-width="${n1(w * 2.2)}" stroke-linejoin="round" stroke-dasharray="${n1(30 / s)} ${n1(16 / s)}" stroke-dashoffset="${n1(-since * 120 / s)}" opacity="${op.toFixed(3)}"/>`;
@@ -214,7 +224,7 @@
       const docked = K.docked && o.docked ? K.docked : [];
       const dockWrap = (inner) => (docked.length ? `<g transform="translate(${n1(320 * und)} 0)" opacity="${(1 - 0.85 * und).toFixed(3)}">${inner}</g>` : "");
       const body = (rot, alpha) => { const ln = (d, i) => `<path d="${d}" fill="none" stroke="${i === 0 ? C.paper : C.teal}" stroke-width="${n1((i === 0 ? 10 : 7) / s)}" stroke-linecap="round" stroke-linejoin="round"/>`;
-        return `<g transform="rotate(${n1(rot)} ${scx} ${scy}) ${roll(rot)}" opacity="${alpha.toFixed(3)}">${K.paths.map(ln).join("")}${dockWrap(docked.map((d) => ln(d, 1)).join(""))}</g>`; };
+        return `<g transform="rotate(${n1(rot)} ${scx} ${scy}) ${roll(rot)}" opacity="${alpha.toFixed(3)}">${K.paths.map((p, i) => ln(typeof p === "string" ? p : p.d, i)).join("")}${dockWrap(docked.map((d) => ln(d, 1)).join(""))}</g>`; };
       let g = `<g transform="translate(${n1(x0)} ${n1(y0 + sink * s)}) scale(${s.toFixed(4)}) rotate(${n1(tilt)} ${n1(fx)} ${n1(fy)})">`;
       // props.stars: a fixed star field behind a spacecraft in space (screen-wide, never moves with the spin)
       if (o.stars) { const sr = BTO.rng(7); for (let i = 0; i < 80; i += 1) { const sx = (-x0 + sr() * 1080) / s, sy = (-y0 + sr() * 1920) / s;
@@ -232,7 +242,7 @@
       // line weights 10 / 7 px at scale 1: read on a phone (5 px secondary lines vanished at Shorts size, and frame 0 read as empty)
   // closed outlines (hulls, bodies, cabins) carry a faint fill, so the object reads as a solid shape, not wire
       const stroke = (dd, main) => `<path d="${dd}" fill="${/Z\s*$/.test(dd) ? C.paper : "none"}" fill-opacity="${/Z\s*$/.test(dd) ? (0.09 * draw).toFixed(3) : 0}" stroke="${main ? C.paper : C.teal}" stroke-width="${n1((main ? 10 : 7) / s)}" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="${n1(1 - draw)}" opacity="${main ? 0.95 : 0.75}"/>`;
-      K.paths.forEach((d, i) => { const dd = sag && K.deckY && i < K.deckY.length ? `M20 ${K.deckY[i]} Q500 ${n1(K.deckY[i] + sag * 2)} 980 ${K.deckY[i]}`
+      K.paths.forEach((d0, i) => { const d = typeof d0 === "string" ? d0 : d0.d; const dd = sag && K.deckY && i < K.deckY.length ? `M20 ${K.deckY[i]} Q500 ${n1(K.deckY[i] + sag * 2)} 980 ${K.deckY[i]}`
         : sag && o.failPart === "chain" && i === K.chainPath ? `M240 120 Q500 ${n1(330 + sag * 4)} 760 120` : d;
         g += stroke(dd, i === 0 && !K.halves); });
       g += dockWrap(docked.map((d) => stroke(d, false)).join(""));
