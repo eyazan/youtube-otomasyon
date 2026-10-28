@@ -1,0 +1,39 @@
+name: GoalLore Lab voice review (read-only)
+
+# Puts the three candidate voice samples of a gll-research run on the review/goal-lore-lab branch as plain MP3 files
+# (GitHub plays them from the file page; no zip), next to the research review package. It approves nothing: the
+# owner's choice is recorded separately in channels/goal-lore-lab/config.json. main is never changed.
+on:
+  workflow_dispatch:
+    inputs:
+      run_id: { description: "gll-research run that produced the gll-voice-* artifacts", required: true }
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  voices:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: gll-voice-*
+          run-id: ${{ inputs.run_id }}
+          github-token: ${{ github.token }}
+          path: voices
+          merge-multiple: true
+      - name: Commit the samples to review/goal-lore-lab
+        run: |
+          set -euo pipefail
+          ls -la voices; [ "$(find voices -maxdepth 1 -name "*.mp3" | wc -l)" -ge 3 ] || { echo "::error::expected three MP3 samples"; exit 1; }
+          OUT=review/goal-lore-lab; mkdir -p "$OUT/voices"; cp voices/*.mp3 "$OUT/voices/"
+          cp docs/review/goal-lore-lab-approval.md "$OUT/README.md"
+          { echo; echo "## Listen (run ${{ inputs.run_id }})"; echo
+            for f in "$OUT"/voices/*.mp3; do n=$(basename "$f"); echo "- [$n](voices/$n) — $(du -k "$f" | cut -f1) KB"; done; } >> "$OUT/README.md"
+          git config user.name "gll-voice-review-bot"; git config user.email "actions@users.noreply.github.com"
+          git checkout -q -B review/goal-lore-lab
+          git add -f "$OUT"; git commit -q -m "review: GoalLore Lab voice samples (run ${{ inputs.run_id }}) and research package"
+          git push -q -f origin review/goal-lore-lab

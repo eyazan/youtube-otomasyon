@@ -209,7 +209,9 @@ test("GoalLore Lab: registered successor of CriticalThread, publishing closed; r
   assert.equal(cfg.replaces.channel, "critical-thread"); assert.equal(cfg.voice.status.startsWith("CANDIDATE"), true, "the voice is not approved by code");
   // only the research check, the pilot render check and the one production step name the channel; none holds GLL_ secrets or pushes to main
   const named = fs.readdirSync(path.join(ROOT, ".github/workflows")).filter((f) => /goal-lore-lab|GoalLore/.test(read(`.github/workflows/${f}`))).sort();
-  assert.deepEqual(named, ["gll-research.yml", "portfolio-production.yml", "premium-render-check.yml"]);
+  assert.deepEqual(named, ["gll-research.yml", "gll-voice-review.yml", "portfolio-production.yml", "premium-render-check.yml"]);
+  // the voice review only copies samples to a review branch: no secrets, never main
+  const vr = read(".github/workflows/gll-voice-review.yml"); assert.doesNotMatch(vr, /GLL_|_YT_|secrets\.|HEAD:main|origin main/); assert.match(vr, /git push -q -f origin review\/goal-lore-lab/);
   const rc = read(".github/workflows/premium-render-check.yml"); assert.doesNotMatch(rc, /GLL_|_YT_|git push|PUBLISH: '1'/); assert.match(rc, /--pilot/); assert.match(rc, /contents: read/);
   assert.doesNotMatch(read(".github/workflows/gll-research.yml"), /_YT_|secrets\./, "research needs no credentials");
   const inv = J("channels/goal-lore-lab/topics/topic-candidates.json"); assert.ok(inv.topics.length >= 100);

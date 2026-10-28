@@ -1,0 +1,84 @@
+name: Video review package (read-only)
+
+# Makes an already-rendered video reviewable without touching production:
+#   - downloads the run's portfolio-preview artifact, finds the MP4 and checks its sha256 against the approval record
+#   - re-publishes the MP4 with its review package as one artifact (90 days), so the owner can watch the exact file
+#   - extracts one frame per scene and contact sheets with ffmpeg, plus ffprobe/loudness/black/freeze measurements
+#   - frames and measurements go to the review/<videoId> branch (never main), for an evidence-based creative review
+# Nothing is uploaded to YouTube, no state is written, main is not changed.
+on:
+  workflow_dispatch:
+    inputs:
+      run_id: { description: "workflow run that produced the video", required: true }
+      channel: { description: "channel slug", required: true, default: failure-reconstructed }
+      topic: { description: "premium topic id (e.g. FR-gemini-8-1966)", required: true }
+      video_id: { description: "YouTube video id (label only)", required: true }
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download the run's preview artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: portfolio-preview
+          run-id: ${{ inputs.run_id }}
+          github-token: ${{ github.token }}
+          path: preview
+      - name: Tools
+        run: bash scripts/ci-apt.sh --no-install-recommends ffmpeg
+      - name: Measure and extract frames
+        env:
+          CHANNEL: ${{ inputs.channel }}
+          TOPIC: ${{ inputs.topic }}
+          VID: ${{ inputs.video_id }}
+        run: |
+          set -euo pipefail
+          OUT="review/$VID"; mkdir -p "$OUT/frames" "$OUT/package"
+          MP4=$(find preview -path "*premium/$TOPIC/out/*.mp4" | head -1)
+          [ -n "$MP4" ] || { echo "::error::no MP4 for $TOPIC in the artifact"; find preview -name "*.mp4"; exit 1; }
+          DIR=$(dirname "$MP4"); cp "$MP4" "$OUT/package/$VID.mp4"; cp "$DIR"/*.md "$DIR"/review-package.json "$OUT/package/" 2>/dev/null || true
+          SHA=$(sha256sum "$MP4" | cut -d' ' -f1)
+          APPROVED=$(node -e 'try{const a=require("./channels/'"$CHANNEL"'/premium/approvals/'"$TOPIC"'.json");console.log(a.mediaSha256||"")}catch(e){console.log("")}')
+          {
+            echo "# $VID ($TOPIC)"; echo
+            echo "- file: ${MP4#preview/}"; echo "- sha256: $SHA"; echo "- approval mediaSha256: ${APPROVED:-none}"
+            if [ -n "$APPROVED" ] && [ "$SHA" = "$APPROVED" ]; then echo "- **same file as the uploaded video** (sha256 matches the approval record)"; else echo "- **sha256 does not match the approval record**"; fi
+            echo; echo '## ffprobe'; echo '```'
+            ffprobe -v error -show_entries format=duration,size,bit_rate:stream=codec_name,width,height,r_frame_rate,pix_fmt,sample_rate,channels -of default=nw=1 "$MP4"
+            echo '```'; echo; echo '## loudness (EBU R128)'; echo '```'
+            ffmpeg -hide_banner -nostats -i "$MP4" -af ebur128=peak=true -f null - 2>&1 | sed -n '/Summary/,$p'
+            echo '```'; echo; echo '## black frames (d>=0.1 s, pix_th 0.10)'; echo '```'
+            ffmpeg -hide_banner -nostats -i "$MP4" -vf blackdetect=d=0.1:pix_th=0.10 -an -f null - 2>&1 | grep -o 'black_start.*' || echo none
+            echo '```'; echo; echo '## frozen spans (>= 1.5 s, n=0.003)'; echo '```'
+            ffmpeg -hide_banner -nostats -i "$MP4" -vf freezedetect=n=0.003:d=1.5 -an -f null - 2>&1 | grep -o 'freeze_[a-z]*: [0-9.]*' || echo none
+            echo '```'
+          } > "$OUT/measurements.md"
+          # one frame every 1.5 s (scene coverage) and the first/last frames
+          ffmpeg -hide_banner -loglevel error -i "$MP4" -vf "fps=2/3,scale=540:-2" -q:v 4 "$OUT/frames/t%03d.jpg"
+          ffmpeg -hide_banner -loglevel error -i "$MP4" -frames:v 1 -vf scale=540:-2 "$OUT/frames/first.jpg"
+          ffmpeg -hide_banner -loglevel error -sseof -0.05 -i "$MP4" -frames:v 1 -vf scale=540:-2 "$OUT/frames/last.jpg"
+          ffmpeg -hide_banner -loglevel error -i "$MP4" -vf "fps=1/2,scale=270:-2,tile=6x3" -frames:v 1 "$OUT/contact-sheet.jpg"
+          find "$OUT/frames" -name "*.jpg" | wc -l; cat "$OUT/measurements.md"
+          echo "OUT=$OUT" >> "$GITHUB_ENV"
+      - name: Publish the exact MP4 and its review package (90 days)
+        uses: actions/upload-artifact@v4
+        with:
+          name: video-${{ inputs.video_id }}
+          path: ${{ env.OUT }}
+          retention-days: 90
+      - name: Frames and measurements to the review branch (never main)
+        run: |
+          git config user.name "video-review-bot"; git config user.email "actions@users.noreply.github.com"
+          B="review/${{ inputs.video_id }}"
+          rm -f "$OUT/package/"*.mp4
+          git checkout -q -B "$B"
+          git add -f "$OUT"
+          git commit -q -m "review: frames and measurements for ${{ inputs.video_id }} (${{ inputs.topic }})"
+          git push -q -f origin "$B"
