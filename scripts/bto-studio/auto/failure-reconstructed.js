@@ -122,6 +122,8 @@ function build(script, style, topic) {
   // the object fits 900 x 640 around y 820 (y 500-1140): clear of the chips, the watermark, the y 330 headlines and the captions
   const mech = structureMechanism(topic, kind, lines); const water = /bridge$/.test(kind) && WATER.test(caseText(topic, lines));
   const holds = HOLDS.test(caseText(topic, lines));
+  // a dam that held while the slope above its reservoir slid: the slope is drawn and it is what gives way
+  const atSlope = kind === "dam" && holds && /\b(landslide|slope|mountainside|hillside)\b/i.test([v.tetik, v.mekanizma, ...(v.zincir || [])].join(" "));
   // a suspension bridge whose case names the chain, an eyebar or a cable as what broke: the failure is drawn there
   const atChain = kind === "bridge" && /\b(eyebars?|chain|cables?|hangers?|suspenders?)\b/i.test([v.tetik, v.mekanizma, ...(v.zincir || [])].join(" "));
   // spacecraft cases: a star field when the case is in orbit or space; a stuck thruster drawn firing when the case file
@@ -134,7 +136,7 @@ function build(script, style, topic) {
   const stopLine = motion === "spin" ? lines.findIndex((L) => /\b(stop(ped|s)? (it|the spin|the roll)|regain\w* control|stabili[sz]\w*|halt\w* (it|the spin)|brought it under control)\b/i.test(L.text)) : -1;
   const spinAt = (i) => (!motion ? {} : stopLine < 0 || i < stopLine ? { motion } : i === stopLine ? { motion, stopAt: off(lines[i].id, 0.8) } : { motion: null });
   let cur = 0; const dockAt = (i) => (!docked ? {} : undockLine < 0 || i < undockLine ? { docked: true } : i === undockLine ? { docked: true, undockAt: off(lines[i].id, 0.3) } : { docked: false });
-  const silhouette = (props) => ({ component: "object-silhouette", props: { kind, x: 540, y: 820, w: 900, maxH: 640, seed: 31, ...spinAt(cur), ...dockAt(cur), ...(water ? { water: true } : {}), ...(holds ? { holds: true } : {}), ...(atChain ? { failPart: "chain" } : {}), ...(space ? { stars: true } : {}), ...(plume && (stopLine < 0 || cur <= stopLine) ? { plume: true } : {}), ...props,
+  const silhouette = (props) => ({ component: "object-silhouette", props: { kind, x: atSlope ? 600 : 540, y: 820, w: atSlope ? 840 : 900, maxH: 640, seed: 31, ...spinAt(cur), ...dockAt(cur), ...(water ? { water: true } : {}), ...(holds ? { holds: true } : {}), ...(atChain ? { failPart: "chain" } : {}), ...(atSlope ? { failPart: "slope" } : {}), ...(space ? { stars: true } : {}), ...(plume && (stopLine < 0 || cur <= stopLine) ? { plume: true } : {}), ...props,
     // one continuous spin: it began at the hook's failure (0.6 s) and every later drawing continues it at the same angle
     ...(motion && spinAt(cur).motion && props.failAt != null ? { failAt: 0.6 } : {}) } });
   // headlines sit below the chip column (y >= 460) and shrink with length so they never reach the frame edge
@@ -157,7 +159,10 @@ function build(script, style, topic) {
     if (i === 1 && toll && /\b(killed|died|dead|lives|aboard|people|children|crew|passengers|victims|homes|injured)\b/i.test(L.text)) return roleOf.push("toll");
     if (!contrastUsed && /\b(wasn'?t|weren'?t|isn'?t|never|not|no one|nobody|simply)\b/i.test(L.text) && overlap(L.text, v.yanilgi || "") >= 1) { contrastUsed = true; return roleOf.push("contrast"); }
     if (!triggerUsed && overlap(L.text, v.tetik || "") >= 1 && link < 1) { triggerUsed = true; roleOf.push("trigger"); link = Math.max(link, 0); return; }
-    const scores = chain.map((c, k) => (k < Math.max(0, link) ? -1 : overlap(L.text, c)));
+    // links run forward; a line may go back to an earlier link only when it matches that link better than any link ahead
+    // (a narration that opens on the consequence, then returns to the cause: Vajont's chain stuck on "WAVE OVERTOPS DAM")
+    const fwd = chain.map((c, k) => (k < Math.max(0, link) ? -1 : overlap(L.text, c))); const back = chain.map((c, k) => (k < Math.max(0, link) ? overlap(L.text, c) : -1));
+    const scores = Math.max(...back) > Math.max(...fwd) ? back : fwd;
     const best = scores.indexOf(Math.max(...scores)); link = scores[best] > 0 ? best : Math.min(chain.length - 1, link + 1);
     roleOf.push(`chain:${link}`);
   });
@@ -184,7 +189,8 @@ function build(script, style, topic) {
       layers = [silhouette({ failAt: off(L.id, mech ? 1.2 : 0.3), ...(mech ? { mech, mechAt: start } : {}) }), headline(`${L.id}+0.2`, triggerLabel, 330, S.title, triggerLabel)];
       purpose = `Trigger: the camera closes in on the failure point of the intact ${kind} as the crack starts there, while the case file's trigger is set in three words.`;
       // a spinning object sweeps its whole turning circle: a gentler push keeps it in frame
-      camera = [{ at: start, x: 540, y: 820, z: 1.0 }, { at: end, x: 540, y: 800, z: motion === "spin" ? 1.3 : 1.85 }];
+      camera = atSlope ? [{ at: start, x: 540, y: 820, z: 1.0 }, { at: end, x: 380, y: 760, z: 1.45 }]
+        : [{ at: start, x: 540, y: 820, z: 1.0 }, { at: end, x: 540, y: 800, z: motion === "spin" ? 1.3 : 1.85 }];
     } else if (role === "contrast") {
       kind_ = "contrast"; evidence = [F("misconception"), F("case")];
       layers = [silhouette({ drawAt: off(L.id, -0.1) }), headline(`${L.id}+0.25`, phrase(L.text) || kapak, 330, S.title, phrase(L.text) ? L.text : kapak)];
@@ -207,7 +213,8 @@ function build(script, style, topic) {
       layers = [silhouette(mech ? { failAt: off(L.id, 1.4), mech, mechAt: start } : { failAt: -1 }), ...(label ? [headline(`${L.id}+0.2`, label, 330, S.title, chain[k])] : [])];
       purpose = `Mechanism close-up: the camera closes in on the failure point of the ${kind} while chain link ${k + 1} ("${chain[k]}") is named, so the cause is seen on the object, not only read on a card.`;
       // alternate push-in and pull-back, so two mechanism scenes in a row never repeat the same move
-      const [fx, fy] = [540, 820]; const push = mechCount++ % 2 === 0;
+      // a slope failure is examined on the slope (left of the dam), not at the dam's centre
+      const [fx, fy] = atSlope ? [380, 760] : [540, 820]; const push = mechCount++ % 2 === 0;
       camera = push ? [{ at: start, x: fx + drift, y: fy, z: 1.15 }, { at: end, x: fx, y: fy - 20, z: 1.6 }] : [{ at: start, x: fx, y: fy - 20, z: 1.55 }, { at: end, x: fx - drift, y: fy, z: 1.0 }];
     } else {
       const k = +role.split(":")[1]; kind_ = "chain"; evidence = [F("chain"), F("case")];

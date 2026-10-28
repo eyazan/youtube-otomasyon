@@ -212,3 +212,18 @@ test("IB, GoalLore Lab and HLT headlines are contiguous pieces of the narration,
     }
   }
 });
+
+test("advisory creative checks (#364): measured apart from the objective verdict, subjective questions left to a reviewer", () => {
+  const C = require("../../scripts/bto-studio/creative-checks");
+  const { channel, topic } = Adapter.loadTopic("failure-reconstructed", "gemini-8-1966"); const sb = Generator.build(Adapter.studioScript(channel, topic), style, topic);
+  const r = C.run(sb, { first2sMean: 0.6 }); assert.equal(r.advisory, true);
+  assert.ok(r.checks.every((c) => c.status === "PASS"), JSON.stringify(r.checks.filter((c) => c.status !== "PASS")));
+  assert.ok(r.human.length >= 4 && r.human.every((h) => h.status === "HUMAN"), "subjective items are never reported as PASS");
+  // a still opening, three chain cards in a row and a dangling headline are flagged
+  const bad = JSON.parse(JSON.stringify(sb)); bad.scenes[1].id = "s2-chain"; bad.scenes[2].id = "s3-chain"; bad.scenes[3].id = "s4-chain";
+  bad.scenes[0].layers.find((l) => l.component === "kinetic-type").props.items[0].text = "AMERICAN BRIDGES GET THE";
+  const w = Object.fromEntries(C.run(bad, { first2sMean: 0.2 }).checks.map((c) => [c.name, c.status]));
+  assert.equal(w["motion in the first 2 s"], "WARN"); assert.equal(w["scene variety"], "WARN"); assert.equal(w["headlines read as complete phrases"], "WARN");
+  // the objective verdict ignores them
+  assert.match(fs.readFileSync(path.join(ROOT, "scripts/bto-studio/qa.js"), "utf8"), /const objectivePass = objective\.filter/);
+});

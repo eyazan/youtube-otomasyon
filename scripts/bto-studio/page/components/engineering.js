@@ -65,7 +65,8 @@
     bridge: { box: [1000, 600], fp: [0.5, 0.52], sag: 60, deckY: [320, 340], paths: [
       "M20 320 L980 320", "M20 340 L980 340", "M240 120 L240 520", "M760 120 L760 520", "M20 300 Q240 110 240 120", "M240 120 Q500 330 760 120", "M760 120 Q980 110 980 300",
       "M330 190 L330 320", "M420 245 L420 320", "M500 262 L500 320", "M580 245 L580 320", "M670 190 L670 320", "M200 520 L280 520", "M720 520 L800 520"] },
-    dam: { box: [1000, 600], fp: [0.5, 0.55], breach: true, face: [[700, 120], [820, 520]], reservoir: "M20 200 L276 200 L180 520 L20 520 Z", paths: [
+    dam: { box: [1000, 600], fp: [0.5, 0.55], breach: true, face: [[700, 120], [820, 520]], reservoir: "M20 200 L276 200 L180 520 L20 520 Z",
+      slope: ["M20 200 L20 20 L110 10 L240 200 Z", "M30 80 L150 70", "M30 140 L195 130"], paths: [
       "M300 120 L700 120 L820 520 L180 520 Z", "M60 200 L300 200", "M60 230 L280 230", "M60 260 L270 260", "M200 470 L800 470", "M820 520 L980 520"] },
     rocket: { box: [600, 1000], fp: [0.5, 0.62], tilt: 6, paths: [
       "M300 60 C340 110 360 180 360 260 L360 780 L240 780 L240 260 C240 180 260 110 300 60 Z", "M240 650 L160 820 L240 790", "M360 650 L440 820 L360 790",
@@ -148,7 +149,9 @@
     return `<g opacity="${op.toFixed(3)}"><line x1="${n1(x1)}" y1="${n1(y1)}" x2="${n1(x2 - Math.cos(a) * h * 0.6)}" y2="${n1(y2 - Math.sin(a) * h * 0.6)}" stroke="${c}" stroke-width="${n1(w)}" stroke-linecap="round"/>` +
       `<path d="M${n1(x2)} ${n1(y2)} L${n1(x2 - h * Math.cos(a - 0.45))} ${n1(y2 - h * Math.sin(a - 0.45))} L${n1(x2 - h * Math.cos(a + 0.45))} ${n1(y2 - h * Math.sin(a + 0.45))} Z" fill="${c}"/></g>`; };
   function mechanism(o, K, t, s, fx, fy, f) {
-    const C = P(); const since = t - (o.mechAt == null ? (o.drawAt == null ? -1 : o.drawAt + 0.6) : o.mechAt); if (since < 0) return "";
+    const C = P(); let m0 = o.mechAt == null ? (o.drawAt == null ? -1 : o.drawAt + 0.6) : o.mechAt;
+    // a slide-driven wave follows the slide: it starts 1 s after the slope gives way
+    if (o.failPart === "slope" && o.failAt != null) m0 = Math.max(m0, o.failAt + 1); const since = t - m0; if (since < 0) return "";
     const op = clamp(since / 0.35) * (1 - clamp((f - 0.55) / 0.3)); if (op <= 0) return ""; const w = 6 / s, ph = (since % 1);
     const [bw, bh] = K.box; let g = "";
     if (o.mech === "load") { const top = K.deckTop || fy - 120;
@@ -246,6 +249,12 @@
       // span bridges: each half of the main span hinges down about its pier, opening a gap at the failure point
       if (K.halves) K.halves.forEach((ps, h) => { const [px, py] = K.pivots[h]; const ang = (h ? -1 : 1) * 24 * fe;
         g += `<g transform="translate(0 ${n1(150 * fe)}) rotate(${n1(ang)} ${px} ${py})">` + ps.map((p) => (typeof p === "string" ? stroke(p, false) : stroke(p.d, p.main))).join("") + "</g>"; });
+      // props.failPart "slope" (dam): the mountainside above the reservoir, drawn from the start; at failAt a slide mass
+      // runs down it into the water (the dam itself holds), then the overtopping wave follows
+      if (o.failPart === "slope" && K.slope) { const fs = o.failAt == null ? 0 : BTO.ease("inOut", clamp((t - o.failAt) / 1.2));
+        K.slope.forEach((d) => { g += stroke(d, false); });
+        // the slide: a wedge of the slope's face moves down its line into the reservoir
+        if (fs > 0) g += `<path d="M110 14 L150 60 L215 170 L160 180 L95 60 Z" transform="translate(${n1(70 * fs)} ${n1(80 * fs)})" fill="${C.amber}" opacity="${(0.25 + 0.45 * fs).toFixed(3)}"/>`; }
       if (o.mech) g += mechanism(o, K, t, s, fx, fy, f);
       if (K.breach && f > 0) g += `<path d="M${fx - 40} ${fy} L${fx + 40} ${fy} L${n1(fx + 40 + 300 * fe)} 520 L${n1(fx - 40 - 120 * fe)} 520 Z" fill="${C.teal}" opacity="${(0.45 * fe).toFixed(3)}"/>`;
       if (K.slide && f > 0) g += `<path d="M330 190 C420 260 ${n1(480 + 220 * fe)} ${n1(360 + 120 * fe)} ${n1(560 + 260 * fe)} 540 L${n1(380 + 120 * fe)} 540 C380 420 320 300 300 200 Z" fill="${C.amber}" opacity="${(0.4 * fe).toFixed(3)}"/>`;
