@@ -96,12 +96,13 @@ test("auto storyboard: the subject picks the visual, plates never repeat back to
 });
 
 test("IB readiness: researched records pass without stored quotes (warned); visual pre-check blocks are tolerated, others are not", () => {
-  const { channel, topic } = Adapter.loadTopic("impossible-brief", "IB-HUM-004");
+  const { channel, topic } = Adapter.loadTopic("impossible-brief", "IB-PHY-065");
   const r = Adapter.readiness(channel, topic);
   assert.equal(r.ready, true);
   // a content hold (claim check 2026-10-28: unsourced narration lines) keeps a topic out of production
   const held = Adapter.loadTopic("impossible-brief", "IB-EXT-050");
   assert.ok(Adapter.readiness(held.channel, held.topic).errors.some((e) => /claim check/.test(e)), "IB-EXT-050 is held until its narration is corrected");
+  for (const id of ["IB-EXT-047", "IB-HUM-004"]) { const h = Adapter.loadTopic("impossible-brief", id); assert.ok(Adapter.readiness(h.channel, h.topic).errors.some((e) => /review render/.test(e)), `${id} is held by its review render`); }
   assert.ok(r.warnings.some((w) => /no stored verbatim quote/.test(w)));
   assert.ok(r.warnings.some((w) => /stock-picture renderer/.test(w)));
   const published = Adapter.loadTopic("impossible-brief", "what-if-mosquitoes-went-extinct");
