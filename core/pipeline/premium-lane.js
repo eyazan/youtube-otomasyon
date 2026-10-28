@@ -6,7 +6,8 @@
 // (FAILED / BLOCKED / NO_TOPIC, reported by scripts/production-outcome.js), never a silent legacy upload. Unset the
 // variable to roll the channel back to the legacy lane.
 //
-//   qualified topic (studio readiness: researched evidence, unpublished, not generated, not reserved)
+//   qualified topic (studio readiness: researched evidence, unpublished, not generated, not reserved; and the channel's
+//   own growth bar: viral score minimum and selectable buckets, as in the legacy lane)
 //   -> core/pipeline/premium-publish.js run(): an owner-approved package, or with the channel's signed publication
 //      policy the next qualified topic, rendered fresh at final quality with the approved voice, objective QA, the
 //      publish gate, then the existing uploader (youtube-yukle.js; --dogrula when PUBLISH!=1)
@@ -61,17 +62,37 @@ function universeTopics(channel) {
   return out;
 }
 
-// qualified, studio-ready, unpublished topics, highest priority first
-function qualified(channel, { exclude = [] } = {}) {
+// The channel's own topic-quality bar (core/growth: viral score minimum, allowed buckets), exactly as the legacy lane
+// applies it; premium never lowers it. GoalLore Lab has no growth scoring yet: its bar is the verified research.
+function growthBar(channel) {
+  if (channel.slug === "goal-lore-lab") return null;
+  const Context = require("../growth/context"); const Config = require("../growth/config");
+  const cfg = Config.forChannel(channel); const min = Number(cfg.viralScoring.minimumToProduce || 68);
+  const allowed = new Set([...cfg.selection.exploitBuckets, ...cfg.selection.exploreBuckets].filter((b) => b !== "D"));
+  const by = new Map(); for (const r of Context.rank(channel, {}).rows) { by.set(r.topic.id, r); by.set(r.topic.slug, r); }
+  return (t) => {
+    const r = by.get(t.id) || by.get(t.slug) || by.get(String(t.id).replace(/^FR-/, ""));
+    if (!r) return { why: "not ranked by the channel's topic scoring", score: 0 };
+    const v = r.score.ViralPotentialScore;
+    if (!Number.isFinite(v) || v < min) return { why: `viral score ${v} below the channel minimum ${min}`, score: v || 0 };
+    if (!allowed.has(r.score.bucket)) return { why: `bucket ${r.score.bucket} is not selectable (${[...allowed].join("/")})`, score: v };
+    return { why: null, score: Number(r.score.SelectionScore) || v };
+  };
+}
+
+// qualified, studio-ready, unpublished topics that pass the channel's quality bar, best first
+function qualified(channel, { exclude = [], bar = growthBar } = {}) {
   const Adapter = require("../../scripts/bto-studio/adapter");
   const reserved = require("./premium-publish").reserved(channel); const prio = priorities(channel);
+  const quality = bar ? bar(channel) : null;
   const rows = [];
   for (const { row, topic: t, loadError } of universeTopics(channel)) {
     const why = loadError ? [loadError] : [...extraRefusals(channel, t)];
     if (reserved.has(t.slug) || reserved.has(t.id)) why.push("reserved for a premium publication");
     if (exclude.includes(t.id) || exclude.includes(t.slug)) why.push("excluded");
     if (!loadError) why.push(...Adapter.readiness(channel, t).errors);
-    rows.push({ topic: t, ok: why.length === 0, why, priority: prio.get(t.id) || rowPriority(row) });
+    const q = quality && !loadError ? quality(t) : null; if (q && q.why) why.push(q.why);
+    rows.push({ topic: t, ok: why.length === 0, why, priority: q ? q.score : prio.get(t.id) || rowPriority(row) });
   }
   return { ok: rows.filter((r) => r.ok).sort((a, b) => b.priority - a.priority || String(a.topic.id).localeCompare(String(b.topic.id))), refused: rows.filter((r) => !r.ok) };
 }
@@ -98,7 +119,7 @@ function renderCandidate(channel, topic, { env = process.env, spawn = cp.spawnSy
   return result;
 }
 
-function runChannel(slug, argv = [], { env = process.env, spawn = cp.spawnSync, log = console.log, premium = require("./premium-publish"), channel: injected = null } = {}) {
+function runChannel(slug, argv = [], { env = process.env, spawn = cp.spawnSync, log = console.log, premium = require("./premium-publish"), channel: injected = null, bar = growthBar } = {}) {
   const channel = injected || Channel.getChannel(slug);
   if (channel.retired) { log(`[${channel.name}] retired; no content produced.`); return 0; }
   if (!primary(channel, env)) throw new Error(`premium is not the primary renderer of ${channel.slug}`);
@@ -112,7 +133,7 @@ function runChannel(slug, argv = [], { env = process.env, spawn = cp.spawnSync, 
   }
   // 1. an approved premium Short (owner sign-offs, or the owner-signed publication policy) through the existing uploader
   if (!explicit) {
-    const p = premium.run(channel, { env, targetDay, log, nextTopic: (accept) => (qualified(channel).ok.find((r) => !accept || accept(r.topic)) || {}).topic || null });
+    const p = premium.run(channel, { env, targetDay, log, nextTopic: (accept) => (qualified(channel, { bar }).ok.find((r) => !accept || accept(r.topic)) || {}).topic || null });
     if (p && p.noTopic) { const why = "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)"; run.skip("RESEARCH", why).outcome("NO_TOPIC", why); return 0; }
     if (p && (p.uploaded || p.dryRun)) {
       run.topic(p.slug).done("RESEARCH", p.topicId).done("RENDER", "premium final").done("QA", "objective PASS, publish gate PUBLISH_APPROVED")
@@ -129,7 +150,7 @@ function runChannel(slug, argv = [], { env = process.env, spawn = cp.spawnSync, 
     }
   }
   // 2. otherwise one review candidate: the next qualified topic not yet rendered, never uploaded
-  const { ok, refused } = qualified(channel);
+  const { ok, refused } = qualified(channel, { bar });
   const force = env[`${Shadow.PREFIX[channel.slug]}_PREMIUM_FORCE`] === "1";
   const pick = explicit ? ok.find((r) => r.topic.id === explicit || r.topic.slug === explicit) : ok.find((r) => force || !rendered(channel, r.topic));
   if (!pick) {
@@ -149,4 +170,4 @@ function runChannel(slug, argv = [], { env = process.env, spawn = cp.spawnSync, 
   return 0;
 }
 
-module.exports = { runChannel, primary, qualified, legacySlugs, renderCandidate, reviewDir, ledger, universeTopics };
+module.exports = { runChannel, primary, qualified, growthBar, legacySlugs, renderCandidate, reviewDir, ledger, universeTopics };

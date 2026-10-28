@@ -77,7 +77,7 @@ test("the shipped publication policies are UNSIGNED: no channel publishes unatte
 
 test("without a signed policy or approval: a review candidate, the gate as it stands and the uploader's --dogrula; nothing approved or written", () => {
   const ch = fakeChannel([topic()]); const { spawn, calls } = fakeSpawn(ch);
-  assert.equal(Lane.runChannel("behind-the-ordinary", [], { env: { ...ON, HLT_PREMIUM_PRIMARY: "1", PUBLISH: "0", HLT_YT_REFRESH_TOKEN: "x" }, spawn, log: quiet, channel: ch,
+  assert.equal(Lane.runChannel("behind-the-ordinary", [], { env: { ...ON, HLT_PREMIUM_PRIMARY: "1", PUBLISH: "0", HLT_YT_REFRESH_TOKEN: "x" }, spawn, log: quiet, channel: ch, bar: null,
     premium: { ...Publish, uploaderDryRun: (c, t, f, o) => Publish.uploaderDryRun(c, t, f, { ...o, gate: () => ({ furthestState: "QA_PASSED", steps: [{ to: "PUBLISH_APPROVED", ok: false, reasons: ["creative sign-off missing"] }], duplicates: [] }) }) } }), 0);
   assert.deepEqual(calls.map((c) => path.basename(c.args[0])), ["studio.js", "youtube-yukle.js"]);
   assert.equal(calls[0].env.BTO_PREMIUM_RENDER, "preview"); assert.equal(calls[0].env.HLT_YT_REFRESH_TOKEN, undefined, "the render never sees credentials");
@@ -90,7 +90,7 @@ test("without a signed policy or approval: a review candidate, the gate as it st
 
 test("signed policy, publication day: reserves the next qualified topic, binds the policy to the rendered hash, uploads once through youtube-yukle", () => {
   const ch = fakeChannel([topic()], { policy: POLICY() }); const { spawn, calls } = fakeSpawn(ch); const pol = Publish.policy(ch);
-  const r = Publish.run(ch, { env: { ...ON, PUBLISH: "1" }, spawn, gate: gateOk, log: quiet, nextTopic: () => Lane.qualified(ch).ok[0].topic });
+  const r = Publish.run(ch, { env: { ...ON, PUBLISH: "1" }, spawn, gate: gateOk, log: quiet, nextTopic: () => Lane.qualified(ch, { bar: null }).ok[0].topic });
   assert.equal(r.uploaded, true); assert.equal(r.videoId, "VID1");
   assert.deepEqual(calls.map((c) => path.basename(c.args[0])), ["studio.js", "youtube-yukle.js"]); assert.equal(calls[0].env.BTO_PREMIUM_RENDER, "final"); assert.ok(!calls[1].args.includes("--dogrula"));
   const rec = J(path.join(ch.paths.base, "premium", "approvals", "HLT-T1.json"));
@@ -99,14 +99,14 @@ test("signed policy, publication day: reserves the next qualified topic, binds t
   assert.match(rec.contentSha256, /^[0-9a-f]{64}$/); assert.equal(rec.publishedVideoId, "VID1");
   assert.equal(rec.metadata.title, "Why a zip never jams"); assert.match(rec.metadata.description, /Sources:\n- Wikipedia: Zipper: https:\/\/en\.wikipedia\.org\/wiki\/Zipper/); assert.match(rec.metadata.description, /synthetic voice/);
   // the next day: the published topic is neither re-reserved nor re-uploaded
-  assert.equal(Lane.qualified(ch).ok.length, 0);
-  const again = fakeSpawn(ch); const r2 = Publish.run(ch, { env: { ...ON, PUBLISH: "1" }, spawn: again.spawn, gate: gateOk, log: quiet, nextTopic: () => (Lane.qualified(ch).ok[0] || {}).topic || null });
+  assert.equal(Lane.qualified(ch, { bar: null }).ok.length, 0);
+  const again = fakeSpawn(ch); const r2 = Publish.run(ch, { env: { ...ON, PUBLISH: "1" }, spawn: again.spawn, gate: gateOk, log: quiet, nextTopic: () => (Lane.qualified(ch, { bar: null }).ok[0] || {}).topic || null });
   assert.equal(r2.noTopic, true); assert.equal(again.calls.length, 0);
 });
 
 test("signed policy, dry run: the whole chain runs to the uploader's --dogrula and nothing is written", () => {
   const ch = fakeChannel([topic()], { policy: POLICY() }); const { spawn, calls } = fakeSpawn(ch);
-  const r = Publish.run(ch, { env: { ...ON, PUBLISH: "0" }, spawn, gate: gateOk, log: quiet, nextTopic: () => Lane.qualified(ch).ok[0].topic });
+  const r = Publish.run(ch, { env: { ...ON, PUBLISH: "0" }, spawn, gate: gateOk, log: quiet, nextTopic: () => Lane.qualified(ch, { bar: null }).ok[0].topic });
   assert.equal(r.dryRun, true); assert.ok(calls[1].args.includes("--dogrula"));
   assert.ok(!fs.existsSync(path.join(ch.paths.base, "premium", "approvals")), "a dry run reserves and binds nothing");
 });
@@ -114,15 +114,15 @@ test("signed policy, dry run: the whole chain runs to the uploader's --dogrula a
 test("signed policy: a topic refused for its content stays reserved with the reason and is never picked again; the bar is not lowered", () => {
   const ch = fakeChannel([topic(), topic({ id: "HLT-T2", slug: "t2", title: "Second" })], { policy: POLICY() });
   const bad = fakeSpawn(ch, { verdict: "REVISION_REQUIRED" });
-  const next = () => (Lane.qualified(ch).ok[0] || {}).topic || null;
+  const next = () => (Lane.qualified(ch, { bar: null }).ok[0] || {}).topic || null;
   assert.equal(Publish.run(ch, { env: { ...ON, PUBLISH: "1" }, spawn: bad.spawn, gate: gateOk, log: quiet, nextTopic: next }), null);
   const rec = J(path.join(ch.paths.base, "premium", "approvals", "HLT-T1.json")); assert.match(rec.refused.why, /REVISION_REQUIRED/); assert.equal(rec.creative, null, "nothing was signed for refused content");
-  assert.deepEqual(Lane.qualified(ch).ok.map((q) => q.topic.id), ["HLT-T2"], "the refused topic is out of both lanes");
+  assert.deepEqual(Lane.qualified(ch, { bar: null }).ok.map((q) => q.topic.id), ["HLT-T2"], "the refused topic is out of both lanes");
   const ok = fakeSpawn(ch); const r = Publish.run(ch, { env: { ...ON, PUBLISH: "1" }, spawn: ok.spawn, gate: gateOk, log: quiet, nextTopic: next });
   assert.equal(r.topicId, "HLT-T2"); assert.equal(r.uploaded, true);
   // an unapproved voice or a closed publish gate (channel disabled) is not the topic's fault: it stays reserved, not refused
   const ch2 = fakeChannel([topic()], { policy: POLICY() }); const v = fakeSpawn(ch2, { approved: false });
-  assert.equal(Publish.run(ch2, { env: { ...ON, PUBLISH: "1" }, spawn: v.spawn, gate: gateOk, log: quiet, nextTopic: () => Lane.qualified(ch2).ok[0].topic }), null);
+  assert.equal(Publish.run(ch2, { env: { ...ON, PUBLISH: "1" }, spawn: v.spawn, gate: gateOk, log: quiet, nextTopic: () => Lane.qualified(ch2, { bar: null }).ok[0].topic }), null);
   assert.equal(J(path.join(ch2.paths.base, "premium", "approvals", "HLT-T1.json")).refused, undefined);
 });
 
@@ -130,7 +130,7 @@ test("premium primary on a publication day with a policy that refused: BLOCKED, 
   const ch = fakeChannel([topic()], { policy: POLICY() }); const calls = [];
   const premium = { ...Publish, run: () => null };
   const plan = require("../../core/scheduling"); const orig = plan.channelPlan; plan.channelPlan = () => ({ short: { due: true, targetDay: "2026-10-28" } });
-  try { assert.equal(Lane.runChannel("behind-the-ordinary", [], { env: { ...ON, HLT_PREMIUM_PRIMARY: "1", PUBLISH: "1" }, spawn: (...a) => { calls.push(a); return { status: 0 }; }, log: quiet, channel: ch, premium }), 0); }
+  try { assert.equal(Lane.runChannel("behind-the-ordinary", [], { env: { ...ON, HLT_PREMIUM_PRIMARY: "1", PUBLISH: "1" }, spawn: (...a) => { calls.push(a); return { status: 0 }; }, log: quiet, channel: ch, premium, bar: null }), 0); }
   finally { plan.channelPlan = orig; }
   assert.equal(calls.length, 0);
   assert.equal(J(path.join(ch.paths.state, "ops", "production-stages.json")).runs.pop().outcome, "BLOCKED");
@@ -150,7 +150,7 @@ test("workflow: FR, IB and HLT choose their renderer by variable or the engine i
 
 test("a policy that requires research review publishes only topics whose exact narration and quotes the owner reviewed", () => {
   const t1 = topic(); const ch = fakeChannel([t1], { policy: POLICY({ requireResearchReview: true }) });
-  const next = (accept) => (Lane.qualified(ch).ok.find((r) => !accept || accept(r.topic)) || {}).topic || null;
+  const next = (accept) => (Lane.qualified(ch, { bar: null }).ok.find((r) => !accept || accept(r.topic)) || {}).topic || null;
   const none = fakeSpawn(ch);
   assert.equal(Publish.run(ch, { env: { ...ON, PUBLISH: "1" }, spawn: none.spawn, gate: gateOk, log: quiet, nextTopic: next }).noTopic, true, "unreviewed research is never published unattended");
   assert.equal(none.calls.length, 0);
@@ -161,4 +161,15 @@ test("a policy that requires research review publishes only topics whose exact n
   const ok = fakeSpawn(ch); const r = Publish.run(ch, { env: { ...ON, PUBLISH: "1" }, spawn: ok.spawn, gate: gateOk, log: quiet, nextTopic: next });
   assert.equal(r.uploaded, true); assert.equal(r.topicId, "HLT-T1");
   for (const c of ["goal-lore-lab", "behind-the-ordinary"]) assert.equal(Publish.policy(Channel.getChannel(c)).policy.requireResearchReview, true, `${c}: its new research needs the owner's reading`);
+});
+
+test("premium applies the channel's own topic bar (viral minimum, selectable buckets): never a topic the legacy lane would refuse for quality", () => {
+  const Config = require("../../core/growth/config"); const Context = require("../../core/growth/context");
+  for (const slug of ["failure-reconstructed", "impossible-brief"]) {
+    const ch = Channel.getChannel(slug); const cfg = Config.forChannel(ch); const min = Number(cfg.viralScoring.minimumToProduce || 68);
+    const by = new Map(Context.rank(ch, {}).rows.map((r) => [r.topic.slug, r]));
+    for (const r of Lane.qualified(ch).ok) { const s = by.get(r.topic.slug).score; assert.ok(s.ViralPotentialScore >= min && s.bucket !== "D", `${slug} ${r.topic.id}`); }
+    assert.ok(Lane.qualified(ch).refused.some((r) => r.why.some((w) => /below the channel minimum/.test(w))), `${slug}: the bar refuses topics`);
+  }
+  assert.equal(Lane.growthBar(Channel.getChannel("goal-lore-lab")), null, "GoalLore Lab's bar is its verified research");
 });
