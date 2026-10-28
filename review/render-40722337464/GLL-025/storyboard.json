@@ -1,0 +1,910 @@
+{
+ "schema": "bto-studio.storyboard.v1",
+ "channel": "goal-lore-lab",
+ "topicId": "GLL-025",
+ "slug": "panenka-penalty-1976",
+ "version": 1,
+ "author": "auto/goal-lore-lab (deterministic football grammar; needs creative review before publication)",
+ "licensingNote": "all drawn in-house from code (SVG): stadium, pitch, generic standing tokens (no likeness, kits or crests), boot and ball drawings, physics models; no broadcast footage, no photographs",
+ "treatment": {
+  "educationalObjective": "Tell, from the record's sources: What made Panenka's 1976 penalty so audacious?",
+  "visualHook": "Frame 0: the record's own kind of goal (penalty) on a floodlit pitch; the ball moves within the first second.",
+  "mechanismsToAnimate": [
+   "hook",
+   "when",
+   "replay",
+   "penalty",
+   "payoff"
+  ],
+  "factualRisks": [
+   "the kick is one illustrative model (drag + Magnus), not tracking data of the real goal (RECONSTRUCTION + PHYSICS MODEL chips)",
+   "players are generic tokens: positions are illustrative"
+  ]
+ },
+ "tail": 0.4,
+ "scenes": [
+  {
+   "id": "s1-hook",
+   "lines": [
+    "L1"
+   ],
+   "start": 0,
+   "env": "desk",
+   "evidence": [
+    "F2",
+    "F3",
+    "F5"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "conceptualLabel",
+    "modelLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Hook: the record's own kind of goal (penalty) on the floodlit pitch within the first second, so the moment is on screen before it is named. Penalty: the keeper token dives to one side while the model ball is chipped softly down the middle into the net.",
+   "camera": [
+    {
+     "at": 0,
+     "x": 540,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L1.end",
+     "x": 540,
+     "y": 800,
+     "z": 1.04
+    }
+   ],
+   "layers": [
+    {
+     "component": "stadium",
+     "props": {
+      "horizonY": 700,
+      "seed": 23,
+      "lightsOnAt": 0
+     }
+    },
+    {
+     "component": "football-pitch",
+     "props": {
+      "tokenStyle": "standing",
+      "id": "p0-penalty",
+      "x": 540,
+      "y": 1160,
+      "rx": 72,
+      "rz": -4,
+      "D": 4200,
+      "pxPerMetre": 70,
+      "focusKeys": [
+       [
+        "0+0.05",
+        0,
+        -43
+       ],
+       [
+        "0+1.25",
+        0,
+        -47
+       ]
+      ],
+      "players": [
+       {
+        "id": "taker",
+        "team": "home",
+        "pathKeys": [
+         [
+          "0+0.05",
+          -2,
+          -37.5
+         ],
+         [
+          "0+0.65",
+          -0.3,
+          -41
+         ]
+        ]
+       },
+       {
+        "id": "gk",
+        "team": "away",
+        "pathKeys": [
+         [
+          "0+0.05",
+          0,
+          -52.2
+         ],
+         [
+          "0+0.75",
+          0,
+          -52.2
+         ],
+         [
+          "0+1.15",
+          3.2,
+          -52.2
+         ]
+        ]
+       }
+      ],
+      "kicks": [
+       {
+        "x0": 0,
+        "y0": -41.5,
+        "speed": 13,
+        "elevation": 26,
+        "azimuth": 0,
+        "spinRps": 0,
+        "at": "0+0.7",
+        "timeScale": 1
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s2-when",
+   "lines": [
+    "L2"
+   ],
+   "start": "L2-0.2",
+   "env": "spot",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1",
+    "F3",
+    "F2"
+   ],
+   "chips": [
+    "illustrationLabel"
+   ],
+   "conceptual": false,
+   "visualPurpose": "Place and date on the stadium's dot-matrix board, spelled from the line's own words over the floodlit stands.",
+   "camera": [
+    {
+     "at": "L2-0.2",
+     "x": 540,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L2.end",
+     "x": 540,
+     "y": 780,
+     "z": 1.06
+    }
+   ],
+   "layers": [
+    {
+     "component": "stadium",
+     "props": {
+      "horizonY": 1180,
+      "seed": 23,
+      "lightsOnAt": "L2-0.2"
+     }
+    },
+    {
+     "component": "dot-board",
+     "screen": true,
+     "props": {
+      "x": 540,
+      "y": 760,
+      "dot": 8,
+      "gap": 3,
+      "enterAt": "L2-0.1",
+      "rows": [
+       {
+        "text": "BELGRADE 1976",
+        "at": "L2+0.15",
+        "color": "paper"
+       },
+       {
+        "text": "CZECHOSLOVAKIA",
+        "at": "L2+0.6",
+        "color": "amber"
+       },
+       {
+        "text": "AGAINST WEST",
+        "at": "L2+1.05",
+        "color": "paper"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s3-replay",
+   "lines": [
+    "L3"
+   ],
+   "start": "L3-0.2",
+   "env": "desk",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F2"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "conceptualLabel",
+    "modelLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Replay: the penalty again from a higher camera while the line carries the story (illustrative positions).",
+   "camera": [
+    {
+     "at": "L3-0.2",
+     "x": 540,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L3.end",
+     "x": 540,
+     "y": 790,
+     "z": 1.06
+    }
+   ],
+   "layers": [
+    {
+     "component": "stadium",
+     "props": {
+      "horizonY": 640,
+      "seed": 39,
+      "lightsOnAt": -1
+     }
+    },
+    {
+     "component": "football-pitch",
+     "props": {
+      "tokenStyle": "standing",
+      "id": "p2-penalty",
+      "x": 540,
+      "y": 1040,
+      "rx": 68,
+      "rz": 118,
+      "D": 3600,
+      "pxPerMetre": 52,
+      "focusKeys": [
+       [
+        "L3-0.05",
+        1,
+        -49
+       ]
+      ],
+      "players": [
+       {
+        "id": "taker",
+        "team": "home",
+        "pathKeys": [
+         [
+          "L3-0.05",
+          -2,
+          -37.5
+         ],
+         [
+          "L3+0.55",
+          -0.3,
+          -41
+         ]
+        ]
+       },
+       {
+        "id": "gk",
+        "team": "away",
+        "pathKeys": [
+         [
+          "L3-0.05",
+          0,
+          -52.2
+         ],
+         [
+          "L3+0.65",
+          0,
+          -52.2
+         ],
+         [
+          "L3+1.05",
+          3.2,
+          -52.2
+         ]
+        ]
+       }
+      ],
+      "kicks": [
+       {
+        "x0": 0,
+        "y0": -41.5,
+        "speed": 13,
+        "elevation": 26,
+        "azimuth": 0,
+        "spinRps": 0,
+        "at": "L3+0.6",
+        "timeScale": 1
+       }
+      ]
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L3+0.3",
+        "text": "FINAL WENT TO PENALTIES",
+        "x": 540,
+        "y": 470,
+        "size": 52,
+        "family": "sans",
+        "style": "pop"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s4-penalty",
+   "lines": [
+    "L4"
+   ],
+   "start": "L4-0.2",
+   "env": "spot",
+   "transition": {
+    "type": "dissolve",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F3",
+    "F1",
+    "F5"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "conceptualLabel",
+    "modelLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Penalty: the model ball rises over the crossbar.",
+   "camera": [
+    {
+     "at": "L4-0.2",
+     "x": 540,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L4.end",
+     "x": 540,
+     "y": 800,
+     "z": 1.06
+    }
+   ],
+   "layers": [
+    {
+     "component": "stadium",
+     "props": {
+      "horizonY": 640,
+      "seed": 34,
+      "lightsOnAt": -1
+     }
+    },
+    {
+     "component": "football-pitch",
+     "props": {
+      "tokenStyle": "standing",
+      "id": "p3-penalty",
+      "x": 540,
+      "y": 1160,
+      "rx": 72,
+      "rz": -4,
+      "D": 4200,
+      "pxPerMetre": 70,
+      "focusKeys": [
+       [
+        "L4-0.05",
+        0,
+        -43
+       ],
+       [
+        "L4+1.15",
+        0,
+        -47
+       ]
+      ],
+      "players": [
+       {
+        "id": "taker",
+        "team": "home",
+        "pathKeys": [
+         [
+          "L4-0.05",
+          -2,
+          -37.5
+         ],
+         [
+          "L4+0.55",
+          -0.3,
+          -41
+         ]
+        ]
+       },
+       {
+        "id": "gk",
+        "team": "away",
+        "pathKeys": [
+         [
+          "L4-0.05",
+          0,
+          -52.2
+         ],
+         [
+          "L4+0.65",
+          0,
+          -52.2
+         ],
+         [
+          "L4+1.05",
+          0.8,
+          -52.2
+         ]
+        ]
+       }
+      ],
+      "kicks": [
+       {
+        "x0": 0,
+        "y0": -41.5,
+        "speed": 26,
+        "elevation": 19,
+        "azimuth": 2,
+        "spinRps": 0,
+        "at": "L4+0.6",
+        "timeScale": 1
+       }
+      ]
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L4+0.3",
+        "text": "KICK OVER THE BAR",
+        "x": 540,
+        "y": 470,
+        "size": 60,
+        "family": "sans",
+        "style": "pop"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s5-penalty",
+   "lines": [
+    "L5"
+   ],
+   "start": "L5-0.2",
+   "env": "desk",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F4"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "conceptualLabel",
+    "modelLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Penalty: the keeper token dives to one side while the model ball is chipped softly down the middle into the net.",
+   "camera": [
+    {
+     "at": "L5-0.2",
+     "x": 540,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L5.end",
+     "x": 540,
+     "y": 800,
+     "z": 1.06
+    }
+   ],
+   "layers": [
+    {
+     "component": "stadium",
+     "props": {
+      "horizonY": 640,
+      "seed": 35,
+      "lightsOnAt": -1
+     }
+    },
+    {
+     "component": "football-pitch",
+     "props": {
+      "tokenStyle": "standing",
+      "id": "p4-penalty",
+      "x": 540,
+      "y": 1040,
+      "rx": 68,
+      "rz": 118,
+      "D": 3600,
+      "pxPerMetre": 52,
+      "focusKeys": [
+       [
+        "L5-0.05",
+        1,
+        -49
+       ]
+      ],
+      "players": [
+       {
+        "id": "taker",
+        "team": "home",
+        "pathKeys": [
+         [
+          "L5-0.05",
+          -2,
+          -37.5
+         ],
+         [
+          "L5+0.55",
+          -0.3,
+          -41
+         ]
+        ]
+       },
+       {
+        "id": "gk",
+        "team": "away",
+        "pathKeys": [
+         [
+          "L5-0.05",
+          0,
+          -52.2
+         ],
+         [
+          "L5+0.65",
+          0,
+          -52.2
+         ],
+         [
+          "L5+1.05",
+          3.2,
+          -52.2
+         ]
+        ]
+       }
+      ],
+      "kicks": [
+       {
+        "x0": 0,
+        "y0": -41.5,
+        "speed": 13,
+        "elevation": 26,
+        "azimuth": 0,
+        "spinRps": 0,
+        "at": "L5+0.6",
+        "timeScale": 1
+       }
+      ]
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L5+0.3",
+        "text": "GOALKEEPER DIVED",
+        "x": 540,
+        "y": 470,
+        "size": 60,
+        "family": "sans",
+        "style": "pop"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s6-penalty",
+   "lines": [
+    "L6"
+   ],
+   "start": "L6-0.2",
+   "env": "spot",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F4"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "conceptualLabel",
+    "modelLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Penalty: the keeper token dives to one side while the model ball is chipped softly down the middle into the net.",
+   "camera": [
+    {
+     "at": "L6-0.2",
+     "x": 540,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L6.end",
+     "x": 540,
+     "y": 800,
+     "z": 1.06
+    }
+   ],
+   "layers": [
+    {
+     "component": "stadium",
+     "props": {
+      "horizonY": 640,
+      "seed": 36,
+      "lightsOnAt": -1
+     }
+    },
+    {
+     "component": "football-pitch",
+     "props": {
+      "tokenStyle": "standing",
+      "id": "p5-penalty",
+      "x": 540,
+      "y": 1160,
+      "rx": 72,
+      "rz": -4,
+      "D": 4200,
+      "pxPerMetre": 70,
+      "focusKeys": [
+       [
+        "L6-0.05",
+        0,
+        -43
+       ],
+       [
+        "L6+1.15",
+        0,
+        -47
+       ]
+      ],
+      "players": [
+       {
+        "id": "taker",
+        "team": "home",
+        "pathKeys": [
+         [
+          "L6-0.05",
+          -2,
+          -37.5
+         ],
+         [
+          "L6+0.55",
+          -0.3,
+          -41
+         ]
+        ]
+       },
+       {
+        "id": "gk",
+        "team": "away",
+        "pathKeys": [
+         [
+          "L6-0.05",
+          0,
+          -52.2
+         ],
+         [
+          "L6+0.65",
+          0,
+          -52.2
+         ],
+         [
+          "L6+1.05",
+          3.2,
+          -52.2
+         ]
+        ]
+       }
+      ],
+      "kicks": [
+       {
+        "x0": 0,
+        "y0": -41.5,
+        "speed": 13,
+        "elevation": 26,
+        "azimuth": 0,
+        "spinRps": 0,
+        "at": "L6+0.6",
+        "timeScale": 1
+       }
+      ]
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L6+0.3",
+        "text": "MIDDLE OF THE NET",
+        "x": 540,
+        "y": 470,
+        "size": 60,
+        "family": "sans",
+        "style": "pop"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s7-payoff",
+   "lines": [
+    "L7"
+   ],
+   "start": "L7-0.2",
+   "env": "desk",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F5",
+    "F3"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "conceptualLabel",
+    "modelLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Payoff: the same penalty at night, where the hook started, and the channel tagline lands over the stands so the Short loops.",
+   "camera": [
+    {
+     "at": "L7-0.2",
+     "x": 540,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L7.end",
+     "x": 540,
+     "y": 800,
+     "z": 1.04
+    }
+   ],
+   "layers": [
+    {
+     "component": "stadium",
+     "props": {
+      "horizonY": 700,
+      "seed": 23,
+      "lightsOnAt": -1
+     }
+    },
+    {
+     "component": "football-pitch",
+     "props": {
+      "tokenStyle": "standing",
+      "id": "p6-penalty",
+      "x": 540,
+      "y": 1160,
+      "rx": 72,
+      "rz": -4,
+      "D": 4200,
+      "pxPerMetre": 70,
+      "focusKeys": [
+       [
+        "L7-0.1",
+        0,
+        -43
+       ],
+       [
+        "L7+1.1",
+        0,
+        -47
+       ]
+      ],
+      "players": [
+       {
+        "id": "taker",
+        "team": "home",
+        "pathKeys": [
+         [
+          "L7-0.1",
+          -2,
+          -37.5
+         ],
+         [
+          "L7+0.5",
+          -0.3,
+          -41
+         ]
+        ]
+       },
+       {
+        "id": "gk",
+        "team": "away",
+        "pathKeys": [
+         [
+          "L7-0.1",
+          0,
+          -52.2
+         ],
+         [
+          "L7+0.6",
+          0,
+          -52.2
+         ],
+         [
+          "L7+1",
+          3.2,
+          -52.2
+         ]
+        ]
+       }
+      ],
+      "kicks": [
+       {
+        "x0": 0,
+        "y0": -41.5,
+        "speed": 13,
+        "elevation": 26,
+        "azimuth": 0,
+        "spinRps": 0,
+        "at": "L7+0.55",
+        "timeScale": 1
+       }
+      ]
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L7+0.3",
+        "text": "EVERY GOAL HAS A STORY",
+        "x": 540,
+        "y": 470,
+        "size": 55,
+        "family": "sans",
+        "style": "pop",
+        "color": "amber"
+       }
+      ]
+     }
+    }
+   ]
+  }
+ ]
+}

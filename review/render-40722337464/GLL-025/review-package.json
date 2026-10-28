@@ -1,0 +1,256 @@
+{
+ "schema": "bto-studio.review-package.v1",
+ "channel": "goal-lore-lab",
+ "topicId": "GLL-025",
+ "slug": "panenka-penalty-1976",
+ "title": "The Penalty That Took a Name",
+ "verdict": "SHADOW_OF_LIVE_NOT_PUBLISHABLE",
+ "pilot": null,
+ "researchPending": null,
+ "shadow": true,
+ "autoPublish": false,
+ "uploadAttempted": false,
+ "mode": "preview",
+ "quality": "final",
+ "createdAt": "2026-10-28T16:09:58.126Z",
+ "video": "../../_temp/review/GLL-025/out/panenka-penalty-1976-premium-final.mp4",
+ "voice": {
+  "used": "en-GB-RyanNeural",
+  "approved": false,
+  "approvedVoice": {
+   "provider": "edge-tts",
+   "voice": "en-GB-RyanNeural"
+  },
+  "note": "CANDIDATE voice en-GB-RyanNeural: not approved by the owner yet (listening test); never publishable",
+  "wordTiming": "measured (Edge word boundaries)"
+ },
+ "narrationUnchanged": {
+  "sourceHash": "1e29182202c4b9ce",
+  "lines": [
+   "This penalty decided a European Championship final.",
+   "Belgrade, 1976. Czechoslovakia against West Germany.",
+   "The final went to penalties.",
+   "West Germany's Uli Hoeneß sent his kick over the bar.",
+   "Then Antonín Panenka stepped up, and the goalkeeper dived.",
+   "Panenka chipped it, gently, into the middle of the net.",
+   "Only confident penalty takers dare to try it. Every goal has a story."
+  ]
+ },
+ "traceability": [
+  {
+   "scene": "s1-hook",
+   "lines": [
+    "L1"
+   ],
+   "purpose": "Hook: the record's own kind of goal (penalty) on the floodlit pitch within the first second, so the moment is on screen before it is named. Penalty: the keeper token dives to one side while the model ball is chipped softly down the middle into the net.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F2",
+     "claim": "Czechoslovakia won the final on penalties.",
+     "quote": "Following a 2–2 draw after extra time, Czechoslovakia won 5–3 on penalties to secure their only European Championship title.",
+     "source": "Wikipedia: UEFA Euro 1976 final (revision 1377074927, 2026-09-27T19:45:33Z)",
+     "url": "https://en.wikipedia.org/w/index.php?title=UEFA_Euro_1976_final&oldid=1377074927"
+    },
+    {
+     "id": "F3",
+     "claim": "West Germany's fourth penalty taker, Uli Hoeneß, ballooned his shot over the bar.",
+     "quote": "The first seven kicks were converted, until West Germany's fourth penalty taker, Uli Hoeneß, ballooned his shot over the bar.",
+     "source": "Wikipedia: Panenka (penalty kick) (revision 1381624147, 2026-10-23T19:09:18Z)",
+     "url": "https://en.wikipedia.org/w/index.php?title=Panenka_(penalty_kick)&oldid=1381624147"
+    },
+    {
+     "id": "F5",
+     "claim": "The move is generally only used by confident penalty takers who dare to risk missing the kick.",
+     "quote": "The move is generally only used by confident penalty takers who dare to risk missing the kick.",
+     "source": "Wikipedia: Panenka (penalty kick) (revision 1381624147, 2026-10-23T19:09:18Z)",
+     "url": "https://en.wikipedia.org/w/index.php?title=Panenka_(penalty_kick)&oldid=1381624147"
+    }
+   ]
+  },
+  {
+   "scene": "s2-when",
+   "lines": [
+    "L2"
+   ],
+   "purpose": "Place and date on the stadium's dot-matrix board, spelled from the line's own words over the floodlit stands.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "The UEFA Euro 1976 final between Czechoslovakia and West Germany was played in Belgrade.",
+     "quote": "Contested by Czechoslovakia and West Germany, the match was played at Stadion Crvena Zvezda in Belgrade, Yugoslavia, on 20 June 1976.",
+     "source": "Wikipedia: UEFA Euro 1976 final (revision 1377074927, 2026-09-27T19:45:33Z)",
+     "url": "https://en.wikipedia.org/w/index.php?title=UEFA_Euro_1976_final&oldid=1377074927"
+    },
+    {
+     "id": "F3",
+     "claim": "West Germany's fourth penalty taker, Uli Hoeneß, ballooned his shot over the bar.",
+     "quote": "The first seven kicks were converted, until West Germany's fourth penalty taker, Uli Hoeneß, ballooned his shot over the bar.",
+     "source": "Wikipedia: Panenka (penalty kick) (revision 1381624147, 2026-10-23T19:09:18Z)",
+     "url": "https://en.wikipedia.org/w/index.php?title=Panenka_(penalty_kick)&oldid=1381624147"
+    },
+    {
+     "id": "F2",
+     "claim": "Czechoslovakia won the final on penalties.",
+     "quote": "Following a 2–2 draw after extra time, Czechoslovakia won 5–3 on penalties to secure their only European Championship title.",
+     "source": "Wikipedia: UEFA Euro 1976 final (revision 1377074927, 2026-09-27T19:45:33Z)",
+     "url": "https://en.wikipedia.org/w/index.php?title=UEFA_Euro_1976_final&oldid=1377074927"
+    }
+   ]
+  },
+  {
+   "scene": "s3-replay",
+   "lines": [
+    "L3"
+   ],
+   "purpose": "Replay: the penalty again from a higher camera while the line carries the story (illustrative positions).",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F2",
+     "claim": "Czechoslovakia won the final on penalties.",
+     "quote": "Following a 2–2 draw after extra time, Czechoslovakia won 5–3 on penalties to secure their only European Championship title.",
+     "source": "Wikipedia: UEFA Euro 1976 final (revision 1377074927, 2026-09-27T19:45:33Z)",
+     "url": "https://en.wikipedia.org/w/index.php?title=UEFA_Euro_1976_final&oldid=1377074927"
+    }
+   ]
+  },
+  {
+   "scene": "s4-penalty",
+   "lines": [
+    "L4"
+   ],
+   "purpose": "Penalty: the model ball rises over the crossbar.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F3",
+     "claim": "West Germany's fourth penalty taker, Uli Hoeneß, ballooned his shot over the bar.",
+     "quote": "The first seven kicks were converted, until West Germany's fourth penalty taker, Uli Hoeneß, ballooned his shot over the bar.",
+     "source": "Wikipedia: Panenka (penalty kick) (revision 1381624147, 2026-10-23T19:09:18Z)",
+     "url": "https://en.wikipedia.org/w/index.php?title=Panenka_(penalty_kick)&oldid=1381624147"
+    },
+    {
+     "id": "F1",
+     "claim": "The UEFA Euro 1976 final between Czechoslovakia and West Germany was played in Belgrade.",
+     "quote": "Contested by Czechoslovakia and West Germany, the match was played at Stadion Crvena Zvezda in Belgrade, Yugoslavia, on 20 June 1976.",
+     "source": "Wikipedia: UEFA Euro 1976 final (revision 1377074927, 2026-09-27T19:45:33Z)",
+     "url": "https://en.wikipedia.org/w/index.php?title=UEFA_Euro_1976_final&oldid=1377074927"
+    },
+    {
+     "id": "F5",
+     "claim": "The move is generally only used by confident penalty takers who dare to risk missing the kick.",
+     "quote": "The move is generally only used by confident penalty takers who dare to risk missing the kick.",
+     "source": "Wikipedia: Panenka (penalty kick) (revision 1381624147, 2026-10-23T19:09:18Z)",
+     "url": "https://en.wikipedia.org/w/index.php?title=Panenka_(penalty_kick)&oldid=1381624147"
+    }
+   ]
+  },
+  {
+   "scene": "s5-penalty",
+   "lines": [
+    "L5"
+   ],
+   "purpose": "Penalty: the keeper token dives to one side while the model ball is chipped softly down the middle into the net.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "Panenka feigned shooting to the side, Sepp Maier dived, and Panenka gently chipped the ball into the middle of the net.",
+     "quote": "He feigned shooting to the side of the goal, causing German goalkeeper Sepp Maier to dive to his left, and then gently chipped the ball into the middle of the net.",
+     "source": "Wikipedia: Antonín Panenka (revision 1381388550, 2026-10-22T03:25:54Z)",
+     "url": "https://en.wikipedia.org/w/index.php?title=Anton%C3%ADn_Panenka&oldid=1381388550"
+    }
+   ]
+  },
+  {
+   "scene": "s6-penalty",
+   "lines": [
+    "L6"
+   ],
+   "purpose": "Penalty: the keeper token dives to one side while the model ball is chipped softly down the middle into the net.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "Panenka feigned shooting to the side, Sepp Maier dived, and Panenka gently chipped the ball into the middle of the net.",
+     "quote": "He feigned shooting to the side of the goal, causing German goalkeeper Sepp Maier to dive to his left, and then gently chipped the ball into the middle of the net.",
+     "source": "Wikipedia: Antonín Panenka (revision 1381388550, 2026-10-22T03:25:54Z)",
+     "url": "https://en.wikipedia.org/w/index.php?title=Anton%C3%ADn_Panenka&oldid=1381388550"
+    }
+   ]
+  },
+  {
+   "scene": "s7-payoff",
+   "lines": [
+    "L7"
+   ],
+   "purpose": "Payoff: the same penalty at night, where the hook started, and the channel tagline lands over the stands so the Short loops.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F5",
+     "claim": "The move is generally only used by confident penalty takers who dare to risk missing the kick.",
+     "quote": "The move is generally only used by confident penalty takers who dare to risk missing the kick.",
+     "source": "Wikipedia: Panenka (penalty kick) (revision 1381624147, 2026-10-23T19:09:18Z)",
+     "url": "https://en.wikipedia.org/w/index.php?title=Panenka_(penalty_kick)&oldid=1381624147"
+    },
+    {
+     "id": "F3",
+     "claim": "West Germany's fourth penalty taker, Uli Hoeneß, ballooned his shot over the bar.",
+     "quote": "The first seven kicks were converted, until West Germany's fourth penalty taker, Uli Hoeneß, ballooned his shot over the bar.",
+     "source": "Wikipedia: Panenka (penalty kick) (revision 1381624147, 2026-10-23T19:09:18Z)",
+     "url": "https://en.wikipedia.org/w/index.php?title=Panenka_(penalty_kick)&oldid=1381624147"
+    }
+   ]
+  }
+ ],
+ "licensing": {
+  "visuals": "all drawn in-house from code (SVG): stadium, pitch, generic standing tokens (no likeness, kits or crests), boot and ball drawings, physics models; no broadcast footage, no photographs",
+  "fonts": "SIL OFL 1.1 (@fontsource Inter, Source Serif 4, Barlow Semi Condensed 5.3.0)",
+  "audio": "narration TTS + effects/music synthesised by scripts/bto-studio/audio/sound_design.py (no samples)",
+  "thirdPartyMedia": []
+ },
+ "qa": {
+  "objectivePass": true,
+  "report": "../../_temp/review/GLL-025/out/qa-report.md",
+  "contactSheet": "../../_temp/review/GLL-025/out/contact-sheet.png",
+  "sceneSheet": "../../_temp/review/GLL-025/out/scene-sheet.png",
+  "failures": [
+   "UNVERIFIED audio samples clipped: not reported by this FFmpeg build (astats has no clipped-sample count)",
+   "WARN loop continuity (last -> first frame): whole 12.12, photo region 15.7, final-second step 0, ratio 25.15",
+   "WARN narration voice approved for publishing: en-GB-RyanNeural (preview fallback)",
+   "WARN no static hold >= 1.5 s inside a scene (visual change target): longest 1.57 s (s7-payoff)"
+  ],
+  "unverified": [
+   "audio samples clipped"
+  ]
+ },
+ "audio": {
+  "integratedLufs": -14.1,
+  "truePeakDbtp": -1.8
+ },
+ "performance": {
+  "renderWallSec": 95,
+  "msPerFrame": 115.3,
+  "workers": 3,
+  "peakChromiumRssMb": 3934,
+  "cachedSegments": 0,
+  "segments": 7,
+  "host": "linux x64 4 cpu 16 GB",
+  "totalPipelineSec": 149.4
+ },
+ "cost": {
+  "llmUsd": 0,
+  "ttsUsd": 0,
+  "renderUsd": 0,
+  "note": "local rendering and free/offline TTS; LLM use only when a Claude storyboard draft was requested and approved"
+ },
+ "approvalsNeeded": [
+  "voice: re-narrate with the approved Edge voice (if PREVIEW_ONLY)",
+  "creative sign-off (video-quality-review findings)",
+  "factual sign-off on the traceability table",
+  "owner decision to hand the MP4 to the normal pipeline (never automatic)"
+ ]
+}
