@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-28T07:29:58.715Z",
+  "generatedAt": "2026-10-28T14:15:53.429Z",
   "note": "Per-channel baselines are computed separately and never blended.",
   "channels": [
     {
@@ -9,8 +9,8 @@
         "lastPublished": "2026-10-28T18:00:00.000Z",
         "published": 33,
         "inventory": {
-          "A": 100,
-          "B": 126,
+          "A": 103,
+          "B": 123,
           "C": 59,
           "D": 59
         },
@@ -22,7 +22,7 @@
           "used": 10
         },
         "nextSelection": {
-          "slug": "titanic-1912",
+          "slug": "i-35w-bridge-2007",
           "reason": "EXPLOIT (0.75): best A topic by SelectionScore"
         },
         "baseline": {
@@ -635,16 +635,6 @@
         {
           "channel": "impossible-brief",
           "code": "VISUAL_PRECHECK_BLOCK",
-          "message": "what-if-you-stopped-eating-for-a-year",
-          "details": {
-            "reason": "0 licensed pictures/clips < 4"
-          },
-          "date": "2026-10-09",
-          "at": "2026-10-09T13:02:15.166Z"
-        },
-        {
-          "channel": "impossible-brief",
-          "code": "VISUAL_PRECHECK_BLOCK",
           "message": "what-if-you-remembered-every-day-of-your-life",
           "details": {
             "reason": "0 licensed pictures/clips < 4"
@@ -756,6 +746,21 @@
           },
           "date": "2026-10-25",
           "at": "2026-10-25T11:08:09.765Z"
+        },
+        {
+          "channel": "impossible-brief",
+          "code": "NO_QUALIFIED_TOPIC",
+          "message": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [105 unused A topic(s), best viral score 74 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]",
+          "details": {
+            "inventory": {
+              "A": 105,
+              "B": 23,
+              "C": 140,
+              "D": 206
+            }
+          },
+          "date": "2026-10-28",
+          "at": "2026-10-28T12:34:02.870Z"
         }
       ],
       "legacyPaths": false
@@ -771,14 +776,17 @@
       "competitor-intelligence.yml",
       "ct-research.yml",
       "deploy-watchdog.yml",
+      "fr-library.yml",
       "fr-studio-dry-run.yml",
       "gll-research.yml",
+      "gll-voice-review.yml",
       "growth-feedback-loop.yml",
       "ib-premium-dry-run.yml",
       "live-replacements-2026-10-04.yml",
       "manual-fr-ib-groq-check.yml",
       "portfolio-production.yml",
       "premium-render-check.yml",
+      "premium-review-render.yml",
       "production-watchdog.yml",
       "profitdecoded-competitors.yml",
       "profitdecoded-produce.yml",
@@ -793,6 +801,7 @@
       "uretim-is.yml",
       "uretim.yml",
       "variables-check.yml",
+      "video-review.yml",
       "watchdog-self-test.yml",
       "wiki-popularity.yml",
       "yayin-kontrol.yml",

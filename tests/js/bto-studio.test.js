@@ -122,7 +122,7 @@ test("skills: the seven studio Skills exist with valid frontmatter whose name ma
 
 // The only studio entry points outside scripts/bto-studio are the default-OFF ImpossibleBrief shadow in
 // core/pipeline/impossible-brief.js (IB_PREMIUM_RENDER=preview) and the read-only, no-upload dry-run workflow.
-const STUDIO_ALLOWED = new Set(["ib-premium-dry-run.yml", "fr-studio-dry-run.yml", "premium-render-check.yml", "gll-research.yml", path.join("pipeline", "impossible-brief.js"), path.join("pipeline", "premium-shadow.js"), path.join("pipeline", "goal-lore-lab.js"),
+const STUDIO_ALLOWED = new Set(["ib-premium-dry-run.yml", "fr-studio-dry-run.yml", "premium-render-check.yml", "gll-research.yml", "premium-review-render.yml", path.join("pipeline", "impossible-brief.js"), path.join("pipeline", "premium-shadow.js"), path.join("pipeline", "goal-lore-lab.js"),
   // the premium-primary lane: only when <PREFIX>_PREMIUM_PRIMARY=1 (a repository variable) or for the premium-only GoalLore Lab
   path.join("pipeline", "premium-lane.js"),
   // the publishing adapter: flag-gated (<PREFIX>_PREMIUM_PUBLISH=1, set nowhere), renders through the studio and hands the
@@ -137,6 +137,10 @@ test("isolation: no live workflow, root production script or channel config refe
   for (const f of fs.readdirSync(wf).filter((x) => !STUDIO_ALLOWED.has(x))) assert.doesNotMatch(live(f), /bto-studio|BTO_PREMIUM_RENDER|IB_PREMIUM_RENDER|premium:video/, f);
   for (const name of ["ib-premium-dry-run.yml", "fr-studio-dry-run.yml", "premium-render-check.yml"]) { const dry = fs.readFileSync(path.join(wf, name), "utf8");
     assert.match(dry, /PUBLISH: '0'/, name); assert.match(dry, /contents: read/, name); assert.doesNotMatch(dry, /_YT_REFRESH_TOKEN|_CLIENT_SECRET|git push|group: portfolio-production/, `${name}: no credentials, no push, own concurrency group`); }
+  // the review render: shadow packages only (never publishable), no credentials, pushes only to a review/ branch
+  const rr = fs.readFileSync(path.join(wf, "premium-review-render.yml"), "utf8");
+  assert.match(rr, /PUBLISH: '0'/); assert.match(rr, /--shadow --shadow-dir/); assert.doesNotMatch(rr, /_YT_REFRESH_TOKEN|_CLIENT_SECRET|secrets\.|group: portfolio-production|HEAD:main|origin main/);
+  assert.match(rr, /B="review\/render-/); assert.match(rr, /git push -q -f origin "\$B"/);
   for (const f of fs.readdirSync(ROOT).filter((x) => x.endsWith(".js"))) assert.doesNotMatch(fs.readFileSync(path.join(ROOT, f), "utf8"), /scripts\/bto-studio/, f);
   for (const c of fs.readdirSync(path.join(ROOT, "channels"))) { const cfg = path.join(ROOT, "channels", c, "config.json"); if (fs.existsSync(cfg)) assert.doesNotMatch(fs.readFileSync(cfg, "utf8"), /bto-studio|BTO_PREMIUM/, c); }
   for (const f of fs.readdirSync(path.join(ROOT, "core"), { recursive: true }).filter((x) => String(x).endsWith(".js") && !STUDIO_ALLOWED.has(String(x)))) assert.doesNotMatch(fs.readFileSync(path.join(ROOT, "core", f), "utf8"), /bto-studio/, f);

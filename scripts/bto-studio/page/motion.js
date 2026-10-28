@@ -176,11 +176,17 @@
     const off = (w) => BTO.captionsOff.some(([a, b]) => w.start >= a - 0.01 && w.start < b);
     const ws = BTO.tl.words.filter((w) => !off(w)); const cues = []; let cur = [];
     const len = (arr) => arr.map((w) => w.text).join(" ").length; const flush = () => { if (cur.length) cues.push(cur); cur = []; };
+    // a cue cut by length never ends on an article, preposition or conjunction ("...plates collapsed a", #364): that word
+    // opens the next cue instead
+    const weak = (w) => /^(a|an|the|and|or|but|of|to|in|on|at|by|for|with|from|as|into|onto|than|that|its|their|his|her)$/i.test(String(w.text).replace(/[^A-Za-z']/g, ""));
     ws.forEach((w, i) => { const prev = cur[cur.length - 1]; if (prev && (prev.line !== w.line || w.start - prev.end > 0.6)) flush(); cur.push(w);
-      const nxt = ws[i + 1]; if (cur.length >= maxWords || (/[.,;:!?]$/.test(w.text) && cur.length >= 2) || (nxt && len([...cur, nxt]) > maxChars * 2 - 4)) flush(); });
+      const nxt = ws[i + 1]; if (/[.,;:!?]$/.test(w.text) && cur.length >= 2) flush();
+      // a line's last word never stands alone in its own cue ("out.", #364): it joins this one when it fits
+      else if (cur.length >= maxWords && nxt && nxt.line === w.line && !(ws[i + 2] && ws[i + 2].line === w.line) && len([...cur, nxt]) <= maxChars * 2 - 4) { /* keep */ }
+      else if (cur.length >= maxWords || (nxt && len([...cur, nxt]) > maxChars * 2 - 4)) { const carry = cur.length > 2 && weak(w) && nxt && nxt.line === w.line ? cur.pop() : null; flush(); if (carry) cur.push(carry); } });
     flush();
     BTO.cues = cues.map((c, i) => { const txt = c.map((w) => w.text); let lines = [c];
-      if (txt.join(" ").length > maxChars) { let best = null; for (let k = 1; k < c.length; k += 1) { const sc = Math.max(txt.slice(0, k).join(" ").length, txt.slice(k).join(" ").length); if (!best || sc < best.sc) best = { sc, k }; } lines = [c.slice(0, best.k), c.slice(best.k)]; }
+      if (txt.join(" ").length > maxChars) { let best = null; for (let k = 1; k < c.length; k += 1) { const m = Math.max(txt.slice(0, k).join(" ").length, txt.slice(k).join(" ").length); const sc = m + (weak(c[k - 1]) ? 8 : 0) + (m > maxChars + 2 ? 100 : 0); if (!best || sc < best.sc) best = { sc, k }; } lines = [c.slice(0, best.k), c.slice(best.k)]; }
       const next = cues[i + 1] ? cues[i + 1][0].start : Infinity; const offAfter = BTO.captionsOff.map(([a]) => a).filter((a) => a > c[0].start);
       // a short, fast cue stays up into the pause before the next one until it reads at <= 22 chars/s (#357); never past the next cue
       const read = Number.isFinite(next) ? c[0].start + txt.join(" ").length / 22 : 0;

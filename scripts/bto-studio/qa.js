@@ -99,6 +99,8 @@ async function run({ video, data, meta, work, out, ndir, narration, timeline, st
   const similar = pairs.filter((p) => p.r > 0.92 && !(p.a.startsWith("s1") && p.b.startsWith("s7")));
   add("no two scenes look alike (key-frame correlation <= 0.92; hook/payoff loop pair exempt)", similar.length === 0, similar.map((p) => `${p.a}~${p.b} ${p.r}`).join(", ") || `max ${Math.max(...pairs.map((p) => p.r))}`, "<= 0.92", false);
   scenes.forEach((s) => delete s.thumb);
+  // 3b. advisory creative checks (never part of the objective verdict) and the questions only a reviewer can answer
+  const first2 = diffs.slice(1, Math.min(G.frames, 61)); const creative = require("./creative-checks").run(data.storyboard, { first2sMean: first2.reduce((x, y) => x + y, 0) / Math.max(1, first2.length) });
   // 4. the QR on screen is a real, decodable symbol
   // known on-screen codes: generated symbols (assets with a matrix) and registered photos that declare decodesTo
   const known = [...Object.values(assets).filter((a) => a.matrix).map((a) => a.text), ...require("./asset-manager").load(data.storyboard.channel).assets.filter((a) => a.decodesTo && Object.keys(data.images || {}).includes(a.id)).map((a) => a.decodesTo)];
@@ -112,7 +114,7 @@ async function run({ video, data, meta, work, out, ndir, narration, timeline, st
   const sheets = contactSheets(video, meta, out, tech.durationSec);
   const objectivePass = objective.filter((c) => c.hard && c.status !== "UNVERIFIED").every((c) => c.ok);
   const unverified = objective.filter((c) => c.status === "UNVERIFIED").map((c) => c.name);
-  const report = { video: path.relative(ROOT, video), quality, measuredAt: new Date().toISOString(), objectivePass, unverified, objective, scenes, similarPairsTop: pairs.sort((a, b) => b.r - a.r).slice(0, 5), qr, determinism: det,
+  const report = { video: path.relative(ROOT, video), quality, measuredAt: new Date().toISOString(), objectivePass, unverified, objective, scenes, creative, similarPairsTop: pairs.sort((a, b) => b.r - a.r).slice(0, 5), qr, determinism: det,
     technical: { loudness: tech.loudness, motion: tech.motion, captionSync: tech.captionSync || null, loop: tech.loop, first3s: tech.first3s }, text: { fails: text.fails, warns: text.warns, minEssentialFontPx: text.minEssentialFontPx },
     sheets: { contactSheet: path.relative(ROOT, sheets.contactSheet), sceneSheet: path.relative(ROOT, sheets.sceneSheet) },
     audioSync: { method: "every sound effect is placed at a time the page computed from the same word anchors that drive its animation (BTO.audio); the offset is 0 by construction, frame-quantised to 33 ms", cues: meta.audio.length },
@@ -121,6 +123,8 @@ async function run({ video, data, meta, work, out, ndir, narration, timeline, st
   const md = [`# QA report: ${path.basename(video)}`, "", `Objective verdict: **${objectivePass ? "PASS (hard checks)" : "FAIL"}** · measured ${report.measuredAt}`, unverified.length ? `UNVERIFIED (could not be measured, not counted as pass): ${unverified.join("; ")}` : "", "", "| Check | Result | Measured | Target |", "|---|---|---|---|",
     ...objective.map((c) => `| ${c.name} | ${c.status === "FAIL" ? "**FAIL**" : c.status === "UNVERIFIED" ? "*UNVERIFIED*" : c.status} | ${String(c.measured).replace(/\|/g, "/")} | ${c.target} |`), "",
     "## Motion per scene", "", "| Scene | Seconds | Mean motion | Static share | Longest static |", "|---|---|---|---|---|", ...scenes.map((s) => `| ${s.id} | ${s.sec} | ${s.meanMotion} | ${s.staticShare} | ${s.longestStaticSec} s |`), "",
+    "## Creative checks (advisory: a WARN does not block; not a quality verdict)", "", "| Check | Status | Measured | Target |", "|---|---|---|---|",
+    ...creative.checks.concat(creative.human).map((c) => `| ${c.name} | ${c.status} | ${String(c.measured).replace(/\|/g, "/")} | ${c.target} |`), "",
     "## Text gate findings", "", ...(text.fails.concat(text.warns).map((x) => `- ${x.level} ${x.from.toFixed(2)}–${x.to.toFixed(2)} s ${x.check}: ${x.detail}`)), text.fails.length + text.warns.length ? "" : "- none", "",
     `Contact sheet: \`${report.sheets.contactSheet}\` · Scene sheet: \`${report.sheets.sceneSheet}\``, "", "Subjective creative evaluation is separate (revision-history.md)."].join("\n");
   fs.writeFileSync(path.join(out, "qa-report.md"), md + "\n");

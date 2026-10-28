@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-28T07:30:01.385Z",
+  "generatedAt": "2026-10-28T14:15:55.470Z",
   "date": "2026-10-28",
   "channels": [
     {
@@ -21,7 +21,7 @@
       "inventory": {
         "channel": "failure-reconstructed",
         "channelName": "Failure Reconstructed",
-        "calculatedAt": "2026-10-28T07:30:01.430Z",
+        "calculatedAt": "2026-10-28T14:15:55.505Z",
         "qualifiedTopics": 377,
         "validatedCandidates": 0,
         "researchBacklog": 0,
@@ -827,23 +827,18 @@
         },
         "analyticsFreshness": {
           "channel": "failure-reconstructed",
-          "lastSyncAt": "2026-10-27T11:57:45.422Z",
-          "newestDay": "2026-10-25",
-          "lagDays": 3,
-          "errors": [
-            {
-              "table": "video_daily",
-              "error": "analytics query failed: Internal error encountered."
-            }
-          ]
+          "lastSyncAt": "2026-10-28T12:34:10.835Z",
+          "newestDay": "2026-10-26",
+          "lagDays": 2,
+          "errors": []
         },
         "ops24h": {
-          "analytics.partial": 1,
           "publish.success": 1,
-          "publish.scheduled_verified": 1
+          "publish.scheduled_verified": 1,
+          "analytics.load": 1
         },
         "quota": {
-          "usedToday": 1619,
+          "usedToday": 1655,
           "budget": 9800,
           "project": "1012165386949"
         },
@@ -852,7 +847,7 @@
           "estimate": true,
           "note": "Estimate from the YouTube Analytics API; YouTube decides eligibility.",
           "subscribers": 29,
-          "subscribersAt": "2026-10-28T07:29:45.971Z",
+          "subscribersAt": "2026-10-28T14:15:43.632Z",
           "longWatchHours365": null,
           "shortsViews90": null,
           "percent": {
@@ -900,7 +895,7 @@
       "inventory": {
         "channel": "impossible-brief",
         "channelName": "ImpossibleBrief",
-        "calculatedAt": "2026-10-28T07:30:01.504Z",
+        "calculatedAt": "2026-10-28T14:15:55.566Z",
         "qualifiedTopics": 500,
         "validatedCandidates": 0,
         "researchBacklog": 0,
@@ -990,16 +985,21 @@
         },
         "analyticsFreshness": {
           "channel": "impossible-brief",
-          "lastSyncAt": "2026-10-27T11:57:59.248Z",
-          "newestDay": "2026-10-25",
-          "lagDays": 3,
-          "errors": []
+          "lastSyncAt": "2026-10-28T12:34:24.483Z",
+          "newestDay": "2026-10-26",
+          "lagDays": 2,
+          "errors": [
+            {
+              "table": "channel_type_daily",
+              "error": "analytics query failed: Internal error encountered."
+            }
+          ]
         },
         "ops24h": {
           "analytics.load": 1
         },
         "quota": {
-          "usedToday": 10,
+          "usedToday": 46,
           "budget": 9800,
           "project": "684098966511"
         },
@@ -1008,7 +1008,7 @@
           "estimate": true,
           "note": "Estimate from the YouTube Analytics API; YouTube decides eligibility.",
           "subscribers": 13,
-          "subscribersAt": "2026-10-28T07:29:56.813Z",
+          "subscribersAt": "2026-10-28T14:15:51.913Z",
           "longWatchHours365": null,
           "shortsViews90": null,
           "percent": {

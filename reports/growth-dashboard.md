@@ -1,10 +1,10 @@
 # Growth dashboard
 
-Generated 2026-10-28T07:29:58.715Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-10-28T14:15:53.429Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
-**Shorts health** — last published 2026-10-28T18:00:00.000Z · 33 published · inventory A100/B126/C59/D59 · next: titanic-1912 (EXPLOIT (0.75): best A topic by SelectionScore)
+**Shorts health** — last published 2026-10-28T18:00:00.000Z · 33 published · inventory A103/B123/C59/D59 · next: i-35w-bridge-2007 (EXPLOIT (0.75): best A topic by SelectionScore)
 
 **Long-form health** — cycle 2026-W44: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W44 already QUALITY_BLOCKED)
 
@@ -65,7 +65,6 @@ Generated 2026-10-28T07:29:58.715Z. Per-channel baselines are computed separatel
 
 **Recent alerts**
 
-- 2026-10-09 VISUAL_PRECHECK_BLOCK: what-if-you-stopped-eating-for-a-year
 - 2026-10-09 VISUAL_PRECHECK_BLOCK: what-if-you-remembered-every-day-of-your-life
 - 2026-10-12 VISUAL_PRECHECK_BLOCK: what-if-you-could-touch-earths-core
 - 2026-10-12 VISUAL_PRECHECK_BLOCK: what-if-synthetic-fertilizer-disappeared
@@ -75,8 +74,9 @@ Generated 2026-10-28T07:29:58.715Z. Per-channel baselines are computed separatel
 - 2026-10-22 NO_QUALIFIED_TOPIC: NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [104 unused A topic(s), best viral score 74 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]
 - 2026-10-23 NO_QUALIFIED_TOPIC: NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [103 unused A topic(s), best viral score 74 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]
 - 2026-10-25 NO_QUALIFIED_TOPIC: NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [102 unused A topic(s), best viral score 74 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]
+- 2026-10-28 NO_QUALIFIED_TOPIC: NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [105 unused A topic(s), best viral score 74 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]
 
 ## Cross-channel infrastructure
 
-Channels: failure-reconstructed, impossible-brief · workflows: 35 · growth config present: true
+Channels: failure-reconstructed, impossible-brief · workflows: 39 · growth config present: true
 
