@@ -1,0 +1,566 @@
+{
+ "schema": "bto-studio.storyboard.v1",
+ "channel": "goal-lore-lab",
+ "topicId": "GLL-021",
+ "slug": "hand-of-god-and-goal-of-the-century",
+ "version": 1,
+ "author": "auto/goal-lore-lab (deterministic football grammar; needs creative review before publication)",
+ "licensingNote": "all drawn in-house from code (SVG): stadium, pitch, generic standing tokens (no likeness, kits or crests), boot and ball drawings, physics models; no broadcast footage, no photographs",
+ "treatment": {
+  "educationalObjective": "Tell, from the record's sources: How did the 'Hand of God' and the 'Goal of the Century' happen four minutes apart?",
+  "visualHook": "Frame 0: a floodlit stadium from behind the ball; a model kick flies within the first second.",
+  "mechanismsToAnimate": [
+   "hook",
+   "when",
+   "story",
+   "payoff"
+  ],
+  "factualRisks": [
+   "the kick is one illustrative model (drag + Magnus), not tracking data of the real goal (RECONSTRUCTION + PHYSICS MODEL chips)",
+   "players are generic tokens: positions are illustrative"
+  ]
+ },
+ "tail": 0.4,
+ "scenes": [
+  {
+   "id": "s1-hook",
+   "lines": [
+    "L1"
+   ],
+   "start": 0,
+   "env": "desk",
+   "evidence": [
+    "F3"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "conceptualLabel",
+    "modelLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Hook: low floodlit camera behind the ball and a wall of generic tokens; the model kick flies in the first second, so the moment is on screen before it is named.",
+   "camera": [
+    {
+     "at": 0,
+     "x": 540,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L1.end",
+     "x": 540,
+     "y": 800,
+     "z": 1.04
+    }
+   ],
+   "layers": [
+    {
+     "component": "stadium",
+     "props": {
+      "horizonY": 700,
+      "seed": 23,
+      "lightsOnAt": 0
+     }
+    },
+    {
+     "component": "football-pitch",
+     "props": {
+      "tokenStyle": "standing",
+      "id": "p0",
+      "x": 540,
+      "y": 1160,
+      "rx": 74,
+      "rz": -8,
+      "D": 4200,
+      "ppmKeys": [
+       [
+        0,
+        74
+       ],
+       [
+        "L1.end",
+        84
+       ]
+      ],
+      "focusKeys": [
+       [
+        0,
+        3,
+        -24
+       ],
+       [
+        "L1.end",
+        2,
+        -36
+       ]
+      ],
+      "players": [
+       {
+        "id": "w0",
+        "team": "away",
+        "path": [
+         [
+          0,
+          0.6,
+          -26.65
+         ]
+        ]
+       },
+       {
+        "id": "w1",
+        "team": "away",
+        "path": [
+         [
+          0,
+          1.3,
+          -26.65
+         ]
+        ]
+       },
+       {
+        "id": "w2",
+        "team": "away",
+        "path": [
+         [
+          0,
+          2,
+          -26.65
+         ]
+        ]
+       },
+       {
+        "id": "w3",
+        "team": "away",
+        "path": [
+         [
+          0,
+          2.7,
+          -26.65
+         ]
+        ]
+       },
+       {
+        "id": "gk",
+        "team": "away",
+        "path": [
+         [
+          0,
+          -0.4,
+          -52
+         ]
+        ]
+       }
+      ],
+      "kicks": [
+       {
+        "x0": 3,
+        "y0": -17.5,
+        "speed": 30,
+        "elevation": 14,
+        "azimuth": 9,
+        "spinRps": 10,
+        "at": "0+0.25",
+        "timeScale": 0.6
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s2-when",
+   "lines": [
+    "L2"
+   ],
+   "start": "L2-0.2",
+   "env": "spot",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1",
+    "F3"
+   ],
+   "chips": [
+    "illustrationLabel"
+   ],
+   "conceptual": false,
+   "visualPurpose": "Place and date on the stadium's dot-matrix board, spelled from the line's own words over the floodlit stands.",
+   "camera": [
+    {
+     "at": "L2-0.2",
+     "x": 540,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L2.end",
+     "x": 540,
+     "y": 780,
+     "z": 1.06
+    }
+   ],
+   "layers": [
+    {
+     "component": "stadium",
+     "props": {
+      "horizonY": 1180,
+      "seed": 23,
+      "lightsOnAt": "L2-0.2"
+     }
+    },
+    {
+     "component": "dot-board",
+     "screen": true,
+     "props": {
+      "x": 540,
+      "y": 760,
+      "dot": 8,
+      "gap": 3,
+      "enterAt": "L2-0.1",
+      "rows": [
+       {
+        "text": "THE 1986 WORLD",
+        "at": "L2+0.15",
+        "color": "paper"
+       },
+       {
+        "text": "CUP",
+        "at": "L2+0.6",
+        "color": "amber"
+       },
+       {
+        "text": "QUARTER-FINAL",
+        "at": "L2+1.05",
+        "color": "paper"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s3-story",
+   "lines": [
+    "L3"
+   ],
+   "start": "L3-0.2",
+   "env": "desk",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F2",
+    "F3"
+   ],
+   "chips": [
+    "illustrationLabel"
+   ],
+   "conceptual": false,
+   "visualPurpose": "Story beat: the line's key phrase over the floodlit stands while the camera drifts, holding the moment between the visual explanations.",
+   "camera": [
+    {
+     "at": "L3-0.2",
+     "x": 520,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L3.end",
+     "x": 560,
+     "y": 790,
+     "z": 1.1
+    }
+   ],
+   "layers": [
+    {
+     "component": "stadium",
+     "props": {
+      "horizonY": 1220,
+      "seed": 32,
+      "lightsOnAt": -1
+     }
+    }
+   ]
+  },
+  {
+   "id": "s4-story",
+   "lines": [
+    "L4"
+   ],
+   "start": "L4-0.2",
+   "env": "spot",
+   "transition": {
+    "type": "dissolve",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F2",
+    "F3"
+   ],
+   "chips": [
+    "illustrationLabel"
+   ],
+   "conceptual": false,
+   "visualPurpose": "Story beat: the line's key phrase over the floodlit stands while the camera drifts, holding the moment between the visual explanations.",
+   "camera": [
+    {
+     "at": "L4-0.2",
+     "x": 520,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L4.end",
+     "x": 560,
+     "y": 790,
+     "z": 1.1
+    }
+   ],
+   "layers": [
+    {
+     "component": "stadium",
+     "props": {
+      "horizonY": 1100,
+      "seed": 33,
+      "lightsOnAt": -1
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L4+0.25",
+        "text": "HAND OF GOD",
+        "x": 540,
+        "y": 760,
+        "size": 60,
+        "family": "sans",
+        "style": "pop"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s5-story",
+   "lines": [
+    "L5"
+   ],
+   "start": "L5-0.2",
+   "env": "spot",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F3",
+    "F1",
+    "F2"
+   ],
+   "chips": [
+    "illustrationLabel"
+   ],
+   "conceptual": false,
+   "visualPurpose": "Story beat: the line's key phrase over the floodlit stands while the camera drifts, holding the moment between the visual explanations.",
+   "camera": [
+    {
+     "at": "L5-0.2",
+     "x": 520,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L5.end",
+     "x": 560,
+     "y": 790,
+     "z": 1.1
+    }
+   ],
+   "layers": [
+    {
+     "component": "stadium",
+     "props": {
+      "horizonY": 1160,
+      "seed": 34,
+      "lightsOnAt": -1
+     }
+    }
+   ]
+  },
+  {
+   "id": "s6-payoff",
+   "lines": [
+    "L6"
+   ],
+   "start": "L6-0.2",
+   "env": "desk",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F4",
+    "F3",
+    "F2"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "conceptualLabel",
+    "modelLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Payoff: back behind the ball at night, where the hook started, and the channel tagline lands over the stands so the Short loops.",
+   "camera": [
+    {
+     "at": "L6-0.2",
+     "x": 540,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L6.end",
+     "x": 540,
+     "y": 800,
+     "z": 1.04
+    }
+   ],
+   "layers": [
+    {
+     "component": "stadium",
+     "props": {
+      "horizonY": 700,
+      "seed": 23,
+      "lightsOnAt": -1
+     }
+    },
+    {
+     "component": "football-pitch",
+     "props": {
+      "tokenStyle": "standing",
+      "id": "p5",
+      "x": 540,
+      "y": 1160,
+      "rx": 74,
+      "rz": -8,
+      "D": 4200,
+      "ppmKeys": [
+       [
+        "L6-0.2",
+        74
+       ],
+       [
+        "L6.end",
+        84
+       ]
+      ],
+      "focusKeys": [
+       [
+        "L6-0.2",
+        3,
+        -24
+       ],
+       [
+        "L6.end",
+        2,
+        -36
+       ]
+      ],
+      "players": [
+       {
+        "id": "w0",
+        "team": "away",
+        "path": [
+         [
+          0,
+          0.6,
+          -26.65
+         ]
+        ]
+       },
+       {
+        "id": "w1",
+        "team": "away",
+        "path": [
+         [
+          0,
+          1.3,
+          -26.65
+         ]
+        ]
+       },
+       {
+        "id": "w2",
+        "team": "away",
+        "path": [
+         [
+          0,
+          2,
+          -26.65
+         ]
+        ]
+       },
+       {
+        "id": "w3",
+        "team": "away",
+        "path": [
+         [
+          0,
+          2.7,
+          -26.65
+         ]
+        ]
+       },
+       {
+        "id": "gk",
+        "team": "away",
+        "path": [
+         [
+          0,
+          -0.4,
+          -52
+         ]
+        ]
+       }
+      ],
+      "kicks": [
+       {
+        "x0": 3,
+        "y0": -17.5,
+        "speed": 30,
+        "elevation": 14,
+        "azimuth": 9,
+        "spinRps": 10,
+        "at": "L6+0.05",
+        "timeScale": 0.6
+       }
+      ]
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L6+0.3",
+        "text": "EVERY GOAL HAS A STORY",
+        "x": 540,
+        "y": 470,
+        "size": 55,
+        "family": "sans",
+        "style": "pop",
+        "color": "amber"
+       }
+      ]
+     }
+    }
+   ]
+  }
+ ]
+}
