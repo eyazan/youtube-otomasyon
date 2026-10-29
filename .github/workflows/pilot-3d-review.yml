@@ -1,0 +1,96 @@
+name: Pilot 3D review (isolated Three.js pilots, never publishable)
+
+# Review-only measurement of the isolated Three.js pilots (pilots/) against the current premium studio, on the same
+# GitHub runner: real MP4s, contact and scene sheets, technical QA, wall time and CPU/RAM (GNU time -v). Nothing is
+# uploaded to YouTube, nothing is reserved or approved, no channel state is written or committed. Runs only on the pilot
+# branch; the production render path and its workflows are untouched.
+on:
+  push:
+    branches: [pilot/gll-magnus-3d]
+    paths: ['pilots/**', '.github/workflows/pilot-3d-review.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pilot-3d-review
+  cancel-in-progress: true
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      PUBLISH: '0'
+      BTO_PREMIUM_RENDER: preview
+      EDGE_RATE_LIMIT_RETRIES: '6'
+      PD_CHROMIUM: /usr/bin/google-chrome
+      OUT: review-out
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: scripts/bto-studio/requirements.txt
+      - name: Runtime dependencies
+        run: |
+          bash scripts/ci-apt.sh --no-install-recommends ffmpeg fonts-dejavu-core fonts-liberation python3-pil time
+          npm ci --no-audit --no-fund
+          python -m pip install --quiet -r scripts/bto-studio/requirements.txt
+          node scripts/bto-studio/preflight-deps.js
+          (cd pilots/gll-magnus-3d && npm ci --no-audit --no-fund) && (cd pilots/fr-gemini8-3d && npm ci --no-audit --no-fund)
+          mkdir -p "$OUT"; { echo "runner: $(nproc) vCPU, $(free -g | awk '/Mem/{print $2}') GB RAM, $(lscpu | sed -n 's/Model name: *//p')"; } | tee "$OUT/runner.txt" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Current engine, GLL-P01 (pilot, 2 workers)
+        run: |
+          set -o pipefail
+          /usr/bin/time -v -o "$OUT/time-gll-current.txt" node scripts/bto-studio/studio.js --pilot channels/goal-lore-lab/premium/pilots/GLL-P01 --quality final --workers 2 2>&1 | tee "$OUT/log-gll-current.txt" | tail -12
+      - name: Current engine, FR Gemini 8 (shadow, never publishable, 2 workers)
+        run: |
+          set -o pipefail
+          /usr/bin/time -v -o "$OUT/time-fr-current.txt" node scripts/bto-studio/studio.js --channel failure-reconstructed --topic gemini-8-1966 --shadow --shadow-dir "$RUNNER_TEMP/fr" --regenerate --quality final --voice edge --workers 2 2>&1 | tee "$OUT/log-fr-current.txt" | tail -12
+
+      - name: Three.js pilot, GLL-P01 (same narration and captions, 2 workers) + QA
+        run: |
+          P=channels/goal-lore-lab/premium/pilots/GLL-P01/out
+          /usr/bin/time -v -o "$OUT/time-gll-threejs.txt" node pilots/gll-magnus-3d/render.js --audio-from "$P" --workers 2 | tee "$OUT/log-gll-threejs.txt"
+          node pilots/gll-magnus-3d/qa.js --audio-from "$P" | tee "$OUT/qa-gll-threejs.txt" || true
+      - name: Three.js pilot, FR Gemini 8 (same narration and captions, 2 workers) + QA
+        run: |
+          /usr/bin/time -v -o "$OUT/time-fr-threejs.txt" node pilots/fr-gemini8-3d/render.js --audio-from "$RUNNER_TEMP/fr/out" --workers 2 | tee "$OUT/log-fr-threejs.txt"
+          node pilots/fr-gemini8-3d/qa.js --audio-from "$RUNNER_TEMP/fr/out" | tee "$OUT/qa-fr-threejs.txt" || true
+
+      - name: Collect review package
+        if: always()
+        run: |
+          G=channels/goal-lore-lab/premium/pilots/GLL-P01/out; F="$RUNNER_TEMP/fr/out"
+          for pair in "gll/current:$G" "fr/current:$F" "gll/threejs:pilots/gll-magnus-3d/out" "fr/threejs:pilots/fr-gemini8-3d/out"; do
+            dest=${pair%%:*}; src=${pair#*:}; mkdir -p "$OUT/$dest"
+            for f in video-final.mp4 gll-p01-magnus-3d.mp4 fr-gemini8-3d.mp4 contact-sheet.png scene-sheet.png qa-report.md qa-report.json creative-review.md creative-review.json render-report.json text-layout-issues.json; do
+              [ -e "$src/$f" ] && cp "$src/$f" "$OUT/$dest/"; done
+            for m in "$OUT/$dest"/*.mp4; do [ -e "$m" ] && (cd "$OUT/$dest" && sha256sum "$(basename "$m")" >> mp4.sha256) && ffmpeg -hide_banner -loglevel error -i "$m" -t 2 -vf "fps=6,scale=270:-2,tile=6x2" -frames:v 1 "$OUT/$dest/first-2s.jpg"; done
+          done
+          cp pilots/COMPARISON.md pilots/gll-magnus-3d/MODEL.md "$OUT/gll/" 2>/dev/null || true; cp pilots/fr-gemini8-3d/MODEL.md "$OUT/fr/" 2>/dev/null || true
+          cp pilots/*/CREATIVE-REVIEW.md "$OUT/" 2>/dev/null || true
+          {
+            echo "| run | wall (time -v) | max RSS, largest single process | user+sys CPU (incl. children) | frames render |"; echo "|---|---|---|---|---|"
+            for r in gll-current gll-threejs fr-current fr-threejs; do t="$OUT/time-$r.txt"; [ -e "$t" ] || continue
+              wall=$(sed -n 's/.*Elapsed (wall clock) time.*: //p' "$t"); rss=$(sed -n 's/.*Maximum resident set size (kbytes): //p' "$t")
+              cpu=$(awk -F': ' '/User time|System time/{s+=$2} END{printf "%.0f s", s}' "$t")
+              fr=$(grep -hE '^render:|"frameWallSeconds"' "$OUT/log-$r.txt" 2>/dev/null | head -1 | tr -d ',')
+              echo "| $r | $wall | $((rss / 1024)) MB | $cpu | $fr |"; done
+            echo; for q in "$OUT"/qa-*-threejs.txt; do [ -e "$q" ] && { echo "**$(basename "$q")**: $(tail -1 "$q")"; grep -E '^(FAIL|WARN)' "$q" | sed 's/^/- /'; }; done
+            for l in "$OUT"/log-*-current.txt; do echo "**$(basename "$l")**: $(grep -E '^qa:|^narration:' "$l" | tr '\n' ' ')"; done
+          } | tee -a "$GITHUB_STEP_SUMMARY" > "$OUT/summary.md"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pilot-3d-review
+          path: review-out
+          retention-days: 30
+          if-no-files-found: warn

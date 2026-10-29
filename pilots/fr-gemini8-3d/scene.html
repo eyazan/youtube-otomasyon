@@ -95,7 +95,8 @@ const plumeMat = new THREE.MeshBasicMaterial({ color: 0xffd2a0, transparent: tru
 const plume = (len, r) => { const m = new THREE.Mesh(new THREE.ConeGeometry(r, len, 20, 1, true), plumeMat); return m; };
 const roll8 = new THREE.Group(); { const nz = nozzle(); nz.rotation.x = Math.PI / 2; roll8.add(nz); const p = plume(1.4, 0.2); p.rotation.x = -Math.PI / 2; p.position.z = 0.8; p.name = "plume"; roll8.add(p); }
 roll8.position.set(0.35, 1.45, 0.25); gBody.add(roll8); // tangential: pushes along -z at +y, a torque about +x
-for (let i = 0; i < 8; i += 1) { const a = i / 8 * Math.PI * 2 + 0.3; const nz = nozzle(0.16, 0.06); nz.position.set(0.3, 1.47 * Math.cos(a), 1.47 * Math.sin(a)); nz.rotation.x = a; gBody.add(nz); }
+// 8 attitude thrusters (25 lbf) round the aft rim; No. 8 is the roll8 group above
+for (let i = 1; i < 8; i += 1) { const a = i / 8 * Math.PI * 2 + 0.3; const nz = nozzle(0.16, 0.06); nz.position.set(0.3, 1.47 * Math.cos(a), 1.47 * Math.sin(a)); nz.rotation.x = a; gBody.add(nz); }
 // nose RCS thrusters: two rings of 8 (16 in all, NASA)
 const puffTex = (() => { const c = document.createElement("canvas"); c.width = c.height = 64; const g = c.getContext("2d"); const gr = g.createRadialGradient(32, 32, 1, 32, 32, 31);
   gr.addColorStop(0, "rgba(255,255,255,1)"); gr.addColorStop(0.35, "rgba(200,230,255,.55)"); gr.addColorStop(1, "rgba(200,230,255,0)"); g.fillStyle = gr; g.fillRect(0, 0, 64, 64); return new THREE.CanvasTexture(c); })();
@@ -129,6 +130,8 @@ const BEATS = [["hook", /./], ["faster", /faster and faster/], ["docked", /docke
 const SHOTS = BEATS.map(([kind, re], i) => ({ kind, a: i === 0 ? 0 : cueAt(re) })); SHOTS.forEach((x, i) => { x.b = i + 1 < SHOTS.length ? SHOTS[i + 1].a : END; });
 function look(pos, target, fov = 36, tilt = 0) { cam.up.set(Math.sin(tilt), Math.cos(tilt), 0); cam.position.copy(pos); cam.fov = fov; cam.updateProjectionMatrix(); cam.lookAt(target); cam.updateMatrixWorld(); } // labels project with this frame's camera, not the last one
 const M = D.model; const deg = (x) => x * Math.PI / 180;
+// after undocking Gemini also pitched and yawed (NASA history); amplitude and rate here are illustrative
+const tumble = (t, amt) => { gemini.rotation.z = amt * 0.22 * Math.sin(t * 2.1); gemini.rotation.y = amt * 0.18 * Math.sin(t * 1.7 + 1); };
 // gauge: roll rate on a 0-300 deg/s bar with the reported peak marked
 const gauge = (rate, label, note) => { const f = clamp(rate / 300); return `<div class="gauge"><div style="font:700 26px Inter;letter-spacing:.12em;color:#9fb0c6">${label}</div>
   <div style="margin-top:14px;height:34px;border-radius:17px;background:#1a2230;position:relative;overflow:hidden"><div style="position:absolute;left:0;top:0;bottom:0;width:${(f * 100).toFixed(1)}%;background:linear-gradient(90deg,#ffb36b,#ff4a2e)"></div>
@@ -144,13 +147,13 @@ window.renderAt = (t) => {
   const G = gemini.position; const mid = new THREE.Vector3(dockedOffset() * 0.9, 0, 0);
   if (s.kind === "hook") {
     // Gemini alone at the reported peak: about 296 deg/s about its long axis
-    agena.visible = false; gBody.rotation.x = deg(M.peak) * t; roll8.getObjectByName("plume").visible = true; chips = ["ILLUSTRATION", "MODEL"];
+    agena.visible = false; gBody.rotation.x = deg(M.peak) * t; tumble(t, 1); roll8.getObjectByName("plume").visible = true; chips = ["ILLUSTRATION", "MODEL"];
     look(new THREE.Vector3(-11 + k * 2, 9.5, 19), new THREE.Vector3(2.6, -2.2, 0), 32, -0.6);
     html += `<div class="head">GEMINI 8 · 1966</div><div class="sub">IN ORBIT, SPINNING OUT OF CONTROL</div>`;
-    html += `<div class="read" style="left:60px;top:1150px">≈296°/s ROLL<small>REPORTED PEAK · ALMOST ONE TURN A SECOND</small></div>`;
+    html += `<div class="read" style="left:60px;top:1150px">≈296°/s ROLL<small>REPORTED PEAK · ALMOST ONE TURN A SECOND · ALSO PITCH AND YAW</small></div>`;
   } else if (s.kind === "faster") {
     // rate climbing to the peak (model profile, undocked phase), seen from just behind the adapter
-    agena.visible = false; const dt = t - s.a; gBody.rotation.x = deg(M.rateAtUndock * dt + (M.peak - M.rateAtUndock) * dt * k * 0.5); // integral of a rate ramping up
+    agena.visible = false; tumble(t, 1); const dt = t - s.a; gBody.rotation.x = deg(M.rateAtUndock * dt + (M.peak - M.rateAtUndock) * dt * k * 0.5); // integral of a rate ramping up
     roll8.getObjectByName("plume").visible = true; chips = ["ILLUSTRATION", "MODEL"];
     look(new THREE.Vector3(-12 + k, 3.0, 10), new THREE.Vector3(2.8, 0.6, 0), 34, -0.5);
     html += `<div class="head">FASTER AND FASTER</div>`;
@@ -168,19 +171,19 @@ window.renderAt = (t) => {
     gBody.rotation.x = ang; agena.rotation.x = ang; roll8.getObjectByName("plume").visible = true; chips = ["ILLUSTRATION", "MODEL"];
     look(new THREE.Vector3(1.8 - 0.8 * k, 4.2, 5.2), new THREE.Vector3(0.4, 1.4, 0.9), 40, -0.35); // on the No. 8 side, plume in frame
     html += `<div class="head">A THRUSTER STUCK ON</div>`;
-    html += `<div class="read" style="left:60px;top:1100px">OAMS ROLL THRUSTER No. 8<small>SHORTED, KEPT FIRING (NASA) · POSITION REPRESENTATIVE</small></div>`;
+    html += `<div class="read" style="left:60px;top:1100px">OAMS ROLL THRUSTER No. 8 · 25 lbf<small>SHORTED, KEPT FIRING (NASA) · POSITION REPRESENTATIVE</small></div>`;
   } else if (s.kind === "undock") {
     // separation: same push, less to turn -> faster
     const sep = ease(clamp(k * 1.6)) * 6; agena.position.x = dockedOffset() + sep; const rate = lerp(M.rateAtUndock, M.peak, ease(k));
     gBody.rotation.x = deg(M.rateAtUndock) * (t - s.a) + deg((M.peak - M.rateAtUndock)) * (t - s.a) * ease(k) * 0.5; agena.rotation.x = deg(M.rateAtUndock * 0.4) * (t - s.a);
-    roll8.getObjectByName("plume").visible = true; chips = ["ILLUSTRATION", "MODEL"];
+    roll8.getObjectByName("plume").visible = true; chips = ["ILLUSTRATION", "MODEL"]; tumble(t, ease(k));
     look(new THREE.Vector3(dockedOffset() * 0.5 + sep * 0.5, 9, 30 + 3 * k), new THREE.Vector3(dockedOffset() * 0.55 + sep * 0.5, 0, 0), 34, -0.75);
-    html += `<div class="head">UNDOCKED: FASTER</div><div class="sub">SAME PUSH · ${Math.round((1 - 1 / M.ratio) * 100)}% LESS TO TURN (MODEL)</div>`;
+    html += `<div class="head">UNDOCKED: FASTER</div><div class="sub">SAME PUSH (≈${Math.round(M.tau)} N·m) · ${Math.round((1 - 1 / M.ratio) * 100)}% LESS TO TURN · MODEL</div>`;
     html += gauge(rate, "ROLL RATE · GEMINI ALONE", "MODEL · PEAK REPORTED");
   } else if (s.kind === "rcs") {
     // nose RCS rings fire against the roll; rate falls to zero
     agena.visible = false; const rate = M.peak * (1 - ease(k)); const ang = deg(M.peak * (t - s.a) - 0.5 * M.peak * (t - s.a) * ease(k));
-    gBody.rotation.x = ang; rcsPlumes.forEach((p, i) => { p.visible = k < 0.9 && (i % 2 === 0); });
+    gBody.rotation.x = ang; tumble(t, 1 - ease(k)); rcsPlumes.forEach((p, i) => { p.visible = k < 0.9 && (i % 2 === 0); });
     look(new THREE.Vector3(11 - k, 2.6, 7.5), new THREE.Vector3(3.6, 0.2, 0), 34);
     html += `<div class="head">THE NOSE THRUSTERS</div><div class="sub">RE-ENTRY CONTROL SYSTEM · OAMS SHUT DOWN</div>`;
     html += gauge(rate, "ROLL RATE", "≈75% OF RCS FUEL USED (NASA)");
@@ -203,6 +206,7 @@ window.renderAt = (t) => {
   html += capHtml(cue(t)); if (chips.length) html += `<div class="chip">${chips.join(" · ")}</div>`;
   ui.innerHTML = html; renderer.render(scene, cam);
 };
+window.__shots = SHOTS.map(({ kind, a, b }) => ({ kind, a, b })); // for the scene sheet
 window.__ready = true;
 </script>
 </body></html>

@@ -45,6 +45,14 @@ async function qa({ dir, data, video, pilot }) {
     const ha = await hash(a); await a.browser.close(); const b = await openPage(port); const hb = await hash(b); await b.browser.close();
     add("deterministic frames (two fresh browsers)", ha.every((x, i) => x === hb[i]), times.map((t, i) => `${t}s ${ha[i] === hb[i] ? "same" : "DIFF"}`).join(", "), "identical");
     fs.writeFileSync(path.join(out, "text-layout-issues.json"), JSON.stringify(issues, null, 1) + "\n");
+    // scene sheet: each shot at 35% and 85% of its length (same layout as the studio's scene-sheet.png)
+    { const w = await openPage(port); const shots = await w.page.evaluate(() => window.__shots); await w.browser.close();
+      const dur = +cp.execFileSync("ffprobe", ["-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", video], { encoding: "utf8" });
+      const kdir = path.join(out, "keyframes"); fs.rmSync(kdir, { recursive: true, force: true }); fs.mkdirSync(kdir, { recursive: true });
+      shots.forEach((s, i) => [0.35, 0.85].forEach((f, j) => { const t = Math.min(dur - 0.05, s.a + (Math.min(s.b, dur) - s.a) * f);
+        cp.execFileSync("ffmpeg", ["-v", "error", "-y", "-ss", t.toFixed(3), "-i", video, "-frames:v", "1", "-vf", `scale=270:480,drawtext=text='${s.kind} ${t.toFixed(1)}s':x=8:y=452:fontsize=17:fontcolor=white:box=1:boxcolor=black@0.6`, path.join(kdir, `${j}-${String(i).padStart(2, "0")}.png`)]); }));
+      cp.execFileSync("ffmpeg", ["-v", "error", "-y", "-pattern_type", "glob", "-i", path.join(kdir, "*.png"), "-vf", `tile=${shots.length}x2:padding=6:color=0x222222`, "-frames:v", "1", path.join(out, "scene-sheet.png")]);
+      fs.rmSync(kdir, { recursive: true, force: true }); }
   } finally { srv.close(); }
 
   // 3. longest static run (mean abs gray diff < 0.4 between consecutive frames on a 270x480 proxy)

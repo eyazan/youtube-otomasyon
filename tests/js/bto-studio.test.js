@@ -122,7 +122,7 @@ test("skills: the seven studio Skills exist with valid frontmatter whose name ma
 
 // The only studio entry points outside scripts/bto-studio are the default-OFF ImpossibleBrief shadow in
 // core/pipeline/impossible-brief.js (IB_PREMIUM_RENDER=preview) and the read-only, no-upload dry-run workflow.
-const STUDIO_ALLOWED = new Set(["ib-premium-dry-run.yml", "fr-studio-dry-run.yml", "premium-render-check.yml", "gll-research.yml", "premium-review-render.yml", path.join("pipeline", "impossible-brief.js"), path.join("pipeline", "premium-shadow.js"), path.join("pipeline", "goal-lore-lab.js"),
+const STUDIO_ALLOWED = new Set(["pilot-3d-review.yml", "ib-premium-dry-run.yml", "fr-studio-dry-run.yml", "premium-render-check.yml", "gll-research.yml", "premium-review-render.yml", path.join("pipeline", "impossible-brief.js"), path.join("pipeline", "premium-shadow.js"), path.join("pipeline", "goal-lore-lab.js"),
   // the premium-primary lane: only when <PREFIX>_PREMIUM_PRIMARY=1 (a repository variable) or for the premium-only GoalLore Lab
   path.join("pipeline", "premium-lane.js"),
   // FR topic scoring reads the automatic storyboard's object class and mechanism (pure functions, no render) to score what
@@ -144,6 +144,10 @@ test("isolation: no live workflow, root production script or channel config refe
   const rr = fs.readFileSync(path.join(wf, "premium-review-render.yml"), "utf8");
   assert.match(rr, /PUBLISH: '0'/); assert.match(rr, /--shadow --shadow-dir/); assert.doesNotMatch(rr, /_YT_REFRESH_TOKEN|_CLIENT_SECRET|secrets\.|group: portfolio-production|HEAD:main|origin main/);
   assert.match(rr, /B="review\/render-/); assert.match(rr, /git push -q -f origin "\$B"/);
+  // the isolated 3D pilot review: measurement only, pilot branch only, read-only token, no credentials, no push, shadow FR
+  const pr = fs.readFileSync(path.join(wf, "pilot-3d-review.yml"), "utf8");
+  assert.match(pr, /PUBLISH: '0'/); assert.match(pr, /permissions:\n  contents: read\n/); assert.match(pr, /branches: \[pilot\/gll-magnus-3d\]/);
+  assert.match(pr, /--shadow --shadow-dir/); assert.doesNotMatch(pr, /_YT_|_CLIENT_|secrets\.|git push|git commit|group: portfolio-production|youtube-yukle|PUBLISH: '1'/);
   for (const f of fs.readdirSync(ROOT).filter((x) => x.endsWith(".js"))) assert.doesNotMatch(fs.readFileSync(path.join(ROOT, f), "utf8"), /scripts\/bto-studio/, f);
   for (const c of fs.readdirSync(path.join(ROOT, "channels"))) { const cfg = path.join(ROOT, "channels", c, "config.json"); if (fs.existsSync(cfg)) assert.doesNotMatch(fs.readFileSync(cfg, "utf8"), /bto-studio|BTO_PREMIUM/, c); }
   for (const f of fs.readdirSync(path.join(ROOT, "core"), { recursive: true }).filter((x) => String(x).endsWith(".js") && !STUDIO_ALLOWED.has(String(x)))) assert.doesNotMatch(fs.readFileSync(path.join(ROOT, "core", f), "utf8"), /bto-studio/, f);
@@ -216,7 +220,7 @@ test("GoalLore Lab: registered successor of CriticalThread, publishing closed; r
   assert.equal(cfg.replaces.channel, "critical-thread"); assert.equal(cfg.voice.status.startsWith("CANDIDATE"), true, "the voice is not approved by code");
   // only the research check, the pilot render check and the one production step name the channel; none holds GLL_ secrets or pushes to main
   const named = fs.readdirSync(path.join(ROOT, ".github/workflows")).filter((f) => /goal-lore-lab|GoalLore/.test(read(`.github/workflows/${f}`))).sort();
-  assert.deepEqual(named, ["gll-research.yml", "gll-voice-review.yml", "portfolio-production.yml", "premium-render-check.yml"]);
+  assert.deepEqual(named, ["gll-research.yml", "gll-voice-review.yml", "pilot-3d-review.yml", "portfolio-production.yml", "premium-render-check.yml"]);
   // the voice review only copies samples to a review branch: no secrets, never main
   const vr = read(".github/workflows/gll-voice-review.yml"); assert.doesNotMatch(vr, /GLL_|_YT_|secrets\.|HEAD:main|origin main/); assert.match(vr, /git push -q -f origin review\/goal-lore-lab/);
   const rc = read(".github/workflows/premium-render-check.yml"); assert.doesNotMatch(rc, /GLL_|_YT_|git push|PUBLISH: '1'/); assert.match(rc, /--pilot/); assert.match(rc, /contents: read/);

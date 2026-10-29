@@ -29,7 +29,7 @@ async function openPage(port) {
   const { chromium } = require(path.join(ROOT, "node_modules/playwright-core"));
   // software compositing and raster: the page is composited on the CPU instead of through SwiftShader (about 20% faster
   // per frame, measured); WebGL itself still runs in SwiftShader
-  const browser = await chromium.launch({ args: ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist",
+  const browser = await chromium.launch({ ...(process.env.PD_CHROMIUM ? { executablePath: process.env.PD_CHROMIUM } : {}), args: ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist",
     ...(process.env.PILOT3D_GPU_COMPOSITING === "1" ? [] : ["--disable-gpu-compositing", "--disable-gpu-rasterization"])] });
   const page = await browser.newPage({ viewport: { width: 1080, height: 1920 }, deviceScaleFactor: 1 });
   const errors = []; page.on("pageerror", (e) => errors.push(String(e))); page.on("console", (m) => { if (m.type() === "error") errors.push(m.text()); });
