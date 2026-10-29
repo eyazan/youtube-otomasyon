@@ -147,9 +147,9 @@ export const SHOTS = {
     if (p.mode === "hands" && k > 0.55) { const g = ease(clamp((k - 0.55) / 0.2)); K.pose({ lean: 0.5 * g, drop: 0.25 * g, L: { hip: 0.6 * g, knee: 0.9 * g, sh: 1.2 * g, elbow: 0.3 }, R: { hip: 0.6 * g, knee: 0.9 * g, sh: 1.2 * g, elbow: 0.3 } });
       ball.position.copy(K.position).add(new THREE.Vector3(0, lerp(0.11, 0.75, g), lerp(0.2, 0.45, g))); }
     else if (p.mode === "feet" && k > 0.55) { const u = clamp((k - 0.55) / 0.3); K.pose(MOTION.kick(u, "R", "drive")); if (u > 0.55) { const f = (u - 0.55) / 0.45; ball.position.copy(to).add(new THREE.Vector3(-3 * f, 5 * f * (1.2 - f), 22 * f)); } }
-    S.look(new THREE.Vector3(10.5 - 1.5 * k, 6.5 - k, GZ + 34 - 3 * k), new THREE.Vector3(2.2, 0.8, GZ + 7), 40);
+    S.look(new THREE.Vector3(11 - 1.5 * k, 9.5 - k, GZ + 39 - 3 * k), new THREE.Vector3(3.2, 0.4, GZ + 12), 42);
     let html = O.head(p.head) + O.sub(p.sub);
-    if (p.mode && k > 0.6) { const kp = S.toScreen(K.position.clone().add(new THREE.Vector3(0, 2.3, 0))); const ok = p.mode === "hands";
+    if (p.mode && k > 0.4) { const kp = S.toScreen(K.position.clone().add(new THREE.Vector3(0, 2.3, 0))); const ok = p.mode === "hands";
       html += O.read({ x: kp.x - 120, y: kp.y - 120, title: `${ok ? "✓" : "✕"} HANDS`, small: p.ruleNote || "", tone: ok ? "cool" : "warm" }); }
     return html + labels(S, p.labels); },
   // side view of the flight with the alternative path for comparison (both model paths)

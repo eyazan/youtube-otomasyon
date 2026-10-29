@@ -201,7 +201,7 @@ function fitReading(shots, end) {
     shots[i + 1].line = `${shots[i].line} ${shots[i + 1].line}`; shots[i + 1].facts = [...new Set([...shots[i].facts, ...shots[i + 1].facts])]; shots.splice(i, 1); }
   // window: share of the shot a field is on screen (state swaps show each state for about half the shot)
   const fields = [["sub", 1, false], ["head", 1, true], ["note", 0.5, false], ["overflowNote", 0.45, false], ["beforeNote", 0.45, false], ["afterNote", 0.55, false],
-    ["title", 0.5, true], ["overflowTitle", 0.45, true], ["before", 0.45, true], ["after", 0.55, true]];
+    ["title", 0.5, true], ["overflowTitle", 0.45, true], ["before", 0.45, true], ["after", 0.55, true], ["ruleNote", 0.6, false]];
   const fails = [];
   shots.forEach((s, i) => { const d = dur(i); const P = s.params; const drop = (obj, key, what) => { trimmed.push(`${s.kind} at ${s.at.toFixed(1)} s: dropped ${what} "${obj[key]}" (${d.toFixed(1)} s shot)`); delete obj[key]; };
     // a headline taken from the line (headAuto) is optional: dropped rather than failing the plan
