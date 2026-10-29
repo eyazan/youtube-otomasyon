@@ -21,6 +21,8 @@
   .card p { margin: 0; font: 600 28px/1.35 Inter; color: #39404c; }
   .card .k { font: 700 22px Inter; letter-spacing: .14em; color: #8a5a00; margin-bottom: 14px; }
   .vig { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%); }
+  .scrim { position: absolute; left: 0; right: 0; top: 0; height: 520px; background: linear-gradient(rgba(4,6,10,.82), rgba(4,6,10,.55) 60%, rgba(4,6,10,0)); }
+  .scrim.low { top: auto; bottom: 0; height: 760px; background: linear-gradient(rgba(4,6,10,0), rgba(4,6,10,.55) 45%, rgba(4,6,10,.7)); }
 </style></head>
 <body>
 <div id="ui"></div>
@@ -28,27 +30,64 @@
 <script type="module">
 import * as THREE from "three";
 const D = window.__DATA; // { flight, straight, spiral, cues, setup }
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+const ease = (x) => { x = clamp(x); return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+const lerp = (a, b, k) => a + (b - a) * k;
 const W = 1080, H = 1920;
-const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
-renderer.setPixelRatio(1); renderer.setSize(W, H); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+const OPT = Object.fromEntries(new URLSearchParams(location.search)); // benchmark switches: aa=0, shadow=0, smap=<px>
+const renderer = new THREE.WebGLRenderer({ antialias: OPT.aa !== "0", preserveDrawingBuffer: true });
+// 3D drawn at 810x1440 and scaled up; overlay text stays at full 1080x1920 (measured: 293 vs 395 ms per frame)
+renderer.setPixelRatio(+(OPT.pr || 0.75)); renderer.setSize(W, H); renderer.shadowMap.enabled = OPT.shadow !== "0"; renderer.shadowMap.type = OPT.soft === "1" ? THREE.PCFSoftShadowMap : THREE.PCFShadowMap;
 renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05; renderer.outputColorSpace = THREE.SRGBColorSpace;
 document.body.prepend(renderer.domElement);
-const scene = new THREE.Scene(); scene.background = new THREE.Color(0x070b12); scene.fog = new THREE.Fog(0x070b12, 60, 160);
-const cam = new THREE.PerspectiveCamera(38, W / H, 0.05, 400);
+const scene = new THREE.Scene(); scene.background = new THREE.Color(0x070b12); scene.fog = new THREE.Fog(0x070b12, 90, 260);
+const cam = new THREE.PerspectiveCamera(38, W / H, 0.05, 700);
 
 // --- light: night match under four floodlight banks ---------------------------------------------------------------
 scene.add(new THREE.HemisphereLight(0xbcd4ff, 0x1b2a12, 0.55));
 const key = new THREE.DirectionalLight(0xfff3df, 2.2); key.position.set(-30, 45, 10); key.castShadow = true;
-key.shadow.mapSize.set(2048, 2048); Object.assign(key.shadow.camera, { left: -40, right: 40, top: 40, bottom: -40, near: 1, far: 140 }); key.shadow.bias = -0.0004; scene.add(key);
+key.shadow.mapSize.set(+(OPT.smap || 1536), +(OPT.smap || 1536)); Object.assign(key.shadow.camera, { left: -40, right: 40, top: 40, bottom: -40, near: 1, far: 140 }); key.shadow.bias = -0.0004; scene.add(key);
 const fill = new THREE.DirectionalLight(0x9fc2ff, 0.6); fill.position.set(35, 25, -60); scene.add(fill);
 
 // --- pitch: mown stripes, line markings (FIFA dimensions: goal 7.32 x 2.44 m, box 40.32 x 16.5 m) ---------------------
 function stripeTexture() { const c = document.createElement("canvas"); c.width = 64; c.height = 1024; const g = c.getContext("2d");
-  for (let i = 0; i < 16; i += 1) { g.fillStyle = i % 2 ? "#2f7d3a" : "#2a7034"; g.fillRect(0, i * 64, 64, 64); }
+  for (let i = 0; i < 16; i += 1) { g.fillStyle = i % 2 ? "#2f7d3a" : "#2a7034"; g.fillRect(0, i * 64, 64, 64); } // 16 bands over the 113 m strip
   const img = g.getImageData(0, 0, 64, 1024); for (let i = 0; i < img.data.length; i += 4) { const n = (Math.sin(i * 12.9898) * 43758.5453) % 1 * 14; img.data[i] += n; img.data[i + 1] += n; } g.putImageData(img, 0, 0);
-  const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(30, 3); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; return t; }
-const grass = new THREE.Mesh(new THREE.PlaneGeometry(140, 140), new THREE.MeshStandardMaterial({ map: stripeTexture(), roughness: 0.95 }));
-grass.rotation.x = -Math.PI / 2; grass.position.set(0, 0, -30); grass.receiveShadow = true; scene.add(grass);
+  const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(1, 1); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; return t; }
+// playing surface 105 x 68 m (goal line at z = -35), mown in 5.25 m bands; run-off beyond it in a darker green
+const grass = new THREE.Mesh(new THREE.PlaneGeometry(76, 113), (OPT.pbr === "1" ? new THREE.MeshStandardMaterial({ map: stripeTexture(), roughness: 0.95 }) : new THREE.MeshLambertMaterial({ map: stripeTexture() })));
+grass.material.map.repeat.set(1, 1); grass.material.map.wrapT = THREE.RepeatWrapping;
+grass.rotation.x = -Math.PI / 2; grass.position.set(0, 0.002, 17.5); grass.receiveShadow = true; scene.add(grass);
+const apron = new THREE.Mesh(new THREE.PlaneGeometry(600, 600), new THREE.MeshLambertMaterial({ color: 0x1d4a26 }));
+apron.rotation.x = -Math.PI / 2; apron.position.set(0, -0.01, 17.5); apron.receiveShadow = true; scene.add(apron);
+// stands: four tiered bowls of seated spectators (procedural, anonymous), roofline and floodlight masts
+const stadium = new THREE.Group(); scene.add(stadium);
+function crowdTexture(seed) { const c = document.createElement("canvas"); c.width = 1024; c.height = 256; const g = c.getContext("2d"); g.fillStyle = "#0c1018"; g.fillRect(0, 0, 1024, 256);
+  let r = seed; const rnd = () => (r = (r * 16807) % 2147483647) / 2147483647; const pal = ["#6f7782", "#3f4856", "#6b3434", "#86703a", "#2e4470", "#8a8f96", "#2c3340", "#525c6a"]; // muted: spectators read as texture, not as noise
+  for (let row = 0; row < 32; row += 1) for (let col = 0; col < 170; col += 1) { if (rnd() < 0.12) continue; g.fillStyle = pal[Math.floor(rnd() * pal.length)];
+    g.fillRect(col * 6 + rnd() * 2, row * 8 + 2, 3, 4); }
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.wrapS = THREE.RepeatWrapping; return t; }
+function stand(len, depth, height, x, z, rotY, seed) { const g = new THREE.Group();
+  const tex = crowdTexture(seed); tex.repeat.set(len / 60, 1);
+  const slope = new THREE.Mesh(new THREE.PlaneGeometry(len, Math.hypot(depth, height)), new THREE.MeshBasicMaterial({ map: tex, color: 0x8a909c }) /* unlit: the crowd is lit by the floodlights in the texture, cheap to fill */);
+  slope.rotation.x = -Math.atan2(height, depth); slope.position.set(0, height / 2 + 1.2, -depth / 2); g.add(slope);
+  const wall = new THREE.Mesh(new THREE.BoxGeometry(len, 1.2, 0.3), new THREE.MeshBasicMaterial({ color: 0x1a2230 })); wall.position.set(0, 0.6, 0); g.add(wall);
+  const roof = new THREE.Mesh(new THREE.BoxGeometry(len, 0.6, depth * 0.7), new THREE.MeshBasicMaterial({ color: 0x0e131c })); roof.position.set(0, height + 5, -depth * 0.55); g.add(roof);
+  g.position.set(x, 0, z); g.rotation.y = rotY; stadium.add(g); return g; }
+stand(120, 26, 16, 0, -46, 0, 7);            // behind the goal
+stand(120, 26, 16, 0, 81, Math.PI, 11);      // far end
+stand(130, 26, 18, -42, 17.5, Math.PI / 2, 13); stand(130, 26, 18, 42, 17.5, -Math.PI / 2, 17);
+const glowTex = (() => { const c = document.createElement("canvas"); c.width = c.height = 128; const g = c.getContext("2d"); const gr = g.createRadialGradient(64, 64, 2, 64, 64, 64);
+  gr.addColorStop(0, "rgba(255,250,235,1)"); gr.addColorStop(0.25, "rgba(255,240,210,0.55)"); gr.addColorStop(1, "rgba(255,240,210,0)"); g.fillStyle = gr; g.fillRect(0, 0, 128, 128); return new THREE.CanvasTexture(c); })();
+for (const [x, z] of [[-48, -42], [48, -42], [-48, 77], [48, 77]]) { const mast = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.8, 42, 10), new THREE.MeshStandardMaterial({ color: 0x2a3140 }));
+  mast.position.set(x, 21, z); stadium.add(mast); const bank = new THREE.Mesh(new THREE.BoxGeometry(7, 4, 0.6), new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xfff4dc, emissiveIntensity: 2.2 }));
+  bank.position.set(x, 43, z); bank.lookAt(0, 0, 17.5); stadium.add(bank);
+  const glow = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending })); glow.scale.set(26, 26, 1); glow.position.set(x, 43, z); stadium.add(glow); }
+// the model board for the "if it kept flying" spiral: a dark measured grid, 10 m squares (shown instead of the pitch)
+const board = new THREE.Group(); board.visible = false; scene.add(board);
+{ const plane = new THREE.Mesh(new THREE.PlaneGeometry(220, 220), new THREE.MeshBasicMaterial({ color: 0x0b1220 })); plane.rotation.x = -Math.PI / 2; plane.position.set(-25, -0.02, -35); board.add(plane);
+  const g = []; for (let v = -110; v <= 110; v += 10) { g.push(-25 + v, 0, -145, -25 + v, 0, 75, -135, 0, -35 + v, 85, 0, -35 + v); }
+  const geo = new THREE.BufferGeometry(); geo.setAttribute("position", new THREE.Float32BufferAttribute(g, 3)); board.add(new THREE.LineSegments(geo, new THREE.LineBasicMaterial({ color: 0x24344d }))); }
 const lineMat = new THREE.MeshBasicMaterial({ color: 0xf2f5f0 });
 const line = (x1, z1, x2, z2, w = 0.12) => { const l = Math.hypot(x2 - x1, z2 - z1); const m = new THREE.Mesh(new THREE.PlaneGeometry(l, w), lineMat);
   m.rotation.x = -Math.PI / 2; m.rotation.z = -Math.atan2(z2 - z1, x2 - x1); m.position.set((x1 + x2) / 2, 0.012, (z1 + z2) / 2); scene.add(m); };
@@ -68,24 +107,73 @@ bar(2.44, -3.66, 1.22, GZ); bar(2.44, 3.66, 1.22, GZ); bar(7.44, 0, 2.44, GZ, tr
   const geo = new THREE.BufferGeometry(); geo.setAttribute("position", new THREE.Float32BufferAttribute(g, 3));
   scene.add(new THREE.LineSegments(geo, new THREE.LineBasicMaterial({ color: 0xdfe6ee, transparent: true, opacity: 0.45 }))); }
 
-// --- people: neutral mannequins (no likeness, no kit colours of the real teams) ----------------------------------
-const body = new THREE.MeshStandardMaterial({ color: 0x3b4a63, roughness: 0.7 }), skin = new THREE.MeshStandardMaterial({ color: 0x8a95a8, roughness: 0.8 });
-function mannequin(x, z, h = 1.82, mat = body, arms = 0) { const g = new THREE.Group();
-  const torso = new THREE.Mesh(new THREE.CapsuleGeometry(0.2, h * 0.32, 6, 14), mat); torso.position.y = h * 0.62; g.add(torso);
-  const head = new THREE.Mesh(new THREE.SphereGeometry(0.12, 18, 14), skin); head.position.y = h * 0.92; g.add(head);
-  for (const s of [-1, 1]) { const leg = new THREE.Mesh(new THREE.CapsuleGeometry(0.085, h * 0.36, 4, 10), mat); leg.position.set(0.11 * s, h * 0.24, 0); g.add(leg);
-    const arm = new THREE.Mesh(new THREE.CapsuleGeometry(0.06, h * 0.28, 4, 10), mat); arm.position.set(0.27 * s + arms * 0.25 * s, h * 0.64 + arms * 0.18, 0); arm.rotation.z = arms * 1.2 * s; g.add(arm); }
-  g.traverse((o) => { if (o.isMesh) o.castShadow = true; }); g.position.set(x, 0, z); scene.add(g); return g; }
-// wall 9.15 m from the ball, covering the near (left) side; keeper slightly left of centre
-const wallZ = -9.15; const wallCenterX = D.setup.ballX - 2.2; [-0.9, -0.3, 0.3, 0.9].forEach((dx) => mannequin(wallCenterX + dx, wallZ, 1.84));
-const keeper = mannequin(-0.6, GZ + 0.4, 1.88, new THREE.MeshStandardMaterial({ color: 0x9a6b2c, roughness: 0.7 }), 0.35);
-mannequin(D.setup.ballX - 1.2, 1.6, 1.78);  // kicker, stood back from the ball
+// --- people: jointed, faceless athletes in neutral kits (no likeness, no real team colours) -------------------------
+// proportions from standard adult anthropometry (segment lengths as fractions of height h); poses are representative
+function athlete({ h = 1.82, shirt = 0x3b4a63, shorts = 0xd9dde4, socks = 0x3b4a63, skinTone = 0x9a8578, gloves = null } = {}) {
+  const M = (c, r = 0.75) => new THREE.MeshStandardMaterial({ color: c, roughness: r });
+  const mShirt = M(shirt), mShorts = M(shorts), mSock = M(socks), mSkin = M(skinTone, 0.85), mBoot = M(0x101318, 0.5), mGlove = gloves ? M(gloves, 0.6) : mSkin;
+  const root = new THREE.Group(); const pelvis = new THREE.Group(); pelvis.position.y = h * 0.53; root.add(pelvis);
+  const seg = (rTop, rBot, len, mat) => { const m = new THREE.Mesh(new THREE.CylinderGeometry(rTop, rBot, len, 14), mat); m.position.y = -len / 2; return m; };
+  // torso: lathe profile, waist to shoulders
+  const prof = [[0.15, 0], [0.165, 0.08], [0.16, 0.16], [0.175, 0.26], [0.2, 0.36], [0.205, 0.42], [0.16, 0.47], [0.06, 0.5]].map(([r, y]) => new THREE.Vector2(r * h / 1.82, y * h / 1.82 * 1.05));
+  const torso = new THREE.Mesh(new THREE.LatheGeometry(prof, 18), mShirt); torso.scale.z = 0.68; pelvis.add(torso);
+  const hips = new THREE.Mesh(new THREE.CylinderGeometry(0.165, 0.17, 0.2, 16), mShorts); hips.scale.z = 0.72; hips.position.y = -0.02; pelvis.add(hips);
+  const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.055, 0.09, 10), mSkin); neck.position.y = h * 0.29; pelvis.add(neck);
+  const head = new THREE.Mesh(new THREE.SphereGeometry(0.105, 20, 16), mSkin); head.scale.set(0.92, 1.12, 1); head.position.y = h * 0.29 + 0.15; pelvis.add(head);
+  const limbs = {};
+  for (const side of [-1, 1]) {
+    // leg: hip -> thigh -> knee -> shin (sock) -> ankle -> boot
+    const hip = new THREE.Group(); hip.position.set(0.095 * side, -0.06, 0); pelvis.add(hip);
+    const thighLen = h * 0.245, shinLen = h * 0.245;
+    const shortLeg = seg(0.085, 0.078, thighLen * 0.45, mShorts); hip.add(shortLeg); const thigh = seg(0.078, 0.058, thighLen * 0.6, mSkin); thigh.position.y = -thighLen * 0.4 - thighLen * 0.3; hip.add(thigh);
+    const knee = new THREE.Group(); knee.position.y = -thighLen; hip.add(knee);
+    const shin = seg(0.056, 0.04, shinLen, mSock); knee.add(shin); const calf = new THREE.Mesh(new THREE.SphereGeometry(0.06, 12, 10), mSock); calf.scale.set(0.95, 1.6, 0.95); calf.position.set(0, -shinLen * 0.3, 0.015); knee.add(calf);
+    const ankle = new THREE.Group(); ankle.position.y = -shinLen; knee.add(ankle);
+    const boot = new THREE.Mesh(new THREE.CapsuleGeometry(0.045, 0.17, 6, 12), mBoot); boot.rotation.x = Math.PI / 2; boot.scale.set(1.05, 1, 0.8); boot.position.set(0, -0.04, -0.06); ankle.add(boot);
+    // arm: shoulder -> upper arm (sleeve) -> elbow -> forearm -> hand
+    const sh = new THREE.Group(); sh.position.set(0.2 * side * h / 1.82, h * 0.25, 0); pelvis.add(sh);
+    const upLen = h * 0.17, foreLen = h * 0.15;
+    const sleeve = seg(0.055, 0.05, upLen * 0.5, mShirt); sh.add(sleeve); const upper = seg(0.048, 0.042, upLen * 0.55, mSkin); upper.position.y = -upLen * 0.45 - upLen * 0.275; sh.add(upper);
+    const elbow = new THREE.Group(); elbow.position.y = -upLen; sh.add(elbow); elbow.add(seg(0.04, 0.032, foreLen, mSkin));
+    const hand = new THREE.Mesh(new THREE.SphereGeometry(0.045, 12, 10), mGlove); hand.scale.set(0.8, 1.2, 0.5); hand.position.y = -foreLen - 0.04; elbow.add(hand);
+    limbs[side < 0 ? "L" : "R"] = { hip, knee, ankle, sh, elbow };   // the figure faces -z, so its right side is +x
+  }
+  root.traverse((o) => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
+  // pose: angles in radians. hip/knee/sh/elbow swing about x (forward = positive hip); abduction about z
+  root.pose = (p) => { for (const k of ["L", "R"]) { const q = p[k] || {}; const L = limbs[k]; const sgn = k === "L" ? -1 : 1; // abduction moves each limb away from the midline
+      L.hip.rotation.set(q.hip || 0, 0, (q.hipOut || 0) * sgn); L.knee.rotation.set(-(q.knee || 0), 0, 0); L.ankle.rotation.set(q.ankle || 0, 0, 0);
+      L.sh.rotation.set(q.sh || 0, 0, (q.shOut || 0.08) * sgn); L.elbow.rotation.set(q.elbow || 0, 0, 0); }
+    pelvis.rotation.set(p.lean || 0, p.twist || 0, p.tilt || 0); pelvis.position.y = h * 0.53 - (p.drop || 0); return root; };
+  root.limbs = limbs; root.pose({}); scene.add(root); return root; }
+const NEUTRAL = { shirt: 0x34404f, shorts: 0x1f2630, socks: 0x34404f };          // charcoal: no team identity
+// wall 9.15 m from the ball covering the near side, arms crossed low (a common wall pose; representative)
+const wallZ = -9.15; const wallCenterX = D.setup.ballX - 2.2;
+[-0.9, -0.3, 0.3, 0.9].forEach((dx, i) => { const a = athlete({ ...NEUTRAL, h: 1.8 + (i % 2) * 0.05 }); a.position.set(wallCenterX + dx, 0, wallZ); a.rotation.y = Math.PI;
+  a.pose({ L: { sh: 0.5, shOut: -0.35, elbow: 1.2, hipOut: 0.04 }, R: { sh: 0.5, shOut: -0.35, elbow: 1.2, hipOut: 0.04 } }); });
+// goalkeeper set: knees bent, weight forward, hands out; faces the kicker (+z)
+const keeper = athlete({ shirt: 0x9a6b2c, shorts: 0x1f2630, socks: 0x9a6b2c, gloves: 0xe8e2d0, h: 1.88 }); keeper.position.set(-0.6, 0, GZ + 0.4); keeper.rotation.y = Math.PI;
+keeper.pose({ lean: 0.22, drop: 0.12, L: { hip: 0.45, knee: 0.7, ankle: 0.25, sh: 0.5, shOut: 0.55, elbow: 0.6, hipOut: 0.12 }, R: { hip: 0.45, knee: 0.7, ankle: 0.25, sh: 0.5, shOut: 0.55, elbow: 0.6, hipOut: 0.12 } });
+// kicker: left-footed. The outside of the left boot meets the ball's right-back side (the boot is right of the ball), the
+// plant (right) foot further right. That contact puts spin about +y: r x F = (+x) x (-z) = +y, the curve this model uses.
+const kicker = athlete({ shirt: 0x5a6576, shorts: 0x1f2630, socks: 0x5a6576, h: 1.68 });
+const kickerPose = (u) => { // u: 0 = backswing, 0.55 = contact, 1 = follow-through
+  const swing = u < 0.55 ? lerp(-0.9, 0.3, ease(u / 0.55)) : lerp(0.3, 1.1, ease((u - 0.55) / 0.45));
+  const kneeBend = u < 0.55 ? lerp(1.5, 0.55, ease(u / 0.55)) : lerp(0.55, 0.15, (u - 0.55) / 0.45);
+  kicker.pose({ lean: -0.12, tilt: 0.12, twist: -0.18 + swing * 0.15, drop: 0.0,
+    L: { hip: swing, knee: kneeBend, ankle: 0.6, hipOut: -0.06, sh: -0.3, shOut: 0.6, elbow: 0.4 },
+    R: { hip: -0.05, knee: 0.12, ankle: 0.05, hipOut: 0.05, sh: 0.4, shOut: 0.45, elbow: 0.5 } }); };
+const KICK_X = D.setup.ballX + 0.07, KICK_Z = -0.02;                              // left hip 0.15 m right of the ball centre
+kicker.position.set(KICK_X, 0, KICK_Z); kickerPose(1);
 
 // --- ball: 32-panel look from a canvas texture so the spin is visible --------------------------------------------
 function ballTexture() { const c = document.createElement("canvas"); c.width = 1024; c.height = 512; const g = c.getContext("2d");
-  g.fillStyle = "#f4f4f2"; g.fillRect(0, 0, 1024, 512); g.fillStyle = "#161a22";
-  for (let i = 0; i < 12; i += 1) { const x = (i % 6) * 170 + (i < 6 ? 40 : 125), y = i < 6 ? 150 : 360; g.beginPath(); for (let k = 0; k < 5; k += 1) { const a = k * 2 * Math.PI / 5 - Math.PI / 2; g.lineTo(x + Math.cos(a) * 46, y + Math.sin(a) * 40); } g.fill(); }
-  g.fillRect(0, 0, 1024, 18); g.fillRect(0, 494, 1024, 18); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t; }
+  // equirectangular panel pattern: staggered rows of dark pentagons (widened toward the poles), thin seams; no pole bands
+  g.fillStyle = "#f2f2ef"; g.fillRect(0, 0, 1024, 512); g.fillStyle = "#171b23";
+  const rows = [[70, 5, 0], [190, 7, 0.5], [322, 7, 0], [442, 5, 0.5]];
+  for (const [y, n, off] of rows) { const lat = (0.5 - y / 512) * Math.PI; const sx = 1 / Math.max(0.35, Math.cos(lat));
+    for (let i = 0; i < n; i += 1) { const x = ((i + off) / n) * 1024; g.beginPath(); for (let k = 0; k < 5; k += 1) { const a = k * 2 * Math.PI / 5 + i; g.lineTo(x + Math.cos(a) * 30 * sx, y + Math.sin(a) * 30); } g.fill(); } }
+  g.strokeStyle = "rgba(40,44,52,0.35)"; g.lineWidth = 2; for (let x = 0; x < 1024; x += 73) { g.beginPath(); g.moveTo(x, 0); g.lineTo(x + 40, 512); g.stroke(); }
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t; }
 const ball = new THREE.Mesh(new THREE.SphereGeometry(0.11, 48, 32), new THREE.MeshStandardMaterial({ map: ballTexture(), roughness: 0.45 }));
 ball.castShadow = true; scene.add(ball);
 // spin axis indicator (vertical) shown only in the close-ups
@@ -107,6 +195,11 @@ function arrow(color) { const g = new THREE.Group(); const m = new THREE.MeshSta
     const sL = Math.max(0.01, L - 0.16); shaft.scale.y = sL; shaft.position.y = sL / 2 + 0.12; head.position.y = 0.12 + sL + 0.08; };
   scene.add(g); return g; }
 const arrM = arrow(0x5fe1ff), arrD = arrow(0xff8a3d), arrV = arrow(0xffffff);
+const spinRing = (() => { const g = new THREE.Group(); const m = new THREE.MeshBasicMaterial({ color: 0xffd36b });
+  const arc = new THREE.Mesh(new THREE.TorusGeometry(0.2, 0.02, 10, 72, Math.PI * 5 / 3), m); arc.rotation.x = -Math.PI / 2; g.add(arc); // arc runs +x -> -z: counter-clockwise from above, the sense of omega = +y
+  const head = new THREE.Mesh(new THREE.ConeGeometry(0.05, 0.11, 16), m); // tip at the arc end, pointing along the counter-clockwise (from above) direction
+  const a = Math.PI * 5 / 3; head.position.set(0.2 * Math.cos(a), 0, -0.2 * Math.sin(a)); head.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), new THREE.Vector3(-Math.sin(a), 0, -Math.cos(a)));
+  g.add(head); g.visible = false; scene.add(g); return g; })();
 // constant-size halo so the ball stays findable in wide shots
 const halo = (() => { const c = document.createElement("canvas"); c.width = c.height = 128; const g = c.getContext("2d"); const gr = g.createRadialGradient(64, 64, 18, 64, 64, 62);
   gr.addColorStop(0, "rgba(95,225,255,0)"); gr.addColorStop(0.55, "rgba(95,225,255,0.0)"); gr.addColorStop(0.7, "rgba(95,225,255,0.9)"); gr.addColorStop(0.85, "rgba(95,225,255,0)"); g.fillStyle = gr; g.fillRect(0, 0, 128, 128);
@@ -116,9 +209,6 @@ spiralWide.geometry.setDrawRange(0, 0); scene.add(spiralWide);
 const trailWide = new THREE.Mesh(new THREE.TubeGeometry(fCurveRef(), 400, 0.3, 8, false), new THREE.MeshBasicMaterial({ color: 0x5fe1ff })); scene.add(trailWide);
 
 // --- helpers ----------------------------------------------------------------------------------------------------
-const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
-const ease = (x) => { x = clamp(x); return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
-const lerp = (a, b, k) => a + (b - a) * k;
 const at = (samples, tt) => { const i = clamp(Math.round(tt / (samples[1].t - samples[0].t)), 0, samples.length - 1); return samples[i]; };
 const T = D.flight[D.flight.length - 1].t;
 const cue = (t) => D.cues.find((c) => t >= c.start && t < c.end + 0.05);
@@ -139,13 +229,17 @@ const BEATS = [["hook", /./], ["establish", /Lyon/], ["strike", /Roberto Carlos/
 const SHOTS = BEATS.map(([kind, re]) => ({ kind, a: kind === "hook" ? 0 : cueAt(re, NaN) }));
 SHOTS.forEach((x, i) => { if (!Number.isFinite(x.a)) throw new Error("no cue for shot " + x.kind); x.b = i + 1 < SHOTS.length ? SHOTS[i + 1].a : END; });
 const T_MAGNUS = cueAt(/Spin pushes/, 0) + 0.3, T_DRAG = cueAt(/Drag/, 0);
-function placeBall(tt, samples = D.flight) { const s = at(samples, tt); ball.position.copy(V(s.p)); ball.rotation.set(0, -2 * Math.PI * D.setup.spinRps * tt, 0); return s; }
-function look(pos, target, fov = 38) { cam.position.copy(pos); cam.fov = fov; cam.updateProjectionMatrix(); cam.lookAt(target); }
+// omega along +y: counter-clockwise seen from above. The texture turns 40x slower than the model's 10 rev/s (at 30 fps the
+// real rate is 1/3 turn per frame and aliases into a random wobble); the on-screen label says so.
+let NOW = 0; const SPIN_SHOWN = D.setup.spinRps / 40;
+function placeBall(tt, samples = D.flight) { const s = at(samples, tt); ball.position.copy(V(s.p)); ball.rotation.set(0, 2 * Math.PI * SPIN_SHOWN * NOW, 0); return s; }
+function look(pos, target, fov = 38) { cam.position.copy(pos); cam.fov = fov; cam.updateProjectionMatrix(); cam.lookAt(target); cam.updateMatrixWorld(); } // labels project with this frame's camera, not the last one
 
 window.renderAt = (t) => {
+  NOW = t;
   const s = SHOTS.find((x) => t >= x.a && t < x.b) || SHOTS[SHOTS.length - 1]; const k = clamp((t - s.a) / (s.b - s.a));
-  let html = `<div class="vig"></div><div class="brand">GOALLORE LAB</div>`; const chips = ["ILLUSTRATION", "MODEL"];
-  showTube(trail, 0); showTube(ghost, 0); showTube(spiralTube, 0); arrM.visible = arrD.visible = arrV.visible = false; axis.visible = false; keeper.visible = true; halo.visible = true; scene.fog.far = 160; showTube(spiralWide, 0); trailWide.visible = false;
+  let html = `<div class="vig"></div><div class="scrim"></div><div class="scrim low"></div><div class="brand">GOALLORE LAB</div>`; const chips = ["ILLUSTRATION", "MODEL"];
+  showTube(trail, 0); showTube(ghost, 0); showTube(spiralTube, 0); arrM.visible = arrD.visible = arrV.visible = false; axis.visible = false; spinRing.visible = false; kicker.visible = s.kind === "establish"; kicker.pose({}); kicker.position.set(D.setup.ballX + 1.4, 0, 5.5); stadium.visible = true; grass.visible = apron.visible = true; board.visible = false; keeper.visible = true; halo.visible = true; scene.fog.far = 160; showTube(spiralWide, 0); trailWide.visible = false;
   const B = V(D.flight[0].p), G = new THREE.Vector3(0, 1.2, GZ);
   if (s.kind === "hook" || s.kind === "payoff") {
     // behind the ball, low: the ball is already in the air at frame 0 and heading wide, then turns in
@@ -163,25 +257,38 @@ window.renderAt = (t) => {
     chips.length = 1;
   } else if (s.kind === "strike") {
     // close on the ball: outside of the left foot gives sidespin about a near-vertical axis
-    const tt = k < 0.55 ? 0 : lerp(0, 0.09, (k - 0.55) / 0.45); placeBall(tt); ball.rotation.y = -t * 6; axis.visible = true; axis.position.copy(ball.position);
-    halo.visible = false; look(new THREE.Vector3(B.x + 1.3 - k * 0.2, 0.45, B.z + 1.2), ball.position.clone().add(new THREE.Vector3(0, 0.05, 0)), 30);
+    // the swing reaches the ball at u = 0.55 of the first 1.6 s, then the ball leaves; spin shown 40x slower than the model
+    const u = clamp((t - s.a) / 1.6); kickerPose(u); kicker.visible = true; kicker.position.set(KICK_X, 0, KICK_Z);
+    const tt = u < 0.55 ? 0 : Math.min(0.12, (t - s.a - 0.88) * 0.05); placeBall(tt); const slow = D.setup.spinRps / 40;
+    ball.rotation.set(0, u < 0.55 ? 0 : 2 * Math.PI * slow * (t - s.a - 0.88), 0);
+    spinRing.visible = u >= 0.55; spinRing.position.copy(ball.position); spinRing.rotation.y = 2 * Math.PI * slow * (t - s.a);
+    halo.visible = false; const orbit = lerp(0.2, -0.25, ease(k));
+    // low, front-right of the ball: plant foot, swinging left boot and ball in one frame
+    // after contact the camera swings behind the ball and follows it out in slow motion (ball time 20x slower), so the
+    // ring and the turning texture stay in frame
+    const follow = ease(clamp((t - s.a - 0.88) / 0.7)); const BP = ball.position.clone();
+    const camA = new THREE.Vector3(B.x + 3.0 + orbit, 0.75, B.z - 2.4), tgtA = new THREE.Vector3(B.x + 0.2, 0.45, B.z + 0.1);
+    const camB = BP.clone().add(new THREE.Vector3(1.0, 0.75, 1.4)), tgtB = BP.clone().add(new THREE.Vector3(-0.1, 0.05, -0.4));
+    look(camA.lerp(camB, follow), tgtA.lerp(tgtB, follow), lerp(30, 36, follow));
     html += `<div class="head">OUTSIDE OF THE LEFT FOOT</div>`;
-    const m = toScreen(V(D.flight[0].p).add(new THREE.Vector3(0, 0.3, 0))); html += `<div class="read" style="left:${m.x + 60}px;top:${m.y - 40}px">SIDESPIN<small>AXIS ≈ VERTICAL · ${D.setup.spinRps} REV/S (MODEL)</small></div>`;
+    if (u >= 0.55) html += `<div class="read" style="left:60px;top:440px">SIDESPIN · AXIS ≈ VERTICAL<small>${D.setup.spinRps} REV/S IN THE MODEL · SHOWN 40× SLOWER</small></div>`;
   } else if (s.kind === "wide") {
     // chase camera: the real path in cyan, the no-spin path in red (where it was heading)
     const tt = lerp(0, T * 0.7, ease(k)); const p = placeBall(tt); showTube(trail, tt / T); showTube(ghost, ease(clamp(k * 1.4)));
-    look(V(p.p).add(new THREE.Vector3(2.2, 1.4, 5.5)), V(p.p).add(new THREE.Vector3(-0.5, -0.2, -12)), 40);
+    look(V(p.p).add(new THREE.Vector3(1.0, 0.8, 4.2)), V(p.p).add(new THREE.Vector3(-0.6, -0.15, -9)), 42); // ball held inside the narrow portrait frame
     html += `<div class="head">AROUND THE WALL…</div>`;
-    const g = toScreen(V(D.straight[D.straight.length - 1].p)); if (k > 0.35) html += `<div class="read warm" style="left:${Math.min(820, g.x - 60)}px;top:${g.y - 110}px">NO SPIN<small>WIDE BY ${(D.straight[D.straight.length - 1].p[0] - 3.66).toFixed(1)} m</small></div>`;
+    const g = toScreen(V(D.straight[D.straight.length - 1].p)); if (k > 0.35) html += `<div class="read warm" style="left:${Math.max(60, Math.min(760, g.x - 60))}px;top:${Math.max(400, Math.min(1180, g.y - 110))}px">NO SPIN<small>WIDE BY ${(D.straight[D.straight.length - 1].p[0] - 3.66).toFixed(1)} m</small></div>`;
   } else if (s.kind === "keeper") {
     // from behind the goal: the ball bends back inside the right post
     const tt = lerp(T * 0.55, T, ease(k)); placeBall(tt); showTube(trail, tt / T); showTube(ghost, 1);
-    look(new THREE.Vector3(-7.5, 3.4, GZ - 9), new THREE.Vector3(2.2, 1.0, GZ + 7), 40);
+    // slow push-in through the whole shot, so it keeps moving after the ball has crossed the line
+    look(new THREE.Vector3(-7.5 + 2.2 * k, 3.4 - 0.8 * k, GZ - 9 + 2.5 * k), new THREE.Vector3(2.2, 1.0, GZ + 7), 40 - 4 * k);
     html += `<div class="head">…THEN IT BENT IN</div>`;
     const kp = toScreen(new THREE.Vector3(-0.6, 2.2, GZ + 0.4)); html += `<div class="read" style="left:${kp.x - 140}px;top:${kp.y - 120}px">KEEPER<small>DID NOT MOVE (REPORTED)</small></div>`;
   } else if (s.kind === "paper") {
     placeBall(T); showTube(trail, 1); showTube(ghost, 1);
-    look(new THREE.Vector3(1, 52, -17), new THREE.Vector3(1, 0, -17.5), 42);
+    // slow overhead drift so the card shot never holds still
+    look(new THREE.Vector3(1 + 4 * k, 52 - 6 * k, -17 - 3 * k), new THREE.Vector3(1 + 2 * k, 0, -17.5 - 3 * k), 42);
     html += `<div class="card" style="opacity:${clamp(k * 4)}"><div class="k">NEW JOURNAL OF PHYSICS · 2010</div><h3>The spinning ball spiral</h3><p>Dupeux, Le Goff, Quéré &amp; Clanet<br>New J. Phys. 12, 093004</p></div>`;
     chips.length = 0;
   } else if (s.kind === "forces") {
@@ -190,23 +297,28 @@ window.renderAt = (t) => {
     const P = V(smp.p), v = V(smp.v).normalize(); const fm = V(smp.magnus), fd = V(smp.drag);
     // arrow length 0.12 m per newton (forces) and 0.03 m per m/s (velocity), the same scale through the shot
     halo.visible = false; arrV.set(P, v, smp.speed * 0.03); arrM.set(P, fm, fm.length() * 0.12); arrD.set(P, fd, fd.length() * 0.12);
-    arrM.visible = t > T_MAGNUS; arrD.visible = t > T_DRAG; arrV.visible = true;
+    arrM.visible = t > T_MAGNUS; arrD.visible = t > T_DRAG; arrV.visible = true; spinRing.visible = true; spinRing.position.copy(P); spinRing.rotation.y = 2 * Math.PI * SPIN_SHOWN * t;
     look(P.clone().add(new THREE.Vector3(1.6, 2.6, 2.6)), P.clone().add(new THREE.Vector3(-0.3, 0, -0.6)), 34);
     const m = toScreen(P); html += `<div class="head">${t < T_DRAG ? "SPIN PUSHES SIDEWAYS" : "DRAG SLOWS, SPIN STAYS"}</div>`;
+    html += `<div class="read" style="left:60px;top:${H * 0.5}px">SPIN 10 REV/S<small>MODEL · SHOWN 40× SLOWER</small></div>`;
     html += `<div class="read" style="left:60px;top:${H * 0.58}px">SPEED ${smp.speed.toFixed(1)} m/s<small>MODEL · STARTS ${D.flight[0].speed.toFixed(0)} m/s</small></div>`;
     html += `<div class="read" style="left:${W - 400}px;top:${H * 0.58}px">MAGNUS ${(fm.length()).toFixed(2)} N<small>DRAG ${(fd.length()).toFixed(2)} N</small></div>`;
   } else if (s.kind === "spiral") {
     // top-down: the same ball if it kept flying level; the turning radius shrinks as it slows
     const f = ease(clamp(k * 1.1)); showTube(spiralWide, f); trailWide.visible = true;
     const idx = Math.floor(f * (D.spiral.length - 1)); const sp = D.spiral[idx]; ball.position.copy(V(sp.p)); keeper.visible = false;
-    scene.fog.far = 500; look(new THREE.Vector3(-29, 185, -36), new THREE.Vector3(-29, 0, -36.01), 46);
-    html += `<div class="head">SLOWER = TIGHTER</div>`;
+    stadium.visible = false; grass.visible = apron.visible = false; board.visible = true; scene.fog.far = 900;
+    look(new THREE.Vector3(-27, 175, -34.5), new THREE.Vector3(-27, 0, -34.51), 46);
+    html += `<div class="head">SLOWER = TIGHTER</div><div class="sub">MODEL · 10 m GRID · NO GRAVITY, SPIN HELD</div>`;
     html += `<div class="read" style="left:60px;top:${H * 0.62}px">TURNING RADIUS ${sp.radius.toFixed(0)} m<small>MODEL · IF IT KEPT FLYING LEVEL · ${sp.t.toFixed(1)} s</small></div>`;
   }
   const c = cue(t); html += capHtml(c);
   html += chips.length ? `<div class="chip">${chips.join(" · ")}</div>` : "";
   halo.position.copy(ball.position); ui.innerHTML = html; renderer.render(scene, cam);
 };
+// debug probe for staging checks: world positions of the kicker's boots and the ball at time t
+window.__probe = (t) => { window.renderAt(t); const w = (o) => { const v = new THREE.Vector3(); o.getWorldPosition(v); return [v.x, v.y, v.z].map((x) => +x.toFixed(3)); };
+  return { leftAnkle: w(kicker.limbs.L.ankle), rightAnkle: w(kicker.limbs.R.ankle), ball: w(ball) }; };
 window.__ready = true;
 </script>
 </body></html>

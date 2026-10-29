@@ -1,0 +1,208 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  @font-face { font-family: Inter; src: url(/fonts/inter-latin-600-normal.woff2) format("woff2"); font-weight: 600; }
+  @font-face { font-family: Inter; src: url(/fonts/inter-latin-700-normal.woff2) format("woff2"); font-weight: 700; }
+  @font-face { font-family: Inter; src: url(/fonts/inter-latin-800-normal.woff2) format("woff2"); font-weight: 800; }
+  html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #000; font-family: Inter, sans-serif; }
+  canvas { position: absolute; inset: 0; width: 1080px !important; height: 1920px !important; }
+  #ui { position: absolute; inset: 0; pointer-events: none; color: #fff; }
+  .scrim { position: absolute; left: 0; right: 0; top: 0; height: 520px; background: linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,.45) 60%, rgba(0,0,0,0)); }
+  .scrim.low { top: auto; bottom: 0; height: 760px; background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.5) 45%, rgba(0,0,0,.7)); }
+  .brand { position: absolute; left: 64px; top: 120px; font: 800 30px Inter; letter-spacing: .08em; color: #e8f0ff; opacity: .9; }
+  .chip { position: absolute; right: 64px; top: 120px; font: 700 26px Inter; letter-spacing: .12em; color: #ffd36b; background: rgba(0,0,0,.6); padding: 10px 18px; border-radius: 8px; border: 1px solid rgba(255,211,107,.5); }
+  .head { position: absolute; left: 0; right: 0; top: 230px; text-align: center; font: 800 76px/1.05 Inter; letter-spacing: -.01em; text-shadow: 0 6px 30px rgba(0,0,0,.6); padding: 0 70px; }
+  .sub { position: absolute; left: 0; right: 0; top: 330px; text-align: center; font: 600 32px Inter; color: #b9c7da; letter-spacing: .06em; }
+  .cap { position: absolute; left: 90px; right: 90px; bottom: 330px; text-align: center; font: 800 54px/1.18 Inter; text-shadow: 0 4px 18px rgba(0,0,0,.85); }
+  .cap b { color: #ff6b4a; font-weight: 800; }
+  .read { position: absolute; font: 700 30px Inter; color: #fff; background: rgba(0,0,0,.66); padding: 10px 16px; border-radius: 10px; border-left: 6px solid #ff6b4a; white-space: nowrap; }
+  .read.cool { border-left-color: #5fe1ff; }
+  .read small { display: block; font: 600 20px Inter; color: #9fb0c6; letter-spacing: .08em; }
+  .gauge { position: absolute; left: 60px; right: 60px; top: 1040px; padding: 18px 24px; border-radius: 14px; background: rgba(0,0,0,.62); }
+  .card { position: absolute; left: 90px; right: 90px; top: 640px; background: rgba(14,18,26,.92); border: 1px solid #2b3646; border-radius: 16px; padding: 30px 36px; }
+  .card h3 { margin: 0 0 18px; font: 800 38px Inter; }
+  .card .row { display: flex; align-items: center; gap: 18px; font: 600 28px Inter; color: #c9d3e0; margin: 12px 0; }
+  .card .k { font: 700 22px Inter; letter-spacing: .14em; color: #ff6b4a; margin-bottom: 10px; }
+  .dot { width: 22px; height: 22px; border-radius: 50%; flex: none; }
+</style></head>
+<body>
+<div id="ui"></div>
+<script type="importmap">{ "imports": { "three": "/three/build/three.module.js" } }</script>
+<script type="module">
+import * as THREE from "three";
+const D = window.__DATA; // { cues, model: { docked, undocked, rateAtUndock, peak, ratio, tau } }
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+const ease = (x) => { x = clamp(x); return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+const lerp = (a, b, k) => a + (b - a) * k;
+const W = 1080, H = 1920;
+const OPT = Object.fromEntries(new URLSearchParams(location.search));
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(+(OPT.pr || 0.75)); renderer.setSize(W, H); renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.outputColorSpace = THREE.SRGBColorSpace;
+document.body.prepend(renderer.domElement);
+const scene = new THREE.Scene(); scene.background = new THREE.Color(0x000000);
+const cam = new THREE.PerspectiveCamera(36, W / H, 0.05, 40000);
+
+// --- light: hard sunlight, faint Earth bounce -----------------------------------------------------------------------
+const sun = new THREE.DirectionalLight(0xfff6e8, 3.0); sun.position.set(-40, 25, 30); scene.add(sun);
+scene.add(new THREE.HemisphereLight(0x6f9ad6, 0x05070a, 0.35));
+
+// --- stars (fixed seed) and Earth ------------------------------------------------------------------------------------
+{ let r = 7; const rnd = () => (r = (r * 16807) % 2147483647) / 2147483647; const p = [];
+  for (let i = 0; i < 2600; i += 1) { const u = rnd() * 2 - 1, a = rnd() * Math.PI * 2, s = Math.sqrt(1 - u * u); p.push(1800 * s * Math.cos(a), 1800 * u, 1800 * s * Math.sin(a)); }
+  const g = new THREE.BufferGeometry(); g.setAttribute("position", new THREE.Float32BufferAttribute(p, 3));
+  scene.add(new THREE.Points(g, new THREE.PointsMaterial({ color: 0xcfd8ff, size: 1.6, sizeAttenuation: false }))); }
+function earthTexture() { const c = document.createElement("canvas"); c.width = 2048; c.height = 1024; const g = c.getContext("2d");
+  g.fillStyle = "#0d3a6e"; g.fillRect(0, 0, 2048, 1024); let r = 11; const rnd = () => (r = (r * 16807) % 2147483647) / 2147483647;
+  // continents as clustered blobs, clouds as soft white streaks: an illustration, not a map
+  for (let k = 0; k < 9; k += 1) { const cx = rnd() * 2048, cy = 250 + rnd() * 520; for (let i = 0; i < 120; i += 1) { g.fillStyle = ["#3c6b35", "#56743a", "#8a7a4e"][Math.floor(rnd() * 3)];
+      g.beginPath(); g.ellipse(cx + (rnd() - 0.5) * 380, cy + (rnd() - 0.5) * 200, 20 + rnd() * 60, 12 + rnd() * 40, rnd() * 3, 0, 7); g.fill(); } }
+  g.globalAlpha = 0.35; for (let i = 0; i < 1400; i += 1) { g.fillStyle = "#ffffff"; g.beginPath(); g.ellipse(rnd() * 2048, rnd() * 1024, 8 + rnd() * 40, 2 + rnd() * 5, rnd() * 0.6 - 0.3, 0, 7); g.fill(); }
+  // one soft pass over the whole map (per-shape blur filters are far too slow in software canvas)
+  const c2 = document.createElement("canvas"); c2.width = 2048; c2.height = 1024; const g2 = c2.getContext("2d"); g2.filter = "blur(4px)"; g2.drawImage(c, 0, 0); g.globalAlpha = 1; g.drawImage(c2, 0, 0);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t; }
+const EARTH_R = 9000; // scene units are metres near the spacecraft; Earth is a distant backdrop, not to scale
+const earth = new THREE.Mesh(new THREE.SphereGeometry(EARTH_R, 96, 64), new THREE.MeshStandardMaterial({ map: earthTexture(), roughness: 0.9 }));
+earth.position.set(0, -EARTH_R - 1400, -3000); earth.rotation.x = 1.1; scene.add(earth); // pole turned away from the cameras
+const atmo = new THREE.Mesh(new THREE.SphereGeometry(EARTH_R * 1.018, 96, 64), new THREE.MeshBasicMaterial({ color: 0x5aa8ff, transparent: true, opacity: 0.22, side: THREE.BackSide }));
+atmo.position.copy(earth.position); scene.add(atmo);
+
+// --- Gemini (simplified from published dimensions: adapter base 3.05 m, adapter 2.29 m high, re-entry module ~3.35 m
+//     long with a ~2.3 m heat shield; overall ~5.7-5.8 m). The +x axis is the nose direction (roll axis).
+const white = new THREE.MeshStandardMaterial({ color: 0xe8e6e0, roughness: 0.55, metalness: 0.1 });
+// the adapter skin is stiffened by longitudinal stringers; drawn as fine dark lines (simplified) so the roll is readable
+const adapterMat = (() => { const c = document.createElement("canvas"); c.width = 1024; c.height = 64; const g = c.getContext("2d"); g.fillStyle = "#e8e6e0"; g.fillRect(0, 0, 1024, 64);
+  for (let i = 0; i < 72; i += 1) { g.fillStyle = i % 9 === 0 ? "rgba(40,44,52,.55)" : "rgba(60,64,72,.22)"; g.fillRect(i * 1024 / 72, 0, i % 9 === 0 ? 5 : 2, 64); }
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return new THREE.MeshStandardMaterial({ map: t, roughness: 0.55, metalness: 0.1 }); })();
+const black = new THREE.MeshStandardMaterial({ color: 0x1b1d22, roughness: 0.6, metalness: 0.2 });
+const metal = new THREE.MeshStandardMaterial({ color: 0x8c9098, roughness: 0.35, metalness: 0.8 });
+const glass = new THREE.MeshStandardMaterial({ color: 0x223040, roughness: 0.15, metalness: 0.6 });
+const frustum = (r0, r1, len, mat, seg = 48) => { const m = new THREE.Mesh(new THREE.CylinderGeometry(r1, r0, len, seg, 1, false), mat); m.rotation.z = -Math.PI / 2; return m; }; // along +x, r0 at the back
+const gemini = new THREE.Group(); scene.add(gemini);
+const gBody = new THREE.Group(); gemini.add(gBody);   // rolls about +x
+{ let x = 0; const add = (m, len) => { m.position.x = x + len / 2; gBody.add(m); x += len; };
+  add(frustum(1.525, 1.15, 2.29, adapterMat), 2.29);               // adapter: equipment + retrograde sections (white)
+  const shield = frustum(1.15, 1.15, 0.12, metal); add(shield, 0.12); // heat shield ring
+  add(frustum(1.15, 0.5, 1.75, black), 1.75);                 // crew cabin cone
+  add(frustum(0.49, 0.49, 0.5, black), 0.5);                  // RCS section (16 nose thrusters in two rings)
+  add(frustum(0.49, 0.36, 0.95, black), 0.95);                // rendezvous and recovery section
+  const nose = new THREE.Mesh(new THREE.SphereGeometry(0.36, 24, 16, 0, Math.PI * 2, 0, Math.PI / 2), black); nose.rotation.z = -Math.PI / 2; nose.position.x = x; gBody.add(nose);
+  gemini.userData.length = x + 0.1; }
+// two crew windows on the top of the cabin cone
+for (const s of [-1, 1]) { const w = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.04, 0.3), glass); w.position.set(3.25, 0.78, 0.28 * s); w.rotation.z = -0.34; gBody.add(w); }
+// OAMS thrusters on the adapter rim (representative positions); No. 8 is a roll thruster, highlighted when it fires
+const nozzle = (len = 0.22, r = 0.09) => { const m = new THREE.Mesh(new THREE.CylinderGeometry(r * 0.45, r, len, 16, 1, true), metal); m.material = metal; return m; };
+const plumeMat = new THREE.MeshBasicMaterial({ color: 0xffd2a0, transparent: true, opacity: 0.9, toneMapped: false, blending: THREE.AdditiveBlending, depthWrite: false });
+const plume = (len, r) => { const m = new THREE.Mesh(new THREE.ConeGeometry(r, len, 20, 1, true), plumeMat); return m; };
+const roll8 = new THREE.Group(); { const nz = nozzle(); nz.rotation.x = Math.PI / 2; roll8.add(nz); const p = plume(1.4, 0.2); p.rotation.x = -Math.PI / 2; p.position.z = 0.8; p.name = "plume"; roll8.add(p); }
+roll8.position.set(0.35, 1.45, 0.25); gBody.add(roll8); // tangential: pushes along -z at +y, a torque about +x
+for (let i = 0; i < 8; i += 1) { const a = i / 8 * Math.PI * 2 + 0.3; const nz = nozzle(0.16, 0.06); nz.position.set(0.3, 1.47 * Math.cos(a), 1.47 * Math.sin(a)); nz.rotation.x = a; gBody.add(nz); }
+// nose RCS thrusters: two rings of 8 (16 in all, NASA)
+const puffTex = (() => { const c = document.createElement("canvas"); c.width = c.height = 64; const g = c.getContext("2d"); const gr = g.createRadialGradient(32, 32, 1, 32, 32, 31);
+  gr.addColorStop(0, "rgba(255,255,255,1)"); gr.addColorStop(0.35, "rgba(200,230,255,.55)"); gr.addColorStop(1, "rgba(200,230,255,0)"); g.fillStyle = gr; g.fillRect(0, 0, 64, 64); return new THREE.CanvasTexture(c); })();
+const rcsPlumes = []; for (const ring of [0, 1]) for (let i = 0; i < 8; i += 1) { const a = i / 8 * Math.PI * 2 + ring * 0.39; const x = 4.3 + ring * 0.25;
+  const radial = new THREE.Vector3(0, Math.cos(a), Math.sin(a)), tangent = new THREE.Vector3(0, -Math.sin(a), Math.cos(a)).multiplyScalar(ring ? 1 : -1);
+  const nz = nozzle(0.08, 0.04); nz.position.set(x, 0.5 * radial.y, 0.5 * radial.z); nz.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), tangent); gBody.add(nz);
+  const p = new THREE.Sprite(new THREE.SpriteMaterial({ map: puffTex, color: 0xd8f0ff, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, toneMapped: false }));
+  p.scale.set(0.5, 0.5, 1); p.position.set(x, 0.5 * radial.y, 0.5 * radial.z).addScaledVector(tangent, 0.22); gBody.add(p); rcsPlumes.push(p); }
+
+// --- Agena Target Vehicle (cylinder 1.52 m; ~7.9 m with the target docking adapter). Docking cone faces -x, toward Gemini
+const agena = new THREE.Group(); scene.add(agena);
+{ const silver = new THREE.MeshStandardMaterial({ color: 0xc9ccd2, roughness: 0.4, metalness: 0.6 });
+  const body = frustum(0.76, 0.76, 6.1, silver); body.position.x = 1.6 + 3.05; agena.add(body);
+  const tda = frustum(0.85, 0.76, 0.9, white); tda.position.x = 1.15; agena.add(tda);       // target docking adapter
+  const cone = new THREE.Mesh(new THREE.CylinderGeometry(0.85, 0.42, 0.7, 40, 1, true), new THREE.MeshStandardMaterial({ color: 0xd9d4c6, roughness: 0.6, side: THREE.DoubleSide }));
+  cone.rotation.z = Math.PI / 2; cone.position.x = 0.35; agena.add(cone);                   // docking cone, open toward -x
+  const bell = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.55, 0.9, 24, 1, true), metal); bell.rotation.z = -Math.PI / 2; bell.position.x = 8.1; agena.add(bell);
+  agena.userData.length = 8.55; }
+const dockedOffset = () => gemini.userData.length - 0.5;    // Gemini nose seated in the cone
+
+// --- helpers --------------------------------------------------------------------------------------------------------
+const ui = document.getElementById("ui");
+const esc = (s) => String(s).replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+const KEY = new Set(["spinning", "faster", "stuck", "undocking", "stop", "early", "isolate", "thrusters", "thruster"]);
+const capHtml = (c) => c ? `<div class="cap">${c.lines.map((l) => l.split(" ").map((w) => KEY.has(w.toLowerCase().replace(/[^a-z]/g, "")) ? `<b>${esc(w)}</b>` : esc(w)).join(" ")).join("<br>")}</div>` : "";
+const cue = (t) => D.cues.find((c) => t >= c.start && t < c.end + 0.05);
+const cueAt = (re) => { const c = D.cues.find((x) => re.test(x.lines.join(" "))); if (!c) throw new Error("no cue for " + re); return c.start; };
+const END = D.duration || D.cues[D.cues.length - 1].end + 0.6; // the video length (narration mix), so the closing shot lands on the last frame
+const BEATS = [["hook", /./], ["faster", /faster and faster/], ["docked", /docked/], ["stuck", /own thrusters|stuck on/], ["undock", /Undocking/], ["rcs", /re-entry thrusters/],
+  ["early", /end early/], ["lesson", /redesigned|isolate/]];
+const SHOTS = BEATS.map(([kind, re], i) => ({ kind, a: i === 0 ? 0 : cueAt(re) })); SHOTS.forEach((x, i) => { x.b = i + 1 < SHOTS.length ? SHOTS[i + 1].a : END; });
+function look(pos, target, fov = 36, tilt = 0) { cam.up.set(Math.sin(tilt), Math.cos(tilt), 0); cam.position.copy(pos); cam.fov = fov; cam.updateProjectionMatrix(); cam.lookAt(target); cam.updateMatrixWorld(); } // labels project with this frame's camera, not the last one
+const M = D.model; const deg = (x) => x * Math.PI / 180;
+// gauge: roll rate on a 0-300 deg/s bar with the reported peak marked
+const gauge = (rate, label, note) => { const f = clamp(rate / 300); return `<div class="gauge"><div style="font:700 26px Inter;letter-spacing:.12em;color:#9fb0c6">${label}</div>
+  <div style="margin-top:14px;height:34px;border-radius:17px;background:#1a2230;position:relative;overflow:hidden"><div style="position:absolute;left:0;top:0;bottom:0;width:${(f * 100).toFixed(1)}%;background:linear-gradient(90deg,#ffb36b,#ff4a2e)"></div>
+  <div style="position:absolute;left:${(M.peak / 300 * 100).toFixed(1)}%;top:-4px;bottom:-4px;width:4px;background:#fff"></div></div>
+  <div style="display:flex;justify-content:space-between;margin-top:10px;font:800 44px Inter"><span>${rate.toFixed(0)}°/s</span><span style="font:600 22px Inter;color:#9fb0c6;align-self:center">${note}</span></div></div>`; };
+
+window.renderAt = (t) => {
+  const s = SHOTS.find((x) => t >= x.a && t < x.b) || SHOTS[SHOTS.length - 1]; const k = clamp((t - s.a) / (s.b - s.a));
+  let html = `<div class="scrim"></div><div class="scrim low"></div><div class="brand">FAILURE FILE</div>`; let chips = ["ILLUSTRATION"];
+  agena.visible = true; roll8.getObjectByName("plume").visible = false; rcsPlumes.forEach((p) => { p.visible = false; });
+  gemini.position.set(0, 0, 0); gemini.rotation.set(0, 0, 0); agena.position.set(dockedOffset(), 0, 0); agena.rotation.set(0, 0, 0);
+  earth.rotation.z = t * 0.002;
+  const G = gemini.position; const mid = new THREE.Vector3(dockedOffset() * 0.9, 0, 0);
+  if (s.kind === "hook") {
+    // Gemini alone at the reported peak: about 296 deg/s about its long axis
+    agena.visible = false; gBody.rotation.x = deg(M.peak) * t; roll8.getObjectByName("plume").visible = true; chips = ["ILLUSTRATION", "MODEL"];
+    look(new THREE.Vector3(-11 + k * 2, 9.5, 19), new THREE.Vector3(2.6, -2.2, 0), 32, -0.6);
+    html += `<div class="head">GEMINI 8 · 1966</div><div class="sub">IN ORBIT, SPINNING OUT OF CONTROL</div>`;
+    html += `<div class="read" style="left:60px;top:1150px">≈296°/s ROLL<small>REPORTED PEAK · ALMOST ONE TURN A SECOND</small></div>`;
+  } else if (s.kind === "faster") {
+    // rate climbing to the peak (model profile, undocked phase), seen from just behind the adapter
+    agena.visible = false; const dt = t - s.a; gBody.rotation.x = deg(M.rateAtUndock * dt + (M.peak - M.rateAtUndock) * dt * k * 0.5); // integral of a rate ramping up
+    roll8.getObjectByName("plume").visible = true; chips = ["ILLUSTRATION", "MODEL"];
+    look(new THREE.Vector3(-12 + k, 3.0, 10), new THREE.Vector3(2.8, 0.6, 0), 34, -0.5);
+    html += `<div class="head">FASTER AND FASTER</div>`;
+    html += gauge(lerp(M.rateAtUndock, M.peak, ease(k)), "ROLL RATE", "WHITE MARK: 296°/s REPORTED");
+  } else if (s.kind === "docked") {
+    // the docked pair, stable, Earth below; real sizes
+    gBody.rotation.x = 0; const a = lerp(-0.4, 0.25, ease(k));
+    look(new THREE.Vector3(mid.x + 30 * Math.sin(a), 8, 30 * Math.cos(a)), mid, 34, -0.75); // stack runs corner to corner
+    html += `<div class="head">DOCKED</div><div class="sub">16 MARCH 1966 · FIRST DOCKING OF TWO SPACECRAFT</div>`;
+    html += `<div class="read cool" style="left:60px;top:1060px">GEMINI ≈5.8 m<small>ADAPTER BASE 3.05 m</small></div>`;
+    html += `<div class="read cool" style="left:500px;top:1160px">AGENA ≈7.9 m<small>WITH DOCKING ADAPTER · 1.52 m WIDE</small></div>`;
+  } else if (s.kind === "stuck") {
+    // close on the adapter: roll thruster No. 8 keeps firing; the docked pair starts to roll (slowly: more mass to turn)
+    const tt = k * M.docked; const ang = deg(0.5 * M.rateAtUndock / M.docked * tt * tt);
+    gBody.rotation.x = ang; agena.rotation.x = ang; roll8.getObjectByName("plume").visible = true; chips = ["ILLUSTRATION", "MODEL"];
+    look(new THREE.Vector3(1.8 - 0.8 * k, 4.2, 5.2), new THREE.Vector3(0.4, 1.4, 0.9), 40, -0.35); // on the No. 8 side, plume in frame
+    html += `<div class="head">A THRUSTER STUCK ON</div>`;
+    html += `<div class="read" style="left:60px;top:1100px">OAMS ROLL THRUSTER No. 8<small>SHORTED, KEPT FIRING (NASA) · POSITION REPRESENTATIVE</small></div>`;
+  } else if (s.kind === "undock") {
+    // separation: same push, less to turn -> faster
+    const sep = ease(clamp(k * 1.6)) * 6; agena.position.x = dockedOffset() + sep; const rate = lerp(M.rateAtUndock, M.peak, ease(k));
+    gBody.rotation.x = deg(M.rateAtUndock) * (t - s.a) + deg((M.peak - M.rateAtUndock)) * (t - s.a) * ease(k) * 0.5; agena.rotation.x = deg(M.rateAtUndock * 0.4) * (t - s.a);
+    roll8.getObjectByName("plume").visible = true; chips = ["ILLUSTRATION", "MODEL"];
+    look(new THREE.Vector3(dockedOffset() * 0.5 + sep * 0.5, 9, 30 + 3 * k), new THREE.Vector3(dockedOffset() * 0.55 + sep * 0.5, 0, 0), 34, -0.75);
+    html += `<div class="head">UNDOCKED: FASTER</div><div class="sub">SAME PUSH · ${Math.round((1 - 1 / M.ratio) * 100)}% LESS TO TURN (MODEL)</div>`;
+    html += gauge(rate, "ROLL RATE · GEMINI ALONE", "MODEL · PEAK REPORTED");
+  } else if (s.kind === "rcs") {
+    // nose RCS rings fire against the roll; rate falls to zero
+    agena.visible = false; const rate = M.peak * (1 - ease(k)); const ang = deg(M.peak * (t - s.a) - 0.5 * M.peak * (t - s.a) * ease(k));
+    gBody.rotation.x = ang; rcsPlumes.forEach((p, i) => { p.visible = k < 0.9 && (i % 2 === 0); });
+    look(new THREE.Vector3(11 - k, 2.6, 7.5), new THREE.Vector3(3.6, 0.2, 0), 34);
+    html += `<div class="head">THE NOSE THRUSTERS</div><div class="sub">RE-ENTRY CONTROL SYSTEM · OAMS SHUT DOWN</div>`;
+    html += gauge(rate, "ROLL RATE", "≈75% OF RCS FUEL USED (NASA)");
+  } else if (s.kind === "early") {
+    agena.visible = false; gBody.rotation.x = 0; const dist = lerp(12, 22, ease(k));
+    gemini.rotation.z = -0.25;
+    look(new THREE.Vector3(-dist * 0.9, 4 + k * 3, dist * 1.2), new THREE.Vector3(2, -2 * k, 0), 32);
+    html += `<div class="head">MISSION ENDED EARLY</div><div class="sub">RULES REQUIRED A LANDING ONCE THE RCS WAS USED</div>`;
+  } else if (s.kind === "lesson") {
+    agena.visible = false; gBody.rotation.x = deg(45) * (t - s.a); chips = [];
+    // drift, then in the last 0.7 s return to the opening framing so the loop back to frame 0 is continuous
+    const back = ease(clamp((t - (s.b - 0.7)) / 0.7)); const hookPos = new THREE.Vector3(-11, 9.5, 19), hookTgt = new THREE.Vector3(2.6, -2.2, 0);
+    look(new THREE.Vector3(-14 + 6 * k, 5 + 2 * k, 16 - 2 * k).lerp(hookPos, back), new THREE.Vector3(2.4, -3 + k, 0).lerp(hookTgt, back), 32, -0.6 * back);
+    if (back > 0) { gBody.rotation.x = deg(M.peak) * (t - s.b + 0.7) * back; roll8.getObjectByName("plume").visible = back > 0.5; }
+    html += `<div class="head">THE FIX</div>`;
+    html += `<div class="card" style="opacity:${clamp(k * 5) * (1 - clamp((t - (s.b - 0.9)) / 0.4))}"><div class="k">THRUSTER CIRCUITS</div><h3>One fault, one thruster</h3>
+      <div class="row"><span class="dot" style="background:#ff6b4a"></span>1966: a short kept No. 8 firing</div>
+      <div class="row"><span class="dot" style="background:#5fe1ff"></span>After: each thruster can be isolated</div></div>`;
+  }
+  html += capHtml(cue(t)); if (chips.length) html += `<div class="chip">${chips.join(" · ")}</div>`;
+  ui.innerHTML = html; renderer.render(scene, cam);
+};
+window.__ready = true;
+</script>
+</body></html>
