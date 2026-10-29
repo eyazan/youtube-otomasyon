@@ -2985,5 +2985,83 @@
       }
     ],
     "at": "2026-10-29T13:07:00.510Z"
+  },
+  {
+    "videoId": "QLSnrXyCJgw",
+    "channel": "failure-reconstructed",
+    "contentType": "short",
+    "checkpoint": "24h",
+    "diagnoses": [
+      {
+        "code": "LOW_ENGAGEMENT",
+        "confidence": "low",
+        "evidence": "20.41 engagements / 1,000 views",
+        "recommendation": "Contextual comment prompt after the payoff.",
+        "specCode": "LOW_ENGAGEMENT"
+      }
+    ],
+    "at": "2026-10-29T18:33:48.630Z"
+  },
+  {
+    "videoId": "zq07sKTZmCs",
+    "channel": "failure-reconstructed",
+    "contentType": "short",
+    "checkpoint": "7d",
+    "diagnoses": [
+      {
+        "code": "LOW_ENGAGEMENT",
+        "confidence": "low",
+        "evidence": "24.24 engagements / 1,000 views",
+        "recommendation": "Contextual comment prompt after the payoff.",
+        "specCode": "LOW_ENGAGEMENT"
+      }
+    ],
+    "at": "2026-10-29T18:33:48.630Z"
+  },
+  {
+    "videoId": "6Xsisq9PrHo",
+    "channel": "failure-reconstructed",
+    "contentType": "short",
+    "checkpoint": "14d",
+    "diagnoses": [
+      {
+        "code": "INSUFFICIENT_DATA",
+        "confidence": "high",
+        "evidence": "39 views < 100",
+        "recommendation": "No intervention; wait for the next checkpoint.",
+        "specCode": "INSUFFICIENT_DATA"
+      }
+    ],
+    "at": "2026-10-29T18:33:48.630Z"
+  },
+  {
+    "videoId": "uqoAjXMbbls",
+    "channel": "failure-reconstructed",
+    "contentType": "short",
+    "checkpoint": "30d",
+    "diagnoses": [
+      {
+        "code": "RETENTION_FAILURE",
+        "confidence": "medium",
+        "evidence": "average viewed 53.949999999999996% < 65%",
+        "recommendation": "Cut setup sentences; move the mechanism earlier.",
+        "specCode": "RETENTION_WEAK"
+      },
+      {
+        "code": "LOW_SUBSCRIBER_CONVERSION",
+        "confidence": "medium",
+        "evidence": "1.55 subs / 1,000 views",
+        "recommendation": "Series-shaped payoff; link a related long-form episode.",
+        "specCode": "SUBSCRIBER_CONVERSION_WEAK"
+      },
+      {
+        "code": "STRONG_DISCOVERY",
+        "confidence": "medium",
+        "evidence": "1287 views vs channel Shorts median 446",
+        "recommendation": "Study the opening and topic; replicate one variable at a time.",
+        "specCode": "STRONG_DISCOVERY"
+      }
+    ],
+    "at": "2026-10-29T18:33:48.630Z"
   }
 ]

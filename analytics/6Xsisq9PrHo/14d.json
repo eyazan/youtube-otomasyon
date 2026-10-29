@@ -1,0 +1,152 @@
+{
+  "videoId": "6Xsisq9PrHo",
+  "baslik": "How Daniel J. Morrell Really Failed",
+  "yayin": "2026-10-15",
+  "yasGun": 14,
+  "sureSn": 25,
+  "format": "short",
+  "gizlilik": "public",
+  "metrikler": {
+    "views": {
+      "deger": 39,
+      "durum": "ok",
+      "kaynak": "Data API"
+    },
+    "likes": {
+      "deger": 1,
+      "durum": "ok",
+      "kaynak": "Data API"
+    },
+    "comments": {
+      "deger": 1,
+      "durum": "ok",
+      "kaynak": "Data API"
+    },
+    "impressions": {
+      "deger": null,
+      "durum": "unavailable",
+      "neden": "not exposed by YouTube APIs — export from Studio into studio-manual.json"
+    },
+    "ctr": {
+      "deger": null,
+      "durum": "unavailable",
+      "neden": "not exposed by YouTube APIs — export from Studio into studio-manual.json"
+    },
+    "returningViewers": {
+      "deger": null,
+      "durum": "unavailable",
+      "neden": "not exposed per video by the public API"
+    },
+    "stayedToWatch": {
+      "deger": null,
+      "durum": "unavailable",
+      "neden": "Shorts 'Viewed vs swiped away' is Studio only — import with scripts/studio-import.js"
+    },
+    "watchTimeMinutes": {
+      "deger": 2,
+      "durum": "ok",
+      "kaynak": "Analytics API"
+    },
+    "averageViewDuration": {
+      "deger": 10,
+      "durum": "ok",
+      "kaynak": "Analytics API"
+    },
+    "averageViewPercentage": {
+      "deger": 43.64,
+      "durum": "ok",
+      "kaynak": "Analytics API"
+    },
+    "subscribersGained": {
+      "deger": 0,
+      "durum": "ok",
+      "kaynak": "Analytics API"
+    },
+    "subscribersLost": {
+      "deger": 0,
+      "durum": "ok",
+      "kaynak": "Analytics API"
+    },
+    "netSubscribers": {
+      "deger": 0,
+      "durum": "ok",
+      "kaynak": "derived from Analytics API gained − lost"
+    },
+    "shares": {
+      "deger": 0,
+      "durum": "ok",
+      "kaynak": "Analytics API"
+    },
+    "engagedViews": {
+      "deger": 9,
+      "durum": "ok",
+      "kaynak": "Analytics API"
+    },
+    "first30sRetention": {
+      "deger": null,
+      "durum": "unavailable",
+      "neden": "analytics unavailable"
+    }
+  },
+  "turetilmis": {
+    "subsPer1000": {
+      "deger": 0,
+      "durum": "ok",
+      "kaynak": "derived"
+    },
+    "netSubsPer1000": {
+      "deger": 0,
+      "durum": "ok",
+      "kaynak": "derived"
+    },
+    "likeRate": {
+      "deger": 2.6,
+      "durum": "ok",
+      "kaynak": "derived (% of views)"
+    },
+    "commentRate": {
+      "deger": 2.56,
+      "durum": "ok",
+      "kaynak": "derived (% of views)"
+    }
+  },
+  "trafik": [
+    {
+      "kaynak": "YT_SEARCH",
+      "ad": "Search",
+      "views": 32,
+      "oran": 0.9411764705882353
+    },
+    {
+      "kaynak": "SHORTS",
+      "ad": "Shorts feed",
+      "views": 2,
+      "oran": 0.058823529411764705
+    },
+    {
+      "kaynak": "NO_LINK_OTHER",
+      "ad": "Direct/unknown",
+      "views": 0,
+      "oran": 0
+    }
+  ],
+  "tutma": [],
+  "analitikDurumu": "ok",
+  "toplandi": "2026-10-29T18:33:47.765Z",
+  "checkpoint": "14d",
+  "teshis": [
+    {
+      "kod": "INSUFFICIENT_DATA",
+      "guven": "high",
+      "aciklama": "39 views after 14 days — too early/small for rate-based conclusions.",
+      "oneri": "Do not change packaging yet unless something is objectively broken (missing sources, typo). Re-check at 7 days."
+    },
+    {
+      "kod": "WEAK_TOPIC_PACKAGING",
+      "guven": "low",
+      "aciklama": "Current title scores 46.9/100 in the title engine; best editorial option scores 46.9.",
+      "oneri": "Heuristic only — test the stronger title as a logged experiment rather than switching silently."
+    }
+  ],
+  "retentionDrop": null
+}

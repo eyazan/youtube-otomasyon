@@ -10,14 +10,15 @@ https://youtu.be/uqoAjXMbbls
 | 3d | 2026-10-02 | 1262 | 40 | 2 | 54.35 | 2 | Shorts feed 93%, Search 6% |
 | 7d | 2026-10-06 | 1279 | 40 | 2 | 53.81 | 2 | Shorts feed 89%, Search 9% |
 | 14d | 2026-10-13 | 1286 | 40 | 2 | 53.949999999999996 | 2 | Shorts feed 88%, Search 10% |
+| 30d | 2026-10-29 | 1287 | 40 | 2 | 53.949999999999996 | 2 | Shorts feed 88%, Search 10% |
 
-## Diagnosis at 14d
+## Diagnosis at 30d
 
-- **WEAK_TOPIC_PACKAGING** (low) — Current title scores 48/100 in the title engine; best editorial option scores 54.5.
+- **OUTPERFORMER** (medium) — 1287 views vs channel median 441 (n=32 videos).
 
 ## Suggested interventions
 
-- WEAK PACKAGING (heuristic) → candidate for a logged title experiment once data exists.
+- OUTPERFORMER → keep as is; reuse its subject/hook shape in the next episode.
 
 ## First major observed retention drop
 
@@ -26,4 +27,4 @@ https://youtu.be/uqoAjXMbbls
 - Visual type: REAL ARCHIVAL/LICENCED FOOTAGE
 - This is an observed alignment, not proof that the sentence or visual caused the drop.
 
-Views gained between 7d and 14d: 7.
+Views gained between 14d and 30d: 1.
