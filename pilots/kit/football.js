@@ -127,14 +127,17 @@ export const MOTION = {
 };
 
 // ---- ball ---------------------------------------------------------------------------------------------------------
-function ballTexture() { const c = document.createElement("canvas"); c.width = 1024; c.height = 512; const g = c.getContext("2d");
+// plain: a generic ball with seam lines only, for topics whose ball design is not the classic 32 panels
+function ballTexture(plain = false) { const c = document.createElement("canvas"); c.width = 1024; c.height = 512; const g = c.getContext("2d");
   g.fillStyle = "#f2f2ef"; g.fillRect(0, 0, 1024, 512); g.fillStyle = "#171b23";
+  if (plain) { g.strokeStyle = "rgba(40,44,52,0.55)"; g.lineWidth = 4; for (let i = 0; i < 4; i += 1) { g.beginPath(); for (let x = 0; x <= 1024; x += 16) g.lineTo(x, 256 + 150 * Math.sin((x / 1024) * 2 * Math.PI * 2 + i * Math.PI / 2)); g.stroke(); }
+    const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t; }
   for (const [y, n, off] of [[70, 5, 0], [190, 7, 0.5], [322, 7, 0], [442, 5, 0.5]]) { const lat = (0.5 - y / 512) * Math.PI; const sx = 1 / Math.max(0.35, Math.cos(lat));
     for (let i = 0; i < n; i += 1) { const x = ((i + off) / n) * 1024; g.beginPath(); for (let k = 0; k < 5; k += 1) { const a = k * 2 * Math.PI / 5 + i; g.lineTo(x + Math.cos(a) * 30 * sx, y + Math.sin(a) * 30); } g.fill(); } }
   g.strokeStyle = "rgba(40,44,52,0.35)"; g.lineWidth = 2; for (let x = 0; x < 1024; x += 73) { g.beginPath(); g.moveTo(x, 0); g.lineTo(x + 40, 512); g.stroke(); }
   const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t; }
-export function buildBall(scene) {
-  const ball = new THREE.Mesh(new THREE.SphereGeometry(0.11, 48, 32), new THREE.MeshStandardMaterial({ map: ballTexture(), roughness: 0.45 })); ball.castShadow = true; scene.add(ball);
+export function buildBall(scene, { plain = false } = {}) {
+  const ball = new THREE.Mesh(new THREE.SphereGeometry(0.11, 48, 32), new THREE.MeshStandardMaterial({ map: ballTexture(plain), roughness: 0.45 })); ball.castShadow = true; scene.add(ball);
   // spin ring: 300 degree arc + arrowhead, counter-clockwise from above (the sense of omega = +y); flip() for the other sense
   const ring = new THREE.Group(); const m = new THREE.MeshBasicMaterial({ color: 0xffd36b });
   const arc = new THREE.Mesh(new THREE.TorusGeometry(0.2, 0.02, 10, 72, Math.PI * 5 / 3), m); arc.rotation.x = -Math.PI / 2; ring.add(arc);

@@ -60,19 +60,25 @@ jobs:
           set -o pipefail
           /usr/bin/time -v -o "$OUT/time-gll025-current.txt" node scripts/bto-studio/studio.js --channel goal-lore-lab --topic GLL-025 --shadow --shadow-dir "$RUNNER_TEMP/gll025" --regenerate --quality final --voice edge --workers 2 2>&1 | tee "$OUT/log-gll025-current.txt" | tail -12
           /usr/bin/time -v -o "$OUT/time-ariane-current.txt" node scripts/bto-studio/studio.js --channel failure-reconstructed --topic ariane-5-flight-501 --shadow --shadow-dir "$RUNNER_TEMP/ariane" --regenerate --quality final --voice edge --workers 2 2>&1 | tee "$OUT/log-ariane-current.txt" | tail -12
+          # four more GLL topics the planner now covers (law distance, back-pass rule, knuckle ball, a second free kick)
+          for id in GLL-026 GLL-043 GLL-052 GLL-061; do
+            node scripts/bto-studio/studio.js --channel goal-lore-lab --topic $id --shadow --shadow-dir "$RUNNER_TEMP/$id" --regenerate --quality final --voice edge --workers 2 > "$OUT/log-$id-current.txt" 2>&1 || echo "$id current engine failed"; tail -3 "$OUT/log-$id-current.txt"; done
 
       # v2: one driver, no topic code. The planner reads each topic's narration and facts, picks a mechanism template and
       # writes plan.json (or refuses with CREATIVE_REVIEW_REQUIRED); the kit renders the plan over the narration above.
       - name: Kit v2 (plan-driven), four topics + QA
         run: |
           set -o pipefail
-          node -e "const t=require('./channels/goal-lore-lab/topics/topic-universe.json');const a=Array.isArray(t)?t:(t.topics||t);require('fs').writeFileSync(process.env.RUNNER_TEMP+'/GLL-025.json',JSON.stringify(a.find(x=>x.id==='GLL-025')))"
+          node -e "const t=require('./channels/goal-lore-lab/topics/topic-universe.json');const a=Array.isArray(t)?t:(t.topics||t);for(const id of ['GLL-025','GLL-026','GLL-043','GLL-052','GLL-061'])require('fs').writeFileSync(process.env.RUNNER_TEMP+'/'+id+'.json',JSON.stringify(a.find(x=>x.id===id)))"
           K=pilots/kit/render-plan.js; G=channels/goal-lore-lab/premium/pilots/GLL-P01
           run() { /usr/bin/time -v -o "$OUT/time-$1-kit.txt" node $K --name "$1" --out "$OUT/kit/$1" --workers 2 --topic "$2" --audio-from "$3" 2>&1 | tee "$OUT/log-$1-kit.txt" | grep -vE '^PASS' || true; }
           run gll-p01 "$G/topic.json" "$G/out"
           run fr-gemini8 icerik/konular/gemini-8-1966.json "$RUNNER_TEMP/fr/out"
           run gll-025 "$RUNNER_TEMP/GLL-025.json" "$RUNNER_TEMP/gll025/out"
           run fr-ariane501 icerik/konular/ariane-5-flight-501.json "$RUNNER_TEMP/ariane/out"
+          for id in GLL-026 GLL-043 GLL-052 GLL-061; do run "$id" "$RUNNER_TEMP/$id.json" "$RUNNER_TEMP/$id/out"; done
+          # coverage: plan every researched GLL topic (planning only, no render): PLANNED or CREATIVE_REVIEW_REQUIRED with reasons
+          node pilots/kit/coverage.js | tee "$OUT/coverage.md"
 
       - name: Three.js pilot v1 (hand-written), GLL-P01 (same narration and captions, 2 workers) + QA
         run: |
@@ -103,6 +109,7 @@ jobs:
           sbs "$F/video-final.mp4" "$OUT/kit/fr-gemini8/fr-gemini8.mp4" "$OUT/compare/fr-gemini8_current-vs-kit.mp4"
           sbs "$RUNNER_TEMP/gll025/out/video-final.mp4" "$OUT/kit/gll-025/gll-025.mp4" "$OUT/compare/gll-025_current-vs-kit.mp4"
           sbs "$RUNNER_TEMP/ariane/out/video-final.mp4" "$OUT/kit/fr-ariane501/fr-ariane501.mp4" "$OUT/compare/fr-ariane501_current-vs-kit.mp4"
+          for id in GLL-026 GLL-043 GLL-052 GLL-061; do sbs "$RUNNER_TEMP/$id/out/video-final.mp4" "$OUT/kit/$id/$id.mp4" "$OUT/compare/${id}_current-vs-kit.mp4"; done
           sbs pilots/gll-magnus-3d/out/gll-p01-magnus-3d.mp4 "$OUT/kit/gll-p01/gll-p01.mp4" "$OUT/compare/gll-p01_v1-vs-kit.mp4"
           sbs pilots/fr-gemini8-3d/out/fr-gemini8-3d.mp4 "$OUT/kit/fr-gemini8/fr-gemini8.mp4" "$OUT/compare/fr-gemini8_v1-vs-kit.mp4"
           for t in gll025:gll-025 ariane:fr-ariane501; do src="$RUNNER_TEMP/${t%%:*}/out"; dest="$OUT/${t#*:}/current"; mkdir -p "$dest"
@@ -112,11 +119,12 @@ jobs:
           cp pilots/*/CREATIVE-REVIEW.md "$OUT/" 2>/dev/null || true
           {
             echo "| run | wall (time -v) | max RSS, largest single process | user+sys CPU (incl. children) | frames render |"; echo "|---|---|---|---|---|"
-            for r in gll-current gll-threejs gll-p01-kit fr-current fr-threejs fr-gemini8-kit gll025-current gll-025-kit ariane-current fr-ariane501-kit; do t="$OUT/time-$r.txt"; [ -e "$t" ] || continue
+            for r in gll-current gll-threejs gll-p01-kit fr-current fr-threejs fr-gemini8-kit gll025-current gll-025-kit ariane-current fr-ariane501-kit GLL-026-kit GLL-043-kit GLL-052-kit GLL-061-kit; do t="$OUT/time-$r.txt"; [ -e "$t" ] || continue
               wall=$(sed -n 's/.*Elapsed (wall clock) time.*: //p' "$t"); rss=$(sed -n 's/.*Maximum resident set size (kbytes): //p' "$t")
               cpu=$(awk -F': ' '/User time|System time/{s+=$2} END{printf "%.0f s", s}' "$t")
               fr=$(grep -hE '^render:|"frameWallSeconds"' "$OUT/log-$r.txt" 2>/dev/null | head -1 | tr -d ',')
               echo "| $r | $wall | $((rss / 1024)) MB | $cpu | $fr |"; done
+            echo; [ -e "$OUT/coverage.md" ] && cat "$OUT/coverage.md"
             echo; for l in "$OUT"/log-*-kit.txt; do [ -e "$l" ] && echo "**$(basename "$l")**: $(grep -E '^(plan|render|qa):' "$l" | tr '\n' ' ')" && grep -E '^(FAIL|WARN|- )' "$l" | sed 's/^/  - /'; done
             echo; for q in "$OUT"/qa-*-threejs.txt; do [ -e "$q" ] && { echo "**$(basename "$q")**: $(tail -1 "$q")"; grep -E '^(FAIL|WARN)' "$q" | sed 's/^/- /'; }; done
             for l in "$OUT"/log-*-current.txt; do echo "**$(basename "$l")**: $(grep -E '^qa:|^narration:' "$l" | tr '\n' ' ')"; done

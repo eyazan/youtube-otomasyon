@@ -5,12 +5,12 @@
   "keywords": ["destroyed", "exploded", "number", "sixteen", "faster", "overflowed", "backup", "same", "retested"],
   "beats": [
     { "text": "destroyed itself|after launch", "first": true, "shot": "launch-ascent", "params": { "head": "{event.name} · {event.year}", "sub": "MAIDEN FLIGHT", "t0": 30, "timeScale": 1.2, "clock": "SECONDS AFTER LIFT-OFF", "clockFrom": 30, "clockTo": 37 } },
-    { "text": "veered|breaking up|exploded", "shot": "veer-breakup", "params": { "head": "VEERED, BROKE UP", "sub": "NOZZLES TO THEIR LIMITS AT 37–39 s (ESA)", "t0": "{model.failureT}", "maxPitch": 60,
+    { "text": "veered|breaking up|exploded", "shot": "veer-breakup", "params": { "head": "VEERED, BROKE UP", "sub": "NOZZLES TO THEIR LIMITS AT 37–39 s (ESA)", "t0": "{model.failureT}", "maxPitch": 25,
       "labels": [ { "x": 60, "y": 1150, "title": "ANGLE OF ATTACK > 20°", "small": "INQUIRY BOARD · SEQUENCE REPRESENTATIVE", "src": "{fact:angle of attack}" } ] } },
     { "text": "one number", "shot": "data-overflow", "params": { "head": "ONE NUMBER", "k": "GUIDANCE SOFTWARE", "bits": 16, "title": "A 16-bit register", "overflowTitle": "The value no longer fits", "note": "Horizontal velocity", "overflowNote": "Conversion fails" } },
     { "text": "sixteen bits|squeezed", "shot": "data-overflow", "params": { "head": "64 BITS INTO 16", "k": "REUSED FROM ARIANE 4", "bits": 16, "title": "Room for 16 bits", "overflowTitle": "Too big for 16 bits", "note": "Ariane 4: it fitted", "overflowNote": "Ariane 5: it did not" } },
     { "text": "flew faster", "shot": "launch-ascent", "params": { "head": "A FASTER ROCKET", "sub": "BIGGER HORIZONTAL VELOCITY THAN ARIANE 4", "t0": 34, "timeScale": 0.8, "clock": "SECONDS AFTER LIFT-OFF", "clockFrom": 34, "clockTo": 37 } },
-    { "text": "overflowed|shut down", "shot": "fault-circuit", "params": { "head": "BOTH COMPUTERS STOP", "mode": "cascade", "chips": [], "k": "INERTIAL REFERENCE SYSTEMS", "count": 2, "faulty": 2, "before": "Active unit: overflow", "after": "Backup: same failure", "beforeNote": "Same code in both", "afterNote": "No guidance left" } },
+    { "text": "overflowed|shut down", "shot": "fault-circuit", "params": { "head": "BOTH COMPUTERS STOP", "mode": "cascade", "chips": [], "k": "INERTIAL REFERENCE SYSTEMS", "count": 2, "faulty": 2, "before": "One unit: overflow", "after": "Both units down", "beforeNote": "Same code in both", "afterNote": "Almost simultaneously (E2)" } },
     { "text": "backup", "shot": "fault-circuit", "params": { "head": "NO REAL BACKUP", "mode": "cascade", "chips": [], "k": "SAME SOFTWARE TWICE", "count": 2, "faulty": 1, "before": "Two units", "after": "Both down", "beforeNote": "Identical software", "afterNote": "Common-cause failure" } },
     { "text": "retested|real flight", "shot": "launch-ascent", "params": { "head": "THE LESSON", "sub": "REUSED CODE RETESTED AGAINST THE NEW FLIGHT", "t0": 20, "timeScale": 1.0, "chips": [] } }
   ],

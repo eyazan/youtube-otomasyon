@@ -1,0 +1,19 @@
+{
+ "id": "knuckle-ball", "world": "football", "brand": "GOALLORE LAB", "accent": "#5fe1ff", "accent2": "#8a5a00",
+ "_doc": "A ball that flies with little spin and wobbles (knuckle effect), compared with a steady path. The side force is an ILLUSTRATIVE model: shape shown, size not measured.",
+ "detect": { "all": ["ball"], "any": ["knuckle"] },
+ "chips": ["ILLUSTRATION", "MODEL"], "loop": true,
+ "keywords": ["ball", "knuckle", "knuckle-ball", "surface", "flight", "unpredictable", "panels"],
+ "beats": [
+  { "role": "HOOK", "shot": "ball-close-hook", "headIf": "^$", "params": { "head": "" } },
+  { "role": "CONTEXT", "shot": "scoreboard", "params": { "card": { "kind": "paper", "k": "{thisLine.year?}", "h": "{thisLine.anchor?}", "p": "{thisLine.source}" } } },
+  { "role": "SETUP", "shot": "scoreboard", "params": { "card": { "kind": "paper", "k": "{thisLine.year?}", "h": "{thisLine.anchor?}", "p": "{thisLine.source}" } } },
+  { "role": "BUILD", "shot": "scoreboard", "params": { "card": { "kind": "paper", "k": "{thisLine.year?}", "h": "{thisLine.anchor?}", "p": "{thisLine.source}" } } },
+  { "role": "EXPLANATION", "shot": "compare-paths", "headIf": "knuckle", "params": { "head": "A KNUCKLE-BALL EFFECT", "ghost": "straight", "view": "behind",
+    "labels": [ { "x": 60, "y": 1110, "title": "LITTLE SPIN: SIDE FORCES COME AND GO", "small": "ILLUSTRATIVE MODEL · NOT TO SCALE", "src": "{fact:knuckle},MODEL" },
+                { "x": 60, "y": 1250, "title": "STEADY FLIGHT", "small": "MODEL · FOR COMPARISON", "src": "MODEL", "tone": "warm" } ] } },
+  { "role": "PAYOFF", "shot": "payoff-loop", "headIf": "surface", "params": { "head": "SURFACE CHANGES FLIGHT" } }
+ ],
+ "model": { "type": "football-flight", "knuckle": { "amp": 0.3, "freq": 1.5 }, "explainer": true, "keeperOptional": true, "distance": 25,
+   "shot": { "speed": 28, "aim": { "x": 0.8, "y": 1.6 }, "pitchGuess": 0.08 } }
+}

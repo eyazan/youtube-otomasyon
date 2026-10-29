@@ -55,20 +55,25 @@ birleştirilir), iki ayrı tarayıcıda byte düzeyinde aynı kareler, en uzun d
 
 ## Kapsam ve DAILY READY kararı
 
-Kapsam, planlayıcının konu deposu üzerinde çalıştırılmasıyla ölçüldü (yalnızca planlama, render yok):
+Kapsam `node pilots/kit/coverage.js` ile ölçülür (yalnızca planlama, render yok; CI her koşuda `coverage.md` üretir).
 
 | Kanal | Konu | Sonuç |
 |---|---|---|
 | GLL | GLL-P01 Roberto Carlos (pilot) | PLANNED, magnus-free-kick |
 | GLL | GLL-025 Panenka | PLANNED, penalty-chip (+1 varsayım: vuruş ayağı) |
-| GLL | GLL-026 | RED: serbest vuruş mesafesi kanıtta yok |
-| GLL | GLL-021, 028, 031, 037, 043, 052, 061 | RED: mekanizma şablonu yok (yeni sınıf) |
-| FR | Gemini 8 | PLANNED, attitude-torque |
-| FR | Ariane 5 uçuş 501 | PLANNED, guidance-data-failure |
-| FR | diğer vaka dosyaları | RED: `pilots/research/FR-<konu>.json` kanıt dosyası yok |
+| GLL | GLL-026 Roberto Carlos (ikinci araştırma) | PLANNED, magnus-free-kick (+3 varsayım: ayak, vuruş yüzeyi, kaleci) |
+| GLL | GLL-043 Jabulani | PLANNED, knuckle-ball (yan kuvvet ILLUSTRATIVE; top desensiz çizilir) |
+| GLL | GLL-052 Penaltı neden 12 yarda | PLANNED, law-distance |
+| GLL | GLL-061 Geri pas kuralı | PLANNED, back-pass-rule |
+| GLL | GLL-021 (çalım), 031 (takım golü) | RED: oyuncu konumları kanıtta yok |
+| GLL | GLL-028 (kafa golü), 037 (Banks kurtarışı) | RED: orta / kurtarış yönü kanıtta yok |
+| FR | Gemini 8, Ariane 5 | PLANNED (`pilots/research/FR-<konu>.json` kanıt dosyası olan konular) |
+| FR | diğer 386 vaka dosyası | RED: yapılandırılmış kanıt dosyası yok |
 
-**Karar: DAILY READY değil.** İki yeni konu (GLL-025, Ariane 5) elle animasyon yazılmadan render edildi; bu, mevcut dört
-mekanizma sınıfı için yeniden kullanılabilirliği gösterir. Ancak GLL'deki dokuz araştırılmış konudan yalnızca biri bir
-şablona düşüyor. Her yeni mekanizma sınıfı (çalım, kafa vuruşu, hakem kararı, köprü çökmesi vb.) yeni bir şablon, çoğu
-zaman da yeni çekim türleri ister. FR'de her konu için yapılandırılmış bir kanıt dosyası (olgu kimlikleri, araç ölçüleri)
-gerekir. Günlük üretim için gereken, her gün yeni kod yazmadan konu bulabilmektir; bugünkü kapsam bunu sağlamıyor.
+Güvenlik kuralları: şablon başlığı satır onu söylemiyorsa kullanılmaz (`headIf`), olay hakkında üçten fazla kanıtsız
+ayrıntı gerekiyorsa plan reddedilir, anlatım tekrarı yerine olgu kartı satırın adlarını/yılını ve kaynağını gösterir,
+kural ve top anlatımlarında (explainer) ayak/kaleci gibi sahneleme ayrıntıları `plan.staging` içine yazılır.
+
+**Karar: DAILY READY değil.** GLL'de 9 araştırılmış konunun 5'i elle animasyon yazılmadan plan alıyor (önce 1/9). Kalan
+4 konu bilinçli olarak reddediliyor; bunlar için ya konum/yön içeren kanıt ya da insan kararı gerekir. FR'de 3D kit,
+her konu için yapılandırılmış kanıt dosyası olmadan çalışmaz; FR ve IB günlük üretimi mevcut motorla sürüyor.

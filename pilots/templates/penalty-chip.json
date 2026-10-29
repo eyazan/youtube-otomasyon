@@ -1,19 +1,177 @@
 {
-  "id": "penalty-chip", "world": "football", "brand": "GOALLORE LAB", "accent": "#5fe1ff", "accent2": "#8a5a00",
-  "detect": { "all": ["penalt"], "any": ["chip", "dived", "middle of the net"] },
-  "chips": ["ILLUSTRATION", "MODEL"], "loop": true,
-  "keywords": ["penalty", "penalties", "final", "bar", "dived", "chipped", "gently", "middle", "confident"],
-  "beats": [
-    { "role": "HOOK", "shot": "ball-close-hook", "params": { "head": "THE KICK THAT DECIDED IT", "from": 0.25 } },
-    { "role": "CONTEXT", "shot": "establish", "params": { "head": "{line.place}", "sub": "{line.teams}", "chips": ["ILLUSTRATION"], "runFrom": [1.2, 0, 6.5] } },
-    { "role": "SETUP", "shot": "scoreboard", "params": { "head": "PENALTIES", "chips": ["ILLUSTRATION"], "card": { "kind": "dark", "k": "{score.k}", "h": "{score.h}" } } },
-    { "role": "BUILD", "shot": "alt-kick", "params": { "head": "OVER THE BAR", "path": "alt", "labels": [ { "x": 60, "y": 1150, "title": "{alt.title}", "small": "{alt.small}", "src": "{alt.src}", "tone": "warm" } ] } },
-    { "role": "TWIST", "shot": "penalty-run", "params": { "head": "THE KEEPER COMMITS", "labels": [ { "x": 60, "y": 1150, "title": "KEEPER DIVES {setup.keeperDirWord}", "small": "{setup.keeperPhrase}", "src": "{setup.keeperSrc}" } ] } },
-    { "role": "MECHANISM", "shot": "compare-paths", "params": { "head": "A CHIP, DOWN THE MIDDLE", "ghost": "drive",
-      "labels": [ { "x": 60, "y": 1110, "title": "CHIP · {model.chipSpeed} m/s", "small": "MODEL · PEAK {model.chipPeak} m · {model.chipTime} s", "src": "MODEL" },
-                  { "x": 60, "y": 1230, "title": "DRIVEN KICK · {model.driveSpeed} m/s", "small": "MODEL · {model.driveTime} s TO THE LINE", "src": "MODEL", "tone": "warm" } ] } },
-    { "role": "PAYOFF", "shot": "payoff-loop", "params": { "head": "NERVE OVER POWER" } }
+ "id": "penalty-chip",
+ "world": "football",
+ "brand": "GOALLORE LAB",
+ "accent": "#5fe1ff",
+ "accent2": "#8a5a00",
+ "detect": {
+  "all": [
+   "penalt"
   ],
-  "model": { "type": "football-flight", "distanceLaw": 11, "chip": { "speed": 13, "aim": { "x": 0, "y": 1.3 }, "pitchGuess": 0.75 }, "drive": { "speed": 26, "aim": { "x": -2.6, "y": 0.6 }, "pitchGuess": 0.05, "yawGuess": -0.2 },
-    "overBar": { "speed": 24, "aim": { "x": -0.8, "y": 3.4 }, "pitchGuess": 0.2 }, "keeperX": 0, "keeperDiveAt": -0.35 }
+  "any": [
+   "chip",
+   "dived",
+   "middle of the net"
+  ]
+ },
+ "chips": [
+  "ILLUSTRATION",
+  "MODEL"
+ ],
+ "loop": true,
+ "keywords": [
+  "penalty",
+  "penalties",
+  "final",
+  "bar",
+  "dived",
+  "chipped",
+  "gently",
+  "middle",
+  "confident"
+ ],
+ "beats": [
+  {
+   "role": "HOOK",
+   "shot": "ball-close-hook",
+   "params": {
+    "head": "THE KICK THAT DECIDED IT",
+    "from": 0.25
+   },
+   "headIf": "decided"
+  },
+  {
+   "role": "CONTEXT",
+   "shot": "establish",
+   "params": {
+    "head": "{line.place}",
+    "sub": "{line.teams}",
+    "chips": [
+     "ILLUSTRATION"
+    ],
+    "runFrom": [
+     1.2,
+     0,
+     6.5
+    ]
+   }
+  },
+  {
+   "role": "SETUP",
+   "shot": "scoreboard",
+   "params": {
+    "head": "PENALTIES",
+    "chips": [
+     "ILLUSTRATION"
+    ],
+    "card": {
+     "kind": "dark",
+     "k": "{score.k}",
+     "h": "{score.h}"
+    }
+   },
+   "headIf": "penalt"
+  },
+  {
+   "role": "BUILD",
+   "shot": "alt-kick",
+   "params": {
+    "head": "OVER THE BAR",
+    "path": "alt",
+    "labels": [
+     {
+      "x": 60,
+      "y": 1150,
+      "title": "{alt.title}",
+      "small": "{alt.small}",
+      "src": "{alt.src}",
+      "tone": "warm"
+     }
+    ]
+   },
+   "headIf": "over the bar"
+  },
+  {
+   "role": "TWIST",
+   "shot": "penalty-run",
+   "params": {
+    "head": "THE KEEPER COMMITS",
+    "labels": [
+     {
+      "x": 60,
+      "y": 1150,
+      "title": "KEEPER DIVES {setup.keeperDirWord}",
+      "small": "{setup.keeperPhrase}",
+      "src": "{setup.keeperSrc}"
+     }
+    ]
+   },
+   "headIf": "dive|keeper"
+  },
+  {
+   "role": "MECHANISM",
+   "shot": "compare-paths",
+   "params": {
+    "head": "A CHIP, DOWN THE MIDDLE",
+    "ghost": "drive",
+    "labels": [
+     {
+      "x": 60,
+      "y": 1110,
+      "title": "CHIP · {model.chipSpeed} m/s",
+      "small": "MODEL · PEAK {model.chipPeak} m · {model.chipTime} s",
+      "src": "MODEL"
+     },
+     {
+      "x": 60,
+      "y": 1230,
+      "title": "DRIVEN KICK · {model.driveSpeed} m/s",
+      "small": "MODEL · {model.driveTime} s TO THE LINE",
+      "src": "MODEL",
+      "tone": "warm"
+     }
+    ]
+   },
+   "headIf": "chip"
+  },
+  {
+   "role": "PAYOFF",
+   "shot": "payoff-loop",
+   "params": {
+    "head": "NERVE OVER POWER"
+   },
+   "headIf": "confident|dare|nerve"
+  }
+ ],
+ "model": {
+  "type": "football-flight",
+  "distanceLaw": 11,
+  "chip": {
+   "speed": 13,
+   "aim": {
+    "x": 0,
+    "y": 1.3
+   },
+   "pitchGuess": 0.75
+  },
+  "drive": {
+   "speed": 26,
+   "aim": {
+    "x": -2.6,
+    "y": 0.6
+   },
+   "pitchGuess": 0.05,
+   "yawGuess": -0.2
+  },
+  "overBar": {
+   "speed": 24,
+   "aim": {
+    "x": -0.8,
+    "y": 3.4
+   },
+   "pitchGuess": 0.2
+  },
+  "keeperX": 0,
+  "keeperDiveAt": -0.35
+ }
 }

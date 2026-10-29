@@ -1,0 +1,17 @@
+{
+ "id": "back-pass-rule", "world": "football", "brand": "GOALLORE LAB", "accent": "#5fe1ff", "accent2": "#8a5a00",
+ "_doc": "A goalkeeper handling law shown with a back pass: before (hands allowed) and after (no handling, feet only). Needs the rule's year and the rule's text in the evidence.",
+ "detect": { "all": ["back-pass", "goalkeeper"], "any": ["handl", "pick up"] },
+ "chips": ["ILLUSTRATION"], "loop": true,
+ "keywords": ["back", "pass", "goalkeeper", "goalkeepers", "handle", "rule", "time-wasting"],
+ "beats": [
+  { "role": "HOOK", "shot": "back-pass", "headIf": "used to", "params": { "head": "BEFORE {rule.year}", "mode": "hands", "ruleNote": "BEFORE THE RULE" } },
+  { "role": "CONTEXT", "shot": "scoreboard", "params": { "card": { "kind": "paper", "k": "{thisLine.year?}", "h": "{thisLine.anchor?}", "p": "{thisLine.source}" } } },
+  { "role": "SETUP", "shot": "scoreboard", "params": { "card": { "kind": "paper", "k": "{thisLine.year?}", "h": "{thisLine.anchor?}", "p": "{thisLine.source}" } } },
+  { "role": "TWIST", "shot": "scoreboard", "params": { "card": { "kind": "paper", "k": "{thisLine.year?}", "h": "{thisLine.anchor?}", "p": "{thisLine.source}" } } },
+  { "role": "EXPLANATION", "shot": "back-pass", "headIf": "cannot handle", "params": { "head": "NO HANDS", "mode": "feet", "ruleNote": "DELIBERATE KICK BY A TEAM-MATE",
+    "labels": [ { "x": 60, "y": 1180, "title": "BACK-PASS RULE · {rule.year}", "small": "THE LAW'S TEXT, PARAPHRASED", "src": "{rule.src},{rule.textSrc}" } ] } },
+  { "role": "PAYOFF", "shot": "back-pass", "headIf": "^$", "params": { "head": "", "mode": "feet", "ruleNote": "SINCE {rule.year}" } }
+ ],
+ "model": { "type": "back-pass", "backpass": true, "explainer": true, "keeperOptional": true, "distance": 30 }
+}

@@ -27,7 +27,13 @@ test("setup is read from the evidence: foot, kick style, keeper", () => {
 
 test("refuses topics the kit does not cover", () => {
   assert.throws(() => run(gll("GLL-021")), (e) => e instanceof Refusal && /no mechanism template/.test(e.reasons[0]));
-  assert.throws(() => run(gll("GLL-026")), (e) => e instanceof Refusal && /distance not in the evidence/.test(e.reasons[0]));
+  // a penalty without the keeper's action is refused (the keeper is the mechanism); a free kick records it as an assumption
+  const t = JSON.parse(JSON.stringify(universe.find((x) => x.id === "GLL-025"))); const f4 = t.facts.find((f) => f.id === "F4");
+  f4.claim = "Panenka gently chipped the ball into the middle of the net."; f4.quote = f4.claim; t.narration = t.narration.map((l) => ({ ...l, text: l.text.replace(", and the goalkeeper dived", "") }));
+  const nk = path.join(tmp, "no-keeper.json"); fs.writeFileSync(nk, JSON.stringify(t));
+  assert.throws(() => run(nk), (e) => e instanceof Refusal && /keeper behaviour not in the evidence/.test(e.reasons.join(";")));
+  const fk = run(gll("GLL-026")).plan; assert.equal(fk.template, "magnus-free-kick"); assert.equal(fk.assumptions.length, 3);
+  assert.ok(fk.shots.every((s) => !/WIDE|WALL|LATE BEND/.test(s.params.head || "")), "template headlines the line does not support are replaced");
 });
 
 test("a number on screen must be in its cited fact, or the label must say MODEL", () => {
@@ -37,4 +43,12 @@ test("a number on screen must be in its cited fact, or the label must say MODEL"
   assert.match(checkEvidence(shot([{ title: "CHIP 13 m/s", small: "PEAK 2.2 m", src: "MODEL" }]), T)[0], /does not say MODEL/);
   assert.match(checkEvidence(shot([{ title: "CHIP 13 m/s" }]), T)[0], /has no source/);
   assert.match(checkEvidence(shot([{ title: "X", src: "F9" }]), T)[0], /unknown fact F9/);
+});
+
+test("coverage over the researched GLL topics: planned where the evidence carries the mechanism, refused otherwise", () => {
+  const { rows } = require("../../pilots/kit/coverage");
+  const planned = rows.filter((r) => r.status === "PLANNED").map((r) => r.id).sort();
+  assert.deepEqual(planned, ["GLL-025", "GLL-026", "GLL-043", "GLL-052", "GLL-061"]);
+  // dribbles, team moves, headers and saves need positions or directions the evidence does not give
+  for (const id of ["GLL-021", "GLL-028", "GLL-031", "GLL-037"]) assert.equal(rows.find((r) => r.id === id).status, "CREATIVE_REVIEW_REQUIRED", id);
 });

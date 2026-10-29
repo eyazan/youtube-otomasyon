@@ -25,25 +25,32 @@ export function buildWorld(S, D) {
     a.position.set(st.wall.x + (i - (st.wall.count - 1) / 2) * 0.6, 0, st.wall.z); a.rotation.y = Math.PI; a.pose(MOTION.wall()); a.userData.i = i; a.userData.x0 = a.position.x; return a; }) : []);
   const keeper = athlete(scene, { ...KITS.keeper, h: 1.88 }); keeper.rotation.y = Math.PI; const keeperHome = new THREE.Vector3(st.keeper.x, 0, GZ + 0.4); keeper.position.copy(keeperHome);
   const kicker = athlete(scene, { ...KITS.light, h: st.kickerHeight || 1.75 });
-  const ballKit = buildBall(scene); const P = D.paths; const T = P.flight[P.flight.length - 1].t;
+  const ballKit = buildBall(scene, { plain: st.ballPlain }); const P = D.paths; const T = P.flight[P.flight.length - 1].t;
   const tubes = { flight: ballKit.trail(P.flight, 0x5fe1ff, 0.05), flightWide: ballKit.trail(P.flight, 0x5fe1ff, 0.3, 1) };
   // every other path the plan supplies is a ghost: straight (no-spin counterfactual) red, other kicks orange
   for (const [name, path] of Object.entries(P)) if (path && name !== "flight" && name !== "spiral") tubes[name] = ballKit.trail(path, name === "straight" ? 0xff5a5a : 0xff8a3d, name === "straight" ? 0.035 : 0.04, 0.8);
   if (P.spiral) tubes.spiralWide = ballKit.trail(P.spiral, 0xffd36b, 0.6, 1);
   const arrows = { m: arrow(scene, 0x5fe1ff), d: arrow(scene, 0xff8a3d), v: arrow(scene, 0xffffff) };
+  // dimension line on the grass (laws of the game: distances), grows from its start with set(from, to, f)
+  const measure = new THREE.Group(); { const m = new THREE.MeshBasicMaterial({ color: 0xffd36b }); const bar = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.02, 1), m); measure.add(bar);
+    const tick = () => { const t = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.02, 0.12), m); measure.add(t); return t; }; const t0 = tick(), t1 = tick();
+    measure.set = (from, to, f) => { const d = to.clone().sub(from); const L = d.length() * f; bar.scale.z = Math.max(0.001, L); measure.rotation.y = Math.atan2(d.x, d.z); measure.position.copy(from);
+      bar.position.set(0, 0, L / 2); t0.position.set(0, 0, 0); t1.position.set(0, 0, L); t1.visible = f > 0.98; }; measure.visible = false; scene.add(measure); }
+  // a team-mate (back-pass and passing laws); hidden unless the setup has one
+  const mate = st.mate ? athlete(scene, { ...KITS.light, h: 1.8 }) : null; if (mate) mate.visible = false;
   // contact geometry: the kicking boot meets the ball's side opposite the curl (outside of the foot) or its underside
   // (chip); KICK_OFFSET places the kicker's pelvis so the boot reaches the ball at u = 0.55 (probed, pilots/gll-magnus-3d)
   const footSign = st.foot === "L" ? 1 : -1; const kickPos = B.clone().add(new THREE.Vector3(0.07 * footSign * (st.style === "outside" ? 1 : -1), 0, -0.02));
   const spinShown = (st.spinRps || 0) / 40; const spinSign = st.spinSign || 1;
   const reset = (s) => { Object.values(tubes).forEach((m) => m.show(0)); tubes.flightWide.visible = false; Object.values(arrows).forEach((a) => { a.visible = false; });
     ballKit.ring.visible = false; ballKit.halo.visible = true; stadium.group.visible = true; board.visible = false; scene.fog.far = 260; strikeLight.intensity = 0;
-    wall.forEach((w) => { w.position.x = w.userData.x0; }); keeper.visible = true; keeper.position.copy(keeperHome); keeper.pose(MOTION.keeperReady()); kicker.visible = false; wall.forEach((a) => { a.visible = true; }); };
+    wall.forEach((w) => { w.position.x = w.userData.x0; }); keeper.visible = true; keeper.position.copy(keeperHome); keeper.rotation.set(0, Math.PI, 0); keeper.pose(MOTION.keeperReady()); kicker.visible = false; measure.visible = false; if (mate) mate.visible = false; wall.forEach((a) => { a.visible = true; }); };
   const placeBall = (tt, path = P.flight, now = 0) => { const s = sampleAt(path, tt); ballKit.ball.position.copy(V(s.p)); ballKit.ball.rotation.set(0, spinSign * 2 * Math.PI * spinShown * now, 0); return s; };
   const ring = (pos, now) => { ballKit.ring.visible = spinShown > 0; ballKit.ring.position.copy(pos); ballKit.ring.rotation.y = spinSign * 2 * Math.PI * spinShown * now; ballKit.ring.scale.set(1, 1, spinSign); };
   // keeper behaviour at model time tt: static, or a dive starting at st.keeper.diveAt (model seconds)
   const keeperAt = (tt) => { if (st.keeper.action !== "dive") return; const u = clamp((tt - st.keeper.diveAt) / 0.75); const d = MOTION.dive(u, st.keeper.dir);
     keeper.pose(d.pose); keeper.position.copy(keeperHome).add(new THREE.Vector3(d.offset[0], d.offset[1], 0)); }; // keeper faces +z, so his left is world +x
-  return { GZ, B, T, P, st, stadium, board, wall, keeper, kicker, kickPos, ballKit, tubes, arrows, strikeLight, reset, placeBall, ring, keeperAt, spinShown };
+  return { GZ, B, T, P, st, stadium, board, wall, keeper, kicker, kickPos, ballKit, tubes, arrows, strikeLight, reset, placeBall, ring, keeperAt, spinShown, measure, mate, keeperHome };
 }
 
 const labels = (S, list, extra = {}) => (list || []).map((l) => O.read({ ...l, ...extra })).join("");
@@ -110,7 +117,7 @@ export const SHOTS = {
   // aerial over the stadium with a score / state card (penalty shoot-out, scoreline)
   "scoreboard": (S, C, k, t, p) => { C.placeBall(0); C.ballKit.halo.visible = false; const a = lerp(0.5, 0.1, ease(k)); C.wall.forEach((w) => { w.visible = false; });
     S.look(new THREE.Vector3(60 * Math.sin(a), 48 - 8 * k, C.GZ + 40 + 50 * Math.cos(a)), new THREE.Vector3(0, 0, C.GZ + 30), 44);
-    return O.head(p.head) + O.sub(p.sub) + O.card({ ...p.card, opacity: clamp(k * 4), top: 760 }); },
+    return O.head(p.head) + O.sub(p.sub) + (p.card ? O.card({ ...p.card, opacity: clamp(k * 4), top: 760 }) : ""); },
   // a kick along an alternative path (e.g. over the bar), seen from behind the kicker
   "alt-kick": (S, C, k, t, p) => { const path = C.P[p.path]; const T2 = path[path.length - 1].t; const tt = lerp(0, T2, ease(clamp((k - 0.15) * 1.4)));
     C.placeBall(tt, path, t); C.tubes[p.path].show(tt / T2); C.kicker.visible = true; C.kicker.rotation.y = 0; C.kicker.position.copy(C.kickPos);
@@ -124,8 +131,30 @@ export const SHOTS = {
     if (C.st.keeper.action === "dive") { const u = clamp((k - runEnd + 0.12) / 0.4); const d = MOTION.dive(u, C.st.keeper.dir); C.keeper.pose(d.pose); C.keeper.position.set(C.st.keeper.x + d.offset[0], d.offset[1], C.GZ + 0.4); }
     S.look(new THREE.Vector3(B.x + 0.5 - 0.3 * k, 1.8, B.z + 9.5 - 2.5 * k), new THREE.Vector3(0, 1.1, C.GZ), 36); // behind the run-up, the kicker in frame
     return O.head(p.head) + (k > 0.38 ? labels(S, p.labels) : ""); }, // label as the keeper commits
+  // a distance from the laws of the game, measured on the pitch (from the ball's spot to the goal line)
+  "measure": (S, C, k, t, p) => { C.placeBall(0); C.ballKit.halo.visible = false; C.wall.forEach((w) => { w.visible = false; });
+    const from = new THREE.Vector3(C.B.x, 0.03, C.B.z), to = new THREE.Vector3(C.B.x, 0.03, C.GZ); C.measure.visible = true; C.measure.set(from, to, ease(clamp(k * 1.6)));
+    const mid = from.clone().lerp(to, 0.5); const a = lerp(0.95, 0.75, ease(k));
+    S.look(new THREE.Vector3(mid.x + 17 * Math.sin(a), 12 - 2 * k, mid.z + 17 * Math.cos(a)), mid.clone().add(new THREE.Vector3(0, 0.5, 0)), 40);
+    const m = S.toScreen(mid); return O.head(p.head) + O.sub(p.sub) + (k > 0.3 ? labels(S, (p.labels || []).map((l) => ({ ...l, x: m.x - 120, y: m.y - 150 }))) : ""); },
+  // back pass: a team-mate plays the ball back to the keeper; mode "hands" (keeper picks it up) or "feet" (no handling:
+  // the keeper controls it with a foot and clears). Motion REPRESENTATIVE; what is allowed is the law (cited by the plan).
+  "back-pass": (S, C, k, t, p) => { const GZ = C.GZ; const M = C.mate; M.visible = true; C.wall.forEach((w) => { w.visible = false; }); C.ballKit.halo.visible = false;
+    const from = new THREE.Vector3(7, 0.11, GZ + 24), to = new THREE.Vector3(0.4, 0.11, GZ + 3.2); const kickU = clamp(k / 0.18), roll = clamp((k - 0.1) / 0.45);
+    M.position.set(from.x + 0.35, 0, from.z + 0.5); M.rotation.y = Math.atan2(to.x - from.x, to.z - from.z) + Math.PI; M.pose(MOTION.kick(kickU, "R", "drive"));
+    const K = C.keeper; K.position.copy(C.keeperHome).add(new THREE.Vector3(0.3 * roll, 0, 2.6 * roll));
+    const ball = C.ballKit.ball; ball.position.copy(from.clone().lerp(to, ease(roll))); ball.rotation.x = -roll * 60;
+    if (p.mode === "hands" && k > 0.55) { const g = ease(clamp((k - 0.55) / 0.2)); K.pose({ lean: 0.5 * g, drop: 0.25 * g, L: { hip: 0.6 * g, knee: 0.9 * g, sh: 1.2 * g, elbow: 0.3 }, R: { hip: 0.6 * g, knee: 0.9 * g, sh: 1.2 * g, elbow: 0.3 } });
+      ball.position.copy(K.position).add(new THREE.Vector3(0, lerp(0.11, 0.75, g), lerp(0.2, 0.45, g))); }
+    else if (p.mode === "feet" && k > 0.55) { const u = clamp((k - 0.55) / 0.3); K.pose(MOTION.kick(u, "R", "drive")); if (u > 0.55) { const f = (u - 0.55) / 0.45; ball.position.copy(to).add(new THREE.Vector3(-3 * f, 5 * f * (1.2 - f), 22 * f)); } }
+    S.look(new THREE.Vector3(10.5 - 1.5 * k, 6.5 - k, GZ + 34 - 3 * k), new THREE.Vector3(2.2, 0.8, GZ + 7), 40);
+    let html = O.head(p.head) + O.sub(p.sub);
+    if (p.mode && k > 0.6) { const kp = S.toScreen(K.position.clone().add(new THREE.Vector3(0, 2.3, 0))); const ok = p.mode === "hands";
+      html += O.read({ x: kp.x - 120, y: kp.y - 120, title: `${ok ? "✓" : "✕"} HANDS`, small: p.ruleNote || "", tone: ok ? "cool" : "warm" }); }
+    return html + labels(S, p.labels); },
   // side view of the flight with the alternative path for comparison (both model paths)
   "compare-paths": (S, C, k, t, p) => { const tt = lerp(0, C.T, ease(clamp(k * 1.2))); C.placeBall(tt, C.P.flight, t); C.tubes.flight.show(tt / C.T); if (C.tubes[p.ghost]) C.tubes[p.ghost].show(ease(clamp(k * 1.2))); C.keeperAt(tt);
-    const mz = (C.B.z + C.GZ) / 2; S.look(new THREE.Vector3(14 - 2 * k, 2.4, mz + 1), new THREE.Vector3(0, 1.2, mz - 0.5), 38);
+    const mz = (C.B.z + C.GZ) / 2; if (p.view === "behind") S.look(new THREE.Vector3(C.B.x + 0.6, 4.2 - k, C.B.z + 7), new THREE.Vector3(0, 1.0, C.GZ + 4), 36);
+    else S.look(new THREE.Vector3(14 - 2 * k, 2.4, mz + 1), new THREE.Vector3(0, 1.2, mz - 0.5), 38);
     const fmt = (s) => s.replace("{h}", V(sampleAt(C.P.flight, tt).p).y.toFixed(1)); return O.head(p.head) + (p.labels || []).map((l) => O.read({ ...l, title: fmt(l.title) })).join(""); },
 };
