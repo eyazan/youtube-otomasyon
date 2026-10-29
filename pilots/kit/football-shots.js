@@ -126,7 +126,11 @@ export const SHOTS = {
   // penalty: run-up, the keeper commits (dive), the kick
   "penalty-run": (S, C, k, t, p) => { const B = C.B; const runEnd = 0.62; C.kicker.visible = true; C.kicker.rotation.y = 0; C.ballKit.halo.visible = false;
     if (k < runEnd) { const r = k / runEnd; C.kicker.pose(MOTION.run((r * 4.5) % 1, 0.75)); C.kicker.position.copy(C.kickPos).add(new THREE.Vector3(0.8 * (1 - r), 0, 5.0 * (1 - r))); C.placeBall(0); }
-    else { const u = clamp((k - runEnd) / (1 - runEnd)); C.kicker.pose(MOTION.kick(u, C.st.foot, C.st.style)); C.kicker.position.copy(C.kickPos); C.placeBall(u < 0.55 ? 0 : (u - 0.55) * 0.5); }
+    else { const u = clamp((k - runEnd) / (1 - runEnd)); const pose = MOTION.kick(u, C.st.foot, C.st.style);
+      // feint (when the evidence has one): hips, chest and head open toward the keeper's dive side through the backswing,
+      // then square up for the chip; the keeper commits during this phase
+      if (C.st.feint) { const f = Math.sin(Math.PI * clamp(u / 0.5)) * (C.st.feint.side === "left" ? -1 : 1); pose.twist = (pose.twist || 0) + 0.35 * f; pose.chestTwist = (pose.chestTwist || 0) + 0.25 * f; pose.look = 0.3 * f; }
+      C.kicker.pose(pose); C.kicker.position.copy(C.kickPos); C.placeBall(u < 0.55 ? 0 : (u - 0.55) * 0.5); }
     // the keeper commits as the kicker plants (the dive starts before the ball moves)
     if (C.st.keeper.action === "dive") { const u = clamp((k - runEnd + 0.12) / 0.4); const d = MOTION.dive(u, C.st.keeper.dir); C.keeper.pose(d.pose); C.keeper.position.set(C.st.keeper.x + d.offset[0], d.offset[1], C.GZ + 0.4); }
     S.look(new THREE.Vector3(B.x + 0.5 - 0.3 * k, 1.8, B.z + 9.5 - 2.5 * k), new THREE.Vector3(0, 1.1, C.GZ), 36); // behind the run-up, the kicker in frame

@@ -49,6 +49,10 @@ function footballSetup(T, tpl, assumptions0) {
   const still = findFact(T, /(did not|never) move/i); const dive = findFact(T, /div(?:e|ed|ing) to (?:his|her|the) (left|right)/i);
   if (dive) { const side = `${dive.claim} ${dive.quote}`.match(/div(?:e|ed|ing) to (?:his|her|the) (left|right)/i)[1].toLowerCase();
     Object.assign(got, { keeperAction: "dive", keeperDir: side, keeperDirWord: up(`to his ${side}`), keeperPhrase: `${dive.layer && /VERIFIED/.test(dive.layer) ? "VERIFIED QUOTE" : "REPORTED"} · TIMING REPRESENTATIVE`, keeperSrc: dive.id }); }
+  // a feint before the kick ("feigned shooting to the side"): drawn as the body opening toward the side the keeper then
+  // dived to; the source names no side for the feint itself, so that choice is recorded as an assumption
+  const feint = findFact(T, /feign(?:ed|s|ing)? (?:shooting|to shoot)/i);
+  if (feint && dive) { got.feint = { side: got.keeperDir, src: feint.id }; assumptions.push("feint side is not in the evidence: drawn toward the side the keeper dived"); }
   else if (still) Object.assign(got, { keeperAction: "static", keeperPhrase: "NEVER MOVED · REPORTED (SINGLE SOURCE)", keeperSrc: still.id });
   else if (/div(?:e|ed)/i.test(txt)) assumptions.push("the keeper dives, side not in the evidence: no direction drawn");
   else if (M.keeperOptional) { Object.assign(got, { keeperAction: "static", keeperPhrase: "NOT IN THE SOURCE · POSITION REPRESENTATIVE", keeperSrc: "MODEL" });
@@ -92,7 +96,7 @@ function footballWorld(T, tpl, assumptions) {
   const goalZ = -got.distance; const keeper = { x: M.keeperX || 0, action: got.keeperAction, dir: got.keeperDir, diveAt: M.keeperDiveAt ?? 0.05 };
   // a ball whose panels the evidence describes (not the classic 32) is drawn plain, so the picture does not contradict it
   const ballPlain = /\b(?!thirty-two|32)\w+ (?:spherically )?moulded panels|\bpanels\b/i.test(corpus(T)) && !/\b32 panels\b/i.test(corpus(T));
-  const out = { setup: { goalZ, foot: got.foot, style: got.style, keeper, kickerHeight: 1.75, ballPlain }, paths: {}, model: {} };
+  const out = { setup: { goalZ, foot: got.foot, style: got.style, keeper, kickerHeight: 1.75, ballPlain, feint: got.feint || null }, paths: {}, model: {} };
   if (M.backpass) { // a law shown with a back pass: no kick model needed; the ball is placed by the shot
     const B = [0, 0.11, 0]; Object.assign(out.setup, { ballStart: B, spinRps: 0, spinSign: 1, mate: true }); out.paths = { flight: [{ t: 0, p: B, v: [0, 0, -1], speed: 0 }, { t: 1, p: B, v: [0, 0, -1], speed: 0 }] };
     out.model = { label: "ILLUSTRATION (motion representative; the law is quoted)" };
