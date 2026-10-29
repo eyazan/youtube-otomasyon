@@ -39,22 +39,30 @@ Darboğaz profil ölçümüyle bulundu ve şu iyileştirmeler yapıldı:
 - **Paralellik:** 4 çekirdekte 3. worker hız kazandırmıyor (2 worker: 39,7 s; 3 worker: 39,8 s; 90 kare). SwiftShader
   zaten bütün çekirdekleri kullanıyor.
 
-## 1b. GitHub Actions ölçümü (run 40851576156, ubuntu-latest, 4 vCPU, 2 worker)
+## 1b. GitHub Actions ölçümü (run 40856043566, ubuntu-latest, 4 vCPU, 2 worker; artifact 12889697726)
 
-Aynı runner'da iki motor art arda çalıştırıldı. Mevcut motor Edge sesiyle anlatımı kendisi üretti: GLL için aday ses
-en-GB-RyanNeural (önizleme), FR için onaylı en-US-AndrewMultilingualNeural. 3D pilot aynı ses ve altyazıyı kullandı.
+Aynı runner'da iki motor art arda çalıştırıldı:
+- Mevcut motor anlatımı Edge ile kendisi üretti: GLL için aday ses en-GB-RyanNeural (onaysız önizleme), FR için onaylı en-US-AndrewMultilingualNeural.
+- 3D pilot aynı ses ve altyazıyı kullandı.
 
-| | Mevcut motor (adımın tamamı: anlatım + render + QA + paket) | Three.js (yalnızca kare render + mux) | Three.js QA |
-|---|---|---|---|
-| GLL-P01 (39,0 s, 1.170 kare) | 202 s | 472 s (402 ms/kare) | Tek sert hata: 1,50 s durağan an (sınır < 1,5 s). Düzeltildi, yeniden ölçülüyor |
-| FR Gemini 8 (28,2 s, 846 kare) | 150 s | 121 s (141 ms/kare) | PASS |
+| | Kare render: mevcut motor | Kare render: Three.js | Oran | Adım süresi (time -v): mevcut / 3D | Bellek (en büyük tek süreç): mevcut / 3D | QA (3D) |
+|---|---|---|---|---|---|---|
+| GLL-P01 (39,0 s, 1.170 kare) | 96,7 s (83 ms/kare) | 320,1 s (274 ms/kare) | 3,3× | 2:33 (anlatım + QA dahil) / 5:22 | 702 / 620 MB | **PASS** |
+| FR Gemini 8 (28,2 s, 846–847 kare) | 75,4 s (89 ms/kare) | 82,4 s (97 ms/kare) | 1,1× | 1:54 (anlatım + QA dahil) / 1:23 | 698 / 607 MB | **PASS** |
 
-- **Determinizm (CI):** iki ayrı tarayıcıda dört karede byte düzeyinde aynı.
-- **Ses:** −14,1/−14,3 LUFS; ses-görüntü süre farkı 0,000 s.
-- **Paylaşılan çıktılar** (artifact `pilot-3d-review`): MP4, contact sheet, scene sheet, ilk 2 s şeridi, QA raporları,
-  `time -v` CPU/RAM çıktıları.
-- **Yorum:** uzay sahnesinde (FR) 3D render, mevcut motorun bütün adımından daha kısa. Stadyum sahnesinde (GLL) kare
-  render'ı, mevcut motorun bütün adımının ~2,3 katı. Günlük 180 dakikalık iş süresi bütçesinin içinde.
+Notlar:
+- Mevcut motorun Chromium tepe RSS'i ~3,0 GB (studio ölçümü). 3D için Chromium tepe RSS ölçülmedi; `time -v` yalnızca en
+  büyük tek süreci gösteriyor.
+- Determinizm CI'da doğrulandı: iki ayrı tarayıcıda dört karede byte düzeyinde aynı.
+- Ses: −14,1 / −14,3 LUFS; ses-görüntü süre farkı 0,000 s.
+- Artifact içeriği (`pilot-3d-review`, 30 gün):
+  - her iki motor için MP4, sha256, contact sheet, scene sheet, ilk 2 s şeridi;
+  - QA raporları;
+  - mevcut motorun creative-review dosyaları ve 3D için CREATIVE-REVIEW.md;
+  - MODEL.md, `time -v` çıktıları, summary.md.
+- Yorum:
+  - Uzay sahnesinde maliyet eşit.
+  - Stadyum sahnesinde 3D kare render'ı 3,3 kat. Mutlak süre 5,4 dakika; günlük iş süresi bütçesinin (180 dk) içinde.
 
 ## 2. Teknik QA (`pilots/lib/qa.js`)
 
