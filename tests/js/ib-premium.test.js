@@ -101,7 +101,8 @@ test("auto storyboard: the subject picks the visual, plates never repeat back to
 });
 
 test("IB readiness: researched records pass without stored quotes (warned); visual pre-check blocks are tolerated, others are not", () => {
-  const { channel, topic } = Adapter.loadTopic("impossible-brief", "IB-PHY-065");
+  // IB-PHY-065 was published on 2026-10-29 (5cNecwSkYDo), so an unpublished researched record with a visual pre-check block stands in
+  const { channel, topic } = Adapter.loadTopic("impossible-brief", "IB-OTH-020");
   const r = Adapter.readiness(channel, topic);
   assert.equal(r.ready, true);
   // a content hold (claim check 2026-10-28: unsourced narration lines) keeps a topic out of production
