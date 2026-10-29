@@ -1,0 +1,212 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  @font-face { font-family: Inter; src: url(/fonts/inter-latin-700-normal.woff2) format("woff2"); font-weight: 700; }
+  @font-face { font-family: Inter; src: url(/fonts/inter-latin-800-normal.woff2) format("woff2"); font-weight: 800; }
+  @font-face { font-family: Inter; src: url(/fonts/inter-latin-600-normal.woff2) format("woff2"); font-weight: 600; }
+  html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #05080c; font-family: Inter, sans-serif; }
+  canvas { position: absolute; inset: 0; }
+  #ui { position: absolute; inset: 0; pointer-events: none; color: #fff; }
+  .chip { position: absolute; right: 64px; top: 120px; font: 700 26px Inter; letter-spacing: .12em; color: #ffd36b; background: rgba(5,8,12,.72); padding: 10px 18px; border-radius: 8px; border: 1px solid rgba(255,211,107,.5); }
+  .brand { position: absolute; left: 64px; top: 120px; font: 800 30px Inter; letter-spacing: .08em; color: #e8f0ff; opacity: .9; }
+  .head { position: absolute; left: 0; right: 0; top: 230px; text-align: center; font: 800 76px/1.05 Inter; letter-spacing: -.01em; text-shadow: 0 6px 30px rgba(0,0,0,.6); padding: 0 70px; }
+  .sub { position: absolute; left: 0; right: 0; top: 330px; text-align: center; font: 600 34px Inter; color: #b9c7da; letter-spacing: .06em; }
+  .cap { position: absolute; left: 90px; right: 90px; bottom: 330px; text-align: center; font: 800 54px/1.18 Inter; text-shadow: 0 4px 18px rgba(0,0,0,.85); }
+  .cap b { color: #5fe1ff; font-weight: 800; }
+  .read { position: absolute; font: 700 30px Inter; color: #fff; background: rgba(5,8,12,.72); padding: 10px 16px; border-radius: 10px; border-left: 6px solid #5fe1ff; white-space: nowrap; }
+  .read.warm { border-left-color: #ff8a3d; }
+  .read small { display: block; font: 600 20px Inter; color: #9fb0c6; letter-spacing: .08em; }
+  .card { position: absolute; left: 110px; right: 110px; top: 760px; background: rgba(240,236,226,.96); color: #1b1f27; border-radius: 14px; padding: 34px 40px; box-shadow: 0 30px 80px rgba(0,0,0,.5); }
+  .card h3 { margin: 0 0 10px; font: 800 40px/1.15 Inter; }
+  .card p { margin: 0; font: 600 28px/1.35 Inter; color: #39404c; }
+  .card .k { font: 700 22px Inter; letter-spacing: .14em; color: #8a5a00; margin-bottom: 14px; }
+  .vig { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%); }
+</style></head>
+<body>
+<div id="ui"></div>
+<script type="importmap">{ "imports": { "three": "/three/build/three.module.js" } }</script>
+<script type="module">
+import * as THREE from "three";
+const D = window.__DATA; // { flight, straight, spiral, cues, setup }
+const W = 1080, H = 1920;
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1); renderer.setSize(W, H); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05; renderer.outputColorSpace = THREE.SRGBColorSpace;
+document.body.prepend(renderer.domElement);
+const scene = new THREE.Scene(); scene.background = new THREE.Color(0x070b12); scene.fog = new THREE.Fog(0x070b12, 60, 160);
+const cam = new THREE.PerspectiveCamera(38, W / H, 0.05, 400);
+
+// --- light: night match under four floodlight banks ---------------------------------------------------------------
+scene.add(new THREE.HemisphereLight(0xbcd4ff, 0x1b2a12, 0.55));
+const key = new THREE.DirectionalLight(0xfff3df, 2.2); key.position.set(-30, 45, 10); key.castShadow = true;
+key.shadow.mapSize.set(2048, 2048); Object.assign(key.shadow.camera, { left: -40, right: 40, top: 40, bottom: -40, near: 1, far: 140 }); key.shadow.bias = -0.0004; scene.add(key);
+const fill = new THREE.DirectionalLight(0x9fc2ff, 0.6); fill.position.set(35, 25, -60); scene.add(fill);
+
+// --- pitch: mown stripes, line markings (FIFA dimensions: goal 7.32 x 2.44 m, box 40.32 x 16.5 m) ---------------------
+function stripeTexture() { const c = document.createElement("canvas"); c.width = 64; c.height = 1024; const g = c.getContext("2d");
+  for (let i = 0; i < 16; i += 1) { g.fillStyle = i % 2 ? "#2f7d3a" : "#2a7034"; g.fillRect(0, i * 64, 64, 64); }
+  const img = g.getImageData(0, 0, 64, 1024); for (let i = 0; i < img.data.length; i += 4) { const n = (Math.sin(i * 12.9898) * 43758.5453) % 1 * 14; img.data[i] += n; img.data[i + 1] += n; } g.putImageData(img, 0, 0);
+  const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(30, 3); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; return t; }
+const grass = new THREE.Mesh(new THREE.PlaneGeometry(140, 140), new THREE.MeshStandardMaterial({ map: stripeTexture(), roughness: 0.95 }));
+grass.rotation.x = -Math.PI / 2; grass.position.set(0, 0, -30); grass.receiveShadow = true; scene.add(grass);
+const lineMat = new THREE.MeshBasicMaterial({ color: 0xf2f5f0 });
+const line = (x1, z1, x2, z2, w = 0.12) => { const l = Math.hypot(x2 - x1, z2 - z1); const m = new THREE.Mesh(new THREE.PlaneGeometry(l, w), lineMat);
+  m.rotation.x = -Math.PI / 2; m.rotation.z = -Math.atan2(z2 - z1, x2 - x1); m.position.set((x1 + x2) / 2, 0.012, (z1 + z2) / 2); scene.add(m); };
+const GZ = -D.setup.distance; line(-40, GZ, 40, GZ); line(-20.16, GZ, -20.16, GZ + 16.5); line(20.16, GZ, 20.16, GZ + 16.5); line(-20.16, GZ + 16.5, 20.16, GZ + 16.5);
+line(-9.16, GZ, -9.16, GZ + 5.5); line(9.16, GZ, 9.16, GZ + 5.5); line(-9.16, GZ + 5.5, 9.16, GZ + 5.5);
+// penalty arc and spot
+{ const pts = []; for (let a = -0.93; a <= 0.93; a += 0.02) pts.push(new THREE.Vector3(Math.sin(a) * 9.15, 0.012, GZ + 11 + Math.cos(a) * 9.15));
+  for (let i = 1; i < pts.length; i += 1) line(pts[i - 1].x, pts[i - 1].z, pts[i].x, pts[i].z); }
+
+// --- goal: posts and bar 12 cm, net as a fine line grid -----------------------------------------------------------
+const post = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.35, metalness: 0.1 });
+const bar = (len, x, y, z, rot) => { const m = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, len, 20), post); m.position.set(x, y, z); if (rot) m.rotation.z = Math.PI / 2; m.castShadow = true; scene.add(m); };
+bar(2.44, -3.66, 1.22, GZ); bar(2.44, 3.66, 1.22, GZ); bar(7.44, 0, 2.44, GZ, true);
+{ const g = []; const depth = 2.0; for (let x = -3.66; x <= 3.661; x += 0.18) { g.push(x, 2.44, GZ, x, 2.44, GZ - depth, x, 2.44, GZ - depth, x, 0, GZ - depth); }
+  for (let y = 0; y <= 2.441; y += 0.18) { g.push(-3.66, y, GZ - depth, 3.66, y, GZ - depth); }
+  for (let z = 0; z <= depth + 0.01; z += 0.18) { g.push(-3.66, 2.44, GZ - z, 3.66, 2.44, GZ - z); for (const s of [-3.66, 3.66]) g.push(s, 0, GZ - z, s, 2.44, GZ - z); }
+  const geo = new THREE.BufferGeometry(); geo.setAttribute("position", new THREE.Float32BufferAttribute(g, 3));
+  scene.add(new THREE.LineSegments(geo, new THREE.LineBasicMaterial({ color: 0xdfe6ee, transparent: true, opacity: 0.45 }))); }
+
+// --- people: neutral mannequins (no likeness, no kit colours of the real teams) ----------------------------------
+const body = new THREE.MeshStandardMaterial({ color: 0x3b4a63, roughness: 0.7 }), skin = new THREE.MeshStandardMaterial({ color: 0x8a95a8, roughness: 0.8 });
+function mannequin(x, z, h = 1.82, mat = body, arms = 0) { const g = new THREE.Group();
+  const torso = new THREE.Mesh(new THREE.CapsuleGeometry(0.2, h * 0.32, 6, 14), mat); torso.position.y = h * 0.62; g.add(torso);
+  const head = new THREE.Mesh(new THREE.SphereGeometry(0.12, 18, 14), skin); head.position.y = h * 0.92; g.add(head);
+  for (const s of [-1, 1]) { const leg = new THREE.Mesh(new THREE.CapsuleGeometry(0.085, h * 0.36, 4, 10), mat); leg.position.set(0.11 * s, h * 0.24, 0); g.add(leg);
+    const arm = new THREE.Mesh(new THREE.CapsuleGeometry(0.06, h * 0.28, 4, 10), mat); arm.position.set(0.27 * s + arms * 0.25 * s, h * 0.64 + arms * 0.18, 0); arm.rotation.z = arms * 1.2 * s; g.add(arm); }
+  g.traverse((o) => { if (o.isMesh) o.castShadow = true; }); g.position.set(x, 0, z); scene.add(g); return g; }
+// wall 9.15 m from the ball, covering the near (left) side; keeper slightly left of centre
+const wallZ = -9.15; const wallCenterX = D.setup.ballX - 2.2; [-0.9, -0.3, 0.3, 0.9].forEach((dx) => mannequin(wallCenterX + dx, wallZ, 1.84));
+const keeper = mannequin(-0.6, GZ + 0.4, 1.88, new THREE.MeshStandardMaterial({ color: 0x9a6b2c, roughness: 0.7 }), 0.35);
+mannequin(D.setup.ballX - 1.2, 1.6, 1.78);  // kicker, stood back from the ball
+
+// --- ball: 32-panel look from a canvas texture so the spin is visible --------------------------------------------
+function ballTexture() { const c = document.createElement("canvas"); c.width = 1024; c.height = 512; const g = c.getContext("2d");
+  g.fillStyle = "#f4f4f2"; g.fillRect(0, 0, 1024, 512); g.fillStyle = "#161a22";
+  for (let i = 0; i < 12; i += 1) { const x = (i % 6) * 170 + (i < 6 ? 40 : 125), y = i < 6 ? 150 : 360; g.beginPath(); for (let k = 0; k < 5; k += 1) { const a = k * 2 * Math.PI / 5 - Math.PI / 2; g.lineTo(x + Math.cos(a) * 46, y + Math.sin(a) * 40); } g.fill(); }
+  g.fillRect(0, 0, 1024, 18); g.fillRect(0, 494, 1024, 18); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t; }
+const ball = new THREE.Mesh(new THREE.SphereGeometry(0.11, 48, 32), new THREE.MeshStandardMaterial({ map: ballTexture(), roughness: 0.45 }));
+ball.castShadow = true; scene.add(ball);
+// spin axis indicator (vertical) shown only in the close-ups
+const axis = new THREE.Mesh(new THREE.CylinderGeometry(0.006, 0.006, 0.42, 8), new THREE.MeshBasicMaterial({ color: 0x5fe1ff })); scene.add(axis);
+
+// --- paths ------------------------------------------------------------------------------------------------------
+const V = (a) => new THREE.Vector3(a[0], a[1], a[2]);
+const curveOf = (samples) => new THREE.CatmullRomCurve3(samples.filter((_, i) => i % 6 === 0).map((s) => V(s.p)));
+const fCurve = curveOf(D.flight), sCurve = curveOf(D.straight), pCurve = curveOf(D.spiral); const pCurveRef = () => pCurve, fCurveRef = () => fCurve;
+const tube = (curve, color, r, opacity) => { const m = new THREE.Mesh(new THREE.TubeGeometry(curve, 400, r, 10, false), new THREE.MeshBasicMaterial({ color, transparent: true, opacity }));
+  m.geometry.setDrawRange(0, 0); scene.add(m); return m; };
+const trail = tube(fCurve, 0x5fe1ff, 0.05, 0.95), ghost = tube(sCurve, 0xff5a5a, 0.035, 0.75), spiralTube = tube(pCurve, 0xffd36b, 0.06, 0.95);
+const showTube = (m, f) => { const n = m.geometry.index ? m.geometry.index.count : m.geometry.attributes.position.count; m.geometry.setDrawRange(0, Math.floor(n * Math.max(0, Math.min(1, f)) / 6) * 6); m.visible = f > 0; };
+// force arrows at the ball
+// solid arrows (shaft + head) so they read on a phone; length in metres set per frame
+function arrow(color) { const g = new THREE.Group(); const m = new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0.6, roughness: 0.4 });
+  const shaft = new THREE.Mesh(new THREE.CylinderGeometry(0.022, 0.022, 1, 14), m); const head = new THREE.Mesh(new THREE.ConeGeometry(0.06, 0.16, 18), m); g.add(shaft, head);
+  g.set = (origin, dir, L) => { g.position.copy(origin); g.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir.clone().normalize());
+    const sL = Math.max(0.01, L - 0.16); shaft.scale.y = sL; shaft.position.y = sL / 2 + 0.12; head.position.y = 0.12 + sL + 0.08; };
+  scene.add(g); return g; }
+const arrM = arrow(0x5fe1ff), arrD = arrow(0xff8a3d), arrV = arrow(0xffffff);
+// constant-size halo so the ball stays findable in wide shots
+const halo = (() => { const c = document.createElement("canvas"); c.width = c.height = 128; const g = c.getContext("2d"); const gr = g.createRadialGradient(64, 64, 18, 64, 64, 62);
+  gr.addColorStop(0, "rgba(95,225,255,0)"); gr.addColorStop(0.55, "rgba(95,225,255,0.0)"); gr.addColorStop(0.7, "rgba(95,225,255,0.9)"); gr.addColorStop(0.85, "rgba(95,225,255,0)"); g.fillStyle = gr; g.fillRect(0, 0, 128, 128);
+  const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(c), sizeAttenuation: false, depthTest: false, transparent: true })); sp.scale.set(0.05, 0.05, 1); sp.renderOrder = 5; scene.add(sp); return sp; })();
+const spiralWide = new THREE.Mesh(new THREE.TubeGeometry(pCurveRef(), 900, 0.6, 8, false), new THREE.MeshBasicMaterial({ color: 0xffd36b }));
+spiralWide.geometry.setDrawRange(0, 0); scene.add(spiralWide);
+const trailWide = new THREE.Mesh(new THREE.TubeGeometry(fCurveRef(), 400, 0.3, 8, false), new THREE.MeshBasicMaterial({ color: 0x5fe1ff })); scene.add(trailWide);
+
+// --- helpers ----------------------------------------------------------------------------------------------------
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+const ease = (x) => { x = clamp(x); return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+const lerp = (a, b, k) => a + (b - a) * k;
+const at = (samples, tt) => { const i = clamp(Math.round(tt / (samples[1].t - samples[0].t)), 0, samples.length - 1); return samples[i]; };
+const T = D.flight[D.flight.length - 1].t;
+const cue = (t) => D.cues.find((c) => t >= c.start && t < c.end + 0.05);
+const ui = document.getElementById("ui");
+const esc = (s) => String(s).replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+const KEY = new Set(["wide", "turned", "outside", "wall", "spin", "drag", "spiral", "late", "never", "sideways", "slows", "tighter"]);
+const capHtml = (c) => c ? `<div class="cap">${c.lines.map((l) => l.split(" ").map((w) => KEY.has(w.toLowerCase().replace(/[^a-z]/g, "")) ? `<b>${esc(w)}</b>` : esc(w)).join(" ")).join("<br>")}</div>` : "";
+// project a world point to screen pixels
+const toScreen = (p) => { const v = p.clone().project(cam); return { x: (v.x + 1) / 2 * W, y: (1 - v.y) / 2 * H }; };
+
+// --- shots (times from the narration cues) ----------------------------------------------------------------------
+// each shot: camera path, ball time mapping, overlays. Ball time is model time (s); flight lasts T (about 1.2 s).
+// shot boundaries come from the narration cues (the first cue whose text matches), so a re-voiced take re-times itself
+const cueAt = (re, fallback) => { const c = D.cues.find((x) => re.test(x.lines.join(" "))); return c ? c.start : fallback; };
+const END = D.cues[D.cues.length - 1].end + 0.6;
+const BEATS = [["hook", /./], ["establish", /Lyon/], ["strike", /Roberto Carlos/], ["wide", /swung|around the wall/], ["keeper", /bent back/],
+  ["paper", /physicists|2010/], ["forces", /Spin pushes/], ["spiral", /slower it flies|tighter/], ["payoff", /why the bend|so late/]];
+const SHOTS = BEATS.map(([kind, re]) => ({ kind, a: kind === "hook" ? 0 : cueAt(re, NaN) }));
+SHOTS.forEach((x, i) => { if (!Number.isFinite(x.a)) throw new Error("no cue for shot " + x.kind); x.b = i + 1 < SHOTS.length ? SHOTS[i + 1].a : END; });
+const T_MAGNUS = cueAt(/Spin pushes/, 0) + 0.3, T_DRAG = cueAt(/Drag/, 0);
+function placeBall(tt, samples = D.flight) { const s = at(samples, tt); ball.position.copy(V(s.p)); ball.rotation.set(0, -2 * Math.PI * D.setup.spinRps * tt, 0); return s; }
+function look(pos, target, fov = 38) { cam.position.copy(pos); cam.fov = fov; cam.updateProjectionMatrix(); cam.lookAt(target); }
+
+window.renderAt = (t) => {
+  const s = SHOTS.find((x) => t >= x.a && t < x.b) || SHOTS[SHOTS.length - 1]; const k = clamp((t - s.a) / (s.b - s.a));
+  let html = `<div class="vig"></div><div class="brand">GOALLORE LAB</div>`; const chips = ["ILLUSTRATION", "MODEL"];
+  showTube(trail, 0); showTube(ghost, 0); showTube(spiralTube, 0); arrM.visible = arrD.visible = arrV.visible = false; axis.visible = false; keeper.visible = true; halo.visible = true; scene.fog.far = 160; showTube(spiralWide, 0); trailWide.visible = false;
+  const B = V(D.flight[0].p), G = new THREE.Vector3(0, 1.2, GZ);
+  if (s.kind === "hook" || s.kind === "payoff") {
+    // behind the ball, low: the ball is already in the air at frame 0 and heading wide, then turns in
+    const tt = s.kind === "hook" ? lerp(0.12, T, ease(clamp(k * 1.25))) : lerp(0, T, ease(clamp((k - 0.05) * 1.3)));
+    const p = placeBall(tt); showTube(trail, tt / T);
+    look(new THREE.Vector3(B.x + 0.8, 2.1, 7.5 - k * 2), new THREE.Vector3(lerp(B.x + 1.5, 1.8, ease(k)), 1.1, GZ + 6), 32);
+    if (s.kind === "hook") html += `<div class="head">IT WAS GOING WIDE</div>`;
+    else html += `<div class="head">SPIN + DRAG = A LATE BEND</div>`;
+  } else if (s.kind === "establish") {
+    // high and wide: the whole set piece, distance labelled with the reported range
+    placeBall(0); const a = lerp(-0.35, 0.15, ease(k));
+    look(new THREE.Vector3(B.x + 24 * Math.sin(a), 30, -8 + 26 * Math.cos(a)), new THREE.Vector3(1.5, 0, -18), 40);
+    html += `<div class="head">LYON · 3 JUNE 1997</div><div class="sub">BRAZIL v FRANCE · TOURNOI DE FRANCE</div>`;
+    html += `<div class="read" style="left:60px;top:${H * 0.6}px">≈35 m TO GOAL<small>REPORTED 33 m – 40 yd · MODEL USES 35 m</small></div>`;
+    chips.length = 1;
+  } else if (s.kind === "strike") {
+    // close on the ball: outside of the left foot gives sidespin about a near-vertical axis
+    const tt = k < 0.55 ? 0 : lerp(0, 0.09, (k - 0.55) / 0.45); placeBall(tt); ball.rotation.y = -t * 6; axis.visible = true; axis.position.copy(ball.position);
+    halo.visible = false; look(new THREE.Vector3(B.x + 1.3 - k * 0.2, 0.45, B.z + 1.2), ball.position.clone().add(new THREE.Vector3(0, 0.05, 0)), 30);
+    html += `<div class="head">OUTSIDE OF THE LEFT FOOT</div>`;
+    const m = toScreen(V(D.flight[0].p).add(new THREE.Vector3(0, 0.3, 0))); html += `<div class="read" style="left:${m.x + 60}px;top:${m.y - 40}px">SIDESPIN<small>AXIS ≈ VERTICAL · ${D.setup.spinRps} REV/S (MODEL)</small></div>`;
+  } else if (s.kind === "wide") {
+    // chase camera: the real path in cyan, the no-spin path in red (where it was heading)
+    const tt = lerp(0, T * 0.7, ease(k)); const p = placeBall(tt); showTube(trail, tt / T); showTube(ghost, ease(clamp(k * 1.4)));
+    look(V(p.p).add(new THREE.Vector3(2.2, 1.4, 5.5)), V(p.p).add(new THREE.Vector3(-0.5, -0.2, -12)), 40);
+    html += `<div class="head">AROUND THE WALL…</div>`;
+    const g = toScreen(V(D.straight[D.straight.length - 1].p)); if (k > 0.35) html += `<div class="read warm" style="left:${Math.min(820, g.x - 60)}px;top:${g.y - 110}px">NO SPIN<small>WIDE BY ${(D.straight[D.straight.length - 1].p[0] - 3.66).toFixed(1)} m</small></div>`;
+  } else if (s.kind === "keeper") {
+    // from behind the goal: the ball bends back inside the right post
+    const tt = lerp(T * 0.55, T, ease(k)); placeBall(tt); showTube(trail, tt / T); showTube(ghost, 1);
+    look(new THREE.Vector3(-7.5, 3.4, GZ - 9), new THREE.Vector3(2.2, 1.0, GZ + 7), 40);
+    html += `<div class="head">…THEN IT BENT IN</div>`;
+    const kp = toScreen(new THREE.Vector3(-0.6, 2.2, GZ + 0.4)); html += `<div class="read" style="left:${kp.x - 140}px;top:${kp.y - 120}px">KEEPER<small>DID NOT MOVE (REPORTED)</small></div>`;
+  } else if (s.kind === "paper") {
+    placeBall(T); showTube(trail, 1); showTube(ghost, 1);
+    look(new THREE.Vector3(1, 52, -17), new THREE.Vector3(1, 0, -17.5), 42);
+    html += `<div class="card" style="opacity:${clamp(k * 4)}"><div class="k">NEW JOURNAL OF PHYSICS · 2010</div><h3>The spinning ball spiral</h3><p>Dupeux, Le Goff, Quéré &amp; Clanet<br>New J. Phys. 12, 093004</p></div>`;
+    chips.length = 0;
+  } else if (s.kind === "forces") {
+    // the ball in flight with its forces: Magnus (cyan) sideways, drag (orange) backwards, velocity (white)
+    const tt = lerp(0.15, T * 0.9, k); const smp = placeBall(tt); showTube(trail, tt / T);
+    const P = V(smp.p), v = V(smp.v).normalize(); const fm = V(smp.magnus), fd = V(smp.drag);
+    // arrow length 0.12 m per newton (forces) and 0.03 m per m/s (velocity), the same scale through the shot
+    halo.visible = false; arrV.set(P, v, smp.speed * 0.03); arrM.set(P, fm, fm.length() * 0.12); arrD.set(P, fd, fd.length() * 0.12);
+    arrM.visible = t > T_MAGNUS; arrD.visible = t > T_DRAG; arrV.visible = true;
+    look(P.clone().add(new THREE.Vector3(1.6, 2.6, 2.6)), P.clone().add(new THREE.Vector3(-0.3, 0, -0.6)), 34);
+    const m = toScreen(P); html += `<div class="head">${t < T_DRAG ? "SPIN PUSHES SIDEWAYS" : "DRAG SLOWS, SPIN STAYS"}</div>`;
+    html += `<div class="read" style="left:60px;top:${H * 0.58}px">SPEED ${smp.speed.toFixed(1)} m/s<small>MODEL · STARTS ${D.flight[0].speed.toFixed(0)} m/s</small></div>`;
+    html += `<div class="read" style="left:${W - 400}px;top:${H * 0.58}px">MAGNUS ${(fm.length()).toFixed(2)} N<small>DRAG ${(fd.length()).toFixed(2)} N</small></div>`;
+  } else if (s.kind === "spiral") {
+    // top-down: the same ball if it kept flying level; the turning radius shrinks as it slows
+    const f = ease(clamp(k * 1.1)); showTube(spiralWide, f); trailWide.visible = true;
+    const idx = Math.floor(f * (D.spiral.length - 1)); const sp = D.spiral[idx]; ball.position.copy(V(sp.p)); keeper.visible = false;
+    scene.fog.far = 500; look(new THREE.Vector3(-29, 185, -36), new THREE.Vector3(-29, 0, -36.01), 46);
+    html += `<div class="head">SLOWER = TIGHTER</div>`;
+    html += `<div class="read" style="left:60px;top:${H * 0.62}px">TURNING RADIUS ${sp.radius.toFixed(0)} m<small>MODEL · IF IT KEPT FLYING LEVEL · ${sp.t.toFixed(1)} s</small></div>`;
+  }
+  const c = cue(t); html += capHtml(c);
+  html += chips.length ? `<div class="chip">${chips.join(" · ")}</div>` : "";
+  halo.position.copy(ball.position); ui.innerHTML = html; renderer.render(scene, cam);
+};
+window.__ready = true;
+</script>
+</body></html>
