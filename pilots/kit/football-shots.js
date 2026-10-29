@@ -131,6 +131,12 @@ export const SHOTS = {
     if (C.st.keeper.action === "dive") { const u = clamp((k - runEnd + 0.12) / 0.4); const d = MOTION.dive(u, C.st.keeper.dir); C.keeper.pose(d.pose); C.keeper.position.set(C.st.keeper.x + d.offset[0], d.offset[1], C.GZ + 0.4); }
     S.look(new THREE.Vector3(B.x + 0.5 - 0.3 * k, 1.8, B.z + 9.5 - 2.5 * k), new THREE.Vector3(0, 1.1, C.GZ), 36); // behind the run-up, the kicker in frame
     return O.head(p.head) + (k > 0.38 ? labels(S, p.labels) : ""); }, // label as the keeper commits
+  // a fact as a broadcast graphic: a low tracking shot along the touchline (stands, lights, the goal in depth) with a
+  // lower third naming the line's anchor and its source, and the year in outline; replaces the empty aerial card
+  "fact-graphic": (S, C, k, t, p) => { C.placeBall(0); C.ballKit.halo.visible = false; C.wall.forEach((w) => { w.visible = false; }); C.keeper.visible = true;
+    const side = p.side ?? 1; const x = side * (34 - 3 * k), z = C.GZ + 26 - 14 * k;
+    S.look(new THREE.Vector3(x, 1.7 + 0.4 * k, z), new THREE.Vector3(side * 6, 1.4, C.GZ + 4 - 6 * k), 34);
+    return O.head(p.head) + (p.card ? O.lowerThird(p.card, clamp((t - S.shotStart) / 0.45)) : ""); },
   // a distance from the laws of the game, measured on the pitch (from the ball's spot to the goal line)
   "measure": (S, C, k, t, p) => { C.placeBall(0); C.ballKit.halo.visible = false; C.wall.forEach((w) => { w.visible = false; });
     const from = new THREE.Vector3(C.B.x, 0.03, C.B.z), to = new THREE.Vector3(C.B.x, 0.03, C.GZ); C.measure.visible = true; C.measure.set(from, to, ease(clamp(k * 1.6)));

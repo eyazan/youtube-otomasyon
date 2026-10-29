@@ -1,17 +1,137 @@
 {
- "id": "law-distance", "world": "football", "brand": "GOALLORE LAB", "accent": "#5fe1ff", "accent2": "#8a5a00",
+ "id": "law-distance",
+ "world": "football",
+ "brand": "GOALLORE LAB",
+ "accent": "#5fe1ff",
+ "accent2": "#8a5a00",
  "_doc": "A distance written into the laws of the game (penalty spot, and any law fact of the form 'N yards (M m)'), measured on the pitch; history lines become fact cards quoting the line and naming its source.",
- "detect": { "all": ["penalty"], "any": ["laws of the game", "penalty spot", "introduced"] },
- "chips": ["ILLUSTRATION"], "loop": true,
- "keywords": ["penalty", "yards", "spot", "laws", "introduced", "scored"],
- "beats": [
-  { "role": "HOOK", "shot": "measure", "headIf": "why", "params": { "head": "WHY {law.distance}?", "labels": [ { "title": "{law.distance} ({law.metric})", "small": "SPOT TO GOAL LINE", "src": "{law.src}" } ] } },
-  { "role": "CONTEXT", "shot": "scoreboard", "params": { "card": { "kind": "paper", "k": "{thisLine.year?}", "h": "{thisLine.anchor?}", "p": "{thisLine.source}" } } },
-  { "role": "SETUP", "shot": "scoreboard", "params": { "card": { "kind": "paper", "k": "{thisLine.year?}", "h": "{thisLine.anchor?}", "p": "{thisLine.source}" } } },
-  { "role": "BUILD", "shot": "scoreboard", "params": { "card": { "kind": "paper", "k": "{thisLine.year?}", "h": "{thisLine.anchor?}", "p": "{thisLine.source}" } } },
-  { "role": "TWIST", "shot": "scoreboard", "params": { "card": { "kind": "paper", "k": "{thisLine.year?}", "h": "{thisLine.anchor?}", "p": "{thisLine.source}" } } },
-  { "role": "EXPLANATION", "shot": "measure", "headIf": "spot", "params": { "head": "THE PENALTY SPOT", "labels": [ { "title": "{law.distance} ({law.metric})", "small": "SPOT TO GOAL LINE", "src": "{law.src}" } ] } },
-  { "role": "PAYOFF", "shot": "penalty-run", "headIf": "^$", "params": { "head": "" } }
+ "detect": {
+  "all": [
+   "penalty"
+  ],
+  "any": [
+   "laws of the game",
+   "penalty spot",
+   "introduced"
+  ]
+ },
+ "chips": [
+  "ILLUSTRATION"
  ],
- "model": { "type": "football-flight", "distanceFromLaw": true, "explainer": true, "keeperOptional": true, "drive": { "speed": 24, "aim": { "x": 2.4, "y": 0.8 }, "pitchGuess": 0.05, "yawGuess": 0.2 } }
+ "loop": true,
+ "keywords": [
+  "penalty",
+  "yards",
+  "spot",
+  "laws",
+  "introduced",
+  "scored"
+ ],
+ "beats": [
+  {
+   "role": "HOOK",
+   "shot": "measure",
+   "headIf": "why",
+   "params": {
+    "head": "WHY {law.distance}?",
+    "labels": [
+     {
+      "title": "{law.distance} ({law.metric})",
+      "small": "SPOT TO GOAL LINE",
+      "src": "{law.src}"
+     }
+    ]
+   }
+  },
+  {
+   "role": "CONTEXT",
+   "shot": "fact-graphic",
+   "params": {
+    "card": {
+     "kind": "paper",
+     "k": "{thisLine.year?}",
+     "h": "{thisLine.anchor?}",
+     "p": "{thisLine.source}"
+    },
+    "side": 1
+   }
+  },
+  {
+   "role": "SETUP",
+   "shot": "fact-graphic",
+   "params": {
+    "card": {
+     "kind": "paper",
+     "k": "{thisLine.year?}",
+     "h": "{thisLine.anchor?}",
+     "p": "{thisLine.source}"
+    },
+    "side": -1
+   }
+  },
+  {
+   "role": "BUILD",
+   "shot": "fact-graphic",
+   "params": {
+    "card": {
+     "kind": "paper",
+     "k": "{thisLine.year?}",
+     "h": "{thisLine.anchor?}",
+     "p": "{thisLine.source}"
+    },
+    "side": 1
+   }
+  },
+  {
+   "role": "TWIST",
+   "shot": "fact-graphic",
+   "params": {
+    "card": {
+     "kind": "paper",
+     "k": "{thisLine.year?}",
+     "h": "{thisLine.anchor?}",
+     "p": "{thisLine.source}"
+    },
+    "side": -1
+   }
+  },
+  {
+   "role": "EXPLANATION",
+   "shot": "measure",
+   "headIf": "spot",
+   "params": {
+    "head": "THE PENALTY SPOT",
+    "labels": [
+     {
+      "title": "{law.distance} ({law.metric})",
+      "small": "SPOT TO GOAL LINE",
+      "src": "{law.src}"
+     }
+    ]
+   }
+  },
+  {
+   "role": "PAYOFF",
+   "shot": "penalty-run",
+   "headIf": "^$",
+   "params": {
+    "head": ""
+   }
+  }
+ ],
+ "model": {
+  "type": "football-flight",
+  "distanceFromLaw": true,
+  "explainer": true,
+  "keeperOptional": true,
+  "drive": {
+   "speed": 24,
+   "aim": {
+    "x": 2.4,
+    "y": 0.8
+   },
+   "pitchGuess": 0.05,
+   "yawGuess": 0.2
+  }
+ }
 }

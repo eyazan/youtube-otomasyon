@@ -1,0 +1,22 @@
+{
+ "_doc": "Evidence fields each GoalLore Lab mechanism class needs before the planner may draw it. A field is filled only by a verbatim source quote that contains its value (topic.mechanism.<field> = { value, fact }); the planner checks that the cited fact's quote contains the value and refuses otherwise. Nothing here is a value: it is the list of what research must capture.",
+ "classes": {
+  "curling-free-kick": { "template": "magnus-free-kick", "detect": ["free kick"], "fields": {
+    "foot": "kicking foot (left/right), quoted", "surface": "foot surface (inside/outside/instep), quoted", "distance": "distance to goal (m or yd), quoted",
+    "keeperAction": "what the keeper did (did not move / dived left/right), quoted (optional: drawn as REPRESENTATIVE ready stance)" } },
+  "penalty": { "template": "penalty-chip", "detect": ["penalt"], "fields": {
+    "keeperAction": "keeper's dive and its side (his left/right) or 'did not move', quoted", "placement": "where the ball went (middle, corner, over the bar), quoted",
+    "foot": "kicking foot, quoted (optional: drawn as REPRESENTATIVE)" } },
+  "header-goal": { "template": null, "detect": ["header"], "fields": {
+    "delivery": "how the ball arrived (corner, cross, free kick) and from which side, quoted", "distance": "distance from goal when headed, quoted",
+    "placement": "where the header went (side of goal, past which defender/keeper), quoted" } },
+  "goalkeeper-save": { "template": null, "detect": ["save", "saved"], "fields": {
+    "shotType": "the attempt saved (header, shot) and its direction (down, high, left/right), quoted", "diveDirection": "the keeper's dive side, quoted",
+    "contact": "how the ball was saved (hand, tipped over the bar), quoted" } },
+  "dribble-goal": { "template": null, "detect": ["dribbled past", "dribble"], "fields": {
+    "path": "the run's start and finish on the pitch (halfway line, which flank), quoted or from licensed event data", "beaten": "the players beaten, in order (names or count), quoted",
+    "finish": "how the goal was finished (round the keeper, shot side), quoted" } },
+  "team-move": { "template": null, "detect": ["team goal", "move ran through", "all but two"], "fields": {
+    "passes": "the pass sequence (who to whom, roughly where), from licensed event data or quoted match reports", "finish": "the final pass and finish (side, foot), quoted" } }
+ }
+}

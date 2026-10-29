@@ -7,15 +7,17 @@ name: Pilot 3D review (isolated Three.js pilots, never publishable)
 on:
   push:
     branches: [pilot/gll-magnus-3d]
-    paths: ['pilots/**', '.github/workflows/pilot-3d-review.yml']
+    paths: ['pilots/**', '.github/workflows/pilot-3d-review.yml', '!pilots/**/*.md']
   workflow_dispatch:
 
 permissions:
   contents: read
 
+# a newer push waits for the running review instead of cancelling it (a full review takes about an hour); report-only
+# commits (*.md) do not start one
 concurrency:
   group: pilot-3d-review
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   review:

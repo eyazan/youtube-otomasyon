@@ -35,6 +35,12 @@ const CSS = `
   .card h3 { margin: 0 0 12px; font: 800 40px/1.15 Inter; } .card p { margin: 0; font: 600 30px/1.35 Inter; }
   .card.paper p { color: #39404c; } .card.dark p { color: #c9d3e0; }
   .card .k { font: 700 24px Inter; letter-spacing: .12em; color: var(--accent2); margin-bottom: 12px; }
+  .lt { position: absolute; left: 60px; right: 60px; top: 1150px; display: flex; align-items: stretch; filter: drop-shadow(0 18px 40px rgba(0,0,0,.55)); }
+  .lt .bar { width: 14px; background: var(--accent); border-radius: 4px 0 0 4px; }
+  .lt .body { flex: 1; background: linear-gradient(90deg, rgba(8,12,20,.94), rgba(14,20,32,.88)); padding: 20px 28px; border-radius: 0 10px 10px 0; }
+  .lt .name { font: 800 46px/1.12 Inter; color: #fff; letter-spacing: -.005em; }
+  .lt .src { font: 700 24px Inter; color: #9fb3c9; letter-spacing: .1em; margin-top: 8px; }
+  .yr { position: absolute; left: 56px; top: 400px; font: 800 150px/1 Inter; color: rgba(255,255,255,.08); -webkit-text-stroke: 2px rgba(255,255,255,.55); letter-spacing: -.02em; }
   .gauge { position: absolute; left: 60px; right: 60px; top: 1040px; padding: 18px 24px; border-radius: 14px; background: rgba(0,0,0,.62); }
   .row { display: flex; align-items: center; gap: 18px; font: 600 30px Inter; color: #d4dce8; margin: 14px 0; }
   .dot { width: 24px; height: 24px; border-radius: 50%; flex: none; }
@@ -74,6 +80,9 @@ export const O = {
       <div style="margin-top:14px;height:34px;border-radius:17px;background:#1a2230;position:relative;overflow:hidden"><div style="position:absolute;left:0;top:0;bottom:0;width:${(f * 100).toFixed(1)}%;background:linear-gradient(90deg,#ffb36b,#ff4a2e)"></div>
       ${mark != null ? `<div style="position:absolute;left:${(mark / max * 100).toFixed(1)}%;top:-4px;bottom:-4px;width:4px;background:#fff"></div>` : ""}</div>
       <div style="display:flex;justify-content:space-between;margin-top:10px;font:800 44px Inter"><span>${value.toFixed(0)}${esc(unit)}</span><span style="font:600 24px Inter;color:#b4c2d4;align-self:center">${esc(note)}</span></div></div>`; },
+  // broadcast lower third (name strip + source) and an outlined year, sliding in with progress f (0..1)
+  lowerThird: ({ h = "", p = "", k = "" }, f = 1) => { const e = clamp(f), x = (1 - e) * -80;
+    return `${k ? `<div class="yr" style="opacity:${e.toFixed(3)};transform:translateX(${(x * 0.5).toFixed(1)}px)">${esc(k)}</div>` : ""}<div class="lt" style="opacity:${e.toFixed(3)};transform:translateX(${x.toFixed(1)}px)"><div class="bar"></div><div class="body"><div class="name">${esc(h)}</div>${p ? `<div class="src">${esc(p)}</div>` : ""}</div></div>`; },
   // caption: the current narration cue, keywords highlighted
   caption: (cue, keywords) => cue ? `<div class="cap">${cue.lines.map((l) => l.split(" ").map((w) => keywords.has(w.toLowerCase().replace(/[^a-z0-9]/g, "")) ? `<b>${esc(w)}</b>` : esc(w)).join(" ")).join("<br>")}</div>` : "",
 };

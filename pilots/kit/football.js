@@ -68,25 +68,33 @@ export function buildGoal(scene, goalZ) { const g = new THREE.Group(); scene.add
 // proportions from standard adult anthropometry (segment lengths as fractions of height h); faceless, neutral kits
 export const KITS = { neutral: { shirt: 0x34404f, shorts: 0x1f2630, socks: 0x34404f }, light: { shirt: 0x5a6576, shorts: 0x1f2630, socks: 0x5a6576 },
   keeper: { shirt: 0x9a6b2c, shorts: 0x1f2630, socks: 0x9a6b2c, gloves: 0xe8e2d0 } };
-export function athlete(scene, { h = 1.82, shirt, shorts, socks, skinTone = 0x9a8578, gloves = null } = KITS.neutral) {
+export function athlete(scene, { h = 1.82, shirt, shorts, socks, skinTone = 0x9a8578, hairTone = 0x2a221d, gloves = null } = KITS.neutral) {
   const M = (c, r = 0.75) => new THREE.MeshStandardMaterial({ color: c, roughness: r });
   const mShirt = M(shirt), mShorts = M(shorts), mSock = M(socks), mSkin = M(skinTone, 0.85), mBoot = M(0x101318, 0.5), mGlove = gloves ? M(gloves, 0.6) : mSkin;
   const root = new THREE.Group(); const pelvis = new THREE.Group(); pelvis.position.y = h * 0.53; root.add(pelvis);
   const seg = (rTop, rBot, len, mat) => { const m = new THREE.Mesh(new THREE.CylinderGeometry(rTop, rBot, len, 14), mat); m.position.y = -len / 2; return m; };
   const prof = [[0.15, 0], [0.165, 0.08], [0.16, 0.16], [0.175, 0.26], [0.2, 0.36], [0.205, 0.42], [0.16, 0.47], [0.06, 0.5]].map(([r, y]) => new THREE.Vector2(r * h / 1.82, y * h / 1.82 * 1.05));
-  const torso = new THREE.Mesh(new THREE.LatheGeometry(prof, 18), mShirt); torso.scale.z = 0.68; pelvis.add(torso);
+  // chest: a spine joint above the pelvis, so the upper body can twist and bend against the hips (counter-rotation)
+  const chestY = h * 0.1; const chest = new THREE.Group(); chest.position.y = chestY; pelvis.add(chest);
+  const torso = new THREE.Mesh(new THREE.LatheGeometry(prof, 22), mShirt); torso.scale.z = 0.68; torso.position.y = -chestY; chest.add(torso);
   const hips = new THREE.Mesh(new THREE.CylinderGeometry(0.165, 0.17, 0.2, 16), mShorts); hips.scale.z = 0.72; hips.position.y = -0.02; pelvis.add(hips);
-  const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.055, 0.09, 10), mSkin); neck.position.y = h * 0.29; pelvis.add(neck);
-  const head = new THREE.Mesh(new THREE.SphereGeometry(0.105, 20, 16), mSkin); head.scale.set(0.92, 1.12, 1); head.position.y = h * 0.29 + 0.15; pelvis.add(head);
+  const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.048, 0.058, 0.1, 12), mSkin); neck.position.y = h * 0.29 - chestY; chest.add(neck);
+  const collar = new THREE.Mesh(new THREE.TorusGeometry(0.062, 0.014, 8, 20), mShirt); collar.rotation.x = Math.PI / 2; collar.position.y = h * 0.275 - chestY; chest.add(collar);
+  // head: skull, jaw and a hair cap; no face (generic, no likeness)
+  const headG = new THREE.Group(); headG.position.y = h * 0.29 + 0.06 - chestY; chest.add(headG);
+  const head = new THREE.Mesh(new THREE.SphereGeometry(0.105, 24, 18), mSkin); head.scale.set(0.9, 1.1, 1.0); head.position.y = 0.09; headG.add(head);
+  const jaw = new THREE.Mesh(new THREE.SphereGeometry(0.075, 16, 12), mSkin); jaw.scale.set(0.95, 0.8, 0.95); jaw.position.set(0, 0.03, -0.03); headG.add(jaw);
+  const hair = new THREE.Mesh(new THREE.SphereGeometry(0.11, 24, 12, 0, Math.PI * 2, 0, Math.PI * 0.55), M(hairTone, 0.9)); hair.scale.set(0.92, 1.08, 1.03); hair.position.set(0, 0.1, 0.01); hair.rotation.x = 0.25; headG.add(hair);
   const limbs = {};
   for (const side of [-1, 1]) {
     const hip = new THREE.Group(); hip.position.set(0.095 * side, -0.06, 0); pelvis.add(hip); const thighLen = h * 0.245, shinLen = h * 0.245;
-    hip.add(seg(0.078, 0.06, thighLen, mSkin)); hip.add(seg(0.09, 0.084, thighLen * 0.42, mShorts)); hip.add(new THREE.Mesh(new THREE.SphereGeometry(0.088, 14, 10), mShorts));
+    const thigh = new THREE.Mesh(new THREE.LatheGeometry([[0.05, 0], [0.068, 0.12], [0.08, 0.42], [0.072, 0.78], [0.062, 1]].map(([r, y]) => new THREE.Vector2(r, -y * thighLen)), 16), mSkin);
+    thigh.scale.z = 0.92; hip.add(thigh); hip.add(seg(0.094, 0.088, thighLen * 0.45, mShorts)); hip.add(new THREE.Mesh(new THREE.SphereGeometry(0.088, 14, 10), mShorts));
     const knee = new THREE.Group(); knee.position.y = -thighLen; hip.add(knee); knee.add(new THREE.Mesh(new THREE.SphereGeometry(0.062, 14, 10), mSkin));
     knee.add(seg(0.056, 0.04, shinLen, mSock)); const calf = new THREE.Mesh(new THREE.SphereGeometry(0.06, 12, 10), mSock); calf.scale.set(0.95, 1.6, 0.95); calf.position.set(0, -shinLen * 0.3, 0.015); knee.add(calf);
     const ankle = new THREE.Group(); ankle.position.y = -shinLen; knee.add(ankle); ankle.add(new THREE.Mesh(new THREE.SphereGeometry(0.045, 12, 8), mSock));
     const boot = new THREE.Mesh(new THREE.CapsuleGeometry(0.045, 0.17, 6, 12), mBoot); boot.rotation.x = Math.PI / 2; boot.scale.set(1.05, 1, 0.8); boot.position.set(0, -0.04, -0.06); ankle.add(boot);
-    const sh = new THREE.Group(); sh.position.set(0.2 * side * h / 1.82, h * 0.25, 0); pelvis.add(sh); const upLen = h * 0.17, foreLen = h * 0.15;
+    const sh = new THREE.Group(); sh.position.set(0.2 * side * h / 1.82, h * 0.25 - chestY, 0); chest.add(sh); const upLen = h * 0.17, foreLen = h * 0.15;
     sh.add(seg(0.048, 0.042, upLen, mSkin)); sh.add(seg(0.058, 0.053, upLen * 0.48, mShirt)); sh.add(new THREE.Mesh(new THREE.SphereGeometry(0.062, 14, 10), mShirt));
     const elbow = new THREE.Group(); elbow.position.y = -upLen; sh.add(elbow); elbow.add(seg(0.04, 0.032, foreLen, mSkin)); elbow.add(new THREE.Mesh(new THREE.SphereGeometry(0.044, 12, 8), mSkin));
     const hand = new THREE.Mesh(new THREE.SphereGeometry(0.045, 12, 10), mGlove); hand.scale.set(0.8, 1.2, 0.5); hand.position.y = -foreLen - 0.04; elbow.add(hand);
@@ -96,33 +104,41 @@ export function athlete(scene, { h = 1.82, shirt, shorts, socks, skinTone = 0x9a
   root.pose = (p) => { for (const k of ["L", "R"]) { const q = p[k] || {}; const L = limbs[k]; const sgn = k === "L" ? -1 : 1;
       L.hip.rotation.set(q.hip || 0, 0, (q.hipOut || 0) * sgn); L.knee.rotation.set(-(q.knee || 0), 0, 0); L.ankle.rotation.set(q.ankle || 0, 0, 0);
       L.sh.rotation.set(q.sh || 0, 0, (q.shOut || 0.08) * sgn); L.elbow.rotation.set(q.elbow || 0, 0, 0); }
-    pelvis.rotation.set(p.lean || 0, p.twist || 0, p.tilt || 0); pelvis.position.y = h * 0.53 - (p.drop || 0); return root; };
+    pelvis.rotation.set(p.lean || 0, p.twist || 0, p.tilt || 0); pelvis.position.y = h * 0.53 - (p.drop || 0);
+    chest.rotation.set(p.chestBend || 0, p.chestTwist || 0, p.chestSide || 0); headG.rotation.set(p.nod || 0, p.look || 0, 0); return root; };
   root.limbs = limbs; root.h = h; root.pose({}); scene.add(root); return root;
 }
 
 // motion library (angles in radians; all REPRESENTATIVE). Each returns a pose object for athlete.pose().
-const mir = (p) => ({ ...p, L: p.R, R: p.L, twist: -(p.twist || 0), tilt: -(p.tilt || 0) });
+const mir = (p) => ({ ...p, L: p.R, R: p.L, twist: -(p.twist || 0), tilt: -(p.tilt || 0), chestTwist: -(p.chestTwist || 0), chestSide: -(p.chestSide || 0), look: -(p.look || 0) });
+const seg3 = (u, a, b, c, m = 0.5) => (u < m ? lerp(a, b, ease(u / m)) : lerp(b, c, ease((u - m) / (1 - m))));
 export const MOTION = {
   stand: () => ({ L: { sh: 0.05, elbow: 0.15 }, R: { sh: 0.05, elbow: 0.15 } }),
   wall: () => ({ L: { sh: 0.5, shOut: -0.35, elbow: 1.2, hipOut: 0.04 }, R: { sh: 0.5, shOut: -0.35, elbow: 1.2, hipOut: 0.04 } }),
   keeperReady: () => ({ lean: 0.22, drop: 0.12, L: { hip: 0.45, knee: 0.7, ankle: 0.25, sh: 0.5, shOut: 0.55, elbow: 0.6, hipOut: 0.12 }, R: { hip: 0.45, knee: 0.7, ankle: 0.25, sh: 0.5, shOut: 0.55, elbow: 0.6, hipOut: 0.12 } }),
-  // gait cycle, phase in [0,1): opposite arm and leg swing, knee flexes in the swing phase, small vertical bounce
-  run: (ph, speed = 1) => { const a = ph * Math.PI * 2, s = Math.sin(a), c = Math.cos(a); const amp = 0.55 * speed;
-    return { lean: 0.12 * speed, drop: 0.03 * Math.abs(c),
-      L: { hip: amp * s, knee: 0.25 + 0.9 * speed * Math.max(0, -s), ankle: 0.2 * s, sh: -0.6 * amp * s, elbow: 1.2 },
-      R: { hip: -amp * s, knee: 0.25 + 0.9 * speed * Math.max(0, s), ankle: -0.2 * s, sh: 0.6 * amp * s, elbow: 1.2 } }; },
-  // strike, u: 0 backswing .. 0.55 contact .. 1 follow-through; foot 'L' or 'R'; style changes the swing and the lean
-  kick: (u, foot = "R", style = "drive") => { const S = { drive: [-0.9, 0.3, 1.1, 1.5, 0.55], outside: [-0.9, 0.3, 1.1, 1.5, 0.55], chip: [-0.5, 0.15, 0.45, 1.1, 0.35] }[style] || [-0.9, 0.3, 1.1, 1.5, 0.55];
-    const [back, contact, follow, kb, kc] = S; const pre = u < 0.55;
-    const swing = pre ? lerp(back, contact, ease(u / 0.55)) : lerp(contact, follow, ease((u - 0.55) / 0.45));
-    const kneeBend = pre ? lerp(kb, kc, ease(u / 0.55)) : lerp(kc, 0.15, (u - 0.55) / 0.45);
-    const p = { lean: style === "chip" ? -0.18 : -0.12, tilt: 0.12, twist: -0.18 + swing * 0.15,
-      L: { hip: swing, knee: kneeBend, ankle: style === "chip" ? 0.1 : 0.6, hipOut: -0.06, sh: -0.3, shOut: 0.6, elbow: 0.4 },
-      R: { hip: -0.05, knee: 0.12, ankle: 0.05, hipOut: 0.05, sh: 0.4, shOut: 0.45, elbow: 0.5 } };
+  // gait cycle, phase in [0,1): opposite arm and leg, elbows near 90 degrees, knee drive in swing, the chest counter-rotates
+  // against the hips, a small vertical bounce (REPRESENTATIVE; proportions of a running stride, not motion capture)
+  run: (ph, speed = 1) => { const a = ph * Math.PI * 2, s = Math.sin(a), c = Math.cos(a); const amp = 0.6 * speed;
+    return { lean: 0.1 * speed, chestBend: 0.08 * speed, twist: -0.12 * s * speed, chestTwist: 0.2 * s * speed, drop: 0.035 * Math.abs(c), nod: -0.05,
+      L: { hip: amp * s + 0.1, knee: 0.3 + 1.4 * speed * Math.max(0, -s) ** 1.3, ankle: 0.25 * s, sh: -0.75 * amp * s, shOut: 0.12, elbow: 1.45 },
+      R: { hip: -amp * s + 0.1, knee: 0.3 + 1.4 * speed * Math.max(0, s) ** 1.3, ankle: -0.25 * s, sh: 0.75 * amp * s, shOut: 0.12, elbow: 1.45 } }; },
+  // strike, u: 0 .. 0.3 backswing (hip extended, knee flexed ~100 deg) .. 0.55 contact .. 1 follow-through. Contact angles
+  // are the probed ones (the boot meets the ball at u = 0.55); the arm opposite the kicking leg opens wide for balance,
+  // the hips turn into the kick while the chest counter-rotates, the head stays over the ball. Phases after the
+  // instep-kick literature (Lees & Nolan 1998; Lees et al. 2010); angles REPRESENTATIVE, not measured for any player.
+  kick: (u, foot = "R", style = "drive") => { const chip = style === "chip";
+    const [back, contact, follow] = chip ? [-0.35, 0.15, 0.55] : [-0.6, 0.3, 1.15]; const [kb, kc, kf] = chip ? [1.3, 0.35, 0.2] : [1.8, 0.55, 0.15];
+    const hipA = u < 0.3 ? lerp(-0.1, back, ease(u / 0.3)) : u < 0.55 ? lerp(back, contact, ease((u - 0.3) / 0.25) ** 1.4) : lerp(contact, follow, ease((u - 0.55) / 0.45));
+    const kneeA = u < 0.3 ? lerp(0.4, kb, ease(u / 0.3)) : u < 0.55 ? lerp(kb, kc, ((u - 0.3) / 0.25) ** 1.6) : lerp(kc, kf, ease((u - 0.55) / 0.45));
+    const turn = seg3(u, -0.3, 0.05, 0.3, 0.55);
+    const p = { lean: chip ? -0.2 : seg3(u, 0.05, -0.12, 0.05, 0.55), tilt: 0.16, twist: turn, chestTwist: -0.7 * turn, chestBend: seg3(u, 0.1, 0.2, 0.05, 0.55), chestSide: -0.08, nod: 0.45, drop: 0.04,
+      L: { hip: hipA, knee: kneeA, ankle: chip ? 0.1 : 0.6, hipOut: -0.06, sh: seg3(u, 0.5, -0.1, -0.5, 0.55), shOut: 0.45, elbow: 0.5 },
+      R: { hip: seg3(u, 0.05, 0.18, 0.05, 0.55), knee: seg3(u, 0.2, 0.38, 0.2, 0.55), ankle: 0.1, hipOut: 0.05, sh: seg3(u, -0.1, 0.35, 0.6, 0.55), shOut: seg3(u, 0.9, 1.35, 1.0, 0.55), elbow: 0.35 } };
     return foot === "L" ? p : mir(p); },
   // goalkeeper dive toward the keeper's own left (+x when facing +z) or right; u 0..1; returns pose + root offset
   dive: (u, dir = "left") => { const e = ease(u); const s = dir === "left" ? 1 : -1;
-    return { pose: { lean: 0.1, tilt: 1.25 * e * s, L: { hip: 0.3, knee: 0.4 * (1 - e) + 0.2, sh: 2.6 * e, shOut: 0.4, elbow: 0.2 }, R: { hip: 0.3, knee: 0.5, sh: 2.4 * e, shOut: 0.4, elbow: 0.2 } },
+    // body nearly horizontal, both arms stretched overhead toward the dive, the leading leg pushing off (REPRESENTATIVE)
+    return { pose: { lean: 0.1, tilt: 1.25 * e * s, chestSide: 0.15 * e * s, look: 0.3 * e * s, L: { hip: 0.3 + 0.2 * e, knee: 0.4 * (1 - e) + 0.15, sh: 2.9 * e, shOut: 0.25, elbow: 0.15 }, R: { hip: 0.25, knee: 0.5 - 0.3 * e, sh: 2.9 * e, shOut: 0.25, elbow: 0.15 } },
       offset: [s * 1.9 * e, 0.55 * Math.sin(Math.PI * Math.min(1, u * 1.2)) - 0.45 * e, 0] }; },
 };
 
