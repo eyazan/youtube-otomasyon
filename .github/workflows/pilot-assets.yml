@@ -1,0 +1,34 @@
+name: Pilot assets discovery (review only, never publishable)
+
+# Lists free (CC0) character and animation packs for the isolated Three.js pilots: licence lines, files, archive contents
+# and sha256 (scripts/pilot-assets/discover.sh), then converts the pinned manifest's assets for a motion test. Nothing is
+# committed, uploaded or wired into production. Runs only on the pilot branch.
+on:
+  push:
+    branches: [pilot/gll-magnus-3d]
+    paths: ['scripts/pilot-assets/**', '.github/workflows/pilot-assets.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pilot-assets
+  cancel-in-progress: false
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Discover
+        run: |
+          bash scripts/pilot-assets/discover.sh \
+            https://opengameart.org/content/universal-animation-library \
+            https://opengameart.org/content/universal-animation-library-2 \
+            https://opengameart.org/content/universal-base-characters \
+            https://kenney.nl/assets/animated-characters-1 \
+            https://kenney.nl/assets/blocky-characters \
+            https://quaternius.com/packs/universalanimationlibrary.html \
+            https://quaternius.com/packs/universalbasecharacters.html | tee -a "$GITHUB_STEP_SUMMARY"
