@@ -1,0 +1,199 @@
+{
+ "schema": "bto-studio.review-package.v1",
+ "channel": "impossible-brief",
+ "topicId": "IB-HUM-050",
+ "slug": "what-if-your-microbes-disappeared",
+ "verdict": "SHADOW_OF_LIVE_NOT_PUBLISHABLE",
+ "pilot": null,
+ "researchPending": null,
+ "shadow": true,
+ "autoPublish": false,
+ "uploadAttempted": false,
+ "mode": "preview",
+ "quality": "final",
+ "createdAt": "2026-10-29T05:50:00.960Z",
+ "video": "../../_temp/review/IB-HUM-050/out/what-if-your-microbes-disappeared-premium-final.mp4",
+ "voice": {
+  "used": "en-US-BrianMultilingualNeural",
+  "approved": true,
+  "approvedVoice": {
+   "provider": "edge-tts",
+   "voice": "en-US-BrianMultilingualNeural",
+   "rate": "+2%"
+  },
+  "note": null,
+  "wordTiming": "measured (Edge word boundaries)"
+ },
+ "narrationUnchanged": {
+  "sourceHash": "0ad0fc6a571086fb",
+  "lines": [
+   "Why your microbes carry 100 times your genes.",
+   "About 2 million bacterial genes, against 20,000 human ones.",
+   "More than 10,000 microbial species live in and on us.",
+   "They digest food and help train your immune system.",
+   "Without them, harmful microbes could move in.",
+   "Restoring gut microbes cures 85 to 90% of some stubborn infections.",
+   "So your body works as a partnership, not a solo act."
+  ]
+ },
+ "traceability": [
+  {
+   "scene": "s1-hook",
+   "lines": [
+    "L1"
+   ],
+   "purpose": "Hook: frame 0 shows the micro itself and the claim's number (100 times) lands as a readout, so the scale of the question is visible before it is explained.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "The number of bacterial genes is estimated to be 2 million, 100 times the number of approximately 20,000 human genes.",
+     "source": "Wikipedia — Human microbiome",
+     "url": "https://en.wikipedia.org/wiki/Human_microbiome"
+    }
+   ]
+  },
+  {
+   "scene": "s2-measure",
+   "lines": [
+    "L2"
+   ],
+   "purpose": "Number: the cited value (2 million) lands as a large readout over the subject while the camera pushes in, so the quantity is held on screen as it is spoken.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "The number of bacterial genes is estimated to be 2 million, 100 times the number of approximately 20,000 human genes.",
+     "source": "Wikipedia — Human microbiome",
+     "url": "https://en.wikipedia.org/wiki/Human_microbiome"
+    }
+   ]
+  },
+  {
+   "scene": "s3-measure",
+   "lines": [
+    "L3"
+   ],
+   "purpose": "Number: the cited value (10,000) lands as a large readout over the subject while the camera pushes in, so the quantity is held on screen as it is spoken.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F2",
+     "claim": "The researchers calculated that more than 10,000 microbial species occupy the human ecosystem.",
+     "source": "Wikipedia — Human microbiome",
+     "url": "https://en.wikipedia.org/wiki/Human_microbiome"
+    }
+   ]
+  },
+  {
+   "scene": "s4-mechanism",
+   "lines": [
+    "L4"
+   ],
+   "purpose": "Mechanism: the subject stays on screen while the key idea is set in two or three words; known science.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "The number of bacterial genes is estimated to be 2 million, 100 times the number of approximately 20,000 human genes.",
+     "source": "Wikipedia — Human microbiome",
+     "url": "https://en.wikipedia.org/wiki/Human_microbiome"
+    }
+   ]
+  },
+  {
+   "scene": "s5-mechanism",
+   "lines": [
+    "L5"
+   ],
+   "purpose": "Mechanism: the microbe population thins out as the line describes it; an estimate, chipped as such.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "The number of bacterial genes is estimated to be 2 million, 100 times the number of approximately 20,000 human genes.",
+     "source": "Wikipedia — Human microbiome",
+     "url": "https://en.wikipedia.org/wiki/Human_microbiome"
+    }
+   ]
+  },
+  {
+   "scene": "s6-measure",
+   "lines": [
+    "L6"
+   ],
+   "purpose": "Number: the cited value (85–90 %) lands as a large readout over the subject while the camera pushes in, so the quantity is held on screen as it is spoken.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F3",
+     "claim": "Fecal microbiota transplant is approximately 85–90% effective in people with CDI for whom antibiotics have not worked or in whom the disease recurs following antibiotics.",
+     "source": "Wikipedia — Human microbiome",
+     "url": "https://en.wikipedia.org/wiki/Human_microbiome"
+    }
+   ]
+  },
+  {
+   "scene": "s7-payoff",
+   "lines": [
+    "L7"
+   ],
+   "purpose": "Payoff: the answer in a few words over the opening composition; the camera eases back to the frame-0 framing so the Short loops on its first image.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "The number of bacterial genes is estimated to be 2 million, 100 times the number of approximately 20,000 human genes.",
+     "source": "Wikipedia — Human microbiome",
+     "url": "https://en.wikipedia.org/wiki/Human_microbiome"
+    }
+   ]
+  }
+ ],
+ "licensing": {
+  "visuals": "all visuals drawn in-house from code (SVG): starfield, bodies, slices, ladders and orbits are original; no photographs or third-party media",
+  "fonts": "SIL OFL 1.1 (@fontsource Inter, Source Serif 4, Barlow Semi Condensed 5.3.0)",
+  "audio": "narration TTS + effects/music synthesised by scripts/bto-studio/audio/sound_design.py (no samples)",
+  "thirdPartyMedia": []
+ },
+ "qa": {
+  "objectivePass": true,
+  "report": "../../_temp/review/IB-HUM-050/out/qa-report.md",
+  "contactSheet": "../../_temp/review/IB-HUM-050/out/contact-sheet.png",
+  "sceneSheet": "../../_temp/review/IB-HUM-050/out/scene-sheet.png",
+  "failures": [
+   "UNVERIFIED audio samples clipped: not reported by this FFmpeg build (astats has no clipped-sample count)",
+   "WARN loop continuity (last -> first frame): whole 12, photo region 23.67, final-second step 0.26, ratio 16.46",
+   "WARN no static hold >= 1.5 s inside a scene (visual change target): longest 1.6 s (s6-measure)"
+  ],
+  "unverified": [
+   "audio samples clipped"
+  ]
+ },
+ "audio": {
+  "integratedLufs": -14,
+  "truePeakDbtp": -2
+ },
+ "performance": {
+  "renderWallSec": 104,
+  "msPerFrame": 124.1,
+  "workers": 3,
+  "peakChromiumRssMb": 3891,
+  "cachedSegments": 0,
+  "segments": 7,
+  "host": "linux x64 4 cpu 16 GB",
+  "totalPipelineSec": 171.3
+ },
+ "cost": {
+  "llmUsd": 0,
+  "ttsUsd": 0,
+  "renderUsd": 0,
+  "note": "local rendering and free/offline TTS; LLM use only when a Claude storyboard draft was requested and approved"
+ },
+ "approvalsNeeded": [
+  "voice: re-narrate with the approved Edge voice (if PREVIEW_ONLY)",
+  "creative sign-off (video-quality-review findings)",
+  "factual sign-off on the traceability table",
+  "owner decision to hand the MP4 to the normal pipeline (never automatic)"
+ ]
+}
