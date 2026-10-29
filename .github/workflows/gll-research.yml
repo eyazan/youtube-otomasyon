@@ -55,6 +55,11 @@ jobs:
           node scripts/gll-research/verify.js "${ARGS[@]}" | tee -a "$GITHUB_STEP_SUMMARY"
           # The Hidden Logic of Things: hand-drafted answers to existing universe questions, same verbatim verification
           node scripts/gll-research/verify.js --channel behind-the-ordinary "${ARGS[@]/gll-research-report.json/hlt-research-report.json}" | tee -a "$GITHUB_STEP_SUMMARY"
+      # research branch only: print each mechanism fact's verified quote (or the nearest sentences) for review
+      - name: Mechanism evidence quotes (review)
+        if: always()
+        run: |
+          node -e "const r=require('./gll-research-report.json');const L=Array.isArray(r)?r:(r.topics||r.results||Object.values(r));console.log(JSON.stringify(L,null,1).slice(0,60000))" || cat gll-research-report.json | head -c 60000
       - uses: actions/upload-artifact@v4
         if: always()
         with:
