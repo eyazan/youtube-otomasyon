@@ -66,11 +66,14 @@ test("routing: premium is primary only for the premium-only channel or by its re
 });
 
 test("publication policies: only the owner signs; unsigned channels never publish unattended", () => {
-  // Failure Reconstructed was signed by the owner on 2026-10-28 (decision B); every other channel stays UNSIGNED
-  const fr = Publish.policy(Channel.getChannel("failure-reconstructed"));
-  assert.equal(fr.ok, true); assert.equal(fr.policy.signedBy, "eyazan"); assert.match(fr.policy.approval, /Owner approval 2026-10-28/);
-  assert.equal(Publish.policyActive(Channel.getChannel("failure-reconstructed"), {}), false, "a signed policy still needs FR_PREMIUM_PUBLISH=1");
-  for (const slug of ["impossible-brief", "behind-the-ordinary", "goal-lore-lab"]) {
+  // Failure Reconstructed (2026-10-28, decision B) and ImpossibleBrief (2026-10-29, first publication IB-PHY-065) were
+  // signed by the owner; every other channel stays UNSIGNED
+  for (const [slug, P] of [["failure-reconstructed", "FR"], ["impossible-brief", "IB"]]) {
+    const s = Publish.policy(Channel.getChannel(slug));
+    assert.equal(s.ok, true, slug); assert.equal(s.policy.signedBy, "eyazan"); assert.match(s.policy.approval, /Owner approval 2026-10-2[89]/);
+    assert.equal(Publish.policyActive(Channel.getChannel(slug), {}), false, `a signed policy still needs ${P}_PREMIUM_PUBLISH=1`);
+  }
+  for (const slug of ["behind-the-ordinary", "goal-lore-lab"]) {
     const ch = Channel.getChannel(slug); const p = Publish.policy(ch);
     assert.equal(p.ok, false, slug); assert.match(p.why, /not SIGNED/); assert.equal(p.policy.channel, slug); assert.equal(p.policy.signedBy, null);
     assert.equal(Publish.policyActive(ch, { [`${{ "failure-reconstructed": "FR", "impossible-brief": "IB", "behind-the-ordinary": "HLT", "goal-lore-lab": "GLL" }[slug]}_PREMIUM_PUBLISH`]: "1" }), false);
