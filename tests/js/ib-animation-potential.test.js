@@ -19,8 +19,12 @@ test("drawings the engine gets wrong score 0: one silhouette (IB-HUM-004), a spi
   assert.equal(ib("IB-FUT-045").score, 0, "superconductors are not an ocean current");
 });
 
-test("worlds the engine draws for the topic's own mechanism earn credit (field, current, lake, cutaway)", () => {
-  for (const [id, w] of [["IB-EAR-019", "magnetic"], ["IB-EAR-071", "current"], ["IB-EAR-066", "lake"], ["IB-PHY-065", "earth-interior"]]) {
+test("worlds whose real MP4 misshowed the mechanism earn nothing: current (EAR-071), lake (EAR-066), micro (HUM-050)", () => {
+  for (const id of ["IB-EAR-071", "IB-EAR-066", "IB-HUM-050"]) { const a = ib(id); assert.equal(a.score, 0, id); assert.ok(a.reasons.some((r) => /review render/.test(r)), a.reasons.join("; ")); }
+});
+
+test("worlds whose real MP4 showed the mechanism earn credit (magnetic field, cutaway)", () => {
+  for (const [id, w] of [["IB-EAR-019", "magnetic"], ["IB-PHY-065", "earth-interior"]]) {
     const a = ib(id); assert.equal(a.world, w, id); assert.ok(a.score >= 70, `${id} ${a.score}`); assert.equal(a.drawable, true);
   }
 });

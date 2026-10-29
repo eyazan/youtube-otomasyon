@@ -40,10 +40,16 @@ function forFailureReconstructed(topic) {
 // own mechanism (review renders 2026-10-28: IB-PHY-065 cutaway PASS; IB-HUM-004 one silhouette FAIL; IB-EXT-047 a spin
 // drawn as an orbit). Anything the engine would draw wrongly scores 0, so it is never lifted above its archival score.
 // Analysis only until the owner approves it for production (no growth-engine.json sets visuals.source for IB).
+// Credit only for worlds whose real MP4 showed the mechanism correctly (review renders 2026-10-28/29): earth-interior
+// (IB-PHY-065) and magnetic (IB-EAR-019). current (IB-EAR-071: a contradicting ICE AGE headline, one globe in every
+// scene), lake (IB-EAR-066: 3 °C water drawn glowing red-hot, the lake never shown) and micro (IB-HUM-050: restoring
+// microbes drawn as a thinning population) score 0 until a render shows them right; worlds not yet rendered keep a
+// provisional base and must pass a review render before any topic is counted as stock.
 const WORLD_IB = {
-  "earth-interior": 70, magnetic: 70, current: 70, lake: 66, "ocean-depth": 66, micro: 62, "orbit-body": 62, orbit: 40,
+  "earth-interior": 70, magnetic: 70, current: 0, lake: 0, "ocean-depth": 66, micro: 0, "orbit-body": 62, orbit: 40,
   "earth-surface": 48, sky: 48, cosmos: 0, body: 0,
 };
+const UNVALIDATED_IB = { current: "IB-EAR-071 review render", lake: "IB-EAR-066 review render", micro: "IB-HUM-050 review render" };
 const MECH_IB = new Set(["cut", "zoom", "flow", "heat", "count", "year"]);
 const OTHER_BODY = /\b(io|europa|titan|enceladus|mars|venus|mercury|jupiter|saturn|neptune|uranus|pluto|proxima|moon)\b/i;
 // an eruption whose mechanism happens at or above the surface (a flank collapse and lateral blast, a gas or ash cloud)
@@ -65,7 +71,7 @@ function forImpossibleBrief(topic) {
   if (["earth-interior", "ocean-depth", "lake", "current", "magnetic", "earth-surface", "sky"].includes(W) && OTHER_BODY.test(title) && !/\bearth\b/i.test(title)) why.push("an Earth drawing for another body");
   if (W === "orbit" && /\b(spin|spun|spinning|rotation|rotate|day length)\b/i.test(title + " " + mechText)) why.push("a spin drawn as an orbit");
   if (W === "earth-interior" && SURFACE_ERUPTION.test(mechText) && !INTERIOR.test(mechText)) why.push("a surface eruption (blast, gas, ash) drawn as a cutaway");
-  if (score === 0) why.push(W === "body" ? "one generic silhouette in every scene" : "a generic planet unrelated to the subject");
+  if (score === 0) why.push(UNVALIDATED_IB[W] ? `the ${W} drawing misshowed the mechanism (${UNVALIDATED_IB[W]})` : W === "body" ? "one generic silhouette in every scene" : "a generic planet unrelated to the subject");
   if (why.length) return { score: 0, world: W, drawable: false, reasons: [...reasons, ...why] };
   const kinds = sb.scenes.map((s) => s.id.replace(/^s\d+-/, ""));
   const ladders = sb.scenes.some((s) => s.layers.some((l) => l.component === "scale-ladder"));
