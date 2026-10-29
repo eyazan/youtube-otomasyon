@@ -128,24 +128,47 @@ Tifo Football için handle doğrulanamadı; verileri **doğrulanmadı**.
 | Remotion | Orta (aynı vektör) | Orta | Benzer | Hayır | Tam | Ticari lisans şartı var (kurum büyüklüğüne göre ücret) | Olası | **Hayır**: R1–R3'ü çözmez |
 | 2.5D katman (mevcut sayfa) + fotoğraf plakaları | Orta–yüksek | Düşük | ~4–6 dk | Hayır | Tam | Varlık lisansına bağlı | Yok | **Evet**: IB/FR için ilk adım |
 | Blender (Cycles CPU / Eevee) | Yüksek (Jared Owen tipi) | Orta–yüksek | Cycles CPU 1080×1920, ~30 s: **saatler**; Eevee headless: GH'de GPU yok, sınırlı | Fiilen evet | Kısmi (model kütüphanesi gerekir) | Model lisansına bağlı | Yok (açık kaynak) | **Pilot ile kanıtlanmalı**: yalnızca HLT/FR nesne yakın planları için |
-| Three.js (mevcut Chromium içinde WebGL) | Orta–yüksek (gerçek zamanlı 3D, ışık) | Orta | ~4–8 dk (SwiftShader/CPU) | Hayır (yazılım render) | Tam | Model lisansı | Yok | **Evet, pilot**: mevcut render.js'e en düşük entegrasyon maliyeti |
+| Three.js (mevcut Chromium içinde WebGL) | Orta–yüksek (gerçek zamanlı 3D, ışık) | Orta | ~4–8 dk (SwiftShader/CPU) | Hayır (yazılım render) | Tam | Model lisansı | Yok | **İzole pilot onaylı** (`pilots/`, ayrı `package.json`); production entegrasyonu ayrı karar (aşağıda) |
 | Veri tabanlı futbol (açık event/tracking verisi) | Yüksek (gerçek konumlar) | Orta | ~3–5 dk | Hayır | Tam | Veri lisansı **doğrulanmalı** (StatsBomb Open Data, Metrica sample) | Yok | **Evet**: GLL "Moment" ve "Decision" için |
 | AI video/görsel üretimi | Değişken; fiziksel doğruluk zayıf | Düşük | Dakikalar | Bulut | Kısmi | Yüksek (eğitim verisi, benzerlik) | **Ücretli** | **Hayır** (onaysız ücretli servis yok; doğruluk riski) |
 
 **Önerilen V2 (pilotla kanıtlanacak):**
 1. **Görsel Yönetmen katmanı (R1).**
-   - Her konu için önce bir "görsel fikir" (tek güçlü metafor/mekanizma) ve sahne listesi yazılır. Bunu kayıtlı
-     araştırma + insan onaylı bir yönetmenlik JSON'u olarak yapacağız; LLM çağrısı yok, maliyet yok.
-   - Üreteç bunu uygular; regex yalnızca yedek.
-   - Mekanizma gösterilemiyorsa sahne yanlış çizilmez: `CREATIVE_REVIEW_REQUIRED`.
+   - Her konu için önce bir "görsel plan" üretilir: tek güçlü mekanizma, sahne listesi, çekim tipi, her sahnenin
+     dayandığı kaynak (claim id). LLM çağrısı yok, maliyet yok.
+   - **Hedef otomatik çalışmadır; insan onayı kalıcı bağımlılık değildir.**
+     - *Pilot aşaması:* plan elle yazılır ve insan onaylar. Amaç, hangi plan kurallarının doğru sonuç verdiğini
+       gerçek MP4 ile öğrenmek.
+     - *Geçiş:* her onaylı pilot planı bir şablona dönüşür. Şablon, konunun kayıtlı araştırmasındaki mekanizma
+       etiketleri (ör. `MAGNUS`, `DYNAMO`, `ESCAPEMENT`) ile eşleşir.
+     - *Kalıcı:* plan, araştırma kayıtlarından otomatik üretilir. Plandaki her sahne bir claim id'ye bağlı
+       olmalıdır. Kaynağı olmayan sahne plana giremez.
+   - **Yanlış mekanizma güvenli biçimde reddedilir (fail-closed):**
+     - Plan üretilemezse sahne yanlış çizilmez; konu `CREATIVE_REVIEW_REQUIRED` olur ve yayına gitmez.
+     - Reddetme nedenleri: mekanizma etiketi için şablon yok, sahne kaynağa bağlanamıyor, başlıktaki dünya ile
+       sahne dünyası çelişiyor (Laki, St. Helens, EAR-071, HUM-050, EAR-066 vakaları).
+     - Kanal günü kaçırmaz: sıradaki nitelikli konuya geçilir; stok bitmişse o gün yayın yapılmaz. Yanlış video
+       hiçbir zaman yayına "yedek" olarak çıkmaz.
+     - İnsan yalnızca reddedilen konuları ve yeni şablonları görür; rutin konular onay beklemez.
+   - Regex eşlemesi (bugünkü `auto/*.js`) yalnızca şablonu olan mekanizmalarda yedek olarak kalır; tek başına
+     sahne seçemez.
 2. **Konuya özgü varlık kütüphanesi (R2, R3).** Lisansı doğrulanmış kaynaklar:
    - NASA ve ABD kamu kurumu görüntüleri (kamu malı)
    - Wikimedia Commons CC-BY/CC0 (mevcut varlık kaydı üzerinden)
    - Doğru geometriye sahip modeller: CC0/CC-BY kaynaklı veya kendi çizimimiz
    - Kayıt dışı varlık kullanılmaz.
-3. **Three.js sahne bileşeni (R2, R4).**
-   - Mevcut Chromium sayfasında gerçek 3D nesne, ışık, kamera yolu, kesit düzlemi (clipping plane).
-   - Determinizm korunur: `draw(t)` ile kamera ve ışık t'nin fonksiyonu.
+3. **Three.js sahne bileşeni (R2, R4) — iki ayrı adım.**
+   - **3a. İzole pilot (onaylandı, 29 Ekim):**
+     - Yalnızca `pilots/gll-magnus-3d/` altında; kendi `package.json` dosyası (`three@0.170.0` sabit).
+     - Kök `package.json`, `scripts/bto-studio/` ve production workflow'ları değişmez. Production render hattı
+       Three.js'i bilmez.
+     - Pilot çıktısı yalnızca inceleme içindir; yükleme yoluna bağlanamaz.
+   - **3b. Production entegrasyonu (ayrı karar; onay gerekli):**
+     - Şartlar: pilotun gerçek MP4'ü, mevcut motorla aynı ses ve altyazı üzerinden yan yana karşılaştırma,
+       ölçülmüş render süresi (GH Actions CPU), determinizm kanıtı ve görsel kalite değerlendirmesi.
+     - Ancak bundan sonra `scripts/bto-studio` içine bir sahne türü olarak eklenir.
+   - Teknik ilke (her iki adımda): mevcut Chromium sayfasında gerçek 3D nesne, ışık, kamera yolu, kesit düzlemi.
+     Determinizm korunur: `renderAt(t)` ile kamera, ışık ve nesneler t'nin fonksiyonudur.
 4. **Kamera ve kurgu dili (R4).** Sahne amacına göre çekim tipi:
    - kuruluş çekimi
    - içeri girme
@@ -235,17 +258,20 @@ Qualification.
 | Öncelik | İş | Bağımlılık | Kabul kriteri | Kanıt |
 |---|---|---|---|---|
 | P0 | IB-PHY-065 yükleme doğrulaması (bugün) | Zamanlanmış çalıştırma | Video ID, kanal ID, private, publishAt = 18:00Z | events.jsonl + YouTube API |
-| P0 | Metin-tabanlı yanlış mekanizma koruması: gösterilemeyen mekanizma → `CREATIVE_REVIEW_REQUIRED` | — | Laki, St. Helens, EAR-071, HUM-050, EAR-066 tipi vakalar otomatik yayına giremez | Test + review render |
+| P0 | Yanlış mekanizma koruması (fail-closed): şablonu olmayan veya kaynağa bağlanamayan mekanizma → `CREATIVE_REVIEW_REQUIRED`, yayına gitmez | — | Laki, St. Helens, EAR-071, HUM-050, EAR-066 tipi vakalar otomatik yayına giremez | Test + review render |
 | P0 | Yaratıcı rapor yayın kapısında zorunlu alan (teknik PASS ≠ yaratıcı PASS) | Creative Director şeması | Yaratıcı rapor olmadan PUBLISH_APPROVED yok (policy kapsamında) | Kapı testi |
-| P1 | Pilot A (GLL fizik, Three.js + Magnus) | Three.js bileşeni | Gerçek MP4; fizik parametreleri kaynakta; Creative Director raporu | review dalı + artifact |
-| P1 | Pilot B (FR Gemini 8, doğru araç) | NASA referansları, Three.js | Nesne karşılaştırması NASA çizimiyle | Önce/sonra kontak sayfası |
+| P1 | Pilot A (GLL fizik, izole Three.js + Magnus) | Yok (izole; production'a bağlı değil) | Gerçek MP4; aynı ses/altyazı ile mevcut motor karşılaştırması; fizik parametreleri kaynakta veya MODEL etiketli | `pilot/gll-magnus-3d` dalı |
+| P1 | Three.js production entegrasyonu | Pilot A karşılaştırması + onay | Render süresi, determinizm, kalite kanıtı | Ayrı PR |
+| P1 | Otomatik görsel plan: onaylı pilot planlarından mekanizma şablonları | Pilot A/B planları | Şablonu olan konu insan beklemeden plan üretir; olmayan konu reddedilir | Test + review render |
+| P1 | Pilot B (FR Gemini 8, doğru araç) | NASA referansları, izole Three.js | Nesne karşılaştırması NASA çizimiyle | Önce/sonra kontak sayfası |
 | P1 | Pilot C (IB) ve D (HLT) | Pilot A/B'den kalan bileşenler | Aynı | Aynı |
 | P2 | Kanal başına 30 aday → 14 nitelikli | CI claim check, vidIQ | Doğrulanmış 14 konu | candidates JSON + CI run |
 | P2 | Otomatik stok yenileme | Araştırma workflow'u | Stok <14 → aday doğrulama | Workflow kaydı |
 | P3 | Retention analizi | YouTube Analytics erişimi | Yeterli örneklem | Analytics raporu |
 
 **Karar noktaları (onayın gerekir):**
-- Three.js'in render hattına eklenmesi: pilot A sonrası.
+- Three.js'in **production** render hattına eklenmesi: pilot A'nın gerçek MP4, performans ve kalite
+  karşılaştırmasından sonra. (İzole pilot kullanımı 29 Ekim'de onaylandı; bu karar onu kapsamaz.)
 - Blender/GPU: yalnızca pilot gerekirse; GitHub Actions'ta GPU yok, maliyet doğurur.
 - Ücretli servisler: önerilmiyor.
 - GLL/HLT yayınının açılması.
