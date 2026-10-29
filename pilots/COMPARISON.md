@@ -39,6 +39,23 @@ Darboğaz profil ölçümüyle bulundu ve şu iyileştirmeler yapıldı:
 - **Paralellik:** 4 çekirdekte 3. worker hız kazandırmıyor (2 worker: 39,7 s; 3 worker: 39,8 s; 90 kare). SwiftShader
   zaten bütün çekirdekleri kullanıyor.
 
+## 1b. GitHub Actions ölçümü (run 40851576156, ubuntu-latest, 4 vCPU, 2 worker)
+
+Aynı runner'da iki motor art arda çalıştırıldı. Mevcut motor Edge sesiyle anlatımı kendisi üretti: GLL için aday ses
+en-GB-RyanNeural (önizleme), FR için onaylı en-US-AndrewMultilingualNeural. 3D pilot aynı ses ve altyazıyı kullandı.
+
+| | Mevcut motor (adımın tamamı: anlatım + render + QA + paket) | Three.js (yalnızca kare render + mux) | Three.js QA |
+|---|---|---|---|
+| GLL-P01 (39,0 s, 1.170 kare) | 202 s | 472 s (402 ms/kare) | Tek sert hata: 1,50 s durağan an (sınır < 1,5 s). Düzeltildi, yeniden ölçülüyor |
+| FR Gemini 8 (28,2 s, 846 kare) | 150 s | 121 s (141 ms/kare) | PASS |
+
+- **Determinizm (CI):** iki ayrı tarayıcıda dört karede byte düzeyinde aynı.
+- **Ses:** −14,1/−14,3 LUFS; ses-görüntü süre farkı 0,000 s.
+- **Paylaşılan çıktılar** (artifact `pilot-3d-review`): MP4, contact sheet, scene sheet, ilk 2 s şeridi, QA raporları,
+  `time -v` CPU/RAM çıktıları.
+- **Yorum:** uzay sahnesinde (FR) 3D render, mevcut motorun bütün adımından daha kısa. Stadyum sahnesinde (GLL) kare
+  render'ı, mevcut motorun bütün adımının ~2,3 katı. Günlük 180 dakikalık iş süresi bütçesinin içinde.
+
 ## 2. Teknik QA (`pilots/lib/qa.js`)
 
 Mevcut motorun ölçüm araçları kullanıldı:
