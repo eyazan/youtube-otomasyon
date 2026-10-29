@@ -9,8 +9,10 @@ on:
     paths: ['scripts/pilot-assets/**', '.github/workflows/pilot-assets.yml']
   workflow_dispatch:
 
+# write: only the vendor job, which commits the hash-checked CC0 files (with their licence texts) to the separate
+# pilot/assets-vendor branch so a local review can load them; never to main or the pilot branch
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: pilot-assets
@@ -37,3 +39,23 @@ jobs:
             https://opengameart.org/users/quaternius \
             https://quaternius.com/packs/universalbasecharacters.html | tee -a "$GITHUB_STEP_SUMMARY"
           curl -fsSL https://opengameart.org/users/quaternius | grep -oE 'href="/content/[a-z0-9-]*(base|character|human|soccer|football|sport)[a-z0-9-]*"' | sort -u | head -30 || true
+
+  vendor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Commit the pinned CC0 files to pilot/assets-vendor
+        run: |
+          bash scripts/pilot-assets/fetch.sh /tmp/vendor > /dev/null
+          rm -rf /tmp/out && mkdir -p /tmp/out
+          cp "/tmp/vendor/quaternius-ual1-standard/Animation Library[Standard]/Godot/AnimationLibrary_Godot_Standard.glb" /tmp/out/ual1-standard.glb
+          cp "/tmp/vendor/quaternius-ual1-standard/Animation Library[Standard]/License.txt" /tmp/out/ual1-LICENSE.txt
+          cp "/tmp/vendor/quaternius-ual2-standard/Universal Animation Library 2 [Standard]/Unreal-Godot/UAL2_Standard.glb" /tmp/out/ual2-standard.glb
+          cp "/tmp/vendor/quaternius-ual2-standard/Universal Animation Library 2 [Standard]/Female Mannequin/Unreal-Godot/Mannequin_F.glb" /tmp/out/ual2-mannequin-f.glb
+          cp "/tmp/vendor/quaternius-ual2-standard/Universal Animation Library 2 [Standard]/License.txt" /tmp/out/ual2-LICENSE.txt
+          cp scripts/pilot-assets/manifest.json /tmp/out/manifest.json
+          (cd /tmp/out && sha256sum * > SHA256SUMS && printf 'CC0 1.0 files from the pinned archives in manifest.json (see the *-LICENSE.txt files). Review only; not used in production.\n' > README.txt)
+          git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout --orphan pilot/assets-vendor && git rm -rfq . && cp /tmp/out/* . && git add -A && git commit -qm "Pilot assets vendor: pinned CC0 files (Quaternius UAL1/UAL2 Standard)"
+          git push -f origin pilot/assets-vendor
