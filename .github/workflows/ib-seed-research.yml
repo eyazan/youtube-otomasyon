@@ -31,7 +31,7 @@ jobs:
       - name: Source sentences
         run: |
           f=channels/impossible-brief/topics/research-seeds/batch-11.excerpts.json
-          [ -e "$f" ] && node scripts/ib-research/excerpt.js "$f" | tee -a "$GITHUB_STEP_SUMMARY" || true
+          if [ -e "$f" ]; then node scripts/ib-research/excerpt.js "$f" | tee -a "$GITHUB_STEP_SUMMARY"; fi
       - name: Builder dry run (no write)
         run: |
           f=channels/impossible-brief/topics/research-seeds/batch-11.json
