@@ -57,11 +57,13 @@ jobs:
 
       - name: Three.js pilot, GLL-P01 (same narration and captions, 2 workers) + QA
         run: |
+          set -o pipefail
           P=channels/goal-lore-lab/premium/pilots/GLL-P01/out
           /usr/bin/time -v -o "$OUT/time-gll-threejs.txt" node pilots/gll-magnus-3d/render.js --audio-from "$P" --workers 2 | tee "$OUT/log-gll-threejs.txt"
           node pilots/gll-magnus-3d/qa.js --audio-from "$P" | tee "$OUT/qa-gll-threejs.txt" || true
       - name: Three.js pilot, FR Gemini 8 (same narration and captions, 2 workers) + QA
         run: |
+          set -o pipefail
           /usr/bin/time -v -o "$OUT/time-fr-threejs.txt" node pilots/fr-gemini8-3d/render.js --audio-from "$RUNNER_TEMP/fr/out" --workers 2 | tee "$OUT/log-fr-threejs.txt"
           node pilots/fr-gemini8-3d/qa.js --audio-from "$RUNNER_TEMP/fr/out" | tee "$OUT/qa-fr-threejs.txt" || true
 

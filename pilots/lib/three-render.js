@@ -16,6 +16,7 @@ function serve(dir, data) {
   const types = { ".js": "text/javascript", ".woff2": "font/woff2", ".html": "text/html" };
   const srv = http.createServer((req, res) => {
     const u = decodeURIComponent(req.url.split("?")[0]);
+    if (u === "/favicon.ico") { res.writeHead(204); return res.end(); }   // Chrome (CI) asks for it; a 404 would count as a page error
     if (u === "/") { const html = fs.readFileSync(path.join(dir, "scene.html"), "utf8").replace("<script type=\"importmap\">", `<script>window.__DATA=${JSON.stringify(data)}</script><script type="importmap">`);
       res.writeHead(200, { "content-type": "text/html" }); return res.end(html); }
     const base = Object.keys(routes).find((r) => u.startsWith(r)); if (!base) { res.writeHead(404); return res.end(); }

@@ -238,9 +238,11 @@ let NOW = 0; const SPIN_SHOWN = D.setup.spinRps / 40;
 function placeBall(tt, samples = D.flight) { const s = at(samples, tt); ball.position.copy(V(s.p)); ball.rotation.set(0, 2 * Math.PI * SPIN_SHOWN * NOW, 0); return s; }
 function look(pos, target, fov = 38) { cam.position.copy(pos); cam.fov = fov; cam.updateProjectionMatrix(); cam.lookAt(target); cam.updateMatrixWorld(); } // labels project with this frame's camera, not the last one
 
-window.renderAt = (t) => {
+window.renderAt = (tIn) => {
+  // the last 0.7 s replays the opening close-up (hook time -0.7..0), so the Shorts loop back to frame 0 is seamless
+  const VIDEO_END = D.duration || END; const tail = tIn > VIDEO_END - 0.7; const t = tail ? tIn - VIDEO_END : tIn;
   NOW = t;
-  const s = SHOTS.find((x) => t >= x.a && t < x.b) || SHOTS[SHOTS.length - 1]; const k = clamp((t - s.a) / (s.b - s.a));
+  const s = t < 0 ? SHOTS[0] : SHOTS.find((x) => t >= x.a && t < x.b) || SHOTS[SHOTS.length - 1]; const k = clamp((t - s.a) / (s.b - s.a));
   let html = `<div class="vig"></div><div class="scrim"></div><div class="scrim low"></div><div class="brand">GOALLORE LAB</div>`; const chips = ["ILLUSTRATION", "MODEL"];
   showTube(trail, 0); showTube(ghost, 0); showTube(spiralTube, 0); arrM.visible = arrD.visible = arrV.visible = false; axis.visible = false; spinRing.visible = false; kicker.visible = s.kind === "establish"; kicker.pose({}); kicker.position.set(D.setup.ballX + 1.4, 0, 5.5); stadium.visible = true; grass.visible = apron.visible = true; board.visible = false; strikeLight.intensity = s.kind === "strike" ? 1.6 : 0; keeper.visible = true; halo.visible = true; scene.fog.far = 160; showTube(spiralWide, 0); trailWide.visible = false;
   const B = V(D.flight[0].p), G = new THREE.Vector3(0, 1.2, GZ);
@@ -284,7 +286,7 @@ window.renderAt = (t) => {
     const tt = lerp(0, T * 0.7, ease(k)); const p = placeBall(tt); showTube(trail, tt / T); showTube(ghost, ease(clamp(k * 1.4)));
     look(V(p.p).add(new THREE.Vector3(1.0, 0.8, 4.2)), V(p.p).add(new THREE.Vector3(-0.6, -0.15, -9)), 42); // ball held inside the narrow portrait frame
     html += `<div class="head">AROUND THE WALL…</div>`;
-    const g = toScreen(V(D.straight[D.straight.length - 1].p)); if (k > 0.35) html += `<div class="read warm" style="left:${Math.max(60, Math.min(760, g.x - 60))}px;top:${Math.max(400, Math.min(1180, g.y - 110))}px">NO SPIN (MODEL)<small>WIDE BY ${(D.straight[D.straight.length - 1].p[0] - 3.66).toFixed(1)} m</small></div>`;
+    const g = toScreen(V(D.straight[D.straight.length - 1].p)); if (k > 0.35) html += `<div class="read warm" style="left:${Math.max(60, Math.min(680, g.x - 60))}px;top:${Math.max(400, Math.min(1180, g.y - 110))}px">NO SPIN (MODEL)<small>WIDE BY ${(D.straight[D.straight.length - 1].p[0] - 3.66).toFixed(1)} m</small></div>`;
   } else if (s.kind === "keeper") {
     // from behind the goal: the ball bends back inside the right post
     const tt = lerp(T * 0.55, T, ease(k)); placeBall(tt); showTube(trail, tt / T); showTube(ghost, 1);
@@ -319,7 +321,7 @@ window.renderAt = (t) => {
     html += `<div class="head">SLOWER = TIGHTER</div><div class="sub">MODEL · 10 m GRID · NO GRAVITY, SPIN HELD</div>`;
     html += `<div class="read" style="left:60px;top:${H * 0.62}px">TURNING RADIUS ${sp.radius.toFixed(0)} m<small>MODEL · IF IT KEPT FLYING LEVEL · ${sp.t.toFixed(1)} s</small></div>`;
   }
-  const c = cue(t); html += capHtml(c);
+  const c = cue(tIn); html += capHtml(c);
   html += chips.length ? `<div class="chip">${chips.join(" · ")}</div>` : "";
   halo.position.copy(ball.position); ui.innerHTML = html; renderer.render(scene, cam);
 };
