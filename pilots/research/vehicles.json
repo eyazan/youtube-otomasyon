@@ -1,0 +1,310 @@
+{
+ "_doc": "Vehicle specs for the space kit: simplified geometry from published dimensions (metres). Reusable by any topic that names the vehicle. Sources per vehicle; every scene labels the geometry as simplified.",
+ "gemini": {
+  "names": [
+   "Gemini"
+  ],
+  "mass": 3790,
+  "baseRadius": 1.525,
+  "sources": [
+   "space.skyrocket.de Gemini (adapter 304.8 cm base, 228.6 cm high)",
+   "spacefacts.de Gemini 8/9 (re-entry module 3.45 m, 2.347 m max diameter; total 5.736 m)"
+  ],
+  "parts": [
+   {
+    "shape": "frustum",
+    "r0": 1.525,
+    "r1": 1.15,
+    "len": 2.29,
+    "mat": "stringer",
+    "role": "adapter"
+   },
+   {
+    "shape": "frustum",
+    "r0": 1.15,
+    "r1": 1.15,
+    "len": 0.12,
+    "mat": "metal",
+    "role": "heat shield"
+   },
+   {
+    "shape": "frustum",
+    "r0": 1.15,
+    "r1": 0.5,
+    "len": 1.75,
+    "mat": "black",
+    "role": "cabin"
+   },
+   {
+    "shape": "frustum",
+    "r0": 0.49,
+    "r1": 0.49,
+    "len": 0.5,
+    "mat": "black",
+    "role": "RCS section"
+   },
+   {
+    "shape": "frustum",
+    "r0": 0.49,
+    "r1": 0.36,
+    "len": 0.95,
+    "mat": "black",
+    "role": "rendezvous and recovery section"
+   },
+   {
+    "shape": "dome",
+    "r": 0.36,
+    "mat": "black"
+   }
+  ],
+  "adapterLength": 2.29,
+  "thrusters": [
+   {
+    "name": "OAMS roll thruster No. 8",
+    "at": [
+     0.35,
+     1.45,
+     0.25
+    ],
+    "dir": [
+     0,
+     0,
+     1
+    ],
+    "len": 3.2,
+    "width": 0.75,
+    "thrustN": 111,
+    "leverM": 1.525,
+    "source": "OAMS attitude thrusters 25 lbf, aft rim of the adapter (Wikipedia, Orbit Attitude and Maneuvering System); position representative",
+    "color": "0xffa060"
+   }
+  ],
+  "rcs": {
+   "count": 16,
+   "x": 4.3,
+   "r": 0.5,
+   "source": "16 re-entry control thrusters at the base of the nose (NASA)"
+  },
+  "length": 5.8,
+  "inertia": {
+   "model": "shell",
+   "note": "tapered shell 0.35 m R^2 (MODEL)"
+  }
+ },
+ "agena": {
+  "names": [
+   "Agena",
+   "GATV",
+   "target vehicle"
+  ],
+  "mass": 3175,
+  "baseRadius": 0.76,
+  "sources": [
+   "Wikipedia, Agena target vehicle (1.52 m diameter; ~7.9 m with the target docking adapter)",
+   "astronautix (mass 3,175 kg)"
+  ],
+  "parts": [
+   {
+    "shape": "cone-open",
+    "r0": 0.85,
+    "r1": 0.42,
+    "len": 0.7,
+    "mat": "cream",
+    "role": "docking cone"
+   },
+   {
+    "shape": "frustum",
+    "r0": 0.85,
+    "r1": 0.76,
+    "len": 0.9,
+    "mat": "white",
+    "role": "target docking adapter"
+   },
+   {
+    "shape": "frustum",
+    "r0": 0.76,
+    "r1": 0.76,
+    "len": 6.1,
+    "mat": "silver",
+    "role": "body"
+   },
+   {
+    "shape": "cone-open",
+    "r0": 0.28,
+    "r1": 0.55,
+    "len": 0.9,
+    "mat": "metal",
+    "role": "engine bell"
+   }
+  ],
+  "length": 7.9,
+  "inertia": {
+   "model": "cylinder",
+   "note": "solid cylinder 0.5 m r^2 (MODEL)"
+  }
+ },
+ "ariane5": {
+  "names": [
+   "Ariane 5",
+   "Ariane"
+  ],
+  "baseRadius": 2.7,
+  "sources": [
+   "Wikipedia, Ariane 5 (height 46-52 m, diameter 5.4 m; boosters 31.6 m x 3.06 m)",
+   "NASA SMA launch vehicle report (core stage EPC 5.4 m x 30.5 m)"
+  ],
+  "parts": [
+   {
+    "shape": "frustum",
+    "r0": 2.7,
+    "r1": 2.7,
+    "len": 30.5,
+    "mat": "white",
+    "role": "core stage (EPC)"
+   },
+   {
+    "shape": "frustum",
+    "r0": 2.7,
+    "r1": 2.7,
+    "len": 4.5,
+    "mat": "silver",
+    "role": "upper composite"
+   },
+   {
+    "shape": "frustum",
+    "r0": 2.7,
+    "r1": 2.7,
+    "len": 8.0,
+    "mat": "white",
+    "role": "fairing"
+   },
+   {
+    "shape": "frustum",
+    "r0": 2.7,
+    "r1": 1.0,
+    "len": 4.0,
+    "mat": "white",
+    "role": "fairing ogive"
+   },
+   {
+    "shape": "dome",
+    "r": 1.0,
+    "mat": "white"
+   }
+  ],
+  "nozzles": [
+   {
+    "r": 1.05,
+    "len": 2.6
+   }
+  ],
+  "strapons": [
+   {
+    "x": 0.5,
+    "y": 4.33,
+    "z": 0,
+    "spec": {
+     "parts": [
+      {
+       "shape": "frustum",
+       "r0": 1.53,
+       "r1": 1.53,
+       "len": 27.6,
+       "mat": "white"
+      },
+      {
+       "shape": "frustum",
+       "r0": 1.53,
+       "r1": 0.35,
+       "len": 4.0,
+       "mat": "white"
+      }
+     ],
+     "nozzles": [
+      {
+       "r": 1.5,
+       "len": 3.0
+      }
+     ]
+    }
+   },
+   {
+    "x": 0.5,
+    "y": -4.33,
+    "z": 0,
+    "spec": {
+     "parts": [
+      {
+       "shape": "frustum",
+       "r0": 1.53,
+       "r1": 1.53,
+       "len": 27.6,
+       "mat": "white"
+      },
+      {
+       "shape": "frustum",
+       "r0": 1.53,
+       "r1": 0.35,
+       "len": 4.0,
+       "mat": "white"
+      }
+     ],
+     "nozzles": [
+      {
+       "r": 1.5,
+       "len": 3.0
+      }
+     ]
+    }
+   }
+  ],
+  "engines": [
+   {
+    "name": "Vulcain",
+    "at": [
+     -2.6,
+     0,
+     0
+    ],
+    "dir": [
+     -1,
+     0,
+     0
+    ],
+    "len": 26,
+    "width": 5
+   },
+   {
+    "name": "booster",
+    "at": [
+     -2.5,
+     4.33,
+     0
+    ],
+    "dir": [
+     -1,
+     0,
+     0
+    ],
+    "len": 40,
+    "width": 8
+   },
+   {
+    "name": "booster",
+    "at": [
+     -2.5,
+     -4.33,
+     0
+    ],
+    "dir": [
+     -1,
+     0,
+     0
+    ],
+    "len": 40,
+    "width": 8
+   }
+  ],
+  "length": 52
+ }
+}

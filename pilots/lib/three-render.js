@@ -11,13 +11,16 @@ const ROOT = path.resolve(__dirname, "../..");
 
 function probeDuration(file) { return Number(cp.spawnSync("ffprobe", ["-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", file], { encoding: "utf8" }).stdout.trim()); }
 
+// dir holds the page (scene.html for the hand-written v1 pilots, runtime.html for the plan-driven kit) and node_modules/three;
+// /kit/ always serves the shared kit modules
 function serve(dir, data) {
-  const routes = { "/three/": path.join(dir, "node_modules/three/"), "/fonts/": path.join(ROOT, "node_modules/@fontsource/inter/files/") };
+  const KIT = path.join(__dirname, "../kit/"); const page = fs.existsSync(path.join(dir, "scene.html")) ? "scene.html" : "runtime.html";
+  const routes = { "/three/": path.join(dir, "node_modules/three/"), "/kit/": KIT, "/fonts/": path.join(ROOT, "node_modules/@fontsource/inter/files/") };
   const types = { ".js": "text/javascript", ".woff2": "font/woff2", ".html": "text/html" };
   const srv = http.createServer((req, res) => {
     const u = decodeURIComponent(req.url.split("?")[0]);
     if (u === "/favicon.ico") { res.writeHead(204); return res.end(); }   // Chrome (CI) asks for it; a 404 would count as a page error
-    if (u === "/") { const html = fs.readFileSync(path.join(dir, "scene.html"), "utf8").replace("<script type=\"importmap\">", `<script>window.__DATA=${JSON.stringify(data)}</script><script type="importmap">`);
+    if (u === "/") { const html = fs.readFileSync(path.join(dir, page), "utf8").replace("<script type=\"importmap\">", `<script>window.__DATA=${JSON.stringify(data)}</script><script type="importmap">`);
       res.writeHead(200, { "content-type": "text/html" }); return res.end(html); }
     const base = Object.keys(routes).find((r) => u.startsWith(r)); if (!base) { res.writeHead(404); return res.end(); }
     const file = path.join(routes[base], u.slice(base.length)); if (!file.startsWith(routes[base]) || !fs.existsSync(file)) { res.writeHead(404); return res.end(); }

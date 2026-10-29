@@ -1,0 +1,22 @@
+{
+  "id": "attitude-torque", "world": "space", "brand": "FAILURE FILE", "accent": "#ff6b4a", "accent2": "#ff6b4a",
+  "detect": { "all": ["thruster"], "any": ["spin", "roll", "rolled", "spinning"] },
+  "chips": ["ILLUSTRATION"], "loop": true,
+  "keywords": ["spinning", "faster", "stuck", "undocking", "stop", "early", "isolate", "thrusters", "thruster"],
+  "beats": [
+    { "text": "spinning|out of control", "first": true, "shot": "hero-spin", "params": { "head": "{event.name} · {event.year}", "sub": "IN ORBIT, SPINNING OUT OF CONTROL", "rate": "{model.peak}", "chips": ["ILLUSTRATION", "MODEL"],
+      "labels": [ { "x": 60, "y": 1150, "title": "≈{model.peak}°/s ROLL", "small": "REPORTED PEAK · ALSO PITCH AND YAW", "src": "{model.peakSrc}" } ] } },
+    { "text": "faster and faster|black out", "shot": "rate-climb", "params": { "head": "FASTER AND FASTER", "from": "{model.rateAtUndock}", "to": "{model.peak}", "max": 300, "mark": "{model.peak}", "gaugeLabel": "ROLL RATE", "note": "WHITE MARK: {model.peak}°/s REPORTED", "chips": ["ILLUSTRATION", "MODEL"] } },
+    { "text": "docked", "shot": "docked-pair", "params": { "head": "DOCKED", "sub": "{event.dockSub}",
+      "labels": [ { "x": 60, "y": 1060, "title": "{vehicle.main.name} ≈{vehicle.main.lengthR} m", "small": "SIMPLIFIED", "src": "{vehicle.main.src}", "tone": "cool" },
+                  { "x": 520, "y": 1180, "title": "{vehicle.target.name} ≈{vehicle.target.lengthR} m", "small": "WITH DOCKING ADAPTER", "src": "{vehicle.target.src}", "tone": "cool" } ] } },
+    { "text": "stuck on|own thrusters", "shot": "thruster-close", "params": { "head": "A THRUSTER STUCK ON", "rateEnd": "{model.rateAtUndock}", "span": "{model.phase}", "chips": ["ILLUSTRATION", "MODEL"],
+      "labels": [ { "x": 60, "y": 1260, "title": "{thruster.short} · {thruster.lbf} lbf", "small": "STUCK ON (NASA) · POSITION REPRESENTATIVE", "src": "{thruster.src}" } ] } },
+    { "text": "[Uu]ndock", "shot": "separation", "params": { "head": "UNDOCKED: FASTER", "sub": "{model.lessPct}% LESS INERTIA · MODEL", "from": "{model.rateAtUndock}", "to": "{model.peak}", "max": 300, "mark": "{model.peak}", "gaugeLabel": "ROLL RATE · ALONE", "note": "MODEL · PEAK REPORTED", "chips": ["ILLUSTRATION", "MODEL"] } },
+    { "text": "re-entry thrusters|stop it", "shot": "rcs-recovery", "params": { "head": "THE NOSE THRUSTERS", "sub": "RE-ENTRY CONTROL SYSTEM · OAMS SHUT DOWN", "from": "{model.peak}", "max": 300, "gaugeLabel": "ROLL RATE", "note": "≈75% OF RCS FUEL USED (NASA)" } },
+    { "text": "end early", "shot": "reentry", "params": { "head": "MISSION ENDED EARLY", "sub": "RCS USED: LANDING REQUIRED", "adapterLength": "{vehicle.main.adapterLength}",
+      "labels": [ { "x": 60, "y": 1150, "title": "RE-ENTRY", "small": "ADAPTER DROPPED · ILLUSTRATION", "src": "{fact:re-entry control|RCS}" } ] } },
+    { "text": "redesigned|isolate", "shot": "fault-circuit", "params": { "head": "THE FIX", "chips": [], "k": "THRUSTER CIRCUITS", "count": 8, "faulty": 8, "before": "Stuck thruster", "after": "Each can be isolated", "beforeNote": "1966: No. 8 kept firing", "afterNote": "One fault, one switch" } }
+  ],
+  "model": { "type": "roll-torque" }
+}

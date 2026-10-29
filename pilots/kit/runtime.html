@@ -1,0 +1,35 @@
+<!doctype html>
+<html><head><meta charset="utf-8"></head>
+<body>
+<script type="importmap">{ "imports": { "three": "/three/build/three.module.js" } }</script>
+<script type="module">
+// Generic pilot runtime: builds the world named by the plan and plays its shots in narration time. No topic code here;
+// everything comes from window.__DATA = { plan, setup, paths | model, cues, duration } produced by pilots/lib/planner.js.
+import { createStage, timeShots, O, clamp } from "/kit/core.js";
+const D = window.__DATA; const plan = D.plan;
+const worlds = { football: await import("/kit/football-shots.js"), space: await import("/kit/space-shots.js") };
+const lib = worlds[plan.world]; if (!lib) throw new Error("unknown world " + plan.world);
+const S = createStage({ far: plan.world === "space" ? 40000 : 700, shadows: plan.world === "football", accent: plan.accent, accent2: plan.accent2 });
+const C = lib.buildWorld(S, D);
+const { shots, end } = timeShots(plan, D.cues, D.duration);
+// a looping plan replays the opening over the last 0.7 s: the last shot completes before that tail (as the planner assumes)
+if (plan.loop) shots[shots.length - 1].b = (D.duration || end) - 0.7;
+const KEY = new Set(plan.keywords || []);
+const cue = (t) => D.cues.find((c) => t >= c.start && t < c.end + 0.05);
+for (const s of shots) if (!lib.SHOTS[s.kind]) throw new Error("plan uses unknown shot kind " + s.kind);
+window.renderAt = (tIn) => {
+  // optional loop tail: the last 0.7 s replays the opening (shot 0 at negative time) so the Shorts loop is seamless
+  const VIDEO_END = D.duration || end; const tail = plan.loop && tIn > VIDEO_END - 0.7; const t = tail ? tIn - VIDEO_END : tIn;
+  const s = t < 0 ? shots[0] : shots.find((x) => t >= x.a && t < x.b) || shots[shots.length - 1];
+  const k = clamp((t - s.a) / (s.b - s.a)); S.shotStart = s.a; C.reset(s);
+  let html = O.frame(plan.brand) + lib.SHOTS[s.kind](S, C, k, t, s.params || {});
+  html += O.caption(cue(tIn), KEY) + O.chip(s.params && s.params.chips !== undefined ? s.params.chips : plan.chips);
+  if (C.stadium) C.stadium.update(t);
+  if (C.env && C.env.sky) C.env.sky.dome.position.copy(S.cam.position);
+  if (C.ballKit) C.ballKit.halo.position.copy(C.ballKit.ball.position);
+  S.ui.innerHTML = html; S.render();
+};
+window.__shots = shots.map(({ kind, a, b, cue }) => ({ kind, a, b, cue }));
+window.__ready = true;
+</script>
+</body></html>

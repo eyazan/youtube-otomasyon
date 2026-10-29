@@ -20,7 +20,7 @@ concurrency:
 jobs:
   review:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 150
     env:
       PUBLISH: '0'
       BTO_PREMIUM_RENDER: preview
@@ -43,7 +43,7 @@ jobs:
           npm ci --no-audit --no-fund
           python -m pip install --quiet -r scripts/bto-studio/requirements.txt
           node scripts/bto-studio/preflight-deps.js
-          (cd pilots/gll-magnus-3d && npm ci --no-audit --no-fund) && (cd pilots/fr-gemini8-3d && npm ci --no-audit --no-fund)
+          for d in gll-magnus-3d fr-gemini8-3d kit; do (cd pilots/$d && npm ci --no-audit --no-fund); done
           mkdir -p "$OUT"; { echo "runner: $(nproc) vCPU, $(free -g | awk '/Mem/{print $2}') GB RAM, $(lscpu | sed -n 's/Model name: *//p')"; } | tee "$OUT/runner.txt" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Current engine, GLL-P01 (pilot, 2 workers)
@@ -55,13 +55,32 @@ jobs:
           set -o pipefail
           /usr/bin/time -v -o "$OUT/time-fr-current.txt" node scripts/bto-studio/studio.js --channel failure-reconstructed --topic gemini-8-1966 --shadow --shadow-dir "$RUNNER_TEMP/fr" --regenerate --quality final --voice edge --workers 2 2>&1 | tee "$OUT/log-fr-current.txt" | tail -12
 
-      - name: Three.js pilot, GLL-P01 (same narration and captions, 2 workers) + QA
+      - name: Current engine, GLL-025 Panenka and FR Ariane 5 (reuse topics; shadow, never publishable, 2 workers)
+        run: |
+          set -o pipefail
+          /usr/bin/time -v -o "$OUT/time-gll025-current.txt" node scripts/bto-studio/studio.js --channel goal-lore-lab --topic GLL-025 --shadow --shadow-dir "$RUNNER_TEMP/gll025" --regenerate --quality final --voice edge --workers 2 2>&1 | tee "$OUT/log-gll025-current.txt" | tail -12
+          /usr/bin/time -v -o "$OUT/time-ariane-current.txt" node scripts/bto-studio/studio.js --channel failure-reconstructed --topic ariane-5-flight-501 --shadow --shadow-dir "$RUNNER_TEMP/ariane" --regenerate --quality final --voice edge --workers 2 2>&1 | tee "$OUT/log-ariane-current.txt" | tail -12
+
+      # v2: one driver, no topic code. The planner reads each topic's narration and facts, picks a mechanism template and
+      # writes plan.json (or refuses with CREATIVE_REVIEW_REQUIRED); the kit renders the plan over the narration above.
+      - name: Kit v2 (plan-driven), four topics + QA
+        run: |
+          set -o pipefail
+          node -e "const t=require('./channels/goal-lore-lab/topics/topic-universe.json');const a=Array.isArray(t)?t:(t.topics||t);require('fs').writeFileSync(process.env.RUNNER_TEMP+'/GLL-025.json',JSON.stringify(a.find(x=>x.id==='GLL-025')))"
+          K=pilots/kit/render-plan.js; G=channels/goal-lore-lab/premium/pilots/GLL-P01
+          run() { /usr/bin/time -v -o "$OUT/time-$1-kit.txt" node $K --name "$1" --out "$OUT/kit/$1" --workers 2 --topic "$2" --audio-from "$3" 2>&1 | tee "$OUT/log-$1-kit.txt" | grep -vE '^PASS' || true; }
+          run gll-p01 "$G/topic.json" "$G/out"
+          run fr-gemini8 icerik/konular/gemini-8-1966.json "$RUNNER_TEMP/fr/out"
+          run gll-025 "$RUNNER_TEMP/GLL-025.json" "$RUNNER_TEMP/gll025/out"
+          run fr-ariane501 icerik/konular/ariane-5-flight-501.json "$RUNNER_TEMP/ariane/out"
+
+      - name: Three.js pilot v1 (hand-written), GLL-P01 (same narration and captions, 2 workers) + QA
         run: |
           set -o pipefail
           P=channels/goal-lore-lab/premium/pilots/GLL-P01/out
           /usr/bin/time -v -o "$OUT/time-gll-threejs.txt" node pilots/gll-magnus-3d/render.js --audio-from "$P" --workers 2 | tee "$OUT/log-gll-threejs.txt"
           node pilots/gll-magnus-3d/qa.js --audio-from "$P" | tee "$OUT/qa-gll-threejs.txt" || true
-      - name: Three.js pilot, FR Gemini 8 (same narration and captions, 2 workers) + QA
+      - name: Three.js pilot v1 (hand-written), FR Gemini 8 (same narration and captions, 2 workers) + QA
         run: |
           set -o pipefail
           /usr/bin/time -v -o "$OUT/time-fr-threejs.txt" node pilots/fr-gemini8-3d/render.js --audio-from "$RUNNER_TEMP/fr/out" --workers 2 | tee "$OUT/log-fr-threejs.txt"
@@ -77,15 +96,28 @@ jobs:
               [ -e "$src/$f" ] && cp "$src/$f" "$OUT/$dest/"; done
             for m in "$OUT/$dest"/*.mp4; do [ -e "$m" ] && (cd "$OUT/$dest" && sha256sum "$(basename "$m")" >> mp4.sha256) && ffmpeg -hide_banner -loglevel error -i "$m" -t 2 -vf "fps=6,scale=270:-2,tile=6x2" -frames:v 1 "$OUT/$dest/first-2s.jpg"; done
           done
+          # before/after: current engine | kit v2, side by side at half size, same narration (v1 | v2 for the two v1 pilots)
+          sbs() { [ -e "$1" ] && [ -e "$2" ] && ffmpeg -hide_banner -loglevel error -y -i "$1" -i "$2" -filter_complex "[0:v]scale=540:960[a];[1:v]scale=540:960[b];[a][b]hstack=2[v]" -map "[v]" -map 1:a -c:v libx264 -crf 22 -preset veryfast -c:a aac "$3" || true; }
+          mkdir -p "$OUT/compare"
+          sbs "$G/video-final.mp4" "$OUT/kit/gll-p01/gll-p01.mp4" "$OUT/compare/gll-p01_current-vs-kit.mp4"
+          sbs "$F/video-final.mp4" "$OUT/kit/fr-gemini8/fr-gemini8.mp4" "$OUT/compare/fr-gemini8_current-vs-kit.mp4"
+          sbs "$RUNNER_TEMP/gll025/out/video-final.mp4" "$OUT/kit/gll-025/gll-025.mp4" "$OUT/compare/gll-025_current-vs-kit.mp4"
+          sbs "$RUNNER_TEMP/ariane/out/video-final.mp4" "$OUT/kit/fr-ariane501/fr-ariane501.mp4" "$OUT/compare/fr-ariane501_current-vs-kit.mp4"
+          sbs pilots/gll-magnus-3d/out/gll-p01-magnus-3d.mp4 "$OUT/kit/gll-p01/gll-p01.mp4" "$OUT/compare/gll-p01_v1-vs-kit.mp4"
+          sbs pilots/fr-gemini8-3d/out/fr-gemini8-3d.mp4 "$OUT/kit/fr-gemini8/fr-gemini8.mp4" "$OUT/compare/fr-gemini8_v1-vs-kit.mp4"
+          for t in gll025:gll-025 ariane:fr-ariane501; do src="$RUNNER_TEMP/${t%%:*}/out"; dest="$OUT/${t#*:}/current"; mkdir -p "$dest"
+            for f in video-final.mp4 contact-sheet.png scene-sheet.png qa-report.md creative-review.md; do [ -e "$src/$f" ] && cp "$src/$f" "$dest/"; done; done
+          for d in "$OUT"/kit/*/; do for m in "$d"*.mp4; do [ -e "$m" ] && ffmpeg -hide_banner -loglevel error -i "$m" -t 2 -vf "fps=6,scale=270:-2,tile=6x2" -frames:v 1 "$d/first-2s.jpg"; done; done
           cp pilots/COMPARISON.md pilots/gll-magnus-3d/MODEL.md "$OUT/gll/" 2>/dev/null || true; cp pilots/fr-gemini8-3d/MODEL.md "$OUT/fr/" 2>/dev/null || true
           cp pilots/*/CREATIVE-REVIEW.md "$OUT/" 2>/dev/null || true
           {
             echo "| run | wall (time -v) | max RSS, largest single process | user+sys CPU (incl. children) | frames render |"; echo "|---|---|---|---|---|"
-            for r in gll-current gll-threejs fr-current fr-threejs; do t="$OUT/time-$r.txt"; [ -e "$t" ] || continue
+            for r in gll-current gll-threejs gll-p01-kit fr-current fr-threejs fr-gemini8-kit gll025-current gll-025-kit ariane-current fr-ariane501-kit; do t="$OUT/time-$r.txt"; [ -e "$t" ] || continue
               wall=$(sed -n 's/.*Elapsed (wall clock) time.*: //p' "$t"); rss=$(sed -n 's/.*Maximum resident set size (kbytes): //p' "$t")
               cpu=$(awk -F': ' '/User time|System time/{s+=$2} END{printf "%.0f s", s}' "$t")
               fr=$(grep -hE '^render:|"frameWallSeconds"' "$OUT/log-$r.txt" 2>/dev/null | head -1 | tr -d ',')
               echo "| $r | $wall | $((rss / 1024)) MB | $cpu | $fr |"; done
+            echo; for l in "$OUT"/log-*-kit.txt; do [ -e "$l" ] && echo "**$(basename "$l")**: $(grep -E '^(plan|render|qa):' "$l" | tr '\n' ' ')" && grep -E '^(FAIL|WARN|- )' "$l" | sed 's/^/  - /'; done
             echo; for q in "$OUT"/qa-*-threejs.txt; do [ -e "$q" ] && { echo "**$(basename "$q")**: $(tail -1 "$q")"; grep -E '^(FAIL|WARN)' "$q" | sed 's/^/- /'; }; done
             for l in "$OUT"/log-*-current.txt; do echo "**$(basename "$l")**: $(grep -E '^qa:|^narration:' "$l" | tr '\n' ' ')"; done
           } | tee -a "$GITHUB_STEP_SUMMARY" > "$OUT/summary.md"

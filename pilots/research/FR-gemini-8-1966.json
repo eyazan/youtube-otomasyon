@@ -1,0 +1,16 @@
+{
+  "topic": "gemini-8-1966", "channel": "failure-reconstructed",
+  "researchMethod": "web search 2026-10-29; source pages could not be opened from the build environment, so no verbatim quotes (layer SEARCH-CORROBORATED)",
+  "facts": [
+    { "id": "N1", "claim": "OAMS roll thruster No. 8 short-circuited and stuck open while the crew maneuvered the docked Gemini-Agena", "url": "https://www.nasa.gov/mission/gemini-viii/", "layer": "SEARCH-CORROBORATED" },
+    { "id": "N2", "claim": "After undocking Gemini rolled, pitched and yawed even more rapidly, reaching a roll rate of about one rotation per second", "url": "https://www.nasa.gov/history/55-years-ago-gemini-viii-the-first-docking-in-space/", "layer": "SEARCH-CORROBORATED" },
+    { "id": "N3", "claim": "Armstrong shut down the OAMS and used the nose re-entry control system, all 16 RCS thrusters, using about 75 percent of the RCS fuel; mission rules then required an early landing", "url": "https://www.nasa.gov/mission/gemini-viii/", "layer": "SEARCH-CORROBORATED" },
+    { "id": "N4", "claim": "Eight 25 lbf OAMS attitude thrusters sat around the aft end of the adapter", "url": "https://en.wikipedia.org/wiki/Orbit_Attitude_and_Maneuvering_System", "layer": "SEARCH-CORROBORATED" },
+    { "id": "N5", "claim": "Gemini was about 5.7 to 5.8 m long with a 3.05 m adapter base; the Agena target was 1.52 m wide and about 7.9 m long with its docking adapter", "url": "https://space.skyrocket.de/doc_sdat/gemini.htm", "layer": "SEARCH-CORROBORATED" },
+    { "id": "N6", "claim": "On 16 March 1966 Gemini 8 made the first docking of two spacecraft in orbit with an Agena target vehicle", "url": "https://www.nasa.gov/history/55-years-ago-gemini-viii-the-first-docking-in-space/", "layer": "SEARCH-CORROBORATED" },
+    { "id": "N7", "claim": "Thruster circuits were changed so a single fault could be isolated", "url": "icerik/konular/gemini-8-1966.json (case file lesson)", "layer": "CASE-FILE" },
+    { "id": "N8", "claim": "The peak roll rate is reported at about 296 degrees per second", "url": "https://en.wikipedia.org/wiki/Gemini_8", "layer": "SEARCH-CORROBORATED (secondary)" }
+  ],
+  "vehicles": { "main": "gemini", "target": "agena" },
+  "model": { "type": "roll-torque", "peakDegS": 296, "peakFact": "N8" }
+}

@@ -1,0 +1,24 @@
+{
+  "id": "magnus-free-kick", "world": "football", "brand": "GOALLORE LAB", "accent": "#5fe1ff", "accent2": "#8a5a00",
+  "detect": { "all": ["free kick"], "any": ["bend", "swerv", "curl", "turned", "spin"] },
+  "chips": ["ILLUSTRATION", "MODEL"], "loop": true,
+  "keywords": ["wide", "turned", "outside", "wall", "spin", "drag", "spiral", "late", "never", "sideways", "slows", "tighter"],
+  "beats": [
+    { "role": "HOOK", "shot": "ball-close-hook", "params": { "head": "IT WAS GOING WIDE" } },
+    { "role": "CONTEXT", "shot": "establish", "params": { "head": "{line.place}", "sub": "{line.teams}", "chips": ["ILLUSTRATION"],
+      "labels": [ { "x": 60, "y": 1150, "title": "≈{setup.distance} m TO GOAL", "small": "REPORTED {setup.distanceRange} · MODEL USES {setup.distance} m", "src": "{setup.distanceSrc}" } ] } },
+    { "role": "SETUP", "shot": "strike", "params": { "head": "{setup.footPhrase}", "swing": 1.6,
+      "labels": [ { "x": 60, "y": 440, "title": "SIDESPIN", "small": "MODEL · {setup.spinRps} REV/S · SHOWN 40× SLOWER", "src": "MODEL" } ] } },
+    { "role": "BUILD", "shot": "chase", "params": { "head": "AROUND THE WALL…", "ghost": "straight", "ghostLabel": { "title": "NO SPIN (MODEL)", "small": "WIDE BY {model.straightWide} m", "tone": "warm", "src": "MODEL" } } },
+    { "role": "TWIST", "shot": "goal-reverse", "params": { "head": "…THEN IT BENT IN", "ghost": "straight", "keeperLabel": { "title": "KEEPER", "small": "{setup.keeperPhrase}", "src": "{setup.keeperSrc}" } } },
+    { "role": "ORIGIN", "shot": "card", "params": { "ghost": "straight", "chips": [], "card": { "kind": "paper", "k": "{paper.year}", "h": "{paper.title}", "p": "{paper.cite}" } } },
+    { "role": "EXPLANATION", "shot": "forces", "params": { "heads": ["SPIN PUSHES SIDEWAYS", "DRAG SLOWS, SPIN STAYS"], "magnusAt": "{cue:Spin pushes}+0.3", "dragAt": "{cue:Drag}",
+      "labels": [ { "x": 60, "y": 960, "title": "SPIN {setup.spinRps} REV/S", "small": "MODEL · SHOWN 40× SLOWER", "src": "MODEL" },
+                  { "x": 60, "y": 1110, "title": "SPEED {speed} m/s", "small": "MODEL · STARTS {setup.speed} m/s", "src": "MODEL" },
+                  { "x": 640, "y": 1110, "title": "MAGNUS {magnus} N", "small": "DRAG {drag} N · MODEL", "src": "MODEL" } ] } },
+    { "role": "MECHANISM", "shot": "model-board", "params": { "head": "SLOWER = TIGHTER", "sub": "MODEL · 10 m GRID · NO GRAVITY, SPIN HELD",
+      "labels": [ { "x": 60, "y": 1190, "title": "TURNING RADIUS {radius} m", "small": "MODEL · IF IT KEPT FLYING LEVEL · {t} s", "src": "MODEL" } ] } },
+    { "role": "PAYOFF", "shot": "payoff-loop", "params": { "head": "SPIN + DRAG = A LATE BEND" } }
+  ],
+  "model": { "type": "football-flight", "speed": 38, "spinRps": 10, "aim": { "x": 3.0, "y": 1.35 }, "ballX": 4.5, "spiralSeconds": 12, "pitchGuess": 0.12, "yawGuess": 0.2, "wall": { "count": 4, "dx": -2.2, "z": -9.15 }, "keeperX": -0.6 }
+}

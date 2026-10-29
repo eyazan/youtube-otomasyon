@@ -1,0 +1,14 @@
+{
+  "topic": "ariane-5-flight-501", "channel": "failure-reconstructed",
+  "researchMethod": "web search 2026-10-29; source pages could not be opened from the build environment, so no verbatim quotes (layer SEARCH-CORROBORATED)",
+  "facts": [
+    { "id": "E1", "claim": "Flight 501 on 4 June 1996 was normal until about 37 seconds; between 37 and 39 seconds both booster nozzles and the Vulcain nozzle swivelled to their limits", "url": "https://www.esa.int/Newsroom/Press_Releases/Flight_501_failure-_first_information", "layer": "SEARCH-CORROBORATED" },
+    { "id": "E2", "claim": "The backup and active inertial reference systems failed almost simultaneously after a 64-bit floating-point value was converted to a 16-bit signed integer and overflowed in software reused from Ariane 4", "url": "https://en.wikipedia.org/wiki/Ariane_flight_V88", "layer": "SEARCH-CORROBORATED" },
+    { "id": "E3", "claim": "Full nozzle deflection from the flawed data drove the angle of attack above 20 degrees, the aerodynamic loads broke the launcher up and it self-destructed", "url": "https://www.esa.int/Newsroom/Press_Releases/Ariane_501_-_Presentation_of_Inquiry_Board_report", "layer": "SEARCH-CORROBORATED" },
+    { "id": "E4", "claim": "Ariane 5 flew a faster trajectory than Ariane 4, so the horizontal velocity value grew too large for the 16-bit integer", "url": "https://en.wikipedia.org/wiki/Ariane_flight_V88", "layer": "SEARCH-CORROBORATED" },
+    { "id": "E5", "claim": "Ariane 5 stands 46 to 52 m tall with a 5.4 m core stage and two 31.6 m solid boosters 3.06 m across", "url": "https://en.wikipedia.org/wiki/Ariane_5", "layer": "SEARCH-CORROBORATED" },
+    { "id": "E6", "claim": "Reused software is now re-verified against the new vehicle's real flight profile", "url": "icerik/konular/ariane-5-flight-501.json (case file lesson)", "layer": "CASE-FILE" }
+  ],
+  "vehicles": { "main": "ariane5" },
+  "model": { "type": "ascent", "failureT": 37, "failureFact": "E1" }
+}
