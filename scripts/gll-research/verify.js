@@ -93,6 +93,25 @@ const prose = (s) => !/^=|=$/.test(s.trim()) && !/:\s*$/.test(s.trim());
 
 // the shortest source sentence containing every required term and every non-year claim number (years: sentence or title)
 // that shares at least half of the claim's content words
+// A mechanism fact (fact.mechanism: foot, surface, position, direction, keeper action, path...) decides what the animation
+// draws, so sharing words is not enough: its terms must include the action itself, not only names ("Shilton" alone matched
+// a sentence about his saves, not the finish); the quote must come from a paragraph that names the event (every
+// fact.context term, e.g. the year and the opponent) and must not name a year outside that context (a 1998 goal is not
+// the 1997 free kick).
+const paragraphOf = (text, s) => String(text || "").split(/\n+/).find((p) => p.includes(s)) || "";
+function mechanismProblem(fact, src, s) {
+  const context = (fact.context || []).map(fold);
+  if (!context.length) return "a mechanism fact needs context terms that name its event (year, opponent)";
+  if (!(fact.terms || []).some((t) => /^[a-z]/.test(String(t)))) return "a mechanism fact needs an action term (e.g. \"left foot\", \"scored\"), not only names";
+  const para = fold(paragraphOf(src.text, s) || s);
+  const missing = context.filter((t) => !para.includes(t));
+  if (missing.length) return `the quote's paragraph does not name the event (${missing.join(", ")})`;
+  const allowed = new Set(context.flatMap((t) => FR.numbersIn(t)).filter(isYear));
+  const other = FR.numbersIn(s).filter((n) => isYear(n) && !allowed.has(n));
+  if (allowed.size && other.length) return `the quote names another year (${other.join(", ")})`;
+  return null;
+}
+
 function evidenceFor(fact, src) {
   const terms = (fact.terms || []).map(fold);
   const nums = [...new Set(FR.numbersIn(fact.claim))];
@@ -100,7 +119,11 @@ function evidenceFor(fact, src) {
   const candidates = sentences(src.text).filter((s) => terms.every((t) => fold(s).includes(t)));
   const fits = candidates.filter((s) => { const have = new Set(FR.numbersIn(s)); return nums.every((n) => have.has(n) || (isYear(n) && titleNums.has(n))); })
     .filter((s) => words(s) >= 5 && words(s) <= 80 && prose(s) && support(fact.claim, s) >= MIN_SUPPORT).sort((a, b) => a.length - b.length);
-  if (fits[0]) return { quote: fits[0] };
+  if (fact.mechanism) {
+    const ok = fits.filter((s) => !mechanismProblem(fact, src, s));
+    if (ok[0]) return { quote: ok[0] };
+    if (fits[0]) return { error: `mechanism fact: ${mechanismProblem(fact, src, fits[0])}`, near: fits.slice(0, 3) };
+  } else if (fits[0]) return { quote: fits[0] };
   const near = sentences(src.text).map((s) => ({ s, hit: terms.filter((t) => fold(s).includes(t)).length })).filter((x) => x.hit).sort((a, b) => b.hit - a.hit || a.s.length - b.s.length).slice(0, 3).map((x) => x.s);
   return { error: candidates.length ? `a sentence has the terms but not every claim number (${nums.join(", ") || "none"}), is not 5-80 words of prose, or shares under ${MIN_SUPPORT * 100}% of the claim's content words` : `no sentence contains all of: ${fact.terms.join(" + ")}`, near };
 }
@@ -197,4 +220,4 @@ async function run(argv = process.argv.slice(2), { fetchJson = get, fetchText = 
 }
 
 if (require.main === module) run().catch((e) => { console.error(e.message); process.exit(1); });
-module.exports = { run, verifyDraft, evidenceFor, sentences, article, page, pageText, support };
+module.exports = { run, verifyDraft, evidenceFor, mechanismProblem, sentences, article, page, pageText, support };
