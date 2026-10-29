@@ -317,7 +317,8 @@ window.renderAt = (tIn) => {
     const f = ease(clamp(k * 1.1)); showTube(spiralWide, f); trailWide.visible = true;
     const idx = Math.floor(f * (D.spiral.length - 1)); const sp = D.spiral[idx]; ball.position.copy(V(sp.p)); keeper.visible = false;
     stadium.visible = false; grass.visible = apron.visible = false; board.visible = true; scene.fog.far = 900;
-    look(new THREE.Vector3(-27, 175, -34.5), new THREE.Vector3(-27, 0, -34.51), 46);
+    // slow descent and drift through the whole shot, so it keeps moving after the spiral is drawn
+    look(new THREE.Vector3(-27 + 4 * k, 175 - 22 * k, -34.5 + 3 * k), new THREE.Vector3(-27 + 4 * k, 0, -34.51 + 3 * k), 46);
     html += `<div class="head">SLOWER = TIGHTER</div><div class="sub">MODEL · 10 m GRID · NO GRAVITY, SPIN HELD</div>`;
     html += `<div class="read" style="left:60px;top:${H * 0.62}px">TURNING RADIUS ${sp.radius.toFixed(0)} m<small>MODEL · IF IT KEPT FLYING LEVEL · ${sp.t.toFixed(1)} s</small></div>`;
   }

@@ -89,6 +89,7 @@ jobs:
             echo; for q in "$OUT"/qa-*-threejs.txt; do [ -e "$q" ] && { echo "**$(basename "$q")**: $(tail -1 "$q")"; grep -E '^(FAIL|WARN)' "$q" | sed 's/^/- /'; }; done
             for l in "$OUT"/log-*-current.txt; do echo "**$(basename "$l")**: $(grep -E '^qa:|^narration:' "$l" | tr '\n' ' ')"; done
           } | tee -a "$GITHUB_STEP_SUMMARY" > "$OUT/summary.md"
+          cat "$OUT/summary.md"; grep -h '^render:' "$OUT"/log-*-current.txt || true
       - uses: actions/upload-artifact@v4
         if: always()
         with:
