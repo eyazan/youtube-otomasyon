@@ -1,8 +1,8 @@
 name: Pilot assets discovery (review only, never publishable)
 
-# Lists free (CC0) character and animation packs for the isolated Three.js pilots: licence lines, files, archive contents
-# and sha256 (scripts/pilot-assets/discover.sh), then converts the pinned manifest's assets for a motion test. Nothing is
-# committed, uploaded or wired into production. Runs only on the pilot branch.
+# Free (CC0) character and animation packs for the isolated Three.js pilots: discovery (licence lines, files, sha256),
+# then a pinned, hash-checked download of the manifest and an inventory of every glTF (meshes, skeleton, clips).
+# Nothing is committed, uploaded or wired into production. Runs only on the pilot branch.
 on:
   push:
     branches: [pilot/gll-magnus-3d]
@@ -22,13 +22,18 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
-      - name: Discover
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Pinned download (sha256) and inventory
+        run: |
+          bash scripts/pilot-assets/fetch.sh /tmp/vendor | tee -a "$GITHUB_STEP_SUMMARY"
+          find /tmp/vendor -type f \( -name '*.glb' -o -name '*.gltf' \) -print0 | xargs -0 -r node scripts/pilot-assets/inspect-gltf.js | tee -a "$GITHUB_STEP_SUMMARY"
+          find /tmp/vendor -type f \( -iname '*licen*' -o -iname '*readme*' \) -exec sh -c 'echo "### $1"; head -40 "$1"' _ {} \; | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Discover more packs
         run: |
           bash scripts/pilot-assets/discover.sh \
-            https://opengameart.org/content/universal-animation-library \
-            https://opengameart.org/content/universal-animation-library-2 \
-            https://opengameart.org/content/universal-base-characters \
-            https://kenney.nl/assets/animated-characters-1 \
-            https://kenney.nl/assets/blocky-characters \
-            https://quaternius.com/packs/universalanimationlibrary.html \
+            https://opengameart.org/content/universal-base-characters-0 \
+            https://opengameart.org/users/quaternius \
             https://quaternius.com/packs/universalbasecharacters.html | tee -a "$GITHUB_STEP_SUMMARY"
+          curl -fsSL https://opengameart.org/users/quaternius | grep -oE 'href="/content/[a-z0-9-]*(base|character|human|soccer|football|sport)[a-z0-9-]*"' | sort -u | head -30 || true
