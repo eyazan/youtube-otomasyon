@@ -1,21 +1,21 @@
 {
   "schema": "feedback-loop-health/1",
-  "generatedAt": "2026-10-29T07:03:18.760Z",
+  "generatedAt": "2026-10-29T14:16:46.520Z",
   "verdict": "CLOSED_LOOP_WORKING",
   "channels": [
     {
       "channel": "failure-reconstructed",
       "verdict": "CLOSED_LOOP_WORKING",
       "mode": "adaptive",
-      "publishedVideos": 33,
+      "publishedVideos": 34,
       "performanceRows": 33,
-      "diagnosisRows": 158,
+      "diagnosisRows": 159,
       "learning": {
-        "updatedAt": "2026-10-29T07:03:14.229Z",
+        "updatedAt": "2026-10-29T14:16:41.344Z",
         "sampleSize": 32,
         "status": "adaptive",
         "observations": 34,
-        "hypotheses": 17,
+        "hypotheses": 10,
         "adopted": 0,
         "suppressed": 0
       },
@@ -76,23 +76,9 @@
         }
       ],
       "timing": {
-        "lateCheckpointCount": 94,
+        "lateCheckpointCount": 96,
         "note": "Historical late collections are retained for audit, but performance math uses their real collection age.",
         "examples": [
-          {
-            "videoId": "aScjSrwqeRk",
-            "label": "12h",
-            "scheduledHours": 12,
-            "collectedAgeHours": 70.27,
-            "driftHours": 58.27
-          },
-          {
-            "videoId": "aScjSrwqeRk",
-            "label": "6h",
-            "scheduledHours": 6,
-            "collectedAgeHours": 70.6,
-            "driftHours": 64.6
-          },
           {
             "videoId": "aScjSrwqeRk",
             "label": "1h",
@@ -148,6 +134,20 @@
             "scheduledHours": 1,
             "collectedAgeHours": 46.61,
             "driftHours": 45.61
+          },
+          {
+            "videoId": "QLSnrXyCJgw",
+            "label": "12h",
+            "scheduledHours": 12,
+            "collectedAgeHours": 18.87,
+            "driftHours": 6.87
+          },
+          {
+            "videoId": "QLSnrXyCJgw",
+            "label": "6h",
+            "scheduledHours": 6,
+            "collectedAgeHours": 19.11,
+            "driftHours": 13.11
           }
         ]
       },
@@ -158,11 +158,11 @@
       "channel": "impossible-brief",
       "verdict": "CLOSED_LOOP_WORKING",
       "mode": "adaptive",
-      "publishedVideos": 19,
+      "publishedVideos": 20,
       "performanceRows": 18,
       "diagnosisRows": 102,
       "learning": {
-        "updatedAt": "2026-10-29T07:03:15.534Z",
+        "updatedAt": "2026-10-29T14:16:42.472Z",
         "sampleSize": 17,
         "status": "adaptive",
         "observations": 30,
@@ -313,7 +313,7 @@
       "performanceRows": 7,
       "diagnosisRows": 27,
       "learning": {
-        "updatedAt": "2026-10-29T07:03:16.384Z",
+        "updatedAt": "2026-10-29T14:16:43.694Z",
         "sampleSize": 6,
         "status": "observing",
         "observations": 25,
