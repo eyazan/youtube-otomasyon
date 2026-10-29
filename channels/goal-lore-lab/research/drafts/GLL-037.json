@@ -40,6 +40,35 @@
     "Italy",
     "final"
    ]
+  },
+  {
+   "id": "M1",
+   "mechanism": "shotType",
+   "source": "Gordon Banks",
+   "claim": "Pelé headed the ball downwards towards the corner of the goal.",
+   "terms": [
+    "Pelé",
+    "header"
+   ]
+  },
+  {
+   "id": "M2",
+   "mechanism": "diveDirection+contact",
+   "source": "Gordon Banks",
+   "claim": "Banks dived and flicked the ball over the crossbar.",
+   "terms": [
+    "Banks",
+    "over the bar"
+   ]
+  },
+  {
+   "id": "M3",
+   "mechanism": "diveDirection+contact",
+   "source": "Gordon Banks",
+   "claim": "Banks dived to his right and tipped the ball over the crossbar.",
+   "terms": [
+    "crossbar"
+   ]
   }
  ],
  "narration": [
@@ -95,5 +124,6 @@
  ],
  "schema": "goal-lore-lab.research-draft.v1",
  "channel": "goal-lore-lab",
- "draftNote": "Claims drafted by hand from web search summaries, revised on 2026-10-27 against the sentences the first verification run copied from the live source. No quote is written here; scripts/gll-research/verify.js copies each one or leaves the fact UNVERIFIED."
+ "draftNote": "Claims drafted by hand from web search summaries, revised on 2026-10-27 against the sentences the first verification run copied from the live source. No quote is written here; scripts/gll-research/verify.js copies each one or leaves the fact UNVERIFIED.",
+ "mechanismNote": "M* facts: candidate mechanism evidence (pilots/research/gll-mechanism-evidence.json). Hand-drafted claims; verify.js copies a quote only if the live article contains one. Not cited by narration; review-only until the owner accepts."
 }

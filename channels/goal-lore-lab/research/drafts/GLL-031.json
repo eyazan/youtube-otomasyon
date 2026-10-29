@@ -39,6 +39,35 @@
     "fourth goal",
     "greatest"
    ]
+  },
+  {
+   "id": "M1",
+   "mechanism": "passes",
+   "source": "1970 FIFA World Cup final",
+   "claim": "The move began with Clodoaldo dribbling past Italian players in his own half.",
+   "terms": [
+    "Clodoaldo"
+   ]
+  },
+  {
+   "id": "M2",
+   "mechanism": "passes",
+   "source": "1970 FIFA World Cup final",
+   "claim": "Jairzinho passed to Pelé, who rolled the ball into the path of Carlos Alberto.",
+   "terms": [
+    "Jairzinho",
+    "Pelé"
+   ]
+  },
+  {
+   "id": "M3",
+   "mechanism": "finish",
+   "source": "1970 FIFA World Cup final",
+   "claim": "Carlos Alberto struck the ball into the net with a powerful shot.",
+   "terms": [
+    "Carlos Alberto",
+    "shot"
+   ]
   }
  ],
  "narration": [
@@ -87,5 +116,6 @@
  ],
  "schema": "goal-lore-lab.research-draft.v1",
  "channel": "goal-lore-lab",
- "draftNote": "Claims drafted by hand from web search summaries, revised on 2026-10-27 against the sentences the first verification run copied from the live source. No quote is written here; scripts/gll-research/verify.js copies each one or leaves the fact UNVERIFIED."
+ "draftNote": "Claims drafted by hand from web search summaries, revised on 2026-10-27 against the sentences the first verification run copied from the live source. No quote is written here; scripts/gll-research/verify.js copies each one or leaves the fact UNVERIFIED.",
+ "mechanismNote": "M* facts: candidate mechanism evidence (pilots/research/gll-mechanism-evidence.json). Hand-drafted claims; verify.js copies a quote only if the live article contains one. Not cited by narration; review-only until the owner accepts."
 }

@@ -37,6 +37,25 @@
    "terms": [
     "1980"
    ]
+  },
+  {
+   "id": "M1",
+   "mechanism": "delivery",
+   "source": "UEFA Euro 2004 final",
+   "claim": "Greece's goal came from a corner kick taken by Angelos Basinas from the right.",
+   "terms": [
+    "corner",
+    "Basinas"
+   ]
+  },
+  {
+   "id": "M2",
+   "mechanism": "delivery",
+   "source": "UEFA Euro 2004 final",
+   "claim": "Angelos Basinas took a corner kick for Greece.",
+   "terms": [
+    "Basinas"
+   ]
   }
  ],
  "narration": [
@@ -78,5 +97,6 @@
  ],
  "schema": "goal-lore-lab.research-draft.v1",
  "channel": "goal-lore-lab",
- "draftNote": "Claims drafted by hand from web search summaries, revised on 2026-10-27 against the sentences the first verification run copied from the live source. No quote is written here; scripts/gll-research/verify.js copies each one or leaves the fact UNVERIFIED."
+ "draftNote": "Claims drafted by hand from web search summaries, revised on 2026-10-27 against the sentences the first verification run copied from the live source. No quote is written here; scripts/gll-research/verify.js copies each one or leaves the fact UNVERIFIED.",
+ "mechanismNote": "M* facts: candidate mechanism evidence (pilots/research/gll-mechanism-evidence.json). Hand-drafted claims; verify.js copies a quote only if the live article contains one. Not cited by narration; review-only until the owner accepts."
 }

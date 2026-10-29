@@ -39,6 +39,24 @@
     "voted",
     "Goal of the Century"
    ]
+  },
+  {
+   "id": "M1",
+   "mechanism": "path",
+   "source": "Argentina v England (1986 FIFA World Cup)",
+   "claim": "Maradona received the ball in his own half before his run.",
+   "terms": [
+    "own half"
+   ]
+  },
+  {
+   "id": "M2",
+   "mechanism": "finish",
+   "source": "Argentina v England (1986 FIFA World Cup)",
+   "claim": "Maradona went around goalkeeper Peter Shilton and scored.",
+   "terms": [
+    "Shilton"
+   ]
   }
  ],
  "narration": [
@@ -87,5 +105,6 @@
  ],
  "schema": "goal-lore-lab.research-draft.v1",
  "channel": "goal-lore-lab",
- "draftNote": "Claims drafted by hand from web search summaries, revised on 2026-10-27 against the sentences the first verification run copied from the live source. No quote is written here; scripts/gll-research/verify.js copies each one or leaves the fact UNVERIFIED."
+ "draftNote": "Claims drafted by hand from web search summaries, revised on 2026-10-27 against the sentences the first verification run copied from the live source. No quote is written here; scripts/gll-research/verify.js copies each one or leaves the fact UNVERIFIED.",
+ "mechanismNote": "M* facts: candidate mechanism evidence (pilots/research/gll-mechanism-evidence.json). Hand-drafted claims; verify.js copies a quote only if the live article contains one. Not cited by narration; review-only until the owner accepts."
 }

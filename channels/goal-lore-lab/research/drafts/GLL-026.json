@@ -13,6 +13,35 @@
     "Roberto Carlos",
     "free kick"
    ]
+  },
+  {
+   "id": "M1",
+   "mechanism": "foot+surface",
+   "source": "Roberto Carlos",
+   "claim": "He struck the free kick against France with the outside of his left foot.",
+   "terms": [
+    "outside",
+    "left foot"
+   ]
+  },
+  {
+   "id": "M2",
+   "mechanism": "foot+surface",
+   "source": "1997 Tournoi de France",
+   "claim": "Roberto Carlos struck the free kick with the outside of his left foot.",
+   "terms": [
+    "outside",
+    "foot"
+   ]
+  },
+  {
+   "id": "M3",
+   "mechanism": "keeperAction",
+   "source": "1997 Tournoi de France",
+   "claim": "France goalkeeper Fabien Barthez did not move as the ball went in.",
+   "terms": [
+    "Barthez"
+   ]
   }
  ],
  "narration": [
@@ -54,5 +83,6 @@
  ],
  "schema": "goal-lore-lab.research-draft.v1",
  "channel": "goal-lore-lab",
- "draftNote": "Claims drafted by hand from web search summaries, revised on 2026-10-27 against the sentences the first verification run copied from the live source. No quote is written here; scripts/gll-research/verify.js copies each one or leaves the fact UNVERIFIED."
+ "draftNote": "Claims drafted by hand from web search summaries, revised on 2026-10-27 against the sentences the first verification run copied from the live source. No quote is written here; scripts/gll-research/verify.js copies each one or leaves the fact UNVERIFIED.",
+ "mechanismNote": "M* facts: candidate mechanism evidence (pilots/research/gll-mechanism-evidence.json). Hand-drafted claims; verify.js copies a quote only if the live article contains one. Not cited by narration; review-only until the owner accepts."
 }
