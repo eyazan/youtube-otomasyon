@@ -2,50 +2,6 @@
   "channel": "impossible-brief",
   "runs": [
     {
-      "runId": "40391456673",
-      "attempt": "1",
-      "startedAt": "2026-10-26T19:59:28.189Z",
-      "publish": true,
-      "trigger": {
-        "event": "schedule",
-        "correlationId": null
-      },
-      "targetDay": null,
-      "slug": null,
-      "outcome": "FAILED",
-      "reason": "health pre-flight: nitelikli-konu: kalite çubuğunu geçen konu yok — NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [107 unused A topic(s), best viral score 74 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]; seslendirme: NARRATION_UNAVAILABLE: Edge sesi reddedildi (Edge TTS WebSocket error: Unexpected server response: 200",
-      "stages": {
-        "RESEARCH": {
-          "status": "not-reached"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "not-reached"
-        },
-        "QA": {
-          "status": "not-reached"
-        },
-        "UPLOAD": {
-          "status": "not-reached"
-        },
-        "SCHEDULE": {
-          "status": "not-reached"
-        },
-        "PUBLISH": {
-          "status": "not-reached"
-        }
-      },
-      "finishedAt": "2026-10-26T19:59:35.952Z"
-    },
-    {
       "runId": "40397130921",
       "attempt": "1",
       "startedAt": "2026-10-26T20:41:00.331Z",
@@ -1338,6 +1294,62 @@
         }
       },
       "finishedAt": "2026-10-28T21:14:18.735Z"
+    },
+    {
+      "runId": "40875642150",
+      "attempt": "1",
+      "startedAt": "2026-10-29T12:47:56.984Z",
+      "publish": true,
+      "trigger": {
+        "event": "schedule",
+        "correlationId": null
+      },
+      "targetDay": "2026-10-29",
+      "slug": "what-if-you-could-touch-earths-core",
+      "outcome": "UPLOADED",
+      "reason": "premium IB-PHY-065 5cNecwSkYDo",
+      "stages": {
+        "RESEARCH": {
+          "status": "done",
+          "detail": "IB-PHY-065",
+          "at": "2026-10-29T12:52:11.135Z"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "done",
+          "detail": "premium final",
+          "at": "2026-10-29T12:52:11.140Z"
+        },
+        "QA": {
+          "status": "done",
+          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
+          "at": "2026-10-29T12:52:11.143Z"
+        },
+        "UPLOAD": {
+          "status": "done",
+          "detail": "5cNecwSkYDo",
+          "at": "2026-10-29T12:52:11.144Z"
+        },
+        "SCHEDULE": {
+          "status": "done",
+          "detail": "2026-10-29T18:00:00.000Z",
+          "at": "2026-10-29T12:52:11.145Z"
+        },
+        "PUBLISH": {
+          "status": "scheduled",
+          "detail": "YouTube makes it public at 2026-10-29T18:00:00.000Z",
+          "at": "2026-10-29T12:52:11.148Z"
+        }
+      },
+      "finishedAt": "2026-10-29T12:52:11.149Z"
     }
   ]
 }

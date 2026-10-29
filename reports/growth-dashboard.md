@@ -1,14 +1,14 @@
 # Growth dashboard
 
-Generated 2026-10-28T21:14:28.677Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-10-29T12:52:39.155Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
-**Shorts health** — last published 2026-10-28T18:00:00.000Z · 33 published · inventory A98/B138/C60/D59 · next: i-35w-bridge-2007 (EXPLOIT (0.75): best A topic by SelectionScore)
+**Shorts health** — last published 2026-10-29T18:00:00.000Z · 34 published · inventory A97/B138/C60/D59 · next: teton-dam-1976 (EXPLOIT (0.75): best A topic by SelectionScore)
 
 **Long-form health** — cycle 2026-W44: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W44 already QUALITY_BLOCKED)
 
-**Long-form backlog** — challenger-1986 87/A, chernobyl-1986 86/A, columbia-2003 86/A, apollo-13-1970 85/A, air-france-447-2009 84/A
+**Long-form backlog** — challenger-1986 86/A, chernobyl-1986 86/A, columbia-2003 85/A, air-france-447-2009 84/A, apollo-13-1970 84/A
 
 **Content clusters** — 12 · integrity OK
 
@@ -41,7 +41,7 @@ Generated 2026-10-28T21:14:28.677Z. Per-channel baselines are computed separatel
 
 ## ImpossibleBrief
 
-**Shorts health** — last published 2026-10-19T18:00:00.000Z · 19 published · inventory A111/B23/C140/D206 · next: what-if-we-tried-to-drill-through-the-earth (EXPLOIT (0.75): best A topic by SelectionScore)
+**Shorts health** — last published 2026-10-29T18:00:00.000Z · 20 published · inventory A110/B23/C140/D206 · next: what-if-we-tried-to-drill-through-the-earth (EXPLOIT (0.75): best A topic by SelectionScore)
 
 **Long-form health** — cycle 2026-W44: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W44 already QUALITY_BLOCKED)
 
@@ -78,5 +78,5 @@ Generated 2026-10-28T21:14:28.677Z. Per-channel baselines are computed separatel
 
 ## Cross-channel infrastructure
 
-Channels: failure-reconstructed, impossible-brief · workflows: 39 · growth config present: true
+Channels: failure-reconstructed, impossible-brief · workflows: 40 · growth config present: true
 

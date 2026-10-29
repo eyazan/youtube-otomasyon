@@ -1,6 +1,6 @@
 # Daily operations report
 
-Generated: 2026-10-28T21:37:58.518Z
+Generated: 2026-10-29T12:52:41.911Z
 
 Missing API-only metrics are reported as `unavailable`, never as zero.
 
@@ -8,43 +8,43 @@ Missing API-only metrics are reported as `unavailable`, never as zero.
 
 | Signal | Status |
 |---|---|
-| Today topic | unavailable |
-| Short | not-due |
+| Today topic | i-35w-bridge-2007 |
+| Short | scheduled |
 | Long | due-not-produced |
-| Quality | unavailable / unavailable |
-| YouTube | not-uploaded |
-| Publish time | unavailable |
-| Video ID | unavailable |
+| Quality | PUBLISH / unavailable |
+| YouTube | scheduled |
+| Publish time | 2026-10-29T18:00:00.000Z |
+| Video ID | 8eb8nuVkMrE |
 | Analytics | measured |
-| Scheduler | pending-before-deadline |
-| Ready topic backlog | 355 |
+| Scheduler | healthy |
+| Ready topic backlog | 354 |
 | Errors/review/blocks | 20 |
-| TikTok today | NO_TODAY_VIDEO |
-| TikTok backlog | 22 |
-| Analytics warehouse | through 2026-10-26 (lag 2 d) |
-| Ops (24 h) | publish.success 1, publish.scheduled_verified 1, analytics.load 1, publish.public 1 |
-| Scheduler queue | 1 queued, oldest 2026-10-29 (-1 d) |
-| API quota today | 0 / 9800 units (project channel:failure-reconstructed) |
+| TikTok today | NOT_SENT |
+| TikTok backlog | 23 |
+| Analytics warehouse | through 2026-10-27 (lag 2 d) |
+| Ops (24 h) | publish.public 1, publish.success 1, publish.scheduled_verified 1, analytics.load 1 |
+| Scheduler queue | 2 queued, oldest 2026-10-29 (0 d) |
+| API quota today | 1613 / 9800 units (project 1012165386949) |
 | YPP readiness (estimate) | subs 29/1,000 · long-form watch h (365 d) unavailable/4,000 · Shorts views (90 d) unavailable/10M |
 
 ## ImpossibleBrief
 
 | Signal | Status |
 |---|---|
-| Today topic | unavailable |
-| Short | not-due |
+| Today topic | what-if-you-could-touch-earths-core |
+| Short | scheduled |
 | Long | due-not-produced |
-| Quality | unavailable / unavailable |
-| YouTube | not-uploaded |
-| Publish time | unavailable |
-| Video ID | unavailable |
+| Quality | PUBLISH / unavailable |
+| YouTube | scheduled |
+| Publish time | 2026-10-29T18:00:00.000Z |
+| Video ID | 5cNecwSkYDo |
 | Analytics | measured |
-| Scheduler | pending-before-deadline |
+| Scheduler | healthy |
 | Ready topic backlog | 474 |
 | Errors/review/blocks | 6 |
-| Analytics warehouse | through 2026-10-26 (lag 2 d) · 1 table error(s) |
-| Ops (24 h) | analytics.load 1 |
-| Scheduler queue | 1 queued, oldest 2026-10-29 (-1 d) |
-| API quota today | 115 / 9800 units (project 684098966511) |
+| Analytics warehouse | through 2026-10-27 (lag 2 d) |
+| Ops (24 h) | publish.success 1, publish.scheduled_verified 1, analytics.load 1 |
+| Scheduler queue | 2 queued, oldest 2026-10-29 (0 d) |
+| API quota today | 1613 / 9800 units (project 684098966511) |
 | YPP readiness (estimate) | subs 13/1,000 · long-form watch h (365 d) unavailable/4,000 · Shorts views (90 d) unavailable/10M |
 

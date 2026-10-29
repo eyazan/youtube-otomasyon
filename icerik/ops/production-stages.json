@@ -2,50 +2,6 @@
   "channel": "failure-reconstructed",
   "runs": [
     {
-      "runId": "40499810441",
-      "attempt": "1",
-      "startedAt": "2026-10-27T11:56:57.173Z",
-      "publish": true,
-      "trigger": {
-        "event": "schedule",
-        "correlationId": null
-      },
-      "targetDay": "2026-10-27",
-      "slug": null,
-      "outcome": "FAILED",
-      "reason": "health pre-flight: seslendirme: NARRATION_UNAVAILABLE: Edge sesi reddedildi (Edge TTS WebSocket error: Unexpected server response: 200, Edge TTS WebSocket error: Unexpected server response: 200, Edge TTS WebSocket error: Unexpected server response: 200; msedge-tts 2.1.0); yedek ses yok — fallback voice am_michael is not approved for publishing (config.voice.fallback.approved)",
-      "stages": {
-        "RESEARCH": {
-          "status": "not-reached"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "not-reached"
-        },
-        "QA": {
-          "status": "not-reached"
-        },
-        "UPLOAD": {
-          "status": "not-reached"
-        },
-        "SCHEDULE": {
-          "status": "not-reached"
-        },
-        "PUBLISH": {
-          "status": "not-reached"
-        }
-      },
-      "finishedAt": "2026-10-27T11:57:07.666Z"
-    },
-    {
       "runId": "40504275788",
       "attempt": "1",
       "startedAt": "2026-10-27T13:01:38.862Z",
@@ -1345,6 +1301,62 @@
         }
       },
       "finishedAt": "2026-10-28T21:14:14.290Z"
+    },
+    {
+      "runId": "40875642150",
+      "attempt": "1",
+      "startedAt": "2026-10-29T12:44:39.949Z",
+      "publish": true,
+      "trigger": {
+        "event": "schedule",
+        "correlationId": null
+      },
+      "targetDay": "2026-10-29",
+      "slug": "i-35w-bridge-2007",
+      "outcome": "UPLOADED",
+      "reason": "premium FR-i-35w-bridge-2007 8eb8nuVkMrE",
+      "stages": {
+        "RESEARCH": {
+          "status": "done",
+          "detail": "FR-i-35w-bridge-2007",
+          "at": "2026-10-29T12:47:51.107Z"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "done",
+          "detail": "premium final",
+          "at": "2026-10-29T12:47:51.107Z"
+        },
+        "QA": {
+          "status": "done",
+          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
+          "at": "2026-10-29T12:47:51.108Z"
+        },
+        "UPLOAD": {
+          "status": "done",
+          "detail": "8eb8nuVkMrE",
+          "at": "2026-10-29T12:47:51.108Z"
+        },
+        "SCHEDULE": {
+          "status": "done",
+          "detail": "2026-10-29T18:00:00.000Z",
+          "at": "2026-10-29T12:47:51.109Z"
+        },
+        "PUBLISH": {
+          "status": "scheduled",
+          "detail": "YouTube makes it public at 2026-10-29T18:00:00.000Z",
+          "at": "2026-10-29T12:47:51.110Z"
+        }
+      },
+      "finishedAt": "2026-10-29T12:47:51.110Z"
     }
   ]
 }
