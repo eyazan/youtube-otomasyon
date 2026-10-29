@@ -1,0 +1,200 @@
+<!doctype html>
+<html><head><meta charset="utf-8"></head>
+<body>
+<script type="importmap">{ "imports": { "three": "/three/build/three.module.js" } }</script>
+<script type="module">
+// Character pilot (review only; never published, not wired into production): the kit's football motion library
+// (pilots/kit/football.js MOTION: kick, chip, keeper ready, dive) retargeted onto a rigged CC0 mannequin (Quaternius
+// Universal Animation Library, pinned in scripts/pilot-assets/manifest.json), with motion-captured locomotion clips for
+// the run-up. ?fig=v2 draws the same sequence with the kit's v2 figure for a side-by-side comparison.
+// ?seq=rc   long run-up, left-foot outside strike, balance arm, follow-through (Roberto Carlos pilot)
+// ?seq=pk   penalty: slowing run-up, chest feint, chip; the keeper dives early (Panenka pilot)
+import * as THREE from "three";
+import { GLTFLoader } from "/three/examples/jsm/loaders/GLTFLoader.js";
+import * as SkeletonUtils from "/three/examples/jsm/utils/SkeletonUtils.js";
+import { createStage, O, clamp, ease, lerp } from "/kit/core.js";
+import { buildStadium, buildGoal, buildBall, athlete, MOTION, KITS } from "/kit/football.js";
+
+const S = createStage({ far: 700, shadows: true });
+const OPT = S.OPT; const SEQ = OPT.seq || "rc"; const FIG = OPT.fig || "ual";
+const GZ = -20; const stadium = buildStadium(S.scene, { goalZ: GZ }); buildGoal(S.scene, GZ);
+const { ball } = buildBall(S.scene, {});
+const sun = new THREE.DirectionalLight(0xffffff, 1.4); sun.position.set(-18, 40, 20); sun.castShadow = true;
+sun.shadow.mapSize.set(2048, 2048); Object.assign(sun.shadow.camera, { left: -15, right: 15, top: 15, bottom: -15, near: 1, far: 120 }); S.scene.add(sun, sun.target);
+S.scene.add(new THREE.HemisphereLight(0xcfe3ff, 0x2a3a24, 0.7));
+
+// ---- rigged mannequin + retargeting ----------------------------------------------------------------------------------
+// The kit's pose parameters are joint angles in the figure's own frame (the figure faces -z, +x is its right side).
+// A pose is applied to the skeleton as world-space rotations over a neutral base (legs straight, arms hanging), so the
+// same MOTION functions drive both figures and no bone axes need to be known.
+const BONES = { hips: "DEF-hips", spine: ["DEF-spine.001", "DEF-spine.002"], chest: ["DEF-spine.003"], neck: "DEF-neck", head: "DEF-head",
+  L: { thigh: "DEF-thigh.L", shin: "DEF-shin.L", foot: "DEF-foot.L", toe: "DEF-toe.L", upper: "DEF-upper_arm.L", fore: "DEF-forearm.L", hand: "DEF-hand.L" },
+  R: { thigh: "DEF-thigh.R", shin: "DEF-shin.R", foot: "DEF-foot.R", toe: "DEF-toe.R", upper: "DEF-upper_arm.R", fore: "DEF-forearm.R", hand: "DEF-hand.R" } };
+let GLTF = null;
+if (FIG === "ual") GLTF = await new GLTFLoader().loadAsync("/vendor/ual1-standard.glb");
+const clipNamed = (n) => GLTF.animations.find((a) => a.name === n);
+const E = (x, y, z) => new THREE.Quaternion().setFromEuler(new THREE.Euler(x, y, z, "XYZ"));
+
+function mannequin({ color = 0x34404f, h = 1.82 } = {}) {
+  const wrap = new THREE.Group(); S.scene.add(wrap);
+  const model = SkeletonUtils.clone(GLTF.scene); const inner = new THREE.Group(); inner.add(model); wrap.add(inner);
+  model.traverse((o) => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; o.frustumCulled = false;
+    o.material = o.material.clone(); if (o.material.color && o.material.color.getHSL({}).l > 0.25) o.material.color.setHex(color); } });
+  // GLTFLoader sanitises node names (drops ".", ":", "/", brackets): index bones under both spellings
+  const bone = {}; model.traverse((o) => { if (o.isBone) bone[o.name] = o; });
+  for (const n of JSON.stringify(BONES).match(/DEF-[^"]+/g)) if (!bone[n]) bone[n] = bone[n.replace(/[.:\/\[\]]/g, "")];
+  const missing = JSON.stringify(BONES).match(/DEF-[^"]+/g).filter((n) => !bone[n]); if (missing.length) throw new Error("rig lacks bones " + missing.join(", "));
+  const mixer = new THREE.AnimationMixer(model); const act = {};
+  for (const c of GLTF.animations) { const a = mixer.clipAction(c); a.play(); a.weight = 0; act[c.name] = a; }
+  const evalClip = (name, time) => { for (const a of Object.values(act)) a.weight = 0; act[name].weight = 1; act[name].time = time % act[name].getClip().duration; mixer.update(0); model.updateMatrixWorld(true); };
+  // orientation: the clips face +z; turn the mannequin to face -z like the kit figure
+  inner.rotation.y = Math.PI;
+  evalClip("Idle_Loop", 0); const box = new THREE.Box3().setFromObject(model); const s = h / (box.max.y - box.min.y); model.scale.setScalar(s); model.position.y = -box.min.y * s;
+  model.updateMatrixWorld(true);
+  const all = Object.values(bone);
+  const snap = () => new Map(all.map((b) => [b, b.quaternion.clone()]));
+  const apply = (m) => { for (const [b, q] of m) b.quaternion.copy(q); model.updateMatrixWorld(true); };
+  const hipsRest = bone[BONES.hips].position.clone();
+  // neutral base: idle pose, then each limb rotated in world space so it hangs straight down (arms) / stands straight (legs)
+  evalClip("Idle_Loop", 0);
+  const down = new THREE.Vector3(0, -1, 0); const wp = (b) => b.getWorldPosition(new THREE.Vector3());
+  const setWorldQ = (b, qWorld) => { const pq = b.parent.getWorldQuaternion(new THREE.Quaternion()); b.quaternion.copy(pq.invert().multiply(qWorld)); b.updateMatrixWorld(true); };
+  const point = (b, child, dir) => { const v = wp(child).sub(wp(b)).normalize(); const q = new THREE.Quaternion().setFromUnitVectors(v, dir);
+    setWorldQ(b, q.multiply(b.getWorldQuaternion(new THREE.Quaternion()))); };
+  for (const k of ["L", "R"]) { const B = BONES[k]; point(bone[B.thigh], bone[B.shin], down); point(bone[B.shin], bone[B.foot], down);
+    point(bone[B.upper], bone[B.fore], new THREE.Vector3(k === "L" ? -0.12 : 0.12, -1, 0).normalize()); point(bone[B.fore], bone[B.hand], new THREE.Vector3(k === "L" ? -0.1 : 0.1, -1, -0.12).normalize()); }
+  const base = snap(); const baseWorld = new Map(all.map((b) => [b, b.getWorldQuaternion(new THREE.Quaternion())]));
+  const wq = () => wrap.getWorldQuaternion(new THREE.Quaternion());
+  // pose p (kit parameters) -> bone local quaternions
+  const posed = (p) => {
+    apply(base); const W = wq(); const Wi = W.clone().invert();
+    const Qp = E(p.lean || 0, p.twist || 0, p.tilt || 0); const Qc = Qp.clone().multiply(E(p.chestBend || 0, p.chestTwist || 0, p.chestSide || 0));
+    const Qh = Qc.clone().multiply(E(p.nod || 0, p.look || 0, 0));
+    const world = (b, Q) => setWorldQ(b, W.clone().multiply(Q).multiply(Wi).multiply(baseWorld.get(b)));
+    world(bone[BONES.hips], Qp); for (const n of BONES.spine) world(bone[n], Qp.clone().slerp(Qc, 0.5)); for (const n of BONES.chest) world(bone[n], Qc);
+    world(bone[BONES.neck], Qc.clone().slerp(Qh, 0.5)); world(bone[BONES.head], Qh);
+    for (const k of ["L", "R"]) { const q = p[k] || {}; const B = BONES[k]; const sgn = k === "L" ? -1 : 1;
+      // the kit's figure has its left side at -x: hip and shoulder abduction carry the side sign, as in athlete.pose()
+      const Hq = Qp.clone().multiply(E(q.hip || 0, 0, (q.hipOut || 0) * sgn)); const Kq = Hq.clone().multiply(E(-(q.knee || 0), 0, 0)); const Aq = Kq.clone().multiply(E(q.ankle || 0, 0, 0));
+      world(bone[B.thigh], Hq); world(bone[B.shin], Kq); world(bone[B.foot], Aq); world(bone[B.toe], Aq);
+      const Sq = Qc.clone().multiply(E(q.sh || 0, 0, (q.shOut === undefined ? 0.08 : q.shOut) * sgn)); const Eq = Sq.clone().multiply(E(q.elbow || 0, 0, 0));
+      world(bone[B.upper], Sq); world(bone[B.fore], Eq); world(bone[B.hand], Eq); }
+    bone[BONES.hips].position.copy(hipsRest); bone[BONES.hips].position.y -= (p.drop || 0) / s;
+    const m = snap(); m.mode = "pose"; return m; };
+  const clipPose = (name, time) => { evalClip(name, time); const m = snap(); m.mode = "clip"; return m; };
+  // blend two bone-quaternion maps (w = weight of b)
+  const mix = (a, b, w) => { const m = new Map([...a].map(([bn, q]) => [bn, q.clone().slerp(b.get(bn), clamp(w))])); m.mode = w < 0.5 ? a.mode : b.mode; return m; };
+  const show = (m) => { mode = m.mode || "pose"; apply(m); };
+  // ground the lowest foot (procedural poses bend the knees; the hips height of the base would leave the feet floating)
+  // ground(): the clips carry their own vertical motion (the flight phase of a sprint), so locomotion keeps the
+  // calibrated idle offset; ground(k) seats the named support foot for procedural poses (kick plant, keeper stance)
+  const toeY = (k) => Math.min(wp(bone[BONES[k].foot]).y, wp(bone[BONES[k].toe]).y);
+  const offsetOf = (m) => { inner.position.y = 0; apply(m); return 0.045 - Math.min(toeY("L"), toeY("R")); };
+  const clipOffset = offsetOf((evalClip("Idle_Loop", 0), snap())); const baseOffset = offsetOf(base);
+  // procedural poses start from the straight-legged base, clips from their own hips height
+  let mode = "clip";
+  const ground = (k) => { inner.position.y = mode === "clip" ? clipOffset : baseOffset; model.updateMatrixWorld(true); if (!k) return; inner.position.y += 0.045 - toeY(k); };
+  return { wrap, inner, bone, posed, clipPose, mix, show, ground, footY: (k) => wp(bone[BONES[k].toe]).y, toe: (k) => wp(bone[BONES[k].toe]) };
+}
+
+// kit figure with the same interface (comparison)
+function kitFigure({ kit = KITS.neutral } = {}) {
+  const r = athlete(S.scene, kit); const wrap = new THREE.Group(); S.scene.add(wrap); S.scene.remove(r); wrap.add(r);
+  return { wrap, inner: r, posed: (p) => p, clipPose: (name, time) => MOTION.run((time % 0.7) / 0.7, name === "Sprint_Loop" ? 1 : 0.8),
+    mix: (a, b, w) => (w < 0.5 ? a : b), show: (p) => r.pose(p), ground: () => {}, toe: (k) => r.limbs[k].ankle.getWorldPosition(new THREE.Vector3()) };
+}
+
+const make = (opts) => (FIG === "ual" ? mannequin(opts) : kitFigure({ kit: opts.kit }));
+const kicker = make({ color: 0xf4f4f2, kit: KITS.light });
+const keeper = make({ color: 0x2f9e57, kit: { shirt: 0x2f9e57, shorts: 0x1b2a1f, socks: 0x2f9e57 } });
+
+// ---- sequences (REPRESENTATIVE motion: joint angles from the kit library, not measured for any player) -------------
+const ballSpot = SEQ === "pk" ? new THREE.Vector3(0, 0.11, GZ + 11) : new THREE.Vector3(-4, 0.11, GZ + 30);
+const tContact = SEQ === "pk" ? 3.3 : 3.0;
+const foot = SEQ === "pk" ? "R" : "L";
+// run-up: a curved approach that ends with the plant foot beside the ball (kicker faces -z toward goal)
+const runStart = SEQ === "pk" ? new THREE.Vector3(1.2, 0, ballSpot.z + 7) : new THREE.Vector3(ballSpot.x + 4.5, 0, ballSpot.z + 13);
+// the support foot lands beside and just behind the ball; the body travels ~0.35 m forward through the strike
+const plantAt = ballSpot.clone().add(new THREE.Vector3(foot === "L" ? 0.3 : -0.3, -0.11, 0.42));
+const runEnd = tContact - 0.55;
+function kickerState(t) {
+  const u = clamp(t / runEnd); const e = SEQ === "pk" ? 1 - Math.pow(1 - u, 1.6) : u;     // the Panenka run-up slows down
+  const pos = runStart.clone().lerp(plantAt, e); pos.x += Math.sin(Math.PI * u) * (SEQ === "pk" ? 0.3 : 1.2);
+  const dir = plantAt.clone().sub(runStart).normalize(); const heading = Math.atan2(-dir.x, -dir.z);
+  if (t <= runEnd) {
+    const dist = runStart.distanceTo(plantAt) * e;
+    // the clips are in place: playing them at (distance covered / native ground speed) keeps the stance foot planted.
+    // native speeds from the stance foot's travel inside the clip (window.__clipTrace): Sprint_Loop 6.4 m/s, Jog_Fwd_Loop 3.8 m/s
+    const clip = SEQ === "pk" && u > 0.55 ? "Jog_Fwd_Loop" : "Sprint_Loop"; const native = clip === "Sprint_Loop" ? 6.4 : 3.8;
+    return { pos, heading, clip, clipTime: dist / native, kick: null };
+  }
+  const k = clamp((t - runEnd) / 1.0); return { pos: plantAt.clone().add(dir.clone().multiplyScalar(0.35 * ease(clamp(k / 0.7)))), heading, clip: null, kick: k };     // contact at u = 0.55 of 1.0 s
+}
+const ballAt = (t) => { if (t < tContact) return ballSpot.clone(); const dt = t - tContact;
+  if (SEQ === "pk") return ballSpot.clone().add(new THREE.Vector3(0.0, 0.11 + 4.2 * dt - 4.9 * dt * dt, -9.5 * dt)).setY(Math.max(0.11, 0.11 + 4.2 * dt - 4.9 * dt * dt));
+  return ballSpot.clone().add(new THREE.Vector3(2.5 * dt * dt, 3.2 * dt - 2 * dt * dt, -27 * dt)); };
+
+function poseKicker(t) {
+  const st = kickerState(t); const K = kicker;
+  K.wrap.position.copy(st.pos); K.wrap.rotation.y = st.heading;
+  let pose;
+  if (st.clip) pose = K.clipPose(st.clip, st.clipTime);
+  else {
+    const style = SEQ === "pk" ? "chip" : "drive"; const p = MOTION.kick(st.kick, foot, style);
+    // the feint: shoulders and head turn toward one side just before contact while the hips keep pointing at the ball
+    if (SEQ === "pk") { const f = Math.sin(Math.PI * clamp((st.kick - 0.1) / 0.4)); p.chestTwist = (p.chestTwist || 0) + 0.45 * f; p.look = (p.look || 0) + 0.35 * f; }
+    pose = K.posed(p);
+    // blend out of the last locomotion frame over 0.18 s so the plant step does not pop
+    const w = clamp((t - runEnd) / 0.18); if (w < 1 && FIG === "ual") { const last = kickerState(runEnd - 1e-3); pose = K.mix(K.clipPose(last.clip, last.clipTime), K.posed(p), ease(w)); }
+  }
+  K.show(pose); K.ground(st.clip ? null : (foot === "L" ? "R" : "L"));
+}
+function poseKeeper(t) {
+  const K = keeper; K.wrap.position.set(0, 0, GZ + 0.4); K.wrap.rotation.y = Math.PI;   // faces the kicker (+z)
+  const tDive = SEQ === "pk" ? tContact - 0.25 : tContact + 0.35;   // Panenka: the keeper commits before the contact
+  const u = clamp((t - tDive) / 0.55);
+  let p = MOTION.keeperReady();
+  if (u > 0) { const d = MOTION.dive(u, SEQ === "pk" ? "left" : "right"); p = d.pose; K.wrap.position.x += -d.offset[0]; K.wrap.position.y += d.offset[1]; }
+  K.show(K.posed(p)); K.ground(u <= 0 ? "L" : null);
+}
+
+// ---- cameras: a broadcast high side angle for the run-up, low behind-the-kicker at contact, side replay at 0.35x ----
+const DUR = 8.2;
+function cameraAt(t) {
+  const P = ballSpot;
+  // run-up: broadcast camera high on the side, panning with the kicker
+  if (t < 2.2) { const k = kickerState(t).pos; return [new THREE.Vector3(k.x + 7.0, 2.6, k.z + 2.5), new THREE.Vector3(k.x - 0.4, 0.95, k.z - 1.6), 34]; }
+  if (t < 4.2) return [new THREE.Vector3(P.x + 2.2, 1.3, P.z + 5.5), new THREE.Vector3(P.x, 0.8, P.z - 4), 40];
+  return [new THREE.Vector3(P.x - 6.5, 1.25, P.z + 0.6), new THREE.Vector3(P.x, 0.85, P.z + 0.4), 34];
+}
+window.renderAt = (tIn) => {
+  // after 4.2 s the strike replays from the side at 0.35x speed
+  const t = tIn < 4.2 ? tIn : tContact - 0.9 + (tIn - 4.2) * 0.35;
+  poseKicker(t); poseKeeper(t); ball.position.copy(ballAt(t)); ball.rotation.x = -Math.max(0, t - tContact) * 25;
+  const [cp, ct, fov] = cameraAt(tIn); S.look(cp, ct, fov); sun.target.position.copy(ballSpot); stadium.update && stadium.update(t);
+  const label = FIG === "ual" ? "RIGGED CC0 MANNEQUIN · MOCAP RUN-UP + KIT KICK" : "KIT v2 FIGURE";
+  S.ui.innerHTML = O.frame("CHARACTER PILOT") + `<div class="chip">${tIn >= 4.2 ? "REPLAY 0.35x · " : ""}MOTION REPRESENTATIVE</div><div class="sub" style="top:236px">${label}</div>`;
+  S.render();
+};
+window.__duration = DUR;
+// QA hook: foot skate = horizontal speed of the planted foot (lower foot, toe joint within 8 cm of the ground) over [a, b];
+// median and 90th percentile (touchdown frames are excluded by the planted test on both frames)
+window.footSkate = (a, b, fps = 30) => { const v = []; let prev = null;
+  for (let i = 0; i <= (b - a) * fps; i += 1) { const t = a + i / fps; poseKicker(t); const L = kicker.toe("L"), R = kicker.toe("R"); const low = L.y < R.y ? ["L", L.clone()] : ["R", R.clone()];
+    if (prev && prev[0] === low[0] && low[1].y < 0.08 && prev[1].y < 0.08) v.push(Math.hypot(low[1].x - prev[1].x, low[1].z - prev[1].z) * fps);
+    prev = low; }
+  v.sort((x, y) => x - y); const q = (p) => (v.length ? +v[Math.min(v.length - 1, Math.floor(p * v.length))].toFixed(2) : null); return { median: q(0.5), p90: q(0.9), samples: v.length }; };
+// QA hook: a clip's native ground speed = the root speed at which the stance foot stays planted. The root moves at v
+// while the clip plays at rate 1; the planted foot's world speed is |v - native|, so the best v is the native speed.
+window.clipSpeed = (name) => { if (FIG !== "ual") return null; const K = kicker; K.wrap.rotation.y = 0; const dur = GLTF.animations.find((a) => a.name === name).duration;
+  const slide = (v) => { let worst = 0, prev = null; for (let i = 0; i <= 60; i += 1) { const tt = (i / 60) * dur; K.wrap.position.set(0, 0, -v * tt); K.show(K.clipPose(name, tt)); K.ground(null);
+      const L = K.toe("L"), R = K.toe("R"); const low = L.y < R.y ? ["L", L.clone()] : ["R", R.clone()];
+      if (prev && prev[0] === low[0] && low[1].y < 0.06) worst = Math.max(worst, Math.hypot(low[1].x - prev[1].x, low[1].z - prev[1].z) / (dur / 60)); prev = low; } return worst; };
+  let best = [Infinity, 0]; for (let v = 1; v <= 9; v += 0.1) { const w = slide(v); if (w < best[0]) best = [w, v]; }
+  return { dur: +dur.toFixed(3), native: +best[1].toFixed(1), residualSlide: +best[0].toFixed(2) }; };
+window.__clipTrace = (name) => { const K = kicker; K.wrap.position.set(0, 0, 0); K.wrap.rotation.y = 0; const dur = GLTF.animations.find((a) => a.name === name).duration; const r = [];
+  for (let i = 0; i <= 12; i += 1) { K.show(K.clipPose(name, (i / 12) * dur)); K.ground(null); const f = (v) => [+v.x.toFixed(2), +v.y.toFixed(2), +v.z.toFixed(2)]; r.push([i, f(K.toe("L")), f(K.toe("R")), f(K.bone["DEF-hips"].getWorldPosition(new THREE.Vector3()))]); } return r; };
+window.__dbg = () => { const f = (v) => [+v.x.toFixed(2), +v.y.toFixed(3), +v.z.toFixed(2)]; return { L: f(kicker.toe("L")), R: f(kicker.toe("R")), root: f(kicker.wrap.position) }; };
+window.__ready = true;
+</script>
+</body></html>

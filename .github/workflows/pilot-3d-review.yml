@@ -7,7 +7,7 @@ name: Pilot 3D review (isolated Three.js pilots, never publishable)
 on:
   push:
     branches: [pilot/gll-magnus-3d]
-    paths: ['pilots/**', '.github/workflows/pilot-3d-review.yml', '!pilots/**/*.md']
+    paths: ['pilots/**', '.github/workflows/pilot-3d-review.yml', '!pilots/**/*.md', '!pilots/character-pilot/**']
   workflow_dispatch:
 
 permissions:

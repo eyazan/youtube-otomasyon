@@ -6,7 +6,7 @@ name: Pilot assets discovery (review only, never publishable)
 on:
   push:
     branches: [pilot/gll-magnus-3d]
-    paths: ['scripts/pilot-assets/**', '.github/workflows/pilot-assets.yml']
+    paths: ['scripts/pilot-assets/**', 'pilots/character-pilot/**', '.github/workflows/pilot-assets.yml']
   workflow_dispatch:
 
 # write: only the vendor job, which commits the hash-checked CC0 files (with their licence texts) to the separate
@@ -59,3 +59,38 @@ jobs:
           git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout --orphan pilot/assets-vendor && git rm -rfq . && cp /tmp/out/* . && git add -A && git commit -qm "Pilot assets vendor: pinned CC0 files (Quaternius UAL1/UAL2 Standard)"
           git push -f origin pilot/assets-vendor
+
+  character:
+    # the character pilot (pilots/character-pilot): the kit's motion library retargeted onto the pinned CC0 mannequin,
+    # with motion-captured run-up clips, against the kit v2 figure; real MP4s, render time, foot-skate measurement
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      PD_CHROMIUM: /usr/bin/google-chrome
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Dependencies
+        run: |
+          bash scripts/ci-apt.sh --no-install-recommends ffmpeg python3-pil
+          npm ci --no-audit --no-fund
+          (cd pilots/kit && npm ci --no-audit --no-fund)
+          bash scripts/pilot-assets/fetch.sh /tmp/vendor > /dev/null
+          mkdir -p /tmp/glb && cp "/tmp/vendor/quaternius-ual1-standard/Animation Library[Standard]/Godot/AnimationLibrary_Godot_Standard.glb" /tmp/glb/ual1-standard.glb
+      - name: Render (2 sequences x 2 figures)
+        env:
+          PILOT_VENDOR: /tmp/glb
+        run: |
+          mkdir -p char-out
+          for s in rc pk; do for f in ual v2; do
+            /usr/bin/time -f "%e s wall, %M KB max RSS" -o "char-out/time-$s-$f.txt" node pilots/character-pilot/render.js --seq $s --fig $f --out char-out --mp4 --stills 1.2,2.9,6.3,6.9,7.6 | tee "char-out/log-$s-$f.txt"
+          done; done
+          for s in rc pk; do ffmpeg -hide_banner -loglevel error -y -i "char-out/$s-ual.mp4" -i "char-out/$s-v2.mp4" -filter_complex "[0:v]scale=540:960[a];[1:v]scale=540:960[b];[a][b]hstack=2[v]" -map "[v]" -c:v libx264 -crf 22 -preset veryfast "char-out/$s-side-by-side.mp4"; done
+          { echo "## Character pilot"; for l in char-out/log-*.txt; do echo "- $(basename "$l" .txt): $(tr '\n' ' ' < "$l") ($(cat "${l/log-/time-}"))"; done; } | tee -a "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: character-pilot
+          path: char-out
+          retention-days: 14

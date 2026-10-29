@@ -16,7 +16,9 @@ function probeDuration(file) { return Number(cp.spawnSync("ffprobe", ["-v", "err
 function serve(dir, data) {
   const KIT = path.join(__dirname, "../kit/"); const page = fs.existsSync(path.join(dir, "scene.html")) ? "scene.html" : "runtime.html";
   const routes = { "/three/": path.join(dir, "node_modules/three/"), "/kit/": KIT, "/fonts/": path.join(ROOT, "node_modules/@fontsource/inter/files/") };
-  const types = { ".js": "text/javascript", ".woff2": "font/woff2", ".html": "text/html" };
+  // /vendor/: the pinned CC0 character files (scripts/pilot-assets/fetch.sh), for the character pilot only
+  if (process.env.PILOT_VENDOR) routes["/vendor/"] = path.resolve(process.env.PILOT_VENDOR) + path.sep;
+  const types = { ".js": "text/javascript", ".woff2": "font/woff2", ".html": "text/html", ".glb": "model/gltf-binary" };
   const srv = http.createServer((req, res) => {
     const u = decodeURIComponent(req.url.split("?")[0]);
     if (u === "/favicon.ico") { res.writeHead(204); return res.end(); }   // Chrome (CI) asks for it; a 404 would count as a page error
