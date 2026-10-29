@@ -1,27 +1,25 @@
 {
-  "at": "2026-10-29T12:52:42.104Z",
-  "runId": "40875642150",
+  "at": "2026-10-29T13:07:15.258Z",
+  "runId": "40878847357",
   "rows": [
     {
       "channel": "failure-reconstructed",
-      "outcome": "UPLOADED",
-      "category": "SCHEDULED",
-      "scheduled": true,
-      "publication": "SCHEDULED",
-      "publishAt": "2026-10-29T18:00:00.000Z",
-      "reason": "premium FR-i-35w-bridge-2007 8eb8nuVkMrE",
-      "slug": "i-35w-bridge-2007",
+      "outcome": "NOT_DUE",
+      "category": "NOT_DUE",
+      "scheduled": false,
+      "publication": "NOT_SCHEDULED",
+      "publishAt": null,
+      "reason": "today's Short already exists (i-35w-bridge-2007)",
+      "slug": null,
       "videoId": null,
-      "targetDay": "2026-10-29",
+      "targetDay": null,
       "trigger": {
-        "event": "schedule",
-        "correlationId": null
+        "event": "repository_dispatch",
+        "correlationId": "production-2-20261029T130553Z-222a29ae"
       },
       "stages": {
         "RESEARCH": {
-          "status": "done",
-          "detail": "FR-i-35w-bridge-2007",
-          "at": "2026-10-29T12:47:51.107Z"
+          "status": "not-reached"
         },
         "SCRIPT": {
           "status": "not-reached"
@@ -33,52 +31,40 @@
           "status": "not-reached"
         },
         "RENDER": {
-          "status": "done",
-          "detail": "premium final",
-          "at": "2026-10-29T12:47:51.107Z"
+          "status": "not-reached"
         },
         "QA": {
-          "status": "done",
-          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
-          "at": "2026-10-29T12:47:51.108Z"
+          "status": "not-reached"
         },
         "UPLOAD": {
-          "status": "done",
-          "detail": "8eb8nuVkMrE",
-          "at": "2026-10-29T12:47:51.108Z"
+          "status": "not-reached"
         },
         "SCHEDULE": {
-          "status": "done",
-          "detail": "2026-10-29T18:00:00.000Z",
-          "at": "2026-10-29T12:47:51.109Z"
+          "status": "not-reached"
         },
         "PUBLISH": {
-          "status": "scheduled",
-          "detail": "YouTube makes it public at 2026-10-29T18:00:00.000Z",
-          "at": "2026-10-29T12:47:51.110Z"
+          "status": "not-reached"
         }
       }
     },
     {
       "channel": "impossible-brief",
-      "outcome": "UPLOADED",
-      "category": "SCHEDULED",
-      "scheduled": true,
-      "publication": "SCHEDULED",
-      "publishAt": "2026-10-29T18:00:00.000Z",
-      "reason": "premium IB-PHY-065 5cNecwSkYDo",
-      "slug": "what-if-you-could-touch-earths-core",
+      "outcome": "NOT_DUE",
+      "category": "NOT_DUE",
+      "scheduled": false,
+      "publication": "NOT_SCHEDULED",
+      "publishAt": null,
+      "reason": "today's Short already exists (what-if-you-could-touch-earths-core)",
+      "slug": null,
       "videoId": null,
-      "targetDay": "2026-10-29",
+      "targetDay": null,
       "trigger": {
-        "event": "schedule",
-        "correlationId": null
+        "event": "repository_dispatch",
+        "correlationId": "production-2-20261029T130553Z-222a29ae"
       },
       "stages": {
         "RESEARCH": {
-          "status": "done",
-          "detail": "IB-PHY-065",
-          "at": "2026-10-29T12:52:11.135Z"
+          "status": "not-reached"
         },
         "SCRIPT": {
           "status": "not-reached"
@@ -90,29 +76,19 @@
           "status": "not-reached"
         },
         "RENDER": {
-          "status": "done",
-          "detail": "premium final",
-          "at": "2026-10-29T12:52:11.140Z"
+          "status": "not-reached"
         },
         "QA": {
-          "status": "done",
-          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
-          "at": "2026-10-29T12:52:11.143Z"
+          "status": "not-reached"
         },
         "UPLOAD": {
-          "status": "done",
-          "detail": "5cNecwSkYDo",
-          "at": "2026-10-29T12:52:11.144Z"
+          "status": "not-reached"
         },
         "SCHEDULE": {
-          "status": "done",
-          "detail": "2026-10-29T18:00:00.000Z",
-          "at": "2026-10-29T12:52:11.145Z"
+          "status": "not-reached"
         },
         "PUBLISH": {
-          "status": "scheduled",
-          "detail": "YouTube makes it public at 2026-10-29T18:00:00.000Z",
-          "at": "2026-10-29T12:52:11.148Z"
+          "status": "not-reached"
         }
       }
     }
