@@ -1,9 +1,9 @@
 {
   "schema": "premium.publication-policy.v1",
   "channel": "impossible-brief",
-  "status": "UNSIGNED",
-  "signedBy": null,
-  "signedAt": null,
+  "status": "SIGNED",
+  "signedBy": "eyazan",
+  "signedAt": "2026-10-29T05:18:09.992Z",
   "grants": "Unattended publication, on the channel's due day and at most one Short per day, of a premium Short that passes every check under requires, without a per-video review. For such a Short this policy is the creative, factual and publish sign-off; each approval record names this file's sha256. Code never signs this file.",
   "requires": [
     "research: an ImpossibleBrief record that is researched and qualified, every fact with a source URL whose numbers were checked against that source at research time, narration layered KNOWN SCIENCE / ESTIMATED CONSEQUENCE / SPECULATIVE SCENARIO: the IB live research standard",
@@ -21,5 +21,6 @@
     "any change to channel identity or credentials"
   ],
   "activation": "sign: set status SIGNED, signedBy and signedAt (ISO time). It takes effect only with IB_PREMIUM_PUBLISH=1 and, for this channel, IB_PREMIUM_PRIMARY=1, plus config/channels.json enabled: true.",
-  "revoke": "set status REVOKED (or unset the repository variable). Records already bound keep naming the sha256 they were bound to."
+  "revoke": "set status REVOKED (or unset the repository variable). Records already bound keep naming the sha256 they were bound to.",
+  "approval": "Owner approval 2026-10-28/29 in the Claude Code session: IB-PHY-065 accepted as the first ImpossibleBrief publication after its final review render (run 40782026744, sha256 26cc4e94...), the owner-corrected L2/L6 narration and the claim check; the owner set IB_PREMIUM_PRIMARY=1 and IB_PREMIUM_PUBLISH=1 and confirmed the policy approval. Signed within the stated scope. Applied by Claude on the owner's instruction."
 }
