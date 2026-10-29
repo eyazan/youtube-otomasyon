@@ -122,6 +122,8 @@ test("AUTH: workflows verify every dispatch with the existing secret and act onl
     assert.match(wf, /needs: gate/, `${file} work depends on the gate`);
     assert.doesNotMatch(wf, /--allow-unsigned/);
   }
+  // a dispatch that is acknowledged but not produced must not read as a production in the run summary
+  assert.match(read(".github/workflows/portfolio-production.yml"), /NOT PRODUCED: dispatch acknowledged only[^\n]*>> "\$GITHUB_STEP_SUMMARY"/);
 });
 
 // 2. Idempotent repeated dispatches --------------------------------------------------------------
