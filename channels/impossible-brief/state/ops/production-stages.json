@@ -2,50 +2,6 @@
   "channel": "impossible-brief",
   "runs": [
     {
-      "runId": "40499810441",
-      "attempt": "1",
-      "startedAt": "2026-10-27T11:57:16.300Z",
-      "publish": true,
-      "trigger": {
-        "event": "schedule",
-        "correlationId": null
-      },
-      "targetDay": null,
-      "slug": null,
-      "outcome": "FAILED",
-      "reason": "health pre-flight: nitelikli-konu: kalite çubuğunu geçen konu yok — NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [107 unused A topic(s), best viral score 74 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]; seslendirme: NARRATION_UNAVAILABLE: Edge sesi reddedildi (Edge TTS WebSocket error: Unexpected server response: 200",
-      "stages": {
-        "RESEARCH": {
-          "status": "not-reached"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "not-reached"
-        },
-        "QA": {
-          "status": "not-reached"
-        },
-        "UPLOAD": {
-          "status": "not-reached"
-        },
-        "SCHEDULE": {
-          "status": "not-reached"
-        },
-        "PUBLISH": {
-          "status": "not-reached"
-        }
-      },
-      "finishedAt": "2026-10-27T11:57:24.772Z"
-    },
-    {
       "runId": "40504275788",
       "attempt": "1",
       "startedAt": "2026-10-27T13:01:57.594Z",
@@ -1350,6 +1306,50 @@
         }
       },
       "finishedAt": "2026-10-29T13:27:18.523Z"
+    },
+    {
+      "runId": "40886362534",
+      "attempt": "1",
+      "startedAt": "2026-10-29T13:55:54.938Z",
+      "publish": true,
+      "trigger": {
+        "event": "schedule",
+        "correlationId": null
+      },
+      "targetDay": null,
+      "slug": null,
+      "outcome": "NOT_DUE",
+      "reason": "today's Short already exists (what-if-you-could-touch-earths-core)",
+      "stages": {
+        "RESEARCH": {
+          "status": "not-reached"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "not-reached"
+        },
+        "QA": {
+          "status": "not-reached"
+        },
+        "UPLOAD": {
+          "status": "not-reached"
+        },
+        "SCHEDULE": {
+          "status": "not-reached"
+        },
+        "PUBLISH": {
+          "status": "not-reached"
+        }
+      },
+      "finishedAt": "2026-10-29T13:55:54.952Z"
     }
   ]
 }
