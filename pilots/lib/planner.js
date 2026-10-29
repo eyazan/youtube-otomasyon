@@ -85,6 +85,9 @@ function footballWorld(T, tpl, assumptions) {
   if (got.distance == null) reasons.push(M.distanceFromLaw ? "the law's distance is not in the evidence" : "free-kick distance not in the evidence");
   if (M.backpass && !(rule && rule.textSrc)) reasons.push("the rule's year and text are not in the evidence");
   if (!got.keeperAction) reasons.push("keeper behaviour not in the evidence");
+  // a curling kick of a real event: the curl direction follows foot and surface, so both must be in the evidence
+  if (M.requireCurlEvidence && !(got.footSrc && (got.style === "outside" || /inside of (?:his|the) (?:left|right) foot/i.test(corpus(T)))))
+    reasons.push("kicking foot and surface are not in the evidence: the curl direction of a real kick would be invented");
   if (reasons.length) throw new Refusal(reasons);
   const goalZ = -got.distance; const keeper = { x: M.keeperX || 0, action: got.keeperAction, dir: got.keeperDir, diveAt: M.keeperDiveAt ?? 0.05 };
   // a ball whose panels the evidence describes (not the classic 32) is drawn plain, so the picture does not contradict it

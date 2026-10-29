@@ -61,7 +61,7 @@ Kapsam `node pilots/kit/coverage.js` ile ölçülür (yalnızca planlama, render
 |---|---|---|
 | GLL | GLL-P01 Roberto Carlos (pilot) | PLANNED, magnus-free-kick |
 | GLL | GLL-025 Panenka | PLANNED, penalty-chip (+1 varsayım: vuruş ayağı) |
-| GLL | GLL-026 Roberto Carlos (ikinci araştırma) | PLANNED, magnus-free-kick (+3 varsayım: ayak, vuruş yüzeyi, kaleci) |
+| GLL | GLL-026 Roberto Carlos (ikinci araştırma) | RED: ayak ve vuruş yüzeyi kanıtta yok; gerçek bir vuruşun falso yönü uydurulmuş olurdu |
 | GLL | GLL-043 Jabulani | PLANNED, knuckle-ball (yan kuvvet ILLUSTRATIVE; top desensiz çizilir) |
 | GLL | GLL-052 Penaltı neden 12 yarda | PLANNED, law-distance |
 | GLL | GLL-061 Geri pas kuralı | PLANNED, back-pass-rule |
@@ -74,6 +74,6 @@ Güvenlik kuralları: şablon başlığı satır onu söylemiyorsa kullanılmaz 
 ayrıntı gerekiyorsa plan reddedilir, anlatım tekrarı yerine olgu kartı satırın adlarını/yılını ve kaynağını gösterir,
 kural ve top anlatımlarında (explainer) ayak/kaleci gibi sahneleme ayrıntıları `plan.staging` içine yazılır.
 
-**Karar: DAILY READY değil.** GLL'de 9 araştırılmış konunun 5'i elle animasyon yazılmadan plan alıyor (önce 1/9). Kalan
-4 konu bilinçli olarak reddediliyor; bunlar için ya konum/yön içeren kanıt ya da insan kararı gerekir. FR'de 3D kit,
+**Karar: DAILY READY değil.** GLL'de 9 araştırılmış konunun 4'ü elle animasyon yazılmadan plan alıyor (önce 1/9; GLL-P01
+pilotu bu sayıya dahil değil). Kalan 5 konu bilinçli olarak reddediliyor; bunlar için ya konum/yön içeren kanıt ya da insan kararı gerekir. FR'de 3D kit,
 her konu için yapılandırılmış kanıt dosyası olmadan çalışmaz; FR ve IB günlük üretimi mevcut motorla sürüyor.
