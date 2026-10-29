@@ -95,6 +95,8 @@ jobs:
           if [ "$EVENT_NAME" != "repository_dispatch" ]; then echo "run=true" >> "$GITHUB_OUTPUT"; exit 0; fi
           if [ "$DISPATCH_ENABLED" = "1" ]; then echo "run=true" >> "$GITHUB_OUTPUT"; exit 0; fi
           echo "::notice::Verified Cloudflare shorts-production dispatch; CF_PRODUCTION_DISPATCH is not '1', so nothing is produced."
+          # A green run here is NOT a production: say so where people look (the run summary).
+          echo "### NOT PRODUCED: dispatch acknowledged only (CF_PRODUCTION_DISPATCH is not '1'); no Short was rendered or uploaded." >> "$GITHUB_STEP_SUMMARY"
           echo "run=false" >> "$GITHUB_OUTPUT"
 
   portfolio:
