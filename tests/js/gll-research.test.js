@@ -64,6 +64,24 @@ test("a heading, a list lead-in, or a sentence sharing too few of the claim's wo
   assert.ok(V.evidenceFor({ claim: "Brazil beat Italy in the final at Estadio Azteca in Mexico City in front of a record crowd.", terms: ["Azteca"] }, src).error, "a sentence about another match shares too few words");
 });
 
+test("a mechanism fact needs a quote from a paragraph naming its event; another match's sentence is refused", async () => {
+  // the two false matches of the 2026-10-29 research run, rebuilt: a 1998 goal matched the 1997 free kick's foot claim,
+  // and a sentence about the goalkeeper's saves matched the claim about how the goal was finished
+  const goal98 = "In 1998, against Tenerife, Roberto Carlos struck a free kick with the outside of his left foot.";
+  const text = `${goal98}\nAt the 1997 Tournoi de France against France, Roberto Carlos struck a free kick with the outside of his left foot and Barthez did not move.\n` +
+    "In the 1986 quarter-final against England, Peter Shilton made several saves before Maradona went past him.";
+  const mk = async (t) => V.article("Test", async () => ({ query: { pages: [{ title: "Test", extract: t, revisions: [{ revid: 1, timestamp: "t" }] }] } }));
+  const src = await mk(text); const only98 = await mk(goal98);
+  const foot = { claim: "He struck the free kick against France with the outside of his left foot.", terms: ["outside", "left foot"], mechanism: "foot+surface" };
+  assert.ok(V.evidenceFor({ claim: foot.claim, terms: foot.terms }, only98).quote, "the ordinary word-overlap rule accepts the 1998 goal (the false match)");
+  assert.match(V.evidenceFor({ ...foot, context: ["1997", "France"] }, only98).error, /does not name the event/, "the 1998 goal is not the 1997 free kick");
+  assert.match(V.evidenceFor(foot, src).error, /needs context terms/);
+  assert.match(V.evidenceFor({ ...foot, context: ["1997", "France"] }, src).quote, /^At the 1997 Tournoi de France/);
+  const finish = { claim: "Maradona went around goalkeeper Peter Shilton and scored.", mechanism: "finish", context: ["1986", "England"] };
+  assert.match(V.evidenceFor({ ...finish, terms: ["Shilton"] }, src).error, /action term/, "a name alone cannot carry a mechanism");
+  assert.ok(V.evidenceFor({ ...finish, terms: ["Shilton", "scored"] }, src).error, "the saves sentence does not say he scored");
+});
+
 test("Hidden Logic of Things drafts answer existing universe questions, carry no quote, and every line cites a draft fact", async () => {
   const dir = path.join(ROOT, "channels", "behind-the-ordinary", "research", "drafts");
   const rows = new Map(JSON.parse(fs.readFileSync(path.join(ROOT, "channels", "behind-the-ordinary", "topics", "topic-universe.json"), "utf8")).topics.map((t) => [t.id, t]));
