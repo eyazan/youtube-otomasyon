@@ -2,63 +2,6 @@
   "channel": "failure-reconstructed",
   "runs": [
     {
-      "runId": "40650009127",
-      "attempt": "1",
-      "startedAt": "2026-10-28T07:26:53.622Z",
-      "publish": true,
-      "trigger": {
-        "event": "workflow_dispatch",
-        "correlationId": null
-      },
-      "targetDay": "2026-10-28",
-      "slug": "gemini-8-1966",
-      "outcome": "UPLOADED",
-      "reason": "premium FR-gemini-8-1966 QLSnrXyCJgw",
-      "stages": {
-        "RESEARCH": {
-          "status": "done",
-          "detail": "FR-gemini-8-1966",
-          "at": "2026-10-28T07:29:45.468Z"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "done",
-          "detail": "premium final",
-          "at": "2026-10-28T07:29:45.469Z"
-        },
-        "QA": {
-          "status": "done",
-          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
-          "at": "2026-10-28T07:29:45.470Z"
-        },
-        "UPLOAD": {
-          "status": "done",
-          "detail": "QLSnrXyCJgw",
-          "at": "2026-10-28T07:29:45.470Z"
-        },
-        "SCHEDULE": {
-          "status": "done",
-          "detail": "2026-10-28T18:00:00.000Z",
-          "at": "2026-10-28T07:35:40.007Z",
-          "note": "recorded from the uploader's verified YouTube read-back (run 40650009127: private, publishAt 2026-10-28T18:00:00Z); the premium lane did not record this stage (fixed in the same commit)"
-        },
-        "PUBLISH": {
-          "status": "scheduled",
-          "detail": "YouTube makes it public at 2026-10-28T18:00:00.000Z",
-          "at": "2026-10-28T07:35:40.007Z"
-        }
-      },
-      "finishedAt": "2026-10-28T07:29:45.471Z"
-    },
-    {
       "runId": "40688706002",
       "attempt": "1",
       "startedAt": "2026-10-28T12:33:55.653Z",
@@ -1345,6 +1288,62 @@
         }
       },
       "finishedAt": "2026-10-29T21:16:38.938Z"
+    },
+    {
+      "runId": "41017983233",
+      "attempt": "1",
+      "startedAt": "2026-10-30T07:06:57.949Z",
+      "publish": true,
+      "trigger": {
+        "event": "repository_dispatch",
+        "correlationId": "production-1-20261030T070553Z-ea55a8de"
+      },
+      "targetDay": "2026-10-30",
+      "slug": "northeast-blackout-2003",
+      "outcome": "UPLOADED",
+      "reason": "premium FR-northeast-blackout-2003 r-t7LH21ecs",
+      "stages": {
+        "RESEARCH": {
+          "status": "done",
+          "detail": "FR-northeast-blackout-2003",
+          "at": "2026-10-30T07:10:02.526Z"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "done",
+          "detail": "premium final",
+          "at": "2026-10-30T07:10:02.526Z"
+        },
+        "QA": {
+          "status": "done",
+          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
+          "at": "2026-10-30T07:10:02.527Z"
+        },
+        "UPLOAD": {
+          "status": "done",
+          "detail": "r-t7LH21ecs",
+          "at": "2026-10-30T07:10:02.528Z"
+        },
+        "SCHEDULE": {
+          "status": "done",
+          "detail": "2026-10-30T18:00:00.000Z",
+          "at": "2026-10-30T07:10:02.528Z"
+        },
+        "PUBLISH": {
+          "status": "scheduled",
+          "detail": "YouTube makes it public at 2026-10-30T18:00:00.000Z",
+          "at": "2026-10-30T07:10:02.529Z"
+        }
+      },
+      "finishedAt": "2026-10-30T07:10:02.529Z"
     }
   ]
 }

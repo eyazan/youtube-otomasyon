@@ -1,10 +1,10 @@
 # Growth dashboard
 
-Generated 2026-10-29T21:16:54.199Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-10-30T07:10:21.865Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
-**Shorts health** — last published 2026-10-29T18:00:00.000Z · 34 published · inventory A96/B139/C60/D59 · next: teton-dam-1976 (EXPLOIT (0.75): best A topic by SelectionScore)
+**Shorts health** — last published 2026-10-30T18:00:00.000Z · 35 published · inventory A95/B139/C60/D59 · next: teton-dam-1976 (EXPLOIT (0.75): best A topic by SelectionScore)
 
 **Long-form health** — cycle 2026-W44: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W44 already QUALITY_BLOCKED)
 
@@ -41,7 +41,7 @@ Generated 2026-10-29T21:16:54.199Z. Per-channel baselines are computed separatel
 
 ## ImpossibleBrief
 
-**Shorts health** — last published 2026-10-29T18:00:00.000Z · 20 published · inventory A106/B27/C140/D206 · next: what-if-we-tried-to-drill-through-the-earth (EXPLOIT (0.75): best A topic by SelectionScore)
+**Shorts health** — last published 2026-10-29T18:00:00.000Z · 20 published · inventory A106/B27/C140/D206 · next: what-if-we-tried-to-drill-through-the-earth (EXPLORE (0.25): under-sampled cluster EXTREME SCIENCE)
 
 **Long-form health** — cycle 2026-W44: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W44 already QUALITY_BLOCKED)
 

@@ -1,25 +1,27 @@
 {
-  "at": "2026-10-29T21:16:57.140Z",
-  "runId": "40956234605",
+  "at": "2026-10-30T07:10:24.755Z",
+  "runId": "41017983233",
   "rows": [
     {
       "channel": "failure-reconstructed",
-      "outcome": "NOT_DUE",
-      "category": "NOT_DUE",
-      "scheduled": false,
-      "publication": "NOT_SCHEDULED",
-      "publishAt": null,
-      "reason": "before production slot 09:00 Europe/Istanbul",
-      "slug": null,
+      "outcome": "UPLOADED",
+      "category": "SCHEDULED",
+      "scheduled": true,
+      "publication": "SCHEDULED",
+      "publishAt": "2026-10-30T18:00:00.000Z",
+      "reason": "premium FR-northeast-blackout-2003 r-t7LH21ecs",
+      "slug": "northeast-blackout-2003",
       "videoId": null,
-      "targetDay": null,
+      "targetDay": "2026-10-30",
       "trigger": {
-        "event": "schedule",
-        "correlationId": null
+        "event": "repository_dispatch",
+        "correlationId": "production-1-20261030T070553Z-ea55a8de"
       },
       "stages": {
         "RESEARCH": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "FR-northeast-blackout-2003",
+          "at": "2026-10-30T07:10:02.526Z"
         },
         "SCRIPT": {
           "status": "not-reached"
@@ -31,40 +33,52 @@
           "status": "not-reached"
         },
         "RENDER": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "premium final",
+          "at": "2026-10-30T07:10:02.526Z"
         },
         "QA": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
+          "at": "2026-10-30T07:10:02.527Z"
         },
         "UPLOAD": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "r-t7LH21ecs",
+          "at": "2026-10-30T07:10:02.528Z"
         },
         "SCHEDULE": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "2026-10-30T18:00:00.000Z",
+          "at": "2026-10-30T07:10:02.528Z"
         },
         "PUBLISH": {
-          "status": "not-reached"
+          "status": "scheduled",
+          "detail": "YouTube makes it public at 2026-10-30T18:00:00.000Z",
+          "at": "2026-10-30T07:10:02.529Z"
         }
       }
     },
     {
       "channel": "impossible-brief",
-      "outcome": "NOT_DUE",
-      "category": "NOT_DUE",
+      "outcome": "NO_TOPIC",
+      "category": "CONTENT_BLOCKED",
       "scheduled": false,
       "publication": "NOT_SCHEDULED",
       "publishAt": null,
-      "reason": "before production slot 09:30 Europe/Istanbul",
+      "reason": "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)",
       "slug": null,
       "videoId": null,
-      "targetDay": null,
+      "targetDay": "2026-10-30",
       "trigger": {
-        "event": "schedule",
-        "correlationId": null
+        "event": "repository_dispatch",
+        "correlationId": "production-1-20261030T070553Z-ea55a8de"
       },
       "stages": {
         "RESEARCH": {
-          "status": "not-reached"
+          "status": "skipped",
+          "detail": "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)",
+          "at": "2026-10-30T07:10:07.251Z"
         },
         "SCRIPT": {
           "status": "not-reached"
