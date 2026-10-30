@@ -2,52 +2,6 @@
   "channel": "impossible-brief",
   "runs": [
     {
-      "runId": "40723205259",
-      "attempt": "1",
-      "startedAt": "2026-10-28T16:10:55.787Z",
-      "publish": true,
-      "trigger": {
-        "event": "schedule",
-        "correlationId": null
-      },
-      "targetDay": "2026-10-28",
-      "slug": null,
-      "outcome": "NO_TOPIC",
-      "reason": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [105 unused A topic(s), best viral score 74 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]",
-      "stages": {
-        "RESEARCH": {
-          "status": "failed",
-          "detail": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [105 unused A topic(s), best viral score 74 < minimum 75; 2 topic(s) at the minimum are bucket B, not selectable]",
-          "at": "2026-10-28T16:10:59.905Z"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "not-reached"
-        },
-        "QA": {
-          "status": "not-reached"
-        },
-        "UPLOAD": {
-          "status": "not-reached"
-        },
-        "SCHEDULE": {
-          "status": "not-reached"
-        },
-        "PUBLISH": {
-          "status": "not-reached"
-        }
-      },
-      "finishedAt": "2026-10-28T16:10:59.908Z"
-    },
-    {
       "runId": "40727542940",
       "attempt": "1",
       "startedAt": "2026-10-28T16:37:08.296Z",
@@ -1350,6 +1304,52 @@
         }
       },
       "finishedAt": "2026-10-30T14:21:26.268Z"
+    },
+    {
+      "runId": "41071396072",
+      "attempt": "1",
+      "startedAt": "2026-10-30T14:27:22.205Z",
+      "publish": true,
+      "trigger": {
+        "event": "schedule",
+        "correlationId": null
+      },
+      "targetDay": "2026-10-30",
+      "slug": null,
+      "outcome": "NO_TOPIC",
+      "reason": "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)",
+      "stages": {
+        "RESEARCH": {
+          "status": "skipped",
+          "detail": "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)",
+          "at": "2026-10-30T14:27:23.622Z"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "not-reached"
+        },
+        "QA": {
+          "status": "not-reached"
+        },
+        "UPLOAD": {
+          "status": "not-reached"
+        },
+        "SCHEDULE": {
+          "status": "not-reached"
+        },
+        "PUBLISH": {
+          "status": "not-reached"
+        }
+      },
+      "finishedAt": "2026-10-30T14:27:23.623Z"
     }
   ]
 }
