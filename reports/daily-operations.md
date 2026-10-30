@@ -1,6 +1,6 @@
 # Daily operations report
 
-Generated: 2026-10-30T17:03:51.200Z
+Generated: 2026-10-30T18:06:13.656Z
 
 Missing API-only metrics are reported as `unavailable`, never as zero.
 
@@ -22,9 +22,9 @@ Missing API-only metrics are reported as `unavailable`, never as zero.
 | TikTok today | NOT_SENT |
 | TikTok backlog | 24 |
 | Analytics warehouse | through 2026-10-28 (lag 2 d) · 1 table error(s) |
-| Ops (24 h) | publish.public 1, publish.success 1, publish.scheduled_verified 1, analytics.partial 1 |
+| Ops (24 h) | publish.public 2, publish.success 1, publish.scheduled_verified 1, analytics.partial 1 |
 | Scheduler queue | 2 queued, oldest 2026-10-30 (0 d) |
-| API quota today | 1683 / 9800 units (project 1012165386949) |
+| API quota today | 1691 / 9800 units (project 1012165386949) |
 | YPP readiness (estimate) | subs 29/1,000 · long-form watch h (365 d) unavailable/4,000 · Shorts views (90 d) unavailable/10M |
 
 ## ImpossibleBrief
@@ -45,6 +45,6 @@ Missing API-only metrics are reported as `unavailable`, never as zero.
 | Analytics warehouse | through 2026-10-28 (lag 2 d) |
 | Ops (24 h) | publish.public 1, analytics.load 1 |
 | Scheduler queue | 2 queued, oldest 2026-10-30 (0 d) |
-| API quota today | 69 / 9800 units (project 684098966511) |
+| API quota today | 75 / 9800 units (project 684098966511) |
 | YPP readiness (estimate) | subs 13/1,000 · long-form watch h (365 d) unavailable/4,000 · Shorts views (90 d) unavailable/10M |
 

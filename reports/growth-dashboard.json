@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-30T17:03:49.675Z",
+  "generatedAt": "2026-10-30T18:06:10.934Z",
   "note": "Per-channel baselines are computed separately and never blended.",
   "channels": [
     {
@@ -9,8 +9,8 @@
         "lastPublished": "2026-10-30T18:00:00.000Z",
         "published": 35,
         "inventory": {
-          "A": 95,
-          "B": 139,
+          "A": 97,
+          "B": 137,
           "C": 60,
           "D": 59
         },
@@ -22,15 +22,15 @@
           "used": 10
         },
         "nextSelection": {
-          "slug": "teton-dam-1976",
+          "slug": "titanic-1912",
           "reason": "EXPLOIT (0.75): best A topic by SelectionScore"
         },
         "baseline": {
           "n": 33,
-          "views": 435,
+          "views": 446,
           "averagePercentageViewed": 64.65,
           "subscribersPer1000Views": 0,
-          "engagementPer1000Views": 24.69,
+          "engagementPer1000Views": 25,
           "watchHoursPer1000Views": 2
         }
       },
@@ -161,7 +161,7 @@
           "status": "adaptive",
           "sampleSize": 33,
           "adopted": 0,
-          "hypotheses": 14
+          "hypotheses": 17
         },
         "longform": {
           "status": "heuristics-only",
@@ -187,6 +187,16 @@
           "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
         },
         {
+          "slug": "quebec-bridge-1907",
+          "bucket": "C",
+          "reason": "VideoPotential 84 in experimental band 58–71; sources 55 < 62"
+        },
+        {
+          "slug": "eastland-1915",
+          "bucket": "C",
+          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
+        },
+        {
           "slug": "new-london-school-1937",
           "bucket": "C",
           "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
@@ -202,22 +212,12 @@
           "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
         },
         {
-          "slug": "quebec-bridge-1907",
-          "bucket": "C",
-          "reason": "VideoPotential 84 in experimental band 58–71; sources 55 < 62"
-        },
-        {
           "slug": "controlled-impact-1984",
           "bucket": "C",
           "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
         },
         {
-          "slug": "eastland-1915",
-          "bucket": "C",
-          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
-        },
-        {
-          "slug": "b2-guam-2008",
+          "slug": "uss-forrestal-1967",
           "bucket": "C",
           "reason": "VideoPotential 82 in experimental band 58–71; sources 41 < 62"
         }
@@ -621,12 +621,12 @@
           "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
         },
         {
-          "slug": "what-breaks-first-if-a-rogue-planet-suddenly-doubles-in-mass",
+          "slug": "could-commercial-fusion-power-scale-worldwide-in-ten-years",
           "bucket": "C",
-          "reason": "VideoPotential 72 in experimental band 58–71; boilerplate 0.5"
+          "reason": "VideoPotential 68 in experimental band 58–71; boilerplate 0.67"
         },
         {
-          "slug": "if-a-rogue-planet-moved-twice-as-close-when-would-earth-notice",
+          "slug": "what-breaks-first-if-a-rogue-planet-suddenly-doubles-in-mass",
           "bucket": "C",
           "reason": "VideoPotential 72 in experimental band 58–71; boilerplate 0.5"
         }

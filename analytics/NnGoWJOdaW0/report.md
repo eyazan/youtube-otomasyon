@@ -10,22 +10,23 @@ https://youtu.be/NnGoWJOdaW0
 | 3d | 2026-10-03 | 947 | 17 | 1 | 92.31 | 1 | Shorts feed 98%, Search 1% |
 | 7d | 2026-10-07 | 963 | 17 | 1 | 91.89 | 1 | Shorts feed 97%, Search 2% |
 | 14d | 2026-10-14 | 965 | 17 | 1 | 91.89 | 1 | Shorts feed 97%, Search 3% |
+| 30d | 2026-10-30 | 972 | 17 | 1 | 91.61 | 1 | Shorts feed 96%, Search 3% |
 
-## Diagnosis at 14d
+## Diagnosis at 30d
 
 - **LOW_IMPRESSIONS_GOOD_RETENTION** (medium) — Viewers who arrive stay, but YouTube shows it to few people.
-- **WEAK_TOPIC_PACKAGING** (low) — Current title scores 24.4/100 in the title engine; best editorial option scores 46.7.
+- **OUTPERFORMER** (medium) — 972 views vs channel median 447 (n=33 videos).
 
 ## Suggested interventions
 
 - GOOD RETENTION + LOW IMPRESSIONS → do not panic; monitor audience matching, improve topic packaging and cluster links.
-- WEAK PACKAGING (heuristic) → candidate for a logged title experiment once data exists.
+- OUTPERFORMER → keep as is; reuse its subject/hook shape in the next episode.
 
 ## First major observed retention drop
 
-- Timestamp: 5s; magnitude: 19 percentage points.
+- Timestamp: 5s; magnitude: 18 percentage points.
 - Active sentence: Fire spread through the whole ship in minutes.
 - Visual type: REAL ARCHIVAL IMAGE
 - This is an observed alignment, not proof that the sentence or visual caused the drop.
 
-Views gained between 7d and 14d: 2.
+Views gained between 14d and 30d: 7.
