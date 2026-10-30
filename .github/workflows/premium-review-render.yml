@@ -63,7 +63,7 @@ jobs:
             D="$RUNNER_TEMP/review/$T"
             echo "### $T" | tee -a "$GITHUB_STEP_SUMMARY"
             node scripts/bto-studio/studio.js --channel "$CHANNEL" --topic "$T" --shadow --shadow-dir "$D" --regenerate --quality final --voice edge 2>&1 | tail -25 || echo "render failed: $T" | tee -a "$GITHUB_STEP_SUMMARY"
-            MP4=$(find "$D/out" -maxdepth 1 -name "*.mp4" | head -1)
+            MP4=$(find "$D/out" -maxdepth 1 -name "*.mp4" 2>/dev/null | head -1 || true)
             [ -n "$MP4" ] || { echo "no MP4 for $T" | tee -a "$GITHUB_STEP_SUMMARY"; continue; }
             O="review-out/$T"; mkdir -p "$O/frames"
             (cd "$(dirname "$MP4")" && sha256sum "$(basename "$MP4")") | tee "$O/mp4.sha256" | tee -a "$GITHUB_STEP_SUMMARY"

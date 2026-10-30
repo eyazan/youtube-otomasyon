@@ -189,13 +189,15 @@ function build(script, style, topic) {
   const valueLabel = (n) => { const r = n.upto ? `${n.raw}–${n.upto.raw}` : n.raw;
     if (n.unit === "°C" || n.unit === "°F") return `${r} ${n.unit}`;
     if (n.unit === "°") return n.quantity === "latitude" ? `${r}° LATITUDE` : n.quantity === "longitude" ? `${r}° LONGITUDE` : `${r}°`;
+    // an age is not a duration: "780,000 years ago" never shows as "780,000 years" (IB-EAR-019 render 41006538761)
+    if (/^years?$/.test(n.unit) && n.noun === "ago") return `${r} ${n.unit} ago`;
     return n.unit ? `${r} ${n.unit}` : r; };
   // the line rejects the figure it states ("claims of a 15 to 20 °C crash are considered incorrect"): strike it through
   const rejects = (L) => /\b(incorrect|myth|false|wrong|not true|exaggerat\w*|debunked|unfounded|overstated)\b/i.test(L.text);
   let ti = 0; const mid = Math.floor(lines.length / 2); const nextTransition = (i) => (i === mid ? "dissolve" : TRANSITIONS[(ti++) % TRANSITIONS.length]);
 
   // the world's signature visual (also the payoff, so the loop returns to frame 0)
-  const signature = (at, { probe = null, cut = false, zoom = null, field = null, lat = null } = {}) => {
+  const signature = (at, { probe = null, cut = false, zoom = null, field = null, lat = null, polar = false } = {}) => {
     // probe depth is exaggerated for visibility (a real 12 km hole is ~0.2 % of Earth's radius): ILLUSTRATION chip
     // zoom { from, to }: the planet grows past the frame while its top surface stays in view, so a "scratch" reads as tiny
     // cutaway: the planet moves left and its layer labels stack in a column inside the right safe margin
@@ -219,10 +221,11 @@ function build(script, style, topic) {
     // rotation: the globe turns on its axis; a stopping line keys its spin rate to zero while the equator's eastward
     // streak keeps going (everything on the surface keeps the ground's speed: inertia)
     // a line that names a latitude draws the streak on that parallel (shorter, as the ground speed falls with cos(lat));
-    // without one it runs along the equator. Never drawn at a latitude the line does not state.
+    // without one it runs along the equator. A poles payoff draws an unlabelled short streak at high latitude, below the
+    // ice cap (at 75° the cap hid it, render 41006538761), on the hook's own globe so the Short still loops.
     if (W === "rotation") { const streak = (deg) => { const p = (deg * Math.PI) / 180, y = 820 - 330 * Math.sin(p), hw = 330 * Math.cos(p) * 0.88;
       return [-1, -0.5, 0, 0.5, 1].map((u) => [Math.round(540 + u * hw), Math.round(y + 22 * Math.cos(p) * (1 - u * u))]); };
-      return [{ component: "planet", props: { kind: "earth", x: 540, y: 820, r: 330, seed: 3, grid: lat != null, spinKeys: field ? [[at, 0.35 * field.from], [off(at, 0.6), 0.35 * field.to]] : [[0, 0.35]] } },
+      return [{ component: "planet", props: { kind: "earth", x: 540, y: 820, r: 330, seed: 3, grid: lat != null && !polar, spinKeys: field ? [[at, 0.35 * field.from], [off(at, 0.6), 0.35 * field.to]] : [[0, 0.35]] } },
         ...((field && field.to === 0) || lat != null ? [{ component: "flow-arrows", props: { streams: [{ pts: streak(lat || 0), color: "amber", width: Math.max(6, Math.round(14 * Math.cos(((lat || 0) * Math.PI) / 180))), at: off(at, 0.4) }] } }] : [])]; }
     if (W === "orbit" && body) return [{ component: "planet", props: { kind: body, x: 540, y: 820, r: 320, spin: 0.18, seed: 7, ...(body === "gas" ? { rings: /saturn/i.test(topic.title + topic.topic) } : {}) } }];
     if (W === "orbit") return [{ component: "orbit", props: { cx: 540, cy: 800, a: 360, e: 0.18, tilt: -8, period: 7, trail: 0.22, central: { r: 74 }, body: { r: 26 }, enterAt: 0 } }];
@@ -307,7 +310,7 @@ function build(script, style, topic) {
       purpose = `Hook: frame 0 shows the ${W.replace("-", " ")} itself${n ? ` and the claim's number (${valueLabel(n)}) lands as a readout` : ""}, so the scale of the question is visible before it is explained.`;
       camera = cam(1.12, 1.0);
     } else if (last) {
-      kind = "payoff"; layers = [stars(11), ...signature(`${L.id}+0.2`, { probe: W === "earth-interior", ...(W === "rotation" && /\bpoles?\b|\bpolar\b/i.test(L.text) ? { lat: 75 } : {}) }), headline(`${L.id}+0.3`, keyPhrase(L.text, 4), 420, S.title)];
+      kind = "payoff"; layers = [stars(11), ...signature(`${L.id}+0.2`, { probe: W === "earth-interior", ...(W === "rotation" && /\bpoles?\b|\bpolar\b/i.test(L.text) ? { lat: 60, polar: true } : {}) }), headline(`${L.id}+0.3`, keyPhrase(L.text, 4), 420, S.title)];
       purpose = "Payoff: the answer in a few words over the opening composition; the camera eases back to the frame-0 framing so the Short loops on its first image.";
       camera = [{ at: start, x: 540, y: 800, z: 1.06 }, { at: "end-0.6", x: 540, y: 800, z: 1.12 }];
     } else if (W === "earth-interior" && !cutUsed && (temp || (qty && qty.unit === "K")) && /\bcore\b/i.test(L.text.slice(0, Math.max(0, L.text.search(/\d/))))) {
@@ -359,7 +362,7 @@ function build(script, style, topic) {
       // spans of time are never laddered: an interval, an age ("780,000 years ago") and a duration measure different things
       const same = qty.unit === "%" || /^(years?|hours?|days?|minutes?|seconds?)$/.test(qty.unit) ? [] : facts.flatMap((f) => numbersIn(f.claim).filter((n) => !n.year && n.unit === qty.unit && (qty.unit || (qty.noun && n.noun === qty.noun))).map((n) => ({ ...n, fact: f.id }))).filter((n, k, a) => a.findIndex((x) => x.value === n.value) === k).slice(0, 4);
       const ladderKey = same.map((n) => n.value).sort((a, b) => a - b).join("|");
-      kind = "measure"; if (same.length >= 2 && !laddersShown.has(ladderKey) && laddersShown.add(ladderKey)) { layers = [stars(40 + i), { component: "scale-ladder", props: { x: 110, y: 560, w: 700, log: Math.max(...same.map((n) => n.value)) / Math.max(1e-9, Math.min(...same.map((n) => n.value))) > 50, items: same.sort((a, b) => a.value - b.value).map((n, k) => ({ label: `FACT ${n.fact}`.replace("FACT ", ""), place: placeOf(n.fact), value: n.value, valueText: valueLabel(n), at: `${L.id}+${(0.2 + k * 0.45).toFixed(2)}` })) } }];
+      kind = "measure"; if (same.length >= 2 && !laddersShown.has(ladderKey) && laddersShown.add(ladderKey)) { layers = [stars(40 + i), { component: "scale-ladder", props: { x: 190, y: 560, w: 640, log: Math.max(...same.map((n) => n.value)) / Math.max(1e-9, Math.min(...same.map((n) => n.value))) > 50, items: same.sort((a, b) => a.value - b.value).map((n, k) => ({ label: `FACT ${n.fact}`.replace("FACT ", ""), place: placeOf(n.fact), value: n.value, valueText: valueLabel(n), at: `${L.id}+${(0.2 + k * 0.45).toFixed(2)}` })) } }];
         same.forEach((n) => { if (!evidence.includes(n.fact)) evidence.push(n.fact); }); purpose = `Scale: the topic's own ${qty.unit || "values"} side by side as growing bars, so the size of the change is seen, not read.`; }
       // the size of an inner layer ("its radius is about 1,230 kilometres") is shown on the opened planet, where that layer is
       else if (W === "earth-interior" && /\b(radius|radii|diameter)\b/i.test(L.text)) { layers = [stars(40 + i), ...signature(`${L.id}`, { cut: true }), readout(`${L.id}+0.5`, valueLabel(qty), 1230, rejects(L))]; chips[0] = "conceptualLabel"; purpose = `Size: the planet opens into its layers and the cited size (${valueLabel(qty)}) lands beside them; layer proportions are illustrative.`; }

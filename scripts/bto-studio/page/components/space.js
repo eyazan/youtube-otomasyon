@@ -131,7 +131,10 @@
       items.forEach((it, i) => { const yy = y0 + i * gap; const k = t < it.at ? 0 : BTO.ep(t, it.at, it.at + 0.8, "decelerate"); const bw = Math.max(6, w * clamp(f(it.value)) * k); const col = (it.color && C[it.color]) || it.color || (i === items.length - 1 ? C.amber : C.teal);
         if (it.label) g += BTO.text(x0, yy - 18, it.label, { size: o.labelSize || T().scale.small, anchor: "start", weight: 700, fill: C.muted, ls: 1.5, op: clamp((t - it.at + 0.3) / 0.3) });
         g += `<rect x="${x0}" y="${yy}" width="${n1(bw)}" height="${bh}" rx="10" fill="${col}" opacity="${clamp((t - it.at) / 0.15).toFixed(3)}"/>`;
-        if (it.valueText) g += BTO.text(Math.min(x0 + bw + 20, x0 + w - 10), yy + bh * 0.7, it.valueText, { size: o.valueSize || T().scale.label, anchor: x0 + bw + 20 > x0 + w - 220 ? "end" : "start", weight: 800, family: T().num, op: clamp((t - it.at - 0.5) / 0.3), fill: x0 + bw + 20 > x0 + w - 220 ? C.desk : C.text }); });
+        // the value sits after the bar when it fits, otherwise inside the bar's own end (never past it: "1,184.2 km/h"
+        // ran 20 px over a shorter bar, IB-EAR-001 review render 41006538761)
+        const inside = x0 + bw + 20 > x0 + w - 220;
+        if (it.valueText) g += BTO.text(inside ? x0 + bw - 16 : x0 + bw + 20, yy + bh * 0.7, it.valueText, { size: o.valueSize || T().scale.label, anchor: inside ? "end" : "start", weight: 800, family: T().num, op: clamp((t - it.at - 0.5) / 0.3), fill: inside ? C.desk : C.text }); });
       return `<g opacity="${op.toFixed(3)}">${g}</g>`;
     } };
   });
