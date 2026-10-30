@@ -144,8 +144,23 @@ test("IB readiness: researched records pass without stored quotes (warned); visu
   assert.ok(Adapter.readiness(channel, undeclared).errors.some((e) => /^CREATIVE_REVIEW_REQUIRED: .*declares no visual mechanism/.test(e)));
   assert.ok(Adapter.readiness(channel, { ...undeclared, visualMechanism: "organism-microscope" }).errors.some((e) => /^CREATIVE_REVIEW_REQUIRED: .*not supported/.test(e)), "a declared mechanism with no drawing is refused");
   const topic = { ...undeclared, visualMechanism: "earth-surface" };
-  const r = Adapter.readiness(channel, topic);
-  assert.equal(r.ready, true);
+  // no claim-source ledger: no fact has a verified passage, so the record is held
+  assert.ok(Adapter.readiness(channel, topic).errors.some((e) => /^SOURCE_UNVERIFIED: no claim-source ledger/.test(e)));
+  // with a ledger of VERIFIED records for exactly these facts it is ready, and the description lists only those pages
+  const CS = require("../../core/research/claim-sources"); const lf = CS.file(channel, topic.id); const fsm = require("fs");
+  const records = topic.facts.map((f, i) => ({ fact: `F${i + 1}`, claim: f.claim, url: f.url, sourceTitle: "Wikipedia — Test", passage: f.claim, status: "VERIFIED" }));
+  fsm.mkdirSync(path.dirname(lf), { recursive: true }); fsm.writeFileSync(lf, JSON.stringify({ topicId: topic.id, factsHash: CS.factsHash(topic), records }));
+  let r;
+  try {
+    r = Adapter.readiness(channel, topic);
+    assert.ok(r.warnings.some((w) => /topic-level sources are generic pages/.test(w)), "the generator's agency front pages are named and never listed");
+    const meta = require("../../core/pipeline/premium-publish").metadata(channel, topic);
+    assert.doesNotMatch(meta.description, /nih\.gov\/research-training|nist\.gov\/topics\/physics|science\.nasa\.gov\/\n/);
+    assert.ok(records.every((x) => meta.description.includes(x.url)));
+    fsm.writeFileSync(lf, JSON.stringify({ topicId: topic.id, factsHash: CS.factsHash(topic), records: records.map((x, i) => (i ? x : { ...x, status: "UNVERIFIED", reason: "no supporting passage" })) }));
+    assert.ok(Adapter.readiness(channel, topic).errors.some((e) => /^SOURCE_UNVERIFIED: F1/.test(e)), "one unverified fact holds the topic");
+  } finally { fsm.rmSync(lf, { force: true }); }
+  assert.equal(r.ready, true, r.errors.join("; "));
   // a content hold (claim check 2026-10-28: unsourced narration lines) keeps a topic out of production
   const held = Adapter.loadTopic("impossible-brief", "IB-EXT-050");
   assert.ok(Adapter.readiness(held.channel, held.topic).errors.some((e) => /claim check/.test(e)), "IB-EXT-050 is held until its narration is corrected");

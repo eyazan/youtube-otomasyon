@@ -32,16 +32,31 @@ async function check(id, fetchJson) {
     const status = n.length ? (missing.length ? "FAIL" : "VERIFIED-NUMBERS") : "HUMAN";
     if (status === "FAIL" && /KNOWN/i.test(layer)) out.ok = false;
     out.lines.push({ layer, text, status, ...(missing.length ? { missing } : {}), ...(status !== "VERIFIED-NUMBERS" ? { near } : {}) }); }
+  out.factsHash = require(path.join(ROOT, "core/research/claim-sources")).factsHash(topic);
+  out.records = topic.facts.map((f, i) => { const r = out.facts[i]; const claimNums = [...new Set(nums(f.claim))]; const inPassage = r.quote ? claimNums.filter((n) => nums(r.quote).includes(n)) : [];
+    return { fact: r.id, claim: f.claim, url: f.url, sourceTitle: r.source ? `Wikipedia — ${String(r.source).replace(/ rev \d+$/, "")}` : f.source || null, revision: r.source ? Number((String(r.source).match(/rev (\d+)$/) || [])[1]) || null : null,
+      passage: r.quote || null, numbers: { claim: claimNums, inPassage, missing: claimNums.filter((n) => !inPassage.includes(n)) },
+      support: r.quote ? +V.support(f.claim, r.quote).toFixed(2) : 0, status: r.quote ? "VERIFIED" : "UNVERIFIED", reason: r.quote ? null : (r.error || "no supporting passage") }; });
   return out;
+}
+
+// --ledger: write channels/impossible-brief/research/claim-sources/<id>.json (core/research/claim-sources.js)
+function writeLedger(r) {
+  const fs = require("fs"); const CS = require(path.join(ROOT, "core/research/claim-sources")); const Channel = require(path.join(ROOT, "core/channel-context"));
+  const f = CS.file(Channel.getChannel("impossible-brief"), r.id); fs.mkdirSync(path.dirname(f), { recursive: true });
+  fs.writeFileSync(f, JSON.stringify({ schema: "ib.claim-sources.v1", topicId: r.id, checkedAt: new Date().toISOString(), method: "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+    factsHash: r.factsHash, records: r.records, narration: r.lines.map(({ near, ...l }) => l) }, null, 1) + "\n");
+  return f;
 }
 
 if (require.main === module) {
   (async () => { let ok = true;
-    for (const id of process.argv.slice(2)) { const r = await check(id); ok = ok && r.ok;
+    for (const id of process.argv.slice(2).filter((a) => !a.startsWith("--"))) { const r = await check(id); ok = ok && r.ok;
+      if (process.argv.includes("--ledger")) console.log(`ledger: ${path.relative(ROOT, writeLedger(r))}`);
       console.log(`## ${id}: ${r.ok ? "PASS" : "FAIL"}`);
       for (const f of r.facts) console.log(`- ${f.id} ${f.quote ? "VERIFIED" : "FAIL"}: ${f.claim}\n    ${f.quote ? `quote: "${f.quote}" (${f.source})` : `${f.error}${f.near ? "\n    near: " + f.near.join(" | ") : ""}`}`);
       for (const l of r.lines) console.log(`- [${l.layer}] ${l.status}: ${l.text}${l.missing ? ` (numbers not in a verified quote: ${l.missing.join(", ")})` : ""}${l.near ? `\n    nearest source sentences: ${l.near.join(" | ")}` : ""}`); }
     // the job lists every topic; it is red when any topic fails (a failing topic is never published)
     process.exit(ok ? 0 : 1); })().catch((e) => { console.error(e.message); process.exit(1); });
 }
-module.exports = { check };
+module.exports = { check, writeLedger };

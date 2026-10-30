@@ -54,6 +54,9 @@ function readinessImpossibleBrief(channel, topic) {
   // tardigrade as an orbit)
   const mech = require("./auto/impossible-brief").mechanismOf(topic);
   if (!mech.supported) errors.push(`CREATIVE_REVIEW_REQUIRED: ${mech.reason}`);
+  // every fact needs a claim-specific source with its supporting passage (core/research/claim-sources.js ledger)
+  const src = require(path.join(__dirname, "..", "..", "core", "research", "claim-sources")).check(channel, topic);
+  errors.push(...src.errors); warnings.push(...src.warnings);
   const published = readJson(path.join(channel.paths.state, "published.json"), []);
   const generated = readJson(path.join(channel.paths.state, "generated.json"), []);
   const pub = published.filter((p) => p.slug === topic.slug || p.topicId === topic.id);
