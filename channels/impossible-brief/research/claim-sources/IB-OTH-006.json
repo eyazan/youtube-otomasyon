@@ -1,0 +1,136 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-OTH-006",
+ "checkedAt": "2026-10-30T04:54:53.030Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "b8dd9b4a66bef5ce",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "A whale fall occurs when the carcass of a whale has fallen onto the ocean floor, typically at a depth greater than 1,000 m (3,300 ft).",
+   "url": "https://en.wikipedia.org/wiki/Whale_fall",
+   "sourceTitle": "Wikipedia — Whale fall",
+   "revision": 1381819210,
+   "passage": "A whale fall occurs when the carcass of a whale has fallen onto the ocean floor, typically at a depth greater than 1,000 m (3,300 ft), putting them in the bathyal or abyssal zones.",
+   "numbers": {
+    "claim": [
+     "1000",
+     "3300"
+    ],
+    "inPassage": [
+     "1000",
+     "3300"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "Researchers estimate that 690,000 carcasses/skeletons of the nine largest whale species are in one of the four stages of succession at any one time.",
+   "url": "https://en.wikipedia.org/wiki/Whale_fall",
+   "sourceTitle": "Wikipedia — Whale fall",
+   "revision": 1381819210,
+   "passage": "Researchers estimate that 690,000 carcasses/skeletons of the nine largest whale species are in one of the four stages of succession at any one time.",
+   "numbers": {
+    "claim": [
+     "690000"
+    ],
+    "inPassage": [
+     "690000"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "This estimate implies an average spacing of 12 km (7.5 mi) and as little as 5 km (3.1 mi) along migration routes.",
+   "url": "https://en.wikipedia.org/wiki/Whale_fall",
+   "sourceTitle": "Wikipedia — Whale fall",
+   "revision": 1381819210,
+   "passage": "This estimate implies an average spacing of 12 km (7.5 mi) and as little as 5 km (3.1 mi) along migration routes.",
+   "numbers": {
+    "claim": [
+     "12",
+     "7.5",
+     "5",
+     "3.1"
+    ],
+    "inPassage": [
+     "12",
+     "7.5",
+     "5",
+     "3.1"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "The DSV Alvin observed the remains using scanning sonar at 1,240 m (4,070 ft) in the Catalina Basin.",
+   "url": "https://en.wikipedia.org/wiki/Whale_fall",
+   "sourceTitle": "Wikipedia — Whale fall",
+   "revision": 1381819210,
+   "passage": "The  DSV Alvin observed the remains using scanning sonar at 1,240 m (4,070 ft) in the Catalina Basin and collected the first photographic images and samples of animals and microbes from this remarkable community.",
+   "numbers": {
+    "claim": [
+     "1240",
+     "4070"
+    ],
+    "inPassage": [
+     "1240",
+     "4070"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why 690,000 dead whales feed the deep sea.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "A dead whale sinks below 1,000 metres.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It passes through four stages of feeding communities.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "On average, they lie about 12 kilometres apart.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Scavengers strip flesh; worms and microbes feast on bones.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Some species may live almost nowhere else.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So a single whale becomes a deep-sea ecosystem.",
+   "status": "HUMAN"
+  }
+ ]
+}
