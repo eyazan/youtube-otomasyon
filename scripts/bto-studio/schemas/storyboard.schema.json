@@ -107,6 +107,18 @@
         "$ref": "#/$defs/scene"
       }
     },
+    "visualMechanism": {
+      "type": "object",
+      "description": "the mechanism the scenes draw (auto storyboards): declared by the research record (topic.visualMechanism) or inferred for a draft; production requires declared and supported",
+      "properties": {
+        "id": { "type": ["string", "null"] },
+        "world": { "type": ["string", "null"] },
+        "declared": { "type": "boolean" },
+        "supported": { "type": "boolean" },
+        "draws": { "type": ["string", "null"] },
+        "reason": { "type": ["string", "null"] }
+      }
+    },
     "licensingNote": {
       "type": "string",
       "description": "what the visuals are made of, for the review package licensing section"

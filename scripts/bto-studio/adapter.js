@@ -49,6 +49,11 @@ function readinessImpossibleBrief(channel, topic) {
     if (!IB_LAYERS.includes(f.layer)) errors.push(`fact ${i + 1} layer ${f.layer} is not an IB layer`);
     if (!String(f.quote || "").trim()) warnings.push(`fact ${i + 1}: no stored verbatim quote (IB standard: numbers checked against the source at research time)`);
   });
+  // the storyboard draws the mechanism the research record declares; an undeclared or undrawable mechanism is a creative
+  // review item, never a guess from the record's words (IB-EAR-001 drew a rotation topic as an orbit, IB-EXT-036 a
+  // tardigrade as an orbit)
+  const mech = require("./auto/impossible-brief").mechanismOf(topic);
+  if (!mech.supported) errors.push(`CREATIVE_REVIEW_REQUIRED: ${mech.reason}`);
   const published = readJson(path.join(channel.paths.state, "published.json"), []);
   const generated = readJson(path.join(channel.paths.state, "generated.json"), []);
   const pub = published.filter((p) => p.slug === topic.slug || p.topicId === topic.id);

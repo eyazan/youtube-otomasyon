@@ -39,6 +39,9 @@
     sun: { base: "#ffb43c", land: "#ffd36b", land2: "#ff8a2a", atm: "#ffcf6b", glow: true },
   };
   let pid = 0;
+  // spinKeys [[t, rate], ...]: the rotation angle is the integral of a keyed rate (fixed 1/60 s steps, deterministic), so
+  // a planet can slow down and stop without its surface jumping back (IB-EAR-001: "Earth stops spinning for one second")
+  const spunAngle = (keys, t) => { let a = 0; const dt = 1 / 60; for (let x = 0; x < t; x += dt) a += BTO.keys(Math.min(x + dt / 2, t), keys) * Math.min(dt, t - x); return a; };
   BTO.def("planet", (o) => {
     const id = `pl${pid += 1}`; const K = { ...(KINDS[o.kind || "earth"] || KINDS.earth), ...(o.colors || {}) }; const r0 = BTO.rng(o.seed || 9);
     const blobs = []; for (let i = 0; i < (o.blobs || 26); i += 1) blobs.push({ u: r0() * 6.283, v: (r0() - 0.5) * 2.6, s: 0.12 + r0() * 0.3, c: r0() < 0.7 ? K.land : K.land2 });
@@ -46,7 +49,7 @@
     return { draw: (t) => {
       const op = fade(t, o.enterAt, o.outAt, 0.4); if (op <= 0) return "";
       const R = o.rKeys ? BTO.keys(t, o.rKeys, "camera") : (o.r || 300); const X = o.xKeys ? BTO.keys(t, o.xKeys, "camera") : (o.x || 540), Y = o.yKeys ? BTO.keys(t, o.yKeys, "camera") : (o.y || 800);
-      const L = o.light || [-0.6, -0.5]; const rot = (o.spin == null ? 0.12 : o.spin) * t; const ent = o.enterAt == null ? 1 : BTO.sp(t, o.enterAt, "soft"); const Rs = R * lerp(0.9, 1, ent);
+      const L = o.light || [-0.6, -0.5]; const rot = o.spinKeys ? spunAngle(o.spinKeys, t) : (o.spin == null ? 0.12 : o.spin) * t; const ent = o.enterAt == null ? 1 : BTO.sp(t, o.enterAt, "soft"); const Rs = R * lerp(0.9, 1, ent);
       let defs = `<clipPath id="${id}c"><circle cx="${n1(X)}" cy="${n1(Y)}" r="${n1(Rs)}"/></clipPath>
         <radialGradient id="${id}s" cx="${50 + L[0] * 32}%" cy="${50 + L[1] * 32}%" r="78%"><stop offset="0" stop-color="#fff" stop-opacity="${K.glow ? 0.35 : 0.18}"/><stop offset="0.55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="${K.glow ? 0.05 : 0.78}"/></radialGradient>
         <radialGradient id="${id}a" cx="50%" cy="50%" r="50%"><stop offset="0.82" stop-color="${K.atm || "#fff"}" stop-opacity="0"/><stop offset="0.9" stop-color="${K.atm || "#fff"}" stop-opacity="${K.glow ? 0.55 : 0.32}"/><stop offset="1" stop-color="${K.atm || "#fff"}" stop-opacity="0"/></radialGradient>`;

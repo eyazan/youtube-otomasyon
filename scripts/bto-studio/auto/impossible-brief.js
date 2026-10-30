@@ -37,9 +37,39 @@ const WORLD_WORDS = {
   "earth-surface": /\b(earth|earth's|climate|europe|greenland|siberia|continent|country|ice age|glacier|desert|dust bowl|forest)/i,
 };
 const SPECIFIC = new Set(["magnetic", "current", "lake", "micro"]);
+// The visual mechanism is declared by the research record (topic.visualMechanism), never guessed from its words for
+// production: "spin" in a title made a planet-rotation topic (IB-EAR-001) an orbit diagram, and a tardigrade topic fell
+// to the orbit world (IB-EXT-036). Each declared mechanism maps to the world that draws it; a mechanism with no drawing
+// is unsupported and the topic goes to CREATIVE_REVIEW_REQUIRED (scripts/bto-studio/adapter.js readiness).
+const MECHANISMS = {
+  "planet-rotation": { world: "rotation", draws: "a planet turning on its own axis (spin rate keyed; it can slow and stop) with the surface's eastward motion" },
+  "planet-orbit": { world: "orbit", draws: "a body travelling around another on an orbit" },
+  "named-body": { world: "orbit", draws: "the named planet, moon or star itself" },
+  "magnetic-field": { world: "magnetic", draws: "a planet inside its dipole field lines; weakening/removal shrinks the field, charged particles arrive" },
+  "ocean-current": { world: "current", draws: "a warm stream and a cold return over a globe" },
+  "lake-water": { world: "lake", draws: "a water column with depth markers" },
+  "microbial-population": { world: "micro", draws: "a cluster of microbes whose count can fall" },
+  "earth-interior": { world: "earth-interior", draws: "a planet cutaway and a rock slice with depth and heat" },
+  "ocean-depth": { world: "ocean-depth", draws: "a water column to the seafloor with depth markers" },
+  "atmosphere": { world: "sky", draws: "the planet's limb and the layers of air above it" },
+  "human-body": { world: "body", draws: "a generic human figure" },
+  "earth-surface": { world: "earth-surface", draws: "the globe" },
+  // declared by research but not drawable yet: a microscopic animal is not a microbe cluster and not an orbit
+  "organism-microscope": { world: null, draws: null, missing: "no microscopic-animal drawing exists yet" },
+};
+// the declared mechanism of a record: { id, world, declared, supported, reason }
+function mechanismOf(topic) {
+  const id = topic && topic.visualMechanism;
+  if (!id) return { id: null, world: world(topic, { inferOnly: true }), declared: false, supported: false, reason: "the research record declares no visual mechanism (topic.visualMechanism)" };
+  const m = MECHANISMS[id];
+  if (!m) return { id, world: null, declared: true, supported: false, reason: `unknown visual mechanism "${id}" (known: ${Object.keys(MECHANISMS).join(", ")})` };
+  if (!m.world) return { id, world: null, declared: true, supported: false, reason: `visual mechanism "${id}" is not supported: ${m.missing}` };
+  return { id, world: m.world, declared: true, supported: true, reason: null, draws: m.draws };
+}
 const LAYER_CHIP = { "KNOWN SCIENCE": "factLabel", "ESTIMATED CONSEQUENCE": "estimateLabel", "SPECULATIVE SCENARIO": "speculativeLabel" };
 
-function world(topic) {
+function world(topic, { inferOnly = false } = {}) {
+  if (!inferOnly && topic && topic.visualMechanism && MECHANISMS[topic.visualMechanism] && MECHANISMS[topic.visualMechanism].world) return MECHANISMS[topic.visualMechanism].world;
   const text = [topic.topic, topic.title, topic.scientificMechanism, topic.coreQuestion, ...((topic.visualPotential || {}).scenes || [])].join(" ");
   // the world whose words occur most often in the record (title and mechanism count double); a specific subject named in
   // the title or topic line wins outright, and "earth-surface" is only the fallback before deep space
@@ -54,19 +84,37 @@ function world(topic) {
 }
 
 // numbers spoken in a line with their unit, kept only when a fact contains the same digits
-const NUM = /(\d{1,3}(?:,\d{3})+|\d+(?:\.\d+)?)(\s+(?:million|billion|thousand|trillion)\b)?\s*(°\s?C|°\s?F|degrees|metres|meters|kilometres|kilometers|km|m\b|cm|centimetres|percent|%|kelvin|years?|hours?|days?|minutes?|seconds?|times)?/gi;
+const NUM = /(\d{1,3}(?:,\d{3})+|\d+(?:\.\d+)?)(\s+(?:million|billion|thousand|trillion)\b)?\s*((?:metres|meters|m) per second squared|m\/s²|m\/s2\b|(?:metres|meters|m) per second|m\/s\b|(?:kilometres|kilometers|km) per (?:hour|second)|km\/h\b|km\/s\b|miles per hour|mph\b|°\s?C\b|°\s?F\b|°|degrees?|metres|meters|kilometres|kilometers|km|m\b|cm|centimetres|percent|%|kelvin|K\b|years?|hours?|days?|minutes?|seconds?|times)?/gi;
 const MULT = { thousand: 1e3, million: 1e6, billion: 1e9, trillion: 1e12 };
-const UNIT = { metres: "m", meters: "m", kilometres: "km", kilometers: "km", centimetres: "cm", degrees: "°", percent: "%", kelvin: "K" };
+const UNIT = { metres: "m", meters: "m", kilometres: "km", kilometers: "km", centimetres: "cm", degrees: "°", degree: "°", percent: "%", kelvin: "K", k: "K" };
+// "degrees" and a bare "°" name an angle unless the words after them say what is measured: "45 degrees latitude" is a
+// position on Earth, "30 degrees" of tilt is an angle, only "degrees Celsius/Fahrenheit" (or °C/°F) is a temperature
+// (IB-EAR-001 storyboard: "At 45 degrees latitude" was drawn as a "45 °C" heat readout).
+function degreeMeaning(after) {
+  const a = String(after || "");
+  if (/^\s*(celsius|centigrade|c\b)/i.test(a)) return { unit: "°C", quantity: "temperature" };
+  if (/^\s*(fahrenheit|f\b)/i.test(a)) return { unit: "°F", quantity: "temperature" };
+  if (/^\s*(north|south|n\b|s\b)?\s*(latitude|lat\b)|^\s*(north|south)\b/i.test(a)) return { unit: "°", quantity: "latitude" };
+  if (/^\s*(east|west|e\b|w\b)?\s*(longitude|lon\b|long\b)|^\s*(east|west)\b/i.test(a)) return { unit: "°", quantity: "longitude" };
+  return { unit: "°", quantity: "angle" };
+}
+// rates keep their full unit: "9.8 metres per second squared" is an acceleration, not "9.8 m" (IB-EAR-001 storyboard)
+const RATE = [[/^(metres|meters|m) per second squared$|^m\/s(²|2)$/i, "m/s²", "acceleration"], [/^(metres|meters|m) per second$|^m\/s$/i, "m/s", "speed"],
+  [/^(kilometres|kilometers|km) per hour$|^km\/h$/i, "km/h", "speed"], [/^(kilometres|kilometers|km) per second$|^km\/s$/i, "km/s", "speed"], [/^miles per hour$|^mph$/i, "mph", "speed"]];
+const QUANTITY = { "m/s²": "acceleration", "m/s": "speed", "km/h": "speed", "km/s": "speed", mph: "speed", "°C": "temperature", "°F": "temperature", K: "temperature", m: "length", km: "length", cm: "length", "%": "percent" };
 function numbersIn(text) {
   const out = []; let m; NUM.lastIndex = 0;
   while ((m = NUM.exec(text))) { const mult = (m[2] || "").trim().toLowerCase(); const raw = m[1] + (mult ? ` ${mult}` : ""); const unit = (m[3] || "").replace(/\s/g, ""); const value = Number(m[1].replace(/,/g, "")) * (MULT[mult] || 1);
     if (!Number.isFinite(value)) continue;
     // the counted thing ("2 million bacterial genes", "10,000 microbial species"): its last plain word before punctuation
     const noun = ((text.slice(NUM.lastIndex).match(/^\s*((?:[A-Za-z-]+\s+){0,2}[A-Za-z-]+)/) || [])[1] || "").toLowerCase().split(/\s+/).filter((w) => !STOP.has(w)).pop() || "";
-    out.push({ raw, value, unit: UNIT[unit.toLowerCase()] || unit, noun: noun.replace(/s$/, ""), year: !mult && !unit && /^\d{4}$/.test(m[1]) && value >= 1500 && value <= 2100, end: NUM.lastIndex, start: m.index }); }
+    const rawUnit = (m[3] || "").trim(); const rate = RATE.find(([re]) => re.test(rawUnit));
+    let u = rate ? rate[1] : UNIT[unit.toLowerCase()] || unit; let quantity = rate ? rate[2] : QUANTITY[u] || null;
+    if (u === "°") ({ unit: u, quantity } = degreeMeaning(text.slice(NUM.lastIndex)));
+    out.push({ raw, value, unit: u, quantity, noun: noun.replace(/s$/, ""), year: !mult && !unit && /^\d{4}$/.test(m[1]) && value >= 1500 && value <= 2100, end: NUM.lastIndex, start: m.index }); }
   // "900, 1,600 and 1,400 metres" / "4 to 10 °C": bare numbers in a list take the unit written after the last one
   // ("2 million, 100 times the number" is not a list: "times" and a multiplier never pass on)
-  for (let i = out.length - 2; i >= 0; i -= 1) if (!out[i].unit && out[i + 1].unit && out[i + 1].unit !== "times" && !/ (million|billion|thousand|trillion)$/.test(out[i].raw) && /^(\s*,\s*|\s*and\s+|\s*to\s+|\s*[–-]\s*)$/.test(text.slice(out[i].end, out[i + 1].start))) { out[i].unit = out[i + 1].unit; out[i].year = false; }
+  for (let i = out.length - 2; i >= 0; i -= 1) if (!out[i].unit && out[i + 1].unit && out[i + 1].unit !== "times" && !/ (million|billion|thousand|trillion)$/.test(out[i].raw) && /^(\s*,\s*|\s*and\s+|\s*to\s+|\s*[–-]\s*)$/.test(text.slice(out[i].end, out[i + 1].start))) { out[i].unit = out[i + 1].unit; out[i].quantity = out[i + 1].quantity; out[i].year = false; }
   // a range ("4 to 10 °C", "85 to 90%") is one figure: never show only its first number
   for (let i = 0; i < out.length - 1; i += 1) if (out[i].unit && out[i].unit === out[i + 1].unit && /^(\s*to\s+|\s*[–-]\s*)$/.test(text.slice(out[i].end, out[i + 1].start))) out[i].upto = out[i + 1];
   return out.map(({ end, start, ...n }) => ({ ...n, ...(n.upto ? { upto: { raw: n.upto.raw, value: n.upto.value } } : {}) }));
@@ -134,7 +182,10 @@ function build(script, style, topic) {
     return k && k !== "earth" && k !== body ? k : null; };
   const bothNamed = (t) => /\bearth\b/i.test(t);
   const evidenced = (line) => numbersIn(line.text).map((n) => ({ ...n, facts: facts.filter((f) => factHas(f, n.raw) && (!n.upto || factHas(f, n.upto.raw))).map((f) => f.id) })).filter((n) => n.facts.length);
-  const valueLabel = (n) => { const r = n.upto ? `${n.raw}–${n.upto.raw}` : n.raw; return n.unit === "°C" || n.unit === "°" ? `${r} °C` : n.unit === "°F" ? `${r} °F` : n.unit ? `${r} ${n.unit}` : r; };
+  const valueLabel = (n) => { const r = n.upto ? `${n.raw}–${n.upto.raw}` : n.raw;
+    if (n.unit === "°C" || n.unit === "°F") return `${r} ${n.unit}`;
+    if (n.unit === "°") return n.quantity === "latitude" ? `${r}° LATITUDE` : n.quantity === "longitude" ? `${r}° LONGITUDE` : `${r}°`;
+    return n.unit ? `${r} ${n.unit}` : r; };
   // the line rejects the figure it states ("claims of a 15 to 20 °C crash are considered incorrect"): strike it through
   const rejects = (L) => /\b(incorrect|myth|false|wrong|not true|exaggerat\w*|debunked|unfounded|overstated)\b/i.test(L.text);
   let ti = 0; const mid = Math.floor(lines.length / 2); const nextTransition = (i) => (i === mid ? "dissolve" : TRANSITIONS[(ti++) % TRANSITIONS.length]);
@@ -161,6 +212,10 @@ function build(script, style, topic) {
         { pts: [[760, 600], [700, 760], [610, 900], [500, 1020], [420, 1110]], color: "teal", width: 10, at: off(at, 0.3), ...(field ? { speedKeys: [[off(at, 0.3), field.from], [off(at, 1.9), Math.min(field.from, field.to)]] } : {}) }] } }];
     if (W === "lake" || W === "earth-surface") return [{ component: "planet", props: { kind: "earth", x: 540, y: 820, r: 330, spin: 0.22, seed: W === "lake" ? 12 : 3, grid: W === "lake" } }];
     if (W === "micro") return [{ component: "microbes", props: { cx: 540, cy: 820, spread: 360, count: 110, seed: 23, ...(field ? { countKeys: [[at, field.from], [off(at, 1.4), Math.min(field.from, field.to)]] } : {}) } }];
+    // rotation: the globe turns on its axis; a stopping line keys its spin rate to zero while the equator's eastward
+    // streak keeps going (everything on the surface keeps the ground's speed: inertia)
+    if (W === "rotation") return [{ component: "planet", props: { kind: "earth", x: 540, y: 820, r: 330, seed: 3, spinKeys: field ? [[at, 0.35 * field.from], [off(at, 0.6), 0.35 * field.to]] : [[0, 0.35]] } },
+      ...(field && field.to === 0 ? [{ component: "flow-arrows", props: { streams: [{ pts: [[250, 830], [400, 846], [540, 852], [680, 846], [830, 830]], color: "amber", at: off(at, 0.4) }] } }] : [])];
     if (W === "orbit" && body) return [{ component: "planet", props: { kind: body, x: 540, y: 820, r: 320, spin: 0.18, seed: 7, ...(body === "gas" ? { rings: /saturn/i.test(topic.title + topic.topic) } : {}) } }];
     if (W === "orbit") return [{ component: "orbit", props: { cx: 540, cy: 800, a: 360, e: 0.18, tilt: -8, period: 7, trail: 0.22, central: { r: 74 }, body: { r: 26 }, enterAt: 0 } }];
     if (W === "sky") return [{ component: "planet", props: { kind: "earth", x: 540, y: 1560, r: 900, spin: 0.03, seed: 2 } }];
@@ -170,16 +225,17 @@ function build(script, style, topic) {
   };
   // what the line does to a field / flow / population world, from its own verbs: weaken (to 35 %), remove (to 5 %), and
   // whether charged particles arrive (magnetic). null = the world as it is.
-  const COMPOSITE = new Set(["magnetic", "current", "micro", "body"]);
+  const COMPOSITE = new Set(["magnetic", "current", "micro", "body", "rotation"]);
   const fieldFor = (L) => {
     if (!COMPOSITE.has(W) || W === "body") return null; const t = L.text;
-    const gone = /\b(switch(?:ed)? (?:it )?off|off completely|without (?:it|them)|vanish|vanished|disappear|disappeared|gone|shut(?:s)? down|collapse[sd]?|wiped out)\b/i.test(t);
-    const weak = /\b(weaken|weakens|weakening|weaker|faded|fade|fading|slow|slows|slowed|decline|declines|shrink|shrinks)\b/i.test(t);
+    const gone = W === "rotation" ? /\b(stops?|stopped|stopping|halts?|halted|freez(?:e|es|ing)|froze)\b/i.test(t)
+      : /\b(switch(?:ed)? (?:it )?off|off completely|without (?:it|them)|vanish|vanished|disappear|disappeared|gone|shut(?:s)? down|collapse[sd]?|wiped out)\b/i.test(t);
+    const weak = W !== "rotation" && /\b(weaken|weakens|weakening|weaker|faded|fade|fading|slow|slows|slowed|decline|declines|shrink|shrinks)\b/i.test(t);
     const wind = W === "magnetic" && /\b(particle|particles|radiation|solar wind|charged|storm|storms|satellite|satellites)\b/i.test(t);
     // once the line has removed the field / stopped the current / wiped out the population, later scenes stay in that
     // state (no field returning at full strength right after "switch it off"); only the payoff returns to frame 0
     const was = removed;
-    if (gone) removed = { from: 1, to: W === "micro" ? 0.12 : 0.05 };
+    if (gone) removed = { from: 1, to: W === "micro" ? 0.12 : W === "rotation" ? 0 : 0.05 };
     if (!gone && !weak && !wind) return was ? { to: was.to, from: was.to, wind: false } : null;
     return { to: gone ? removed.to : weak ? 0.4 : 0.25, from: was ? was.to : 1, wind };
   };
@@ -213,7 +269,7 @@ function build(script, style, topic) {
 
   let cutUsed = false; let surfaceShown = false; const laddersShown = new Set();
   const scenes = lines.map((L, i) => {
-    const nums = evidenced(L); const year = nums.find((n) => n.year); const temp = nums.find((n) => /°|degrees/i.test(n.unit) || /°C/.test(L.text) && n.unit === "");
+    const nums = evidenced(L); const year = nums.find((n) => n.year); const temp = nums.find((n) => n.quantity === "temperature" || (/°\s?C|degrees celsius/i.test(L.text) && n.unit === ""));
     const qty = (depthWorld && nums.find((n) => !n.year && n !== temp && (n.unit === "m" || n.unit === "km"))) || nums.find((n) => !n.year && n !== temp);
     // "flipped 183 times in 83 million years": a count of events over a span, both evidenced
     const cm = /\b(\d{1,3}(?:,\d{3})*|\d+)\s+(times|reversals|flips|eruptions|impacts|events|extinctions)\b[^.]*?\bin\s+(?:the\s+last\s+)?([\d.,]+\s*(?:million|thousand|billion)?\s*years)/i.exec(L.text);
@@ -355,8 +411,10 @@ function build(script, style, topic) {
       mechanismsToAnimate: [...new Set(scenes.map((s) => s.id.replace(/^s\d+-/, "")))],
       factualRisks: ["probe depth on the planet is exaggerated for visibility (ILLUSTRATION)", "auto storyboard: scale drawings are illustrative unless computed from a cited number (ILLUSTRATION chip)", "IB facts carry sourced claims without stored verbatim quotes (channel standard; see readiness warnings)"],
     },
+    // the mechanism the scenes draw, and whether the record declared it (inferred = draft only, never production)
+    visualMechanism: (() => { const m = mechanismOf(topic); return { id: m.id, world: W, declared: m.declared, supported: m.supported, draws: m.draws || null, reason: m.reason }; })(),
     tail: 0.6, scenes,
   };
 }
 
-module.exports = { build, world, numbersIn, keyPhrase };
+module.exports = { build, world, numbersIn, keyPhrase, mechanismOf, MECHANISMS };

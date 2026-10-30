@@ -100,9 +100,50 @@ test("auto storyboard: the subject picks the visual, plates never repeat back to
   assert.deepEqual(Generator.numbersIn("Its basins reach 900, 1,600 and 1,400 metres deep.").map((n) => n.unit), ["m", "m", "m"]);
 });
 
+test("units keep their meaning: an angle or a latitude is never a temperature (IB-EAR-001: 45 degrees latitude drawn as 45 °C)", () => {
+  const n = (t) => Generator.numbersIn(t).map((x) => [x.raw, x.unit, x.quantity]);
+  assert.deepEqual(n("At 45 degrees latitude, it's still about 1,184 kilometres per hour."), [["45", "°", "latitude"], ["1,184", "km/h", "speed"]]);
+  assert.deepEqual(n("At 30° north the trade winds blow."), [["30", "°", "latitude"]]);
+  assert.deepEqual(n("Its longitude is 120 degrees east."), [["120", "°", "longitude"]]);
+  assert.deepEqual(n("The axis tilts 23.4 degrees."), [["23.4", "°", "angle"]]);
+  assert.deepEqual(n("Water boils at 100 degrees Celsius."), [["100", "°C", "temperature"]]);
+  assert.deepEqual(n("Peaks reach 120°F and 5,700 kelvin."), [["120", "°F", "temperature"], ["5,700", "K", "temperature"]]);
+  assert.deepEqual(n("Between 4 to 10 °C."), [["4", "°C", "temperature"], ["10", "°C", "temperature"]]);
+  assert.deepEqual(n("Gravity pulls down at 9.8 metres per second squared."), [["9.8", "m/s²", "acceleration"]]);
+  assert.deepEqual(n("You keep moving at 465 metres per second, about 1,675 kilometres per hour."), [["465", "m/s", "speed"], ["1,675", "km/h", "speed"]]);
+  assert.deepEqual(n("It is 900 metres deep."), [["900", "m", "length"]]);
+  // the storyboard of the latitude line shows a latitude readout and no heat scene
+  const ear = Adapter.loadTopic("impossible-brief", "IB-EAR-001"); const sb = Generator.build(Adapter.studioScript(ear.channel, ear.topic), style, ear.topic);
+  const texts = sb.scenes.flatMap((s) => s.layers.filter((l) => l.component === "kinetic-type").flatMap((l) => l.props.items.map((it) => it.text)));
+  assert.ok(!texts.some((t) => /°C/.test(t)), `no temperature on screen: ${texts.join(" | ")}`);
+  assert.ok(texts.includes("45° LATITUDE"), texts.join(" | "));
+  assert.ok(!sb.scenes.some((s) => /heat/.test(s.id)), "no heat scene for a latitude");
+});
+
+test("the declared visual mechanism decides the drawing: a planet's rotation is not an orbit (IB-EAR-001)", () => {
+  const ear = Adapter.loadTopic("impossible-brief", "IB-EAR-001");
+  assert.equal(ear.topic.visualMechanism, "planet-rotation");
+  assert.equal(Generator.world({ ...ear.topic, visualMechanism: undefined }, { inferOnly: true }), "orbit", "the word match alone would have drawn an orbit");
+  const sb = Generator.build(Adapter.studioScript(ear.channel, ear.topic), style, ear.topic);
+  assert.deepEqual([sb.visualMechanism.id, sb.visualMechanism.world, sb.visualMechanism.declared, sb.visualMechanism.supported], ["planet-rotation", "rotation", true, true]);
+  const comps = sb.scenes.flatMap((s) => s.layers.map((l) => l.component));
+  assert.ok(!comps.includes("orbit"), "no orbit diagram");
+  // the line that stops the Earth keys its spin to zero and the surface's eastward streak appears and stays
+  const stop = sb.scenes.find((s) => s.lines.includes("L1")); const planet = stop.layers.find((l) => l.component === "planet");
+  assert.equal(planet.props.spinKeys[planet.props.spinKeys.length - 1][1], 0);
+  const drawn = sb.scenes.slice(1, -1).filter((s) => s.layers.some((l) => l.component === "planet"));
+  assert.ok(drawn.length && drawn.every((s) => s.layers.some((l) => l.component === "flow-arrows")), "inertia streak on every globe after the stop");
+  const script = Adapter.studioScript(ear.channel, ear.topic);
+  assert.deepEqual(Validator.validateStoryboard(sb, { script, timeline: fakeTimeline(script), style, policy: profile.evidencePolicy.validator }).errors, []);
+});
+
 test("IB readiness: researched records pass without stored quotes (warned); visual pre-check blocks are tolerated, others are not", () => {
   // IB-PHY-065 was published on 2026-10-29 (5cNecwSkYDo), so an unpublished researched record with a visual pre-check block stands in
-  const { channel, topic } = Adapter.loadTopic("impossible-brief", "IB-OTH-020");
+  const { channel, topic: undeclared } = Adapter.loadTopic("impossible-brief", "IB-OTH-020");
+  // a record that declares no visual mechanism is a creative review item, never a word-matched guess
+  assert.ok(Adapter.readiness(channel, undeclared).errors.some((e) => /^CREATIVE_REVIEW_REQUIRED: .*declares no visual mechanism/.test(e)));
+  assert.ok(Adapter.readiness(channel, { ...undeclared, visualMechanism: "organism-microscope" }).errors.some((e) => /^CREATIVE_REVIEW_REQUIRED: .*not supported/.test(e)), "a declared mechanism with no drawing is refused");
+  const topic = { ...undeclared, visualMechanism: "earth-surface" };
   const r = Adapter.readiness(channel, topic);
   assert.equal(r.ready, true);
   // a content hold (claim check 2026-10-28: unsourced narration lines) keeps a topic out of production
