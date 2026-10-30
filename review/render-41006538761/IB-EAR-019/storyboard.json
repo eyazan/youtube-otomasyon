@@ -1,0 +1,736 @@
+{
+ "schema": "bto-studio.storyboard.v1",
+ "channel": "impossible-brief",
+ "topicId": "IB-EAR-019",
+ "slug": "could-earth-survive-one-day-without-earth-s-magnetic-field",
+ "version": 1,
+ "author": "auto/impossible-brief (deterministic scene grammar, world magnetic; needs creative review before publication)",
+ "licensingNote": "all visuals drawn in-house from code (SVG): starfield, bodies, slices, ladders and orbits are original; no photographs or third-party media",
+ "treatment": {
+  "educationalObjective": "Answer, with the record's own sourced numbers: Could Earth survive a single day without its magnetic field, and how close are we to finding out?",
+  "visualHook": "Frame 0: the magnetic drawn in light against deep space, with the hook's number landing as the first readout.",
+  "mechanismsToAnimate": [
+   "hook",
+   "measure",
+   "count",
+   "mechanism",
+   "payoff"
+  ],
+  "factualRisks": [
+   "probe depth on the planet is exaggerated for visibility (ILLUSTRATION)",
+   "auto storyboard: scale drawings are illustrative unless computed from a cited number (ILLUSTRATION chip)",
+   "IB facts carry sourced claims without stored verbatim quotes (channel standard; see readiness warnings)"
+  ]
+ },
+ "visualMechanism": {
+  "id": "magnetic-field",
+  "world": "magnetic",
+  "declared": true,
+  "supported": true,
+  "draws": "a planet inside its dipole field lines; weakening/removal shrinks the field, charged particles arrive",
+  "reason": null
+ },
+ "tail": 0.6,
+ "scenes": [
+  {
+   "id": "s1-hook",
+   "lines": [
+    "L1"
+   ],
+   "start": 0,
+   "env": "space",
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "factLabel"
+   ],
+   "visualPurpose": "Hook: frame 0 shows the magnetic itself, so the scale of the question is visible before it is explained.",
+   "camera": [
+    {
+     "at": 0,
+     "x": 576,
+     "y": 800,
+     "z": 1.12
+    },
+    {
+     "at": "L1.end",
+     "x": 504,
+     "y": 800,
+     "z": 1.2600000000000002
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 11,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "planet",
+     "props": {
+      "kind": "earth",
+      "x": 540,
+      "y": 820,
+      "r": 210,
+      "spin": 0.3,
+      "seed": 4
+     }
+    },
+    {
+     "component": "magnetosphere",
+     "props": {
+      "cx": 540,
+      "cy": 820,
+      "r": 210,
+      "strengthKeys": [
+       [
+        0.15,
+        1
+       ],
+       [
+        1.75,
+        0.4
+       ]
+      ]
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L1+0.2",
+        "text": "ALREADY WEAKENING",
+        "x": 540,
+        "y": 420,
+        "size": 78,
+        "family": "sans"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s2-measure",
+   "lines": [
+    "L2"
+   ],
+   "start": "L2-0.15",
+   "env": "void",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "factLabel"
+   ],
+   "visualPurpose": "Number: the cited value (6.3 %) lands as a large readout over the subject while the camera pushes in, so the quantity is held on screen as it is spoken.",
+   "camera": [
+    {
+     "at": "L2-0.15",
+     "x": 504,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L2.end",
+     "x": 576,
+     "y": 800,
+     "z": 1.1400000000000001
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 41,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "planet",
+     "props": {
+      "kind": "earth",
+      "x": 540,
+      "y": 820,
+      "r": 210,
+      "spin": 0.3,
+      "seed": 4
+     }
+    },
+    {
+     "component": "magnetosphere",
+     "props": {
+      "cx": 540,
+      "cy": 820,
+      "r": 210,
+      "strengthKeys": [
+       [
+        "L2",
+        1
+       ],
+       [
+        "L2+1.6",
+        0.4
+       ]
+      ]
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L2+0.3",
+        "text": "6.3 %",
+        "x": 540,
+        "y": 1230,
+        "size": 104,
+        "family": "num"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s3-count",
+   "lines": [
+    "L3"
+   ],
+   "start": "L3-0.15",
+   "env": "teal",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F3"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "factLabel"
+   ],
+   "visualPurpose": "Count: 183 events tick onto a 83 million years ago axis as the line is spoken, so the frequency is seen as a density of marks; the spacing is illustrative, the count and span are the cited fact's.",
+   "camera": [
+    {
+     "at": "L3-0.15",
+     "x": 520,
+     "y": 900,
+     "z": 1
+    },
+    {
+     "at": "L3.end",
+     "x": 560,
+     "y": 940,
+     "z": 1.08
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 62,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "event-ticks",
+     "props": {
+      "x": 150,
+      "y": 980,
+      "w": 700,
+      "count": 183,
+      "at": "L3+0.2",
+      "dur": 2.6,
+      "startLabel": "83 MILLION YEARS AGO",
+      "endLabel": "NOW",
+      "seed": 9
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L3+0.4",
+        "text": "183 TIMES",
+        "x": 540,
+        "y": 760,
+        "size": 104,
+        "family": "num"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s4-measure",
+   "lines": [
+    "L4"
+   ],
+   "start": "L4-0.15",
+   "env": "space",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F4",
+    "F3",
+    "F2"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "factLabel"
+   ],
+   "visualPurpose": "Number: the cited value (780,000 years) lands as a large readout over the subject while the camera pushes in, so the quantity is held on screen as it is spoken.",
+   "camera": [
+    {
+     "at": "L4-0.15",
+     "x": 504,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L4.end",
+     "x": 576,
+     "y": 800,
+     "z": 1.1400000000000001
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 43,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "planet",
+     "props": {
+      "kind": "earth",
+      "x": 560,
+      "y": 1080,
+      "r": 325.5,
+      "spin": 0.3,
+      "seed": 4
+     }
+    },
+    {
+     "component": "magnetosphere",
+     "props": {
+      "cx": 560,
+      "cy": 1080,
+      "r": 325.5
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L4+0.3",
+        "text": "780,000 years",
+        "x": 540,
+        "y": 1230,
+        "size": 104,
+        "family": "num"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s5-mechanism",
+   "lines": [
+    "L5"
+   ],
+   "start": "L5-0.15",
+   "env": "void",
+   "transition": {
+    "type": "dissolve",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "speculativeLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Mechanism: the field lines around the planet shrink and dim as the line describes it; speculative, chipped as such.",
+   "camera": [
+    {
+     "at": "L5-0.15",
+     "x": 576,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L5.end",
+     "x": 504,
+     "y": 780,
+     "z": 1.1400000000000001
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 54,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "planet",
+     "props": {
+      "kind": "earth",
+      "x": 400,
+      "y": 760,
+      "r": 168,
+      "spin": 0.3,
+      "seed": 4
+     }
+    },
+    {
+     "component": "magnetosphere",
+     "props": {
+      "cx": 400,
+      "cy": 760,
+      "r": 168,
+      "strengthKeys": [
+       [
+        "L5",
+        1
+       ],
+       [
+        "L5+1.6",
+        0.05
+       ]
+      ]
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L5+0.25",
+        "text": "OFF COMPLETELY",
+        "x": 540,
+        "y": 360,
+        "size": 60,
+        "family": "sans",
+        "outAt": "L5.end-0.25"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s6-mechanism",
+   "lines": [
+    "L6"
+   ],
+   "start": "L6-0.15",
+   "env": "space",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "estimateLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Mechanism: the field lines around the planet shrink and dim as the line describes it, and charged particles now reach the surface; an estimate, chipped as such.",
+   "camera": [
+    {
+     "at": "L6-0.15",
+     "x": 504,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L6.end",
+     "x": 576,
+     "y": 780,
+     "z": 1.1400000000000001
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 55,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "planet",
+     "props": {
+      "kind": "earth",
+      "x": 540,
+      "y": 820,
+      "r": 210,
+      "spin": 0.3,
+      "seed": 4
+     }
+    },
+    {
+     "component": "magnetosphere",
+     "props": {
+      "cx": 540,
+      "cy": 820,
+      "r": 210,
+      "strengthKeys": [
+       [
+        "L6",
+        0.05
+       ],
+       [
+        "L6+1.6",
+        0.05
+       ]
+      ],
+      "wind": {
+       "at": "L6",
+       "side": "left"
+      }
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L6+0.25",
+        "text": "CHARGED PARTICLES",
+        "x": 540,
+        "y": 360,
+        "size": 60,
+        "family": "sans",
+        "outAt": "L6.end-0.25"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s7-mechanism",
+   "lines": [
+    "L7"
+   ],
+   "start": "L7-0.15",
+   "env": "void",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "estimateLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Mechanism: the field lines around the planet shrink and dim as the line describes it; an estimate, chipped as such.",
+   "camera": [
+    {
+     "at": "L7-0.15",
+     "x": 576,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L7.end",
+     "x": 504,
+     "y": 780,
+     "z": 1.1400000000000001
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 56,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "planet",
+     "props": {
+      "kind": "earth",
+      "x": 560,
+      "y": 1080,
+      "r": 325.5,
+      "spin": 0.3,
+      "seed": 4
+     }
+    },
+    {
+     "component": "magnetosphere",
+     "props": {
+      "cx": 560,
+      "cy": 1080,
+      "r": 325.5,
+      "strengthKeys": [
+       [
+        "L7",
+        0.05
+       ],
+       [
+        "L7+1.6",
+        0.05
+       ]
+      ]
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L7+0.25",
+        "text": "TAKES FAR LONGER",
+        "x": 540,
+        "y": 360,
+        "size": 60,
+        "family": "sans"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s8-payoff",
+   "lines": [
+    "L8"
+   ],
+   "start": "L8-0.15",
+   "env": "space",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "estimateLabel"
+   ],
+   "visualPurpose": "Payoff: the answer in a few words over the opening composition; the camera eases back to the frame-0 framing so the Short loops on its first image.",
+   "camera": [
+    {
+     "at": "L8-0.15",
+     "x": 540,
+     "y": 800,
+     "z": 1.06
+    },
+    {
+     "at": "end-0.6",
+     "x": 540,
+     "y": 800,
+     "z": 1.12
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 11,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "planet",
+     "props": {
+      "kind": "earth",
+      "x": 540,
+      "y": 820,
+      "r": 210,
+      "spin": 0.3,
+      "seed": 4
+     }
+    },
+    {
+     "component": "magnetosphere",
+     "props": {
+      "cx": 540,
+      "cy": 820,
+      "r": 210
+     }
+    }
+   ]
+  }
+ ]
+}

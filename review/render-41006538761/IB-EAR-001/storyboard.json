@@ -1,0 +1,815 @@
+{
+ "schema": "bto-studio.storyboard.v1",
+ "channel": "impossible-brief",
+ "topicId": "IB-EAR-001",
+ "slug": "what-if-earth-stopped-spinning-for-one-second",
+ "version": 1,
+ "author": "auto/impossible-brief (deterministic scene grammar, world rotation; needs creative review before publication)",
+ "licensingNote": "all visuals drawn in-house from code (SVG): starfield, bodies, slices, ladders and orbits are original; no photographs or third-party media",
+ "treatment": {
+  "educationalObjective": "Answer, with the record's own sourced numbers: If Earth stopped spinning for just one second, why would the stop matter more than its length?",
+  "visualHook": "Frame 0: the rotation drawn in light against deep space, with the hook's number landing as the first readout.",
+  "mechanismsToAnimate": [
+   "hook",
+   "measure",
+   "mechanism",
+   "payoff"
+  ],
+  "factualRisks": [
+   "probe depth on the planet is exaggerated for visibility (ILLUSTRATION)",
+   "auto storyboard: scale drawings are illustrative unless computed from a cited number (ILLUSTRATION chip)",
+   "IB facts carry sourced claims without stored verbatim quotes (channel standard; see readiness warnings)"
+  ]
+ },
+ "visualMechanism": {
+  "id": "planet-rotation",
+  "world": "rotation",
+  "declared": true,
+  "supported": true,
+  "draws": "a planet turning on its own axis (spin rate keyed; it can slow and stop) with the surface's eastward motion",
+  "reason": null
+ },
+ "tail": 0.6,
+ "scenes": [
+  {
+   "id": "s1-hook",
+   "lines": [
+    "L1"
+   ],
+   "start": 0,
+   "env": "space",
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "speculativeLabel"
+   ],
+   "visualPurpose": "Hook: frame 0 shows the rotation itself, so the scale of the question is visible before it is explained.",
+   "camera": [
+    {
+     "at": 0,
+     "x": 576,
+     "y": 800,
+     "z": 1.12
+    },
+    {
+     "at": "L1.end",
+     "x": 504,
+     "y": 800,
+     "z": 1.2600000000000002
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 11,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "planet",
+     "props": {
+      "kind": "earth",
+      "x": 540,
+      "y": 820,
+      "r": 330,
+      "seed": 3,
+      "grid": false,
+      "spinKeys": [
+       [
+        0.15,
+        0.35
+       ],
+       [
+        0.75,
+        0
+       ]
+      ]
+     }
+    },
+    {
+     "component": "flow-arrows",
+     "props": {
+      "streams": [
+       {
+        "pts": [
+         [
+          250,
+          820
+         ],
+         [
+          395,
+          837
+         ],
+         [
+          540,
+          842
+         ],
+         [
+          685,
+          837
+         ],
+         [
+          830,
+          820
+         ]
+        ],
+        "color": "amber",
+        "width": 14,
+        "at": 0.55
+       }
+      ]
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L1+0.2",
+        "text": "ONE SECOND",
+        "x": 540,
+        "y": 420,
+        "size": 78,
+        "family": "sans"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s2-measure",
+   "lines": [
+    "L2"
+   ],
+   "start": "L2-0.15",
+   "env": "void",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "estimateLabel"
+   ],
+   "visualPurpose": "Number: the cited value (465 m/s) lands as a large readout over the subject while the camera pushes in, so the quantity is held on screen as it is spoken.",
+   "camera": [
+    {
+     "at": "L2-0.15",
+     "x": 504,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L2.end",
+     "x": 576,
+     "y": 800,
+     "z": 1.1400000000000001
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 41,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "planet",
+     "props": {
+      "kind": "earth",
+      "x": 540,
+      "y": 820,
+      "r": 330,
+      "seed": 3,
+      "grid": false,
+      "spinKeys": [
+       [
+        "L2",
+        0
+       ],
+       [
+        "L2+0.6",
+        0
+       ]
+      ]
+     }
+    },
+    {
+     "component": "flow-arrows",
+     "props": {
+      "streams": [
+       {
+        "pts": [
+         [
+          250,
+          820
+         ],
+         [
+          395,
+          837
+         ],
+         [
+          540,
+          842
+         ],
+         [
+          685,
+          837
+         ],
+         [
+          830,
+          820
+         ]
+        ],
+        "color": "amber",
+        "width": 14,
+        "at": "L2+0.4"
+       }
+      ]
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L2+0.3",
+        "text": "465 m/s",
+        "x": 540,
+        "y": 1230,
+        "size": 104,
+        "family": "num"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s3-mechanism",
+   "lines": [
+    "L3"
+   ],
+   "start": "L3-0.15",
+   "env": "space",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Mechanism: the globe's spin winds down to a stop while the eastward streak keeps going (inertia); known science.",
+   "camera": [
+    {
+     "at": "L3-0.15",
+     "x": 576,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L3.end",
+     "x": 504,
+     "y": 780,
+     "z": 1.1400000000000001
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 52,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "planet",
+     "props": {
+      "kind": "earth",
+      "x": 560,
+      "y": 1080,
+      "r": 511.5,
+      "seed": 3,
+      "grid": false,
+      "spinKeys": [
+       [
+        "L3",
+        0
+       ],
+       [
+        "L3+0.6",
+        0
+       ]
+      ]
+     }
+    },
+    {
+     "component": "flow-arrows",
+     "props": {
+      "streams": [
+       {
+        "pts": [
+         [
+          110.5,
+          1080
+         ],
+         [
+          335.3,
+          1106.3
+         ],
+         [
+          560,
+          1114.1
+         ],
+         [
+          784.8,
+          1106.3
+         ],
+         [
+          1009.5,
+          1080
+         ]
+        ],
+        "color": "amber",
+        "width": 17,
+        "at": "L3+0.4"
+       }
+      ]
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L3+0.25",
+        "text": "HEADING EAST",
+        "x": 540,
+        "y": 360,
+        "size": 60,
+        "family": "sans"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s4-measure",
+   "lines": [
+    "L4"
+   ],
+   "start": "L4-0.15",
+   "env": "void",
+   "transition": {
+    "type": "dissolve",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F4"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "factLabel"
+   ],
+   "visualPurpose": "Number: the cited value (9.8 m/s²) lands as a large readout over the subject while the camera pushes in, so the quantity is held on screen as it is spoken.",
+   "camera": [
+    {
+     "at": "L4-0.15",
+     "x": 504,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L4.end",
+     "x": 576,
+     "y": 800,
+     "z": 1.1400000000000001
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 43,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "planet",
+     "props": {
+      "kind": "earth",
+      "x": 400,
+      "y": 760,
+      "r": 264,
+      "seed": 3,
+      "grid": false,
+      "spinKeys": [
+       [
+        "L4",
+        0
+       ],
+       [
+        "L4+0.6",
+        0
+       ]
+      ]
+     }
+    },
+    {
+     "component": "flow-arrows",
+     "props": {
+      "streams": [
+       {
+        "pts": [
+         [
+          168,
+          760
+         ],
+         [
+          284,
+          773.6
+         ],
+         [
+          400,
+          777.6
+         ],
+         [
+          516,
+          773.6
+         ],
+         [
+          632,
+          760
+         ]
+        ],
+        "color": "amber",
+        "width": 13,
+        "at": "L4+0.4"
+       }
+      ]
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L4+0.3",
+        "text": "9.8 m/s²",
+        "x": 540,
+        "y": 1230,
+        "size": 104,
+        "family": "num"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s5-mechanism",
+   "lines": [
+    "L5"
+   ],
+   "start": "L5-0.15",
+   "env": "space",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "estimateLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Mechanism: the globe's spin winds down to a stop while the eastward streak keeps going (inertia); an estimate, chipped as such.",
+   "camera": [
+    {
+     "at": "L5-0.15",
+     "x": 576,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L5.end",
+     "x": 504,
+     "y": 780,
+     "z": 1.1400000000000001
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 54,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "planet",
+     "props": {
+      "kind": "earth",
+      "x": 540,
+      "y": 820,
+      "r": 330,
+      "seed": 3,
+      "grid": false,
+      "spinKeys": [
+       [
+        "L5",
+        0
+       ],
+       [
+        "L5+0.6",
+        0
+       ]
+      ]
+     }
+    },
+    {
+     "component": "flow-arrows",
+     "props": {
+      "streams": [
+       {
+        "pts": [
+         [
+          250,
+          820
+         ],
+         [
+          395,
+          837
+         ],
+         [
+          540,
+          842
+         ],
+         [
+          685,
+          837
+         ],
+         [
+          830,
+          820
+         ]
+        ],
+        "color": "amber",
+        "width": 14,
+        "at": "L5+0.4"
+       }
+      ]
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L5+0.25",
+        "text": "NOTHING HOLDS YOU BACK",
+        "x": 540,
+        "y": 360,
+        "size": 55,
+        "family": "sans"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s6-measure",
+   "lines": [
+    "L6"
+   ],
+   "start": "L6-0.15",
+   "env": "teal",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F2",
+    "F1"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "factLabel"
+   ],
+   "visualPurpose": "Scale: the topic's own km/h side by side as growing bars, so the size of the change is seen, not read.",
+   "camera": [
+    {
+     "at": "L6-0.15",
+     "x": 504,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L6.end",
+     "x": 576,
+     "y": 800,
+     "z": 1.1400000000000001
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 45,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "scale-ladder",
+     "props": {
+      "x": 110,
+      "y": 560,
+      "w": 700,
+      "log": false,
+      "items": [
+       {
+        "label": "45° LATITUDE",
+        "value": 1184.2,
+        "valueText": "1,184.2 km/h",
+        "at": "L6+0.20"
+       },
+       {
+        "label": "EQUATOR",
+        "value": 1674.7,
+        "valueText": "1,674.7 km/h",
+        "at": "L6+0.65"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s7-payoff",
+   "lines": [
+    "L7"
+   ],
+   "start": "L7-0.15",
+   "env": "space",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "estimateLabel"
+   ],
+   "visualPurpose": "Payoff: the answer in a few words over the opening composition; the camera eases back to the frame-0 framing so the Short loops on its first image.",
+   "camera": [
+    {
+     "at": "L7-0.15",
+     "x": 540,
+     "y": 800,
+     "z": 1.06
+    },
+    {
+     "at": "end-0.6",
+     "x": 540,
+     "y": 800,
+     "z": 1.12
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 11,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "planet",
+     "props": {
+      "kind": "earth",
+      "x": 540,
+      "y": 820,
+      "r": 330,
+      "seed": 3,
+      "grid": true,
+      "spinKeys": [
+       [
+        0,
+        0.35
+       ]
+      ]
+     }
+    },
+    {
+     "component": "flow-arrows",
+     "props": {
+      "streams": [
+       {
+        "pts": [
+         [
+          465,
+          501
+         ],
+         [
+          502,
+          506
+         ],
+         [
+          540,
+          507
+         ],
+         [
+          578,
+          506
+         ],
+         [
+          615,
+          501
+         ]
+        ],
+        "color": "amber",
+        "width": 6,
+        "at": "L7+0.6"
+       }
+      ]
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L7+0.3",
+        "text": "NEAR THE POLES",
+        "x": 540,
+        "y": 420,
+        "size": 60,
+        "family": "sans"
+       }
+      ]
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,227 @@
+{
+ "schema": "bto-studio.review-package.v1",
+ "channel": "impossible-brief",
+ "topicId": "IB-EAR-019",
+ "slug": "could-earth-survive-one-day-without-earth-s-magnetic-field",
+ "verdict": "SHADOW_OF_LIVE_NOT_PUBLISHABLE",
+ "pilot": null,
+ "researchPending": null,
+ "shadow": true,
+ "autoPublish": false,
+ "uploadAttempted": false,
+ "mode": "preview",
+ "quality": "final",
+ "createdAt": "2026-10-30T05:11:57.659Z",
+ "video": "../../_temp/review/IB-EAR-019/out/could-earth-survive-one-day-without-earth-s-magnetic-field-premium-final.mp4",
+ "voice": {
+  "used": "en-US-BrianMultilingualNeural",
+  "approved": true,
+  "approvedVoice": {
+   "provider": "edge-tts",
+   "voice": "en-US-BrianMultilingualNeural",
+   "rate": "+2%"
+  },
+  "note": null,
+  "wordTiming": "measured (Edge word boundaries)"
+ },
+ "narrationUnchanged": {
+  "sourceHash": "a970bcd4f4b78c27",
+  "lines": [
+   "Earth's magnetic field is already weakening.",
+   "Its main dipole has faded about 6.3% per century.",
+   "Fields have flipped 183 times in 83 million years.",
+   "The last flip was 780,000 years ago.",
+   "Now switch it off completely, for just one day.",
+   "Satellites and power grids would take more charged particles.",
+   "But the air wouldn't vanish in a day; that takes far longer.",
+   "So we'd survive, but our technology would feel it first."
+  ]
+ },
+ "traceability": [
+  {
+   "scene": "s1-hook",
+   "lines": [
+    "L1"
+   ],
+   "purpose": "Hook: frame 0 shows the magnetic itself, so the scale of the question is visible before it is explained.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "Over the last two centuries the dipole strength has been decreasing at a rate of about 6.3% per century.",
+     "source": "Wikipedia — Earth's magnetic field",
+     "url": "https://en.wikipedia.org/wiki/Earth%27s_magnetic_field"
+    }
+   ]
+  },
+  {
+   "scene": "s2-measure",
+   "lines": [
+    "L2"
+   ],
+   "purpose": "Number: the cited value (6.3 %) lands as a large readout over the subject while the camera pushes in, so the quantity is held on screen as it is spoken.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "Over the last two centuries the dipole strength has been decreasing at a rate of about 6.3% per century.",
+     "source": "Wikipedia — Earth's magnetic field",
+     "url": "https://en.wikipedia.org/wiki/Earth%27s_magnetic_field"
+    }
+   ]
+  },
+  {
+   "scene": "s3-count",
+   "lines": [
+    "L3"
+   ],
+   "purpose": "Count: 183 events tick onto a 83 million years ago axis as the line is spoken, so the frequency is seen as a density of marks; the spacing is illustrative, the count and span are the cited fact's.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F3",
+     "claim": "There have been at least 183 reversals over the last 83 million years, on average once every ~450,000 years.",
+     "source": "Wikipedia — Geomagnetic reversal",
+     "url": "https://en.wikipedia.org/wiki/Geomagnetic_reversal"
+    }
+   ]
+  },
+  {
+   "scene": "s4-measure",
+   "lines": [
+    "L4"
+   ],
+   "purpose": "Number: the cited value (780,000 years) lands as a large readout over the subject while the camera pushes in, so the quantity is held on screen as it is spoken.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "The latest, the Brunhes–Matuyama reversal, occurred 780,000 years ago.",
+     "source": "Wikipedia — Geomagnetic reversal",
+     "url": "https://en.wikipedia.org/wiki/Geomagnetic_reversal"
+    },
+    {
+     "id": "F3",
+     "claim": "There have been at least 183 reversals over the last 83 million years, on average once every ~450,000 years.",
+     "source": "Wikipedia — Geomagnetic reversal",
+     "url": "https://en.wikipedia.org/wiki/Geomagnetic_reversal"
+    },
+    {
+     "id": "F2",
+     "claim": "Measurements since Gauss in 1832 show a relative decay of about 10% over the last 150 years.",
+     "source": "Wikipedia — Earth's magnetic field",
+     "url": "https://en.wikipedia.org/wiki/Earth%27s_magnetic_field"
+    }
+   ]
+  },
+  {
+   "scene": "s5-mechanism",
+   "lines": [
+    "L5"
+   ],
+   "purpose": "Mechanism: the field lines around the planet shrink and dim as the line describes it; speculative, chipped as such.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "Over the last two centuries the dipole strength has been decreasing at a rate of about 6.3% per century.",
+     "source": "Wikipedia — Earth's magnetic field",
+     "url": "https://en.wikipedia.org/wiki/Earth%27s_magnetic_field"
+    }
+   ]
+  },
+  {
+   "scene": "s6-mechanism",
+   "lines": [
+    "L6"
+   ],
+   "purpose": "Mechanism: the field lines around the planet shrink and dim as the line describes it, and charged particles now reach the surface; an estimate, chipped as such.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "Over the last two centuries the dipole strength has been decreasing at a rate of about 6.3% per century.",
+     "source": "Wikipedia — Earth's magnetic field",
+     "url": "https://en.wikipedia.org/wiki/Earth%27s_magnetic_field"
+    }
+   ]
+  },
+  {
+   "scene": "s7-mechanism",
+   "lines": [
+    "L7"
+   ],
+   "purpose": "Mechanism: the field lines around the planet shrink and dim as the line describes it; an estimate, chipped as such.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "Over the last two centuries the dipole strength has been decreasing at a rate of about 6.3% per century.",
+     "source": "Wikipedia — Earth's magnetic field",
+     "url": "https://en.wikipedia.org/wiki/Earth%27s_magnetic_field"
+    }
+   ]
+  },
+  {
+   "scene": "s8-payoff",
+   "lines": [
+    "L8"
+   ],
+   "purpose": "Payoff: the answer in a few words over the opening composition; the camera eases back to the frame-0 framing so the Short loops on its first image.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "Over the last two centuries the dipole strength has been decreasing at a rate of about 6.3% per century.",
+     "source": "Wikipedia — Earth's magnetic field",
+     "url": "https://en.wikipedia.org/wiki/Earth%27s_magnetic_field"
+    }
+   ]
+  }
+ ],
+ "licensing": {
+  "visuals": "all visuals drawn in-house from code (SVG): starfield, bodies, slices, ladders and orbits are original; no photographs or third-party media",
+  "fonts": "SIL OFL 1.1 (@fontsource Inter, Source Serif 4, Barlow Semi Condensed 5.3.0)",
+  "audio": "narration TTS + effects/music synthesised by scripts/bto-studio/audio/sound_design.py (no samples)",
+  "thirdPartyMedia": []
+ },
+ "qa": {
+  "objectivePass": true,
+  "report": "../../_temp/review/IB-EAR-019/out/qa-report.md",
+  "contactSheet": "../../_temp/review/IB-EAR-019/out/contact-sheet.png",
+  "sceneSheet": "../../_temp/review/IB-EAR-019/out/scene-sheet.png",
+  "failures": [
+   "UNVERIFIED audio samples clipped: not reported by this FFmpeg build (astats has no clipped-sample count)",
+   "WARN loop continuity (last -> first frame): whole 4.91, photo region 10.78, final-second step 0.26, ratio 7.09"
+  ],
+  "unverified": [
+   "audio samples clipped"
+  ]
+ },
+ "audio": {
+  "integratedLufs": -14.1,
+  "truePeakDbtp": -2
+ },
+ "performance": {
+  "renderWallSec": 98.6,
+  "msPerFrame": 105.5,
+  "workers": 3,
+  "peakChromiumRssMb": 4084,
+  "cachedSegments": 0,
+  "segments": 8,
+  "host": "linux x64 4 cpu 16 GB",
+  "totalPipelineSec": 144
+ },
+ "cost": {
+  "llmUsd": 0,
+  "ttsUsd": 0,
+  "renderUsd": 0,
+  "note": "local rendering and free/offline TTS; LLM use only when a Claude storyboard draft was requested and approved"
+ },
+ "approvalsNeeded": [
+  "voice: re-narrate with the approved Edge voice (if PREVIEW_ONLY)",
+  "creative sign-off (video-quality-review findings)",
+  "factual sign-off on the traceability table",
+  "owner decision to hand the MP4 to the normal pipeline (never automatic)"
+ ]
+}

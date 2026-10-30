@@ -1,0 +1,206 @@
+{
+ "schema": "bto-studio.review-package.v1",
+ "channel": "impossible-brief",
+ "topicId": "IB-EAR-001",
+ "slug": "what-if-earth-stopped-spinning-for-one-second",
+ "verdict": "BLOCKED",
+ "pilot": null,
+ "researchPending": null,
+ "shadow": true,
+ "autoPublish": false,
+ "uploadAttempted": false,
+ "mode": "preview",
+ "quality": "final",
+ "createdAt": "2026-10-30T05:09:25.716Z",
+ "video": "../../_temp/review/IB-EAR-001/out/what-if-earth-stopped-spinning-for-one-second-premium-final.mp4",
+ "voice": {
+  "used": "en-US-BrianMultilingualNeural",
+  "approved": true,
+  "approvedVoice": {
+   "provider": "edge-tts",
+   "voice": "en-US-BrianMultilingualNeural",
+   "rate": "+2%"
+  },
+  "note": null,
+  "wordTiming": "measured (Edge word boundaries)"
+ },
+ "narrationUnchanged": {
+  "sourceHash": "a94cc5787c007de3",
+  "lines": [
+   "Earth stops spinning for one second.",
+   "But you keep moving at 465 metres per second.",
+   "At the equator, that's about 1,675 kilometres per hour, heading east.",
+   "Gravity pulls down at 9.8 metres per second squared.",
+   "Sideways, nothing holds you back.",
+   "At 45 degrees latitude, it's still about 1,184 kilometres per hour.",
+   "Only near the poles would the stop feel gentle."
+  ]
+ },
+ "traceability": [
+  {
+   "scene": "s1-hook",
+   "lines": [
+    "L1"
+   ],
+   "purpose": "Hook: frame 0 shows the rotation itself, so the scale of the question is visible before it is explained.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "Earth's rotational speed is about 1,674.7 km/h (465.2 m/s) at the equator, decreasing to zero at the poles.",
+     "source": "Wikipedia — Earth's rotation",
+     "url": "https://en.wikipedia.org/wiki/Earth%27s_rotation"
+    }
+   ]
+  },
+  {
+   "scene": "s2-measure",
+   "lines": [
+    "L2"
+   ],
+   "purpose": "Number: the cited value (465 m/s) lands as a large readout over the subject while the camera pushes in, so the quantity is held on screen as it is spoken.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "Earth's rotational speed is about 1,674.7 km/h (465.2 m/s) at the equator, decreasing to zero at the poles.",
+     "source": "Wikipedia — Earth's rotation",
+     "url": "https://en.wikipedia.org/wiki/Earth%27s_rotation"
+    }
+   ]
+  },
+  {
+   "scene": "s3-mechanism",
+   "lines": [
+    "L3"
+   ],
+   "purpose": "Mechanism: the globe's spin winds down to a stop while the eastward streak keeps going (inertia); known science.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "Earth's rotational speed is about 1,674.7 km/h (465.2 m/s) at the equator, decreasing to zero at the poles.",
+     "source": "Wikipedia — Earth's rotation",
+     "url": "https://en.wikipedia.org/wiki/Earth%27s_rotation"
+    }
+   ]
+  },
+  {
+   "scene": "s4-measure",
+   "lines": [
+    "L4"
+   ],
+   "purpose": "Number: the cited value (9.8 m/s²) lands as a large readout over the subject while the camera pushes in, so the quantity is held on screen as it is spoken.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "Near Earth's surface, the acceleration due to gravity is 9.8 m/s2.",
+     "source": "Wikipedia — Gravity of Earth",
+     "url": "https://en.wikipedia.org/wiki/Gravity_of_Earth"
+    }
+   ]
+  },
+  {
+   "scene": "s5-mechanism",
+   "lines": [
+    "L5"
+   ],
+   "purpose": "Mechanism: the globe's spin winds down to a stop while the eastward streak keeps going (inertia); an estimate, chipped as such.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "Earth's rotational speed is about 1,674.7 km/h (465.2 m/s) at the equator, decreasing to zero at the poles.",
+     "source": "Wikipedia — Earth's rotation",
+     "url": "https://en.wikipedia.org/wiki/Earth%27s_rotation"
+    }
+   ]
+  },
+  {
+   "scene": "s6-measure",
+   "lines": [
+    "L6"
+   ],
+   "purpose": "Scale: the topic's own km/h side by side as growing bars, so the size of the change is seen, not read.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F2",
+     "claim": "At 45° latitude, the speed is roughly 1,184.2 km/h.",
+     "source": "Wikipedia — Earth's rotation",
+     "url": "https://en.wikipedia.org/wiki/Earth%27s_rotation"
+    },
+    {
+     "id": "F1",
+     "claim": "Earth's rotational speed is about 1,674.7 km/h (465.2 m/s) at the equator, decreasing to zero at the poles.",
+     "source": "Wikipedia — Earth's rotation",
+     "url": "https://en.wikipedia.org/wiki/Earth%27s_rotation"
+    }
+   ]
+  },
+  {
+   "scene": "s7-payoff",
+   "lines": [
+    "L7"
+   ],
+   "purpose": "Payoff: the answer in a few words over the opening composition; the camera eases back to the frame-0 framing so the Short loops on its first image.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "Earth's rotational speed is about 1,674.7 km/h (465.2 m/s) at the equator, decreasing to zero at the poles.",
+     "source": "Wikipedia — Earth's rotation",
+     "url": "https://en.wikipedia.org/wiki/Earth%27s_rotation"
+    }
+   ]
+  }
+ ],
+ "licensing": {
+  "visuals": "all visuals drawn in-house from code (SVG): starfield, bodies, slices, ladders and orbits are original; no photographs or third-party media",
+  "fonts": "SIL OFL 1.1 (@fontsource Inter, Source Serif 4, Barlow Semi Condensed 5.3.0)",
+  "audio": "narration TTS + effects/music synthesised by scripts/bto-studio/audio/sound_design.py (no samples)",
+  "thirdPartyMedia": []
+ },
+ "qa": {
+  "objectivePass": false,
+  "report": "../../_temp/review/IB-EAR-001/out/qa-report.md",
+  "contactSheet": "../../_temp/review/IB-EAR-001/out/contact-sheet.png",
+  "sceneSheet": "../../_temp/review/IB-EAR-001/out/scene-sheet.png",
+  "failures": [
+   "UNVERIFIED audio samples clipped: not reported by this FFmpeg build (astats has no clipped-sample count)",
+   "WARN loop continuity (last -> first frame): whole 8.02, photo region 16.19, final-second step 0.45, ratio 8.96",
+   "FAIL text gate (collisions, caption band, edges, size): 21 FAIL / 0 WARN groups; min essential 30px",
+   "WARN no static hold >= 1.5 s inside a scene (visual change target): longest 3.3 s (s6-measure)"
+  ],
+  "unverified": [
+   "audio samples clipped"
+  ]
+ },
+ "audio": {
+  "integratedLufs": -14.1,
+  "truePeakDbtp": -1.9
+ },
+ "performance": {
+  "renderWallSec": 102.5,
+  "msPerFrame": 114.3,
+  "workers": 3,
+  "peakChromiumRssMb": 3991,
+  "cachedSegments": 0,
+  "segments": 7,
+  "host": "linux x64 4 cpu 16 GB",
+  "totalPipelineSec": 156.5
+ },
+ "cost": {
+  "llmUsd": 0,
+  "ttsUsd": 0,
+  "renderUsd": 0,
+  "note": "local rendering and free/offline TTS; LLM use only when a Claude storyboard draft was requested and approved"
+ },
+ "approvalsNeeded": [
+  "voice: re-narrate with the approved Edge voice (if PREVIEW_ONLY)",
+  "creative sign-off (video-quality-review findings)",
+  "factual sign-off on the traceability table",
+  "owner decision to hand the MP4 to the normal pipeline (never automatic)"
+ ]
+}
