@@ -116,8 +116,34 @@ test("units keep their meaning: an angle or a latitude is never a temperature (I
   const ear = Adapter.loadTopic("impossible-brief", "IB-EAR-001"); const sb = Generator.build(Adapter.studioScript(ear.channel, ear.topic), style, ear.topic);
   const texts = sb.scenes.flatMap((s) => s.layers.filter((l) => l.component === "kinetic-type").flatMap((l) => l.props.items.map((it) => it.text)));
   assert.ok(!texts.some((t) => /°C/.test(t)), `no temperature on screen: ${texts.join(" | ")}`);
-  assert.ok(texts.includes("45° LATITUDE"), texts.join(" | "));
   assert.ok(!sb.scenes.some((s) => /heat/.test(s.id)), "no heat scene for a latitude");
+  // the latitude places the measured speed: a ladder of the two cited speeds, each labelled with where its fact says it
+  // applies, and a thousands number with decimals is read whole ("1,184.2", not "2 km/h")
+  const ladder = sb.scenes.flatMap((s) => s.layers).find((l) => l.component === "scale-ladder");
+  assert.deepEqual(ladder.props.items.map((it) => [it.label, it.valueText]), [["45° LATITUDE", "1,184.2 km/h"], ["EQUATOR", "1,674.7 km/h"]]);
+  assert.deepEqual(n("about 1,674.7 km/h"), [["1,674.7", "km/h", "speed"]]);
+});
+
+test("a stated latitude puts the rotation streak on that parallel; a poles payoff draws it near the pole (IB-EAR-001 render 41005043446)", () => {
+  const ear = Adapter.loadTopic("impossible-brief", "IB-EAR-001");
+  // without the second cited speed there is no ladder: the latitude line is drawn on the globe
+  const script = Adapter.studioScript(ear.channel, ear.topic); script.facts = script.facts.filter((f) => !/1,184/.test(f.claim));
+  const sb = Generator.build(script, style, ear.topic);
+  const streakY = (s) => { const f = s.layers.find((l) => l.component === "flow-arrows"); return f && f.props.streams[0].pts[2][1]; };
+  const lat = sb.scenes.find((s) => s.lines.includes("L6")); const pay = sb.scenes[sb.scenes.length - 1];
+  // globe centre y 820, radius 330: the 45th parallel sits about 233 px above the centre, the equator streak at ~842
+  assert.ok(Math.abs(streakY(lat) - (820 - 330 * Math.SQRT1_2) - 22 * Math.SQRT1_2) < 3, `45° streak at y ${streakY(lat)}`);
+  assert.ok(streakY(pay) < 560, `poles payoff streak near the pole, y ${streakY(pay)}`);
+  assert.equal(pay.layers.find((l) => l.component === "kinetic-type").props.items[0].text, "NEAR THE POLES");
+});
+
+test("headlines never cut an inverted clause from its modal; spans of time are never one ladder", () => {
+  assert.equal(Generator.keyPhrase("Only near the poles would the stop feel gentle.", 4), "NEAR THE POLES");
+  const t = { id: "IB-EAR-900", title: "field", topic: "magnetic field reversal", visualMechanism: "magnetic-field" };
+  const script = { facts: [{ id: "F1", claim: "Reversals come every 450,000 years on average." }, { id: "F2", claim: "The last reversal was 780,000 years ago." }, { id: "F3", claim: "One calm stretch lasted 83 million years." }],
+    lines: [{ id: "L1", text: "The field flips.", layer: "SPECULATIVE SCENARIO", facts: [] }, { id: "L2", text: "The last one was 780,000 years ago.", layer: "KNOWN SCIENCE", facts: ["F2"] }, { id: "L3", text: "Reversals come every 450,000 years.", layer: "KNOWN SCIENCE", facts: ["F1"] }, { id: "L4", text: "The field returns.", layer: "ESTIMATED CONSEQUENCE", facts: [] }] };
+  const sb = Generator.build(script, style, t);
+  assert.ok(!sb.scenes.some((s) => s.layers.some((l) => l.component === "scale-ladder")), "an age and an interval are not bars of one scale");
 });
 
 test("the declared visual mechanism decides the drawing: a planet's rotation is not an orbit (IB-EAR-001)", () => {
