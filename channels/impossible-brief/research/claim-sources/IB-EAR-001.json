@@ -1,0 +1,134 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-EAR-001",
+ "checkedAt": "2026-10-30T04:54:50.887Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "7cb8511891652abf",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "Earth's rotational speed is about 1,674.7 km/h (465.2 m/s) at the equator, decreasing to zero at the poles.",
+   "url": "https://en.wikipedia.org/wiki/Earth%27s_rotation",
+   "sourceTitle": "Wikipedia — Earth's rotation",
+   "revision": 1380780386,
+   "passage": "Earth's rotational speed is about 1,674.7 km/h (1,040.6 mph; 465.2 m/s; 1,526.2 ft/s) at the equator, but it decreases with latitude, becoming zero at the poles.",
+   "numbers": {
+    "claim": [
+     "1674.7",
+     "465.2"
+    ],
+    "inPassage": [
+     "1674.7",
+     "465.2"
+    ],
+    "missing": []
+   },
+   "support": 0.86,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "At 45° latitude, the speed is roughly 1,184.2 km/h.",
+   "url": "https://en.wikipedia.org/wiki/Earth%27s_rotation",
+   "sourceTitle": "Wikipedia — Earth's rotation",
+   "revision": 1380780386,
+   "passage": "At middle latitudes, the speed decreases; for example, at 45° latitude, the speed is roughly 1,184.2 km/h (735.8 mph) (1674.7  ×  cos (45°)).",
+   "numbers": {
+    "claim": [
+     "45",
+     "1184.2"
+    ],
+    "inPassage": [
+     "45",
+     "1184.2"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "The length of a day has increased by about 2.3 milliseconds per century since the 8th century BCE.",
+   "url": "https://en.wikipedia.org/wiki/Earth%27s_rotation",
+   "sourceTitle": "Wikipedia — Earth's rotation",
+   "revision": 1380780386,
+   "passage": "Analysis of historical astronomical records shows a slowing trend; the length of a day has increased by about 2.3 milliseconds per century since the 8th century BCE.",
+   "numbers": {
+    "claim": [
+     "2.3",
+     "8"
+    ],
+    "inPassage": [
+     "2.3",
+     "8"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "Near Earth's surface, the acceleration due to gravity is 9.8 m/s2.",
+   "url": "https://en.wikipedia.org/wiki/Gravity_of_Earth",
+   "sourceTitle": "Wikipedia — Gravity of Earth",
+   "revision": 1382258066,
+   "passage": "Near Earth's surface, the acceleration due to gravity, accurate to 2 significant figures, is 9.8 m/s2 (32 ft/s2).",
+   "numbers": {
+    "claim": [
+     "9.8",
+     "2"
+    ],
+    "inPassage": [
+     "9.8",
+     "2"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "SPECULATIVE SCENARIO",
+   "text": "Earth stops spinning for one second.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "But you keep moving at 465 metres per second.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "At the equator, that's about 1,675 kilometres per hour, heading east.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Gravity pulls down at 9.8 metres per second squared.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Sideways, nothing holds you back.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "At 45 degrees latitude, it's still about 1,184 kilometres per hour.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Only near the poles would the stop feel gentle.",
+   "status": "HUMAN"
+  }
+ ]
+}
