@@ -76,7 +76,8 @@ jobs:
           # fail here, by name, rather than as a misleading QA result later (run 39835922184: no QR decoder)
           node scripts/bto-studio/preflight-deps.js
       - name: Visual survey (runner-local)
-        run: node scripts/growth/visual-survey.js --channel impossible-brief --limit 30 --report visual-survey-report.json
+        # verification branch: the committed survey holds only the candidate under review; no runner-local survey
+        run: echo 'survey skipped on the verification branch'
       - name: Qualified topic buffer
         run: node scripts/growth/topic-buffer.js | tee -a "$GITHUB_STEP_SUMMARY"
       - name: Scheduled-production entry point, dry run (no upload) + premium shadow
