@@ -1,10 +1,10 @@
 # Growth dashboard
 
-Generated 2026-10-31T17:49:19.763Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-10-31T18:38:21.259Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
-**Shorts health** — last published 2026-10-31T18:00:00.000Z · 36 published · inventory A70/B148/C58/D76 · next: teton-dam-1976 (EXPLOIT (0.75): best A topic by SelectionScore)
+**Shorts health** — last published 2026-10-31T18:00:00.000Z · 36 published · inventory A96/B137/C60/D59 · next: titanic-1912 (EXPLOIT (0.75): best A topic by SelectionScore)
 
 **Long-form health** — cycle 2026-W44: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W44 already QUALITY_BLOCKED)
 
@@ -20,11 +20,11 @@ Generated 2026-10-31T17:49:19.763Z. Per-channel baselines are computed separatel
 
 **Research/source enrichment tasks**
 
-- apollo-1-1967 (C): VideoPotential 86 in experimental band 58–71; sources 41 < 62
-- munich-1958 (C): VideoPotential 85 in experimental band 58–71; sources 41 < 62
+- apollo-1-1967 (C): VideoPotential 87 in experimental band 58–71; sources 41 < 62
+- munich-1958 (C): VideoPotential 86 in experimental band 58–71; sources 41 < 62
 - skylab-1973 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
+- controlled-impact-1984 (C): VideoPotential 83 in experimental band 58–71; sources 41 < 62
 - eastland-1915 (C): VideoPotential 83 in experimental band 58–71; sources 41 < 62
-- vanguard-1957 (C): VideoPotential 82 in experimental band 58–71; sources 41 < 62
 
 **Recent alerts**
 
