@@ -2,62 +2,6 @@
   "channel": "failure-reconstructed",
   "runs": [
     {
-      "runId": "41017983233",
-      "attempt": "1",
-      "startedAt": "2026-10-30T07:06:57.949Z",
-      "publish": true,
-      "trigger": {
-        "event": "repository_dispatch",
-        "correlationId": "production-1-20261030T070553Z-ea55a8de"
-      },
-      "targetDay": "2026-10-30",
-      "slug": "northeast-blackout-2003",
-      "outcome": "UPLOADED",
-      "reason": "premium FR-northeast-blackout-2003 r-t7LH21ecs",
-      "stages": {
-        "RESEARCH": {
-          "status": "done",
-          "detail": "FR-northeast-blackout-2003",
-          "at": "2026-10-30T07:10:02.526Z"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "done",
-          "detail": "premium final",
-          "at": "2026-10-30T07:10:02.526Z"
-        },
-        "QA": {
-          "status": "done",
-          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
-          "at": "2026-10-30T07:10:02.527Z"
-        },
-        "UPLOAD": {
-          "status": "done",
-          "detail": "r-t7LH21ecs",
-          "at": "2026-10-30T07:10:02.528Z"
-        },
-        "SCHEDULE": {
-          "status": "done",
-          "detail": "2026-10-30T18:00:00.000Z",
-          "at": "2026-10-30T07:10:02.528Z"
-        },
-        "PUBLISH": {
-          "status": "scheduled",
-          "detail": "YouTube makes it public at 2026-10-30T18:00:00.000Z",
-          "at": "2026-10-30T07:10:02.529Z"
-        }
-      },
-      "finishedAt": "2026-10-30T07:10:02.529Z"
-    },
-    {
       "runId": "41056429570",
       "attempt": "1",
       "startedAt": "2026-10-30T12:35:58.281Z",
@@ -1344,6 +1288,50 @@
         }
       },
       "finishedAt": "2026-10-31T18:37:56.519Z"
+    },
+    {
+      "runId": "41233902324",
+      "attempt": "1",
+      "startedAt": "2026-10-31T19:23:14.548Z",
+      "publish": true,
+      "trigger": {
+        "event": "schedule",
+        "correlationId": null
+      },
+      "targetDay": null,
+      "slug": null,
+      "outcome": "NOT_DUE",
+      "reason": "today's Short already exists (silver-bridge-1967)",
+      "stages": {
+        "RESEARCH": {
+          "status": "not-reached"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "not-reached"
+        },
+        "QA": {
+          "status": "not-reached"
+        },
+        "UPLOAD": {
+          "status": "not-reached"
+        },
+        "SCHEDULE": {
+          "status": "not-reached"
+        },
+        "PUBLISH": {
+          "status": "not-reached"
+        }
+      },
+      "finishedAt": "2026-10-31T19:23:14.562Z"
     }
   ]
 }
