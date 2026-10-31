@@ -1,6 +1,6 @@
 {
-  "at": "2026-10-31T13:07:14.356Z",
-  "runId": "41204005139",
+  "at": "2026-10-31T13:18:19.861Z",
+  "runId": "41204866858",
   "rows": [
     {
       "channel": "failure-reconstructed",
@@ -14,8 +14,8 @@
       "videoId": null,
       "targetDay": null,
       "trigger": {
-        "event": "repository_dispatch",
-        "correlationId": "production-2-20261031T130537Z-7b4969c7"
+        "event": "schedule",
+        "correlationId": null
       },
       "stages": {
         "RESEARCH": {
@@ -59,14 +59,14 @@
       "videoId": null,
       "targetDay": "2026-10-31",
       "trigger": {
-        "event": "repository_dispatch",
-        "correlationId": "production-2-20261031T130537Z-7b4969c7"
+        "event": "schedule",
+        "correlationId": null
       },
       "stages": {
         "RESEARCH": {
           "status": "skipped",
           "detail": "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)",
-          "at": "2026-10-31T13:07:00.643Z"
+          "at": "2026-10-31T13:18:06.550Z"
         },
         "SCRIPT": {
           "status": "not-reached"
