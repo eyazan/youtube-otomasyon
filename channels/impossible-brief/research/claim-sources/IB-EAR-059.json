@@ -1,0 +1,136 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-EAR-059",
+ "checkedAt": "2026-10-30T04:54:51.468Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "e831f59cdfe5de5c",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "The drought and erosion of the Dust Bowl affected 100 million acres (400,000 km2) that centered on the Texas Panhandle and Oklahoma Panhandle.",
+   "url": "https://en.wikipedia.org/wiki/Dust_Bowl",
+   "sourceTitle": "Wikipedia — Dust Bowl",
+   "revision": 1382150609,
+   "passage": "The drought and erosion of the Dust Bowl affected 100 million acres (400,000 km2) that centered on the Texas Panhandle and Oklahoma Panhandle and touched adjacent sections of New Mexico, Colorado, and Kansas.",
+   "numbers": {
+    "claim": [
+     "100",
+     "400000",
+     "2"
+    ],
+    "inPassage": [
+     "100",
+     "400000",
+     "2"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "Between 1930 and 1940, about 3.5 million people moved out of the Plains states.",
+   "url": "https://en.wikipedia.org/wiki/Dust_Bowl",
+   "sourceTitle": "Wikipedia — Dust Bowl",
+   "revision": 1382150609,
+   "passage": "Between 1930 and 1940, about 3.5 million people moved out of the Plains states.",
+   "numbers": {
+    "claim": [
+     "1930",
+     "1940",
+     "3.5"
+    ],
+    "inPassage": [
+     "1930",
+     "1940",
+     "3.5"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "The first recorded dust storm occurred on September 14, 1930.",
+   "url": "https://en.wikipedia.org/wiki/Dust_Bowl",
+   "sourceTitle": "Wikipedia — Dust Bowl",
+   "revision": 1382150609,
+   "passage": "The first recorded dust storm occurred on September 14, 1930.",
+   "numbers": {
+    "claim": [
+     "14",
+     "1930"
+    ],
+    "inPassage": [
+     "14",
+     "1930"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "In just over a year, over 86,000 people migrated to California.",
+   "url": "https://en.wikipedia.org/wiki/Dust_Bowl",
+   "sourceTitle": "Wikipedia — Dust Bowl",
+   "revision": 1382150609,
+   "passage": "In just over a year, over 86,000 people migrated to California.",
+   "numbers": {
+    "claim": [
+     "86000"
+    ],
+    "inPassage": [
+     "86000"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why 3.5 million people fled the Great Plains.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "In the 1930s, dust storms blackened the sky.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "About 400,000 square kilometres of farmland were hit.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Drought met ploughed soil with no grass to hold it.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "In just over a year, over 86,000 people reached California.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Modern farming practices now protect much of that soil.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the Dust Bowl was drought plus human choices.",
+   "status": "HUMAN"
+  }
+ ]
+}

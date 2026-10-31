@@ -1,0 +1,142 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-PHY-007",
+ "checkedAt": "2026-10-30T04:54:55.272Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "fc988d57b18412d6",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "The speed of light is defined in SI units as exactly 299792458 m/s.",
+   "url": "https://en.wikipedia.org/wiki/Speed_of_light",
+   "sourceTitle": "Wikipedia — Speed of light",
+   "revision": 1381043372,
+   "passage": "The constant c is defined in the International System of Units (SI) as exactly 299792458 m/s.",
+   "numbers": {
+    "claim": [
+     "299792458"
+    ],
+    "inPassage": [
+     "299792458"
+    ],
+    "missing": []
+   },
+   "support": 0.67,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "Prior to 1983, the metre was defined separately from the second and the speed of light was measured experimentally.",
+   "url": "https://en.wikipedia.org/wiki/Speed_of_light",
+   "sourceTitle": "Wikipedia — Speed of light",
+   "revision": 1381043372,
+   "passage": "Prior to 1983, the meter was defined separately from the second and the speed of light was measured experimentally.",
+   "numbers": {
+    "claim": [
+     "1983"
+    ],
+    "inPassage": [
+     "1983"
+    ],
+    "missing": []
+   },
+   "support": 0.9,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "The fine-structure constant is approximately 0.0072973525643, about 1/137.",
+   "url": "https://en.wikipedia.org/wiki/Fine-structure_constant",
+   "sourceTitle": "Wikipedia — Fine-structure constant",
+   "revision": 1381651906,
+   "passage": null,
+   "numbers": {
+    "claim": [
+     "0.0072973525643",
+     "1",
+     "137"
+    ],
+    "inPassage": [],
+    "missing": [
+     "0.0072973525643",
+     "1",
+     "137"
+    ]
+   },
+   "support": 0,
+   "status": "UNVERIFIED",
+   "reason": "a sentence has the terms but not every claim number (0.0072973525643, 1, 137), is not 5-80 words of prose, or shares under 50% of the claim's content words"
+  },
+  {
+   "fact": "F4",
+   "claim": "If grand unified theories are correct, the fine-structure constant needs to be between around 1/180 and 1/85 for proton decay to be slow enough for life.",
+   "url": "https://en.wikipedia.org/wiki/Fine-structure_constant",
+   "sourceTitle": "Wikipedia — Fine-structure constant",
+   "revision": 1381651906,
+   "passage": "For instance, if modern grand unified theories are correct, then α needs to be between around 1/180 and 1/85 to have proton decay to be slow enough for life to be possible.",
+   "numbers": {
+    "claim": [
+     "1",
+     "180",
+     "85"
+    ],
+    "inPassage": [
+     "1",
+     "180",
+     "85"
+    ],
+    "missing": []
+   },
+   "support": 0.79,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "SPECULATIVE SCENARIO",
+   "text": "Double light speed, and atoms change.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "It's not just faster internet. Chemistry itself shifts.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Light is fixed at exactly 299,792,458 metres per second.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "A number called the fine-structure constant is about 1/137.",
+   "status": "FAIL",
+   "missing": [
+    "137"
+   ]
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It shrinks when light gets faster, and it governs how atoms bond.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Double light speed, and it halves.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Some theories say life needs it between 1/180 and 1/85.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Halved, it falls outside that window, so the answer is chemistry, not speed.",
+   "status": "HUMAN"
+  }
+ ]
+}

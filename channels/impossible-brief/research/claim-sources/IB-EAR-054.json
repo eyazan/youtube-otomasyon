@@ -1,0 +1,155 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-EAR-054",
+ "checkedAt": "2026-10-30T04:54:52.457Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "3f786b0f1a5ef1b9",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "On March 18, 1925, the deadliest tornado in United States history and second-deadliest worldwide moved through Eastern Missouri, Southern Illinois and Southwestern Indiana.",
+   "url": "https://en.wikipedia.org/wiki/1925_Tri-State_tornado",
+   "sourceTitle": "Wikipedia — 1925 Tri-State tornado",
+   "revision": 1382385614,
+   "passage": "In the midday and afternoon hours of Wednesday, March 18, 1925, the deadliest tornado in United States history and second-deadliest worldwide moved through Eastern Missouri, Southern Illinois and Southern Indiana, killing 695 people and injuring 2,027 more in what is sometimes known as the Tri-State tornado.",
+   "numbers": {
+    "claim": [
+     "18",
+     "1925"
+    ],
+    "inPassage": [
+     "18",
+     "1925"
+    ],
+    "missing": []
+   },
+   "support": 0.94,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "The tornado killed a combined total of 695 people, the majority of which occurred in Illinois.",
+   "url": "https://en.wikipedia.org/wiki/1925_Tri-State_tornado",
+   "sourceTitle": "Wikipedia — 1925 Tri-State tornado",
+   "revision": 1382385614,
+   "passage": "The tornado killed a combined total of 695 people, the majority of which occurred in Illinois.",
+   "numbers": {
+    "claim": [
+     "695"
+    ],
+    "inPassage": [
+     "695"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "In Murphysboro, 234 residents would die as the tornado barreled through the town at an estimated forward speed of 62 mph (100 km/h).",
+   "url": "https://en.wikipedia.org/wiki/1925_Tri-State_tornado",
+   "sourceTitle": "Wikipedia — 1925 Tri-State tornado",
+   "revision": 1382385614,
+   "passage": "To the northeast, it would hit the northern portions of Murphysboro, where 234 residents would die as the tornado barreled through the town at an estimated forward speed of 62 mph (100 km/h).",
+   "numbers": {
+    "claim": [
+     "234",
+     "62",
+     "100"
+    ],
+    "inPassage": [
+     "234",
+     "62",
+     "100"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "The storm finally dissipated over three hours after touching down.",
+   "url": "https://en.wikipedia.org/wiki/1925_Tri-State_tornado",
+   "sourceTitle": "Wikipedia — 1925 Tri-State tornado",
+   "revision": 1382385614,
+   "passage": "The town of Griffin was completely destroyed and the large town of Princeton ravaged before the storm passed into Pike County, where it finally dissipated, over three hours after touching down.",
+   "numbers": {
+    "claim": [],
+    "inPassage": [],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F5",
+   "claim": "Debris from the town was found almost 50 mi (80 km) away.",
+   "url": "https://en.wikipedia.org/wiki/1925_Tri-State_tornado",
+   "sourceTitle": "Wikipedia — 1925 Tri-State tornado",
+   "revision": 1382385614,
+   "passage": "Deep ground scouring was observed as the tornado moved past Sedgewickville, and debris from the town was found almost 50 mi (80 km) away.",
+   "numbers": {
+    "claim": [
+     "50",
+     "80"
+    ],
+    "inPassage": [
+     "50",
+     "80"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why one tornado stayed on the ground three hours.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "In 1925, it crossed Missouri, Illinois and Indiana.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It raced forward at about 100 kilometres per hour.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Debris landed nearly 80 kilometres away.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "In Murphysboro alone, 234 people died.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "In total, 695 people were killed.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "There was no tornado warning system back then.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So warnings matter most when storms move this fast.",
+   "status": "HUMAN"
+  }
+ ]
+}
