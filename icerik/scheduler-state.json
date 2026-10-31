@@ -10,17 +10,6 @@
       "position": 1,
       "renderLane": 0,
       "uploadLane": 0,
-      "date": "2026-09-30",
-      "status": "expired",
-      "settledOn": "2026-10-03"
-    },
-    {
-      "channel": "failure-reconstructed",
-      "format": "long",
-      "key": "failure-reconstructed:long",
-      "position": 1,
-      "renderLane": 0,
-      "uploadLane": 0,
       "date": "2026-10-01",
       "status": "expired",
       "settledOn": "2026-10-03"
@@ -649,7 +638,8 @@
       "renderLane": 0,
       "uploadLane": 0,
       "date": "2026-10-30",
-      "status": "queued"
+      "status": "expired",
+      "settledOn": "2026-10-31"
     },
     {
       "channel": "failure-reconstructed",
@@ -659,6 +649,27 @@
       "renderLane": 0,
       "uploadLane": 0,
       "date": "2026-10-30",
+      "status": "done",
+      "settledOn": "2026-10-31"
+    },
+    {
+      "channel": "failure-reconstructed",
+      "format": "short",
+      "key": "failure-reconstructed:short",
+      "position": 1,
+      "renderLane": 0,
+      "uploadLane": 0,
+      "date": "2026-10-31",
+      "status": "queued"
+    },
+    {
+      "channel": "failure-reconstructed",
+      "format": "long",
+      "key": "failure-reconstructed:long",
+      "position": 3,
+      "renderLane": 0,
+      "uploadLane": 0,
+      "date": "2026-10-31",
       "status": "queued"
     }
   ]

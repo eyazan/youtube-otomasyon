@@ -1,33 +1,33 @@
 {
-  "generatedAt": "2026-10-30T21:26:41.700Z",
+  "generatedAt": "2026-10-31T07:09:35.903Z",
   "date": "2026-10-31",
   "channels": [
     {
       "channel": "failure-reconstructed",
       "name": "Failure Reconstructed",
       "date": "2026-10-31",
-      "todayTopic": null,
-      "shortStatus": "not-due",
+      "todayTopic": "silver-bridge-1967",
+      "shortStatus": "scheduled",
       "longStatus": "due-not-produced",
       "qualityScore": null,
-      "qualityGate": null,
-      "youtubeStatus": "not-uploaded",
-      "publishTime": null,
-      "videoId": null,
+      "qualityGate": "PUBLISH",
+      "youtubeStatus": "scheduled",
+      "publishTime": "2026-10-31T18:00:00.000Z",
+      "videoId": "COYIywbrlq4",
       "analyticsHealth": "measured",
-      "schedulerHealth": "pending-before-deadline",
-      "backlog": 353,
+      "schedulerHealth": "healthy",
+      "backlog": 352,
       "errors": 20,
       "inventory": {
         "channel": "failure-reconstructed",
         "channelName": "Failure Reconstructed",
-        "calculatedAt": "2026-10-30T21:26:41.745Z",
+        "calculatedAt": "2026-10-31T07:09:35.945Z",
         "qualifiedTopics": 388,
         "validatedCandidates": 0,
         "researchBacklog": 0,
-        "readyShorts": 353,
-        "readyLongForm": 351,
-        "daysOfInventory": 353,
+        "readyShorts": 352,
+        "readyLongForm": 350,
+        "daysOfInventory": 352,
         "monthsOfInventory": 11.6,
         "categoryDistribution": {
           "software-and-control-failures": 20,
@@ -841,14 +841,14 @@
       "platform": {
         "queue": {
           "depth": 2,
-          "oldestDate": "2026-10-30",
+          "oldestDate": "2026-10-31",
           "oldestAgeDays": 0
         },
         "analyticsFreshness": {
           "channel": "failure-reconstructed",
           "lastSyncAt": "2026-10-30T12:36:08.463Z",
           "newestDay": "2026-10-28",
-          "lagDays": 2,
+          "lagDays": 3,
           "errors": [
             {
               "table": "video_daily",
@@ -857,26 +857,26 @@
           ]
         },
         "ops24h": {
-          "publish.success": 1,
-          "publish.scheduled_verified": 1,
+          "publish.success": 2,
+          "publish.scheduled_verified": 2,
           "analytics.partial": 1,
           "publish.public": 1
         },
         "quota": {
-          "usedToday": 0,
+          "usedToday": 1612,
           "budget": 9800,
-          "project": "channel:failure-reconstructed"
+          "project": "1012165386949"
         },
         "monetization": {
           "channel": "failure-reconstructed",
           "estimate": true,
           "note": "Estimate from the YouTube Analytics API; YouTube decides eligibility.",
-          "subscribers": 30,
-          "subscribersAt": "2026-10-30T20:56:35.545Z",
+          "subscribers": 29,
+          "subscribersAt": "2026-10-31T07:09:19.827Z",
           "longWatchHours365": null,
           "shortsViews90": null,
           "percent": {
-            "subscribers": 3,
+            "subscribers": 2.9,
             "longWatchHours365": null,
             "shortsViews90": null
           },
@@ -889,15 +889,15 @@
       },
       "tiktok": {
         "mode": "SEND_TO_USER_INBOX",
-        "todayStatus": "NO_TODAY_VIDEO",
+        "todayStatus": "NOT_SENT",
         "sent": 10,
         "publicationStateAvailable": false,
-        "backlog": 24,
+        "backlog": 25,
         "failures": 0
       },
       "stateCounts": {
         "generated": 31,
-        "published": 35,
+        "published": 36,
         "failed": 1
       }
     },
@@ -906,7 +906,7 @@
       "name": "ImpossibleBrief",
       "date": "2026-10-31",
       "todayTopic": null,
-      "shortStatus": "not-due",
+      "shortStatus": "due-not-produced",
       "longStatus": "due-not-produced",
       "qualityScore": null,
       "qualityGate": null,
@@ -920,7 +920,7 @@
       "inventory": {
         "channel": "impossible-brief",
         "channelName": "ImpossibleBrief",
-        "calculatedAt": "2026-10-30T21:26:41.823Z",
+        "calculatedAt": "2026-10-31T07:09:36.023Z",
         "qualifiedTopics": 500,
         "validatedCandidates": 0,
         "researchBacklog": 0,
@@ -1005,21 +1005,21 @@
       "platform": {
         "queue": {
           "depth": 2,
-          "oldestDate": "2026-10-30",
+          "oldestDate": "2026-10-31",
           "oldestAgeDays": 0
         },
         "analyticsFreshness": {
           "channel": "impossible-brief",
           "lastSyncAt": "2026-10-30T12:36:22.834Z",
           "newestDay": "2026-10-28",
-          "lagDays": 2,
+          "lagDays": 3,
           "errors": []
         },
         "ops24h": {
           "analytics.load": 1
         },
         "quota": {
-          "usedToday": 103,
+          "usedToday": 6,
           "budget": 9800,
           "project": "684098966511"
         },
@@ -1028,7 +1028,7 @@
           "estimate": true,
           "note": "Estimate from the YouTube Analytics API; YouTube decides eligibility.",
           "subscribers": 13,
-          "subscribersAt": "2026-10-30T20:56:45.209Z",
+          "subscribersAt": "2026-10-31T07:09:31.196Z",
           "longWatchHours365": null,
           "shortsViews90": null,
           "percent": {

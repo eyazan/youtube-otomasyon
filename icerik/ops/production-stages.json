@@ -2,50 +2,6 @@
   "channel": "failure-reconstructed",
   "runs": [
     {
-      "runId": "40878847357",
-      "attempt": "1",
-      "startedAt": "2026-10-29T13:06:54.589Z",
-      "publish": true,
-      "trigger": {
-        "event": "repository_dispatch",
-        "correlationId": "production-2-20261029T130553Z-222a29ae"
-      },
-      "targetDay": null,
-      "slug": null,
-      "outcome": "NOT_DUE",
-      "reason": "today's Short already exists (i-35w-bridge-2007)",
-      "stages": {
-        "RESEARCH": {
-          "status": "not-reached"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "not-reached"
-        },
-        "QA": {
-          "status": "not-reached"
-        },
-        "UPLOAD": {
-          "status": "not-reached"
-        },
-        "SCHEDULE": {
-          "status": "not-reached"
-        },
-        "PUBLISH": {
-          "status": "not-reached"
-        }
-      },
-      "finishedAt": "2026-10-29T13:06:54.609Z"
-    },
-    {
       "runId": "40881935446",
       "attempt": "1",
       "startedAt": "2026-10-29T13:27:16.175Z",
@@ -1332,6 +1288,62 @@
         }
       },
       "finishedAt": "2026-10-30T20:56:31.835Z"
+    },
+    {
+      "runId": "41179218610",
+      "attempt": "1",
+      "startedAt": "2026-10-31T07:06:36.638Z",
+      "publish": true,
+      "trigger": {
+        "event": "repository_dispatch",
+        "correlationId": "production-1-20261031T070537Z-22df9515"
+      },
+      "targetDay": "2026-10-31",
+      "slug": "silver-bridge-1967",
+      "outcome": "UPLOADED",
+      "reason": "premium FR-silver-bridge-1967 COYIywbrlq4",
+      "stages": {
+        "RESEARCH": {
+          "status": "done",
+          "detail": "FR-silver-bridge-1967",
+          "at": "2026-10-31T07:09:15.172Z"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "done",
+          "detail": "premium final",
+          "at": "2026-10-31T07:09:15.172Z"
+        },
+        "QA": {
+          "status": "done",
+          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
+          "at": "2026-10-31T07:09:15.173Z"
+        },
+        "UPLOAD": {
+          "status": "done",
+          "detail": "COYIywbrlq4",
+          "at": "2026-10-31T07:09:15.173Z"
+        },
+        "SCHEDULE": {
+          "status": "done",
+          "detail": "2026-10-31T18:00:00.000Z",
+          "at": "2026-10-31T07:09:15.174Z"
+        },
+        "PUBLISH": {
+          "status": "scheduled",
+          "detail": "YouTube makes it public at 2026-10-31T18:00:00.000Z",
+          "at": "2026-10-31T07:09:15.175Z"
+        }
+      },
+      "finishedAt": "2026-10-31T07:09:15.175Z"
     }
   ]
 }
