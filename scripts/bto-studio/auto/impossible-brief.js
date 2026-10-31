@@ -359,4 +359,4 @@ function build(script, style, topic) {
   };
 }
 
-module.exports = { build, world, numbersIn, keyPhrase };
+module.exports = { build, world, numbersIn, keyPhrase, worldWords: WORLD_WORDS };
