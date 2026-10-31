@@ -1,0 +1,203 @@
+{
+ "video": "pilots/fr-gemini8-3d/out/fr-gemini8-3d.mp4",
+ "pass": true,
+ "checks": [
+  {
+   "name": "resolution",
+   "ok": true,
+   "measured": "1080x1920",
+   "target": "1080x1920",
+   "hard": true,
+   "status": "PASS"
+  },
+  {
+   "name": "frame rate",
+   "ok": true,
+   "measured": "30/1",
+   "target": "30/1",
+   "hard": true,
+   "status": "PASS"
+  },
+  {
+   "name": "codec",
+   "ok": true,
+   "measured": "h264 High yuv420p",
+   "target": "h264 yuv420p",
+   "hard": true,
+   "status": "PASS"
+  },
+  {
+   "name": "full decode errors",
+   "ok": true,
+   "measured": 0,
+   "target": 0,
+   "hard": true,
+   "status": "PASS"
+  },
+  {
+   "name": "duration",
+   "ok": false,
+   "measured": "24.90 s",
+   "target": "45-55 s",
+   "hard": false,
+   "status": "WARN"
+  },
+  {
+   "name": "black frames >= 0.1 s",
+   "ok": true,
+   "measured": "none",
+   "target": "none",
+   "hard": true,
+   "status": "PASS"
+  },
+  {
+   "name": "first frame not empty",
+   "ok": true,
+   "measured": "mean luma 39.0, detail sd 47.3, edge 3.28",
+   "target": "mean > 25, sd > 20",
+   "hard": true,
+   "status": "PASS"
+  },
+  {
+   "name": "static holds >= 2 s (freezedetect n=0.003)",
+   "ok": true,
+   "measured": "none",
+   "target": "none",
+   "hard": true,
+   "status": "PASS"
+  },
+  {
+   "name": "audio clipping",
+   "ok": true,
+   "measured": "clipped , flat 0/0/0",
+   "target": "0",
+   "hard": true,
+   "status": "PASS"
+  },
+  {
+   "name": "integrated loudness",
+   "ok": true,
+   "measured": "-14 LUFS",
+   "target": "-14 +/- 1",
+   "hard": false,
+   "status": "PASS"
+  },
+  {
+   "name": "true peak",
+   "ok": true,
+   "measured": "-1.7 dBTP",
+   "target": "<= -1 dBTP",
+   "hard": true,
+   "status": "PASS"
+  },
+  {
+   "name": "silence >= 1.0 s at -45 dB",
+   "ok": true,
+   "measured": "none",
+   "target": "reported (designed pauses allowed)",
+   "hard": false,
+   "status": "PASS"
+  },
+  {
+   "name": "a/v duration match",
+   "ok": true,
+   "measured": "0.000 s",
+   "target": "<= 0.1 s",
+   "hard": true,
+   "status": "PASS"
+  },
+  {
+   "name": "caption layout",
+   "ok": true,
+   "measured": "15 cues, 0 over 2 lines x 26 chars",
+   "target": "<= 2 x 26",
+   "hard": true,
+   "status": "PASS"
+  },
+  {
+   "name": "caption reading speed",
+   "ok": false,
+   "measured": "1 cues over 22 chars/s (max 24.6)",
+   "target": "<= 22 chars/s",
+   "hard": false,
+   "status": "WARN"
+  },
+  {
+   "name": "captions within video",
+   "ok": true,
+   "measured": "last cue ends 24.60 s",
+   "target": "<= 24.90 s",
+   "hard": true,
+   "status": "PASS"
+  },
+  {
+   "name": "caption sync vs acoustic onsets",
+   "ok": true,
+   "measured": "0 cues: mean 0 ms, max 0 ms",
+   "target": "max <= 150 ms",
+   "hard": false,
+   "status": "PASS"
+  },
+  {
+   "name": "loop continuity (last -> first frame)",
+   "ok": false,
+   "measured": "whole 8.28, photo region 10.11, final-second step 1.66, ratio 4.07",
+   "target": "whole <= 25; not (ratio > 3 and > 4)",
+   "hard": false,
+   "status": "WARN"
+  },
+  {
+   "name": "first spoken word within 0.5 s",
+   "ok": true,
+   "measured": "0.00 s",
+   "target": "<= 0.5 s",
+   "hard": false,
+   "status": "PASS"
+  },
+  {
+   "name": "overlay text inside the safe area and not overlapping",
+   "ok": true,
+   "measured": "101 samples clean",
+   "target": "0 issues",
+   "hard": true,
+   "status": "PASS"
+  },
+  {
+   "name": "smallest overlay font",
+   "ok": true,
+   "measured": "20 px (0.00 s read)",
+   "target": ">= 20 px",
+   "hard": true,
+   "status": "PASS"
+  },
+  {
+   "name": "deterministic frames (two fresh browsers)",
+   "ok": true,
+   "measured": "0.7s same, 12.3s same, 24.9s same, 29.1s same",
+   "target": "identical",
+   "hard": true,
+   "status": "PASS"
+  },
+  {
+   "name": "longest static hold",
+   "ok": true,
+   "measured": "0.67 s (ending 10.8 s)",
+   "target": "< 1.5 s",
+   "hard": true,
+   "status": "PASS"
+  }
+ ],
+ "motion": {
+  "method": "mean abs luma diff per frame on a 270x480 gray proxy; static = diff < 0.5",
+  "first3sMean": 1.13,
+  "first3sStaticShare": 0,
+  "wholeMean": 2.01,
+  "wholeStaticShare": 0.11,
+  "longestStaticRunSec": 0.77
+ },
+ "loudness": {
+  "I": -14,
+  "LRA": 1.7,
+  "truePeak": -1.7
+ }
+}

@@ -1,0 +1,40 @@
+name: ImpossibleBrief seed research (read-only)
+
+# Research branches only: prints verbatim source sentences for the articles a seed draws on
+# (scripts/ib-research/excerpt.js) and dry-runs the researched-record builder on the seed
+# (scripts/ib-ct-library/build.js, no --write) plus the claim check. Nothing is written, committed or uploaded.
+on:
+  push:
+    branches: ['research/ib-*']
+    paths:
+      - 'channels/impossible-brief/topics/research-seeds/batch-11*'
+      - 'scripts/ib-research/**'
+      - '.github/workflows/ib-seed-research.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ib-seed-research-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci --no-audit --no-fund
+      - name: Source sentences
+        run: |
+          f=channels/impossible-brief/topics/research-seeds/batch-11.excerpts.json
+          if [ -e "$f" ]; then node scripts/ib-research/excerpt.js "$f" | tee -a "$GITHUB_STEP_SUMMARY"; fi
+      - name: Builder dry run (no write)
+        run: |
+          f=channels/impossible-brief/topics/research-seeds/batch-11.json
+          [ -e "$f" ] || exit 0
+          node scripts/ib-ct-library/build.js "$f" 2>&1 | tee -a "$GITHUB_STEP_SUMMARY"
+          cat "${f%.json}.report.json"

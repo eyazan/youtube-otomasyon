@@ -42447,16 +42447,16 @@
     },
     {
       "id": "IB-HUM-044",
-      "slug": "could-evolution-adapt-if-human-muscle-efficiency-changed-over-ten-genera",
-      "topic": "Could evolution adapt if human muscle efficiency changed over ten generations?",
+      "slug": "what-if-your-heart-stopped-in-ice-water",
+      "topic": "What If Your Heart Stopped in Ice Water?",
       "category": "HUMAN",
-      "hook": "Could evolution adapt if human muscle efficiency changed over ten generations. The first effect comes from ATP conversion.",
-      "openingLine": "Human muscle efficiency suddenly changes.",
-      "secondBeat": "First: ATP conversion.",
-      "scientificMechanism": "ATP conversion, heat loss and biomechanics",
-      "coreQuestion": "Under established science, could evolution adapt if human muscle efficiency changed over ten generations when it changed gradually over ten generations?",
-      "scenarioChange": "human muscle efficiency changed gradually over ten generations",
-      "expectedConsequence": "less waste heat would change endurance more than peak force",
+      "hook": "Her heart stopped for 2 hours and 35 minutes.",
+      "openingLine": "Her heart stopped for 2 hours and 35 minutes.",
+      "secondBeat": "She was trapped under ice for 80 minutes.",
+      "scientificMechanism": "deep accidental hypothermia slows the body's oxygen demand, so a cold body in circulatory arrest can sometimes be rewarmed on a bypass machine and restarted",
+      "coreQuestion": "If your heart stopped in ice water, could cold keep you alive?",
+      "scenarioChange": "a person's heart stopped while trapped under ice in freezing water",
+      "expectedConsequence": "slow rewarming of the blood outside the body restarted the heart and allowed an almost full recovery",
       "shortPotential": {
         "score": 92,
         "durationSeconds": [
@@ -42472,10 +42472,12 @@
       "visualPotential": {
         "score": 82,
         "scenes": [
-          "human muscle efficiency",
-          "mechanism diagram",
-          "scale comparison",
-          "consequence map"
+          "skier falling onto a frozen stream",
+          "air pocket under the ice",
+          "body temperature gauge falling to 13.7 °C",
+          "flatline timer counting 2 h 35 min",
+          "bypass machine warming blood",
+          "recovery ward"
         ]
       },
       "evergreenScore": 91,
@@ -42485,8 +42487,8 @@
         "score": 94,
         "grade": "primary-authority",
         "authorities": [
-          "National Institutes of Health",
-          "NIST"
+          "PubMed — Gilbert et al., Lancet 2000: Resuscitation from accidental hypothermia of 13.7 °C with circulatory arrest",
+          "NCBI Bookshelf — StatPearls: Hypothermia"
         ]
       },
       "confidence": "SUPPORTED",
@@ -42494,29 +42496,29 @@
         {
           "layer": "KNOWN SCIENCE",
           "confidence": "VERIFIED",
-          "claim": "ATP conversion, heat loss and biomechanics"
+          "claim": "deep accidental hypothermia slows the body's oxygen demand, so a cold body in circulatory arrest can sometimes be rewarmed on a bypass machine and restarted"
         },
         {
           "layer": "ESTIMATED CONSEQUENCE",
           "confidence": "SUPPORTED",
-          "claim": "less waste heat would change endurance more than peak force"
+          "claim": "slow rewarming of the blood outside the body restarted the heart and allowed an almost full recovery"
         },
         {
           "layer": "SPECULATIVE SCENARIO",
           "confidence": "SPECULATIVE",
-          "claim": "human muscle efficiency changed gradually over ten generations"
+          "claim": "a person's heart stopped while trapped under ice in freezing water"
         }
       ],
       "sources": [
         {
-          "name": "National Institutes of Health",
-          "url": "https://www.nih.gov/research-training",
-          "type": "government biomedical agency"
+          "name": "PubMed — Gilbert et al., Lancet 2000: Resuscitation from accidental hypothermia of 13.7 °C with circulatory arrest",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/10665559/",
+          "type": "peer-reviewed case report (NIH index)"
         },
         {
-          "name": "NIST",
-          "url": "https://www.nist.gov/topics/physics",
-          "type": "government measurement institute"
+          "name": "NCBI Bookshelf — StatPearls: Hypothermia",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK545239/",
+          "type": "clinical reference (NIH)"
         }
       ],
       "quality": {
@@ -42527,7 +42529,175 @@
         "nonDuplicate": true,
         "qualified": true
       },
-      "status": "qualified"
+      "status": "qualified",
+      "misconception": "A heart stopped by deep cold isn't always the end.",
+      "number": "13.7 °C",
+      "thumbnailText": "HEART STOPPED",
+      "editorialTitles": [
+        "The Skier Whose Heart Stopped for Hours",
+        "How Ice Water Saved a Stopped Heart"
+      ],
+      "facts": [
+        {
+          "claim": "Anna Elisabeth Johansson Bågenholm (born 1970) is a Swedish radiologist from Vänersborg, who survived after a skiing accident in 1999 left her trapped under a layer of ice for 80 minutes in freezing water.",
+          "quote": "left her trapped under a layer of ice for 80 minutes in freezing water",
+          "layer": "KNOWN SCIENCE",
+          "source": "Wikipedia — Anna Bågenholm",
+          "url": "https://en.wikipedia.org/wiki/Anna_B%C3%A5genholm"
+        },
+        {
+          "claim": "During this time she experienced extreme hypothermia and her body temperature decreased to 13.7 °C (56.7 °F), one of the lowest survived body temperatures ever recorded in a human with accidental hypothermia.",
+          "quote": "her body temperature decreased to 13.7 °C (56.7 °F)",
+          "layer": "KNOWN SCIENCE",
+          "source": "Wikipedia — Anna Bågenholm",
+          "url": "https://en.wikipedia.org/wiki/Anna_B%C3%A5genholm"
+        },
+        {
+          "claim": "At first Bågenholm struggled in the cold water before she found an air pocket and was able to remain conscious for 40 minutes before experiencing circulatory arrest.",
+          "quote": "found an air pocket and was able to remain conscious for 40 minutes",
+          "layer": "KNOWN SCIENCE",
+          "source": "Wikipedia — Anna Bågenholm",
+          "url": "https://en.wikipedia.org/wiki/Anna_B%C3%A5genholm"
+        },
+        {
+          "claim": "She had no heart beat for 2 hours 35 minutes, from 19:40 till 22:15.",
+          "quote": "She had no heart beat for 2 hours 35 minutes",
+          "layer": "KNOWN SCIENCE",
+          "source": "Wikipedia — Anna Bågenholm",
+          "url": "https://en.wikipedia.org/wiki/Anna_B%C3%A5genholm"
+        },
+        {
+          "claim": "At 21:40, she was connected to a cardiopulmonary bypass machine that warmed up her blood outside of her body before it was reinserted into her veins.",
+          "quote": "connected to a cardiopulmonary bypass machine that warmed up her blood outside of her body",
+          "layer": "KNOWN SCIENCE",
+          "source": "Wikipedia — Anna Bågenholm",
+          "url": "https://en.wikipedia.org/wiki/Anna_B%C3%A5genholm"
+        },
+        {
+          "claim": "Although she has made an almost full recovery from the incident, late in 2009 she was still having minor symptoms in hands and feet related to nerve injury.",
+          "quote": "Although she has made an almost full recovery from the incident",
+          "layer": "KNOWN SCIENCE",
+          "source": "Wikipedia — Anna Bågenholm",
+          "url": "https://en.wikipedia.org/wiki/Anna_B%C3%A5genholm"
+        },
+        {
+          "claim": "Her body became trapped under the ice, which was 20 centimetres (7.9 in) thick.",
+          "quote": "Her body became trapped under the ice",
+          "layer": "KNOWN SCIENCE",
+          "source": "Wikipedia — Anna Bågenholm",
+          "url": "https://en.wikipedia.org/wiki/Anna_B%C3%A5genholm"
+        },
+        {
+          "claim": "When Bågenholm was pulled out of the water, her pupils were dilated, her blood was not circulating, and she was not breathing.",
+          "quote": "her blood was not circulating, and she was not breathing",
+          "layer": "KNOWN SCIENCE",
+          "source": "Wikipedia — Anna Bågenholm",
+          "url": "https://en.wikipedia.org/wiki/Anna_B%C3%A5genholm"
+        },
+        {
+          "claim": "After rescue, Bågenholm was transported by helicopter to the Tromsø University Hospital, where a team of more than a hundred doctors and nurses worked in shifts for nine hours to save her life.",
+          "quote": "more than a hundred doctors and nurses worked in shifts for nine hours",
+          "layer": "KNOWN SCIENCE",
+          "source": "Wikipedia — Anna Bågenholm",
+          "url": "https://en.wikipedia.org/wiki/Anna_B%C3%A5genholm"
+        },
+        {
+          "claim": "Bågenholm's first heart beat was recorded at 22:15, and her body temperature had risen to 36.4 °C (97.5 °F) at 0:49.",
+          "quote": "Bågenholm's first heart beat was recorded at 22:15",
+          "layer": "KNOWN SCIENCE",
+          "source": "Wikipedia — Anna Bågenholm",
+          "url": "https://en.wikipedia.org/wiki/Anna_B%C3%A5genholm"
+        },
+        {
+          "claim": "Bågenholm woke up ten days after the accident, paralyzed from the neck down and subsequently spent two months recovering in an intensive care unit.",
+          "quote": "Bågenholm woke up ten days after the accident",
+          "layer": "KNOWN SCIENCE",
+          "source": "Wikipedia — Anna Bågenholm",
+          "url": "https://en.wikipedia.org/wiki/Anna_B%C3%A5genholm"
+        },
+        {
+          "claim": "She fell headfirst onto a layer of ice on a frozen stream near a waterfall, landing on her back.",
+          "quote": "She fell headfirst onto a layer of ice on a frozen stream",
+          "layer": "KNOWN SCIENCE",
+          "source": "Wikipedia — Anna Bågenholm",
+          "url": "https://en.wikipedia.org/wiki/Anna_B%C3%A5genholm"
+        },
+        {
+          "claim": "When Falkenberg and Næsheim found Bågenholm, only her feet and skis were above the ice.",
+          "quote": "only her feet and skis were above the ice",
+          "layer": "KNOWN SCIENCE",
+          "source": "Wikipedia — Anna Bågenholm",
+          "url": "https://en.wikipedia.org/wiki/Anna_B%C3%A5genholm"
+        },
+        {
+          "claim": "They then tried to dig her out, but their snow shovel could not break through the ice.",
+          "quote": "their snow shovel could not break through the ice",
+          "layer": "KNOWN SCIENCE",
+          "source": "Wikipedia — Anna Bågenholm",
+          "url": "https://en.wikipedia.org/wiki/Anna_B%C3%A5genholm"
+        },
+        {
+          "claim": "The rescue helicopter soon arrived and Bågenholm was taken to the Tromsø University Hospital in an hour.",
+          "quote": "Bågenholm was taken to the Tromsø University Hospital in an hour",
+          "layer": "KNOWN SCIENCE",
+          "source": "Wikipedia — Anna Bågenholm",
+          "url": "https://en.wikipedia.org/wiki/Anna_B%C3%A5genholm"
+        }
+      ],
+      "narration": [
+        {
+          "text": "Her heart stopped for 2 hours and 35 minutes.",
+          "layer": "KNOWN SCIENCE",
+          "role": "IMPOSSIBLE_QUESTION"
+        },
+        {
+          "text": "She was trapped under ice for 80 minutes.",
+          "layer": "KNOWN SCIENCE",
+          "role": "FIRST_EFFECT"
+        },
+        {
+          "text": "An air pocket kept her conscious for 40 minutes.",
+          "layer": "KNOWN SCIENCE",
+          "role": "SCIENCE_EXPLANATION"
+        },
+        {
+          "text": "Then her body cooled to 13.7 degrees Celsius.",
+          "layer": "KNOWN SCIENCE",
+          "role": "SCIENCE_EXPLANATION"
+        },
+        {
+          "text": "Deep cold slows how much oxygen the body needs.",
+          "layer": "KNOWN SCIENCE",
+          "role": "SCIENCE_EXPLANATION"
+        },
+        {
+          "text": "Doctors warmed her blood outside her body on a bypass machine.",
+          "layer": "KNOWN SCIENCE",
+          "role": "SECOND_ORDER_EFFECT"
+        },
+        {
+          "text": "Her heart restarted, and she almost fully recovered.",
+          "layer": "KNOWN SCIENCE",
+          "role": "SECOND_ORDER_EFFECT"
+        },
+        {
+          "text": "So in deep cold, stopped isn't always the end.",
+          "layer": "ESTIMATED CONSEQUENCE",
+          "role": "SCIENTIFIC_PAYOFF"
+        }
+      ],
+      "researched": {
+        "at": "2026-10-29",
+        "facts": 15,
+        "articles": [
+          "https://en.wikipedia.org/wiki/Anna_B%C3%A5genholm"
+        ],
+        "hookCandidateShortfall": {
+          "candidates": 16,
+          "minimum": 20,
+          "status": "OWNER_DECISION_REQUIRED"
+        }
+      }
     },
     {
       "id": "IB-HUM-045",
@@ -52687,16 +52857,16 @@
     },
     {
       "id": "IB-EXT-036",
-      "slug": "what-would-a-microscopic-wormhole-do-in-one-microsecond-at-sea-level",
-      "topic": "What would a microscopic wormhole do in one microsecond at sea level?",
+      "slug": "what-if-you-left-tardigrades-in-open-space",
+      "topic": "What If You Left Tardigrades in Open Space?",
       "category": "EXTREME SCIENCE",
-      "hook": "What would a microscopic wormhole do in one microsecond at sea level. The first effect comes from general relativity.",
-      "openingLine": "A microscopic wormhole suddenly changes.",
-      "secondBeat": "First: General relativity.",
-      "scientificMechanism": "general relativity, topology and exotic-energy constraints",
-      "coreQuestion": "Under established science, what would a microscopic wormhole do in one microsecond at sea level when it appeared at sea level for one microsecond?",
-      "scenarioChange": "a microscopic wormhole appeared at sea level for one microsecond",
-      "expectedConsequence": "stability and causality would be the first unresolved problems",
+      "hook": "What If You Left Tardigrades in Open Space?",
+      "openingLine": "What If You Left Tardigrades in Open Space?",
+      "secondBeat": "Some animals survived 10 days in open space.",
+      "scientificMechanism": "dried tardigrades enter a 'tun' state with no metabolic activity, which resists vacuum, extreme temperatures and radiation; solar ultraviolet light is what killed most of them",
+      "coreQuestion": "If you left tardigrades in open space, what would actually kill them?",
+      "scenarioChange": "dehydrated tardigrades were exposed to the vacuum and sunlight of low Earth orbit",
+      "expectedConsequence": "vacuum alone barely harmed them, while added solar ultraviolet light killed many",
       "shortPotential": {
         "score": 99,
         "durationSeconds": [
@@ -52712,10 +52882,12 @@
       "visualPotential": {
         "score": 85,
         "scenes": [
-          "a microscopic wormhole",
-          "mechanism diagram",
-          "scale comparison",
-          "consequence map"
+          "tardigrade under a microscope",
+          "tardigrade curling into a dry tun",
+          "FOTON-M3 capsule in orbit",
+          "vacuum versus ultraviolet exposure trays",
+          "temperature range bar from −272 to 149 °C",
+          "tun rehydrating and walking"
         ]
       },
       "evergreenScore": 97,
@@ -52725,9 +52897,8 @@
         "score": 94,
         "grade": "primary-authority",
         "authorities": [
-          "NASA Science",
-          "CERN",
-          "NIST"
+          "NASA — Cell Science-04 (tardigrades on the ISS)",
+          "NASA — Houston We Have a Podcast: Water Bears in Space"
         ]
       },
       "confidence": "SUPPORTED",
@@ -52735,34 +52906,29 @@
         {
           "layer": "KNOWN SCIENCE",
           "confidence": "VERIFIED",
-          "claim": "general relativity, topology and exotic-energy constraints"
+          "claim": "dried tardigrades enter a 'tun' state with no metabolic activity, which resists vacuum, extreme temperatures and radiation; solar ultraviolet light is what killed most of them"
         },
         {
           "layer": "ESTIMATED CONSEQUENCE",
           "confidence": "SUPPORTED",
-          "claim": "stability and causality would be the first unresolved problems"
+          "claim": "vacuum alone barely harmed them, while added solar ultraviolet light killed many"
         },
         {
           "layer": "SPECULATIVE SCENARIO",
           "confidence": "SPECULATIVE",
-          "claim": "a microscopic wormhole appeared at sea level for one microsecond"
+          "claim": "dehydrated tardigrades were exposed to the vacuum and sunlight of low Earth orbit"
         }
       ],
       "sources": [
         {
-          "name": "NASA Science",
-          "url": "https://science.nasa.gov/",
-          "type": "government science agency"
+          "name": "NASA — Cell Science-04 (tardigrades on the ISS)",
+          "url": "https://www.nasa.gov/general/cell-science-04-spacex-22/",
+          "type": "government space agency"
         },
         {
-          "name": "CERN",
-          "url": "https://home.cern/science",
-          "type": "intergovernmental research laboratory"
-        },
-        {
-          "name": "NIST",
-          "url": "https://www.nist.gov/topics/physics",
-          "type": "government measurement institute"
+          "name": "NASA — Houston We Have a Podcast: Water Bears in Space",
+          "url": "https://www.nasa.gov/podcasts/houston-we-have-a-podcast/water-bears-in-space/",
+          "type": "government space agency"
         }
       ],
       "quality": {
@@ -52773,7 +52939,147 @@
         "nonDuplicate": true,
         "qualified": true
       },
-      "status": "qualified"
+      "status": "qualified",
+      "misconception": "For tardigrades, the vacuum of space isn't the deadly part.",
+      "number": "10 days",
+      "thumbnailText": "SPACE SURVIVORS",
+      "editorialTitles": [
+        "The Animal That Survived Open Space",
+        "What Space Can't Do to a Tardigrade"
+      ],
+      "facts": [
+        {
+          "claim": "In 2007, samples of 30 tardigrades and 30 eggs, all dehydrated, were taken on the FOTON-M3 mission and exposed to vacuum, to both vacuum and UVA & B light, or to both vacuum and the full range of solar ultraviolet, for 10 days.",
+          "quote": "were taken on the FOTON-M3 mission and exposed to vacuum",
+          "layer": "KNOWN SCIENCE",
+          "source": "Wikipedia — Tardigrade",
+          "url": "https://en.wikipedia.org/wiki/Tardigrade"
+        },
+        {
+          "claim": "Vacuum exposure alone had no significant effect on any metric, but, when combined with UV exposure, killed many of the tuns.",
+          "quote": "Vacuum exposure alone had no significant effect on any metric",
+          "layer": "KNOWN SCIENCE",
+          "source": "Wikipedia — Tardigrade",
+          "url": "https://en.wikipedia.org/wiki/Tardigrade"
+        },
+        {
+          "claim": "In this state, they can go without food or water for several years.",
+          "quote": "they can go without food or water for several years",
+          "layer": "KNOWN SCIENCE",
+          "source": "Wikipedia — Tardigrade",
+          "url": "https://en.wikipedia.org/wiki/Tardigrade"
+        },
+        {
+          "claim": "Further, in that state they become highly resistant to environmental stresses, including temperatures from as low as −272 °C (−458 °F) to as much as +149 °C (300 °F) (at least for short periods of time), lack of oxygen, vacuum, ionising radiation, and high pressure.",
+          "quote": "temperatures from as low as −272 °C (−458 °F) to as much as +149 °C (300 °F)",
+          "layer": "KNOWN SCIENCE",
+          "source": "Wikipedia — Tardigrade",
+          "url": "https://en.wikipedia.org/wiki/Tardigrade"
+        },
+        {
+          "claim": "Tardigrades can survive impacts up to about 900 metres per second (3,000 ft/s), and momentary shock pressures up to about 1.14 gigapascals (165,000 psi).",
+          "quote": "Tardigrades can survive impacts up to about 900 metres per second",
+          "layer": "KNOWN SCIENCE",
+          "source": "Wikipedia — Tardigrade",
+          "url": "https://en.wikipedia.org/wiki/Tardigrade"
+        },
+        {
+          "claim": "They have survived exposure to outer space.",
+          "quote": "They have survived exposure to outer space",
+          "layer": "KNOWN SCIENCE",
+          "source": "Wikipedia — Tardigrade",
+          "url": "https://en.wikipedia.org/wiki/Tardigrade"
+        },
+        {
+          "claim": "The earliest known fossil is from the Cambrian, some 500 million years ago.",
+          "quote": "The earliest known fossil is from the Cambrian",
+          "layer": "KNOWN SCIENCE",
+          "source": "Wikipedia — Tardigrade",
+          "url": "https://en.wikipedia.org/wiki/Tardigrade"
+        },
+        {
+          "claim": "Tardigrade DNA is protected from radiation by the Dsup (\"damage suppressor\") protein.",
+          "quote": "Tardigrade DNA is protected from radiation by the Dsup",
+          "layer": "KNOWN SCIENCE",
+          "source": "Wikipedia — Tardigrade",
+          "url": "https://en.wikipedia.org/wiki/Tardigrade"
+        },
+        {
+          "claim": "In 2011, tardigrades went on the International Space Station STS-134, showing that they could survive microgravity and cosmic radiation, and should be suitable model organisms.",
+          "quote": "showing that they could survive microgravity and cosmic radiation",
+          "layer": "KNOWN SCIENCE",
+          "source": "Wikipedia — Tardigrade",
+          "url": "https://en.wikipedia.org/wiki/Tardigrade"
+        },
+        {
+          "claim": "Their eggs and resistant life-cycle stages (cysts and tuns) are small and durable enough to enable long-distance transport, whether on the feet of other animals or by the wind.",
+          "quote": "durable enough to enable long-distance transport",
+          "layer": "KNOWN SCIENCE",
+          "source": "Wikipedia — Tardigrade",
+          "url": "https://en.wikipedia.org/wiki/Tardigrade"
+        },
+        {
+          "claim": "They are among the most resilient animals known, with individual species able to survive severe conditions – such as exposure to extreme temperatures, extreme pressures (both high and low), air deprivation, radiation, dehydration, and starvation – that would quickly kill most other forms of life.",
+          "quote": "They are among the most resilient animals known",
+          "layer": "KNOWN SCIENCE",
+          "source": "Wikipedia — Tardigrade",
+          "url": "https://en.wikipedia.org/wiki/Tardigrade"
+        }
+      ],
+      "narration": [
+        {
+          "text": "What If You Left Tardigrades in Open Space?",
+          "layer": "SPECULATIVE SCENARIO",
+          "role": "IMPOSSIBLE_QUESTION"
+        },
+        {
+          "text": "Some animals survived 10 days in open space.",
+          "layer": "KNOWN SCIENCE",
+          "role": "FIRST_EFFECT"
+        },
+        {
+          "text": "They're tardigrades, and dried out, they curl into a tun.",
+          "layer": "KNOWN SCIENCE",
+          "role": "SCIENCE_EXPLANATION"
+        },
+        {
+          "text": "A tun can go without water for years.",
+          "layer": "KNOWN SCIENCE",
+          "role": "SCIENCE_EXPLANATION"
+        },
+        {
+          "text": "In orbit, vacuum alone had no significant effect.",
+          "layer": "KNOWN SCIENCE",
+          "role": "SCIENCE_EXPLANATION"
+        },
+        {
+          "text": "Adding the Sun's ultraviolet light killed many of them.",
+          "layer": "KNOWN SCIENCE",
+          "role": "SECOND_ORDER_EFFECT"
+        },
+        {
+          "text": "Tuns briefly handle −272 to 149 degrees Celsius.",
+          "layer": "KNOWN SCIENCE",
+          "role": "SECOND_ORDER_EFFECT"
+        },
+        {
+          "text": "So for a tardigrade, space isn't the killer. Sunlight is.",
+          "layer": "ESTIMATED CONSEQUENCE",
+          "role": "SCIENTIFIC_PAYOFF"
+        }
+      ],
+      "researched": {
+        "at": "2026-10-29",
+        "facts": 11,
+        "articles": [
+          "https://en.wikipedia.org/wiki/Tardigrade"
+        ],
+        "hookCandidateShortfall": {
+          "candidates": 16,
+          "minimum": 20,
+          "status": "OWNER_DECISION_REQUIRED"
+        }
+      }
     },
     {
       "id": "IB-EXT-037",
