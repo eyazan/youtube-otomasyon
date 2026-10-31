@@ -1,27 +1,25 @@
 {
-  "at": "2026-10-31T07:09:36.084Z",
-  "runId": "41179218610",
+  "at": "2026-10-31T12:02:47.948Z",
+  "runId": "41199269819",
   "rows": [
     {
       "channel": "failure-reconstructed",
-      "outcome": "UPLOADED",
-      "category": "SCHEDULED",
-      "scheduled": true,
-      "publication": "SCHEDULED",
-      "publishAt": "2026-10-31T18:00:00.000Z",
-      "reason": "premium FR-silver-bridge-1967 COYIywbrlq4",
-      "slug": "silver-bridge-1967",
+      "outcome": "NOT_DUE",
+      "category": "NOT_DUE",
+      "scheduled": false,
+      "publication": "NOT_SCHEDULED",
+      "publishAt": null,
+      "reason": "today's Short already exists (silver-bridge-1967)",
+      "slug": null,
       "videoId": null,
-      "targetDay": "2026-10-31",
+      "targetDay": null,
       "trigger": {
-        "event": "repository_dispatch",
-        "correlationId": "production-1-20261031T070537Z-22df9515"
+        "event": "schedule",
+        "correlationId": null
       },
       "stages": {
         "RESEARCH": {
-          "status": "done",
-          "detail": "FR-silver-bridge-1967",
-          "at": "2026-10-31T07:09:15.172Z"
+          "status": "not-reached"
         },
         "SCRIPT": {
           "status": "not-reached"
@@ -33,29 +31,19 @@
           "status": "not-reached"
         },
         "RENDER": {
-          "status": "done",
-          "detail": "premium final",
-          "at": "2026-10-31T07:09:15.172Z"
+          "status": "not-reached"
         },
         "QA": {
-          "status": "done",
-          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
-          "at": "2026-10-31T07:09:15.173Z"
+          "status": "not-reached"
         },
         "UPLOAD": {
-          "status": "done",
-          "detail": "COYIywbrlq4",
-          "at": "2026-10-31T07:09:15.173Z"
+          "status": "not-reached"
         },
         "SCHEDULE": {
-          "status": "done",
-          "detail": "2026-10-31T18:00:00.000Z",
-          "at": "2026-10-31T07:09:15.174Z"
+          "status": "not-reached"
         },
         "PUBLISH": {
-          "status": "scheduled",
-          "detail": "YouTube makes it public at 2026-10-31T18:00:00.000Z",
-          "at": "2026-10-31T07:09:15.175Z"
+          "status": "not-reached"
         }
       }
     },
@@ -71,14 +59,14 @@
       "videoId": null,
       "targetDay": "2026-10-31",
       "trigger": {
-        "event": "repository_dispatch",
-        "correlationId": "production-1-20261031T070537Z-22df9515"
+        "event": "schedule",
+        "correlationId": null
       },
       "stages": {
         "RESEARCH": {
           "status": "skipped",
           "detail": "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)",
-          "at": "2026-10-31T07:09:19.290Z"
+          "at": "2026-10-31T12:02:25.935Z"
         },
         "SCRIPT": {
           "status": "not-reached"
