@@ -1,27 +1,27 @@
 {
-  "generatedAt": "2026-11-01T20:40:33.028Z",
-  "date": "2026-11-01",
+  "generatedAt": "2026-11-01T21:07:34.883Z",
+  "date": "2026-11-02",
   "channels": [
     {
       "channel": "failure-reconstructed",
       "name": "Failure Reconstructed",
-      "date": "2026-11-01",
-      "todayTopic": "tenerife-1977",
-      "shortStatus": "scheduled",
+      "date": "2026-11-02",
+      "todayTopic": null,
+      "shortStatus": "not-due",
       "longStatus": "due-not-produced",
       "qualityScore": null,
-      "qualityGate": "PUBLISH",
-      "youtubeStatus": "scheduled",
-      "publishTime": "2026-11-01T18:00:00.000Z",
-      "videoId": "PlQYe5W0szE",
+      "qualityGate": null,
+      "youtubeStatus": "not-uploaded",
+      "publishTime": null,
+      "videoId": null,
       "analyticsHealth": "measured",
-      "schedulerHealth": "healthy",
+      "schedulerHealth": "pending-before-deadline",
       "backlog": 351,
       "errors": 20,
       "inventory": {
         "channel": "failure-reconstructed",
         "channelName": "Failure Reconstructed",
-        "calculatedAt": "2026-11-01T20:40:33.065Z",
+        "calculatedAt": "2026-11-01T21:07:34.911Z",
         "qualifiedTopics": 388,
         "validatedCandidates": 0,
         "researchBacklog": 0,
@@ -858,9 +858,9 @@
           "publish.public": 1
         },
         "quota": {
-          "usedToday": 1715,
+          "usedToday": 0,
           "budget": 9800,
-          "project": "1012165386949"
+          "project": "channel:failure-reconstructed"
         },
         "monetization": {
           "channel": "failure-reconstructed",
@@ -884,7 +884,7 @@
       },
       "tiktok": {
         "mode": "SEND_TO_USER_INBOX",
-        "todayStatus": "NOT_SENT",
+        "todayStatus": "NO_TODAY_VIDEO",
         "sent": 10,
         "publicationStateAvailable": false,
         "backlog": 26,
@@ -899,7 +899,7 @@
     {
       "channel": "impossible-brief",
       "name": "ImpossibleBrief",
-      "date": "2026-11-01",
+      "date": "2026-11-02",
       "todayTopic": null,
       "shortStatus": "not-due",
       "longStatus": "due-not-produced",
@@ -909,13 +909,13 @@
       "publishTime": null,
       "videoId": null,
       "analyticsHealth": "measured",
-      "schedulerHealth": "sla-missed-or-channel-disabled",
+      "schedulerHealth": "pending-before-deadline",
       "backlog": 474,
       "errors": 6,
       "inventory": {
         "channel": "impossible-brief",
         "channelName": "ImpossibleBrief",
-        "calculatedAt": "2026-11-01T20:40:33.138Z",
+        "calculatedAt": "2026-11-01T21:07:34.962Z",
         "qualifiedTopics": 500,
         "validatedCandidates": 0,
         "researchBacklog": 0,
@@ -1014,7 +1014,7 @@
           "analytics.load": 1
         },
         "quota": {
-          "usedToday": 99,
+          "usedToday": 103,
           "budget": 9800,
           "project": "684098966511"
         },
