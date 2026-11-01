@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-01T17:59:33.501Z",
+  "generatedAt": "2026-11-01T18:28:20.450Z",
   "note": "Per-channel baselines are computed separately and never blended.",
   "channels": [
     {
@@ -28,7 +28,7 @@
         "baseline": {
           "n": 35,
           "views": 446,
-          "averagePercentageViewed": 64.65,
+          "averagePercentageViewed": 64.67,
           "subscribersPer1000Views": 0,
           "engagementPer1000Views": 24.24,
           "watchHoursPer1000Views": 2.01
@@ -418,8 +418,8 @@
         "lastPublished": "2026-10-29T18:00:00.000Z",
         "published": 20,
         "inventory": {
-          "A": 106,
-          "B": 27,
+          "A": 109,
+          "B": 24,
           "C": 140,
           "D": 206
         },
@@ -509,12 +509,6 @@
             "mode": "B_SHORT_PROVES_DEMAND"
           },
           {
-            "slug": "what-if-the-ozone-hole-never-closed",
-            "LongFormPotentialScore": 82,
-            "bucket": "A",
-            "mode": "A_LONG_FIRST"
-          },
-          {
             "slug": "what-if-the-tunguska-blast-happened-over-a-city",
             "LongFormPotentialScore": 82,
             "bucket": "A",
@@ -531,6 +525,12 @@
             "LongFormPotentialScore": 82,
             "bucket": "A",
             "mode": "A_LONG_FIRST"
+          },
+          {
+            "slug": "what-if-we-built-a-star-on-earth",
+            "LongFormPotentialScore": 82,
+            "bucket": "A",
+            "mode": "B_SHORT_PROVES_DEMAND"
           }
         ],
         "baseline": {
@@ -570,7 +570,7 @@
           "status": "adaptive",
           "sampleSize": 18,
           "adopted": 0,
-          "hypotheses": 5
+          "hypotheses": 3
         },
         "longform": {
           "status": "heuristics-only",
@@ -593,12 +593,17 @@
         {
           "slug": "what-if-human-muscle-efficiency-doubled-overnight",
           "bucket": "C",
-          "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
+          "reason": "VideoPotential 70 in experimental band 58–71; boilerplate 0.5"
         },
         {
-          "slug": "what-happens-if-the-global-ocean-doubles",
+          "slug": "if-a-rogue-planet-vanished-right-now-what-would-change-first",
           "bucket": "C",
-          "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
+          "reason": "VideoPotential 72 in experimental band 58–71; boilerplate 0.5"
+        },
+        {
+          "slug": "if-a-rogue-planet-moved-twice-as-close-when-would-earth-notice",
+          "bucket": "C",
+          "reason": "VideoPotential 72 in experimental band 58–71; boilerplate 0.5"
         },
         {
           "slug": "what-if-the-brain-s-energy-use-doubled-overnight",
@@ -611,24 +616,19 @@
           "reason": "VideoPotential 68 in experimental band 58–71; boilerplate 0.5"
         },
         {
-          "slug": "if-a-rogue-planet-vanished-right-now-what-would-change-first",
+          "slug": "what-breaks-first-if-a-rogue-planet-suddenly-doubles-in-mass",
           "bucket": "C",
           "reason": "VideoPotential 72 in experimental band 58–71; boilerplate 0.5"
+        },
+        {
+          "slug": "what-happens-if-the-global-ocean-doubles",
+          "bucket": "C",
+          "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
         },
         {
           "slug": "would-doubling-all-synthetic-fertilizers-help-or-harm-us",
           "bucket": "C",
           "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
-        },
-        {
-          "slug": "could-commercial-fusion-power-scale-worldwide-in-ten-years",
-          "bucket": "C",
-          "reason": "VideoPotential 68 in experimental band 58–71; boilerplate 0.67"
-        },
-        {
-          "slug": "what-breaks-first-if-a-rogue-planet-suddenly-doubles-in-mass",
-          "bucket": "C",
-          "reason": "VideoPotential 72 in experimental band 58–71; boilerplate 0.5"
         }
       ],
       "alerts": [

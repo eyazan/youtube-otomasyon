@@ -1,6 +1,6 @@
 # Growth dashboard
 
-Generated 2026-11-01T17:59:33.501Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-11-01T18:28:20.450Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
@@ -41,11 +41,11 @@ Generated 2026-11-01T17:59:33.501Z. Per-channel baselines are computed separatel
 
 ## ImpossibleBrief
 
-**Shorts health** — last published 2026-10-29T18:00:00.000Z · 20 published · inventory A106/B27/C140/D206 · next: what-if-we-tried-to-drill-through-the-earth (EXPLOIT (0.75): best A topic by SelectionScore)
+**Shorts health** — last published 2026-10-29T18:00:00.000Z · 20 published · inventory A109/B24/C140/D206 · next: what-if-we-tried-to-drill-through-the-earth (EXPLOIT (0.75): best A topic by SelectionScore)
 
 **Long-form health** — cycle 2026-W44: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W44 already QUALITY_BLOCKED)
 
-**Long-form backlog** — what-if-we-mined-a-metal-asteroid 83/A, what-if-the-ozone-hole-never-closed 82/A, what-if-the-tunguska-blast-happened-over-a-city 82/A, could-earth-survive-one-day-without-earth-s-magnetic-field 82/A, what-if-the-permafrost-thawed 82/A
+**Long-form backlog** — what-if-we-mined-a-metal-asteroid 83/A, what-if-the-tunguska-blast-happened-over-a-city 82/A, could-earth-survive-one-day-without-earth-s-magnetic-field 82/A, what-if-the-permafrost-thawed 82/A, what-if-we-built-a-star-on-earth 82/A
 
 **Content clusters** — 7 · integrity OK
 
@@ -59,9 +59,9 @@ Generated 2026-11-01T17:59:33.501Z. Per-channel baselines are computed separatel
 
 - what-if-human-heat-tolerance-doubled-overnight (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
 - could-we-function-with-half-human-heat-tolerance (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
-- what-if-human-muscle-efficiency-doubled-overnight (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
-- what-happens-if-the-global-ocean-doubles (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
-- what-if-the-brain-s-energy-use-doubled-overnight (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
+- what-if-human-muscle-efficiency-doubled-overnight (C): VideoPotential 70 in experimental band 58–71; boilerplate 0.5
+- if-a-rogue-planet-vanished-right-now-what-would-change-first (C): VideoPotential 72 in experimental band 58–71; boilerplate 0.5
+- if-a-rogue-planet-moved-twice-as-close-when-would-earth-notice (C): VideoPotential 72 in experimental band 58–71; boilerplate 0.5
 
 **Recent alerts**
 
