@@ -1,25 +1,27 @@
 {
-  "at": "2026-10-31T20:09:13.150Z",
-  "runId": "41237443878",
+  "at": "2026-11-01T07:10:10.325Z",
+  "runId": "41283386372",
   "rows": [
     {
       "channel": "failure-reconstructed",
-      "outcome": "NOT_DUE",
-      "category": "NOT_DUE",
-      "scheduled": false,
-      "publication": "NOT_SCHEDULED",
-      "publishAt": null,
-      "reason": "today's Short already exists (silver-bridge-1967)",
-      "slug": null,
+      "outcome": "UPLOADED",
+      "category": "SCHEDULED",
+      "scheduled": true,
+      "publication": "SCHEDULED",
+      "publishAt": "2026-11-01T18:00:00.000Z",
+      "reason": "premium FR-tenerife-1977 PlQYe5W0szE",
+      "slug": "tenerife-1977",
       "videoId": null,
-      "targetDay": null,
+      "targetDay": "2026-11-01",
       "trigger": {
-        "event": "schedule",
-        "correlationId": null
+        "event": "repository_dispatch",
+        "correlationId": "production-1-20261101T070537Z-6129a853"
       },
       "stages": {
         "RESEARCH": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "FR-tenerife-1977",
+          "at": "2026-11-01T07:09:49.227Z"
         },
         "SCRIPT": {
           "status": "not-reached"
@@ -31,40 +33,52 @@
           "status": "not-reached"
         },
         "RENDER": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "premium final",
+          "at": "2026-11-01T07:09:49.227Z"
         },
         "QA": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
+          "at": "2026-11-01T07:09:49.228Z"
         },
         "UPLOAD": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "PlQYe5W0szE",
+          "at": "2026-11-01T07:09:49.228Z"
         },
         "SCHEDULE": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "2026-11-01T18:00:00.000Z",
+          "at": "2026-11-01T07:09:49.229Z"
         },
         "PUBLISH": {
-          "status": "not-reached"
+          "status": "scheduled",
+          "detail": "YouTube makes it public at 2026-11-01T18:00:00.000Z",
+          "at": "2026-11-01T07:09:49.229Z"
         }
       }
     },
     {
       "channel": "impossible-brief",
-      "outcome": "NOT_DUE",
-      "category": "NOT_DUE",
+      "outcome": "NO_TOPIC",
+      "category": "CONTENT_BLOCKED",
       "scheduled": false,
       "publication": "NOT_SCHEDULED",
       "publishAt": null,
-      "reason": "production window closed at 21:00 Europe/Istanbul minus 60 min",
+      "reason": "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)",
       "slug": null,
       "videoId": null,
-      "targetDay": null,
+      "targetDay": "2026-11-01",
       "trigger": {
-        "event": "schedule",
-        "correlationId": null
+        "event": "repository_dispatch",
+        "correlationId": "production-1-20261101T070537Z-6129a853"
       },
       "stages": {
         "RESEARCH": {
-          "status": "not-reached"
+          "status": "skipped",
+          "detail": "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)",
+          "at": "2026-11-01T07:09:53.490Z"
         },
         "SCRIPT": {
           "status": "not-reached"

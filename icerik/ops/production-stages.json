@@ -2,50 +2,6 @@
   "channel": "failure-reconstructed",
   "runs": [
     {
-      "runId": "41060417769",
-      "attempt": "1",
-      "startedAt": "2026-10-30T13:06:57.272Z",
-      "publish": true,
-      "trigger": {
-        "event": "repository_dispatch",
-        "correlationId": "production-2-20261030T130553Z-e6f9e7da"
-      },
-      "targetDay": null,
-      "slug": null,
-      "outcome": "NOT_DUE",
-      "reason": "today's Short already exists (northeast-blackout-2003)",
-      "stages": {
-        "RESEARCH": {
-          "status": "not-reached"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "not-reached"
-        },
-        "QA": {
-          "status": "not-reached"
-        },
-        "UPLOAD": {
-          "status": "not-reached"
-        },
-        "SCHEDULE": {
-          "status": "not-reached"
-        },
-        "PUBLISH": {
-          "status": "not-reached"
-        }
-      },
-      "finishedAt": "2026-10-30T13:06:57.287Z"
-    },
-    {
       "runId": "41061773526",
       "attempt": "1",
       "startedAt": "2026-10-30T13:16:39.970Z",
@@ -1332,6 +1288,62 @@
         }
       },
       "finishedAt": "2026-10-31T20:08:54.701Z"
+    },
+    {
+      "runId": "41283386372",
+      "attempt": "1",
+      "startedAt": "2026-11-01T07:06:36.690Z",
+      "publish": true,
+      "trigger": {
+        "event": "repository_dispatch",
+        "correlationId": "production-1-20261101T070537Z-6129a853"
+      },
+      "targetDay": "2026-11-01",
+      "slug": "tenerife-1977",
+      "outcome": "UPLOADED",
+      "reason": "premium FR-tenerife-1977 PlQYe5W0szE",
+      "stages": {
+        "RESEARCH": {
+          "status": "done",
+          "detail": "FR-tenerife-1977",
+          "at": "2026-11-01T07:09:49.227Z"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "done",
+          "detail": "premium final",
+          "at": "2026-11-01T07:09:49.227Z"
+        },
+        "QA": {
+          "status": "done",
+          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
+          "at": "2026-11-01T07:09:49.228Z"
+        },
+        "UPLOAD": {
+          "status": "done",
+          "detail": "PlQYe5W0szE",
+          "at": "2026-11-01T07:09:49.228Z"
+        },
+        "SCHEDULE": {
+          "status": "done",
+          "detail": "2026-11-01T18:00:00.000Z",
+          "at": "2026-11-01T07:09:49.229Z"
+        },
+        "PUBLISH": {
+          "status": "scheduled",
+          "detail": "YouTube makes it public at 2026-11-01T18:00:00.000Z",
+          "at": "2026-11-01T07:09:49.229Z"
+        }
+      },
+      "finishedAt": "2026-11-01T07:09:49.230Z"
     }
   ]
 }
