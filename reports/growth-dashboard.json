@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-01T18:59:32.824Z",
+  "generatedAt": "2026-11-01T19:48:05.273Z",
   "note": "Per-channel baselines are computed separately and never blended.",
   "channels": [
     {
@@ -26,11 +26,11 @@
           "reason": "EXPLORE (0.25): under-sampled cluster industrial-disasters"
         },
         "baseline": {
-          "n": 35,
+          "n": 36,
           "views": 446,
           "averagePercentageViewed": 64.67,
           "subscribersPer1000Views": 0,
-          "engagementPer1000Views": 24.24,
+          "engagementPer1000Views": 25,
           "watchHoursPer1000Views": 2.01
         }
       },
@@ -106,20 +106,20 @@
             "mode": "B_SHORT_PROVES_DEMAND"
           },
           {
+            "slug": "air-france-447-2009",
+            "LongFormPotentialScore": 85,
+            "bucket": "A",
+            "mode": "B_SHORT_PROVES_DEMAND"
+          },
+          {
             "slug": "columbia-2003",
             "LongFormPotentialScore": 85,
             "bucket": "A",
             "mode": "B_SHORT_PROVES_DEMAND"
           },
           {
-            "slug": "air-france-447-2009",
-            "LongFormPotentialScore": 84,
-            "bucket": "A",
-            "mode": "B_SHORT_PROVES_DEMAND"
-          },
-          {
-            "slug": "apollo-13-1970",
-            "LongFormPotentialScore": 84,
+            "slug": "tam-3054-2007",
+            "LongFormPotentialScore": 85,
             "bucket": "A",
             "mode": "B_SHORT_PROVES_DEMAND"
           }
@@ -150,7 +150,7 @@
         "pendingRelatedVideoManualActions": 0
       },
       "growth": {
-        "trackedVideos": 36,
+        "trackedVideos": 37,
         "subscriberConversion": {
           "shorts": 0,
           "longform": null
@@ -159,9 +159,9 @@
       "learning": {
         "shorts": {
           "status": "adaptive",
-          "sampleSize": 35,
+          "sampleSize": 36,
           "adopted": 0,
-          "hypotheses": 15
+          "hypotheses": 16
         },
         "longform": {
           "status": "heuristics-only",
@@ -187,11 +187,6 @@
           "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
         },
         {
-          "slug": "controlled-impact-1984",
-          "bucket": "C",
-          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
-        },
-        {
           "slug": "eastland-1915",
           "bucket": "C",
           "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
@@ -212,14 +207,19 @@
           "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
         },
         {
-          "slug": "b2-guam-2008",
+          "slug": "controlled-impact-1984",
           "bucket": "C",
-          "reason": "VideoPotential 82 in experimental band 58–71; sources 41 < 62"
+          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
         },
         {
           "slug": "uss-forrestal-1967",
           "bucket": "C",
           "reason": "VideoPotential 82 in experimental band 58–71; sources 41 < 62"
+        },
+        {
+          "slug": "why-dams-fail",
+          "bucket": "C",
+          "reason": "VideoPotential 78 in experimental band 58–71; sources 58 < 62"
         }
       ],
       "alerts": [

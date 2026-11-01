@@ -2,62 +2,6 @@
   "channel": "failure-reconstructed",
   "runs": [
     {
-      "runId": "41179218610",
-      "attempt": "1",
-      "startedAt": "2026-10-31T07:06:36.638Z",
-      "publish": true,
-      "trigger": {
-        "event": "repository_dispatch",
-        "correlationId": "production-1-20261031T070537Z-22df9515"
-      },
-      "targetDay": "2026-10-31",
-      "slug": "silver-bridge-1967",
-      "outcome": "UPLOADED",
-      "reason": "premium FR-silver-bridge-1967 COYIywbrlq4",
-      "stages": {
-        "RESEARCH": {
-          "status": "done",
-          "detail": "FR-silver-bridge-1967",
-          "at": "2026-10-31T07:09:15.172Z"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "done",
-          "detail": "premium final",
-          "at": "2026-10-31T07:09:15.172Z"
-        },
-        "QA": {
-          "status": "done",
-          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
-          "at": "2026-10-31T07:09:15.173Z"
-        },
-        "UPLOAD": {
-          "status": "done",
-          "detail": "COYIywbrlq4",
-          "at": "2026-10-31T07:09:15.173Z"
-        },
-        "SCHEDULE": {
-          "status": "done",
-          "detail": "2026-10-31T18:00:00.000Z",
-          "at": "2026-10-31T07:09:15.174Z"
-        },
-        "PUBLISH": {
-          "status": "scheduled",
-          "detail": "YouTube makes it public at 2026-10-31T18:00:00.000Z",
-          "at": "2026-10-31T07:09:15.175Z"
-        }
-      },
-      "finishedAt": "2026-10-31T07:09:15.175Z"
-    },
-    {
       "runId": "41199269819",
       "attempt": "1",
       "startedAt": "2026-10-31T12:02:22.947Z",
@@ -1344,6 +1288,50 @@
         }
       },
       "finishedAt": "2026-11-01T18:59:14.841Z"
+    },
+    {
+      "runId": "41343454220",
+      "attempt": "1",
+      "startedAt": "2026-11-01T19:47:50.011Z",
+      "publish": true,
+      "trigger": {
+        "event": "schedule",
+        "correlationId": null
+      },
+      "targetDay": null,
+      "slug": null,
+      "outcome": "NOT_DUE",
+      "reason": "today's Short already exists (tenerife-1977)",
+      "stages": {
+        "RESEARCH": {
+          "status": "not-reached"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "not-reached"
+        },
+        "QA": {
+          "status": "not-reached"
+        },
+        "UPLOAD": {
+          "status": "not-reached"
+        },
+        "SCHEDULE": {
+          "status": "not-reached"
+        },
+        "PUBLISH": {
+          "status": "not-reached"
+        }
+      },
+      "finishedAt": "2026-11-01T19:47:50.030Z"
     }
   ]
 }
