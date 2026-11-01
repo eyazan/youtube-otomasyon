@@ -1,27 +1,25 @@
 {
-  "at": "2026-11-01T07:10:10.325Z",
-  "runId": "41283386372",
+  "at": "2026-11-01T13:03:02.991Z",
+  "runId": "41309250740",
   "rows": [
     {
       "channel": "failure-reconstructed",
-      "outcome": "UPLOADED",
-      "category": "SCHEDULED",
-      "scheduled": true,
-      "publication": "SCHEDULED",
-      "publishAt": "2026-11-01T18:00:00.000Z",
-      "reason": "premium FR-tenerife-1977 PlQYe5W0szE",
-      "slug": "tenerife-1977",
+      "outcome": "NOT_DUE",
+      "category": "NOT_DUE",
+      "scheduled": false,
+      "publication": "NOT_SCHEDULED",
+      "publishAt": null,
+      "reason": "today's Short already exists (tenerife-1977)",
+      "slug": null,
       "videoId": null,
-      "targetDay": "2026-11-01",
+      "targetDay": null,
       "trigger": {
-        "event": "repository_dispatch",
-        "correlationId": "production-1-20261101T070537Z-6129a853"
+        "event": "schedule",
+        "correlationId": null
       },
       "stages": {
         "RESEARCH": {
-          "status": "done",
-          "detail": "FR-tenerife-1977",
-          "at": "2026-11-01T07:09:49.227Z"
+          "status": "not-reached"
         },
         "SCRIPT": {
           "status": "not-reached"
@@ -33,29 +31,19 @@
           "status": "not-reached"
         },
         "RENDER": {
-          "status": "done",
-          "detail": "premium final",
-          "at": "2026-11-01T07:09:49.227Z"
+          "status": "not-reached"
         },
         "QA": {
-          "status": "done",
-          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
-          "at": "2026-11-01T07:09:49.228Z"
+          "status": "not-reached"
         },
         "UPLOAD": {
-          "status": "done",
-          "detail": "PlQYe5W0szE",
-          "at": "2026-11-01T07:09:49.228Z"
+          "status": "not-reached"
         },
         "SCHEDULE": {
-          "status": "done",
-          "detail": "2026-11-01T18:00:00.000Z",
-          "at": "2026-11-01T07:09:49.229Z"
+          "status": "not-reached"
         },
         "PUBLISH": {
-          "status": "scheduled",
-          "detail": "YouTube makes it public at 2026-11-01T18:00:00.000Z",
-          "at": "2026-11-01T07:09:49.229Z"
+          "status": "not-reached"
         }
       }
     },
@@ -71,14 +59,14 @@
       "videoId": null,
       "targetDay": "2026-11-01",
       "trigger": {
-        "event": "repository_dispatch",
-        "correlationId": "production-1-20261101T070537Z-6129a853"
+        "event": "schedule",
+        "correlationId": null
       },
       "stages": {
         "RESEARCH": {
           "status": "skipped",
           "detail": "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)",
-          "at": "2026-11-01T07:09:53.490Z"
+          "at": "2026-11-01T13:02:40.876Z"
         },
         "SCRIPT": {
           "status": "not-reached"
