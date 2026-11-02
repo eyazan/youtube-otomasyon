@@ -1,14 +1,14 @@
 # Growth dashboard
 
-Generated 2026-11-02T07:10:37.552Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-11-02T13:07:13.741Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
-**Shorts health** — last published 2026-11-02T18:00:00.000Z · 38 published · inventory A93/B138/C60/D59 · next: teton-dam-1976 (EXPLOIT (0.75): best A topic by SelectionScore)
+**Shorts health** — last published 2026-11-02T18:00:00.000Z · 38 published · inventory A91/B140/C60/D59 · next: titanic-1912 (EXPLOIT (0.75): best A topic by SelectionScore)
 
 **Long-form health** — cycle 2026-W45: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W45 already QUALITY_BLOCKED)
 
-**Long-form backlog** — challenger-1986 86/A, chernobyl-1986 86/A, air-france-447-2009 85/A, columbia-2003 85/A, apollo-13-1970 84/A
+**Long-form backlog** — challenger-1986 86/A, chernobyl-1986 86/A, columbia-2003 85/A, air-france-447-2009 84/A, apollo-13-1970 84/A
 
 **Content clusters** — 12 · integrity OK
 

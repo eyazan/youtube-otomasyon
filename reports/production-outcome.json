@@ -1,27 +1,25 @@
 {
-  "at": "2026-11-02T07:10:40.510Z",
-  "runId": "41404050830",
+  "at": "2026-11-02T13:07:15.975Z",
+  "runId": "41450002497",
   "rows": [
     {
       "channel": "failure-reconstructed",
-      "outcome": "UPLOADED",
-      "category": "SCHEDULED",
-      "scheduled": true,
-      "publication": "SCHEDULED",
-      "publishAt": "2026-11-02T18:00:00.000Z",
-      "reason": "premium FR-great-flood-1993 WDMBEza0Sd4",
-      "slug": "great-flood-1993",
+      "outcome": "NOT_DUE",
+      "category": "NOT_DUE",
+      "scheduled": false,
+      "publication": "NOT_SCHEDULED",
+      "publishAt": null,
+      "reason": "today's Short already exists (great-flood-1993)",
+      "slug": null,
       "videoId": null,
-      "targetDay": "2026-11-02",
+      "targetDay": null,
       "trigger": {
         "event": "repository_dispatch",
-        "correlationId": "production-1-20261102T070537Z-6480d49c"
+        "correlationId": "production-2-20261102T130537Z-8b5dca24"
       },
       "stages": {
         "RESEARCH": {
-          "status": "done",
-          "detail": "FR-great-flood-1993",
-          "at": "2026-11-02T07:10:01.727Z"
+          "status": "not-reached"
         },
         "SCRIPT": {
           "status": "not-reached"
@@ -33,29 +31,19 @@
           "status": "not-reached"
         },
         "RENDER": {
-          "status": "done",
-          "detail": "premium final",
-          "at": "2026-11-02T07:10:01.728Z"
+          "status": "not-reached"
         },
         "QA": {
-          "status": "done",
-          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
-          "at": "2026-11-02T07:10:01.731Z"
+          "status": "not-reached"
         },
         "UPLOAD": {
-          "status": "done",
-          "detail": "WDMBEza0Sd4",
-          "at": "2026-11-02T07:10:01.732Z"
+          "status": "not-reached"
         },
         "SCHEDULE": {
-          "status": "done",
-          "detail": "2026-11-02T18:00:00.000Z",
-          "at": "2026-11-02T07:10:01.733Z"
+          "status": "not-reached"
         },
         "PUBLISH": {
-          "status": "scheduled",
-          "detail": "YouTube makes it public at 2026-11-02T18:00:00.000Z",
-          "at": "2026-11-02T07:10:01.733Z"
+          "status": "not-reached"
         }
       }
     },
@@ -72,13 +60,13 @@
       "targetDay": "2026-11-02",
       "trigger": {
         "event": "repository_dispatch",
-        "correlationId": "production-1-20261102T070537Z-6480d49c"
+        "correlationId": "production-2-20261102T130537Z-8b5dca24"
       },
       "stages": {
         "RESEARCH": {
           "status": "skipped",
           "detail": "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)",
-          "at": "2026-11-02T07:10:06.208Z"
+          "at": "2026-11-02T13:06:47.583Z"
         },
         "SCRIPT": {
           "status": "not-reached"
