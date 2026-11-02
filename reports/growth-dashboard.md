@@ -1,6 +1,6 @@
 # Growth dashboard
 
-Generated 2026-11-02T21:48:45.828Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-11-02T22:23:07.378Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
@@ -59,9 +59,9 @@ Generated 2026-11-02T21:48:45.828Z. Per-channel baselines are computed separatel
 
 - what-if-human-heat-tolerance-doubled-overnight (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
 - could-we-function-with-half-human-heat-tolerance (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
-- what-if-human-muscle-efficiency-doubled-overnight (C): VideoPotential 70 in experimental band 58–71; boilerplate 0.5
 - if-a-rogue-planet-vanished-right-now-what-would-change-first (C): VideoPotential 72 in experimental band 58–71; boilerplate 0.5
-- if-a-rogue-planet-moved-twice-as-close-when-would-earth-notice (C): VideoPotential 72 in experimental band 58–71; boilerplate 0.5
+- what-if-human-muscle-efficiency-doubled-overnight (C): VideoPotential 70 in experimental band 58–71; boilerplate 0.5
+- what-breaks-first-if-a-rogue-planet-suddenly-doubles-in-mass (C): VideoPotential 72 in experimental band 58–71; boilerplate 0.5
 
 **Recent alerts**
 
