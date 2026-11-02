@@ -1,17 +1,17 @@
 {
   "schema": "feedback-loop-health/1",
-  "generatedAt": "2026-11-02T02:29:46.573Z",
+  "generatedAt": "2026-11-02T11:00:48.298Z",
   "verdict": "CLOSED_LOOP_WORKING",
   "channels": [
     {
       "channel": "failure-reconstructed",
       "verdict": "CLOSED_LOOP_WORKING",
       "mode": "adaptive",
-      "publishedVideos": 37,
+      "publishedVideos": 38,
       "performanceRows": 37,
-      "diagnosisRows": 186,
+      "diagnosisRows": 187,
       "learning": {
-        "updatedAt": "2026-11-02T02:29:42.084Z",
+        "updatedAt": "2026-11-02T11:00:27.656Z",
         "sampleSize": 36,
         "status": "adaptive",
         "observations": 35,
@@ -76,16 +76,9 @@
         }
       ],
       "timing": {
-        "lateCheckpointCount": 99,
+        "lateCheckpointCount": 100,
         "note": "Historical late collections are retained for audit, but performance math uses their real collection age.",
         "examples": [
-          {
-            "videoId": "X_EhSVzvv3o",
-            "label": "1h",
-            "scheduledHours": 1,
-            "collectedAgeHours": 17.94,
-            "driftHours": 16.94
-          },
           {
             "videoId": "rgSsk8q6eyM",
             "label": "12h",
@@ -148,6 +141,13 @@
             "scheduledHours": 6,
             "collectedAgeHours": 17.86,
             "driftHours": 11.86
+          },
+          {
+            "videoId": "PlQYe5W0szE",
+            "label": "6h",
+            "scheduledHours": 6,
+            "collectedAgeHours": 17,
+            "driftHours": 11
           }
         ]
       },
@@ -162,7 +162,7 @@
       "performanceRows": 19,
       "diagnosisRows": 112,
       "learning": {
-        "updatedAt": "2026-11-02T02:29:43.360Z",
+        "updatedAt": "2026-11-02T11:00:38.476Z",
         "sampleSize": 18,
         "status": "adaptive",
         "observations": 30,
@@ -313,7 +313,7 @@
       "performanceRows": 7,
       "diagnosisRows": 27,
       "learning": {
-        "updatedAt": "2026-11-02T02:29:44.402Z",
+        "updatedAt": "2026-11-02T11:00:45.067Z",
         "sampleSize": 6,
         "status": "observing",
         "observations": 25,
