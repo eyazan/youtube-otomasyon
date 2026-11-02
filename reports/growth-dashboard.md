@@ -1,14 +1,14 @@
 # Growth dashboard
 
-Generated 2026-11-01T20:40:30.518Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-11-02T07:10:37.552Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
-**Shorts health** — last published 2026-11-01T18:00:00.000Z · 37 published · inventory A94/B138/C60/D59 · next: ocean-ranger-1982 (EXPLORE (0.25): under-sampled cluster industrial-disasters)
+**Shorts health** — last published 2026-11-02T18:00:00.000Z · 38 published · inventory A93/B138/C60/D59 · next: teton-dam-1976 (EXPLOIT (0.75): best A topic by SelectionScore)
 
-**Long-form health** — cycle 2026-W44: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W44 already QUALITY_BLOCKED)
+**Long-form health** — cycle 2026-W45: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W45 already QUALITY_BLOCKED)
 
-**Long-form backlog** — challenger-1986 86/A, chernobyl-1986 86/A, air-france-447-2009 85/A, columbia-2003 85/A, tam-3054-2007 85/A
+**Long-form backlog** — challenger-1986 86/A, chernobyl-1986 86/A, air-france-447-2009 85/A, columbia-2003 85/A, apollo-13-1970 84/A
 
 **Content clusters** — 12 · integrity OK
 
@@ -43,7 +43,7 @@ Generated 2026-11-01T20:40:30.518Z. Per-channel baselines are computed separatel
 
 **Shorts health** — last published 2026-10-29T18:00:00.000Z · 20 published · inventory A109/B24/C140/D206 · next: what-if-we-tried-to-drill-through-the-earth (EXPLOIT (0.75): best A topic by SelectionScore)
 
-**Long-form health** — cycle 2026-W44: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W44 already QUALITY_BLOCKED)
+**Long-form health** — cycle 2026-W45: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W45 already QUALITY_BLOCKED)
 
 **Long-form backlog** — what-if-we-mined-a-metal-asteroid 83/A, what-if-the-tunguska-blast-happened-over-a-city 82/A, could-earth-survive-one-day-without-earth-s-magnetic-field 82/A, what-if-the-permafrost-thawed 82/A, what-if-we-built-a-star-on-earth 82/A
 

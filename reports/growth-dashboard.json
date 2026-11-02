@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-11-01T20:40:30.518Z",
+  "generatedAt": "2026-11-02T07:10:37.552Z",
   "note": "Per-channel baselines are computed separately and never blended.",
   "channels": [
     {
       "channel": "failure-reconstructed",
       "name": "Failure Reconstructed",
       "shorts": {
-        "lastPublished": "2026-11-01T18:00:00.000Z",
-        "published": 37,
+        "lastPublished": "2026-11-02T18:00:00.000Z",
+        "published": 38,
         "inventory": {
-          "A": 94,
+          "A": 93,
           "B": 138,
           "C": 60,
           "D": 59
@@ -22,8 +22,8 @@
           "used": 10
         },
         "nextSelection": {
-          "slug": "ocean-ranger-1982",
-          "reason": "EXPLORE (0.25): under-sampled cluster industrial-disasters"
+          "slug": "teton-dam-1976",
+          "reason": "EXPLOIT (0.75): best A topic by SelectionScore"
         },
         "baseline": {
           "n": 36,
@@ -36,30 +36,17 @@
       },
       "longform": {
         "lane": {
-          "cycleId": "2026-W44",
+          "cycleId": "2026-W45",
           "due": false,
-          "reason": "cycle 2026-W44 already QUALITY_BLOCKED",
+          "reason": "cycle 2026-W45 already QUALITY_BLOCKED",
           "lastPublished": null
         },
         "lastCycle": {
-          "cycleId": "2026-W44",
+          "cycleId": "2026-W45",
           "channel": "failure-reconstructed",
-          "startedAt": "2026-10-26T12:42:17.460Z",
+          "startedAt": "2026-11-02T07:10:06.289Z",
           "status": "QUALITY_BLOCKED",
           "evaluated": [
-            {
-              "slug": "air-france-447-2009",
-              "mode": "B_SHORT_PROVES_DEMAND",
-              "LongFormPotentialScore": 86,
-              "bucket": "A",
-              "decision": "BLOCK",
-              "score": 83,
-              "hardFails": [
-                "INSUFFICIENT_DEPTH: evidence supports ~1.9 min; target 8–12 min — not padded",
-                "LLM generation failed safely (REQUEST_TOO_LARGE); deterministic evidence draft retained"
-              ],
-              "generationStatus": "FAILED"
-            },
             {
               "slug": "challenger-1986",
               "mode": "B_SHORT_PROVES_DEMAND",
@@ -85,11 +72,24 @@
                 "LLM generation failed safely (REQUEST_TOO_LARGE); deterministic evidence draft retained"
               ],
               "generationStatus": "FAILED"
+            },
+            {
+              "slug": "air-france-447-2009",
+              "mode": "B_SHORT_PROVES_DEMAND",
+              "LongFormPotentialScore": 85,
+              "bucket": "A",
+              "decision": "BLOCK",
+              "score": 83,
+              "hardFails": [
+                "INSUFFICIENT_DEPTH: evidence supports ~1.9 min; target 8–12 min — not padded",
+                "LLM generation failed safely (REQUEST_TOO_LARGE); deterministic evidence draft retained"
+              ],
+              "generationStatus": "FAILED"
             }
           ],
           "selected": null,
           "reason": "no candidate passed the long-form quality gate; cadence does not override quality",
-          "finishedAt": "2026-10-26T12:42:18.733Z"
+          "finishedAt": "2026-11-02T07:10:07.176Z"
         },
         "episodes": 0,
         "backlog": [
@@ -118,8 +118,8 @@
             "mode": "B_SHORT_PROVES_DEMAND"
           },
           {
-            "slug": "tam-3054-2007",
-            "LongFormPotentialScore": 85,
+            "slug": "apollo-13-1970",
+            "LongFormPotentialScore": 84,
             "bucket": "A",
             "mode": "B_SHORT_PROVES_DEMAND"
           }
@@ -445,20 +445,20 @@
       },
       "longform": {
         "lane": {
-          "cycleId": "2026-W44",
+          "cycleId": "2026-W45",
           "due": false,
-          "reason": "cycle 2026-W44 already QUALITY_BLOCKED",
+          "reason": "cycle 2026-W45 already QUALITY_BLOCKED",
           "lastPublished": null
         },
         "lastCycle": {
-          "cycleId": "2026-W44",
+          "cycleId": "2026-W45",
           "channel": "impossible-brief",
-          "startedAt": "2026-10-26T12:42:18.789Z",
+          "startedAt": "2026-11-02T07:10:07.238Z",
           "status": "QUALITY_BLOCKED",
           "evaluated": [
             {
               "slug": "what-if-we-mined-a-metal-asteroid",
-              "mode": "A_LONG_FIRST",
+              "mode": "B_SHORT_PROVES_DEMAND",
               "LongFormPotentialScore": 83,
               "bucket": "A",
               "decision": "BLOCK",
@@ -470,35 +470,35 @@
               "generationStatus": "FAILED"
             },
             {
-              "slug": "what-if-synthetic-fertilizer-disappeared",
+              "slug": "what-if-the-tunguska-blast-happened-over-a-city",
               "mode": "A_LONG_FIRST",
-              "LongFormPotentialScore": 83,
+              "LongFormPotentialScore": 82,
               "bucket": "A",
               "decision": "BLOCK",
-              "score": 86,
+              "score": 88,
               "hardFails": [
-                "INSUFFICIENT_DEPTH: evidence supports ~1.8 min; target 8–12 min — not padded",
+                "INSUFFICIENT_DEPTH: evidence supports ~2 min; target 8–12 min — not padded",
                 "LLM generation failed safely (REQUEST_TOO_LARGE); deterministic evidence draft retained"
               ],
               "generationStatus": "FAILED"
             },
             {
-              "slug": "what-if-gps-went-dark-for-a-day",
+              "slug": "could-earth-survive-one-day-without-earth-s-magnetic-field",
               "mode": "A_LONG_FIRST",
-              "LongFormPotentialScore": 83,
+              "LongFormPotentialScore": 82,
               "bucket": "A",
               "decision": "BLOCK",
-              "score": 86,
+              "score": 81,
               "hardFails": [
-                "INSUFFICIENT_DEPTH: evidence supports ~1.7 min; target 8–12 min — not padded",
-                "LLM generation failed safely (REQUEST_TOO_LARGE); deterministic evidence draft retained"
+                "unsupported central claim/number: 24",
+                "INSUFFICIENT_DEPTH: evidence supports ~1.6 min; target 8–12 min — not padded"
               ],
-              "generationStatus": "FAILED"
+              "generationStatus": "QUALITY_REVIEW"
             }
           ],
           "selected": null,
           "reason": "no candidate passed the long-form quality gate; cadence does not override quality",
-          "finishedAt": "2026-10-26T12:42:19.989Z"
+          "finishedAt": "2026-11-02T07:10:18.180Z"
         },
         "episodes": 0,
         "backlog": [
