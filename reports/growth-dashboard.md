@@ -1,10 +1,10 @@
 # Growth dashboard
 
-Generated 2026-11-02T17:20:48.867Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-11-02T18:34:33.599Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
-**Shorts health** — last published 2026-11-02T18:00:00.000Z · 38 published · inventory A91/B140/C60/D59 · next: titanic-1912 (EXPLOIT (0.75): best A topic by SelectionScore)
+**Shorts health** — last published 2026-11-02T18:00:00.000Z · 38 published · inventory A92/B139/C60/D59 · next: titanic-1912 (EXPLOIT (0.75): best A topic by SelectionScore)
 
 **Long-form health** — cycle 2026-W45: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W45 already QUALITY_BLOCKED)
 
@@ -21,7 +21,7 @@ Generated 2026-11-02T17:20:48.867Z. Per-channel baselines are computed separatel
 **Research/source enrichment tasks**
 
 - apollo-1-1967 (C): VideoPotential 87 in experimental band 58–71; sources 41 < 62
-- munich-1958 (C): VideoPotential 86 in experimental band 58–71; sources 41 < 62
+- munich-1958 (C): VideoPotential 85 in experimental band 58–71; sources 41 < 62
 - skylab-1973 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
 - eastland-1915 (C): VideoPotential 83 in experimental band 58–71; sources 41 < 62
 - new-london-school-1937 (C): VideoPotential 83 in experimental band 58–71; sources 41 < 62
@@ -45,7 +45,7 @@ Generated 2026-11-02T17:20:48.867Z. Per-channel baselines are computed separatel
 
 **Long-form health** — cycle 2026-W45: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W45 already QUALITY_BLOCKED)
 
-**Long-form backlog** — what-if-we-mined-a-metal-asteroid 83/A, what-if-the-tunguska-blast-happened-over-a-city 82/A, could-earth-survive-one-day-without-earth-s-magnetic-field 82/A, what-if-the-permafrost-thawed 82/A, what-if-we-built-a-star-on-earth 82/A
+**Long-form backlog** — what-if-we-mined-a-metal-asteroid 83/A, what-if-the-tunguska-blast-happened-over-a-city 82/A, could-earth-survive-one-day-without-earth-s-magnetic-field 82/A, what-if-the-permafrost-thawed 82/A, what-if-water-refused-to-freeze 82/A
 
 **Content clusters** — 7 · integrity OK
 

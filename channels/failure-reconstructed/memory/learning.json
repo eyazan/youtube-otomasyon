@@ -2,13 +2,13 @@
   "channel": "failure-reconstructed",
   "status": "sample-floor-met",
   "minimumSample": 5,
-  "sampleSize": 32,
+  "sampleSize": 33,
   "learnedRules": [
     {
       "key": "hookType",
       "value": "consequence",
       "weakValue": "statement",
-      "evidenceVideos": 32,
+      "evidenceVideos": 33,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
@@ -23,8 +23,8 @@
         },
         {
           "value": "statement",
-          "sample": 21,
-          "averagePercentageViewed": 66.06
+          "sample": 22,
+          "averagePercentageViewed": 65.78
         }
       ]
     },
@@ -32,7 +32,7 @@
       "key": "durationRange",
       "value": "over-35s",
       "weakValue": "under-25s",
-      "evidenceVideos": 32,
+      "evidenceVideos": 33,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
@@ -42,13 +42,13 @@
         },
         {
           "value": "25-35s",
-          "sample": 23,
-          "averagePercentageViewed": 81.98
+          "sample": 24,
+          "averagePercentageViewed": 81.11
         },
         {
           "value": "under-25s",
           "sample": 7,
-          "averagePercentageViewed": 71.72
+          "averagePercentageViewed": 71.56
         }
       ]
     },
@@ -56,7 +56,7 @@
       "key": "secondBeat",
       "value": "countdown",
       "weakValue": "event",
-      "evidenceVideos": 32,
+      "evidenceVideos": 33,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
@@ -77,7 +77,12 @@
         {
           "value": "event",
           "sample": 15,
-          "averagePercentageViewed": 66.11
+          "averagePercentageViewed": 66.03
+        },
+        {
+          "value": "escalation",
+          "sample": 1,
+          "averagePercentageViewed": 61.25
         }
       ]
     },
@@ -85,18 +90,18 @@
       "key": "visualChangeFrequency",
       "value": "fast",
       "weakValue": "measured",
-      "evidenceVideos": 32,
+      "evidenceVideos": 33,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
           "value": "fast",
           "sample": 23,
-          "averagePercentageViewed": 85.44
+          "averagePercentageViewed": 85.39
         },
         {
           "value": "measured",
-          "sample": 8,
-          "averagePercentageViewed": 67.69
+          "sample": 9,
+          "averagePercentageViewed": 66.97
         }
       ]
     },
@@ -104,13 +109,13 @@
       "key": "questionStyle",
       "value": "question",
       "weakValue": null,
-      "evidenceVideos": 32,
+      "evidenceVideos": 33,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
           "value": "question",
-          "sample": 31,
-          "averagePercentageViewed": 80.86
+          "sample": 32,
+          "averagePercentageViewed": 80.21
         },
         {
           "value": "statement",
@@ -123,7 +128,7 @@
       "key": "category",
       "value": "nuclear-accidents",
       "weakValue": "materials-failures",
-      "evidenceVideos": 32,
+      "evidenceVideos": 33,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
@@ -172,9 +177,14 @@
           "averagePercentageViewed": 62.24
         },
         {
+          "value": "software-and-control-failures",
+          "sample": 1,
+          "averagePercentageViewed": 61.25
+        },
+        {
           "value": "bridge-failures",
           "sample": 3,
-          "averagePercentageViewed": 58.82
+          "averagePercentageViewed": 58.43
         },
         {
           "value": "fire-and-explosions",
@@ -192,17 +202,17 @@
       "key": "ctaStyle",
       "value": "adaptive after payoff",
       "weakValue": null,
-      "evidenceVideos": 32,
+      "evidenceVideos": 33,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
           "value": "adaptive after payoff",
-          "sample": 32,
-          "averagePercentageViewed": 80.32
+          "sample": 33,
+          "averagePercentageViewed": 79.71
         }
       ]
     }
   ],
-  "lastUpdated": "2026-11-02T17:20:37.303Z",
+  "lastUpdated": "2026-11-02T18:34:13.765Z",
   "caveat": "Observed associations only; topic, timing and packaging can confound retention. No causal claim."
 }
