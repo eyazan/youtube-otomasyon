@@ -158,6 +158,12 @@ test("headlines never cut an inverted clause from its modal; spans of time are n
   const ear19 = Adapter.loadTopic("impossible-brief", "IB-EAR-019"); const sb19 = Generator.build(Adapter.studioScript(ear19.channel, ear19.topic), style, ear19.topic);
   const texts19 = sb19.scenes.flatMap((s) => s.layers.filter((l) => l.component === "kinetic-type").flatMap((l) => l.props.items.map((it) => it.text)));
   assert.ok(texts19.includes("780,000 years ago") && !texts19.includes("780,000 years"), texts19.join(" | "));
+  // the source says "at least 183 reversals": a lower bound never shows as an exact count
+  assert.ok(texts19.includes("AT LEAST 183 TIMES"), texts19.join(" | "));
+  // the air line shows the atmosphere itself, labelled, while the particles arrive (Creative Director, render 41007360726)
+  const air = sb19.scenes.find((s) => /air/i.test(ear19.topic.narration[s.lines[0].slice(1) - 1].text));
+  assert.ok(air.layers.some((l) => l.component === "globe" && l.props.atmosphere && l.props.atmosphere.label === "ATMOSPHERE"));
+  assert.ok(air.layers.some((l) => l.component === "magnetosphere" && l.props.wind));
   const t = { id: "IB-EAR-900", title: "field", topic: "magnetic field reversal", visualMechanism: "magnetic-field" };
   const script = { facts: [{ id: "F1", claim: "Reversals come every 450,000 years on average." }, { id: "F2", claim: "The last reversal was 780,000 years ago." }, { id: "F3", claim: "One calm stretch lasted 83 million years." }],
     lines: [{ id: "L1", text: "The field flips.", layer: "SPECULATIVE SCENARIO", facts: [] }, { id: "L2", text: "The last one was 780,000 years ago.", layer: "KNOWN SCIENCE", facts: ["F2"] }, { id: "L3", text: "Reversals come every 450,000 years.", layer: "KNOWN SCIENCE", facts: ["F1"] }, { id: "L4", text: "The field returns.", layer: "ESTIMATED CONSEQUENCE", facts: [] }] };

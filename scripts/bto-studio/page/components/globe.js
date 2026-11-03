@@ -75,7 +75,9 @@
       g += `<g clip-path="url(#${id}c)">${surf}</g>`;
       g += `<circle cx="${n1(X)}" cy="${n1(Y)}" r="${n1(R)}" fill="none" stroke="#bfe8ff" stroke-width="${n1(Math.max(1.5, R / 160))}" opacity="0.35"/>`;
       if (A.label && t >= (A.labelAt == null ? 0 : A.labelAt)) { const k = clamp((t - (A.labelAt || 0)) / 0.5); const ax = X + R * aS * 0.62, ay = Y - R * aS * 0.79;
-        g += BTO.label(ax, ay, ax + 120, ay - 110, A.label, k * fade(t, null, A.outAt), { size: T().scale.label, pill: true, color: "#8fd3ff" }); }
+        // on the limb's upper right; when that is in the right half the label hangs left of it, and it never rises into
+        // the chip band (render IB-EAR-019 v4: "ATMOSPHERE" ran off the right edge on the close framing)
+        const right = ax > 600; g += BTO.label(ax, ay, right ? Math.min(930, ax - 20) : ax + 120, Math.max(300, ay - 110), A.label, k * fade(t, null, A.outAt), { size: T().scale.label, pill: true, color: "#8fd3ff", anchor: right ? "end" : "start" }); }
       // parallels drawn on the surface (a line of latitude, e.g. the equator or 45 degrees north)
       (o.parallels || []).forEach((p) => { if (t < (p.at || 0)) return; const k = clamp((t - (p.at || 0)) / 0.7) * fade(t, null, p.outAt); const s = [];
         for (let lo = -180; lo <= 180; lo += 2) s.push([p.lat, lo]); const col = (p.color && C[p.color]) || p.color || C.teal;

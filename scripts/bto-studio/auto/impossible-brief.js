@@ -349,7 +349,9 @@ function build(script, style, topic) {
     // "flipped 183 times in 83 million years": a count of events over a span, both evidenced
     const cm = /\b(\d{1,3}(?:,\d{3})*|\d+)\s+(times|reversals|flips|eruptions|impacts|events|extinctions)\b[^.]*?\bin\s+(?:the\s+last\s+)?([\d.,]+\s*(?:million|thousand|billion)?\s*years)/i.exec(L.text);
     const count = cm && nums.some((n) => n.raw === cm[1]) && Number(cm[1].replace(/,/g, "")) >= 3 && Number(cm[1].replace(/,/g, "")) <= 400
-      && facts.some((f) => factHas(f, cm[3].match(/[\d.,]+/)[0])) ? { n: Number(cm[1].replace(/,/g, "")), raw: cm[1], noun: cm[2], span: `${cm[3].toUpperCase()} AGO` } : null;
+      && facts.some((f) => factHas(f, cm[3].match(/[\d.,]+/)[0])) ? { n: Number(cm[1].replace(/,/g, "")), raw: cm[1], noun: cm[2], span: `${cm[3].toUpperCase()} AGO`,
+        // a lower bound stays a lower bound on screen ("at least 183", IB-EAR-019 review: the source says "at least")
+        atLeast: /\b(at least|more than|over)\s+$/i.test(L.text.slice(0, cm.index)) } : null;
     const ev = [...new Set([...nums.flatMap((n) => n.facts), ...(L.evidenceSuggested || [])])].slice(0, 3); const evidence = ev.length ? ev : [facts[0].id];
     const chips = ["illustrationLabel", LAYER_CHIP[L.layer] || "factLabel"];
     const start = i === 0 ? 0 : `${L.id}-0.15`; const first = i === 0; const last = i === lines.length - 1;
@@ -385,7 +387,7 @@ function build(script, style, topic) {
     } else if (count) {
       // "N times in M years": N evenly spaced ticks on a long axis (spacing illustrative, count and span from the cited fact)
       kind = "count"; layers = [stars(60 + i), { component: "event-ticks", props: { x: 150, y: 980, w: 700, count: count.n, at: `${L.id}+0.2`, dur: 2.6, startLabel: count.span, endLabel: "NOW", seed: 7 + i } },
-        readout(`${L.id}+0.4`, `${count.raw} ${count.noun}`.toUpperCase(), 760)];
+        readout(`${L.id}+0.4`, `${count.atLeast ? "AT LEAST " : ""}${count.raw} ${count.noun}`.toUpperCase(), 760)];
       purpose = `Count: ${count.raw} events tick onto a ${count.span.toLowerCase()} axis as the line is spoken, so the frequency is seen as a density of marks; the spacing is illustrative, the count and span are the cited fact's.`;
       // the axis spans x 150-850: a gentle push keeps its end labels inside the safe margins (x >= 72) while it moves
       camera = [{ at: start, x: 520, y: 900, z: 1.0 }, { at: `${L.id}.end`, x: 560, y: 940, z: 1.08 }];
