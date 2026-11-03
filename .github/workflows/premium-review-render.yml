@@ -111,7 +111,7 @@ jobs:
       - name: Frames to the review branch (never main)
         if: always()
         run: |
-          [ -d review-out ] || exit 0
+          [ -n "$(ls -A review-out 2>/dev/null)" ] || exit 0
           find review-out -name "*.mp4" -delete
           git config user.name "premium-review-bot"; git config user.email "actions@users.noreply.github.com"
           B="review/render-${{ github.run_id }}-${{ steps.name.outputs.topic }}"

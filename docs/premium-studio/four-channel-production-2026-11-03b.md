@@ -12,14 +12,26 @@ frames showed, re-rendered, and measured live YouTube data. Nothing was merged, 
 | The Hidden Logic of Things (BTO-156) | Blank paper cards and quote slides. The mesh-vs-wavelength mechanism was never drawn. | **Aperture-vs-wavelength mechanism** (`page/components/waves.js`):<br>- a loupe opens on the door mesh;<br>- body and mesh glow as one shield;<br>- the magnetron launches waves that reflect inside the cage (continuous shot);<br>- hole vs a braced 12.2 cm wavelength (cited);<br>- "CANNOT PASS";<br>- visible light threads a hole;<br>- the viewer sees in while the energy stays in.<br>Duration was 27.3 s < 30 s minimum. Fixed by adding one verified line (fact P1, magnetron) instead of lowering the bar. |
 | GoalLore Lab (GLL-021) | "Past five England players" was not countable. Hook ≈ payoff (0.936). | A five-token **tally** struck off as each defender is passed (`tally.js`). The payoff replays from the higher camera. |
 | ImpossibleBrief (EAR-019) | "Satellites and power grids" showed neither. The payoff redrew the full field under "technology would feel it first". | **tech-hits**: satellites on orbit and pylons on the limb, struck by the particles. The technology payoff keeps the field off. |
-| ImpossibleBrief (EAR-001) | Good. Re-rendered byte-identical (sha256 `7a792484…`): the render is deterministic. | — |
+| ImpossibleBrief (EAR-001) | Good; the inertia figure stays upright while sliding (minor). MP4 sha256 matched in two of three runs; Edge's narration audio can vary between runs, so hashes are not a determinism guarantee. | — |
 
 Regression tests: `tests/js/premium-mechanisms.test.js` (7). Full suite: 1044 + 7 pass.
 
 ## 2. Real MP4s (CI, final 1080×1920, approved Edge voice except GLL's candidate)
 
-See the final run's table in the PR description (run 41700131525; MP4s in its `premium-review-render` artifact, frames
-on `review/render-41700131525`).
+Run [41703791696](https://github.com/eyazan/youtube-otomasyon/actions/runs/41703791696) (commit `d3bf1f03`): one
+artifact per topic; frames, contact sheet, QA and Creative Director report on `review/render-41703791696-<topic>`.
+
+| Channel | Topic | MP4 artifact | Duration | Loudness / true peak | Voice | Objective QA |
+|---|---|---|---|---|---|---|
+| ImpossibleBrief | IB-EAR-001 | [premium-IB-EAR-001](https://github.com/eyazan/youtube-otomasyon/actions/runs/41703791696/artifacts/13264262698) | 30.6 s | −14.3 LUFS / −3.0 dBTP | Brian (approved) | PASS |
+| ImpossibleBrief | IB-EAR-019 | [premium-IB-EAR-019](https://github.com/eyazan/youtube-otomasyon/actions/runs/41703791696/artifacts/13264207883) | 31.5 s | −14.2 / −3.0 | Brian (approved) | PASS |
+| Failure Reconstructed | FR-el-faro-2015 | [premium-FR-el-faro-2015](https://github.com/eyazan/youtube-otomasyon/actions/runs/41703791696/artifacts/13265451771) | 26.9 s | −14.3 / −2.9 | Andrew (approved) | PASS |
+| The Hidden Logic of Things | BTO-156 | [premium-BTO-156](https://github.com/eyazan/youtube-otomasyon/actions/runs/41703791696/artifacts/13265237338) | 31.9 s | −14.0 / −3.0 | Emma (approved) | PASS (was FAIL 27.3 s) |
+| GoalLore Lab | GLL-021 | [premium-GLL-021](https://github.com/eyazan/youtube-otomasyon/actions/runs/41703791696/artifacts/13264817418) | 25.6 s | −14.4 / −2.9 | Ryan (**candidate, not approved**) | PASS (voice WARN) |
+
+IB-EAR-006 (a volcano topic) was also dispatched and is correctly **refused** at readiness: its visual mechanism is
+not declared by a person (CREATIVE_REVIEW_REQUIRED). The board renders it only as preview stills.
+Artifacts expire 2026-12-03.
 
 ## 3. ImpossibleBrief starvation: root cause and fix
 
