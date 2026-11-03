@@ -36,6 +36,9 @@ function legacySlugs() {
 }
 
 // channel-specific refusals on top of the studio readiness
+// automatic publication also waits for a person's claim review and creative PASS (IB: core/research/claim-sources.js)
+const publicationHolds = (channel, topic) => require("../research/claim-sources").publicationHolds(channel, topic);
+
 function extraRefusals(channel, topic) {
   if (channel.slug !== "goal-lore-lab") return [];
   const why = [];
@@ -133,7 +136,7 @@ function runChannel(slug, argv = [], { env = process.env, spawn = cp.spawnSync, 
   }
   // 1. an approved premium Short (owner sign-offs, or the owner-signed publication policy) through the existing uploader
   if (!explicit) {
-    const p = premium.run(channel, { env, targetDay, log, nextTopic: (accept) => (qualified(channel, { bar }).ok.find((r) => !accept || accept(r.topic)) || {}).topic || null });
+    const p = premium.run(channel, { env, targetDay, log, nextTopic: (accept) => (qualified(channel, { bar }).ok.find((r) => (!accept || accept(r.topic)) && !publicationHolds(channel, r.topic).length) || {}).topic || null });
     if (p && p.noTopic) { const why = "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)"; run.skip("RESEARCH", why).outcome("NO_TOPIC", why); return 0; }
     if (p && (p.uploaded || p.dryRun)) {
       run.topic(p.slug).done("RESEARCH", p.topicId).done("RENDER", "premium final").done("QA", "objective PASS, publish gate PUBLISH_APPROVED")
