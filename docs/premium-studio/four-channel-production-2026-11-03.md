@@ -82,7 +82,7 @@ person must choose; topics whose mechanism has no drawing stay held.
 |---|---|---|---|---|
 | IB-EAR-001 | CI run 41688507762 (artifact `premium-review-render`), frames `review/render-41688507762` | Edge Brian Multilingual (approved) | PASS | sha256 `7a792484…f2bc` |
 | IB-EAR-019 | same run | same | PASS | sha256 `22e2c5dd…0e65` |
-| FR-el-faro-2015 | CI dispatch (see PR) + local preview | Edge Andrew (CI) / Kokoro preview | PASS (preview) | creative FAIL, below |
+| FR-el-faro-2015 | CI run 41688512604, frames `review/render-41688512604` | approved Edge voice | PASS | sha256 `f0541c3e…0641`; Creative Director flags THIN on 8/8 scenes, LOW_NOVELTY, LOW_MOTION: creative FAIL, below |
 | GLL-021 | CI dispatch (see PR) + local preview | Edge Ryan (not approved) / Kokoro | FAIL duration (preview voice) | |
 | BTO-156 | local preview | Kokoro (preview) | FAIL duration 25.3 s < 30 s | creative FAIL |
 
