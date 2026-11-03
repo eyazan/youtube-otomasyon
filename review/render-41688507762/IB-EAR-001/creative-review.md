@@ -1,0 +1,16 @@
+# Creative review (../../_temp/review/IB-EAR-001/out/what-if-earth-stopped-spinning-for-one-second-premium-final.mp4)
+
+Measurements describe the frames; they are not quality scores. Human fields are filled by a reviewer (creative-notes.json) and are marked with who wrote them.
+
+| scene | technique | transition | motion | novelty | offset | text share | min text | flags | human verdict |
+|---|---|---|---|---|---|---|---|---|---|
+| s1-hook | kinetic-typography | cut | 0.0175 | null | 0.066 | 0.013 | 60 | CENTRED_FLAT | not reviewed |
+| s2-inertia |  | scan-wipe | 0.0279 | 0.0902 | 0.02 | 0.017 | 41.6 | THIN | not reviewed |
+| s3-equator |  | iris | 0.0475 | 0.2344 | 0.085 | 0.014 | 40.8 | THIN | not reviewed |
+| s4-forces |  | dissolve | 0.0307 | 0.2346 | 0.042 | 0.016 | 40.1 | THIN | not reviewed |
+| s5-slide |  | scan-wipe | 0.0177 | 0.0413 | 0.06 | 0.016 | 44.8 | LOW_NOVELTY, CENTRED_FLAT, THIN | not reviewed |
+| s6-latitudes |  | iris | 0.0339 | 0.1309 | 0.041 | 0.021 | 41 | THIN | not reviewed |
+| s7-payoff | kinetic-typography | scan-wipe | 0.0173 | 0.093 | 0.104 | 0.028 | 43.4 | CENTRED_FLAT | not reviewed |
+
+## Reviewer notes (judgement, not measurement)
+
