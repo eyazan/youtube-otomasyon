@@ -3,7 +3,7 @@
   "channel": "impossible-brief",
   "channelName": "ImpossibleBrief",
   "contentType": "long",
-  "createdAt": "2026-09-30T15:48:34.232Z",
+  "createdAt": "2026-11-02T07:10:07.238Z",
   "topic": {
     "id": "IB-EAR-019",
     "slug": "could-earth-survive-one-day-without-earth-s-magnetic-field",
@@ -17,10 +17,10 @@
     "slug": "could-earth-survive-one-day-without-earth-s-magnetic-field",
     "title": "Could Earth survive one day without Earth's magnetic field?",
     "cluster": "EARTH",
-    "LongFormPotentialScore": 78,
+    "LongFormPotentialScore": 82,
     "bucket": "A",
     "reasons": [
-      "LongFormPotential 78 ≥ 78"
+      "LongFormPotential 82 ≥ 78"
     ],
     "factors": {
       "DepthPotential": {
@@ -58,16 +58,16 @@
         "basis": "inventory-signal"
       },
       "ShortsEvidence": {
-        "value": 50,
-        "basis": "derived",
-        "note": "no published Short in this cluster yet — neutral"
+        "value": 57,
+        "basis": "measured",
+        "note": "best cluster Short 1222 views vs channel median 922; best subscriber conversion 0.00098; best growth score 62.7"
       },
       "SeriesPotential": {
-        "value": 80,
+        "value": 95,
         "basis": "derived"
       },
       "ViewerJourneyPotential": {
-        "value": 55,
+        "value": 85,
         "basis": "derived"
       }
     },
@@ -129,7 +129,7 @@
     "gaps": [
       "no deep research — long-form depth limited to the Shorts case file"
     ],
-    "reuseCount": 0
+    "reuseCount": 1
   },
   "outline": {
     "structure": [
@@ -254,14 +254,50 @@
       {
         "type": "impossible_question",
         "text": "Could Earth survive one day without Earth's magnetic field?",
-        "score": 77,
+        "score": 81,
         "estimatedSeconds": 2.8
       },
       {
         "type": "visual_first_reveal",
         "text": "Earth's magnetic field is already weakening.",
-        "score": 72,
+        "score": 78,
         "estimatedSeconds": 1.9
+      },
+      {
+        "type": "tiny_cause_massive_consequence",
+        "text": "Earth's magnetic field switched off for one day.",
+        "score": 75,
+        "estimatedSeconds": 2.5
+      },
+      {
+        "type": "impossible_sounding_fact",
+        "text": "Fields have flipped 183 times in 83 million years.",
+        "score": 75,
+        "estimatedSeconds": 2.8
+      },
+      {
+        "type": "unexpected_chain_reaction",
+        "text": "Its main dipole has faded about 6.3% per century.",
+        "score": 74,
+        "estimatedSeconds": 2.8
+      },
+      {
+        "type": "hidden_cause",
+        "text": "So we'd survive, but our technology would feel it first.",
+        "score": 74,
+        "estimatedSeconds": 3.1
+      },
+      {
+        "type": "contradiction",
+        "text": "But the air wouldn't vanish in a day; that takes far longer.",
+        "score": 73,
+        "estimatedSeconds": 3.8
+      },
+      {
+        "type": "before_after_consequence",
+        "text": "Now switch it off completely, for just one day.",
+        "score": 73,
+        "estimatedSeconds": 2.8
       },
       {
         "type": "shocking_consequence",
@@ -270,65 +306,164 @@
         "estimatedSeconds": 6.9
       },
       {
-        "type": "tiny_cause_massive_consequence",
-        "text": "Earth's magnetic field switched off for one day.",
-        "score": 70,
-        "estimatedSeconds": 2.5
-      },
-      {
-        "type": "impossible_sounding_fact",
-        "text": "Fields have flipped 183 times in 83 million years.",
-        "score": 70,
-        "estimatedSeconds": 2.8
-      },
-      {
-        "type": "contradiction",
-        "text": "But the air wouldn't vanish in a day; that takes far longer.",
-        "score": 68,
-        "estimatedSeconds": 3.8
-      },
-      {
-        "type": "unexpected_chain_reaction",
-        "text": "Its main dipole has faded about 6.3% per century.",
-        "score": 67,
-        "estimatedSeconds": 2.8
-      },
-      {
-        "type": "hidden_cause",
-        "text": "So we'd survive, but our technology would feel it first.",
-        "score": 66,
-        "estimatedSeconds": 3.1
-      },
-      {
-        "type": "before_after_consequence",
-        "text": "Now switch it off completely, for just one day.",
-        "score": 65,
-        "estimatedSeconds": 2.8
-      },
-      {
         "type": "misconception_reversal",
         "text": "It would not all happen at once.",
-        "score": 63,
+        "score": 71,
         "estimatedSeconds": 2.2
       },
       {
         "type": "question_gap",
         "text": "What changes first?",
-        "score": 61,
+        "score": 68,
         "estimatedSeconds": 0.9
       }
     ],
     "selected": {
       "type": "impossible_question",
       "text": "Could Earth survive one day without Earth's magnetic field?",
-      "score": 77,
+      "score": 81,
       "estimatedSeconds": 2.8
     }
   },
   "script": {
-    "generator": "deterministic-evidence",
+    "generator": "llm:groq:openai/gpt-oss-120b",
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "status": "QUALITY_REVIEW",
+    "pipeline": [
+      "TOPIC",
+      "RESEARCH_EVIDENCE",
+      "FACT_PACK",
+      "NARRATIVE_ANGLE",
+      "OUTLINE",
+      "SECTION_PLAN",
+      "SECTION_GENERATION",
+      "CONTINUITY_PASS",
+      "RETENTION_PASS",
+      "FACTUAL_CONSISTENCY_CHECK",
+      "FINAL_VOICEOVER_SCRIPT"
+    ],
+    "blueprint": {
+      "central_question": "Could Earth survive one day without Earth's magnetic field?",
+      "audience_promise": "Answer one precise question about Could Earth survive one day without Earth's magnetic field using only documented evidence.",
+      "narrative_angle": "We start with the shocking immediate fallout on our technology, then zoom out to the geodynamo that creates the field, explain why the atmosphere stays intact, and finish with what science can and cannot predict about a 24‑hour blackout.",
+      "hook_candidates": [
+        "Satellites flicker and power grids gasp as Earth’s magnetic shield vanishes for a day (C1, C11, C13).",
+        "What if the field that’s been weakening 6.3% per century disappears tomorrow? (C6, C7).",
+        "Imagine a day without the magnetosphere – the solar wind rushes in, but the air stays put (C1, C5)."
+      ],
+      "retention_beats": [
+        "[object Object].",
+        "[object Object].",
+        "[object Object].",
+        "[object Object].",
+        "[object Object].",
+        "[object Object].",
+        "[object Object].",
+        "[object Object].",
+        "[object Object]."
+      ],
+      "uncertain_claims": [],
+      "section_plan": [
+        {
+          "section": "COLD_OPEN",
+          "question": "What is the unresolved consequence the viewer sees first?",
+          "claimIds": [
+            "C1",
+            "C6",
+            "C7",
+            "C8",
+            "C9",
+            "C10",
+            "C11",
+            "C12",
+            "C13"
+          ]
+        },
+        {
+          "section": "IMPOSSIBLE_QUESTION",
+          "question": "What exactly is being asked?",
+          "claimIds": [
+            "C1"
+          ]
+        },
+        {
+          "section": "INITIAL_CONDITIONS",
+          "question": "What do we assume?",
+          "claimIds": [
+            "C2"
+          ]
+        },
+        {
+          "section": "FIRST_EFFECT",
+          "question": "What changes first?",
+          "claimIds": [
+            "C6",
+            "C7",
+            "C8",
+            "C9",
+            "C10",
+            "C11",
+            "C12",
+            "C13",
+            "C14",
+            "C15",
+            "C16",
+            "C17",
+            "C18",
+            "C19",
+            "C20"
+          ]
+        },
+        {
+          "section": "SECOND_ORDER_EFFECT",
+          "question": "What does that trigger?",
+          "claimIds": []
+        },
+        {
+          "section": "SYSTEM_WIDE_CONSEQUENCE",
+          "question": "How far does it spread?",
+          "claimIds": []
+        },
+        {
+          "section": "SCIENCE_EXPLANATION",
+          "question": "What physics governs it?",
+          "claimIds": [
+            "C3"
+          ]
+        },
+        {
+          "section": "LIMITS_UNCERTAINTIES",
+          "question": "What can science not predict here?",
+          "claimIds": [
+            "C21"
+          ]
+        },
+        {
+          "section": "FINAL_SCIENTIFIC_PAYOFF",
+          "question": "What is the answer?",
+          "claimIds": []
+        }
+      ]
+    },
+    "quality": {
+      "duplicateSections": [],
+      "repeatedPhrases": [],
+      "weakHook": false,
+      "payoff": false,
+      "filler": [],
+      "introShare": 0.16,
+      "missingPlanSections": [],
+      "hardFails": [
+        "missing final payoff"
+      ],
+      "notes": []
+    },
+    "checkpoint": "generation/could-earth-survive-one-day-without-earth-s-magnetic-field.json",
     "llmError": null,
-    "depthNote": null,
+    "llmErrorCode": null,
+    "llmErrorStage": null,
+    "depthNote": "Only one confirmed fact (C1) supports this brief; no additional evidence available. Section relies solely on claim C2 Immediate technological impacts precede atmospheric effects. Only one confirmed fact supports this explanation. Speculation limited to physics‑based ordering, no precise timing predictions.",
     "sections": [
       {
         "section": "COLD_OPEN",
@@ -344,7 +479,7 @@
         "section": "IMPOSSIBLE_QUESTION",
         "paragraphs": [
           {
-            "text": "Start with the assumption. One day without it would expose satellites and power grids to more charged particles; the atmosphere would not vanish in a day.",
+            "text": "A 24‑hour loss of the geomagnetic field would immediately increase the flux of charged particles reaching satellites and power‑grid components, yet the atmosphere would not disappear within that period.",
             "claims": [
               "C1"
             ],
@@ -356,7 +491,7 @@
         "section": "INITIAL_CONDITIONS",
         "paragraphs": [
           {
-            "text": "That is the first effect — but not the biggest. Assume earth's magnetic field switched off for one day.",
+            "text": "We assume the Earth's magnetic field is switched off for one day.",
             "claims": [
               "C2"
             ],
@@ -368,21 +503,44 @@
         "section": "FIRST_EFFECT",
         "paragraphs": [
           {
-            "text": "The second-order effect is stranger. Earth's magnetic field is already weakening. Its main dipole has faded about 6.3% per century. Fields have flipped 183 times in 83 million years. The last flip was 780,000 years ago. Now switch it off completely, for just one day. Satellites and power grids would take more charged particles. But the air wouldn't vanish in a day; that takes far longer. So we'd survive, but our technology would feel it first. Over the last two centuries the dipole strength has been decreasing at a rate of about 6.3% per century. Measurements since Gauss in 1832 show a relative decay of about 10% over the last 150 years. There have been at least 183 reversals over the last 83 million years, on average once every ~450,000 years. The latest, the Brunhes–Matuyama reversal, occurred 780,000 years ago. Some sources estimate the four most recent reversals took on average 7,000 years. The geodynamo in Earth's liquid outer core generates a field that deflects the solar wind. Earth's magnetic field switched off for one day.",
+            "text": "Earth's magnetic field is already weakening, its main dipole has faded about 6.3% per century, and over the last two centuries the dipole strength has been decreasing at a similar rate.",
             "claims": [
               "C6",
               "C7",
+              "C14"
+            ],
+            "role": "evidence"
+          },
+          {
+            "text": "Measurements since Gauss in 1832 show a relative decay of about 10% over the last 150 years.",
+            "claims": [
+              "C15"
+            ],
+            "role": "evidence"
+          },
+          {
+            "text": "Fields have flipped 183 times in 83 million years, the last flip was 780,000 years ago, and there have been at least 183 reversals over that span, on average once every ~450,000 years.",
+            "claims": [
               "C8",
               "C9",
+              "C16",
+              "C17"
+            ],
+            "role": "evidence"
+          },
+          {
+            "text": "If the field were switched off completely for just one day, satellites and power grids would take more charged particles, but the air wouldn't vanish in a day; that takes far longer, so we'd survive, but our technology would feel it first.",
+            "claims": [
               "C10",
               "C11",
               "C12",
-              "C13",
-              "C14",
-              "C15",
-              "C16",
-              "C17",
-              "C18",
+              "C13"
+            ],
+            "role": "evidence"
+          },
+          {
+            "text": "The geodynamo in Earth's liquid outer core generates a field that deflects the solar wind, and the scenario of Earth's magnetic field switched off for one day remains a speculation.",
+            "claims": [
               "C19",
               "C20"
             ],
@@ -402,7 +560,7 @@
         "section": "SCIENCE_EXPLANATION",
         "paragraphs": [
           {
-            "text": "And here is where science stops being certain. The governing physics: the geodynamo in Earth's liquid outer core generates a field that deflects the solar wind.",
+            "text": "The geodynamo in Earth’s liquid outer core generates a magnetic field that deflects the solar wind.",
             "claims": [
               "C3"
             ],
@@ -414,7 +572,7 @@
         "section": "LIMITS_UNCERTAINTIES",
         "paragraphs": [
           {
-            "text": "So what is the answer? The exact timeline depends on how the impossible change happens; the order of effects is what established physics constrains.",
+            "text": "Science cannot pinpoint the exact timeline of consequences if Earth’s magnetic field vanished; only the sequence of effects is bounded by established physics.",
             "claims": [
               "C21"
             ],
@@ -427,10 +585,10 @@
         "paragraphs": []
       }
     ],
-    "words": 280,
-    "estimatedMinutes": 1.9,
-    "paragraphs": 6,
-    "secondsPerNewBeat": 19
+    "words": 242,
+    "estimatedMinutes": 1.6,
+    "paragraphs": 10,
+    "secondsPerNewBeat": 10
   },
   "claimSourceMap": {
     "rows": [
@@ -441,7 +599,7 @@
       },
       {
         "section": "IMPOSSIBLE_QUESTION",
-        "excerpt": "Start with the assumption. One day without it would expose satellites and power grids to m",
+        "excerpt": "A 24‑hour loss of the geomagnetic field would immediately increase the flux of charged par",
         "claims": [
           {
             "id": "C1",
@@ -452,7 +610,7 @@
       },
       {
         "section": "INITIAL_CONDITIONS",
-        "excerpt": "That is the first effect — but not the biggest. Assume earth's magnetic field switched off",
+        "excerpt": "We assume the Earth's magnetic field is switched off for one day.",
         "claims": [
           {
             "id": "C2",
@@ -463,7 +621,7 @@
       },
       {
         "section": "FIRST_EFFECT",
-        "excerpt": "The second-order effect is stranger. Earth's magnetic field is already weakening. Its main",
+        "excerpt": "Earth's magnetic field is already weakening, its main dipole has faded about 6.3% per cent",
         "claims": [
           {
             "id": "C6",
@@ -476,6 +634,28 @@
             "source": "editorial narration (case file)"
           },
           {
+            "id": "C14",
+            "class": "CONFIRMED_FACT",
+            "source": "Wikipedia — Earth's magnetic field"
+          }
+        ]
+      },
+      {
+        "section": "FIRST_EFFECT",
+        "excerpt": "Measurements since Gauss in 1832 show a relative decay of about 10% over the last 150 year",
+        "claims": [
+          {
+            "id": "C15",
+            "class": "CONFIRMED_FACT",
+            "source": "Wikipedia — Earth's magnetic field"
+          }
+        ]
+      },
+      {
+        "section": "FIRST_EFFECT",
+        "excerpt": "Fields have flipped 183 times in 83 million years, the last flip was 780,000 years ago, an",
+        "claims": [
+          {
             "id": "C8",
             "class": "CONFIRMED_FACT",
             "source": "editorial narration (case file)"
@@ -485,6 +665,22 @@
             "class": "CONFIRMED_FACT",
             "source": "editorial narration (case file)"
           },
+          {
+            "id": "C16",
+            "class": "CONFIRMED_FACT",
+            "source": "Wikipedia — Geomagnetic reversal"
+          },
+          {
+            "id": "C17",
+            "class": "CONFIRMED_FACT",
+            "source": "Wikipedia — Geomagnetic reversal"
+          }
+        ]
+      },
+      {
+        "section": "FIRST_EFFECT",
+        "excerpt": "If the field were switched off completely for just one day, satellites and power grids wou",
+        "claims": [
           {
             "id": "C10",
             "class": "CONFIRMED_FACT",
@@ -504,32 +700,13 @@
             "id": "C13",
             "class": "CONFIRMED_FACT",
             "source": "editorial narration (case file)"
-          },
-          {
-            "id": "C14",
-            "class": "CONFIRMED_FACT",
-            "source": "Wikipedia — Earth's magnetic field"
-          },
-          {
-            "id": "C15",
-            "class": "CONFIRMED_FACT",
-            "source": "Wikipedia — Earth's magnetic field"
-          },
-          {
-            "id": "C16",
-            "class": "CONFIRMED_FACT",
-            "source": "Wikipedia — Geomagnetic reversal"
-          },
-          {
-            "id": "C17",
-            "class": "CONFIRMED_FACT",
-            "source": "Wikipedia — Geomagnetic reversal"
-          },
-          {
-            "id": "C18",
-            "class": "CONFIRMED_FACT",
-            "source": "Wikipedia — Geomagnetic reversal"
-          },
+          }
+        ]
+      },
+      {
+        "section": "FIRST_EFFECT",
+        "excerpt": "The geodynamo in Earth's liquid outer core generates a field that deflects the solar wind,",
+        "claims": [
           {
             "id": "C19",
             "class": "CONFIRMED_FACT",
@@ -544,7 +721,7 @@
       },
       {
         "section": "SCIENCE_EXPLANATION",
-        "excerpt": "And here is where science stops being certain. The governing physics: the geodynamo in Ear",
+        "excerpt": "The geodynamo in Earth’s liquid outer core generates a magnetic field that deflects the so",
         "claims": [
           {
             "id": "C3",
@@ -555,7 +732,7 @@
       },
       {
         "section": "LIMITS_UNCERTAINTIES",
-        "excerpt": "So what is the answer? The exact timeline depends on how the impossible change happens; th",
+        "excerpt": "Science cannot pinpoint the exact timeline of consequences if Earth’s magnetic field vanis",
         "claims": [
           {
             "id": "C21",
@@ -566,7 +743,9 @@
       }
     ],
     "unsupportedParagraphs": 0,
-    "unsupportedNumbers": [],
+    "unsupportedNumbers": [
+      "24"
+    ],
     "copyRisks": []
   },
   "scenePlan": [
@@ -592,7 +771,7 @@
       "scene": 2,
       "narrationSpan": [
         4,
-        14
+        15
       ],
       "section": "IMPOSSIBLE_QUESTION",
       "visualPurpose": "visualise scenario",
@@ -600,7 +779,7 @@
       "subject": "field strength decline chart",
       "asset": "field strength decline chart",
       "sourceRequirement": "procedural render, labelled on screen",
-      "durationEstimateSeconds": 10.4,
+      "durationEstimateSeconds": 11.6,
       "motion": "slow push-in to detail",
       "claimSupported": "C1",
       "fallbackAssetStrategy": "labelled procedural diagram",
@@ -609,8 +788,8 @@
     {
       "scene": 3,
       "narrationSpan": [
-        14,
-        22
+        15,
+        20
       ],
       "section": "INITIAL_CONDITIONS",
       "visualPurpose": "visualise scenario",
@@ -618,7 +797,7 @@
       "subject": "magnetic reversal timeline",
       "asset": "magnetic reversal timeline",
       "sourceRequirement": "procedural render, labelled on screen",
-      "durationEstimateSeconds": 7.6,
+      "durationEstimateSeconds": 4.8,
       "motion": "slow push-in to detail",
       "claimSupported": "C2",
       "fallbackAssetStrategy": "labelled procedural diagram",
@@ -627,8 +806,8 @@
     {
       "scene": 4,
       "narrationSpan": [
-        22,
-        39
+        20,
+        32
       ],
       "section": "FIRST_EFFECT",
       "visualPurpose": "visualise scenario",
@@ -636,7 +815,7 @@
       "subject": "compass needle drifting",
       "asset": "compass needle drifting",
       "sourceRequirement": "procedural render, labelled on screen",
-      "durationEstimateSeconds": 17.6,
+      "durationEstimateSeconds": 12.4,
       "motion": "slow push-in to detail",
       "claimSupported": "C6",
       "fallbackAssetStrategy": "labelled procedural diagram",
@@ -645,8 +824,8 @@
     {
       "scene": 5,
       "narrationSpan": [
-        39,
-        57
+        32,
+        39
       ],
       "section": "FIRST_EFFECT",
       "visualPurpose": "visualise scenario",
@@ -654,17 +833,17 @@
       "subject": "satellite hit by particles",
       "asset": "satellite hit by particles",
       "sourceRequirement": "procedural render, labelled on screen",
-      "durationEstimateSeconds": 17.6,
-      "motion": "lateral reframe / crop to evidence",
-      "claimSupported": "C7",
+      "durationEstimateSeconds": 6.8,
+      "motion": "slow push-in to detail",
+      "claimSupported": "C15",
       "fallbackAssetStrategy": "labelled procedural diagram",
       "disclosure": "on-screen label required"
     },
     {
       "scene": 6,
       "narrationSpan": [
-        57,
-        74
+        39,
+        52
       ],
       "section": "FIRST_EFFECT",
       "visualPurpose": "visualise scenario",
@@ -672,8 +851,8 @@
       "subject": "aurora spreading to lower latitudes",
       "asset": "aurora spreading to lower latitudes",
       "sourceRequirement": "procedural render, labelled on screen",
-      "durationEstimateSeconds": 17.6,
-      "motion": "hold, animated highlight on the claimed element",
+      "durationEstimateSeconds": 13.2,
+      "motion": "slow push-in to detail",
       "claimSupported": "C8",
       "fallbackAssetStrategy": "labelled procedural diagram",
       "disclosure": "on-screen label required"
@@ -681,8 +860,8 @@
     {
       "scene": 7,
       "narrationSpan": [
-        74,
-        92
+        52,
+        69
       ],
       "section": "FIRST_EFFECT",
       "visualPurpose": "visualise scenario",
@@ -690,17 +869,35 @@
       "subject": "magnetosphere deflecting solar wind",
       "asset": "magnetosphere deflecting solar wind",
       "sourceRequirement": "procedural render, labelled on screen",
-      "durationEstimateSeconds": 17.6,
+      "durationEstimateSeconds": 16.8,
       "motion": "slow push-in to detail",
-      "claimSupported": "C9",
+      "claimSupported": "C10",
       "fallbackAssetStrategy": "labelled procedural diagram",
       "disclosure": "on-screen label required"
     },
     {
       "scene": 8,
       "narrationSpan": [
-        92,
-        102
+        69,
+        81
+      ],
+      "section": "FIRST_EFFECT",
+      "visualPurpose": "visualise scenario",
+      "visualType": "ILLUSTRATION",
+      "subject": "field strength decline chart",
+      "asset": "field strength decline chart",
+      "sourceRequirement": "procedural render, labelled on screen",
+      "durationEstimateSeconds": 12,
+      "motion": "slow push-in to detail",
+      "claimSupported": "C19",
+      "fallbackAssetStrategy": "labelled procedural diagram",
+      "disclosure": "on-screen label required"
+    },
+    {
+      "scene": 9,
+      "narrationSpan": [
+        81,
+        88
       ],
       "section": "SCIENCE_EXPLANATION",
       "visualPurpose": "explain mechanism",
@@ -708,25 +905,25 @@
       "subject": "The governing physics: the geodynamo in Earth's liquid outer core generates a field that",
       "asset": "diagram:SCIENCE_EXPLANATION:C3",
       "sourceRequirement": "procedural render, labelled on screen",
-      "durationEstimateSeconds": 10.4,
+      "durationEstimateSeconds": 6.4,
       "motion": "slow push-in to detail",
       "claimSupported": "C3",
       "fallbackAssetStrategy": "labelled procedural diagram",
       "disclosure": null
     },
     {
-      "scene": 9,
+      "scene": 10,
       "narrationSpan": [
-        102,
-        112
+        88,
+        97
       ],
       "section": "LIMITS_UNCERTAINTIES",
       "visualPurpose": "visualise scenario",
       "visualType": "ILLUSTRATION",
-      "subject": "field strength decline chart",
-      "asset": "field strength decline chart",
+      "subject": "magnetic reversal timeline",
+      "asset": "magnetic reversal timeline",
       "sourceRequirement": "procedural render, labelled on screen",
-      "durationEstimateSeconds": 9.6,
+      "durationEstimateSeconds": 9.2,
       "motion": "slow push-in to detail",
       "claimSupported": "C21",
       "fallbackAssetStrategy": "labelled procedural diagram",
@@ -736,7 +933,7 @@
   "assetPlan": {
     "byType": {
       "SIMULATION": 1,
-      "ILLUSTRATION": 7,
+      "ILLUSTRATION": 8,
       "DIAGRAM": 1
     },
     "distinctSubjects": 7,
@@ -890,48 +1087,40 @@
   },
   "titles": {
     "selected": {
-      "title": "What One Day Without Earth's Magnetic Field Would Do",
+      "title": "Earth's Magnetic Field Is Weakening. Should We Worry?",
       "source": "editorial",
-      "pattern": "statement",
+      "pattern": "question",
       "scores": {
         "clarity": 100,
-        "curiosity": 58,
+        "curiosity": 66,
         "specificity": 47,
         "truthfulness": 100,
-        "searchIntent": 42,
+        "searchIntent": 38,
         "channelIdentity": 84,
         "ctrPotential": 57,
-        "novelty": 100,
-        "evergreenPotential": 75
+        "novelty": 90,
+        "evergreenPotential": 75,
+        "consequence": 42,
+        "compactness": 100,
+        "recognizability": 38,
+        "nonRedundancy": 90,
+        "factualIntegrity": 100,
+        "historicalPerformanceSimilarity": 50,
+        "patternFreshness": 100
       },
       "total": 71,
+      "patternPenalty": 0,
+      "templateNaturalnessPenalty": 0,
+      "genericTemplatePenalty": 0,
       "adjustedTotal": 71,
       "unsupportedWords": [],
-      "misleading": false
+      "misleading": false,
+      "grammar": [],
+      "ungrammatical": false
     },
     "selectedScore": 71,
     "count": 21,
     "candidates": [
-      {
-        "title": "What One Day Without Earth's Magnetic Field Would Do",
-        "source": "editorial",
-        "pattern": "statement",
-        "scores": {
-          "clarity": 100,
-          "curiosity": 58,
-          "specificity": 47,
-          "truthfulness": 100,
-          "searchIntent": 42,
-          "channelIdentity": 84,
-          "ctrPotential": 57,
-          "novelty": 100,
-          "evergreenPotential": 75
-        },
-        "total": 71,
-        "adjustedTotal": 71,
-        "unsupportedWords": [],
-        "misleading": false
-      },
       {
         "title": "Earth's Magnetic Field Is Weakening. Should We Worry?",
         "source": "editorial",
@@ -944,33 +1133,25 @@
           "searchIntent": 38,
           "channelIdentity": 84,
           "ctrPotential": 57,
-          "novelty": 100,
-          "evergreenPotential": 75
+          "novelty": 90,
+          "evergreenPotential": 75,
+          "consequence": 42,
+          "compactness": 100,
+          "recognizability": 38,
+          "nonRedundancy": 90,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
         },
         "total": 71,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
         "adjustedTotal": 71,
         "unsupportedWords": [],
-        "misleading": false
-      },
-      {
-        "title": "Could Earth Survive One Day Without Earth's Magnetic Field?",
-        "source": "current",
-        "pattern": "question",
-        "scores": {
-          "clarity": 100,
-          "curiosity": 66,
-          "specificity": 47,
-          "truthfulness": 100,
-          "searchIntent": 38,
-          "channelIdentity": 74,
-          "ctrPotential": 57,
-          "novelty": 100,
-          "evergreenPotential": 75
-        },
-        "total": 70,
-        "adjustedTotal": 70,
-        "unsupportedWords": [],
-        "misleading": false
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
       },
       {
         "title": "What Would Really Happen If Could Earth Survive One Day Without Earth's Magnetic Field?",
@@ -984,35 +1165,25 @@
           "searchIntent": 42,
           "channelIdentity": 74,
           "ctrPotential": 59,
-          "novelty": 100,
-          "evergreenPotential": 75
+          "novelty": 93,
+          "evergreenPotential": 75,
+          "consequence": 80,
+          "compactness": 18,
+          "recognizability": 38,
+          "nonRedundancy": 93,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
         },
         "total": 69,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
         "adjustedTotal": 69,
         "unsupportedWords": [],
-        "misleading": false
-      },
-      {
-        "title": "What If Earth's Magnetic Field Switched Off for One Day? the Full Scenario",
-        "source": "full-scenario",
-        "pattern": "statement",
-        "scores": {
-          "clarity": 84,
-          "curiosity": 76,
-          "specificity": 47,
-          "truthfulness": 85,
-          "searchIntent": 50,
-          "channelIdentity": 74,
-          "ctrPotential": 59,
-          "novelty": 100,
-          "evergreenPotential": 75
-        },
-        "total": 69,
-        "adjustedTotal": 69,
-        "unsupportedWords": [
-          "scenario"
-        ],
-        "misleading": false
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
       },
       {
         "title": "How Long Would Earth Last If Could Earth Survive One Day Without Earth's Magnetic Field?",
@@ -1026,33 +1197,91 @@
           "searchIntent": 50,
           "channelIdentity": 74,
           "ctrPotential": 59,
-          "novelty": 100,
-          "evergreenPotential": 75
+          "novelty": 93,
+          "evergreenPotential": 75,
+          "consequence": 80,
+          "compactness": 9,
+          "recognizability": 38,
+          "nonRedundancy": 93,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
         },
         "total": 69,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
         "adjustedTotal": 69,
         "unsupportedWords": [],
-        "misleading": false
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
       },
       {
-        "title": "The Real Physics If Could Earth Survive One Day Without Earth's Magnetic Field",
-        "source": "real-physics",
+        "title": "What One Day Without Earth's Magnetic Field Would Do",
+        "source": "editorial",
         "pattern": "statement",
         "scores": {
-          "clarity": 78,
+          "clarity": 100,
           "curiosity": 58,
           "specificity": 47,
           "truthfulness": 100,
-          "searchIntent": 30,
-          "channelIdentity": 86,
-          "ctrPotential": 47,
-          "novelty": 100,
-          "evergreenPotential": 75
+          "searchIntent": 42,
+          "channelIdentity": 84,
+          "ctrPotential": 57,
+          "novelty": 90,
+          "evergreenPotential": 75,
+          "consequence": 95,
+          "compactness": 100,
+          "recognizability": 38,
+          "nonRedundancy": 90,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 70
         },
-        "total": 66,
-        "adjustedTotal": 66,
+        "total": 71,
+        "patternPenalty": 4,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 67,
         "unsupportedWords": [],
-        "misleading": false
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
+        "title": "What If Earth's Magnetic Field Switched Off for One Day? the Full Scenario",
+        "source": "full-scenario",
+        "pattern": "statement",
+        "scores": {
+          "clarity": 84,
+          "curiosity": 76,
+          "specificity": 47,
+          "truthfulness": 85,
+          "searchIntent": 50,
+          "channelIdentity": 74,
+          "ctrPotential": 59,
+          "novelty": 92,
+          "evergreenPotential": 75,
+          "consequence": 42,
+          "compactness": 51,
+          "recognizability": 38,
+          "nonRedundancy": 92,
+          "factualIntegrity": 85,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 70
+        },
+        "total": 69,
+        "patternPenalty": 4,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 65,
+        "unsupportedWords": [
+          "scenario"
+        ],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
       },
       {
         "title": "Could Humanity Survive If Could Earth Survive One Day Without Earth's Magnetic Field?",
@@ -1066,13 +1295,25 @@
           "searchIntent": 30,
           "channelIdentity": 74,
           "ctrPotential": 47,
-          "novelty": 100,
-          "evergreenPotential": 75
+          "novelty": 93,
+          "evergreenPotential": 75,
+          "consequence": 80,
+          "compactness": 29,
+          "recognizability": 38,
+          "nonRedundancy": 93,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
         },
         "total": 64,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
         "adjustedTotal": 64,
         "unsupportedWords": [],
-        "misleading": false
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
       },
       {
         "title": "If Could Earth Survive One Day Without Earth's Magnetic Field: The Full Breakdown",
@@ -1086,13 +1327,25 @@
           "searchIntent": 38,
           "channelIdentity": 74,
           "ctrPotential": 43,
-          "novelty": 100,
-          "evergreenPotential": 75
+          "novelty": 93,
+          "evergreenPotential": 75,
+          "consequence": 80,
+          "compactness": 37,
+          "recognizability": 38,
+          "nonRedundancy": 93,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
         },
         "total": 63,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
         "adjustedTotal": 63,
         "unsupportedWords": [],
-        "misleading": false
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
       },
       {
         "title": "If Could Earth Survive One Day Without Earth's Magnetic Field — Simulated With Real Science",
@@ -1106,33 +1359,25 @@
           "searchIntent": 38,
           "channelIdentity": 86,
           "ctrPotential": 47,
-          "novelty": 100,
-          "evergreenPotential": 75
+          "novelty": 94,
+          "evergreenPotential": 75,
+          "consequence": 80,
+          "compactness": 3,
+          "recognizability": 38,
+          "nonRedundancy": 94,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
         },
         "total": 63,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
         "adjustedTotal": 63,
         "unsupportedWords": [],
-        "misleading": false
-      },
-      {
-        "title": "If Could Earth Survive One Day Without Earth's Magnetic Field, Minute by Minute",
-        "source": "minute-by-minute",
-        "pattern": "statement",
-        "scores": {
-          "clarity": 77,
-          "curiosity": 40,
-          "specificity": 47,
-          "truthfulness": 100,
-          "searchIntent": 38,
-          "channelIdentity": 74,
-          "ctrPotential": 35,
-          "novelty": 100,
-          "evergreenPotential": 75
-        },
-        "total": 62,
-        "adjustedTotal": 62,
-        "unsupportedWords": [],
-        "misleading": false
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
       },
       {
         "title": "If Could Earth Survive One Day Without Earth's Magnetic Field: First Effect to Final Outcome",
@@ -1146,33 +1391,57 @@
           "searchIntent": 38,
           "channelIdentity": 74,
           "ctrPotential": 47,
-          "novelty": 95,
-          "evergreenPotential": 75
+          "novelty": 94,
+          "evergreenPotential": 75,
+          "consequence": 80,
+          "compactness": 1,
+          "recognizability": 38,
+          "nonRedundancy": 94,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
         },
         "total": 62,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
         "adjustedTotal": 62,
         "unsupportedWords": [],
-        "misleading": false
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
       },
       {
-        "title": "The Day After Could Earth Survive One Day Without Earth's Magnetic Field",
-        "source": "day-after",
+        "title": "The Real Physics If Could Earth Survive One Day Without Earth's Magnetic Field",
+        "source": "real-physics",
         "pattern": "statement",
         "scores": {
-          "clarity": 92,
-          "curiosity": 40,
+          "clarity": 78,
+          "curiosity": 58,
           "specificity": 47,
           "truthfulness": 100,
           "searchIntent": 30,
-          "channelIdentity": 74,
-          "ctrPotential": 35,
-          "novelty": 100,
-          "evergreenPotential": 75
+          "channelIdentity": 86,
+          "ctrPotential": 47,
+          "novelty": 89,
+          "evergreenPotential": 75,
+          "consequence": 80,
+          "compactness": 43,
+          "recognizability": 38,
+          "nonRedundancy": 89,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 70
         },
-        "total": 62,
+        "total": 66,
+        "patternPenalty": 4,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
         "adjustedTotal": 62,
         "unsupportedWords": [],
-        "misleading": false
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
       },
       {
         "title": "If Could Earth Survive One Day Without Earth's Magnetic Field — What Physics Says Happens Next",
@@ -1186,35 +1455,27 @@
           "searchIntent": 38,
           "channelIdentity": 86,
           "ctrPotential": 47,
-          "novelty": 100,
-          "evergreenPotential": 75
+          "novelty": 89,
+          "evergreenPotential": 75,
+          "consequence": 80,
+          "compactness": 0,
+          "recognizability": 38,
+          "nonRedundancy": 89,
+          "factualIntegrity": 85,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
         },
         "total": 60,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
         "adjustedTotal": 60,
         "unsupportedWords": [
           "says"
         ],
-        "misleading": false
-      },
-      {
-        "title": "Could Earth Survive One Day Without Earth's Magnetic Field: A Scientific Thought Experiment",
-        "source": "thought-experiment",
-        "pattern": "label-colon",
-        "scores": {
-          "clarity": 59,
-          "curiosity": 40,
-          "specificity": 47,
-          "truthfulness": 100,
-          "searchIntent": 38,
-          "channelIdentity": 74,
-          "ctrPotential": 35,
-          "novelty": 100,
-          "evergreenPotential": 75
-        },
-        "total": 60,
-        "adjustedTotal": 60,
-        "unsupportedWords": [],
-        "misleading": false
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
       },
       {
         "title": "If Could Earth Survive One Day Without Earth's Magnetic Field: The Complete Scientific Timeline",
@@ -1228,55 +1489,89 @@
           "searchIntent": 38,
           "channelIdentity": 74,
           "ctrPotential": 35,
-          "novelty": 100,
-          "evergreenPotential": 75
+          "novelty": 94,
+          "evergreenPotential": 75,
+          "consequence": 80,
+          "compactness": 2,
+          "recognizability": 38,
+          "nonRedundancy": 94,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
         },
         "total": 59,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
         "adjustedTotal": 59,
         "unsupportedWords": [],
-        "misleading": false
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
       },
       {
-        "title": "Every Consequence If Could Earth Survive One Day Without Earth's Magnetic Field, Explained",
-        "source": "every-consequence",
+        "title": "If Could Earth Survive One Day Without Earth's Magnetic Field, Minute by Minute",
+        "source": "minute-by-minute",
         "pattern": "statement",
         "scores": {
-          "clarity": 60,
+          "clarity": 77,
+          "curiosity": 40,
+          "specificity": 47,
+          "truthfulness": 100,
+          "searchIntent": 38,
+          "channelIdentity": 74,
+          "ctrPotential": 35,
+          "novelty": 93,
+          "evergreenPotential": 75,
+          "consequence": 80,
+          "compactness": 41,
+          "recognizability": 38,
+          "nonRedundancy": 93,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 70
+        },
+        "total": 62,
+        "patternPenalty": 4,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 58,
+        "unsupportedWords": [],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
+        "title": "The Day After Could Earth Survive One Day Without Earth's Magnetic Field",
+        "source": "day-after",
+        "pattern": "statement",
+        "scores": {
+          "clarity": 92,
           "curiosity": 40,
           "specificity": 47,
           "truthfulness": 100,
           "searchIntent": 30,
           "channelIdentity": 74,
           "ctrPotential": 35,
-          "novelty": 100,
-          "evergreenPotential": 75
+          "novelty": 92,
+          "evergreenPotential": 75,
+          "consequence": 80,
+          "compactness": 62,
+          "recognizability": 38,
+          "nonRedundancy": 92,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 70
         },
-        "total": 59,
-        "adjustedTotal": 59,
+        "total": 62,
+        "patternPenalty": 4,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 58,
         "unsupportedWords": [],
-        "misleading": false
-      },
-      {
-        "title": "The Second-Order Effects If Could Earth Survive One Day Without Earth's Magnetic Field",
-        "source": "second-order",
-        "pattern": "statement",
-        "scores": {
-          "clarity": 66,
-          "curiosity": 40,
-          "specificity": 47,
-          "truthfulness": 85,
-          "searchIntent": 30,
-          "channelIdentity": 74,
-          "ctrPotential": 35,
-          "novelty": 100,
-          "evergreenPotential": 75
-        },
-        "total": 57,
-        "adjustedTotal": 57,
-        "unsupportedWords": [
-          "second-order"
-        ],
-        "misleading": false
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
       },
       {
         "title": "What Changes — And What Doesn't — If Could Earth Survive One Day Without Earth's Magnetic Field",
@@ -1290,38 +1585,27 @@
           "searchIntent": 42,
           "channelIdentity": 74,
           "ctrPotential": 47,
-          "novelty": 100,
-          "evergreenPotential": 75
+          "novelty": 93,
+          "evergreenPotential": 75,
+          "consequence": 80,
+          "compactness": 0,
+          "recognizability": 38,
+          "nonRedundancy": 93,
+          "factualIntegrity": 85,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
         },
         "total": 57,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
         "adjustedTotal": 57,
         "unsupportedWords": [
           "doesnt"
         ],
-        "misleading": false
-      },
-      {
-        "title": "What Scientists Can and Can't Predict If Could Earth Survive One Day Without Earth's Magnetic Field",
-        "source": "can-cant-predict",
-        "pattern": "statement",
-        "scores": {
-          "clarity": 32,
-          "curiosity": 58,
-          "specificity": 47,
-          "truthfulness": 70,
-          "searchIntent": 42,
-          "channelIdentity": 74,
-          "ctrPotential": 47,
-          "novelty": 100,
-          "evergreenPotential": 75
-        },
-        "total": 56,
-        "adjustedTotal": 56,
-        "unsupportedWords": [
-          "scientists",
-          "cant"
-        ],
-        "misleading": false
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
       },
       {
         "title": "The Chain Reaction That Follows If Could Earth Survive One Day Without Earth's Magnetic Field",
@@ -1335,15 +1619,196 @@
           "searchIntent": 30,
           "channelIdentity": 74,
           "ctrPotential": 35,
-          "novelty": 100,
-          "evergreenPotential": 75
+          "novelty": 94,
+          "evergreenPotential": 75,
+          "consequence": 80,
+          "compactness": 0,
+          "recognizability": 38,
+          "nonRedundancy": 94,
+          "factualIntegrity": 85,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
         },
         "total": 55,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
         "adjustedTotal": 55,
         "unsupportedWords": [
           "reaction"
         ],
-        "misleading": false
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
+        "title": "Every Consequence If Could Earth Survive One Day Without Earth's Magnetic Field, Explained",
+        "source": "every-consequence",
+        "pattern": "statement",
+        "scores": {
+          "clarity": 60,
+          "curiosity": 40,
+          "specificity": 47,
+          "truthfulness": 100,
+          "searchIntent": 30,
+          "channelIdentity": 74,
+          "ctrPotential": 35,
+          "novelty": 87,
+          "evergreenPotential": 75,
+          "consequence": 80,
+          "compactness": 19,
+          "recognizability": 38,
+          "nonRedundancy": 87,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 70
+        },
+        "total": 59,
+        "patternPenalty": 4,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 55,
+        "unsupportedWords": [],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
+        "title": "The Second-Order Effects If Could Earth Survive One Day Without Earth's Magnetic Field",
+        "source": "second-order",
+        "pattern": "statement",
+        "scores": {
+          "clarity": 66,
+          "curiosity": 40,
+          "specificity": 47,
+          "truthfulness": 85,
+          "searchIntent": 30,
+          "channelIdentity": 74,
+          "ctrPotential": 35,
+          "novelty": 93,
+          "evergreenPotential": 75,
+          "consequence": 80,
+          "compactness": 27,
+          "recognizability": 38,
+          "nonRedundancy": 93,
+          "factualIntegrity": 85,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 70
+        },
+        "total": 57,
+        "patternPenalty": 4,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 53,
+        "unsupportedWords": [
+          "second-order"
+        ],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
+        "title": "What Scientists Can and Can't Predict If Could Earth Survive One Day Without Earth's Magnetic Field",
+        "source": "can-cant-predict",
+        "pattern": "statement",
+        "scores": {
+          "clarity": 32,
+          "curiosity": 58,
+          "specificity": 47,
+          "truthfulness": 70,
+          "searchIntent": 42,
+          "channelIdentity": 74,
+          "ctrPotential": 47,
+          "novelty": 94,
+          "evergreenPotential": 75,
+          "consequence": 80,
+          "compactness": 0,
+          "recognizability": 38,
+          "nonRedundancy": 94,
+          "factualIntegrity": 70,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 70
+        },
+        "total": 56,
+        "patternPenalty": 4,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 52,
+        "unsupportedWords": [
+          "scientists",
+          "cant"
+        ],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
+        "title": "Could Earth Survive One Day Without Earth's Magnetic Field?",
+        "source": "current",
+        "pattern": "question",
+        "scores": {
+          "clarity": 100,
+          "curiosity": 66,
+          "specificity": 47,
+          "truthfulness": 100,
+          "searchIntent": 38,
+          "channelIdentity": 74,
+          "ctrPotential": 57,
+          "novelty": 92,
+          "evergreenPotential": 75,
+          "consequence": 80,
+          "compactness": 100,
+          "recognizability": 38,
+          "nonRedundancy": 92,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
+        },
+        "total": 70,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 70,
+        "unsupportedWords": [],
+        "misleading": false,
+        "grammar": [
+          "a clause used as a noun"
+        ],
+        "ungrammatical": true
+      },
+      {
+        "title": "Could Earth Survive One Day Without Earth's Magnetic Field: A Scientific Thought Experiment",
+        "source": "thought-experiment",
+        "pattern": "label-colon",
+        "scores": {
+          "clarity": 59,
+          "curiosity": 40,
+          "specificity": 47,
+          "truthfulness": 100,
+          "searchIntent": 38,
+          "channelIdentity": 74,
+          "ctrPotential": 35,
+          "novelty": 94,
+          "evergreenPotential": 75,
+          "consequence": 80,
+          "compactness": 17,
+          "recognizability": 38,
+          "nonRedundancy": 94,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
+        },
+        "total": 60,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 60,
+        "unsupportedWords": [],
+        "misleading": false,
+        "grammar": [
+          "a clause used as a noun"
+        ],
+        "ungrammatical": true
       }
     ]
   },
@@ -1351,11 +1816,11 @@
     "shorts": [
       {
         "angle": "first-effect",
-        "hook": "Earth's magnetic field is already weakening.",
-        "hookFamily": "visual_first_reveal",
-        "hookScore": 72,
+        "hook": "Could Earth survive one day without Earth's magnetic field?",
+        "hookFamily": "impossible_question",
+        "hookScore": 81,
         "first3SecondPlan": {
-          "narration": "Earth's magnetic field is already weakening.",
+          "narration": "Could Earth survive one day without Earth's magnetic field?",
           "firstFrame": {
             "description": "magnetosphere deflecting solar wind at the moment the impossible change begins",
             "source": "procedural render",
@@ -1369,10 +1834,10 @@
           "motion": "scale shift: object shrinks/grows in 0.8 s, then hard cut",
           "cutTiming": [
             0,
-            1,
-            1.9
+            0.8,
+            1.6
           ],
-          "soundCue": "sub-bass swell resolving on the first cut",
+          "soundCue": "single low hit on the first cut",
           "communicates": "mystery"
         },
         "miniNarrative": [
@@ -1408,7 +1873,29 @@
     "count": 1,
     "meetsMinimum": false
   },
-  "relatedShorts": [],
+  "relatedShorts": [
+    {
+      "short_video_id": "6AdruLBoGiw",
+      "short_slug": "what-if-a-mountain-fell-into-a-bay",
+      "relationship_type": "SAME_SERIES",
+      "relationship_reason": "same series; subject overlap 0.00, same cluster EARTH",
+      "score": 0.4
+    },
+    {
+      "short_video_id": "OFwONtLpIIM",
+      "short_slug": "what-if-you-spent-a-summer-in-death-valley",
+      "relationship_type": "SAME_SERIES",
+      "relationship_reason": "same series; subject overlap 0.00, same cluster EARTH",
+      "score": 0.4
+    },
+    {
+      "short_video_id": "N0k8S0IMwlU",
+      "short_slug": "what-if-a-lake-exploded",
+      "relationship_type": "SAME_SERIES",
+      "relationship_reason": "same series; subject overlap 0.00, same cluster EARTH",
+      "score": 0.4
+    }
+  ],
   "nextVideos": {
     "primary_next_video": {
       "slug": "what-happens-if-earth-s-magnetic-field-doubles",
@@ -1443,7 +1930,7 @@
     "playlist": "EARTH",
     "subscribe_element": true,
     "timing": {
-      "startSeconds": 94,
+      "startSeconds": 76,
       "durationSeconds": 20,
       "note": "final 20 s; narration must not end abruptly"
     },
@@ -1451,28 +1938,28 @@
     "apiSupport": "UNSUPPORTED — YouTube Data API v3 has no end-screen write endpoint; configure in Studio (task emitted)."
   },
   "cost": {
-    "estimated_production_cost": 0.06,
+    "estimated_production_cost": 0.17,
     "currency": "USD",
     "breakdown": {
-      "llmTokens": 0,
-      "ttsMinutes": 1.9,
-      "renderMinutesCpu": 5.7,
-      "assets": 9,
+      "llmTokens": 7998,
+      "ttsMinutes": 1.6,
+      "renderMinutesCpu": 4.8,
+      "assets": 10,
       "youtubeQuotaUnits": 1650
     },
     "note": "approximate; update config/growth-engine.json cost units from invoices"
   },
   "readiness": {
-    "LongFormProductionReadinessScore": 84,
+    "LongFormProductionReadinessScore": 81,
     "decision": "BLOCK",
     "dimensions": {
       "TopicDepth": 94,
       "NarrativeQuality": 74,
-      "Hook": 77,
+      "Hook": 81,
       "ResearchQuality": 90,
       "SourceCoverage": 100,
-      "FactualAccuracy": 100,
-      "ScriptRetention": 51,
+      "FactualAccuracy": 70,
+      "ScriptRetention": 49,
       "VisualCoverage": 90,
       "AudioQuality": null,
       "Editing": null,
@@ -1488,12 +1975,13 @@
       "Editing"
     ],
     "hardFails": [
-      "INSUFFICIENT_DEPTH: evidence supports ~1.9 min; target 8–12 min — not padded"
+      "unsupported central claim/number: 24",
+      "INSUFFICIENT_DEPTH: evidence supports ~1.6 min; target 8–12 min — not padded"
     ],
     "notes": [],
     "thresholds": {
-      "publish": 85,
-      "review": 70
+      "publish": 86,
+      "review": 74
     }
   },
   "targetMinutes": [
@@ -1504,16 +1992,16 @@
     "Channel": "ImpossibleBrief",
     "Content Type": "LONG_FORM",
     "Topic": "Could Earth survive one day without Earth's magnetic field?",
-    "LongFormPotentialScore": 78,
+    "LongFormPotentialScore": 82,
     "Topic Bucket": "A",
     "Cold Open": "Could Earth survive one day without Earth's magnetic field?",
     "Target Duration": "8–12 min",
-    "Actual Duration": "~1.9 min (script estimate, deterministic-evidence)",
-    "Scenes": 9,
+    "Actual Duration": "~1.6 min (script estimate, llm:groq:openai/gpt-oss-120b)",
+    "Scenes": 10,
     "Thumbnail Score": 91,
     "Title Score": 71,
-    "LongFormProductionReadinessScore": "84 → BLOCK",
-    "Related Shorts": "none published yet",
+    "LongFormProductionReadinessScore": "81 → BLOCK",
+    "Related Shorts": "what-if-a-mountain-fell-into-a-bay, what-if-you-spent-a-summer-in-death-valley, what-if-a-lake-exploded",
     "Primary Next Video": "What happens if Earth's magnetic field doubles?"
   }
 }

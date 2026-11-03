@@ -1,6 +1,6 @@
 {
-  "at": "2026-10-29T21:16:57.140Z",
-  "runId": "40956234605",
+  "at": "2026-11-03T16:22:00.093Z",
+  "runId": "41673133607",
   "rows": [
     {
       "channel": "failure-reconstructed",
@@ -9,7 +9,7 @@
       "scheduled": false,
       "publication": "NOT_SCHEDULED",
       "publishAt": null,
-      "reason": "before production slot 09:00 Europe/Istanbul",
+      "reason": "today's Short already exists (pike-river-2010)",
       "slug": null,
       "videoId": null,
       "targetDay": null,
@@ -49,22 +49,24 @@
     },
     {
       "channel": "impossible-brief",
-      "outcome": "NOT_DUE",
-      "category": "NOT_DUE",
+      "outcome": "NO_TOPIC",
+      "category": "CONTENT_BLOCKED",
       "scheduled": false,
       "publication": "NOT_SCHEDULED",
       "publishAt": null,
-      "reason": "before production slot 09:30 Europe/Istanbul",
+      "reason": "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)",
       "slug": null,
       "videoId": null,
-      "targetDay": null,
+      "targetDay": "2026-11-03",
       "trigger": {
         "event": "schedule",
         "correlationId": null
       },
       "stages": {
         "RESEARCH": {
-          "status": "not-reached"
+          "status": "skipped",
+          "detail": "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)",
+          "at": "2026-11-03T16:21:46.235Z"
         },
         "SCRIPT": {
           "status": "not-reached"
