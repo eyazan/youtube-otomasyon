@@ -1,0 +1,154 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-EAR-006",
+ "checkedAt": "2026-11-03T17:53:30.904Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "37bf1319bef0a9cc",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "Volcanism began 2.15 million years ago and proceeded through three major volcanic cycles.",
+   "url": "https://en.wikipedia.org/wiki/Yellowstone_Caldera",
+   "sourceTitle": "Wikipedia — Yellowstone Caldera",
+   "revision": 1383530692,
+   "passage": "Volcanism began 2.15 million years ago and proceeded through three major volcanic cycles.",
+   "numbers": {
+    "claim": [
+     "2.15"
+    ],
+    "inPassage": [
+     "2.15"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "The climactic eruption of the first and largest cycle produced the Huckleberry Ridge Tuff about 2.08 million years ago.",
+   "url": "https://en.wikipedia.org/wiki/Yellowstone_Caldera",
+   "sourceTitle": "Wikipedia — Yellowstone Caldera",
+   "revision": 1383530692,
+   "passage": "The first-cycle caldera-forming event was the eruption of the Huckleberry Ridge Tuff at about 2.08 million years ago.",
+   "numbers": {
+    "claim": [
+     "2.08"
+    ],
+    "inPassage": [
+     "2.08"
+    ],
+    "missing": []
+   },
+   "support": 0.73,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "The most recent supereruption, about 631,000 years ago, produced the Lava Creek Tuff and created the present Yellowstone Caldera.",
+   "url": "https://en.wikipedia.org/wiki/Yellowstone_Caldera",
+   "sourceTitle": "Wikipedia — Yellowstone Caldera",
+   "revision": 1383530692,
+   "passage": "The most recent supereruption, about 631,000 years ago, produced the Lava Creek Tuff and created the present Yellowstone Caldera.",
+   "numbers": {
+    "claim": [
+     "631000"
+    ],
+    "inPassage": [
+     "631000"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "Post-caldera eruptions included basalt flows, rhyolite domes and flows, with the last known magmatic eruption about 70,000 years ago.",
+   "url": "https://en.wikipedia.org/wiki/Yellowstone_Caldera",
+   "sourceTitle": "Wikipedia — Yellowstone Caldera",
+   "revision": 1383530692,
+   "passage": "Post-caldera eruptions included basalt flows, rhyolite domes and flows, and minor explosive deposits, with the last known magmatic eruption about 70,000 years ago.",
+   "numbers": {
+    "claim": [
+     "70000"
+    ],
+    "inPassage": [
+     "70000"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F5",
+   "claim": "The second cycle culminated in eruption of the Mesa Falls Tuff about 1.3 million years ago.",
+   "url": "https://en.wikipedia.org/wiki/Yellowstone_Caldera",
+   "sourceTitle": "Wikipedia — Yellowstone Caldera",
+   "revision": 1383530692,
+   "passage": "The second cycle culminated in eruption of the Mesa Falls Tuff and formation of the Henry's Fork Caldera about 1.3 million years ago.",
+   "numbers": {
+    "claim": [
+     "1.3"
+    ],
+    "inPassage": [
+     "1.3"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Yellowstone erupted 631,000 years ago. Is it overdue?",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Three caldera-forming eruptions in about 2.1 million years.",
+   "status": "FAIL",
+   "missing": [
+    "2.1"
+   ]
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Its last magmatic eruption of any kind was 70,000 years ago.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "A new supereruption would bury nearby states in ash.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Far downwind, ash would ground flights and smother crops.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "But eruptions don't run on a schedule, so it isn't overdue.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Smaller lava flows are far likelier than another giant blast.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So Yellowstone's real risk is disruption, not extinction.",
+   "status": "HUMAN"
+  }
+ ]
+}

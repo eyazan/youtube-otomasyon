@@ -1,0 +1,139 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-PHY-001",
+ "checkedAt": "2026-11-03T17:53:34.928Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "d6364ea86a2a1bda",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "Near Earth's surface, the acceleration due to gravity is 9.8 m/s2.",
+   "url": "https://en.wikipedia.org/wiki/Gravity_of_Earth",
+   "sourceTitle": "Wikipedia — Gravity of Earth",
+   "revision": 1382258066,
+   "passage": "Near Earth's surface, the acceleration due to gravity, accurate to 2 significant figures, is 9.8 m/s2 (32 ft/s2).",
+   "numbers": {
+    "claim": [
+     "9.8",
+     "2"
+    ],
+    "inPassage": [
+     "9.8",
+     "2"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "Gravity on Earth's surface varies by around 0.7%, from 9.7639 m/s2 on Nevado Huascarán to 9.8337 m/s2 at the Arctic Ocean surface.",
+   "url": "https://en.wikipedia.org/wiki/Gravity_of_Earth",
+   "sourceTitle": "Wikipedia — Gravity of Earth",
+   "revision": 1382258066,
+   "passage": "Gravity on the Earth's surface varies by around 0.7%, from 9.7639 m/s2 on the Nevado Huascarán mountain in Peru to 9.8337 m/s2 at the surface of the Arctic Ocean.",
+   "numbers": {
+    "claim": [
+     "0.7",
+     "9.7639",
+     "2",
+     "9.8337"
+    ],
+    "inPassage": [
+     "0.7",
+     "9.7639",
+     "2",
+     "9.8337"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "The conventional value for standard gravity is 9.80665 m/s2, originally adopted by the CGPM in 1901.",
+   "url": "https://en.wikipedia.org/wiki/Gravity_of_Earth",
+   "sourceTitle": "Wikipedia — Gravity of Earth",
+   "revision": 1382258066,
+   "passage": "The conventional value for standard gravity is 9.80665 m⋅s−2‍ by definition, originally adopted by the CGPM in 1901.",
+   "numbers": {
+    "claim": [
+     "9.80665",
+     "2",
+     "1901"
+    ],
+    "inPassage": [
+     "9.80665",
+     "2",
+     "1901"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "The weight of an object on Earth's surface is the downward force on it, force equals mass times acceleration.",
+   "url": "https://en.wikipedia.org/wiki/Gravity_of_Earth",
+   "sourceTitle": "Wikipedia — Gravity of Earth",
+   "revision": 1382258066,
+   "passage": "The weight of an object on Earth's surface is the downwards force on that object, given by Newton's second law of motion, or F = m a (force = mass × acceleration).",
+   "numbers": {
+    "claim": [],
+    "inPassage": [],
+    "missing": []
+   },
+   "support": 0.7,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "SPECULATIVE SCENARIO",
+   "text": "Gravity doubles tomorrow. Your weight doubles too.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Your mass stays the same. Only the pull changes.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Weight is mass times gravity's pull, 9.8 metres per second squared.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Double it, and every step lifts twice the load.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Today, gravity varies across Earth by only about 0.7%.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So a doubling dwarfs every difference you've ever felt.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Your heart would push blood uphill against twice the pull.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the first strain lands on bodies, not buildings.",
+   "status": "HUMAN"
+  }
+ ]
+}

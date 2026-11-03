@@ -266,7 +266,9 @@ async function run(seed, { write = false, offline = false, log = console.log } =
     const hooks = Hooks.generate(Model.normalize(channel, upgraded), growthConfig, { openingMaxSeconds: channel.config.retentionRules.openingMaxSeconds });
     row.hooks = hooks.candidateCount;
     row.hookScore = hooks.selectedScore;
-    if (hooks.candidateCount < growthConfig.hooks.minimumCandidates) row.errors.push(`only ${hooks.candidateCount} hook candidates (≥ ${growthConfig.hooks.minimumCandidates}); add distinct short facts`);
+    if (!hooks.meetsMinimum) row.errors.push(growthConfig.hooks.gate
+      ? `hook variety below the channel gate (${hooks.candidates.filter((h) => !h.blocked).length} valid candidates / ${hooks.familyCount} families; needs ${growthConfig.hooks.gate.minimumCandidates} valid, ${growthConfig.hooks.gate.minimumFamilies} families, ${growthConfig.hooks.gate.minimumStrong} scoring >= ${growthConfig.hooks.gate.strongScore}); add distinct short facts`
+      : `only ${hooks.candidateCount} hook candidates (≥ ${growthConfig.hooks.minimumCandidates}); add distinct short facts`);
     if (!hooks.selected || hooks.selected.spoken !== (/[.!?]$/.test(record.openingLine) ? record.openingLine : record.openingLine + ".")) row.errors.push("the spoken opening is not a valid hook candidate (blocked or too long)");
     if (!row.errors.length) { universe.topics[index] = upgraded; changed += 1; }
     report.push(row);

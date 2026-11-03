@@ -1,0 +1,135 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-SPA-016",
+ "checkedAt": "2026-11-03T17:53:24.120Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "629b385cfb7b0c2a",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "The Sun's mass is around 330,000 times that of Earth, making up about 99.86% of the total mass of the Solar System.",
+   "url": "https://en.wikipedia.org/wiki/Sun",
+   "sourceTitle": "Wikipedia — Sun",
+   "revision": 1382445123,
+   "passage": "The Sun's mass is around 330,000 times that of Earth, making up about 99.86% of the total mass of the Solar System.",
+   "numbers": {
+    "claim": [
+     "330000",
+     "99.86"
+    ],
+    "inPassage": [
+     "330000",
+     "99.86"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "The Sun formed approximately 4.6 billion years ago from the gravitational collapse of matter within a region of a large molecular cloud.",
+   "url": "https://en.wikipedia.org/wiki/Sun",
+   "sourceTitle": "Wikipedia — Sun",
+   "revision": 1382445123,
+   "passage": "The Sun formed approximately 4.6 billion years ago from the gravitational collapse of matter within a region of a large molecular cloud.",
+   "numbers": {
+    "claim": [
+     "4.6"
+    ],
+    "inPassage": [
+     "4.6"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "The Sun will spend a total of approximately 10 to 11 billion years as a main-sequence star before the red giant phase of the Sun.",
+   "url": "https://en.wikipedia.org/wiki/Sun",
+   "sourceTitle": "Wikipedia — Sun",
+   "revision": 1382445123,
+   "passage": "The Sun will spend a total of approximately 10 to 11 billion years as a main-sequence star before the red giant phase of the Sun.",
+   "numbers": {
+    "claim": [
+     "10",
+     "11"
+    ],
+    "inPassage": [
+     "10",
+     "11"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "When it runs out of hydrogen in the core in approximately 5 billion years, core hydrogen fusion will stop, and there will be nothing to prevent the core from contracting.",
+   "url": "https://en.wikipedia.org/wiki/Sun",
+   "sourceTitle": "Wikipedia — Sun",
+   "revision": 1382445123,
+   "passage": "Instead, when it runs out of hydrogen in the core in approximately 5 billion years, core hydrogen fusion will stop, and there will be nothing to prevent the core from contracting.",
+   "numbers": {
+    "claim": [
+     "5"
+    ],
+    "inPassage": [
+     "5"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The Sun has 5 billion years of core hydrogen.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Then fusion there stops, and the core contracts.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It holds 99.86% of the Solar System's mass.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It's about 4.6 billion years old, roughly halfway through.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Next comes the red giant phase.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "The Sun will swell, and the inner planets will face its heat.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Earth's oceans will be long gone before then.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So we're living in the Sun's calm middle age.",
+   "status": "HUMAN"
+  }
+ ]
+}

@@ -1,0 +1,143 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-FUT-047",
+ "checkedAt": "2026-11-03T17:53:39.639Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "28c71c2d16ce4282",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "The target asteroid, Dimorphos, is a 525 feet (160 m) wide moonlet of the asteroid Didymos.",
+   "url": "https://en.wikipedia.org/wiki/Double_Asteroid_Redirection_Test",
+   "sourceTitle": "Wikipedia — Double Asteroid Redirection Test",
+   "revision": 1377248560,
+   "passage": "The target asteroid, Dimorphos, is a 525 feet (160 m) wide moonlet of the asteroid Didymos; neither asteroid poses an impact threat to Earth, but their joint characteristics made them an ideal target.",
+   "numbers": {
+    "claim": [
+     "525",
+     "160"
+    ],
+    "inPassage": [
+     "525",
+     "160"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "The DART spacecraft collided with Dimorphos at 14,000 mph (23,000 km/h) on 26 September 2022.",
+   "url": "https://en.wikipedia.org/wiki/Double_Asteroid_Redirection_Test",
+   "sourceTitle": "Wikipedia — Double Asteroid Redirection Test",
+   "revision": 1377248560,
+   "passage": "Launched on 24 November 2021, the DART spacecraft collided with Dimorphos at 14,000 mph (23,000 km/h) on 26 September 2022 about 6.8 million miles (10.9 million kilometers) from Earth.",
+   "numbers": {
+    "claim": [
+     "14000",
+     "23000",
+     "26",
+     "2022"
+    ],
+    "inPassage": [
+     "14000",
+     "23000",
+     "26",
+     "2022"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "The collision shortened Dimorphos's orbit around Didymos by 32 minutes, greatly in excess of the pre-defined success threshold of 73 seconds.",
+   "url": "https://en.wikipedia.org/wiki/Double_Asteroid_Redirection_Test",
+   "sourceTitle": "Wikipedia — Double Asteroid Redirection Test",
+   "revision": 1377248560,
+   "passage": "The collision shortened Dimorphos's orbit around Didymos by 32 minutes, greatly in excess of the pre-defined success threshold of 73 seconds.",
+   "numbers": {
+    "claim": [
+     "32",
+     "73"
+    ],
+    "inPassage": [
+     "32",
+     "73"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "The spacecraft cost US$330 million by the time it collided with Dimorphos in 2022.",
+   "url": "https://en.wikipedia.org/wiki/Double_Asteroid_Redirection_Test",
+   "sourceTitle": "Wikipedia — Double Asteroid Redirection Test",
+   "revision": 1377248560,
+   "passage": "The spacecraft cost US$330 million by the time it collided with Dimorphos in 2022.",
+   "numbers": {
+    "claim": [
+     "330",
+     "2022"
+    ],
+    "inPassage": [
+     "330",
+     "2022"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why one crash moved an asteroid by 32 minutes.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "NASA's DART hit Dimorphos on purpose in 2022.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The target was a 160-metre moonlet of Didymos.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "DART struck at about 23,000 kilometres per hour.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Success needed a change of just 73 seconds.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The mission cost about $330 million.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "A real threat would need years of warning to nudge in time.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So planetary defence works, if we see the asteroid early.",
+   "status": "HUMAN"
+  }
+ ]
+}

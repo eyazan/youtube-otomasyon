@@ -1,0 +1,135 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-OTH-015",
+ "checkedAt": "2026-11-03T17:53:42.418Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "0fe6ca99f517168d",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "The majority of Earth's atmosphere (78%) is atmospheric nitrogen, making it the largest source of nitrogen.",
+   "url": "https://en.wikipedia.org/wiki/Nitrogen_cycle",
+   "sourceTitle": "Wikipedia — Nitrogen cycle",
+   "revision": 1379397670,
+   "passage": "The majority of Earth's atmosphere (78%) is atmospheric nitrogen, making it the largest source of nitrogen.",
+   "numbers": {
+    "claim": [
+     "78"
+    ],
+    "inPassage": [
+     "78"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "Between 5 and 10 billion kg per year are fixed by lightning strikes, but most fixation is done by free-living or symbiotic bacteria known as diazotrophs.",
+   "url": "https://en.wikipedia.org/wiki/Nitrogen_cycle",
+   "sourceTitle": "Wikipedia — Nitrogen cycle",
+   "revision": 1379397670,
+   "passage": "Between 5 and 10 billion kg per year are fixed by lightning strikes, but most fixation is done by free-living or symbiotic bacteria known as diazotrophs.",
+   "numbers": {
+    "claim": [
+     "5",
+     "10"
+    ],
+    "inPassage": [
+     "5",
+     "10"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "Nitrogen cannot be utilized by phytoplankton as N2 so it must undergo nitrogen fixation which is performed predominately by cyanobacteria.",
+   "url": "https://en.wikipedia.org/wiki/Nitrogen_cycle",
+   "sourceTitle": "Wikipedia — Nitrogen cycle",
+   "revision": 1379397670,
+   "passage": "Nitrogen cannot be utilized by phytoplankton as N2 so it must undergo nitrogen fixation which is performed predominately by cyanobacteria.",
+   "numbers": {
+    "claim": [
+     "2"
+    ],
+    "inPassage": [
+     "2"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "High-temperature combustion has contributed to a 6- or 7-fold increase in the flux of NOx to the atmosphere.",
+   "url": "https://en.wikipedia.org/wiki/Nitrogen_cycle",
+   "sourceTitle": "Wikipedia — Nitrogen cycle",
+   "revision": 1379397670,
+   "passage": "The very high temperature of lightning naturally produces small amounts of NOx, NH3, and HNO3, but high-temperature combustion has contributed to a 6- or 7-fold increase in the flux of NOx to the atmosphere.",
+   "numbers": {
+    "claim": [
+     "6",
+     "7"
+    ],
+    "inPassage": [
+     "6",
+     "7"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Air is 78% nitrogen, but plants can't use it.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Bacteria must fix it into usable forms first.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Lightning fixes 5 to 10 billion kilograms a year.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "But most fixation is done by bacteria.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Ocean phytoplankton rely on cyanobacteria to fix it for them.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Combustion has raised nitrogen oxide flux 6 to 7 times.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "If fixation stopped, soils and seas would slowly starve.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the air's most common gas is useless until microbes change it.",
+   "status": "HUMAN"
+  }
+ ]
+}

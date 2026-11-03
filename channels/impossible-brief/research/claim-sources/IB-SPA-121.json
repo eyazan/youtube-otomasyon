@@ -1,0 +1,163 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-SPA-121",
+ "checkedAt": "2026-11-03T17:53:30.678Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "7b92783817bcd41c",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "It orbits 6,000 km (3,700 mi) from the Martian surface, closer to its primary body than any other known natural satellite to a planet.",
+   "url": "https://en.wikipedia.org/wiki/Phobos_(moon)",
+   "sourceTitle": "Wikipedia — Phobos (moon)",
+   "revision": 1381338264,
+   "passage": "It orbits 6,000 km (3,700 mi) from the Martian surface, closer to its primary body than any other known natural satellite to a planet.",
+   "numbers": {
+    "claim": [
+     "6000",
+     "3700"
+    ],
+    "inPassage": [
+     "6000",
+     "3700"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "It orbits Mars much faster than Mars rotates and completes an orbit in just 7 hours and 39 minutes.",
+   "url": "https://en.wikipedia.org/wiki/Phobos_(moon)",
+   "sourceTitle": "Wikipedia — Phobos (moon)",
+   "revision": 1381338264,
+   "passage": "It orbits Mars much faster than Mars rotates and completes an orbit in just 7 hours and 39 minutes.",
+   "numbers": {
+    "claim": [
+     "7",
+     "39"
+    ],
+    "inPassage": [
+     "7",
+     "39"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "Tidal deceleration is gradually decreasing the orbital radius of Phobos by approximately 2 m (6 ft 7 in) every 100 years.",
+   "url": "https://en.wikipedia.org/wiki/Phobos_(moon)",
+   "sourceTitle": "Wikipedia — Phobos (moon)",
+   "revision": 1381338264,
+   "passage": "Tidal deceleration is gradually decreasing the orbital radius of Phobos by approximately 2 m (6 ft 7 in) every 100 years, and with decreasing orbital radius the likelihood of breakup due to tidal forces increases, estimated in approximately 30–50 million years, or about 43 million years in one study's estimate.",
+   "numbers": {
+    "claim": [
+     "2",
+     "6",
+     "7",
+     "100"
+    ],
+    "inPassage": [
+     "2",
+     "6",
+     "7",
+     "100"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "This predicted ring may last from 1 million to 100 million years.",
+   "url": "https://en.wikipedia.org/wiki/Phobos_(moon)",
+   "sourceTitle": "Wikipedia — Phobos (moon)",
+   "revision": 1381338264,
+   "passage": "This predicted ring may last from 1 million to 100 million years.",
+   "numbers": {
+    "claim": [
+     "1",
+     "100"
+    ],
+    "inPassage": [
+     "1",
+     "100"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F5",
+   "claim": "Phobos is a small, irregularly shaped object with a mean radius of 11 km (7 mi).",
+   "url": "https://en.wikipedia.org/wiki/Phobos_(moon)",
+   "sourceTitle": "Wikipedia — Phobos (moon)",
+   "revision": 1381338264,
+   "passage": "Phobos is a small, irregularly shaped object with a mean radius of 11 km (7 mi).",
+   "numbers": {
+    "claim": [
+     "11",
+     "7"
+    ],
+    "inPassage": [
+     "11",
+     "7"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why Phobos circles Mars in under 8 hours.",
+   "status": "FAIL",
+   "missing": [
+    "8"
+   ]
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It orbits just 6,000 kilometres above the surface.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Tides pull it about 2 metres closer every 100 years.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Its mean radius is only 11 kilometres.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Eventually, tidal forces are expected to tear it apart.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The debris could form a ring lasting 1 to 100 million years.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So Mars may swap a moon for a ring.",
+   "status": "HUMAN"
+  }
+ ]
+}

@@ -1,0 +1,139 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-EAR-026",
+ "checkedAt": "2026-11-03T17:53:32.587Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "ab350b9cb2b46781",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "The year 1816 is known as the Year Without a Summer because of severe climate abnormalities that caused average global temperatures to decrease by 0.4–0.7 °C (0.7–1 °F).",
+   "url": "https://en.wikipedia.org/wiki/Year_Without_a_Summer",
+   "sourceTitle": "Wikipedia — Year Without a Summer",
+   "revision": 1380901837,
+   "passage": "The year 1816 is known as the Year Without a Summer because of severe climate abnormalities that caused average global temperatures to decrease by 0.4–0.7 °C (0.7–1 °F).",
+   "numbers": {
+    "claim": [
+     "1816",
+     "0.4",
+     "0.7",
+     "1"
+    ],
+    "inPassage": [
+     "1816",
+     "0.4",
+     "0.7",
+     "1"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "The main cause of the Year Without a Summer is generally held to be a volcanic winter created by the April 1815 eruption of Mount Tambora on Sumbawa.",
+   "url": "https://en.wikipedia.org/wiki/Year_Without_a_Summer",
+   "sourceTitle": "Wikipedia — Year Without a Summer",
+   "revision": 1380901837,
+   "passage": "The main cause of the Year Without a Summer is generally held to be a volcanic winter created by the April 1815 eruption of Mount Tambora on Sumbawa.",
+   "numbers": {
+    "claim": [
+     "1815"
+    ],
+    "inPassage": [
+     "1815"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "Between 1816 and 1819, major typhus epidemics occurred in parts of Europe, including Ireland, Italy, Switzerland, and Scotland, precipitated by the famine.",
+   "url": "https://en.wikipedia.org/wiki/Year_Without_a_Summer",
+   "sourceTitle": "Wikipedia — Year Without a Summer",
+   "revision": 1380901837,
+   "passage": "Between 1816 and 1819, major typhus epidemics occurred in parts of Europe, including Ireland, Italy, Switzerland, and Scotland, precipitated by the famine.",
+   "numbers": {
+    "claim": [
+     "1816",
+     "1819"
+    ],
+    "inPassage": [
+     "1816",
+     "1819"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "The ice dam collapsed catastrophically in June 1818, killing forty people in the resulting flood.",
+   "url": "https://en.wikipedia.org/wiki/Year_Without_a_Summer",
+   "sourceTitle": "Wikipedia — Year Without a Summer",
+   "revision": 1380901837,
+   "passage": "Despite engineer Ignaz Venetz's efforts to drain the growing lake, the ice dam collapsed catastrophically in June 1818, killing forty people in the resulting flood.",
+   "numbers": {
+    "claim": [
+     "1818"
+    ],
+    "inPassage": [
+     "1818"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Under 1 °C of cooling cancelled a whole summer.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Tambora erupted in 1815. Summer 1816 barely came.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Global temperatures dropped by 0.4 to 0.7 °C.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "That small shift was enough to ruin harvests.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Famine helped trigger typhus epidemics across Europe until 1819.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "SPECULATIVE SCENARIO",
+   "text": "Today, a similar eruption would hit global grain markets at once.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Food trade would spread the shortage, and the price shock, worldwide.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So a single volcano could still test the world's food supply.",
+   "status": "HUMAN"
+  }
+ ]
+}

@@ -1,0 +1,143 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-SPA-086",
+ "checkedAt": "2026-11-03T17:53:27.229Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "ba2fc120de56c20d",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "It has a marked axial tilt of 82.23°, with a retrograde rotation period of 17 hours and 14 minutes.",
+   "url": "https://en.wikipedia.org/wiki/Uranus",
+   "sourceTitle": "Wikipedia — Uranus",
+   "revision": 1380352133,
+   "passage": "It has a marked axial tilt of 82.23°,  with a retrograde rotation period of 17 hours and 14 minutes.",
+   "numbers": {
+    "claim": [
+     "82.23",
+     "17",
+     "14"
+    ],
+    "inPassage": [
+     "82.23",
+     "17",
+     "14"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "In an 84-Earth-year orbital period around the Sun, its poles get around 42 years of continuous sunlight, followed by 42 years of continuous darkness.",
+   "url": "https://en.wikipedia.org/wiki/Uranus",
+   "sourceTitle": "Wikipedia — Uranus",
+   "revision": 1380352133,
+   "passage": "This means that in an 84-Earth-year orbital period around the Sun, its poles get around 42 years of continuous sunlight, followed by 42 years of continuous darkness.",
+   "numbers": {
+    "claim": [
+     "84",
+     "42"
+    ],
+    "inPassage": [
+     "84",
+     "42"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "The planet's atmosphere has the lowest minimum temperature (49 K (−224 °C)) of all of the Solar System's planets.",
+   "url": "https://en.wikipedia.org/wiki/Uranus",
+   "sourceTitle": "Wikipedia — Uranus",
+   "revision": 1380352133,
+   "passage": "The planet's atmosphere has a complex layered cloud structure, and has the lowest minimum temperature (49 K (−224 °C; −371 °F)) of all of the Solar System's planets.",
+   "numbers": {
+    "claim": [
+     "49",
+     "224"
+    ],
+    "inPassage": [
+     "49",
+     "224"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "As of 2026, it has been visited only once when in 1986 the Voyager 2 probe flew by the planet.",
+   "url": "https://en.wikipedia.org/wiki/Uranus",
+   "sourceTitle": "Wikipedia — Uranus",
+   "revision": 1380352133,
+   "passage": "As of 2026, it has been visited only once when in 1986 the Voyager 2 probe flew by the planet.",
+   "numbers": {
+    "claim": [
+     "2026",
+     "1986",
+     "2"
+    ],
+    "inPassage": [
+     "2026",
+     "1986",
+     "2"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why Uranus's poles get 42 years of sunlight.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Then they get 42 years of darkness.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Its axis is tilted 82.23 degrees, nearly on its side.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "One orbit takes 84 Earth years.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "SPECULATIVE SCENARIO",
+   "text": "Tilt Earth like that, and each pole gets decades-long days.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Seasons would swing between endless glare and endless night.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Only Voyager 2 has visited Uranus, in 1986.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So Earth's gentle seasons come from a modest tilt.",
+   "status": "HUMAN"
+  }
+ ]
+}

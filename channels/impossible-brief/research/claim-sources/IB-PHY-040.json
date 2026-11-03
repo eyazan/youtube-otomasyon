@@ -1,0 +1,133 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-PHY-040",
+ "checkedAt": "2026-11-03T17:53:36.158Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "60944c6609f1c9a6",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "A 2017 study computed the rate of flow of the medieval glass used in Westminster Abbey from the year 1268.",
+   "url": "https://en.wikipedia.org/wiki/Glass",
+   "sourceTitle": "Wikipedia — Glass",
+   "revision": 1383037354,
+   "passage": "A 2017 study computed the rate of flow of the medieval glass used in Westminster Abbey from the year 1268.",
+   "numbers": {
+    "claim": [
+     "2017",
+     "1268"
+    ],
+    "inPassage": [
+     "2017",
+     "1268"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "The study authors calculated that the maximum flow rate of medieval glass is 1 nm per billion years, making it impossible to observe in a human timescale.",
+   "url": "https://en.wikipedia.org/wiki/Glass",
+   "sourceTitle": "Wikipedia — Glass",
+   "revision": 1383037354,
+   "passage": "Even with this lower viscosity, the study authors calculated that the maximum flow rate of medieval glass is 1 nm per billion years, making it impossible to observe in a human timescale.",
+   "numbers": {
+    "claim": [
+     "1"
+    ],
+    "inPassage": [
+     "1"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "Glassmaking dates back at least 6000 years, long before humans had discovered how to smelt iron.",
+   "url": "https://en.wikipedia.org/wiki/Glass",
+   "sourceTitle": "Wikipedia — Glass",
+   "revision": 1383037354,
+   "passage": "Glassmaking dates back at least 6000 years, long before humans had discovered how to smelt iron.",
+   "numbers": {
+    "claim": [
+     "6000"
+    ],
+    "inPassage": [
+     "6000"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "Its high melting temperature (1723 °C) and viscosity make it difficult to work with.",
+   "url": "https://en.wikipedia.org/wiki/Glass",
+   "sourceTitle": "Wikipedia — Glass",
+   "revision": 1383037354,
+   "passage": "However, its high melting temperature (1723 °C) and viscosity make it difficult to work with.",
+   "numbers": {
+    "claim": [
+     "1723"
+    ],
+    "inPassage": [
+     "1723"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why glass flows just 1 nanometre per billion years.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Old church windows didn't sag because of it.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "A 2017 study checked glass in Westminster Abbey from 1268.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Even at its most fluid, that flow is far too slow to see.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Uneven panes came from how the glass was made and fitted.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Glass-making is at least 6,000 years old.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Pure silica only melts at 1,723 °C.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So glass is a solid, just one without a crystal pattern.",
+   "status": "HUMAN"
+  }
+ ]
+}

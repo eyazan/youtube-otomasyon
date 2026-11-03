@@ -1,0 +1,143 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-SPA-021",
+ "checkedAt": "2026-11-03T17:53:24.615Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "c673481e82701ee4",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "Mars has about 15% of Earth's volume and 11% of Earth's mass, resulting in about 38% of Earth's surface gravity.",
+   "url": "https://en.wikipedia.org/wiki/Mars",
+   "sourceTitle": "Wikipedia — Mars",
+   "revision": 1381679380,
+   "passage": "Mars is less dense than Earth, having about 15% of Earth's volume and 11% of Earth's mass, resulting in about 38% of Earth's surface gravity.",
+   "numbers": {
+    "claim": [
+     "15",
+     "11",
+     "38"
+    ],
+    "inPassage": [
+     "15",
+     "11",
+     "38"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "The resulting mean surface pressure is only 0.6% of Earth's 101.3 kPa (14.69 psi).",
+   "url": "https://en.wikipedia.org/wiki/Mars",
+   "sourceTitle": "Wikipedia — Mars",
+   "revision": 1381679380,
+   "passage": "The resulting mean surface pressure is only 0.6% of Earth's 101.3 kPa (14.69 psi).",
+   "numbers": {
+    "claim": [
+     "0.6",
+     "101.3",
+     "14.69"
+    ],
+    "inPassage": [
+     "0.6",
+     "101.3",
+     "14.69"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "At the average surface level the atmospheric temperature ranges from −153 to 20 °C, and cosmic radiation is high.",
+   "url": "https://en.wikipedia.org/wiki/Mars",
+   "sourceTitle": "Wikipedia — Mars",
+   "revision": 1381679380,
+   "passage": "At the average surface level the atmospheric pressure is a few thousandths of Earth's, atmospheric temperature ranges from −153 to 20 °C (−243 to 68 °F), and cosmic radiation is high.",
+   "numbers": {
+    "claim": [
+     "153",
+     "20"
+    ],
+    "inPassage": [
+     "153",
+     "20"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "The Martian soil has a basic pH of 7.7, and contains 0.6% perchlorate by weight, concentrations that are toxic to humans.",
+   "url": "https://en.wikipedia.org/wiki/Mars",
+   "sourceTitle": "Wikipedia — Mars",
+   "revision": 1381679380,
+   "passage": "Experiments performed by the lander showed that the Martian soil has a basic pH of 7.7, and contains 0.6% perchlorate by weight, concentrations that are toxic to humans.",
+   "numbers": {
+    "claim": [
+     "7.7",
+     "0.6"
+    ],
+    "inPassage": [
+     "7.7",
+     "0.6"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why Mars's 38% gravity is the easy part.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The air there is 0.6% of Earth's pressure.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Mars has 11% of Earth's mass.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Temperatures swing from −153 to 20 °C.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Its soil holds 0.6% perchlorate, toxic to humans.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Cosmic radiation at the surface is high.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So every Martian home would need pressure, shielding and filters.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So on Mars, the hard part is simply staying alive.",
+   "status": "HUMAN"
+  }
+ ]
+}

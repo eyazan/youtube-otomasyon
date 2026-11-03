@@ -1,0 +1,130 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-EAR-024",
+ "checkedAt": "2026-11-03T17:53:32.412Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "84ed4c319c8e1e7f",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "About 20 countries closed their airspace to commercial jet traffic, affecting approximately 10 million travellers.",
+   "url": "https://en.wikipedia.org/wiki/2010_eruptions_of_Eyjafjallajökull",
+   "sourceTitle": "Wikipedia — 2010 eruptions of Eyjafjallajökull",
+   "revision": 1380199425,
+   "passage": "About 20 countries closed their airspace to commercial jet traffic, affecting approximately 10 million travellers.",
+   "numbers": {
+    "claim": [
+     "20",
+     "10"
+    ],
+    "inPassage": [
+     "20",
+     "10"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "The disruptions started over an initial period of six days in April 2010.",
+   "url": "https://en.wikipedia.org/wiki/2010_eruptions_of_Eyjafjallajökull",
+   "sourceTitle": "Wikipedia — 2010 eruptions of Eyjafjallajökull",
+   "revision": 1380199425,
+   "passage": "The disruptions started over an initial period of six days in April 2010.",
+   "numbers": {
+    "claim": [
+     "2010"
+    ],
+    "inPassage": [
+     "2010"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "Beginning on 14 April 2010, the eruption created an ash cloud that led to the closure of most of the European IFR airspace from 15 until 20 April 2010.",
+   "url": "https://en.wikipedia.org/wiki/2010_eruptions_of_Eyjafjallajökull",
+   "sourceTitle": "Wikipedia — 2010 eruptions of Eyjafjallajökull",
+   "revision": 1380199425,
+   "passage": "Beginning on 14 April 2010, the eruption entered a second phase and created an ash cloud that led to the closure of most of the European IFR airspace from 15 until 20 April 2010.",
+   "numbers": {
+    "claim": [
+     "14",
+     "2010",
+     "15",
+     "20"
+    ],
+    "inPassage": [
+     "14",
+     "2010",
+     "15",
+     "20"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "Although no commercial aircraft were damaged, the engines of some military aircraft were harmed.",
+   "url": "https://en.wikipedia.org/wiki/2010_eruptions_of_Eyjafjallajökull",
+   "sourceTitle": "Wikipedia — 2010 eruptions of Eyjafjallajökull",
+   "revision": 1380199425,
+   "passage": "Many flights within, to, and from Europe were cancelled following 14 April 2010 eruption, and although no commercial aircraft were damaged, the engines of some military aircraft were harmed.",
+   "numbers": {
+    "claim": [],
+    "inPassage": [],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why one volcano stranded 10 million travellers.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "In 2010, Iceland's Eyjafjallajökull sent ash across Europe.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "About 20 countries closed their airspace to jets.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Most European airspace shut from 15 to 20 April.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Ash can melt inside jet engines and stop them.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Some military jet engines were damaged.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So a modest eruption can halt a continent's travel.",
+   "status": "HUMAN"
+  }
+ ]
+}

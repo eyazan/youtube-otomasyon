@@ -1,0 +1,177 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-EAR-051",
+ "checkedAt": "2026-11-03T17:53:33.676Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "ab972d9ab13c5e8c",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "In 1960, the Aral Sea had been the world's fourth-largest lake with an area of 68,000 km2 (26,000 sq mi) and a volume of 1,100 km3.",
+   "url": "https://en.wikipedia.org/wiki/Aral_Sea",
+   "sourceTitle": "Wikipedia — Aral Sea",
+   "revision": 1382339792,
+   "passage": "In 1960, the Aral Sea had been the world's fourth-largest lake with an area of 68,000 km2 (26,000 sq mi) and a volume of 1,100 km3 (260 cu mi).",
+   "numbers": {
+    "claim": [
+     "1960",
+     "68000",
+     "2",
+     "26000",
+     "1100",
+     "3"
+    ],
+    "inPassage": [
+     "1960",
+     "68000",
+     "2",
+     "26000",
+     "1100",
+     "3"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "In 2004, the sea's surface area was 17,160 km2 (6,630 sq mi), 25% of its original size, and a nearly fivefold increase in salinity had killed most of its flora and fauna.",
+   "url": "https://en.wikipedia.org/wiki/Aral_Sea",
+   "sourceTitle": "Wikipedia — Aral Sea",
+   "revision": 1382339792,
+   "passage": "In 2004, the sea's surface area was 17,160 km2 (6,630 sq mi), 25% of its original size, and a nearly fivefold increase in salinity had killed most of its flora and fauna.",
+   "numbers": {
+    "claim": [
+     "2004",
+     "17160",
+     "2",
+     "6630",
+     "25"
+    ],
+    "inPassage": [
+     "2004",
+     "17160",
+     "2",
+     "6630",
+     "25"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "Large scale construction of irrigation canals first began in the 1930s and was greatly increased in the 1960s.",
+   "url": "https://en.wikipedia.org/wiki/Aral_Sea",
+   "sourceTitle": "Wikipedia — Aral Sea",
+   "revision": 1382339792,
+   "passage": "Large scale construction of irrigation canals first began in the 1930s and was greatly increased in the 1960s.",
+   "numbers": {
+    "claim": [
+     "1930",
+     "1960"
+    ],
+    "inPassage": [
+     "1930",
+     "1960"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "The North Aral Sea's surface increased from 2,550 square kilometers in 2003 to 3,300 square kilometers in 2008.",
+   "url": "https://en.wikipedia.org/wiki/Aral_Sea",
+   "sourceTitle": "Wikipedia — Aral Sea",
+   "revision": 1382339792,
+   "passage": "The Kazakh Foreign Ministry stated that \"The North Aral Sea's surface increased from 2,550 square kilometers (980 sq mi) in 2003 to 3,300 square kilometers (1,300 sq mi) in 2008.",
+   "numbers": {
+    "claim": [
+     "2550",
+     "2003",
+     "3300",
+     "2008"
+    ],
+    "inPassage": [
+     "2550",
+     "2003",
+     "3300",
+     "2008"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F5",
+   "claim": "By 1988, Uzbekistan was the world's largest exporter of cotton.",
+   "url": "https://en.wikipedia.org/wiki/Aral_Sea",
+   "sourceTitle": "Wikipedia — Aral Sea",
+   "revision": 1382339792,
+   "passage": "This plan was initially successful, and by 1988, Uzbekistan was the world's largest exporter of cotton.",
+   "numbers": {
+    "claim": [
+     "1988"
+    ],
+    "inPassage": [
+     "1988"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why a sea shrank to 25% without a drought.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It was the world's fourth-largest lake in 1960.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It covered 68,000 square kilometres.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Soviet irrigation diverted its rivers to grow cotton.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "By 2004, it was down to 17,160 square kilometres.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Salinity rose nearly fivefold, killing most fish and plants.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "A dam has since let the North Aral partly recover.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So a sea can vanish without a drought, just by thirst upstream.",
+   "status": "HUMAN"
+  }
+ ]
+}

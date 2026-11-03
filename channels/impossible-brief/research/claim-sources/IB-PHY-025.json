@@ -1,0 +1,133 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-PHY-025",
+ "checkedAt": "2026-11-03T17:53:35.781Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "11e6f29af9db2aaf",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "Each second, about 65 billion solar neutrinos pass through every square centimeter on the part of the Earth orthogonal to the direction of the Sun.",
+   "url": "https://en.wikipedia.org/wiki/Neutrino",
+   "sourceTitle": "Wikipedia — Neutrino",
+   "revision": 1382248098,
+   "passage": "At the surface of the Earth, the flux is about 65 billion (6.5×1010) solar neutrinos, per second per square centimeter.",
+   "numbers": {
+    "claim": [
+     "65"
+    ],
+    "inPassage": [
+     "65"
+    ],
+    "missing": []
+   },
+   "support": 0.5,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "From calculations based on cosmological models, the sum of the three neutrino masses must be below 0.120 eV/c2.",
+   "url": "https://en.wikipedia.org/wiki/Neutrino",
+   "sourceTitle": "Wikipedia — Neutrino",
+   "revision": 1382248098,
+   "passage": "From calculations based on cosmological models, the sum of the three neutrino masses must be below 0.120 eV/c2.",
+   "numbers": {
+    "claim": [
+     "0.120",
+     "2"
+    ],
+    "inPassage": [
+     "0.120",
+     "2"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "Koshiba's work resulted in the first real-time observation of neutrinos from the SN 1987A supernova in the nearby Large Magellanic Cloud.",
+   "url": "https://en.wikipedia.org/wiki/Neutrino",
+   "sourceTitle": "Wikipedia — Neutrino",
+   "revision": 1382248098,
+   "passage": "Koshiba's work also resulted in the first real-time observation of neutrinos from the SN 1987A supernova in the nearby Large Magellanic Cloud.",
+   "numbers": {
+    "claim": [
+     "1987"
+    ],
+    "inPassage": [
+     "1987"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "SN 1987A represents the only verified detection of neutrinos from a supernova.",
+   "url": "https://en.wikipedia.org/wiki/Neutrino",
+   "sourceTitle": "Wikipedia — Neutrino",
+   "revision": 1382248098,
+   "passage": "SN 1987A represents the only verified detection of neutrinos from a supernova.",
+   "numbers": {
+    "claim": [
+     "1987"
+    ],
+    "inPassage": [
+     "1987"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "65 billion neutrinos pass through your fingertip every second.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "You never feel them. Almost none ever hit anything.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "They stream from fusion in the Sun's core.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "At night, they pass through Earth and reach you from below.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The three neutrino masses add up to under 0.120 electronvolts.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "In 1987, detectors caught neutrinos from a supernova.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "SPECULATIVE SCENARIO",
+   "text": "If they interacted like light, the Sun would glare through the ground at night.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So one of the most common particles around you goes unnoticed.",
+   "status": "HUMAN"
+  }
+ ]
+}

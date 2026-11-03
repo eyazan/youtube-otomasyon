@@ -1,0 +1,161 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-FUT-049",
+ "checkedAt": "2026-11-03T17:53:39.953Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "677b716b6c5c5030",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "The probes would be propelled by a square-kilometre array of 10 kW ground-based lasers with a combined output of up to 100 GW.",
+   "url": "https://en.wikipedia.org/wiki/Breakthrough_Starshot",
+   "sourceTitle": "Wikipedia — Breakthrough Starshot",
+   "revision": 1376867919,
+   "passage": "They would be propelled by a square-kilometre array of 10 kW ground-based lasers with a combined output of up to 100 GW.",
+   "numbers": {
+    "claim": [
+     "10",
+     "100"
+    ],
+    "inPassage": [
+     "10",
+     "100"
+    ],
+    "missing": []
+   },
+   "support": 0.9,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "To accelerate the 4 m sail at 10,000 Gs to 0.2 c requires combining optics which are approximately 3 kilometers in diameter.",
+   "url": "https://en.wikipedia.org/wiki/Breakthrough_Starshot",
+   "sourceTitle": "Wikipedia — Breakthrough Starshot",
+   "revision": 1376867919,
+   "passage": "For example, to accelerate the previously mentioned 4 m sail at 10,000 Gs to 0.2 c requires combining optics which are approximately 3 kilometers in diameter to focus the laser light on the sail.",
+   "numbers": {
+    "claim": [
+     "4",
+     "10000",
+     "0.2",
+     "3"
+    ],
+    "inPassage": [
+     "4",
+     "10000",
+     "0.2",
+     "3"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "The spacecraft will have to survive collisions with space dust; each square centimeter of frontal cross-section is expected to collide with about a thousand particles of size at least 0.1 μm.",
+   "url": "https://en.wikipedia.org/wiki/Breakthrough_Starshot",
+   "sourceTitle": "Wikipedia — Breakthrough Starshot",
+   "revision": 1376867919,
+   "passage": "The spacecraft will have to survive collisions with space dust; Starshot expects each square centimeter of frontal cross-section to collide at high speed with about a thousand particles of size at least 0.1 μm.",
+   "numbers": {
+    "claim": [
+     "0.1"
+    ],
+    "inPassage": [
+     "0.1"
+    ],
+    "missing": []
+   },
+   "support": 0.94,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "Milner placed the final mission cost at $5–10 billion.",
+   "url": "https://en.wikipedia.org/wiki/Breakthrough_Starshot",
+   "sourceTitle": "Wikipedia — Breakthrough Starshot",
+   "revision": 1376867919,
+   "passage": "Milner placed the final mission cost at $5–10 billion, and estimated the first craft could launch by around 2036.",
+   "numbers": {
+    "claim": [
+     "5",
+     "10"
+    ],
+    "inPassage": [
+     "5",
+     "10"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F5",
+   "claim": "In September 2025, Scientific American reported that the project was on hold indefinitely.",
+   "url": "https://en.wikipedia.org/wiki/Breakthrough_Starshot",
+   "sourceTitle": "Wikipedia — Breakthrough Starshot",
+   "revision": 1376867919,
+   "passage": "In September 2025, Scientific American reported that the project was on hold indefinitely.",
+   "numbers": {
+    "claim": [
+     "2025"
+    ],
+    "inPassage": [
+     "2025"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why a star probe needs 100 gigawatts of lasers.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Its sail must reach a fifth of light speed.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The probes would weigh grams, on ultra-thin sails.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Focusing that beam needs optics about 3 kilometres across.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Every square centimetre would hit about a thousand dust grains.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Estimates put the mission at $5 to 10 billion.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "In 2025, the project was reported on hold indefinitely.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So reaching another star is possible on paper, and very hard in practice.",
+   "status": "HUMAN"
+  }
+ ]
+}
