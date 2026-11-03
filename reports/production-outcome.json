@@ -1,27 +1,25 @@
 {
-  "at": "2026-11-03T07:09:39.101Z",
-  "runId": "41593967785",
+  "at": "2026-11-03T13:06:47.209Z",
+  "runId": "41641196375",
   "rows": [
     {
       "channel": "failure-reconstructed",
-      "outcome": "UPLOADED",
-      "category": "SCHEDULED",
-      "scheduled": true,
-      "publication": "SCHEDULED",
-      "publishAt": "2026-11-03T18:00:00.000Z",
-      "reason": "premium FR-pike-river-2010 OCpJYOYxnjQ",
-      "slug": "pike-river-2010",
+      "outcome": "NOT_DUE",
+      "category": "NOT_DUE",
+      "scheduled": false,
+      "publication": "NOT_SCHEDULED",
+      "publishAt": null,
+      "reason": "today's Short already exists (pike-river-2010)",
+      "slug": null,
       "videoId": null,
-      "targetDay": "2026-11-03",
+      "targetDay": null,
       "trigger": {
         "event": "repository_dispatch",
-        "correlationId": "production-1-20261103T070508Z-9fb76159"
+        "correlationId": "production-2-20261103T130509Z-1e59f3d0"
       },
       "stages": {
         "RESEARCH": {
-          "status": "done",
-          "detail": "FR-pike-river-2010",
-          "at": "2026-11-03T07:09:15.197Z"
+          "status": "not-reached"
         },
         "SCRIPT": {
           "status": "not-reached"
@@ -33,29 +31,19 @@
           "status": "not-reached"
         },
         "RENDER": {
-          "status": "done",
-          "detail": "premium final",
-          "at": "2026-11-03T07:09:15.197Z"
+          "status": "not-reached"
         },
         "QA": {
-          "status": "done",
-          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
-          "at": "2026-11-03T07:09:15.198Z"
+          "status": "not-reached"
         },
         "UPLOAD": {
-          "status": "done",
-          "detail": "OCpJYOYxnjQ",
-          "at": "2026-11-03T07:09:15.198Z"
+          "status": "not-reached"
         },
         "SCHEDULE": {
-          "status": "done",
-          "detail": "2026-11-03T18:00:00.000Z",
-          "at": "2026-11-03T07:09:15.199Z"
+          "status": "not-reached"
         },
         "PUBLISH": {
-          "status": "scheduled",
-          "detail": "YouTube makes it public at 2026-11-03T18:00:00.000Z",
-          "at": "2026-11-03T07:09:15.199Z"
+          "status": "not-reached"
         }
       }
     },
@@ -72,13 +60,13 @@
       "targetDay": "2026-11-03",
       "trigger": {
         "event": "repository_dispatch",
-        "correlationId": "production-1-20261103T070508Z-9fb76159"
+        "correlationId": "production-2-20261103T130509Z-1e59f3d0"
       },
       "stages": {
         "RESEARCH": {
           "status": "skipped",
           "detail": "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)",
-          "at": "2026-11-03T07:09:21.219Z"
+          "at": "2026-11-03T13:06:18.499Z"
         },
         "SCRIPT": {
           "status": "not-reached"
