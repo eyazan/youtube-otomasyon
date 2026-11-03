@@ -1,0 +1,258 @@
+{
+ "schema": "bto-studio.review-package.v1",
+ "channel": "failure-reconstructed",
+ "topicId": "FR-el-faro-2015",
+ "slug": "el-faro-2015",
+ "title": "The Cargo Ship That Sailed Into a Hurricane",
+ "verdict": "SHADOW_OF_LIVE_NOT_PUBLISHABLE",
+ "pilot": null,
+ "researchPending": null,
+ "shadow": true,
+ "autoPublish": false,
+ "uploadAttempted": false,
+ "mode": "preview",
+ "quality": "final",
+ "createdAt": "2026-11-03T18:04:25.086Z",
+ "video": "../../_temp/review/FR-el-faro-2015/out/el-faro-2015-premium-final.mp4",
+ "voice": {
+  "used": "en-US-AndrewMultilingualNeural",
+  "approved": true,
+  "approvedVoice": {
+   "provider": "edge-tts",
+   "voice": "en-US-AndrewMultilingualNeural",
+   "rate": "+1%"
+  },
+  "note": null,
+  "wordTiming": "measured (Edge word boundaries)"
+ },
+ "narrationUnchanged": {
+  "sourceHash": "609bfcf9d7373976",
+  "lines": [
+   "A US cargo ship sailed into a Category 3 hurricane.",
+   "The ship sank, and all thirty three crew were killed.",
+   "Its route kept it close to the hurricane's path.",
+   "Some weather updates it relied on were hours old.",
+   "Water came in through an open hatch, and the ship listed.",
+   "Then the engine lost oil pressure and stopped.",
+   "Without power, the waves took over.",
+   "Rules on weather routing and old ships were tightened."
+  ]
+ },
+ "traceability": [
+  {
+   "scene": "s1-hook",
+   "lines": [
+    "L1"
+   ],
+   "purpose": "Hook: frame 0 draws the ship as clean line work and it gives way at the failure point within the first second, with the case stamp (EL FARO · 2015), so the consequence is on screen before any cause.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "El Faro (2015): sank in Hurricane Joaquin. 33 CREW",
+     "source": "Wikipedia — SS El Faro",
+     "url": "https://en.wikipedia.org/wiki/SS_El_Faro"
+    }
+   ]
+  },
+  {
+   "scene": "s2-toll",
+   "lines": [
+    "L2"
+   ],
+   "purpose": "Toll: the broken ship holds while the case's count (33 CREW) is stamped below it; the number is the case file's, not computed.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "El Faro (2015): sank in Hurricane Joaquin. 33 CREW",
+     "source": "Wikipedia — SS El Faro",
+     "url": "https://en.wikipedia.org/wiki/SS_El_Faro"
+    }
+   ]
+  },
+  {
+   "scene": "s3-trigger",
+   "lines": [
+    "L3"
+   ],
+   "purpose": "Trigger: the camera closes in on the failure point of the intact ship as the crack starts there, while the case file's trigger is set in three words.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F2",
+     "claim": "a route that took the ship into the storm's path",
+     "source": "Wikipedia — SS El Faro",
+     "url": "https://en.wikipedia.org/wiki/SS_El_Faro"
+    },
+    {
+     "id": "F1",
+     "claim": "El Faro (2015): sank in Hurricane Joaquin. 33 CREW",
+     "source": "Wikipedia — SS El Faro",
+     "url": "https://en.wikipedia.org/wiki/SS_El_Faro"
+    }
+   ]
+  },
+  {
+   "scene": "s4-chain",
+   "lines": [
+    "L4"
+   ],
+   "purpose": "Chain: the case's failure chain scrolls from link 1 to link 2 (\"OUTDATED WEATHER DATA\"), which lights as the line describes it, so consecutive causes read as one continuous investigation.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "ROUTE KEPT NEAR THE STORM -> OUTDATED WEATHER DATA -> SHIP LISTS, WATER ENTERS -> PROPULSION LOST -> SHIP SINKS",
+     "source": "Wikipedia — SS El Faro",
+     "url": "https://en.wikipedia.org/wiki/SS_El_Faro"
+    },
+    {
+     "id": "F1",
+     "claim": "El Faro (2015): sank in Hurricane Joaquin. 33 CREW",
+     "source": "Wikipedia — SS El Faro",
+     "url": "https://en.wikipedia.org/wiki/SS_El_Faro"
+    }
+   ]
+  },
+  {
+   "scene": "s5-chain",
+   "lines": [
+    "L5"
+   ],
+   "purpose": "Chain: the case's failure chain scrolls from link 2 to link 3 (\"SHIP LISTS, WATER ENTERS\"), which lights as the line describes it, so consecutive causes read as one continuous investigation.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "ROUTE KEPT NEAR THE STORM -> OUTDATED WEATHER DATA -> SHIP LISTS, WATER ENTERS -> PROPULSION LOST -> SHIP SINKS",
+     "source": "Wikipedia — SS El Faro",
+     "url": "https://en.wikipedia.org/wiki/SS_El_Faro"
+    },
+    {
+     "id": "F1",
+     "claim": "El Faro (2015): sank in Hurricane Joaquin. 33 CREW",
+     "source": "Wikipedia — SS El Faro",
+     "url": "https://en.wikipedia.org/wiki/SS_El_Faro"
+    }
+   ]
+  },
+  {
+   "scene": "s6-mechanism",
+   "lines": [
+    "L6"
+   ],
+   "purpose": "Mechanism close-up: the camera closes in on the failure point of the ship while chain link 4 (\"PROPULSION LOST\") is named, so the cause is seen on the object, not only read on a card.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "ROUTE KEPT NEAR THE STORM -> OUTDATED WEATHER DATA -> SHIP LISTS, WATER ENTERS -> PROPULSION LOST -> SHIP SINKS",
+     "source": "Wikipedia — SS El Faro",
+     "url": "https://en.wikipedia.org/wiki/SS_El_Faro"
+    },
+    {
+     "id": "F3",
+     "claim": "flooding through an open scuttle, loss of propulsion, and progressive flooding in heavy seas",
+     "source": "NTSB — DCA16MM01 preliminary report (cited by Wikipedia)",
+     "url": "https://www.ntsb.gov/investigations/AccidentReports/Reports/DCA16MM01_preliminary_report.pdf"
+    },
+    {
+     "id": "F1",
+     "claim": "El Faro (2015): sank in Hurricane Joaquin. 33 CREW",
+     "source": "Wikipedia — SS El Faro",
+     "url": "https://en.wikipedia.org/wiki/SS_El_Faro"
+    }
+   ]
+  },
+  {
+   "scene": "s7-chain",
+   "lines": [
+    "L7"
+   ],
+   "purpose": "Chain: the case's failure chain scrolls from link 4 to link 4 (\"PROPULSION LOST\"), which lights as the line describes it, so consecutive causes read as one continuous investigation.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "ROUTE KEPT NEAR THE STORM -> OUTDATED WEATHER DATA -> SHIP LISTS, WATER ENTERS -> PROPULSION LOST -> SHIP SINKS",
+     "source": "Wikipedia — SS El Faro",
+     "url": "https://en.wikipedia.org/wiki/SS_El_Faro"
+    },
+    {
+     "id": "F1",
+     "claim": "El Faro (2015): sank in Hurricane Joaquin. 33 CREW",
+     "source": "Wikipedia — SS El Faro",
+     "url": "https://en.wikipedia.org/wiki/SS_El_Faro"
+    }
+   ]
+  },
+  {
+   "scene": "s8-payoff",
+   "lines": [
+    "L8"
+   ],
+   "purpose": "Payoff: the lesson in a few of the line's words over the object redrawn whole; the camera returns to the exact frame-0 framing and the lesson clears before the end, so the last frame matches the first and the Short loops (#357).",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F6",
+     "claim": "weather routing and older-ship safety rules were tightened",
+     "source": "NTSB — DCA16MM01 preliminary report (cited by Wikipedia)",
+     "url": "https://www.ntsb.gov/investigations/AccidentReports/Reports/DCA16MM01_preliminary_report.pdf"
+    },
+    {
+     "id": "F1",
+     "claim": "El Faro (2015): sank in Hurricane Joaquin. 33 CREW",
+     "source": "Wikipedia — SS El Faro",
+     "url": "https://en.wikipedia.org/wiki/SS_El_Faro"
+    }
+   ]
+  }
+ ],
+ "licensing": {
+  "visuals": "all visuals drawn in-house from code (SVG): generic object-class line drawings, failure chain and stamps; no photographs, footage or third-party media",
+  "fonts": "SIL OFL 1.1 (@fontsource Inter, Source Serif 4, Barlow Semi Condensed 5.3.0)",
+  "audio": "narration TTS + effects/music synthesised by scripts/bto-studio/audio/sound_design.py (no samples)",
+  "thirdPartyMedia": []
+ },
+ "qa": {
+  "objectivePass": true,
+  "report": "../../_temp/review/FR-el-faro-2015/out/qa-report.md",
+  "contactSheet": "../../_temp/review/FR-el-faro-2015/out/contact-sheet.png",
+  "sceneSheet": "../../_temp/review/FR-el-faro-2015/out/scene-sheet.png",
+  "failures": [
+   "UNVERIFIED audio samples clipped: not reported by this FFmpeg build (astats has no clipped-sample count)",
+   "WARN no static hold >= 1.5 s inside a scene (visual change target): longest 1.53 s (s5-chain)"
+  ],
+  "unverified": [
+   "audio samples clipped"
+  ]
+ },
+ "audio": {
+  "integratedLufs": -14.3,
+  "truePeakDbtp": -3
+ },
+ "performance": {
+  "renderWallSec": 89.1,
+  "msPerFrame": 110.4,
+  "workers": 3,
+  "peakChromiumRssMb": 3828,
+  "cachedSegments": 0,
+  "segments": 8,
+  "host": "linux x64 4 cpu 16 GB",
+  "totalPipelineSec": 136.3
+ },
+ "cost": {
+  "llmUsd": 0,
+  "ttsUsd": 0,
+  "renderUsd": 0,
+  "note": "local rendering and free/offline TTS; LLM use only when a Claude storyboard draft was requested and approved"
+ },
+ "approvalsNeeded": [
+  "voice: re-narrate with the approved Edge voice (if PREVIEW_ONLY)",
+  "creative sign-off (video-quality-review findings)",
+  "factual sign-off on the traceability table",
+  "owner decision to hand the MP4 to the normal pipeline (never automatic)"
+ ]
+}
