@@ -2,52 +2,6 @@
   "channel": "impossible-brief",
   "runs": [
     {
-      "runId": "41320367069",
-      "attempt": "1",
-      "startedAt": "2026-11-01T15:17:16.154Z",
-      "publish": true,
-      "trigger": {
-        "event": "schedule",
-        "correlationId": null
-      },
-      "targetDay": "2026-11-01",
-      "slug": null,
-      "outcome": "NO_TOPIC",
-      "reason": "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)",
-      "stages": {
-        "RESEARCH": {
-          "status": "skipped",
-          "detail": "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)",
-          "at": "2026-11-01T15:17:16.898Z"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "not-reached"
-        },
-        "QA": {
-          "status": "not-reached"
-        },
-        "UPLOAD": {
-          "status": "not-reached"
-        },
-        "SCHEDULE": {
-          "status": "not-reached"
-        },
-        "PUBLISH": {
-          "status": "not-reached"
-        }
-      },
-      "finishedAt": "2026-11-01T15:17:16.898Z"
-    },
-    {
       "runId": "41324798685",
       "attempt": "1",
       "startedAt": "2026-11-01T16:09:49.665Z",
@@ -1342,6 +1296,52 @@
         }
       },
       "finishedAt": "2026-11-03T13:58:10.335Z"
+    },
+    {
+      "runId": "41654317321",
+      "attempt": "1",
+      "startedAt": "2026-11-03T14:31:29.524Z",
+      "publish": true,
+      "trigger": {
+        "event": "schedule",
+        "correlationId": null
+      },
+      "targetDay": "2026-11-03",
+      "slug": null,
+      "outcome": "NO_TOPIC",
+      "reason": "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)",
+      "stages": {
+        "RESEARCH": {
+          "status": "skipped",
+          "detail": "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)",
+          "at": "2026-11-03T14:31:30.855Z"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "not-reached"
+        },
+        "QA": {
+          "status": "not-reached"
+        },
+        "UPLOAD": {
+          "status": "not-reached"
+        },
+        "SCHEDULE": {
+          "status": "not-reached"
+        },
+        "PUBLISH": {
+          "status": "not-reached"
+        }
+      },
+      "finishedAt": "2026-11-03T14:31:30.856Z"
     }
   ]
 }
