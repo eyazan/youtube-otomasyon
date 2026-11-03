@@ -11,7 +11,7 @@ flag. Every verdict below comes from real renders and read CI logs, not from job
 | ImpossibleBrief | **READY_FOR_HUMAN_REVIEW** (EAR-001, EAR-019) | CI run 41688507762: final 1080×1920, approved Edge voice, objective QA PASS on both, text gate 0 FAIL | named Creative Director PASS + human review of the HUMAN lines (`research/reviews/<id>.json`); merge of this branch |
 | Failure Reconstructed | **BLOCKED_WITH_ACTIONABLE_FIX** (premium); legacy lane keeps publishing | El Faro preview: QA PASS, creatively weak (below) | forensic visual grammar; case files without verbatim quotes |
 | The Hidden Logic of Things | **BLOCKED_WITH_ACTIONABLE_FIX** | BTO-156 renders after two P0 fixes; creatively fails the brief | mechanism drawings instead of paper cards; channel inactive by owner decision |
-| GoalLore Lab | **BLOCKED_WITH_ACTIONABLE_FIX** | GLL-021 preview: distinctive, validates; 21.6 s < 25 s minimum with the preview voice | owner voice approval, research review, channel `enabled:false` |
+| GoalLore Lab | **BLOCKED_WITH_ACTIONABLE_FIX** | GLL-021 CI final render: objective QA PASS with the candidate Edge voice; distinctive identity | owner voice approval, research review, channel `enabled:false` |
 
 No channel is PRODUCTION_READY: none has a recorded human creative approval, and that approval is not something
 this system may produce.
@@ -83,8 +83,8 @@ person must choose; topics whose mechanism has no drawing stay held.
 | IB-EAR-001 | CI run 41688507762 (artifact `premium-review-render`), frames `review/render-41688507762` | Edge Brian Multilingual (approved) | PASS | sha256 `7a792484…f2bc` |
 | IB-EAR-019 | same run | same | PASS | sha256 `22e2c5dd…0e65` |
 | FR-el-faro-2015 | CI run 41688512604, frames `review/render-41688512604` | approved Edge voice | PASS | sha256 `f0541c3e…0641`; Creative Director flags THIN on 8/8 scenes, LOW_NOVELTY, LOW_MOTION: creative FAIL, below |
-| GLL-021 | CI dispatch (see PR) + local preview | Edge Ryan (not approved) / Kokoro | FAIL duration (preview voice) | |
-| BTO-156 | local preview | Kokoro (preview) | FAIL duration 25.3 s < 30 s | creative FAIL |
+| GLL-021 | CI run 41690253051, frames `review/render-41690253051` | Edge Ryan (candidate, not approved) | PASS (25.4 s) | sha256 `419b37a7…d0a`; WARN hook~payoff similarity 0.936, caption sync max 169 ms |
+| BTO-156 | local preview; CI review render dispatched after #409 | Kokoro (preview) | FAIL duration 25.3 s < 30 s (preview voice) | creative FAIL |
 
 Before/after (EAR-001): `docs/premium-studio/evidence/2026-11-03/ib-ear-001-before-after.jpg`.
 
@@ -102,7 +102,7 @@ Before/after (EAR-001): `docs/premium-studio/evidence/2026-11-03/ib-ear-001-befo
 - **HLT BTO-156** — fails the brief: blank paper cards and quote slides, no door mesh or wavelength comparison.
   Fix: a declared-mechanism layer like IB's (here: aperture vs wavelength), before reactivating the channel.
 - **GLL-021** — on-brand and distinct (floodlit pitch, scoreboard, tokens, RECONSTRUCTION chip). Open: the dribble
-  doesn't show five distinct defenders being passed; runtime under the 25 s floor with the preview voice.
+  doesn't show five distinct defenders being passed; hook and payoff frames nearly identical (0.936).
 
 ## 7. Approvals still required (owner)
 
