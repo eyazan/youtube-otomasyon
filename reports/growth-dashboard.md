@@ -1,18 +1,18 @@
 # Growth dashboard
 
-Generated 2026-11-03T17:54:03.353Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-11-03T18:31:57.436Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
-**Shorts health** — last published 2026-11-03T18:00:00.000Z · 39 published · inventory A65/B150/C58/D76 · next: ocean-ranger-1982 (EXPLORE (0.25): under-sampled cluster industrial-disasters)
+**Shorts health** — last published 2026-11-03T18:00:00.000Z · 39 published · inventory A90/B140/C60/D59 · next: swissair-111-1998 (EXPLORE (0.25): under-sampled cluster fire-and-explosions)
 
 **Long-form health** — cycle 2026-W45: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W45 already QUALITY_BLOCKED)
 
-**Long-form backlog** — challenger-1986 86/A, chernobyl-1986 86/A, columbia-2003 85/A, air-france-447-2009 84/A, apollo-13-1970 84/A
+**Long-form backlog** — challenger-1986 87/A, columbia-2003 87/A, air-france-447-2009 86/A, chernobyl-1986 86/A, apollo-13-1970 85/A
 
 **Content clusters** — 12 · integrity OK
 
-**Growth / subscriber conversion** — tracked 38 · subs/1k Shorts 0 · subs/1k long n/a
+**Growth / subscriber conversion** — tracked 38 · subs/1k Shorts 0.83 · subs/1k long n/a
 
 **Learning** — Shorts adaptive (n=37, adopted 0) · Long-form heuristics-only (n=0)
 
@@ -20,11 +20,11 @@ Generated 2026-11-03T17:54:03.353Z. Per-channel baselines are computed separatel
 
 **Research/source enrichment tasks**
 
-- apollo-1-1967 (C): VideoPotential 86 in experimental band 58–71; sources 41 < 62
+- apollo-1-1967 (C): VideoPotential 87 in experimental band 58–71; sources 41 < 62
 - munich-1958 (C): VideoPotential 85 in experimental band 58–71; sources 41 < 62
 - skylab-1973 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
 - eastland-1915 (C): VideoPotential 83 in experimental band 58–71; sources 41 < 62
-- vanguard-1957 (C): VideoPotential 82 in experimental band 58–71; sources 41 < 62
+- vanguard-1957 (C): VideoPotential 83 in experimental band 58–71; sources 41 < 62
 
 **Recent alerts**
 

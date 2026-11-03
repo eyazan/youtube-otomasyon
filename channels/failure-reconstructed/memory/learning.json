@@ -2,19 +2,19 @@
   "channel": "failure-reconstructed",
   "status": "sample-floor-met",
   "minimumSample": 5,
-  "sampleSize": 33,
+  "sampleSize": 34,
   "learnedRules": [
     {
       "key": "hookType",
       "value": "consequence",
       "weakValue": "statement",
-      "evidenceVideos": 33,
+      "evidenceVideos": 34,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
           "value": "consequence",
           "sample": 8,
-          "averagePercentageViewed": 118.97
+          "averagePercentageViewed": 118.93
         },
         {
           "value": "number-or-countdown",
@@ -23,8 +23,8 @@
         },
         {
           "value": "statement",
-          "sample": 22,
-          "averagePercentageViewed": 65.78
+          "sample": 23,
+          "averagePercentageViewed": 64.75
         }
       ]
     },
@@ -32,7 +32,7 @@
       "key": "durationRange",
       "value": "over-35s",
       "weakValue": "under-25s",
-      "evidenceVideos": 33,
+      "evidenceVideos": 34,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
@@ -42,13 +42,13 @@
         },
         {
           "value": "25-35s",
-          "sample": 24,
-          "averagePercentageViewed": 81.11
+          "sample": 25,
+          "averagePercentageViewed": 79.55
         },
         {
           "value": "under-25s",
           "sample": 7,
-          "averagePercentageViewed": 71.56
+          "averagePercentageViewed": 71.51
         }
       ]
     },
@@ -56,7 +56,7 @@
       "key": "secondBeat",
       "value": "countdown",
       "weakValue": "event",
-      "evidenceVideos": 33,
+      "evidenceVideos": 34,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
@@ -72,12 +72,12 @@
         {
           "value": "emergency",
           "sample": 8,
-          "averagePercentageViewed": 71.1
+          "averagePercentageViewed": 71.06
         },
         {
           "value": "event",
-          "sample": 15,
-          "averagePercentageViewed": 66.03
+          "sample": 16,
+          "averagePercentageViewed": 64.75
         },
         {
           "value": "escalation",
@@ -90,18 +90,18 @@
       "key": "visualChangeFrequency",
       "value": "fast",
       "weakValue": "measured",
-      "evidenceVideos": 33,
+      "evidenceVideos": 34,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
           "value": "fast",
           "sample": 23,
-          "averagePercentageViewed": 85.39
+          "averagePercentageViewed": 85.37
         },
         {
           "value": "measured",
-          "sample": 9,
-          "averagePercentageViewed": 66.97
+          "sample": 10,
+          "averagePercentageViewed": 64.83
         }
       ]
     },
@@ -109,18 +109,18 @@
       "key": "questionStyle",
       "value": "question",
       "weakValue": null,
-      "evidenceVideos": 33,
+      "evidenceVideos": 34,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
           "value": "question",
-          "sample": 32,
-          "averagePercentageViewed": 80.21
+          "sample": 33,
+          "averagePercentageViewed": 79.15
         },
         {
           "value": "statement",
           "sample": 1,
-          "averagePercentageViewed": 63.61
+          "averagePercentageViewed": 60.01
         }
       ]
     },
@@ -128,7 +128,7 @@
       "key": "category",
       "value": "nuclear-accidents",
       "weakValue": "materials-failures",
-      "evidenceVideos": 33,
+      "evidenceVideos": 34,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
@@ -149,7 +149,7 @@
         {
           "value": "aviation-failures",
           "sample": 4,
-          "averagePercentageViewed": 77.78
+          "averagePercentageViewed": 77.7
         },
         {
           "value": "spaceflight-disasters",
@@ -182,14 +182,14 @@
           "averagePercentageViewed": 61.25
         },
         {
-          "value": "bridge-failures",
-          "sample": 3,
-          "averagePercentageViewed": 58.43
-        },
-        {
           "value": "fire-and-explosions",
           "sample": 2,
           "averagePercentageViewed": 58.12
+        },
+        {
+          "value": "bridge-failures",
+          "sample": 4,
+          "averagePercentageViewed": 55.22
         },
         {
           "value": "materials-failures",
@@ -202,17 +202,17 @@
       "key": "ctaStyle",
       "value": "adaptive after payoff",
       "weakValue": null,
-      "evidenceVideos": 33,
+      "evidenceVideos": 34,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
           "value": "adaptive after payoff",
-          "sample": 33,
-          "averagePercentageViewed": 79.71
+          "sample": 34,
+          "averagePercentageViewed": 78.59
         }
       ]
     }
   ],
-  "lastUpdated": "2026-11-03T17:53:52.444Z",
+  "lastUpdated": "2026-11-03T18:31:43.590Z",
   "caveat": "Observed associations only; topic, timing and packaging can confound retention. No causal claim."
 }

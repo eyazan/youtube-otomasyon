@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-03T17:54:03.353Z",
+  "generatedAt": "2026-11-03T18:31:57.436Z",
   "note": "Per-channel baselines are computed separately and never blended.",
   "channels": [
     {
@@ -9,10 +9,10 @@
         "lastPublished": "2026-11-03T18:00:00.000Z",
         "published": 39,
         "inventory": {
-          "A": 65,
-          "B": 150,
-          "C": 58,
-          "D": 76
+          "A": 90,
+          "B": 140,
+          "C": 60,
+          "D": 59
         },
         "durableInventory": {
           "total": 501,
@@ -22,14 +22,14 @@
           "used": 10
         },
         "nextSelection": {
-          "slug": "ocean-ranger-1982",
-          "reason": "EXPLORE (0.25): under-sampled cluster industrial-disasters"
+          "slug": "swissair-111-1998",
+          "reason": "EXPLORE (0.25): under-sampled cluster fire-and-explosions"
         },
         "baseline": {
           "n": 37,
           "views": 446,
           "averagePercentageViewed": 64.67,
-          "subscribersPer1000Views": 0,
+          "subscribersPer1000Views": 0.83,
           "engagementPer1000Views": 24.24,
           "watchHoursPer1000Views": 2.02
         }
@@ -95,6 +95,18 @@
         "backlog": [
           {
             "slug": "challenger-1986",
+            "LongFormPotentialScore": 87,
+            "bucket": "A",
+            "mode": "B_SHORT_PROVES_DEMAND"
+          },
+          {
+            "slug": "columbia-2003",
+            "LongFormPotentialScore": 87,
+            "bucket": "A",
+            "mode": "B_SHORT_PROVES_DEMAND"
+          },
+          {
+            "slug": "air-france-447-2009",
             "LongFormPotentialScore": 86,
             "bucket": "A",
             "mode": "B_SHORT_PROVES_DEMAND"
@@ -106,20 +118,8 @@
             "mode": "B_SHORT_PROVES_DEMAND"
           },
           {
-            "slug": "columbia-2003",
-            "LongFormPotentialScore": 85,
-            "bucket": "A",
-            "mode": "B_SHORT_PROVES_DEMAND"
-          },
-          {
-            "slug": "air-france-447-2009",
-            "LongFormPotentialScore": 84,
-            "bucket": "A",
-            "mode": "B_SHORT_PROVES_DEMAND"
-          },
-          {
             "slug": "apollo-13-1970",
-            "LongFormPotentialScore": 84,
+            "LongFormPotentialScore": 85,
             "bucket": "A",
             "mode": "B_SHORT_PROVES_DEMAND"
           }
@@ -152,7 +152,7 @@
       "growth": {
         "trackedVideos": 38,
         "subscriberConversion": {
-          "shorts": 0,
+          "shorts": 0.83,
           "longform": null
         }
       },
@@ -161,7 +161,7 @@
           "status": "adaptive",
           "sampleSize": 37,
           "adopted": 0,
-          "hypotheses": 17
+          "hypotheses": 18
         },
         "longform": {
           "status": "heuristics-only",
@@ -174,7 +174,7 @@
         {
           "slug": "apollo-1-1967",
           "bucket": "C",
-          "reason": "VideoPotential 86 in experimental band 58–71; sources 41 < 62"
+          "reason": "VideoPotential 87 in experimental band 58–71; sources 41 < 62"
         },
         {
           "slug": "munich-1958",
@@ -194,17 +194,12 @@
         {
           "slug": "vanguard-1957",
           "bucket": "C",
-          "reason": "VideoPotential 82 in experimental band 58–71; sources 41 < 62"
+          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
         },
         {
           "slug": "castle-bravo-1954",
           "bucket": "C",
           "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
-        },
-        {
-          "slug": "controlled-impact-1984",
-          "bucket": "C",
-          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
         },
         {
           "slug": "new-london-school-1937",
@@ -218,6 +213,11 @@
         },
         {
           "slug": "boston-molasses-1919",
+          "bucket": "C",
+          "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
+        },
+        {
+          "slug": "controlled-impact-1984",
           "bucket": "C",
           "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
         }

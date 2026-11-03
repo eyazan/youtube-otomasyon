@@ -7,11 +7,21 @@ https://youtu.be/COYIywbrlq4
 | Checkpoint | Collected | Views | Likes | Comments | Avg % viewed | Subs (net) | Top traffic |
 |---|---|---:|---:|---:|---:|---:|---|
 | 1d | 2026-11-01 | 544 | 3 | 1 | — | — |  |
+| 3d | 2026-11-03 | 565 | 3 | 1 | 45.57 | 0 | Shorts feed 96%, Search 2% |
 
-## Diagnosis at 1d
+## Diagnosis at 3d
 
-- **INSUFFICIENT_DATA** (high) — 544 views after 1 days — too early/small for rate-based conclusions.
+- **HEALTHY** (low) — No problem pattern detected with available data.
 
 ## Suggested interventions
 
-- INSUFFICIENT DATA → no intervention; wait for the next checkpoint.
+- HEALTHY → no action.
+
+## First major observed retention drop
+
+- Timestamp: 5s; magnitude: 16 percentage points.
+- Active sentence: At rush hour it fell into the Ohio River, and forty six people died.
+- Visual type: REAL ARCHIVAL IMAGE
+- This is an observed alignment, not proof that the sentence or visual caused the drop.
+
+Views gained between 1d and 3d: 21.
