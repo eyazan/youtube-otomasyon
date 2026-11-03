@@ -51,6 +51,7 @@ function build(script, style, topic, context = {}) {
   const say = (L, re) => { const m = String(typeof L === "string" ? L : L.text).match(re); return m ? m[0].toUpperCase() : null; };
   const wordAnchor = (L, re, d) => { const w = String(L.text).split(/\s+/).map((x) => x.replace(/[^A-Za-z0-9]/g, "")).find((x) => re.test(x)); return w ? `${L.id}:${w}` : off(L.id, d); };
   const door = (props) => ({ component: "oven-door", props: { x: 110, y: 560, w: 860, h: 600, ...props } });
+  let launchedAt = null; // the cage scene continues the magnetron's shot: the same packets, not a relaunch
   const mechanismScene = (L, i, evidence) => {
     if (!aperture) return null; const first = i === 0, last = i === lines.length - 1; const start = first ? 0 : `${L.id}-0.15`; const end = `${L.id}.end`;
     const T = String(L.text);
@@ -60,7 +61,11 @@ function build(script, style, topic, context = {}) {
     if (last && oven) return { kind: "payoff", layers: [door({ viewAt: off(L.id, 0.3), shieldAt: off(L.id, 0.9) })],
       purpose: "Payoff: light leaves through the window to the viewer's eye while the enclosure and mesh glow as one shield: you see in, the energy stays in. Returns to the hook's oven, so the Short loops.",
       camera: [{ at: start, x: 540, y: 960, z: 1.0 }, { at: "end-0.6", x: 540, y: 860, z: 1.1 }] };
-    if (/\b(faraday|cage)\b/i.test(T)) return { kind: "cage", layers: [{ component: "faraday-box", props: { launchAt: off(L.id, 0.1), packets: 7, label: say(L, /faraday cage/i) ? { at: wordAnchor(L, /^cage$/i, 1.0), text: say(L, /faraday cage/i) } : null } }],
+    // the source of the waves: the cutaway opens and the magnetron starts launching them (the cage line continues this shot)
+    if (/\bmagnetron\b/i.test(T)) return { kind: "source", layers: [{ component: "faraday-box", props: { launchAt: (launchedAt = wordAnchor(L, /^magnetron$/i, 0.8)), packets: 7, magnetron: { at: wordAnchor(L, /^magnetron$/i, 0.8), text: "MAGNETRON" } } }],
+      purpose: "Source: the oven in cutaway; as the line names it, the magnetron in the corner starts launching microwaves into the metal box.",
+      camera: [{ at: start, x: 600, y: 820, z: 1.12 }, { at: end, x: 560, y: 860, z: 1.02 }] };
+    if (/\b(faraday|cage)\b/i.test(T)) return { kind: "cage", layers: [{ component: "faraday-box", props: { launchAt: launchedAt || off(L.id, 0.1), packets: 7, label: say(L, /faraday cage/i) ? { at: wordAnchor(L, /^cage$/i, 1.0), text: say(L, /faraday cage/i) } : null } }],
       purpose: "Cage: the oven in cutaway; the magnetron launches waves that reflect off every wall, the mesh door included, so none leaves the box.",
       camera: [{ at: start, x: 540, y: 880, z: 1.0 }, { at: end, x: 520, y: 880, z: 1.08 }] };
     if (oven && /\b(shield|decoration)\b/i.test(T)) return { kind: "shield", layers: [door({ shieldAt: wordAnchor(L, /^part$/i, 1.0) })],
@@ -77,6 +82,7 @@ function build(script, style, topic, context = {}) {
       camera: [{ at: start, x: 520, y: 860, z: 1.0 }, { at: end, x: 600, y: 860, z: 1.08 }] };
     return null;
   };
+  let prevKindB = null;
   const scenes = lines.map((L, i) => {
     const first = i === 0, last = i === lines.length - 1; const start = first ? 0 : `${L.id}-0.15`; const end = `${L.id}.end`;
     const ev = (L.evidenceSuggested || []).filter((id) => facts.some((f) => f.id === id)); const evidence = ev.length ? ev.slice(0, 3) : [facts[0].id];
@@ -119,7 +125,8 @@ function build(script, style, topic, context = {}) {
     // greeked printed matter is a conceptual depiction (validator): CONCEPTUAL chip + conceptual flag
     const printed = layers.some((l) => ["print-surface", "oven-door", "faraday-box", "wave-aperture"].includes(l.component)); if (printed) chips = ["conceptualLabel"];
     const env = kind === "quote" && quotes === 2 ? "spot" : "desk";
-    return { id: `s${i + 1}-${kind}`, lines: [L.id], start, env, ...(first ? {} : { transition: { type: nextTransition(i), dur: 0.5 } }), evidence: [...new Set(evidence)].slice(0, 4), chips, ...(printed ? { conceptual: true } : {}), visualPurpose: purpose, camera, layers };
+    const cont = kind === "cage" && prevKindB === "source"; prevKindB = kind;
+    return { id: `s${i + 1}-${kind}`, lines: [L.id], start, env, ...(first ? {} : { transition: cont ? { type: "continuity", dur: 0.3 } : { type: nextTransition(i), dur: 0.5 } }), evidence: [...new Set(evidence)].slice(0, 4), chips, ...(printed ? { conceptual: true } : {}), visualPurpose: purpose, camera, layers };
   });
   // last guard (validator rule): on-screen digits must occur in a cited fact; failing type becomes the key phrase
   const cited = (sc) => sc.evidence.map((id) => facts.find((f) => f.id === id)).filter(Boolean).map((f) => f.claim + " " + (f.quote || "")).join(" ");

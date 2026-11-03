@@ -211,7 +211,7 @@ function build(script, style, topic) {
     if (cls === "hook") return { kind_: "hook", evidence: [F("case")], layers: [{ component: "heavy-seas", props: { storm: stormCase, swell: 85, hitAt: 0.55, seed: 5 } }, ...(stamp ? [headline(`${L.id}+0.3`, stamp, 330, S.title)] : [])],
       purpose: `Hook: frame 0 is the ship already in heavy seas${stormCase ? " with the storm wall on the horizon" : ""}; a sea breaks over the bow in the first second, before any cause is named.`,
       camera: [{ at: start, x: 560, y: 900, z: 1.12 }, { at: end, x: 520, y: 880, z: 1.0 }] };
-    if (cls === "toll") return { kind_: "toll", evidence: [F("case")], layers: [{ component: "heavy-seas", props: { sunk: true, swell: 28, seed: 5 } }, readout(`${L.id}+0.25`, toll, 760)],
+    if (cls === "toll") return { kind_: "toll", evidence: [F("case")], layers: [{ component: "heavy-seas", props: { sunk: true, swell: 28, seed: 5 } }, readout(`${L.id}+0.25`, toll, 640)],
       purpose: `Toll: the surface closes over the ship's outline while the case's count (${toll}) is stamped; the number is the case file's.`,
       camera: [{ at: start, x: 540, y: 960, z: 1.0 }, { at: end, x: 540, y: 1000, z: 1.1 }] };
     if (cls === "payoff") { const lesson = phrase(L.text) ? headline(`${L.id}+0.3`, phrase(L.text), 330, S.title, L.text) : null; if (lesson) lesson.props.items[0].outAt = "end-0.45";

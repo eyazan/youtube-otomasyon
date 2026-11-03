@@ -82,6 +82,7 @@
         pg += `<path d="${d}" fill="none" stroke="${MW}" stroke-width="6" stroke-linecap="round" opacity="0.9"/><circle cx="${n1(x)}" cy="${n1(y)}" r="9" fill="${MW}"/>`;
         if (fx < 24) flashes += `<circle cx="${X - wall / 2}" cy="${n1(y)}" r="${n1(28 - fx)}" fill="${C.amber}" opacity="${n1(0.5 * (1 - fx / 24))}"/>`; });
       g += `<g clip-path="url(#fbCav)">${pg}</g>` + flashes;
+      if (o.magnetron && t >= o.magnetron.at) g += BTO.label(mx - 70, Y - wall - 35, mx - 200, Y - wall - 90, o.magnetron.text, clamp((t - o.magnetron.at) / 0.5), { size: LBL(), pill: true, color: C.amber, anchor: "end" });
       if (o.label) g += BTO.label(X + W, Y + H, X + W - 20, Y + H + 120, o.label.text, clamp((t - o.label.at) / 0.5), { size: LBL(), pill: true, color: C.teal, anchor: "end" });
       return `<g opacity="${op.toFixed(3)}">${g}</g>`;
     } };

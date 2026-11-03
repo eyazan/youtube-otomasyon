@@ -55,6 +55,7 @@ function screenTexts(layer) {
   if (layer.component === "tech-hits") Object.values(p.labels || {}).forEach((x) => x && out.push({ text: x, kind: "label", size: 40 }));
   // aperture-vs-wavelength kit (page/components/waves.js)
   if (["oven-door", "faraday-box"].includes(layer.component) && p.label) out.push({ text: p.label.text, kind: "label", size: 40 });
+  if (layer.component === "faraday-box" && p.magnetron) out.push({ text: p.magnetron.text, kind: "label", size: 40 });
   if (layer.component === "wave-aperture") Object.values(p.labels || {}).forEach((l) => l && l.text && out.push({ text: l.text, kind: "label", size: 40 }));
   if (layer.component === "failure-chain") (p.steps || []).forEach((st) => out.push({ text: st, kind: "label", size: 44 }));
   if (layer.component === "run-length-strip") { if (p.labelsAt != null) out.push({ text: (p.labels || p.runs || []).join(":"), kind: "ratio" }); if (p.caption) out.push({ text: p.caption, kind: "label" }); }
