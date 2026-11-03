@@ -117,24 +117,40 @@ test("units keep their meaning: an angle or a latitude is never a temperature (I
   const texts = sb.scenes.flatMap((s) => s.layers.filter((l) => l.component === "kinetic-type").flatMap((l) => l.props.items.map((it) => it.text)));
   assert.ok(!texts.some((t) => /°C/.test(t)), `no temperature on screen: ${texts.join(" | ")}`);
   assert.ok(!sb.scenes.some((s) => /heat/.test(s.id)), "no heat scene for a latitude");
-  // the latitude places the measured speed: a ladder of the two cited speeds, each labelled with where its fact says it
-  // applies, and a thousands number with decimals is read whole ("1,184.2", not "2 km/h")
-  const ladder = sb.scenes.flatMap((s) => s.layers).find((l) => l.component === "scale-ladder");
-  assert.deepEqual(ladder.props.items.map((it) => [it.label, it.valueText]), [["45° LATITUDE", "1,184.2 km/h"], ["EQUATOR", "1,674.7 km/h"]]);
+  // the latitude places the measured speed on the real globe: the 45th parallel beside the equator, each with an east
+  // arrow labelled with its own cited speed; a thousands number with decimals is read whole ("1,184.2", not "2 km/h")
+  const g = sb.scenes.find((sc) => sc.lines.includes("L6")).layers.find((l) => l.component === "globe");
+  assert.deepEqual(g.props.parallels.map((p) => p.lat), [0, 45]);
+  assert.deepEqual(g.props.speeds.labels, { 0: "1,674.7 km/h", 45: "1,184.2 km/h AT 45°" });
   assert.deepEqual(n("about 1,674.7 km/h"), [["1,674.7", "km/h", "speed"]]);
 });
 
-test("a stated latitude puts the rotation streak on that parallel; a poles payoff draws it near the pole (IB-EAR-001 render 41005043446)", () => {
-  const ear = Adapter.loadTopic("impossible-brief", "IB-EAR-001");
-  // without the second cited speed there is no ladder: the latitude line is drawn on the globe
-  const script = Adapter.studioScript(ear.channel, ear.topic); script.facts = script.facts.filter((f) => !/1,184/.test(f.claim));
-  const sb = Generator.build(script, style, ear.topic);
-  const streakY = (s) => { const f = s.layers.find((l) => l.component === "flow-arrows"); return f && f.props.streams[0].pts[2][1]; };
-  const lat = sb.scenes.find((s) => s.lines.includes("L6")); const pay = sb.scenes[sb.scenes.length - 1];
-  // globe centre y 820, radius 330: the 45th parallel sits about 233 px above the centre, the equator streak at ~842
-  assert.ok(Math.abs(streakY(lat) - (820 - 330 * Math.SQRT1_2) - 22 * Math.SQRT1_2) < 3, `45° streak at y ${streakY(lat)}`);
-  assert.ok(streakY(pay) < 560, `poles payoff streak near the pole, y ${streakY(pay)}`);
-  assert.equal(pay.layers.find((l) => l.component === "kinetic-type").props.items[0].text, "NEAR THE POLES");
+test("planet-rotation grammar: each line gets a view that shows its mechanism (IB-EAR-001 Creative Director review)", () => {
+  const ear = Adapter.loadTopic("impossible-brief", "IB-EAR-001"); const sb = Generator.build(Adapter.studioScript(ear.channel, ear.topic), style, ear.topic);
+  const kinds = sb.scenes.map((s) => s.id.replace(/^s\d+-/, ""));
+  // the reviewer counted 6 of 9 shots on the same globe: now the hook, inertia from the ground, the equator, the forces,
+  // the slide, the latitudes and the pole tilt are seven different views
+  assert.deepEqual(kinds, ["hook", "inertia", "equator", "forces", "slide", "latitudes", "payoff"]);
+  const layer = (k, c) => sb.scenes.find((s) => s.id.endsWith(k)).layers.find((l) => l.component === c);
+  // the gravity line has its own visual: a force diagram with gravity labelled by its cited unit
+  assert.equal(layer("forces", "ground-frame").props.gravity.label, "GRAVITY 9.8 m/s²");
+  assert.equal(layer("inertia", "ground-frame").props.velocity.label, "465 m/s");
+  // the poles payoff shows its claim: the camera tilts over the pole and the arrows reach high latitudes (length cos(lat))
+  const pay = layer("payoff", "globe"); assert.ok(pay.props.viewLatKeys[pay.props.viewLatKeys.length - 1][1] >= 60);
+  assert.ok(Math.max(...pay.props.speeds.lats) >= 75);
+  assert.equal(layer("payoff", "kinetic-type").props.items[0].text, "NEAR THE POLES");
+  // drawn surface-frame scenes are conceptual and say so
+  for (const s of sb.scenes.filter((x) => x.layers.some((l) => l.component === "ground-frame"))) assert.ok(s.conceptual && s.chips.includes("conceptualLabel"), s.id);
+  const script = Adapter.studioScript(ear.channel, ear.topic);
+  assert.deepEqual(Validator.validateStoryboard(sb, { script, timeline: fakeTimeline(script), style, policy: profile.evidencePolicy.validator }).errors, []);
+});
+
+test("a number on a new component is evidence-checked like any other on-screen number", () => {
+  const ear = Adapter.loadTopic("impossible-brief", "IB-EAR-001"); const script = Adapter.studioScript(ear.channel, ear.topic);
+  const sb = Generator.build(script, style, ear.topic); const g = sb.scenes.find((s) => s.id.endsWith("latitudes")).layers.find((l) => l.component === "globe");
+  g.props.speeds.labels[45] = "1,999 km/h";
+  const v = Validator.validateStoryboard(sb, { script, timeline: fakeTimeline(script), style, policy: profile.evidencePolicy.validator });
+  assert.ok(v.errors.some((e) => /1999|"1"|999/.test(e)), v.errors.join("; "));
 });
 
 test("headlines never cut an inverted clause from its modal; spans of time are never one ladder", () => {
@@ -157,11 +173,12 @@ test("the declared visual mechanism decides the drawing: a planet's rotation is 
   assert.deepEqual([sb.visualMechanism.id, sb.visualMechanism.world, sb.visualMechanism.declared, sb.visualMechanism.supported], ["planet-rotation", "rotation", true, true]);
   const comps = sb.scenes.flatMap((s) => s.layers.map((l) => l.component));
   assert.ok(!comps.includes("orbit"), "no orbit diagram");
-  // the line that stops the Earth keys its spin to zero and the surface's eastward streak appears and stays
-  const stop = sb.scenes.find((s) => s.lines.includes("L1")); const planet = stop.layers.find((l) => l.component === "planet");
-  assert.equal(planet.props.spinKeys[planet.props.spinKeys.length - 1][1], 0);
-  const drawn = sb.scenes.slice(1, -1).filter((s) => s.layers.some((l) => l.component === "planet"));
-  assert.ok(drawn.length && drawn.every((s) => s.layers.some((l) => l.component === "flow-arrows")), "inertia streak on every globe after the stop");
+  // the line that stops the Earth keys the globe's spin to zero, east arrows appear after the stop, and every later
+  // globe stays stopped (the planet never restarts mid-story)
+  const stop = sb.scenes.find((s) => s.lines.includes("L1")); const globe = stop.layers.find((l) => l.component === "globe");
+  assert.equal(globe.props.spinKeys[globe.props.spinKeys.length - 1][1], 0);
+  assert.ok(globe.props.speeds && globe.props.speeds.lats.includes(0));
+  for (const s of sb.scenes.slice(1)) for (const l of s.layers.filter((x) => x.component === "globe")) assert.ok(!l.props.spinKeys && !l.props.spin, `${s.id}: stopped`);
   const script = Adapter.studioScript(ear.channel, ear.topic);
   assert.deepEqual(Validator.validateStoryboard(sb, { script, timeline: fakeTimeline(script), style, policy: profile.evidencePolicy.validator }).errors, []);
 });

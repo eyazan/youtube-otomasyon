@@ -209,7 +209,9 @@ function build(script, style, topic) {
     }
     if (W === "ocean-depth") return [{ component: "planet", props: { kind: "earth", x: 540, y: 820, r: 330, spin: 0.32, seed: 8 } }];
     // field: the planet inside its dipole field lines; weaken/switch-off lines shrink the field, particle lines bring the wind
-    if (W === "magnetic") return [{ component: "planet", props: { kind: "earth", x: 540, y: 820, r: 210, spin: 0.3, seed: 4 } },
+    // the real globe (Natural Earth coastlines); a line about the air shows the atmosphere as a visible, labelled shell
+    // that stays while the particles arrive (IB-EAR-019 Creative Director: "takes far longer" showed no atmosphere)
+    if (W === "magnetic") return [{ component: "globe", props: { x: 540, y: 820, r: 210, viewLat: 20, lon0: 20, spin: 7, ...(airOf(at) ? { atmosphere: { scale: 1.1, opacity: 0.85, label: "ATMOSPHERE", labelAt: off(at, 0.3) } } : {}) } },
       { component: "magnetosphere", props: { cx: 540, cy: 820, r: 210, ...(field ? { strengthKeys: [[at, field.from], [off(at, 1.6), Math.min(field.from, field.to)]] } : {}), ...(field && field.wind ? { wind: { at, side: "left" } } : {}) } }];
     // current: a slow globe with a warm stream running north and a cold return; "weaken/shut down" slows the dashes
     if (W === "current") return [{ component: "planet", props: { kind: "earth", x: 540, y: 820, r: 360, spin: 0.04, seed: 8, ice: false } },
@@ -237,12 +239,15 @@ function build(script, style, topic) {
   // what the line does to a field / flow / population world, from its own verbs: weaken (to 35 %), remove (to 5 %), and
   // whether charged particles arrive (magnetic). null = the world as it is.
   const COMPOSITE = new Set(["magnetic", "current", "micro", "body", "rotation"]);
+  const lineAt = (at) => lines.find((x) => x.id === String(at).split(/[+-]/)[0]);
+  const airOf = (at) => { const L = lineAt(at); return W === "magnetic" && !!L && /\b(air|atmosphere|atmospheric)\b/i.test(L.text); };
   const fieldFor = (L) => {
     if (!COMPOSITE.has(W) || W === "body") return null; const t = L.text;
     const gone = W === "rotation" ? /\b(stops?|stopped|stopping|halts?|halted|freez(?:e|es|ing)|froze)\b/i.test(t)
       : /\b(switch(?:ed)? (?:it )?off|off completely|without (?:it|them)|vanish|vanished|disappear|disappeared|gone|shut(?:s)? down|collapse[sd]?|wiped out)\b/i.test(t);
     const weak = W !== "rotation" && /\b(weaken|weakens|weakening|weaker|faded|fade|fading|slow|slows|slowed|decline|declines|shrink|shrinks)\b/i.test(t);
-    const wind = W === "magnetic" && /\b(particle|particles|radiation|solar wind|charged|storm|storms|satellite|satellites)\b/i.test(t);
+    // the air line keeps the particles arriving while the shell stays: the field is off, the air is still there
+    const wind = W === "magnetic" && (/\b(particle|particles|radiation|solar wind|charged|storm|storms|satellite|satellites)\b/i.test(t) || (!!removed && /\b(air|atmosphere)\b/i.test(t)));
     // once the line has removed the field / stopped the current / wiped out the population, later scenes stay in that
     // state (no field returning at full strength right after "switch it off"); only the payoff returns to frame 0
     const was = removed;
@@ -258,7 +263,7 @@ function build(script, style, topic) {
   // registered: every layer is scaled about the world centre (540, 820) and moved to the framing's centre
   const C_FRAMES = [{ x: 540, y: 820, k: 1 }, { x: 560, y: 1080, k: 1.55 }, { x: 400, y: 760, k: 0.8 }];
   const reframe = (layers, f) => layers.map((l) => { const P = { ...l.props }; const X = (x) => +(f.x + (x - 540) * f.k).toFixed(1), Y = (y) => +(f.y + (y - 820) * f.k).toFixed(1);
-    if (l.component === "planet") Object.assign(P, { x: X(P.x), y: Y(P.y), r: +(P.r * f.k).toFixed(1) });
+    if (l.component === "planet" || l.component === "globe") Object.assign(P, { x: X(P.x), y: Y(P.y), r: +(P.r * f.k).toFixed(1) });
     if (l.component === "magnetosphere") Object.assign(P, { cx: X(P.cx), cy: Y(P.cy), r: +(P.r * f.k).toFixed(1) });
     if (l.component === "flow-arrows") P.streams = P.streams.map((st) => ({ ...st, width: Math.round((st.width || 14) * Math.sqrt(f.k)), pts: st.pts.map(([x, y]) => [X(x), Y(y)]) }));
     if (l.component === "microbes") Object.assign(P, { cx: X(P.cx), cy: Y(P.cy), spread: Math.round(P.spread * f.k) });
@@ -283,6 +288,58 @@ function build(script, style, topic) {
   // where a fact's own claim places its value (a stated latitude, the equator, the poles); never inferred
   const placeOf = (id) => { const c = ((facts.find((f) => f.id === id) || {}).claim) || ""; const lat = numbersIn(c).find((n) => n.quantity === "latitude");
     return lat ? valueLabel(lat) : /\bequator\b/i.test(c) ? "EQUATOR" : /\b(north|south) pole\b|\bpoles\b/i.test(c) ? "POLES" : ""; };
+  // ---- planet-rotation grammar (IB-EAR-001 Creative Director review): one globe shot repeated six times did not show the
+  // mechanism. Each line now gets the view that demonstrates it: the true globe (Natural Earth coastlines) stopping; the
+  // ground frame where the ground stops and you do not; a force diagram for a gravity line; ground-speed arrows whose
+  // lengths are cos(latitude) (exact for a rigid sphere) for a latitude or equator line; a camera tilt over the pole for
+  // a poles payoff. Numbers on these views come only from the facts that state them.
+  const ROT = W === "rotation";
+  const factOf = (re) => facts.find((f) => re.test(f.claim)) || null;
+  const valueOf = (f, pred) => { const n = f && numbersIn(f.claim).find(pred); return n ? valueLabel(n) : null; };
+  const eqFact = ROT ? factOf(/\bequator\b/i) : null; const eqSpeed = valueOf(eqFact, (n) => n.unit === "km/h");
+  const latFact = ROT ? facts.find((f) => numbersIn(f.claim).some((n) => n.quantity === "latitude") && numbersIn(f.claim).some((n) => n.unit === "km/h")) : null;
+  const latDeg = latFact ? numbersIn(latFact.claim).find((n) => n.quantity === "latitude").value : null; const latSpeed = valueOf(latFact, (n) => n.unit === "km/h");
+  const msFact = ROT ? facts.find((f) => numbersIn(f.claim).some((n) => n.unit === "m/s")) : null; const msSpeed = valueOf(msFact, (n) => n.unit === "m/s");
+  const gFact = ROT ? facts.find((f) => /\bgravity\b/i.test(f.claim) && numbersIn(f.claim).some((n) => n.quantity === "acceleration")) : null;
+  const gValue = valueOf(gFact, (n) => n.quantity === "acceleration");
+  // the spoken figure (465) shows as its cited rounding only when the fact holds those digits; else the fact's own value
+  const spokenOr = (L, unit, fallback) => { const n = evidenced(L).find((x) => x.unit === unit); return n ? valueLabel(n) : fallback; };
+  const globe = (props) => ({ component: "globe", props: { x: 540, y: 820, r: 340, viewLat: 18, lon0: 20, spin: 0, grid: true, ...props } });
+  let groundN = 0;
+  const rotationScene = (L, i, first, last, start) => {
+    const t = L.text; const ev = []; const use = (f) => { if (f && !ev.includes(f.id)) ev.push(f.id); };
+    if (first) { use(eqFact);
+      return { kind: "hook", ev, layers: [stars(11), globe({ spinKeys: [[0, 46], [`${L.id}:stops`, 46], [off(`${L.id}:stops`, 0.3), 0]], speeds: { at: off(`${L.id}:stops`, 0.35), lats: [0, 30, -30, 55, -55], max: 300, stagger: 0.06 } }), headline(`${L.id}+0.2`, keyPhrase(t), 360, S.title)],
+        purpose: "Hook: the real globe turning (time-lapse, not to scale) stops dead on 'stops'; at once east-pointing arrows appear on every latitude: the ground halted, everything on it did not.",
+        camera: [{ at: start, x: 540, y: 800, z: 1.14 }, { at: `${L.id}.end`, x: 540, y: 800, z: 1.0 }] }; }
+    if (last && /\bpoles?\b|\bpolar\b/i.test(t)) { use(eqFact);
+      return { kind: "payoff", ev, layers: [stars(11), globe({ viewLatKeys: [[start, 18], [off(L.id, 1.4), 64]], speeds: { at: off(L.id, 0.2), lats: [0, 15, 30, 45, 60, 75, 85], max: 300, stagger: 0.1 }, markers: [{ lat: 90, dlon: 0, at: off(L.id, 1.2), ring: 26, label: eqFact && /\bzero\b/i.test(eqFact.claim) ? "ZERO AT THE POLE" : null, lx: 540, ly: 560, anchor: "middle" }] }), headline(`${L.id}+0.3`, keyPhrase(t, 4), 420, S.title)],
+        purpose: "Payoff: the camera tilts over the North Pole while arrows on each parallel shrink as cos(latitude) to nothing at the pole: the claim 'gentle near the poles' is seen, not read.",
+        camera: [{ at: start, x: 540, y: 800, z: 1.0 }, { at: "end-0.4", x: 540, y: 800, z: 1.1 }] }; }
+    if (/\bgravity\b/i.test(t) && gValue) { use(gFact); use(msFact);
+      return { kind: "forces", ev, conceptual: true, layers: [{ component: "ground-frame", props: { stopAt: off(start, -1.4), tumble: true, hop: 90, seed: 31, gy: 1100, fx: 420, height: 230, gravity: { at: off(L.id, 0.3), label: `GRAVITY ${gValue}` }, velocity: msSpeed ? { at: off(L.id, 0.05), label: spokenOr(lines[1] || L, "m/s", msSpeed) } : null } }],
+        purpose: `Forces: a free-body view over the sliding ground: gravity (${gValue}) pulls straight down while the sideways speed stays; the two arrows are different quantities and are labelled with their own units.`,
+        camera: [{ at: start, x: 520, y: 900, z: 1.0 }, { at: `${L.id}.end`, x: 560, y: 920, z: 1.12 }] }; }
+    if (!last && (/\bkeep(s)?\s+(moving|going)\b|\binertia\b/i.test(t) || /\bsideways\b|\bholds? you back\b|\bslows? you\b/i.test(t))) { const sideways = /\bsideways\b|\bholds? you back\b|\bslows? you\b/i.test(t); const n = evidenced(L).find((x) => x.quantity === "speed");
+      if (n) n.facts.forEach((id) => { if (!ev.includes(id)) ev.push(id); }); const k = groundN++;
+      return { kind: sideways ? "slide" : "inertia", ev, conceptual: true, layers: [{ component: "ground-frame", props: sideways
+          ? { stopAt: off(start, -0.6), tumble: true, hop: 60, seed: 53 + k, gy: 1320, fx: 540, height: 170, speed: 3000 }
+          : { stopAt: off(L.id, 0.35), tumble: false, seed: 17 + k, gy: 1220, fx: 380, height: 260, velocity: n ? { at: off(L.id, 0.6), label: valueLabel(n) } : null, groundTag: { at: off(L.id, 0.5), label: "GROUND STOPPED" } } },
+        ...(sideways ? [headline(`${L.id}+0.25`, keyPhrase(t), 360, S.title)] : [])],
+        purpose: sideways ? "Slide: a wide shot from the surface: the ground and everything fixed to it rush backwards under a person who still carries the old speed; only contact with the ground can slow them."
+          : "Inertia: seen from the surface, nothing moves until the ground stops; then buildings and hills rush backwards while the person keeps the speed the ground had (the cited value labels the arrow).",
+        camera: sideways ? [{ at: start, x: 540, y: 980, z: 1.0 }, { at: `${L.id}.end`, x: 540, y: 960, z: 1.12 }] : [{ at: start, x: 470, y: 960, z: 1.18 }, { at: `${L.id}.end`, x: 540, y: 940, z: 1.04 }] }; }
+    if (latFact && latSpeed && numbersIn(t).some((n) => n.quantity === "latitude")) { use(latFact); use(eqFact);
+      return { kind: "latitudes", ev, layers: [stars(70 + i), globe({ r: 400, y: 860, viewLat: 22, parallels: [{ lat: 0, at: off(L.id, 0.1), color: "amber", width: 4 }, { lat: latDeg, at: off(L.id, 0.2), color: "teal", width: 5 }],
+          speeds: { at: off(L.id, 0.35), lats: [0, latDeg], max: 420, stagger: 0.35, labels: { 0: eqSpeed, [latDeg]: `${latSpeed} AT ${latDeg}°` }, labelDy: 60 } })],
+        purpose: `Latitude: the ${latDeg}° parallel is drawn on the real globe beside the equator; each carries an east arrow whose length is cos(latitude) of the equator's, labelled with the cited speeds (${latSpeed}, ${eqSpeed}).`,
+        camera: [{ at: start, x: 540, y: 820, z: 1.0 }, { at: `${L.id}.end`, x: 560, y: 760, z: 1.14 }] }; }
+    if (eqFact && eqSpeed && /\bequator\b/i.test(t)) { use(eqFact);
+      return { kind: "equator", ev, layers: [stars(80 + i), globe({ r: 860, y: 1010, viewLat: 6, lon0: -40, parallels: [{ lat: 0, at: off(L.id, 0.1), color: "amber", width: 7, dash: "26 14" }], speeds: { at: off(L.id, 0.4), lats: [0], max: 560, labels: { 0: eqSpeed }, labelDy: 90 } })],
+        purpose: `Equator: a low close-up along the equator of the stopped globe; one long east arrow carries the cited equatorial speed (${eqSpeed}).`,
+        camera: [{ at: start, x: 500, y: 860, z: 1.0 }, { at: `${L.id}.end`, x: 580, y: 840, z: 1.16 }] }; }
+    return null;
+  };
   let cutUsed = false; let surfaceShown = false; const laddersShown = new Set();
   const scenes = lines.map((L, i) => {
     const nums = evidenced(L); const year = nums.find((n) => n.year); const temp = nums.find((n) => n.quantity === "temperature" || (/°\s?C|degrees celsius/i.test(L.text) && n.unit === ""));
@@ -303,7 +360,9 @@ function build(script, style, topic) {
     const cam = (z0, z1, y0 = 800, y1 = 800) => [{ at: start, x: 540 - drift, y: y0, z: z0 }, { at: `${L.id}.end`, x: 540 + drift, y: y1, z: Math.max(z1, z0 + 0.14) }];
     const other = last ? null : otherBody(i);
     const pair = (k) => [{ component: "planet", props: { kind: k, x: 300, y: 860, r: 220, spin: 0.18, seed: 7 } }, { component: "planet", props: { kind: "earth", x: 790, y: 860, r: 230, spin: 0.3, seed: 3 } }];
-    if (first) {
+    const RS = ROT ? rotationScene(L, i, first, last, start) : null;
+    if (RS) { kind = RS.kind; layers = RS.layers; purpose = RS.purpose; camera = RS.camera; RS.ev.forEach((id) => { if (!evidence.includes(id)) evidence.push(id); }); if (RS.conceptual) chips[0] = "conceptualLabel";
+    } else if (first) {
       kind = "hook"; const n = qty || temp || year;
       // a hook comparing Earth with another body draws both, side by side (sizes illustrative)
       layers = [stars(11), ...(other && bothNamed(L.text) ? pair(other) : signature(0.15, { probe: W === "earth-interior", field: fieldFor(L) })), ...(n ? [readout(`${L.id}+0.25`, valueLabel(n), 1230)] : [headline(`${L.id}+0.2`, keyPhrase(L.text), 420)])];
