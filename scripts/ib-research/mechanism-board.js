@@ -23,7 +23,8 @@ const RULES = [
   ["magnetic-field", /\b(aurora|magnetar|solar (super)?storm|geomagnetic|magnetic field|carrington|1859 solar)\b/i, "Earth in its dipole field; particles arrive as the field weakens"],
   ["ocean-current", /\b(ocean current|atlantic (ocean )?current|gulf stream|amoc|overturning circulation)\b/i, "the warm northbound stream and its cold return over the globe"],
   ["lake-water", /\b(lake|sea (just )?(disappeared|dried|drained)|sea dried up|mediterranean sea dried|drained)\b/i, "a water column with depth markers falling"],
-  ["earth-interior", /\b(earthquake|volcano(es)?|volcanic|eruption|erupt(ed|s)?|yellowstone|tambora|krakatoa|magma|continents merged|plate tectonics)\b/i, "the planet cut open: crust, mantle and core, with heat and depth"],
+  ["volcano-eruption", /\b(volcano(es)?|volcanic|eruption|erupt(ed|s)?|yellowstone|tambora|krakatoa|magma)\b/i, "a volcano in cross-section erupting: chamber, column and ash umbrella"],
+  ["earth-interior", /\b(earthquake|continents merged|plate tectonics)\b/i, "the planet cut open: crust, mantle and core, with heat and depth"],
   ["planet-orbit", /\b(orbit\w*|asteroid|comet|moon disappeared|year lasted|tidally locked|flew past|space junk|halley)\b/i, "a body travelling on its orbit around another"],
   ["named-body", /\b(lived on (mars|mercury|venus|proxima b|the moon)|on (mars|mercury|venus|io)\b|visited io|neptune'?s winds|ceres|pluto|betelgeuse|uy scuti|jupiter'?s great red spot)\b/i, "the named world itself"],
   ["atmosphere", /\b(tornado|dust bowl|edge of space|oxygen doubles|carbon out of the air|dimmed the sun|ozone)\b/i, "the planet's limb and the layers of air above it"],
@@ -63,7 +64,8 @@ function render(p, outDir) {
 function main() {
   const out = path.resolve(ROOT, arg("out", "reports/ib-mechanism-board")); fs.mkdirSync(out, { recursive: true });
   const all = candidates().map((t) => ({ ...propose(t), title: t.title || t.topic }));
-  const strong = all.filter((p) => p.confidence === "STRONG").slice(0, Number(arg("limit", 999)));
+  const only = arg("only", null) ? arg("only").split(",") : null;
+  const strong = all.filter((p) => p.confidence === "STRONG" && (!only || only.includes(p.id))).slice(0, Number(arg("limit", 999)));
   if (process.argv.includes("--render")) for (const p of strong) { const r = render(p, out); Object.assign(p, { render: r }); console.log(`${p.id} ${p.mechanism}: ${r.ok ? r.sheet : "FAILED " + r.err}`); }
   const L = ["# ImpossibleBrief: visual-mechanism review board", "",
     `Generated ${new Date().toISOString().slice(0, 10)} by \`scripts/ib-research/mechanism-board.js\`. ${all.length} researched topics stop only at the`,
@@ -72,6 +74,7 @@ function main() {
     "the research records are unchanged. **Nothing here is a decision.**", "",
     `STRONG: ${all.filter((p) => p.confidence === "STRONG").length} · NO_DRAWING: ${all.filter((p) => p.confidence === "NO_DRAWING").length}`, "",
     "| topic | title | proposed | why | frames |", "|---|---|---|---|---|"];
+  for (const p of all) if (!p.render && fs.existsSync(path.join(out, `${p.id}.jpg`)) && p.confidence === "STRONG") p.render = { ok: true, sheet: `${p.id}.jpg` };
   for (const p of all) L.push(`| ${p.id} | ${String(p.title).replace(/\|/g, "/")} | ${p.mechanism || "—"} | ${p.why} | ${p.render ? (p.render.ok ? `![](${p.render.sheet})` : "render failed: " + p.render.err) : ""} |`);
   const ok = strong.filter((p) => !p.render || p.render.ok);
   L.push("", "## To declare (reviewer)", "", "Look at each topic's frames, delete the pairs you reject, then run with your own name:", "", "```bash",

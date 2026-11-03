@@ -72,7 +72,7 @@ test("IB-EAR-019: satellites and power grids are drawn on their line; the techno
 
 test("IB mechanism board: proposals only where the drawing shows what the title names", () => {
   const { propose } = require("../../scripts/ib-research/mechanism-board");
-  assert.equal(propose({ id: "a", title: "What If Another Tambora Erupted Today?" }).mechanism, "earth-interior");
+  assert.equal(propose({ id: "a", title: "What If Another Tambora Erupted Today?" }).mechanism, "volcano-eruption");
   assert.equal(propose({ id: "b", title: "What If the 1859 Solar Superstorm Hit Today?" }).mechanism, "magnetic-field");
   assert.equal(propose({ id: "c", title: "What If GPS Went Dark for a Day?" }).confidence, "NO_DRAWING");
   assert.equal(propose({ id: "d", title: "What If You Melted a Diamond?" }).confidence, "NO_DRAWING");

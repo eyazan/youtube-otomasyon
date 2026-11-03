@@ -49,6 +49,7 @@ const MECHANISMS = {
   "ocean-current": { world: "current", draws: "a warm stream and a cold return over a globe" },
   "lake-water": { world: "lake", draws: "a water column with depth markers" },
   "microbial-population": { world: "micro", draws: "a cluster of microbes whose count can fall" },
+  "volcano-eruption": { world: "volcano", draws: "a volcano in cross-section: magma chamber and conduit, eruption column spreading into an ash umbrella; a lateral blast when the record says sideways" },
   "earth-interior": { world: "earth-interior", draws: "a planet cutaway and a rock slice with depth and heat" },
   "ocean-depth": { world: "ocean-depth", draws: "a water column to the seafloor with depth markers" },
   "atmosphere": { world: "sky", draws: "the planet's limb and the layers of air above it" },
@@ -173,7 +174,7 @@ function build(script, style, topic) {
   // a topic about one named body is drawn as that body (Venus, Mars, the Moon), not as a generic orbit
   const BODY = [[/\bvenus\b/i, "venus"], [/\bmars\b/i, "rocky"], [/\bmercury\b/i, "moon"], [/\b(the moon|moon's|lunar)\b/i, "moon"],
     // a dwarf planet or asteroid is a small cratered body, never the gas-giant fallback (mechanism board: Ceres drawn banded)
-    [/\b(ceres|pluto|vesta|eris|asteroids?|dwarf planet)\b/i, "moon"], [/\b(jupiter|saturn|neptune|uranus)\b/i, "gas"], [/\bthe sun\b|\bsun's\b/i, "sun"]];
+    [/\b(ceres|pluto|vesta|eris|asteroids?|dwarf planet)\b/i, "moon"], [/\b(neptune|uranus)\b/i, "ice"], [/\b(jupiter|saturn)\b/i, "gas"], [/\bthe sun\b|\bsun's\b/i, "sun"]];
   const body = (BODY.find(([re]) => re.test([topic.title, topic.topic].join(" "))) || [])[1] || null;
   const depthWorld = W === "earth-interior" || W === "ocean-depth" || W === "lake";
   // a line about another named body ("the Sun's surface", or "Its surface ..." right after it) shows that body, not the
@@ -210,6 +211,9 @@ function build(script, style, topic) {
         ...(cut ? { cutaway: { at, angle: -30, open: 32, layers: [{ f: 0.99, color: "#7a4a2a", label: "CRUST", labelAt: off(at, 0.6), lx: 690, ly: 600 }, { f: 0.88, color: "#c0501f", label: "MANTLE", labelAt: off(at, 0.9), lx: 690, ly: 690 }, { f: 0.47, color: "#ff8a2a", label: "CORE", labelAt: off(at, 1.2), lx: 690, ly: 780 }, { f: 0.2, color: "#ffd06a" }] } } : {}) } }];
     }
     if (W === "ocean-depth") return [{ component: "planet", props: { kind: "earth", x: 540, y: 820, r: 330, spin: 0.32, seed: 8 } }];
+    // volcano: the hook erupts within its first second; later scenes join the eruption already under way (the column up)
+    if (W === "volcano") return [{ component: "volcano", props: { x: 540, y: 1120, k: 0.85, column: 430, seed: 13, eruptAt: typeof at === "number" && at < 1 ? 0.45 : off(String(at), -3),
+      lateral: /\b(sideways|lateral)\b/i.test(`${topic.title} ${topic.topic}`) } }];
     // field: the planet inside its dipole field lines; weaken/switch-off lines shrink the field, particle lines bring the wind
     // the real globe (Natural Earth coastlines); a line about the air shows the atmosphere as a visible, labelled shell
     // that stays while the particles arrive (IB-EAR-019 Creative Director: "takes far longer" showed no atmosphere)
@@ -243,7 +247,7 @@ function build(script, style, topic) {
   };
   // what the line does to a field / flow / population world, from its own verbs: weaken (to 35 %), remove (to 5 %), and
   // whether charged particles arrive (magnetic). null = the world as it is.
-  const COMPOSITE = new Set(["magnetic", "current", "micro", "body", "rotation"]);
+  const COMPOSITE = new Set(["magnetic", "current", "micro", "body", "rotation", "volcano"]);
   const lineAt = (at) => lines.find((x) => x.id === String(at).split(/[+-]/)[0]);
   // satellites / power grids / technology named by the line (magnetic world): which to draw and the line's own words as labels
   const techOf = (at) => { const L = lineAt(at); if (W !== "magnetic" || !L) return null; const t = L.text; const any = /\b(technology|electronics|infrastructure)\b/i.test(t);
@@ -252,7 +256,7 @@ function build(script, style, topic) {
     return { sat: sat || any, grid: grid || any, satText: m(/\bsatellites?\b/i), gridText: m(/\bpower ?grids?\b/i) }; };
   const airOf = (at) => { const L = lineAt(at); return W === "magnetic" && !!L && /\b(air|atmosphere|atmospheric)\b/i.test(L.text); };
   const fieldFor = (L) => {
-    if (!COMPOSITE.has(W) || W === "body") return null; const t = L.text;
+    if (!COMPOSITE.has(W) || W === "body" || W === "volcano") return null; const t = L.text;
     const gone = W === "rotation" ? /\b(stops?|stopped|stopping|halts?|halted|freez(?:e|es|ing)|froze)\b/i.test(t)
       : /\b(switch(?:ed)? (?:it )?off|off completely|without (?:it|them)|vanish|vanished|disappear|disappeared|gone|shut(?:s)? down|collapse[sd]?|wiped out)\b/i.test(t);
     const weak = W !== "rotation" && /\b(weaken|weakens|weakening|weaker|faded|fade|fading|slow|slows|slowed|decline|declines|shrink|shrinks)\b/i.test(t);
@@ -276,6 +280,7 @@ function build(script, style, topic) {
     if (l.component === "planet" || l.component === "globe") Object.assign(P, { x: X(P.x), y: Y(P.y), r: +(P.r * f.k).toFixed(1) });
     if (l.component === "magnetosphere" || l.component === "tech-hits") Object.assign(P, { cx: X(P.cx), cy: Y(P.cy), r: +(P.r * f.k).toFixed(1) });
     if (l.component === "flow-arrows") P.streams = P.streams.map((st) => ({ ...st, width: Math.round((st.width || 14) * Math.sqrt(f.k)), pts: st.pts.map(([x, y]) => [X(x), Y(y)]) }));
+    if (l.component === "volcano") Object.assign(P, { x: X(P.x), y: Y(P.y), k: +(P.k * f.k).toFixed(3) });
     if (l.component === "microbes") Object.assign(P, { cx: X(P.cx), cy: Y(P.cy), spread: Math.round(P.spread * f.k) });
     if (l.component === "figure") Object.assign(P, { pathKeys: P.pathKeys.map(([t, x, y, sc]) => [t, X(x), Y(y), sc]), height: Math.round(P.height * f.k), facing: f.k < 1 ? -1 : 1 });
     return { ...l, props: P }; });
