@@ -18,7 +18,7 @@ const { validate: schemaValidate } = require("../fr-premium/engine/jsonschema");
 const SCHEMA = JSON.parse(fs.readFileSync(path.join(__dirname, "schemas/storyboard.schema.json"), "utf8"));
 const COMPONENT_SRC = ["page/motion.js", ...fs.readdirSync(path.join(__dirname, "page/components")).map((f) => "page/components/" + f)].map((f) => fs.readFileSync(path.join(__dirname, f), "utf8")).join("\n");
 const COMPONENTS = new Set([...COMPONENT_SRC.matchAll(/BTO\.def\("([a-z0-9-]+)"/g)].map((m) => m[1]));
-const CONCEPTUAL = new Set(["print-surface", "search-window", "ground-frame"]);
+const CONCEPTUAL = new Set(["print-surface", "search-window", "ground-frame", "heavy-seas", "storm-track", "hull-section", "propulsion"]);
 const norm = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, "");
 const digits = (s) => (String(s).match(/\d+/g) || []);
 
@@ -48,6 +48,10 @@ function screenTexts(layer) {
   if (layer.component === "event-ticks") { if (p.startLabel) out.push({ text: p.startLabel, kind: "label", size: 40 }); if (p.endLabel) out.push({ text: p.endLabel, kind: "label", size: 40 }); out.push({ text: String(p.count), kind: "count" }); }
   if (layer.component === "globe") { (p.parallels || []).forEach((l) => l.label && out.push({ text: l.label, kind: "label", size: l.size || 40 })); Object.values((p.speeds || {}).labels || {}).forEach((x) => out.push({ text: x, kind: "label", size: (p.speeds || {}).labelSize || 40 })); (p.markers || []).forEach((m) => m.label && out.push({ text: m.label, kind: "label", size: m.size || 40 })); if ((p.atmosphere || {}).label) out.push({ text: p.atmosphere.label, kind: "label", size: 40 }); }
   if (layer.component === "ground-frame") ["velocity", "gravity", "groundTag"].forEach((k) => p[k] && p[k].label && out.push({ text: p[k].label, kind: "label", size: 40 }));
+  // maritime kit (page/components/maritime.js): every caption it draws is evidence-checked like any label
+  if (layer.component === "storm-track") { [p.routeLabel, p.stormLabel, (p.stale || {}).label, (p.detour || {}).label].filter(Boolean).forEach((x) => out.push({ text: x, kind: "label", size: 40 })); }
+  if (layer.component === "hull-section") { if (p.label) out.push({ text: p.label.text, kind: "label", size: 40 }); if (p.listLabel) out.push({ text: p.listLabel, kind: "label", size: 40 }); }
+  if (layer.component === "propulsion") { if (p.label) out.push({ text: p.label, kind: "label", size: 44 }); if (p.stateLabel) out.push({ text: p.stateLabel.text, kind: "label", size: 40 }); }
   if (layer.component === "failure-chain") (p.steps || []).forEach((st) => out.push({ text: st, kind: "label", size: 44 }));
   if (layer.component === "run-length-strip") { if (p.labelsAt != null) out.push({ text: (p.labels || p.runs || []).join(":"), kind: "ratio" }); if (p.caption) out.push({ text: p.caption, kind: "label" }); }
   return out;

@@ -216,7 +216,12 @@ test("GoalLore Lab: registered successor of CriticalThread, publishing closed; r
   assert.equal(cfg.replaces.channel, "critical-thread"); assert.equal(cfg.voice.status.startsWith("CANDIDATE"), true, "the voice is not approved by code");
   // only the research check, the pilot render check and the one production step name the channel; none holds GLL_ secrets or pushes to main
   const named = fs.readdirSync(path.join(ROOT, ".github/workflows")).filter((f) => /goal-lore-lab|GoalLore/.test(read(`.github/workflows/${f}`))).sort();
-  assert.deepEqual(named, ["gll-research.yml", "gll-voice-review.yml", "portfolio-production.yml", "premium-render-check.yml"]);
+  assert.deepEqual(named, ["gll-research.yml", "gll-voice-review.yml", "portfolio-production.yml", "premium-render-check.yml", "variables-check.yml"]);
+  // the read-only YouTube audit holds the channel's credentials but runs only the audit script and pushes only a review branch
+  const va = read(".github/workflows/variables-check.yml");
+  assert.doesNotMatch(va, /HEAD:main|origin main|youtube-yukle|youtube-guncelle|PUBLISH: '1'/);
+  assert.deepEqual([...va.matchAll(/run: node (\S+)/g)].map((m) => m[1]).filter((v, i, a) => a.indexOf(v) === i), ["scripts/growth/youtube-audit.js"]);
+  assert.doesNotMatch(read("scripts/growth/youtube-audit.js"), /api\.(post|put)\(|method: "(POST|PUT|DELETE)"/, "the audit never writes to YouTube");
   // the voice review only copies samples to a review branch: no secrets, never main
   const vr = read(".github/workflows/gll-voice-review.yml"); assert.doesNotMatch(vr, /GLL_|_YT_|secrets\.|HEAD:main|origin main/); assert.match(vr, /git push -q -f origin review\/goal-lore-lab/);
   const rc = read(".github/workflows/premium-render-check.yml"); assert.doesNotMatch(rc, /GLL_|_YT_|git push|PUBLISH: '1'/); assert.match(rc, /--pilot/); assert.match(rc, /contents: read/);

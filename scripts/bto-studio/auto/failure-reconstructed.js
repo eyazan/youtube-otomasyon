@@ -186,13 +186,69 @@ function build(script, style, topic) {
     roleOf.push(`chain:${link}`);
   });
 
+  // ---- maritime mechanisms (page/components/maritime.js) --------------------------------------------------------
+  // A ship case is told with the mechanism each line names, not one silhouette and chain cards: the storm and the route on
+  // a chart (a stale forecast left behind the real storm), the hold flooding and the list, the engine stopping, the ship
+  // overwhelmed. The classes are read from the line's own words first, then from its chain link; a line that names none
+  // keeps the forensic grammar below.
+  const SEA = { stale: /\b(hours?[- ]old|outdated|out of date|stale|old (data|forecasts?|updates?)|(updates?|forecasts?|data)\b.*\b(old|late|delayed))\b/i,
+    storm: /\b(hurricane|storm|typhoon|cyclone|gale|weather|forecasts?|route|course)\b/i,
+    sink: /\b(sank|sinks?|sinking|founder\w*|went down|took over|overwhelm\w*|swamp\w*|capsiz\w*|rolled over)\b/i,
+    flood: /\b(flood\w*|water (came|poured|rushed|entered|got|flowed)|took on water|listed|listing|lists|heel\w*|hatch\w*|scuttles?|bow doors?|breach\w*)\b/i,
+    engine: /\b(engines?|propulsion|oil pressure|boilers?|propellers?|steering|rudder|lost power|power failed)\b/i };
+  const caseAll = caseText(topic, lines); const stormCase = SEA.storm.test(caseAll) && /\b(hurricane|storm|typhoon|cyclone|gale)\b/i.test(caseAll);
+  const seaClass = (text) => (SEA.stale.test(text) ? "stale" : SEA.sink.test(text) ? "sink" : SEA.flood.test(text) ? "flood" : SEA.engine.test(text) ? "engine" : SEA.storm.test(text) ? "storm" : null);
+  const chainFor = (re) => chain.find((c) => re.test(c)) || null;
+  // a word of the line as a time anchor ("L6:stopped"), or an offset from the line start when no word matches
+  const wordAt = (L, re, d) => { const w = String(L.text).split(/\s+/).find((x) => re.test(x)); const k = w ? w.replace(/[^A-Za-z0-9']/g, "") : ""; return k && /^[A-Za-z0-9]+$/.test(k) ? `${L.id}:${k}` : off(L.id, d); };
+  const route = [[170, 1180], [380, 1010], [600, 860], [860, 690]]; const track = [[960, 1200], [880, 1010], [760, 860], [600, 700]];
+  const maritime = (L, i, role) => {
+    if (kind !== "ship") return null; const start = i === 0 ? 0 : `${L.id}-0.15`; const end = `${L.id}.end`;
+    const k = String(role).startsWith("chain:") ? +role.split(":")[1] : -1;
+    const cls = role === "hook" || role === "toll" || role === "payoff" ? role : seaClass(L.text) || (k >= 0 ? seaClass(chain[k] || "") : null);
+    const evidence = [F(role === "payoff" ? "lesson" : k >= 0 ? "chain" : "case"), F("mechanism"), F("case")];
+    const head = (txt) => (txt ? [headline(`${L.id}+0.2`, String(txt).toUpperCase(), 330, S.title, txt)] : []);
+    if (cls === "hook") return { kind_: "hook", evidence: [F("case")], layers: [{ component: "heavy-seas", props: { storm: stormCase, swell: 85, hitAt: 0.55, seed: 5 } }, ...(stamp ? [headline(`${L.id}+0.3`, stamp, 330, S.title)] : [])],
+      purpose: `Hook: frame 0 is the ship already in heavy seas${stormCase ? " with the storm wall on the horizon" : ""}; a sea breaks over the bow in the first second, before any cause is named.`,
+      camera: [{ at: start, x: 560, y: 900, z: 1.12 }, { at: end, x: 520, y: 880, z: 1.0 }] };
+    if (cls === "toll") return { kind_: "toll", evidence: [F("case")], layers: [{ component: "heavy-seas", props: { sunk: true, swell: 28, seed: 5 } }, readout(`${L.id}+0.25`, toll, 760)],
+      purpose: `Toll: the surface closes over the ship's outline while the case's count (${toll}) is stamped; the number is the case file's.`,
+      camera: [{ at: start, x: 540, y: 960, z: 1.0 }, { at: end, x: 540, y: 1000, z: 1.1 }] };
+    if (cls === "payoff") { const lesson = phrase(L.text) ? headline(`${L.id}+0.3`, phrase(L.text), 330, S.title, L.text) : null; if (lesson) lesson.props.items[0].outAt = "end-0.45";
+      const detour = stormCase && /\b(route|routing|weather|forecast)\w*/i.test(L.text);
+      return { kind_: "payoff", evidence, layers: detour ? [{ component: "storm-track", props: { route, track, progress: [0.55, 0.55], detour: { at: `${L.id}+0.2`, path: [[170, 1180], [260, 900], [380, 700], [560, 580], [860, 560]] } } }, ...(lesson ? [lesson] : [])]
+        : [{ component: "heavy-seas", props: { storm: false, swell: 40, seed: 5 } }, ...(lesson ? [lesson] : [])],
+      purpose: detour ? "Payoff: the lesson on the chart: the route is redrawn to keep clear of the storm's track, the change the rules now require." : "Payoff: the lesson over the ship whole again in moderate seas.",
+      camera: [{ at: start, x: 540, y: 880, z: 1.0 }, { at: "end-0.6", x: 560, y: 900, z: 1.12 }] }; }
+    if (cls === "storm") return { kind_: "storm", evidence, layers: [{ component: "storm-track", props: { route, track, from: off(L.id, 0.1), to: end, progress: [0.12, 0.8] } }, ...head(chainFor(/\b(route|course|storm|path)\b/i))],
+      purpose: "Route against storm: on a schematic chart the ship's route and the storm's track converge until the ship is inside the danger ring.",
+      camera: [{ at: start, x: 540, y: 900, z: 1.0 }, { at: end, x: 600, y: 860, z: 1.12 }] };
+    if (cls === "stale") return { kind_: "forecast", evidence, layers: [{ component: "storm-track", props: { route, track, from: start, to: end, progress: [0.62, 0.86], stale: { at: off(L.id, 0.5), lag: 0.32, label: chainFor(SEA.stale) || null } } }],
+      purpose: "Stale forecast: the storm the crew planned around (the old position, ghosted) and where it really was; the ship's route runs into the real one.",
+      camera: [{ at: start, x: 560, y: 900, z: 1.02 }, { at: end, x: 580, y: 890, z: 1.1 }] };
+    if (cls === "flood") { const open = (String(L.text).match(/\b(open \w+|hatch\w*|scuttles?|bow doors?|doors?)\b/i) || [])[0];
+      return { kind_: "flooding", evidence, layers: [{ component: "hull-section", props: { floodAt: wordAt(L, /^(water|came|poured|flooded|in)$/i, 0.3), listTo: 16, ...(open ? { label: { at: off(L.id, 0.4), text: open.toUpperCase() } } : {}), listLabel: /\blist/i.test(L.text) ? "LIST" : null } }],
+        purpose: "Flooding: a cut through the hull in a level sea; water pours through the opening, the hold on that side fills and the ship heels toward it (inclinometer).",
+        camera: [{ at: start, x: 540, y: 860, z: 1.0 }, { at: end, x: 540, y: 870, z: 1.06 }] }; }
+    if (cls === "engine") { const oil = /oil pressure/i.test(L.text) ? "OIL PRESSURE" : null;
+      return { kind_: "propulsion", evidence, layers: [{ component: "propulsion", props: { stopAt: wordAt(L, /^(stopped|stop|failed|lost|died|quit)/i, 0.8), label: oil, stateLabel: chainFor(SEA.engine) ? { at: off(L.id, 1.2), text: chainFor(SEA.engine) } : null } }],
+        purpose: "Propulsion lost: the stern in cutaway; the oil-pressure needle falls, the engine light dies and the propeller spins down to a stop.",
+        camera: [{ at: start, x: 560, y: 800, z: 1.0 }, { at: end, x: 620, y: 820, z: 1.1 }] }; }
+    if (cls === "sink") return { kind_: "sinking", evidence, layers: [{ component: "heavy-seas", props: { storm: stormCase, swell: 95, powerlessAt: /\b(without power|no power|powerless|adrift|drift\w*)\b/i.test(L.text) ? start : null, sinkAt: off(L.id, 0.45), sinkDur: 1.6, seed: 5 } }],
+      purpose: "Overwhelmed: without propulsion the ship lies broadside to the sea, rolls, and goes under.",
+      camera: [{ at: start, x: 540, y: 920, z: 1.0 }, { at: end, x: 540, y: 980, z: 1.08 }] };
+    return null;
+  };
+
   // position of line i inside its run of consecutive chain lines (0 for the first)
   const runIndex = (i) => { let n = 0; for (let j = i - 1; j >= 0 && String(roleOf[j]).startsWith("chain:"); j -= 1) n += 1; return String(roleOf[i]).startsWith("chain:") ? n : -1; };
   let prevKind = null; let mechCount = 0; const hookZ = motion === "spin" ? 1.45 : 1.18;
   const scenes = lines.map((L, i) => {
     cur = i; const role = roleOf[i]; const start = i === 0 ? 0 : `${L.id}-0.15`; const end = `${L.id}.end`;
     const drift = i % 2 ? 30 : -30; let kind_, layers, purpose, camera, evidence = [F("case")], chips = ["conceptualLabel", "factLabel"];
-    if (role === "hook") {
+    const sea = maritime(L, i, role);
+    if (sea) { ({ kind_, layers, purpose, camera, evidence } = sea); }
+    else if (role === "hook") {
       // frame 0 must show the object (QA: first frame not empty): it is drawn whole at t=0 and gives way at 0.6 s
       // with a named mechanism the load (wind, water) is already on the object at frame 0 and it gives way at 0.9 s
       kind_ = "hook"; layers = [silhouette(mech ? { failAt: 0.9, mech, mechAt: -0.4 } : { failAt: 0.6, ...(plume ? { plumeAt: 0 } : {}) }), ...(stamp ? [headline(`${L.id}+0.3`, stamp, 330, S.title)] : [])];
