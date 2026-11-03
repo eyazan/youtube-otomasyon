@@ -60,6 +60,10 @@
       if (K.bands) for (let i = -5; i <= 5; i += 1) surf += `<rect x="${n1(X - Rs)}" y="${n1(Y + i * Rs * 0.19 - Rs * 0.05 + Math.sin(rot * 2 + i) * 4)}" width="${n1(Rs * 2)}" height="${n1(Rs * 0.09)}" fill="${i % 2 ? K.land : K.land2}" opacity="0.55"/>`;
       else blobs.forEach((b) => { const u = ((b.u + rot) % 6.283 + 6.283) % 6.283; if (u > 3.14) return; const px = X - Math.cos(u) * Rs * 0.98, py = Y + b.v * Rs * 0.36; const sq = Math.sin(u);
         surf += `<ellipse cx="${n1(px)}" cy="${n1(py)}" rx="${n1(b.s * Rs * sq + 2)}" ry="${n1(b.s * Rs * 0.7)}" fill="${b.c}" opacity="0.9"/>`; });
+      // spot: a storm oval in the southern belt that turns with the planet (Jupiter's Great Red Spot topics)
+      if (o.spot) { // it drifts across the visible hemisphere but never turns away: the topic is about the spot, so it stays in view
+        const u = 1.57 + 0.55 * Math.sin(rot * 0.8); if (u < 3.14) { const sq = Math.sin(u); const px = X - Math.cos(u) * Rs * 0.8, py = Y + Rs * 0.32;
+        surf += `<ellipse cx="${n1(px)}" cy="${n1(py)}" rx="${n1(Rs * 0.2 * (o.spotScale || 1) * sq + 2)}" ry="${n1(Rs * 0.11 * (o.spotScale || 1))}" fill="#b5462e" stroke="#e8a27a" stroke-width="3" opacity="0.95"/>`; } }
       if ((o.kind || "earth") === "earth" && o.ice !== false) surf += `<ellipse cx="${n1(X)}" cy="${n1(Y - Rs * 0.93)}" rx="${n1(Rs * 0.42)}" ry="${n1(Rs * 0.12)}" fill="${K.ice}" opacity="0.85"/>`;
       // grid: latitude chords + meridians that turn with the planet (reads as motion even on a featureless close-up)
       if (o.grid) { for (let la = -75; la <= 75; la += 15) { const yy = Y + Math.sin(la * Math.PI / 180) * Rs; const hw = Math.cos(la * Math.PI / 180) * Rs; surf += `<line x1="${n1(X - hw)}" y1="${n1(yy)}" x2="${n1(X + hw)}" y2="${n1(yy)}" stroke="${P().teal}" stroke-width="2.5" opacity="0.35"/>`; }

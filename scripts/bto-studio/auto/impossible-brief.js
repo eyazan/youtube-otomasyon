@@ -171,7 +171,9 @@ function build(script, style, topic) {
   const depthNumbers = facts.flatMap((f) => numbersIn(f.claim).filter((n) => n.unit === "m" || n.unit === "km").map((n) => (n.unit === "km" ? n.value * 1000 : n.value)));
   const maxDepth = depthNumbers.length ? Math.max(...depthNumbers) * 1.18 : 1;
   // a topic about one named body is drawn as that body (Venus, Mars, the Moon), not as a generic orbit
-  const BODY = [[/\bvenus\b/i, "venus"], [/\bmars\b/i, "rocky"], [/\bmercury\b/i, "moon"], [/\b(the moon|moon's|lunar)\b/i, "moon"], [/\b(jupiter|saturn|neptune|uranus)\b/i, "gas"], [/\bthe sun\b|\bsun's\b/i, "sun"]];
+  const BODY = [[/\bvenus\b/i, "venus"], [/\bmars\b/i, "rocky"], [/\bmercury\b/i, "moon"], [/\b(the moon|moon's|lunar)\b/i, "moon"],
+    // a dwarf planet or asteroid is a small cratered body, never the gas-giant fallback (mechanism board: Ceres drawn banded)
+    [/\b(ceres|pluto|vesta|eris|asteroids?|dwarf planet)\b/i, "moon"], [/\b(jupiter|saturn|neptune|uranus)\b/i, "gas"], [/\bthe sun\b|\bsun's\b/i, "sun"]];
   const body = (BODY.find(([re]) => re.test([topic.title, topic.topic].join(" "))) || [])[1] || null;
   const depthWorld = W === "earth-interior" || W === "ocean-depth" || W === "lake";
   // a line about another named body ("the Sun's surface", or "Its surface ..." right after it) shows that body, not the
@@ -232,7 +234,7 @@ function build(script, style, topic) {
       return [-1, -0.5, 0, 0.5, 1].map((u) => [Math.round(540 + u * hw), Math.round(y + 22 * Math.cos(p) * (1 - u * u))]); };
       return [{ component: "planet", props: { kind: "earth", x: 540, y: 820, r: 330, seed: 3, grid: lat != null && !polar, spinKeys: field ? [[at, 0.35 * field.from], [off(at, 0.6), 0.35 * field.to]] : [[0, 0.35]] } },
         ...((field && field.to === 0) || lat != null ? [{ component: "flow-arrows", props: { streams: [{ pts: streak(lat || 0), color: "amber", width: Math.max(6, Math.round(14 * Math.cos(((lat || 0) * Math.PI) / 180))), at: off(at, 0.4) }] } }] : [])]; }
-    if (W === "orbit" && body) return [{ component: "planet", props: { kind: body, x: 540, y: 820, r: 320, spin: 0.18, seed: 7, ...(body === "gas" ? { rings: /saturn/i.test(topic.title + topic.topic) } : {}) } }];
+    if (W === "orbit" && body) return [{ component: "planet", props: { kind: body, x: 540, y: 820, r: 320, spin: 0.18, seed: 7, ...(body === "gas" ? { rings: /saturn/i.test(topic.title + topic.topic), spot: /great red spot/i.test(topic.title + topic.topic) } : {}) } }];
     if (W === "orbit") return [{ component: "orbit", props: { cx: 540, cy: 800, a: 360, e: 0.18, tilt: -8, period: 7, trail: 0.22, central: { r: 74 }, body: { r: 26 }, enterAt: 0 } }];
     if (W === "sky") return [{ component: "planet", props: { kind: "earth", x: 540, y: 1560, r: 900, spin: 0.03, seed: 2 } }];
     // a human-body topic is drawn as a person (generic silhouette, no likeness), not as a coloured planet
@@ -281,7 +283,7 @@ function build(script, style, topic) {
   const latOf = (at) => { const L = lines.find((x) => x.id === String(at).split(/[+-]/)[0]); const n = L && numbersIn(L.text).find((x) => x.quantity === "latitude"); return n ? n.value : null; };
   const subjectView = (at, n, field = null, lat = latOf(at)) => (COMPOSITE.has(W) ? reframe(signature(at, { field, lat }), lat != null ? C_FRAMES[0] : C_FRAMES[n % C_FRAMES.length])
     // a named body alternates with a side-by-side beside Earth (sizes illustrative)
-    : body && n % 2 === 1 ? [{ component: "planet", props: { kind: body, x: 300, y: 860, r: 220, spin: 0.18, seed: 7 } }, { component: "planet", props: { kind: "earth", x: 790, y: 860, r: 230, spin: 0.3, seed: 3 } }]
+    : body && n % 2 === 1 ? [{ component: "planet", props: { kind: body, x: 300, y: 860, r: 220, spin: 0.18, seed: 7, ...(body === "gas" && /great red spot/i.test(topic.title + topic.topic) ? { spot: true } : {}) } }, { component: "planet", props: { kind: "earth", x: 790, y: 860, r: 230, spin: 0.3, seed: 3 } }]
     : signature(at).map((l) => (l.component === "planet" ? { ...l, props: { ...l.props, ...FRAMINGS[n % FRAMINGS.length], spin: l.props.spin * (n % 2 ? -1 : 1), ...(n % FRAMINGS.length === 1 ? { ice: false } : {}) } } : l)));
   let subjectN = 0;
   const stars = (seed) => ({ component: "starfield", screen: true, props: { seed, count: 300, drift: [22, 9] } });
