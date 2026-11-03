@@ -1,0 +1,138 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-SPA-004",
+ "checkedAt": "2026-11-03T17:53:22.270Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "48bdc65b7ce8c89c",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "The Moon orbits Earth at an average distance of 384,399 kilometers.",
+   "url": "https://en.wikipedia.org/wiki/Moon",
+   "sourceTitle": "Wikipedia — Moon",
+   "revision": 1383347965,
+   "passage": null,
+   "numbers": {
+    "claim": [
+     "384399"
+    ],
+    "inPassage": [],
+    "missing": [
+     "384399"
+    ]
+   },
+   "support": 0,
+   "status": "UNVERIFIED",
+   "reason": "a sentence has the terms but not every claim number (384399), is not 5-80 words of prose, or shares under 50% of the claim's content words"
+  },
+  {
+   "fact": "F2",
+   "claim": "Tidal force is inversely proportional to the cube of the distance.",
+   "url": "https://en.wikipedia.org/wiki/Tidal_force",
+   "sourceTitle": "Wikipedia — Tidal force",
+   "revision": 1373926207,
+   "passage": "The tidal force is proportional to the difference.",
+   "numbers": {
+    "claim": [],
+    "inPassage": [],
+    "missing": []
+   },
+   "support": 0.5,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "The principal lunar tide has a period of about 12 hours and 25.2 minutes.",
+   "url": "https://en.wikipedia.org/wiki/Tide",
+   "sourceTitle": "Wikipedia — Tide",
+   "revision": 1381187363,
+   "passage": "Its period is about 12 hours and 25.2 minutes, exactly half a tidal lunar day, which is the average time separating one lunar zenith from the next, and thus is the time required for the Earth to rotate once relative to the Moon.",
+   "numbers": {
+    "claim": [
+     "12",
+     "25.2"
+    ],
+    "inPassage": [
+     "12",
+     "25.2"
+    ],
+    "missing": []
+   },
+   "support": 0.67,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "The Moon's distance varies over the year from 357,000 to 407,000 kilometers.",
+   "url": "https://en.wikipedia.org/wiki/Moon",
+   "sourceTitle": "Wikipedia — Moon",
+   "revision": 1383347965,
+   "passage": null,
+   "numbers": {
+    "claim": [
+     "357000",
+     "407000"
+    ],
+    "inPassage": [],
+    "missing": [
+     "357000",
+     "407000"
+    ]
+   },
+   "support": 0,
+   "status": "UNVERIFIED",
+   "reason": "a sentence has the terms but not every claim number (357000, 407000), is not 5-80 words of prose, or shares under 50% of the claim's content words"
+  }
+ ],
+ "narration": [
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Halve the Moon's distance, tides grow eightfold.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Tidal pull scales with the cube of distance.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Today the Moon averages 384,399 kilometres away.",
+   "status": "FAIL",
+   "missing": [
+    "384399"
+   ]
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Its distance already swings between 357,000 and 407,000 kilometres.",
+   "status": "FAIL",
+   "missing": [
+    "357000",
+    "407000"
+   ]
+  },
+  {
+   "layer": "SPECULATIVE SCENARIO",
+   "text": "Halving it would be a jump no orbit ever gives.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "The next high tide, about 12 hours later, would arrive enormous.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "And the Moon would look twice as wide.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So Earth would notice within a single tide.",
+   "status": "HUMAN"
+  }
+ ]
+}

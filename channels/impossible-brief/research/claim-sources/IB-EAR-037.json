@@ -1,0 +1,139 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-EAR-037",
+ "checkedAt": "2026-11-03T17:53:33.266Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "301bd952aecb03e3",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "Earth currently has an axial tilt of about 23.44°.",
+   "url": "https://en.wikipedia.org/wiki/Axial_tilt",
+   "sourceTitle": "Wikipedia — Axial tilt",
+   "revision": 1383299661,
+   "passage": "Earth currently has an axial tilt of about 23.44°.",
+   "numbers": {
+    "claim": [
+     "23.44"
+    ],
+    "inPassage": [
+     "23.44"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "Mars's obliquity is quite variable over millions of years; it varies as much as 0° to 60° depending on perturbations of the planets.",
+   "url": "https://en.wikipedia.org/wiki/Axial_tilt",
+   "sourceTitle": "Wikipedia — Axial tilt",
+   "revision": 1383299661,
+   "passage": "Mars's obliquity is quite variable over millions of years and may be in a chaotic state; it varies as much as 0° to 60° over some millions of years, depending on perturbations of the planets.",
+   "numbers": {
+    "claim": [
+     "0",
+     "60"
+    ],
+    "inPassage": [
+     "0",
+     "60"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "Nutation adds short-period oscillations of about 9.2 arcseconds over about 18.6 years.",
+   "url": "https://en.wikipedia.org/wiki/Axial_tilt",
+   "sourceTitle": "Wikipedia — Axial tilt",
+   "revision": 1383299661,
+   "passage": "Periodic motions of the Moon and of Earth in its orbit cause much smaller (9.2 arcseconds) short-period (about 18.6 years) oscillations of the rotation axis of Earth, known as nutation, which add a periodic component to Earth's obliquity.",
+   "numbers": {
+    "claim": [
+     "9.2",
+     "18.6"
+    ],
+    "inPassage": [
+     "9.2",
+     "18.6"
+    ],
+    "missing": []
+   },
+   "support": 0.86,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "Simulations in 2011 indicated that even without the Moon, Earth's obliquity might vary only by about 20–25°.",
+   "url": "https://en.wikipedia.org/wiki/Axial_tilt",
+   "sourceTitle": "Wikipedia — Axial tilt",
+   "revision": 1383299661,
+   "passage": "However, more recent numerical simulations made in 2011 indicated that even in the absence of the Moon, Earth's obliquity might not be quite so unstable; varying only by about 20–25°.",
+   "numbers": {
+    "claim": [
+     "2011",
+     "20",
+     "25"
+    ],
+    "inPassage": [
+     "2011",
+     "20",
+     "25"
+    ],
+    "missing": []
+   },
+   "support": 0.82,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "SPECULATIVE SCENARIO",
+   "text": "Double Earth's tilt, and seasons turn extreme.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Today the axis leans about 23.44 degrees.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "That tilt, not distance from the Sun, makes seasons.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Double it, and months of polar night creep toward mid-latitudes.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Summers would get hotter, winters darker and longer.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Mars shows how wild it gets: its tilt swings between 0 and 60 degrees.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Earth's own tilt barely wobbles today, only by arcseconds.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So a stable tilt is one reason seasons are survivable.",
+   "status": "HUMAN"
+  }
+ ]
+}

@@ -1,0 +1,132 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-HUM-050",
+ "checkedAt": "2026-11-03T17:53:38.177Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "e7cfa57fe9b99646",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "The number of bacterial genes is estimated to be 2 million, 100 times the number of approximately 20,000 human genes.",
+   "url": "https://en.wikipedia.org/wiki/Human_microbiome",
+   "sourceTitle": "Wikipedia — Human microbiome",
+   "revision": 1375970349,
+   "passage": "The number of bacterial genes is estimated to be 2 million, 100 times the number of approximately 20,000 human genes.",
+   "numbers": {
+    "claim": [
+     "2",
+     "100",
+     "20000"
+    ],
+    "inPassage": [
+     "2",
+     "100",
+     "20000"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "The researchers calculated that more than 10,000 microbial species occupy the human ecosystem.",
+   "url": "https://en.wikipedia.org/wiki/Human_microbiome",
+   "sourceTitle": "Wikipedia — Human microbiome",
+   "revision": 1375970349,
+   "passage": "The researchers calculated that more than 10,000 microbial species occupy the human ecosystem, and they have identified 81–99% of the genera.",
+   "numbers": {
+    "claim": [
+     "10000"
+    ],
+    "inPassage": [
+     "10000"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "Fecal microbiota transplant is approximately 85–90% effective in people with CDI for whom antibiotics have not worked or in whom the disease recurs following antibiotics.",
+   "url": "https://en.wikipedia.org/wiki/Human_microbiome",
+   "sourceTitle": "Wikipedia — Human microbiome",
+   "revision": 1375970349,
+   "passage": "Fecal microbiota transplant is approximately 85–90% effective in people with CDI for whom antibiotics have not worked or in whom the disease recurs following antibiotics.",
+   "numbers": {
+    "claim": [
+     "85",
+     "90"
+    ],
+    "inPassage": [
+     "85",
+     "90"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "Only about 50% of humans have easily detectable populations of methanogens.",
+   "url": "https://en.wikipedia.org/wiki/Human_microbiome",
+   "sourceTitle": "Wikipedia — Human microbiome",
+   "revision": 1375970349,
+   "passage": "However, colonization by methanogens is variable, and only about 50% of humans have easily detectable populations of these organisms.",
+   "numbers": {
+    "claim": [
+     "50"
+    ],
+    "inPassage": [
+     "50"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why your microbes carry 100 times your genes.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "About 2 million bacterial genes, against 20,000 human ones.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "More than 10,000 microbial species live in and on us.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "They digest food and help train your immune system.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Without them, harmful microbes could move in.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Restoring gut microbes cures 85 to 90% of some stubborn infections.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So your body works as a partnership, not a solo act.",
+   "status": "HUMAN"
+  }
+ ]
+}

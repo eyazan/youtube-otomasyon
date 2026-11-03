@@ -1,0 +1,141 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-FUT-050",
+ "checkedAt": "2026-11-03T17:53:40.126Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "f3f866e365a53ad1",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "For example, the eruption of Mount Pinatubo in 1991 caused global temperatures to drop by about 0.5 degrees Celsius for up to three years.",
+   "url": "https://en.wikipedia.org/wiki/Stratospheric_aerosol_injection",
+   "sourceTitle": "Wikipedia — Stratospheric aerosol injection",
+   "revision": 1381005909,
+   "passage": "For example, the eruption of Mount Pinatubo in 1991 caused global temperatures to drop by about 0.5 degrees Celsius for up to three years.",
+   "numbers": {
+    "claim": [
+     "1991",
+     "0.5"
+    ],
+    "inPassage": [
+     "1991",
+     "0.5"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "The annual cost of delivering a sufficient amount of sulfur to counteract expected greenhouse warming is estimated at $5–10 billion US dollars.",
+   "url": "https://en.wikipedia.org/wiki/Stratospheric_aerosol_injection",
+   "sourceTitle": "Wikipedia — Stratospheric aerosol injection",
+   "revision": 1381005909,
+   "passage": "The annual cost of delivering a sufficient amount of sulfur to counteract expected greenhouse warming is estimated at $5–10 billion US dollars.",
+   "numbers": {
+    "claim": [
+     "5",
+     "10"
+    ],
+    "inPassage": [
+     "5",
+     "10"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "In comparison, the annual cost estimates for climate damage or emission mitigation range from US$200 billion to 2 trillion.",
+   "url": "https://en.wikipedia.org/wiki/Stratospheric_aerosol_injection",
+   "sourceTitle": "Wikipedia — Stratospheric aerosol injection",
+   "revision": 1381005909,
+   "passage": "In comparison, the annual cost estimates for climate damage or emission mitigation range from US$200 billion to 2 trillion.",
+   "numbers": {
+    "claim": [
+     "200",
+     "2"
+    ],
+    "inPassage": [
+     "200",
+     "2"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "From 1850 to 2014, they reduced global average surface temperature by about 0.66 °C.",
+   "url": "https://en.wikipedia.org/wiki/Stratospheric_aerosol_injection",
+   "sourceTitle": "Wikipedia — Stratospheric aerosol injection",
+   "revision": 1381005909,
+   "passage": "From 1850 to 2014, they reduced global average surface temperature by about 0.66 °C.",
+   "numbers": {
+    "claim": [
+     "1850",
+     "2014",
+     "0.66"
+    ],
+    "inPassage": [
+     "1850",
+     "2014",
+     "0.66"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "One volcano cooled Earth by 0.5 °C for years.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Some scientists propose copying it on purpose.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Its sulfur haze reflected sunlight back to space.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Estimates put a yearly program at $5 to 10 billion.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Climate damage costs are estimated at $200 billion to $2 trillion a year.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "But stopping suddenly would unleash the hidden warming fast.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "And it wouldn't remove any carbon dioxide at all.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So dimming the sun treats the fever, not the infection.",
+   "status": "HUMAN"
+  }
+ ]
+}

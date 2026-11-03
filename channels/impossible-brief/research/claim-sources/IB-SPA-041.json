@@ -1,0 +1,137 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-SPA-041",
+ "checkedAt": "2026-11-03T17:53:25.097Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "a08191f757b8324e",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "Tidal influence has helped lengthen the Earth day from about 6 hours to the current 24 hours (over about 4.5 billion years).",
+   "url": "https://en.wikipedia.org/wiki/Tidal_locking",
+   "sourceTitle": "Wikipedia — Tidal locking",
+   "revision": 1378366143,
+   "passage": "Current estimations are that this (together with the tidal influence of the Sun) has helped lengthen the Earth day from about 6 hours to the current 24 hours (over about 4.5 billion years).",
+   "numbers": {
+    "claim": [
+     "6",
+     "24",
+     "4.5"
+    ],
+    "inPassage": [
+     "6",
+     "24",
+     "4.5"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "Earth's sidereal day would eventually have the same length as the Moon's orbital period, about 47 times the length of the Earth day at present.",
+   "url": "https://en.wikipedia.org/wiki/Tidal_locking",
+   "sourceTitle": "Wikipedia — Tidal locking",
+   "revision": 1378366143,
+   "passage": "Earth's sidereal day would eventually have the same length as the Moon's sidereal orbital period, by then much longer than the present 27.3 Earth days, about 47 times the length of the Earth day at present.",
+   "numbers": {
+    "claim": [
+     "47"
+    ],
+    "inPassage": [
+     "47"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "About 59 percent of the Moon's total surface may be seen with repeated observations from Earth, due to the phenomena of libration and parallax.",
+   "url": "https://en.wikipedia.org/wiki/Tidal_locking",
+   "sourceTitle": "Wikipedia — Tidal locking",
+   "revision": 1378366143,
+   "passage": "Despite the Moon's rotational and orbital periods being exactly locked, about 59 percent of the Moon's total surface may be seen with repeated observations from Earth, due to the phenomena of libration and parallax.",
+   "numbers": {
+    "claim": [
+     "59"
+    ],
+    "inPassage": [
+     "59"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "Most of the far side of the Moon was not seen until 1959, when photographs were transmitted from the Soviet spacecraft Luna 3.",
+   "url": "https://en.wikipedia.org/wiki/Tidal_locking",
+   "sourceTitle": "Wikipedia — Tidal locking",
+   "revision": 1378366143,
+   "passage": "Most of the far side of the Moon was not seen until 1959, when photographs of most of the far side were transmitted from the Soviet spacecraft Luna 3.",
+   "numbers": {
+    "claim": [
+     "1959",
+     "3"
+    ],
+    "inPassage": [
+     "1959",
+     "3"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Earth's day was once only 6 hours long.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The Moon's tides have been slowing us ever since.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Over 4.5 billion years, days stretched to 24 hours.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Eventually, Earth's day could match the Moon's orbit.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "That's about 47 times today's day.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Then the Moon would hang over one hemisphere forever.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The Moon already shows us about 59% of its surface.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So tides aren't just ocean motion. They're a brake on the planet.",
+   "status": "HUMAN"
+  }
+ ]
+}

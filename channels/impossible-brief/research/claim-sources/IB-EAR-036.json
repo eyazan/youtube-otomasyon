@@ -1,0 +1,145 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-EAR-036",
+ "checkedAt": "2026-11-03T17:53:33.147Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "455384e63b6115b3",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "The explosion was heard 3,110 kilometres (1,930 mi) away in Perth, Western Australia, and Rodrigues near Mauritius, 4,800 kilometres (3,000 mi) away.",
+   "url": "https://en.wikipedia.org/wiki/1883_eruption_of_Krakatoa",
+   "sourceTitle": "Wikipedia — 1883 eruption of Krakatoa",
+   "revision": 1382862107,
+   "passage": "The explosion was heard 3,110 kilometres (1,930 mi) away in Perth, Western Australia, and Rodrigues near Mauritius, 4,800 kilometres (3,000 mi) away.",
+   "numbers": {
+    "claim": [
+     "3110",
+     "1930",
+     "4800",
+     "3000"
+    ],
+    "inPassage": [
+     "3110",
+     "1930",
+     "4800",
+     "3000"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "At least 36,417 deaths are attributed to the eruption and the tsunamis it created.",
+   "url": "https://en.wikipedia.org/wiki/1883_eruption_of_Krakatoa",
+   "sourceTitle": "Wikipedia — 1883 eruption of Krakatoa",
+   "revision": 1382862107,
+   "passage": "At least 36,417 deaths are attributed to the eruption and the tsunamis it created.",
+   "numbers": {
+    "claim": [
+     "36417"
+    ],
+    "inPassage": [
+     "36417"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "By 2:00 p.m., a black ash cloud could be seen 27 km (89,000 ft) high.",
+   "url": "https://en.wikipedia.org/wiki/1883_eruption_of_Krakatoa",
+   "sourceTitle": "Wikipedia — 1883 eruption of Krakatoa",
+   "revision": 1382862107,
+   "passage": "By 2:00 p.m., a black ash cloud could be seen 27 km (89,000 ft) high.",
+   "numbers": {
+    "claim": [
+     "2",
+     "00",
+     "27",
+     "89000"
+    ],
+    "inPassage": [
+     "2",
+     "00",
+     "27",
+     "89000"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "Explosions could be heard in Batavia (Jakarta) 160 km (100 mi) away, rattling windows and doors.",
+   "url": "https://en.wikipedia.org/wiki/1883_eruption_of_Krakatoa",
+   "sourceTitle": "Wikipedia — 1883 eruption of Krakatoa",
+   "revision": 1382862107,
+   "passage": "Eruptions of ash reached an estimated altitude of 6 kilometres (20,000 ft), and explosions could be heard in Batavia (Jakarta) 160 km (100 mi) away, rattling windows and doors.",
+   "numbers": {
+    "claim": [
+     "160",
+     "100"
+    ],
+    "inPassage": [
+     "160",
+     "100"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why Krakatoa was heard 4,800 kilometres away.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "That's Indonesia to an island near Mauritius.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "In Perth, 3,110 kilometres away, people heard it too.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Its ash cloud climbed 27 kilometres high.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "At least 36,417 deaths are linked to the eruption and tsunamis.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "SPECULATIVE SCENARIO",
+   "text": "Today, coasts around the Sunda Strait would face the waves first.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Ash high in the sky would ground flights across the region.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So Krakatoa's real danger was its waves, not its bang.",
+   "status": "HUMAN"
+  }
+ ]
+}

@@ -1,0 +1,143 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-SPA-020",
+ "checkedAt": "2026-11-03T17:53:24.370Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "0f958798254992e4",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "The mass of Saturn's rings is around two-thirds the mass of the Earth's entire Antarctic ice sheet, spread across a surface area 80 times larger than that of Earth.",
+   "url": "https://en.wikipedia.org/wiki/Rings_of_Saturn",
+   "sourceTitle": "Wikipedia — Rings of Saturn",
+   "revision": 1383245128,
+   "passage": "This is around two-thirds the mass of the Earth's entire Antarctic ice sheet, spread across a surface area 80 times larger than that of Earth.",
+   "numbers": {
+    "claim": [
+     "80"
+    ],
+    "inPassage": [
+     "80"
+    ],
+    "missing": []
+   },
+   "support": 0.87,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "The Cassini Division is a 4,800-kilometre-wide (3,000 mi) region between the A Ring and B Ring.",
+   "url": "https://en.wikipedia.org/wiki/Rings_of_Saturn",
+   "sourceTitle": "Wikipedia — Rings of Saturn",
+   "revision": 1383245128,
+   "passage": "This division is a 4,800-kilometre-wide (3,000 mi) region between the A Ring and B Ring.",
+   "numbers": {
+    "claim": [
+     "4800",
+     "3000"
+    ],
+    "inPassage": [
+     "4800",
+     "3000"
+    ],
+    "missing": []
+   },
+   "support": 0.83,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "Unlike the main rings, the E Ring is more than 2,000 km (1000 miles) thick and increases with its distance from Enceladus.",
+   "url": "https://en.wikipedia.org/wiki/Rings_of_Saturn",
+   "sourceTitle": "Wikipedia — Rings of Saturn",
+   "revision": 1383245128,
+   "passage": "Unlike the main rings, the E Ring is more than 2,000 km (1000 miles) thick and increases with its distance from Enceladus.",
+   "numbers": {
+    "claim": [
+     "2000",
+     "1000"
+    ],
+    "inPassage": [
+     "2000",
+     "1000"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "Stellar occultation revealed 13 objects, ranging from 27 meters (89') to 10 km (6 miles) across, within the F ring.",
+   "url": "https://en.wikipedia.org/wiki/Rings_of_Saturn",
+   "sourceTitle": "Wikipedia — Rings of Saturn",
+   "revision": 1383245128,
+   "passage": "The Cassini UVIS team, led by Larry Esposito, used stellar occultation to discover 13 objects, ranging from 27 meters (89') to 10 km (6 miles) across, within the F ring.",
+   "numbers": {
+    "claim": [
+     "13",
+     "27",
+     "89",
+     "10",
+     "6"
+    ],
+    "inPassage": [
+     "13",
+     "27",
+     "89",
+     "10",
+     "6"
+    ],
+    "missing": []
+   },
+   "support": 0.9,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Saturn's rings cover 80 times Earth's surface area.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Yet their total mass is surprisingly small.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "All that ice weighs about two-thirds of Antarctica's ice sheet.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Gaps like the Cassini Division span 4,800 kilometres.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "SPECULATIVE SCENARIO",
+   "text": "Give Earth rings like that, and they'd shade whole latitudes.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Seasons would shift as the shadow crossed each hemisphere.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "At night, sunlit ice would arc across the sky.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So rings wouldn't just decorate Earth. They'd change its weather.",
+   "status": "HUMAN"
+  }
+ ]
+}

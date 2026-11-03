@@ -1,0 +1,138 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-SPA-007",
+ "checkedAt": "2026-11-03T17:53:22.927Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "e20e90e7f40024ab",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "The Sun's mean distance from Earth is about 1.496×10^8 kilometres, or about 8 light-minutes.",
+   "url": "https://en.wikipedia.org/wiki/Sun",
+   "sourceTitle": "Wikipedia — Sun",
+   "revision": 1382445123,
+   "passage": null,
+   "numbers": {
+    "claim": [
+     "1.496",
+     "10",
+     "8"
+    ],
+    "inPassage": [],
+    "missing": [
+     "1.496",
+     "10",
+     "8"
+    ]
+   },
+   "support": 0,
+   "status": "UNVERIFIED",
+   "reason": "a sentence has the terms but not every claim number (1.496, 10, 8), is not 5-80 words of prose, or shares under 50% of the claim's content words"
+  },
+  {
+   "fact": "F2",
+   "claim": "The Sun's mass is around 330,000 times that of Earth, about 99.86% of the total mass of the Solar System.",
+   "url": "https://en.wikipedia.org/wiki/Sun",
+   "sourceTitle": "Wikipedia — Sun",
+   "revision": 1382445123,
+   "passage": "The Sun's mass is around 330,000 times that of Earth, making up about 99.86% of the total mass of the Solar System.",
+   "numbers": {
+    "claim": [
+     "330000",
+     "99.86"
+    ],
+    "inPassage": [
+     "330000",
+     "99.86"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "The speed of gravity, the speed of gravitational waves, equals the speed of light.",
+   "url": "https://en.wikipedia.org/wiki/Speed_of_gravity",
+   "sourceTitle": "Wikipedia — Speed of gravity",
+   "revision": 1378756458,
+   "passage": "Does Gravity Travel at the Speed of Light? in The Physics FAQ (also here).",
+   "numbers": {
+    "claim": [],
+    "inPassage": [],
+    "missing": []
+   },
+   "support": 0.5,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "The Sun's diameter is about 1,391,400 km, around 109 times that of Earth.",
+   "url": "https://en.wikipedia.org/wiki/Sun",
+   "sourceTitle": "Wikipedia — Sun",
+   "revision": 1382445123,
+   "passage": "It is the largest and most massive object in the Solar System; its diameter is about 1,391,400 km (864,600 mi), around 109 times that of Earth.",
+   "numbers": {
+    "claim": [
+     "1391400",
+     "109"
+    ],
+    "inPassage": [
+     "1391400",
+     "109"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "SPECULATIVE SCENARIO",
+   "text": "The Sun vanishes, and nobody notices.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "For about 8 minutes, sunlight is still on its way.",
+   "status": "FAIL",
+   "missing": [
+    "8"
+   ]
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Gravity's pull also changes only at light speed.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So Earth keeps orbiting an empty point for those same minutes.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The Sun holds 99.86% of the Solar System's mass.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Without it, Earth flies off in a straight line.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "The sky goes dark, and the planet starts cooling.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the first change arrives exactly as late as sunlight.",
+   "status": "HUMAN"
+  }
+ ]
+}

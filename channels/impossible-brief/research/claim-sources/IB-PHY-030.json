@@ -1,0 +1,121 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-PHY-030",
+ "checkedAt": "2026-11-03T17:53:35.970Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "ecc4b63f7c3c7d48",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "Contrary to popular misconception, bathtubs, toilets, and other water receptacles do not drain in opposite directions in the Northern and Southern Hemispheres.",
+   "url": "https://en.wikipedia.org/wiki/Coriolis_force",
+   "sourceTitle": "Wikipedia — Coriolis force",
+   "revision": 1380363764,
+   "passage": "Contrary to popular misconception, bathtubs, toilets, and other water receptacles do not drain in opposite directions in the Northern and Southern Hemispheres.",
+   "numbers": {
+    "claim": [],
+    "inPassage": [],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "Identical toilets flushed in both hemispheres drain in the same direction, and this direction is determined mostly by the shape of the toilet bowl.",
+   "url": "https://en.wikipedia.org/wiki/Coriolis_force",
+   "sourceTitle": "Wikipedia — Coriolis force",
+   "revision": 1380363764,
+   "passage": "For example, identical toilets flushed in both hemispheres drain in the same direction, and this direction is determined mostly by the shape of the toilet bowl.",
+   "numbers": {
+    "claim": [],
+    "inPassage": [],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "The theory that the effect determines the rotation of draining water in a household bathtub, sink or toilet has been repeatedly disproven.",
+   "url": "https://en.wikipedia.org/wiki/Coriolis_force",
+   "sourceTitle": "Wikipedia — Coriolis force",
+   "revision": 1380363764,
+   "passage": "However, the theory that the effect determines the rotation of draining water in a household bathtub, sink or toilet has been repeatedly disproven by modern-day scientists; the force is negligibly small compared to the many other influences on the rotation.",
+   "numbers": {
+    "claim": [],
+    "inPassage": [],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "In a carefully prepared experiment, it takes 20 minutes to drain, and the cross starts turning only around 15 minutes.",
+   "url": "https://en.wikipedia.org/wiki/Coriolis_force",
+   "sourceTitle": "Wikipedia — Coriolis force",
+   "revision": 1380363764,
+   "passage": "It takes 20 minutes to drain, and the cross starts turning only around 15 minutes.",
+   "numbers": {
+    "claim": [
+     "20",
+     "15"
+    ],
+    "inPassage": [
+     "20",
+     "15"
+    ],
+    "missing": []
+   },
+   "support": 0.73,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why Earth's spin can't steer your toilet.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Identical toilets drain the same way in both hemispheres.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The bowl's shape sets the swirl, not Earth's spin.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The Coriolis effect is real, but tiny at sink scale.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "In one careful test, a still tank took 20 minutes to drain.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Only after about 15 minutes did Earth's rotation show.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "At hurricane scale, though, it sets the direction of the spin.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So Earth's rotation steers storms, not your bathroom.",
+   "status": "HUMAN"
+  }
+ ]
+}

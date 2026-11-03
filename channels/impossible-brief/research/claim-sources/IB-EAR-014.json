@@ -1,0 +1,184 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-EAR-014",
+ "checkedAt": "2026-11-03T17:53:32.243Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "0dae051aa8356c7d",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "Most studies have placed it at 9.4–9.6 on the moment magnitude scale, making it the strongest earthquake ever recorded.",
+   "url": "https://en.wikipedia.org/wiki/1960_Valdivia_earthquake",
+   "sourceTitle": "Wikipedia — 1960 Valdivia earthquake",
+   "revision": 1383222439,
+   "passage": "Most studies have placed it at 9.4–9.6 on the moment magnitude scale, making it the strongest earthquake ever recorded, while some studies have placed the magnitude lower than 9.4.",
+   "numbers": {
+    "claim": [
+     "9.4",
+     "9.6"
+    ],
+    "inPassage": [
+     "9.4",
+     "9.6"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "On 22 May 1960, an earthquake and tsunami occurred in Chile, devastating the city of Valdivia.",
+   "url": "https://en.wikipedia.org/wiki/1960_Valdivia_earthquake",
+   "sourceTitle": "Wikipedia — 1960 Valdivia earthquake",
+   "revision": 1383222439,
+   "passage": "On 22 May 1960, an earthquake and tsunami occurred in Chile, devastating the city of Valdivia.",
+   "numbers": {
+    "claim": [
+     "22",
+     "1960"
+    ],
+    "inPassage": [
+     "22",
+     "1960"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "It occurred in the afternoon (19:11:14 UTC, 15:11:14 local time), and lasted 10 minutes.",
+   "url": "https://en.wikipedia.org/wiki/1960_Valdivia_earthquake",
+   "sourceTitle": "Wikipedia — 1960 Valdivia earthquake",
+   "revision": 1383222439,
+   "passage": "It occurred in the afternoon (19:11:14 UTC, 15:11:14 local time), and lasted 10 minutes.",
+   "numbers": {
+    "claim": [
+     "19",
+     "11",
+     "14",
+     "15",
+     "10"
+    ],
+    "inPassage": [
+     "19",
+     "11",
+     "14",
+     "15",
+     "10"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "The main tsunami traveled across the Pacific Ocean and devastated Hilo, Hawaii, where waves as high as 10.7 metres were recorded over 10,000 kilometres from the epicenter.",
+   "url": "https://en.wikipedia.org/wiki/1960_Valdivia_earthquake",
+   "sourceTitle": "Wikipedia — 1960 Valdivia earthquake",
+   "revision": 1383222439,
+   "passage": "The main tsunami traveled across the Pacific Ocean and devastated Hilo, Hawaii, where waves as high as 10.7 metres (35 ft) were recorded over 10,000 kilometres (6,200 mi) from the epicenter.",
+   "numbers": {
+    "claim": [
+     "10.7",
+     "10000"
+    ],
+    "inPassage": [
+     "10.7",
+     "10000"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F5",
+   "claim": "The tremor caused localized tsunamis that severely battered the Chilean coast, with waves up to 25 metres (82 ft).",
+   "url": "https://en.wikipedia.org/wiki/1960_Valdivia_earthquake",
+   "sourceTitle": "Wikipedia — 1960 Valdivia earthquake",
+   "revision": 1383222439,
+   "passage": "Some localized tsunamis severely battered the Chilean coast, with waves up to 25 m (82 ft).",
+   "numbers": {
+    "claim": [
+     "25",
+     "82"
+    ],
+    "inPassage": [
+     "25",
+     "82"
+    ],
+    "missing": []
+   },
+   "support": 0.7,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F6",
+   "claim": "Various estimates of the total number of fatalities from the earthquake and tsunamis have surfaced, ranging between 1,000 and 6,000 killed.",
+   "url": "https://en.wikipedia.org/wiki/1960_Valdivia_earthquake",
+   "sourceTitle": "Wikipedia — 1960 Valdivia earthquake",
+   "revision": 1383222439,
+   "passage": "Various estimates of the total number of fatalities from the earthquake and tsunamis have surfaced, ranging between 1,000 and 6,000 killed.",
+   "numbers": {
+    "claim": [
+     "1000",
+     "6000"
+    ],
+    "inPassage": [
+     "1000",
+     "6000"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why Chile's 1960 quake flooded Hawaii 10,000 kilometres away.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It measured 9.4 to 9.6, the strongest ever recorded.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The shaking lasted 10 minutes.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Waves up to 25 metres struck the Chilean coast.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "In Hilo, Hawaii, waves reached 10.7 metres.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "SPECULATIVE SCENARIO",
+   "text": "Today, coasts all around the Pacific would get warnings, and hours to act.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the biggest quakes are ocean-wide events.",
+   "status": "HUMAN"
+  }
+ ]
+}

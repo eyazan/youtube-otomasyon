@@ -1,0 +1,193 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-EAR-076",
+ "checkedAt": "2026-11-03T17:53:34.106Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "caee363c3b74140d",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "The northern section of the Sunda megathrust ruptured over a length of 1,300 km (810 mi).",
+   "url": "https://en.wikipedia.org/wiki/2004_Indian_Ocean_earthquake_and_tsunami",
+   "sourceTitle": "Wikipedia — 2004 Indian Ocean earthquake and tsunami",
+   "revision": 1382904983,
+   "passage": "The northern section of the Sunda megathrust ruptured over a length of 1,300 km (810 mi).",
+   "numbers": {
+    "claim": [
+     "1300",
+     "810"
+    ],
+    "inPassage": [
+     "1300",
+     "810"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "It had the longest fault rupture ever observed, between 1,200 to 1,300 kilometres, and had the longest duration of faulting ever observed, lasting at least ten minutes.",
+   "url": "https://en.wikipedia.org/wiki/2004_Indian_Ocean_earthquake_and_tsunami",
+   "sourceTitle": "Wikipedia — 2004 Indian Ocean earthquake and tsunami",
+   "revision": 1382904983,
+   "passage": "It had the longest fault rupture ever observed, between 1,200 to 1,300 kilometres (746 to 808 mi), and had the longest duration of faulting ever observed, lasting at least ten minutes.",
+   "numbers": {
+    "claim": [
+     "1200",
+     "1300"
+    ],
+    "inPassage": [
+     "1200",
+     "1300"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "A 2016 study estimated the magnitude to be Mw9.25, while a 2021 study revised its 2007 estimate of Mw9.1 to a new magnitude of Mw9.2; more recent studies estimate Mw9.3.",
+   "url": "https://en.wikipedia.org/wiki/2004_Indian_Ocean_earthquake_and_tsunami",
+   "sourceTitle": "Wikipedia — 2004 Indian Ocean earthquake and tsunami",
+   "revision": 1382904983,
+   "passage": null,
+   "numbers": {
+    "claim": [
+     "2016",
+     "9.25",
+     "2021",
+     "2007",
+     "9.1",
+     "9.2",
+     "9.3"
+    ],
+    "inPassage": [],
+    "missing": [
+     "2016",
+     "9.25",
+     "2021",
+     "2007",
+     "9.1",
+     "9.2",
+     "9.3"
+    ]
+   },
+   "support": 0,
+   "status": "UNVERIFIED",
+   "reason": "a sentence has the terms but not every claim number (2016, 9.25, 2021, 2007, 9.1, 9.2, 9.3), is not 5-80 words of prose, or shares under 50% of the claim's content words"
+  },
+  {
+   "fact": "F4",
+   "claim": "The earthquake caused a massive tsunami with waves up to 30 m (100 ft) high.",
+   "url": "https://en.wikipedia.org/wiki/2004_Indian_Ocean_earthquake_and_tsunami",
+   "sourceTitle": "Wikipedia — 2004 Indian Ocean earthquake and tsunami",
+   "revision": 1382904983,
+   "passage": "The earthquake caused a massive tsunami with waves up to 30 m (100 ft) high, referred to by British and Commonwealth media as the Boxing Day tsunami, after the Boxing Day holiday, or the Asian tsunami, which devastated communities along the surrounding coasts of the Indian Ocean, killing an estimated 227,898 people in 14 countries, especially in Aceh in Indonesia, Sri Lanka, Tamil Nadu in India, and Khao Lak in Thailand.",
+   "numbers": {
+    "claim": [
+     "30",
+     "100"
+    ],
+    "inPassage": [
+     "30",
+     "100"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F5",
+   "claim": "According to the final report of the Tsunami Evaluation Coalition, a total of 227,898 people died.",
+   "url": "https://en.wikipedia.org/wiki/2004_Indian_Ocean_earthquake_and_tsunami",
+   "sourceTitle": "Wikipedia — 2004 Indian Ocean earthquake and tsunami",
+   "revision": 1382904983,
+   "passage": "According to the final report of the Tsunami Evaluation Coalition, a total of 227,898 people died.",
+   "numbers": {
+    "claim": [
+     "227898"
+    ],
+    "inPassage": [
+     "227898"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F6",
+   "claim": "The compressional (P) wave takes about 22 minutes to reach the other side of the planet.",
+   "url": "https://en.wikipedia.org/wiki/2004_Indian_Ocean_earthquake_and_tsunami",
+   "sourceTitle": "Wikipedia — 2004 Indian Ocean earthquake and tsunami",
+   "revision": 1382904983,
+   "passage": "The earliest, lower amplitude signal is that of the compressional (P) wave, which takes about 22 minutes to reach the other side of the planet (the antipode; in this case near Ecuador).",
+   "numbers": {
+    "claim": [
+     "22"
+    ],
+    "inPassage": [
+     "22"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "One earthquake ruptured 1,300 kilometres of seafloor.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The shaking lasted at least ten minutes.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Its magnitude is estimated at 9.1 to 9.3.",
+   "status": "FAIL",
+   "missing": [
+    "9.1",
+    "9.3"
+   ]
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Waves reached up to 30 metres high.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "In total, 227,898 people died across the Indian Ocean.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Seismic waves crossed the planet in about 22 minutes.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The Indian Ocean had no tsunami warning system then.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the deadliest part of a tsunami is the time without warning.",
+   "status": "HUMAN"
+  }
+ ]
+}

@@ -1,0 +1,138 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-SPA-071",
+ "checkedAt": "2026-11-03T17:53:26.186Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "e01599014f4162d1",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "Measurements from laser reflectors left during the Apollo missions have found that the Moon's distance increases by 38 mm (1.5 in) per year, roughly the rate at which human fingernails grow.",
+   "url": "https://en.wikipedia.org/wiki/Moon",
+   "sourceTitle": "Wikipedia — Moon",
+   "revision": 1383347965,
+   "passage": "Measurements from laser reflectors left during the Apollo missions (lunar ranging experiments) have found that the Moon's distance increases by 38 mm (1.5 in) per year (roughly the rate at which human fingernails grow).",
+   "numbers": {
+    "claim": [
+     "38",
+     "1.5"
+    ],
+    "inPassage": [
+     "38",
+     "1.5"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "It orbits Earth at an average distance of 384,399 kilometers (238,854 mi).",
+   "url": "https://en.wikipedia.org/wiki/Moon",
+   "sourceTitle": "Wikipedia — Moon",
+   "revision": 1383347965,
+   "passage": null,
+   "numbers": {
+    "claim": [
+     "384399",
+     "238854"
+    ],
+    "inPassage": [],
+    "missing": [
+     "384399",
+     "238854"
+    ]
+   },
+   "support": 0,
+   "status": "UNVERIFIED",
+   "reason": "a sentence has the terms but not every claim number (384399, 238854), is not 5-80 words of prose, or shares under 50% of the claim's content words"
+  },
+  {
+   "fact": "F3",
+   "claim": "On average the Moon's angular diameter is about 0.52°, roughly the same apparent size as the Sun.",
+   "url": "https://en.wikipedia.org/wiki/Moon",
+   "sourceTitle": "Wikipedia — Moon",
+   "revision": 1383347965,
+   "passage": "On average the Moon's angular diameter is about 0.52°, roughly the same apparent size as the Sun (see § Eclipses).",
+   "numbers": {
+    "claim": [
+     "0.52"
+    ],
+    "inPassage": [
+     "0.52"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "As the Moon's orbit around Earth is inclined by about 5.145° to the orbit of Earth around the Sun, eclipses do not occur at every full and new moon.",
+   "url": "https://en.wikipedia.org/wiki/Moon",
+   "sourceTitle": "Wikipedia — Moon",
+   "revision": 1383347965,
+   "passage": "As the Moon's orbit around Earth is inclined by about 5.145° (5° 9′) to the orbit of Earth around the Sun, eclipses do not occur at every full and new moon.",
+   "numbers": {
+    "claim": [
+     "5.145"
+    ],
+    "inPassage": [
+     "5.145"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why the Moon drifts 38 millimetres farther every year.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "That's about as fast as your fingernails grow.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Apollo's laser reflectors let us measure it.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It orbits about 384,399 kilometres away today.",
+   "status": "FAIL",
+   "missing": [
+    "384399"
+   ]
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "From Earth, it spans about 0.52 degrees, like the Sun.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "As it recedes, it will look smaller than the Sun.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Then total solar eclipses will stop happening.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So perfect eclipses are a temporary coincidence.",
+   "status": "HUMAN"
+  }
+ ]
+}

@@ -1,0 +1,153 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-SPA-036",
+ "checkedAt": "2026-11-03T17:53:24.935Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "d2f26362aa9f3094",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "In 2004 its length was about half that of a century earlier, when it reached a size of 40,000 km (25,000 mi), about three times the diameter of Earth.",
+   "url": "https://en.wikipedia.org/wiki/Great_Red_Spot",
+   "sourceTitle": "Wikipedia — Great Red Spot",
+   "revision": 1383419025,
+   "passage": "In 2004 its length was about half that of a century earlier, when it reached a size of 40,000 km (25,000 mi), about three times the diameter of Earth.",
+   "numbers": {
+    "claim": [
+     "2004",
+     "40000",
+     "25000"
+    ],
+    "inPassage": [
+     "2004",
+     "40000",
+     "25000"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "Measuring 16,350 km (10,160 mi) in width as of 3 April 2017, the Great Red Spot is 1.3 times the diameter of Earth.",
+   "url": "https://en.wikipedia.org/wiki/Great_Red_Spot",
+   "sourceTitle": "Wikipedia — Great Red Spot",
+   "revision": 1383419025,
+   "passage": "Measuring 16,350 km (10,160 mi) in width as of 3 April 2017, the Great Red Spot is 1.3 times the diameter of Earth.",
+   "numbers": {
+    "claim": [
+     "16350",
+     "10160",
+     "3",
+     "2017",
+     "1.3"
+    ],
+    "inPassage": [
+     "16350",
+     "10160",
+     "3",
+     "2017",
+     "1.3"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "Located 22 degrees south of Jupiter's equator, it produces wind speeds up to 496 km/h (308 mph).",
+   "url": "https://en.wikipedia.org/wiki/Great_Red_Spot",
+   "sourceTitle": "Wikipedia — Great Red Spot",
+   "revision": 1383419025,
+   "passage": "Located 22 degrees south of Jupiter's equator, it produces wind speeds up to 496 km/h (308 mph).",
+   "numbers": {
+    "claim": [
+     "22",
+     "496",
+     "308"
+    ],
+    "inPassage": [
+     "22",
+     "496",
+     "308"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "A 2024 study suggests the permanent spot observed from 1665 to 1713 may not be the same as the modern Great Red Spot observed since 1831.",
+   "url": "https://en.wikipedia.org/wiki/Great_Red_Spot",
+   "sourceTitle": "Wikipedia — Great Red Spot",
+   "revision": 1383419025,
+   "passage": "A 2024 study of historical observations suggests that the \"permanent spot\" observed from 1665 to 1713 may not be the same as the modern Great Red Spot observed since 1831.",
+   "numbers": {
+    "claim": [
+     "2024",
+     "1665",
+     "1713",
+     "1831"
+    ],
+    "inPassage": [
+     "2024",
+     "1665",
+     "1713",
+     "1831"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why Jupiter's 16,350-kilometre storm keeps shrinking.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It once stretched 40,000 kilometres, three Earths wide.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "That was the Great Red Spot's width in 2017.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "That's still 1.3 times Earth's diameter.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Its winds reach 496 kilometres per hour.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It's been watched continuously since 1831.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "If it faded, Jupiter would lose its most famous storm, not its weather.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So even a planet-sized storm isn't permanent.",
+   "status": "HUMAN"
+  }
+ ]
+}

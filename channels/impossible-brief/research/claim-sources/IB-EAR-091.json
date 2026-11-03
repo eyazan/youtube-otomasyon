@@ -1,0 +1,159 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-EAR-091",
+ "checkedAt": "2026-11-03T17:53:34.583Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "658498502aa7d18f",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "The estimated size of the garbage patch is 1,600,000 square kilometres (about twice the size of Texas or three times the size of France).",
+   "url": "https://en.wikipedia.org/wiki/Great_Pacific_Garbage_Patch",
+   "sourceTitle": "Wikipedia — Great Pacific Garbage Patch",
+   "revision": 1381616007,
+   "passage": "The estimated size of the garbage patch is 1,600,000 square kilometres (620,000 mi2) (about twice the size of Texas or three times the size of France).",
+   "numbers": {
+    "claim": [
+     "1600000"
+    ],
+    "inPassage": [
+     "1600000"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "Researchers claimed that the patch covers 1.6 million square kilometres consisting of 45,000–129,000 metric tons of plastic as of 2018.",
+   "url": "https://en.wikipedia.org/wiki/Great_Pacific_Garbage_Patch",
+   "sourceTitle": "Wikipedia — Great Pacific Garbage Patch",
+   "revision": 1381616007,
+   "passage": "Researchers from the Ocean Cleanup project claimed that the patch covers 1.6 million square kilometres (620,000 square miles) consisting of 45,000–129,000 metric tons (50,000–142,000 short tons) of plastic as of 2018, later growing to twice the size of Texas.",
+   "numbers": {
+    "claim": [
+     "1.6",
+     "45000",
+     "129000",
+     "2018"
+    ],
+    "inPassage": [
+     "1.6",
+     "45000",
+     "129000",
+     "2018"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "While microplastics dominate the area by count, 92% of the mass of the patch consists of larger objects.",
+   "url": "https://en.wikipedia.org/wiki/Great_Pacific_Garbage_Patch",
+   "sourceTitle": "Wikipedia — Great Pacific Garbage Patch",
+   "revision": 1381616007,
+   "passage": "While microplastics dominate the area by count, 92% of the mass of the patch consists of larger objects.",
+   "numbers": {
+    "claim": [
+     "92"
+    ],
+    "inPassage": [
+     "92"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "Some of the plastic is over 50 years old.",
+   "url": "https://en.wikipedia.org/wiki/Great_Pacific_Garbage_Patch",
+   "sourceTitle": "Wikipedia — Great Pacific Garbage Patch",
+   "revision": 1381616007,
+   "passage": "Some of the plastic is over 50 years old, and includes items (and fragments of items) such as \"plastic lighters, toothbrushes, water bottles, pens, baby bottles, cell phones, plastic bags, and nurdles\".",
+   "numbers": {
+    "claim": [
+     "50"
+    ],
+    "inPassage": [
+     "50"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F5",
+   "claim": "By the end of 2024, the Ocean Cleanup had removed more than one million pounds of trash from the Great Pacific Garbage Patch, or 0.5% of the total accumulated trash.",
+   "url": "https://en.wikipedia.org/wiki/Great_Pacific_Garbage_Patch",
+   "sourceTitle": "Wikipedia — Great Pacific Garbage Patch",
+   "revision": 1381616007,
+   "passage": "By the end of 2024, the Ocean Cleanup had removed more than one million pounds of trash from the Great Pacific Garbage Patch, or 0.5% of the total accumulated trash.",
+   "numbers": {
+    "claim": [
+     "2024",
+     "0.5"
+    ],
+    "inPassage": [
+     "2024",
+     "0.5"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why cleanup removed only 0.5% of the garbage patch.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The patch covers 1.6 million square kilometres.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "That's about three times the size of France.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It holds 45,000 to 129,000 tonnes of plastic.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "By mass, 92% is larger objects, not microplastics.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Some of the plastic is over 50 years old.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Stopping new plastic matters more than scooping old plastic.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the patch isn't an island. It's a slow, spreading soup.",
+   "status": "HUMAN"
+  }
+ ]
+}

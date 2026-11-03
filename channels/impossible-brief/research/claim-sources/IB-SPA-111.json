@@ -1,0 +1,143 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-SPA-111",
+ "checkedAt": "2026-11-03T17:53:28.367Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "6ab7b988fe04e86e",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "Its orbit takes it at 7.67 km/s (27,600 km/h; 17,200 mph) roughly every 93 minutes around Earth, 15.5 times a day.",
+   "url": "https://en.wikipedia.org/wiki/International_Space_Station",
+   "sourceTitle": "Wikipedia — International Space Station",
+   "revision": 1382620349,
+   "passage": "Its orbit takes it at 7.67 km/s (27,600 km/h; 17,200 mph) roughly every 93 minutes around Earth, 15.5 times a day.",
+   "numbers": {
+    "claim": [
+     "7.67",
+     "27600",
+     "17200",
+     "93",
+     "15.5"
+    ],
+    "inPassage": [
+     "7.67",
+     "27600",
+     "17200",
+     "93",
+     "15.5"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "The station orbits between 51.64° north and south, at about 400 kilometres (250 miles) above Earth, below the Van Allen radiation belts.",
+   "url": "https://en.wikipedia.org/wiki/International_Space_Station",
+   "sourceTitle": "Wikipedia — International Space Station",
+   "revision": 1382620349,
+   "passage": "The station orbits between 51.64° north and south, at about 400 kilometres (250 miles) above Earth, below the Van Allen radiation belts and most space debris.",
+   "numbers": {
+    "claim": [
+     "51.64",
+     "400",
+     "250"
+    ],
+    "inPassage": [
+     "51.64",
+     "400",
+     "250"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "The Integrated Truss Structure connects the station's solar panels and radiators to its 16 major pressurized modules.",
+   "url": "https://en.wikipedia.org/wiki/International_Space_Station",
+   "sourceTitle": "Wikipedia — International Space Station",
+   "revision": 1382620349,
+   "passage": "The Integrated Truss Structure connects the station's vast system of solar panels and radiators to its 16 major pressurized modules.",
+   "numbers": {
+    "claim": [
+     "16"
+    ],
+    "inPassage": [
+     "16"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "The station is expected to remain operational until the end of 2030.",
+   "url": "https://en.wikipedia.org/wiki/International_Space_Station",
+   "sourceTitle": "Wikipedia — International Space Station",
+   "revision": 1382620349,
+   "passage": "The station is expected to remain operational until the end of 2030, by which parts of it are to be used for Axiom Station and the Russian Orbital Station.",
+   "numbers": {
+    "claim": [
+     "2030"
+    ],
+    "inPassage": [
+     "2030"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why the space station circles Earth every 93 minutes.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "That's 15.5 orbits, and sunrises, every day.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It flies at 27,600 kilometres per hour.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It's only about 400 kilometres up.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Crews aren't beyond gravity; they're constantly falling around Earth.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Days and nights blur, so schedules replace the Sun.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The station is due to operate until the end of 2030.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So living in orbit means living in permanent free fall.",
+   "status": "HUMAN"
+  }
+ ]
+}

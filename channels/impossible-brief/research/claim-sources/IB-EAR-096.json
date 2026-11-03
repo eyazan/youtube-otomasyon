@@ -1,0 +1,147 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-EAR-096",
+ "checkedAt": "2026-11-03T17:53:34.746Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "3f45d5a6aaabcc6c",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "The system erupted violently over an eight-month period between June 1783 and February 1784 from the Laki fissure and the adjoining volcano Grímsvötn.",
+   "url": "https://en.wikipedia.org/wiki/Laki",
+   "sourceTitle": "Wikipedia — Laki",
+   "revision": 1373697920,
+   "passage": "The system erupted violently over an eight-month period between June 1783 and February 1784 from the Laki fissure and the adjoining volcano Grímsvötn.",
+   "numbers": {
+    "claim": [
+     "1783",
+     "1784"
+    ],
+    "inPassage": [
+     "1783",
+     "1784"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "About 80% of sheep (190,500 head), 50% of cattle (11,500 head), and 50% of horses (28,000 head) died because of dental and skeletal fluorosis from the 8 million tons of fluorine that were released.",
+   "url": "https://en.wikipedia.org/wiki/Laki",
+   "sourceTitle": "Wikipedia — Laki",
+   "revision": 1373697920,
+   "passage": "About 80% of sheep (190,500 head), 50% of cattle (11,500 head), and 50% of horses (28,000 head) died because of dental and skeletal fluorosis from the 8 million tons of fluorine that were released.",
+   "numbers": {
+    "claim": [
+     "80",
+     "190500",
+     "50",
+     "11500",
+     "28000",
+     "8"
+    ],
+    "inPassage": [
+     "80",
+     "190500",
+     "50",
+     "11500",
+     "28000",
+     "8"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "An estimated 20% of the population died in the famine after the fissure eruptions ensued, with about 8,000 excess deaths.",
+   "url": "https://en.wikipedia.org/wiki/Laki",
+   "sourceTitle": "Wikipedia — Laki",
+   "revision": 1373697920,
+   "passage": "An estimated 20% of the population died in the famine after the fissure eruptions ensued, with about 8,000 excess deaths.",
+   "numbers": {
+    "claim": [
+     "20",
+     "8000"
+    ],
+    "inPassage": [
+     "20",
+     "8000"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "The gases were carried by the convective eruption column to altitudes around 15 km (50,000 ft).",
+   "url": "https://en.wikipedia.org/wiki/Laki",
+   "sourceTitle": "Wikipedia — Laki",
+   "revision": 1373697920,
+   "passage": "The gases were carried by the convective eruption column to altitudes around 15 km (50,000 ft).",
+   "numbers": {
+    "claim": [
+     "15",
+     "50000"
+    ],
+    "inPassage": [
+     "15",
+     "50000"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why one eruption killed 80% of Iceland's sheep.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Laki released about 8 million tons of fluorine.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It erupted for eight months, from June 1783.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Fluorine poisoned the grass that livestock ate.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Half of all cattle and horses died too.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Famine followed, killing about 20% of the population.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Its gases rose about 15 kilometres high.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So a volcano's deadliest weapon can be invisible.",
+   "status": "HUMAN"
+  }
+ ]
+}

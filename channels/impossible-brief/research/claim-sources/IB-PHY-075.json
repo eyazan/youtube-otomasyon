@@ -1,0 +1,136 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-PHY-075",
+ "checkedAt": "2026-11-03T17:53:37.066Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "2326e9862a7a1581",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "Depending on the ambient temperature, the top of the tower may shift away from the sun by up to 18 cm (7 in) due to thermal expansion of the metal on the side facing the sun.",
+   "url": "https://en.wikipedia.org/wiki/Eiffel_Tower",
+   "sourceTitle": "Wikipedia — Eiffel Tower",
+   "revision": 1383208616,
+   "passage": "Depending on the ambient temperature, the top of the tower may shift away from the sun by up to 18 cm (7 in) due to thermal expansion of the metal on the side facing the sun.",
+   "numbers": {
+    "claim": [
+     "18",
+     "7"
+    ],
+    "inPassage": [
+     "18",
+     "7"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "The tower is 330 metres (1,083 ft) tall, about the same height as an 81-storey building, and the tallest structure in Paris.",
+   "url": "https://en.wikipedia.org/wiki/Eiffel_Tower",
+   "sourceTitle": "Wikipedia — Eiffel Tower",
+   "revision": 1383208616,
+   "passage": "The tower is 330 metres (1,083 ft) tall, about the same height as an 81-storey building, and the tallest structure in Paris.",
+   "numbers": {
+    "claim": [
+     "330",
+     "1083",
+     "81"
+    ],
+    "inPassage": [
+     "330",
+     "1083",
+     "81"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "Its base is square, measuring 125 metres (410 ft) on each side.",
+   "url": "https://en.wikipedia.org/wiki/Eiffel_Tower",
+   "sourceTitle": "Wikipedia — Eiffel Tower",
+   "revision": 1383208616,
+   "passage": "Its base is square, measuring 125 metres (410 ft) on each side.",
+   "numbers": {
+    "claim": [
+     "125",
+     "410"
+    ],
+    "inPassage": [
+     "125",
+     "410"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "It was the first structure in the world to surpass both the 200-metre and 300-metre mark in height.",
+   "url": "https://en.wikipedia.org/wiki/Eiffel_Tower",
+   "sourceTitle": "Wikipedia — Eiffel Tower",
+   "revision": 1383208616,
+   "passage": "It was the first structure in the world to surpass both the 200-metre and 300-metre mark in height.",
+   "numbers": {
+    "claim": [
+     "200",
+     "300"
+    ],
+    "inPassage": [
+     "200",
+     "300"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why the Eiffel Tower leans 18 centimetres in sunshine.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The Sun heats one side of its iron frame.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "That side expands, tilting the top away from the sun.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The tower is 330 metres tall.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Its base spans 125 metres on each side.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Bridges need expansion joints for the same reason.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So even giant structures move with the weather.",
+   "status": "HUMAN"
+  }
+ ]
+}

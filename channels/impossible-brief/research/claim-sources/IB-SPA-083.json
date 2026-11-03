@@ -1,0 +1,138 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-SPA-083",
+ "checkedAt": "2026-11-03T17:53:26.966Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "6be560aa895c6f28",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "Betelgeuse is expected to end its evolution with a supernova explosion, most likely within 100,000 years.",
+   "url": "https://en.wikipedia.org/wiki/Betelgeuse",
+   "sourceTitle": "Wikipedia — Betelgeuse",
+   "revision": 1383366464,
+   "passage": "but astronomers note that the supernova is expected to occur within approximately the next 100,000 years and is thus unlikely to be imminent.",
+   "numbers": {
+    "claim": [
+     "100000"
+    ],
+    "inPassage": [
+     "100000"
+    ],
+    "missing": []
+   },
+   "support": 0.5,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "Current best estimates put Betelgeuse at the order of 400–600 light-years from the Sun.",
+   "url": "https://en.wikipedia.org/wiki/Betelgeuse",
+   "sourceTitle": "Wikipedia — Betelgeuse",
+   "revision": 1383366464,
+   "passage": "For various reasons, its distance has been quite difficult to measure; current best estimates are of the order of 400–600 light-years from the Sun – a comparatively wide uncertainty for a relatively nearby star.",
+   "numbers": {
+    "claim": [
+     "400",
+     "600"
+    ],
+    "inPassage": [
+     "400",
+     "600"
+    ],
+    "missing": []
+   },
+   "support": 0.86,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "Starting in October 2019, Betelgeuse began to dim noticeably, and by mid-February 2020 its brightness had dropped by a factor of approximately 3, from magnitude 0.5 to 1.7.",
+   "url": "https://en.wikipedia.org/wiki/Betelgeuse",
+   "sourceTitle": "Wikipedia — Betelgeuse",
+   "revision": 1383366464,
+   "passage": "Starting in October 2019, Betelgeuse began to dim noticeably, and by mid-February 2020 its brightness had dropped by a factor of approximately 3, from magnitude 0.5 to 1.7.",
+   "numbers": {
+    "claim": [
+     "2019",
+     "2020",
+     "3",
+     "0.5",
+     "1.7"
+    ],
+    "inPassage": [
+     "2019",
+     "2020",
+     "3",
+     "0.5",
+     "1.7"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "This type of supernova would remain at roughly constant brightness for 2–3 months before rapidly dimming.",
+   "url": "https://en.wikipedia.org/wiki/Betelgeuse",
+   "sourceTitle": "Wikipedia — Betelgeuse",
+   "revision": 1383366464,
+   "passage": "This type of supernova would remain at roughly constant brightness for 2–3 months before rapidly dimming.",
+   "numbers": {
+    "claim": [
+     "2",
+     "3"
+    ],
+    "inPassage": [
+     "2",
+     "3"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Betelgeuse will explode, likely within 100,000 years.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It would then shine steadily for 2 to 3 months.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It sits roughly 400 to 600 light-years away.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "That's far too distant to harm life on Earth.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "In 2019, it dimmed by a factor of about 3.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Many wondered if the explosion had begun. It hadn't.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the scariest star in Orion is mostly a spectacle.",
+   "status": "HUMAN"
+  }
+ ]
+}

@@ -1,0 +1,150 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-SPA-051",
+ "checkedAt": "2026-11-03T17:53:25.441Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "2c5d8a908427ab8a",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "Voyager 1 is a space probe launched by NASA on September 5, 1977.",
+   "url": "https://en.wikipedia.org/wiki/Voyager_1",
+   "sourceTitle": "Wikipedia — Voyager 1",
+   "revision": 1383473926,
+   "passage": "The Voyager 1 probe was launched on September 5, 1977, from Launch Complex 41 at the Cape Canaveral Air Force Station, aboard a Titan IIIE launch vehicle.",
+   "numbers": {
+    "claim": [
+     "1",
+     "5",
+     "1977"
+    ],
+    "inPassage": [
+     "1",
+     "5",
+     "1977"
+    ],
+    "missing": []
+   },
+   "support": 0.71,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "At a distance of 171.19 AU (25.6 billion km; 15.9 billion mi) as of August 2026, it is the most distant human-made object from Earth.",
+   "url": "https://en.wikipedia.org/wiki/Voyager_1",
+   "sourceTitle": "Wikipedia — Voyager 1",
+   "revision": 1383473926,
+   "passage": null,
+   "numbers": {
+    "claim": [
+     "171.19",
+     "25.6",
+     "15.9",
+     "2026"
+    ],
+    "inPassage": [],
+    "missing": [
+     "171.19",
+     "25.6",
+     "15.9",
+     "2026"
+    ]
+   },
+   "support": 0,
+   "status": "UNVERIFIED",
+   "reason": "a sentence has the terms but not every claim number (171.19, 25.6, 15.9, 2026, 1000000000), is not 5-80 words of prose, or shares under 50% of the claim's content words"
+  },
+  {
+   "fact": "F3",
+   "claim": "Voyager 1 is projected to reach a distance of one light day from Earth in November 2026.",
+   "url": "https://en.wikipedia.org/wiki/Voyager_1",
+   "sourceTitle": "Wikipedia — Voyager 1",
+   "revision": 1383473926,
+   "passage": "Voyager 1 is projected to reach a distance of one light day from Earth on November 18, 2026.",
+   "numbers": {
+    "claim": [
+     "1",
+     "2026"
+    ],
+    "inPassage": [
+     "1",
+     "2026"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "Voyager 1 crossed the heliopause and entered interstellar space on August 25, 2012, making it the first spacecraft to do so.",
+   "url": "https://en.wikipedia.org/wiki/Voyager_1",
+   "sourceTitle": "Wikipedia — Voyager 1",
+   "revision": 1383473926,
+   "passage": "Voyager 1 crossed the heliopause and entered interstellar space on August 25, 2012, making it the first spacecraft to do so.",
+   "numbers": {
+    "claim": [
+     "1",
+     "25",
+     "2012"
+    ],
+    "inPassage": [
+     "1",
+     "25",
+     "2012"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Voyager 1 is 25.6 billion kilometres from Earth.",
+   "status": "FAIL",
+   "missing": [
+    "25.6"
+   ]
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Its signals take nearly a day to arrive.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It launched on September 5, 1977.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "In 2012, it became the first craft in interstellar space.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It's the most distant human-made object.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "By November 2026, it will be one light-day away.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Riding along, you'd see the Sun as just a bright star.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So our farthest traveller has barely left the Sun's neighbourhood.",
+   "status": "HUMAN"
+  }
+ ]
+}
