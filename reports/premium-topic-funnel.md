@@ -1,10 +1,10 @@
 # Premium topic funnel and remediation queue
 
-Generated 2026-11-03T17:46:48.801Z by scripts/growth/topic-funnel.js from the premium lane's own refusals. A topic is placed at the first stage it does not clear; nothing is removed from the inventory. RENDERABLE means the lane may render it for review; publication still needs a recorded human creative PASS.
+Generated 2026-11-03T18:04:29.708Z by scripts/growth/topic-funnel.js from the premium lane's own refusals. A topic is placed at the first stage it does not clear; nothing is removed from the inventory. RENDERABLE means the lane may render it for review; publication still needs a recorded human creative PASS.
 
 | channel | UNRESEARCHED | RESEARCHED | VERIFIED | CREATIVE_VIABLE | RENDERABLE | HISTORY |
 |---|---|---|---|---|---|---|
-| ImpossibleBrief | 344 | 117 | 0 | 12 | 2 | 25 |
+| ImpossibleBrief | 344 | 39 | 0 | 90 | 2 | 25 |
 | Failure Reconstructed | 123 | 0 | 319 | 0 | 4 | 55 |
 | The Hidden Logic of Things | 510 | 7 | 3 | 0 | 1 | 4 |
 | GoalLore Lab | 0 | 0 | 0 | 0 | 9 | 0 |
@@ -24,20 +24,20 @@ Remediation queue (top 15, closest to production first):
 | topic | stops at | blockers | proposal |
 |---|---|---|---|
 | IB-SPA-031 | CREATIVE_VIABLE | CREATIVE_REVIEW_REQUIRED: the research record declares no visual mechanism (topic.visualMechanism) | planet-orbit (PROPOSED_NOT_DECLARED) |
+| IB-SPA-006 | CREATIVE_VIABLE | CREATIVE_REVIEW_REQUIRED: the research record declares no visual mechanism (topic.visualMechanism) | atmosphere (PROPOSED_NOT_DECLARED) |
+| IB-SPA-021 | CREATIVE_VIABLE | CREATIVE_REVIEW_REQUIRED: the research record declares no visual mechanism (topic.visualMechanism) | planet-orbit (PROPOSED_NOT_DECLARED) |
+| IB-SPA-091 | CREATIVE_VIABLE | CREATIVE_REVIEW_REQUIRED: the research record declares no visual mechanism (topic.visualMechanism) | planet-orbit (PROPOSED_NOT_DECLARED) |
+| IB-SPA-101 | CREATIVE_VIABLE | CREATIVE_REVIEW_REQUIRED: the research record declares no visual mechanism (topic.visualMechanism) | planet-orbit (PROPOSED_NOT_DECLARED) |
 | IB-EAR-054 | CREATIVE_VIABLE | CREATIVE_REVIEW_REQUIRED: the research record declares no visual mechanism (topic.visualMechanism) | atmosphere (PROPOSED_NOT_DECLARED) |
 | IB-EAR-059 | CREATIVE_VIABLE | CREATIVE_REVIEW_REQUIRED: the research record declares no visual mechanism (topic.visualMechanism) | atmosphere (PROPOSED_NOT_DECLARED) |
 | IB-EAR-066 | CREATIVE_VIABLE | CREATIVE_REVIEW_REQUIRED: the research record declares no visual mechanism (topic.visualMechanism) | lake-water (PROPOSED_NOT_DECLARED) |
 | IB-EAR-071 | CREATIVE_VIABLE | CREATIVE_REVIEW_REQUIRED: the research record declares no visual mechanism (topic.visualMechanism) | ocean-current (PROPOSED_NOT_DECLARED) |
+| IB-EAR-086 | CREATIVE_VIABLE | CREATIVE_REVIEW_REQUIRED: the research record declares no visual mechanism (topic.visualMechanism) | earth-interior (PROPOSED_NOT_DECLARED) |
+| IB-EAR-096 | CREATIVE_VIABLE | CREATIVE_REVIEW_REQUIRED: the research record declares no visual mechanism (topic.visualMechanism) | earth-interior (PROPOSED_NOT_DECLARED) |
+| IB-HUM-050 | CREATIVE_VIABLE | CREATIVE_REVIEW_REQUIRED: the research record declares no visual mechanism (topic.visualMechanism) | microbial-population (PROPOSED_NOT_DECLARED) |
 | IB-FUT-042 | CREATIVE_VIABLE | CREATIVE_REVIEW_REQUIRED: the research record declares no visual mechanism (topic.visualMechanism) | planet-orbit (PROPOSED_NOT_DECLARED) |
-| IB-HUM-024 | CREATIVE_VIABLE | CREATIVE_REVIEW_REQUIRED: the research record declares no visual mechanism (topic.visualMechanism) | human-body (PROPOSED_NOT_DECLARED) |
-| IB-EXT-046 | CREATIVE_VIABLE | CREATIVE_REVIEW_REQUIRED: the research record declares no visual mechanism (topic.visualMechanism) | planet-orbit (PROPOSED_NOT_DECLARED) |
-| IB-OTH-006 | CREATIVE_VIABLE | CREATIVE_REVIEW_REQUIRED: the research record declares no visual mechanism (topic.visualMechanism) | ocean-depth (PROPOSED_NOT_DECLARED) |
-| IB-EAR-044 | CREATIVE_VIABLE | CREATIVE_REVIEW_REQUIRED: the research record declares no visual mechanism (topic.visualMechanism) | earth-surface (PROPOSED_NOT_DECLARED) |
-| IB-PHY-080 | CREATIVE_VIABLE | CREATIVE_REVIEW_REQUIRED: the research record declares no visual mechanism (topic.visualMechanism) | microbial-population (PROPOSED_NOT_DECLARED) |
-| IB-OTH-004 | CREATIVE_VIABLE | CREATIVE_REVIEW_REQUIRED: the research record declares no visual mechanism (topic.visualMechanism) | earth-surface (PROPOSED_NOT_DECLARED) |
-| IB-OTH-020 | RESEARCHED | CREATIVE_REVIEW_REQUIRED: the research record declares no visual mechanism (topic.visualMechanism); SOURCE_UNVERIFIED: no claim-source ledger (run scripts/ib-research/claim-check.js --ledger in CI) | - (NEEDS_CREATIVE_DECISION) |
-| IB-SPA-006 | RESEARCHED | CREATIVE_REVIEW_REQUIRED: the research record declares no visual mechanism (topic.visualMechanism); SOURCE_UNVERIFIED: no claim-source ledger (run scripts/ib-research/claim-check.js --ledger in CI) | atmosphere (PROPOSED_NOT_DECLARED) |
-| IB-SPA-021 | RESEARCHED | CREATIVE_REVIEW_REQUIRED: the research record declares no visual mechanism (topic.visualMechanism); SOURCE_UNVERIFIED: no claim-source ledger (run scripts/ib-research/claim-check.js --ledger in CI) | planet-orbit (PROPOSED_NOT_DECLARED) |
+| IB-SPA-066 | CREATIVE_VIABLE | CREATIVE_REVIEW_REQUIRED: the research record declares no visual mechanism (topic.visualMechanism) | planet-orbit (PROPOSED_NOT_DECLARED) |
+| IB-SPA-076 | CREATIVE_VIABLE | CREATIVE_REVIEW_REQUIRED: the research record declares no visual mechanism (topic.visualMechanism) | planet-orbit (PROPOSED_NOT_DECLARED) |
 
 ## Failure Reconstructed
 
