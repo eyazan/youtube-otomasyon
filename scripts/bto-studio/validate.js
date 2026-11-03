@@ -83,7 +83,8 @@ function validateStoryboard(sb, { script, timeline, style, pilot = false, policy
       if (!COMPONENTS.has(L.component)) errors.push(`${s.id}: unknown component ${L.component} (known: ${[...COMPONENTS].join(", ")})`);
       if (CONCEPTUAL.has(L.component) && !(L.props || {}).context && !(s.conceptual && (s.chips || []).includes("conceptualLabel"))) errors.push(`${s.id}: ${L.component} is a conceptual depiction; mark the scene conceptual and show the conceptualLabel chip`);
       for (const tx of screenTexts(L)) {
-        for (const d of digits(tx.text)) if (!new RegExp(`(^|\\D)${d}(\\D|$)`).test(citedText)) errors.push(`${s.id}: on-screen number "${d}" (${tx.kind}: "${tx.text}") is not in the facts this scene cites (${s.evidence.join(", ")})`);
+        // a credit line is attribution (source title, revision id), not a claim: its digits are not facts to evidence
+        if (tx.kind !== "credit") for (const d of digits(tx.text)) if (!new RegExp(`(^|\\D)${d}(\\D|$)`).test(citedText)) errors.push(`${s.id}: on-screen number "${d}" (${tx.kind}: "${tx.text}") is not in the facts this scene cites (${s.evidence.join(", ")})`);
         if (tx.kind === "quote") { const f = facts.get(tx.quoteOf); const body = tx.text.replace(/…/g, " ").replace(/\s+/g, " ").trim();
           if (!f) errors.push(`${s.id}: quote-card needs quoteOf naming a cited fact`); else if (!s.evidence.includes(tx.quoteOf)) errors.push(`${s.id}: quote-card quotes ${tx.quoteOf}, which the scene does not cite`);
           else if (!norm(f.quote).includes(norm(body))) errors.push(`${s.id}: quote-card text is not verbatim from ${tx.quoteOf}: "${body}"`); }
