@@ -1,6 +1,6 @@
 {
   "schema": "feedback-loop-health/1",
-  "generatedAt": "2026-11-03T18:27:02.049Z",
+  "generatedAt": "2026-11-03T23:58:31.347Z",
   "verdict": "CLOSED_LOOP_WORKING",
   "channels": [
     {
@@ -8,11 +8,11 @@
       "verdict": "CLOSED_LOOP_WORKING",
       "mode": "adaptive",
       "publishedVideos": 39,
-      "performanceRows": 38,
-      "diagnosisRows": 197,
+      "performanceRows": 39,
+      "diagnosisRows": 198,
       "learning": {
-        "updatedAt": "2026-11-03T18:26:52.354Z",
-        "sampleSize": 37,
+        "updatedAt": "2026-11-03T23:58:26.673Z",
+        "sampleSize": 38,
         "status": "adaptive",
         "observations": 35,
         "hypotheses": 18,
@@ -21,23 +21,23 @@
       },
       "metricCoverage": {
         "views": {
-          "available": 37,
-          "total": 37,
+          "available": 38,
+          "total": 38,
           "ratio": 1
         },
         "retention": {
           "available": 30,
-          "total": 37,
-          "ratio": 0.811
+          "total": 38,
+          "ratio": 0.789
         },
         "subscribersPer1000": {
           "available": 30,
-          "total": 37,
-          "ratio": 0.811
+          "total": 38,
+          "ratio": 0.789
         },
         "engagement": {
-          "available": 37,
-          "total": 37,
+          "available": 38,
+          "total": 38,
           "ratio": 1
         }
       },
@@ -160,9 +160,9 @@
       "mode": "adaptive",
       "publishedVideos": 20,
       "performanceRows": 19,
-      "diagnosisRows": 114,
+      "diagnosisRows": 115,
       "learning": {
-        "updatedAt": "2026-11-03T18:26:55.523Z",
+        "updatedAt": "2026-11-03T23:58:27.878Z",
         "sampleSize": 18,
         "status": "adaptive",
         "observations": 30,
@@ -231,34 +231,6 @@
         "note": "Historical late collections are retained for audit, but performance math uses their real collection age.",
         "examples": [
           {
-            "videoId": "N0k8S0IMwlU",
-            "label": "1h",
-            "scheduledHours": 1,
-            "collectedAgeHours": 20.32,
-            "driftHours": 19.32
-          },
-          {
-            "videoId": "5yPoQCElJuk",
-            "label": "12h",
-            "scheduledHours": 12,
-            "collectedAgeHours": 17.69,
-            "driftHours": 5.69
-          },
-          {
-            "videoId": "5yPoQCElJuk",
-            "label": "6h",
-            "scheduledHours": 6,
-            "collectedAgeHours": 17.86,
-            "driftHours": 11.86
-          },
-          {
-            "videoId": "x5VVXKhOhMQ",
-            "label": "12h",
-            "scheduledHours": 12,
-            "collectedAgeHours": 17.4,
-            "driftHours": 5.4
-          },
-          {
             "videoId": "x5VVXKhOhMQ",
             "label": "6h",
             "scheduledHours": 6,
@@ -299,6 +271,34 @@
             "scheduledHours": 336,
             "collectedAgeHours": 348.9,
             "driftHours": 12.9
+          },
+          {
+            "videoId": "Vuvx5nEqcaY",
+            "label": "12h",
+            "scheduledHours": 12,
+            "collectedAgeHours": 18.29,
+            "driftHours": 6.29
+          },
+          {
+            "videoId": "Vuvx5nEqcaY",
+            "label": "6h",
+            "scheduledHours": 6,
+            "collectedAgeHours": 18.33,
+            "driftHours": 12.33
+          },
+          {
+            "videoId": "Vuvx5nEqcaY",
+            "label": "1h",
+            "scheduledHours": 1,
+            "collectedAgeHours": 18.84,
+            "driftHours": 17.84
+          },
+          {
+            "videoId": "Vuvx5nEqcaY",
+            "label": "14d",
+            "scheduledHours": 336,
+            "collectedAgeHours": 352.66,
+            "driftHours": 16.66
           }
         ]
       },
@@ -313,7 +313,7 @@
       "performanceRows": 7,
       "diagnosisRows": 27,
       "learning": {
-        "updatedAt": "2026-11-03T18:26:59.359Z",
+        "updatedAt": "2026-11-03T23:58:29.089Z",
         "sampleSize": 6,
         "status": "observing",
         "observations": 25,
