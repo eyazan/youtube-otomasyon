@@ -212,7 +212,10 @@ function build(script, style, topic) {
     // the real globe (Natural Earth coastlines); a line about the air shows the atmosphere as a visible, labelled shell
     // that stays while the particles arrive (IB-EAR-019 Creative Director: "takes far longer" showed no atmosphere)
     if (W === "magnetic") return [{ component: "globe", props: { x: 540, y: 820, r: 210, viewLat: 20, lon0: 20, spin: 7, ...(airOf(at) ? { atmosphere: { scale: 1.1, opacity: 0.85, label: "ATMOSPHERE", labelAt: off(at, 0.3) } } : {}) } },
-      { component: "magnetosphere", props: { cx: 540, cy: 820, r: 210, ...(field ? { strengthKeys: [[at, field.from], [off(at, 1.6), Math.min(field.from, field.to)]] } : {}), ...(field && field.wind ? { wind: { at, side: "left" } } : {}) } }];
+      { component: "magnetosphere", props: { cx: 540, cy: 820, r: 210, ...(field ? { strengthKeys: [[at, field.from], [off(at, 1.6), Math.min(field.from, field.to)]] } : {}), ...(field && field.wind ? { wind: { at, side: "left" } } : {}) } },
+      // the technology the line names is drawn and struck by the arriving particles (IB-EAR-019 review: no satellite shown)
+      ...(techOf(at) && field && field.wind ? [{ component: "tech-hits", props: { cx: 540, cy: 820, r: 210, hitAt: off(at, 0.6), satellites: techOf(at).sat, grid: techOf(at).grid,
+        labels: { ...(techOf(at).satText ? { satellites: techOf(at).satText } : {}), ...(techOf(at).gridText ? { grid: techOf(at).gridText } : {}) } } }] : [])];
     // current: a slow globe with a warm stream running north and a cold return; "weaken/shut down" slows the dashes
     if (W === "current") return [{ component: "planet", props: { kind: "earth", x: 540, y: 820, r: 360, spin: 0.04, seed: 8, ice: false } },
       { component: "flow-arrows", props: { streams: [
@@ -240,6 +243,11 @@ function build(script, style, topic) {
   // whether charged particles arrive (magnetic). null = the world as it is.
   const COMPOSITE = new Set(["magnetic", "current", "micro", "body", "rotation"]);
   const lineAt = (at) => lines.find((x) => x.id === String(at).split(/[+-]/)[0]);
+  // satellites / power grids / technology named by the line (magnetic world): which to draw and the line's own words as labels
+  const techOf = (at) => { const L = lineAt(at); if (W !== "magnetic" || !L) return null; const t = L.text; const any = /\b(technology|electronics|infrastructure)\b/i.test(t);
+    const sat = /\bsatellites?\b/i.test(t), grid = /\b(power ?grids?|grids?|power lines?)\b/i.test(t); if (!sat && !grid && !any) return null;
+    const m = (re) => { const x = t.match(re); return x ? x[0].toUpperCase() : null; };
+    return { sat: sat || any, grid: grid || any, satText: m(/\bsatellites?\b/i), gridText: m(/\bpower ?grids?\b/i) }; };
   const airOf = (at) => { const L = lineAt(at); return W === "magnetic" && !!L && /\b(air|atmosphere|atmospheric)\b/i.test(L.text); };
   const fieldFor = (L) => {
     if (!COMPOSITE.has(W) || W === "body") return null; const t = L.text;
@@ -264,7 +272,7 @@ function build(script, style, topic) {
   const C_FRAMES = [{ x: 540, y: 820, k: 1 }, { x: 560, y: 1080, k: 1.55 }, { x: 400, y: 760, k: 0.8 }];
   const reframe = (layers, f) => layers.map((l) => { const P = { ...l.props }; const X = (x) => +(f.x + (x - 540) * f.k).toFixed(1), Y = (y) => +(f.y + (y - 820) * f.k).toFixed(1);
     if (l.component === "planet" || l.component === "globe") Object.assign(P, { x: X(P.x), y: Y(P.y), r: +(P.r * f.k).toFixed(1) });
-    if (l.component === "magnetosphere") Object.assign(P, { cx: X(P.cx), cy: Y(P.cy), r: +(P.r * f.k).toFixed(1) });
+    if (l.component === "magnetosphere" || l.component === "tech-hits") Object.assign(P, { cx: X(P.cx), cy: Y(P.cy), r: +(P.r * f.k).toFixed(1) });
     if (l.component === "flow-arrows") P.streams = P.streams.map((st) => ({ ...st, width: Math.round((st.width || 14) * Math.sqrt(f.k)), pts: st.pts.map(([x, y]) => [X(x), Y(y)]) }));
     if (l.component === "microbes") Object.assign(P, { cx: X(P.cx), cy: Y(P.cy), spread: Math.round(P.spread * f.k) });
     if (l.component === "figure") Object.assign(P, { pathKeys: P.pathKeys.map(([t, x, y, sc]) => [t, X(x), Y(y), sc]), height: Math.round(P.height * f.k), facing: f.k < 1 ? -1 : 1 });
@@ -371,7 +379,10 @@ function build(script, style, topic) {
       purpose = `Hook: frame 0 shows the ${W.replace("-", " ")} itself${n ? ` and the claim's number (${valueLabel(n)}) lands as a readout` : ""}, so the scale of the question is visible before it is explained.`;
       camera = cam(1.12, 1.0);
     } else if (last) {
-      kind = "payoff"; layers = [stars(11), ...signature(`${L.id}+0.2`, { probe: W === "earth-interior", ...(W === "rotation" && /\bpoles?\b|\bpolar\b/i.test(L.text) ? { lat: 60, polar: true } : {}) }), headline(`${L.id}+0.3`, keyPhrase(L.text, 4), 420, S.title)];
+      // a payoff about what still suffers with the field off (technology) keeps the field off and shows it (IB-EAR-019:
+      // the payoff redrew the full field under "our technology would feel it first")
+      const keepOff = W === "magnetic" && removed && techOf(`${L.id}+0.2`);
+      kind = "payoff"; layers = [stars(11), ...signature(`${L.id}+0.2`, { ...(keepOff ? { field: { from: removed.to, to: removed.to, wind: true } } : {}), probe: W === "earth-interior", ...(W === "rotation" && /\bpoles?\b|\bpolar\b/i.test(L.text) ? { lat: 60, polar: true } : {}) }), headline(`${L.id}+0.3`, keyPhrase(L.text, 4), 420, S.title)];
       purpose = "Payoff: the answer in a few words over the opening composition; the camera eases back to the frame-0 framing so the Short loops on its first image.";
       camera = [{ at: start, x: 540, y: 800, z: 1.06 }, { at: "end-0.6", x: 540, y: 800, z: 1.12 }];
     } else if (W === "earth-interior" && !cutUsed && (temp || (qty && qty.unit === "K")) && /\bcore\b/i.test(L.text.slice(0, Math.max(0, L.text.search(/\d/))))) {

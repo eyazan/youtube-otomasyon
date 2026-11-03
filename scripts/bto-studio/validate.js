@@ -52,6 +52,7 @@ function screenTexts(layer) {
   if (layer.component === "storm-track") { [p.routeLabel, p.stormLabel, (p.stale || {}).label, (p.detour || {}).label].filter(Boolean).forEach((x) => out.push({ text: x, kind: "label", size: 40 })); }
   if (layer.component === "hull-section") { if (p.label) out.push({ text: p.label.text, kind: "label", size: 40 }); if (p.listLabel) out.push({ text: p.listLabel, kind: "label", size: 40 }); }
   if (layer.component === "propulsion") { if (p.label) out.push({ text: p.label, kind: "label", size: 44 }); if (p.stateLabel) out.push({ text: p.stateLabel.text, kind: "label", size: 40 }); }
+  if (layer.component === "tech-hits") Object.values(p.labels || {}).forEach((x) => x && out.push({ text: x, kind: "label", size: 40 }));
   // aperture-vs-wavelength kit (page/components/waves.js)
   if (["oven-door", "faraday-box"].includes(layer.component) && p.label) out.push({ text: p.label.text, kind: "label", size: 40 });
   if (layer.component === "wave-aperture") Object.values(p.labels || {}).forEach((l) => l && l.text && out.push({ text: l.text, kind: "label", size: 40 }));
