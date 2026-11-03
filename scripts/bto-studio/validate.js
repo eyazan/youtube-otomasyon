@@ -18,7 +18,7 @@ const { validate: schemaValidate } = require("../fr-premium/engine/jsonschema");
 const SCHEMA = JSON.parse(fs.readFileSync(path.join(__dirname, "schemas/storyboard.schema.json"), "utf8"));
 const COMPONENT_SRC = ["page/motion.js", ...fs.readdirSync(path.join(__dirname, "page/components")).map((f) => "page/components/" + f)].map((f) => fs.readFileSync(path.join(__dirname, f), "utf8")).join("\n");
 const COMPONENTS = new Set([...COMPONENT_SRC.matchAll(/BTO\.def\("([a-z0-9-]+)"/g)].map((m) => m[1]));
-const CONCEPTUAL = new Set(["print-surface", "search-window", "ground-frame", "heavy-seas", "storm-track", "hull-section", "propulsion"]);
+const CONCEPTUAL = new Set(["print-surface", "search-window", "ground-frame", "heavy-seas", "storm-track", "hull-section", "propulsion", "oven-door", "faraday-box", "wave-aperture"]);
 const norm = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, "");
 const digits = (s) => (String(s).match(/\d+/g) || []);
 
@@ -52,6 +52,9 @@ function screenTexts(layer) {
   if (layer.component === "storm-track") { [p.routeLabel, p.stormLabel, (p.stale || {}).label, (p.detour || {}).label].filter(Boolean).forEach((x) => out.push({ text: x, kind: "label", size: 40 })); }
   if (layer.component === "hull-section") { if (p.label) out.push({ text: p.label.text, kind: "label", size: 40 }); if (p.listLabel) out.push({ text: p.listLabel, kind: "label", size: 40 }); }
   if (layer.component === "propulsion") { if (p.label) out.push({ text: p.label, kind: "label", size: 44 }); if (p.stateLabel) out.push({ text: p.stateLabel.text, kind: "label", size: 40 }); }
+  // aperture-vs-wavelength kit (page/components/waves.js)
+  if (["oven-door", "faraday-box"].includes(layer.component) && p.label) out.push({ text: p.label.text, kind: "label", size: 40 });
+  if (layer.component === "wave-aperture") Object.values(p.labels || {}).forEach((l) => l && l.text && out.push({ text: l.text, kind: "label", size: 40 }));
   if (layer.component === "failure-chain") (p.steps || []).forEach((st) => out.push({ text: st, kind: "label", size: 44 }));
   if (layer.component === "run-length-strip") { if (p.labelsAt != null) out.push({ text: (p.labels || p.runs || []).join(":"), kind: "ratio" }); if (p.caption) out.push({ text: p.caption, kind: "label" }); }
   return out;
