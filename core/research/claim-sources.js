@@ -54,4 +54,22 @@ function describable(channel, topic) {
 
 function factsHash(topic) { return require("crypto").createHash("sha256").update(JSON.stringify((topic.facts || []).map((f) => [f.claim, f.url]))).digest("hex").slice(0, 16); }
 
-module.exports = { isGenericPage, check, describable, load, file, factsHash, GENERIC_PAGES };
+// Publication holds (automatic publication only; renders for review are not held). A ledger verifies numbers; a narration
+// line without one (status HUMAN) and the finished video's creative quality are a person's call. Both are recorded in
+// research/reviews/<id>.json and bound to the facts they were made for:
+//   { "topicId": "IB-EAR-001", "factsHash": "<claim-sources factsHash>",
+//     "narration": { "reviewedBy": "<name>", "at": "<iso>" },
+//     "creative": { "verdict": "PASS", "by": "<name>", "at": "<iso>", "render": "<run id or MP4 sha256>" } }
+const reviewFile = (channel, topicId) => path.join(channel.paths.base, "research", "reviews", `${topicId}.json`);
+function publicationHolds(channel, topic) {
+  if (channel.slug !== "impossible-brief") return [];
+  const why = []; const ledger = load(channel, topic.id) || {}; let rv = null;
+  try { rv = JSON.parse(fs.readFileSync(reviewFile(channel, topic.id), "utf8")); } catch (error) { rv = null; }
+  const current = rv && rv.factsHash === factsHash(topic);
+  const human = (ledger.narration || []).filter((l) => l.status === "HUMAN").length;
+  if (human && !(current && rv.narration && rv.narration.reviewedBy)) why.push(`CLAIM_REVIEW_REQUIRED: ${human} narration line(s) without a number need a person's review (research/reviews/${topic.id}.json)`);
+  if (!(current && rv.creative && rv.creative.verdict === "PASS" && rv.creative.by)) why.push(`CREATIVE_PASS_REQUIRED: no Creative Director PASS by a named reviewer for the current research (research/reviews/${topic.id}.json)`);
+  return why;
+}
+
+module.exports = { isGenericPage, check, describable, load, file, factsHash, GENERIC_PAGES, publicationHolds, reviewFile };

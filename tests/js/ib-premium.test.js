@@ -256,3 +256,21 @@ test("no tracked file under channels/impossible-brief/premium/<id>/: a shadow ru
   const probe = "channels/impossible-brief/premium/IB-NEW-001/out/review-package.json";
   assert.equal(require("child_process").spawnSync("git", ["check-ignore", "-q", probe], { cwd: path.join(__dirname, "../..") }).status, 0, "new shadow output is ignored");
 });
+
+test("IB automatic publication waits for a person's claim review and a named Creative Director PASS bound to the facts", () => {
+  const CS = require("../../core/research/claim-sources");
+  const ear = Adapter.loadTopic("impossible-brief", "IB-EAR-001"); const f = CS.reviewFile(ear.channel, "IB-EAR-001");
+  const fs = require("fs"); const had = fs.existsSync(f) ? fs.readFileSync(f) : null;
+  try {
+    if (had) fs.unlinkSync(f);
+    assert.deepEqual(CS.publicationHolds(ear.channel, ear.topic).map((w) => w.split(":")[0]), ["CLAIM_REVIEW_REQUIRED", "CREATIVE_PASS_REQUIRED"]);
+    fs.mkdirSync(require("path").dirname(f), { recursive: true });
+    const rec = { topicId: "IB-EAR-001", factsHash: CS.factsHash(ear.topic), narration: { reviewedBy: "owner", at: "2026-10-30" }, creative: { verdict: "PASS", by: "owner", at: "2026-10-30" } };
+    fs.writeFileSync(f, JSON.stringify(rec)); assert.deepEqual(CS.publicationHolds(ear.channel, ear.topic), []);
+    // a review made for other facts does not carry over; an automated or unnamed verdict is not a PASS
+    fs.writeFileSync(f, JSON.stringify({ ...rec, factsHash: "0000000000000000" })); assert.equal(CS.publicationHolds(ear.channel, ear.topic).length, 2);
+    fs.writeFileSync(f, JSON.stringify({ ...rec, creative: { verdict: "PASS" } })); assert.deepEqual(CS.publicationHolds(ear.channel, ear.topic).map((w) => w.split(":")[0]), ["CREATIVE_PASS_REQUIRED"]);
+    // other channels are not held by this rule
+    assert.deepEqual(CS.publicationHolds({ slug: "failure-reconstructed" }, ear.topic), []);
+  } finally { fs.rmSync(f, { force: true }); if (had) fs.writeFileSync(f, had); }
+});
