@@ -1,18 +1,18 @@
 {
-  "generatedAt": "2026-10-29T21:16:54.199Z",
+  "generatedAt": "2026-11-03T16:21:57.794Z",
   "note": "Per-channel baselines are computed separately and never blended.",
   "channels": [
     {
       "channel": "failure-reconstructed",
       "name": "Failure Reconstructed",
       "shorts": {
-        "lastPublished": "2026-10-29T18:00:00.000Z",
-        "published": 34,
+        "lastPublished": "2026-11-03T18:00:00.000Z",
+        "published": 39,
         "inventory": {
-          "A": 96,
-          "B": 139,
-          "C": 60,
-          "D": 59
+          "A": 65,
+          "B": 150,
+          "C": 58,
+          "D": 76
         },
         "durableInventory": {
           "total": 501,
@@ -22,44 +22,31 @@
           "used": 10
         },
         "nextSelection": {
-          "slug": "teton-dam-1976",
-          "reason": "EXPLOIT (0.75): best A topic by SelectionScore"
+          "slug": "ocean-ranger-1982",
+          "reason": "EXPLORE (0.25): under-sampled cluster industrial-disasters"
         },
         "baseline": {
-          "n": 33,
-          "views": 435,
-          "averagePercentageViewed": 64.65,
+          "n": 37,
+          "views": 446,
+          "averagePercentageViewed": 64.67,
           "subscribersPer1000Views": 0,
           "engagementPer1000Views": 24.24,
-          "watchHoursPer1000Views": 2
+          "watchHoursPer1000Views": 2.02
         }
       },
       "longform": {
         "lane": {
-          "cycleId": "2026-W44",
+          "cycleId": "2026-W45",
           "due": false,
-          "reason": "cycle 2026-W44 already QUALITY_BLOCKED",
+          "reason": "cycle 2026-W45 already QUALITY_BLOCKED",
           "lastPublished": null
         },
         "lastCycle": {
-          "cycleId": "2026-W44",
+          "cycleId": "2026-W45",
           "channel": "failure-reconstructed",
-          "startedAt": "2026-10-26T12:42:17.460Z",
+          "startedAt": "2026-11-02T07:10:06.289Z",
           "status": "QUALITY_BLOCKED",
           "evaluated": [
-            {
-              "slug": "air-france-447-2009",
-              "mode": "B_SHORT_PROVES_DEMAND",
-              "LongFormPotentialScore": 86,
-              "bucket": "A",
-              "decision": "BLOCK",
-              "score": 83,
-              "hardFails": [
-                "INSUFFICIENT_DEPTH: evidence supports ~1.9 min; target 8–12 min — not padded",
-                "LLM generation failed safely (REQUEST_TOO_LARGE); deterministic evidence draft retained"
-              ],
-              "generationStatus": "FAILED"
-            },
             {
               "slug": "challenger-1986",
               "mode": "B_SHORT_PROVES_DEMAND",
@@ -85,11 +72,24 @@
                 "LLM generation failed safely (REQUEST_TOO_LARGE); deterministic evidence draft retained"
               ],
               "generationStatus": "FAILED"
+            },
+            {
+              "slug": "air-france-447-2009",
+              "mode": "B_SHORT_PROVES_DEMAND",
+              "LongFormPotentialScore": 85,
+              "bucket": "A",
+              "decision": "BLOCK",
+              "score": 83,
+              "hardFails": [
+                "INSUFFICIENT_DEPTH: evidence supports ~1.9 min; target 8–12 min — not padded",
+                "LLM generation failed safely (REQUEST_TOO_LARGE); deterministic evidence draft retained"
+              ],
+              "generationStatus": "FAILED"
             }
           ],
           "selected": null,
           "reason": "no candidate passed the long-form quality gate; cadence does not override quality",
-          "finishedAt": "2026-10-26T12:42:18.733Z"
+          "finishedAt": "2026-11-02T07:10:07.176Z"
         },
         "episodes": 0,
         "backlog": [
@@ -150,7 +150,7 @@
         "pendingRelatedVideoManualActions": 0
       },
       "growth": {
-        "trackedVideos": 34,
+        "trackedVideos": 38,
         "subscriberConversion": {
           "shorts": 0,
           "longform": null
@@ -159,9 +159,9 @@
       "learning": {
         "shorts": {
           "status": "adaptive",
-          "sampleSize": 33,
+          "sampleSize": 37,
           "adopted": 0,
-          "hypotheses": 13
+          "hypotheses": 17
         },
         "longform": {
           "status": "heuristics-only",
@@ -174,12 +174,12 @@
         {
           "slug": "apollo-1-1967",
           "bucket": "C",
-          "reason": "VideoPotential 87 in experimental band 58–71; sources 41 < 62"
+          "reason": "VideoPotential 86 in experimental band 58–71; sources 41 < 62"
         },
         {
           "slug": "munich-1958",
           "bucket": "C",
-          "reason": "VideoPotential 86 in experimental band 58–71; sources 41 < 62"
+          "reason": "VideoPotential 85 in experimental band 58–71; sources 41 < 62"
         },
         {
           "slug": "skylab-1973",
@@ -187,14 +187,14 @@
           "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
         },
         {
-          "slug": "new-london-school-1937",
+          "slug": "eastland-1915",
           "bucket": "C",
           "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
         },
         {
           "slug": "vanguard-1957",
           "bucket": "C",
-          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
+          "reason": "VideoPotential 82 in experimental band 58–71; sources 41 < 62"
         },
         {
           "slug": "castle-bravo-1954",
@@ -202,24 +202,24 @@
           "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
         },
         {
-          "slug": "quebec-bridge-1907",
-          "bucket": "C",
-          "reason": "VideoPotential 84 in experimental band 58–71; sources 55 < 62"
-        },
-        {
           "slug": "controlled-impact-1984",
           "bucket": "C",
           "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
         },
         {
-          "slug": "eastland-1915",
+          "slug": "new-london-school-1937",
           "bucket": "C",
           "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
         },
         {
-          "slug": "b2-guam-2008",
+          "slug": "uss-forrestal-1967",
           "bucket": "C",
           "reason": "VideoPotential 82 in experimental band 58–71; sources 41 < 62"
+        },
+        {
+          "slug": "boston-molasses-1919",
+          "bucket": "C",
+          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
         }
       ],
       "alerts": [
@@ -418,8 +418,8 @@
         "lastPublished": "2026-10-29T18:00:00.000Z",
         "published": 20,
         "inventory": {
-          "A": 106,
-          "B": 27,
+          "A": 109,
+          "B": 24,
           "C": 140,
           "D": 206
         },
@@ -436,29 +436,29 @@
         },
         "baseline": {
           "n": 18,
-          "views": 920,
+          "views": 922,
           "averagePercentageViewed": 61.79,
           "subscribersPer1000Views": 0,
-          "engagementPer1000Views": 19.42,
+          "engagementPer1000Views": 20,
           "watchHoursPer1000Views": 2.52
         }
       },
       "longform": {
         "lane": {
-          "cycleId": "2026-W44",
+          "cycleId": "2026-W45",
           "due": false,
-          "reason": "cycle 2026-W44 already QUALITY_BLOCKED",
+          "reason": "cycle 2026-W45 already QUALITY_BLOCKED",
           "lastPublished": null
         },
         "lastCycle": {
-          "cycleId": "2026-W44",
+          "cycleId": "2026-W45",
           "channel": "impossible-brief",
-          "startedAt": "2026-10-26T12:42:18.789Z",
+          "startedAt": "2026-11-02T07:10:07.238Z",
           "status": "QUALITY_BLOCKED",
           "evaluated": [
             {
               "slug": "what-if-we-mined-a-metal-asteroid",
-              "mode": "A_LONG_FIRST",
+              "mode": "B_SHORT_PROVES_DEMAND",
               "LongFormPotentialScore": 83,
               "bucket": "A",
               "decision": "BLOCK",
@@ -470,35 +470,35 @@
               "generationStatus": "FAILED"
             },
             {
-              "slug": "what-if-synthetic-fertilizer-disappeared",
+              "slug": "what-if-the-tunguska-blast-happened-over-a-city",
               "mode": "A_LONG_FIRST",
-              "LongFormPotentialScore": 83,
+              "LongFormPotentialScore": 82,
               "bucket": "A",
               "decision": "BLOCK",
-              "score": 86,
+              "score": 88,
               "hardFails": [
-                "INSUFFICIENT_DEPTH: evidence supports ~1.8 min; target 8–12 min — not padded",
+                "INSUFFICIENT_DEPTH: evidence supports ~2 min; target 8–12 min — not padded",
                 "LLM generation failed safely (REQUEST_TOO_LARGE); deterministic evidence draft retained"
               ],
               "generationStatus": "FAILED"
             },
             {
-              "slug": "what-if-gps-went-dark-for-a-day",
+              "slug": "could-earth-survive-one-day-without-earth-s-magnetic-field",
               "mode": "A_LONG_FIRST",
-              "LongFormPotentialScore": 83,
+              "LongFormPotentialScore": 82,
               "bucket": "A",
               "decision": "BLOCK",
-              "score": 86,
+              "score": 81,
               "hardFails": [
-                "INSUFFICIENT_DEPTH: evidence supports ~1.7 min; target 8–12 min — not padded",
-                "LLM generation failed safely (REQUEST_TOO_LARGE); deterministic evidence draft retained"
+                "unsupported central claim/number: 24",
+                "INSUFFICIENT_DEPTH: evidence supports ~1.6 min; target 8–12 min — not padded"
               ],
-              "generationStatus": "FAILED"
+              "generationStatus": "QUALITY_REVIEW"
             }
           ],
           "selected": null,
           "reason": "no candidate passed the long-form quality gate; cadence does not override quality",
-          "finishedAt": "2026-10-26T12:42:19.989Z"
+          "finishedAt": "2026-11-02T07:10:18.180Z"
         },
         "episodes": 0,
         "backlog": [
@@ -507,12 +507,6 @@
             "LongFormPotentialScore": 83,
             "bucket": "A",
             "mode": "B_SHORT_PROVES_DEMAND"
-          },
-          {
-            "slug": "what-if-the-ozone-hole-never-closed",
-            "LongFormPotentialScore": 82,
-            "bucket": "A",
-            "mode": "A_LONG_FIRST"
           },
           {
             "slug": "what-if-the-tunguska-blast-happened-over-a-city",
@@ -528,6 +522,12 @@
           },
           {
             "slug": "what-if-the-permafrost-thawed",
+            "LongFormPotentialScore": 82,
+            "bucket": "A",
+            "mode": "A_LONG_FIRST"
+          },
+          {
+            "slug": "what-if-water-refused-to-freeze",
             "LongFormPotentialScore": 82,
             "bucket": "A",
             "mode": "A_LONG_FIRST"
@@ -570,7 +570,7 @@
           "status": "adaptive",
           "sampleSize": 18,
           "adopted": 0,
-          "hypotheses": 7
+          "hypotheses": 3
         },
         "longform": {
           "status": "heuristics-only",
@@ -591,14 +591,24 @@
           "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
         },
         {
-          "slug": "what-if-human-muscle-efficiency-doubled-overnight",
+          "slug": "if-a-rogue-planet-vanished-right-now-what-would-change-first",
           "bucket": "C",
-          "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
+          "reason": "VideoPotential 72 in experimental band 58–71; boilerplate 0.5"
         },
         {
-          "slug": "what-happens-if-the-global-ocean-doubles",
+          "slug": "what-if-human-muscle-efficiency-doubled-overnight",
           "bucket": "C",
-          "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
+          "reason": "VideoPotential 70 in experimental band 58–71; boilerplate 0.5"
+        },
+        {
+          "slug": "what-breaks-first-if-a-rogue-planet-suddenly-doubles-in-mass",
+          "bucket": "C",
+          "reason": "VideoPotential 72 in experimental band 58–71; boilerplate 0.5"
+        },
+        {
+          "slug": "if-a-rogue-planet-moved-twice-as-close-when-would-earth-notice",
+          "bucket": "C",
+          "reason": "VideoPotential 72 in experimental band 58–71; boilerplate 0.5"
         },
         {
           "slug": "what-if-the-brain-s-energy-use-doubled-overnight",
@@ -611,24 +621,14 @@
           "reason": "VideoPotential 68 in experimental band 58–71; boilerplate 0.5"
         },
         {
-          "slug": "if-a-rogue-planet-vanished-right-now-what-would-change-first",
+          "slug": "what-happens-if-the-global-ocean-doubles",
           "bucket": "C",
-          "reason": "VideoPotential 72 in experimental band 58–71; boilerplate 0.5"
+          "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
         },
         {
           "slug": "would-doubling-all-synthetic-fertilizers-help-or-harm-us",
           "bucket": "C",
           "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
-        },
-        {
-          "slug": "what-breaks-first-if-a-rogue-planet-suddenly-doubles-in-mass",
-          "bucket": "C",
-          "reason": "VideoPotential 72 in experimental band 58–71; boilerplate 0.5"
-        },
-        {
-          "slug": "if-a-rogue-planet-moved-twice-as-close-when-would-earth-notice",
-          "bucket": "C",
-          "reason": "VideoPotential 72 in experimental band 58–71; boilerplate 0.5"
         }
       ],
       "alerts": [

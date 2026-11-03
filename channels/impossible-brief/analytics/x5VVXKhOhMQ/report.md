@@ -9,8 +9,9 @@ https://youtu.be/x5VVXKhOhMQ
 | 1d | 2026-10-20 | 623 | 14 | 1 | — | — |  |
 | 3d | 2026-10-22 | 759 | 17 | 3 | 48.83 | 1 | Shorts feed 95%, Search 5% |
 | 7d | 2026-10-26 | 778 | 17 | 3 | 49.95 | 1 | Shorts feed 87%, Search 12% |
+| 14d | 2026-11-02 | 781 | 17 | 3 | 49.98 | 1 | Shorts feed 87%, Search 12% |
 
-## Diagnosis at 7d
+## Diagnosis at 14d
 
 - **HEALTHY** (low) — No problem pattern detected with available data.
 
@@ -25,4 +26,4 @@ https://youtu.be/x5VVXKhOhMQ
 - Visual type: AI-GENERATED VISUAL
 - This is an observed alignment, not proof that the sentence or visual caused the drop.
 
-Views gained between 3d and 7d: 19.
+Views gained between 7d and 14d: 3.
