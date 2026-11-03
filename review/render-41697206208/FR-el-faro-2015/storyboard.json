@@ -1,0 +1,604 @@
+{
+ "schema": "bto-studio.storyboard.v1",
+ "channel": "failure-reconstructed",
+ "topicId": "FR-el-faro-2015",
+ "slug": "el-faro-2015",
+ "version": 1,
+ "author": "auto/failure-reconstructed (deterministic forensic grammar, object class ship; needs creative review before publication)",
+ "licensingNote": "all visuals drawn in-house from code (SVG): generic object-class line drawings, failure chain and stamps; no photographs, footage or third-party media",
+ "treatment": {
+  "educationalObjective": "Reconstruct, from the case file: The Cargo Ship That Sailed Into a Hurricane",
+  "visualHook": "Frame 0: a ship drawn as line work gives way at its failure point within the first second.",
+  "mechanismsToAnimate": [
+   "hook",
+   "toll",
+   "storm",
+   "forecast",
+   "flooding",
+   "propulsion",
+   "sinking",
+   "payoff"
+  ],
+  "factualRisks": [
+   "the ship is a generic class drawing, not the actual vehicle or structure (RECONSTRUCTION chip)",
+   "the failure point on the drawing is illustrative",
+   "case-file facts carry researched claims without stored verbatim quotes (FR live standard)"
+  ]
+ },
+ "tail": 0.6,
+ "scenes": [
+  {
+   "id": "s1-hook",
+   "lines": [
+    "L1"
+   ],
+   "start": 0,
+   "env": "blueprint",
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Hook: frame 0 is the ship already in heavy seas with the storm wall on the horizon; a sea breaks over the bow in the first second, before any cause is named.",
+   "camera": [
+    {
+     "at": 0,
+     "x": 560,
+     "y": 900,
+     "z": 1.12
+    },
+    {
+     "at": "L1.end",
+     "x": 520,
+     "y": 880,
+     "z": 1
+    }
+   ],
+   "layers": [
+    {
+     "component": "heavy-seas",
+     "props": {
+      "storm": true,
+      "swell": 85,
+      "hitAt": 0.55,
+      "seed": 5
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L1+0.3",
+        "text": "EL FARO · 2015",
+        "x": 540,
+        "y": 460,
+        "size": 60,
+        "family": "sans"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s2-toll",
+   "lines": [
+    "L2"
+   ],
+   "start": "L2-0.15",
+   "env": "void",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Toll: the surface closes over the ship's outline while the case's count (33 CREW) is stamped; the number is the case file's.",
+   "camera": [
+    {
+     "at": "L2-0.15",
+     "x": 540,
+     "y": 960,
+     "z": 1
+    },
+    {
+     "at": "L2.end",
+     "x": 540,
+     "y": 1000,
+     "z": 1.1
+    }
+   ],
+   "layers": [
+    {
+     "component": "heavy-seas",
+     "props": {
+      "sunk": true,
+      "swell": 28,
+      "seed": 5
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L2+0.25",
+        "text": "33 CREW",
+        "x": 540,
+        "y": 760,
+        "size": 104,
+        "family": "num",
+        "style": "pop"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s3-storm",
+   "lines": [
+    "L3"
+   ],
+   "start": "L3-0.15",
+   "env": "blueprint",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1",
+    "F3"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Route against storm: on a schematic chart the ship's route and the storm's track converge until the ship is inside the danger ring.",
+   "camera": [
+    {
+     "at": "L3-0.15",
+     "x": 540,
+     "y": 900,
+     "z": 1
+    },
+    {
+     "at": "L3.end",
+     "x": 600,
+     "y": 860,
+     "z": 1.12
+    }
+   ],
+   "layers": [
+    {
+     "component": "storm-track",
+     "props": {
+      "route": [
+       [
+        170,
+        1180
+       ],
+       [
+        380,
+        1010
+       ],
+       [
+        600,
+        860
+       ],
+       [
+        860,
+        690
+       ]
+      ],
+      "track": [
+       [
+        960,
+        1200
+       ],
+       [
+        880,
+        1010
+       ],
+       [
+        760,
+        860
+       ],
+       [
+        600,
+        700
+       ]
+      ],
+      "from": "L3+0.1",
+      "to": "L3.end",
+      "progress": [
+       0.12,
+       0.8
+      ]
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L3+0.2",
+        "text": "ROUTE KEPT NEAR THE STORM",
+        "x": 540,
+        "y": 460,
+        "size": 53,
+        "family": "sans",
+        "source": "ROUTE KEPT NEAR THE STORM"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s4-forecast",
+   "lines": [
+    "L4"
+   ],
+   "start": "L4-0.15",
+   "env": "void",
+   "transition": {
+    "type": "square-iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F4",
+    "F3",
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Stale forecast: the storm the crew planned around (the old position, ghosted) and where it really was; the ship's route runs into the real one.",
+   "camera": [
+    {
+     "at": "L4-0.15",
+     "x": 560,
+     "y": 900,
+     "z": 1.02
+    },
+    {
+     "at": "L4.end",
+     "x": 580,
+     "y": 890,
+     "z": 1.1
+    }
+   ],
+   "layers": [
+    {
+     "component": "storm-track",
+     "props": {
+      "route": [
+       [
+        170,
+        1180
+       ],
+       [
+        380,
+        1010
+       ],
+       [
+        600,
+        860
+       ],
+       [
+        860,
+        690
+       ]
+      ],
+      "track": [
+       [
+        960,
+        1200
+       ],
+       [
+        880,
+        1010
+       ],
+       [
+        760,
+        860
+       ],
+       [
+        600,
+        700
+       ]
+      ],
+      "from": "L4-0.15",
+      "to": "L4.end",
+      "progress": [
+       0.62,
+       0.86
+      ],
+      "stale": {
+       "at": "L4+0.5",
+       "lag": 0.32,
+       "label": "OUTDATED WEATHER DATA"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s5-flooding",
+   "lines": [
+    "L5"
+   ],
+   "start": "L5-0.15",
+   "env": "blueprint",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F4",
+    "F3",
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Flooding: a cut through the hull in a level sea; water pours through the opening, the hold on that side fills and the ship heels toward it (inclinometer).",
+   "camera": [
+    {
+     "at": "L5-0.15",
+     "x": 540,
+     "y": 860,
+     "z": 1
+    },
+    {
+     "at": "L5.end",
+     "x": 540,
+     "y": 870,
+     "z": 1.06
+    }
+   ],
+   "layers": [
+    {
+     "component": "hull-section",
+     "props": {
+      "floodAt": "L5:Water",
+      "listTo": 16,
+      "label": {
+       "at": "L5+0.4",
+       "text": "OPEN HATCH"
+      },
+      "listLabel": "LIST"
+     }
+    }
+   ]
+  },
+  {
+   "id": "s6-propulsion",
+   "lines": [
+    "L6"
+   ],
+   "start": "L6-0.15",
+   "env": "void",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F4",
+    "F3",
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Propulsion lost: the stern in cutaway; the oil-pressure needle falls, the engine light dies and the propeller spins down to a stop.",
+   "camera": [
+    {
+     "at": "L6-0.15",
+     "x": 560,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L6.end",
+     "x": 620,
+     "y": 820,
+     "z": 1.1
+    }
+   ],
+   "layers": [
+    {
+     "component": "propulsion",
+     "props": {
+      "stopAt": "L6:lost",
+      "label": "OIL PRESSURE",
+      "stateLabel": {
+       "at": "L6+1.2",
+       "text": "PROPULSION LOST"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s7-sinking",
+   "lines": [
+    "L7"
+   ],
+   "start": "L7-0.15",
+   "env": "teal",
+   "transition": {
+    "type": "square-iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F4",
+    "F3",
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Overwhelmed: without propulsion the ship lies broadside to the sea, rolls, and goes under.",
+   "camera": [
+    {
+     "at": "L7-0.15",
+     "x": 540,
+     "y": 920,
+     "z": 1
+    },
+    {
+     "at": "L7.end",
+     "x": 540,
+     "y": 980,
+     "z": 1.08
+    }
+   ],
+   "layers": [
+    {
+     "component": "heavy-seas",
+     "props": {
+      "storm": true,
+      "swell": 95,
+      "powerlessAt": "L7-0.15",
+      "sinkAt": "L7+0.45",
+      "sinkDur": 1.6,
+      "seed": 5
+     }
+    }
+   ]
+  },
+  {
+   "id": "s8-payoff",
+   "lines": [
+    "L8"
+   ],
+   "start": "L8-0.15",
+   "env": "blueprint",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F6",
+    "F3",
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Payoff: the lesson on the chart: the route is redrawn to keep clear of the storm's track, the change the rules now require.",
+   "camera": [
+    {
+     "at": "L8-0.15",
+     "x": 540,
+     "y": 880,
+     "z": 1
+    },
+    {
+     "at": "end-0.6",
+     "x": 560,
+     "y": 900,
+     "z": 1.12
+    }
+   ],
+   "layers": [
+    {
+     "component": "storm-track",
+     "props": {
+      "route": [
+       [
+        170,
+        1180
+       ],
+       [
+        380,
+        1010
+       ],
+       [
+        600,
+        860
+       ],
+       [
+        860,
+        690
+       ]
+      ],
+      "track": [
+       [
+        960,
+        1200
+       ],
+       [
+        880,
+        1010
+       ],
+       [
+        760,
+        860
+       ],
+       [
+        600,
+        700
+       ]
+      ],
+      "progress": [
+       0.55,
+       0.55
+      ],
+      "detour": {
+       "at": "L8+0.2",
+       "path": [
+        [
+         170,
+         1180
+        ],
+        [
+         260,
+         900
+        ],
+        [
+         380,
+         700
+        ],
+        [
+         560,
+         580
+        ],
+        [
+         860,
+         560
+        ]
+       ]
+      }
+     }
+    }
+   ]
+  }
+ ]
+}

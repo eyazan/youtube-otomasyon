@@ -1,0 +1,17 @@
+# Creative review (../../_temp/review/IB-EAR-019/out/could-earth-survive-one-day-without-earth-s-magnetic-field-premium-final.mp4)
+
+Measurements describe the frames; they are not quality scores. Human fields are filled by a reviewer (creative-notes.json) and are marked with who wrote them.
+
+| scene | technique | transition | motion | novelty | offset | text share | min text | flags | human verdict |
+|---|---|---|---|---|---|---|---|---|---|
+| s1-hook | kinetic-typography | cut | 0.0183 | null | 0.083 | 0.04 | 78 | - | not reviewed |
+| s2-measure | kinetic-typography | scan-wipe | 0.0158 | 0.0858 | 0.073 | 0.04 | 78 | - | not reviewed |
+| s3-count | kinetic-typography | iris | 0.0119 | 0.1477 | 0.089 | 0.061 | 40.2 | - | not reviewed |
+| s4-measure | kinetic-typography | scan-wipe | 0.0167 | 0.1125 | 0.05 | 0.061 | 43.2 | - | not reviewed |
+| s5-mechanism | kinetic-typography | dissolve | 0.0117 | 0.1307 | 0.1 | 0.042 | 60 | - | not reviewed |
+| s6-mechanism | kinetic-typography | iris | 0.024 | 0.0866 | 0.072 | 0.039 | 43.4 | - | not reviewed |
+| s7-mechanism | kinetic-typography | scan-wipe | 0.0422 | 0.1332 | 0.05 | 0.028 | 41.3 | - | not reviewed |
+| s8-payoff |  | iris | 0.0141 | 0.1325 | 0.025 | 0.028 | 45.6 | CENTRED_FLAT | not reviewed |
+
+## Reviewer notes (judgement, not measurement)
+

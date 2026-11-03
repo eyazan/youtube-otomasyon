@@ -1,0 +1,581 @@
+{
+ "schema": "bto-studio.storyboard.v1",
+ "channel": "impossible-brief",
+ "topicId": "IB-EAR-001",
+ "slug": "what-if-earth-stopped-spinning-for-one-second",
+ "version": 1,
+ "author": "auto/impossible-brief (deterministic scene grammar, world rotation; needs creative review before publication)",
+ "licensingNote": "all visuals drawn in-house from code (SVG): starfield, bodies, slices, ladders and orbits are original; no photographs or third-party media",
+ "treatment": {
+  "educationalObjective": "Answer, with the record's own sourced numbers: If Earth stopped spinning for just one second, why would the stop matter more than its length?",
+  "visualHook": "Frame 0: the rotation drawn in light against deep space, with the hook's number landing as the first readout.",
+  "mechanismsToAnimate": [
+   "hook",
+   "inertia",
+   "equator",
+   "forces",
+   "slide",
+   "latitudes",
+   "payoff"
+  ],
+  "factualRisks": [
+   "probe depth on the planet is exaggerated for visibility (ILLUSTRATION)",
+   "auto storyboard: scale drawings are illustrative unless computed from a cited number (ILLUSTRATION chip)",
+   "IB facts carry sourced claims without stored verbatim quotes (channel standard; see readiness warnings)"
+  ]
+ },
+ "visualMechanism": {
+  "id": "planet-rotation",
+  "world": "rotation",
+  "declared": true,
+  "supported": true,
+  "draws": "a planet turning on its own axis (spin rate keyed; it can slow and stop) with the surface's eastward motion",
+  "reason": null
+ },
+ "tail": 0.6,
+ "scenes": [
+  {
+   "id": "s1-hook",
+   "lines": [
+    "L1"
+   ],
+   "start": 0,
+   "env": "space",
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "speculativeLabel"
+   ],
+   "visualPurpose": "Hook: the real globe turning (time-lapse, not to scale) stops dead on 'stops'; at once east-pointing arrows appear on every latitude: the ground halted, everything on it did not.",
+   "camera": [
+    {
+     "at": 0,
+     "x": 540,
+     "y": 800,
+     "z": 1.14
+    },
+    {
+     "at": "L1.end",
+     "x": 540,
+     "y": 800,
+     "z": 1
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 11,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "globe",
+     "props": {
+      "x": 540,
+      "y": 820,
+      "r": 340,
+      "viewLat": 18,
+      "lon0": 20,
+      "spin": 0,
+      "grid": true,
+      "spinKeys": [
+       [
+        0,
+        46
+       ],
+       [
+        "L1:stops",
+        46
+       ],
+       [
+        "L1:stops+0.3",
+        0
+       ]
+      ],
+      "speeds": {
+       "at": "L1:stops+0.35",
+       "lats": [
+        0,
+        30,
+        -30,
+        55,
+        -55
+       ],
+       "max": 300,
+       "stagger": 0.06
+      }
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L1+0.2",
+        "text": "ONE SECOND",
+        "x": 540,
+        "y": 360,
+        "size": 60,
+        "family": "sans"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s2-inertia",
+   "lines": [
+    "L2"
+   ],
+   "start": "L2-0.15",
+   "env": "void",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "estimateLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Inertia: seen from the surface, nothing moves until the ground stops; then buildings and hills rush backwards while the person keeps the speed the ground had (the cited value labels the arrow).",
+   "camera": [
+    {
+     "at": "L2-0.15",
+     "x": 470,
+     "y": 960,
+     "z": 1.18
+    },
+    {
+     "at": "L2.end",
+     "x": 540,
+     "y": 940,
+     "z": 1.04
+    }
+   ],
+   "layers": [
+    {
+     "component": "ground-frame",
+     "props": {
+      "stopAt": "L2+0.35",
+      "tumble": false,
+      "seed": 17,
+      "gy": 1220,
+      "fx": 380,
+      "height": 260,
+      "velocity": {
+       "at": "L2+0.6",
+       "label": "465 m/s"
+      },
+      "groundTag": {
+       "at": "L2+0.5",
+       "label": "GROUND STOPPED"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s3-equator",
+   "lines": [
+    "L3"
+   ],
+   "start": "L3-0.15",
+   "env": "space",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "factLabel"
+   ],
+   "visualPurpose": "Equator: a low close-up along the equator of the stopped globe; one long east arrow carries the cited equatorial speed (1,674.7 km/h).",
+   "camera": [
+    {
+     "at": "L3-0.15",
+     "x": 500,
+     "y": 860,
+     "z": 1
+    },
+    {
+     "at": "L3.end",
+     "x": 580,
+     "y": 840,
+     "z": 1.16
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 82,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "globe",
+     "props": {
+      "x": 540,
+      "y": 1010,
+      "r": 860,
+      "viewLat": 6,
+      "lon0": -40,
+      "spin": 0,
+      "grid": true,
+      "parallels": [
+       {
+        "lat": 0,
+        "at": "L3+0.1",
+        "color": "amber",
+        "width": 7,
+        "dash": "26 14"
+       }
+      ],
+      "speeds": {
+       "at": "L3+0.4",
+       "lats": [
+        0
+       ],
+       "max": 560,
+       "labels": {
+        "0": "1,674.7 km/h"
+       },
+       "labelDy": 90
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s4-forces",
+   "lines": [
+    "L4"
+   ],
+   "start": "L4-0.15",
+   "env": "void",
+   "transition": {
+    "type": "dissolve",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F4",
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Forces: a free-body view over the sliding ground: gravity (9.8 m/s²) pulls straight down while the sideways speed stays; the two arrows are different quantities and are labelled with their own units.",
+   "camera": [
+    {
+     "at": "L4-0.15",
+     "x": 520,
+     "y": 900,
+     "z": 1
+    },
+    {
+     "at": "L4.end",
+     "x": 560,
+     "y": 920,
+     "z": 1.12
+    }
+   ],
+   "layers": [
+    {
+     "component": "ground-frame",
+     "props": {
+      "stopAt": "L4-1.55",
+      "tumble": true,
+      "hop": 90,
+      "seed": 31,
+      "gy": 1100,
+      "fx": 420,
+      "height": 230,
+      "gravity": {
+       "at": "L4+0.3",
+       "label": "GRAVITY 9.8 m/s²"
+      },
+      "velocity": {
+       "at": "L4+0.05",
+       "label": "465 m/s"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s5-slide",
+   "lines": [
+    "L5"
+   ],
+   "start": "L5-0.15",
+   "env": "space",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "estimateLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Slide: a wide shot from the surface: the ground and everything fixed to it rush backwards under a person who still carries the old speed; only contact with the ground can slow them.",
+   "camera": [
+    {
+     "at": "L5-0.15",
+     "x": 540,
+     "y": 980,
+     "z": 1
+    },
+    {
+     "at": "L5.end",
+     "x": 540,
+     "y": 960,
+     "z": 1.12
+    }
+   ],
+   "layers": [
+    {
+     "component": "ground-frame",
+     "props": {
+      "stopAt": "L5-0.75",
+      "tumble": true,
+      "hop": 60,
+      "seed": 54,
+      "gy": 1320,
+      "fx": 540,
+      "height": 170,
+      "speed": 3000
+     }
+    }
+   ]
+  },
+  {
+   "id": "s6-latitudes",
+   "lines": [
+    "L6"
+   ],
+   "start": "L6-0.15",
+   "env": "void",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F2",
+    "F1"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "factLabel"
+   ],
+   "visualPurpose": "Latitude: the 45° parallel is drawn on the real globe beside the equator; each carries an east arrow whose length is cos(latitude) of the equator's, labelled with the cited speeds (1,184.2 km/h, 1,674.7 km/h).",
+   "camera": [
+    {
+     "at": "L6-0.15",
+     "x": 540,
+     "y": 820,
+     "z": 1
+    },
+    {
+     "at": "L6.end",
+     "x": 560,
+     "y": 760,
+     "z": 1.14
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 75,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "globe",
+     "props": {
+      "x": 540,
+      "y": 860,
+      "r": 400,
+      "viewLat": 22,
+      "lon0": 20,
+      "spin": 0,
+      "grid": true,
+      "parallels": [
+       {
+        "lat": 0,
+        "at": "L6+0.1",
+        "color": "amber",
+        "width": 4
+       },
+       {
+        "lat": 45,
+        "at": "L6+0.2",
+        "color": "teal",
+        "width": 5
+       }
+      ],
+      "speeds": {
+       "at": "L6+0.35",
+       "lats": [
+        0,
+        45
+       ],
+       "max": 420,
+       "stagger": 0.35,
+       "labels": {
+        "0": "1,674.7 km/h",
+        "45": "1,184.2 km/h AT 45°"
+       },
+       "labelDy": 60
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s7-payoff",
+   "lines": [
+    "L7"
+   ],
+   "start": "L7-0.15",
+   "env": "space",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "estimateLabel"
+   ],
+   "visualPurpose": "Payoff: the camera tilts over the North Pole while arrows on each parallel shrink as cos(latitude) to nothing at the pole: the claim 'gentle near the poles' is seen, not read.",
+   "camera": [
+    {
+     "at": "L7-0.15",
+     "x": 540,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "end-0.4",
+     "x": 540,
+     "y": 800,
+     "z": 1.1
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 11,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "globe",
+     "props": {
+      "x": 540,
+      "y": 820,
+      "r": 340,
+      "viewLat": 18,
+      "lon0": 20,
+      "spin": 0,
+      "grid": true,
+      "viewLatKeys": [
+       [
+        "L7-0.15",
+        18
+       ],
+       [
+        "L7+1.4",
+        64
+       ]
+      ],
+      "speeds": {
+       "at": "L7+0.2",
+       "lats": [
+        0,
+        15,
+        30,
+        45,
+        60,
+        75,
+        85
+       ],
+       "max": 300,
+       "stagger": 0.1
+      },
+      "markers": [
+       {
+        "lat": 90,
+        "dlon": 0,
+        "at": "L7+1.2",
+        "ring": 26,
+        "label": "ZERO AT THE POLE",
+        "lx": 540,
+        "ly": 560,
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L7+0.3",
+        "text": "NEAR THE POLES",
+        "x": 540,
+        "y": 420,
+        "size": 60,
+        "family": "sans"
+       }
+      ]
+     }
+    }
+   ]
+  }
+ ]
+}
