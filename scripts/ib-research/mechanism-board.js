@@ -76,7 +76,7 @@ function main() {
     "| topic | title | proposed | why | frames |", "|---|---|---|---|---|"];
   for (const p of all) if (!p.render && fs.existsSync(path.join(out, `${p.id}.jpg`)) && p.confidence === "STRONG") p.render = { ok: true, sheet: `${p.id}.jpg` };
   for (const p of all) L.push(`| ${p.id} | ${String(p.title).replace(/\|/g, "/")} | ${p.mechanism || "—"} | ${p.why} | ${p.render ? (p.render.ok ? `![](${p.render.sheet})` : "render failed: " + p.render.err) : ""} |`);
-  const ok = strong.filter((p) => !p.render || p.render.ok);
+  const ok = all.filter((p) => p.confidence === "STRONG" && (!p.render || p.render.ok));
   L.push("", "## To declare (reviewer)", "", "Look at each topic's frames, delete the pairs you reject, then run with your own name:", "", "```bash",
     `node scripts/ib-research/declare-mechanism.js ${ok.map((p) => `${p.id} ${p.mechanism}`).join(" ")} --by "<your name>"`, "```", "");
   fs.writeFileSync(path.join(out, "README.md"), L.join("\n"));
