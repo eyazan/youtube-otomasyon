@@ -125,6 +125,8 @@ jobs:
           find review-out -name "*.mp4" -delete
           git config user.name "premium-review-bot"; git config user.email "actions@users.noreply.github.com"
           B="review/render-${{ github.run_id }}-${{ steps.name.outputs.topic }}"
-          git checkout -q -B "$B"; mkdir -p review; rm -rf "review/render-${{ github.run_id }}"; mv review-out "review/render-${{ github.run_id }}"
+          # an orphan branch with only the review files: no code tree, so a changed workflow on the source branch never
+          # blocks the push (the Actions token may not create refs that carry workflow edits)
+          git checkout -q --orphan "$B"; git rm -rq --cached . >/dev/null; mkdir -p review; rm -rf "review/render-${{ github.run_id }}"; mv review-out "review/render-${{ github.run_id }}"
           git add -f "review/render-${{ github.run_id }}"; git commit -q -m "review: premium render frames (run ${{ github.run_id }})"
           git push -q -f origin "$B"
