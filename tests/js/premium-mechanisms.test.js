@@ -83,3 +83,18 @@ test("studio: --propose-mechanism is preview + shadow + stills only and never to
   assert.match(src, /--propose-mechanism needs BTO_PREMIUM_RENDER=preview, --shadow and --stills/);
   assert.doesNotMatch(require("fs").readFileSync(require.resolve("../../scripts/ib-research/mechanism-board.js"), "utf8"), /writeFileSync\([^)]*topic-universe/);
 });
+
+test("owner review sheet: only rows a person set to APPROVE are declared, a HOLD row never is, and the shipped sheet decides nothing", () => {
+  const { fromSheet } = require("../../scripts/ib-research/declare-mechanism.js");
+  const r = fromSheet({ topics: [
+    { id: "A", mechanism: "named-body", decision: "APPROVE" },
+    { id: "B", mechanism: "named-body", decision: "REJECT" },
+    { id: "C", mechanism: "named-body", decision: null },
+    { id: "D", mechanism: "named-body", decision: "approve", hold: "FACT ERROR: x" }] });
+  assert.deepEqual(r.approved.map((x) => x.id), ["A"]);
+  assert.deepEqual(r.held.map((x) => x.id), ["D"]);
+  const shipped = require("../../reports/ib-mechanism-board/decisions.json");
+  assert.ok(shipped.topics.length > 0 && shipped.topics.every((x) => x.decision === null), "the sheet ships with no decision");
+  const IB = require("../../scripts/bto-studio/auto/impossible-brief.js");
+  for (const t of shipped.topics) assert.ok(IB.MECHANISMS[t.mechanism] && IB.MECHANISMS[t.mechanism].world, `${t.id}: ${t.mechanism} has a drawing`);
+});
