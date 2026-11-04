@@ -137,6 +137,10 @@ function build(script, style, topic, context = {}) {
   // a line with no natural short phrase gets no headline: empty text items (and then empty text layers) are removed
   scenes.forEach((sc) => { sc.layers.forEach((l) => { if (l.component === "kinetic-type") l.props.items = l.props.items.filter((it) => String(it.text || "").trim()); });
     sc.layers = sc.layers.filter((l) => l.component !== "kinetic-type" || l.props.items.length); });
+  // a headline followed by a scene with its own headline clears before its line ends, so the transition never overlays
+  // the two in the same band (BTO-301 text gate: "RAREST BLACK-AND-WHITE RATIO" x "ANY ANGLE" during the wipe)
+  const heads = (sc) => sc.layers.filter((l) => l.component === "kinetic-type").flatMap((l) => l.props.items);
+  scenes.forEach((sc, k) => { const nx = scenes[k + 1]; if (nx && heads(nx).length) heads(sc).forEach((it) => { if (it.outAt == null) it.outAt = `${sc.lines[0]}.end-0.25`; }); });
   return {
     schema: "bto-studio.storyboard.v1", channel: script.channel, topicId: script.topicId, slug: script.slug, version: 1,
     author: "auto/behind-the-ordinary (deterministic documentary-desk grammar; needs creative review before publication)",
