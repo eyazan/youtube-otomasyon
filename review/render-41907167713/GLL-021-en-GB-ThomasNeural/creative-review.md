@@ -1,0 +1,15 @@
+# Creative review (../../_temp/review/GLL-021/out/hand-of-god-and-goal-of-the-century-premium-final.mp4)
+
+Measurements describe the frames; they are not quality scores. Human fields are filled by a reviewer (creative-notes.json) and are marked with who wrote them.
+
+| scene | technique | transition | motion | novelty | offset | text share | min text | flags | human verdict |
+|---|---|---|---|---|---|---|---|---|---|
+| s1-hook | tactical-pitch | cut | 0.0703 | null | 0.076 | 0 | null | - | not reviewed |
+| s2-when | place-establishing, scoreboard-archival | scan-wipe | 0.0143 | 0.1705 | 0.028 | 0 | null | CENTRED_FLAT, THIN | not reviewed |
+| s3-hand | tactical-pitch | iris | 0.0182 | 0.1466 | 0.042 | 0 | null | - | not reviewed |
+| s4-hand | tactical-pitch, kinetic-typography | dissolve | 0.0161 | 0.0356 | 0.057 | 0.015 | 59.9 | LOW_NOVELTY | not reviewed |
+| s5-dribble | tactical-pitch | scan-wipe | 0.0493 | 0.0655 | 0.053 | 0.015 | 60 | SAME_ENV_AS_PREVIOUS (spot) | not reviewed |
+| s6-payoff | tactical-pitch, kinetic-typography | iris | 0.0725 | 0.0622 | 0.136 | 0.024 | 53.1 | - | not reviewed |
+
+## Reviewer notes (judgement, not measurement)
+
