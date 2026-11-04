@@ -1,0 +1,259 @@
+{
+ "schema": "bto-studio.review-package.v1",
+ "channel": "failure-reconstructed",
+ "topicId": "FR-moore-tornado-2013",
+ "slug": "moore-tornado-2013",
+ "title": "Schools in Tornado Alley Without Storm Shelters",
+ "verdict": "SHADOW_OF_LIVE_NOT_PUBLISHABLE",
+ "pilot": null,
+ "researchPending": null,
+ "shadow": true,
+ "autoPublish": false,
+ "uploadAttempted": false,
+ "mode": "preview",
+ "quality": "final",
+ "createdAt": "2026-11-04T17:42:17.161Z",
+ "video": "../../_temp/review/FR-moore-tornado-2013/out/moore-tornado-2013-premium-final.mp4",
+ "voice": {
+  "used": "en-US-AndrewMultilingualNeural",
+  "approved": true,
+  "approvedVoice": {
+   "provider": "edge-tts",
+   "voice": "en-US-AndrewMultilingualNeural",
+   "rate": "+1%"
+  },
+  "note": null,
+  "wordTiming": "measured (Edge word boundaries)"
+ },
+ "narrationUnchanged": {
+  "sourceHash": "2e2b4a2b4e94ec87",
+  "lines": [
+   "An EF5 tornado struck Moore, Oklahoma, during the school day.",
+   "Two schools were destroyed, and seven children were killed at one of them.",
+   "Neither school had a storm shelter.",
+   "Children sheltered in hallways and bathrooms.",
+   "The tornado collapsed walls and roofs.",
+   "Only reinforced safe rooms resist a direct hit like that.",
+   "Moore then changed its rules.",
+   "New schools and homes now need storm shelters."
+  ]
+ },
+ "traceability": [
+  {
+   "scene": "s1-hook",
+   "lines": [
+    "L1"
+   ],
+   "purpose": "Hook: frame 0 draws the building as clean line work and it gives way at the failure point within the first second, with the case stamp (MOORE TORNADO · 2013), so the consequence is on screen before any cause.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "the 2013 Moore tornado (2013): destroyed two elementary schools. NO SHELTERS",
+     "source": "Wikipedia — 2013 Moore tornado",
+     "url": "https://en.wikipedia.org/wiki/2013_Moore_tornado"
+    }
+   ]
+  },
+  {
+   "scene": "s2-toll",
+   "lines": [
+    "L2"
+   ],
+   "purpose": "Toll: the broken building holds while the case's count (NO SHELTERS) is stamped below it; the number is the case file's, not computed.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "the 2013 Moore tornado (2013): destroyed two elementary schools. NO SHELTERS",
+     "source": "Wikipedia — 2013 Moore tornado",
+     "url": "https://en.wikipedia.org/wiki/2013_Moore_tornado"
+    }
+   ]
+  },
+  {
+   "scene": "s3-trigger",
+   "lines": [
+    "L3"
+   ],
+   "purpose": "Trigger: the camera closes in on the failure point of the intact building as the crack starts there, while the case file's trigger is set in three words.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F2",
+     "claim": "an EF5 tornado on a school day",
+     "source": "Wikipedia — 2013 Moore tornado",
+     "url": "https://en.wikipedia.org/wiki/2013_Moore_tornado"
+    },
+    {
+     "id": "F1",
+     "claim": "the 2013 Moore tornado (2013): destroyed two elementary schools. NO SHELTERS",
+     "source": "Wikipedia — 2013 Moore tornado",
+     "url": "https://en.wikipedia.org/wiki/2013_Moore_tornado"
+    }
+   ]
+  },
+  {
+   "scene": "s4-chain",
+   "lines": [
+    "L4"
+   ],
+   "purpose": "Chain: the case's failure chain scrolls from link 4 to link 5 (\"CHILDREN TRAPPED\"), which lights as the line describes it, so consecutive causes read as one continuous investigation.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "SCHOOL DAY -> EF5 TORNADO -> NO SAFE ROOM -> WALLS AND ROOF COLLAPSE -> CHILDREN TRAPPED",
+     "source": "Wikipedia — 2013 Moore tornado",
+     "url": "https://en.wikipedia.org/wiki/2013_Moore_tornado"
+    },
+    {
+     "id": "F1",
+     "claim": "the 2013 Moore tornado (2013): destroyed two elementary schools. NO SHELTERS",
+     "source": "Wikipedia — 2013 Moore tornado",
+     "url": "https://en.wikipedia.org/wiki/2013_Moore_tornado"
+    }
+   ]
+  },
+  {
+   "scene": "s5-chain",
+   "lines": [
+    "L5"
+   ],
+   "purpose": "Chain: the case's failure chain scrolls from link 5 to link 4 (\"WALLS AND ROOF COLLAPSE\"), which lights as the line describes it, so consecutive causes read as one continuous investigation.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "SCHOOL DAY -> EF5 TORNADO -> NO SAFE ROOM -> WALLS AND ROOF COLLAPSE -> CHILDREN TRAPPED",
+     "source": "Wikipedia — 2013 Moore tornado",
+     "url": "https://en.wikipedia.org/wiki/2013_Moore_tornado"
+    },
+    {
+     "id": "F1",
+     "claim": "the 2013 Moore tornado (2013): destroyed two elementary schools. NO SHELTERS",
+     "source": "Wikipedia — 2013 Moore tornado",
+     "url": "https://en.wikipedia.org/wiki/2013_Moore_tornado"
+    }
+   ]
+  },
+  {
+   "scene": "s6-mechanism",
+   "lines": [
+    "L6"
+   ],
+   "purpose": "Mechanism close-up: the camera closes in on the failure point of the building while chain link 3 (\"NO SAFE ROOM\") is named, so the cause is seen on the object, not only read on a card.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "SCHOOL DAY -> EF5 TORNADO -> NO SAFE ROOM -> WALLS AND ROOF COLLAPSE -> CHILDREN TRAPPED",
+     "source": "Wikipedia — 2013 Moore tornado",
+     "url": "https://en.wikipedia.org/wiki/2013_Moore_tornado"
+    },
+    {
+     "id": "F3",
+     "claim": "collapse of school buildings without reinforced storm shelters",
+     "source": "NOAA — tgen3 (cited by Wikipedia)",
+     "url": "https://www.spc.noaa.gov/publications/broyles/tgen3.pdf"
+    },
+    {
+     "id": "F1",
+     "claim": "the 2013 Moore tornado (2013): destroyed two elementary schools. NO SHELTERS",
+     "source": "Wikipedia — 2013 Moore tornado",
+     "url": "https://en.wikipedia.org/wiki/2013_Moore_tornado"
+    }
+   ]
+  },
+  {
+   "scene": "s7-chain",
+   "lines": [
+    "L7"
+   ],
+   "purpose": "Chain: the case's failure chain scrolls from link 3 to link 3 (\"NO SAFE ROOM\"), which lights as the line describes it, so consecutive causes read as one continuous investigation.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "SCHOOL DAY -> EF5 TORNADO -> NO SAFE ROOM -> WALLS AND ROOF COLLAPSE -> CHILDREN TRAPPED",
+     "source": "Wikipedia — 2013 Moore tornado",
+     "url": "https://en.wikipedia.org/wiki/2013_Moore_tornado"
+    },
+    {
+     "id": "F1",
+     "claim": "the 2013 Moore tornado (2013): destroyed two elementary schools. NO SHELTERS",
+     "source": "Wikipedia — 2013 Moore tornado",
+     "url": "https://en.wikipedia.org/wiki/2013_Moore_tornado"
+    }
+   ]
+  },
+  {
+   "scene": "s8-payoff",
+   "lines": [
+    "L8"
+   ],
+   "purpose": "Payoff: the lesson in a few of the line's words over the object redrawn whole; the camera returns to the exact frame-0 framing and the lesson clears before the end, so the last frame matches the first and the Short loops (#357).",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F6",
+     "claim": "Moore required storm shelters or safe rooms in new schools and homes",
+     "source": "NOAA — tgen3 (cited by Wikipedia)",
+     "url": "https://www.spc.noaa.gov/publications/broyles/tgen3.pdf"
+    },
+    {
+     "id": "F1",
+     "claim": "the 2013 Moore tornado (2013): destroyed two elementary schools. NO SHELTERS",
+     "source": "Wikipedia — 2013 Moore tornado",
+     "url": "https://en.wikipedia.org/wiki/2013_Moore_tornado"
+    }
+   ]
+  }
+ ],
+ "licensing": {
+  "visuals": "all visuals drawn in-house from code (SVG): generic object-class line drawings, failure chain and stamps; no photographs, footage or third-party media",
+  "fonts": "SIL OFL 1.1 (@fontsource Inter, Source Serif 4, Barlow Semi Condensed 5.3.0)",
+  "audio": "narration TTS + effects/music synthesised by scripts/bto-studio/audio/sound_design.py (no samples)",
+  "thirdPartyMedia": []
+ },
+ "qa": {
+  "objectivePass": true,
+  "report": "../../_temp/review/FR-moore-tornado-2013/out/qa-report.md",
+  "contactSheet": "../../_temp/review/FR-moore-tornado-2013/out/contact-sheet.png",
+  "sceneSheet": "../../_temp/review/FR-moore-tornado-2013/out/scene-sheet.png",
+  "failures": [
+   "UNVERIFIED audio samples clipped: not reported by this FFmpeg build (astats has no clipped-sample count)",
+   "WARN caption reading speed: 2 cues over 22 chars/s (max 24.0)",
+   "WARN no static hold >= 1.5 s inside a scene (visual change target): longest 1.6 s (s5-chain)"
+  ],
+  "unverified": [
+   "audio samples clipped"
+  ]
+ },
+ "audio": {
+  "integratedLufs": -14.1,
+  "truePeakDbtp": -2.9
+ },
+ "performance": {
+  "renderWallSec": 86.8,
+  "msPerFrame": 109.2,
+  "workers": 3,
+  "peakChromiumRssMb": 3728,
+  "cachedSegments": 0,
+  "segments": 8,
+  "host": "linux x64 4 cpu 16 GB",
+  "totalPipelineSec": 189.5
+ },
+ "cost": {
+  "llmUsd": 0,
+  "ttsUsd": 0,
+  "renderUsd": 0,
+  "note": "local rendering and free/offline TTS; LLM use only when a Claude storyboard draft was requested and approved"
+ },
+ "approvalsNeeded": [
+  "voice: re-narrate with the approved Edge voice (if PREVIEW_ONLY)",
+  "creative sign-off (video-quality-review findings)",
+  "factual sign-off on the traceability table",
+  "owner decision to hand the MP4 to the normal pipeline (never automatic)"
+ ]
+}
