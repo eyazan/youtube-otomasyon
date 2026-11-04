@@ -1,10 +1,10 @@
 # Growth dashboard
 
-Generated 2026-11-03T21:54:23.020Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-11-04T07:13:10.693Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
-**Shorts health** — last published 2026-11-03T18:00:00.000Z · 39 published · inventory A90/B140/C60/D59 · next: swissair-111-1998 (EXPLORE (0.25): under-sampled cluster fire-and-explosions)
+**Shorts health** — last published 2026-11-04T18:00:00.000Z · 40 published · inventory A64/B150/C58/D76 · next: columbia-2003 (EXPLOIT (0.75): best A topic by SelectionScore)
 
 **Long-form health** — cycle 2026-W45: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W45 already QUALITY_BLOCKED)
 
@@ -20,11 +20,11 @@ Generated 2026-11-03T21:54:23.020Z. Per-channel baselines are computed separatel
 
 **Research/source enrichment tasks**
 
-- apollo-1-1967 (C): VideoPotential 87 in experimental band 58–71; sources 41 < 62
+- apollo-1-1967 (C): VideoPotential 86 in experimental band 58–71; sources 41 < 62
 - munich-1958 (C): VideoPotential 85 in experimental band 58–71; sources 41 < 62
 - skylab-1973 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
-- eastland-1915 (C): VideoPotential 83 in experimental band 58–71; sources 41 < 62
-- vanguard-1957 (C): VideoPotential 83 in experimental band 58–71; sources 41 < 62
+- castle-bravo-1954 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
+- vanguard-1957 (C): VideoPotential 82 in experimental band 58–71; sources 41 < 62
 
 **Recent alerts**
 
@@ -41,7 +41,7 @@ Generated 2026-11-03T21:54:23.020Z. Per-channel baselines are computed separatel
 
 ## ImpossibleBrief
 
-**Shorts health** — last published 2026-10-29T18:00:00.000Z · 20 published · inventory A112/B21/C140/D206 · next: what-if-we-tried-to-drill-through-the-earth (EXPLOIT (0.75): best A topic by SelectionScore)
+**Shorts health** — last published 2026-11-04T18:00:00.000Z · 21 published · inventory A111/B21/C140/D206 · next: what-if-we-tried-to-drill-through-the-earth (EXPLORE (0.25): under-sampled cluster EXTREME SCIENCE)
 
 **Long-form health** — cycle 2026-W45: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W45 already QUALITY_BLOCKED)
 

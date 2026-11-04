@@ -2,50 +2,6 @@
   "channel": "impossible-brief",
   "runs": [
     {
-      "runId": "41482999980",
-      "attempt": "1",
-      "startedAt": "2026-11-02T16:36:45.731Z",
-      "publish": true,
-      "trigger": {
-        "event": "repository_dispatch",
-        "correlationId": null
-      },
-      "targetDay": "2026-11-02",
-      "slug": null,
-      "outcome": "BLOCKED",
-      "reason": "LEGACY_UPLOAD_RETIRED: this channel publishes premium Shorts only (premium publish path); the legacy renderer does not run with PUBLISH=1",
-      "stages": {
-        "RESEARCH": {
-          "status": "not-reached"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "not-reached"
-        },
-        "QA": {
-          "status": "not-reached"
-        },
-        "UPLOAD": {
-          "status": "not-reached"
-        },
-        "SCHEDULE": {
-          "status": "not-reached"
-        },
-        "PUBLISH": {
-          "status": "not-reached"
-        }
-      },
-      "finishedAt": "2026-11-02T16:36:48.030Z"
-    },
-    {
       "runId": "41484909796",
       "attempt": "1",
       "startedAt": "2026-11-02T16:48:46.005Z",
@@ -1338,6 +1294,62 @@
         }
       },
       "finishedAt": "2026-11-03T21:54:10.299Z"
+    },
+    {
+      "runId": "41789838815",
+      "attempt": "1",
+      "startedAt": "2026-11-04T07:09:07.530Z",
+      "publish": true,
+      "trigger": {
+        "event": "repository_dispatch",
+        "correlationId": "production-1-20261104T070521Z-1d8fde44"
+      },
+      "targetDay": "2026-11-04",
+      "slug": "what-if-earth-became-like-venus",
+      "outcome": "UPLOADED",
+      "reason": "premium IB-SPA-031 b7LByhFrMMc",
+      "stages": {
+        "RESEARCH": {
+          "status": "done",
+          "detail": "IB-SPA-031",
+          "at": "2026-11-04T07:12:53.295Z"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "done",
+          "detail": "premium final",
+          "at": "2026-11-04T07:12:53.295Z"
+        },
+        "QA": {
+          "status": "done",
+          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
+          "at": "2026-11-04T07:12:53.296Z"
+        },
+        "UPLOAD": {
+          "status": "done",
+          "detail": "b7LByhFrMMc",
+          "at": "2026-11-04T07:12:53.296Z"
+        },
+        "SCHEDULE": {
+          "status": "done",
+          "detail": "2026-11-04T18:00:00.000Z",
+          "at": "2026-11-04T07:12:53.297Z"
+        },
+        "PUBLISH": {
+          "status": "scheduled",
+          "detail": "YouTube makes it public at 2026-11-04T18:00:00.000Z",
+          "at": "2026-11-04T07:12:53.297Z"
+        }
+      },
+      "finishedAt": "2026-11-04T07:12:53.302Z"
     }
   ]
 }
