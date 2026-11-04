@@ -1,0 +1,527 @@
+{
+ "schema": "bto-studio.storyboard.v1",
+ "channel": "behind-the-ordinary",
+ "topicId": "BTO-301",
+ "slug": "why-qr-codes-have-three-corner-squares",
+ "version": 1,
+ "author": "auto/behind-the-ordinary (deterministic documentary-desk grammar; needs creative review before publication)",
+ "licensingNote": "all visuals drawn in-house from code (SVG): desk, greeked printed matter, rulers and quote cards; quotes are verbatim from the cited sources; no photographs or third-party media",
+ "treatment": {
+  "educationalObjective": "Answer, in the sources' own words: Why does every QR code have three large squares in its corners?",
+  "visualHook": "Frame 0: QR CODES in large type over printed matter on the desk.",
+  "mechanismsToAnimate": [
+   "hook",
+   "quote",
+   "year",
+   "detail",
+   "payoff"
+  ],
+  "factualRisks": [
+   "printed matter is greeked and generic (ILLUSTRATION chip)",
+   "the automatic grammar draws no mechanism: a directed storyboard is needed for cutaways and exploded views"
+  ]
+ },
+ "tail": 0.6,
+ "scenes": [
+  {
+   "id": "s1-hook",
+   "lines": [
+    "L1"
+   ],
+   "start": 0,
+   "env": "desk",
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "illustrationLabel"
+   ],
+   "visualPurpose": "Hook: frame 0 sets the object (QR CODES) in large type over printed matter on the desk, so the detail in question is named before it is explained.",
+   "camera": [
+    {
+     "at": 0,
+     "x": 540,
+     "y": 820,
+     "z": 1.14
+    },
+    {
+     "at": "L1.end",
+     "x": 568,
+     "y": 820,
+     "z": 1
+    }
+   ],
+   "layers": [
+    {
+     "component": "desk-grain",
+     "screen": true,
+     "props": {
+      "seed": 3
+     }
+    },
+    {
+     "component": "qr-symbol",
+     "props": {
+      "asset": "qr-hidden-logic",
+      "id": "sym-hook",
+      "cx": 540,
+      "cy": 860,
+      "module": 26,
+      "rotate": 0
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L1+0.2",
+        "text": "QR CODES",
+        "x": 540,
+        "y": 420,
+        "size": 78,
+        "family": "sans",
+        "style": "pop"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s2-quote",
+   "lines": [
+    "L2"
+   ],
+   "start": "L2-0.15",
+   "env": "desk",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Source: the record's own evidence on a quote card (verbatim from F1, attributed), so the claim in the line is shown in the source's words, not the narrator's.",
+   "camera": [
+    {
+     "at": "L2-0.15",
+     "x": 520,
+     "y": 900,
+     "z": 1
+    },
+    {
+     "at": "L2.end",
+     "x": 560,
+     "y": 940,
+     "z": 1.14
+    }
+   ],
+   "layers": [
+    {
+     "component": "desk-grain",
+     "screen": true,
+     "props": {
+      "seed": 8
+     }
+    },
+    {
+     "component": "print-surface",
+     "props": {
+      "kind": "form",
+      "x": 190,
+      "y": 560,
+      "w": 700,
+      "h": 560,
+      "rotate": -6,
+      "seed": 61
+     }
+    },
+    {
+     "component": "quote-card",
+     "screen": true,
+     "props": {
+      "at": "L2+0.1",
+      "lines": [
+       "In 1994, DENSO WAVE",
+       "(then a division of",
+       "DENSO CORPORATION)",
+       "announced the release of"
+      ],
+      "quoteOf": "F1",
+      "attribution": "DENSO WAVE",
+      "y": 560,
+      "size": 52
+     }
+    }
+   ]
+  },
+  {
+   "id": "s3-year",
+   "lines": [
+    "L3"
+   ],
+   "start": "L3-0.15",
+   "env": "desk",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1",
+    "F10",
+    "F2"
+   ],
+   "chips": [
+    "conceptualLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Time: the ruler rolls and locks on 1994 as the line says it, over the period's printed matter; the year is from the cited fact.",
+   "camera": [
+    {
+     "at": "L3-0.15",
+     "x": 512,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L3.end",
+     "x": 568,
+     "y": 820,
+     "z": 1.1
+    }
+   ],
+   "layers": [
+    {
+     "component": "desk-grain",
+     "screen": true,
+     "props": {
+      "seed": 7
+     }
+    },
+    {
+     "component": "print-surface",
+     "props": {
+      "kind": "box",
+      "x": 190,
+      "y": 560,
+      "w": 700,
+      "h": 560,
+      "rotate": 3,
+      "seed": 22
+     }
+    },
+    {
+     "component": "timeline-ruler",
+     "screen": true,
+     "props": {
+      "y": 1180,
+      "fromYear": 1986,
+      "year": 1994,
+      "enterAt": "L3-0.1",
+      "arriveAt": "L3+0.6",
+      "outAt": "L3.end"
+     }
+    }
+   ]
+  },
+  {
+   "id": "s4-quote",
+   "lines": [
+    "L4"
+   ],
+   "start": "L4-0.15",
+   "env": "spot",
+   "transition": {
+    "type": "dissolve",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F4",
+    "F6",
+    "F2"
+   ],
+   "chips": [
+    "conceptualLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Source: the record's own evidence on a quote card (verbatim from F4, attributed), so the claim in the line is shown in the source's words, not the narrator's.",
+   "camera": [
+    {
+     "at": "L4-0.15",
+     "x": 520,
+     "y": 900,
+     "z": 1
+    },
+    {
+     "at": "L4.end",
+     "x": 560,
+     "y": 940,
+     "z": 1.14
+    }
+   ],
+   "layers": [
+    {
+     "component": "desk-grain",
+     "screen": true,
+     "props": {
+      "seed": 10
+     }
+    },
+    {
+     "component": "print-surface",
+     "props": {
+      "kind": "magazine",
+      "x": 190,
+      "y": 560,
+      "w": 700,
+      "h": 560,
+      "rotate": 7,
+      "seed": 63
+     }
+    },
+    {
+     "component": "quote-card",
+     "screen": true,
+     "props": {
+      "at": "L4+0.1",
+      "lines": [
+       "By incorporating these",
+       "marks into their code,",
+       "high-speed reading",
+       "became possible"
+      ],
+      "quoteOf": "F4",
+      "attribution": "DENSO WAVE",
+      "y": 660,
+      "size": 52
+     }
+    }
+   ]
+  },
+  {
+   "id": "s5-detail",
+   "lines": [
+    "L5"
+   ],
+   "start": "L5-0.15",
+   "env": "desk",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F5",
+    "F6",
+    "F8"
+   ],
+   "chips": [
+    "conceptualLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Detail: the line's key phrase over a different piece of printed matter while the camera drifts across it, so each step of the explanation has its own object on the desk.",
+   "camera": [
+    {
+     "at": "L5-0.15",
+     "x": 512,
+     "y": 820,
+     "z": 1
+    },
+    {
+     "at": "L5.end",
+     "x": 568,
+     "y": 800,
+     "z": 1.14
+    }
+   ],
+   "layers": [
+    {
+     "component": "desk-grain",
+     "screen": true,
+     "props": {
+      "seed": 15
+     }
+    },
+    {
+     "component": "print-surface",
+     "props": {
+      "kind": "flyer",
+      "x": 190,
+      "y": 560,
+      "w": 700,
+      "h": 560,
+      "rotate": -5,
+      "seed": 44
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L5+0.25",
+        "text": "BUSINESS FORMS",
+        "x": 540,
+        "y": 420,
+        "size": 60,
+        "family": "sans",
+        "style": "pop"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s6-detail",
+   "lines": [
+    "L6"
+   ],
+   "start": "L6-0.15",
+   "env": "desk",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F7",
+    "F8"
+   ],
+   "chips": [
+    "conceptualLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Detail: the line's key phrase over a different piece of printed matter while the camera drifts across it, so each step of the explanation has its own object on the desk.",
+   "camera": [
+    {
+     "at": "L6-0.15",
+     "x": 568,
+     "y": 820,
+     "z": 1
+    },
+    {
+     "at": "L6.end",
+     "x": 512,
+     "y": 800,
+     "z": 1.14
+    }
+   ],
+   "layers": [
+    {
+     "component": "desk-grain",
+     "screen": true,
+     "props": {
+      "seed": 16
+     }
+    },
+    {
+     "component": "print-surface",
+     "props": {
+      "kind": "label",
+      "x": 190,
+      "y": 560,
+      "w": 700,
+      "h": 560,
+      "rotate": 5,
+      "seed": 45
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L6+0.25",
+        "text": "RAREST BLACK-AND-WHITE RATIO",
+        "x": 540,
+        "y": 420,
+        "size": 47,
+        "family": "sans",
+        "style": "pop"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s7-payoff",
+   "lines": [
+    "L7"
+   ],
+   "start": "L7-0.15",
+   "env": "desk",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F9",
+    "F3",
+    "F8"
+   ],
+   "chips": [
+    "illustrationLabel"
+   ],
+   "visualPurpose": "Payoff: the answer in a few of the line's words over the opening composition, so the Short loops on its first image.",
+   "camera": [
+    {
+     "at": "L7-0.15",
+     "x": 540,
+     "y": 820,
+     "z": 1
+    },
+    {
+     "at": "end-0.6",
+     "x": 540,
+     "y": 820,
+     "z": 1.12
+    }
+   ],
+   "layers": [
+    {
+     "component": "desk-grain",
+     "screen": true,
+     "props": {
+      "seed": 3
+     }
+    },
+    {
+     "component": "qr-symbol",
+     "props": {
+      "asset": "qr-hidden-logic",
+      "id": "sym-payoff",
+      "cx": 540,
+      "cy": 860,
+      "module": 26,
+      "rotate": 0
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L7+0.2",
+        "text": "ANY ANGLE",
+        "x": 540,
+        "y": 420,
+        "size": 60,
+        "family": "sans",
+        "style": "pop"
+       }
+      ]
+     }
+    }
+   ]
+  }
+ ]
+}

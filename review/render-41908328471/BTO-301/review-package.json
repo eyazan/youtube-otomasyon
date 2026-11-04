@@ -1,0 +1,289 @@
+{
+ "schema": "bto-studio.review-package.v1",
+ "channel": "behind-the-ordinary",
+ "topicId": "BTO-301",
+ "slug": "why-qr-codes-have-three-corner-squares",
+ "title": "Why QR Codes Have Three Corner Squares",
+ "verdict": "BLOCKED",
+ "layers": {
+  "TECHNICAL": {
+   "blocking": true,
+   "failed": [
+    "text gate (collisions, caption band, edges, size)"
+   ],
+   "warnings": [
+    "loop continuity (last -> first frame)",
+    "no static hold >= 1.5 s inside a scene (visual change target)"
+   ]
+  },
+  "CREATIVE": {
+   "blocking": false,
+   "advisory": [
+    "headline hand-over at cuts"
+   ]
+  }
+ },
+ "pilot": null,
+ "researchPending": null,
+ "shadow": true,
+ "autoPublish": false,
+ "uploadAttempted": false,
+ "mode": "preview",
+ "quality": "final",
+ "createdAt": "2026-11-04T20:40:27.702Z",
+ "video": "../../_temp/review/BTO-301/out/why-qr-codes-have-three-corner-squares-premium-final.mp4",
+ "voice": {
+  "used": "en-US-EmmaMultilingualNeural",
+  "approved": true,
+  "approvedVoice": {
+   "provider": "edge-tts",
+   "voice": "en-US-EmmaMultilingualNeural",
+   "rate": "+1%"
+  },
+  "note": null,
+  "wordTiming": "measured (Edge word boundaries)"
+ },
+ "narrationUnchanged": {
+  "sourceHash": "13e0e90af8c1d439",
+  "lines": [
+   "Those three QR squares aren't decoration.",
+   "They tell the scanner where to look.",
+   "Denso Wave released the QR Code in 1994, and QR means quick response.",
+   "The corner marks are position detection patterns. Finding them made high-speed reading possible.",
+   "Why squares? The team said that pattern was least likely to appear on business forms.",
+   "They surveyed flyers, magazines and cardboard boxes for the rarest black-and-white ratio.",
+   "That rare ratio lets a scanner orient the code from any angle."
+  ]
+ },
+ "traceability": [
+  {
+   "scene": "s1-hook",
+   "lines": [
+    "L1"
+   ],
+   "purpose": "Hook: frame 0 sets the object (QR CODES) in large type over printed matter on the desk, so the detail in question is named before it is explained.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "Denso Wave, then a division of Denso Corporation, announced the release of the QR Code in 1994.",
+     "quote": "In 1994, DENSO WAVE (then a division of DENSO CORPORATION) announced the release of its QR Code",
+     "source": "DENSO WAVE — History of QR Code",
+     "url": "https://www.qrcode.com/en/history/"
+    }
+   ]
+  },
+  {
+   "scene": "s2-quote",
+   "lines": [
+    "L2"
+   ],
+   "purpose": "Source: the record's own evidence on a quote card (verbatim from F1, attributed), so the claim in the line is shown in the source's words, not the narrator's.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "Denso Wave, then a division of Denso Corporation, announced the release of the QR Code in 1994.",
+     "quote": "In 1994, DENSO WAVE (then a division of DENSO CORPORATION) announced the release of its QR Code",
+     "source": "DENSO WAVE — History of QR Code",
+     "url": "https://www.qrcode.com/en/history/"
+    }
+   ]
+  },
+  {
+   "scene": "s3-year",
+   "lines": [
+    "L3"
+   ],
+   "purpose": "Time: the ruler rolls and locks on 1994 as the line says it, over the period's printed matter; the year is from the cited fact.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "Denso Wave, then a division of Denso Corporation, announced the release of the QR Code in 1994.",
+     "quote": "In 1994, DENSO WAVE (then a division of DENSO CORPORATION) announced the release of its QR Code",
+     "source": "DENSO WAVE — History of QR Code",
+     "url": "https://www.qrcode.com/en/history/"
+    },
+    {
+     "id": "F10",
+     "claim": "The QR code was invented by Masahiro Hara of Denso Wave for labelling automobile parts.",
+     "quote": "invented in 1994 by Masahiro Hara of the Japanese company Denso Wave for labelling automobile parts",
+     "source": "Wikipedia — QR code",
+     "url": "https://en.wikipedia.org/wiki/QR_code"
+    },
+    {
+     "id": "F2",
+     "claim": "QR stands for quick response, reflecting a development focus on high-speed reading.",
+     "quote": "The QR in the name stands for quick response",
+     "source": "DENSO WAVE — History of QR Code",
+     "url": "https://www.qrcode.com/en/history/"
+    }
+   ]
+  },
+  {
+   "scene": "s4-quote",
+   "lines": [
+    "L4"
+   ],
+   "purpose": "Source: the record's own evidence on a quote card (verbatim from F4, attributed), so the claim in the line is shown in the source's words, not the narrator's.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "The square position detection marks made high-speed reading possible.",
+     "quote": "By incorporating these marks into their code, high-speed reading became possible",
+     "source": "DENSO WAVE — History of QR Code",
+     "url": "https://www.qrcode.com/en/history/"
+    },
+    {
+     "id": "F6",
+     "claim": "A similar-looking mark near the code could be mistaken for a position detection pattern, so the pattern had to be unique.",
+     "quote": "their position detection patterns had to be truly unique",
+     "source": "DENSO WAVE — History of QR Code",
+     "url": "https://www.qrcode.com/en/history/"
+    },
+    {
+     "id": "F2",
+     "claim": "QR stands for quick response, reflecting a development focus on high-speed reading.",
+     "quote": "The QR in the name stands for quick response",
+     "source": "DENSO WAVE — History of QR Code",
+     "url": "https://www.qrcode.com/en/history/"
+    }
+   ]
+  },
+  {
+   "scene": "s5-detail",
+   "lines": [
+    "L5"
+   ],
+   "purpose": "Detail: the line's key phrase over a different piece of printed matter while the camera drifts across it, so each step of the explanation has its own object on the desk.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F5",
+     "claim": "Masahiro Hara said square marks were chosen because that pattern was least likely to appear on business forms.",
+     "quote": "it was the pattern least likely to appear on various business forms and the like",
+     "source": "DENSO WAVE — History of QR Code",
+     "url": "https://www.qrcode.com/en/history/"
+    },
+    {
+     "id": "F6",
+     "claim": "A similar-looking mark near the code could be mistaken for a position detection pattern, so the pattern had to be unique.",
+     "quote": "their position detection patterns had to be truly unique",
+     "source": "DENSO WAVE — History of QR Code",
+     "url": "https://www.qrcode.com/en/history/"
+    },
+    {
+     "id": "F8",
+     "claim": "The least-used black-and-white ratio on printed matter, 1:1:3:1:1, set the widths of the position detection patterns.",
+     "quote": "came up with the least used ratio of black and white areas on printed matter. This ratio was 1:1:3:1:1",
+     "source": "DENSO WAVE — History of QR Code",
+     "url": "https://www.qrcode.com/en/history/"
+    }
+   ]
+  },
+  {
+   "scene": "s6-detail",
+   "lines": [
+    "L6"
+   ],
+   "purpose": "Detail: the line's key phrase over a different piece of printed matter while the camera drifts across it, so each step of the explanation has its own object on the desk.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F7",
+     "claim": "The team surveyed the ratio of white to black areas in printing on fliers, magazines and cardboard boxes.",
+     "quote": "an exhaustive survey of the ratio of white to black areas in pictures and symbols printed on fliers, magazines, cardboard boxes",
+     "source": "DENSO WAVE — History of QR Code",
+     "url": "https://www.qrcode.com/en/history/"
+    },
+    {
+     "id": "F8",
+     "claim": "The least-used black-and-white ratio on printed matter, 1:1:3:1:1, set the widths of the position detection patterns.",
+     "quote": "came up with the least used ratio of black and white areas on printed matter. This ratio was 1:1:3:1:1",
+     "source": "DENSO WAVE — History of QR Code",
+     "url": "https://www.qrcode.com/en/history/"
+    }
+   ]
+  },
+  {
+   "scene": "s7-payoff",
+   "lines": [
+    "L7"
+   ],
+   "purpose": "Payoff: the answer in a few of the line's words over the opening composition, so the Short loops on its first image.",
+   "conceptual": false,
+   "evidence": [
+    {
+     "id": "F9",
+     "claim": "Searching for this unique ratio lets a reader determine the code's orientation at any scanning angle.",
+     "quote": "the orientation of their code could be determined regardless of the angle of scanning",
+     "source": "DENSO WAVE — History of QR Code",
+     "url": "https://www.qrcode.com/en/history/"
+    },
+    {
+     "id": "F3",
+     "claim": "The developers added positional information indicating that a code is present and should be read.",
+     "quote": "adding positional information indicating the existence of a code to be read",
+     "source": "DENSO WAVE — History of QR Code",
+     "url": "https://www.qrcode.com/en/history/"
+    },
+    {
+     "id": "F8",
+     "claim": "The least-used black-and-white ratio on printed matter, 1:1:3:1:1, set the widths of the position detection patterns.",
+     "quote": "came up with the least used ratio of black and white areas on printed matter. This ratio was 1:1:3:1:1",
+     "source": "DENSO WAVE — History of QR Code",
+     "url": "https://www.qrcode.com/en/history/"
+    }
+   ]
+  }
+ ],
+ "licensing": {
+  "visuals": "all visuals drawn in-house from code (SVG): desk, greeked printed matter, rulers and quote cards; quotes are verbatim from the cited sources; no photographs or third-party media",
+  "fonts": "SIL OFL 1.1 (@fontsource Inter, Source Serif 4, Barlow Semi Condensed 5.3.0)",
+  "audio": "narration TTS + effects/music synthesised by scripts/bto-studio/audio/sound_design.py (no samples)",
+  "thirdPartyMedia": []
+ },
+ "qa": {
+  "objectivePass": false,
+  "report": "../../_temp/review/BTO-301/out/qa-report.md",
+  "contactSheet": "../../_temp/review/BTO-301/out/contact-sheet.png",
+  "sceneSheet": "../../_temp/review/BTO-301/out/scene-sheet.png",
+  "failures": [
+   "UNVERIFIED audio samples clipped: not reported by this FFmpeg build (astats has no clipped-sample count)",
+   "WARN loop continuity (last -> first frame): whole 9.18, photo region 13.25, final-second step 0, ratio 19.23",
+   "FAIL text gate (collisions, caption band, edges, size): 1 FAIL / 0 WARN groups; min essential 30px",
+   "WARN no static hold >= 1.5 s inside a scene (visual change target): longest 2.43 s (s5-detail)"
+  ],
+  "unverified": [
+   "audio samples clipped"
+  ]
+ },
+ "audio": {
+  "integratedLufs": -14,
+  "truePeakDbtp": -3
+ },
+ "performance": {
+  "renderWallSec": 103,
+  "msPerFrame": 105.6,
+  "workers": 3,
+  "peakChromiumRssMb": 3823,
+  "cachedSegments": 0,
+  "segments": 7,
+  "host": "linux x64 4 cpu 16 GB",
+  "totalPipelineSec": 149.5
+ },
+ "cost": {
+  "llmUsd": 0,
+  "ttsUsd": 0,
+  "renderUsd": 0,
+  "note": "local rendering and free/offline TTS; LLM use only when a Claude storyboard draft was requested and approved"
+ },
+ "approvalsNeeded": [
+  "voice: re-narrate with the approved Edge voice (if PREVIEW_ONLY)",
+  "creative sign-off (video-quality-review findings)",
+  "factual sign-off on the traceability table",
+  "owner decision to hand the MP4 to the normal pipeline (never automatic)"
+ ]
+}
