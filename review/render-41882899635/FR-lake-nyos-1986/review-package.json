@@ -1,0 +1,258 @@
+{
+ "schema": "bto-studio.review-package.v1",
+ "channel": "failure-reconstructed",
+ "topicId": "FR-lake-nyos-1986",
+ "slug": "lake-nyos-1986",
+ "title": "The Lake That Released a Cloud of Carbon Dioxide",
+ "verdict": "SHADOW_OF_LIVE_NOT_PUBLISHABLE",
+ "pilot": null,
+ "researchPending": null,
+ "shadow": true,
+ "autoPublish": false,
+ "uploadAttempted": false,
+ "mode": "preview",
+ "quality": "final",
+ "createdAt": "2026-11-04T18:04:48.296Z",
+ "video": "../../_temp/review/FR-lake-nyos-1986/out/lake-nyos-1986-premium-final.mp4",
+ "voice": {
+  "used": "en-US-AndrewMultilingualNeural",
+  "approved": true,
+  "approvedVoice": {
+   "provider": "edge-tts",
+   "voice": "en-US-AndrewMultilingualNeural",
+   "rate": "+1%"
+  },
+  "note": null,
+  "wordTiming": "measured (Edge word boundaries)"
+ },
+ "narrationUnchanged": {
+  "sourceHash": "e64a7f206ef1804f",
+  "lines": [
+   "At night, a lake in Cameroon released a huge cloud of carbon dioxide.",
+   "The gas flowed into villages, and one thousand seven hundred forty six people died.",
+   "Nothing exploded or burned.",
+   "Carbon dioxide from volcanic sources had dissolved deep in the lake.",
+   "Something upset the layers, and the gas burst out.",
+   "Heavier than air, it flowed down the valleys.",
+   "People suffocated where they slept.",
+   "Pipes now vent the lake's gas slowly."
+  ]
+ },
+ "traceability": [
+  {
+   "scene": "s1-hook",
+   "lines": [
+    "L1"
+   ],
+   "purpose": "Hook: frame 0 draws the terrain as clean line work and it gives way at the failure point within the first second, with the case stamp (LAKE NYOS · 1986), so the consequence is on screen before any cause.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "Lake Nyos (1986): released a deadly cloud of carbon dioxide. 1,746 DIED",
+     "source": "Wikipedia — Lake Nyos disaster",
+     "url": "https://en.wikipedia.org/wiki/Lake_Nyos_disaster"
+    }
+   ]
+  },
+  {
+   "scene": "s2-toll",
+   "lines": [
+    "L2"
+   ],
+   "purpose": "Toll: the broken terrain holds while the case's count (1,746 DIED) is stamped below it; the number is the case file's, not computed.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "Lake Nyos (1986): released a deadly cloud of carbon dioxide. 1,746 DIED",
+     "source": "Wikipedia — Lake Nyos disaster",
+     "url": "https://en.wikipedia.org/wiki/Lake_Nyos_disaster"
+    }
+   ]
+  },
+  {
+   "scene": "s3-chain",
+   "lines": [
+    "L3"
+   ],
+   "purpose": "Chain: the case's failure chain scrolls from link 1 to link 1 (\"VOLCANIC CO2 SEEPS INTO LAKE\"), which lights as the line describes it, so consecutive causes read as one continuous investigation.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "VOLCANIC CO2 SEEPS INTO LAKE -> DEEP WATER SATURATES -> TRIGGER UPSETS LAYERS -> GAS BURSTS OUT -> HEAVY CLOUD FLOWS INTO VALLEYS",
+     "source": "Wikipedia — Lake Nyos disaster",
+     "url": "https://en.wikipedia.org/wiki/Lake_Nyos_disaster"
+    },
+    {
+     "id": "F1",
+     "claim": "Lake Nyos (1986): released a deadly cloud of carbon dioxide. 1,746 DIED",
+     "source": "Wikipedia — Lake Nyos disaster",
+     "url": "https://en.wikipedia.org/wiki/Lake_Nyos_disaster"
+    }
+   ]
+  },
+  {
+   "scene": "s4-trigger",
+   "lines": [
+    "L4"
+   ],
+   "purpose": "Trigger: the camera closes in on the failure point of the intact terrain as the crack starts there, while the case file's trigger is set in three words.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F2",
+     "claim": "a sudden overturn of gas-saturated deep water",
+     "source": "Wikipedia — Lake Nyos disaster",
+     "url": "https://en.wikipedia.org/wiki/Lake_Nyos_disaster"
+    },
+    {
+     "id": "F1",
+     "claim": "Lake Nyos (1986): released a deadly cloud of carbon dioxide. 1,746 DIED",
+     "source": "Wikipedia — Lake Nyos disaster",
+     "url": "https://en.wikipedia.org/wiki/Lake_Nyos_disaster"
+    }
+   ]
+  },
+  {
+   "scene": "s5-chain",
+   "lines": [
+    "L5"
+   ],
+   "purpose": "Chain: the case's failure chain scrolls from link 2 to link 3 (\"TRIGGER UPSETS LAYERS\"), which lights as the line describes it, so consecutive causes read as one continuous investigation.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "VOLCANIC CO2 SEEPS INTO LAKE -> DEEP WATER SATURATES -> TRIGGER UPSETS LAYERS -> GAS BURSTS OUT -> HEAVY CLOUD FLOWS INTO VALLEYS",
+     "source": "Wikipedia — Lake Nyos disaster",
+     "url": "https://en.wikipedia.org/wiki/Lake_Nyos_disaster"
+    },
+    {
+     "id": "F1",
+     "claim": "Lake Nyos (1986): released a deadly cloud of carbon dioxide. 1,746 DIED",
+     "source": "Wikipedia — Lake Nyos disaster",
+     "url": "https://en.wikipedia.org/wiki/Lake_Nyos_disaster"
+    }
+   ]
+  },
+  {
+   "scene": "s6-chain",
+   "lines": [
+    "L6"
+   ],
+   "purpose": "Chain: the case's failure chain scrolls from link 3 to link 5 (\"HEAVY CLOUD FLOWS INTO VALLEYS\"), which lights as the line describes it, so consecutive causes read as one continuous investigation.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "VOLCANIC CO2 SEEPS INTO LAKE -> DEEP WATER SATURATES -> TRIGGER UPSETS LAYERS -> GAS BURSTS OUT -> HEAVY CLOUD FLOWS INTO VALLEYS",
+     "source": "Wikipedia — Lake Nyos disaster",
+     "url": "https://en.wikipedia.org/wiki/Lake_Nyos_disaster"
+    },
+    {
+     "id": "F1",
+     "claim": "Lake Nyos (1986): released a deadly cloud of carbon dioxide. 1,746 DIED",
+     "source": "Wikipedia — Lake Nyos disaster",
+     "url": "https://en.wikipedia.org/wiki/Lake_Nyos_disaster"
+    }
+   ]
+  },
+  {
+   "scene": "s7-mechanism",
+   "lines": [
+    "L7"
+   ],
+   "purpose": "Mechanism close-up: the camera closes in on the failure point of the terrain while chain link 5 (\"HEAVY CLOUD FLOWS INTO VALLEYS\") is named, so the cause is seen on the object, not only read on a card.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "VOLCANIC CO2 SEEPS INTO LAKE -> DEEP WATER SATURATES -> TRIGGER UPSETS LAYERS -> GAS BURSTS OUT -> HEAVY CLOUD FLOWS INTO VALLEYS",
+     "source": "Wikipedia — Lake Nyos disaster",
+     "url": "https://en.wikipedia.org/wiki/Lake_Nyos_disaster"
+    },
+    {
+     "id": "F3",
+     "claim": "limnic eruption of carbon dioxide dissolved in the lake's deep layers",
+     "source": "Government source — 16008301 (cited by Wikipedia)",
+     "url": "https://pubmed.ncbi.nlm.nih.gov/16008301"
+    },
+    {
+     "id": "F1",
+     "claim": "Lake Nyos (1986): released a deadly cloud of carbon dioxide. 1,746 DIED",
+     "source": "Wikipedia — Lake Nyos disaster",
+     "url": "https://en.wikipedia.org/wiki/Lake_Nyos_disaster"
+    }
+   ]
+  },
+  {
+   "scene": "s8-payoff",
+   "lines": [
+    "L8"
+   ],
+   "purpose": "Payoff: the lesson in a few of the line's words over the object redrawn whole; the camera returns to the exact frame-0 framing and the lesson clears before the end, so the last frame matches the first and the Short loops (#357).",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F6",
+     "claim": "degassing pipes now vent the lake's carbon dioxide gradually",
+     "source": "Government source — 16008301 (cited by Wikipedia)",
+     "url": "https://pubmed.ncbi.nlm.nih.gov/16008301"
+    },
+    {
+     "id": "F1",
+     "claim": "Lake Nyos (1986): released a deadly cloud of carbon dioxide. 1,746 DIED",
+     "source": "Wikipedia — Lake Nyos disaster",
+     "url": "https://en.wikipedia.org/wiki/Lake_Nyos_disaster"
+    }
+   ]
+  }
+ ],
+ "licensing": {
+  "visuals": "all visuals drawn in-house from code (SVG): generic object-class line drawings, failure chain and stamps; no photographs, footage or third-party media",
+  "fonts": "SIL OFL 1.1 (@fontsource Inter, Source Serif 4, Barlow Semi Condensed 5.3.0)",
+  "audio": "narration TTS + effects/music synthesised by scripts/bto-studio/audio/sound_design.py (no samples)",
+  "thirdPartyMedia": []
+ },
+ "qa": {
+  "objectivePass": true,
+  "report": "../../_temp/review/FR-lake-nyos-1986/out/qa-report.md",
+  "contactSheet": "../../_temp/review/FR-lake-nyos-1986/out/contact-sheet.png",
+  "sceneSheet": "../../_temp/review/FR-lake-nyos-1986/out/scene-sheet.png",
+  "failures": [
+   "UNVERIFIED audio samples clipped: not reported by this FFmpeg build (astats has no clipped-sample count)",
+   "WARN no static hold >= 1.5 s inside a scene (visual change target): longest 1.53 s (s5-chain)"
+  ],
+  "unverified": [
+   "audio samples clipped"
+  ]
+ },
+ "audio": {
+  "integratedLufs": -14.4,
+  "truePeakDbtp": -3
+ },
+ "performance": {
+  "renderWallSec": 79.2,
+  "msPerFrame": 90,
+  "workers": 3,
+  "peakChromiumRssMb": 3691,
+  "cachedSegments": 0,
+  "segments": 8,
+  "host": "linux x64 4 cpu 16 GB",
+  "totalPipelineSec": 139.2
+ },
+ "cost": {
+  "llmUsd": 0,
+  "ttsUsd": 0,
+  "renderUsd": 0,
+  "note": "local rendering and free/offline TTS; LLM use only when a Claude storyboard draft was requested and approved"
+ },
+ "approvalsNeeded": [
+  "voice: re-narrate with the approved Edge voice (if PREVIEW_ONLY)",
+  "creative sign-off (video-quality-review findings)",
+  "factual sign-off on the traceability table",
+  "owner decision to hand the MP4 to the normal pipeline (never automatic)"
+ ]
+}
