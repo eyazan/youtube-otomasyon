@@ -134,8 +134,9 @@ function build(script, style, topic) {
         : `Payoff: the same ${primary} at night, where the hook started, and the channel tagline lands over the stands so the Short loops.`;
       // motion-first hook (2026-11-04 opening review: frame 0 was a wide pitch with tiny players): frame 0 is tight on the
       // ball-carrier already running, and the camera pulls back to the whole play over the first ~2.3 s
+      // the payoff ends pushed in to the hook's frame-0 framing, so the Short still loops (QA loop continuity)
       camera = first ? [{ at: start, x: 540, y: 1000, z: 1.75 }, { at: off(start, 2.3), x: 540, y: 820, z: 1.0 }, { at: end, x: 540, y: 800, z: 1.04 }]
-        : [{ at: start, x: 540, y: 800, z: 1.0 }, { at: end, x: 540, y: 800, z: 1.04 }];
+        : [{ at: start, x: 540, y: 800, z: 1.0 }, { at: "end-1.2", x: 540, y: 820, z: 1.08 }, { at: "end-0.3", x: 540, y: 1000, z: 1.75 }];
     } else if (year && eventYear && year.value > eventYear) {
       kind = "year"; evidence.unshift(...year.facts.filter((f) => !evidence.includes(f)).slice(0, 1)); chips = ["illustrationLabel"];
       layers = [stadium(-1, 1180, 41), { component: "timeline-ruler", screen: true, props: { y: 900, fromYear: eventYear, year: year.value, pxPerYear: 70, enterAt: `${L.id}-0.1`, arriveAt: `${L.id}+0.7`, outAt: end } }];

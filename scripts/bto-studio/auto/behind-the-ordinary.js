@@ -62,7 +62,8 @@ function build(script, style, topic, context = {}) {
       camera: [{ at: start, x: 470, y: 820, z: 1.3 }, { at: end, x: 500, y: 840, z: 1.0 }] };
     if (last && oven) return { kind: "payoff", layers: [door({ viewAt: off(L.id, 0.3), shieldAt: off(L.id, 0.9) })],
       purpose: "Payoff: light leaves through the window to the viewer's eye while the enclosure and mesh glow as one shield: you see in, the energy stays in. Returns to the hook's oven, so the Short loops.",
-      camera: [{ at: start, x: 540, y: 960, z: 1.0 }, { at: "end-0.6", x: 540, y: 860, z: 1.1 }] };
+      // ends on the hook's frame-0 framing (QA loop continuity: the last frame must match the first)
+      camera: [{ at: start, x: 540, y: 960, z: 1.0 }, { at: "end-0.6", x: 470, y: 820, z: 1.3 }] };
     // the source of the waves: the cutaway opens and the magnetron starts launching them (the cage line continues this shot)
     if (/\bmagnetron\b/i.test(T)) return { kind: "source", layers: [{ component: "faraday-box", props: { launchAt: (launchedAt = wordAnchor(L, /^magnetron$/i, 0.8)), packets: 7, magnetron: { at: wordAnchor(L, /^magnetron$/i, 0.8), text: "MAGNETRON" } } }],
       purpose: "Source: the oven in cutaway; as the line names it, the magnetron in the corner starts launching microwaves into the metal box.",

@@ -183,16 +183,17 @@
     } else if (o.mech === "gas") {
       // limnic eruption: the crater lake at the summit, CO2 bubbling out of it, and a heavy cloud that hugs the ground as it
       // runs down the slope into the villages (CO2 is denser than air). Nothing cracks: the mountain is not what failed.
-      g += `<ellipse cx="430" cy="138" rx="78" ry="20" fill="${C.teal}" opacity="${(0.55 * op).toFixed(3)}"/>`;
-      [0, 1, 2, 3, 4, 5].forEach((j) => { const u = (ph + j / 6) % 1; g += `<circle cx="${n1(380 + j * 20 + 6 * Math.sin(since * 3 + j))}" cy="${n1(130 - 70 * u)}" r="${n1((5 + 4 * u) / s * 1.4)}" fill="none" stroke="${C.paper}" stroke-width="${n1(3 / s)}" opacity="${(op * (1 - u) * 0.8).toFixed(3)}"/>`; });
-      const run = clamp((since - 0.3) / 2.6); if (run > 0) { const pts = [[470, 150], [560, 230], [660, 330], [760, 420], [860, 500], [960, 530]];
+      g += `<ellipse cx="425" cy="140" rx="110" ry="30" fill="${C.teal}" opacity="${(0.85 * op).toFixed(3)}"/>`;
+      [0, 1, 2, 3, 4, 5, 6, 7].forEach((j) => { const u = (ph + j / 8) % 1; g += `<circle cx="${n1(345 + j * 22 + 8 * Math.sin(since * 3 + j))}" cy="${n1(130 - 110 * u)}" r="${n1((6 + 8 * u) / s * 1.6)}" fill="none" stroke="${C.paper}" stroke-width="${n1(4 / s)}" opacity="${(op * (1 - u) * 0.9).toFixed(3)}"/>`; });
+      const run = clamp((since - 0.3) / 2.0); if (run > 0) { const pts = [[470, 150], [560, 230], [660, 330], [760, 420], [860, 500], [960, 530]];
         const k = 1 + run * (pts.length - 1); const n = Math.floor(k); const fr = k - n; const path = pts.slice(0, n);
         if (n < pts.length) { const [a, b] = [pts[n - 1], pts[n]]; path.push([a[0] + (b[0] - a[0]) * fr, a[1] + (b[1] - a[1]) * fr]); }
-        const top = path.map(([x, y]) => `${n1(x)} ${n1(y - 26)}`).join(" L"); const bot = path.slice().reverse().map(([x, y]) => `${n1(x)} ${n1(y + 8)}`).join(" L");
-        g += `<path d="M${top} L${bot} Z" fill="${C.paper}" opacity="${(0.32 * op).toFixed(3)}" filter="url(#soft)"/>`; }
+        const top = path.map(([x, y]) => `${n1(x)} ${n1(y - 48)}`).join(" L"); const bot = path.slice().reverse().map(([x, y]) => `${n1(x)} ${n1(y + 10)}`).join(" L");
+        g += `<path d="M${top} L${bot} Z" fill="${C.paper}" opacity="${(0.55 * op).toFixed(3)}" filter="url(#soft)"/>`;
+        const [hx, hy] = path[path.length - 1]; g += `<text x="${n1(hx - 20)}" y="${n1(hy - 64)}" text-anchor="end" font-family="sans-serif" font-weight="700" font-size="${n1(30 / s)}" fill="${C.paper}" opacity="${(0.9 * op * clamp(run * 3)).toFixed(3)}">CO2</text>`; }
     } else if (o.mech === "tornado") {
       // the funnel approaches from the left and its wind strikes the building side-on before it gives way
-      const cx0 = 60 + 90 * clamp(since / 2.2); for (let j = 0; j < 9; j += 1) { const y = -60 + j * 66; const wdt = 150 - j * 14; const sw = Math.sin(since * 2.2 + j * 0.7) * 10;
+      const cx0 = 120 + 60 * clamp(since / 2.2); for (let j = 0; j < 9; j += 1) { const y = -60 + j * 66; const wdt = 150 - j * 14; const sw = Math.sin(since * 2.2 + j * 0.7) * 10;
         g += `<ellipse cx="${n1(cx0 + sw + j * 6)}" cy="${n1(y)}" rx="${n1(wdt / 2)}" ry="${n1(14)}" fill="none" stroke="${C.paper}" stroke-width="${n1(5 / s)}" stroke-dasharray="${n1(40 / s)} ${n1(18 / s)}" stroke-dashoffset="${n1(-since * 160 / s)}" opacity="${(op * 0.75).toFixed(3)}"/>`; }
       [0, 1, 2, 3].forEach((j) => { const y = 0.25 * bh + j * 0.14 * bh; const x0 = cx0 + 70 + 0.3 * bw * ((ph + j * 0.27) % 1);
         g += arrow(x0, y, x0 + 0.14 * bw, y, C.amber, w * 1.4, op * 0.9 * (1 - 0.6 * ((ph + j * 0.27) % 1))); });
