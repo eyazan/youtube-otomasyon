@@ -55,12 +55,15 @@ function build(script, style, topic, context = {}) {
   const mechanismScene = (L, i, evidence) => {
     if (!aperture) return null; const first = i === 0, last = i === lines.length - 1; const start = first ? 0 : `${L.id}-0.15`; const end = `${L.id}.end`;
     const T = String(L.text);
-    if (first && oven) return { kind: "hook", layers: [door({ loupeAt: off(L.id, 0.5), loupe: { x: 420, y: 800, r: 230 }, ...(say(L, /metal mesh/i) ? { label: { at: wordAnchor(L, /^metal$/i, 1.4), text: say(L, /metal mesh/i) } } : {}) })],
+    // motion-first: the loupe opens on the mesh from frame 0 (the review saw a still oven for 0.7 s), so the visual
+    // question - holes in a metal door - is on screen before the first word ends
+    if (first && oven) return { kind: "hook", layers: [door({ loupeAt: 0, loupe: { x: 420, y: 800, r: 230 }, ...(say(L, /metal mesh/i) ? { label: { at: wordAnchor(L, /^metal$/i, 1.4), text: say(L, /metal mesh/i) } } : {}) })],
       purpose: "Hook: frame 0 is the oven with its lit window; as the line names the mesh, a loupe opens on the door and the holes in the metal mesh become visible.",
-      camera: [{ at: start, x: 540, y: 860, z: 1.1 }, { at: end, x: 500, y: 840, z: 1.0 }] };
+      camera: [{ at: start, x: 470, y: 820, z: 1.3 }, { at: end, x: 500, y: 840, z: 1.0 }] };
     if (last && oven) return { kind: "payoff", layers: [door({ viewAt: off(L.id, 0.3), shieldAt: off(L.id, 0.9) })],
       purpose: "Payoff: light leaves through the window to the viewer's eye while the enclosure and mesh glow as one shield: you see in, the energy stays in. Returns to the hook's oven, so the Short loops.",
-      camera: [{ at: start, x: 540, y: 960, z: 1.0 }, { at: "end-0.6", x: 540, y: 860, z: 1.1 }] };
+      // ends on the hook's frame-0 framing (QA loop continuity: the last frame must match the first)
+      camera: [{ at: start, x: 540, y: 960, z: 1.0 }, { at: "end-0.6", x: 470, y: 820, z: 1.3 }] };
     // the source of the waves: the cutaway opens and the magnetron starts launching them (the cage line continues this shot)
     if (/\bmagnetron\b/i.test(T)) return { kind: "source", layers: [{ component: "faraday-box", props: { launchAt: (launchedAt = wordAnchor(L, /^magnetron$/i, 0.8)), packets: 7, magnetron: { at: wordAnchor(L, /^magnetron$/i, 0.8), text: "MAGNETRON" } } }],
       purpose: "Source: the oven in cutaway; as the line names it, the magnetron in the corner starts launching microwaves into the metal box.",
@@ -134,6 +137,10 @@ function build(script, style, topic, context = {}) {
   // a line with no natural short phrase gets no headline: empty text items (and then empty text layers) are removed
   scenes.forEach((sc) => { sc.layers.forEach((l) => { if (l.component === "kinetic-type") l.props.items = l.props.items.filter((it) => String(it.text || "").trim()); });
     sc.layers = sc.layers.filter((l) => l.component !== "kinetic-type" || l.props.items.length); });
+  // a headline followed by a scene with its own headline clears before its line ends, so the transition never overlays
+  // the two in the same band (BTO-301 text gate: "RAREST BLACK-AND-WHITE RATIO" x "ANY ANGLE" during the wipe)
+  const heads = (sc) => sc.layers.filter((l) => l.component === "kinetic-type").flatMap((l) => l.props.items);
+  scenes.forEach((sc, k) => { const nx = scenes[k + 1]; if (nx && heads(nx).length) heads(sc).forEach((it) => { if (it.outAt == null) it.outAt = `${sc.lines[0]}.end-0.25`; }); });
   return {
     schema: "bto-studio.storyboard.v1", channel: script.channel, topicId: script.topicId, slug: script.slug, version: 1,
     author: "auto/behind-the-ordinary (deterministic documentary-desk grammar; needs creative review before publication)",

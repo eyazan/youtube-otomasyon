@@ -80,3 +80,8 @@ test("Failure Reconstructed descriptions lead with strong tags, name the case, a
   assert.equal(lastLine, "#shorts #engineering #VanNormanDam #infrastructure #history");
   assert.equal(hashtagsIn(result.metin).length, 5);
 });
+
+test("revision-pinned Wikipedia URLs (index.php?title=…&oldid=…) give a subject tag; GoalLore Lab has football broad tags", () => {
+  assert.equal(Hashtags.subjectHashtag({ references: [{ url: "https://en.wikipedia.org/w/index.php?title=Argentina_v_England_(1986_FIFA_World_Cup)&oldid=1382184506" }] }), "#ArgentinaVEngland");
+  assert.deepEqual(Hashtags.BROAD["goal-lore-lab"], ["#football", "#soccer"]);
+});

@@ -25,6 +25,9 @@ const zaman = (s) => { s = Math.max(0, Math.round(s)); const h = Math.floor(s / 
 
 // Goruntu kaynaklari: konu.kaynaklar (arsiv) + uretimdeki GORSEL-KAYNAKLARI.txt + kaynak defteri
 function goruntuKaynaklari(konu) {
+  // premium Shorts are original animation: the stock lane's archival/stock credits (kaynak defteri, GORSEL-KAYNAKLARI)
+  // describe footage the premium video does not contain, so none are listed
+  if (konu.tur === "premium") return [];
   const l = [];
   for (const k of konu.kaynaklar || []) {
     if (k.wikimedia) l.push(`Archival film: "${k.wikimedia.replace(/\.(ogv|webm|mp4)$/i, "")}" — Wikimedia Commons (public domain / free licence): https://commons.wikimedia.org/wiki/File:${encodeURIComponent(k.wikimedia.replace(/ /g, "_"))}`);

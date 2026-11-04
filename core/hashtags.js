@@ -45,6 +45,7 @@ const BROAD = Object.freeze({
   "impossible-brief": ["#science", "#whatif"],
   "critical-thread": ["#engineering", "#howitworks"],
   "behind-the-ordinary": ["#design", "#howitworks"],
+  "goal-lore-lab": ["#football", "#soccer"],
 });
 
 // "Lower Van Norman Dam" -> "#LowerVanNormanDam"; "Europa (moon)" -> "#Europa".
@@ -66,7 +67,8 @@ function wikipediaTitles(references = []) {
   const titles = [];
   for (const item of references) {
     if (!item) continue;
-    const url = String(item.url || "").match(/en\.wikipedia\.org\/wiki\/([^#?\s]+)/);
+    // /wiki/<Title> and the revision-pinned /w/index.php?title=<Title>&oldid=… form (GLL, BTO research)
+    const url = String(item.url || "").match(/en\.wikipedia\.org\/wiki\/([^#?\s]+)/) || String(item.url || "").match(/en\.wikipedia\.org\/w\/index\.php\?(?:[^#\s]*&)?title=([^&#\s]+)/);
     if (url) {
       try { titles.push(decodeURIComponent(url[1]).replace(/_/g, " ")); } catch (error) { titles.push(url[1].replace(/_/g, " ")); }
     }

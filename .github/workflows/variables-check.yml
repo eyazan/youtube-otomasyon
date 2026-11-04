@@ -26,6 +26,12 @@ jobs:
           echo "a secret named FR_PREMIUM_PUBLISH exists: ${{ secrets.FR_PREMIUM_PUBLISH != '' }}"
           echo "vars.IB_PREMIUM_PRIMARY == '1': ${{ vars.IB_PREMIUM_PRIMARY == '1' }}"
           echo "vars.IB_PREMIUM_PUBLISH == '1': ${{ vars.IB_PREMIUM_PUBLISH == '1' }}"
+          echo "--- every variable that can enable a YouTube upload (empty = unset) ---"
+          echo "PUBLISH='${{ vars.PUBLISH }}' FR_PUBLISH='${{ vars.FR_PUBLISH }}' IB_PUBLISH='${{ vars.IB_PUBLISH }}' BTO_PUBLISH='${{ vars.BTO_PUBLISH }}'"
+          echo "HLT_PREMIUM_PRIMARY='${{ vars.HLT_PREMIUM_PRIMARY }}' HLT_PREMIUM_PUBLISH='${{ vars.HLT_PREMIUM_PUBLISH }}'"
+          echo "GLL_ACTIVE='${{ vars.GLL_ACTIVE }}' GLL_PUBLISH='${{ vars.GLL_PUBLISH }}' GLL_PREMIUM_PUBLISH='${{ vars.GLL_PREMIUM_PUBLISH }}'"
+          echo "FR_LONGFORM_PUBLISH='${{ vars.FR_LONGFORM_PUBLISH }}' IB_LONGFORM_PUBLISH='${{ vars.IB_LONGFORM_PUBLISH }}' BTO_LONGFORM_PUBLISH='${{ vars.BTO_LONGFORM_PUBLISH }}' CT_LONGFORM_PUBLISH='${{ vars.CT_LONGFORM_PUBLISH }}'"
+          echo "CF_PRODUCTION_DISPATCH='${{ vars.CF_PRODUCTION_DISPATCH }}' FR_PREMIUM_PRIMARY='${{ vars.FR_PREMIUM_PRIMARY }}' IB_PREMIUM_PRIMARY='${{ vars.IB_PREMIUM_PRIMARY }}'"
 
   youtube-audit:
     if: ${{ inputs.audit == '1' }}

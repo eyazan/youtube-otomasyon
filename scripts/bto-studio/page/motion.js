@@ -193,8 +193,11 @@
       return { start: c[0].start, shown: c[0].start, end: Math.min(next, Math.max(c[c.length - 1].end + 0.4, read), ...offAfter), lines }; });
   };
   const captionAt = (t) => {
-    const cue = BTO.cues.find((c) => t >= c.start - 0.03 && t < c.end); if (!cue) return ""; const S = BTO.style.captions;
-    const k = p(t, cue.start - 0.03, cue.start + 0.1);
+    // the opening cue (narration starting within 0.6 s) is fully readable from frame 0: frame 0 is the viewer's first
+    // impression in the Shorts feed, and a half-faded caption there costs the hook (2026-11-04 opening review)
+    const first = (c) => c === BTO.cues[0] && c.start < 0.6;
+    const cue = BTO.cues.find((c) => t >= (first(c) ? 0 : c.start - 0.03) && t < c.end); if (!cue) return ""; const S = BTO.style.captions;
+    const k = first(cue) ? 1 : p(t, cue.start - 0.03, cue.start + 0.1);
     const line = (ws) => ws.map((w) => { const on = t >= w.start - 0.02, now = on && t < w.end + 0.05; return `<span style="color:${now ? S.current : on ? S.spoken : S.upcoming}">${esc(w.text)}</span>`; }).join(" ");
     return `<div data-role="caption" style="position:absolute;left:96px;right:96px;top:${S.top}px;transform:translate(0,${((1 - BTO.ease("decelerate", k)) * 12).toFixed(2)}px);opacity:${k.toFixed(3)};text-align:center;"><span data-role="caption-box" style="display:inline-block;padding:10px 26px 14px;border-radius:20px;background:rgba(21,19,15,.62);font:${S.font};letter-spacing:-0.3px;text-shadow:0 2px 0 rgba(0,0,0,.45);">${cue.lines.map(line).join("<br>")}</span></div>`;
   };

@@ -96,7 +96,9 @@ function researchReviewed(channel, topic) {
 
 // upload metadata from the topic's own research (no invented claims): title, the question, the cited sources, disclosure
 function metadata(channel, topic) {
-  const clean = (x) => String(x || "").replace(/[<>]/g, "").replace(/\s+/g, " ").trim();
+  // source titles scraped from HTML can carry entities ("21 CFR &sect; 1030.10"); decode the common ones, drop the rest
+  const ENT = { amp: "&", sect: "§", quot: '"', apos: "'", nbsp: " ", ndash: "–", mdash: "—", "#39": "'" };
+  const clean = (x) => String(x || "").replace(/&(#39|[a-z]+);/gi, (m, k) => ENT[k.toLowerCase()] || " ").replace(/[<>]/g, "").replace(/\s+/g, " ").trim();
   if (channel.slug === "failure-reconstructed") {
     const konu = J(path.join(channel.paths.state, "konular", `${topic.slug}.json`));
     // the live description engine on the case file, without its stock and archival footage credits: the premium video

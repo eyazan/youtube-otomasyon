@@ -188,6 +188,23 @@ function build(script, style, topic) {
     const k = own || (i > 0 && /^\s*(its|it's|it)\b/i.test(t) ? lastBody(lines[i - 1].text) : null);
     return k && k !== "earth" && k !== body ? k : null; };
   const bothNamed = (t) => /\bearth\b/i.test(t);
+  // a body drawn beside Earth is drawn TO SCALE (mean radius / Earth's, NASA planetary fact sheets): the mechanism board
+  // showed Jupiter, Neptune, Mars, Mercury and the Moon at Earth's size beside it. Beyond 15x either way (the Sun, stars,
+  // Ceres) the smaller body would be a dot, so no side-by-side is drawn at all.
+  // [name, drawn kind, mean radius / Earth's]: a name counts only when it is drawn with that kind
+  const R_EARTH = [[/\bmercury\b/i, "moon", 0.383], [/\bvenus\b/i, "venus", 0.950], [/\bmars\b/i, "rocky", 0.532], [/\bpluto\b/i, "moon", 0.186],
+    [/\beris\b/i, "moon", 0.183], [/\bceres\b/i, "moon", 0.0742], [/\b(the moon|moon's|lunar|moon)\b/i, "moon", 0.273], [/\bjupiter\b/i, "gas", 10.97],
+    [/\bsaturn\b/i, "gas", 9.14], [/\buranus\b/i, "ice", 4.01], [/\bneptune\b/i, "ice", 3.88], [/\b(sun|sun's)\b/i, "sun", 109.1]];
+  const KIND_R = { venus: 0.950, rocky: 0.532, gas: 10.97, ice: 3.88, moon: 0.273, sun: 109.1 };
+  const radiusRatio = (kind, text) => { const m = R_EARTH.find(([re, k]) => k === kind && re.test(String(text || ""))); return m ? m[2] : (KIND_R[kind] ?? null); };
+  const scaledPair = (kind, ratio, extra = {}) => {
+    if (!ratio || ratio > 15 || ratio < 1 / 15) return null;
+    const gap = 50; const u = Math.min(240 / Math.max(ratio, 1), (960 - gap) / (2 * (ratio + 1))); // largest r 240: the old pair used 220/230, so the readout band stays clear
+    const rB = +(u * ratio).toFixed(1), rE = +u.toFixed(1); const x0 = (1080 - (2 * rB + 2 * rE + gap)) / 2;
+    return [{ component: "planet", props: { kind, x: +(x0 + rB).toFixed(1), y: 860, r: rB, spin: 0.18, seed: 7, ...extra } },
+      { component: "planet", props: { kind: "earth", x: +(x0 + 2 * rB + gap + rE).toFixed(1), y: 860, r: rE, spin: 0.3, seed: 3 } }];
+  };
+  const subjectPair = body ? scaledPair(body, radiusRatio(body, [topic.title, topic.topic].join(" ")), body === "gas" && /great red spot/i.test(topic.title + topic.topic) ? { spot: true } : {}) : null;
   const evidenced = (line) => numbersIn(line.text).map((n) => ({ ...n, facts: facts.filter((f) => factHas(f, n.raw) && (!n.upto || factHas(f, n.upto.raw))).map((f) => f.id) })).filter((n) => n.facts.length);
   const valueLabel = (n) => { const r = n.upto ? `${n.raw}–${n.upto.raw}` : n.raw;
     if (n.unit === "°C" || n.unit === "°F") return `${r} ${n.unit}`;
@@ -287,8 +304,8 @@ function build(script, style, topic) {
   // the latitude a line states (anchor "L6" or "L6+0.3"), drawn on the globe in whichever scene kind shows the line
   const latOf = (at) => { const L = lines.find((x) => x.id === String(at).split(/[+-]/)[0]); const n = L && numbersIn(L.text).find((x) => x.quantity === "latitude"); return n ? n.value : null; };
   const subjectView = (at, n, field = null, lat = latOf(at)) => (COMPOSITE.has(W) ? reframe(signature(at, { field, lat }), lat != null ? C_FRAMES[0] : C_FRAMES[n % C_FRAMES.length])
-    // a named body alternates with a side-by-side beside Earth (sizes illustrative)
-    : body && n % 2 === 1 ? [{ component: "planet", props: { kind: body, x: 300, y: 860, r: 220, spin: 0.18, seed: 7, ...(body === "gas" && /great red spot/i.test(topic.title + topic.topic) ? { spot: true } : {}) } }, { component: "planet", props: { kind: "earth", x: 790, y: 860, r: 230, spin: 0.3, seed: 3 } }]
+    // a named body alternates with a side-by-side beside Earth, drawn to scale (scaledPair)
+    : subjectPair && n % 2 === 1 ? subjectPair
     : signature(at).map((l) => (l.component === "planet" ? { ...l, props: { ...l.props, ...FRAMINGS[n % FRAMINGS.length], spin: l.props.spin * (n % 2 ? -1 : 1), ...(n % FRAMINGS.length === 1 ? { ice: false } : {}) } } : l)));
   let subjectN = 0;
   const stars = (seed) => ({ component: "starfield", screen: true, props: { seed, count: 300, drift: [22, 9] } });
@@ -376,13 +393,18 @@ function build(script, style, topic) {
     const drift = i % 2 ? 36 : -36;
     const cam = (z0, z1, y0 = 800, y1 = 800) => [{ at: start, x: 540 - drift, y: y0, z: z0 }, { at: `${L.id}.end`, x: 540 + drift, y: y1, z: Math.max(z1, z0 + 0.14) }];
     const other = last ? null : otherBody(i);
-    const pair = (k) => [{ component: "planet", props: { kind: k, x: 300, y: 860, r: 220, spin: 0.18, seed: 7 } }, { component: "planet", props: { kind: "earth", x: 790, y: 860, r: 230, spin: 0.3, seed: 3 } }];
+    // beyond 15x (the Sun beside Earth) a true-scale pair is impossible: both are drawn, and the scene is labelled
+    // CONCEPTUAL on screen so equal sizes never read as a size comparison
+    const pair = (k) => scaledPair(k, radiusRatio(k, L.text)) || ((chips[0] = "conceptualLabel"), [{ component: "planet", props: { kind: k, x: 300, y: 860, r: 220, spin: 0.18, seed: 7 } }, { component: "planet", props: { kind: "earth", x: 790, y: 860, r: 230, spin: 0.3, seed: 3 } }]);
     const RS = ROT ? rotationScene(L, i, first, last, start) : null;
     if (RS) { kind = RS.kind; layers = RS.layers; purpose = RS.purpose; camera = RS.camera; RS.ev.forEach((id) => { if (!evidence.includes(id)) evidence.push(id); }); if (RS.conceptual) chips[0] = "conceptualLabel";
     } else if (first) {
       kind = "hook"; const n = qty || temp || year;
       // a hook comparing Earth with another body draws both, side by side (sizes illustrative)
-      layers = [stars(11), ...(other && bothNamed(L.text) ? pair(other) : signature(0.15, { probe: W === "earth-interior", field: fieldFor(L) })), ...(n ? [readout(`${L.id}+0.25`, valueLabel(n), 1230)] : [headline(`${L.id}+0.2`, keyPhrase(L.text), 420)])];
+      // motion-first: the field change starts at frame 0, and for the magnetic world the solar wind is already arriving
+      // (it always does; the opening review saw a static globe for the whole first 2 s of IB-EAR-019)
+      const f0 = fieldFor(L);
+      layers = [stars(11), ...(other && bothNamed(L.text) ? pair(other) : signature(0, { probe: W === "earth-interior", field: W === "magnetic" ? { ...(f0 || { from: 1, to: 1 }), wind: true } : f0 })), ...(n ? [readout(`${L.id}+0.25`, valueLabel(n), 1230)] : [headline(`${L.id}+0.2`, keyPhrase(L.text), 420)])];
       purpose = `Hook: frame 0 shows the ${W.replace("-", " ")} itself${n ? ` and the claim's number (${valueLabel(n)}) lands as a readout` : ""}, so the scale of the question is visible before it is explained.`;
       camera = cam(1.12, 1.0);
     } else if (last) {
