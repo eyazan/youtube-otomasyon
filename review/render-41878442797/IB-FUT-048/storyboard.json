@@ -1,0 +1,620 @@
+{
+ "schema": "bto-studio.storyboard.v1",
+ "channel": "impossible-brief",
+ "topicId": "IB-FUT-048",
+ "slug": "what-if-we-sucked-carbon-out-of-the-air",
+ "version": 1,
+ "author": "auto/impossible-brief (deterministic scene grammar, world sky; needs creative review before publication)",
+ "licensingNote": "all visuals drawn in-house from code (SVG): starfield, bodies, slices, ladders and orbits are original; no photographs or third-party media",
+ "treatment": {
+  "educationalObjective": "Answer, with the record's own sourced numbers: If we sucked carbon out of the air, how big would the machines need to be?",
+  "visualHook": "Frame 0: the sky drawn in light against deep space, with the hook's number landing as the first readout.",
+  "mechanismsToAnimate": [
+   "hook",
+   "mechanism",
+   "measure",
+   "year",
+   "payoff"
+  ],
+  "factualRisks": [
+   "probe depth on the planet is exaggerated for visibility (ILLUSTRATION)",
+   "auto storyboard: scale drawings are illustrative unless computed from a cited number (ILLUSTRATION chip)",
+   "IB facts carry sourced claims without stored verbatim quotes (channel standard; see readiness warnings)"
+  ]
+ },
+ "visualMechanism": {
+  "id": "atmosphere",
+  "world": "sky",
+  "declared": true,
+  "supported": true,
+  "draws": "the planet's limb and the layers of air above it",
+  "reason": null
+ },
+ "tail": 0.6,
+ "scenes": [
+  {
+   "id": "s1-hook",
+   "lines": [
+    "L1"
+   ],
+   "start": 0,
+   "env": "space",
+   "evidence": [
+    "F1",
+    "F2",
+    "F3"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "factLabel"
+   ],
+   "visualPurpose": "Hook: frame 0 shows the sky itself and the claim's number (36,000) lands as a readout, so the scale of the question is visible before it is explained.",
+   "camera": [
+    {
+     "at": 0,
+     "x": 576,
+     "y": 800,
+     "z": 1.12
+    },
+    {
+     "at": "L1.end",
+     "x": 504,
+     "y": 800,
+     "z": 1.2600000000000002
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 11,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "planet",
+     "props": {
+      "kind": "earth",
+      "x": 540,
+      "y": 1560,
+      "r": 900,
+      "spin": 0.03,
+      "seed": 2
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L1+0.25",
+        "text": "36,000",
+        "x": 540,
+        "y": 1230,
+        "size": 104,
+        "family": "num"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s2-mechanism",
+   "lines": [
+    "L2"
+   ],
+   "start": "L2-0.15",
+   "env": "void",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1",
+    "F2",
+    "F4"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "factLabel"
+   ],
+   "visualPurpose": "Mechanism: the subject stays on screen while the key idea is set in two or three words; known science.",
+   "camera": [
+    {
+     "at": "L2-0.15",
+     "x": 504,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L2.end",
+     "x": 576,
+     "y": 780,
+     "z": 1.1400000000000001
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 51,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "planet",
+     "props": {
+      "kind": "earth",
+      "x": 540,
+      "y": 820,
+      "r": 330,
+      "spin": 0.03,
+      "seed": 2
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L2+0.25",
+        "text": "BIGGEST AIR-CAPTURE PLANT",
+        "x": 540,
+        "y": 360,
+        "size": 48,
+        "family": "sans"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s3-measure",
+   "lines": [
+    "L3"
+   ],
+   "start": "L3-0.15",
+   "env": "space",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "factLabel"
+   ],
+   "visualPurpose": "Number: the cited value (1,000) lands as a large readout over the subject while the camera pushes in, so the quantity is held on screen as it is spoken.",
+   "camera": [
+    {
+     "at": "L3-0.15",
+     "x": 576,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L3.end",
+     "x": 504,
+     "y": 800,
+     "z": 1.1400000000000001
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 42,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "planet",
+     "props": {
+      "kind": "earth",
+      "x": 250,
+      "y": 1000,
+      "r": 560,
+      "spin": -0.03,
+      "seed": 2,
+      "ice": false
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L3+0.3",
+        "text": "1,000",
+        "x": 540,
+        "y": 1230,
+        "size": 104,
+        "family": "num"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s4-year",
+   "lines": [
+    "L4"
+   ],
+   "start": "L4-0.15",
+   "env": "void",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F2",
+    "F3"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "factLabel"
+   ],
+   "visualPurpose": "Time: the ruler lands on 2050 while the scene shows what started then (the probe begins its descent); the year is from the cited fact.",
+   "camera": [
+    {
+     "at": "L4-0.15",
+     "x": 504,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L4.end",
+     "x": 576,
+     "y": 840,
+     "z": 1.1400000000000001
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 23,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "planet",
+     "props": {
+      "kind": "earth",
+      "x": 540,
+      "y": 1560,
+      "r": 900,
+      "spin": 0.03,
+      "seed": 2
+     }
+    },
+    {
+     "component": "timeline-ruler",
+     "screen": true,
+     "props": {
+      "theme": "dark",
+      "y": 1250,
+      "fromYear": 2044,
+      "year": 2050,
+      "enterAt": "L4-0.1",
+      "arriveAt": "L4+0.6",
+      "outAt": "L4.end"
+     }
+    }
+   ]
+  },
+  {
+   "id": "s5-mechanism",
+   "lines": [
+    "L5"
+   ],
+   "start": "L5-0.15",
+   "env": "space",
+   "transition": {
+    "type": "dissolve",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "estimateLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Mechanism: the subject stays on screen while the key idea is set in two or three words; an estimate, chipped as such.",
+   "camera": [
+    {
+     "at": "L5-0.15",
+     "x": 576,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L5.end",
+     "x": 504,
+     "y": 780,
+     "z": 1.1400000000000001
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 54,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "planet",
+     "props": {
+      "kind": "earth",
+      "x": 540,
+      "y": 1500,
+      "r": 820,
+      "spin": 0.03,
+      "seed": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "s6-measure",
+   "lines": [
+    "L6"
+   ],
+   "start": "L6-0.15",
+   "env": "teal",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F3",
+    "F1",
+    "F2",
+    "F4"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "factLabel"
+   ],
+   "visualPurpose": "Scale: the topic's own values side by side as growing bars, so the size of the change is seen, not read.",
+   "camera": [
+    {
+     "at": "L6-0.15",
+     "x": 504,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L6.end",
+     "x": 576,
+     "y": 800,
+     "z": 1.1400000000000001
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 45,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "scale-ladder",
+     "props": {
+      "x": 190,
+      "y": 560,
+      "w": 640,
+      "log": true,
+      "items": [
+       {
+        "label": "",
+        "value": 2,
+        "valueText": "2",
+        "at": "L6+0.20"
+       },
+       {
+        "label": "",
+        "value": 600,
+        "valueText": "600",
+        "at": "L6+0.65"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s7-mechanism",
+   "lines": [
+    "L7"
+   ],
+   "start": "L7-0.15",
+   "env": "void",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F3"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "factLabel"
+   ],
+   "visualPurpose": "Mechanism: the subject stays on screen while the key idea is set in two or three words; known science.",
+   "camera": [
+    {
+     "at": "L7-0.15",
+     "x": 576,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L7.end",
+     "x": 504,
+     "y": 780,
+     "z": 1.1400000000000001
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 56,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "planet",
+     "props": {
+      "kind": "earth",
+      "x": 540,
+      "y": 820,
+      "r": 330,
+      "spin": -0.03,
+      "seed": 2
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L7+0.25",
+        "text": "OWN EMISSIONS",
+        "x": 540,
+        "y": 360,
+        "size": 60,
+        "family": "sans",
+        "outAt": "L7.end-0.25"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s8-payoff",
+   "lines": [
+    "L8"
+   ],
+   "start": "L8-0.15",
+   "env": "space",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "estimateLabel"
+   ],
+   "visualPurpose": "Payoff: the answer in a few words over the opening composition; the camera eases back to the frame-0 framing so the Short loops on its first image.",
+   "camera": [
+    {
+     "at": "L8-0.15",
+     "x": 540,
+     "y": 800,
+     "z": 1.06
+    },
+    {
+     "at": "end-0.6",
+     "x": 540,
+     "y": 800,
+     "z": 1.12
+    }
+   ],
+   "layers": [
+    {
+     "component": "starfield",
+     "screen": true,
+     "props": {
+      "seed": 11,
+      "count": 300,
+      "drift": [
+       22,
+       9
+      ]
+     }
+    },
+    {
+     "component": "planet",
+     "props": {
+      "kind": "earth",
+      "x": 540,
+      "y": 1560,
+      "r": 900,
+      "spin": 0.03,
+      "seed": 2
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L8+0.3",
+        "text": "HEAVY LIFTING",
+        "x": 540,
+        "y": 420,
+        "size": 60,
+        "family": "sans"
+       }
+      ]
+     }
+    }
+   ]
+  }
+ ]
+}
