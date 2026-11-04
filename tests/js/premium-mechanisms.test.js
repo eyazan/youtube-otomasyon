@@ -121,3 +121,15 @@ test("FR creative fidelity: never a crack for a case that did not crack; gas and
   const t = Adapter.loadTopic("failure-reconstructed", "FR-lake-nyos-1986").topic; const k = FR.objectKind(t, Adapter.studioScript(ch, t).lines);
   assert.equal(FR.structureMechanism(t, k), "gas");
 });
+
+test("FR maritime: no storm for a calm-night grounding (negated in the misconception); passenger and bulk hulls carry no containers", () => {
+  const FR = require("../../scripts/bto-studio/auto/failure-reconstructed.js");
+  const ch = require("../../core/channel-context").getChannel("failure-reconstructed"); const style = require("../../channels/failure-reconstructed/premium/style-pack.json");
+  const sb = (id) => { const t = Adapter.loadTopic("failure-reconstructed", id).topic; return FR.build(Adapter.studioScript(ch, t), style, t); };
+  const layers = (b) => b.scenes.flatMap((s) => s.layers);
+  const cc = layers(sb("FR-costa-concordia-2012"));
+  assert.ok(!cc.some((l) => l.component === "storm-track" || (l.component === "heavy-seas" && l.props.storm)), "Costa Concordia: no storm");
+  assert.ok(cc.filter((l) => l.component === "heavy-seas").every((l) => l.props.profile === "passenger"));
+  assert.ok(layers(sb("FR-edmund-fitzgerald-1975")).filter((l) => l.component === "heavy-seas").every((l) => l.props.profile === "bulk"));
+  assert.ok(layers(sb("FR-el-faro-2015")).some((l) => l.component === "heavy-seas" && l.props.storm), "El Faro keeps its hurricane");
+});

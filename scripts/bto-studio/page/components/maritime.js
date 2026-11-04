@@ -23,13 +23,19 @@
   const LBL = () => BTO.style.type.scale.label;
 
   // generic cargo ship side profile, bow to the right, waterline at y = 0, length 1 = 600 px
-  function shipProfile(L, { stroke, fill, lights = 1, op = 1 } = {}) {
+  // profile: "cargo" (container stacks, default), "passenger" (cruise ship / liner / ferry: tiers of lit decks along the
+  // hull, no containers), "bulk" (lake or ore carrier: flat hatch covers, no containers)
+  function shipProfile(L, { stroke, fill, lights = 1, op = 1, profile = "cargo" } = {}) {
     const C = P(); const s = L / 600; const p = (pts) => "M" + pts.map(([x, y]) => `${n1(x * s)} ${n1(y * s)}`).join(" L") + " Z";
     const hull = p([[-300, -46], [270, -46], [305, -70], [300, -40], [272, 30], [-262, 30], [-300, -10]]);
     const house = p([[-270, -46], [-270, -150], [-170, -150], [-170, -46]]);
     const bridge = p([[-280, -150], [-280, -178], [-150, -178], [-150, -150]]);
     const stack = p([[-235, -178], [-232, -230], [-196, -230], [-200, -178]]);
-    let boxes = ""; for (let i = 0; i < 7; i += 1) { const x0 = -150 + i * 58; boxes += `<rect x="${n1(x0 * s)}" y="${n1(-46 * s - (i % 3 === 1 ? 64 : 46) * s)}" width="${n1(54 * s)}" height="${n1((i % 3 === 1 ? 64 : 46) * s)}" fill="${i % 2 ? "#3b5566" : "#4a3f36"}" stroke="${stroke || C.text}" stroke-width="2" opacity="0.95"/>`; }
+    let boxes = ""; if (profile === "passenger") { for (let d = 0; d < 3; d += 1) { const y0 = -46 - (d + 1) * 34; const xa = -250 + d * 20, xb = 230 - d * 30;
+        boxes += `<rect x="${n1(xa * s)}" y="${n1(y0 * s)}" width="${n1((xb - xa) * s)}" height="${n1(34 * s)}" fill="#d8dde0" stroke="${stroke || C.text}" stroke-width="2"/>`;
+        for (let x = xa + 14; x < xb - 10; x += 26) boxes += `<rect x="${n1(x * s)}" y="${n1((y0 + 12) * s)}" width="${n1(12 * s)}" height="${n1(9 * s)}" fill="${C.amber}" opacity="${(0.8 * lights).toFixed(2)}"/>`; } }
+    else if (profile === "bulk") { for (let i = 0; i < 9; i += 1) boxes += `<rect x="${n1((-150 + i * 46) * s)}" y="${n1(-56 * s)}" width="${n1(38 * s)}" height="${n1(10 * s)}" fill="#4a5a64" stroke="${stroke || C.text}" stroke-width="2"/>`; }
+    else for (let i = 0; i < 7; i += 1) { const x0 = -150 + i * 58; boxes += `<rect x="${n1(x0 * s)}" y="${n1(-46 * s - (i % 3 === 1 ? 64 : 46) * s)}" width="${n1(54 * s)}" height="${n1((i % 3 === 1 ? 64 : 46) * s)}" fill="${i % 2 ? "#3b5566" : "#4a3f36"}" stroke="${stroke || C.text}" stroke-width="2" opacity="0.95"/>`; }
     let win = ""; for (let i = 0; i < 4; i += 1) win += `<rect x="${n1((-268 + i * 30) * s)}" y="${n1(-170 * s)}" width="${n1(18 * s)}" height="${n1(10 * s)}" fill="${C.amber}" opacity="${(0.85 * lights).toFixed(2)}"/>`;
     return `<g opacity="${op}">${boxes}<path d="${hull}" fill="${fill || "#1c2b36"}" stroke="${stroke || C.text}" stroke-width="4" stroke-linejoin="round"/>`
       + `<path d="${p([[-298, 6], [282, 6], [276, 30], [-262, 30]])}" fill="#7a2e2a" opacity="0.9"/>`
@@ -66,13 +72,13 @@
       const heel = sinkK * (o.sinkTilt == null ? 24 : o.sinkTilt);
       const depth = sinkK * (o.sunk ? 300 : 360); const shrink = 1 - beam * 0.18; // broadside: the hull shortens as she turns toward us
       g += sea(t, 0, "#203644", 0.95);
-      g += `<g transform="translate(${n1(sx)} ${n1(sy + depth - 6)}) rotate(${n1(pitch + heel)}) scale(${n1(shrink)} 1)">${shipProfile(L, { lights: (o.lights == null ? 1 : o.lights) * (o.powerlessAt != null && t > o.powerlessAt ? 0.15 : 1) * (1 - sinkK), op: o.sunk ? 0.35 : 1 })}</g>`;
+      g += `<g transform="translate(${n1(sx)} ${n1(sy + depth - 6)}) rotate(${n1(pitch + heel)}) scale(${n1(shrink)} 1)">${shipProfile(L, { profile: o.profile, lights: (o.lights == null ? 1 : o.lights) * (o.powerlessAt != null && t > o.powerlessAt ? 0.15 : 1) * (1 - sinkK), op: o.sunk ? 0.35 : 1 })}</g>`;
       // spray burst over the bow
       if (o.hitAt != null && t >= o.hitAt && t < o.hitAt + 1.4) { const u = (t - o.hitAt) / 1.4; for (let i = 0; i < 26; i += 1) { const a = -1.9 + (i / 26) * 1.5, v = 260 + (i % 5) * 70;
         g += `<circle cx="${n1(sx + L * 0.4 + Math.cos(a) * v * u)}" cy="${n1(sy - 40 + Math.sin(a) * v * u + 420 * u * u)}" r="${n1(10 + (i % 4) * 5)}" fill="#dfe8ee" opacity="${n1(0.8 * (1 - u))}"/>`; } }
       g += sea(t, 1, "#16303e", o.sunk ? 0.72 : 0.92) + sea(t, 2, "#0f2531", 0.96);
       // a sunk ship stays readable as a faint outline under the surface (the toll scene)
-      if (o.sunk) g += `<g transform="translate(${n1(sx)} ${n1(sy + depth)}) rotate(${n1(heel)})" opacity="0.32">${shipProfile(L, { lights: 0, fill: "none" })}</g>`;
+      if (o.sunk) g += `<g transform="translate(${n1(sx)} ${n1(sy + depth)}) rotate(${n1(heel)})" opacity="0.32">${shipProfile(L, { profile: o.profile, lights: 0, fill: "none" })}</g>`;
       // foam lines on the crests
       for (let x = -20; x < 1100; x += 60) { const y = wave(x, t, 2); g += `<path d="M${x} ${n1(y)} q15 -8 30 0" stroke="#cfe0ea" stroke-width="3" fill="none" opacity="0.35"/>`; }
       // bubbles once she is under

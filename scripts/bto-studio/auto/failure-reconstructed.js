@@ -201,7 +201,13 @@ function build(script, style, topic) {
     sink: /\b(sank|sinks?|sinking|founder\w*|went down|took over|overwhelm\w*|swamp\w*|capsiz\w*|rolled over)\b/i,
     flood: /\b(flood\w*|water (came|poured|rushed|entered|got|flowed)|took on water|listed|listing|lists|heel\w*|hatch\w*|scuttles?|bow doors?|breach\w*)\b/i,
     engine: /\b(engines?|propulsion|oil pressure|boilers?|propellers?|steering|rudder|lost power|power failed)\b/i };
-  const caseAll = caseText(topic, lines); const stormCase = SEA.storm.test(caseAll) && /\b(hurricane|storm|typhoon|cyclone|gale)\b/i.test(caseAll);
+  // a storm only when the case says there was one: the misconception line and negations ("wasn't lost to a storm") never
+  // count (#416 review: Costa Concordia, a calm-night grounding, was drawn in a hurricane)
+  const v0 = topic.case || {}; const caseAll = caseText({ ...topic, case: { ...v0, yanilgi: "" } }, lines.filter((l) => !/\b(wasn'?t|was not|not|no|never)\b[^.]{0,40}\b(storm|hurricane|weather)\b/i.test(l.text || "")))
+    .replace(/\b(wasn'?t|was not|not|no|never)\b[^.]{0,40}\b(storm|hurricane|weather)\b[^.]*/gi, "");
+  const stormCase = /\b(hurricane|storm|typhoon|cyclone|gale)\b/i.test(caseAll);
+  // the drawn hull class: passenger ships carry decks of windows, lake/ore carriers flat hatch covers; never containers on them
+  const profile = /\b(cruise|liner|ferry|ferries|passenger|steamboat|steamship)\b/i.test(caseText(topic, lines)) ? "passenger" : /\b(freighter|ore|bulk|lake superior|great lakes|laker|collier|tanker)\b/i.test(caseText(topic, lines)) && !/\bcontainer\b/i.test(caseText(topic, lines)) ? "bulk" : "cargo";
   const seaClass = (text) => (SEA.stale.test(text) ? "stale" : SEA.sink.test(text) ? "sink" : SEA.flood.test(text) ? "flood" : SEA.engine.test(text) ? "engine" : SEA.storm.test(text) ? "storm" : null);
   const chainFor = (re) => chain.find((c) => re.test(c)) || null;
   // a word of the line as a time anchor ("L6:stopped"), or an offset from the line start when no word matches
@@ -210,19 +216,21 @@ function build(script, style, topic) {
   const maritime = (L, i, role) => {
     if (kind !== "ship") return null; const start = i === 0 ? 0 : `${L.id}-0.15`; const end = `${L.id}.end`;
     const k = String(role).startsWith("chain:") ? +role.split(":")[1] : -1;
-    const cls = role === "hook" || role === "toll" || role === "payoff" ? role : seaClass(L.text) || (k >= 0 ? seaClass(chain[k] || "") : null);
+    let cls = role === "hook" || role === "toll" || role === "payoff" ? role : seaClass(L.text) || (k >= 0 ? seaClass(chain[k] || "") : null);
+    if (!stormCase && (cls === "storm" || cls === "stale")) cls = null; // no storm chart for a case without a storm
+    if (cls === "storm" && !SEA.storm.test(L.text)) cls = null; // a chart only for a line about the storm or the route
     const evidence = [F(role === "payoff" ? "lesson" : k >= 0 ? "chain" : "case"), F("mechanism"), F("case")];
     const head = (txt) => (txt ? [headline(`${L.id}+0.2`, String(txt).toUpperCase(), 330, S.title, txt)] : []);
-    if (cls === "hook") return { kind_: "hook", evidence: [F("case")], layers: [{ component: "heavy-seas", props: { storm: stormCase, swell: 85, hitAt: 0.2, seed: 5 } }, ...(stamp ? [headline(`${L.id}+0.3`, stamp, 330, S.title)] : [])],
+    if (cls === "hook") return { kind_: "hook", evidence: [F("case")], layers: [{ component: "heavy-seas", props: { storm: stormCase, swell: stormCase ? 85 : 30, hitAt: 0.2, seed: 5, profile } }, ...(stamp ? [headline(`${L.id}+0.3`, stamp, 330, S.title)] : [])],
       purpose: `Hook: frame 0 is the ship already in heavy seas${stormCase ? " with the storm wall on the horizon" : ""}; a sea breaks over the bow in the first second, before any cause is named.`,
       camera: [{ at: start, x: 560, y: 900, z: 1.12 }, { at: end, x: 520, y: 880, z: 1.0 }] };
-    if (cls === "toll") return { kind_: "toll", evidence: [F("case")], layers: [{ component: "heavy-seas", props: { sunk: true, swell: 28, seed: 5 } }, readout(`${L.id}+0.25`, toll, 640)],
+    if (cls === "toll") return { kind_: "toll", evidence: [F("case")], layers: [{ component: "heavy-seas", props: { sunk: true, swell: 28, seed: 5, profile } }, readout(`${L.id}+0.25`, toll, 640)],
       purpose: `Toll: the surface closes over the ship's outline while the case's count (${toll}) is stamped; the number is the case file's.`,
       camera: [{ at: start, x: 540, y: 960, z: 1.0 }, { at: end, x: 540, y: 1000, z: 1.1 }] };
     if (cls === "payoff") { const lesson = phrase(L.text) ? headline(`${L.id}+0.3`, phrase(L.text), 330, S.title, L.text) : null; if (lesson) lesson.props.items[0].outAt = "end-0.45";
       const detour = stormCase && /\b(route|routing|weather|forecast)\w*/i.test(L.text);
       return { kind_: "payoff", evidence, layers: detour ? [{ component: "storm-track", props: { route, track, progress: [0.55, 0.55], detour: { at: `${L.id}+0.2`, path: [[170, 1180], [260, 900], [380, 700], [560, 580], [860, 560]] } } }, ...(lesson ? [lesson] : [])]
-        : [{ component: "heavy-seas", props: { storm: false, swell: 40, seed: 5 } }, ...(lesson ? [lesson] : [])],
+        : [{ component: "heavy-seas", props: { storm: false, swell: 40, seed: 5, profile } }, ...(lesson ? [lesson] : [])],
       purpose: detour ? "Payoff: the lesson on the chart: the route is redrawn to keep clear of the storm's track, the change the rules now require." : "Payoff: the lesson over the ship whole again in moderate seas.",
       camera: [{ at: start, x: 540, y: 880, z: 1.0 }, { at: "end-0.6", x: 560, y: 900, z: 1.12 }] }; }
     if (cls === "storm") return { kind_: "storm", evidence, layers: [{ component: "storm-track", props: { route, track, from: off(L.id, 0.1), to: end, progress: [0.12, 0.8] } }, ...head(chainFor(/\b(route|course|storm|path)\b/i))],
@@ -239,7 +247,7 @@ function build(script, style, topic) {
       return { kind_: "propulsion", evidence, layers: [{ component: "propulsion", props: { stopAt: wordAt(L, /^(stopped|stop|failed|lost|died|quit)/i, 0.8), label: oil, stateLabel: chainFor(SEA.engine) ? { at: off(L.id, 1.2), text: chainFor(SEA.engine) } : null } }],
         purpose: "Propulsion lost: the stern in cutaway; the oil-pressure needle falls, the engine light dies and the propeller spins down to a stop.",
         camera: [{ at: start, x: 560, y: 800, z: 1.0 }, { at: end, x: 620, y: 820, z: 1.1 }] }; }
-    if (cls === "sink") return { kind_: "sinking", evidence, layers: [{ component: "heavy-seas", props: { storm: stormCase, swell: 95, powerlessAt: /\b(without power|no power|powerless|adrift|drift\w*)\b/i.test(L.text) ? start : null, sinkAt: off(L.id, 0.45), sinkDur: 1.6, seed: 5 } }],
+    if (cls === "sink") return { kind_: "sinking", evidence, layers: [{ component: "heavy-seas", props: { profile, storm: stormCase, swell: stormCase ? 95 : 40, powerlessAt: /\b(without power|no power|powerless|adrift|drift\w*)\b/i.test(L.text) ? start : null, sinkAt: off(L.id, 0.45), sinkDur: 1.6, seed: 5 } }],
       purpose: "Overwhelmed: without propulsion the ship lies broadside to the sea, rolls, and goes under.",
       camera: [{ at: start, x: 540, y: 920, z: 1.0 }, { at: end, x: 540, y: 980, z: 1.08 }] };
     return null;
