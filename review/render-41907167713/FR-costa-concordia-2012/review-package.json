@@ -1,0 +1,295 @@
+{
+ "schema": "bto-studio.review-package.v1",
+ "channel": "failure-reconstructed",
+ "topicId": "FR-costa-concordia-2012",
+ "slug": "costa-concordia-2012",
+ "title": "The Cruise Ship That Sailed Too Close to Shore",
+ "verdict": "SHADOW_OF_LIVE_NOT_PUBLISHABLE",
+ "layers": {
+  "TECHNICAL": {
+   "blocking": false,
+   "failed": [],
+   "warnings": [
+    "loop continuity (last -> first frame)"
+   ]
+  },
+  "CREATIVE": {
+   "blocking": false,
+   "advisory": []
+  }
+ },
+ "pilot": null,
+ "researchPending": null,
+ "shadow": true,
+ "autoPublish": false,
+ "uploadAttempted": false,
+ "mode": "preview",
+ "quality": "final",
+ "createdAt": "2026-11-04T20:32:23.570Z",
+ "video": "../../_temp/review/FR-costa-concordia-2012/out/costa-concordia-2012-premium-final.mp4",
+ "voice": {
+  "used": "en-US-AndrewMultilingualNeural",
+  "approved": true,
+  "approvedVoice": {
+   "provider": "edge-tts",
+   "voice": "en-US-AndrewMultilingualNeural",
+   "rate": "+1%"
+  },
+  "note": null,
+  "wordTiming": "measured (Edge word boundaries)"
+ },
+ "narrationUnchanged": {
+  "sourceHash": "b98882c2a9b1fc20",
+  "lines": [
+   "A giant cruise ship struck a rock off the Italian island of Giglio.",
+   "It flooded and rolled onto its side, and thirty two people died.",
+   "The ship had left its route to sail close to the island.",
+   "A rock tore a long gash in the hull.",
+   "Water flooded the engine rooms, and power failed.",
+   "The order to evacuate came very late.",
+   "By then, the list made many lifeboats hard to use.",
+   "Cruise routes and evacuation rules were tightened afterward."
+  ]
+ },
+ "traceability": [
+  {
+   "scene": "s1-hook",
+   "lines": [
+    "L1"
+   ],
+   "purpose": "Hook: frame 0 is the ship already in heavy seas; a sea breaks over the bow in the first second, before any cause is named.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "the Costa Concordia (2012): capsized off the island of Giglio. 32 DIED",
+     "source": "Wikipedia — Costa Concordia disaster",
+     "url": "https://en.wikipedia.org/wiki/Costa_Concordia_disaster"
+    }
+   ]
+  },
+  {
+   "scene": "s2-toll",
+   "lines": [
+    "L2"
+   ],
+   "purpose": "Toll: seen bow-on the hull rolls onto its side in shallow water (she did not go under) while the case's count (32 DIED) is stamped.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "the Costa Concordia (2012): capsized off the island of Giglio. 32 DIED",
+     "source": "Wikipedia — Costa Concordia disaster",
+     "url": "https://en.wikipedia.org/wiki/Costa_Concordia_disaster"
+    }
+   ]
+  },
+  {
+   "scene": "s3-trigger",
+   "lines": [
+    "L3"
+   ],
+   "purpose": "Trigger: in calm water the ship turns in close to the shore, toward the rock just under the surface; the impact comes on the next line.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F2",
+     "claim": "a close sail-past near the island at night",
+     "source": "Wikipedia — Costa Concordia disaster",
+     "url": "https://en.wikipedia.org/wiki/Costa_Concordia_disaster"
+    },
+    {
+     "id": "F1",
+     "claim": "the Costa Concordia (2012): capsized off the island of Giglio. 32 DIED",
+     "source": "Wikipedia — Costa Concordia disaster",
+     "url": "https://en.wikipedia.org/wiki/Costa_Concordia_disaster"
+    }
+   ]
+  },
+  {
+   "scene": "s4-grounding",
+   "lines": [
+    "L4"
+   ],
+   "purpose": "Grounding: in calm water the ship comes in close and stops over a rock just under the surface; a gash opens along the hull below the waterline.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "SAIL-PAST CLOSE TO SHORE -> ROCK TEARS THE HULL -> ENGINE ROOMS FLOOD -> DELAYED EVACUATION -> SHIP CAPSIZES",
+     "source": "Wikipedia — Costa Concordia disaster",
+     "url": "https://en.wikipedia.org/wiki/Costa_Concordia_disaster"
+    },
+    {
+     "id": "F3",
+     "claim": "hull breach from a rock strike flooding several compartments, then a list and capsize",
+     "source": "Government source — naufragio giglio 2 (cited by Wikipedia)",
+     "url": "http://www.isprambiente.gov.it/site/en-gb/Archive/Home_page_Documents/Documents/naufragio_giglio_2.html"
+    },
+    {
+     "id": "F1",
+     "claim": "the Costa Concordia (2012): capsized off the island of Giglio. 32 DIED",
+     "source": "Wikipedia — Costa Concordia disaster",
+     "url": "https://en.wikipedia.org/wiki/Costa_Concordia_disaster"
+    }
+   ]
+  },
+  {
+   "scene": "s5-flooding",
+   "lines": [
+    "L5"
+   ],
+   "purpose": "Flooding: a cut through the hull in a level sea; water pours through the opening, the hold on that side fills and the ship heels toward it (inclinometer).",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "SAIL-PAST CLOSE TO SHORE -> ROCK TEARS THE HULL -> ENGINE ROOMS FLOOD -> DELAYED EVACUATION -> SHIP CAPSIZES",
+     "source": "Wikipedia — Costa Concordia disaster",
+     "url": "https://en.wikipedia.org/wiki/Costa_Concordia_disaster"
+    },
+    {
+     "id": "F3",
+     "claim": "hull breach from a rock strike flooding several compartments, then a list and capsize",
+     "source": "Government source — naufragio giglio 2 (cited by Wikipedia)",
+     "url": "http://www.isprambiente.gov.it/site/en-gb/Archive/Home_page_Documents/Documents/naufragio_giglio_2.html"
+    },
+    {
+     "id": "F1",
+     "claim": "the Costa Concordia (2012): capsized off the island of Giglio. 32 DIED",
+     "source": "Wikipedia — Costa Concordia disaster",
+     "url": "https://en.wikipedia.org/wiki/Costa_Concordia_disaster"
+    }
+   ]
+  },
+  {
+   "scene": "s6-evacuation",
+   "lines": [
+    "L6"
+   ],
+   "purpose": "Evacuation: the ship at rest in calm water, lights still on, while the line names what was late.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "SAIL-PAST CLOSE TO SHORE -> ROCK TEARS THE HULL -> ENGINE ROOMS FLOOD -> DELAYED EVACUATION -> SHIP CAPSIZES",
+     "source": "Wikipedia — Costa Concordia disaster",
+     "url": "https://en.wikipedia.org/wiki/Costa_Concordia_disaster"
+    },
+    {
+     "id": "F3",
+     "claim": "hull breach from a rock strike flooding several compartments, then a list and capsize",
+     "source": "Government source — naufragio giglio 2 (cited by Wikipedia)",
+     "url": "http://www.isprambiente.gov.it/site/en-gb/Archive/Home_page_Documents/Documents/naufragio_giglio_2.html"
+    },
+    {
+     "id": "F1",
+     "claim": "the Costa Concordia (2012): capsized off the island of Giglio. 32 DIED",
+     "source": "Wikipedia — Costa Concordia disaster",
+     "url": "https://en.wikipedia.org/wiki/Costa_Concordia_disaster"
+    }
+   ]
+  },
+  {
+   "scene": "s7-list",
+   "lines": [
+    "L7"
+   ],
+   "purpose": "List, seen bow-on: the flooded hull heels over and the inclinometer swings; the boats on the high side can no longer be lowered.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "SAIL-PAST CLOSE TO SHORE -> ROCK TEARS THE HULL -> ENGINE ROOMS FLOOD -> DELAYED EVACUATION -> SHIP CAPSIZES",
+     "source": "Wikipedia — Costa Concordia disaster",
+     "url": "https://en.wikipedia.org/wiki/Costa_Concordia_disaster"
+    },
+    {
+     "id": "F3",
+     "claim": "hull breach from a rock strike flooding several compartments, then a list and capsize",
+     "source": "Government source — naufragio giglio 2 (cited by Wikipedia)",
+     "url": "http://www.isprambiente.gov.it/site/en-gb/Archive/Home_page_Documents/Documents/naufragio_giglio_2.html"
+    },
+    {
+     "id": "F1",
+     "claim": "the Costa Concordia (2012): capsized off the island of Giglio. 32 DIED",
+     "source": "Wikipedia — Costa Concordia disaster",
+     "url": "https://en.wikipedia.org/wiki/Costa_Concordia_disaster"
+    }
+   ]
+  },
+  {
+   "scene": "s8-payoff",
+   "lines": [
+    "L8"
+   ],
+   "purpose": "Payoff: the lesson over the ship whole again in moderate seas.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F6",
+     "claim": "cruise route and evacuation rules were tightened",
+     "source": "Government source — naufragio giglio 2 (cited by Wikipedia)",
+     "url": "http://www.isprambiente.gov.it/site/en-gb/Archive/Home_page_Documents/Documents/naufragio_giglio_2.html"
+    },
+    {
+     "id": "F3",
+     "claim": "hull breach from a rock strike flooding several compartments, then a list and capsize",
+     "source": "Government source — naufragio giglio 2 (cited by Wikipedia)",
+     "url": "http://www.isprambiente.gov.it/site/en-gb/Archive/Home_page_Documents/Documents/naufragio_giglio_2.html"
+    },
+    {
+     "id": "F1",
+     "claim": "the Costa Concordia (2012): capsized off the island of Giglio. 32 DIED",
+     "source": "Wikipedia — Costa Concordia disaster",
+     "url": "https://en.wikipedia.org/wiki/Costa_Concordia_disaster"
+    }
+   ]
+  }
+ ],
+ "licensing": {
+  "visuals": "all visuals drawn in-house from code (SVG): generic object-class line drawings, failure chain and stamps; no photographs, footage or third-party media",
+  "fonts": "SIL OFL 1.1 (@fontsource Inter, Source Serif 4, Barlow Semi Condensed 5.3.0)",
+  "audio": "narration TTS + effects/music synthesised by scripts/bto-studio/audio/sound_design.py (no samples)",
+  "thirdPartyMedia": []
+ },
+ "qa": {
+  "objectivePass": true,
+  "report": "../../_temp/review/FR-costa-concordia-2012/out/qa-report.md",
+  "contactSheet": "../../_temp/review/FR-costa-concordia-2012/out/contact-sheet.png",
+  "sceneSheet": "../../_temp/review/FR-costa-concordia-2012/out/scene-sheet.png",
+  "failures": [
+   "UNVERIFIED audio samples clipped: not reported by this FFmpeg build (astats has no clipped-sample count)",
+   "WARN loop continuity (last -> first frame): whole 5.48, photo region 8.03, final-second step 0.43, ratio 6.4"
+  ],
+  "unverified": [
+   "audio samples clipped"
+  ]
+ },
+ "audio": {
+  "integratedLufs": -14.3,
+  "truePeakDbtp": -3
+ },
+ "performance": {
+  "renderWallSec": 58.5,
+  "msPerFrame": 66.6,
+  "workers": 3,
+  "peakChromiumRssMb": 3702,
+  "cachedSegments": 0,
+  "segments": 8,
+  "host": "linux x64 4 cpu 16 GB",
+  "totalPipelineSec": 98.2
+ },
+ "cost": {
+  "llmUsd": 0,
+  "ttsUsd": 0,
+  "renderUsd": 0,
+  "note": "local rendering and free/offline TTS; LLM use only when a Claude storyboard draft was requested and approved"
+ },
+ "approvalsNeeded": [
+  "voice: re-narrate with the approved Edge voice (if PREVIEW_ONLY)",
+  "creative sign-off (video-quality-review findings)",
+  "factual sign-off on the traceability table",
+  "owner decision to hand the MP4 to the normal pipeline (never automatic)"
+ ]
+}
