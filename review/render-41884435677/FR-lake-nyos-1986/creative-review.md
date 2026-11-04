@@ -1,0 +1,17 @@
+# Creative review (../../_temp/review/FR-lake-nyos-1986/out/lake-nyos-1986-premium-final.mp4)
+
+Measurements describe the frames; they are not quality scores. Human fields are filled by a reviewer (creative-notes.json) and are marked with who wrote them.
+
+| scene | technique | transition | motion | novelty | offset | text share | min text | flags | human verdict |
+|---|---|---|---|---|---|---|---|---|---|
+| s1-hook | kinetic-typography | cut | 0.0157 | null | 0.069 | 0.019 | 30.6 | SMALL_TEXT, CENTRED_FLAT, THIN | not reviewed |
+| s2-toll | kinetic-typography | scan-wipe | 0.0174 | 0.08 | 0.005 | 0.025 | 30.6 | SMALL_TEXT, CENTRED_FLAT, THIN | not reviewed |
+| s3-chain |  | iris | 0.0028 | 0.075 | 0.034 | 0.061 | 40 | LOW_MOTION, THIN | not reviewed |
+| s4-trigger | kinetic-typography | square-iris | 0.0389 | 0.0911 | 0.047 | 0.035 | 33.2 | SMALL_TEXT, CENTRED_FLAT, THIN | not reviewed |
+| s5-chain |  | scan-wipe | 0.0153 | 0.0939 | 0.102 | 0.051 | 40 | THIN | not reviewed |
+| s6-chain |  | continuity | 0.019 | 0.0235 | 0.095 | 0.049 | 40 | LOW_NOVELTY, THIN, SAME_ENV_AS_PREVIOUS (blueprint) | not reviewed |
+| s7-mechanism | kinetic-typography | iris | 0.021 | 0.0835 | 0.055 | 0.033 | 40 | CENTRED_FLAT, THIN | not reviewed |
+| s8-payoff |  | square-iris | 0.0137 | 0.0803 | 0.015 | 0.023 | 44 | THIN | not reviewed |
+
+## Reviewer notes (judgement, not measurement)
+
