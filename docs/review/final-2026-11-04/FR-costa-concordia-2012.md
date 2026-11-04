@@ -68,7 +68,7 @@ The signed FR publication policy (2026-10-28) already authorises unattended publ
    node core/pipeline/premium-publish.js reserve --channel failure-reconstructed --topic FR-costa-concordia-2012 --by <your name>
    ```
 3. In `channels/failure-reconstructed/premium/approvals/FR-costa-concordia-2012.json`, set:
-   - `contentSha256` to `CONTENT_HASH` (the reviewed render's content hash);
+   - `contentSha256` to the hash printed by `node scripts/bto-studio/studio.js --channel failure-reconstructed --topic FR-costa-concordia-2012 --quality final --voice edge` followed by `node core/pipeline/premium-publish.js hash --channel failure-reconstructed --topic FR-costa-concordia-2012`. The render is deterministic, so this is the same content you watched;
    - `creative`, `factual` and `publish` to `{ "by": "<your name>", "at": "<ISO time>" }`;
    - the `metadata` title, description and tags above.
 4. Merge, then set `FR_PREMIUM_PUBLISH=1`. A signed per-video approval is picked before the policy's automatic choice.
