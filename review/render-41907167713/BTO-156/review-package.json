@@ -1,0 +1,323 @@
+{
+ "schema": "bto-studio.review-package.v1",
+ "channel": "behind-the-ordinary",
+ "topicId": "BTO-156",
+ "slug": "microwave-doors-what-explains-metal-mesh",
+ "title": "Why Your Microwave Door Has a Metal Mesh",
+ "verdict": "SHADOW_OF_LIVE_NOT_PUBLISHABLE",
+ "layers": {
+  "TECHNICAL": {
+   "blocking": false,
+   "failed": [],
+   "warnings": [
+    "caption reading speed",
+    "loop continuity (last -> first frame)"
+   ]
+  },
+  "CREATIVE": {
+   "blocking": false,
+   "advisory": []
+  }
+ },
+ "pilot": null,
+ "researchPending": null,
+ "shadow": true,
+ "autoPublish": false,
+ "uploadAttempted": false,
+ "mode": "preview",
+ "quality": "final",
+ "createdAt": "2026-11-04T20:34:29.337Z",
+ "video": "../../_temp/review/BTO-156/out/microwave-doors-what-explains-metal-mesh-premium-final.mp4",
+ "voice": {
+  "used": "en-US-EmmaMultilingualNeural",
+  "approved": true,
+  "approvedVoice": {
+   "provider": "edge-tts",
+   "voice": "en-US-EmmaMultilingualNeural",
+   "rate": "+1%"
+  },
+  "note": null,
+  "wordTiming": "measured (Edge word boundaries)"
+ },
+ "narrationUnchanged": {
+  "sourceHash": "08ca9e39ee9385cb",
+  "lines": [
+   "Look closely at a microwave door: there's a metal mesh.",
+   "It is not decoration. It is part of the shield.",
+   "Inside, a device called a magnetron produces the microwaves.",
+   "The oven works as a Faraday cage that keeps the energy inside.",
+   "The holes in the mesh are much smaller than the wavelength of the microwaves.",
+   "So the microwaves cannot pass through the door.",
+   "Visible light has a far shorter wavelength, so it passes straight through.",
+   "That is why you can watch your food while the energy stays in."
+  ]
+ },
+ "traceability": [
+  {
+   "scene": "s1-hook",
+   "lines": [
+    "L1"
+   ],
+   "purpose": "Hook: frame 0 is the oven with its lit window; as the line names the mesh, a loupe opens on the door and the holes in the metal mesh become visible.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F2",
+     "claim": "The perforations in the mesh are much smaller than the microwaves' wavelength, so microwave radiation cannot pass through the door while visible light can.",
+     "quote": "Because the size of the perforations in the mesh is much less than the microwaves' wavelength (12.2 cm for the usual 2.45 GHz), microwave radiation cannot pass through the door, while visible light (with its much shorter wavelength) can.",
+     "source": "Wikipedia: Microwave oven (revision 1381617068, 2026-10-23T18:18:51Z)",
+     "url": "https://en.wikipedia.org/w/index.php?title=Microwave_oven&oldid=1381617068"
+    },
+    {
+     "id": "F1",
+     "claim": "The door of a microwave oven usually has a window with a layer of conductive mesh to maintain the shielding.",
+     "quote": "The oven door usually has a window for easy viewing, with a layer of conductive mesh some distance from the outer panel to maintain the shielding.",
+     "source": "Wikipedia: Microwave oven (revision 1381617068, 2026-10-23T18:18:51Z)",
+     "url": "https://en.wikipedia.org/w/index.php?title=Microwave_oven&oldid=1381617068"
+    },
+    {
+     "id": "F3",
+     "claim": "A microwave oven uses a Faraday cage, partly visible covering the window, to contain the electromagnetic energy within the oven.",
+     "quote": "A microwave oven uses a partial Faraday shield (on five of its interior six sides) and a partial Faraday cage, consisting of a wire mesh, on the sixth side (the transparent window), to contain the electromagnetic energy within the oven and to protect the user from exposure to microwave radiation.",
+     "source": "Wikipedia: Faraday cage (revision 1375090748, 2026-09-15T20:39:53Z)",
+     "url": "https://en.wikipedia.org/w/index.php?title=Faraday_cage&oldid=1375090748"
+    }
+   ]
+  },
+  {
+   "scene": "s2-shield",
+   "lines": [
+    "L2"
+   ],
+   "purpose": "Shield: not decoration: the metal body and the mesh light up together as one continuous shield around the cavity.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "The door of a microwave oven usually has a window with a layer of conductive mesh to maintain the shielding.",
+     "quote": "The oven door usually has a window for easy viewing, with a layer of conductive mesh some distance from the outer panel to maintain the shielding.",
+     "source": "Wikipedia: Microwave oven (revision 1381617068, 2026-10-23T18:18:51Z)",
+     "url": "https://en.wikipedia.org/w/index.php?title=Microwave_oven&oldid=1381617068"
+    }
+   ]
+  },
+  {
+   "scene": "s3-source",
+   "lines": [
+    "L3"
+   ],
+   "purpose": "Source: the oven in cutaway; as the line names it, the magnetron in the corner starts launching microwaves into the metal box.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "P1",
+     "claim": "Microwaves are produced inside the oven by an electron tube called a magnetron.",
+     "quote": "A device called a magnetron inside the oven produces microwaves.",
+     "source": "Microwave Ovens | FDA (fetched 2026-10-28T09:27:13.688Z, text sha256 ede428dc4d146722)",
+     "url": "https://www.fda.gov/radiation-emitting-products/resources-you-radiation-emitting-products/microwave-ovens"
+    },
+    {
+     "id": "F2",
+     "claim": "The perforations in the mesh are much smaller than the microwaves' wavelength, so microwave radiation cannot pass through the door while visible light can.",
+     "quote": "Because the size of the perforations in the mesh is much less than the microwaves' wavelength (12.2 cm for the usual 2.45 GHz), microwave radiation cannot pass through the door, while visible light (with its much shorter wavelength) can.",
+     "source": "Wikipedia: Microwave oven (revision 1381617068, 2026-10-23T18:18:51Z)",
+     "url": "https://en.wikipedia.org/w/index.php?title=Microwave_oven&oldid=1381617068"
+    },
+    {
+     "id": "P2",
+     "claim": "A federal standard limits the amount of microwaves that can leak from an oven throughout its lifetime to 5 milliwatts of microwave radiation per square centimeter at approximately 2 inches from the oven surface.",
+     "quote": "A Federal standard (21 CFR 1030.10) limits the amount of microwaves that can leak from an oven throughout its lifetime to 5 milliwatts (mW) of microwave radiation per square centimeter at approximately 2 inches from the oven surface.",
+     "source": "Microwave Ovens | FDA (fetched 2026-10-28T09:27:13.688Z, text sha256 ede428dc4d146722)",
+     "url": "https://www.fda.gov/radiation-emitting-products/resources-you-radiation-emitting-products/microwave-ovens"
+    }
+   ]
+  },
+  {
+   "scene": "s4-cage",
+   "lines": [
+    "L4"
+   ],
+   "purpose": "Cage: the oven in cutaway; the magnetron launches waves that reflect off every wall, the mesh door included, so none leaves the box.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F3",
+     "claim": "A microwave oven uses a Faraday cage, partly visible covering the window, to contain the electromagnetic energy within the oven.",
+     "quote": "A microwave oven uses a partial Faraday shield (on five of its interior six sides) and a partial Faraday cage, consisting of a wire mesh, on the sixth side (the transparent window), to contain the electromagnetic energy within the oven and to protect the user from exposure to microwave radiation.",
+     "source": "Wikipedia: Faraday cage (revision 1375090748, 2026-09-15T20:39:53Z)",
+     "url": "https://en.wikipedia.org/w/index.php?title=Faraday_cage&oldid=1375090748"
+    },
+    {
+     "id": "P2",
+     "claim": "A federal standard limits the amount of microwaves that can leak from an oven throughout its lifetime to 5 milliwatts of microwave radiation per square centimeter at approximately 2 inches from the oven surface.",
+     "quote": "A Federal standard (21 CFR 1030.10) limits the amount of microwaves that can leak from an oven throughout its lifetime to 5 milliwatts (mW) of microwave radiation per square centimeter at approximately 2 inches from the oven surface.",
+     "source": "Microwave Ovens | FDA (fetched 2026-10-28T09:27:13.688Z, text sha256 ede428dc4d146722)",
+     "url": "https://www.fda.gov/radiation-emitting-products/resources-you-radiation-emitting-products/microwave-ovens"
+    },
+    {
+     "id": "P1",
+     "claim": "Microwaves are produced inside the oven by an electron tube called a magnetron.",
+     "quote": "A device called a magnetron inside the oven produces microwaves.",
+     "source": "Microwave Ovens | FDA (fetched 2026-10-28T09:27:13.688Z, text sha256 ede428dc4d146722)",
+     "url": "https://www.fda.gov/radiation-emitting-products/resources-you-radiation-emitting-products/microwave-ovens"
+    }
+   ]
+  },
+  {
+   "scene": "s5-aperture",
+   "lines": [
+    "L5"
+   ],
+   "purpose": "Comparison: the mesh in cross-section; a hole is marked, then one full microwave wavelength is braced above the wave: the hole is far smaller.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F2",
+     "claim": "The perforations in the mesh are much smaller than the microwaves' wavelength, so microwave radiation cannot pass through the door while visible light can.",
+     "quote": "Because the size of the perforations in the mesh is much less than the microwaves' wavelength (12.2 cm for the usual 2.45 GHz), microwave radiation cannot pass through the door, while visible light (with its much shorter wavelength) can.",
+     "source": "Wikipedia: Microwave oven (revision 1381617068, 2026-10-23T18:18:51Z)",
+     "url": "https://en.wikipedia.org/w/index.php?title=Microwave_oven&oldid=1381617068"
+    },
+    {
+     "id": "F1",
+     "claim": "The door of a microwave oven usually has a window with a layer of conductive mesh to maintain the shielding.",
+     "quote": "The oven door usually has a window for easy viewing, with a layer of conductive mesh some distance from the outer panel to maintain the shielding.",
+     "source": "Wikipedia: Microwave oven (revision 1381617068, 2026-10-23T18:18:51Z)",
+     "url": "https://en.wikipedia.org/w/index.php?title=Microwave_oven&oldid=1381617068"
+    },
+    {
+     "id": "P1",
+     "claim": "Microwaves are produced inside the oven by an electron tube called a magnetron.",
+     "quote": "A device called a magnetron inside the oven produces microwaves.",
+     "source": "Microwave Ovens | FDA (fetched 2026-10-28T09:27:13.688Z, text sha256 ede428dc4d146722)",
+     "url": "https://www.fda.gov/radiation-emitting-products/resources-you-radiation-emitting-products/microwave-ovens"
+    }
+   ]
+  },
+  {
+   "scene": "s6-blocked",
+   "lines": [
+    "L6"
+   ],
+   "purpose": "Blocked: the microwave reaches the mesh and reflects; behind it the axis stays flat: nothing passes through the door.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F2",
+     "claim": "The perforations in the mesh are much smaller than the microwaves' wavelength, so microwave radiation cannot pass through the door while visible light can.",
+     "quote": "Because the size of the perforations in the mesh is much less than the microwaves' wavelength (12.2 cm for the usual 2.45 GHz), microwave radiation cannot pass through the door, while visible light (with its much shorter wavelength) can.",
+     "source": "Wikipedia: Microwave oven (revision 1381617068, 2026-10-23T18:18:51Z)",
+     "url": "https://en.wikipedia.org/w/index.php?title=Microwave_oven&oldid=1381617068"
+    },
+    {
+     "id": "F1",
+     "claim": "The door of a microwave oven usually has a window with a layer of conductive mesh to maintain the shielding.",
+     "quote": "The oven door usually has a window for easy viewing, with a layer of conductive mesh some distance from the outer panel to maintain the shielding.",
+     "source": "Wikipedia: Microwave oven (revision 1381617068, 2026-10-23T18:18:51Z)",
+     "url": "https://en.wikipedia.org/w/index.php?title=Microwave_oven&oldid=1381617068"
+    },
+    {
+     "id": "P1",
+     "claim": "Microwaves are produced inside the oven by an electron tube called a magnetron.",
+     "quote": "A device called a magnetron inside the oven produces microwaves.",
+     "source": "Microwave Ovens | FDA (fetched 2026-10-28T09:27:13.688Z, text sha256 ede428dc4d146722)",
+     "url": "https://www.fda.gov/radiation-emitting-products/resources-you-radiation-emitting-products/microwave-ovens"
+    }
+   ]
+  },
+  {
+   "scene": "s7-light",
+   "lines": [
+    "L7"
+   ],
+   "purpose": "Light: the long microwave still reflects at the mesh while a short light wave threads one hole and carries on to the other side.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F2",
+     "claim": "The perforations in the mesh are much smaller than the microwaves' wavelength, so microwave radiation cannot pass through the door while visible light can.",
+     "quote": "Because the size of the perforations in the mesh is much less than the microwaves' wavelength (12.2 cm for the usual 2.45 GHz), microwave radiation cannot pass through the door, while visible light (with its much shorter wavelength) can.",
+     "source": "Wikipedia: Microwave oven (revision 1381617068, 2026-10-23T18:18:51Z)",
+     "url": "https://en.wikipedia.org/w/index.php?title=Microwave_oven&oldid=1381617068"
+    }
+   ]
+  },
+  {
+   "scene": "s8-payoff",
+   "lines": [
+    "L8"
+   ],
+   "purpose": "Payoff: light leaves through the window to the viewer's eye while the enclosure and mesh glow as one shield: you see in, the energy stays in. Returns to the hook's oven, so the Short loops.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F2",
+     "claim": "The perforations in the mesh are much smaller than the microwaves' wavelength, so microwave radiation cannot pass through the door while visible light can.",
+     "quote": "Because the size of the perforations in the mesh is much less than the microwaves' wavelength (12.2 cm for the usual 2.45 GHz), microwave radiation cannot pass through the door, while visible light (with its much shorter wavelength) can.",
+     "source": "Wikipedia: Microwave oven (revision 1381617068, 2026-10-23T18:18:51Z)",
+     "url": "https://en.wikipedia.org/w/index.php?title=Microwave_oven&oldid=1381617068"
+    },
+    {
+     "id": "F3",
+     "claim": "A microwave oven uses a Faraday cage, partly visible covering the window, to contain the electromagnetic energy within the oven.",
+     "quote": "A microwave oven uses a partial Faraday shield (on five of its interior six sides) and a partial Faraday cage, consisting of a wire mesh, on the sixth side (the transparent window), to contain the electromagnetic energy within the oven and to protect the user from exposure to microwave radiation.",
+     "source": "Wikipedia: Faraday cage (revision 1375090748, 2026-09-15T20:39:53Z)",
+     "url": "https://en.wikipedia.org/w/index.php?title=Faraday_cage&oldid=1375090748"
+    },
+    {
+     "id": "P2",
+     "claim": "A federal standard limits the amount of microwaves that can leak from an oven throughout its lifetime to 5 milliwatts of microwave radiation per square centimeter at approximately 2 inches from the oven surface.",
+     "quote": "A Federal standard (21 CFR 1030.10) limits the amount of microwaves that can leak from an oven throughout its lifetime to 5 milliwatts (mW) of microwave radiation per square centimeter at approximately 2 inches from the oven surface.",
+     "source": "Microwave Ovens | FDA (fetched 2026-10-28T09:27:13.688Z, text sha256 ede428dc4d146722)",
+     "url": "https://www.fda.gov/radiation-emitting-products/resources-you-radiation-emitting-products/microwave-ovens"
+    }
+   ]
+  }
+ ],
+ "licensing": {
+  "visuals": "all visuals drawn in-house from code (SVG): desk, greeked printed matter, rulers and quote cards; quotes are verbatim from the cited sources; no photographs or third-party media",
+  "fonts": "SIL OFL 1.1 (@fontsource Inter, Source Serif 4, Barlow Semi Condensed 5.3.0)",
+  "audio": "narration TTS + effects/music synthesised by scripts/bto-studio/audio/sound_design.py (no samples)",
+  "thirdPartyMedia": []
+ },
+ "qa": {
+  "objectivePass": true,
+  "report": "../../_temp/review/BTO-156/out/qa-report.md",
+  "contactSheet": "../../_temp/review/BTO-156/out/contact-sheet.png",
+  "sceneSheet": "../../_temp/review/BTO-156/out/scene-sheet.png",
+  "failures": [
+   "UNVERIFIED audio samples clipped: not reported by this FFmpeg build (astats has no clipped-sample count)",
+   "WARN caption reading speed: 2 cues over 22 chars/s (max 23.5)",
+   "WARN loop continuity (last -> first frame): whole 8.07, photo region 12.69, final-second step 0.42, ratio 9.27"
+  ],
+  "unverified": [
+   "audio samples clipped"
+  ]
+ },
+ "audio": {
+  "integratedLufs": -14,
+  "truePeakDbtp": -3
+ },
+ "performance": {
+  "renderWallSec": 147.8,
+  "msPerFrame": 154.5,
+  "workers": 3,
+  "peakChromiumRssMb": 3627,
+  "cachedSegments": 0,
+  "segments": 8,
+  "host": "linux x64 4 cpu 16 GB",
+  "totalPipelineSec": 216.8
+ },
+ "cost": {
+  "llmUsd": 0,
+  "ttsUsd": 0,
+  "renderUsd": 0,
+  "note": "local rendering and free/offline TTS; LLM use only when a Claude storyboard draft was requested and approved"
+ },
+ "approvalsNeeded": [
+  "voice: re-narrate with the approved Edge voice (if PREVIEW_ONLY)",
+  "creative sign-off (video-quality-review findings)",
+  "factual sign-off on the traceability table",
+  "owner decision to hand the MP4 to the normal pipeline (never automatic)"
+ ]
+}
