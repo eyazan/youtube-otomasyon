@@ -52,11 +52,11 @@ Today (2026-11-04), main uploaded two Shorts, both private and scheduled for 18:
 | Subject hashtag from revision-pinned Wikipedia URLs; GLL broad tags | `core/hashtags.js` | GLL-021 had only `#shorts`; it now has `#shorts #football #ArgentinaVEngland #soccer` and the tag `Argentina v England`. |
 | Opening caption fully visible at frame 0 | `scripts/bto-studio/page/motion.js` | Frame 0, the first impression in the feed, showed a half-faded caption on all 5 MP4s. |
 | Board stills renderable in CI | `.github/workflows/premium-review-render.yml` (`board:<IB id>`) | The board's stills were gitignored, so the owner could not see them. Stills only; no MP4; the record is unchanged. |
-| Named bodies beside Earth drawn **to scale** | `scripts/bto-studio/auto/impossible-brief.js` | The board stills showed Jupiter, Neptune, Mars, Mercury and the Moon at Earth's size. They are now drawn at the mean-radius ratio, with no pair beyond 15×. Test in `premium-mechanisms`. |
+| Named bodies beside Earth drawn **to scale** | `scripts/bto-studio/auto/impossible-brief.js` | The board stills showed Jupiter, Neptune, Mars, Mercury and the Moon at Earth's size. They are now drawn at the mean-radius ratio. Beyond 15× (the Sun) the scene is labelled CONCEPTUAL on screen instead. Test in `premium-mechanisms`. |
 | Batch mechanism review | `reports/ib-mechanism-board/decisions.json`, `declare-mechanism.js --from/--queue` | One file, one command; HOLD rows are refused (§4). |
 | Tests | `premium-primary`, `hashtags`, `premium-mechanisms` | No archival claim on any channel's premium description; the review sheet ships undecided. |
 
-`npm test`: 1053 JS + 31 Python, 0 fail.
+`npm test`: 1054 JS + 31 Python, 0 fail.
 
 **Searched and not found:** "PitchLore" exists nowhere in code or metadata, only in GLL's live channel description
 (Studio, §3.2).

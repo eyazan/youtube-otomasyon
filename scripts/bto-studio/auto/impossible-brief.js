@@ -393,7 +393,9 @@ function build(script, style, topic) {
     const drift = i % 2 ? 36 : -36;
     const cam = (z0, z1, y0 = 800, y1 = 800) => [{ at: start, x: 540 - drift, y: y0, z: z0 }, { at: `${L.id}.end`, x: 540 + drift, y: y1, z: Math.max(z1, z0 + 0.14) }];
     const other = last ? null : otherBody(i);
-    const pair = (k) => scaledPair(k, radiusRatio(k, L.text)) || [{ component: "planet", props: { kind: k, x: 540, y: 820, r: 330, spin: 0.18, seed: 7 } }];
+    // beyond 15x (the Sun beside Earth) a true-scale pair is impossible: both are drawn, and the scene is labelled
+    // CONCEPTUAL on screen so equal sizes never read as a size comparison
+    const pair = (k) => scaledPair(k, radiusRatio(k, L.text)) || ((chips[0] = "conceptualLabel"), [{ component: "planet", props: { kind: k, x: 300, y: 860, r: 220, spin: 0.18, seed: 7 } }, { component: "planet", props: { kind: "earth", x: 790, y: 860, r: 230, spin: 0.3, seed: 3 } }]);
     const RS = ROT ? rotationScene(L, i, first, last, start) : null;
     if (RS) { kind = RS.kind; layers = RS.layers; purpose = RS.purpose; camera = RS.camera; RS.ev.forEach((id) => { if (!evidence.includes(id)) evidence.push(id); }); if (RS.conceptual) chips[0] = "conceptualLabel";
     } else if (first) {
