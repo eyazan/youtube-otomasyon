@@ -1,0 +1,584 @@
+{
+ "schema": "bto-studio.storyboard.v1",
+ "channel": "failure-reconstructed",
+ "topicId": "FR-edmund-fitzgerald-1975",
+ "slug": "edmund-fitzgerald-1975",
+ "version": 1,
+ "author": "auto/failure-reconstructed (deterministic forensic grammar, object class ship; needs creative review before publication)",
+ "licensingNote": "all visuals drawn in-house from code (SVG): generic object-class line drawings, failure chain and stamps; no photographs, footage or third-party media",
+ "treatment": {
+  "educationalObjective": "Reconstruct, from the case file: The Great Lakes Freighter That Vanished Without a Mayday",
+  "visualHook": "Frame 0: a ship drawn as line work gives way at its failure point within the first second.",
+  "mechanismsToAnimate": [
+   "hook",
+   "toll",
+   "chain",
+   "flooding",
+   "mechanism",
+   "storm",
+   "payoff"
+  ],
+  "factualRisks": [
+   "the ship is a generic class drawing, not the actual vehicle or structure (RECONSTRUCTION chip)",
+   "the failure point on the drawing is illustrative",
+   "case-file facts carry researched claims without stored verbatim quotes (FR live standard)"
+  ]
+ },
+ "tail": 0.6,
+ "scenes": [
+  {
+   "id": "s1-hook",
+   "lines": [
+    "L1"
+   ],
+   "start": 0,
+   "env": "blueprint",
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Hook: frame 0 is the ship already in heavy seas with the storm wall on the horizon; a sea breaks over the bow in the first second, before any cause is named.",
+   "camera": [
+    {
+     "at": 0,
+     "x": 560,
+     "y": 900,
+     "z": 1.12
+    },
+    {
+     "at": "L1.end",
+     "x": 520,
+     "y": 880,
+     "z": 1
+    }
+   ],
+   "layers": [
+    {
+     "component": "heavy-seas",
+     "props": {
+      "storm": true,
+      "swell": 85,
+      "hitAt": 0.2,
+      "seed": 5
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L1+0.3",
+        "text": "EDMUND FITZGERALD · 1975",
+        "x": 540,
+        "y": 460,
+        "size": 55,
+        "family": "sans"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s2-toll",
+   "lines": [
+    "L2"
+   ],
+   "start": "L2-0.15",
+   "env": "void",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Toll: the surface closes over the ship's outline while the case's count (29 CREW) is stamped; the number is the case file's.",
+   "camera": [
+    {
+     "at": "L2-0.15",
+     "x": 540,
+     "y": 960,
+     "z": 1
+    },
+    {
+     "at": "L2.end",
+     "x": 540,
+     "y": 1000,
+     "z": 1.1
+    }
+   ],
+   "layers": [
+    {
+     "component": "heavy-seas",
+     "props": {
+      "sunk": true,
+      "swell": 28,
+      "seed": 5
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L2+0.25",
+        "text": "29 CREW",
+        "x": 540,
+        "y": 640,
+        "size": 104,
+        "family": "num",
+        "style": "pop"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s3-chain",
+   "lines": [
+    "L3"
+   ],
+   "start": "L3-0.15",
+   "env": "blueprint",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F4",
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Chain: the case's failure chain scrolls from link 1 to link 2 (\"SHIP REPORTS DAMAGE AND A LIST\"), which lights as the line describes it, so consecutive causes read as one continuous investigation.",
+   "camera": [
+    {
+     "at": "L3-0.15",
+     "x": 480,
+     "y": 860,
+     "z": 1.05
+    },
+    {
+     "at": "L3.end",
+     "x": 600,
+     "y": 820,
+     "z": 1.22
+    }
+   ],
+   "layers": [
+    {
+     "component": "object-silhouette",
+     "props": {
+      "kind": "ship",
+      "x": 540,
+      "y": 900,
+      "w": 1160,
+      "maxH": 640,
+      "seed": 31,
+      "failAt": -1,
+      "opacity": 0.16
+     }
+    },
+    {
+     "component": "failure-chain",
+     "screen": true,
+     "props": {
+      "x": 540,
+      "gap": 230,
+      "w": 780,
+      "steps": [
+       "STORM ON LAKE SUPERIOR",
+       "SHIP REPORTS DAMAGE AND A LIST",
+       "WATER ENTERS THE HULL",
+       "SHIP DIVES SUDDENLY",
+       "NO DISTRESS CALL"
+      ],
+      "activeKeys": [
+       [
+        "L3-0.15",
+        0
+       ],
+       [
+        "L3+1.1",
+        1
+       ]
+      ],
+      "window": {
+       "center": 800,
+       "top": 300,
+       "bottom": 1250
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s4-chain",
+   "lines": [
+    "L4"
+   ],
+   "start": "L4-0.15",
+   "env": "blueprint",
+   "transition": {
+    "type": "continuity",
+    "dur": 0.3
+   },
+   "evidence": [
+    "F4",
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Chain: the case's failure chain scrolls from link 2 to link 3 (\"WATER ENTERS THE HULL\"), which lights as the line describes it, so consecutive causes read as one continuous investigation.",
+   "camera": [
+    {
+     "at": "L4-0.15",
+     "x": 600,
+     "y": 860,
+     "z": 1.05
+    },
+    {
+     "at": "L4.end",
+     "x": 480,
+     "y": 820,
+     "z": 1.22
+    }
+   ],
+   "layers": [
+    {
+     "component": "object-silhouette",
+     "props": {
+      "kind": "ship",
+      "x": 540,
+      "y": 900,
+      "w": 1160,
+      "maxH": 640,
+      "seed": 31,
+      "failAt": -1,
+      "opacity": 0.16
+     }
+    },
+    {
+     "component": "failure-chain",
+     "screen": true,
+     "props": {
+      "x": 540,
+      "gap": 230,
+      "w": 780,
+      "steps": [
+       "STORM ON LAKE SUPERIOR",
+       "SHIP REPORTS DAMAGE AND A LIST",
+       "WATER ENTERS THE HULL",
+       "SHIP DIVES SUDDENLY",
+       "NO DISTRESS CALL"
+      ],
+      "activeKeys": [
+       [
+        "L4-0.15",
+        1
+       ],
+       [
+        "L4+1.1",
+        2
+       ]
+      ],
+      "window": {
+       "center": 800,
+       "top": 300,
+       "bottom": 1250
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s5-flooding",
+   "lines": [
+    "L5"
+   ],
+   "start": "L5-0.15",
+   "env": "void",
+   "transition": {
+    "type": "square-iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F4",
+    "F3",
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Flooding: a cut through the hull in a level sea; water pours through the opening, the hold on that side fills and the ship heels toward it (inclinometer).",
+   "camera": [
+    {
+     "at": "L5-0.15",
+     "x": 540,
+     "y": 860,
+     "z": 1
+    },
+    {
+     "at": "L5.end",
+     "x": 540,
+     "y": 870,
+     "z": 1.06
+    }
+   ],
+   "layers": [
+    {
+     "component": "hull-section",
+     "props": {
+      "floodAt": "L5+0.3",
+      "listTo": 16,
+      "label": {
+       "at": "L5+0.4",
+       "text": "HATCH"
+      },
+      "listLabel": null
+     }
+    }
+   ]
+  },
+  {
+   "id": "s6-mechanism",
+   "lines": [
+    "L6"
+   ],
+   "start": "L6-0.15",
+   "env": "blueprint",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F4",
+    "F3",
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Mechanism close-up: the camera closes in on the failure point of the ship while chain link 3 (\"WATER ENTERS THE HULL\") is named, so the cause is seen on the object, not only read on a card.",
+   "camera": [
+    {
+     "at": "L6-0.15",
+     "x": 570,
+     "y": 820,
+     "z": 1.15
+    },
+    {
+     "at": "L6.end",
+     "x": 540,
+     "y": 800,
+     "z": 1.6
+    }
+   ],
+   "layers": [
+    {
+     "component": "object-silhouette",
+     "props": {
+      "kind": "ship",
+      "x": 540,
+      "y": 820,
+      "w": 900,
+      "maxH": 640,
+      "seed": 31,
+      "failAt": -1
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L6+0.2",
+        "text": "WATER ENTERS THE HULL",
+        "x": 540,
+        "y": 460,
+        "size": 60,
+        "family": "sans",
+        "source": "WATER ENTERS THE HULL",
+        "outAt": "L6.end-0.25"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s7-storm",
+   "lines": [
+    "L7"
+   ],
+   "start": "L7-0.15",
+   "env": "void",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F4",
+    "F3",
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Route against storm: on a schematic chart the ship's route and the storm's track converge until the ship is inside the danger ring.",
+   "camera": [
+    {
+     "at": "L7-0.15",
+     "x": 540,
+     "y": 900,
+     "z": 1
+    },
+    {
+     "at": "L7.end",
+     "x": 600,
+     "y": 860,
+     "z": 1.12
+    }
+   ],
+   "layers": [
+    {
+     "component": "storm-track",
+     "props": {
+      "route": [
+       [
+        170,
+        1180
+       ],
+       [
+        380,
+        1010
+       ],
+       [
+        600,
+        860
+       ],
+       [
+        860,
+        690
+       ]
+      ],
+      "track": [
+       [
+        960,
+        1200
+       ],
+       [
+        880,
+        1010
+       ],
+       [
+        760,
+        860
+       ],
+       [
+        600,
+        700
+       ]
+      ],
+      "from": "L7+0.1",
+      "to": "L7.end",
+      "progress": [
+       0.12,
+       0.8
+      ]
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L7+0.2",
+        "text": "STORM ON LAKE SUPERIOR",
+        "x": 540,
+        "y": 460,
+        "size": 60,
+        "family": "sans",
+        "source": "STORM ON LAKE SUPERIOR"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s8-payoff",
+   "lines": [
+    "L8"
+   ],
+   "start": "L8-0.15",
+   "env": "blueprint",
+   "transition": {
+    "type": "square-iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F6",
+    "F3",
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Payoff: the lesson over the ship whole again in moderate seas.",
+   "camera": [
+    {
+     "at": "L8-0.15",
+     "x": 540,
+     "y": 880,
+     "z": 1
+    },
+    {
+     "at": "end-0.6",
+     "x": 560,
+     "y": 900,
+     "z": 1.12
+    }
+   ],
+   "layers": [
+    {
+     "component": "heavy-seas",
+     "props": {
+      "storm": false,
+      "swell": 40,
+      "seed": 5
+     }
+    }
+   ]
+  }
+ ]
+}

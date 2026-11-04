@@ -1,0 +1,276 @@
+{
+ "schema": "bto-studio.review-package.v1",
+ "channel": "failure-reconstructed",
+ "topicId": "FR-edmund-fitzgerald-1975",
+ "slug": "edmund-fitzgerald-1975",
+ "title": "The Great Lakes Freighter That Vanished Without a Mayday",
+ "verdict": "SHADOW_OF_LIVE_NOT_PUBLISHABLE",
+ "pilot": null,
+ "researchPending": null,
+ "shadow": true,
+ "autoPublish": false,
+ "uploadAttempted": false,
+ "mode": "preview",
+ "quality": "final",
+ "createdAt": "2026-11-04T18:11:39.144Z",
+ "video": "../../_temp/review/FR-edmund-fitzgerald-1975/out/edmund-fitzgerald-1975-premium-final.mp4",
+ "voice": {
+  "used": "en-US-AndrewMultilingualNeural",
+  "approved": true,
+  "approvedVoice": {
+   "provider": "edge-tts",
+   "voice": "en-US-AndrewMultilingualNeural",
+   "rate": "+1%"
+  },
+  "note": null,
+  "wordTiming": "measured (Edge word boundaries)"
+ },
+ "narrationUnchanged": {
+  "sourceHash": "28ec2a2d6e90bda5",
+  "lines": [
+   "In a November storm, a giant freighter vanished on Lake Superior.",
+   "It sank without a distress call, and all twenty nine crew were killed.",
+   "The captain had reported damage and a list.",
+   "Water was getting into the hull.",
+   "The Coast Guard blamed leaking hatch covers.",
+   "Others argued it struck a shoal or was hit by huge waves.",
+   "The wreck lies broken in two on the lake floor.",
+   "Great Lakes safety rules were revised afterward."
+  ]
+ },
+ "traceability": [
+  {
+   "scene": "s1-hook",
+   "lines": [
+    "L1"
+   ],
+   "purpose": "Hook: frame 0 is the ship already in heavy seas with the storm wall on the horizon; a sea breaks over the bow in the first second, before any cause is named.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "the Edmund Fitzgerald (1975): sank in a Lake Superior storm without a distress call. 29 CREW",
+     "source": "Wikipedia — SS Edmund Fitzgerald",
+     "url": "https://en.wikipedia.org/wiki/SS_Edmund_Fitzgerald"
+    }
+   ]
+  },
+  {
+   "scene": "s2-toll",
+   "lines": [
+    "L2"
+   ],
+   "purpose": "Toll: the surface closes over the ship's outline while the case's count (29 CREW) is stamped; the number is the case file's.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "the Edmund Fitzgerald (1975): sank in a Lake Superior storm without a distress call. 29 CREW",
+     "source": "Wikipedia — SS Edmund Fitzgerald",
+     "url": "https://en.wikipedia.org/wiki/SS_Edmund_Fitzgerald"
+    }
+   ]
+  },
+  {
+   "scene": "s3-chain",
+   "lines": [
+    "L3"
+   ],
+   "purpose": "Chain: the case's failure chain scrolls from link 1 to link 2 (\"SHIP REPORTS DAMAGE AND A LIST\"), which lights as the line describes it, so consecutive causes read as one continuous investigation.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "STORM ON LAKE SUPERIOR -> SHIP REPORTS DAMAGE AND A LIST -> WATER ENTERS THE HULL -> SHIP DIVES SUDDENLY -> NO DISTRESS CALL",
+     "source": "Wikipedia — SS Edmund Fitzgerald",
+     "url": "https://en.wikipedia.org/wiki/SS_Edmund_Fitzgerald"
+    },
+    {
+     "id": "F1",
+     "claim": "the Edmund Fitzgerald (1975): sank in a Lake Superior storm without a distress call. 29 CREW",
+     "source": "Wikipedia — SS Edmund Fitzgerald",
+     "url": "https://en.wikipedia.org/wiki/SS_Edmund_Fitzgerald"
+    }
+   ]
+  },
+  {
+   "scene": "s4-chain",
+   "lines": [
+    "L4"
+   ],
+   "purpose": "Chain: the case's failure chain scrolls from link 2 to link 3 (\"WATER ENTERS THE HULL\"), which lights as the line describes it, so consecutive causes read as one continuous investigation.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "STORM ON LAKE SUPERIOR -> SHIP REPORTS DAMAGE AND A LIST -> WATER ENTERS THE HULL -> SHIP DIVES SUDDENLY -> NO DISTRESS CALL",
+     "source": "Wikipedia — SS Edmund Fitzgerald",
+     "url": "https://en.wikipedia.org/wiki/SS_Edmund_Fitzgerald"
+    },
+    {
+     "id": "F1",
+     "claim": "the Edmund Fitzgerald (1975): sank in a Lake Superior storm without a distress call. 29 CREW",
+     "source": "Wikipedia — SS Edmund Fitzgerald",
+     "url": "https://en.wikipedia.org/wiki/SS_Edmund_Fitzgerald"
+    }
+   ]
+  },
+  {
+   "scene": "s5-flooding",
+   "lines": [
+    "L5"
+   ],
+   "purpose": "Flooding: a cut through the hull in a level sea; water pours through the opening, the hold on that side fills and the ship heels toward it (inclinometer).",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "STORM ON LAKE SUPERIOR -> SHIP REPORTS DAMAGE AND A LIST -> WATER ENTERS THE HULL -> SHIP DIVES SUDDENLY -> NO DISTRESS CALL",
+     "source": "Wikipedia — SS Edmund Fitzgerald",
+     "url": "https://en.wikipedia.org/wiki/SS_Edmund_Fitzgerald"
+    },
+    {
+     "id": "F3",
+     "claim": "progressive flooding, attributed by the Coast Guard to leaking hatch covers; other theories cite shoal damage",
+     "source": "NTSB — MAR7803 (cited by Wikipedia)",
+     "url": "https://www.ntsb.gov/investigations/AccidentReports/Reports/MAR7803.pdf"
+    },
+    {
+     "id": "F1",
+     "claim": "the Edmund Fitzgerald (1975): sank in a Lake Superior storm without a distress call. 29 CREW",
+     "source": "Wikipedia — SS Edmund Fitzgerald",
+     "url": "https://en.wikipedia.org/wiki/SS_Edmund_Fitzgerald"
+    }
+   ]
+  },
+  {
+   "scene": "s6-mechanism",
+   "lines": [
+    "L6"
+   ],
+   "purpose": "Mechanism close-up: the camera closes in on the failure point of the ship while chain link 3 (\"WATER ENTERS THE HULL\") is named, so the cause is seen on the object, not only read on a card.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "STORM ON LAKE SUPERIOR -> SHIP REPORTS DAMAGE AND A LIST -> WATER ENTERS THE HULL -> SHIP DIVES SUDDENLY -> NO DISTRESS CALL",
+     "source": "Wikipedia — SS Edmund Fitzgerald",
+     "url": "https://en.wikipedia.org/wiki/SS_Edmund_Fitzgerald"
+    },
+    {
+     "id": "F3",
+     "claim": "progressive flooding, attributed by the Coast Guard to leaking hatch covers; other theories cite shoal damage",
+     "source": "NTSB — MAR7803 (cited by Wikipedia)",
+     "url": "https://www.ntsb.gov/investigations/AccidentReports/Reports/MAR7803.pdf"
+    },
+    {
+     "id": "F1",
+     "claim": "the Edmund Fitzgerald (1975): sank in a Lake Superior storm without a distress call. 29 CREW",
+     "source": "Wikipedia — SS Edmund Fitzgerald",
+     "url": "https://en.wikipedia.org/wiki/SS_Edmund_Fitzgerald"
+    }
+   ]
+  },
+  {
+   "scene": "s7-storm",
+   "lines": [
+    "L7"
+   ],
+   "purpose": "Route against storm: on a schematic chart the ship's route and the storm's track converge until the ship is inside the danger ring.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "STORM ON LAKE SUPERIOR -> SHIP REPORTS DAMAGE AND A LIST -> WATER ENTERS THE HULL -> SHIP DIVES SUDDENLY -> NO DISTRESS CALL",
+     "source": "Wikipedia — SS Edmund Fitzgerald",
+     "url": "https://en.wikipedia.org/wiki/SS_Edmund_Fitzgerald"
+    },
+    {
+     "id": "F3",
+     "claim": "progressive flooding, attributed by the Coast Guard to leaking hatch covers; other theories cite shoal damage",
+     "source": "NTSB — MAR7803 (cited by Wikipedia)",
+     "url": "https://www.ntsb.gov/investigations/AccidentReports/Reports/MAR7803.pdf"
+    },
+    {
+     "id": "F1",
+     "claim": "the Edmund Fitzgerald (1975): sank in a Lake Superior storm without a distress call. 29 CREW",
+     "source": "Wikipedia — SS Edmund Fitzgerald",
+     "url": "https://en.wikipedia.org/wiki/SS_Edmund_Fitzgerald"
+    }
+   ]
+  },
+  {
+   "scene": "s8-payoff",
+   "lines": [
+    "L8"
+   ],
+   "purpose": "Payoff: the lesson over the ship whole again in moderate seas.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F6",
+     "claim": "Great Lakes load-line and safety rules were revised",
+     "source": "NTSB — MAR7803 (cited by Wikipedia)",
+     "url": "https://www.ntsb.gov/investigations/AccidentReports/Reports/MAR7803.pdf"
+    },
+    {
+     "id": "F3",
+     "claim": "progressive flooding, attributed by the Coast Guard to leaking hatch covers; other theories cite shoal damage",
+     "source": "NTSB — MAR7803 (cited by Wikipedia)",
+     "url": "https://www.ntsb.gov/investigations/AccidentReports/Reports/MAR7803.pdf"
+    },
+    {
+     "id": "F1",
+     "claim": "the Edmund Fitzgerald (1975): sank in a Lake Superior storm without a distress call. 29 CREW",
+     "source": "Wikipedia — SS Edmund Fitzgerald",
+     "url": "https://en.wikipedia.org/wiki/SS_Edmund_Fitzgerald"
+    }
+   ]
+  }
+ ],
+ "licensing": {
+  "visuals": "all visuals drawn in-house from code (SVG): generic object-class line drawings, failure chain and stamps; no photographs, footage or third-party media",
+  "fonts": "SIL OFL 1.1 (@fontsource Inter, Source Serif 4, Barlow Semi Condensed 5.3.0)",
+  "audio": "narration TTS + effects/music synthesised by scripts/bto-studio/audio/sound_design.py (no samples)",
+  "thirdPartyMedia": []
+ },
+ "qa": {
+  "objectivePass": true,
+  "report": "../../_temp/review/FR-edmund-fitzgerald-1975/out/qa-report.md",
+  "contactSheet": "../../_temp/review/FR-edmund-fitzgerald-1975/out/contact-sheet.png",
+  "sceneSheet": "../../_temp/review/FR-edmund-fitzgerald-1975/out/scene-sheet.png",
+  "failures": [
+   "UNVERIFIED audio samples clipped: not reported by this FFmpeg build (astats has no clipped-sample count)",
+   "WARN loop continuity (last -> first frame): whole 10.03, photo region 18.22, final-second step 0.57, ratio 9.88"
+  ],
+  "unverified": [
+   "audio samples clipped"
+  ]
+ },
+ "audio": {
+  "integratedLufs": -14.3,
+  "truePeakDbtp": -3
+ },
+ "performance": {
+  "renderWallSec": 92,
+  "msPerFrame": 115.2,
+  "workers": 3,
+  "peakChromiumRssMb": 3864,
+  "cachedSegments": 0,
+  "segments": 8,
+  "host": "linux x64 4 cpu 16 GB",
+  "totalPipelineSec": 190.7
+ },
+ "cost": {
+  "llmUsd": 0,
+  "ttsUsd": 0,
+  "renderUsd": 0,
+  "note": "local rendering and free/offline TTS; LLM use only when a Claude storyboard draft was requested and approved"
+ },
+ "approvalsNeeded": [
+  "voice: re-narrate with the approved Edge voice (if PREVIEW_ONLY)",
+  "creative sign-off (video-quality-review findings)",
+  "factual sign-off on the traceability table",
+  "owner decision to hand the MP4 to the normal pipeline (never automatic)"
+ ]
+}
