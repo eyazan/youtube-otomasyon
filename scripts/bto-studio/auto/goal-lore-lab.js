@@ -129,7 +129,10 @@ function build(script, style, topic) {
       // the payoff replays the moment from the higher camera (GLL-021: hook and payoff frames were 0.936 alike); its tally
       // of beaten defenders stays off, the tagline owns that band
       if (last) ev.layers = ev.layers.filter((l) => l.component !== "tally-tokens");
-      layers = [stadium(first ? 0 : -1), ...ev.layers, ...(last ? [type(`${L.id}+0.3`, tagline, 470, S.title, "amber")] : [])];
+      // the tagline clears before the camera pushes back in to the frame-0 framing, so the last frame matches the first and
+      // the goal frame never runs through it (#416 review: the crossbar struck through the tagline in the last frame)
+      const tag = last ? type(`${L.id}+0.3`, tagline, 470, S.title, "amber") : null; if (tag) tag.props.items[0].outAt = "end-1.3";
+      layers = [stadium(first ? 0 : -1), ...ev.layers, ...(tag ? [tag] : [])];
       purpose = first ? `Hook: the record's own kind of goal (${primary}) on the floodlit pitch within the first second, so the moment is on screen before it is named. ${ev.purpose}`
         : `Payoff: the same ${primary} at night, where the hook started, and the channel tagline lands over the stands so the Short loops.`;
       // motion-first hook (2026-11-04 opening review: frame 0 was a wide pitch with tiny players): frame 0 is tight on the

@@ -96,6 +96,8 @@ jobs:
             ffmpeg -hide_banner -loglevel error -i "$MP4" -vf "fps=2/3,scale=540:-2" -q:v 4 "$O/frames/t%03d.jpg"
             ffmpeg -hide_banner -loglevel error -i "$MP4" -vf "fps=1/2,scale=270:-2,tile=6x3" -frames:v 1 "$O/contact-sheet.jpg"
             ffmpeg -hide_banner -loglevel error -i "$MP4" -t 2 -vf "fps=6,scale=270:-2,tile=6x2" -frames:v 1 "$O/first-2s.jpg"
+            # the whole MP4 at two frames a second, 8 per sheet (4 s each), for a full watch-through review of every frame band
+            mkdir -p "$O/full"; ffmpeg -hide_banner -loglevel error -i "$MP4" -vf "fps=2,scale=480:-2,tile=4x2" -q:v 4 "$O/full/s%02d.jpg"
             grep -E "^\| (s[0-9]|Scene)" "$D/out/qa-report.md" | head -14 | tee -a "$GITHUB_STEP_SUMMARY" || true
             grep -E "Objective verdict|WARN|FAIL" "$D/out/qa-report.md" | head -8 | tee -a "$GITHUB_STEP_SUMMARY" || true
             # creative verdict, separate from the objective QA above (a technical PASS is never a creative approval)
