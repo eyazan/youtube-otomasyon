@@ -1,0 +1,485 @@
+{
+ "schema": "bto-studio.storyboard.v1",
+ "channel": "behind-the-ordinary",
+ "topicId": "BTO-156",
+ "slug": "microwave-doors-what-explains-metal-mesh",
+ "version": 1,
+ "author": "auto/behind-the-ordinary (deterministic documentary-desk grammar; needs creative review before publication)",
+ "licensingNote": "all visuals drawn in-house from code (SVG): desk, greeked printed matter, rulers and quote cards; quotes are verbatim from the cited sources; no photographs or third-party media",
+ "treatment": {
+  "educationalObjective": "Answer, in the sources' own words: Microwave doors: what explains metal mesh?",
+  "visualHook": "Frame 0: MICROWAVE DOORS in large type over printed matter on the desk.",
+  "mechanismsToAnimate": [
+   "hook",
+   "shield",
+   "source",
+   "cage",
+   "aperture",
+   "blocked",
+   "light",
+   "payoff"
+  ],
+  "factualRisks": [
+   "printed matter is greeked and generic (ILLUSTRATION chip)",
+   "the automatic grammar draws no mechanism: a directed storyboard is needed for cutaways and exploded views"
+  ]
+ },
+ "tail": 0.6,
+ "scenes": [
+  {
+   "id": "s1-hook",
+   "lines": [
+    "L1"
+   ],
+   "start": 0,
+   "env": "desk",
+   "evidence": [
+    "F2",
+    "F1",
+    "F3"
+   ],
+   "chips": [
+    "conceptualLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Hook: frame 0 is the oven with its lit window; as the line names the mesh, a loupe opens on the door and the holes in the metal mesh become visible.",
+   "camera": [
+    {
+     "at": 0,
+     "x": 470,
+     "y": 820,
+     "z": 1.3
+    },
+    {
+     "at": "L1.end",
+     "x": 500,
+     "y": 840,
+     "z": 1
+    }
+   ],
+   "layers": [
+    {
+     "component": "desk-grain",
+     "screen": true,
+     "props": {
+      "seed": 3
+     }
+    },
+    {
+     "component": "oven-door",
+     "props": {
+      "x": 110,
+      "y": 560,
+      "w": 860,
+      "h": 600,
+      "loupeAt": 0,
+      "loupe": {
+       "x": 420,
+       "y": 800,
+       "r": 230
+      },
+      "label": {
+       "at": "L1:metal",
+       "text": "METAL MESH"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s2-shield",
+   "lines": [
+    "L2"
+   ],
+   "start": "L2-0.15",
+   "env": "desk",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Shield: not decoration: the metal body and the mesh light up together as one continuous shield around the cavity.",
+   "camera": [
+    {
+     "at": "L2-0.15",
+     "x": 520,
+     "y": 860,
+     "z": 1
+    },
+    {
+     "at": "L2.end",
+     "x": 540,
+     "y": 860,
+     "z": 1.06
+    }
+   ],
+   "layers": [
+    {
+     "component": "desk-grain",
+     "screen": true,
+     "props": {
+      "seed": 4
+     }
+    },
+    {
+     "component": "oven-door",
+     "props": {
+      "x": 110,
+      "y": 560,
+      "w": 860,
+      "h": 600,
+      "shieldAt": "L2:part"
+     }
+    }
+   ]
+  },
+  {
+   "id": "s3-source",
+   "lines": [
+    "L3"
+   ],
+   "start": "L3-0.15",
+   "env": "desk",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "P1",
+    "F2",
+    "P2"
+   ],
+   "chips": [
+    "conceptualLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Source: the oven in cutaway; as the line names it, the magnetron in the corner starts launching microwaves into the metal box.",
+   "camera": [
+    {
+     "at": "L3-0.15",
+     "x": 600,
+     "y": 820,
+     "z": 1.12
+    },
+    {
+     "at": "L3.end",
+     "x": 560,
+     "y": 860,
+     "z": 1.02
+    }
+   ],
+   "layers": [
+    {
+     "component": "desk-grain",
+     "screen": true,
+     "props": {
+      "seed": 5
+     }
+    },
+    {
+     "component": "faraday-box",
+     "props": {
+      "launchAt": "L3:magnetron",
+      "packets": 7,
+      "magnetron": {
+       "at": "L3:magnetron",
+       "text": "MAGNETRON"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s4-cage",
+   "lines": [
+    "L4"
+   ],
+   "start": "L4-0.15",
+   "env": "desk",
+   "transition": {
+    "type": "continuity",
+    "dur": 0.3
+   },
+   "evidence": [
+    "F3",
+    "P2",
+    "P1"
+   ],
+   "chips": [
+    "conceptualLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Cage: the oven in cutaway; the magnetron launches waves that reflect off every wall, the mesh door included, so none leaves the box.",
+   "camera": [
+    {
+     "at": "L4-0.15",
+     "x": 540,
+     "y": 880,
+     "z": 1
+    },
+    {
+     "at": "L4.end",
+     "x": 520,
+     "y": 880,
+     "z": 1.08
+    }
+   ],
+   "layers": [
+    {
+     "component": "desk-grain",
+     "screen": true,
+     "props": {
+      "seed": 6
+     }
+    },
+    {
+     "component": "faraday-box",
+     "props": {
+      "launchAt": "L3:magnetron",
+      "packets": 7,
+      "label": {
+       "at": "L4:cage",
+       "text": "FARADAY CAGE"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s5-aperture",
+   "lines": [
+    "L5"
+   ],
+   "start": "L5-0.15",
+   "env": "desk",
+   "transition": {
+    "type": "dissolve",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F2",
+    "F1",
+    "P1"
+   ],
+   "chips": [
+    "conceptualLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Comparison: the mesh in cross-section; a hole is marked, then one full microwave wavelength is braced above the wave: the hole is far smaller.",
+   "camera": [
+    {
+     "at": "L5-0.15",
+     "x": 560,
+     "y": 880,
+     "z": 1
+    },
+    {
+     "at": "L5.end",
+     "x": 520,
+     "y": 860,
+     "z": 1.06
+    }
+   ],
+   "layers": [
+    {
+     "component": "desk-grain",
+     "screen": true,
+     "props": {
+      "seed": 7
+     }
+    },
+    {
+     "component": "wave-aperture",
+     "props": {
+      "microAt": "L5",
+      "labels": {
+       "hole": {
+        "at": "L5:holes",
+        "text": "HOLE"
+       },
+       "wavelength": {
+        "at": "L5:wavelength",
+        "text": "12.2 CM"
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s6-blocked",
+   "lines": [
+    "L6"
+   ],
+   "start": "L6-0.15",
+   "env": "desk",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F2",
+    "F1",
+    "P1"
+   ],
+   "chips": [
+    "conceptualLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Blocked: the microwave reaches the mesh and reflects; behind it the axis stays flat: nothing passes through the door.",
+   "camera": [
+    {
+     "at": "L6-0.15",
+     "x": 520,
+     "y": 860,
+     "z": 1
+    },
+    {
+     "at": "L6.end",
+     "x": 600,
+     "y": 860,
+     "z": 1.08
+    }
+   ],
+   "layers": [
+    {
+     "component": "desk-grain",
+     "screen": true,
+     "props": {
+      "seed": 8
+     }
+    },
+    {
+     "component": "wave-aperture",
+     "props": {
+      "microAt": "L6-0.9",
+      "labels": {
+       "micro": {
+        "at": "L6+0.6",
+        "text": "CANNOT PASS"
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s7-light",
+   "lines": [
+    "L7"
+   ],
+   "start": "L7-0.15",
+   "env": "desk",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F2"
+   ],
+   "chips": [
+    "conceptualLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Light: the long microwave still reflects at the mesh while a short light wave threads one hole and carries on to the other side.",
+   "camera": [
+    {
+     "at": "L7-0.15",
+     "x": 540,
+     "y": 860,
+     "z": 1.06
+    },
+    {
+     "at": "L7.end",
+     "x": 560,
+     "y": 860,
+     "z": 1
+    }
+   ],
+   "layers": [
+    {
+     "component": "desk-grain",
+     "screen": true,
+     "props": {
+      "seed": 9
+     }
+    },
+    {
+     "component": "wave-aperture",
+     "props": {
+      "microAt": "L7-2.2",
+      "lightAt": "L7+0.2",
+      "labels": {
+       "light": {
+        "at": "L7+0.7",
+        "text": "VISIBLE LIGHT"
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s8-payoff",
+   "lines": [
+    "L8"
+   ],
+   "start": "L8-0.15",
+   "env": "desk",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F2",
+    "F3",
+    "P2"
+   ],
+   "chips": [
+    "conceptualLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Payoff: light leaves through the window to the viewer's eye while the enclosure and mesh glow as one shield: you see in, the energy stays in. Returns to the hook's oven, so the Short loops.",
+   "camera": [
+    {
+     "at": "L8-0.15",
+     "x": 540,
+     "y": 960,
+     "z": 1
+    },
+    {
+     "at": "end-0.6",
+     "x": 540,
+     "y": 860,
+     "z": 1.1
+    }
+   ],
+   "layers": [
+    {
+     "component": "desk-grain",
+     "screen": true,
+     "props": {
+      "seed": 10
+     }
+    },
+    {
+     "component": "oven-door",
+     "props": {
+      "x": 110,
+      "y": 560,
+      "w": 860,
+      "h": 600,
+      "viewAt": "L8+0.3",
+      "shieldAt": "L8+0.9"
+     }
+    }
+   ]
+  }
+ ]
+}
