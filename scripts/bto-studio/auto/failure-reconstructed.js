@@ -238,6 +238,9 @@ function build(script, style, topic) {
     if (cls === "hook") return { kind_: "hook", evidence: [F("case")], layers: [{ component: "heavy-seas", props: { storm: stormCase, swell: stormCase ? 85 : 30, hitAt: 0.2, seed: 5, profile } }, ...(stamp ? [headline(`${L.id}+0.3`, stamp, 330, S.title)] : [])],
       purpose: `Hook: frame 0 is the ship already in heavy seas${stormCase ? " with the storm wall on the horizon" : ""}; a sea breaks over the bow in the first second, before any cause is named.`,
       camera: [{ at: start, x: 560, y: 900, z: 1.12 }, { at: end, x: 520, y: 880, z: 1.0 }] };
+    if (cls === "toll" && groundCase && /\b(rolled|capsiz\w*|on (its|her) side)\b/i.test(L.text)) return { kind_: "toll", evidence: [F("case")], layers: [{ component: "hull-section", props: { floodAt: start, floodDur: 2.2, listTo: 60 } }, readout(`${L.id}+0.25`, toll, 640)],
+      purpose: `Toll: seen bow-on the hull rolls onto its side in shallow water (she did not go under) while the case's count (${toll}) is stamped.`,
+      camera: [{ at: start, x: 540, y: 880, z: 1.0 }, { at: end, x: 540, y: 900, z: 1.06 }] };
     if (cls === "toll") return { kind_: "toll", evidence: [F("case")], layers: [{ component: "heavy-seas", props: { sunk: true, swell: 28, seed: 5, profile } }, readout(`${L.id}+0.25`, toll, 640)],
       purpose: `Toll: the surface closes over the ship's outline while the case's count (${toll}) is stamped; the number is the case file's.`,
       camera: [{ at: start, x: 540, y: 960, z: 1.0 }, { at: end, x: 540, y: 1000, z: 1.1 }] };
@@ -262,16 +265,20 @@ function build(script, style, topic) {
         purpose: "Propulsion lost: the stern in cutaway; the oil-pressure needle falls, the engine light dies and the propeller spins down to a stop.",
         camera: [{ at: start, x: 560, y: 800, z: 1.0 }, { at: end, x: 620, y: 820, z: 1.1 }] }; }
     // a grounding (Costa Concordia): calm water, the ship comes on and stops over a rock, a gash opens below the waterline
-    if (cls === "approach") return { kind_: "trigger", evidence: [F("trigger"), F("case")], layers: [{ component: "heavy-seas", props: { storm: false, swell: 22, seed: 5, profile, rockAt: off(end, 1.6) } }, headline(`${L.id}+0.2`, triggerLabel, 330, S.title, triggerLabel)],
+    if (cls === "approach") return { kind_: "trigger", evidence: [F("trigger"), F("case")], layers: [{ component: "heavy-seas", props: { storm: false, swell: 22, seed: 5, profile, rockAt: off(end, 0.8), approachDur: 4.5 } }, headline(`${L.id}+0.2`, triggerLabel, 330, S.title, triggerLabel)],
       purpose: "Trigger: in calm water the ship turns in close to the shore, toward the rock just under the surface; the impact comes on the next line.",
-      camera: [{ at: start, x: 520, y: 900, z: 1.0 }, { at: end, x: 600, y: 920, z: 1.15 }] };
+      camera: [{ at: start, x: 540, y: 900, z: 1.0 }, { at: end, x: 560, y: 910, z: 1.06 }] };
     if (cls === "ground") return { kind_: "grounding", evidence, layers: [{ component: "heavy-seas", props: { storm: false, swell: 22, seed: 5, profile, rockAt: wordAt(L, /^(rock|struck|tore|ran|hit)/i, 0.6) } }, ...head(chainFor(SEA.ground))],
       purpose: "Grounding: in calm water the ship comes in close and stops over a rock just under the surface; a gash opens along the hull below the waterline.",
       camera: [{ at: start, x: 540, y: 900, z: 1.0 }, { at: end, x: 640, y: 940, z: 1.25 }] };
-    // evacuation: the ship lists in calm water, lights still on, while the line names the delay
-    if (cls === "evac") return { kind_: "evacuation", evidence, layers: [{ component: "heavy-seas", props: { storm: false, swell: 20, seed: 5, profile, heel: evacAgain ? 22 : 14, ...(evacAgain ? {} : { heelAt: start }) } }, ...head(chainFor(SEA.evac))],
-      purpose: "Evacuation: the ship lists in calm water with her lights still on while the line names what was late.",
-      camera: evacAgain ? [{ at: start, x: 520, y: 900, z: 1.0 }, { at: end, x: 600, y: 940, z: 1.2 }] : [{ at: start, x: 540, y: 900, z: 1.1 }, { at: end, x: 520, y: 900, z: 1.0 }] };
+    // evacuation: the order was late; the side view stays level (a tilt seen side-on reads as trim, not as a list)
+    if (cls === "evac" && !evacAgain) return { kind_: "evacuation", evidence, layers: [{ component: "heavy-seas", props: { storm: false, swell: 20, seed: 5, profile } }, ...head(chainFor(SEA.evac))],
+      purpose: "Evacuation: the ship at rest in calm water, lights still on, while the line names what was late.",
+      camera: [{ at: start, x: 540, y: 900, z: 1.1 }, { at: end, x: 520, y: 900, z: 1.0 }] };
+    // the list, seen bow-on: the hull section heels and the inclinometer shows it (why lifeboats on one side were unusable)
+    if (cls === "evac") return { kind_: "list", evidence, layers: [{ component: "hull-section", props: { floodAt: start, floodDur: 2.4, listTo: 24, listLabel: "LIST" } }],
+      purpose: "List, seen bow-on: the flooded hull heels over and the inclinometer swings; the boats on the high side can no longer be lowered.",
+      camera: [{ at: start, x: 540, y: 860, z: 1.0 }, { at: end, x: 540, y: 870, z: 1.06 }] };
     if (cls === "sink") return { kind_: "sinking", evidence, layers: [{ component: "heavy-seas", props: { profile, storm: stormCase, swell: stormCase ? 95 : 40, powerlessAt: /\b(without power|no power|powerless|adrift|drift\w*)\b/i.test(L.text) ? start : null, sinkAt: off(L.id, 0.45), sinkDur: 1.6, seed: 5 } }],
       purpose: "Overwhelmed: without propulsion the ship lies broadside to the sea, rolls, and goes under.",
       camera: [{ at: start, x: 540, y: 920, z: 1.0 }, { at: end, x: 540, y: 980, z: 1.08 }] };

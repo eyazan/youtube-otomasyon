@@ -140,7 +140,8 @@ test("FR Costa Concordia: grounding on a rock, a listing ship for the evacuation
   const t = Adapter.loadTopic("failure-reconstructed", "FR-costa-concordia-2012").topic; const sb = FR.build(Adapter.studioScript(ch, t), style, t);
   const ls = sb.scenes.flatMap((s) => s.layers);
   assert.ok(ls.some((l) => l.component === "heavy-seas" && l.props.rockAt), "the rock is drawn");
-  assert.ok(ls.some((l) => l.component === "heavy-seas" && l.props.heel), "the list is drawn");
+  assert.ok(ls.some((l) => l.component === "hull-section" && l.props.listLabel === "LIST"), "the list is drawn bow-on");
+  assert.ok(!ls.some((l) => l.component === "heavy-seas" && (l.props.heel || l.props.sunk)), "no side-view tilt, and she did not go under");
   assert.ok(ls.filter((l) => l.component === "object-silhouette").every((l) => l.props.failAt == null), "no crack on a ship that did not break");
   sb.scenes.filter((s) => s.id.endsWith("-chain") && s.transition && s.transition.type !== "continuity").forEach((s) => assert.equal(s.transition.type, "scan-wipe"));
 });

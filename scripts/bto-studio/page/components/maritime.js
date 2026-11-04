@@ -46,7 +46,7 @@
   // ---- heavy-seas -----------------------------------------------------------------------------------------------
   // props: x (ship x), y (mean sea level, default 980), L (ship length px), swell (wave height px), storm (bool),
   //   heading (1 = into the sea from the left), hitAt, powerlessAt, sinkAt, sinkDur, sunk, lights, enterAt, outAt, seed,
-//   rockAt (grounding: a rock under the bow, a gash opens), heel + heelAt (a list in calm water)
+//   rockAt (grounding: a rock under the bow, a gash opens; approachDur: how long she comes on), heel + heelAt
   BTO.def("heavy-seas", (o) => {
     const r = BTO.rng(o.seed || 11); const drops = Array.from({ length: 90 }, () => ({ x: r() * 1400 - 160, y: r() * 1920, v: 1600 + r() * 900, l: 40 + r() * 50 }));
     if (o.hitAt != null) { BTO.cue(o.hitAt, "whoosh", 0.7); BTO.cue(o.hitAt + 0.05, "drop", 0.5); }
@@ -68,8 +68,8 @@
       const beam = o.powerlessAt != null ? BTO.ep(t, o.powerlessAt, o.powerlessAt + 1.6, "inOut") : 0;
       // rockAt: a grounding. The ship comes on from the left and stops with its bow section over a rock just under the
       // surface; at rockAt a gash opens along the hull below the waterline. heel (deg, from heelAt over 1.6 s): a list
-      const appr = o.rockAt != null ? 1 - BTO.ep(t, o.rockAt - 1.4, o.rockAt, "out") : 0;
-      const sx = X - appr * 160 + (o.heading === -1 ? -1 : 1) * 18 * Math.sin(t * 0.5) * (1 - sinkK) * (o.rockAt != null ? 0 : 1);
+      const appr = o.rockAt != null ? 1 - BTO.ep(t, o.rockAt - (o.approachDur || 1.4), o.rockAt, "out") : 0;
+      const sx = X - appr * 120 + (o.heading === -1 ? -1 : 1) * 18 * Math.sin(t * 0.5) * (1 - sinkK) * (o.rockAt != null ? 0 : 1);
       const sy = wave(sx, t, 1); const slope = (wave(sx + 30, t, 1) - wave(sx - 30, t, 1)) / 60;
       // broadside to the sea the ship rolls (seen end-on it would roll; side-on we see the pitch shrink and the heave grow)
       const pitch = Math.atan(slope) * 57.3 * 0.42 * (1 - beam * 0.5) + beam * 7 * Math.sin(t * 1.9);
