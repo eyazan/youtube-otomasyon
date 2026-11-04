@@ -1,7 +1,7 @@
 # Failure Reconstructed: Costa Concordia (FR-costa-concordia-2012)
 
-**Final MP4:** run 41904421963, artifact `premium-FR-costa-concordia-2012`. Every half-second of the MP4 is on branch
-`review/render-41904421963-FR-costa-concordia-2012`, under `full/`.
+**Final MP4:** run 41907167713, artifact `premium-FR-costa-concordia-2012`. Every half-second of the MP4 is on branch
+`review/render-41907167713-FR-costa-concordia-2012`, under `full/`.
 
 ## Title
 The Cruise Ship That Sailed Too Close to Shore
@@ -68,7 +68,7 @@ The signed FR publication policy (2026-10-28) already authorises unattended publ
    node core/pipeline/premium-publish.js reserve --channel failure-reconstructed --topic FR-costa-concordia-2012 --by <your name>
    ```
 3. In `channels/failure-reconstructed/premium/approvals/FR-costa-concordia-2012.json`, set:
-   - `contentSha256` to the hash printed by `node scripts/bto-studio/studio.js --channel failure-reconstructed --topic FR-costa-concordia-2012 --quality final --voice edge` followed by `node core/pipeline/premium-publish.js hash --channel failure-reconstructed --topic FR-costa-concordia-2012`. The render is deterministic, so this is the same content you watched;
+   - `contentSha256` to `10970e8a960b44d4bcbddca6f64e7063bb9e43af15b1493b686e051cb9e740b4` (this render's content hash; re-check it with `node core/pipeline/premium-publish.js hash --channel failure-reconstructed --topic FR-costa-concordia-2012` after a local final render; the publisher refuses any render whose hash differs);
    - `creative`, `factual` and `publish` to `{ "by": "<your name>", "at": "<ISO time>" }`;
    - the `metadata` title, description and tags above.
 4. Merge, then set `FR_PREMIUM_PUBLISH=1`. A signed per-video approval is picked before the policy's automatic choice.
