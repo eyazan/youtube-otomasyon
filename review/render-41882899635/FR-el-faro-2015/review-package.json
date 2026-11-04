@@ -1,0 +1,282 @@
+{
+ "schema": "bto-studio.review-package.v1",
+ "channel": "failure-reconstructed",
+ "topicId": "FR-el-faro-2015",
+ "slug": "el-faro-2015",
+ "title": "The Cargo Ship That Sailed Into a Hurricane",
+ "verdict": "SHADOW_OF_LIVE_NOT_PUBLISHABLE",
+ "pilot": null,
+ "researchPending": null,
+ "shadow": true,
+ "autoPublish": false,
+ "uploadAttempted": false,
+ "mode": "preview",
+ "quality": "final",
+ "createdAt": "2026-11-04T18:05:00.142Z",
+ "video": "../../_temp/review/FR-el-faro-2015/out/el-faro-2015-premium-final.mp4",
+ "voice": {
+  "used": "en-US-AndrewMultilingualNeural",
+  "approved": true,
+  "approvedVoice": {
+   "provider": "edge-tts",
+   "voice": "en-US-AndrewMultilingualNeural",
+   "rate": "+1%"
+  },
+  "note": null,
+  "wordTiming": "measured (Edge word boundaries)"
+ },
+ "narrationUnchanged": {
+  "sourceHash": "609bfcf9d7373976",
+  "lines": [
+   "A US cargo ship sailed into a Category 3 hurricane.",
+   "The ship sank, and all thirty three crew were killed.",
+   "Its route kept it close to the hurricane's path.",
+   "Some weather updates it relied on were hours old.",
+   "Water came in through an open hatch, and the ship listed.",
+   "Then the engine lost oil pressure and stopped.",
+   "Without power, the waves took over.",
+   "Rules on weather routing and old ships were tightened."
+  ]
+ },
+ "traceability": [
+  {
+   "scene": "s1-hook",
+   "lines": [
+    "L1"
+   ],
+   "purpose": "Hook: frame 0 is the ship already in heavy seas with the storm wall on the horizon; a sea breaks over the bow in the first second, before any cause is named.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "El Faro (2015): sank in Hurricane Joaquin. 33 CREW",
+     "source": "Wikipedia — SS El Faro",
+     "url": "https://en.wikipedia.org/wiki/SS_El_Faro"
+    }
+   ]
+  },
+  {
+   "scene": "s2-toll",
+   "lines": [
+    "L2"
+   ],
+   "purpose": "Toll: the surface closes over the ship's outline while the case's count (33 CREW) is stamped; the number is the case file's.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "El Faro (2015): sank in Hurricane Joaquin. 33 CREW",
+     "source": "Wikipedia — SS El Faro",
+     "url": "https://en.wikipedia.org/wiki/SS_El_Faro"
+    }
+   ]
+  },
+  {
+   "scene": "s3-storm",
+   "lines": [
+    "L3"
+   ],
+   "purpose": "Route against storm: on a schematic chart the ship's route and the storm's track converge until the ship is inside the danger ring.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F1",
+     "claim": "El Faro (2015): sank in Hurricane Joaquin. 33 CREW",
+     "source": "Wikipedia — SS El Faro",
+     "url": "https://en.wikipedia.org/wiki/SS_El_Faro"
+    },
+    {
+     "id": "F3",
+     "claim": "flooding through an open scuttle, loss of propulsion, and progressive flooding in heavy seas",
+     "source": "NTSB — DCA16MM01 preliminary report (cited by Wikipedia)",
+     "url": "https://www.ntsb.gov/investigations/AccidentReports/Reports/DCA16MM01_preliminary_report.pdf"
+    }
+   ]
+  },
+  {
+   "scene": "s4-forecast",
+   "lines": [
+    "L4"
+   ],
+   "purpose": "Stale forecast: the storm the crew planned around (the old position, ghosted) and where it really was; the ship's route runs into the real one.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "ROUTE KEPT NEAR THE STORM -> OUTDATED WEATHER DATA -> SHIP LISTS, WATER ENTERS -> PROPULSION LOST -> SHIP SINKS",
+     "source": "Wikipedia — SS El Faro",
+     "url": "https://en.wikipedia.org/wiki/SS_El_Faro"
+    },
+    {
+     "id": "F3",
+     "claim": "flooding through an open scuttle, loss of propulsion, and progressive flooding in heavy seas",
+     "source": "NTSB — DCA16MM01 preliminary report (cited by Wikipedia)",
+     "url": "https://www.ntsb.gov/investigations/AccidentReports/Reports/DCA16MM01_preliminary_report.pdf"
+    },
+    {
+     "id": "F1",
+     "claim": "El Faro (2015): sank in Hurricane Joaquin. 33 CREW",
+     "source": "Wikipedia — SS El Faro",
+     "url": "https://en.wikipedia.org/wiki/SS_El_Faro"
+    }
+   ]
+  },
+  {
+   "scene": "s5-flooding",
+   "lines": [
+    "L5"
+   ],
+   "purpose": "Flooding: a cut through the hull in a level sea; water pours through the opening, the hold on that side fills and the ship heels toward it (inclinometer).",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "ROUTE KEPT NEAR THE STORM -> OUTDATED WEATHER DATA -> SHIP LISTS, WATER ENTERS -> PROPULSION LOST -> SHIP SINKS",
+     "source": "Wikipedia — SS El Faro",
+     "url": "https://en.wikipedia.org/wiki/SS_El_Faro"
+    },
+    {
+     "id": "F3",
+     "claim": "flooding through an open scuttle, loss of propulsion, and progressive flooding in heavy seas",
+     "source": "NTSB — DCA16MM01 preliminary report (cited by Wikipedia)",
+     "url": "https://www.ntsb.gov/investigations/AccidentReports/Reports/DCA16MM01_preliminary_report.pdf"
+    },
+    {
+     "id": "F1",
+     "claim": "El Faro (2015): sank in Hurricane Joaquin. 33 CREW",
+     "source": "Wikipedia — SS El Faro",
+     "url": "https://en.wikipedia.org/wiki/SS_El_Faro"
+    }
+   ]
+  },
+  {
+   "scene": "s6-propulsion",
+   "lines": [
+    "L6"
+   ],
+   "purpose": "Propulsion lost: the stern in cutaway; the oil-pressure needle falls, the engine light dies and the propeller spins down to a stop.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "ROUTE KEPT NEAR THE STORM -> OUTDATED WEATHER DATA -> SHIP LISTS, WATER ENTERS -> PROPULSION LOST -> SHIP SINKS",
+     "source": "Wikipedia — SS El Faro",
+     "url": "https://en.wikipedia.org/wiki/SS_El_Faro"
+    },
+    {
+     "id": "F3",
+     "claim": "flooding through an open scuttle, loss of propulsion, and progressive flooding in heavy seas",
+     "source": "NTSB — DCA16MM01 preliminary report (cited by Wikipedia)",
+     "url": "https://www.ntsb.gov/investigations/AccidentReports/Reports/DCA16MM01_preliminary_report.pdf"
+    },
+    {
+     "id": "F1",
+     "claim": "El Faro (2015): sank in Hurricane Joaquin. 33 CREW",
+     "source": "Wikipedia — SS El Faro",
+     "url": "https://en.wikipedia.org/wiki/SS_El_Faro"
+    }
+   ]
+  },
+  {
+   "scene": "s7-sinking",
+   "lines": [
+    "L7"
+   ],
+   "purpose": "Overwhelmed: without propulsion the ship lies broadside to the sea, rolls, and goes under.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F4",
+     "claim": "ROUTE KEPT NEAR THE STORM -> OUTDATED WEATHER DATA -> SHIP LISTS, WATER ENTERS -> PROPULSION LOST -> SHIP SINKS",
+     "source": "Wikipedia — SS El Faro",
+     "url": "https://en.wikipedia.org/wiki/SS_El_Faro"
+    },
+    {
+     "id": "F3",
+     "claim": "flooding through an open scuttle, loss of propulsion, and progressive flooding in heavy seas",
+     "source": "NTSB — DCA16MM01 preliminary report (cited by Wikipedia)",
+     "url": "https://www.ntsb.gov/investigations/AccidentReports/Reports/DCA16MM01_preliminary_report.pdf"
+    },
+    {
+     "id": "F1",
+     "claim": "El Faro (2015): sank in Hurricane Joaquin. 33 CREW",
+     "source": "Wikipedia — SS El Faro",
+     "url": "https://en.wikipedia.org/wiki/SS_El_Faro"
+    }
+   ]
+  },
+  {
+   "scene": "s8-payoff",
+   "lines": [
+    "L8"
+   ],
+   "purpose": "Payoff: the lesson on the chart: the route is redrawn to keep clear of the storm's track, the change the rules now require.",
+   "conceptual": true,
+   "evidence": [
+    {
+     "id": "F6",
+     "claim": "weather routing and older-ship safety rules were tightened",
+     "source": "NTSB — DCA16MM01 preliminary report (cited by Wikipedia)",
+     "url": "https://www.ntsb.gov/investigations/AccidentReports/Reports/DCA16MM01_preliminary_report.pdf"
+    },
+    {
+     "id": "F3",
+     "claim": "flooding through an open scuttle, loss of propulsion, and progressive flooding in heavy seas",
+     "source": "NTSB — DCA16MM01 preliminary report (cited by Wikipedia)",
+     "url": "https://www.ntsb.gov/investigations/AccidentReports/Reports/DCA16MM01_preliminary_report.pdf"
+    },
+    {
+     "id": "F1",
+     "claim": "El Faro (2015): sank in Hurricane Joaquin. 33 CREW",
+     "source": "Wikipedia — SS El Faro",
+     "url": "https://en.wikipedia.org/wiki/SS_El_Faro"
+    }
+   ]
+  }
+ ],
+ "licensing": {
+  "visuals": "all visuals drawn in-house from code (SVG): generic object-class line drawings, failure chain and stamps; no photographs, footage or third-party media",
+  "fonts": "SIL OFL 1.1 (@fontsource Inter, Source Serif 4, Barlow Semi Condensed 5.3.0)",
+  "audio": "narration TTS + effects/music synthesised by scripts/bto-studio/audio/sound_design.py (no samples)",
+  "thirdPartyMedia": []
+ },
+ "qa": {
+  "objectivePass": true,
+  "report": "../../_temp/review/FR-el-faro-2015/out/qa-report.md",
+  "contactSheet": "../../_temp/review/FR-el-faro-2015/out/contact-sheet.png",
+  "sceneSheet": "../../_temp/review/FR-el-faro-2015/out/scene-sheet.png",
+  "failures": [
+   "UNVERIFIED audio samples clipped: not reported by this FFmpeg build (astats has no clipped-sample count)",
+   "WARN loop continuity (last -> first frame): whole 16.43, photo region 16.92, final-second step 0.18, ratio 24.91"
+  ],
+  "unverified": [
+   "audio samples clipped"
+  ]
+ },
+ "audio": {
+  "integratedLufs": -14.3,
+  "truePeakDbtp": -2.9
+ },
+ "performance": {
+  "renderWallSec": 86.9,
+  "msPerFrame": 107.7,
+  "workers": 3,
+  "peakChromiumRssMb": 3781,
+  "cachedSegments": 0,
+  "segments": 8,
+  "host": "linux x64 4 cpu 16 GB",
+  "totalPipelineSec": 145.5
+ },
+ "cost": {
+  "llmUsd": 0,
+  "ttsUsd": 0,
+  "renderUsd": 0,
+  "note": "local rendering and free/offline TTS; LLM use only when a Claude storyboard draft was requested and approved"
+ },
+ "approvalsNeeded": [
+  "voice: re-narrate with the approved Edge voice (if PREVIEW_ONLY)",
+  "creative sign-off (video-quality-review findings)",
+  "factual sign-off on the traceability table",
+  "owner decision to hand the MP4 to the normal pipeline (never automatic)"
+ ]
+}
