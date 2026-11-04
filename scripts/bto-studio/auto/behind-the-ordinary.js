@@ -55,9 +55,11 @@ function build(script, style, topic, context = {}) {
   const mechanismScene = (L, i, evidence) => {
     if (!aperture) return null; const first = i === 0, last = i === lines.length - 1; const start = first ? 0 : `${L.id}-0.15`; const end = `${L.id}.end`;
     const T = String(L.text);
-    if (first && oven) return { kind: "hook", layers: [door({ loupeAt: off(L.id, 0.5), loupe: { x: 420, y: 800, r: 230 }, ...(say(L, /metal mesh/i) ? { label: { at: wordAnchor(L, /^metal$/i, 1.4), text: say(L, /metal mesh/i) } } : {}) })],
+    // motion-first: the loupe opens on the mesh from frame 0 (the review saw a still oven for 0.7 s), so the visual
+    // question - holes in a metal door - is on screen before the first word ends
+    if (first && oven) return { kind: "hook", layers: [door({ loupeAt: 0, loupe: { x: 420, y: 800, r: 230 }, ...(say(L, /metal mesh/i) ? { label: { at: wordAnchor(L, /^metal$/i, 1.4), text: say(L, /metal mesh/i) } } : {}) })],
       purpose: "Hook: frame 0 is the oven with its lit window; as the line names the mesh, a loupe opens on the door and the holes in the metal mesh become visible.",
-      camera: [{ at: start, x: 540, y: 860, z: 1.1 }, { at: end, x: 500, y: 840, z: 1.0 }] };
+      camera: [{ at: start, x: 470, y: 820, z: 1.3 }, { at: end, x: 500, y: 840, z: 1.0 }] };
     if (last && oven) return { kind: "payoff", layers: [door({ viewAt: off(L.id, 0.3), shieldAt: off(L.id, 0.9) })],
       purpose: "Payoff: light leaves through the window to the viewer's eye while the enclosure and mesh glow as one shield: you see in, the energy stays in. Returns to the hook's oven, so the Short loops.",
       camera: [{ at: start, x: 540, y: 960, z: 1.0 }, { at: "end-0.6", x: 540, y: 860, z: 1.1 }] };

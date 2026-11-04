@@ -85,6 +85,11 @@ function structureMechanism(topic, kind, lines = []) {
     if (/\b(uplift|foundation|abutment|underneath|under the dam)\b/i.test(text)) return "uplift";
     return null;
   }
+  // a gas release from a lake (Lake Nyos, Monoun): nothing structural failed. The lake, the gas rising out of it and the
+  // heavy cloud running down into the valley are drawn, never a crack (#416 review: Lake Nyos drawn as a cracked mountain)
+  if (kind === "terrain" && /\b(limnic|carbon dioxide|co2|gas (cloud|burst|release))\b/i.test([text, v.sonuc || ""].join(" "))) return "gas";
+  // a tornado or windstorm on a building: the funnel and its wind are drawn against the building that gives way
+  if (kind === "building" && /\b(tornado|twister|ef[0-5]|hurricane|windstorm)\b/i.test([text, v.sonuc || "", v.ad || "", topic.title || ""].join(" "))) return "tornado";
   if (/bridge$|walkway/.test(kind)) {
     if (/\b(wind\w*|gale|gust\w*|storm)\b/i.test(text)) return "wind";
     // a strike as the cause (a truck or a ship hitting the structure) is not a load on the deck: no load path for it
@@ -136,7 +141,7 @@ function build(script, style, topic) {
   const motion = objectMotion(topic, kind); const docked = kind === "capsule" && DOCKED.test([v.sonuc, v.tetik, v.mekanizma, ...(v.zincir || [])].join(" "));
   // the object fits 900 x 640 around y 820 (y 500-1140): clear of the chips, the watermark, the y 330 headlines and the captions
   const mech = structureMechanism(topic, kind, lines); const water = /bridge$/.test(kind) && WATER.test(caseText(topic, lines));
-  const holds = HOLDS.test(caseText(topic, lines));
+  const holds = HOLDS.test(caseText(topic, lines)) || structureMechanism(topic, objectKind(topic, lines), lines) === "gas";
   // a dam that held while the slope above its reservoir slid: the slope is drawn and it is what gives way
   const atSlope = kind === "dam" && holds && /\b(landslide|slope|mountainside|hillside)\b/i.test([v.tetik, v.mekanizma, ...(v.zincir || [])].join(" "));
   // a suspension bridge whose case names the chain, an eyebar or a cable as what broke: the failure is drawn there
@@ -208,7 +213,7 @@ function build(script, style, topic) {
     const cls = role === "hook" || role === "toll" || role === "payoff" ? role : seaClass(L.text) || (k >= 0 ? seaClass(chain[k] || "") : null);
     const evidence = [F(role === "payoff" ? "lesson" : k >= 0 ? "chain" : "case"), F("mechanism"), F("case")];
     const head = (txt) => (txt ? [headline(`${L.id}+0.2`, String(txt).toUpperCase(), 330, S.title, txt)] : []);
-    if (cls === "hook") return { kind_: "hook", evidence: [F("case")], layers: [{ component: "heavy-seas", props: { storm: stormCase, swell: 85, hitAt: 0.55, seed: 5 } }, ...(stamp ? [headline(`${L.id}+0.3`, stamp, 330, S.title)] : [])],
+    if (cls === "hook") return { kind_: "hook", evidence: [F("case")], layers: [{ component: "heavy-seas", props: { storm: stormCase, swell: 85, hitAt: 0.2, seed: 5 } }, ...(stamp ? [headline(`${L.id}+0.3`, stamp, 330, S.title)] : [])],
       purpose: `Hook: frame 0 is the ship already in heavy seas${stormCase ? " with the storm wall on the horizon" : ""}; a sea breaks over the bow in the first second, before any cause is named.`,
       camera: [{ at: start, x: 560, y: 900, z: 1.12 }, { at: end, x: 520, y: 880, z: 1.0 }] };
     if (cls === "toll") return { kind_: "toll", evidence: [F("case")], layers: [{ component: "heavy-seas", props: { sunk: true, swell: 28, seed: 5 } }, readout(`${L.id}+0.25`, toll, 640)],
@@ -251,7 +256,9 @@ function build(script, style, topic) {
     else if (role === "hook") {
       // frame 0 must show the object (QA: first frame not empty): it is drawn whole at t=0 and gives way at 0.6 s
       // with a named mechanism the load (wind, water) is already on the object at frame 0 and it gives way at 0.9 s
-      kind_ = "hook"; layers = [silhouette(mech ? { failAt: 0.9, mech, mechAt: -0.4 } : { failAt: 0.6, ...(plume ? { plumeAt: 0 } : {}) }), ...(stamp ? [headline(`${L.id}+0.3`, stamp, 330, S.title)] : [])];
+      // motion-first (2026-11-04 opening review): the mechanism is already acting at frame 0 and the failure starts within
+      // 0.35 s, so the first frame shows an event in progress, not a still drawing
+      kind_ = "hook"; layers = [silhouette(mech ? { failAt: 0.35, mech, mechAt: -1.5 } : { failAt: 0.2, ...(plume ? { plumeAt: 0 } : {}) }), ...(stamp ? [headline(`${L.id}+0.3`, stamp, 330, S.title)] : [])];
       purpose = `Hook: frame 0 draws the ${kind} as clean line work and it gives way at the failure point within the first second, with the case stamp (${stamp || "case"}), so the consequence is on screen before any cause.`;
       // a spin starts close on the still object and pulls back as it spins up, so the turning circle stays in frame
       camera = [{ at: start, x: 540, y: 820, z: hookZ }, { at: end, x: 540 - drift, y: 830, z: 1.02 }];

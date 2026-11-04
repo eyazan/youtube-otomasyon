@@ -82,13 +82,15 @@ jobs:
               node scripts/ib-research/mechanism-board.js --render --only "$T" --out "$O" 2>&1 | tail -5 | tee -a "$GITHUB_STEP_SUMMARY" || true
               mkdir -p "$O/stills"; cp "$O/work/$T/out/work/stills/"* "$O/stills/" 2>/dev/null || true
               cp "$O/work/$T/storyboard.json" "$O/" 2>/dev/null || true; rm -rf "$O/work"; continue;; esac
+            # <topic>~<Edge voice> reads the same script with a candidate voice (marked unapproved, never publishable)
+            VC=""; case "$TOK" in *~*) VC="${TOK#*~}"; TOK="${TOK%%~*}";; esac
             CH="$CHANNEL"; T="$TOK"; case "$TOK" in *:*) CH="${TOK%%:*}"; T="${TOK#*:}";; esac
             D="$RUNNER_TEMP/review/$T"
             echo "### $T" | tee -a "$GITHUB_STEP_SUMMARY"
-            node scripts/bto-studio/studio.js --channel "$CH" --topic "$T" --shadow --shadow-dir "$D" --regenerate --quality final --voice edge 2>&1 | tail -25 || echo "render failed: $T" | tee -a "$GITHUB_STEP_SUMMARY"
+            PREMIUM_VOICE_CANDIDATE="$VC" node scripts/bto-studio/studio.js --channel "$CH" --topic "$T" --shadow --shadow-dir "$D" --regenerate --quality final --voice edge 2>&1 | tail -25 || echo "render failed: $T" | tee -a "$GITHUB_STEP_SUMMARY"
             MP4=$(find "$D/out" -maxdepth 1 -name "*.mp4" 2>/dev/null | head -1 || true)
             [ -n "$MP4" ] || { echo "no MP4 for $T" | tee -a "$GITHUB_STEP_SUMMARY"; continue; }
-            O="review-out/$T"; mkdir -p "$O/frames"
+            O="review-out/$T${VC:+-$VC}"; mkdir -p "$O/frames"
             (cd "$(dirname "$MP4")" && sha256sum "$(basename "$MP4")") | tee "$O/mp4.sha256" | tee -a "$GITHUB_STEP_SUMMARY"
             cp "$MP4" "$O/"; cp "$D/out/qa-report.md" "$D/out/review-package.json" "$D/storyboard.json" "$D/out/contact-sheet.png" "$D/out/scene-sheet.png" "$O/" 2>/dev/null || true
             ffmpeg -hide_banner -loglevel error -i "$MP4" -vf "fps=2/3,scale=540:-2" -q:v 4 "$O/frames/t%03d.jpg"
@@ -106,7 +108,7 @@ jobs:
         if: always()
         env:
           TOK: ${{ matrix.token }}
-        run: echo "topic=${TOK#*:}" >> "$GITHUB_OUTPUT"
+        run: T="${TOK#*:}"; echo "topic=${T/\~/-}" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-artifact@v4
         if: always()
         with:

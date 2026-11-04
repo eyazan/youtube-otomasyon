@@ -401,7 +401,10 @@ function build(script, style, topic) {
     } else if (first) {
       kind = "hook"; const n = qty || temp || year;
       // a hook comparing Earth with another body draws both, side by side (sizes illustrative)
-      layers = [stars(11), ...(other && bothNamed(L.text) ? pair(other) : signature(0.15, { probe: W === "earth-interior", field: fieldFor(L) })), ...(n ? [readout(`${L.id}+0.25`, valueLabel(n), 1230)] : [headline(`${L.id}+0.2`, keyPhrase(L.text), 420)])];
+      // motion-first: the field change starts at frame 0, and for the magnetic world the solar wind is already arriving
+      // (it always does; the opening review saw a static globe for the whole first 2 s of IB-EAR-019)
+      const f0 = fieldFor(L);
+      layers = [stars(11), ...(other && bothNamed(L.text) ? pair(other) : signature(0, { probe: W === "earth-interior", field: W === "magnetic" ? { ...(f0 || { from: 1, to: 1 }), wind: true } : f0 })), ...(n ? [readout(`${L.id}+0.25`, valueLabel(n), 1230)] : [headline(`${L.id}+0.2`, keyPhrase(L.text), 420)])];
       purpose = `Hook: frame 0 shows the ${W.replace("-", " ")} itself${n ? ` and the claim's number (${valueLabel(n)}) lands as a readout` : ""}, so the scale of the question is visible before it is explained.`;
       camera = cam(1.12, 1.0);
     } else if (last) {

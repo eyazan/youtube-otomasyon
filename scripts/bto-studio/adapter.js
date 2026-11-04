@@ -165,7 +165,10 @@ function studioScript(channel, topic, { pauses = {} } = {}) {
     sourceHash: sha(JSON.stringify(topic.narration)).slice(0, 16),
     // a channel voice still marked CANDIDATE (GoalLore Lab until the owner's listening test) is read with Edge but never
     // counts as approved: narrate.js marks the timeline unapproved, so the package is PREVIEW_ONLY and the gate refuses
-    voice: { approved: { provider: voice.provider, voice: voice.voice, rate: voice.rate }, ownerApproved: !/^CANDIDATE/i.test(String(voice.status || "")) && voice.approved !== false },
+    // PREMIUM_VOICE_CANDIDATE (shadow review renders only, e.g. the GoalLore Lab listening test): read the same script with
+    // another Edge voice; it is always marked unapproved, so such a render can never be published
+    voice: process.env.PREMIUM_VOICE_CANDIDATE ? { approved: { provider: "edge-tts", voice: process.env.PREMIUM_VOICE_CANDIDATE, rate: voice.rate }, ownerApproved: false }
+      : { approved: { provider: voice.provider, voice: voice.voice, rate: voice.rate }, ownerApproved: !/^CANDIDATE/i.test(String(voice.status || "")) && voice.approved !== false },
     lines, beats, facts: facts.map(({ id, hash, role, claim, quote, source, url, layer }) => ({ id, hash, role, claim, quote, source, url, layer })),
   };
 }
