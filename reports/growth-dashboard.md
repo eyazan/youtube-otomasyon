@@ -1,10 +1,10 @@
 # Growth dashboard
 
-Generated 2026-11-04T18:42:58.558Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-11-04T19:54:18.655Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
-**Shorts health** — last published 2026-11-04T18:00:00.000Z · 40 published · inventory A64/B150/C58/D76 · next: columbia-2003 (EXPLOIT (0.75): best A topic by SelectionScore)
+**Shorts health** — last published 2026-11-04T18:00:00.000Z · 40 published · inventory A60/B146/C56/D86 · next: columbia-2003 (EXPLOIT (0.75): best A topic by SelectionScore)
 
 **Long-form health** — cycle 2026-W45: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W45 already QUALITY_BLOCKED)
 
@@ -12,9 +12,9 @@ Generated 2026-11-04T18:42:58.558Z. Per-channel baselines are computed separatel
 
 **Content clusters** — 12 · integrity OK
 
-**Growth / subscriber conversion** — tracked 39 · subs/1k Shorts 0 · subs/1k long n/a
+**Growth / subscriber conversion** — tracked 40 · subs/1k Shorts 0 · subs/1k long n/a
 
-**Learning** — Shorts adaptive (n=38, adopted 0) · Long-form heuristics-only (n=0)
+**Learning** — Shorts adaptive (n=39, adopted 0) · Long-form heuristics-only (n=0)
 
 **Short → Long funnel** — 0 link(s), 0 long→long, 0 pending RELATED_VIDEO_MANUAL_ACTION_REQUIRED
 
@@ -49,9 +49,9 @@ Generated 2026-11-04T18:42:58.558Z. Per-channel baselines are computed separatel
 
 **Content clusters** — 7 · integrity OK
 
-**Growth / subscriber conversion** — tracked 19 · subs/1k Shorts 0 · subs/1k long n/a
+**Growth / subscriber conversion** — tracked 20 · subs/1k Shorts 0 · subs/1k long n/a
 
-**Learning** — Shorts adaptive (n=18, adopted 0) · Long-form heuristics-only (n=0)
+**Learning** — Shorts adaptive (n=19, adopted 0) · Long-form heuristics-only (n=0)
 
 **Short → Long funnel** — 0 link(s), 0 long→long, 0 pending RELATED_VIDEO_MANUAL_ACTION_REQUIRED
 
@@ -60,8 +60,8 @@ Generated 2026-11-04T18:42:58.558Z. Per-channel baselines are computed separatel
 - what-if-human-heat-tolerance-doubled-overnight (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
 - could-we-function-with-half-human-heat-tolerance (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
 - if-a-rogue-planet-vanished-right-now-what-would-change-first (C): VideoPotential 72 in experimental band 58–71; boilerplate 0.5
-- if-a-rogue-planet-moved-twice-as-close-when-would-earth-notice (C): VideoPotential 72 in experimental band 58–71; boilerplate 0.5
-- what-breaks-first-if-a-rogue-planet-suddenly-doubles-in-mass (C): VideoPotential 72 in experimental band 58–71; boilerplate 0.5
+- what-happens-if-the-global-ocean-doubles (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
+- what-if-human-muscle-efficiency-doubled-overnight (C): VideoPotential 70 in experimental band 58–71; boilerplate 0.5
 
 **Recent alerts**
 
