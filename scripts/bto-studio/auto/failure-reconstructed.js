@@ -158,7 +158,10 @@ function build(script, style, topic) {
   let cur = 0; const dockAt = (i) => (!docked ? {} : undockLine < 0 || i < undockLine ? { docked: true } : i === undockLine ? { docked: true, undockAt: off(lines[i].id, 0.3) } : { docked: false });
   const silhouette = (props) => ({ component: "object-silhouette", props: { kind, x: atSlope ? 600 : 540, y: 820, w: atSlope ? 840 : 900, maxH: 640, seed: 31, ...spinAt(cur), ...dockAt(cur), ...(water ? { water: true } : {}), ...(holds ? { holds: true } : {}), ...(atChain ? { failPart: "chain" } : {}), ...(atSlope ? { failPart: "slope" } : {}), ...(space ? { stars: true } : {}), ...(plume && (stopLine < 0 || cur <= stopLine) ? { plume: true } : {}), ...props,
     // one continuous spin: it began at the hook's failure (0.6 s) and every later drawing continues it at the same angle
-    ...(motion && spinAt(cur).motion && props.failAt != null ? { failAt: 0.6 } : {}) } });
+    ...(motion && spinAt(cur).motion && props.failAt != null ? { failAt: 0.6 } : {}),
+    // a ship that did not break is never drawn with a crack (#416 review: Costa Concordia, torn by a rock, was cracked)
+    ...(kind === "ship" && !shipBroke ? { failAt: null, mech: undefined } : {}) } });
+  const shipBroke = kind === "ship" && /\b(broke|broken|break(s|ing)? (up|apart|in two)|split|crack\w*|in two|halves|fractur\w*)\b/i.test(caseText(topic, lines));
   // headlines sit below the chip column (y >= 460) and shrink with length so they never reach the frame edge
   const headline = (at, text, y = 470, size = S.title, source = null) => ({ component: "kinetic-type", screen: true, props: { items: [{ at, text, x: 540, y: Math.max(460, y), size: text.length > 22 ? Math.max(44, Math.round(size * 22 / text.length)) : size, family: "sans", ...(source ? { source } : {}) }] } });
   const readout = (at, text, y = 1200) => ({ component: "kinetic-type", screen: true, props: { items: [{ at, text, x: 540, y, size: S.display, family: "num", style: "pop" }] } });
@@ -200,7 +203,9 @@ function build(script, style, topic) {
     storm: /\b(hurricane|storm|typhoon|cyclone|gale|weather|forecasts?|route|course)\b/i,
     sink: /\b(sank|sinks?|sinking|founder\w*|went down|took over|overwhelm\w*|swamp\w*|capsiz\w*|rolled over)\b/i,
     flood: /\b(flood\w*|water (came|poured|rushed|entered|got|flowed)|took on water|listed|listing|lists|heel\w*|hatch\w*|scuttles?|bow doors?|breach\w*)\b/i,
-    engine: /\b(engines?|propulsion|oil pressure|boilers?|propellers?|steering|rudder|lost power|power failed)\b/i };
+    engine: /\b(engines?|propulsion|oil pressure|boilers?|propellers?|steering|rudder|lost power|power failed)\b/i,
+    ground: /\b(rocks?|reefs?|aground|grounding|grounded|shoals?)\b/i,
+    evac: /\b(evacuat\w*|abandon\w* ship|lifeboats?|muster\w*)\b/i };
   // a storm only when the case says there was one: the misconception line and negations ("wasn't lost to a storm") never
   // count (#416 review: Costa Concordia, a calm-night grounding, was drawn in a hurricane)
   const v0 = topic.case || {}; const caseAll = caseText({ ...topic, case: { ...v0, yanilgi: "" } }, lines.filter((l) => !/\b(wasn'?t|was not|not|no|never)\b[^.]{0,40}\b(storm|hurricane|weather)\b/i.test(l.text || "")))
@@ -208,7 +213,9 @@ function build(script, style, topic) {
   const stormCase = /\b(hurricane|storm|typhoon|cyclone|gale)\b/i.test(caseAll);
   // the drawn hull class: passenger ships carry decks of windows, lake/ore carriers flat hatch covers; never containers on them
   const profile = /\b(cruise|liner|ferry|ferries|passenger|steamboat|steamship)\b/i.test(caseText(topic, lines)) ? "passenger" : /\b(freighter|ore|bulk|lake superior|great lakes|laker|collier|tanker)\b/i.test(caseText(topic, lines)) && !/\bcontainer\b/i.test(caseText(topic, lines)) ? "bulk" : "cargo";
-  const seaClass = (text) => (SEA.stale.test(text) ? "stale" : SEA.sink.test(text) ? "sink" : SEA.flood.test(text) ? "flood" : SEA.engine.test(text) ? "engine" : SEA.storm.test(text) ? "storm" : null);
+  const HEDGE = /\b(argued|argue|may|might|possibly|perhaps|theor\w*|suggest\w*|claimed|alleged|disputed|some say|others)\b/i;
+  const groundCase = SEA.ground.test(caseText(topic, lines));
+  const seaClass = (text) => (SEA.stale.test(text) ? "stale" : SEA.sink.test(text) ? "sink" : SEA.flood.test(text) ? "flood" : SEA.engine.test(text) ? "engine" : SEA.evac.test(text) ? "evac" : SEA.ground.test(text) ? "ground" : SEA.storm.test(text) ? "storm" : null);
   const chainFor = (re) => chain.find((c) => re.test(c)) || null;
   // a word of the line as a time anchor ("L6:stopped"), or an offset from the line start when no word matches
   const wordAt = (L, re, d) => { const w = String(L.text).split(/\s+/).find((x) => re.test(x)); const k = w ? w.replace(/[^A-Za-z0-9']/g, "") : ""; return k && /^[A-Za-z0-9]+$/.test(k) ? `${L.id}:${k}` : off(L.id, d); };
@@ -218,6 +225,13 @@ function build(script, style, topic) {
     const k = String(role).startsWith("chain:") ? +role.split(":")[1] : -1;
     let cls = role === "hook" || role === "toll" || role === "payoff" ? role : seaClass(L.text) || (k >= 0 ? seaClass(chain[k] || "") : null);
     if (!stormCase && (cls === "storm" || cls === "stale")) cls = null; // no storm chart for a case without a storm
+    // one drawing per beat: a second line of the same class in a row goes to the chain card
+    if (cls === "ground" && i > 0 && seaClass(lines[i - 1].text) === cls) cls = null;
+    // a contested explanation is never drawn as what happened (Edmund Fitzgerald: "others argued it struck a shoal")
+    if (cls === "ground" && HEDGE.test(L.text)) cls = null;
+    const evacAgain = cls === "evac" && i > 0 && seaClass(lines[i - 1].text) === "evac";
+    // the trigger of a grounding: the ship comes in toward the rock; the impact is on the line that names it
+    if (role === "trigger" && !cls && groundCase) cls = "approach";
     if (cls === "storm" && !SEA.storm.test(L.text)) cls = null; // a chart only for a line about the storm or the route
     const evidence = [F(role === "payoff" ? "lesson" : k >= 0 ? "chain" : "case"), F("mechanism"), F("case")];
     const head = (txt) => (txt ? [headline(`${L.id}+0.2`, String(txt).toUpperCase(), 330, S.title, txt)] : []);
@@ -247,6 +261,17 @@ function build(script, style, topic) {
       return { kind_: "propulsion", evidence, layers: [{ component: "propulsion", props: { stopAt: wordAt(L, /^(stopped|stop|failed|lost|died|quit)/i, 0.8), label: oil, stateLabel: chainFor(SEA.engine) ? { at: off(L.id, 1.2), text: chainFor(SEA.engine) } : null } }],
         purpose: "Propulsion lost: the stern in cutaway; the oil-pressure needle falls, the engine light dies and the propeller spins down to a stop.",
         camera: [{ at: start, x: 560, y: 800, z: 1.0 }, { at: end, x: 620, y: 820, z: 1.1 }] }; }
+    // a grounding (Costa Concordia): calm water, the ship comes on and stops over a rock, a gash opens below the waterline
+    if (cls === "approach") return { kind_: "trigger", evidence: [F("trigger"), F("case")], layers: [{ component: "heavy-seas", props: { storm: false, swell: 22, seed: 5, profile, rockAt: off(end, 1.6) } }, headline(`${L.id}+0.2`, triggerLabel, 330, S.title, triggerLabel)],
+      purpose: "Trigger: in calm water the ship turns in close to the shore, toward the rock just under the surface; the impact comes on the next line.",
+      camera: [{ at: start, x: 520, y: 900, z: 1.0 }, { at: end, x: 600, y: 920, z: 1.15 }] };
+    if (cls === "ground") return { kind_: "grounding", evidence, layers: [{ component: "heavy-seas", props: { storm: false, swell: 22, seed: 5, profile, rockAt: wordAt(L, /^(rock|struck|tore|ran|hit)/i, 0.6) } }, ...head(chainFor(SEA.ground))],
+      purpose: "Grounding: in calm water the ship comes in close and stops over a rock just under the surface; a gash opens along the hull below the waterline.",
+      camera: [{ at: start, x: 540, y: 900, z: 1.0 }, { at: end, x: 640, y: 940, z: 1.25 }] };
+    // evacuation: the ship lists in calm water, lights still on, while the line names the delay
+    if (cls === "evac") return { kind_: "evacuation", evidence, layers: [{ component: "heavy-seas", props: { storm: false, swell: 20, seed: 5, profile, heel: evacAgain ? 22 : 14, ...(evacAgain ? {} : { heelAt: start }) } }, ...head(chainFor(SEA.evac))],
+      purpose: "Evacuation: the ship lists in calm water with her lights still on while the line names what was late.",
+      camera: evacAgain ? [{ at: start, x: 520, y: 900, z: 1.0 }, { at: end, x: 600, y: 940, z: 1.2 }] : [{ at: start, x: 540, y: 900, z: 1.1 }, { at: end, x: 520, y: 900, z: 1.0 }] };
     if (cls === "sink") return { kind_: "sinking", evidence, layers: [{ component: "heavy-seas", props: { profile, storm: stormCase, swell: stormCase ? 95 : 40, powerlessAt: /\b(without power|no power|powerless|adrift|drift\w*)\b/i.test(L.text) ? start : null, sinkAt: off(L.id, 0.45), sinkDur: 1.6, seed: 5 } }],
       purpose: "Overwhelmed: without propulsion the ship lies broadside to the sea, rolls, and goes under.",
       camera: [{ at: start, x: 540, y: 920, z: 1.0 }, { at: end, x: 540, y: 980, z: 1.08 }] };
@@ -323,7 +348,13 @@ function build(script, style, topic) {
   // consecutive chain scenes share one continuous camera move, so they are joined with a continuity cut; plates alternate
   scenes.forEach((sc, k) => { if (k && sc.id.endsWith("-chain") && scenes[k - 1].id.endsWith("-chain")) sc.transition = { type: "continuity", dur: 0.3 }; });
   // the remaining real cuts cycle the clip reveals in order, so a chain run does not use up the variety (#357)
-  ti = 0; scenes.forEach((sc, k) => { if (k && sc.transition.type !== "continuity") sc.transition.type = nextTransition(); });
+  // a chain card enters with a full-width wipe: an iris would open on a fragment of a card's label (#416 review: "T CL"
+  // on Costa Concordia between the trigger and the chain); the other cuts cycle the reveals and never repeat the previous
+  // cut or take the wipe the next chain card needs
+  ti = 0; let lastCut = null; scenes.forEach((sc, k) => { if (!k || sc.transition.type === "continuity") return;
+    if (sc.id.endsWith("-chain")) { sc.transition.type = "scan-wipe"; lastCut = "scan-wipe"; return; }
+    const nextChain = scenes.slice(k + 1).find((x) => x.transition.type !== "continuity"); const avoid = [lastCut, nextChain && nextChain.id.endsWith("-chain") ? "scan-wipe" : null];
+    let ty = nextTransition(); for (let n = 0; n < 3 && avoid.includes(ty); n += 1) ty = nextTransition(); sc.transition.type = ty; lastCut = ty; });
   // plates alternate blueprint / void at every cut; a continuity cut keeps its group's plate; the payoff returns to the
   // hook's blueprint, and when that would repeat the previous plate, the previous group takes the teal plate
   const cont = (sc) => sc.transition && sc.transition.type === "continuity";

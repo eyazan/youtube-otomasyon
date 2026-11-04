@@ -133,3 +133,21 @@ test("FR maritime: no storm for a calm-night grounding (negated in the misconcep
   assert.ok(layers(sb("FR-edmund-fitzgerald-1975")).filter((l) => l.component === "heavy-seas").every((l) => l.props.profile === "bulk"));
   assert.ok(layers(sb("FR-el-faro-2015")).some((l) => l.component === "heavy-seas" && l.props.storm), "El Faro keeps its hurricane");
 });
+
+test("FR Costa Concordia: grounding on a rock, a listing ship for the evacuation, no crack, chain cards enter with a wipe", () => {
+  const FR = require("../../scripts/bto-studio/auto/failure-reconstructed.js");
+  const ch = require("../../core/channel-context").getChannel("failure-reconstructed"); const style = require("../../channels/failure-reconstructed/premium/style-pack.json");
+  const t = Adapter.loadTopic("failure-reconstructed", "FR-costa-concordia-2012").topic; const sb = FR.build(Adapter.studioScript(ch, t), style, t);
+  const ls = sb.scenes.flatMap((s) => s.layers);
+  assert.ok(ls.some((l) => l.component === "heavy-seas" && l.props.rockAt), "the rock is drawn");
+  assert.ok(ls.some((l) => l.component === "heavy-seas" && l.props.heel), "the list is drawn");
+  assert.ok(ls.filter((l) => l.component === "object-silhouette").every((l) => l.props.failAt == null), "no crack on a ship that did not break");
+  sb.scenes.filter((s) => s.id.endsWith("-chain") && s.transition && s.transition.type !== "continuity").forEach((s) => assert.equal(s.transition.type, "scan-wipe"));
+});
+
+test("FR: a contested explanation is never drawn as fact (Edmund Fitzgerald: 'others argued it struck a shoal')", () => {
+  const FR = require("../../scripts/bto-studio/auto/failure-reconstructed.js");
+  const ch = require("../../core/channel-context").getChannel("failure-reconstructed"); const style = require("../../channels/failure-reconstructed/premium/style-pack.json");
+  const t = Adapter.loadTopic("failure-reconstructed", "FR-edmund-fitzgerald-1975").topic; const sb = FR.build(Adapter.studioScript(ch, t), style, t);
+  assert.ok(!sb.scenes.flatMap((s) => s.layers).some((l) => l.component === "heavy-seas" && l.props.rockAt));
+});

@@ -45,7 +45,8 @@
 
   // ---- heavy-seas -----------------------------------------------------------------------------------------------
   // props: x (ship x), y (mean sea level, default 980), L (ship length px), swell (wave height px), storm (bool),
-  //   heading (1 = into the sea from the left), hitAt, powerlessAt, sinkAt, sinkDur, sunk, lights, enterAt, outAt, seed
+  //   heading (1 = into the sea from the left), hitAt, powerlessAt, sinkAt, sinkDur, sunk, lights, enterAt, outAt, seed,
+//   rockAt (grounding: a rock under the bow, a gash opens), heel + heelAt (a list in calm water)
   BTO.def("heavy-seas", (o) => {
     const r = BTO.rng(o.seed || 11); const drops = Array.from({ length: 90 }, () => ({ x: r() * 1400 - 160, y: r() * 1920, v: 1600 + r() * 900, l: 40 + r() * 50 }));
     if (o.hitAt != null) { BTO.cue(o.hitAt, "whoosh", 0.7); BTO.cue(o.hitAt + 0.05, "drop", 0.5); }
@@ -65,18 +66,25 @@
       // ship state
       const sinkK = o.sunk ? 1 : o.sinkAt != null ? BTO.ep(t, o.sinkAt, o.sinkAt + (o.sinkDur || 2.6), "inOut") : 0;
       const beam = o.powerlessAt != null ? BTO.ep(t, o.powerlessAt, o.powerlessAt + 1.6, "inOut") : 0;
-      const sx = X + (o.heading === -1 ? -1 : 1) * 18 * Math.sin(t * 0.5) * (1 - sinkK);
+      // rockAt: a grounding. The ship comes on from the left and stops with its bow section over a rock just under the
+      // surface; at rockAt a gash opens along the hull below the waterline. heel (deg, from heelAt over 1.6 s): a list
+      const appr = o.rockAt != null ? 1 - BTO.ep(t, o.rockAt - 1.4, o.rockAt, "out") : 0;
+      const sx = X - appr * 160 + (o.heading === -1 ? -1 : 1) * 18 * Math.sin(t * 0.5) * (1 - sinkK) * (o.rockAt != null ? 0 : 1);
       const sy = wave(sx, t, 1); const slope = (wave(sx + 30, t, 1) - wave(sx - 30, t, 1)) / 60;
       // broadside to the sea the ship rolls (seen end-on it would roll; side-on we see the pitch shrink and the heave grow)
       const pitch = Math.atan(slope) * 57.3 * 0.42 * (1 - beam * 0.5) + beam * 7 * Math.sin(t * 1.9);
-      const heel = sinkK * (o.sinkTilt == null ? 24 : o.sinkTilt);
+      const heel = sinkK * (o.sinkTilt == null ? 24 : o.sinkTilt) + (o.heel ? o.heel * (o.heelAt == null ? 1 : BTO.ep(t, o.heelAt, o.heelAt + 1.6, "inOut")) : 0);
       const depth = sinkK * (o.sunk ? 300 : 360); const shrink = 1 - beam * 0.18; // broadside: the hull shortens as she turns toward us
       g += sea(t, 0, "#203644", 0.95);
       g += `<g transform="translate(${n1(sx)} ${n1(sy + depth - 6)}) rotate(${n1(pitch + heel)}) scale(${n1(shrink)} 1)">${shipProfile(L, { profile: o.profile, lights: (o.lights == null ? 1 : o.lights) * (o.powerlessAt != null && t > o.powerlessAt ? 0.15 : 1) * (1 - sinkK), op: o.sunk ? 0.35 : 1 })}</g>`;
+      if (o.rockAt != null) { const gk = BTO.ep(t, o.rockAt, o.rockAt + 0.7, "out"), s6 = L / 600;
+        if (gk > 0) g += `<g transform="translate(${n1(sx)} ${n1(sy - 6)}) rotate(${n1(pitch + heel)})"><path d="M${n1(120 * s6)} ${n1(14 * s6)} l${n1(30 * s6 * gk)} ${n1(6 * s6)} l${n1(30 * s6 * gk)} ${n1(-5 * s6)} l${n1(30 * s6 * gk)} ${n1(7 * s6)} l${n1(30 * s6 * gk)} ${n1(-4 * s6)}" fill="none" stroke="${C.red || "#e0483e"}" stroke-width="7" stroke-linecap="round"/></g>`; }
       // spray burst over the bow
       if (o.hitAt != null && t >= o.hitAt && t < o.hitAt + 1.4) { const u = (t - o.hitAt) / 1.4; for (let i = 0; i < 26; i += 1) { const a = -1.9 + (i / 26) * 1.5, v = 260 + (i % 5) * 70;
         g += `<circle cx="${n1(sx + L * 0.4 + Math.cos(a) * v * u)}" cy="${n1(sy - 40 + Math.sin(a) * v * u + 420 * u * u)}" r="${n1(10 + (i % 4) * 5)}" fill="#dfe8ee" opacity="${n1(0.8 * (1 - u))}"/>`; } }
       g += sea(t, 1, "#16303e", o.sunk ? 0.72 : 0.92) + sea(t, 2, "#0f2531", 0.96);
+      // the rock: a dark outcrop just breaking the surface under the bow section (drawn over the sea so it reads)
+      if (o.rockAt != null) { const rx = X + L * 0.27, ry = wave(rx, t, 2); g += `<path d="M${n1(rx - 90)} ${n1(ry + 60)} L${n1(rx - 50)} ${n1(ry - 4)} L${n1(rx - 10)} ${n1(ry - 22)} L${n1(rx + 30)} ${n1(ry - 8)} L${n1(rx + 80)} ${n1(ry + 60)} Z" fill="#3a3530" stroke="#8a8078" stroke-width="3" stroke-linejoin="round"/>`; }
       // a sunk ship stays readable as a faint outline under the surface (the toll scene)
       if (o.sunk) g += `<g transform="translate(${n1(sx)} ${n1(sy + depth)}) rotate(${n1(heel)})" opacity="0.32">${shipProfile(L, { profile: o.profile, lights: 0, fill: "none" })}</g>`;
       // foam lines on the crests
