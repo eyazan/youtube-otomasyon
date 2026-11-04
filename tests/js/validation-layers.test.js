@@ -13,3 +13,12 @@ test("validation layers: factual and fidelity reasons are FACTUAL, score is CREA
   const p = L.packageLayers({ qa: { objectivePass: false, objective: [{ name: "loudness", hard: true, status: "FAIL" }, { name: "loop", hard: false, status: "WARN" }], creative: [{ name: "motion in the first 2 s", status: "WARN" }] } });
   assert.equal(p.TECHNICAL.blocking, true); assert.deepEqual(p.TECHNICAL.failed, ["loudness"]); assert.equal(p.CREATIVE.blocking, false);
 });
+
+test("packageLayers reads the real QA report shape (creative is { checks, human }, not an array)", () => {
+  const { packageLayers } = require("../../core/pipeline/validation-layers");
+  const l = packageLayers({ qa: { objectivePass: true, objective: [{ name: "loop", hard: false, status: "WARN" }], creative: { checks: [{ name: "motion in the first 2 s", status: "WARN" }], human: [{ name: "hook", status: "HUMAN" }] } } });
+  assert.equal(l.TECHNICAL.blocking, false);
+  assert.deepEqual(l.TECHNICAL.warnings, ["loop"]);
+  assert.deepEqual(l.CREATIVE.advisory, ["motion in the first 2 s"]);
+  assert.deepEqual(packageLayers({ qa: {} }).CREATIVE.advisory, []);
+});

@@ -34,7 +34,8 @@ function packageLayers(pkg) {
   const objective = qa.objective || [];
   return {
     TECHNICAL: { blocking: !qa.objectivePass, failed: objective.filter((c) => c.hard && c.status === "FAIL").map((c) => c.name), warnings: objective.filter((c) => c.status === "WARN").map((c) => c.name) },
-    CREATIVE: { blocking: false, advisory: (qa.creative || []).filter((c) => c.status === "WARN" || c.ok === false).map((c) => c.name || c.check) },
+    // qa.creative is { checks: [...], human: [...] } (the studio creative checks); an array is accepted too
+    CREATIVE: { blocking: false, advisory: (Array.isArray(qa.creative) ? qa.creative : ((qa.creative && qa.creative.checks) || [])).filter((c) => c && (c.status === "WARN" || c.ok === false)).map((c) => c.name || c.check) },
   };
 }
 
