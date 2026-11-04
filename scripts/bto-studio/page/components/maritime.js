@@ -183,7 +183,8 @@
       g += `<g transform="translate(${ix} ${iy})"><g transform="rotate(${n1(ang)})"><path d="M-90 0 A90 90 0 0 0 90 0" fill="#0b1e2b" stroke="${C.text}" stroke-width="4"/>`;
       for (let a = -60; a <= 60; a += 15) g += `<line x1="${n1(Math.sin(a / 57.3) * 78)}" y1="${n1(Math.cos(a / 57.3) * 78)}" x2="${n1(Math.sin(a / 57.3) * 90)}" y2="${n1(Math.cos(a / 57.3) * 90)}" stroke="${C.text}" stroke-width="${a ? 2 : 4}"/>`;
       g += `</g><line x1="0" y1="0" x2="0" y2="84" stroke="${f > 0.3 ? C.coral : C.amber}" stroke-width="6"/><circle r="9" fill="${C.text}"/></g>`;
-      if (o.listLabel) g += BTO.text(ix, iy + 150, o.listLabel, { size: LBL(), weight: 800, ls: 2, fill: C.text, op: clamp(f * 3) });
+      // the caption sits above the dial's pivot, clear of the heeling hull (#416 review: the hull covered "LIST")
+      if (o.listLabel) g += BTO.text(ix, iy - 36, o.listLabel, { size: LBL(), weight: 800, ls: 2, fill: C.text, op: clamp(f * 3) });
       if (o.label) { const k = clamp((t - o.label.at) / 0.5); const a = ang / 57.3; const wx = X + Math.cos(a) * ox - Math.sin(a) * oy, wy = Y + Math.sin(a) * ox + Math.cos(a) * oy;
         g += BTO.label(wx, wy, wx + side * 20, wy - 200, o.label.text, k, { size: LBL(), pill: true, color: C.amber, anchor: side > 0 ? "end" : "start" }); }
       return `<g opacity="${op.toFixed(3)}">${g}</g>`;

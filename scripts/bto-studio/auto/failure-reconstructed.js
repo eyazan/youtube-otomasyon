@@ -238,7 +238,7 @@ function build(script, style, topic) {
     if (cls === "hook") return { kind_: "hook", evidence: [F("case")], layers: [{ component: "heavy-seas", props: { storm: stormCase, swell: stormCase ? 85 : 30, hitAt: 0.2, seed: 5, profile } }, ...(stamp ? [headline(`${L.id}+0.3`, stamp, 330, S.title)] : [])],
       purpose: `Hook: frame 0 is the ship already in heavy seas${stormCase ? " with the storm wall on the horizon" : ""}; a sea breaks over the bow in the first second, before any cause is named.`,
       camera: [{ at: start, x: 560, y: 900, z: 1.12 }, { at: end, x: 520, y: 880, z: 1.0 }] };
-    if (cls === "toll" && groundCase && /\b(rolled|capsiz\w*|on (its|her) side)\b/i.test(L.text)) return { kind_: "toll", evidence: [F("case")], layers: [{ component: "hull-section", props: { floodAt: start, floodDur: 2.2, listTo: 60 } }, readout(`${L.id}+0.25`, toll, 640)],
+    if (cls === "toll" && groundCase && /\b(rolled|capsiz\w*|on (its|her) side)\b/i.test(L.text)) return { kind_: "toll", evidence: [F("case")], layers: [{ component: "hull-section", props: { floodAt: start, floodDur: 2.2, listTo: 60 } }, readout(`${L.id}+0.25`, toll, 1200)],
       purpose: `Toll: seen bow-on the hull rolls onto its side in shallow water (she did not go under) while the case's count (${toll}) is stamped.`,
       camera: [{ at: start, x: 540, y: 880, z: 1.0 }, { at: end, x: 540, y: 900, z: 1.06 }] };
     if (cls === "toll") return { kind_: "toll", evidence: [F("case")], layers: [{ component: "heavy-seas", props: { sunk: true, swell: 28, seed: 5, profile } }, readout(`${L.id}+0.25`, toll, 640)],
