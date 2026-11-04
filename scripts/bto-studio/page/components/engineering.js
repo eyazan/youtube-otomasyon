@@ -190,7 +190,7 @@
         if (n < pts.length) { const [a, b] = [pts[n - 1], pts[n]]; path.push([a[0] + (b[0] - a[0]) * fr, a[1] + (b[1] - a[1]) * fr]); }
         const top = path.map(([x, y]) => `${n1(x)} ${n1(y - 48)}`).join(" L"); const bot = path.slice().reverse().map(([x, y]) => `${n1(x)} ${n1(y + 10)}`).join(" L");
         g += `<path d="M${top} L${bot} Z" fill="${C.paper}" opacity="${(0.55 * op).toFixed(3)}" filter="url(#soft)"/>`;
-        const [hx, hy] = path[path.length - 1]; g += `<text x="${n1(hx - 20)}" y="${n1(hy - 64)}" text-anchor="end" font-family="sans-serif" font-weight="700" font-size="${n1(30 / s)}" fill="${C.paper}" opacity="${(0.9 * op * clamp(run * 3)).toFixed(3)}">CO2</text>`; }
+        }
     } else if (o.mech === "tornado") {
       // the funnel approaches from the left and its wind strikes the building side-on before it gives way
       const cx0 = 120 + 60 * clamp(since / 2.2); for (let j = 0; j < 9; j += 1) { const y = -60 + j * 66; const wdt = 150 - j * 14; const sw = Math.sin(since * 2.2 + j * 0.7) * 10;
