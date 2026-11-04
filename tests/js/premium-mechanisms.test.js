@@ -98,3 +98,16 @@ test("owner review sheet: only rows a person set to APPROVE are declared, a HOLD
   const IB = require("../../scripts/bto-studio/auto/impossible-brief.js");
   for (const t of shipped.topics) assert.ok(IB.MECHANISMS[t.mechanism] && IB.MECHANISMS[t.mechanism].world, `${t.id}: ${t.mechanism} has a drawing`);
 });
+
+test("a named body drawn beside Earth is to scale (mean radius ratio), and no side-by-side beyond 15x", () => {
+  const Channel = require("../../core/channel-context"); const IB = require("../../scripts/bto-studio/auto/impossible-brief.js");
+  const ch = Channel.getChannel("impossible-brief"); const style = require("../../channels/impossible-brief/premium/style-pack.json");
+  const u = require("../../channels/impossible-brief/topics/topic-universe.json");
+  const ratio = (id) => { const t = { ...u.topics.find((x) => x.id === id), visualMechanism: "named-body" };
+    const sb = IB.build(Adapter.studioScript(ch, t), style, t);
+    const pair = sb.scenes.map((s) => (s.layers || []).filter((l) => l.component === "planet")).find((p) => p.length === 2);
+    return pair ? pair[0].props.r / pair[1].props.r : null; };
+  assert.ok(Math.abs(ratio("IB-SPA-036") - 10.97) < 0.05, "Jupiter about 11 Earths wide");
+  assert.ok(Math.abs(ratio("IB-SPA-076") - 0.383) < 0.01, "Mercury 0.38 Earth");
+  assert.ok(Math.abs(ratio("IB-SPA-021") - 0.532) < 0.01, "Mars 0.53 Earth");
+});

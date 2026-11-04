@@ -1,23 +1,175 @@
 {
   "_how": "Owner review sheet for ImpossibleBrief visual mechanisms. For each topic, look at its stills (link in reports/ib-mechanism-board/OWNER-REVIEW.md), then set decision to APPROVE or REJECT. Only APPROVE rows are declared, and only when you run: node scripts/ib-research/declare-mechanism.js --from reports/ib-mechanism-board/decisions.json --by \"<your name>\". Nothing in this file is a decision until you edit it: every decision ships null. prescreen and accuracy are the assistant's non-binding notes. HOLD rows are refused by the tool even if you set APPROVE, until the noted research correction lands (remove the hold field after fixing it).",
   "topics": [
-    { "id": "IB-EAR-086", "mechanism": "volcano-eruption", "queue": 1, "prescreen": "VIABLE", "hook": "Mount St. Helens' north face slides away and the blast goes sideways (the event, in motion, at frame 0)", "accuracy": "OK: every number is in its quote (May 18 1980, 24 km column, 11 states, about 57 killed)", "decision": null },
-    { "id": "IB-SPA-006", "mechanism": "magnetic-field", "queue": 2, "prescreen": "VIABLE", "hook": "a solar wave hits Earth's field and the telegraph lines spark", "accuracy": "minor: line 2 'set telegraph stations on fire' is stronger than the quote ('sparking and even fires in telegraph stations'); suggest 'sparked fires in telegraph stations'. Line 1's $2.6 trillion is the upper bound of a 2013 US-only estimate (line 6 says so)", "decision": null },
-    { "id": "IB-EAR-036", "mechanism": "volcano-eruption", "queue": 3, "prescreen": "VIABLE", "hook": "the bang heard 4,800 km away, then the waves", "accuracy": "OK", "decision": null },
-    { "id": "IB-SPA-091", "mechanism": "named-body", "queue": 4, "prescreen": "VIABLE", "hook": "a 2,100 km/h wind on a -218 °C world", "accuracy": "OK; 'standing' is the scenario (Neptune has no solid surface), the line says nothing could hold you", "decision": null },
-    { "id": "IB-EAR-024", "mechanism": "volcano-eruption", "queue": 5, "prescreen": "VIABLE", "hook": "one ash plume, every plane in Europe on the ground", "accuracy": "OK", "decision": null },
-    { "id": "IB-EAR-071", "mechanism": "ocean-current", "queue": 6, "prescreen": "VIABLE", "hook": "the warm current that heats Europe slows", "accuracy": "OK: explicitly rejects the 15-20 °C crash myth", "decision": null },
-    { "id": "IB-EAR-096", "mechanism": "volcano-eruption", "queue": 7, "prescreen": "VIABLE", "hook": "an invisible gas poisons the grass; 80% of the sheep die", "accuracy": "OK", "decision": null },
-    { "id": "IB-SPA-041", "mechanism": "planet-orbit", "queue": 8, "prescreen": "VIABLE", "hook": "a 6-hour day slowing to 47 of today's", "accuracy": "OK", "decision": null },
-    { "id": "IB-EAR-026", "mechanism": "volcano-eruption", "queue": 9, "prescreen": "VIABLE", "hook": "a summer that never came (1816)", "accuracy": "OK; line 6 is correctly layered SPECULATIVE", "decision": null },
-    { "id": "IB-SPA-010", "mechanism": "magnetic-field", "queue": 10, "prescreen": "VIABLE", "hook": "flying up through green into red", "accuracy": "OK", "decision": null },
-    { "id": "IB-EAR-006", "mechanism": "volcano-eruption", "queue": 11, "prescreen": "VIABLE", "hook": "Is Yellowstone overdue? (answer: no)", "accuracy": "OK: debunks 'overdue' rather than promising a disaster; keep that framing in the title", "decision": null },
-    { "id": "IB-SPA-076", "mechanism": "named-body", "queue": 12, "prescreen": "VIABLE", "hook": "a day longer than a year", "accuracy": "OK (700 K and -163 °C are in the quotes)", "decision": null },
-    { "id": "IB-SPA-021", "mechanism": "named-body", "queue": 13, "prescreen": "VIABLE", "hook": "gravity is the easy part", "accuracy": "OK", "decision": null },
-    { "id": "IB-SPA-101", "mechanism": "named-body", "queue": 14, "prescreen": "VIABLE", "hook": "a year that lasts 11 days", "accuracy": "minor: line 5 'far dimmer' is unsourced; the planet gets roughly two-thirds of Earth's total sunlight, mostly infrared. Suggest 'larger, redder, and dimmer to the eye'. The planet's appearance is unknown: the drawing must stay labelled as an illustration", "decision": null },
-    { "id": "IB-SPA-106", "mechanism": "named-body", "queue": 15, "prescreen": "VIABLE", "hook": "Pluto didn't shrink; the definition changed", "accuracy": "OK", "decision": null },
-    { "id": "IB-SPA-036", "mechanism": "named-body", "queue": null, "prescreen": "VIABLE drawing", "hold": "FACT ERROR: lines 2-3 read 'It once stretched 40,000 km ... That was the Great Red Spot's width in 2017.' The 2017 width is 16,350 km; 40,000 km was about a century before 2004. Fix line 3 (e.g. 'In 2017 it measured 16,350 kilometres.') and re-run the claim check before declaring", "accuracy": "BLOCK until fixed", "decision": null },
-    { "id": "IB-SPA-066", "mechanism": "planet-orbit", "queue": null, "prescreen": "WEAK drawing", "hold": "SCIENCE: the drawing shows a circular orbit; Halley's orbit is extremely elongated (eccentricity about 0.97). Also line 7 'probes flew within 8,030 kilometres' omits that Giotto passed about 600 km from the nucleus. Needs an eccentric-orbit drawing and a sourced line before declaring", "accuracy": "BLOCK until fixed", "decision": null },
-    { "id": "IB-HUM-014", "mechanism": "human-body", "queue": null, "prescreen": "VIABLE drawing", "hold": "UNSOURCED: line 6 'Most people would need well over twice as long' (over 19 s for 100 m) has no source and is doubtful for healthy adults. Replace with a sourced comparison or drop the line before declaring", "accuracy": "BLOCK until fixed", "decision": null }
+    {
+      "id": "IB-EAR-086",
+      "mechanism": "volcano-eruption",
+      "queue": 1,
+      "prescreen": "VIABLE",
+      "hook": "Mount St. Helens' north face slides away and the blast goes sideways (the event, in motion, at frame 0)",
+      "accuracy": "OK: every number is in its quote (May 18 1980, 24 km column, 11 states, about 57 killed)",
+      "decision": null
+    },
+    {
+      "id": "IB-SPA-006",
+      "mechanism": "magnetic-field",
+      "queue": 2,
+      "prescreen": "VIABLE",
+      "hook": "a solar wave hits Earth's field and the telegraph lines spark",
+      "accuracy": "minor: line 2 'set telegraph stations on fire' is stronger than the quote ('sparking and even fires in telegraph stations'); suggest 'sparked fires in telegraph stations'. Line 1's $2.6 trillion is the upper bound of a 2013 US-only estimate (line 6 says so)",
+      "decision": null
+    },
+    {
+      "id": "IB-EAR-036",
+      "mechanism": "volcano-eruption",
+      "queue": 3,
+      "prescreen": "VIABLE",
+      "hook": "the bang heard 4,800 km away, then the waves",
+      "accuracy": "OK",
+      "decision": null
+    },
+    {
+      "id": "IB-SPA-091",
+      "mechanism": "named-body",
+      "queue": 4,
+      "prescreen": "VIABLE",
+      "hook": "a 2,100 km/h wind on a -218 °C world",
+      "accuracy": "OK; 'standing' is the scenario (Neptune has no solid surface), the line says nothing could hold you",
+      "decision": null,
+      "scale": "side-by-side frames are now drawn to scale (mean radius ratio); the stills in run 41878442797 show the old equal-size pair, so look at the re-render linked in OWNER-REVIEW.md"
+    },
+    {
+      "id": "IB-EAR-024",
+      "mechanism": "volcano-eruption",
+      "queue": 5,
+      "prescreen": "VIABLE",
+      "hook": "one ash plume, every plane in Europe on the ground",
+      "accuracy": "OK",
+      "decision": null
+    },
+    {
+      "id": "IB-EAR-071",
+      "mechanism": "ocean-current",
+      "queue": 6,
+      "prescreen": "VIABLE",
+      "hook": "the warm current that heats Europe slows",
+      "accuracy": "OK: explicitly rejects the 15-20 °C crash myth",
+      "decision": null
+    },
+    {
+      "id": "IB-EAR-096",
+      "mechanism": "volcano-eruption",
+      "queue": null,
+      "prescreen": "WEAK drawing",
+      "hook": "an invisible gas poisons the grass; 80% of the sheep die",
+      "accuracy": "BLOCK until the drawing exists (narration OK)",
+      "decision": null,
+      "hold": "SCIENCE: Laki (1783) was a fissure eruption (a 27 km line of craters), not a cone; the drawing shows a stratovolcano. Needs a fissure variant of the volcano drawing before declaring"
+    },
+    {
+      "id": "IB-SPA-041",
+      "mechanism": "planet-orbit",
+      "queue": 7,
+      "prescreen": "VIABLE",
+      "hook": "a 6-hour day slowing to 47 of today's",
+      "accuracy": "OK",
+      "decision": null,
+      "scale": "side-by-side frames are now drawn to scale (mean radius ratio); the stills in run 41878442797 show the old equal-size pair, so look at the re-render linked in OWNER-REVIEW.md"
+    },
+    {
+      "id": "IB-EAR-026",
+      "mechanism": "volcano-eruption",
+      "queue": 8,
+      "prescreen": "VIABLE",
+      "hook": "a summer that never came (1816)",
+      "accuracy": "OK; line 6 is correctly layered SPECULATIVE",
+      "decision": null
+    },
+    {
+      "id": "IB-SPA-010",
+      "mechanism": "magnetic-field",
+      "queue": 9,
+      "prescreen": "VIABLE",
+      "hook": "flying up through green into red",
+      "accuracy": "OK",
+      "decision": null
+    },
+    {
+      "id": "IB-EAR-006",
+      "mechanism": "volcano-eruption",
+      "queue": null,
+      "prescreen": "WEAK drawing",
+      "hook": "Is Yellowstone overdue? (answer: no)",
+      "accuracy": "BLOCK until the drawing exists (narration OK)",
+      "decision": null,
+      "hold": "SCIENCE: the volcano-eruption drawing is a steep cone (stratovolcano). Yellowstone is a caldera system: its supereruptions came from a collapsed caldera tens of kilometres across, not a cone. Needs a caldera variant of the volcano drawing before declaring"
+    },
+    {
+      "id": "IB-SPA-076",
+      "mechanism": "named-body",
+      "queue": 10,
+      "prescreen": "VIABLE",
+      "hook": "a day longer than a year",
+      "accuracy": "OK (700 K and -163 °C are in the quotes)",
+      "decision": null,
+      "scale": "side-by-side frames are now drawn to scale (mean radius ratio); the stills in run 41878442797 show the old equal-size pair, so look at the re-render linked in OWNER-REVIEW.md"
+    },
+    {
+      "id": "IB-SPA-021",
+      "mechanism": "named-body",
+      "queue": 11,
+      "prescreen": "VIABLE",
+      "hook": "gravity is the easy part",
+      "accuracy": "OK",
+      "decision": null,
+      "scale": "side-by-side frames are now drawn to scale (mean radius ratio); the stills in run 41878442797 show the old equal-size pair, so look at the re-render linked in OWNER-REVIEW.md"
+    },
+    {
+      "id": "IB-SPA-101",
+      "mechanism": "named-body",
+      "queue": 12,
+      "prescreen": "VIABLE",
+      "hook": "a year that lasts 11 days",
+      "accuracy": "minor: line 5 'far dimmer' is unsourced; the planet gets roughly two-thirds of Earth's total sunlight, mostly infrared. Suggest 'larger, redder, and dimmer to the eye'. The planet's appearance is unknown: the drawing must stay labelled as an illustration",
+      "decision": null
+    },
+    {
+      "id": "IB-SPA-106",
+      "mechanism": "named-body",
+      "queue": 13,
+      "prescreen": "VIABLE",
+      "hook": "Pluto didn't shrink; the definition changed",
+      "accuracy": "OK",
+      "decision": null,
+      "scale": "side-by-side frames are now drawn to scale (mean radius ratio); the stills in run 41878442797 show the old equal-size pair, so look at the re-render linked in OWNER-REVIEW.md"
+    },
+    {
+      "id": "IB-SPA-036",
+      "mechanism": "named-body",
+      "queue": null,
+      "prescreen": "VIABLE drawing",
+      "hold": "FACT ERROR: lines 2-3 read 'It once stretched 40,000 km ... That was the Great Red Spot's width in 2017.' The 2017 width is 16,350 km; 40,000 km was about a century before 2004. Fix line 3 (e.g. 'In 2017 it measured 16,350 kilometres.') and re-run the claim check before declaring",
+      "accuracy": "BLOCK until fixed",
+      "decision": null,
+      "scale": "side-by-side frames are now drawn to scale (mean radius ratio); the stills in run 41878442797 show the old equal-size pair, so look at the re-render linked in OWNER-REVIEW.md"
+    },
+    {
+      "id": "IB-SPA-066",
+      "mechanism": "planet-orbit",
+      "queue": null,
+      "prescreen": "WEAK drawing",
+      "hold": "SCIENCE: the drawing shows a circular orbit; Halley's orbit is extremely elongated (eccentricity about 0.97). Also line 7 'probes flew within 8,030 kilometres' omits that Giotto passed about 600 km from the nucleus. Needs an eccentric-orbit drawing and a sourced line before declaring",
+      "accuracy": "BLOCK until fixed",
+      "decision": null
+    },
+    {
+      "id": "IB-HUM-014",
+      "mechanism": "human-body",
+      "queue": null,
+      "prescreen": "VIABLE drawing",
+      "hold": "UNSOURCED: line 6 'Most people would need well over twice as long' (over 19 s for 100 m) has no source and is doubtful for healthy adults. Replace with a sourced comparison or drop the line before declaring",
+      "accuracy": "BLOCK until fixed",
+      "decision": null
+    }
   ]
 }
