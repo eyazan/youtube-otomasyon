@@ -1,27 +1,25 @@
 {
-  "at": "2026-11-04T07:13:13.637Z",
-  "runId": "41789838815",
+  "at": "2026-11-04T13:07:39.366Z",
+  "runId": "41834926008",
   "rows": [
     {
       "channel": "failure-reconstructed",
-      "outcome": "UPLOADED",
-      "category": "SCHEDULED",
-      "scheduled": true,
-      "publication": "SCHEDULED",
-      "publishAt": "2026-11-04T18:00:00.000Z",
-      "reason": "premium FR-el-faro-2015 A-IgHh6J_ZU",
-      "slug": "el-faro-2015",
+      "outcome": "NOT_DUE",
+      "category": "NOT_DUE",
+      "scheduled": false,
+      "publication": "NOT_SCHEDULED",
+      "publishAt": null,
+      "reason": "today's Short already exists (el-faro-2015)",
+      "slug": null,
       "videoId": null,
-      "targetDay": "2026-11-04",
+      "targetDay": null,
       "trigger": {
         "event": "repository_dispatch",
-        "correlationId": "production-1-20261104T070521Z-1d8fde44"
+        "correlationId": "production-2-20261104T130521Z-93dbb484"
       },
       "stages": {
         "RESEARCH": {
-          "status": "done",
-          "detail": "FR-el-faro-2015",
-          "at": "2026-11-04T07:09:04.295Z"
+          "status": "not-reached"
         },
         "SCRIPT": {
           "status": "not-reached"
@@ -33,52 +31,40 @@
           "status": "not-reached"
         },
         "RENDER": {
-          "status": "done",
-          "detail": "premium final",
-          "at": "2026-11-04T07:09:04.296Z"
+          "status": "not-reached"
         },
         "QA": {
-          "status": "done",
-          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
-          "at": "2026-11-04T07:09:04.296Z"
+          "status": "not-reached"
         },
         "UPLOAD": {
-          "status": "done",
-          "detail": "A-IgHh6J_ZU",
-          "at": "2026-11-04T07:09:04.297Z"
+          "status": "not-reached"
         },
         "SCHEDULE": {
-          "status": "done",
-          "detail": "2026-11-04T18:00:00.000Z",
-          "at": "2026-11-04T07:09:04.298Z"
+          "status": "not-reached"
         },
         "PUBLISH": {
-          "status": "scheduled",
-          "detail": "YouTube makes it public at 2026-11-04T18:00:00.000Z",
-          "at": "2026-11-04T07:09:04.299Z"
+          "status": "not-reached"
         }
       }
     },
     {
       "channel": "impossible-brief",
-      "outcome": "UPLOADED",
-      "category": "SCHEDULED",
-      "scheduled": true,
-      "publication": "SCHEDULED",
-      "publishAt": "2026-11-04T18:00:00.000Z",
-      "reason": "premium IB-SPA-031 b7LByhFrMMc",
-      "slug": "what-if-earth-became-like-venus",
+      "outcome": "NOT_DUE",
+      "category": "NOT_DUE",
+      "scheduled": false,
+      "publication": "NOT_SCHEDULED",
+      "publishAt": null,
+      "reason": "today's Short already exists (what-if-earth-became-like-venus)",
+      "slug": null,
       "videoId": null,
-      "targetDay": "2026-11-04",
+      "targetDay": null,
       "trigger": {
         "event": "repository_dispatch",
-        "correlationId": "production-1-20261104T070521Z-1d8fde44"
+        "correlationId": "production-2-20261104T130521Z-93dbb484"
       },
       "stages": {
         "RESEARCH": {
-          "status": "done",
-          "detail": "IB-SPA-031",
-          "at": "2026-11-04T07:12:53.295Z"
+          "status": "not-reached"
         },
         "SCRIPT": {
           "status": "not-reached"
@@ -90,29 +76,19 @@
           "status": "not-reached"
         },
         "RENDER": {
-          "status": "done",
-          "detail": "premium final",
-          "at": "2026-11-04T07:12:53.295Z"
+          "status": "not-reached"
         },
         "QA": {
-          "status": "done",
-          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
-          "at": "2026-11-04T07:12:53.296Z"
+          "status": "not-reached"
         },
         "UPLOAD": {
-          "status": "done",
-          "detail": "b7LByhFrMMc",
-          "at": "2026-11-04T07:12:53.296Z"
+          "status": "not-reached"
         },
         "SCHEDULE": {
-          "status": "done",
-          "detail": "2026-11-04T18:00:00.000Z",
-          "at": "2026-11-04T07:12:53.297Z"
+          "status": "not-reached"
         },
         "PUBLISH": {
-          "status": "scheduled",
-          "detail": "YouTube makes it public at 2026-11-04T18:00:00.000Z",
-          "at": "2026-11-04T07:12:53.297Z"
+          "status": "not-reached"
         }
       }
     }
