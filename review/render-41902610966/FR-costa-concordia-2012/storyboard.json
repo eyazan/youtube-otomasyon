@@ -1,0 +1,493 @@
+{
+ "schema": "bto-studio.storyboard.v1",
+ "channel": "failure-reconstructed",
+ "topicId": "FR-costa-concordia-2012",
+ "slug": "costa-concordia-2012",
+ "version": 1,
+ "author": "auto/failure-reconstructed (deterministic forensic grammar, object class ship; needs creative review before publication)",
+ "licensingNote": "all visuals drawn in-house from code (SVG): generic object-class line drawings, failure chain and stamps; no photographs, footage or third-party media",
+ "treatment": {
+  "educationalObjective": "Reconstruct, from the case file: The Cruise Ship That Sailed Too Close to Shore",
+  "visualHook": "Frame 0: a ship drawn as line work gives way at its failure point within the first second.",
+  "mechanismsToAnimate": [
+   "hook",
+   "toll",
+   "trigger",
+   "grounding",
+   "flooding",
+   "evacuation",
+   "list",
+   "payoff"
+  ],
+  "factualRisks": [
+   "the ship is a generic class drawing, not the actual vehicle or structure (RECONSTRUCTION chip)",
+   "the failure point on the drawing is illustrative",
+   "case-file facts carry researched claims without stored verbatim quotes (FR live standard)"
+  ]
+ },
+ "tail": 0.6,
+ "scenes": [
+  {
+   "id": "s1-hook",
+   "lines": [
+    "L1"
+   ],
+   "start": 0,
+   "env": "blueprint",
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Hook: frame 0 is the ship already in heavy seas; a sea breaks over the bow in the first second, before any cause is named.",
+   "camera": [
+    {
+     "at": 0,
+     "x": 560,
+     "y": 900,
+     "z": 1.12
+    },
+    {
+     "at": "L1.end",
+     "x": 520,
+     "y": 880,
+     "z": 1
+    }
+   ],
+   "layers": [
+    {
+     "component": "heavy-seas",
+     "props": {
+      "storm": false,
+      "swell": 30,
+      "hitAt": 0.2,
+      "seed": 5,
+      "profile": "passenger"
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L1+0.3",
+        "text": "COSTA CONCORDIA · 2012",
+        "x": 540,
+        "y": 460,
+        "size": 60,
+        "family": "sans"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s2-toll",
+   "lines": [
+    "L2"
+   ],
+   "start": "L2-0.15",
+   "env": "void",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Toll: seen bow-on the hull rolls onto its side in shallow water (she did not go under) while the case's count (32 DIED) is stamped.",
+   "camera": [
+    {
+     "at": "L2-0.15",
+     "x": 540,
+     "y": 880,
+     "z": 1
+    },
+    {
+     "at": "L2.end",
+     "x": 540,
+     "y": 900,
+     "z": 1.06
+    }
+   ],
+   "layers": [
+    {
+     "component": "hull-section",
+     "props": {
+      "floodAt": "L2-0.15",
+      "floodDur": 2.2,
+      "listTo": 60
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L2+0.25",
+        "text": "32 DIED",
+        "x": 540,
+        "y": 640,
+        "size": 104,
+        "family": "num",
+        "style": "pop"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s3-trigger",
+   "lines": [
+    "L3"
+   ],
+   "start": "L3-0.15",
+   "env": "blueprint",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F2",
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Trigger: in calm water the ship turns in close to the shore, toward the rock just under the surface; the impact comes on the next line.",
+   "camera": [
+    {
+     "at": "L3-0.15",
+     "x": 540,
+     "y": 900,
+     "z": 1
+    },
+    {
+     "at": "L3.end",
+     "x": 560,
+     "y": 910,
+     "z": 1.06
+    }
+   ],
+   "layers": [
+    {
+     "component": "heavy-seas",
+     "props": {
+      "storm": false,
+      "swell": 22,
+      "seed": 5,
+      "profile": "passenger",
+      "rockAt": "L3.end+0.8",
+      "approachDur": 4.5
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L3+0.2",
+        "text": "SAIL-PAST CLOSE TO SHORE",
+        "x": 540,
+        "y": 460,
+        "size": 55,
+        "family": "sans",
+        "source": "SAIL-PAST CLOSE TO SHORE",
+        "outAt": "L3.end-0.25"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s4-grounding",
+   "lines": [
+    "L4"
+   ],
+   "start": "L4-0.15",
+   "env": "void",
+   "transition": {
+    "type": "square-iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F4",
+    "F3",
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Grounding: in calm water the ship comes in close and stops over a rock just under the surface; a gash opens along the hull below the waterline.",
+   "camera": [
+    {
+     "at": "L4-0.15",
+     "x": 540,
+     "y": 900,
+     "z": 1
+    },
+    {
+     "at": "L4.end",
+     "x": 640,
+     "y": 940,
+     "z": 1.25
+    }
+   ],
+   "layers": [
+    {
+     "component": "heavy-seas",
+     "props": {
+      "storm": false,
+      "swell": 22,
+      "seed": 5,
+      "profile": "passenger",
+      "rockAt": "L4:rock"
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L4+0.2",
+        "text": "ROCK TEARS THE HULL",
+        "x": 540,
+        "y": 460,
+        "size": 60,
+        "family": "sans",
+        "source": "ROCK TEARS THE HULL"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s5-flooding",
+   "lines": [
+    "L5"
+   ],
+   "start": "L5-0.15",
+   "env": "blueprint",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F4",
+    "F3",
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Flooding: a cut through the hull in a level sea; water pours through the opening, the hold on that side fills and the ship heels toward it (inclinometer).",
+   "camera": [
+    {
+     "at": "L5-0.15",
+     "x": 540,
+     "y": 860,
+     "z": 1
+    },
+    {
+     "at": "L5.end",
+     "x": 540,
+     "y": 870,
+     "z": 1.06
+    }
+   ],
+   "layers": [
+    {
+     "component": "hull-section",
+     "props": {
+      "floodAt": "L5:Water",
+      "listTo": 16,
+      "listLabel": null
+     }
+    }
+   ]
+  },
+  {
+   "id": "s6-evacuation",
+   "lines": [
+    "L6"
+   ],
+   "start": "L6-0.15",
+   "env": "void",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F4",
+    "F3",
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Evacuation: the ship at rest in calm water, lights still on, while the line names what was late.",
+   "camera": [
+    {
+     "at": "L6-0.15",
+     "x": 540,
+     "y": 900,
+     "z": 1.1
+    },
+    {
+     "at": "L6.end",
+     "x": 520,
+     "y": 900,
+     "z": 1
+    }
+   ],
+   "layers": [
+    {
+     "component": "heavy-seas",
+     "props": {
+      "storm": false,
+      "swell": 20,
+      "seed": 5,
+      "profile": "passenger"
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L6+0.2",
+        "text": "DELAYED EVACUATION",
+        "x": 540,
+        "y": 460,
+        "size": 60,
+        "family": "sans",
+        "source": "DELAYED EVACUATION"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s7-list",
+   "lines": [
+    "L7"
+   ],
+   "start": "L7-0.15",
+   "env": "teal",
+   "transition": {
+    "type": "square-iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F4",
+    "F3",
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "List, seen bow-on: the flooded hull heels over and the inclinometer swings; the boats on the high side can no longer be lowered.",
+   "camera": [
+    {
+     "at": "L7-0.15",
+     "x": 540,
+     "y": 860,
+     "z": 1
+    },
+    {
+     "at": "L7.end",
+     "x": 540,
+     "y": 870,
+     "z": 1.06
+    }
+   ],
+   "layers": [
+    {
+     "component": "hull-section",
+     "props": {
+      "floodAt": "L7-0.15",
+      "floodDur": 2.4,
+      "listTo": 24,
+      "listLabel": "LIST"
+     }
+    }
+   ]
+  },
+  {
+   "id": "s8-payoff",
+   "lines": [
+    "L8"
+   ],
+   "start": "L8-0.15",
+   "env": "blueprint",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F6",
+    "F3",
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel",
+    "factLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Payoff: the lesson over the ship whole again in moderate seas.",
+   "camera": [
+    {
+     "at": "L8-0.15",
+     "x": 540,
+     "y": 880,
+     "z": 1
+    },
+    {
+     "at": "end-0.6",
+     "x": 560,
+     "y": 900,
+     "z": 1.12
+    }
+   ],
+   "layers": [
+    {
+     "component": "heavy-seas",
+     "props": {
+      "storm": false,
+      "swell": 40,
+      "seed": 5,
+      "profile": "passenger"
+     }
+    }
+   ]
+  }
+ ]
+}
