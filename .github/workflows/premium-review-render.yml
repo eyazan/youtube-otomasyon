@@ -29,7 +29,7 @@ jobs:
       - id: p
         env:
           TOPICS: ${{ inputs.topics }}
-        run: echo "tokens=$(printf '%s\n' $TOPICS | jq -R . | jq -cs .)" >> "$GITHUB_OUTPUT"
+        run: echo "tokens=$(tr -s ' ' '\n' <<< "$TOPICS" | sed '/^$/d' | jq -R . | jq -cs .)" >> "$GITHUB_OUTPUT"
   render:
     needs: plan
     strategy:
