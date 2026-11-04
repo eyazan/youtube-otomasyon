@@ -26,9 +26,22 @@ Today (2026-11-04), main uploaded two Shorts, both private and scheduled for 18:
 | FR | `A-IgHh6J_ZU` "The Cargo Ship That Sailed Into a Hurricane" (El Faro) | The description lists 7 "Archival film: Wikimedia…" credits and then says "Original animation: no archival or stock footage" (fixed in code on this branch, see §1). It was rendered by main's older FR engine: the frame review found one wireframe ship repeated, which is what PR #411's maritime kit replaces. |
 | IB | `b7LByhFrMMc` "What If Earth Became Like Venus" (IB-SPA-031) | Main has no mechanism-declaration gate. The board rates this topic NO_DRAWING: the existing drawings cannot show it. |
 
-**Owner decision:** keep both lanes running, or pause them until #411 merges by setting `FR_PREMIUM_PUBLISH` and
-`IB_PREMIUM_PUBLISH` to `0`. A controlled rollout ("one owner-approved video per channel first") is not what is running
-now. Studio edit for `A-IgHh6J_ZU`: delete the "Footage & sources" block (§3.3).
+**What runs next on main:**
+
+- **FR, about 07:00 UTC 2026-11-05:** FR-lake-nyos-1986, then Mars 96, then the Moore tornado. Main's
+  `Lane.qualified` has exactly 3 topics.
+- **The Lake Nyos frames are misleading.** We rendered the same topic on #411's engine (run 41878990198). It draws the
+  generic failure kit: a cracked triangle, with no lake and no gas cloud. Nothing cracked at Lake Nyos; it was a
+  limnic CO2 release. The Moore render draws cracked buildings and no tornado. Objective QA passes both, but the
+  pictures misinform.
+- **IB:** main has 0 qualified topics, so IB publishes nothing until mechanisms are declared and #411 merges.
+
+**Owner decision (recommended: pause FR now):**
+
+- Set `FR_PREMIUM_PUBLISH` to `0` before 07:00 UTC on 5 Nov, so Lake Nyos does not go out with that drawing.
+- Optionally set `IB_PREMIUM_PUBLISH` to `0` too (it has nothing to publish anyway).
+- A controlled rollout ("one owner-approved video per channel first") is not what is running now.
+- Studio edit for `A-IgHh6J_ZU`: delete the "Footage & sources" block (§3.3).
 
 ## 1. Fixes completed on this branch (`claude/jolly-galileo-538eda`, stacked on #411)
 
@@ -39,6 +52,7 @@ now. Studio edit for `A-IgHh6J_ZU`: delete the "Footage & sources" block (§3.3)
 | Subject hashtag from revision-pinned Wikipedia URLs; GLL broad tags | `core/hashtags.js` | GLL-021 had only `#shorts`; it now has `#shorts #football #ArgentinaVEngland #soccer` and the tag `Argentina v England`. |
 | Opening caption fully visible at frame 0 | `scripts/bto-studio/page/motion.js` | Frame 0, the first impression in the feed, showed a half-faded caption on all 5 MP4s. |
 | Board stills renderable in CI | `.github/workflows/premium-review-render.yml` (`board:<IB id>`) | The board's stills were gitignored, so the owner could not see them. Stills only; no MP4; the record is unchanged. |
+| Named bodies beside Earth drawn **to scale** | `scripts/bto-studio/auto/impossible-brief.js` | The board stills showed Jupiter, Neptune, Mars, Mercury and the Moon at Earth's size. They are now drawn at the mean-radius ratio, with no pair beyond 15×. Test in `premium-mechanisms`. |
 | Batch mechanism review | `reports/ib-mechanism-board/decisions.json`, `declare-mechanism.js --from/--queue` | One file, one command; HOLD rows are refused (§4). |
 | Tests | `premium-primary`, `hashtags`, `premium-mechanisms` | No archival claim on any channel's premium description; the review sheet ships undecided. |
 
@@ -63,10 +77,10 @@ now. Studio edit for `A-IgHh6J_ZU`: delete the "Footage & sources" block (§3.3)
 
 | | ImpossibleBrief | Failure Reconstructed | Hidden Logic (BTO) | GoalLore Lab |
 |---|---|---|---|---|
-| latest real premium MP4 | [IB-EAR-001](https://github.com/eyazan/youtube-otomasyon/actions/runs/41703791696/artifacts/13264262698) 30.6 s, [IB-EAR-019](https://github.com/eyazan/youtube-otomasyon/actions/runs/41703791696/artifacts/13264207883) 31.5 s | [El Faro](https://github.com/eyazan/youtube-otomasyon/actions/runs/41703791696/artifacts/13265451771) 26.9 s (now published from main's older render); Lake Nyos and Moore tornado render queued, see §7 | [BTO-156](https://github.com/eyazan/youtube-otomasyon/actions/runs/41703791696/artifacts/13265237338) 31.9 s | [GLL-021](https://github.com/eyazan/youtube-otomasyon/actions/runs/41703791696/artifacts/13264817418) 25.6 s |
+| latest real premium MP4 | [IB-EAR-001](https://github.com/eyazan/youtube-otomasyon/actions/runs/41703791696/artifacts/13264262698) 30.6 s, [IB-EAR-019](https://github.com/eyazan/youtube-otomasyon/actions/runs/41703791696/artifacts/13264207883) 31.5 s | [El Faro](https://github.com/eyazan/youtube-otomasyon/actions/runs/41703791696/artifacts/13265451771) 26.9 s (now published from main's older render). New today: [Lake Nyos](https://github.com/eyazan/youtube-otomasyon/actions/runs/41878990198) 29.2 s and Moore 26.5 s, **QA PASS but generic, misleading drawings** (frames on `review/render-41878990198-<topic>`) | [BTO-156](https://github.com/eyazan/youtube-otomasyon/actions/runs/41703791696/artifacts/13265237338) 31.9 s | [GLL-021](https://github.com/eyazan/youtube-otomasyon/actions/runs/41703791696/artifacts/13264817418) 25.6 s |
 | objective QA | PASS / PASS (loop WARN; EAR-019 static-hold WARN 1.87 s) | PASS (loop WARN) | PASS (caption speed WARN 23.5 c/s, loop WARN) | PASS, **voice WARN** (Ryan not approved), caption-sync WARN 169 ms |
 | Creative Director package | frames, contact sheet, `creative-review.md` on `review/render-41703791696-<id>`; all scenes "not reviewed" | same; 6 of 8 scenes LOW_NOVELTY | same; 6 scenes SAME_ENV (desk), 5 LOW_NOVELTY | same |
-| exact outstanding approvals | 1. Creative verdict on EAR-001 (`creative-notes.json`). 2. HUMAN-line review (`research/reviews/IB-EAR-001.json`). 3. Mechanism declarations (§4). 4. Merge #411. | 1. Creative verdict on Lake Nyos or Moore (once rendered). 2. Merge #411 (the maritime kit is not on main). | 1. Fix OAuth (§3.1). 2. Enable Analytics API. 3. Research review of BTO-156 (`premium-publish.js review-research`). 4. Creative verdict. 5. Sign the policy. 6. `HLT_PREMIUM_PUBLISH`, `BTO_PUBLISH`. 7. Merge. | 1. Voice approval (Ryan, or pick another: `gll-voice-review.yml`). 2. Research review (`docs/review/goal-lore-lab-approval.md`). 3. Creative verdict. 4. Policy, `enabled:true`, `GLL_ACTIVE`, `GLL_PUBLISH`, `GLL_PREMIUM_PUBLISH`. 5. Merge. |
+| exact outstanding approvals | 1. Creative verdict on EAR-001 (`creative-notes.json`). 2. HUMAN-line review (`research/reviews/IB-EAR-001.json`). 3. Mechanism declarations (§4). 4. Merge #411. | 1. **No launch candidate.** The new maritime kit draws ship cases correctly, but the ship cases fail the channel's viral-score floor of 75 (Costa Concordia 74, Andrea Doria 70). The 3 qualified non-ship cases draw a generic crack. Owner choice: approve a ship case's score exception, or wait for drawings for limnic/tornado cases. 2. Merge #411. | 1. Fix OAuth (§3.1). 2. Enable Analytics API. 3. Research review of BTO-156 (`premium-publish.js review-research`). 4. Creative verdict. 5. Sign the policy. 6. `HLT_PREMIUM_PUBLISH`, `BTO_PUBLISH`. 7. Merge. | 1. Voice approval (Ryan, or pick another: `gll-voice-review.yml`). 2. Research review (`docs/review/goal-lore-lab-approval.md`). 3. Creative verdict. 4. Policy, `enabled:true`, `GLL_ACTIVE`, `GLL_PUBLISH`, `GLL_PREMIUM_PUBLISH`. 5. Merge. |
 | publishing config | policy SIGNED; switches ON; at most 1/day; 21:00 Istanbul (18:00 UTC) | same | policy UNSIGNED; switches off; **OAuth broken** | policy UNSIGNED; `enabled:false`; switches off |
 | duplicate protection | Verified in code: `published.json` slug/topicId; reservation file; journal + resumable-session + remote title/publishAt reconciliation (`youtube-yukle.js` 370–423); tests `publish-safety`, `premium-primary` | same | same. **Owner check:** two Bluetooth videos exist in `published.json` (`Q98e12I0NFA` via duplicate-guard on 5 Oct, `Dibi31XmolY` uploaded 8 Oct with a new title). Check in Studio that only one is public. | same |
 | scheduled publication | Verified live today: uploaded private, `publishAt` 18:00 UTC, read-back verified (`b7LByhFrMMc`) | Verified live today (`A-IgHh6J_ZU`) | not verifiable (auth) | no uploads yet |
@@ -141,20 +155,26 @@ New Short every day. Subscribe so you don't miss the next one.
   `reports/ib-mechanism-board/OWNER-REVIEW.md`.
 - **Sheet:** `reports/ib-mechanism-board/decisions.json` lists the 18 pre-screened topics in proposed queue order. Each row
   has a hook note and an accuracy note, and every `decision` is `null`.
+- **Re-render:** the planet pairs were re-rendered with the to-scale fix (6 topics; branches
+  `review/render-<run>-IB-SPA-0xx`). Judge the scale on those, not on run 41878442797.
 - **Process:**
   1. Look at the contact sheets.
   2. Set `"decision": "APPROVE"` or `"REJECT"` on each row.
   3. Run `node scripts/ib-research/declare-mechanism.js --from reports/ib-mechanism-board/decisions.json --by "<your name>"`.
   4. Run `node scripts/ib-research/declare-mechanism.js --queue` to print the real production order.
 - **Accuracy review of the 18:**
-  - **15 are clean**, or have only a minor wording suggestion noted in the row.
-  - **3 are HOLD.** The tool refuses them until the research is fixed:
+  - **13 are clean**, or have only a minor wording suggestion noted in the row.
+  - **5 are HOLD.** The tool refuses them until the research or the drawing is fixed:
+    - **IB-EAR-006 Yellowstone:** drawn as a cone; it is a caldera.
+    - **IB-EAR-096 Laki:** drawn as a cone; it was a fissure eruption.
     - **IB-SPA-036:** line 3 dates the 40,000 km Great Red Spot to 2017. The 2017 width is 16,350 km.
     - **IB-SPA-066:** Halley's orbit is drawn as a circle (eccentricity ≈ 0.97), and the "8,030 km" probe line omits
       Giotto's ~600 km pass.
     - **IB-HUM-014:** "most people would need well over twice as long" has no source.
-- **Supply:** 15 topics plus the already-declared EAR-001/019 gives 17 Shorts, about 17 days at 1/day. Tested on a copy:
-  approving all 15 yields a 17-topic queue. The rest of the 47 STRONG rows have stills now; look before adding them.
+- **Supply:** 13 topics plus the already-declared EAR-001/019 gives 15 Shorts, about 15 days at 1/day. Tested on a copy
+  of the research file (restored afterwards).
+- **The 6-volcano set is visually identical** (same cone, same column). Even where the cone is right, space them out in
+  the queue; the sheet's order does this. The rest of the 47 STRONG rows have stills now; look before adding them.
 - **After the merge:** the queue only feeds production once #411 merges. Main has no declaration gate.
 
 ## 5. Retention: what the openings actually show, and three hooks per channel
@@ -221,7 +241,8 @@ No hook may promise something the video doesn't show.
    - Fix BTO OAuth and the Analytics API.
 2. **One approved premium Short per channel**, each signed by the owner on its own MP4:
    - **IB:** IB-EAR-001 "What If Earth Stopped Spinning for One Second?" (QA PASS, declared mechanism). Needs a creative verdict + HUMAN-line review.
-   - **FR:** FR-lake-nyos-1986 (a concrete event; render queued, §7), or Moore tornado as the alternative.
+   - **FR:** none ready. El Faro (the best FR premium so far) is already public from the old engine. The next FR
+     candidate is a ship case once the owner decides on the score floor; Costa Concordia is at 74 against 75.
    - **BTO:** BTO-156 microwave door (QA PASS, mechanism drawn), with the title above. Needs OAuth, research review and the policy.
    - **GLL:** GLL-021 "Two Goals, Four Minutes Apart" (QA PASS). Needs an approved voice: re-render after approval, because the content hash binds the voice.
 3. **Then 1/day per channel under the signed policies**, only after the merge. Read the audit at day 7:
@@ -229,10 +250,12 @@ No hook may promise something the video doesn't show.
    - grow IB supply through more declarations, not lower bars;
    - no channel goes above 1/day before the day-14 readout.
 
-## 7. Pending at the time of writing
+## 7. CI evidence from this session
 
-- **CI runs:**
-  - [41878442797](https://github.com/eyazan/youtube-otomasyon/actions/runs/41878442797): 47 board stills.
-  - FR Lake Nyos + Moore tornado MP4s, at the commit with the frame-0 caption fix.
-  - Both were queued on GitHub runners. Their branches appear as `review/render-<run>-<topic>`.
+- [41878442797](https://github.com/eyazan/youtube-otomasyon/actions/runs/41878442797): 47 board still sets, done.
+- [41878990198](https://github.com/eyazan/youtube-otomasyon/actions/runs/41878990198): FR Lake Nyos + Moore MP4s.
+  - QA PASS on both.
+  - The frame-0 caption fix is confirmed: the first caption is fully visible at 0 s.
+  - The creative check still flags "motion in the first 2 s" at 0.27–0.28 against 0.3, which is arm A's target.
+- To-scale planet re-render (6 IB topics) dispatched last; its branches appear as `review/render-<run>-IB-SPA-0xx`.
 - **PR #411:** open, draft, `mergeable_state: unstable`. This branch is stacked on it.
