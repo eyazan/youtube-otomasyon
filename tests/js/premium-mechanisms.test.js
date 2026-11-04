@@ -111,3 +111,13 @@ test("a named body drawn beside Earth is to scale (mean radius ratio), and no si
   assert.ok(Math.abs(ratio("IB-SPA-076") - 0.383) < 0.01, "Mercury 0.38 Earth");
   assert.ok(Math.abs(ratio("IB-SPA-021") - 0.532) < 0.01, "Mars 0.53 Earth");
 });
+
+test("FR creative fidelity: never a crack for a case that did not crack; gas and tornado drawn as themselves", () => {
+  const FR = require("../../scripts/bto-studio/auto/failure-reconstructed.js");
+  const ch = require("../../core/channel-context").getChannel("failure-reconstructed");
+  const fid = (id) => { const t = Adapter.loadTopic("failure-reconstructed", id).topic; return FR.drawingFidelity(t, Adapter.studioScript(ch, t).lines); };
+  for (const id of ["FR-mars-96-1996", "FR-texas-power-crisis-2021", "FR-grenfell-tower-2017", "FR-twa-800-1996", "FR-millennium-bridge-wobble-2000"]) assert.equal(fid(id).ok, false, id);
+  for (const id of ["FR-lake-nyos-1986", "FR-moore-tornado-2013", "FR-el-faro-2015", "FR-costa-concordia-2012", "FR-tay-bridge-1879"]) assert.equal(fid(id).ok, true, id);
+  const t = Adapter.loadTopic("failure-reconstructed", "FR-lake-nyos-1986").topic; const k = FR.objectKind(t, Adapter.studioScript(ch, t).lines);
+  assert.equal(FR.structureMechanism(t, k), "gas");
+});

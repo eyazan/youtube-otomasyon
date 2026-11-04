@@ -108,6 +108,8 @@ function qualified(channel, { exclude = [], bar = growthBar } = {}) {
     if (reserved.has(t.slug) || reserved.has(t.id)) why.push("reserved for a premium publication");
     if (exclude.includes(t.id) || exclude.includes(t.slug)) why.push("excluded");
     if (!loadError) why.push(...Adapter.readiness(channel, t).errors);
+    // FR creative fidelity: never a crack drawn for a case that did not crack (scripts/bto-studio/auto/failure-reconstructed.js)
+    if (!loadError && channel.slug === "failure-reconstructed" && !why.length) { try { const f = require("../../scripts/bto-studio/auto/failure-reconstructed").drawingFidelity(t, Adapter.studioScript(channel, t).lines); if (!f.ok) why.push(f.why); } catch (e) { why.push("creative fidelity: " + e.message); } }
     const q = quality && !loadError ? quality(t) : null; if (q && q.why) why.push(q.why);
     rows.push({ topic: t, ok: why.length === 0, why, priority: q ? q.score : prio.get(t.id) || rowPriority(row) });
   }

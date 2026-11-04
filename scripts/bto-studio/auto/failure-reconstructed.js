@@ -349,4 +349,24 @@ function build(script, style, topic) {
   };
 }
 
-module.exports = { build, objectKind, structureMechanism };
+// Creative fidelity (validation layer 3, but it guards what the picture claims): the generic class drawing tells a
+// failure as a crack at the failure point. That is true only for a structural mechanism. A case driven by fire,
+// freezing, an outage, software, radar or an engine burn that did not happen would be drawn as a crack that never
+// happened (#416 review: Lake Nyos as a cracked mountain; Mars 96 and the 2021 Texas grid would be next), so it is
+// refused until it has its own drawing. Ships use the maritime kit; named mechanisms (gas, tornado, wind, load,
+// overtop, seepage, uplift) are drawn as themselves.
+const NONSTRUCTURAL = /\b(ignit\w*|explo\w*|arson|lightning|sway\w*|wobbl\w*|lateral excitation|ic(e|ing)|fires?|flames?|blaze|burn\w*|smoke|freez\w*|frozen|unwinteriz\w*|outages?|blackout|software|code|computer|radar|misread|misinterpret\w*|communicat\w*|cyber\w*)\b/i;
+function drawingFidelity(topic, lines = []) {
+  const kind = objectKind(topic, lines); const v = topic.case || {};
+  const mech = structureMechanism(topic, kind, lines); if (mech) return { ok: true, kind, why: null };
+  if (objectMotion(topic, kind) === "spin") return { ok: true, kind, why: null }; // an uncontrolled spin is drawn as a spin
+  const m = [v.mekanizma, v.tetik].join(" ").match(NONSTRUCTURAL);
+  if (kind === "ship" && !m) return { ok: true, kind, why: null }; // the maritime kit: storm, flooding, list, propulsion, sinking
+  if (m) return { ok: false, kind, why: `creative fidelity: the ${kind} drawing would show a structural crack, but the case's mechanism is "${m[0]}" (needs its own drawing)` };
+  // a crack is the story only for structures; an aircraft, train, vehicle, plant or generic structure failing would be
+  // drawn as breaking apart, which is rarely what the investigation found
+  if (!/bridge|dam$|building|walkway|tank|terrain|mine/.test(kind)) return { ok: false, kind, why: `creative fidelity: the generic ${kind} drawing can only show it cracking; this case needs its own drawing` };
+  return { ok: true, kind, why: null };
+}
+
+module.exports = { build, objectKind, structureMechanism, drawingFidelity };
