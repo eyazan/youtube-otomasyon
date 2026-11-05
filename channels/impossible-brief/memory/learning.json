@@ -19,26 +19,26 @@
         {
           "value": "statement",
           "sample": 3,
-          "averagePercentageViewed": 47.72
+          "averagePercentageViewed": 62.76
         }
       ]
     },
     {
       "key": "durationRange",
-      "value": "25-35s",
-      "weakValue": "over-35s",
+      "value": "over-35s",
+      "weakValue": "25-35s",
       "evidenceVideos": 18,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
+          "value": "over-35s",
+          "sample": 3,
+          "averagePercentageViewed": 70.61
+        },
+        {
           "value": "25-35s",
           "sample": 15,
           "averagePercentageViewed": 70.05
-        },
-        {
-          "value": "over-35s",
-          "sample": 3,
-          "averagePercentageViewed": 55.57
         }
       ]
     },
@@ -62,7 +62,7 @@
         {
           "value": "context",
           "sample": 15,
-          "averagePercentageViewed": 65.58
+          "averagePercentageViewed": 68.59
         }
       ]
     },
@@ -84,14 +84,14 @@
         {
           "value": "question",
           "sample": 18,
-          "averagePercentageViewed": 67.63
+          "averagePercentageViewed": 70.14
         }
       ]
     },
     {
       "key": "category",
       "value": "EARTH",
-      "weakValue": "PHYSICS",
+      "weakValue": "OTHER",
       "evidenceVideos": 18,
       "confidence": "SUPPORTED",
       "aggregates": [
@@ -116,6 +116,11 @@
           "averagePercentageViewed": 59.71
         },
         {
+          "value": "PHYSICS",
+          "sample": 3,
+          "averagePercentageViewed": 59.34
+        },
+        {
           "value": "OTHER",
           "sample": 3,
           "averagePercentageViewed": 57.22
@@ -124,11 +129,6 @@
           "value": "HUMAN",
           "sample": 1,
           "averagePercentageViewed": 52.35
-        },
-        {
-          "value": "PHYSICS",
-          "sample": 3,
-          "averagePercentageViewed": 44.3
         }
       ]
     },
@@ -142,11 +142,11 @@
         {
           "value": "optional curiosity bridge after the scientific payoff",
           "sample": 18,
-          "averagePercentageViewed": 67.63
+          "averagePercentageViewed": 70.14
         }
       ]
     }
   ],
-  "lastUpdated": "2026-11-05T17:29:53.939Z",
+  "lastUpdated": "2026-11-05T18:06:07.073Z",
   "caveat": "Observed associations only; topic, timing and packaging can confound retention. No causal claim."
 }

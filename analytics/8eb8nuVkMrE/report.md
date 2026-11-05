@@ -8,8 +8,9 @@ https://youtu.be/8eb8nuVkMrE
 |---|---|---:|---:|---:|---:|---:|---|
 | 1d | 2026-10-30 | 49 | 1 | 1 | — | — |  |
 | 3d | 2026-11-01 | 322 | 4 | 1 | 47.46 | 0 | Shorts feed 90%, Search 7% |
+| 7d | 2026-11-05 | 323 | 4 | 1 | 71.69 | 0 | Shorts feed 96%, Search 3% |
 
-## Diagnosis at 3d
+## Diagnosis at 7d
 
 - **HEALTHY** (low) — No problem pattern detected with available data.
 
@@ -19,9 +20,9 @@ https://youtu.be/8eb8nuVkMrE
 
 ## First major observed retention drop
 
-- Timestamp: 7s; magnitude: 19 percentage points.
+- Timestamp: 5s; magnitude: 12 percentage points.
 - Active sentence: Cars plunged into the Mississippi River, and thirteen people were killed.
 - Visual type: REAL ARCHIVAL IMAGE
 - This is an observed alignment, not proof that the sentence or visual caused the drop.
 
-Views gained between 1d and 3d: 273.
+Views gained between 3d and 7d: 1.

@@ -1,6 +1,6 @@
 # Growth dashboard
 
-Generated 2026-11-05T17:29:55.039Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-11-05T18:06:15.796Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
@@ -24,7 +24,7 @@ Generated 2026-11-05T17:29:55.039Z. Per-channel baselines are computed separatel
 - munich-1958 (C): VideoPotential 85 in experimental band 58–71; sources 41 < 62
 - skylab-1973 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
 - castle-bravo-1954 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
-- vanguard-1957 (C): VideoPotential 82 in experimental band 58–71; sources 41 < 62
+- new-london-school-1937 (C): VideoPotential 83 in experimental band 58–71; sources 41 < 62
 
 **Recent alerts**
 
@@ -59,8 +59,8 @@ Generated 2026-11-05T17:29:55.039Z. Per-channel baselines are computed separatel
 
 - what-if-human-heat-tolerance-doubled-overnight (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
 - could-we-function-with-half-human-heat-tolerance (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
-- if-a-rogue-planet-vanished-right-now-what-would-change-first (C): VideoPotential 72 in experimental band 58–71; boilerplate 0.5
 - what-happens-if-the-global-ocean-doubles (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
+- if-a-rogue-planet-vanished-right-now-what-would-change-first (C): VideoPotential 72 in experimental band 58–71; boilerplate 0.5
 - what-if-human-muscle-efficiency-doubled-overnight (C): VideoPotential 70 in experimental band 58–71; boilerplate 0.5
 
 **Recent alerts**
