@@ -2,52 +2,6 @@
   "channel": "impossible-brief",
   "runs": [
     {
-      "runId": "41654317321",
-      "attempt": "1",
-      "startedAt": "2026-11-03T14:31:29.524Z",
-      "publish": true,
-      "trigger": {
-        "event": "schedule",
-        "correlationId": null
-      },
-      "targetDay": "2026-11-03",
-      "slug": null,
-      "outcome": "NO_TOPIC",
-      "reason": "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)",
-      "stages": {
-        "RESEARCH": {
-          "status": "skipped",
-          "detail": "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)",
-          "at": "2026-11-03T14:31:30.855Z"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "not-reached"
-        },
-        "QA": {
-          "status": "not-reached"
-        },
-        "UPLOAD": {
-          "status": "not-reached"
-        },
-        "SCHEDULE": {
-          "status": "not-reached"
-        },
-        "PUBLISH": {
-          "status": "not-reached"
-        }
-      },
-      "finishedAt": "2026-11-03T14:31:30.856Z"
-    },
-    {
       "runId": "41657672060",
       "attempt": "1",
       "startedAt": "2026-11-03T14:51:38.272Z",
@@ -1342,6 +1296,62 @@
         }
       },
       "finishedAt": "2026-11-04T22:01:16.896Z"
+    },
+    {
+      "runId": "41984774523",
+      "attempt": "1",
+      "startedAt": "2026-11-05T07:09:38.309Z",
+      "publish": true,
+      "trigger": {
+        "event": "repository_dispatch",
+        "correlationId": "production-1-20261105T070521Z-34d1f870"
+      },
+      "targetDay": "2026-11-05",
+      "slug": "what-if-a-tornado-lasted-three-hours",
+      "outcome": "UPLOADED",
+      "reason": "premium IB-EAR-054 Xet75LEQkWg",
+      "stages": {
+        "RESEARCH": {
+          "status": "done",
+          "detail": "IB-EAR-054",
+          "at": "2026-11-05T07:12:46.565Z"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "done",
+          "detail": "premium final",
+          "at": "2026-11-05T07:12:46.566Z"
+        },
+        "QA": {
+          "status": "done",
+          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
+          "at": "2026-11-05T07:12:46.569Z"
+        },
+        "UPLOAD": {
+          "status": "done",
+          "detail": "Xet75LEQkWg",
+          "at": "2026-11-05T07:12:46.569Z"
+        },
+        "SCHEDULE": {
+          "status": "done",
+          "detail": "2026-11-05T18:00:00.000Z",
+          "at": "2026-11-05T07:12:46.570Z"
+        },
+        "PUBLISH": {
+          "status": "scheduled",
+          "detail": "YouTube makes it public at 2026-11-05T18:00:00.000Z",
+          "at": "2026-11-05T07:12:46.571Z"
+        }
+      },
+      "finishedAt": "2026-11-05T07:12:46.572Z"
     }
   ]
 }

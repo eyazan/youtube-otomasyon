@@ -1,21 +1,21 @@
 {
-  "at": "2026-11-04T22:01:33.393Z",
-  "runId": "41921255778",
+  "at": "2026-11-05T07:13:05.463Z",
+  "runId": "41984774523",
   "rows": [
     {
       "channel": "failure-reconstructed",
-      "outcome": "NOT_DUE",
-      "category": "NOT_DUE",
+      "outcome": "BLOCKED",
+      "category": "QUALITY_REJECTED",
       "scheduled": false,
       "publication": "NOT_SCHEDULED",
       "publishAt": null,
-      "reason": "before production slot 09:00 Europe/Istanbul",
+      "reason": "premium publication refused (see the premium publish log); nothing uploaded, legacy renderer not used",
       "slug": null,
       "videoId": null,
-      "targetDay": null,
+      "targetDay": "2026-11-05",
       "trigger": {
-        "event": "schedule",
-        "correlationId": null
+        "event": "repository_dispatch",
+        "correlationId": "production-1-20261105T070521Z-34d1f870"
       },
       "stages": {
         "RESEARCH": {
@@ -49,22 +49,24 @@
     },
     {
       "channel": "impossible-brief",
-      "outcome": "NOT_DUE",
-      "category": "NOT_DUE",
-      "scheduled": false,
-      "publication": "NOT_SCHEDULED",
-      "publishAt": null,
-      "reason": "before production slot 09:30 Europe/Istanbul",
-      "slug": null,
+      "outcome": "UPLOADED",
+      "category": "SCHEDULED",
+      "scheduled": true,
+      "publication": "SCHEDULED",
+      "publishAt": "2026-11-05T18:00:00.000Z",
+      "reason": "premium IB-EAR-054 Xet75LEQkWg",
+      "slug": "what-if-a-tornado-lasted-three-hours",
       "videoId": null,
-      "targetDay": null,
+      "targetDay": "2026-11-05",
       "trigger": {
-        "event": "schedule",
-        "correlationId": null
+        "event": "repository_dispatch",
+        "correlationId": "production-1-20261105T070521Z-34d1f870"
       },
       "stages": {
         "RESEARCH": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "IB-EAR-054",
+          "at": "2026-11-05T07:12:46.565Z"
         },
         "SCRIPT": {
           "status": "not-reached"
@@ -76,19 +78,29 @@
           "status": "not-reached"
         },
         "RENDER": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "premium final",
+          "at": "2026-11-05T07:12:46.566Z"
         },
         "QA": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
+          "at": "2026-11-05T07:12:46.569Z"
         },
         "UPLOAD": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "Xet75LEQkWg",
+          "at": "2026-11-05T07:12:46.569Z"
         },
         "SCHEDULE": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "2026-11-05T18:00:00.000Z",
+          "at": "2026-11-05T07:12:46.570Z"
         },
         "PUBLISH": {
-          "status": "not-reached"
+          "status": "scheduled",
+          "detail": "YouTube makes it public at 2026-11-05T18:00:00.000Z",
+          "at": "2026-11-05T07:12:46.571Z"
         }
       }
     }
