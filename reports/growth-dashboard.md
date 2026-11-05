@@ -1,6 +1,6 @@
 # Growth dashboard
 
-Generated 2026-11-05T18:50:48.326Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-11-05T20:07:25.385Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
@@ -12,9 +12,9 @@ Generated 2026-11-05T18:50:48.326Z. Per-channel baselines are computed separatel
 
 **Content clusters** — 12 · integrity OK
 
-**Growth / subscriber conversion** — tracked 40 · subs/1k Shorts 0 · subs/1k long n/a
+**Growth / subscriber conversion** — tracked 41 · subs/1k Shorts 0 · subs/1k long n/a
 
-**Learning** — Shorts adaptive (n=39, adopted 0) · Long-form heuristics-only (n=0)
+**Learning** — Shorts adaptive (n=40, adopted 0) · Long-form heuristics-only (n=0)
 
 **Short → Long funnel** — 0 link(s), 0 long→long, 0 pending RELATED_VIDEO_MANUAL_ACTION_REQUIRED
 
@@ -45,13 +45,13 @@ Generated 2026-11-05T18:50:48.326Z. Per-channel baselines are computed separatel
 
 **Long-form health** — cycle 2026-W45: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W45 already QUALITY_BLOCKED)
 
-**Long-form backlog** — could-earth-survive-one-day-without-earth-s-magnetic-field 83/A, what-if-we-mined-a-metal-asteroid 83/A, what-if-we-swam-in-europas-ocean 82/A, what-if-you-visited-io-the-volcano-moon 82/A, what-if-the-dinosaur-killing-asteroid-hit-today 82/A
+**Long-form backlog** — what-if-the-ozone-hole-never-closed 83/A, what-if-the-tunguska-blast-happened-over-a-city 83/A, could-earth-survive-one-day-without-earth-s-magnetic-field 83/A, what-if-the-permafrost-thawed 83/A, what-if-the-atlantic-ocean-current-shut-down 83/A
 
 **Content clusters** — 7 · integrity OK
 
-**Growth / subscriber conversion** — tracked 20 · subs/1k Shorts 0 · subs/1k long n/a
+**Growth / subscriber conversion** — tracked 21 · subs/1k Shorts 0 · subs/1k long n/a
 
-**Learning** — Shorts adaptive (n=19, adopted 0) · Long-form heuristics-only (n=0)
+**Learning** — Shorts adaptive (n=20, adopted 0) · Long-form heuristics-only (n=0)
 
 **Short → Long funnel** — 0 link(s), 0 long→long, 0 pending RELATED_VIDEO_MANUAL_ACTION_REQUIRED
 
@@ -59,8 +59,8 @@ Generated 2026-11-05T18:50:48.326Z. Per-channel baselines are computed separatel
 
 - what-if-human-heat-tolerance-doubled-overnight (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
 - could-we-function-with-half-human-heat-tolerance (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
-- what-happens-if-the-global-ocean-doubles (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
 - if-a-rogue-planet-vanished-right-now-what-would-change-first (C): VideoPotential 72 in experimental band 58–71; boilerplate 0.5
+- what-happens-if-the-global-ocean-doubles (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
 - what-if-human-muscle-efficiency-doubled-overnight (C): VideoPotential 70 in experimental band 58–71; boilerplate 0.5
 
 **Recent alerts**

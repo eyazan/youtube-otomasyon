@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-05T18:50:48.326Z",
+  "generatedAt": "2026-11-05T20:07:25.385Z",
   "note": "Per-channel baselines are computed separately and never blended.",
   "channels": [
     {
@@ -26,11 +26,11 @@
           "reason": "EXPLOIT (0.75): best A topic by SelectionScore"
         },
         "baseline": {
-          "n": 39,
+          "n": 40,
           "views": 435,
           "averagePercentageViewed": 66.26,
           "subscribersPer1000Views": 0,
-          "engagementPer1000Views": 23.95,
+          "engagementPer1000Views": 25.18,
           "watchHoursPer1000Views": 2.08
         }
       },
@@ -150,7 +150,7 @@
         "pendingRelatedVideoManualActions": 0
       },
       "growth": {
-        "trackedVideos": 40,
+        "trackedVideos": 41,
         "subscriberConversion": {
           "shorts": 0,
           "longform": null
@@ -159,9 +159,9 @@
       "learning": {
         "shorts": {
           "status": "adaptive",
-          "sampleSize": 39,
+          "sampleSize": 40,
           "adopted": 0,
-          "hypotheses": 18
+          "hypotheses": 19
         },
         "longform": {
           "status": "heuristics-only",
@@ -435,7 +435,7 @@
           "reason": "EXPLOIT (0.75): best A topic by SelectionScore"
         },
         "baseline": {
-          "n": 19,
+          "n": 20,
           "views": 781,
           "averagePercentageViewed": 64.54,
           "subscribersPer1000Views": 0,
@@ -503,32 +503,32 @@
         "episodes": 0,
         "backlog": [
           {
+            "slug": "what-if-the-ozone-hole-never-closed",
+            "LongFormPotentialScore": 83,
+            "bucket": "A",
+            "mode": "A_LONG_FIRST"
+          },
+          {
+            "slug": "what-if-the-tunguska-blast-happened-over-a-city",
+            "LongFormPotentialScore": 83,
+            "bucket": "A",
+            "mode": "A_LONG_FIRST"
+          },
+          {
             "slug": "could-earth-survive-one-day-without-earth-s-magnetic-field",
             "LongFormPotentialScore": 83,
             "bucket": "A",
             "mode": "A_LONG_FIRST"
           },
           {
-            "slug": "what-if-we-mined-a-metal-asteroid",
+            "slug": "what-if-the-permafrost-thawed",
             "LongFormPotentialScore": 83,
             "bucket": "A",
-            "mode": "B_SHORT_PROVES_DEMAND"
-          },
-          {
-            "slug": "what-if-we-swam-in-europas-ocean",
-            "LongFormPotentialScore": 82,
-            "bucket": "A",
             "mode": "A_LONG_FIRST"
           },
           {
-            "slug": "what-if-you-visited-io-the-volcano-moon",
-            "LongFormPotentialScore": 82,
-            "bucket": "A",
-            "mode": "A_LONG_FIRST"
-          },
-          {
-            "slug": "what-if-the-dinosaur-killing-asteroid-hit-today",
-            "LongFormPotentialScore": 82,
+            "slug": "what-if-the-atlantic-ocean-current-shut-down",
+            "LongFormPotentialScore": 83,
             "bucket": "A",
             "mode": "A_LONG_FIRST"
           }
@@ -559,7 +559,7 @@
         "pendingRelatedVideoManualActions": 0
       },
       "growth": {
-        "trackedVideos": 20,
+        "trackedVideos": 21,
         "subscriberConversion": {
           "shorts": 0,
           "longform": null
@@ -568,9 +568,9 @@
       "learning": {
         "shorts": {
           "status": "adaptive",
-          "sampleSize": 19,
+          "sampleSize": 20,
           "adopted": 0,
-          "hypotheses": 3
+          "hypotheses": 5
         },
         "longform": {
           "status": "heuristics-only",
@@ -591,14 +591,14 @@
           "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
         },
         {
-          "slug": "what-happens-if-the-global-ocean-doubles",
-          "bucket": "C",
-          "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
-        },
-        {
           "slug": "if-a-rogue-planet-vanished-right-now-what-would-change-first",
           "bucket": "C",
           "reason": "VideoPotential 72 in experimental band 58–71; boilerplate 0.5"
+        },
+        {
+          "slug": "what-happens-if-the-global-ocean-doubles",
+          "bucket": "C",
+          "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
         },
         {
           "slug": "what-if-human-muscle-efficiency-doubled-overnight",
