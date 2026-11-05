@@ -1,27 +1,25 @@
 {
-  "at": "2026-11-05T13:12:41.001Z",
-  "runId": "42032675444",
+  "at": "2026-11-05T14:28:06.828Z",
+  "runId": "42045064983",
   "rows": [
     {
       "channel": "failure-reconstructed",
-      "outcome": "UPLOADED",
-      "category": "SCHEDULED",
-      "scheduled": true,
-      "publication": "SCHEDULED",
-      "publishAt": "2026-11-05T18:00:00.000Z",
-      "reason": "premium FR-lake-nyos-1986 n-EezRRsuOA",
-      "slug": "lake-nyos-1986",
+      "outcome": "NOT_DUE",
+      "category": "NOT_DUE",
+      "scheduled": false,
+      "publication": "NOT_SCHEDULED",
+      "publishAt": null,
+      "reason": "today's Short already exists (lake-nyos-1986)",
+      "slug": null,
       "videoId": null,
-      "targetDay": "2026-11-05",
+      "targetDay": null,
       "trigger": {
-        "event": "repository_dispatch",
-        "correlationId": "production-2-20261105T130521Z-29f64172"
+        "event": "schedule",
+        "correlationId": null
       },
       "stages": {
         "RESEARCH": {
-          "status": "done",
-          "detail": "FR-lake-nyos-1986",
-          "at": "2026-11-05T13:12:06.660Z"
+          "status": "not-reached"
         },
         "SCRIPT": {
           "status": "not-reached"
@@ -33,29 +31,19 @@
           "status": "not-reached"
         },
         "RENDER": {
-          "status": "done",
-          "detail": "premium final",
-          "at": "2026-11-05T13:12:06.661Z"
+          "status": "not-reached"
         },
         "QA": {
-          "status": "done",
-          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
-          "at": "2026-11-05T13:12:06.661Z"
+          "status": "not-reached"
         },
         "UPLOAD": {
-          "status": "done",
-          "detail": "n-EezRRsuOA",
-          "at": "2026-11-05T13:12:06.662Z"
+          "status": "not-reached"
         },
         "SCHEDULE": {
-          "status": "done",
-          "detail": "2026-11-05T18:00:00.000Z",
-          "at": "2026-11-05T13:12:06.662Z"
+          "status": "not-reached"
         },
         "PUBLISH": {
-          "status": "scheduled",
-          "detail": "YouTube makes it public at 2026-11-05T18:00:00.000Z",
-          "at": "2026-11-05T13:12:06.662Z"
+          "status": "not-reached"
         }
       }
     },
@@ -71,8 +59,8 @@
       "videoId": null,
       "targetDay": null,
       "trigger": {
-        "event": "repository_dispatch",
-        "correlationId": "production-2-20261105T130521Z-29f64172"
+        "event": "schedule",
+        "correlationId": null
       },
       "stages": {
         "RESEARCH": {
