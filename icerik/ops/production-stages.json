@@ -2,50 +2,6 @@
   "channel": "failure-reconstructed",
   "runs": [
     {
-      "runId": "41654317321",
-      "attempt": "1",
-      "startedAt": "2026-11-03T14:31:26.568Z",
-      "publish": true,
-      "trigger": {
-        "event": "schedule",
-        "correlationId": null
-      },
-      "targetDay": null,
-      "slug": null,
-      "outcome": "NOT_DUE",
-      "reason": "today's Short already exists (pike-river-2010)",
-      "stages": {
-        "RESEARCH": {
-          "status": "not-reached"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "not-reached"
-        },
-        "QA": {
-          "status": "not-reached"
-        },
-        "UPLOAD": {
-          "status": "not-reached"
-        },
-        "SCHEDULE": {
-          "status": "not-reached"
-        },
-        "PUBLISH": {
-          "status": "not-reached"
-        }
-      },
-      "finishedAt": "2026-11-03T14:31:26.587Z"
-    },
-    {
       "runId": "41657672060",
       "attempt": "1",
       "startedAt": "2026-11-03T14:51:31.468Z",
@@ -1332,6 +1288,62 @@
         }
       },
       "finishedAt": "2026-11-05T07:09:35.227Z"
+    },
+    {
+      "runId": "42032675444",
+      "attempt": "1",
+      "startedAt": "2026-11-05T13:09:53.683Z",
+      "publish": true,
+      "trigger": {
+        "event": "repository_dispatch",
+        "correlationId": "production-2-20261105T130521Z-29f64172"
+      },
+      "targetDay": "2026-11-05",
+      "slug": "lake-nyos-1986",
+      "outcome": "UPLOADED",
+      "reason": "premium FR-lake-nyos-1986 n-EezRRsuOA",
+      "stages": {
+        "RESEARCH": {
+          "status": "done",
+          "detail": "FR-lake-nyos-1986",
+          "at": "2026-11-05T13:12:06.660Z"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "done",
+          "detail": "premium final",
+          "at": "2026-11-05T13:12:06.661Z"
+        },
+        "QA": {
+          "status": "done",
+          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
+          "at": "2026-11-05T13:12:06.661Z"
+        },
+        "UPLOAD": {
+          "status": "done",
+          "detail": "n-EezRRsuOA",
+          "at": "2026-11-05T13:12:06.662Z"
+        },
+        "SCHEDULE": {
+          "status": "done",
+          "detail": "2026-11-05T18:00:00.000Z",
+          "at": "2026-11-05T13:12:06.662Z"
+        },
+        "PUBLISH": {
+          "status": "scheduled",
+          "detail": "YouTube makes it public at 2026-11-05T18:00:00.000Z",
+          "at": "2026-11-05T13:12:06.662Z"
+        }
+      },
+      "finishedAt": "2026-11-05T13:12:06.663Z"
     }
   ]
 }

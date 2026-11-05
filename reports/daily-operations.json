@@ -1,33 +1,33 @@
 {
-  "generatedAt": "2026-11-05T07:13:05.280Z",
+  "generatedAt": "2026-11-05T13:12:40.846Z",
   "date": "2026-11-05",
   "channels": [
     {
       "channel": "failure-reconstructed",
       "name": "Failure Reconstructed",
       "date": "2026-11-05",
-      "todayTopic": null,
-      "shortStatus": "due-not-produced",
+      "todayTopic": "lake-nyos-1986",
+      "shortStatus": "scheduled",
       "longStatus": "due-not-produced",
       "qualityScore": null,
-      "qualityGate": null,
-      "youtubeStatus": "not-uploaded",
-      "publishTime": null,
-      "videoId": null,
+      "qualityGate": "PUBLISH",
+      "youtubeStatus": "scheduled",
+      "publishTime": "2026-11-05T18:00:00.000Z",
+      "videoId": "n-EezRRsuOA",
       "analyticsHealth": "measured",
-      "schedulerHealth": "pending-before-deadline",
-      "backlog": 348,
+      "schedulerHealth": "healthy",
+      "backlog": 347,
       "errors": 20,
       "inventory": {
         "channel": "failure-reconstructed",
         "channelName": "Failure Reconstructed",
-        "calculatedAt": "2026-11-05T07:13:05.324Z",
+        "calculatedAt": "2026-11-05T13:12:40.882Z",
         "qualifiedTopics": 388,
         "validatedCandidates": 0,
         "researchBacklog": 0,
-        "readyShorts": 348,
-        "readyLongForm": 346,
-        "daysOfInventory": 348,
+        "readyShorts": 347,
+        "readyLongForm": 345,
+        "daysOfInventory": 347,
         "monthsOfInventory": 11.4,
         "categoryDistribution": {
           "software-and-control-failures": 20,
@@ -846,17 +846,19 @@
         },
         "analyticsFreshness": {
           "channel": "failure-reconstructed",
-          "lastSyncAt": "2026-11-04T13:07:09.625Z",
-          "newestDay": "2026-11-02",
-          "lagDays": 3,
+          "lastSyncAt": "2026-11-05T13:12:20.374Z",
+          "newestDay": "2026-11-03",
+          "lagDays": 2,
           "errors": []
         },
         "ops24h": {
-          "analytics.load": 1,
-          "publish.public": 1
+          "publish.public": 1,
+          "publish.success": 1,
+          "publish.scheduled_verified": 1,
+          "analytics.load": 1
         },
         "quota": {
-          "usedToday": 107,
+          "usedToday": 1613,
           "budget": 9800,
           "project": "1012165386949"
         },
@@ -865,7 +867,7 @@
           "estimate": true,
           "note": "Estimate from the YouTube Analytics API; YouTube decides eligibility.",
           "subscribers": 29,
-          "subscribersAt": "2026-11-05T07:12:47.250Z",
+          "subscribersAt": "2026-11-05T13:12:09.950Z",
           "longWatchHours365": null,
           "shortsViews90": null,
           "percent": {
@@ -882,15 +884,15 @@
       },
       "tiktok": {
         "mode": "SEND_TO_USER_INBOX",
-        "todayStatus": "NO_TODAY_VIDEO",
+        "todayStatus": "NOT_SENT",
         "sent": 10,
         "publicationStateAvailable": false,
-        "backlog": 29,
+        "backlog": 30,
         "failures": 0
       },
       "stateCounts": {
         "generated": 31,
-        "published": 40,
+        "published": 41,
         "failed": 1
       }
     },
@@ -913,7 +915,7 @@
       "inventory": {
         "channel": "impossible-brief",
         "channelName": "ImpossibleBrief",
-        "calculatedAt": "2026-11-05T07:13:05.401Z",
+        "calculatedAt": "2026-11-05T13:12:40.947Z",
         "qualifiedTopics": 500,
         "validatedCandidates": 0,
         "researchBacklog": 0,
@@ -1003,19 +1005,19 @@
         },
         "analyticsFreshness": {
           "channel": "impossible-brief",
-          "lastSyncAt": "2026-11-04T13:07:34.920Z",
-          "newestDay": "2026-11-02",
-          "lagDays": 3,
+          "lastSyncAt": "2026-11-05T13:12:37.517Z",
+          "newestDay": "2026-11-03",
+          "lagDays": 2,
           "errors": []
         },
         "ops24h": {
-          "analytics.load": 1,
           "publish.public": 1,
           "publish.success": 1,
-          "publish.scheduled_verified": 1
+          "publish.scheduled_verified": 1,
+          "analytics.load": 1
         },
         "quota": {
-          "usedToday": 1713,
+          "usedToday": 8,
           "budget": 9800,
           "project": "684098966511"
         },
@@ -1024,7 +1026,7 @@
           "estimate": true,
           "note": "Estimate from the YouTube Analytics API; YouTube decides eligibility.",
           "subscribers": 13,
-          "subscribersAt": "2026-11-05T07:12:57.862Z",
+          "subscribersAt": "2026-11-05T13:12:30.520Z",
           "longWatchHours365": null,
           "shortsViews90": null,
           "percent": {
