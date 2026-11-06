@@ -166,7 +166,9 @@ async function generateStory({ topic, evidence, generate, budget }) {
   const unsupported=reviewed.audit.filter((a)=>a.status==="UNSUPPORTED");
   const status=unsupported.length?"REJECTED_UNSUPPORTED":hooks.problems.length?"REJECTED_HOOK":
     errors.length?"REJECTED_OFFLINE_BUILDER":"HUMAN_SEMANTIC_REVIEW_REQUIRED";
-  return { status, audit:reviewed.audit, hooks, offlineBuilder:{executed:true,passed:!errors.length,errors},
+  // record: the would-be topic record, returned for the builder's online verification and scoring
+  // by an explicit manual caller; this module never writes it.
+  return { status, record, audit:reviewed.audit, hooks, offlineBuilder:{executed:true,passed:!errors.length,errors},
     semanticAccuracy:"NEEDS_REVIEW",humanReviewRequired:true,neverProductionReady:true,
     traceability:record.narration.map((line,index)=>({line:index+1,text:line.text,fact_ids:line.factIds})),
     evidenceDigest:evidence.integrity_sha256 };

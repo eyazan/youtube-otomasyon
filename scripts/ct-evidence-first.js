@@ -134,10 +134,10 @@ async function extractEvidence({ topic, sources, generate, verifyPrimary, budget
     stage: "ct-evidence-first-extract", reasoningEffort: "low",
     maxTokens: MAX_OUTPUT_TOKENS, clientJson: true,
     ...(budget ? { budget } : {}),
-    system: "Return JSON only: {facts:[{fact_id,source_id,claim,verbatim_quote}]}. Use only supplied excerpts. Write 16-18 distinct claims, 4-10 words each, with a 6+ word exact quote. Never fabricate citations, dates, numbers or facts.",
+    system: "Return JSON only: {facts:[{fact_id,source_id,claim,verbatim_quote}]}. Use only supplied excerpts. Write 16-18 distinct claims, 4-10 words each, with a 6+ word exact quote. Never fabricate citations, dates, numbers or facts. Sources of kind \"primary\" are official documents: take facts from at least two different primary sources, because only quotes found in those documents count as primary-source verified.",
     user: JSON.stringify({
       topic_id: topic.id, subject: topic.subject,
-      sources: sources.map((s) => ({ source_id: s.source_id, url: s.url, excerpt: s.excerpt }))
+      sources: sources.map((s) => ({ source_id: s.source_id, kind: s.kind, url: s.url, excerpt: s.excerpt }))
     })
   });
   return validateEvidence({ topic, sources, facts: result && result.json && result.json.facts, verifyPrimary });
