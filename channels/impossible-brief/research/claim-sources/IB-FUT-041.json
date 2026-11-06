@@ -1,0 +1,139 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-FUT-041",
+ "checkedAt": "2026-11-03T17:53:38.493Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "8ca95ade5116241d",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "Each probe contains 48 or 96 wires, each of which contains 32 independent electrodes, making a system of up to 3,072 electrodes per formation.",
+   "url": "https://en.wikipedia.org/wiki/Neuralink",
+   "sourceTitle": "Wikipedia — Neuralink",
+   "revision": 1383293163,
+   "passage": "Each probe contains 48 or 96 wires, each of which contains 32 independent electrodes, making a system of up to 3,072 electrodes per formation.",
+   "numbers": {
+    "claim": [
+     "48",
+     "96",
+     "32",
+     "3072"
+    ],
+    "inPassage": [
+     "48",
+     "96",
+     "32",
+     "3072"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "In April 2021, Neuralink demonstrated a monkey playing the game Pong using a Neuralink implant.",
+   "url": "https://en.wikipedia.org/wiki/Neuralink",
+   "sourceTitle": "Wikipedia — Neuralink",
+   "revision": 1383293163,
+   "passage": "In April 2021, Neuralink demonstrated a monkey playing the game \"Pong\" using a Neuralink implant.",
+   "numbers": {
+    "claim": [
+     "2021"
+    ],
+    "inPassage": [
+     "2021"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "On January 29, 2024, Musk announced that Neuralink had successfully implanted a Neuralink device in a human and that the patient was recovering.",
+   "url": "https://en.wikipedia.org/wiki/Neuralink",
+   "sourceTitle": "Wikipedia — Neuralink",
+   "revision": 1383293163,
+   "passage": "On January 29, 2024, Musk announced that Neuralink had successfully implanted a Neuralink device in a human and that the patient was recovering.",
+   "numbers": {
+    "claim": [
+     "29",
+     "2024"
+    ],
+    "inPassage": [
+     "29",
+     "2024"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "In August and September 2025, Toronto's University Health Network performed Canada's first Neuralink brain implant surgeries on two patients with cervical spinal cord injuries.",
+   "url": "https://en.wikipedia.org/wiki/Neuralink",
+   "sourceTitle": "Wikipedia — Neuralink",
+   "revision": 1383293163,
+   "passage": "In August and September 2025, Toronto's University Health Network performed Canada's first Neuralink brain implant surgeries on two patients with cervical spinal cord injuries, marking the first such procedures outside the United States.",
+   "numbers": {
+    "claim": [
+     "2025"
+    ],
+    "inPassage": [
+     "2025"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why one brain implant carries up to 3,072 electrodes.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Each tiny wire holds 32 of them.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "They record neurons firing as you intend to move.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "In 2021, a monkey played Pong with one.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "In 2024, the first human received the implant.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "By 2025, patients with spinal injuries were getting them in Canada.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "It decodes movement signals, not private thoughts.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So brain chips restore control long before they read minds.",
+   "status": "HUMAN"
+  }
+ ]
+}

@@ -1,0 +1,150 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-EAR-086",
+ "checkedAt": "2026-11-03T17:53:34.409Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "5b1a5e2b0567d410",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "An earthquake at 8:32:11 am PDT on May 18, 1980, caused the entire weakened north face to slide away, a sector collapse which was the largest subaerial landslide in recorded history.",
+   "url": "https://en.wikipedia.org/wiki/1980_eruption_of_Mount_St._Helens",
+   "sourceTitle": "Wikipedia — 1980 eruption of Mount St. Helens",
+   "revision": 1382465278,
+   "passage": "An earthquake at 8:32:11 am PDT (UTC−7) on May 18, 1980, caused the entire weakened north face to slide away, a sector collapse which was the largest subaerial landslide in recorded history.",
+   "numbers": {
+    "claim": [
+     "8",
+     "32",
+     "11",
+     "18",
+     "1980"
+    ],
+    "inPassage": [
+     "8",
+     "32",
+     "11",
+     "18",
+     "1980"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "An eruption column rose 80,000 feet (24 km; 15 mi) into the atmosphere and deposited ash in 11 U.S. states.",
+   "url": "https://en.wikipedia.org/wiki/1980_eruption_of_Mount_St._Helens",
+   "sourceTitle": "Wikipedia — 1980 eruption of Mount St. Helens",
+   "revision": 1382465278,
+   "passage": "An eruption column rose 80,000 feet (24 km; 15 mi) into the atmosphere and deposited ash in 11 U.S. states and various Canadian provinces.",
+   "numbers": {
+    "claim": [
+     "80000",
+     "24",
+     "15",
+     "11"
+    ],
+    "inPassage": [
+     "80000",
+     "24",
+     "15",
+     "11"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "About 57 people were killed.",
+   "url": "https://en.wikipedia.org/wiki/1980_eruption_of_Mount_St._Helens",
+   "sourceTitle": "Wikipedia — 1980 eruption of Mount St. Helens",
+   "revision": 1382465278,
+   "passage": "About 57 people were killed, including innkeeper and World War I veteran Harry R.",
+   "numbers": {
+    "claim": [
+     "57"
+    ],
+    "inPassage": [
+     "57"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "A 16,000-foot-long (4.9 km) eastward-trending fracture system had also developed across the summit area.",
+   "url": "https://en.wikipedia.org/wiki/1980_eruption_of_Mount_St._Helens",
+   "sourceTitle": "Wikipedia — 1980 eruption of Mount St. Helens",
+   "revision": 1382465278,
+   "passage": "By this date, a 16,000-foot-long (4.9 km) eastward-trending fracture system had also developed across the summit area.",
+   "numbers": {
+    "claim": [
+     "16000",
+     "4.9"
+    ],
+    "inPassage": [
+     "16000",
+     "4.9"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why 1 landslide uncorked Mount St. Helens sideways.",
+   "status": "FAIL",
+   "missing": [
+    "1"
+   ]
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Its whole north face slid away on May 18, 1980.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "An earthquake set off the largest landslide in recorded history.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "The collapse uncorked the volcano sideways, not upward.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The ash column rose 24 kilometres high.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Ash fell across 11 U.S. states.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "About 57 people were killed.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the most dangerous eruptions don't always go straight up.",
+   "status": "HUMAN"
+  }
+ ]
+}

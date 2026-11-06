@@ -1,0 +1,141 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-OTH-025",
+ "checkedAt": "2026-11-03T17:53:42.932Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "469eca2314b57fb4",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "Relativity predicted that the clocks on GPS satellites, as observed by those on Earth, run 38 microseconds faster per day than those on the Earth.",
+   "url": "https://en.wikipedia.org/wiki/Global_Positioning_System",
+   "sourceTitle": "Wikipedia — Global Positioning System",
+   "revision": 1381199385,
+   "passage": "Special and general relativity predicted that the clocks on GPS satellites, as observed by those on Earth, run 38 microseconds faster per day than those on the Earth.",
+   "numbers": {
+    "claim": [
+     "38"
+    ],
+    "inPassage": [
+     "38"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "The prototype spacecraft was launched in 1978 and the full constellation of 24 satellites became operational in 1993.",
+   "url": "https://en.wikipedia.org/wiki/Global_Positioning_System",
+   "sourceTitle": "Wikipedia — Global Positioning System",
+   "revision": 1381199385,
+   "passage": "The prototype spacecraft was launched in 1978 and the ultimate constellation of 24 satellites became operational in 1993.",
+   "numbers": {
+    "claim": [
+     "1978",
+     "24",
+     "1993"
+    ],
+    "inPassage": [
+     "1978",
+     "24",
+     "1993"
+    ],
+    "missing": []
+   },
+   "support": 0.9,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "When Selective Availability was discontinued, GPS was accurate to about 5 meters (16 ft).",
+   "url": "https://en.wikipedia.org/wiki/Global_Positioning_System",
+   "sourceTitle": "Wikipedia — Global Positioning System",
+   "revision": 1381199385,
+   "passage": "When Selective Availability was discontinued, GPS was accurate to about 5 meters (16 ft).",
+   "numbers": {
+    "claim": [
+     "5",
+     "16"
+    ],
+    "inPassage": [
+     "5",
+     "16"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "As of March 2026, 21 GPS satellites broadcast L5 signals.",
+   "url": "https://en.wikipedia.org/wiki/Global_Positioning_System",
+   "sourceTitle": "Wikipedia — Global Positioning System",
+   "revision": 1381199385,
+   "passage": "As of March 2026, 21 GPS satellites broadcast L5 signals, which are considered pre-operational prior to the availability of all 24 satellites in 2027.",
+   "numbers": {
+    "claim": [
+     "2026",
+     "21",
+     "5"
+    ],
+    "inPassage": [
+     "2026",
+     "21",
+     "5"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "GPS clocks gain 38 microseconds a day from relativity.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Without correction, positions would drift quickly.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The system became fully operational in 1993.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It was designed around 24 satellites.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Civil accuracy reached about 5 metres.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "If it went dark, phones would lean on cell towers and Wi-Fi.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "But networks and markets that use GPS timing would feel it too.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So GPS isn't just maps. It's the world's shared clock.",
+   "status": "HUMAN"
+  }
+ ]
+}

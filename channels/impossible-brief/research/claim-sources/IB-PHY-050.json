@@ -1,0 +1,133 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-PHY-050",
+ "checkedAt": "2026-11-03T17:53:36.577Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "c43f14cdb8fe3d66",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "In 1998, Danish physicist Lene Vestergaard Hau led a team from Harvard University and the Rowland Institute for Science which realized much lower group velocities of light.",
+   "url": "https://en.wikipedia.org/wiki/Slow_light",
+   "sourceTitle": "Wikipedia — Slow light",
+   "revision": 1376631459,
+   "passage": "In 1998, Danish physicist Lene Vestergaard Hau led a combined team from Harvard University and the Rowland Institute for Science which realized much lower group velocities of light.",
+   "numbers": {
+    "claim": [
+     "1998"
+    ],
+    "inPassage": [
+     "1998"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "They succeeded in slowing a beam of light to about 17 meters per second.",
+   "url": "https://en.wikipedia.org/wiki/Slow_light",
+   "sourceTitle": "Wikipedia — Slow light",
+   "revision": 1376631459,
+   "passage": "They succeeded in slowing a beam of light to about 17 meters per second.",
+   "numbers": {
+    "claim": [
+     "17"
+    ],
+    "inPassage": [
+     "17"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "In 2004, researchers at UC Berkeley first demonstrated slow light in a semiconductor, with a group velocity 9.6 kilometers per second.",
+   "url": "https://en.wikipedia.org/wiki/Slow_light",
+   "sourceTitle": "Wikipedia — Slow light",
+   "revision": 1376631459,
+   "passage": "In 2004, researchers at UC Berkeley first demonstrated slow light in a semiconductor, with a group velocity 9.6 kilometers per second.",
+   "numbers": {
+    "claim": [
+     "2004",
+     "9.6"
+    ],
+    "inPassage": [
+     "2004",
+     "9.6"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "The faster the relative velocity, the greater the time dilation, with time slowing to a stop as one clock approaches the speed of light (299,792,458 m/s).",
+   "url": "https://en.wikipedia.org/wiki/Time_dilation",
+   "sourceTitle": "Wikipedia — Time dilation",
+   "revision": 1382761380,
+   "passage": "The faster the relative velocity, the greater the time dilation between them, with time slowing to a stop as one clock approaches the speed of light (299,792,458 m/s).",
+   "numbers": {
+    "claim": [
+     "299792458"
+    ],
+    "inPassage": [
+     "299792458"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Light was once slowed to 17 metres per second.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "That's slower than traffic on a highway.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Lene Hau's team did it in 1998 using ultracold atoms.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "In a vacuum, light moves at 299,792,458 metres per second.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "In 2004, a semiconductor slowed light to 9.6 kilometres per second.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The light isn't tired. It's delayed by how it interacts with matter.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Slow light could one day help store signals in optical chips.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So light's famous speed limit is only its top speed.",
+   "status": "HUMAN"
+  }
+ ]
+}

@@ -1,0 +1,130 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-EXT-041",
+ "checkedAt": "2026-11-03T17:53:41.351Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "162334fc1b75e8de",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "UY Scuti is a red supergiant or hypergiant star, located 5,900 light-years away in the constellation Scutum.",
+   "url": "https://en.wikipedia.org/wiki/UY_Scuti",
+   "sourceTitle": "Wikipedia — UY Scuti",
+   "revision": 1381213749,
+   "passage": "UY Scuti (BD-12°5055) is a red supergiant or hypergiant star, located 5,900 light-years away in the constellation Scutum.",
+   "numbers": {
+    "claim": [
+     "5900"
+    ],
+    "inPassage": [
+     "5900"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "They determined that all three stars are over 1,000 times bigger than the Sun and over 100,000 times more luminous than the Sun.",
+   "url": "https://en.wikipedia.org/wiki/UY_Scuti",
+   "sourceTitle": "Wikipedia — UY Scuti",
+   "revision": 1381213749,
+   "passage": "They determined that all three stars are over 1,000 times bigger than the Sun and over 100,000 times more luminous than the Sun.",
+   "numbers": {
+    "claim": [
+     "1000",
+     "100000"
+    ],
+    "inPassage": [
+     "1000",
+     "100000"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "The analysis was based on an old radius of 1,708 R☉.",
+   "url": "https://en.wikipedia.org/wiki/UY_Scuti",
+   "sourceTitle": "Wikipedia — UY Scuti",
+   "revision": 1381213749,
+   "passage": "Based on an old radius of 1,708 R☉, this pulsation would be an overtone of the fundamental pulsation period, or it may be a fundamental mode corresponding to a smaller radius.",
+   "numbers": {
+    "claim": [
+     "1708"
+    ],
+    "inPassage": [
+     "1708"
+    ],
+    "missing": []
+   },
+   "support": 0.67,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "Potentially larger radius estimates have already been published for other supergiant stars, such as VX Sagittarii, NML Cygni, MY Cephei, and Stephenson 2 DFK 1.",
+   "url": "https://en.wikipedia.org/wiki/UY_Scuti",
+   "sourceTitle": "Wikipedia — UY Scuti",
+   "revision": 1381213749,
+   "passage": "However, potentially larger radius estimates have already been implied and published for other supergiant stars, such as VX Sagittarii, NML Cygni, MY Cephei, and Stephenson 2 DFK 1.",
+   "numbers": {
+    "claim": [
+     "2",
+     "1"
+    ],
+    "inPassage": [
+     "2",
+     "1"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why one star dwarfs the Sun 1,000 times over.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "UY Scuti is a red supergiant, 5,900 light-years away.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It shines over 100,000 times brighter than the Sun.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "An older estimate put its radius at 1,708 Suns.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "SPECULATIVE SCENARIO",
+   "text": "Put it in our Sun's place, and the inner planets would be inside it.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Its outer layers are so thin, they're nearly vacuum.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the biggest stars are giants in size, not in density.",
+   "status": "HUMAN"
+  }
+ ]
+}

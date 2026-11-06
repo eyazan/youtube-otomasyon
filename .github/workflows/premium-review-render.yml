@@ -63,7 +63,7 @@ jobs:
             D="$RUNNER_TEMP/review/$T"
             echo "### $T" | tee -a "$GITHUB_STEP_SUMMARY"
             node scripts/bto-studio/studio.js --channel "$CHANNEL" --topic "$T" --shadow --shadow-dir "$D" --regenerate --quality final --voice edge 2>&1 | tail -25 || echo "render failed: $T" | tee -a "$GITHUB_STEP_SUMMARY"
-            MP4=$(find "$D/out" -maxdepth 1 -name "*.mp4" | head -1)
+            MP4=$(find "$D/out" -maxdepth 1 -name "*.mp4" 2>/dev/null | head -1 || true)
             [ -n "$MP4" ] || { echo "no MP4 for $T" | tee -a "$GITHUB_STEP_SUMMARY"; continue; }
             O="review-out/$T"; mkdir -p "$O/frames"
             (cd "$(dirname "$MP4")" && sha256sum "$(basename "$MP4")") | tee "$O/mp4.sha256" | tee -a "$GITHUB_STEP_SUMMARY"
@@ -73,6 +73,11 @@ jobs:
             ffmpeg -hide_banner -loglevel error -i "$MP4" -t 2 -vf "fps=6,scale=270:-2,tile=6x2" -frames:v 1 "$O/first-2s.jpg"
             grep -E "^\| (s[0-9]|Scene)" "$D/out/qa-report.md" | head -14 | tee -a "$GITHUB_STEP_SUMMARY" || true
             grep -E "Objective verdict|WARN|FAIL" "$D/out/qa-report.md" | head -8 | tee -a "$GITHUB_STEP_SUMMARY" || true
+            # creative verdict, separate from the objective QA above (a technical PASS is never a creative approval)
+            echo "#### Creative Director ($T)" | tee -a "$GITHUB_STEP_SUMMARY"
+            node scripts/bto-studio/creative-director.js review --out "$D/out" > "$O/creative-director.txt" 2>&1 || true
+            cp "$D/out"/creative-*.json "$D/out"/creative-*.md "$O/" 2>/dev/null || true
+            tail -16 "$O/creative-director.txt" | tee -a "$GITHUB_STEP_SUMMARY"
           done
       - uses: actions/upload-artifact@v4
         if: always()

@@ -298,6 +298,15 @@ function dedupe(list, threshold) {
   return kept;
 }
 
+// the hook-count minimum; with a channel's approved hookCandidateGate (core/growth/config.js) it also asks for distinct
+// families and strong candidates, counted over unblocked candidates only
+function meetsGate(scored, config) {
+  const g = config.hooks.gate;
+  if (!g) return scored.length >= config.hooks.minimumCandidates;
+  const valid = scored.filter((h) => !h.blocked);
+  return valid.length >= g.minimumCandidates && new Set(valid.map((h) => h.family)).size >= g.minimumFamilies && valid.filter((h) => (h.adjustedTotal ?? h.total) >= g.strongScore).length >= g.minimumStrong;
+}
+
 function generate(topic, config, options = {}) {
   const templated = options.templatedFields || [];
   const raw = build(topic, config);
@@ -327,11 +336,11 @@ function generate(topic, config, options = {}) {
     candidates: scored,
     candidateCount: scored.length,
     familyCount: families.size,
-    meetsMinimum: scored.length >= config.hooks.minimumCandidates,
+    meetsMinimum: meetsGate(scored, config),
     selected,
     selectedScore: selected ? selected.adjustedTotal : 0,
     passes: !!selected && selected.adjustedTotal >= config.hooks.minimumScore,
   };
 }
 
-module.exports = { FAMILIES, FORBIDDEN, DATE_OPENING, TENSION, MALFORMED_ENGLISH, languageProblems, build, score, generate, dedupe, compress, sentenceCase, wordCount };
+module.exports = { meetsGate, FAMILIES, FORBIDDEN, DATE_OPENING, TENSION, MALFORMED_ENGLISH, languageProblems, build, score, generate, dedupe, compress, sentenceCase, wordCount };

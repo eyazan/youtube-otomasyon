@@ -1,0 +1,139 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-SPA-101",
+ "checkedAt": "2026-11-03T17:53:27.855Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "8b40f38dce1a0a71",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "The host star is the closest star to the Sun, at a distance of about 4.2 light-years (1.3 parsecs) from Earth, and is part of the larger triple star system Alpha Centauri.",
+   "url": "https://en.wikipedia.org/wiki/Proxima_Centauri_b",
+   "sourceTitle": "Wikipedia — Proxima Centauri b",
+   "revision": 1381618913,
+   "passage": "The host star is the closest star to the Sun, at a distance of about 4.2 light-years (1.3 parsecs) from Earth, and is part of the larger triple star system Alpha Centauri.",
+   "numbers": {
+    "claim": [
+     "4.2",
+     "1.3"
+    ],
+    "inPassage": [
+     "4.2",
+     "1.3"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "It orbits Proxima Centauri every 11.185 Earth days at a distance of about 0.048 AU, over 20 times closer to Proxima Centauri than Earth is to the Sun.",
+   "url": "https://en.wikipedia.org/wiki/Proxima_Centauri_b",
+   "sourceTitle": "Wikipedia — Proxima Centauri b",
+   "revision": 1381618913,
+   "passage": "It orbits Proxima Centauri every 11.185 Earth days at a distance of about 0.048 AU, over 20 times closer to Proxima Centauri than Earth is to the Sun.",
+   "numbers": {
+    "claim": [
+     "11.185",
+     "0.048",
+     "20"
+    ],
+    "inPassage": [
+     "11.185",
+     "0.048",
+     "20"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "It is probably a terrestrial planet with a minimum mass of 1.06 M🜨 and a slightly larger radius than that of Earth.",
+   "url": "https://en.wikipedia.org/wiki/Proxima_Centauri_b",
+   "sourceTitle": "Wikipedia — Proxima Centauri b",
+   "revision": 1381618913,
+   "passage": "Its other properties are only poorly understood, but it is probably a terrestrial planet with a minimum mass of 1.06 M🜨 and a slightly larger radius than that of Earth.",
+   "numbers": {
+    "claim": [
+     "1.06"
+    ],
+    "inPassage": [
+     "1.06"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "About 20–40% of all red dwarfs have one planet in the habitable zone.",
+   "url": "https://en.wikipedia.org/wiki/Proxima_Centauri_b",
+   "sourceTitle": "Wikipedia — Proxima Centauri b",
+   "revision": 1381618913,
+   "passage": "Planets are common around dwarf stars, with on average 1–2 planets per star, and about 20–40% of all red dwarfs have one in the habitable zone.",
+   "numbers": {
+    "claim": [
+     "20",
+     "40"
+    ],
+    "inPassage": [
+     "20",
+     "40"
+    ],
+    "missing": []
+   },
+   "support": 0.75,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why a year on Proxima b lasts 11 days.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It hugs a dim red dwarf, 4.2 light-years away.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It orbits over 20 times closer than Earth does to the Sun.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It's at least 1.06 times Earth's mass.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Its red sun would look larger but far dimmer than ours.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Whether it keeps air and water is still unknown.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Up to 40% of red dwarfs may host planets like it.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the nearest new world is close, and still a mystery.",
+   "status": "HUMAN"
+  }
+ ]
+}

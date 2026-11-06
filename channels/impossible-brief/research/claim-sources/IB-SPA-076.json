@@ -1,0 +1,159 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-SPA-076",
+ "checkedAt": "2026-11-03T17:53:26.440Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "f00b1e03b6f8d18d",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "One solar day (sunrise to sunrise) on Mercury lasts for around 176 Earth days, or twice Mercury's sidereal year.",
+   "url": "https://en.wikipedia.org/wiki/Mercury_(planet)",
+   "sourceTitle": "Wikipedia — Mercury (planet)",
+   "revision": 1383556879,
+   "passage": "Due to Mercury's 3:2 spin-orbit resonance, a solar day lasts about 176 Earth days.",
+   "numbers": {
+    "claim": [
+     "176"
+    ],
+    "inPassage": [
+     "176"
+    ],
+    "missing": []
+   },
+   "support": 0.5,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "Mercury's sidereal year (88.0 Earth days) and sidereal day (58.65 Earth days) are in a 3:2 ratio, in a spin–orbit resonance.",
+   "url": "https://en.wikipedia.org/wiki/Mercury_(planet)",
+   "sourceTitle": "Wikipedia — Mercury (planet)",
+   "revision": 1383556879,
+   "passage": "Mercury's sidereal year (88.0 Earth days) and sidereal day (58.65 Earth days) are in a 3:2 ratio, in a spin–orbit resonance.",
+   "numbers": {
+    "claim": [
+     "88.0",
+     "58.65",
+     "3",
+     "2"
+    ],
+    "inPassage": [
+     "88.0",
+     "58.65",
+     "3",
+     "2"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "At perihelion, the equatorial subsolar point climbs to a temperature of about 700 K.",
+   "url": "https://en.wikipedia.org/wiki/Mercury_(planet)",
+   "sourceTitle": "Wikipedia — Mercury (planet)",
+   "revision": 1383556879,
+   "passage": "At perihelion, the equatorial subsolar point is located at longitude 0°W or 180°W, and it climbs to a temperature of about 700 K.",
+   "numbers": {
+    "claim": [
+     "700"
+    ],
+    "inPassage": [
+     "700"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "On the dark side of the planet, temperatures average 110 K (−163 °C).",
+   "url": "https://en.wikipedia.org/wiki/Mercury_(planet)",
+   "sourceTitle": "Wikipedia — Mercury (planet)",
+   "revision": 1383556879,
+   "passage": "On the dark side of the planet, temperatures average 110 K, 110 K (−163 °C).",
+   "numbers": {
+    "claim": [
+     "110",
+     "163"
+    ],
+    "inPassage": [
+     "110",
+     "163"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F5",
+   "claim": "The floors of deep craters at the poles are never exposed to direct sunlight, and temperatures there remain below 102 K.",
+   "url": "https://en.wikipedia.org/wiki/Mercury_(planet)",
+   "sourceTitle": "Wikipedia — Mercury (planet)",
+   "revision": 1383556879,
+   "passage": "The floors of deep craters at the poles are never exposed to direct sunlight, and temperatures there remain below 102 K, far lower than the global average.",
+   "numbers": {
+    "claim": [
+     "102"
+    ],
+    "inPassage": [
+     "102"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why one Mercury day lasts 176 Earth days.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "That's twice as long as its 88-day year.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It spins slowly, locked in a 3:2 dance with its orbit.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "At noon, the surface can reach about 700 kelvin.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The night side averages −163 °C.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Polar craters never see sunlight at all.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "With no atmosphere, nothing evens the heat out.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the closest planet to the Sun still has frozen corners.",
+   "status": "HUMAN"
+  }
+ ]
+}

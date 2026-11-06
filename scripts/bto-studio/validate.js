@@ -18,7 +18,7 @@ const { validate: schemaValidate } = require("../fr-premium/engine/jsonschema");
 const SCHEMA = JSON.parse(fs.readFileSync(path.join(__dirname, "schemas/storyboard.schema.json"), "utf8"));
 const COMPONENT_SRC = ["page/motion.js", ...fs.readdirSync(path.join(__dirname, "page/components")).map((f) => "page/components/" + f)].map((f) => fs.readFileSync(path.join(__dirname, f), "utf8")).join("\n");
 const COMPONENTS = new Set([...COMPONENT_SRC.matchAll(/BTO\.def\("([a-z0-9-]+)"/g)].map((m) => m[1]));
-const CONCEPTUAL = new Set(["print-surface", "search-window"]);
+const CONCEPTUAL = new Set(["print-surface", "search-window", "ground-frame"]);
 const norm = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, "");
 const digits = (s) => (String(s).match(/\d+/g) || []);
 
@@ -46,6 +46,8 @@ function screenTexts(layer) {
   if (layer.component === "depth-probe") { (p.markers || []).forEach((m) => out.push({ text: m.label, kind: "label", size: m.size || 40 })); (p.readouts || []).forEach((r) => out.push({ text: r.text, kind: "type", size: r.size || 78 })); if (p.surface) out.push({ text: p.surface, kind: "label", size: 40 }); }
   if (layer.component === "planet") { (p.labels || []).forEach((l) => out.push({ text: l.text, kind: "label", size: l.size || 40 })); ((p.cutaway || {}).layers || []).forEach((l) => l.label && out.push({ text: l.label, kind: "label", size: l.size || 40 })); if (p.probe && p.probe.label) out.push({ text: p.probe.label, kind: "label", size: p.probe.size || 40 }); }
   if (layer.component === "event-ticks") { if (p.startLabel) out.push({ text: p.startLabel, kind: "label", size: 40 }); if (p.endLabel) out.push({ text: p.endLabel, kind: "label", size: 40 }); out.push({ text: String(p.count), kind: "count" }); }
+  if (layer.component === "globe") { (p.parallels || []).forEach((l) => l.label && out.push({ text: l.label, kind: "label", size: l.size || 40 })); Object.values((p.speeds || {}).labels || {}).forEach((x) => out.push({ text: x, kind: "label", size: (p.speeds || {}).labelSize || 40 })); (p.markers || []).forEach((m) => m.label && out.push({ text: m.label, kind: "label", size: m.size || 40 })); if ((p.atmosphere || {}).label) out.push({ text: p.atmosphere.label, kind: "label", size: 40 }); }
+  if (layer.component === "ground-frame") ["velocity", "gravity", "groundTag"].forEach((k) => p[k] && p[k].label && out.push({ text: p[k].label, kind: "label", size: 40 }));
   if (layer.component === "failure-chain") (p.steps || []).forEach((st) => out.push({ text: st, kind: "label", size: 44 }));
   if (layer.component === "run-length-strip") { if (p.labelsAt != null) out.push({ text: (p.labels || p.runs || []).join(":"), kind: "ratio" }); if (p.caption) out.push({ text: p.caption, kind: "label" }); }
   return out;
@@ -81,7 +83,8 @@ function validateStoryboard(sb, { script, timeline, style, pilot = false, policy
       if (!COMPONENTS.has(L.component)) errors.push(`${s.id}: unknown component ${L.component} (known: ${[...COMPONENTS].join(", ")})`);
       if (CONCEPTUAL.has(L.component) && !(L.props || {}).context && !(s.conceptual && (s.chips || []).includes("conceptualLabel"))) errors.push(`${s.id}: ${L.component} is a conceptual depiction; mark the scene conceptual and show the conceptualLabel chip`);
       for (const tx of screenTexts(L)) {
-        for (const d of digits(tx.text)) if (!new RegExp(`(^|\\D)${d}(\\D|$)`).test(citedText)) errors.push(`${s.id}: on-screen number "${d}" (${tx.kind}: "${tx.text}") is not in the facts this scene cites (${s.evidence.join(", ")})`);
+        // a credit line is attribution (source title, revision id), not a claim: its digits are not facts to evidence
+        if (tx.kind !== "credit") for (const d of digits(tx.text)) if (!new RegExp(`(^|\\D)${d}(\\D|$)`).test(citedText)) errors.push(`${s.id}: on-screen number "${d}" (${tx.kind}: "${tx.text}") is not in the facts this scene cites (${s.evidence.join(", ")})`);
         if (tx.kind === "quote") { const f = facts.get(tx.quoteOf); const body = tx.text.replace(/…/g, " ").replace(/\s+/g, " ").trim();
           if (!f) errors.push(`${s.id}: quote-card needs quoteOf naming a cited fact`); else if (!s.evidence.includes(tx.quoteOf)) errors.push(`${s.id}: quote-card quotes ${tx.quoteOf}, which the scene does not cite`);
           else if (!norm(f.quote).includes(norm(body))) errors.push(`${s.id}: quote-card text is not verbatim from ${tx.quoteOf}: "${body}"`); }

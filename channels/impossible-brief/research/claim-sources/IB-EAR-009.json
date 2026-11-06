@@ -1,0 +1,152 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-EAR-009",
+ "checkedAt": "2026-11-03T17:53:31.814Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "5b99bb521b3c29cc",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "It is Earth's most severe known extinction event, with the extinction of 57% of biological families, 62% of genera, 81% of marine species, and 70% of terrestrial vertebrate species.",
+   "url": "https://en.wikipedia.org/wiki/Permian–Triassic_extinction_event",
+   "sourceTitle": "Wikipedia — Permian–Triassic extinction event",
+   "revision": 1383228954,
+   "passage": "It is Earth's most severe known extinction event, with the extinction of 57% of biological families, 62% of genera, 81% of marine species,  and 70% of terrestrial vertebrate species.",
+   "numbers": {
+    "claim": [
+     "57",
+     "62",
+     "81",
+     "70"
+    ],
+    "inPassage": [
+     "57",
+     "62",
+     "81",
+     "70"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "The extinction occurred between 251.941 ± 0.037 and 251.880 ± 0.031 million years ago, a duration of 60 ± 48 thousand years.",
+   "url": "https://en.wikipedia.org/wiki/Permian–Triassic_extinction_event",
+   "sourceTitle": "Wikipedia — Permian–Triassic extinction event",
+   "revision": 1383228954,
+   "passage": "The extinction occurred between 251.941 ± 0.037 and 251.880 ± 0.031 million years ago, a duration of 60 ± 48 thousand years.",
+   "numbers": {
+    "claim": [
+     "251.941",
+     "0.037",
+     "251.880",
+     "0.031",
+     "60",
+     "48"
+    ],
+    "inPassage": [
+     "251.941",
+     "0.037",
+     "251.880",
+     "0.031",
+     "60",
+     "48"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "The negative carbon isotope excursion lasted for approximately 500,000 years.",
+   "url": "https://en.wikipedia.org/wiki/Permian–Triassic_extinction_event",
+   "sourceTitle": "Wikipedia — Permian–Triassic extinction event",
+   "revision": 1383228954,
+   "passage": "The negative carbon isotope excursion's magnitude was 4–7% and lasted for approximately 500,000 years, though estimating its exact value is challenging due to diagenetic alteration of many sedimentary facies spanning the boundary.",
+   "numbers": {
+    "claim": [
+     "500000"
+    ],
+    "inPassage": [
+     "500000"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "The decline of animal life is concentrated over approximately 10,000 to 60,000 years, with plants taking an additional several hundred thousand years to show the full impact.",
+   "url": "https://en.wikipedia.org/wiki/Permian–Triassic_extinction_event",
+   "sourceTitle": "Wikipedia — Permian–Triassic extinction event",
+   "revision": 1383228954,
+   "passage": "In this sequence, the decline of animal life is concentrated over approximately 10,000 to 60,000 years, with plants taking an additional several hundred thousand years to show the full impact of the event.",
+   "numbers": {
+    "claim": [
+     "10000",
+     "60000"
+    ],
+    "inPassage": [
+     "10000",
+     "60000"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why 81% of marine species vanished at once.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It happened about 251.9 million years ago.",
+   "status": "FAIL",
+   "missing": [
+    "251.9"
+   ]
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "70% of land vertebrate species died too.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The main extinction took about 60,000 years.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Carbon chemistry stayed disturbed for about 500,000 years.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Recovery took far longer than the collapse.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Life survived, but in a very different form.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the worst extinction was slow, and still catastrophic.",
+   "status": "HUMAN"
+  }
+ ]
+}

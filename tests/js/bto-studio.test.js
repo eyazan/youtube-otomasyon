@@ -370,3 +370,17 @@ test("captions: a short fast cue stays up into the following pause until it read
   assert.equal(b.end, c.start, "a cue with no pause after it ends where the next begins");
   assert.equal(c.end, 2.5 + 0.4, "the last cue keeps its end");
 });
+
+test("primary-source facts (P1..) are citable evidence; a credit line's revision id is attribution, not a claim (BTO-156)", () => {
+  const Adapter = require("../../scripts/bto-studio/adapter"); const V = require("../../scripts/bto-studio/validate");
+  const Gen = require("../../scripts/bto-studio/auto/behind-the-ordinary");
+  const st = require("../../channels/behind-the-ordinary/premium/style-pack.json"); const prof = require("../../scripts/bto-studio/profiles/behind-the-ordinary.json");
+  const { channel, topic } = Adapter.loadTopic("behind-the-ordinary", "BTO-156"); const script = Adapter.studioScript(channel, topic);
+  const sb = Gen.build(script, st, topic);
+  let t = 0; const words = [], lines = []; for (const l of script.lines) { const s = t; for (const w of l.text.split(/\s+/)) { words.push({ line: l.id, text: w, start: t, end: t + 0.3 }); t += 0.38; } lines.push({ id: l.id, start: s, end: t }); t += 0.25; }
+  const v = V.validateStoryboard(sb, { script, timeline: { duration: t, words, lines }, style: st, policy: prof.evidencePolicy.validator });
+  assert.deepEqual(v.errors, []);
+  assert.ok(sb.scenes.some((s) => s.evidence.some((id) => /^P\d+$/.test(id))), "a primary-source fact is cited");
+  // an unknown id is still refused by the validator
+  sb.scenes[1].evidence = ["P99"]; assert.ok(V.validateStoryboard(sb, { script, timeline: { duration: t, words, lines }, style: st, policy: prof.evidencePolicy.validator }).errors.some((e) => /unknown fact P99/.test(e)));
+});
