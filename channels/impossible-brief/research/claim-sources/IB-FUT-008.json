@@ -1,0 +1,167 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-FUT-008",
+ "checkedAt": "2026-11-03T18:27:18.263Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "33fb476afd7490be",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "The greatest tension on a space elevator cable is at the point of geostationary orbit, 35,786 km (22,236 mi) above the Earth's equator.",
+   "url": "https://en.wikipedia.org/wiki/Space_elevator",
+   "sourceTitle": "Wikipedia — Space elevator",
+   "revision": 1381664825,
+   "passage": "The greatest tension on a space elevator cable is at the point of geostationary orbit, 35,786 km (22,236 mi) above the Earth's equator.",
+   "numbers": {
+    "claim": [
+     "35786",
+     "22236"
+    ],
+    "inPassage": [
+     "35786",
+     "22236"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "Metals like titanium, steel or aluminium alloys have breaking lengths of only 20–30 km (0.2–0.3 MPa/(kg/m3)).",
+   "url": "https://en.wikipedia.org/wiki/Space_elevator",
+   "sourceTitle": "Wikipedia — Space elevator",
+   "revision": 1381664825,
+   "passage": "For comparison, metals like titanium, steel or aluminium alloys have breaking lengths of only 20–30 km (0.2–0.3 MPa/(kg/m3)).",
+   "numbers": {
+    "claim": [
+     "20",
+     "30",
+     "0.2",
+     "0.3",
+     "3"
+    ],
+    "inPassage": [
+     "20",
+     "30",
+     "0.2",
+     "0.3",
+     "3"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "A functional Earth space elevator would require a tether of 30–80 megaYuri (corresponding to 3100–8200 km of breaking length).",
+   "url": "https://en.wikipedia.org/wiki/Space_elevator",
+   "sourceTitle": "Wikipedia — Space elevator",
+   "revision": 1381664825,
+   "passage": "A functional Earth space elevator would require a tether of 30–80 megaYuri (corresponding to 3100–8200 km of breaking length).",
+   "numbers": {
+    "claim": [
+     "30",
+     "80",
+     "3100",
+     "8200"
+    ],
+    "inPassage": [
+     "30",
+     "80",
+     "3100",
+     "8200"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "In 2014, Google X found that no one had yet manufactured a perfectly formed carbon nanotube strand longer than a meter.",
+   "url": "https://en.wikipedia.org/wiki/Space_elevator",
+   "sourceTitle": "Wikipedia — Space elevator",
+   "revision": 1381664825,
+   "passage": "In 2014, Google X's Rapid Evaluation R&D team began designing a Space Elevator, eventually finding that no one had yet manufactured a perfectly formed carbon nanotube strand longer than a meter.",
+   "numbers": {
+    "claim": [
+     "2014"
+    ],
+    "inPassage": [
+     "2014"
+    ],
+    "missing": []
+   },
+   "support": 0.91,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F5",
+   "claim": "The design's passenger climber would be able to reach the level of geosynchronous equatorial orbit (GEO) after an 8-day trip.",
+   "url": "https://en.wikipedia.org/wiki/Space_elevator",
+   "sourceTitle": "Wikipedia — Space elevator",
+   "revision": 1381664825,
+   "passage": "The design's passenger climber would be able to reach the level of geosynchronous equatorial orbit (GEO) after an 8-day trip.",
+   "numbers": {
+    "claim": [
+     "8"
+    ],
+    "inPassage": [
+     "8"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "A space elevator cable must stretch past 35,786 kilometres.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "No material we can make is strong enough.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Steel can hang only 20 to 30 kilometres before snapping.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "An Earth elevator needs 3,100 to 8,200 kilometres of breaking length.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Carbon nanotubes could work, in theory.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "But no one has made a perfect strand longer than a meter.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Even then, a climber would take about 8 days to reach orbit.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the elevator waits on chemistry, not rocket science.",
+   "status": "HUMAN"
+  }
+ ]
+}

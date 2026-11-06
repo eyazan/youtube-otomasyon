@@ -1,0 +1,160 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-PHY-005",
+ "checkedAt": "2026-11-03T18:27:16.368Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "552fddf7186ec92e",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "The Kelvin scale is defined so that absolute zero is 0 K, equivalent to −273.15 °C on the Celsius scale, and −459.67 °F on the Fahrenheit scale.",
+   "url": "https://en.wikipedia.org/wiki/Absolute_zero",
+   "sourceTitle": "Wikipedia — Absolute zero",
+   "revision": 1383384153,
+   "passage": "The Kelvin scale is defined so that absolute zero is 0 Kelvin, equivalent to −273.15 °C on the Celsius scale, and −459.67 °F on the Fahrenheit scale.",
+   "numbers": {
+    "claim": [
+     "0",
+     "273.15",
+     "459.67"
+    ],
+    "inPassage": [
+     "0",
+     "273.15",
+     "459.67"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "The current world record for effective temperatures was set in 2021 at 38 picokelvin through matter-wave lensing of rubidium Bose–Einstein condensates.",
+   "url": "https://en.wikipedia.org/wiki/Absolute_zero",
+   "sourceTitle": "Wikipedia — Absolute zero",
+   "revision": 1383384153,
+   "passage": "The current world record for effective temperatures was set in 2021 at 38 picokelvin through matter-wave lensing of rubidium Bose–Einstein condensates.",
+   "numbers": {
+    "claim": [
+     "2021",
+     "38"
+    ],
+    "inPassage": [
+     "2021",
+     "38"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "In 2018, scientists at the University of Bremen achieved temperatures as low as 38 picokelvin (pK), 38 trillionths of a degree above absolute zero.",
+   "url": "https://en.wikipedia.org/wiki/Absolute_zero",
+   "sourceTitle": "Wikipedia — Absolute zero",
+   "revision": 1383384153,
+   "passage": "In 2018, scientists at the University of Bremen achieved temperatures as low as 38 picokelvin (pK), 38 trillionths of a degree above absolute zero.",
+   "numbers": {
+    "claim": [
+     "2018",
+     "38"
+    ],
+    "inPassage": [
+     "2018",
+     "38"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "0 kelvins is defined as the point at which pressure or volume would vanish in an ideal gas.",
+   "url": "https://en.wikipedia.org/wiki/Absolute_zero",
+   "sourceTitle": "Wikipedia — Absolute zero",
+   "revision": 1383384153,
+   "passage": "To resolve this, the concept of absolute temperature is introduced, with 0 kelvins defined as the point at which pressure or volume would vanish in an ideal gas.",
+   "numbers": {
+    "claim": [
+     "0"
+    ],
+    "inPassage": [
+     "0"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F5",
+   "claim": "By 1845, Michael Faraday had reached a new record for lowest temperatures by reaching −130 °C (−202 °F; 143 K).",
+   "url": "https://en.wikipedia.org/wiki/Absolute_zero",
+   "sourceTitle": "Wikipedia — Absolute zero",
+   "revision": 1383384153,
+   "passage": "By 1845, Michael Faraday had managed to liquefy most gases then known to exist, and reached a new record for lowest temperatures by reaching −130 °C (−202 °F; 143 K).",
+   "numbers": {
+    "claim": [
+     "1845",
+     "130",
+     "202",
+     "143"
+    ],
+    "inPassage": [
+     "1845",
+     "130",
+     "202",
+     "143"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Nothing has ever reached −273.15 °C: absolute zero.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The record is 38 trillionths of a degree above.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It's where an ideal gas's pressure would fall to zero.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Physics lets you approach it, but never arrive.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Even there, particles would keep a minimum jiggle, called zero-point motion.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Near it, helium flows without friction and climbs container walls.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So absolute zero isn't stillness. It's a limit you chase forever.",
+   "status": "HUMAN"
+  }
+ ]
+}

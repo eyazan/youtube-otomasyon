@@ -1,0 +1,48 @@
+name: ImpossibleBrief claim-source ledgers (branches only)
+
+# Writes the claim-source ledgers (core/research/claim-sources.js) for the named topics with the same check as the
+# read-only claim check (scripts/ib-research/claim-check.js --ledger): one record per fact with its source page, the
+# verbatim passage at the pinned revision, the claim's numbers found in it and VERIFIED / UNVERIFIED. It commits only
+# channels/impossible-brief/research/claim-sources/ to the branch it runs on and refuses main, so ledgers reach main
+# through a reviewed PR. No secrets, nothing rendered or uploaded.
+# A workflow file only becomes dispatchable once it is on main, so a branch asks for ledgers by pushing
+# channels/impossible-brief/research/claim-sources/REQUEST.txt (one topic id per line).
+on:
+  push:
+    branches-ignore: [main]
+    paths: ['channels/impossible-brief/research/claim-sources/REQUEST.txt']
+  workflow_dispatch:
+    inputs:
+      topics: { description: "space-separated IB topic ids", required: true }
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ib-claim-ledger-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  ledger:
+    if: ${{ github.ref_name != 'main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci --no-audit --no-fund
+      - name: Claim check with ledgers
+        env:
+          TOPICS: ${{ inputs.topics }}
+        run: |
+          set -o pipefail
+          [ -n "$TOPICS" ] || TOPICS=$(grep -oE 'IB-[A-Z]+-[0-9]+' channels/impossible-brief/research/claim-sources/REQUEST.txt | tr '\n' ' ')
+          # shellcheck disable=SC2086  # TOPICS is a space-separated list of ids
+          node scripts/ib-research/claim-check.js $TOPICS --ledger | tee -a "$GITHUB_STEP_SUMMARY" || true
+      - name: Commit the ledgers to this branch
+        run: |
+          git config user.name "ib-claim-ledger-bot"; git config user.email "actions@users.noreply.github.com"
+          git add channels/impossible-brief/research/claim-sources
+          if ! git diff --cached --quiet; then git commit -q -m "research(ib): claim-source ledgers (run ${{ github.run_id }})"; git push -q origin "HEAD:${{ github.ref_name }}"; fi

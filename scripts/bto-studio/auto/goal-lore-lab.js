@@ -49,6 +49,7 @@ function eventPitch(kind, i, t0, { variant = null, view = "hook" } = {}) {
     // a solo run through five defenders from midfield to the box, then the finish; the ball stays at the runner's feet
     const wp = [[0, -3, -4], [0.75, 2, -14], [1.5, -4, -24], [2.25, 3, -33], [3.0, 1, -42]];
     const att = { id: "att", team: "home", pathKeys: wp.map(([d, x, y]) => [at(d), x, y]) };
+    const defsAt = [0.4, 1.1, 1.9, 2.6, 2.9];
     const defs = [[0.4, 0, -10], [1.1, -1, -19], [1.9, 1.5, -28], [2.6, -2, -37], [2.9, 4, -40]].map(([d, x, y], k) => ({ id: `d${k}`, team: "away",
       pathKeys: [[at(0), x, y], [at(d), x, y], [at(d + 0.5), x + (k % 2 ? 1.8 : -1.8), y - 1.5]] }));
     // the camera rides with the runner, close enough that the defenders he passes read as players (#364 review: 26 px/m
@@ -56,7 +57,9 @@ function eventPitch(kind, i, t0, { variant = null, view = "hook" } = {}) {
     return { layers: [pitch({ id, x: 540, y: 980, rx: hi ? 56 : 64, rz: hi ? 0 : -6, D: 3800, pxPerMetre: hi ? 34 : 44,
       focusKeys: wp.map(([d, x, y]) => [at(d), x * 0.8, y - 3]), players: [att, ...defs, KEEPER_C],
       ball: wp.slice(1).map(([d], k) => ({ at: at(wp[k][0]), dur: d - wp[k][0], src: "att", dst: "att" })), ballOutAt: at(3.0),
-      kicks: [{ x0: 1, y0: -42, speed: 22, elevation: 5, azimuth: -3, spinRps: 0, at: at(3.0), timeScale: 1, hideBefore: true }] })],
+      kicks: [{ x0: 1, y0: -42, speed: 22, elevation: 5, azimuth: -3, spinRps: 0, at: at(3.0), timeScale: 1, hideBefore: true }] }),
+      // each defender is struck off a row of five tokens as the runner goes past him, so "past five" is countable (#409 review)
+      { component: "tally-tokens", screen: true, props: { x: 540, y: 380, size: 24, enterAt: at(0), beatKeys: defsAt.map((d) => [at(d + 0.25)]) } }],
       purpose: "Solo run: a generic forward token carries the ball from midfield past five defender tokens, the ball at his feet, then finishes; the run's line is left on the pitch (illustrative positions)." };
   }
   if (kind === "hand") {
@@ -122,7 +125,10 @@ function build(script, style, topic) {
     const evKind = lineEvent && lineEvent !== "shot" ? lineEvent : null;
     if (first || last) {
       kind = first ? "hook" : "payoff"; model = true;
-      const ev = eventPitch(primary, i, off(start, first ? 0.05 : 0.1), { variant: primary === "penalty" ? (chipTopic ? "chip" : null) : null });
+      const ev = eventPitch(primary, i, off(start, first ? 0.05 : 0.1), { variant: primary === "penalty" ? (chipTopic ? "chip" : null) : null, view: first ? "hook" : "replay" });
+      // the payoff replays the moment from the higher camera (GLL-021: hook and payoff frames were 0.936 alike); its tally
+      // of beaten defenders stays off, the tagline owns that band
+      if (last) ev.layers = ev.layers.filter((l) => l.component !== "tally-tokens");
       layers = [stadium(first ? 0 : -1), ...ev.layers, ...(last ? [type(`${L.id}+0.3`, tagline, 470, S.title, "amber")] : [])];
       purpose = first ? `Hook: the record's own kind of goal (${primary}) on the floodlit pitch within the first second, so the moment is on screen before it is named. ${ev.purpose}`
         : `Payoff: the same ${primary} at night, where the hook started, and the channel tagline lands over the stands so the Short loops.`;

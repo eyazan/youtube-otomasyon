@@ -39,6 +39,50 @@ function build(script, style, topic, context = {}) {
   const symbol = Object.entries(context.assets || {}).find(([, a]) => a && a.matrix);
   const symbolLayer = (sid) => (symbol ? [{ component: "qr-symbol", props: { asset: symbol[0], id: sid, cx: 540, cy: 860, module: 26, rotate: 0 } }] : []);
   let quotes = 0; let surfaceN = 0;
+  // ---- declared mechanism: aperture versus wavelength (page/components/waves.js) --------------------------------
+  // When the verified record's mechanism is "the holes are smaller than the wavelength", each line is shown as the step
+  // it states: the mesh under a loupe, the enclosure as one shield, waves trapped in the cavity, the long wave reflected
+  // by the mesh, the short light wave passing, the viewer seeing through it. A line that states none keeps the desk.
+  const mechText = String(topic.mechanism || "");
+  const aperture = /wavelength/i.test(mechText) && /\b(mesh|holes?|perforat\w*|grille|grid)\b/i.test(mechText);
+  const oven = /\bmicrowave\b/i.test(`${topic.object || ""} ${topic.canonicalTopic || ""}`);
+  const citesText = (ids) => ids.map((id) => facts.find((f) => f.id === id)).filter(Boolean).map((f) => f.claim + " " + (f.quote || "")).join(" ");
+  const wl = (ids) => { const m = citesText(ids).match(/(\d+(?:\.\d+)?) ?cm\b/i); return m ? `${m[1]} CM` : "WAVELENGTH"; };
+  const say = (L, re) => { const m = String(typeof L === "string" ? L : L.text).match(re); return m ? m[0].toUpperCase() : null; };
+  const wordAnchor = (L, re, d) => { const w = String(L.text).split(/\s+/).map((x) => x.replace(/[^A-Za-z0-9]/g, "")).find((x) => re.test(x)); return w ? `${L.id}:${w}` : off(L.id, d); };
+  const door = (props) => ({ component: "oven-door", props: { x: 110, y: 560, w: 860, h: 600, ...props } });
+  let launchedAt = null; // the cage scene continues the magnetron's shot: the same packets, not a relaunch
+  const mechanismScene = (L, i, evidence) => {
+    if (!aperture) return null; const first = i === 0, last = i === lines.length - 1; const start = first ? 0 : `${L.id}-0.15`; const end = `${L.id}.end`;
+    const T = String(L.text);
+    if (first && oven) return { kind: "hook", layers: [door({ loupeAt: off(L.id, 0.5), loupe: { x: 420, y: 800, r: 230 }, ...(say(L, /metal mesh/i) ? { label: { at: wordAnchor(L, /^metal$/i, 1.4), text: say(L, /metal mesh/i) } } : {}) })],
+      purpose: "Hook: frame 0 is the oven with its lit window; as the line names the mesh, a loupe opens on the door and the holes in the metal mesh become visible.",
+      camera: [{ at: start, x: 540, y: 860, z: 1.1 }, { at: end, x: 500, y: 840, z: 1.0 }] };
+    if (last && oven) return { kind: "payoff", layers: [door({ viewAt: off(L.id, 0.3), shieldAt: off(L.id, 0.9) })],
+      purpose: "Payoff: light leaves through the window to the viewer's eye while the enclosure and mesh glow as one shield: you see in, the energy stays in. Returns to the hook's oven, so the Short loops.",
+      camera: [{ at: start, x: 540, y: 960, z: 1.0 }, { at: "end-0.6", x: 540, y: 860, z: 1.1 }] };
+    // the source of the waves: the cutaway opens and the magnetron starts launching them (the cage line continues this shot)
+    if (/\bmagnetron\b/i.test(T)) return { kind: "source", layers: [{ component: "faraday-box", props: { launchAt: (launchedAt = wordAnchor(L, /^magnetron$/i, 0.8)), packets: 7, magnetron: { at: wordAnchor(L, /^magnetron$/i, 0.8), text: "MAGNETRON" } } }],
+      purpose: "Source: the oven in cutaway; as the line names it, the magnetron in the corner starts launching microwaves into the metal box.",
+      camera: [{ at: start, x: 600, y: 820, z: 1.12 }, { at: end, x: 560, y: 860, z: 1.02 }] };
+    if (/\b(faraday|cage)\b/i.test(T)) return { kind: "cage", layers: [{ component: "faraday-box", props: { launchAt: launchedAt || off(L.id, 0.1), packets: 7, label: say(L, /faraday cage/i) ? { at: wordAnchor(L, /^cage$/i, 1.0), text: say(L, /faraday cage/i) } : null } }],
+      purpose: "Cage: the oven in cutaway; the magnetron launches waves that reflect off every wall, the mesh door included, so none leaves the box.",
+      camera: [{ at: start, x: 540, y: 880, z: 1.0 }, { at: end, x: 520, y: 880, z: 1.08 }] };
+    if (oven && /\b(shield|decoration)\b/i.test(T)) return { kind: "shield", layers: [door({ shieldAt: wordAnchor(L, /^part$/i, 1.0) })],
+      purpose: "Shield: not decoration: the metal body and the mesh light up together as one continuous shield around the cavity.",
+      camera: [{ at: start, x: 520, y: 860, z: 1.0 }, { at: end, x: 540, y: 860, z: 1.06 }] };
+    if (/\bholes?\b/i.test(T) && /wavelength/i.test(T)) return { kind: "aperture", layers: [{ component: "wave-aperture", props: { microAt: off(L.id, 0.0), labels: { hole: { at: wordAnchor(L, /^holes?$/i, 0.3), text: "HOLE" }, wavelength: { at: wordAnchor(L, /^wavelength$/i, 1.4), text: wl(evidence) } } } }],
+      purpose: "Comparison: the mesh in cross-section; a hole is marked, then one full microwave wavelength is braced above the wave: the hole is far smaller.",
+      camera: [{ at: start, x: 560, y: 880, z: 1.0 }, { at: end, x: 520, y: 860, z: 1.06 }] };
+    if (/\b(light)\b/i.test(T)) return { kind: "light", layers: [{ component: "wave-aperture", props: { microAt: off(L.id, -2.2), lightAt: off(L.id, 0.2), labels: { light: { at: off(L.id, 0.7), text: say(T, /visible light/i) || "LIGHT" } } } }],
+      purpose: "Light: the long microwave still reflects at the mesh while a short light wave threads one hole and carries on to the other side.",
+      camera: [{ at: start, x: 540, y: 860, z: 1.06 }, { at: end, x: 560, y: 860, z: 1.0 }] };
+    if (/\b(cannot|can't|can not|blocked?|reflect\w*)\b/i.test(T)) return { kind: "blocked", layers: [{ component: "wave-aperture", props: { microAt: off(L.id, -0.9), labels: { micro: { at: off(L.id, 0.6), text: say(T, /cannot pass|can't pass|blocked/i) || "REFLECTED" } } } }],
+      purpose: "Blocked: the microwave reaches the mesh and reflects; behind it the axis stays flat: nothing passes through the door.",
+      camera: [{ at: start, x: 520, y: 860, z: 1.0 }, { at: end, x: 600, y: 860, z: 1.08 }] };
+    return null;
+  };
+  let prevKindB = null;
   const scenes = lines.map((L, i) => {
     const first = i === 0, last = i === lines.length - 1; const start = first ? 0 : `${L.id}-0.15`; const end = `${L.id}.end`;
     const ev = (L.evidenceSuggested || []).filter((id) => facts.some((f) => f.id === id)); const evidence = ev.length ? ev.slice(0, 3) : [facts[0].id];
@@ -46,7 +90,9 @@ function build(script, style, topic, context = {}) {
     const year = nums.find((n) => n.year); const qty = nums.find((n) => !n.year);
     const quoted = facts.find((f) => f.id === evidence[0] && String(f.quote || "").split(/\s+/).length >= 6);
     const drift = i % 2 ? 28 : -28; let kind, layers, purpose, camera, chips = ["illustrationLabel"];
-    if (first || last) {
+    const mech = mechanismScene(L, i, evidence);
+    if (mech) { ({ kind, layers, purpose, camera } = mech); layers = [desk(3 + i), ...layers]; }
+    else if (first || last) {
       kind = first ? "hook" : "payoff";
       layers = [desk(3), ...(symbol ? symbolLayer(first ? "sym-hook" : "sym-payoff") : [surface(0, 11, -4)]), type(`${L.id}+0.2`, first ? object || keyPhrase(L.text) : keyPhrase(L.text, 4), 420, first ? S.headline : S.title)];
       purpose = first ? `Hook: frame 0 sets the object (${object || "the subject"}) in large type over printed matter on the desk, so the detail in question is named before it is explained.`
@@ -77,9 +123,10 @@ function build(script, style, topic, context = {}) {
       camera = [{ at: start, x: 540 + drift, y: 820, z: 1.0 }, { at: end, x: 540 - drift, y: 800, z: 1.14 }];
     }
     // greeked printed matter is a conceptual depiction (validator): CONCEPTUAL chip + conceptual flag
-    const printed = layers.some((l) => l.component === "print-surface"); if (printed) chips = ["conceptualLabel"];
+    const printed = layers.some((l) => ["print-surface", "oven-door", "faraday-box", "wave-aperture"].includes(l.component)); if (printed) chips = ["conceptualLabel"];
     const env = kind === "quote" && quotes === 2 ? "spot" : "desk";
-    return { id: `s${i + 1}-${kind}`, lines: [L.id], start, env, ...(first ? {} : { transition: { type: nextTransition(i), dur: 0.5 } }), evidence: [...new Set(evidence)].slice(0, 4), chips, ...(printed ? { conceptual: true } : {}), visualPurpose: purpose, camera, layers };
+    const cont = kind === "cage" && prevKindB === "source"; prevKindB = kind;
+    return { id: `s${i + 1}-${kind}`, lines: [L.id], start, env, ...(first ? {} : { transition: cont ? { type: "continuity", dur: 0.3 } : { type: nextTransition(i), dur: 0.5 } }), evidence: [...new Set(evidence)].slice(0, 4), chips, ...(printed ? { conceptual: true } : {}), visualPurpose: purpose, camera, layers };
   });
   // last guard (validator rule): on-screen digits must occur in a cited fact; failing type becomes the key phrase
   const cited = (sc) => sc.evidence.map((id) => facts.find((f) => f.id === id)).filter(Boolean).map((f) => f.claim + " " + (f.quote || "")).join(" ");

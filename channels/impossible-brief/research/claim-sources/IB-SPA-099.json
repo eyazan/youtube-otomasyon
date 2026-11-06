@@ -1,0 +1,179 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-SPA-099",
+ "checkedAt": "2026-11-03T18:27:12.954Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "20d875ad63640fe9",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "99942 Apophis is a near-Earth asteroid and a potentially hazardous object, 450 metres (1,480 ft) by 170 metres (560 ft) in size.",
+   "url": "https://en.wikipedia.org/wiki/99942_Apophis",
+   "sourceTitle": "Wikipedia — 99942 Apophis",
+   "revision": 1382610986,
+   "passage": null,
+   "numbers": {
+    "claim": [
+     "99942",
+     "450",
+     "1480",
+     "170",
+     "560"
+    ],
+    "inPassage": [],
+    "missing": [
+     "99942",
+     "450",
+     "1480",
+     "170",
+     "560"
+    ]
+   },
+   "support": 0,
+   "status": "UNVERIFIED",
+   "reason": "a sentence has the terms but not every claim number (99942, 450, 1480, 170, 560), is not 5-80 words of prose, or shares under 50% of the claim's content words"
+  },
+  {
+   "fact": "F2",
+   "claim": "During a brief period of concern in December 2004, initial observations indicated a probability of 2.7% that the asteroid would hit Earth on Friday, April 13, 2029.",
+   "url": "https://en.wikipedia.org/wiki/99942_Apophis",
+   "sourceTitle": "Wikipedia — 99942 Apophis",
+   "revision": 1382610986,
+   "passage": null,
+   "numbers": {
+    "claim": [
+     "2004",
+     "2.7",
+     "13",
+     "2029"
+    ],
+    "inPassage": [],
+    "missing": [
+     "2004",
+     "2.7",
+     "13",
+     "2029"
+    ]
+   },
+   "support": 0,
+   "status": "UNVERIFIED",
+   "reason": "a sentence has the terms but not every claim number (2004, 2.7, 13, 2029), is not 5-80 words of prose, or shares under 50% of the claim's content words"
+  },
+  {
+   "fact": "F3",
+   "claim": "It will pass Earth in 2029 at a distance of about 31,600 km (19,600 mi) above the surface.",
+   "url": "https://en.wikipedia.org/wiki/99942_Apophis",
+   "sourceTitle": "Wikipedia — 99942 Apophis",
+   "revision": 1382610986,
+   "passage": "Apophis will nevertheless make an exceptionally close approach to Earth on 13 April 2029, passing about 31,600 kilometres (19,600 mi) above the surface.",
+   "numbers": {
+    "claim": [
+     "2029",
+     "31600",
+     "19600"
+    ],
+    "inPassage": [
+     "2029",
+     "31600",
+     "19600"
+    ],
+    "missing": []
+   },
+   "support": 0.71,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "By 2021, the uncertainty in the 2029 approach distance had been reduced from hundreds of kilometres to just a couple of kilometres.",
+   "url": "https://en.wikipedia.org/wiki/99942_Apophis",
+   "sourceTitle": "Wikipedia — 99942 Apophis",
+   "revision": 1382610986,
+   "passage": null,
+   "numbers": {
+    "claim": [
+     "2021",
+     "2029"
+    ],
+    "inPassage": [],
+    "missing": [
+     "2021",
+     "2029"
+    ]
+   },
+   "support": 0,
+   "status": "UNVERIFIED",
+   "reason": "a sentence has the terms but not every claim number (2021, 2029), is not 5-80 words of prose, or shares under 50% of the claim's content words"
+  },
+  {
+   "fact": "F5",
+   "claim": "Geostationary orbit lies 35,786 km (22,236 mi) above the Earth's equator.",
+   "url": "https://en.wikipedia.org/wiki/Space_elevator",
+   "sourceTitle": "Wikipedia — Space elevator",
+   "revision": 1381664825,
+   "passage": "This is 35,786 km (22,236 mi) above Earth's surface, the altitude of geostationary orbit.",
+   "numbers": {
+    "claim": [
+     "35786",
+     "22236"
+    ],
+    "inPassage": [
+     "35786",
+     "22236"
+    ],
+    "missing": []
+   },
+   "support": 0.67,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Apophis once had a 2.7% chance of hitting Earth.",
+   "status": "FAIL",
+   "missing": [
+    "2.7"
+   ]
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Better tracking ruled out an impact in 2029.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The asteroid is about 450 metres long.",
+   "status": "FAIL",
+   "missing": [
+    "450"
+   ]
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "In 2029, it passes just 31,600 kilometres above the surface.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "That's inside the 35,786-kilometre ring of geostationary satellites.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Its path is now known to within a couple of kilometres.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "A hit would devastate a region, not end civilisation.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So Apophis turned from a threat into a planetary-defence rehearsal.",
+   "status": "HUMAN"
+  }
+ ]
+}

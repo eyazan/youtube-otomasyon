@@ -1,0 +1,138 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-SPA-005",
+ "checkedAt": "2026-11-03T18:27:09.138Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "03c1cc579aa5a814",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "It was the first object identified in the asteroid belt, discovered on 1 January 1801 by Giuseppe Piazzi at Palermo Astronomical Observatory, and announced as a new planet.",
+   "url": "https://en.wikipedia.org/wiki/Ceres_(dwarf_planet)",
+   "sourceTitle": "Wikipedia — Ceres (dwarf planet)",
+   "revision": 1381567812,
+   "passage": "It was the first object identified in the asteroid belt, discovered on 1 January 1801 by Giuseppe Piazzi at Palermo Astronomical Observatory in Sicily, and announced as a new planet.",
+   "numbers": {
+    "claim": [
+     "1",
+     "1801"
+    ],
+    "inPassage": [
+     "1",
+     "1801"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "Ceres's diameter was determined to within ten percent of its true value of 939 km (583 mi).",
+   "url": "https://en.wikipedia.org/wiki/Ceres_(dwarf_planet)",
+   "sourceTitle": "Wikipedia — Ceres (dwarf planet)",
+   "revision": 1381567812,
+   "passage": "In the 1970s, infrared photometry enabled more accurate measurements of its albedo, and Ceres's diameter was determined to within ten percent of its true value of 939 km (583 mi).",
+   "numbers": {
+    "claim": [
+     "939",
+     "583"
+    ],
+    "inPassage": [
+     "939",
+     "583"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "Herschel underestimated its diameter at 260 km in 1802; in 1811, Schröter overestimated it at 2,613 km.",
+   "url": "https://en.wikipedia.org/wiki/Ceres_(dwarf_planet)",
+   "sourceTitle": "Wikipedia — Ceres (dwarf planet)",
+   "revision": 1381567812,
+   "passage": "Herschel underestimated its diameter at 260 km (160 mi) in 1802; in 1811, German astronomer Johann Hieronymus Schröter overestimated it at 2,613 km (1,624 mi).",
+   "numbers": {
+    "claim": [
+     "260",
+     "1802",
+     "1811",
+     "2613"
+    ],
+    "inPassage": [
+     "260",
+     "1802",
+     "1811",
+     "2613"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "A formula predicted another planet with an orbital radius near 2.8 astronomical units (AU), or 420 million km, from the Sun.",
+   "url": "https://en.wikipedia.org/wiki/Ceres_(dwarf_planet)",
+   "sourceTitle": "Wikipedia — Ceres (dwarf planet)",
+   "revision": 1381567812,
+   "passage": "This formula predicted that there ought to be another planet with an orbital radius near 2.8 astronomical units (AU), or 420 million km, from the Sun.",
+   "numbers": {
+    "claim": [
+     "2.8",
+     "420"
+    ],
+    "inPassage": [
+     "2.8",
+     "420"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why Ceres was called a planet in 1801.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Giuseppe Piazzi spotted it between Mars and Jupiter.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It sits about 420 million kilometres from the Sun.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Early estimates ranged from 260 to 2,613 kilometres wide.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It's actually about 939 kilometres across.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "As more belt objects appeared, it lost planet status.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the asteroid belt's giant was a planet for a while.",
+   "status": "HUMAN"
+  }
+ ]
+}

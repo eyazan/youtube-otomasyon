@@ -1,0 +1,136 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-EAR-034",
+ "checkedAt": "2026-11-03T18:27:15.003Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "671e12602c53c45e",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "Around 15% of Northern Hemisphere land that is not completely covered by ice is directly underlain by permafrost; 22% is defined as part of a permafrost zone or region.",
+   "url": "https://en.wikipedia.org/wiki/Permafrost",
+   "sourceTitle": "Wikipedia — Permafrost",
+   "revision": 1381393250,
+   "passage": "Around 15% of Northern Hemisphere land that is not completely covered by ice is directly underlain by permafrost; 22% is defined as part of a permafrost zone or region.",
+   "numbers": {
+    "claim": [
+     "15",
+     "22"
+    ],
+    "inPassage": [
+     "15",
+     "22"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "Estimates suggest nearly 70% of such infrastructure is at risk by 2050.",
+   "url": "https://en.wikipedia.org/wiki/Permafrost",
+   "sourceTitle": "Wikipedia — Permafrost",
+   "revision": 1381393250,
+   "passage": "Estimates suggest nearly 70% of such infrastructure is at risk by 2050, and that the associated costs could rise to tens of billions of dollars in the second half of the century.",
+   "numbers": {
+    "claim": [
+     "70",
+     "2050"
+    ],
+    "inPassage": [
+     "70",
+     "2050"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "In 2014, regional estimates of alpine permafrost extent had established a global extent of 3,560,000 km2.",
+   "url": "https://en.wikipedia.org/wiki/Permafrost",
+   "sourceTitle": "Wikipedia — Permafrost",
+   "revision": 1381393250,
+   "passage": "In 2014, a collection of regional estimates of alpine permafrost extent had established a global extent of  3,560,000 km2 (1,370,000 mi2).",
+   "numbers": {
+    "claim": [
+     "2014",
+     "3560000",
+     "2"
+    ],
+    "inPassage": [
+     "2014",
+     "3560000",
+     "2"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "Microorganism numbers in permafrost soil typically range from 1 to 1000 million per gram of soil.",
+   "url": "https://en.wikipedia.org/wiki/Permafrost",
+   "sourceTitle": "Wikipedia — Permafrost",
+   "revision": 1381393250,
+   "passage": "While permafrost soil is frozen, it is not completely inhospitable to microorganisms, though their numbers can vary widely, typically from 1 to 1000 million per gram of soil.",
+   "numbers": {
+    "claim": [
+     "1",
+     "1000"
+    ],
+    "inPassage": [
+     "1",
+     "1000"
+    ],
+    "missing": []
+   },
+   "support": 0.78,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why 15% of northern land rests on frozen ground.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "That's permafrost, and it's starting to thaw.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Alpine permafrost alone covers about 3,560,000 square kilometres.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "As ice inside the ground melts, the surface slumps.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Nearly 70% of infrastructure on it may be at risk by 2050.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Each gram of frozen soil can hold up to 1,000 million microbes.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So thawing ground threatens both buildings and the climate.",
+   "status": "HUMAN"
+  }
+ ]
+}

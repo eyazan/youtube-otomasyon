@@ -53,6 +53,12 @@ async function main() {
 
   // ---- load ----------------------------------------------------------------------------------------------
   const { channel, topic } = pilotDir ? Adapter.loadPilot(channelSlug, pilotTopic) : Adapter.loadTopic(channelSlug, topicRef);
+  // --propose-mechanism <id>: render STILLS of a proposed (not declared) visual mechanism, for the person who decides it
+  // (scripts/ib-research/mechanism-board.js). Preview + shadow + stills only: nothing renders to video, nothing is packaged,
+  // and the research record is not changed (topic.visualMechanism stays undeclared on disk).
+  const proposed = opt("--propose-mechanism", null);
+  if (proposed) { if (mode !== "preview" || !flag("--shadow") || !opt("--stills", null) || topic.visualMechanism) throw new Error("--propose-mechanism needs BTO_PREMIUM_RENDER=preview, --shadow and --stills, on a record without a declared mechanism");
+    topic.visualMechanism = proposed; }
   // readiness is decided before anything is written: a refused run leaves no files behind
   const ready = pilotDir ? Adapter.pilotReadiness(topic) : Adapter.readiness(channel, topic);
   // --research-pending: an engine/creative pilot of a topic whose research is incomplete. Preview mode only; only the

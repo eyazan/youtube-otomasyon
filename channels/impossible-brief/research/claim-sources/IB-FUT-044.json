@@ -1,0 +1,143 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-FUT-044",
+ "checkedAt": "2026-11-03T18:27:18.618Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "15c3f218a069f2ea",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "In 2013, Mark Post created a hamburger patty made from tissue grown outside of an animal.",
+   "url": "https://en.wikipedia.org/wiki/Cultured_meat",
+   "sourceTitle": "Wikipedia — Cultured meat",
+   "revision": 1383302505,
+   "passage": "In 2013, Mark Post created a hamburger patty made from tissue grown outside of an animal; other cultured meat prototypes have gained media attention since.",
+   "numbers": {
+    "claim": [
+     "2013"
+    ],
+    "inPassage": [
+     "2013"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "It was made from over 20,000 thin strands of muscle tissue, cost over $325,000 and needed 2 years to produce.",
+   "url": "https://en.wikipedia.org/wiki/Cultured_meat",
+   "sourceTitle": "Wikipedia — Cultured meat",
+   "revision": 1383302505,
+   "passage": "It was made from over 20,000 thin strands of muscle tissue, cost over $325,000 and needed 2 years to produce.",
+   "numbers": {
+    "claim": [
+     "20000",
+     "325000",
+     "2"
+    ],
+    "inPassage": [
+     "20000",
+     "325000",
+     "2"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "In 2021 through 2023, cultured meat and seafood companies attracted over $2.5 billion in investment worldwide.",
+   "url": "https://en.wikipedia.org/wiki/Cultured_meat",
+   "sourceTitle": "Wikipedia — Cultured meat",
+   "revision": 1383302505,
+   "passage": "Data published by The Good Food Institute found that in 2021 through 2023, cultured meat and seafood companies attracted over $2.5 billion in investment worldwide.",
+   "numbers": {
+    "claim": [
+     "2021",
+     "2023",
+     "2.5"
+    ],
+    "inPassage": [
+     "2021",
+     "2023",
+     "2.5"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "In May 2008, PETA offered a $1 million prize to the first company to bring cultured chicken meat to consumers by 2012.",
+   "url": "https://en.wikipedia.org/wiki/Cultured_meat",
+   "sourceTitle": "Wikipedia — Cultured meat",
+   "revision": 1383302505,
+   "passage": "In May 2008, PETA offered a $1 million prize to the first company to bring cultured chicken meat to consumers by 2012.",
+   "numbers": {
+    "claim": [
+     "2008",
+     "1",
+     "2012"
+    ],
+    "inPassage": [
+     "2008",
+     "1",
+     "2012"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why the first lab burger cost $325,000.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Mark Post unveiled it in 2013.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It took 20,000 thin strands of muscle tissue.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It needed 2 years to produce.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "From 2021 to 2023, companies raised over $2.5 billion.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Scaling up means growing cells cheaply in giant tanks.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Price, not taste, decides whether it reaches your plate.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the hardest part of lab meat is the factory.",
+   "status": "HUMAN"
+  }
+ ]
+}

@@ -1,0 +1,163 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-EAR-066",
+ "checkedAt": "2026-10-30T04:54:51.711Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "8d2bcbcd7d6416fa",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "It is estimated that the lake contains around 19% of the unfrozen fresh water on the planet.",
+   "url": "https://en.wikipedia.org/wiki/Lake_Baikal",
+   "sourceTitle": "Wikipedia — Lake Baikal",
+   "revision": 1382624218,
+   "passage": "It is estimated that the lake contains around 19% of the unfrozen fresh water on the planet.",
+   "numbers": {
+    "claim": [
+     "19"
+    ],
+    "inPassage": [
+     "19"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "It is also the world's oldest lake at 25–30 million years, and among the clearest.",
+   "url": "https://en.wikipedia.org/wiki/Lake_Baikal",
+   "sourceTitle": "Wikipedia — Lake Baikal",
+   "revision": 1382624218,
+   "passage": "It is also the world's oldest lake at 25–30 million years, and among the clearest.",
+   "numbers": {
+    "claim": [
+     "25",
+     "30"
+    ],
+    "inPassage": [
+     "25",
+     "30"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "In geological terms, the rift is young and active; it widens about 4 mm (0.16 in) per year.",
+   "url": "https://en.wikipedia.org/wiki/Lake_Baikal",
+   "sourceTitle": "Wikipedia — Lake Baikal",
+   "revision": 1382624218,
+   "passage": "In geological terms, the rift is young and active—it widens about 4 mm (0.16 in) per year.",
+   "numbers": {
+    "claim": [
+     "4",
+     "0.16"
+    ],
+    "inPassage": [
+     "4",
+     "0.16"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "The lake is divided into three basins: North, Central, and South, with depths about 900 m, 1,600 m, and 1,400 m, respectively.",
+   "url": "https://en.wikipedia.org/wiki/Lake_Baikal",
+   "sourceTitle": "Wikipedia — Lake Baikal",
+   "revision": 1382624218,
+   "passage": "The lake is divided into three basins: North, Central, and South, with depths about 900 m (3,000 ft), 1,600 m (5,200 ft), and 1,400 m (4,600 ft), respectively.",
+   "numbers": {
+    "claim": [
+     "900",
+     "1600",
+     "1400"
+    ],
+    "inPassage": [
+     "900",
+     "1600",
+     "1400"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F5",
+   "claim": "In the deepest parts of the lake, from about 300 m, the temperature is stable at 3.1–3.4 °C with only minor annual variations.",
+   "url": "https://en.wikipedia.org/wiki/Lake_Baikal",
+   "sourceTitle": "Wikipedia — Lake Baikal",
+   "revision": 1382624218,
+   "passage": "In the deepest parts of the lake, from about 300 m (980 ft), the temperature is stable at 3.1–3.4 °C (37.6–38.1 °F) with only minor annual variations.",
+   "numbers": {
+    "claim": [
+     "300",
+     "3.1",
+     "3.4"
+    ],
+    "inPassage": [
+     "300",
+     "3.1",
+     "3.4"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "One lake holds 19% of unfrozen fresh water.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Lake Baikal, in Siberia, is also the world's oldest.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It formed 25 to 30 million years ago.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Its rift still widens about 4 millimetres a year.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Its basins reach 900, 1,600 and 1,400 metres deep.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Below 300 metres, it stays at 3.1 to 3.4 °C year-round.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "SPECULATIVE SCENARIO",
+   "text": "Drain it, and a fifth of Earth's unfrozen fresh water disappears.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So one Siberian rift holds a startling share of our fresh water.",
+   "status": "HUMAN"
+  }
+ ]
+}

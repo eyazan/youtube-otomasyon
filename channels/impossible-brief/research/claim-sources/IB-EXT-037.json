@@ -1,0 +1,128 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-EXT-037",
+ "checkedAt": "2026-11-03T18:27:19.668Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "0abcf6ce75e98ec6",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "TDEs were predicted in the 1970s and first observed in the 1990s.",
+   "url": "https://en.wikipedia.org/wiki/Tidal_disruption_event",
+   "sourceTitle": "Wikipedia — Tidal disruption event",
+   "revision": 1360697994,
+   "passage": "TDEs were predicted in the 1970s and first observed in the 1990s.",
+   "numbers": {
+    "claim": [
+     "1970",
+     "1990"
+    ],
+    "inPassage": [
+     "1970",
+     "1990"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "In 1988 Martin Rees described how approximately half of the disrupted stellar material will remain bound, eventually accreting onto the black hole.",
+   "url": "https://en.wikipedia.org/wiki/Tidal_disruption_event",
+   "sourceTitle": "Wikipedia — Tidal disruption event",
+   "revision": 1360697994,
+   "passage": "In 1988 Martin Rees described how approximately half of the disrupted stellar material will remain bound, eventually accreting onto the black hole and forming a luminous accretion disk.",
+   "numbers": {
+    "claim": [
+     "1988"
+    ],
+    "inPassage": [
+     "1988"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "Approximately 1% of TDEs are relativistic TDEs, where an astrophysical jet is launched from the black hole shortly after the star is destroyed.",
+   "url": "https://en.wikipedia.org/wiki/Tidal_disruption_event",
+   "sourceTitle": "Wikipedia — Tidal disruption event",
+   "revision": 1360697994,
+   "passage": "Approximately 1% of TDEs, however, are relativistic TDEs, where an astrophysical jet is launched from the black hole shortly after the star is destroyed.",
+   "numbers": {
+    "claim": [
+     "1"
+    ],
+    "inPassage": [
+     "1"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "As of 2023 only four TDEs with jets have been observed.",
+   "url": "https://en.wikipedia.org/wiki/Tidal_disruption_event",
+   "sourceTitle": "Wikipedia — Tidal disruption event",
+   "revision": 1360697994,
+   "passage": "As of 2023 only four TDEs with jets have been observed.",
+   "numbers": {
+    "claim": [
+     "2023"
+    ],
+    "inPassage": [
+     "2023"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why only 1% of shredded stars launch jets.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "A star that strays too close gets pulled apart.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "About half its matter stays bound and falls in.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The rest is flung away.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "The infalling gas flares brightly in X-rays.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "By 2023, only four jetted events had been seen.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So hidden black holes reveal themselves by what they destroy.",
+   "status": "HUMAN"
+  }
+ ]
+}

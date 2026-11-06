@@ -1,0 +1,163 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-EAR-031",
+ "checkedAt": "2026-11-03T18:27:14.898Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "d1e4eeae58a340b6",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "This massive desiccation left a deep dry basin, reaching 3 to 5 km (1.9 to 3.1 mi) deep below normal sea level, with a few hypersaline pockets.",
+   "url": "https://en.wikipedia.org/wiki/Messinian_salinity_crisis",
+   "sourceTitle": "Wikipedia — Messinian salinity crisis",
+   "revision": 1382315754,
+   "passage": "This massive desiccation left a deep dry basin, reaching 3 to 5 km (1.9 to 3.1 mi) deep below normal sea level, with a few hypersaline pockets similar to today's Dead Sea.",
+   "numbers": {
+    "claim": [
+     "3",
+     "5",
+     "1.9",
+     "3.1"
+    ],
+    "inPassage": [
+     "3",
+     "5",
+     "1.9",
+     "3.1"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "When that was shut off sometime between 6.5 to 6 MYBP, net evaporative loss set in at the rate of around 3,300 cubic kilometres yearly.",
+   "url": "https://en.wikipedia.org/wiki/Messinian_salinity_crisis",
+   "sourceTitle": "Wikipedia — Messinian salinity crisis",
+   "revision": 1382315754,
+   "passage": "When that was shut off sometime between 6.5 to 6 MYBP, net evaporative loss set in at the rate of around 3,300 cubic kilometres yearly.",
+   "numbers": {
+    "claim": [
+     "6.5",
+     "6",
+     "3300"
+    ],
+    "inPassage": [
+     "6.5",
+     "6",
+     "3300"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "The Messinian salinity crisis ended with the Strait of Gibraltar finally reopening 5.33 Ma, when the Atlantic rapidly filled up the Mediterranean basin in what is known as the Zanclean flood.",
+   "url": "https://en.wikipedia.org/wiki/Messinian_salinity_crisis",
+   "sourceTitle": "Wikipedia — Messinian salinity crisis",
+   "revision": 1382315754,
+   "passage": "The Messinian salinity crisis ended with the Strait of Gibraltar finally reopening 5.33 Ma, when the Atlantic rapidly filled up the Mediterranean basin in what is known as the Zanclean flood.",
+   "numbers": {
+    "claim": [
+     "5.33"
+    ],
+    "inPassage": [
+     "5.33"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "The Sorbas Basin was filled with evaporites at 5.5 million years ago (Ma), compared to the main basin at 5.96 Ma.",
+   "url": "https://en.wikipedia.org/wiki/Messinian_salinity_crisis",
+   "sourceTitle": "Wikipedia — Messinian salinity crisis",
+   "revision": 1382315754,
+   "passage": "This would result in the Sorbas Basin being filled with evaporites at 5.5 million years ago (Ma), compared to the main basin at 5.96 Ma.).",
+   "numbers": {
+    "claim": [
+     "5.5",
+     "5.96"
+    ],
+    "inPassage": [
+     "5.5",
+     "5.96"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F5",
+   "claim": "Research has suggested that the desiccation-flooding cycle may have repeated several times during the last 630,000 years of the Miocene epoch.",
+   "url": "https://en.wikipedia.org/wiki/Messinian_salinity_crisis",
+   "sourceTitle": "Wikipedia — Messinian salinity crisis",
+   "revision": 1382315754,
+   "passage": "Research since then has suggested that the desiccation-flooding cycle may have repeated several times during the last 630,000 years of the Miocene epoch.",
+   "numbers": {
+    "claim": [
+     "630000"
+    ],
+    "inPassage": [
+     "630000"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why the Mediterranean once lost 3,300 km³ a year.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It left a basin up to 5 kilometres deep.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Cut off from the Atlantic, evaporation outpaced every river.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Salt piled up in thick layers across the seabed.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The drying and flooding may have repeated several times.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It ended 5.33 million years ago, when Gibraltar reopened.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The Atlantic poured back in, in the Zanclean flood.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So one narrow strait decides whether a sea exists.",
+   "status": "HUMAN"
+  }
+ ]
+}

@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 "use strict";
 // FR premium mix and mux: narration levelled by measured (linear) gain, the sound-design stem ducked
-// under the voice, the sum mastered to -14 LUFS integrated with a sample-peak limiter (keeps true peak
-// under -1 dBTP after AAC), then muxed with the rendered picture.
+// under the voice, the sum mastered to -14 LUFS integrated with a 4x-oversampled limiter at -3 dBFS (an approximate
+// true-peak limiter: a 48 kHz sample-peak limiter let intersample peaks reach -0.5 dBTP after AAC on a brighter voice,
+// IB-EAR-001 preview render 2026-11-03), so true peak stays under -1 dBTP; then muxed with the rendered picture.
 //
 //   node scripts/fr-premium/mix-audio.js <narration.wav> <sfx.wav> <video.mp4> <out.mp4> [--work dir]
 const fs = require("fs");
@@ -23,7 +24,7 @@ execFileSync("ffmpeg", ["-v", "error", "-y", "-i", narr, "-i", sfx, "-filter_com
   `[1:a]aresample=48000,apad,atrim=0:${D}[b];[b][v1]sidechaincompress=threshold=0.025:ratio=5:attack=12:release=320:makeup=1[d];` +
   `[d][v2]amix=inputs=2:normalize=0:duration=first[m]`, "-map", "[m]", "-c:a", "pcm_s24le", pre]);
 const pl = loud(pre); const mg = (-14 - pl.I).toFixed(2);
-execFileSync("ffmpeg", ["-v", "error", "-y", "-i", pre, "-af", `volume=${mg}dB,alimiter=limit=0.794:attack=5:release=80:level=disabled`, "-ar", "48000", "-c:a", "pcm_s24le", master]);
+execFileSync("ffmpeg", ["-v", "error", "-y", "-i", pre, "-af", `volume=${mg}dB,aresample=192000,alimiter=limit=0.708:attack=5:release=80:level=disabled,aresample=48000`, "-ar", "48000", "-c:a", "pcm_s24le", master]);
 const ml = loud(master);
 execFileSync("ffmpeg", ["-v", "error", "-y", "-i", video, "-i", master, "-map", "0:v", "-map", "1:a", "-c:v", "copy", "-c:a", "aac", "-b:a", "256k", "-ar", "48000", "-ac", "2", "-t", D, "-movflags", "+faststart", out]);
 const report = { narration: { before: nl, gainDb: +ng }, preMaster: pl, masterGainDb: +mg, master: ml, final: loud(out), durationSec: +D };

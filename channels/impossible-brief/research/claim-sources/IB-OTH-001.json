@@ -1,0 +1,128 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-OTH-001",
+ "checkedAt": "2026-11-03T18:27:20.568Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "526b04dd5b60500f",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "They occupy less than 0.1% of the world's ocean area, about half the area of France.",
+   "url": "https://en.wikipedia.org/wiki/Coral_reef",
+   "sourceTitle": "Wikipedia — Coral reef",
+   "revision": 1383238587,
+   "passage": "They occupy less than 0.1% of the world's ocean area, about half the area of France.",
+   "numbers": {
+    "claim": [
+     "0.1"
+    ],
+    "inPassage": [
+     "0.1"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "They provide a home for at least 25% of all marine species, including fish, mollusks, worms, crustaceans, echinoderms, sponges, tunicates and other cnidarians.",
+   "url": "https://en.wikipedia.org/wiki/Coral_reef",
+   "sourceTitle": "Wikipedia — Coral reef",
+   "revision": 1383238587,
+   "passage": "Yet, they provide a home for at least 25% of all marine species, including fish, mollusks, worms, crustaceans, echinoderms, sponges, tunicates and other cnidarians.",
+   "numbers": {
+    "claim": [
+     "25"
+    ],
+    "inPassage": [
+     "25"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "Shallow tropical coral reefs have declined by 50% since 1950, partly because they are sensitive to water conditions.",
+   "url": "https://en.wikipedia.org/wiki/Coral_reef",
+   "sourceTitle": "Wikipedia — Coral reef",
+   "revision": 1383238587,
+   "passage": "Shallow tropical coral reefs have declined by 50% since 1950, partly because they are sensitive to water conditions.",
+   "numbers": {
+    "claim": [
+     "50",
+     "1950"
+    ],
+    "inPassage": [
+     "50",
+     "1950"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "The Indo-Pacific region accounts for 91.9% of this total.",
+   "url": "https://en.wikipedia.org/wiki/Coral_reef",
+   "sourceTitle": "Wikipedia — Coral reef",
+   "revision": 1383238587,
+   "passage": "The Indo-Pacific region (including the Red Sea, Indian Ocean, Southeast Asia and the Pacific) account for 91.9% of this total.",
+   "numbers": {
+    "claim": [
+     "91.9"
+    ],
+    "inPassage": [
+     "91.9"
+    ],
+    "missing": []
+   },
+   "support": 0.8,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why 0.1% of the ocean shelters 25% of species.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It's coral reef, about half the area of France.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Corals build the structure that shelters fish and invertebrates.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Shallow tropical reefs have declined 50% since 1950.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Most reefs, 91.9%, lie in the Indo-Pacific.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Lose them, and a quarter of marine species lose their home.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the ocean's richest life depends on its smallest builders.",
+   "status": "HUMAN"
+  }
+ ]
+}

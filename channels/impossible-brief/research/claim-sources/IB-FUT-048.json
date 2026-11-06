@@ -1,0 +1,155 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-FUT-048",
+ "checkedAt": "2026-11-03T18:27:19.051Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "6ff04f79c9ac08d2",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "The current largest DAC plant, Climeworks Mammoth, has a capacity of just 36,000 tonnes CO2 per annum with a capture cost of $1,000 (£774) per tCO2.",
+   "url": "https://en.wikipedia.org/wiki/Direct_air_capture",
+   "sourceTitle": "Wikipedia — Direct air capture",
+   "revision": 1383318799,
+   "passage": "The current largest DAC plant, Climeworks Mammoth, has a capacity of just 36,000 tonnes CO2 per annum with a capture cost of $1,000 (£774) per tCO2.",
+   "numbers": {
+    "claim": [
+     "36000",
+     "2",
+     "1000",
+     "774"
+    ],
+    "inPassage": [
+     "36000",
+     "2",
+     "1000",
+     "774"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "The IEA estimates that capture of at least 85 million tonnes and 980 million tonnes of CO2 annually by 2030 and 2050, respectively, are needed to achieve net zero.",
+   "url": "https://en.wikipedia.org/wiki/Direct_air_capture",
+   "sourceTitle": "Wikipedia — Direct air capture",
+   "revision": 1383318799,
+   "passage": "The IEA estimates that capture of at least 85 million tonnes and 980 million tonnes of CO2 annually by 2030 and 2050, respectively, are needed to achieve net zero.",
+   "numbers": {
+    "claim": [
+     "85",
+     "980",
+     "2",
+     "2030",
+     "2050"
+    ],
+    "inPassage": [
+     "85",
+     "980",
+     "2",
+     "2030",
+     "2050"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "The actual performance has averaged 600 tonnes per year since it started operating, and fails to even extract sufficient CO2 to compensate for its own emissions.",
+   "url": "https://en.wikipedia.org/wiki/Direct_air_capture",
+   "sourceTitle": "Wikipedia — Direct air capture",
+   "revision": 1383318799,
+   "passage": "Howvever the actual performance has averaged 600 tonnes per year since it started operating, and fails to even extract sufficient CO2 to compensate for its own emissions.",
+   "numbers": {
+    "claim": [
+     "600",
+     "2"
+    ],
+    "inPassage": [
+     "600",
+     "2"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "It was estimated that to capture 3.3 gigatonnes of CO2 a year would require 300 km3 of water, or 4% of the water used for irrigation.",
+   "url": "https://en.wikipedia.org/wiki/Direct_air_capture",
+   "sourceTitle": "Wikipedia — Direct air capture",
+   "revision": 1383318799,
+   "passage": "It was estimated, that to capture 3.3 gigatonnes of CO2 a year would require 300 km3 of water, or 4% of the water used for irrigation.",
+   "numbers": {
+    "claim": [
+     "3.3",
+     "2",
+     "300",
+     "3",
+     "4"
+    ],
+    "inPassage": [
+     "3.3",
+     "2",
+     "300",
+     "3",
+     "4"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why 36,000 tonnes a year barely dents CO2.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "That's the capacity of the biggest air-capture plant.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Capture there costs about $1,000 per tonne.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Net zero may need 980 million tonnes a year by 2050.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "That's tens of thousands of plants like it.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "An earlier plant, Orca, averaged just 600 tonnes a year.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It didn't even offset its own emissions.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So air capture helps at the edges. Cutting emissions does the heavy lifting.",
+   "status": "HUMAN"
+  }
+ ]
+}
