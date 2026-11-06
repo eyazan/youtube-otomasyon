@@ -1,25 +1,27 @@
 {
-  "at": "2026-11-06T07:12:17.880Z",
-  "runId": "42178540053",
+  "at": "2026-11-06T13:11:25.332Z",
+  "runId": "42222639450",
   "rows": [
     {
       "channel": "failure-reconstructed",
-      "outcome": "BLOCKED",
-      "category": "QUALITY_REJECTED",
-      "scheduled": false,
-      "publication": "NOT_SCHEDULED",
-      "publishAt": null,
-      "reason": "premium publication refused (see the premium publish log); nothing uploaded, legacy renderer not used",
-      "slug": null,
+      "outcome": "UPLOADED",
+      "category": "SCHEDULED",
+      "scheduled": true,
+      "publication": "SCHEDULED",
+      "publishAt": "2026-11-06T18:00:00.000Z",
+      "reason": "premium FR-mississippi-flood-1927 UOGvy9hscUM",
+      "slug": "mississippi-flood-1927",
       "videoId": null,
       "targetDay": "2026-11-06",
       "trigger": {
         "event": "repository_dispatch",
-        "correlationId": "production-1-20261106T070506Z-efbbe241"
+        "correlationId": "production-2-20261106T130506Z-600aec03"
       },
       "stages": {
         "RESEARCH": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "FR-mississippi-flood-1927",
+          "at": "2026-11-06T13:09:01.115Z"
         },
         "SCRIPT": {
           "status": "not-reached"
@@ -31,19 +33,29 @@
           "status": "not-reached"
         },
         "RENDER": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "premium final",
+          "at": "2026-11-06T13:09:01.115Z"
         },
         "QA": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
+          "at": "2026-11-06T13:09:01.115Z"
         },
         "UPLOAD": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "UOGvy9hscUM",
+          "at": "2026-11-06T13:09:01.116Z"
         },
         "SCHEDULE": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "2026-11-06T18:00:00.000Z",
+          "at": "2026-11-06T13:09:01.116Z"
         },
         "PUBLISH": {
-          "status": "not-reached"
+          "status": "scheduled",
+          "detail": "YouTube makes it public at 2026-11-06T18:00:00.000Z",
+          "at": "2026-11-06T13:09:01.116Z"
         }
       }
     },
@@ -60,7 +72,7 @@
       "targetDay": "2026-11-06",
       "trigger": {
         "event": "repository_dispatch",
-        "correlationId": "production-1-20261106T070506Z-efbbe241"
+        "correlationId": "production-2-20261106T130506Z-600aec03"
       },
       "stages": {
         "RESEARCH": {
