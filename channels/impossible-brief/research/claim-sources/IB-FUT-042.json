@@ -1,0 +1,152 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-FUT-042",
+ "checkedAt": "2026-10-30T04:54:55.723Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "9f166b387e719d5c",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "The intensity in orbit is approximately 144% of the maximum attainable intensity on Earth's surface.",
+   "url": "https://en.wikipedia.org/wiki/Space-based_solar_power",
+   "sourceTitle": "Wikipedia — Space-based solar power",
+   "revision": 1378075453,
+   "passage": "Consequently, the intensity in orbit is approximately 144% of the maximum attainable intensity on Earth's surface.",
+   "numbers": {
+    "claim": [
+     "144"
+    ],
+    "inPassage": [
+     "144"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "Caltech's MAPLE project successfully demonstrated beaming power to earth in 2023.",
+   "url": "https://en.wikipedia.org/wiki/Space-based_solar_power",
+   "sourceTitle": "Wikipedia — Space-based solar power",
+   "revision": 1378075453,
+   "passage": "Caltech's MAPLE project successfully demonstrated beaming power to earth in 2023.",
+   "numbers": {
+    "claim": [
+     "2023"
+    ],
+    "inPassage": [
+     "2023"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "MAPLE transmitted an effective isotropic radiated power (EIRP) of 3.2 watts, far below the kilowatts typical of commercial communications satellites.",
+   "url": "https://en.wikipedia.org/wiki/Space-based_solar_power",
+   "sourceTitle": "Wikipedia — Space-based solar power",
+   "revision": 1378075453,
+   "passage": "MAPLE transmitted an effective isotropic radiated power (EIRP) of 3.2 watts (+35 dBm), far below the kilowatts typical of commercial communications satellites.",
+   "numbers": {
+    "claim": [
+     "3.2"
+    ],
+    "inPassage": [
+     "3.2"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "Launch costs in the range of $100–$200 per kilogram of payload from low Earth orbit to Geosynchronous orbit are needed if SPS is to be economically viable.",
+   "url": "https://en.wikipedia.org/wiki/Space-based_solar_power",
+   "sourceTitle": "Wikipedia — Space-based solar power",
+   "revision": 1378075453,
+   "passage": "Launch costs in the range of $100–$200 per kilogram of payload from low Earth orbit to Geosynchronous orbit are needed if SPS is to be economically viable.",
+   "numbers": {
+    "claim": [
+     "100",
+     "200"
+    ],
+    "inPassage": [
+     "100",
+     "200"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F5",
+   "claim": "In December 2019, Xinhua reported that China plans to launch a 200-tonne SBSP station capable of generating megawatts of electricity to Earth by 2035.",
+   "url": "https://en.wikipedia.org/wiki/Space-based_solar_power",
+   "sourceTitle": "Wikipedia — Space-based solar power",
+   "revision": 1378075453,
+   "passage": "In December 2019, Xinhua News Agency reported that China plans to launch a 200-tonne SBSP station capable of generating megawatts (MW) of electricity to Earth by 2035.",
+   "numbers": {
+    "claim": [
+     "2019",
+     "200",
+     "2035"
+    ],
+    "inPassage": [
+     "2019",
+     "200",
+     "2035"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why orbit gets 144% of Earth's best sunlight.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "In space, there's no night, clouds or air.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "In 2023, Caltech's MAPLE beamed power down to Earth.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It sent just 3.2 watts, a proof of concept.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Viable plants need launch costs of $100 to $200 per kilogram.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "China has talked of a 200-tonne station by 2035.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So space solar power is waiting on rockets, not sunlight.",
+   "status": "HUMAN"
+  }
+ ]
+}

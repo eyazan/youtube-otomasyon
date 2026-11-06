@@ -1,0 +1,136 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-PHY-080",
+ "checkedAt": "2026-10-30T04:54:54.871Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "7f50b6693ccba461",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "Results published in Nature Physics in 2010 suggest that, at ultra-high pressures and temperatures (about 10 million atmospheres or 1 TPa and 50,000 °C), diamond melts into a metallic fluid.",
+   "url": "https://en.wikipedia.org/wiki/Diamond",
+   "sourceTitle": "Wikipedia — Diamond",
+   "revision": 1382023864,
+   "passage": "Results published in Nature Physics in 2010 suggest that, at ultra-high pressures and temperatures (about 10 million atmospheres or 1 TPa and 50,000 °C), diamond melts into a metallic fluid.",
+   "numbers": {
+    "claim": [
+     "2010",
+     "10",
+     "1",
+     "50000"
+    ],
+    "inPassage": [
+     "2010",
+     "10",
+     "1",
+     "50000"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "Most natural diamonds have ages between 1 billion and 3.5 billion years.",
+   "url": "https://en.wikipedia.org/wiki/Diamond",
+   "sourceTitle": "Wikipedia — Diamond",
+   "revision": 1382023864,
+   "passage": "Most natural diamonds have ages between 1 billion and 3.5 billion years.",
+   "numbers": {
+    "claim": [
+     "1",
+     "3.5"
+    ],
+    "inPassage": [
+     "1",
+     "3.5"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "At 0 K, the transition is predicted to occur at 1100 GPa.",
+   "url": "https://en.wikipedia.org/wiki/Diamond",
+   "sourceTitle": "Wikipedia — Diamond",
+   "revision": 1382023864,
+   "passage": "At 0 K, the transition is predicted to occur at 1100 GPa.",
+   "numbers": {
+    "claim": [
+     "0",
+     "1100"
+    ],
+    "inPassage": [
+     "0",
+     "1100"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "Experiments have found that diamond, in the presence of H2O passes through an intermediate linear carbon phase.",
+   "url": "https://en.wikipedia.org/wiki/Diamond",
+   "sourceTitle": "Wikipedia — Diamond",
+   "revision": 1382023864,
+   "passage": "Experiments have found that diamond, in the presence of H2O passes through an intermediate linear carbon phase.",
+   "numbers": {
+    "claim": [
+     "2"
+    ],
+    "inPassage": [
+     "2"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why melting diamond takes 50,000 °C.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It also needs about 10 million atmospheres of pressure.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Diamond's carbon atoms are locked in a rigid lattice.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Under those conditions, it becomes a metallic fluid.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Most natural diamonds are 1 to 3.5 billion years old.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Conditions like that exist deep inside giant planets.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So diamonds may rain and melt in places we can't visit.",
+   "status": "HUMAN"
+  }
+ ]
+}

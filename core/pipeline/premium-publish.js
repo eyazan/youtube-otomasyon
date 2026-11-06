@@ -107,6 +107,8 @@ function metadata(channel, topic) {
       return { title: clean(konu.baslik).slice(0, 100), description: metin, tags: d.etiketler }; }
   }
   const Hashtags = require("../hashtags");
+  // ImpossibleBrief lists only the claim-specific pages its claim-source ledger VERIFIED (never an agency front page)
+  if (channel.slug === "impossible-brief") { const CS = require("../research/claim-sources"); topic = { ...topic, facts: [], sources: CS.describable(channel, topic) }; }
   const sources = []; for (const f of [...(topic.facts || []), ...(topic.sources || [])]) { const url = f.url; const name = clean(f.sourceTitle || f.source || f.name || ""); if (url && !sources.some((x) => x.url === url)) sources.push({ name: name.replace(/ \(revision.*$/, "") || url, url }); }
   const hashtags = Hashtags.forTopic(channel.slug, topic, { format: "short" });
   const question = clean(topic.coreQuestion || topic.hook || topic.title);
