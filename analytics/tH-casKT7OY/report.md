@@ -9,8 +9,9 @@ https://youtu.be/tH-casKT7OY
 | 1d | 2026-10-24 | 205 | 4 | 1 | — | — |  |
 | 3d | 2026-10-26 | 255 | 6 | 1 | 65.04 | 0 | Shorts feed 86%, Search 13% |
 | 7d | 2026-10-30 | 257 | 6 | 1 | 59.29 | 0 | Shorts feed 75%, Search 24% |
+| 14d | 2026-11-06 | 264 | 6 | 1 | 59.25 | 0 | Shorts feed 74%, Search 25% |
 
-## Diagnosis at 7d
+## Diagnosis at 14d
 
 - **WEAK_TOPIC_PACKAGING** (low) — Current title scores 48.9/100 in the title engine; best editorial option scores 48.9.
 
@@ -25,4 +26,4 @@ https://youtu.be/tH-casKT7OY
 - Visual type: REAL ARCHIVAL IMAGE
 - This is an observed alignment, not proof that the sentence or visual caused the drop.
 
-Views gained between 3d and 7d: 2.
+Views gained between 7d and 14d: 7.

@@ -10,11 +10,12 @@ https://youtu.be/8HybydJa-l8
 | 3d | 2026-10-10 | 1179 | 22 | 1 | 74.33 | 1 | Shorts feed 98%, Search 1% |
 | 7d | 2026-10-14 | 1197 | 22 | 1 | 76.48 | 1 | Shorts feed 96%, Search 2% |
 | 14d | 2026-10-21 | 1200 | 23 | 1 | 76.54 | 1 | Shorts feed 96%, Search 2% |
+| 30d | 2026-11-06 | 1200 | 23 | 1 | 77.24 | 1 | Shorts feed 96%, Search 3% |
 
-## Diagnosis at 14d
+## Diagnosis at 30d
 
 - **HIGH_VIEWS_LOW_SUB_CONVERSION** (medium) — 0.8 subscribers per 1,000 views.
-- **OUTPERFORMER** (medium) — 1200 views vs channel median 524.5 (n=28 videos).
+- **OUTPERFORMER** (medium) — 1200 views vs channel median 442 (n=40 videos).
 
 ## Suggested interventions
 
@@ -28,4 +29,4 @@ https://youtu.be/8HybydJa-l8
 - Visual type: REAL ARCHIVAL IMAGE
 - This is an observed alignment, not proof that the sentence or visual caused the drop.
 
-Views gained between 7d and 14d: 3.
+Views gained between 14d and 30d: 0.
