@@ -2,50 +2,6 @@
   "channel": "failure-reconstructed",
   "runs": [
     {
-      "runId": "41877035537",
-      "attempt": "1",
-      "startedAt": "2026-11-04T17:23:46.943Z",
-      "publish": true,
-      "trigger": {
-        "event": "schedule",
-        "correlationId": null
-      },
-      "targetDay": null,
-      "slug": null,
-      "outcome": "NOT_DUE",
-      "reason": "today's Short already exists (el-faro-2015)",
-      "stages": {
-        "RESEARCH": {
-          "status": "not-reached"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "not-reached"
-        },
-        "QA": {
-          "status": "not-reached"
-        },
-        "UPLOAD": {
-          "status": "not-reached"
-        },
-        "SCHEDULE": {
-          "status": "not-reached"
-        },
-        "PUBLISH": {
-          "status": "not-reached"
-        }
-      },
-      "finishedAt": "2026-11-04T17:23:46.962Z"
-    },
-    {
       "runId": "41882907408",
       "attempt": "1",
       "startedAt": "2026-11-04T18:02:55.602Z",
@@ -1344,6 +1300,50 @@
         }
       },
       "finishedAt": "2026-11-06T15:13:05.507Z"
+    },
+    {
+      "runId": "42241301807",
+      "attempt": "1",
+      "startedAt": "2026-11-06T15:18:29.534Z",
+      "publish": true,
+      "trigger": {
+        "event": "schedule",
+        "correlationId": null
+      },
+      "targetDay": null,
+      "slug": null,
+      "outcome": "NOT_DUE",
+      "reason": "today's Short already exists (mississippi-flood-1927)",
+      "stages": {
+        "RESEARCH": {
+          "status": "not-reached"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "not-reached"
+        },
+        "QA": {
+          "status": "not-reached"
+        },
+        "UPLOAD": {
+          "status": "not-reached"
+        },
+        "SCHEDULE": {
+          "status": "not-reached"
+        },
+        "PUBLISH": {
+          "status": "not-reached"
+        }
+      },
+      "finishedAt": "2026-11-06T15:18:29.554Z"
     }
   ]
 }
