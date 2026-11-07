@@ -1,25 +1,27 @@
 {
-  "at": "2026-11-06T21:41:48.356Z",
-  "runId": "42298538196",
+  "at": "2026-11-07T07:08:19.982Z",
+  "runId": "42349762355",
   "rows": [
     {
       "channel": "failure-reconstructed",
-      "outcome": "NOT_DUE",
-      "category": "NOT_DUE",
+      "outcome": "NO_TOPIC",
+      "category": "CONTENT_BLOCKED",
       "scheduled": false,
       "publication": "NOT_SCHEDULED",
       "publishAt": null,
-      "reason": "before production slot 09:00 Europe/Istanbul",
+      "reason": "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)",
       "slug": null,
       "videoId": null,
-      "targetDay": null,
+      "targetDay": "2026-11-07",
       "trigger": {
-        "event": "schedule",
-        "correlationId": null
+        "event": "repository_dispatch",
+        "correlationId": "production-1-20261107T070506Z-156f9d58"
       },
       "stages": {
         "RESEARCH": {
-          "status": "not-reached"
+          "status": "skipped",
+          "detail": "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)",
+          "at": "2026-11-07T07:06:09.841Z"
         },
         "SCRIPT": {
           "status": "not-reached"
@@ -49,18 +51,18 @@
     },
     {
       "channel": "impossible-brief",
-      "outcome": "NOT_DUE",
-      "category": "NOT_DUE",
+      "outcome": "BLOCKED",
+      "category": "QUALITY_REJECTED",
       "scheduled": false,
       "publication": "NOT_SCHEDULED",
       "publishAt": null,
-      "reason": "before production slot 09:30 Europe/Istanbul",
+      "reason": "premium publication refused (see the premium publish log); nothing uploaded, legacy renderer not used",
       "slug": null,
       "videoId": null,
-      "targetDay": null,
+      "targetDay": "2026-11-07",
       "trigger": {
-        "event": "schedule",
-        "correlationId": null
+        "event": "repository_dispatch",
+        "correlationId": "production-1-20261107T070506Z-156f9d58"
       },
       "stages": {
         "RESEARCH": {
