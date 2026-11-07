@@ -1,27 +1,25 @@
 {
-  "at": "2026-11-07T16:58:03.598Z",
-  "runId": "42393585918",
+  "at": "2026-11-07T17:48:27.791Z",
+  "runId": "42398000274",
   "rows": [
     {
       "channel": "failure-reconstructed",
-      "outcome": "NO_TOPIC",
-      "category": "CONTENT_BLOCKED",
+      "outcome": "NOT_DUE",
+      "category": "NOT_DUE",
       "scheduled": false,
       "publication": "NOT_SCHEDULED",
       "publishAt": null,
-      "reason": "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)",
+      "reason": "production window closed at 21:00 Europe/Istanbul minus 60 min",
       "slug": null,
       "videoId": null,
-      "targetDay": "2026-11-07",
+      "targetDay": null,
       "trigger": {
         "event": "schedule",
         "correlationId": null
       },
       "stages": {
         "RESEARCH": {
-          "status": "skipped",
-          "detail": "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)",
-          "at": "2026-11-07T16:55:01.006Z"
+          "status": "not-reached"
         },
         "SCRIPT": {
           "status": "not-reached"
@@ -51,15 +49,15 @@
     },
     {
       "channel": "impossible-brief",
-      "outcome": "BLOCKED",
-      "category": "QUALITY_REJECTED",
+      "outcome": "NOT_DUE",
+      "category": "NOT_DUE",
       "scheduled": false,
       "publication": "NOT_SCHEDULED",
       "publishAt": null,
-      "reason": "premium publication refused (see the premium publish log); nothing uploaded, legacy renderer not used",
+      "reason": "production window closed at 21:00 Europe/Istanbul minus 60 min",
       "slug": null,
       "videoId": null,
-      "targetDay": "2026-11-07",
+      "targetDay": null,
       "trigger": {
         "event": "schedule",
         "correlationId": null
