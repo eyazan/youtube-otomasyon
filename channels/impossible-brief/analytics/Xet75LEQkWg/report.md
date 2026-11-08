@@ -7,11 +7,23 @@ https://youtu.be/Xet75LEQkWg
 | Checkpoint | Collected | Views | Likes | Comments | Avg % viewed | Subs (net) | Top traffic |
 |---|---|---:|---:|---:|---:|---:|---|
 | 1d | 2026-11-06 | 202 | 0 | 1 | — | — |  |
+| 3d | 2026-11-08 | 283 | 0 | 1 | 52.37 | 0 | Search 65%, Shorts feed 35% |
 
-## Diagnosis at 1d
+## Diagnosis at 3d
 
-- **INSUFFICIENT_DATA** (high) — 202 views after 1 days — too early/small for rate-based conclusions.
+- **SEARCH_DEPENDENT** (medium) — 65% of views from Search.
+- **SHORTS_FEED_NOT_PICKED_UP** (low) — Most views are not from the Shorts feed.
 
 ## Suggested interventions
 
-- INSUFFICIENT DATA → no intervention; wait for the next checkpoint.
+- SEARCH ONLY → build the Suggested network: same-cluster follow-ups, playlist, end screens.
+- NOT IN SHORTS FEED → review the opening frame and first sentence.
+
+## First major observed retention drop
+
+- Timestamp: 5s; magnitude: 16 percentage points.
+- Active sentence: track map across Missouri, Illinois and Indiana
+- Visual type: AI-GENERATED VISUAL
+- This is an observed alignment, not proof that the sentence or visual caused the drop.
+
+Views gained between 1d and 3d: 81.

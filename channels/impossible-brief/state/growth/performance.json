@@ -36,7 +36,7 @@
     "publishHourUTC": 18,
     "readiness": 91,
     "normalized": {
-      "ageHours": 935.99,
+      "ageHours": 936.41,
       "viewsPerHour": null,
       "recentViewVelocity": null,
       "likeRate": null,
@@ -58,10 +58,10 @@
         "views": null
       },
       "baselines": {
-        "views": 699.5,
-        "viewsPerHour": 1.72,
+        "views": 701.5,
+        "viewsPerHour": 1.69,
         "averagePercentageViewed": 63.165000000000006,
-        "engagementRate": 0.01967,
+        "engagementRate": 0.01996,
         "subscriberConversion": 0
       },
       "missing": [
@@ -76,2059 +76,6 @@
       "probableCauses": [],
       "caveat": "Classification is channel-relative correlation, not proof of YouTube recommendation causality."
     }
-  },
-  {
-    "checkpoints": {
-      "1h": {
-        "collectedAt": "2026-10-09T19:34:23.417Z",
-        "metrics": {
-          "views": {
-            "value": 81,
-            "status": "DIRECTLY_MEASURED",
-            "source": "Data API"
-          },
-          "likes": {
-            "value": 2,
-            "status": "DIRECTLY_MEASURED",
-            "source": "Data API"
-          },
-          "comments": {
-            "value": 0,
-            "status": "DIRECTLY_MEASURED",
-            "source": "Data API"
-          },
-          "shares": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "subscribers_gained": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "subscribers_lost": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "net_subscribers": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "average_view_duration": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "average_percentage_viewed": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "watch_time_minutes": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "impressions": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "not exposed by YouTube APIs — export from Studio into studio-manual.json"
-          },
-          "ctr": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "not exposed by YouTube APIs — export from Studio into studio-manual.json"
-          },
-          "returning_viewers": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "not exposed per video by the public API"
-          },
-          "stayed_to_watch": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "Shorts 'Viewed vs swiped away' is Studio only — import with scripts/studio-import.js"
-          },
-          "first_30s_retention": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "engaged_views": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "subscribers_per_1000_views": {
-            "value": null,
-            "status": "UNAVAILABLE"
-          },
-          "net_subscribers_per_1000_views": {
-            "value": null,
-            "status": "UNAVAILABLE"
-          },
-          "engagement_per_1000_views": {
-            "value": 24.69,
-            "status": "DERIVED",
-            "from": "likes+comments+shares / views"
-          },
-          "watch_hours_per_1000_views": {
-            "value": null,
-            "status": "UNAVAILABLE"
-          }
-        },
-        "traffic": [],
-        "retention": [],
-        "analyticsStatus": "ok"
-      },
-      "12h": {
-        "collectedAt": "2026-10-10T12:24:34.746Z",
-        "metrics": {
-          "views": {
-            "value": 362,
-            "status": "DIRECTLY_MEASURED",
-            "source": "Data API"
-          },
-          "likes": {
-            "value": 8,
-            "status": "DIRECTLY_MEASURED",
-            "source": "Data API"
-          },
-          "comments": {
-            "value": 1,
-            "status": "DIRECTLY_MEASURED",
-            "source": "Data API"
-          },
-          "shares": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "subscribers_gained": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "subscribers_lost": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "net_subscribers": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "average_view_duration": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "average_percentage_viewed": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "watch_time_minutes": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "impressions": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "not exposed by YouTube APIs — export from Studio into studio-manual.json"
-          },
-          "ctr": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "not exposed by YouTube APIs — export from Studio into studio-manual.json"
-          },
-          "returning_viewers": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "not exposed per video by the public API"
-          },
-          "stayed_to_watch": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "Shorts 'Viewed vs swiped away' is Studio only — import with scripts/studio-import.js"
-          },
-          "first_30s_retention": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "engaged_views": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "subscribers_per_1000_views": {
-            "value": null,
-            "status": "UNAVAILABLE"
-          },
-          "net_subscribers_per_1000_views": {
-            "value": null,
-            "status": "UNAVAILABLE"
-          },
-          "engagement_per_1000_views": {
-            "value": 24.86,
-            "status": "DERIVED",
-            "from": "likes+comments+shares / views"
-          },
-          "watch_hours_per_1000_views": {
-            "value": null,
-            "status": "UNAVAILABLE"
-          }
-        },
-        "traffic": [],
-        "retention": [],
-        "analyticsStatus": "ok"
-      },
-      "6h": {
-        "collectedAt": "2026-10-10T12:48:00.504Z",
-        "metrics": {
-          "views": {
-            "value": 355,
-            "status": "DIRECTLY_MEASURED",
-            "source": "Data API"
-          },
-          "likes": {
-            "value": 8,
-            "status": "DIRECTLY_MEASURED",
-            "source": "Data API"
-          },
-          "comments": {
-            "value": 1,
-            "status": "DIRECTLY_MEASURED",
-            "source": "Data API"
-          },
-          "shares": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "subscribers_gained": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "subscribers_lost": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "net_subscribers": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "average_view_duration": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "average_percentage_viewed": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "watch_time_minutes": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "impressions": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "not exposed by YouTube APIs — export from Studio into studio-manual.json"
-          },
-          "ctr": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "not exposed by YouTube APIs — export from Studio into studio-manual.json"
-          },
-          "returning_viewers": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "not exposed per video by the public API"
-          },
-          "stayed_to_watch": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "Shorts 'Viewed vs swiped away' is Studio only — import with scripts/studio-import.js"
-          },
-          "first_30s_retention": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "engaged_views": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "subscribers_per_1000_views": {
-            "value": null,
-            "status": "UNAVAILABLE"
-          },
-          "net_subscribers_per_1000_views": {
-            "value": null,
-            "status": "UNAVAILABLE"
-          },
-          "engagement_per_1000_views": {
-            "value": 25.35,
-            "status": "DERIVED",
-            "from": "likes+comments+shares / views"
-          },
-          "watch_hours_per_1000_views": {
-            "value": null,
-            "status": "UNAVAILABLE"
-          }
-        },
-        "traffic": [],
-        "retention": [],
-        "analyticsStatus": "ok"
-      },
-      "24h": {
-        "collectedAt": "2026-10-10T18:41:54.793Z",
-        "metrics": {
-          "views": {
-            "value": 371,
-            "status": "DIRECTLY_MEASURED",
-            "source": "Data API"
-          },
-          "likes": {
-            "value": 8,
-            "status": "DIRECTLY_MEASURED",
-            "source": "Data API"
-          },
-          "comments": {
-            "value": 1,
-            "status": "DIRECTLY_MEASURED",
-            "source": "Data API"
-          },
-          "shares": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "subscribers_gained": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "subscribers_lost": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "net_subscribers": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "average_view_duration": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "average_percentage_viewed": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "watch_time_minutes": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "impressions": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "not exposed by YouTube APIs — export from Studio into studio-manual.json"
-          },
-          "ctr": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "not exposed by YouTube APIs — export from Studio into studio-manual.json"
-          },
-          "returning_viewers": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "not exposed per video by the public API"
-          },
-          "stayed_to_watch": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "Shorts 'Viewed vs swiped away' is Studio only — import with scripts/studio-import.js"
-          },
-          "first_30s_retention": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "engaged_views": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "subscribers_per_1000_views": {
-            "value": null,
-            "status": "UNAVAILABLE"
-          },
-          "net_subscribers_per_1000_views": {
-            "value": null,
-            "status": "UNAVAILABLE"
-          },
-          "engagement_per_1000_views": {
-            "value": 24.26,
-            "status": "DERIVED",
-            "from": "likes+comments+shares / views"
-          },
-          "watch_hours_per_1000_views": {
-            "value": null,
-            "status": "UNAVAILABLE"
-          }
-        },
-        "traffic": [],
-        "retention": [],
-        "analyticsStatus": "ok"
-      },
-      "48h": {
-        "collectedAt": "2026-10-11T18:09:26.063Z",
-        "metrics": {
-          "views": {
-            "value": 549,
-            "status": "DIRECTLY_MEASURED",
-            "source": "Data API"
-          },
-          "likes": {
-            "value": 11,
-            "status": "DIRECTLY_MEASURED",
-            "source": "Data API"
-          },
-          "comments": {
-            "value": 1,
-            "status": "DIRECTLY_MEASURED",
-            "source": "Data API"
-          },
-          "shares": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "subscribers_gained": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "subscribers_lost": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "net_subscribers": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "average_view_duration": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "average_percentage_viewed": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "watch_time_minutes": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "impressions": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "not exposed by YouTube APIs — export from Studio into studio-manual.json"
-          },
-          "ctr": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "not exposed by YouTube APIs — export from Studio into studio-manual.json"
-          },
-          "returning_viewers": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "not exposed per video by the public API"
-          },
-          "stayed_to_watch": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "Shorts 'Viewed vs swiped away' is Studio only — import with scripts/studio-import.js"
-          },
-          "first_30s_retention": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "engaged_views": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "analytics unavailable"
-          },
-          "subscribers_per_1000_views": {
-            "value": null,
-            "status": "UNAVAILABLE"
-          },
-          "net_subscribers_per_1000_views": {
-            "value": null,
-            "status": "UNAVAILABLE"
-          },
-          "engagement_per_1000_views": {
-            "value": 21.86,
-            "status": "DERIVED",
-            "from": "likes+comments+shares / views"
-          },
-          "watch_hours_per_1000_views": {
-            "value": null,
-            "status": "UNAVAILABLE"
-          }
-        },
-        "traffic": [],
-        "retention": [],
-        "analyticsStatus": "ok"
-      },
-      "7d": {
-        "collectedAt": "2026-10-16T18:08:43.282Z",
-        "metrics": {
-          "views": {
-            "value": 618,
-            "status": "DIRECTLY_MEASURED",
-            "source": "Data API"
-          },
-          "likes": {
-            "value": 11,
-            "status": "DIRECTLY_MEASURED",
-            "source": "Data API"
-          },
-          "comments": {
-            "value": 1,
-            "status": "DIRECTLY_MEASURED",
-            "source": "Data API"
-          },
-          "shares": {
-            "value": 0,
-            "status": "DIRECTLY_MEASURED",
-            "source": "Analytics API"
-          },
-          "subscribers_gained": {
-            "value": 1,
-            "status": "DIRECTLY_MEASURED",
-            "source": "Analytics API"
-          },
-          "subscribers_lost": {
-            "value": 0,
-            "status": "DIRECTLY_MEASURED",
-            "source": "Analytics API"
-          },
-          "net_subscribers": {
-            "value": 1,
-            "status": "DIRECTLY_MEASURED",
-            "source": "derived from Analytics API gained − lost"
-          },
-          "average_view_duration": {
-            "value": 15,
-            "status": "DIRECTLY_MEASURED",
-            "source": "Analytics API"
-          },
-          "average_percentage_viewed": {
-            "value": 52.61,
-            "status": "DIRECTLY_MEASURED",
-            "source": "Analytics API"
-          },
-          "watch_time_minutes": {
-            "value": 73,
-            "status": "DIRECTLY_MEASURED",
-            "source": "Analytics API"
-          },
-          "impressions": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "not exposed by YouTube APIs — export from Studio into studio-manual.json"
-          },
-          "ctr": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "not exposed by YouTube APIs — export from Studio into studio-manual.json"
-          },
-          "returning_viewers": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "not exposed per video by the public API"
-          },
-          "stayed_to_watch": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "Shorts 'Viewed vs swiped away' is Studio only — import with scripts/studio-import.js"
-          },
-          "first_30s_retention": {
-            "value": 0.2231,
-            "status": "DIRECTLY_MEASURED",
-            "source": "Analytics API (retention at 100% of video)"
-          },
-          "engaged_views": {
-            "value": 251,
-            "status": "DIRECTLY_MEASURED",
-            "source": "Analytics API"
-          },
-          "subscribers_per_1000_views": {
-            "value": 1.62,
-            "status": "DERIVED",
-            "from": "subscribers_gained / views"
-          },
-          "net_subscribers_per_1000_views": {
-            "value": 1.62,
-            "status": "DERIVED",
-            "from": "net_subscribers / views"
-          },
-          "engagement_per_1000_views": {
-            "value": 19.42,
-            "status": "DERIVED",
-            "from": "likes+comments+shares / views"
-          },
-          "watch_hours_per_1000_views": {
-            "value": 1.97,
-            "status": "DERIVED",
-            "from": "watch hours / views"
-          }
-        },
-        "traffic": [
-          {
-            "source": "SHORTS",
-            "views": 592,
-            "share": 0.963
-          },
-          {
-            "source": "YT_SEARCH",
-            "views": 13,
-            "share": 0.021
-          },
-          {
-            "source": "YT_OTHER_PAGE",
-            "views": 7,
-            "share": 0.011
-          },
-          {
-            "source": "YT_CHANNEL",
-            "views": 1,
-            "share": 0.002
-          },
-          {
-            "source": "EXT_URL",
-            "views": 1,
-            "share": 0.002
-          },
-          {
-            "source": "HASHTAGS",
-            "views": 1,
-            "share": 0.002
-          },
-          {
-            "source": "NO_LINK_OTHER",
-            "views": 0,
-            "share": 0
-          },
-          {
-            "source": "SUBSCRIBER",
-            "views": 0,
-            "share": 0
-          }
-        ],
-        "retention": [
-          {
-            "oran": 0.01,
-            "izleme": 1.2072,
-            "goreceli": 0.6164499999999999
-          },
-          {
-            "oran": 0.02,
-            "izleme": 1.2031999999999998,
-            "goreceli": 0.59075
-          },
-          {
-            "oran": 0.03,
-            "izleme": 1.1912,
-            "goreceli": 0.56555
-          },
-          {
-            "oran": 0.04,
-            "izleme": 1.1753,
-            "goreceli": 0.54265
-          },
-          {
-            "oran": 0.05,
-            "izleme": 1.1633,
-            "goreceli": 0.5232
-          },
-          {
-            "oran": 0.06,
-            "izleme": 1.1514,
-            "goreceli": 0.5075
-          },
-          {
-            "oran": 0.07,
-            "izleme": 1.1434,
-            "goreceli": 0.4951
-          },
-          {
-            "oran": 0.08,
-            "izleme": 1.1275,
-            "goreceli": 0.48525
-          },
-          {
-            "oran": 0.09,
-            "izleme": 1.1195,
-            "goreceli": 0.47705
-          },
-          {
-            "oran": 0.1,
-            "izleme": 1.1036,
-            "goreceli": 0.4699
-          },
-          {
-            "oran": 0.11,
-            "izleme": 1.1036,
-            "goreceli": 0.46325
-          },
-          {
-            "oran": 0.12,
-            "izleme": 1.0876000000000001,
-            "goreceli": 0.4569
-          },
-          {
-            "oran": 0.13,
-            "izleme": 1.0756999999999999,
-            "goreceli": 0.45075
-          },
-          {
-            "oran": 0.14,
-            "izleme": 1.0717,
-            "goreceli": 0.44485
-          },
-          {
-            "oran": 0.15,
-            "izleme": 1.0438,
-            "goreceli": 0.4393
-          },
-          {
-            "oran": 0.16,
-            "izleme": 1.0159,
-            "goreceli": 0.43405
-          },
-          {
-            "oran": 0.17,
-            "izleme": 1.004,
-            "goreceli": 0.42925
-          },
-          {
-            "oran": 0.18,
-            "izleme": 0.9801000000000001,
-            "goreceli": 0.4248
-          },
-          {
-            "oran": 0.19,
-            "izleme": 0.9681000000000001,
-            "goreceli": 0.42075
-          },
-          {
-            "oran": 0.2,
-            "izleme": 0.9401999999999999,
-            "goreceli": 0.4171
-          },
-          {
-            "oran": 0.21,
-            "izleme": 0.9124,
-            "goreceli": 0.41365
-          },
-          {
-            "oran": 0.22,
-            "izleme": 0.8845000000000001,
-            "goreceli": 0.41045
-          },
-          {
-            "oran": 0.23,
-            "izleme": 0.8247,
-            "goreceli": 0.4074
-          },
-          {
-            "oran": 0.24,
-            "izleme": 0.757,
-            "goreceli": 0.40445
-          },
-          {
-            "oran": 0.25,
-            "izleme": 0.6931999999999999,
-            "goreceli": 0.40154999999999996
-          },
-          {
-            "oran": 0.26,
-            "izleme": 0.6574,
-            "goreceli": 0.39875
-          },
-          {
-            "oran": 0.27,
-            "izleme": 0.6255,
-            "goreceli": 0.396
-          },
-          {
-            "oran": 0.28,
-            "izleme": 0.6096,
-            "goreceli": 0.39339999999999997
-          },
-          {
-            "oran": 0.29,
-            "izleme": 0.5896,
-            "goreceli": 0.3909
-          },
-          {
-            "oran": 0.3,
-            "izleme": 0.5857,
-            "goreceli": 0.3886
-          },
-          {
-            "oran": 0.31,
-            "izleme": 0.5697,
-            "goreceli": 0.38655
-          },
-          {
-            "oran": 0.32,
-            "izleme": 0.5697,
-            "goreceli": 0.3847
-          },
-          {
-            "oran": 0.33,
-            "izleme": 0.5618,
-            "goreceli": 0.38315
-          },
-          {
-            "oran": 0.34,
-            "izleme": 0.5458,
-            "goreceli": 0.3819
-          },
-          {
-            "oran": 0.35,
-            "izleme": 0.5378000000000001,
-            "goreceli": 0.381
-          },
-          {
-            "oran": 0.36,
-            "izleme": 0.5219,
-            "goreceli": 0.3805
-          },
-          {
-            "oran": 0.37,
-            "izleme": 0.5139,
-            "goreceli": 0.38035
-          },
-          {
-            "oran": 0.38,
-            "izleme": 0.502,
-            "goreceli": 0.3806
-          },
-          {
-            "oran": 0.39,
-            "izleme": 0.4861,
-            "goreceli": 0.3812
-          },
-          {
-            "oran": 0.4,
-            "izleme": 0.4781,
-            "goreceli": 0.3822
-          },
-          {
-            "oran": 0.41,
-            "izleme": 0.4781,
-            "goreceli": 0.38355
-          },
-          {
-            "oran": 0.42,
-            "izleme": 0.47009999999999996,
-            "goreceli": 0.3852
-          },
-          {
-            "oran": 0.43,
-            "izleme": 0.4622,
-            "goreceli": 0.38715
-          },
-          {
-            "oran": 0.44,
-            "izleme": 0.4582,
-            "goreceli": 0.3893
-          },
-          {
-            "oran": 0.45,
-            "izleme": 0.4582,
-            "goreceli": 0.39165
-          },
-          {
-            "oran": 0.46,
-            "izleme": 0.4542,
-            "goreceli": 0.3941
-          },
-          {
-            "oran": 0.47,
-            "izleme": 0.4542,
-            "goreceli": 0.3966
-          },
-          {
-            "oran": 0.48,
-            "izleme": 0.45020000000000004,
-            "goreceli": 0.3991
-          },
-          {
-            "oran": 0.49,
-            "izleme": 0.45020000000000004,
-            "goreceli": 0.40145
-          },
-          {
-            "oran": 0.5,
-            "izleme": 0.4462,
-            "goreceli": 0.40365
-          },
-          {
-            "oran": 0.51,
-            "izleme": 0.4462,
-            "goreceli": 0.40565
-          },
-          {
-            "oran": 0.52,
-            "izleme": 0.4422,
-            "goreceli": 0.40735
-          },
-          {
-            "oran": 0.53,
-            "izleme": 0.4382,
-            "goreceli": 0.40875
-          },
-          {
-            "oran": 0.54,
-            "izleme": 0.4303,
-            "goreceli": 0.4099
-          },
-          {
-            "oran": 0.55,
-            "izleme": 0.4263,
-            "goreceli": 0.4108
-          },
-          {
-            "oran": 0.56,
-            "izleme": 0.42229999999999995,
-            "goreceli": 0.4116
-          },
-          {
-            "oran": 0.57,
-            "izleme": 0.4183,
-            "goreceli": 0.4124
-          },
-          {
-            "oran": 0.58,
-            "izleme": 0.40240000000000004,
-            "goreceli": 0.4134
-          },
-          {
-            "oran": 0.59,
-            "izleme": 0.39840000000000003,
-            "goreceli": 0.4148
-          },
-          {
-            "oran": 0.6,
-            "izleme": 0.3944,
-            "goreceli": 0.4168
-          },
-          {
-            "oran": 0.61,
-            "izleme": 0.3785,
-            "goreceli": 0.4198
-          },
-          {
-            "oran": 0.62,
-            "izleme": 0.3625,
-            "goreceli": 0.42415
-          },
-          {
-            "oran": 0.63,
-            "izleme": 0.3546,
-            "goreceli": 0.4302
-          },
-          {
-            "oran": 0.64,
-            "izleme": 0.3386,
-            "goreceli": 0.43825000000000003
-          },
-          {
-            "oran": 0.65,
-            "izleme": 0.3267,
-            "goreceli": 0.44865
-          },
-          {
-            "oran": 0.66,
-            "izleme": 0.3147,
-            "goreceli": 0.46155
-          },
-          {
-            "oran": 0.67,
-            "izleme": 0.3147,
-            "goreceli": 0.4769
-          },
-          {
-            "oran": 0.68,
-            "izleme": 0.31079999999999997,
-            "goreceli": 0.49455
-          },
-          {
-            "oran": 0.69,
-            "izleme": 0.3028,
-            "goreceli": 0.51395
-          },
-          {
-            "oran": 0.7,
-            "izleme": 0.3028,
-            "goreceli": 0.53445
-          },
-          {
-            "oran": 0.71,
-            "izleme": 0.2988,
-            "goreceli": 0.55515
-          },
-          {
-            "oran": 0.72,
-            "izleme": 0.2948,
-            "goreceli": 0.5751999999999999
-          },
-          {
-            "oran": 0.73,
-            "izleme": 0.2869,
-            "goreceli": 0.5938
-          },
-          {
-            "oran": 0.74,
-            "izleme": 0.2869,
-            "goreceli": 0.6104
-          },
-          {
-            "oran": 0.75,
-            "izleme": 0.2829,
-            "goreceli": 0.62465
-          },
-          {
-            "oran": 0.76,
-            "izleme": 0.2829,
-            "goreceli": 0.6366
-          },
-          {
-            "oran": 0.77,
-            "izleme": 0.2749,
-            "goreceli": 0.6464
-          },
-          {
-            "oran": 0.78,
-            "izleme": 0.26289999999999997,
-            "goreceli": 0.65445
-          },
-          {
-            "oran": 0.79,
-            "izleme": 0.26289999999999997,
-            "goreceli": 0.6611
-          },
-          {
-            "oran": 0.8,
-            "izleme": 0.259,
-            "goreceli": 0.6668000000000001
-          },
-          {
-            "oran": 0.81,
-            "izleme": 0.251,
-            "goreceli": 0.6718
-          },
-          {
-            "oran": 0.82,
-            "izleme": 0.251,
-            "goreceli": 0.6764
-          },
-          {
-            "oran": 0.83,
-            "izleme": 0.247,
-            "goreceli": 0.6808
-          },
-          {
-            "oran": 0.84,
-            "izleme": 0.247,
-            "goreceli": 0.68515
-          },
-          {
-            "oran": 0.85,
-            "izleme": 0.243,
-            "goreceli": 0.6896
-          },
-          {
-            "oran": 0.86,
-            "izleme": 0.247,
-            "goreceli": 0.6942
-          },
-          {
-            "oran": 0.87,
-            "izleme": 0.243,
-            "goreceli": 0.69895
-          },
-          {
-            "oran": 0.88,
-            "izleme": 0.2351,
-            "goreceli": 0.7039
-          },
-          {
-            "oran": 0.89,
-            "izleme": 0.2311,
-            "goreceli": 0.7091000000000001
-          },
-          {
-            "oran": 0.9,
-            "izleme": 0.2311,
-            "goreceli": 0.7146
-          },
-          {
-            "oran": 0.91,
-            "izleme": 0.2311,
-            "goreceli": 0.7203999999999999
-          },
-          {
-            "oran": 0.92,
-            "izleme": 0.2311,
-            "goreceli": 0.7264999999999999
-          },
-          {
-            "oran": 0.93,
-            "izleme": 0.2311,
-            "goreceli": 0.73295
-          },
-          {
-            "oran": 0.94,
-            "izleme": 0.2271,
-            "goreceli": 0.73975
-          },
-          {
-            "oran": 0.95,
-            "izleme": 0.2231,
-            "goreceli": 0.7468
-          },
-          {
-            "oran": 0.96,
-            "izleme": 0.2231,
-            "goreceli": 0.7539
-          },
-          {
-            "oran": 0.97,
-            "izleme": 0.2231,
-            "goreceli": 0.7609
-          },
-          {
-            "oran": 0.98,
-            "izleme": 0.2231,
-            "goreceli": 0.76745
-          },
-          {
-            "oran": 0.99,
-            "izleme": 0.2231,
-            "goreceli": 0.7733
-          },
-          {
-            "oran": 1,
-            "izleme": 0.2231,
-            "goreceli": 0.7783
-          }
-        ],
-        "analyticsStatus": "ok"
-      },
-      "14d": {
-        "collectedAt": "2026-10-23T18:26:26.181Z",
-        "metrics": {
-          "views": {
-            "value": 618,
-            "status": "DIRECTLY_MEASURED",
-            "source": "Data API"
-          },
-          "likes": {
-            "value": 11,
-            "status": "DIRECTLY_MEASURED",
-            "source": "Data API"
-          },
-          "comments": {
-            "value": 1,
-            "status": "DIRECTLY_MEASURED",
-            "source": "Data API"
-          },
-          "shares": {
-            "value": 0,
-            "status": "DIRECTLY_MEASURED",
-            "source": "Analytics API"
-          },
-          "subscribers_gained": {
-            "value": 1,
-            "status": "DIRECTLY_MEASURED",
-            "source": "Analytics API"
-          },
-          "subscribers_lost": {
-            "value": 0,
-            "status": "DIRECTLY_MEASURED",
-            "source": "Analytics API"
-          },
-          "net_subscribers": {
-            "value": 1,
-            "status": "DIRECTLY_MEASURED",
-            "source": "derived from Analytics API gained − lost"
-          },
-          "average_view_duration": {
-            "value": 15,
-            "status": "DIRECTLY_MEASURED",
-            "source": "Analytics API"
-          },
-          "average_percentage_viewed": {
-            "value": 52.349999999999994,
-            "status": "DIRECTLY_MEASURED",
-            "source": "Analytics API"
-          },
-          "watch_time_minutes": {
-            "value": 73,
-            "status": "DIRECTLY_MEASURED",
-            "source": "Analytics API"
-          },
-          "impressions": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "not exposed by YouTube APIs — export from Studio into studio-manual.json"
-          },
-          "ctr": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "not exposed by YouTube APIs — export from Studio into studio-manual.json"
-          },
-          "returning_viewers": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "not exposed per video by the public API"
-          },
-          "stayed_to_watch": {
-            "value": null,
-            "status": "UNAVAILABLE",
-            "reason": "Shorts 'Viewed vs swiped away' is Studio only — import with scripts/studio-import.js"
-          },
-          "first_30s_retention": {
-            "value": 0.2213,
-            "status": "DIRECTLY_MEASURED",
-            "source": "Analytics API (retention at 100% of video)"
-          },
-          "engaged_views": {
-            "value": 253,
-            "status": "DIRECTLY_MEASURED",
-            "source": "Analytics API"
-          },
-          "subscribers_per_1000_views": {
-            "value": 1.62,
-            "status": "DERIVED",
-            "from": "subscribers_gained / views"
-          },
-          "net_subscribers_per_1000_views": {
-            "value": 1.62,
-            "status": "DERIVED",
-            "from": "net_subscribers / views"
-          },
-          "engagement_per_1000_views": {
-            "value": 19.42,
-            "status": "DERIVED",
-            "from": "likes+comments+shares / views"
-          },
-          "watch_hours_per_1000_views": {
-            "value": 1.97,
-            "status": "DERIVED",
-            "from": "watch hours / views"
-          }
-        },
-        "traffic": [
-          {
-            "source": "SHORTS",
-            "views": 592,
-            "share": 0.958
-          },
-          {
-            "source": "YT_SEARCH",
-            "views": 15,
-            "share": 0.024
-          },
-          {
-            "source": "YT_OTHER_PAGE",
-            "views": 7,
-            "share": 0.011
-          },
-          {
-            "source": "EXT_URL",
-            "views": 2,
-            "share": 0.003
-          },
-          {
-            "source": "YT_CHANNEL",
-            "views": 1,
-            "share": 0.002
-          },
-          {
-            "source": "HASHTAGS",
-            "views": 1,
-            "share": 0.002
-          },
-          {
-            "source": "NO_LINK_OTHER",
-            "views": 0,
-            "share": 0
-          },
-          {
-            "source": "SUBSCRIBER",
-            "views": 0,
-            "share": 0
-          }
-        ],
-        "retention": [
-          {
-            "oran": 0.01,
-            "izleme": 1.2055,
-            "goreceli": 0.6157
-          },
-          {
-            "oran": 0.02,
-            "izleme": 1.2016,
-            "goreceli": 0.58985
-          },
-          {
-            "oran": 0.03,
-            "izleme": 1.1897,
-            "goreceli": 0.5646
-          },
-          {
-            "oran": 0.04,
-            "izleme": 1.1739,
-            "goreceli": 0.5416
-          },
-          {
-            "oran": 0.05,
-            "izleme": 1.1621,
-            "goreceli": 0.5221
-          },
-          {
-            "oran": 0.06,
-            "izleme": 1.1502,
-            "goreceli": 0.5063
-          },
-          {
-            "oran": 0.07,
-            "izleme": 1.1423,
-            "goreceli": 0.4938
-          },
-          {
-            "oran": 0.08,
-            "izleme": 1.1225,
-            "goreceli": 0.4839
-          },
-          {
-            "oran": 0.09,
-            "izleme": 1.1146,
-            "goreceli": 0.4757
-          },
-          {
-            "oran": 0.1,
-            "izleme": 1.0988,
-            "goreceli": 0.46845000000000003
-          },
-          {
-            "oran": 0.11,
-            "izleme": 1.0988,
-            "goreceli": 0.4618
-          },
-          {
-            "oran": 0.12,
-            "izleme": 1.083,
-            "goreceli": 0.4554
-          },
-          {
-            "oran": 0.13,
-            "izleme": 1.0711,
-            "goreceli": 0.4493
-          },
-          {
-            "oran": 0.14,
-            "izleme": 1.0672,
-            "goreceli": 0.4434
-          },
-          {
-            "oran": 0.15,
-            "izleme": 1.0395,
-            "goreceli": 0.4378
-          },
-          {
-            "oran": 0.16,
-            "izleme": 1.0119,
-            "goreceli": 0.43255
-          },
-          {
-            "oran": 0.17,
-            "izleme": 1,
-            "goreceli": 0.42769999999999997
-          },
-          {
-            "oran": 0.18,
-            "izleme": 0.9763,
-            "goreceli": 0.4233
-          },
-          {
-            "oran": 0.19,
-            "izleme": 0.9684,
-            "goreceli": 0.41925
-          },
-          {
-            "oran": 0.2,
-            "izleme": 0.9407,
-            "goreceli": 0.41555
-          },
-          {
-            "oran": 0.21,
-            "izleme": 0.9129999999999999,
-            "goreceli": 0.41215
-          },
-          {
-            "oran": 0.22,
-            "izleme": 0.8854000000000001,
-            "goreceli": 0.40895
-          },
-          {
-            "oran": 0.23,
-            "izleme": 0.8261,
-            "goreceli": 0.4059
-          },
-          {
-            "oran": 0.24,
-            "izleme": 0.7589,
-            "goreceli": 0.40295000000000003
-          },
-          {
-            "oran": 0.25,
-            "izleme": 0.6957,
-            "goreceli": 0.4001
-          },
-          {
-            "oran": 0.26,
-            "izleme": 0.6561,
-            "goreceli": 0.3973
-          },
-          {
-            "oran": 0.27,
-            "izleme": 0.6245,
-            "goreceli": 0.3946
-          },
-          {
-            "oran": 0.28,
-            "izleme": 0.6047,
-            "goreceli": 0.392
-          },
-          {
-            "oran": 0.29,
-            "izleme": 0.585,
-            "goreceli": 0.38955
-          },
-          {
-            "oran": 0.3,
-            "izleme": 0.581,
-            "goreceli": 0.38725
-          },
-          {
-            "oran": 0.31,
-            "izleme": 0.5652,
-            "goreceli": 0.38515
-          },
-          {
-            "oran": 0.32,
-            "izleme": 0.5652,
-            "goreceli": 0.38335
-          },
-          {
-            "oran": 0.33,
-            "izleme": 0.5573,
-            "goreceli": 0.38180000000000003
-          },
-          {
-            "oran": 0.34,
-            "izleme": 0.5415,
-            "goreceli": 0.3806
-          },
-          {
-            "oran": 0.35,
-            "izleme": 0.5336,
-            "goreceli": 0.37970000000000004
-          },
-          {
-            "oran": 0.36,
-            "izleme": 0.5178,
-            "goreceli": 0.3792
-          },
-          {
-            "oran": 0.37,
-            "izleme": 0.5099,
-            "goreceli": 0.3791
-          },
-          {
-            "oran": 0.38,
-            "izleme": 0.498,
-            "goreceli": 0.37935
-          },
-          {
-            "oran": 0.39,
-            "izleme": 0.48219999999999996,
-            "goreceli": 0.38
-          },
-          {
-            "oran": 0.4,
-            "izleme": 0.4743,
-            "goreceli": 0.38105
-          },
-          {
-            "oran": 0.41,
-            "izleme": 0.4743,
-            "goreceli": 0.3824
-          },
-          {
-            "oran": 0.42,
-            "izleme": 0.4664,
-            "goreceli": 0.3841
-          },
-          {
-            "oran": 0.43,
-            "izleme": 0.4585,
-            "goreceli": 0.38605
-          },
-          {
-            "oran": 0.44,
-            "izleme": 0.4545,
-            "goreceli": 0.38825
-          },
-          {
-            "oran": 0.45,
-            "izleme": 0.4545,
-            "goreceli": 0.39065
-          },
-          {
-            "oran": 0.46,
-            "izleme": 0.4506,
-            "goreceli": 0.39315
-          },
-          {
-            "oran": 0.47,
-            "izleme": 0.4506,
-            "goreceli": 0.39565
-          },
-          {
-            "oran": 0.48,
-            "izleme": 0.44659999999999994,
-            "goreceli": 0.3982
-          },
-          {
-            "oran": 0.49,
-            "izleme": 0.44659999999999994,
-            "goreceli": 0.4006
-          },
-          {
-            "oran": 0.5,
-            "izleme": 0.44270000000000004,
-            "goreceli": 0.4028
-          },
-          {
-            "oran": 0.51,
-            "izleme": 0.44270000000000004,
-            "goreceli": 0.4048
-          },
-          {
-            "oran": 0.52,
-            "izleme": 0.4387,
-            "goreceli": 0.4065
-          },
-          {
-            "oran": 0.53,
-            "izleme": 0.43479999999999996,
-            "goreceli": 0.4079
-          },
-          {
-            "oran": 0.54,
-            "izleme": 0.4269,
-            "goreceli": 0.40905
-          },
-          {
-            "oran": 0.55,
-            "izleme": 0.4229,
-            "goreceli": 0.40995
-          },
-          {
-            "oran": 0.56,
-            "izleme": 0.419,
-            "goreceli": 0.4107
-          },
-          {
-            "oran": 0.57,
-            "izleme": 0.415,
-            "goreceli": 0.4115
-          },
-          {
-            "oran": 0.58,
-            "izleme": 0.3992,
-            "goreceli": 0.41245
-          },
-          {
-            "oran": 0.59,
-            "izleme": 0.3953,
-            "goreceli": 0.41375
-          },
-          {
-            "oran": 0.6,
-            "izleme": 0.39130000000000004,
-            "goreceli": 0.41575
-          },
-          {
-            "oran": 0.61,
-            "izleme": 0.37549999999999994,
-            "goreceli": 0.41869999999999996
-          },
-          {
-            "oran": 0.62,
-            "izleme": 0.35969999999999996,
-            "goreceli": 0.42295
-          },
-          {
-            "oran": 0.63,
-            "izleme": 0.3518,
-            "goreceli": 0.4289
-          },
-          {
-            "oran": 0.64,
-            "izleme": 0.336,
-            "goreceli": 0.4369
-          },
-          {
-            "oran": 0.65,
-            "izleme": 0.32409999999999994,
-            "goreceli": 0.44725
-          },
-          {
-            "oran": 0.66,
-            "izleme": 0.3123,
-            "goreceli": 0.4601
-          },
-          {
-            "oran": 0.67,
-            "izleme": 0.3123,
-            "goreceli": 0.47545
-          },
-          {
-            "oran": 0.68,
-            "izleme": 0.30829999999999996,
-            "goreceli": 0.49305
-          },
-          {
-            "oran": 0.69,
-            "izleme": 0.3004,
-            "goreceli": 0.5125
-          },
-          {
-            "oran": 0.7,
-            "izleme": 0.3004,
-            "goreceli": 0.53305
-          },
-          {
-            "oran": 0.71,
-            "izleme": 0.2964,
-            "goreceli": 0.5539
-          },
-          {
-            "oran": 0.72,
-            "izleme": 0.2925,
-            "goreceli": 0.57405
-          },
-          {
-            "oran": 0.73,
-            "izleme": 0.2846,
-            "goreceli": 0.5928
-          },
-          {
-            "oran": 0.74,
-            "izleme": 0.2846,
-            "goreceli": 0.60955
-          },
-          {
-            "oran": 0.75,
-            "izleme": 0.28059999999999996,
-            "goreceli": 0.62395
-          },
-          {
-            "oran": 0.76,
-            "izleme": 0.28059999999999996,
-            "goreceli": 0.63605
-          },
-          {
-            "oran": 0.77,
-            "izleme": 0.2727,
-            "goreceli": 0.64595
-          },
-          {
-            "oran": 0.78,
-            "izleme": 0.2609,
-            "goreceli": 0.6541
-          },
-          {
-            "oran": 0.79,
-            "izleme": 0.2609,
-            "goreceli": 0.6607999999999999
-          },
-          {
-            "oran": 0.8,
-            "izleme": 0.2569,
-            "goreceli": 0.66655
-          },
-          {
-            "oran": 0.81,
-            "izleme": 0.249,
-            "goreceli": 0.67155
-          },
-          {
-            "oran": 0.82,
-            "izleme": 0.249,
-            "goreceli": 0.6762
-          },
-          {
-            "oran": 0.83,
-            "izleme": 0.2451,
-            "goreceli": 0.68065
-          },
-          {
-            "oran": 0.84,
-            "izleme": 0.2451,
-            "goreceli": 0.685
-          },
-          {
-            "oran": 0.85,
-            "izleme": 0.24109999999999998,
-            "goreceli": 0.6895
-          },
-          {
-            "oran": 0.86,
-            "izleme": 0.2451,
-            "goreceli": 0.6940500000000001
-          },
-          {
-            "oran": 0.87,
-            "izleme": 0.24109999999999998,
-            "goreceli": 0.69885
-          },
-          {
-            "oran": 0.88,
-            "izleme": 0.2332,
-            "goreceli": 0.7038
-          },
-          {
-            "oran": 0.89,
-            "izleme": 0.22920000000000001,
-            "goreceli": 0.70905
-          },
-          {
-            "oran": 0.9,
-            "izleme": 0.22920000000000001,
-            "goreceli": 0.7145
-          },
-          {
-            "oran": 0.91,
-            "izleme": 0.22920000000000001,
-            "goreceli": 0.7203
-          },
-          {
-            "oran": 0.92,
-            "izleme": 0.22920000000000001,
-            "goreceli": 0.72645
-          },
-          {
-            "oran": 0.93,
-            "izleme": 0.22920000000000001,
-            "goreceli": 0.7329
-          },
-          {
-            "oran": 0.94,
-            "izleme": 0.2253,
-            "goreceli": 0.7397
-          },
-          {
-            "oran": 0.95,
-            "izleme": 0.2213,
-            "goreceli": 0.74675
-          },
-          {
-            "oran": 0.96,
-            "izleme": 0.2213,
-            "goreceli": 0.75385
-          },
-          {
-            "oran": 0.97,
-            "izleme": 0.2213,
-            "goreceli": 0.76085
-          },
-          {
-            "oran": 0.98,
-            "izleme": 0.2213,
-            "goreceli": 0.7674
-          },
-          {
-            "oran": 0.99,
-            "izleme": 0.2213,
-            "goreceli": 0.77325
-          },
-          {
-            "oran": 1,
-            "izleme": 0.2213,
-            "goreceli": 0.77825
-          }
-        ],
-        "analyticsStatus": "ok"
-      }
-    },
-    "hookType": "countdown",
-    "hookScore": 79,
-    "selectedHook": "Jeanne Calment lived 122 years and 164 days.",
-    "firstLine": "Jeanne Calment lived 122 years and 164 days.",
-    "firstSecondsScore": 91,
-    "topicCluster": "HUMAN",
-    "bucket": "A",
-    "viralScore": 77,
-    "viralComponents": {
-      "curiosity_gap": {
-        "value": 93,
-        "basis": "derived"
-      },
-      "immediate_stakes": {
-        "value": 94,
-        "basis": "derived"
-      },
-      "human_consequence": {
-        "value": 65,
-        "basis": "derived"
-      },
-      "recognizability": {
-        "value": 78,
-        "basis": "measured"
-      },
-      "surprise": {
-        "value": 90,
-        "basis": "derived"
-      },
-      "visual_potential": {
-        "value": 85,
-        "basis": "inventory-signal"
-      },
-      "archival_footage_potential": {
-        "value": 35,
-        "basis": "inventory-signal"
-      },
-      "first_frame_potential": {
-        "value": 68,
-        "basis": "derived"
-      },
-      "title_potential": {
-        "value": 84,
-        "basis": "derived",
-        "note": "3 source-backed title seeds"
-      },
-      "emotional_tension": {
-        "value": 70,
-        "basis": "derived"
-      },
-      "contradiction": {
-        "value": 85,
-        "basis": "derived"
-      },
-      "unexpected_cause": {
-        "value": 82,
-        "basis": "derived"
-      },
-      "numerical_anomaly": {
-        "value": 95,
-        "basis": "derived"
-      },
-      "didnt_know_factor": {
-        "value": 86,
-        "basis": "derived"
-      },
-      "shareability": {
-        "value": 93,
-        "basis": "derived"
-      },
-      "channel_fit": {
-        "value": 74,
-        "basis": "derived"
-      },
-      "historical_similarity": {
-        "value": 50,
-        "basis": "neutral",
-        "note": "no same-cluster channel evidence yet"
-      },
-      "subscriber_conversion_potential": {
-        "value": 70,
-        "basis": "derived",
-        "note": "series-depth proxy; no measured conversion yet"
-      },
-      "audience_breadth": {
-        "value": 100,
-        "basis": "inventory-signal"
-      },
-      "hook_potential": {
-        "value": 71,
-        "basis": "derived"
-      },
-      "visual_availability": {
-        "value": 67,
-        "basis": "inventory-signal"
-      },
-      "research_confidence": {
-        "value": 95,
-        "basis": "derived"
-      },
-      "duplicate_risk": {
-        "value": 0,
-        "basis": "penalty",
-        "note": "no published-title collision"
-      },
-      "saturation_risk": {
-        "value": 0,
-        "basis": "penalty",
-        "note": "0 published / 50 inventory in cluster"
-      },
-      "recent_fatigue_risk": {
-        "value": 0,
-        "basis": "penalty",
-        "note": "0 same-family upload(s) in the last 30 days"
-      },
-      "source_confidence_risk": {
-        "value": -5,
-        "basis": "penalty",
-        "note": "95/100 source quality"
-      },
-      "weak_footage_risk": {
-        "value": -33,
-        "basis": "penalty",
-        "note": "no archival footage confirmed"
-      }
-    },
-    "storyStructure": "IMPOSSIBLE_QUESTION>ASSUMPTION>FIRST_EFFECT>SECOND_ORDER_EFFECT>SCIENTIFIC_PAYOFF",
-    "titlePattern": "question",
-    "selectedTitle": "A Person Lived Past 120: What Happens Next?",
-    "titleScore": 81,
-    "titleCandidates": 42,
-    "hookCandidates": 14,
-    "topicScore": 80,
-    "popularityScore": 78,
-    "ctaStyle": "NONE",
-    "durationBucket": "18-25s",
-    "openingVisual": "ILLUSTRATION",
-    "experimentVariant": null,
-    "factors": {
-      "TopicDemandScore": 78,
-      "CuriosityScore": 93,
-      "HookPotentialScore": 71,
-      "VisualImpactScore": 85,
-      "EmotionalImpactScore": 70,
-      "StoryCompressionScore": 68,
-      "RewatchPotentialScore": 66,
-      "SharePotentialScore": 93,
-      "CommentPotentialScore": 68,
-      "SubscriberConversionPotential": 70,
-      "NoveltyScore": 79,
-      "AudienceFitScore": 100,
-      "SourceQualityScore": 95,
-      "ChannelFitScore": 74
-    },
-    "selectionMode": "EXPLORE",
-    "videoId": "sielLySz6r8",
-    "slug": "what-if-you-lived-to-122",
-    "channel": "impossible-brief",
-    "contentType": "short",
-    "title": "A Person Lived Past 120: What Happens Next?",
-    "publishAt": "2026-10-09T18:00:10Z",
-    "publishHourUTC": 18,
-    "publishSlot": "21:00 TR",
-    "popularityBand": "unknown",
-    "readiness": 88,
-    "normalized": {
-      "ageHours": 336,
-      "viewsPerHour": 1.84,
-      "recentViewVelocity": 0,
-      "likeRate": 0.0178,
-      "commentRate": 0.00162,
-      "shareRate": 0,
-      "engagementRate": 0.01942,
-      "engagedViewRate": 0.40939,
-      "subscriberConversion": 0.00162,
-      "subscribersPer1000Views": 1.62
-    },
-    "performance": {
-      "growthScore": 45.4,
-      "classification": "NORMAL",
-      "percentiles": {
-        "viewVelocity": 18.4,
-        "retention": 17.6,
-        "engagement": 47.4,
-        "subscriberConversion": 82.4,
-        "views": 57.9
-      },
-      "baselines": {
-        "views": 699.5,
-        "viewsPerHour": 1.72,
-        "averagePercentageViewed": 63.165000000000006,
-        "engagementRate": 0.01967,
-        "subscriberConversion": 0
-      },
-      "missing": [],
-      "plateau": null,
-      "breakout": null,
-      "probableCauses": [],
-      "caveat": "Classification is channel-relative correlation, not proof of YouTube recommendation causality."
-    },
-    "durationSeconds": 30,
-    "registeredBy": "analytics-pass",
-    "metrics": {
-      "views": 618,
-      "averagePercentageViewed": 52.349999999999994,
-      "averageViewDuration": 15,
-      "likes": 11,
-      "comments": 1,
-      "shares": 0,
-      "subscribersGained": 1,
-      "engagedViews": 253,
-      "subscribersLost": 0,
-      "netSubscribers": 1,
-      "subscribersPer1000Views": 1.62,
-      "netSubscribersPer1000Views": 1.62,
-      "engagementPer1000Views": 19.42,
-      "watchHoursPer1000Views": 1.97,
-      "ctr": null,
-      "stayedToWatch": null,
-      "first30sRetention": 0.2213,
-      "shortsFeedShare": 0.958,
-      "searchShare": 0.024
-    },
-    "latestCheckpoint": "14d"
   },
   {
     "checkpoints": {
@@ -4126,20 +2073,20 @@
       "subscribersPer1000Views": 0.96
     },
     "performance": {
-      "growthScore": 68.1,
+      "growthScore": 67.1,
       "classification": "NORMAL",
       "percentiles": {
         "viewVelocity": 84.2,
         "retention": 58.8,
-        "engagement": 63.2,
+        "engagement": 57.9,
         "subscriberConversion": 64.7,
         "views": 89.5
       },
       "baselines": {
-        "views": 699.5,
-        "viewsPerHour": 1.72,
+        "views": 701.5,
+        "viewsPerHour": 1.69,
         "averagePercentageViewed": 63.165000000000006,
-        "engagementRate": 0.01967,
+        "engagementRate": 0.01996,
         "subscriberConversion": 0
       },
       "missing": [],
@@ -6159,20 +4106,20 @@
       "subscribersPer1000Views": 2.5
     },
     "performance": {
-      "growthScore": 68.8,
+      "growthScore": 67.7,
       "classification": "NORMAL",
       "percentiles": {
-        "viewVelocity": 57.9,
+        "viewVelocity": 55.3,
         "retention": 64.7,
-        "engagement": 57.9,
+        "engagement": 52.6,
         "subscriberConversion": 94.1,
-        "views": 31.6
+        "views": 36.8
       },
       "baselines": {
-        "views": 699.5,
-        "viewsPerHour": 1.72,
+        "views": 701.5,
+        "viewsPerHour": 1.69,
         "averagePercentageViewed": 63.165000000000006,
-        "engagementRate": 0.01967,
+        "engagementRate": 0.01996,
         "subscriberConversion": 0
       },
       "missing": [],
@@ -8182,20 +6129,20 @@
       "subscribersPer1000Views": 0
     },
     "performance": {
-      "growthScore": 48.3,
+      "growthScore": 47.8,
       "classification": "NORMAL",
       "percentiles": {
-        "viewVelocity": 57.9,
+        "viewVelocity": 55.3,
         "retention": 47.1,
         "engagement": 89.5,
         "subscriberConversion": 26.5,
         "views": 15.8
       },
       "baselines": {
-        "views": 699.5,
-        "viewsPerHour": 1.72,
+        "views": 701.5,
+        "viewsPerHour": 1.69,
         "averagePercentageViewed": 63.165000000000006,
-        "engagementRate": 0.01967,
+        "engagementRate": 0.01996,
         "subscriberConversion": 0
       },
       "missing": [],
@@ -10215,10 +8162,10 @@
         "views": 94.7
       },
       "baselines": {
-        "views": 699.5,
-        "viewsPerHour": 1.72,
+        "views": 701.5,
+        "viewsPerHour": 1.69,
         "averagePercentageViewed": 63.165000000000006,
-        "engagementRate": 0.01967,
+        "engagementRate": 0.01996,
         "subscriberConversion": 0
       },
       "missing": [],
@@ -12228,20 +10175,20 @@
       "subscribersPer1000Views": 0
     },
     "performance": {
-      "growthScore": 36.9,
+      "growthScore": 36.5,
       "classification": "WEAK",
       "percentiles": {
-        "viewVelocity": 57.9,
+        "viewVelocity": 55.3,
         "retention": 29.4,
         "engagement": 26.3,
         "subscriberConversion": 26.5,
         "views": 84.2
       },
       "baselines": {
-        "views": 699.5,
-        "viewsPerHour": 1.72,
+        "views": 701.5,
+        "viewsPerHour": 1.69,
         "averagePercentageViewed": 63.165000000000006,
-        "engagementRate": 0.01967,
+        "engagementRate": 0.01996,
         "subscriberConversion": 0
       },
       "missing": [],
@@ -14241,20 +12188,20 @@
       "subscribersPer1000Views": 0
     },
     "performance": {
-      "growthScore": 22.9,
+      "growthScore": 22.8,
       "classification": "WEAK",
       "percentiles": {
-        "viewVelocity": 18.4,
+        "viewVelocity": 15.8,
         "retention": 11.8,
         "engagement": 36.8,
         "subscriberConversion": 26.5,
-        "views": 26.3
+        "views": 31.6
       },
       "baselines": {
-        "views": 699.5,
-        "viewsPerHour": 1.72,
+        "views": 701.5,
+        "viewsPerHour": 1.69,
         "averagePercentageViewed": 63.165000000000006,
-        "engagementRate": 0.01967,
+        "engagementRate": 0.01996,
         "subscriberConversion": 0
       },
       "missing": [],
@@ -16264,20 +14211,20 @@
       "subscribersPer1000Views": 0
     },
     "performance": {
-      "growthScore": 24.1,
+      "growthScore": 23.6,
       "classification": "WEAK",
       "percentiles": {
-        "viewVelocity": 57.9,
+        "viewVelocity": 55.3,
         "retention": 0,
         "engagement": 5.3,
         "subscriberConversion": 26.5,
         "views": 68.4
       },
       "baselines": {
-        "views": 699.5,
-        "viewsPerHour": 1.72,
+        "views": 701.5,
+        "viewsPerHour": 1.69,
         "averagePercentageViewed": 63.165000000000006,
-        "engagementRate": 0.01967,
+        "engagementRate": 0.01996,
         "subscriberConversion": 0
       },
       "missing": [],
@@ -18287,20 +16234,20 @@
       "subscribersPer1000Views": 0.98
     },
     "performance": {
-      "growthScore": 66.1,
+      "growthScore": 65.7,
       "classification": "NORMAL",
       "percentiles": {
-        "viewVelocity": 18.4,
+        "viewVelocity": 15.8,
         "retention": 88.2,
         "engagement": 68.4,
         "subscriberConversion": 70.6,
         "views": 78.9
       },
       "baselines": {
-        "views": 699.5,
-        "viewsPerHour": 1.72,
+        "views": 701.5,
+        "viewsPerHour": 1.69,
         "averagePercentageViewed": 63.165000000000006,
-        "engagementRate": 0.01967,
+        "engagementRate": 0.01996,
         "subscriberConversion": 0
       },
       "missing": [],
@@ -20887,20 +18834,20 @@
       "subscribersPer1000Views": 0
     },
     "performance": {
-      "growthScore": 33.8,
+      "growthScore": 33.3,
       "classification": "WEAK",
       "percentiles": {
-        "viewVelocity": 57.9,
+        "viewVelocity": 55.3,
         "retention": 23.5,
         "engagement": 42.1,
         "subscriberConversion": 26.5,
         "views": 21.1
       },
       "baselines": {
-        "views": 699.5,
-        "viewsPerHour": 1.72,
+        "views": 701.5,
+        "viewsPerHour": 1.69,
         "averagePercentageViewed": 63.165000000000006,
-        "engagementRate": 0.01967,
+        "engagementRate": 0.01996,
         "subscriberConversion": 0
       },
       "missing": [],
@@ -22920,10 +20867,10 @@
         "views": 63.2
       },
       "baselines": {
-        "views": 699.5,
-        "viewsPerHour": 1.72,
+        "views": 701.5,
+        "viewsPerHour": 1.69,
         "averagePercentageViewed": 63.165000000000006,
-        "engagementRate": 0.01967,
+        "engagementRate": 0.01996,
         "subscriberConversion": 0
       },
       "missing": [],
@@ -26077,20 +24024,20 @@
       "subscribersPer1000Views": 0
     },
     "performance": {
-      "growthScore": 37.9,
+      "growthScore": 37.4,
       "classification": "WEAK",
       "percentiles": {
-        "viewVelocity": 18.4,
+        "viewVelocity": 15.8,
         "retention": 41.2,
         "engagement": 84.2,
         "subscriberConversion": 26.5,
         "views": 5.3
       },
       "baselines": {
-        "views": 699.5,
-        "viewsPerHour": 1.72,
+        "views": 701.5,
+        "viewsPerHour": 1.69,
         "averagePercentageViewed": 63.165000000000006,
-        "engagementRate": 0.01967,
+        "engagementRate": 0.01996,
         "subscriberConversion": 0
       },
       "missing": [],
@@ -29214,20 +27161,20 @@
       "subscribersPer1000Views": 3.82
     },
     "performance": {
-      "growthScore": 68.2,
+      "growthScore": 68.1,
       "classification": "NORMAL",
       "percentiles": {
-        "viewVelocity": 18.4,
+        "viewVelocity": 15.8,
         "retention": 70.6,
         "engagement": 73.7,
         "subscriberConversion": 100,
-        "views": 36.8
+        "views": 42.1
       },
       "baselines": {
-        "views": 699.5,
-        "viewsPerHour": 1.72,
+        "views": 701.5,
+        "viewsPerHour": 1.69,
         "averagePercentageViewed": 63.165000000000006,
-        "engagementRate": 0.01967,
+        "engagementRate": 0.01996,
         "subscriberConversion": 0
       },
       "missing": [],
@@ -32377,20 +30324,20 @@
       "subscribersPer1000Views": 0
     },
     "performance": {
-      "growthScore": 40.9,
+      "growthScore": 40.4,
       "classification": "WEAK",
       "percentiles": {
-        "viewVelocity": 18.4,
+        "viewVelocity": 15.8,
         "retention": 100,
         "engagement": 10.5,
         "subscriberConversion": 26.5,
         "views": 10.5
       },
       "baselines": {
-        "views": 699.5,
-        "viewsPerHour": 1.72,
+        "views": 701.5,
+        "viewsPerHour": 1.69,
         "averagePercentageViewed": 63.165000000000006,
-        "engagementRate": 0.01967,
+        "engagementRate": 0.01996,
         "subscriberConversion": 0
       },
       "missing": [],
@@ -33120,20 +31067,20 @@
       "subscribersPer1000Views": 0
     },
     "performance": {
-      "growthScore": 43.5,
+      "growthScore": 43.1,
       "classification": "NORMAL",
       "percentiles": {
-        "viewVelocity": 18.4,
+        "viewVelocity": 15.8,
         "retention": 52.9,
         "engagement": 100,
         "subscriberConversion": 26.5,
         "views": 0
       },
       "baselines": {
-        "views": 699.5,
-        "viewsPerHour": 1.72,
+        "views": 701.5,
+        "viewsPerHour": 1.69,
         "averagePercentageViewed": 63.165000000000006,
-        "engagementRate": 0.01967,
+        "engagementRate": 0.01996,
         "subscriberConversion": 0
       },
       "missing": [],
@@ -35749,20 +33696,20 @@
       "subscribersPer1000Views": 0
     },
     "performance": {
-      "growthScore": 42.5,
+      "growthScore": 42.4,
       "classification": "NORMAL",
       "percentiles": {
-        "viewVelocity": 18.4,
+        "viewVelocity": 15.8,
         "retention": 82.4,
         "engagement": 31.6,
         "subscriberConversion": 26.5,
-        "views": 47.4
+        "views": 52.6
       },
       "baselines": {
-        "views": 699.5,
-        "viewsPerHour": 1.72,
+        "views": 701.5,
+        "viewsPerHour": 1.69,
         "averagePercentageViewed": 63.165000000000006,
-        "engagementRate": 0.01967,
+        "engagementRate": 0.01996,
         "subscriberConversion": 0
       },
       "missing": [],
@@ -36377,10 +34324,10 @@
         "views": 73.7
       },
       "baselines": {
-        "views": 699.5,
-        "viewsPerHour": 1.72,
+        "views": 701.5,
+        "viewsPerHour": 1.69,
         "averagePercentageViewed": 63.165000000000006,
-        "engagementRate": 0.01967,
+        "engagementRate": 0.01996,
         "subscriberConversion": 0
       },
       "missing": [
@@ -38999,20 +36946,20 @@
       "subscribersPer1000Views": 1.65
     },
     "performance": {
-      "growthScore": 64.3,
+      "growthScore": 64.2,
       "classification": "NORMAL",
       "percentiles": {
-        "viewVelocity": 57.9,
+        "viewVelocity": 55.3,
         "retention": 76.5,
         "engagement": 21.1,
         "subscriberConversion": 88.2,
-        "views": 42.1
+        "views": 47.4
       },
       "baselines": {
-        "views": 699.5,
-        "viewsPerHour": 1.72,
+        "views": 701.5,
+        "viewsPerHour": 1.69,
         "averagePercentageViewed": 63.165000000000006,
-        "engagementRate": 0.01967,
+        "engagementRate": 0.01996,
         "subscriberConversion": 0
       },
       "missing": [],
@@ -39628,10 +37575,10 @@
         "views": 100
       },
       "baselines": {
-        "views": 699.5,
-        "viewsPerHour": 1.72,
+        "views": 701.5,
+        "viewsPerHour": 1.69,
         "averagePercentageViewed": 63.165000000000006,
-        "engagementRate": 0.01967,
+        "engagementRate": 0.01996,
         "subscriberConversion": 0
       },
       "missing": [
@@ -42300,20 +40247,20 @@
       "subscribersPer1000Views": 0
     },
     "performance": {
-      "growthScore": 41.1,
+      "growthScore": 40,
       "classification": "WEAK",
       "percentiles": {
-        "viewVelocity": 57.9,
+        "viewVelocity": 55.3,
         "retention": 35.3,
-        "engagement": 52.6,
+        "engagement": 47.4,
         "subscriberConversion": 26.5,
-        "views": 52.6
+        "views": 57.9
       },
       "baselines": {
-        "views": 699.5,
-        "viewsPerHour": 1.72,
+        "views": 701.5,
+        "viewsPerHour": 1.69,
         "averagePercentageViewed": 63.165000000000006,
-        "engagementRate": 0.01967,
+        "engagementRate": 0.01996,
         "subscriberConversion": 0
       },
       "missing": [],
@@ -42344,6 +40291,2709 @@
       "first30sRetention": 0.315,
       "shortsFeedShare": 0.931,
       "searchShare": 0.05
+    },
+    "latestCheckpoint": "30d"
+  },
+  {
+    "checkpoints": {
+      "1h": {
+        "collectedAt": "2026-10-09T19:34:23.417Z",
+        "metrics": {
+          "views": {
+            "value": 81,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Data API"
+          },
+          "likes": {
+            "value": 2,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Data API"
+          },
+          "comments": {
+            "value": 0,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Data API"
+          },
+          "shares": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "subscribers_gained": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "subscribers_lost": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "net_subscribers": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "average_view_duration": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "average_percentage_viewed": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "watch_time_minutes": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "impressions": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "not exposed by YouTube APIs — export from Studio into studio-manual.json"
+          },
+          "ctr": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "not exposed by YouTube APIs — export from Studio into studio-manual.json"
+          },
+          "returning_viewers": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "not exposed per video by the public API"
+          },
+          "stayed_to_watch": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "Shorts 'Viewed vs swiped away' is Studio only — import with scripts/studio-import.js"
+          },
+          "first_30s_retention": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "engaged_views": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "subscribers_per_1000_views": {
+            "value": null,
+            "status": "UNAVAILABLE"
+          },
+          "net_subscribers_per_1000_views": {
+            "value": null,
+            "status": "UNAVAILABLE"
+          },
+          "engagement_per_1000_views": {
+            "value": 24.69,
+            "status": "DERIVED",
+            "from": "likes+comments+shares / views"
+          },
+          "watch_hours_per_1000_views": {
+            "value": null,
+            "status": "UNAVAILABLE"
+          }
+        },
+        "traffic": [],
+        "retention": [],
+        "analyticsStatus": "ok"
+      },
+      "12h": {
+        "collectedAt": "2026-10-10T12:24:34.746Z",
+        "metrics": {
+          "views": {
+            "value": 362,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Data API"
+          },
+          "likes": {
+            "value": 8,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Data API"
+          },
+          "comments": {
+            "value": 1,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Data API"
+          },
+          "shares": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "subscribers_gained": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "subscribers_lost": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "net_subscribers": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "average_view_duration": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "average_percentage_viewed": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "watch_time_minutes": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "impressions": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "not exposed by YouTube APIs — export from Studio into studio-manual.json"
+          },
+          "ctr": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "not exposed by YouTube APIs — export from Studio into studio-manual.json"
+          },
+          "returning_viewers": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "not exposed per video by the public API"
+          },
+          "stayed_to_watch": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "Shorts 'Viewed vs swiped away' is Studio only — import with scripts/studio-import.js"
+          },
+          "first_30s_retention": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "engaged_views": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "subscribers_per_1000_views": {
+            "value": null,
+            "status": "UNAVAILABLE"
+          },
+          "net_subscribers_per_1000_views": {
+            "value": null,
+            "status": "UNAVAILABLE"
+          },
+          "engagement_per_1000_views": {
+            "value": 24.86,
+            "status": "DERIVED",
+            "from": "likes+comments+shares / views"
+          },
+          "watch_hours_per_1000_views": {
+            "value": null,
+            "status": "UNAVAILABLE"
+          }
+        },
+        "traffic": [],
+        "retention": [],
+        "analyticsStatus": "ok"
+      },
+      "6h": {
+        "collectedAt": "2026-10-10T12:48:00.504Z",
+        "metrics": {
+          "views": {
+            "value": 355,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Data API"
+          },
+          "likes": {
+            "value": 8,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Data API"
+          },
+          "comments": {
+            "value": 1,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Data API"
+          },
+          "shares": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "subscribers_gained": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "subscribers_lost": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "net_subscribers": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "average_view_duration": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "average_percentage_viewed": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "watch_time_minutes": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "impressions": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "not exposed by YouTube APIs — export from Studio into studio-manual.json"
+          },
+          "ctr": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "not exposed by YouTube APIs — export from Studio into studio-manual.json"
+          },
+          "returning_viewers": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "not exposed per video by the public API"
+          },
+          "stayed_to_watch": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "Shorts 'Viewed vs swiped away' is Studio only — import with scripts/studio-import.js"
+          },
+          "first_30s_retention": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "engaged_views": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "subscribers_per_1000_views": {
+            "value": null,
+            "status": "UNAVAILABLE"
+          },
+          "net_subscribers_per_1000_views": {
+            "value": null,
+            "status": "UNAVAILABLE"
+          },
+          "engagement_per_1000_views": {
+            "value": 25.35,
+            "status": "DERIVED",
+            "from": "likes+comments+shares / views"
+          },
+          "watch_hours_per_1000_views": {
+            "value": null,
+            "status": "UNAVAILABLE"
+          }
+        },
+        "traffic": [],
+        "retention": [],
+        "analyticsStatus": "ok"
+      },
+      "24h": {
+        "collectedAt": "2026-10-10T18:41:54.793Z",
+        "metrics": {
+          "views": {
+            "value": 371,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Data API"
+          },
+          "likes": {
+            "value": 8,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Data API"
+          },
+          "comments": {
+            "value": 1,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Data API"
+          },
+          "shares": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "subscribers_gained": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "subscribers_lost": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "net_subscribers": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "average_view_duration": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "average_percentage_viewed": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "watch_time_minutes": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "impressions": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "not exposed by YouTube APIs — export from Studio into studio-manual.json"
+          },
+          "ctr": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "not exposed by YouTube APIs — export from Studio into studio-manual.json"
+          },
+          "returning_viewers": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "not exposed per video by the public API"
+          },
+          "stayed_to_watch": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "Shorts 'Viewed vs swiped away' is Studio only — import with scripts/studio-import.js"
+          },
+          "first_30s_retention": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "engaged_views": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "subscribers_per_1000_views": {
+            "value": null,
+            "status": "UNAVAILABLE"
+          },
+          "net_subscribers_per_1000_views": {
+            "value": null,
+            "status": "UNAVAILABLE"
+          },
+          "engagement_per_1000_views": {
+            "value": 24.26,
+            "status": "DERIVED",
+            "from": "likes+comments+shares / views"
+          },
+          "watch_hours_per_1000_views": {
+            "value": null,
+            "status": "UNAVAILABLE"
+          }
+        },
+        "traffic": [],
+        "retention": [],
+        "analyticsStatus": "ok"
+      },
+      "48h": {
+        "collectedAt": "2026-10-11T18:09:26.063Z",
+        "metrics": {
+          "views": {
+            "value": 549,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Data API"
+          },
+          "likes": {
+            "value": 11,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Data API"
+          },
+          "comments": {
+            "value": 1,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Data API"
+          },
+          "shares": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "subscribers_gained": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "subscribers_lost": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "net_subscribers": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "average_view_duration": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "average_percentage_viewed": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "watch_time_minutes": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "impressions": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "not exposed by YouTube APIs — export from Studio into studio-manual.json"
+          },
+          "ctr": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "not exposed by YouTube APIs — export from Studio into studio-manual.json"
+          },
+          "returning_viewers": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "not exposed per video by the public API"
+          },
+          "stayed_to_watch": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "Shorts 'Viewed vs swiped away' is Studio only — import with scripts/studio-import.js"
+          },
+          "first_30s_retention": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "engaged_views": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "analytics unavailable"
+          },
+          "subscribers_per_1000_views": {
+            "value": null,
+            "status": "UNAVAILABLE"
+          },
+          "net_subscribers_per_1000_views": {
+            "value": null,
+            "status": "UNAVAILABLE"
+          },
+          "engagement_per_1000_views": {
+            "value": 21.86,
+            "status": "DERIVED",
+            "from": "likes+comments+shares / views"
+          },
+          "watch_hours_per_1000_views": {
+            "value": null,
+            "status": "UNAVAILABLE"
+          }
+        },
+        "traffic": [],
+        "retention": [],
+        "analyticsStatus": "ok"
+      },
+      "7d": {
+        "collectedAt": "2026-10-16T18:08:43.282Z",
+        "metrics": {
+          "views": {
+            "value": 618,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Data API"
+          },
+          "likes": {
+            "value": 11,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Data API"
+          },
+          "comments": {
+            "value": 1,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Data API"
+          },
+          "shares": {
+            "value": 0,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Analytics API"
+          },
+          "subscribers_gained": {
+            "value": 1,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Analytics API"
+          },
+          "subscribers_lost": {
+            "value": 0,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Analytics API"
+          },
+          "net_subscribers": {
+            "value": 1,
+            "status": "DIRECTLY_MEASURED",
+            "source": "derived from Analytics API gained − lost"
+          },
+          "average_view_duration": {
+            "value": 15,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Analytics API"
+          },
+          "average_percentage_viewed": {
+            "value": 52.61,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Analytics API"
+          },
+          "watch_time_minutes": {
+            "value": 73,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Analytics API"
+          },
+          "impressions": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "not exposed by YouTube APIs — export from Studio into studio-manual.json"
+          },
+          "ctr": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "not exposed by YouTube APIs — export from Studio into studio-manual.json"
+          },
+          "returning_viewers": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "not exposed per video by the public API"
+          },
+          "stayed_to_watch": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "Shorts 'Viewed vs swiped away' is Studio only — import with scripts/studio-import.js"
+          },
+          "first_30s_retention": {
+            "value": 0.2231,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Analytics API (retention at 100% of video)"
+          },
+          "engaged_views": {
+            "value": 251,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Analytics API"
+          },
+          "subscribers_per_1000_views": {
+            "value": 1.62,
+            "status": "DERIVED",
+            "from": "subscribers_gained / views"
+          },
+          "net_subscribers_per_1000_views": {
+            "value": 1.62,
+            "status": "DERIVED",
+            "from": "net_subscribers / views"
+          },
+          "engagement_per_1000_views": {
+            "value": 19.42,
+            "status": "DERIVED",
+            "from": "likes+comments+shares / views"
+          },
+          "watch_hours_per_1000_views": {
+            "value": 1.97,
+            "status": "DERIVED",
+            "from": "watch hours / views"
+          }
+        },
+        "traffic": [
+          {
+            "source": "SHORTS",
+            "views": 592,
+            "share": 0.963
+          },
+          {
+            "source": "YT_SEARCH",
+            "views": 13,
+            "share": 0.021
+          },
+          {
+            "source": "YT_OTHER_PAGE",
+            "views": 7,
+            "share": 0.011
+          },
+          {
+            "source": "YT_CHANNEL",
+            "views": 1,
+            "share": 0.002
+          },
+          {
+            "source": "EXT_URL",
+            "views": 1,
+            "share": 0.002
+          },
+          {
+            "source": "HASHTAGS",
+            "views": 1,
+            "share": 0.002
+          },
+          {
+            "source": "NO_LINK_OTHER",
+            "views": 0,
+            "share": 0
+          },
+          {
+            "source": "SUBSCRIBER",
+            "views": 0,
+            "share": 0
+          }
+        ],
+        "retention": [
+          {
+            "oran": 0.01,
+            "izleme": 1.2072,
+            "goreceli": 0.6164499999999999
+          },
+          {
+            "oran": 0.02,
+            "izleme": 1.2031999999999998,
+            "goreceli": 0.59075
+          },
+          {
+            "oran": 0.03,
+            "izleme": 1.1912,
+            "goreceli": 0.56555
+          },
+          {
+            "oran": 0.04,
+            "izleme": 1.1753,
+            "goreceli": 0.54265
+          },
+          {
+            "oran": 0.05,
+            "izleme": 1.1633,
+            "goreceli": 0.5232
+          },
+          {
+            "oran": 0.06,
+            "izleme": 1.1514,
+            "goreceli": 0.5075
+          },
+          {
+            "oran": 0.07,
+            "izleme": 1.1434,
+            "goreceli": 0.4951
+          },
+          {
+            "oran": 0.08,
+            "izleme": 1.1275,
+            "goreceli": 0.48525
+          },
+          {
+            "oran": 0.09,
+            "izleme": 1.1195,
+            "goreceli": 0.47705
+          },
+          {
+            "oran": 0.1,
+            "izleme": 1.1036,
+            "goreceli": 0.4699
+          },
+          {
+            "oran": 0.11,
+            "izleme": 1.1036,
+            "goreceli": 0.46325
+          },
+          {
+            "oran": 0.12,
+            "izleme": 1.0876000000000001,
+            "goreceli": 0.4569
+          },
+          {
+            "oran": 0.13,
+            "izleme": 1.0756999999999999,
+            "goreceli": 0.45075
+          },
+          {
+            "oran": 0.14,
+            "izleme": 1.0717,
+            "goreceli": 0.44485
+          },
+          {
+            "oran": 0.15,
+            "izleme": 1.0438,
+            "goreceli": 0.4393
+          },
+          {
+            "oran": 0.16,
+            "izleme": 1.0159,
+            "goreceli": 0.43405
+          },
+          {
+            "oran": 0.17,
+            "izleme": 1.004,
+            "goreceli": 0.42925
+          },
+          {
+            "oran": 0.18,
+            "izleme": 0.9801000000000001,
+            "goreceli": 0.4248
+          },
+          {
+            "oran": 0.19,
+            "izleme": 0.9681000000000001,
+            "goreceli": 0.42075
+          },
+          {
+            "oran": 0.2,
+            "izleme": 0.9401999999999999,
+            "goreceli": 0.4171
+          },
+          {
+            "oran": 0.21,
+            "izleme": 0.9124,
+            "goreceli": 0.41365
+          },
+          {
+            "oran": 0.22,
+            "izleme": 0.8845000000000001,
+            "goreceli": 0.41045
+          },
+          {
+            "oran": 0.23,
+            "izleme": 0.8247,
+            "goreceli": 0.4074
+          },
+          {
+            "oran": 0.24,
+            "izleme": 0.757,
+            "goreceli": 0.40445
+          },
+          {
+            "oran": 0.25,
+            "izleme": 0.6931999999999999,
+            "goreceli": 0.40154999999999996
+          },
+          {
+            "oran": 0.26,
+            "izleme": 0.6574,
+            "goreceli": 0.39875
+          },
+          {
+            "oran": 0.27,
+            "izleme": 0.6255,
+            "goreceli": 0.396
+          },
+          {
+            "oran": 0.28,
+            "izleme": 0.6096,
+            "goreceli": 0.39339999999999997
+          },
+          {
+            "oran": 0.29,
+            "izleme": 0.5896,
+            "goreceli": 0.3909
+          },
+          {
+            "oran": 0.3,
+            "izleme": 0.5857,
+            "goreceli": 0.3886
+          },
+          {
+            "oran": 0.31,
+            "izleme": 0.5697,
+            "goreceli": 0.38655
+          },
+          {
+            "oran": 0.32,
+            "izleme": 0.5697,
+            "goreceli": 0.3847
+          },
+          {
+            "oran": 0.33,
+            "izleme": 0.5618,
+            "goreceli": 0.38315
+          },
+          {
+            "oran": 0.34,
+            "izleme": 0.5458,
+            "goreceli": 0.3819
+          },
+          {
+            "oran": 0.35,
+            "izleme": 0.5378000000000001,
+            "goreceli": 0.381
+          },
+          {
+            "oran": 0.36,
+            "izleme": 0.5219,
+            "goreceli": 0.3805
+          },
+          {
+            "oran": 0.37,
+            "izleme": 0.5139,
+            "goreceli": 0.38035
+          },
+          {
+            "oran": 0.38,
+            "izleme": 0.502,
+            "goreceli": 0.3806
+          },
+          {
+            "oran": 0.39,
+            "izleme": 0.4861,
+            "goreceli": 0.3812
+          },
+          {
+            "oran": 0.4,
+            "izleme": 0.4781,
+            "goreceli": 0.3822
+          },
+          {
+            "oran": 0.41,
+            "izleme": 0.4781,
+            "goreceli": 0.38355
+          },
+          {
+            "oran": 0.42,
+            "izleme": 0.47009999999999996,
+            "goreceli": 0.3852
+          },
+          {
+            "oran": 0.43,
+            "izleme": 0.4622,
+            "goreceli": 0.38715
+          },
+          {
+            "oran": 0.44,
+            "izleme": 0.4582,
+            "goreceli": 0.3893
+          },
+          {
+            "oran": 0.45,
+            "izleme": 0.4582,
+            "goreceli": 0.39165
+          },
+          {
+            "oran": 0.46,
+            "izleme": 0.4542,
+            "goreceli": 0.3941
+          },
+          {
+            "oran": 0.47,
+            "izleme": 0.4542,
+            "goreceli": 0.3966
+          },
+          {
+            "oran": 0.48,
+            "izleme": 0.45020000000000004,
+            "goreceli": 0.3991
+          },
+          {
+            "oran": 0.49,
+            "izleme": 0.45020000000000004,
+            "goreceli": 0.40145
+          },
+          {
+            "oran": 0.5,
+            "izleme": 0.4462,
+            "goreceli": 0.40365
+          },
+          {
+            "oran": 0.51,
+            "izleme": 0.4462,
+            "goreceli": 0.40565
+          },
+          {
+            "oran": 0.52,
+            "izleme": 0.4422,
+            "goreceli": 0.40735
+          },
+          {
+            "oran": 0.53,
+            "izleme": 0.4382,
+            "goreceli": 0.40875
+          },
+          {
+            "oran": 0.54,
+            "izleme": 0.4303,
+            "goreceli": 0.4099
+          },
+          {
+            "oran": 0.55,
+            "izleme": 0.4263,
+            "goreceli": 0.4108
+          },
+          {
+            "oran": 0.56,
+            "izleme": 0.42229999999999995,
+            "goreceli": 0.4116
+          },
+          {
+            "oran": 0.57,
+            "izleme": 0.4183,
+            "goreceli": 0.4124
+          },
+          {
+            "oran": 0.58,
+            "izleme": 0.40240000000000004,
+            "goreceli": 0.4134
+          },
+          {
+            "oran": 0.59,
+            "izleme": 0.39840000000000003,
+            "goreceli": 0.4148
+          },
+          {
+            "oran": 0.6,
+            "izleme": 0.3944,
+            "goreceli": 0.4168
+          },
+          {
+            "oran": 0.61,
+            "izleme": 0.3785,
+            "goreceli": 0.4198
+          },
+          {
+            "oran": 0.62,
+            "izleme": 0.3625,
+            "goreceli": 0.42415
+          },
+          {
+            "oran": 0.63,
+            "izleme": 0.3546,
+            "goreceli": 0.4302
+          },
+          {
+            "oran": 0.64,
+            "izleme": 0.3386,
+            "goreceli": 0.43825000000000003
+          },
+          {
+            "oran": 0.65,
+            "izleme": 0.3267,
+            "goreceli": 0.44865
+          },
+          {
+            "oran": 0.66,
+            "izleme": 0.3147,
+            "goreceli": 0.46155
+          },
+          {
+            "oran": 0.67,
+            "izleme": 0.3147,
+            "goreceli": 0.4769
+          },
+          {
+            "oran": 0.68,
+            "izleme": 0.31079999999999997,
+            "goreceli": 0.49455
+          },
+          {
+            "oran": 0.69,
+            "izleme": 0.3028,
+            "goreceli": 0.51395
+          },
+          {
+            "oran": 0.7,
+            "izleme": 0.3028,
+            "goreceli": 0.53445
+          },
+          {
+            "oran": 0.71,
+            "izleme": 0.2988,
+            "goreceli": 0.55515
+          },
+          {
+            "oran": 0.72,
+            "izleme": 0.2948,
+            "goreceli": 0.5751999999999999
+          },
+          {
+            "oran": 0.73,
+            "izleme": 0.2869,
+            "goreceli": 0.5938
+          },
+          {
+            "oran": 0.74,
+            "izleme": 0.2869,
+            "goreceli": 0.6104
+          },
+          {
+            "oran": 0.75,
+            "izleme": 0.2829,
+            "goreceli": 0.62465
+          },
+          {
+            "oran": 0.76,
+            "izleme": 0.2829,
+            "goreceli": 0.6366
+          },
+          {
+            "oran": 0.77,
+            "izleme": 0.2749,
+            "goreceli": 0.6464
+          },
+          {
+            "oran": 0.78,
+            "izleme": 0.26289999999999997,
+            "goreceli": 0.65445
+          },
+          {
+            "oran": 0.79,
+            "izleme": 0.26289999999999997,
+            "goreceli": 0.6611
+          },
+          {
+            "oran": 0.8,
+            "izleme": 0.259,
+            "goreceli": 0.6668000000000001
+          },
+          {
+            "oran": 0.81,
+            "izleme": 0.251,
+            "goreceli": 0.6718
+          },
+          {
+            "oran": 0.82,
+            "izleme": 0.251,
+            "goreceli": 0.6764
+          },
+          {
+            "oran": 0.83,
+            "izleme": 0.247,
+            "goreceli": 0.6808
+          },
+          {
+            "oran": 0.84,
+            "izleme": 0.247,
+            "goreceli": 0.68515
+          },
+          {
+            "oran": 0.85,
+            "izleme": 0.243,
+            "goreceli": 0.6896
+          },
+          {
+            "oran": 0.86,
+            "izleme": 0.247,
+            "goreceli": 0.6942
+          },
+          {
+            "oran": 0.87,
+            "izleme": 0.243,
+            "goreceli": 0.69895
+          },
+          {
+            "oran": 0.88,
+            "izleme": 0.2351,
+            "goreceli": 0.7039
+          },
+          {
+            "oran": 0.89,
+            "izleme": 0.2311,
+            "goreceli": 0.7091000000000001
+          },
+          {
+            "oran": 0.9,
+            "izleme": 0.2311,
+            "goreceli": 0.7146
+          },
+          {
+            "oran": 0.91,
+            "izleme": 0.2311,
+            "goreceli": 0.7203999999999999
+          },
+          {
+            "oran": 0.92,
+            "izleme": 0.2311,
+            "goreceli": 0.7264999999999999
+          },
+          {
+            "oran": 0.93,
+            "izleme": 0.2311,
+            "goreceli": 0.73295
+          },
+          {
+            "oran": 0.94,
+            "izleme": 0.2271,
+            "goreceli": 0.73975
+          },
+          {
+            "oran": 0.95,
+            "izleme": 0.2231,
+            "goreceli": 0.7468
+          },
+          {
+            "oran": 0.96,
+            "izleme": 0.2231,
+            "goreceli": 0.7539
+          },
+          {
+            "oran": 0.97,
+            "izleme": 0.2231,
+            "goreceli": 0.7609
+          },
+          {
+            "oran": 0.98,
+            "izleme": 0.2231,
+            "goreceli": 0.76745
+          },
+          {
+            "oran": 0.99,
+            "izleme": 0.2231,
+            "goreceli": 0.7733
+          },
+          {
+            "oran": 1,
+            "izleme": 0.2231,
+            "goreceli": 0.7783
+          }
+        ],
+        "analyticsStatus": "ok"
+      },
+      "14d": {
+        "collectedAt": "2026-10-23T18:26:26.181Z",
+        "metrics": {
+          "views": {
+            "value": 618,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Data API"
+          },
+          "likes": {
+            "value": 11,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Data API"
+          },
+          "comments": {
+            "value": 1,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Data API"
+          },
+          "shares": {
+            "value": 0,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Analytics API"
+          },
+          "subscribers_gained": {
+            "value": 1,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Analytics API"
+          },
+          "subscribers_lost": {
+            "value": 0,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Analytics API"
+          },
+          "net_subscribers": {
+            "value": 1,
+            "status": "DIRECTLY_MEASURED",
+            "source": "derived from Analytics API gained − lost"
+          },
+          "average_view_duration": {
+            "value": 15,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Analytics API"
+          },
+          "average_percentage_viewed": {
+            "value": 52.349999999999994,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Analytics API"
+          },
+          "watch_time_minutes": {
+            "value": 73,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Analytics API"
+          },
+          "impressions": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "not exposed by YouTube APIs — export from Studio into studio-manual.json"
+          },
+          "ctr": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "not exposed by YouTube APIs — export from Studio into studio-manual.json"
+          },
+          "returning_viewers": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "not exposed per video by the public API"
+          },
+          "stayed_to_watch": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "Shorts 'Viewed vs swiped away' is Studio only — import with scripts/studio-import.js"
+          },
+          "first_30s_retention": {
+            "value": 0.2213,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Analytics API (retention at 100% of video)"
+          },
+          "engaged_views": {
+            "value": 253,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Analytics API"
+          },
+          "subscribers_per_1000_views": {
+            "value": 1.62,
+            "status": "DERIVED",
+            "from": "subscribers_gained / views"
+          },
+          "net_subscribers_per_1000_views": {
+            "value": 1.62,
+            "status": "DERIVED",
+            "from": "net_subscribers / views"
+          },
+          "engagement_per_1000_views": {
+            "value": 19.42,
+            "status": "DERIVED",
+            "from": "likes+comments+shares / views"
+          },
+          "watch_hours_per_1000_views": {
+            "value": 1.97,
+            "status": "DERIVED",
+            "from": "watch hours / views"
+          }
+        },
+        "traffic": [
+          {
+            "source": "SHORTS",
+            "views": 592,
+            "share": 0.958
+          },
+          {
+            "source": "YT_SEARCH",
+            "views": 15,
+            "share": 0.024
+          },
+          {
+            "source": "YT_OTHER_PAGE",
+            "views": 7,
+            "share": 0.011
+          },
+          {
+            "source": "EXT_URL",
+            "views": 2,
+            "share": 0.003
+          },
+          {
+            "source": "YT_CHANNEL",
+            "views": 1,
+            "share": 0.002
+          },
+          {
+            "source": "HASHTAGS",
+            "views": 1,
+            "share": 0.002
+          },
+          {
+            "source": "NO_LINK_OTHER",
+            "views": 0,
+            "share": 0
+          },
+          {
+            "source": "SUBSCRIBER",
+            "views": 0,
+            "share": 0
+          }
+        ],
+        "retention": [
+          {
+            "oran": 0.01,
+            "izleme": 1.2055,
+            "goreceli": 0.6157
+          },
+          {
+            "oran": 0.02,
+            "izleme": 1.2016,
+            "goreceli": 0.58985
+          },
+          {
+            "oran": 0.03,
+            "izleme": 1.1897,
+            "goreceli": 0.5646
+          },
+          {
+            "oran": 0.04,
+            "izleme": 1.1739,
+            "goreceli": 0.5416
+          },
+          {
+            "oran": 0.05,
+            "izleme": 1.1621,
+            "goreceli": 0.5221
+          },
+          {
+            "oran": 0.06,
+            "izleme": 1.1502,
+            "goreceli": 0.5063
+          },
+          {
+            "oran": 0.07,
+            "izleme": 1.1423,
+            "goreceli": 0.4938
+          },
+          {
+            "oran": 0.08,
+            "izleme": 1.1225,
+            "goreceli": 0.4839
+          },
+          {
+            "oran": 0.09,
+            "izleme": 1.1146,
+            "goreceli": 0.4757
+          },
+          {
+            "oran": 0.1,
+            "izleme": 1.0988,
+            "goreceli": 0.46845000000000003
+          },
+          {
+            "oran": 0.11,
+            "izleme": 1.0988,
+            "goreceli": 0.4618
+          },
+          {
+            "oran": 0.12,
+            "izleme": 1.083,
+            "goreceli": 0.4554
+          },
+          {
+            "oran": 0.13,
+            "izleme": 1.0711,
+            "goreceli": 0.4493
+          },
+          {
+            "oran": 0.14,
+            "izleme": 1.0672,
+            "goreceli": 0.4434
+          },
+          {
+            "oran": 0.15,
+            "izleme": 1.0395,
+            "goreceli": 0.4378
+          },
+          {
+            "oran": 0.16,
+            "izleme": 1.0119,
+            "goreceli": 0.43255
+          },
+          {
+            "oran": 0.17,
+            "izleme": 1,
+            "goreceli": 0.42769999999999997
+          },
+          {
+            "oran": 0.18,
+            "izleme": 0.9763,
+            "goreceli": 0.4233
+          },
+          {
+            "oran": 0.19,
+            "izleme": 0.9684,
+            "goreceli": 0.41925
+          },
+          {
+            "oran": 0.2,
+            "izleme": 0.9407,
+            "goreceli": 0.41555
+          },
+          {
+            "oran": 0.21,
+            "izleme": 0.9129999999999999,
+            "goreceli": 0.41215
+          },
+          {
+            "oran": 0.22,
+            "izleme": 0.8854000000000001,
+            "goreceli": 0.40895
+          },
+          {
+            "oran": 0.23,
+            "izleme": 0.8261,
+            "goreceli": 0.4059
+          },
+          {
+            "oran": 0.24,
+            "izleme": 0.7589,
+            "goreceli": 0.40295000000000003
+          },
+          {
+            "oran": 0.25,
+            "izleme": 0.6957,
+            "goreceli": 0.4001
+          },
+          {
+            "oran": 0.26,
+            "izleme": 0.6561,
+            "goreceli": 0.3973
+          },
+          {
+            "oran": 0.27,
+            "izleme": 0.6245,
+            "goreceli": 0.3946
+          },
+          {
+            "oran": 0.28,
+            "izleme": 0.6047,
+            "goreceli": 0.392
+          },
+          {
+            "oran": 0.29,
+            "izleme": 0.585,
+            "goreceli": 0.38955
+          },
+          {
+            "oran": 0.3,
+            "izleme": 0.581,
+            "goreceli": 0.38725
+          },
+          {
+            "oran": 0.31,
+            "izleme": 0.5652,
+            "goreceli": 0.38515
+          },
+          {
+            "oran": 0.32,
+            "izleme": 0.5652,
+            "goreceli": 0.38335
+          },
+          {
+            "oran": 0.33,
+            "izleme": 0.5573,
+            "goreceli": 0.38180000000000003
+          },
+          {
+            "oran": 0.34,
+            "izleme": 0.5415,
+            "goreceli": 0.3806
+          },
+          {
+            "oran": 0.35,
+            "izleme": 0.5336,
+            "goreceli": 0.37970000000000004
+          },
+          {
+            "oran": 0.36,
+            "izleme": 0.5178,
+            "goreceli": 0.3792
+          },
+          {
+            "oran": 0.37,
+            "izleme": 0.5099,
+            "goreceli": 0.3791
+          },
+          {
+            "oran": 0.38,
+            "izleme": 0.498,
+            "goreceli": 0.37935
+          },
+          {
+            "oran": 0.39,
+            "izleme": 0.48219999999999996,
+            "goreceli": 0.38
+          },
+          {
+            "oran": 0.4,
+            "izleme": 0.4743,
+            "goreceli": 0.38105
+          },
+          {
+            "oran": 0.41,
+            "izleme": 0.4743,
+            "goreceli": 0.3824
+          },
+          {
+            "oran": 0.42,
+            "izleme": 0.4664,
+            "goreceli": 0.3841
+          },
+          {
+            "oran": 0.43,
+            "izleme": 0.4585,
+            "goreceli": 0.38605
+          },
+          {
+            "oran": 0.44,
+            "izleme": 0.4545,
+            "goreceli": 0.38825
+          },
+          {
+            "oran": 0.45,
+            "izleme": 0.4545,
+            "goreceli": 0.39065
+          },
+          {
+            "oran": 0.46,
+            "izleme": 0.4506,
+            "goreceli": 0.39315
+          },
+          {
+            "oran": 0.47,
+            "izleme": 0.4506,
+            "goreceli": 0.39565
+          },
+          {
+            "oran": 0.48,
+            "izleme": 0.44659999999999994,
+            "goreceli": 0.3982
+          },
+          {
+            "oran": 0.49,
+            "izleme": 0.44659999999999994,
+            "goreceli": 0.4006
+          },
+          {
+            "oran": 0.5,
+            "izleme": 0.44270000000000004,
+            "goreceli": 0.4028
+          },
+          {
+            "oran": 0.51,
+            "izleme": 0.44270000000000004,
+            "goreceli": 0.4048
+          },
+          {
+            "oran": 0.52,
+            "izleme": 0.4387,
+            "goreceli": 0.4065
+          },
+          {
+            "oran": 0.53,
+            "izleme": 0.43479999999999996,
+            "goreceli": 0.4079
+          },
+          {
+            "oran": 0.54,
+            "izleme": 0.4269,
+            "goreceli": 0.40905
+          },
+          {
+            "oran": 0.55,
+            "izleme": 0.4229,
+            "goreceli": 0.40995
+          },
+          {
+            "oran": 0.56,
+            "izleme": 0.419,
+            "goreceli": 0.4107
+          },
+          {
+            "oran": 0.57,
+            "izleme": 0.415,
+            "goreceli": 0.4115
+          },
+          {
+            "oran": 0.58,
+            "izleme": 0.3992,
+            "goreceli": 0.41245
+          },
+          {
+            "oran": 0.59,
+            "izleme": 0.3953,
+            "goreceli": 0.41375
+          },
+          {
+            "oran": 0.6,
+            "izleme": 0.39130000000000004,
+            "goreceli": 0.41575
+          },
+          {
+            "oran": 0.61,
+            "izleme": 0.37549999999999994,
+            "goreceli": 0.41869999999999996
+          },
+          {
+            "oran": 0.62,
+            "izleme": 0.35969999999999996,
+            "goreceli": 0.42295
+          },
+          {
+            "oran": 0.63,
+            "izleme": 0.3518,
+            "goreceli": 0.4289
+          },
+          {
+            "oran": 0.64,
+            "izleme": 0.336,
+            "goreceli": 0.4369
+          },
+          {
+            "oran": 0.65,
+            "izleme": 0.32409999999999994,
+            "goreceli": 0.44725
+          },
+          {
+            "oran": 0.66,
+            "izleme": 0.3123,
+            "goreceli": 0.4601
+          },
+          {
+            "oran": 0.67,
+            "izleme": 0.3123,
+            "goreceli": 0.47545
+          },
+          {
+            "oran": 0.68,
+            "izleme": 0.30829999999999996,
+            "goreceli": 0.49305
+          },
+          {
+            "oran": 0.69,
+            "izleme": 0.3004,
+            "goreceli": 0.5125
+          },
+          {
+            "oran": 0.7,
+            "izleme": 0.3004,
+            "goreceli": 0.53305
+          },
+          {
+            "oran": 0.71,
+            "izleme": 0.2964,
+            "goreceli": 0.5539
+          },
+          {
+            "oran": 0.72,
+            "izleme": 0.2925,
+            "goreceli": 0.57405
+          },
+          {
+            "oran": 0.73,
+            "izleme": 0.2846,
+            "goreceli": 0.5928
+          },
+          {
+            "oran": 0.74,
+            "izleme": 0.2846,
+            "goreceli": 0.60955
+          },
+          {
+            "oran": 0.75,
+            "izleme": 0.28059999999999996,
+            "goreceli": 0.62395
+          },
+          {
+            "oran": 0.76,
+            "izleme": 0.28059999999999996,
+            "goreceli": 0.63605
+          },
+          {
+            "oran": 0.77,
+            "izleme": 0.2727,
+            "goreceli": 0.64595
+          },
+          {
+            "oran": 0.78,
+            "izleme": 0.2609,
+            "goreceli": 0.6541
+          },
+          {
+            "oran": 0.79,
+            "izleme": 0.2609,
+            "goreceli": 0.6607999999999999
+          },
+          {
+            "oran": 0.8,
+            "izleme": 0.2569,
+            "goreceli": 0.66655
+          },
+          {
+            "oran": 0.81,
+            "izleme": 0.249,
+            "goreceli": 0.67155
+          },
+          {
+            "oran": 0.82,
+            "izleme": 0.249,
+            "goreceli": 0.6762
+          },
+          {
+            "oran": 0.83,
+            "izleme": 0.2451,
+            "goreceli": 0.68065
+          },
+          {
+            "oran": 0.84,
+            "izleme": 0.2451,
+            "goreceli": 0.685
+          },
+          {
+            "oran": 0.85,
+            "izleme": 0.24109999999999998,
+            "goreceli": 0.6895
+          },
+          {
+            "oran": 0.86,
+            "izleme": 0.2451,
+            "goreceli": 0.6940500000000001
+          },
+          {
+            "oran": 0.87,
+            "izleme": 0.24109999999999998,
+            "goreceli": 0.69885
+          },
+          {
+            "oran": 0.88,
+            "izleme": 0.2332,
+            "goreceli": 0.7038
+          },
+          {
+            "oran": 0.89,
+            "izleme": 0.22920000000000001,
+            "goreceli": 0.70905
+          },
+          {
+            "oran": 0.9,
+            "izleme": 0.22920000000000001,
+            "goreceli": 0.7145
+          },
+          {
+            "oran": 0.91,
+            "izleme": 0.22920000000000001,
+            "goreceli": 0.7203
+          },
+          {
+            "oran": 0.92,
+            "izleme": 0.22920000000000001,
+            "goreceli": 0.72645
+          },
+          {
+            "oran": 0.93,
+            "izleme": 0.22920000000000001,
+            "goreceli": 0.7329
+          },
+          {
+            "oran": 0.94,
+            "izleme": 0.2253,
+            "goreceli": 0.7397
+          },
+          {
+            "oran": 0.95,
+            "izleme": 0.2213,
+            "goreceli": 0.74675
+          },
+          {
+            "oran": 0.96,
+            "izleme": 0.2213,
+            "goreceli": 0.75385
+          },
+          {
+            "oran": 0.97,
+            "izleme": 0.2213,
+            "goreceli": 0.76085
+          },
+          {
+            "oran": 0.98,
+            "izleme": 0.2213,
+            "goreceli": 0.7674
+          },
+          {
+            "oran": 0.99,
+            "izleme": 0.2213,
+            "goreceli": 0.77325
+          },
+          {
+            "oran": 1,
+            "izleme": 0.2213,
+            "goreceli": 0.77825
+          }
+        ],
+        "analyticsStatus": "ok"
+      },
+      "30d": {
+        "collectedAt": "2026-11-08T18:24:23.209Z",
+        "metrics": {
+          "views": {
+            "value": 622,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Data API"
+          },
+          "likes": {
+            "value": 12,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Data API"
+          },
+          "comments": {
+            "value": 1,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Data API"
+          },
+          "shares": {
+            "value": 0,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Analytics API"
+          },
+          "subscribers_gained": {
+            "value": 1,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Analytics API"
+          },
+          "subscribers_lost": {
+            "value": 0,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Analytics API"
+          },
+          "net_subscribers": {
+            "value": 1,
+            "status": "DIRECTLY_MEASURED",
+            "source": "derived from Analytics API gained − lost"
+          },
+          "average_view_duration": {
+            "value": 15,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Analytics API"
+          },
+          "average_percentage_viewed": {
+            "value": 52.12,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Analytics API"
+          },
+          "watch_time_minutes": {
+            "value": 73,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Analytics API"
+          },
+          "impressions": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "not exposed by YouTube APIs — export from Studio into studio-manual.json"
+          },
+          "ctr": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "not exposed by YouTube APIs — export from Studio into studio-manual.json"
+          },
+          "returning_viewers": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "not exposed per video by the public API"
+          },
+          "stayed_to_watch": {
+            "value": null,
+            "status": "UNAVAILABLE",
+            "reason": "Shorts 'Viewed vs swiped away' is Studio only — import with scripts/studio-import.js"
+          },
+          "first_30s_retention": {
+            "value": 0.21960000000000002,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Analytics API (retention at 100% of video)"
+          },
+          "engaged_views": {
+            "value": 255,
+            "status": "DIRECTLY_MEASURED",
+            "source": "Analytics API"
+          },
+          "subscribers_per_1000_views": {
+            "value": 1.61,
+            "status": "DERIVED",
+            "from": "subscribers_gained / views"
+          },
+          "net_subscribers_per_1000_views": {
+            "value": 1.61,
+            "status": "DERIVED",
+            "from": "net_subscribers / views"
+          },
+          "engagement_per_1000_views": {
+            "value": 20.9,
+            "status": "DERIVED",
+            "from": "likes+comments+shares / views"
+          },
+          "watch_hours_per_1000_views": {
+            "value": 1.96,
+            "status": "DERIVED",
+            "from": "watch hours / views"
+          }
+        },
+        "traffic": [
+          {
+            "source": "SHORTS",
+            "views": 592,
+            "share": 0.952
+          },
+          {
+            "source": "YT_SEARCH",
+            "views": 18,
+            "share": 0.029
+          },
+          {
+            "source": "YT_OTHER_PAGE",
+            "views": 7,
+            "share": 0.011
+          },
+          {
+            "source": "EXT_URL",
+            "views": 2,
+            "share": 0.003
+          },
+          {
+            "source": "HASHTAGS",
+            "views": 2,
+            "share": 0.003
+          },
+          {
+            "source": "YT_CHANNEL",
+            "views": 1,
+            "share": 0.002
+          },
+          {
+            "source": "NO_LINK_OTHER",
+            "views": 0,
+            "share": 0
+          },
+          {
+            "source": "SUBSCRIBER",
+            "views": 0,
+            "share": 0
+          }
+        ],
+        "retention": [
+          {
+            "oran": 0.01,
+            "izleme": 1.2039,
+            "goreceli": 0.61485
+          },
+          {
+            "oran": 0.02,
+            "izleme": 1.2,
+            "goreceli": 0.5889
+          },
+          {
+            "oran": 0.03,
+            "izleme": 1.1882,
+            "goreceli": 0.5635
+          },
+          {
+            "oran": 0.04,
+            "izleme": 1.1725,
+            "goreceli": 0.5404
+          },
+          {
+            "oran": 0.05,
+            "izleme": 1.1608,
+            "goreceli": 0.5208
+          },
+          {
+            "oran": 0.06,
+            "izleme": 1.149,
+            "goreceli": 0.5049
+          },
+          {
+            "oran": 0.07,
+            "izleme": 1.1412,
+            "goreceli": 0.49235
+          },
+          {
+            "oran": 0.08,
+            "izleme": 1.1216,
+            "goreceli": 0.48235
+          },
+          {
+            "oran": 0.09,
+            "izleme": 1.1137000000000001,
+            "goreceli": 0.4741
+          },
+          {
+            "oran": 0.1,
+            "izleme": 1.0979999999999999,
+            "goreceli": 0.46685
+          },
+          {
+            "oran": 0.11,
+            "izleme": 1.0979999999999999,
+            "goreceli": 0.4601
+          },
+          {
+            "oran": 0.12,
+            "izleme": 1.0824,
+            "goreceli": 0.4537
+          },
+          {
+            "oran": 0.13,
+            "izleme": 1.0706,
+            "goreceli": 0.44755
+          },
+          {
+            "oran": 0.14,
+            "izleme": 1.0667,
+            "goreceli": 0.44165
+          },
+          {
+            "oran": 0.15,
+            "izleme": 1.0392000000000001,
+            "goreceli": 0.436
+          },
+          {
+            "oran": 0.16,
+            "izleme": 1.0118,
+            "goreceli": 0.4308
+          },
+          {
+            "oran": 0.17,
+            "izleme": 1,
+            "goreceli": 0.42595
+          },
+          {
+            "oran": 0.18,
+            "izleme": 0.9765,
+            "goreceli": 0.4215
+          },
+          {
+            "oran": 0.19,
+            "izleme": 0.9686,
+            "goreceli": 0.4175
+          },
+          {
+            "oran": 0.2,
+            "izleme": 0.9412,
+            "goreceli": 0.4138
+          },
+          {
+            "oran": 0.21,
+            "izleme": 0.9137000000000001,
+            "goreceli": 0.4104
+          },
+          {
+            "oran": 0.22,
+            "izleme": 0.8863,
+            "goreceli": 0.4072
+          },
+          {
+            "oran": 0.23,
+            "izleme": 0.8275,
+            "goreceli": 0.40415
+          },
+          {
+            "oran": 0.24,
+            "izleme": 0.7608,
+            "goreceli": 0.40125
+          },
+          {
+            "oran": 0.25,
+            "izleme": 0.6901999999999999,
+            "goreceli": 0.3984
+          },
+          {
+            "oran": 0.26,
+            "izleme": 0.6509999999999999,
+            "goreceli": 0.39565
+          },
+          {
+            "oran": 0.27,
+            "izleme": 0.6196,
+            "goreceli": 0.39295
+          },
+          {
+            "oran": 0.28,
+            "izleme": 0.6,
+            "goreceli": 0.39035
+          },
+          {
+            "oran": 0.29,
+            "izleme": 0.5804,
+            "goreceli": 0.38795
+          },
+          {
+            "oran": 0.3,
+            "izleme": 0.5765,
+            "goreceli": 0.3857
+          },
+          {
+            "oran": 0.31,
+            "izleme": 0.5608,
+            "goreceli": 0.38365
+          },
+          {
+            "oran": 0.32,
+            "izleme": 0.5608,
+            "goreceli": 0.38185
+          },
+          {
+            "oran": 0.33,
+            "izleme": 0.5529,
+            "goreceli": 0.38029999999999997
+          },
+          {
+            "oran": 0.34,
+            "izleme": 0.5373,
+            "goreceli": 0.3791
+          },
+          {
+            "oran": 0.35,
+            "izleme": 0.5294,
+            "goreceli": 0.37825
+          },
+          {
+            "oran": 0.36,
+            "izleme": 0.5136999999999999,
+            "goreceli": 0.3778
+          },
+          {
+            "oran": 0.37,
+            "izleme": 0.5059,
+            "goreceli": 0.3777
+          },
+          {
+            "oran": 0.38,
+            "izleme": 0.4941,
+            "goreceli": 0.378
+          },
+          {
+            "oran": 0.39,
+            "izleme": 0.47840000000000005,
+            "goreceli": 0.3787
+          },
+          {
+            "oran": 0.4,
+            "izleme": 0.4706,
+            "goreceli": 0.37975
+          },
+          {
+            "oran": 0.41,
+            "izleme": 0.4706,
+            "goreceli": 0.38115
+          },
+          {
+            "oran": 0.42,
+            "izleme": 0.46270000000000006,
+            "goreceli": 0.3829
+          },
+          {
+            "oran": 0.43,
+            "izleme": 0.4549,
+            "goreceli": 0.3849
+          },
+          {
+            "oran": 0.44,
+            "izleme": 0.451,
+            "goreceli": 0.38715
+          },
+          {
+            "oran": 0.45,
+            "izleme": 0.451,
+            "goreceli": 0.38955
+          },
+          {
+            "oran": 0.46,
+            "izleme": 0.4471,
+            "goreceli": 0.39205
+          },
+          {
+            "oran": 0.47,
+            "izleme": 0.4471,
+            "goreceli": 0.39465
+          },
+          {
+            "oran": 0.48,
+            "izleme": 0.44310000000000005,
+            "goreceli": 0.3972
+          },
+          {
+            "oran": 0.49,
+            "izleme": 0.44310000000000005,
+            "goreceli": 0.3996
+          },
+          {
+            "oran": 0.5,
+            "izleme": 0.43920000000000003,
+            "goreceli": 0.40185
+          },
+          {
+            "oran": 0.51,
+            "izleme": 0.43920000000000003,
+            "goreceli": 0.40385
+          },
+          {
+            "oran": 0.52,
+            "izleme": 0.4353,
+            "goreceli": 0.4056
+          },
+          {
+            "oran": 0.53,
+            "izleme": 0.4314,
+            "goreceli": 0.407
+          },
+          {
+            "oran": 0.54,
+            "izleme": 0.4235,
+            "goreceli": 0.40815
+          },
+          {
+            "oran": 0.55,
+            "izleme": 0.41960000000000003,
+            "goreceli": 0.40905
+          },
+          {
+            "oran": 0.56,
+            "izleme": 0.4157,
+            "goreceli": 0.4098
+          },
+          {
+            "oran": 0.57,
+            "izleme": 0.4118,
+            "goreceli": 0.41054999999999997
+          },
+          {
+            "oran": 0.58,
+            "izleme": 0.3961,
+            "goreceli": 0.41145
+          },
+          {
+            "oran": 0.59,
+            "izleme": 0.3922,
+            "goreceli": 0.4127
+          },
+          {
+            "oran": 0.6,
+            "izleme": 0.3882,
+            "goreceli": 0.41465
+          },
+          {
+            "oran": 0.61,
+            "izleme": 0.3725,
+            "goreceli": 0.41755
+          },
+          {
+            "oran": 0.62,
+            "izleme": 0.3569,
+            "goreceli": 0.42175
+          },
+          {
+            "oran": 0.63,
+            "izleme": 0.349,
+            "goreceli": 0.42765
+          },
+          {
+            "oran": 0.64,
+            "izleme": 0.3333,
+            "goreceli": 0.43555
+          },
+          {
+            "oran": 0.65,
+            "izleme": 0.32159999999999994,
+            "goreceli": 0.44584999999999997
+          },
+          {
+            "oran": 0.66,
+            "izleme": 0.3098,
+            "goreceli": 0.4586
+          },
+          {
+            "oran": 0.67,
+            "izleme": 0.3098,
+            "goreceli": 0.47395
+          },
+          {
+            "oran": 0.68,
+            "izleme": 0.3059,
+            "goreceli": 0.4916
+          },
+          {
+            "oran": 0.69,
+            "izleme": 0.298,
+            "goreceli": 0.51105
+          },
+          {
+            "oran": 0.7,
+            "izleme": 0.298,
+            "goreceli": 0.5317
+          },
+          {
+            "oran": 0.71,
+            "izleme": 0.29410000000000003,
+            "goreceli": 0.5526
+          },
+          {
+            "oran": 0.72,
+            "izleme": 0.2902,
+            "goreceli": 0.57295
+          },
+          {
+            "oran": 0.73,
+            "izleme": 0.2824,
+            "goreceli": 0.59185
+          },
+          {
+            "oran": 0.74,
+            "izleme": 0.2824,
+            "goreceli": 0.6087
+          },
+          {
+            "oran": 0.75,
+            "izleme": 0.2784,
+            "goreceli": 0.6233
+          },
+          {
+            "oran": 0.76,
+            "izleme": 0.2784,
+            "goreceli": 0.6355
+          },
+          {
+            "oran": 0.77,
+            "izleme": 0.2706,
+            "goreceli": 0.6455
+          },
+          {
+            "oran": 0.78,
+            "izleme": 0.2588,
+            "goreceli": 0.65375
+          },
+          {
+            "oran": 0.79,
+            "izleme": 0.2588,
+            "goreceli": 0.66055
+          },
+          {
+            "oran": 0.8,
+            "izleme": 0.25489999999999996,
+            "goreceli": 0.6663
+          },
+          {
+            "oran": 0.81,
+            "izleme": 0.24710000000000001,
+            "goreceli": 0.67135
+          },
+          {
+            "oran": 0.82,
+            "izleme": 0.24710000000000001,
+            "goreceli": 0.676
+          },
+          {
+            "oran": 0.83,
+            "izleme": 0.24309999999999998,
+            "goreceli": 0.6805
+          },
+          {
+            "oran": 0.84,
+            "izleme": 0.24309999999999998,
+            "goreceli": 0.6849
+          },
+          {
+            "oran": 0.85,
+            "izleme": 0.23920000000000002,
+            "goreceli": 0.68935
+          },
+          {
+            "oran": 0.86,
+            "izleme": 0.24309999999999998,
+            "goreceli": 0.69395
+          },
+          {
+            "oran": 0.87,
+            "izleme": 0.23920000000000002,
+            "goreceli": 0.69875
+          },
+          {
+            "oran": 0.88,
+            "izleme": 0.2314,
+            "goreceli": 0.7037
+          },
+          {
+            "oran": 0.89,
+            "izleme": 0.2275,
+            "goreceli": 0.70895
+          },
+          {
+            "oran": 0.9,
+            "izleme": 0.2275,
+            "goreceli": 0.71445
+          },
+          {
+            "oran": 0.91,
+            "izleme": 0.2275,
+            "goreceli": 0.72025
+          },
+          {
+            "oran": 0.92,
+            "izleme": 0.2275,
+            "goreceli": 0.7264
+          },
+          {
+            "oran": 0.93,
+            "izleme": 0.2275,
+            "goreceli": 0.73285
+          },
+          {
+            "oran": 0.94,
+            "izleme": 0.2235,
+            "goreceli": 0.73965
+          },
+          {
+            "oran": 0.95,
+            "izleme": 0.21960000000000002,
+            "goreceli": 0.7467
+          },
+          {
+            "oran": 0.96,
+            "izleme": 0.21960000000000002,
+            "goreceli": 0.75385
+          },
+          {
+            "oran": 0.97,
+            "izleme": 0.21960000000000002,
+            "goreceli": 0.7607999999999999
+          },
+          {
+            "oran": 0.98,
+            "izleme": 0.21960000000000002,
+            "goreceli": 0.76735
+          },
+          {
+            "oran": 0.99,
+            "izleme": 0.21960000000000002,
+            "goreceli": 0.77325
+          },
+          {
+            "oran": 1,
+            "izleme": 0.21960000000000002,
+            "goreceli": 0.7782
+          }
+        ],
+        "analyticsStatus": "ok"
+      }
+    },
+    "hookType": "countdown",
+    "hookScore": 79,
+    "selectedHook": "Jeanne Calment lived 122 years and 164 days.",
+    "firstLine": "Jeanne Calment lived 122 years and 164 days.",
+    "firstSecondsScore": 91,
+    "topicCluster": "HUMAN",
+    "bucket": "A",
+    "viralScore": 77,
+    "viralComponents": {
+      "curiosity_gap": {
+        "value": 93,
+        "basis": "derived"
+      },
+      "immediate_stakes": {
+        "value": 94,
+        "basis": "derived"
+      },
+      "human_consequence": {
+        "value": 65,
+        "basis": "derived"
+      },
+      "recognizability": {
+        "value": 78,
+        "basis": "measured"
+      },
+      "surprise": {
+        "value": 90,
+        "basis": "derived"
+      },
+      "visual_potential": {
+        "value": 85,
+        "basis": "inventory-signal"
+      },
+      "archival_footage_potential": {
+        "value": 35,
+        "basis": "inventory-signal"
+      },
+      "first_frame_potential": {
+        "value": 68,
+        "basis": "derived"
+      },
+      "title_potential": {
+        "value": 84,
+        "basis": "derived",
+        "note": "3 source-backed title seeds"
+      },
+      "emotional_tension": {
+        "value": 70,
+        "basis": "derived"
+      },
+      "contradiction": {
+        "value": 85,
+        "basis": "derived"
+      },
+      "unexpected_cause": {
+        "value": 82,
+        "basis": "derived"
+      },
+      "numerical_anomaly": {
+        "value": 95,
+        "basis": "derived"
+      },
+      "didnt_know_factor": {
+        "value": 86,
+        "basis": "derived"
+      },
+      "shareability": {
+        "value": 93,
+        "basis": "derived"
+      },
+      "channel_fit": {
+        "value": 74,
+        "basis": "derived"
+      },
+      "historical_similarity": {
+        "value": 50,
+        "basis": "neutral",
+        "note": "no same-cluster channel evidence yet"
+      },
+      "subscriber_conversion_potential": {
+        "value": 70,
+        "basis": "derived",
+        "note": "series-depth proxy; no measured conversion yet"
+      },
+      "audience_breadth": {
+        "value": 100,
+        "basis": "inventory-signal"
+      },
+      "hook_potential": {
+        "value": 71,
+        "basis": "derived"
+      },
+      "visual_availability": {
+        "value": 67,
+        "basis": "inventory-signal"
+      },
+      "research_confidence": {
+        "value": 95,
+        "basis": "derived"
+      },
+      "duplicate_risk": {
+        "value": 0,
+        "basis": "penalty",
+        "note": "no published-title collision"
+      },
+      "saturation_risk": {
+        "value": 0,
+        "basis": "penalty",
+        "note": "0 published / 50 inventory in cluster"
+      },
+      "recent_fatigue_risk": {
+        "value": 0,
+        "basis": "penalty",
+        "note": "0 same-family upload(s) in the last 30 days"
+      },
+      "source_confidence_risk": {
+        "value": -5,
+        "basis": "penalty",
+        "note": "95/100 source quality"
+      },
+      "weak_footage_risk": {
+        "value": -33,
+        "basis": "penalty",
+        "note": "no archival footage confirmed"
+      }
+    },
+    "storyStructure": "IMPOSSIBLE_QUESTION>ASSUMPTION>FIRST_EFFECT>SECOND_ORDER_EFFECT>SCIENTIFIC_PAYOFF",
+    "titlePattern": "question",
+    "selectedTitle": "A Person Lived Past 120: What Happens Next?",
+    "titleScore": 81,
+    "titleCandidates": 42,
+    "hookCandidates": 14,
+    "topicScore": 80,
+    "popularityScore": 78,
+    "ctaStyle": "NONE",
+    "durationBucket": "18-25s",
+    "openingVisual": "ILLUSTRATION",
+    "experimentVariant": null,
+    "factors": {
+      "TopicDemandScore": 78,
+      "CuriosityScore": 93,
+      "HookPotentialScore": 71,
+      "VisualImpactScore": 85,
+      "EmotionalImpactScore": 70,
+      "StoryCompressionScore": 68,
+      "RewatchPotentialScore": 66,
+      "SharePotentialScore": 93,
+      "CommentPotentialScore": 68,
+      "SubscriberConversionPotential": 70,
+      "NoveltyScore": 79,
+      "AudienceFitScore": 100,
+      "SourceQualityScore": 95,
+      "ChannelFitScore": 74
+    },
+    "selectionMode": "EXPLORE",
+    "videoId": "sielLySz6r8",
+    "slug": "what-if-you-lived-to-122",
+    "channel": "impossible-brief",
+    "contentType": "short",
+    "title": "A Person Lived Past 120: What Happens Next?",
+    "publishAt": "2026-10-09T18:00:10Z",
+    "publishHourUTC": 18,
+    "publishSlot": "21:00 TR",
+    "popularityBand": "unknown",
+    "readiness": 88,
+    "normalized": {
+      "ageHours": 720,
+      "viewsPerHour": 0.86,
+      "recentViewVelocity": 0.01,
+      "likeRate": 0.01929,
+      "commentRate": 0.00161,
+      "shareRate": 0,
+      "engagementRate": 0.0209,
+      "engagedViewRate": 0.40997,
+      "subscriberConversion": 0.00161,
+      "subscribersPer1000Views": 1.61
+    },
+    "performance": {
+      "growthScore": 52.6,
+      "classification": "NORMAL",
+      "percentiles": {
+        "viewVelocity": 55.3,
+        "retention": 17.6,
+        "engagement": 63.2,
+        "subscriberConversion": 82.4,
+        "views": 26.3
+      },
+      "baselines": {
+        "views": 701.5,
+        "viewsPerHour": 1.69,
+        "averagePercentageViewed": 63.165000000000006,
+        "engagementRate": 0.01996,
+        "subscriberConversion": 0
+      },
+      "missing": [],
+      "plateau": null,
+      "breakout": null,
+      "probableCauses": [],
+      "caveat": "Classification is channel-relative correlation, not proof of YouTube recommendation causality."
+    },
+    "durationSeconds": 30,
+    "registeredBy": "analytics-pass",
+    "metrics": {
+      "views": 622,
+      "averagePercentageViewed": 52.12,
+      "averageViewDuration": 15,
+      "likes": 12,
+      "comments": 1,
+      "shares": 0,
+      "subscribersGained": 1,
+      "engagedViews": 255,
+      "subscribersLost": 0,
+      "netSubscribers": 1,
+      "subscribersPer1000Views": 1.61,
+      "netSubscribersPer1000Views": 1.61,
+      "engagementPer1000Views": 20.9,
+      "watchHoursPer1000Views": 1.96,
+      "ctr": null,
+      "stayedToWatch": null,
+      "first30sRetention": 0.21960000000000002,
+      "shortsFeedShare": 0.952,
+      "searchShare": 0.029
     },
     "latestCheckpoint": "30d"
   }
