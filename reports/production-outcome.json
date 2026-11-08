@@ -1,27 +1,25 @@
 {
-  "at": "2026-11-08T07:11:39.235Z",
-  "runId": "42457321709",
+  "at": "2026-11-08T13:09:57.385Z",
+  "runId": "42483246272",
   "rows": [
     {
       "channel": "failure-reconstructed",
-      "outcome": "UPLOADED",
-      "category": "SCHEDULED",
-      "scheduled": true,
-      "publication": "SCHEDULED",
-      "publishAt": "2026-11-08T18:00:00.000Z",
-      "reason": "premium FR-iroquois-theatre-1903 qGH3aDGsY9E",
-      "slug": "iroquois-theatre-1903",
+      "outcome": "NOT_DUE",
+      "category": "NOT_DUE",
+      "scheduled": false,
+      "publication": "NOT_SCHEDULED",
+      "publishAt": null,
+      "reason": "today's Short already exists (iroquois-theatre-1903)",
+      "slug": null,
       "videoId": null,
-      "targetDay": "2026-11-08",
+      "targetDay": null,
       "trigger": {
         "event": "repository_dispatch",
-        "correlationId": "production-1-20261108T070505Z-e51d9557"
+        "correlationId": "production-2-20261108T130505Z-f512d143"
       },
       "stages": {
         "RESEARCH": {
-          "status": "done",
-          "detail": "FR-iroquois-theatre-1903",
-          "at": "2026-11-08T07:09:00.258Z"
+          "status": "not-reached"
         },
         "SCRIPT": {
           "status": "not-reached"
@@ -33,29 +31,19 @@
           "status": "not-reached"
         },
         "RENDER": {
-          "status": "done",
-          "detail": "premium final",
-          "at": "2026-11-08T07:09:00.258Z"
+          "status": "not-reached"
         },
         "QA": {
-          "status": "done",
-          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
-          "at": "2026-11-08T07:09:00.259Z"
+          "status": "not-reached"
         },
         "UPLOAD": {
-          "status": "done",
-          "detail": "qGH3aDGsY9E",
-          "at": "2026-11-08T07:09:00.259Z"
+          "status": "not-reached"
         },
         "SCHEDULE": {
-          "status": "done",
-          "detail": "2026-11-08T18:00:00.000Z",
-          "at": "2026-11-08T07:09:00.259Z"
+          "status": "not-reached"
         },
         "PUBLISH": {
-          "status": "scheduled",
-          "detail": "YouTube makes it public at 2026-11-08T18:00:00.000Z",
-          "at": "2026-11-08T07:09:00.260Z"
+          "status": "not-reached"
         }
       }
     },
@@ -72,7 +60,7 @@
       "targetDay": "2026-11-08",
       "trigger": {
         "event": "repository_dispatch",
-        "correlationId": "production-1-20261108T070505Z-e51d9557"
+        "correlationId": "production-2-20261108T130505Z-f512d143"
       },
       "stages": {
         "RESEARCH": {
