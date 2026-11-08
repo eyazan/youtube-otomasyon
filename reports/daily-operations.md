@@ -1,6 +1,6 @@
 # Daily operations report
 
-Generated: 2026-11-07T20:50:58.505Z
+Generated: 2026-11-08T07:11:39.020Z
 
 Missing API-only metrics are reported as `unavailable`, never as zero.
 
@@ -8,43 +8,43 @@ Missing API-only metrics are reported as `unavailable`, never as zero.
 
 | Signal | Status |
 |---|---|
-| Today topic | unavailable |
-| Short | not-due |
+| Today topic | iroquois-theatre-1903 |
+| Short | scheduled |
 | Long | due-not-produced |
-| Quality | unavailable / unavailable |
-| YouTube | not-uploaded |
-| Publish time | unavailable |
-| Video ID | unavailable |
+| Quality | PUBLISH / unavailable |
+| YouTube | scheduled |
+| Publish time | 2026-11-08T18:00:00.000Z |
+| Video ID | qGH3aDGsY9E |
 | Analytics | measured |
-| Scheduler | sla-missed-or-channel-disabled |
-| Ready topic backlog | 346 |
+| Scheduler | healthy |
+| Ready topic backlog | 345 |
 | Errors/review/blocks | 20 |
-| TikTok today | NO_TODAY_VIDEO |
-| TikTok backlog | 31 |
-| Analytics warehouse | through 2026-11-05 (lag 2 d) |
-| Ops (24 h) | analytics.load 1 |
-| Scheduler queue | 2 queued, oldest 2026-11-07 (0 d) |
-| API quota today | 0 / 9800 units (project channel:failure-reconstructed) |
-| YPP readiness (estimate) | subs 32/1,000 · long-form watch h (365 d) unavailable/4,000 · Shorts views (90 d) unavailable/10M |
+| TikTok today | NOT_SENT |
+| TikTok backlog | 32 |
+| Analytics warehouse | through 2026-11-05 (lag 3 d) |
+| Ops (24 h) | analytics.load 1, publish.success 1, publish.scheduled_verified 1 |
+| Scheduler queue | 2 queued, oldest 2026-11-08 (0 d) |
+| API quota today | 1719 / 9800 units (project 1012165386949) |
+| YPP readiness (estimate) | subs 31/1,000 · long-form watch h (365 d) unavailable/4,000 · Shorts views (90 d) unavailable/10M |
 
 ## ImpossibleBrief
 
 | Signal | Status |
 |---|---|
 | Today topic | unavailable |
-| Short | not-due |
+| Short | due-not-produced |
 | Long | due-not-produced |
 | Quality | unavailable / unavailable |
 | YouTube | not-uploaded |
 | Publish time | unavailable |
 | Video ID | unavailable |
 | Analytics | measured |
-| Scheduler | sla-missed-or-channel-disabled |
+| Scheduler | pending-before-deadline |
 | Ready topic backlog | 472 |
 | Errors/review/blocks | 6 |
-| Analytics warehouse | through 2026-11-05 (lag 2 d) |
+| Analytics warehouse | through 2026-11-05 (lag 3 d) |
 | Ops (24 h) | analytics.load 1 |
-| Scheduler queue | 2 queued, oldest 2026-11-07 (0 d) |
-| API quota today | 99 / 9800 units (project 684098966511) |
+| Scheduler queue | 2 queued, oldest 2026-11-08 (0 d) |
+| API quota today | 101 / 9800 units (project 684098966511) |
 | YPP readiness (estimate) | subs 13/1,000 · long-form watch h (365 d) unavailable/4,000 · Shorts views (90 d) unavailable/10M |
 
