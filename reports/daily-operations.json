@@ -1,27 +1,27 @@
 {
-  "generatedAt": "2026-11-08T20:39:51.305Z",
-  "date": "2026-11-08",
+  "generatedAt": "2026-11-08T21:05:59.370Z",
+  "date": "2026-11-09",
   "channels": [
     {
       "channel": "failure-reconstructed",
       "name": "Failure Reconstructed",
-      "date": "2026-11-08",
-      "todayTopic": "iroquois-theatre-1903",
-      "shortStatus": "scheduled",
+      "date": "2026-11-09",
+      "todayTopic": null,
+      "shortStatus": "not-due",
       "longStatus": "due-not-produced",
       "qualityScore": null,
-      "qualityGate": "PUBLISH",
-      "youtubeStatus": "scheduled",
-      "publishTime": "2026-11-08T18:00:00.000Z",
-      "videoId": "qGH3aDGsY9E",
+      "qualityGate": null,
+      "youtubeStatus": "not-uploaded",
+      "publishTime": null,
+      "videoId": null,
       "analyticsHealth": "measured",
-      "schedulerHealth": "healthy",
+      "schedulerHealth": "pending-before-deadline",
       "backlog": 345,
       "errors": 20,
       "inventory": {
         "channel": "failure-reconstructed",
         "channelName": "Failure Reconstructed",
-        "calculatedAt": "2026-11-08T20:39:51.353Z",
+        "calculatedAt": "2026-11-08T21:05:59.414Z",
         "qualifiedTopics": 388,
         "validatedCandidates": 0,
         "researchBacklog": 0,
@@ -858,7 +858,7 @@
           "publish.public": 1
         },
         "quota": {
-          "usedToday": 103,
+          "usedToday": 107,
           "budget": 9800,
           "project": "1012165386949"
         },
@@ -884,7 +884,7 @@
       },
       "tiktok": {
         "mode": "SEND_TO_USER_INBOX",
-        "todayStatus": "NOT_SENT",
+        "todayStatus": "NO_TODAY_VIDEO",
         "sent": 10,
         "publicationStateAvailable": false,
         "backlog": 32,
@@ -899,7 +899,7 @@
     {
       "channel": "impossible-brief",
       "name": "ImpossibleBrief",
-      "date": "2026-11-08",
+      "date": "2026-11-09",
       "todayTopic": null,
       "shortStatus": "not-due",
       "longStatus": "due-not-produced",
@@ -909,13 +909,13 @@
       "publishTime": null,
       "videoId": null,
       "analyticsHealth": "measured",
-      "schedulerHealth": "sla-missed-or-channel-disabled",
+      "schedulerHealth": "pending-before-deadline",
       "backlog": 472,
       "errors": 6,
       "inventory": {
         "channel": "impossible-brief",
         "channelName": "ImpossibleBrief",
-        "calculatedAt": "2026-11-08T20:39:51.436Z",
+        "calculatedAt": "2026-11-08T21:05:59.498Z",
         "qualifiedTopics": 500,
         "validatedCandidates": 0,
         "researchBacklog": 0,
@@ -1014,9 +1014,9 @@
           "analytics.load": 1
         },
         "quota": {
-          "usedToday": 93,
+          "usedToday": 0,
           "budget": 9800,
-          "project": "684098966511"
+          "project": "channel:impossible-brief"
         },
         "monetization": {
           "channel": "impossible-brief",
