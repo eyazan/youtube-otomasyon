@@ -1,6 +1,6 @@
 # Growth dashboard
 
-Generated 2026-11-08T18:53:12.626Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-11-08T19:47:43.868Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
@@ -12,19 +12,19 @@ Generated 2026-11-08T18:53:12.626Z. Per-channel baselines are computed separatel
 
 **Content clusters** — 12 · integrity OK
 
-**Growth / subscriber conversion** — tracked 42 · subs/1k Shorts 0 · subs/1k long n/a
+**Growth / subscriber conversion** — tracked 43 · subs/1k Shorts 0 · subs/1k long n/a
 
-**Learning** — Shorts adaptive (n=41, adopted 0) · Long-form heuristics-only (n=0)
+**Learning** — Shorts adaptive (n=42, adopted 0) · Long-form heuristics-only (n=0)
 
 **Short → Long funnel** — 0 link(s), 0 long→long, 0 pending RELATED_VIDEO_MANUAL_ACTION_REQUIRED
 
 **Research/source enrichment tasks**
 
 - apollo-1-1967 (C): VideoPotential 86 in experimental band 58–71; sources 41 < 62
+- castle-bravo-1954 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
 - skylab-1973 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
 - munich-1958 (C): VideoPotential 85 in experimental band 58–71; sources 41 < 62
-- castle-bravo-1954 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
-- new-london-school-1937 (C): VideoPotential 83 in experimental band 58–71; sources 41 < 62
+- vanguard-1957 (C): VideoPotential 82 in experimental band 58–71; sources 41 < 62
 
 **Recent alerts**
 
