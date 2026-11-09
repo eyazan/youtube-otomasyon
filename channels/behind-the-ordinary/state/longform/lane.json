@@ -297,6 +297,55 @@
       "selected": null,
       "reason": "no candidate passed the long-form quality gate; cadence does not override quality",
       "finishedAt": "2026-11-02T07:10:19.212Z"
+    },
+    {
+      "cycleId": "2026-W46",
+      "channel": "behind-the-ordinary",
+      "startedAt": "2026-11-09T07:11:29.828Z",
+      "status": "QUALITY_BLOCKED",
+      "evaluated": [
+        {
+          "slug": "why-the-bluetooth-logo-looks-like-that",
+          "mode": "A_LONG_FIRST",
+          "LongFormPotentialScore": 71,
+          "bucket": "B",
+          "decision": "BLOCK",
+          "score": 81,
+          "hardFails": [
+            "INSUFFICIENT_DEPTH: evidence supports ~2.6 min; target 8–12 min — not padded"
+          ],
+          "generationStatus": "COMPLETE"
+        },
+        {
+          "slug": "microwave-doors-what-explains-metal-mesh",
+          "mode": "A_LONG_FIRST",
+          "LongFormPotentialScore": 70,
+          "bucket": "B",
+          "decision": "BLOCK",
+          "score": 83,
+          "hardFails": [
+            "INSUFFICIENT_DEPTH: evidence supports ~1.9 min; target 8–12 min — not padded",
+            "LLM generation failed safely (REQUEST_TOO_LARGE); deterministic evidence draft retained"
+          ],
+          "generationStatus": "FAILED"
+        },
+        {
+          "slug": "why-jeans-have-a-tiny-pocket",
+          "mode": "A_LONG_FIRST",
+          "LongFormPotentialScore": 67,
+          "bucket": "B",
+          "decision": "BLOCK",
+          "score": 85,
+          "hardFails": [
+            "INSUFFICIENT_DEPTH: evidence supports ~2.7 min; target 8–12 min — not padded",
+            "LLM generation failed safely (REQUEST_TOO_LARGE); deterministic evidence draft retained"
+          ],
+          "generationStatus": "FAILED"
+        }
+      ],
+      "selected": null,
+      "reason": "no candidate passed the long-form quality gate; cadence does not override quality",
+      "finishedAt": "2026-11-09T07:11:30.479Z"
     }
   ]
 }

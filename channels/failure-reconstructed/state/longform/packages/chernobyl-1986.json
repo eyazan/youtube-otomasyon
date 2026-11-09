@@ -3,7 +3,7 @@
   "channel": "failure-reconstructed",
   "channelName": "Failure Reconstructed",
   "contentType": "long",
-  "createdAt": "2026-11-02T07:10:06.289Z",
+  "createdAt": "2026-11-09T07:11:27.356Z",
   "topic": {
     "id": "chernobyl-1986",
     "slug": "chernobyl-1986",
@@ -60,7 +60,7 @@
       "ShortsEvidence": {
         "value": 73,
         "basis": "measured",
-        "note": "best cluster Short 1383 views vs channel median 446; best subscriber conversion 0.00145; best growth score 60.1 — MODE B: Short proved demand"
+        "note": "best cluster Short 1383 views vs channel median 435; best subscriber conversion 0.00145; best growth score 61 — MODE B: Short proved demand"
       },
       "SeriesPotential": {
         "value": 91,
@@ -117,7 +117,7 @@
       "licence": "CC BY-SA 4.0 — facts only; never narrate verbatim"
     },
     "gaps": [],
-    "reuseCount": 2
+    "reuseCount": 3
   },
   "outline": {
     "structure": [
@@ -1443,38 +1443,6 @@
         "ungrammatical": false
       },
       {
-        "title": "The Failure Chain That Destroyed Chernobyl",
-        "source": "failure-chain",
-        "pattern": "the-x-that",
-        "scores": {
-          "clarity": 100,
-          "curiosity": 40,
-          "specificity": 77,
-          "truthfulness": 100,
-          "searchIntent": 75,
-          "channelIdentity": 74,
-          "ctrPotential": 63,
-          "novelty": 73,
-          "evergreenPotential": 85,
-          "consequence": 80,
-          "compactness": 100,
-          "recognizability": 100,
-          "nonRedundancy": 73,
-          "factualIntegrity": 100,
-          "historicalPerformanceSimilarity": 50,
-          "patternFreshness": 100
-        },
-        "total": 78,
-        "patternPenalty": 0,
-        "templateNaturalnessPenalty": 0,
-        "genericTemplatePenalty": 0,
-        "adjustedTotal": 78,
-        "unsupportedWords": [],
-        "misleading": false,
-        "grammar": [],
-        "ungrammatical": false
-      },
-      {
         "title": "How One Weakness Brought Down Chernobyl",
         "source": "one-weakness",
         "pattern": "how",
@@ -1639,6 +1607,38 @@
         "ungrammatical": false
       },
       {
+        "title": "The Failure Chain That Destroyed Chernobyl",
+        "source": "failure-chain",
+        "pattern": "the-x-that",
+        "scores": {
+          "clarity": 100,
+          "curiosity": 40,
+          "specificity": 77,
+          "truthfulness": 100,
+          "searchIntent": 75,
+          "channelIdentity": 74,
+          "ctrPotential": 63,
+          "novelty": 73,
+          "evergreenPotential": 85,
+          "consequence": 80,
+          "compactness": 100,
+          "recognizability": 100,
+          "nonRedundancy": 73,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 70
+        },
+        "total": 78,
+        "patternPenalty": 4,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 74,
+        "unsupportedWords": [],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
         "title": "Chernobyl — A Forensic Engineering Documentary",
         "source": "documentary",
         "pattern": "two-beat",
@@ -1759,13 +1759,13 @@
           "nonRedundancy": 77,
           "factualIntegrity": 100,
           "historicalPerformanceSimilarity": 50,
-          "patternFreshness": 10
+          "patternFreshness": 40
         },
         "total": 81,
-        "patternPenalty": 12,
+        "patternPenalty": 11,
         "templateNaturalnessPenalty": 0,
         "genericTemplatePenalty": 0,
-        "adjustedTotal": 69,
+        "adjustedTotal": 70,
         "unsupportedWords": [],
         "misleading": false,
         "grammar": [],
@@ -1791,13 +1791,13 @@
           "nonRedundancy": 87,
           "factualIntegrity": 100,
           "historicalPerformanceSimilarity": 50,
-          "patternFreshness": 10
+          "patternFreshness": 40
         },
         "total": 80,
-        "patternPenalty": 12,
+        "patternPenalty": 11,
         "templateNaturalnessPenalty": 0,
         "genericTemplatePenalty": 0,
-        "adjustedTotal": 68,
+        "adjustedTotal": 69,
         "unsupportedWords": [],
         "misleading": false,
         "grammar": [],
@@ -1823,13 +1823,13 @@
           "nonRedundancy": 87,
           "factualIntegrity": 85,
           "historicalPerformanceSimilarity": 50,
-          "patternFreshness": 10
+          "patternFreshness": 40
         },
         "total": 76,
-        "patternPenalty": 12,
+        "patternPenalty": 11,
         "templateNaturalnessPenalty": 0,
         "genericTemplatePenalty": 0,
-        "adjustedTotal": 64,
+        "adjustedTotal": 65,
         "unsupportedWords": [
           "disaster"
         ],
@@ -1857,13 +1857,13 @@
           "nonRedundancy": 90,
           "factualIntegrity": 100,
           "historicalPerformanceSimilarity": 50,
-          "patternFreshness": 100
+          "patternFreshness": 70
         },
         "total": 63,
-        "patternPenalty": 0,
+        "patternPenalty": 4,
         "templateNaturalnessPenalty": 0,
         "genericTemplatePenalty": 0,
-        "adjustedTotal": 63,
+        "adjustedTotal": 59,
         "unsupportedWords": [],
         "misleading": false,
         "grammar": [],

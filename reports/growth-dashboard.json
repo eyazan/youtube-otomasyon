@@ -1,18 +1,18 @@
 {
-  "generatedAt": "2026-11-08T20:39:48.498Z",
+  "generatedAt": "2026-11-09T07:11:49.875Z",
   "note": "Per-channel baselines are computed separately and never blended.",
   "channels": [
     {
       "channel": "failure-reconstructed",
       "name": "Failure Reconstructed",
       "shorts": {
-        "lastPublished": "2026-11-08T18:00:00.000Z",
-        "published": 43,
+        "lastPublished": "2026-11-09T18:00:00.000Z",
+        "published": 44,
         "inventory": {
-          "A": 59,
-          "B": 150,
-          "C": 58,
-          "D": 76
+          "A": 54,
+          "B": 146,
+          "C": 56,
+          "D": 86
         },
         "durableInventory": {
           "total": 501,
@@ -30,21 +30,21 @@
           "views": 435,
           "averagePercentageViewed": 64.36,
           "subscribersPer1000Views": 0,
-          "engagementPer1000Views": 21.98,
+          "engagementPer1000Views": 23.95,
           "watchHoursPer1000Views": 2.02
         }
       },
       "longform": {
         "lane": {
-          "cycleId": "2026-W45",
+          "cycleId": "2026-W46",
           "due": false,
-          "reason": "cycle 2026-W45 already QUALITY_BLOCKED",
+          "reason": "cycle 2026-W46 already QUALITY_BLOCKED",
           "lastPublished": null
         },
         "lastCycle": {
-          "cycleId": "2026-W45",
+          "cycleId": "2026-W46",
           "channel": "failure-reconstructed",
-          "startedAt": "2026-11-02T07:10:06.289Z",
+          "startedAt": "2026-11-09T07:11:27.356Z",
           "status": "QUALITY_BLOCKED",
           "evaluated": [
             {
@@ -74,12 +74,12 @@
               "generationStatus": "FAILED"
             },
             {
-              "slug": "air-france-447-2009",
+              "slug": "columbia-2003",
               "mode": "B_SHORT_PROVES_DEMAND",
               "LongFormPotentialScore": 85,
               "bucket": "A",
               "decision": "BLOCK",
-              "score": 83,
+              "score": 85,
               "hardFails": [
                 "INSUFFICIENT_DEPTH: evidence supports ~1.9 min; target 8–12 min — not padded",
                 "LLM generation failed safely (REQUEST_TOO_LARGE); deterministic evidence draft retained"
@@ -89,7 +89,7 @@
           ],
           "selected": null,
           "reason": "no candidate passed the long-form quality gate; cadence does not override quality",
-          "finishedAt": "2026-11-02T07:10:07.176Z"
+          "finishedAt": "2026-11-09T07:11:28.664Z"
         },
         "episodes": 0,
         "backlog": [
@@ -161,7 +161,7 @@
           "status": "adaptive",
           "sampleSize": 42,
           "adopted": 0,
-          "hypotheses": 19
+          "hypotheses": 17
         },
         "longform": {
           "status": "heuristics-only",
@@ -177,11 +177,6 @@
           "reason": "VideoPotential 86 in experimental band 58–71; sources 41 < 62"
         },
         {
-          "slug": "castle-bravo-1954",
-          "bucket": "C",
-          "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
-        },
-        {
           "slug": "skylab-1973",
           "bucket": "C",
           "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
@@ -192,14 +187,19 @@
           "reason": "VideoPotential 85 in experimental band 58–71; sources 41 < 62"
         },
         {
-          "slug": "vanguard-1957",
+          "slug": "castle-bravo-1954",
           "bucket": "C",
-          "reason": "VideoPotential 82 in experimental band 58–71; sources 41 < 62"
+          "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
         },
         {
           "slug": "new-london-school-1937",
           "bucket": "C",
           "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
+        },
+        {
+          "slug": "vanguard-1957",
+          "bucket": "C",
+          "reason": "VideoPotential 82 in experimental band 58–71; sources 41 < 62"
         },
         {
           "slug": "eastland-1915",
@@ -418,7 +418,7 @@
         "lastPublished": "2026-11-05T18:00:00.000Z",
         "published": 22,
         "inventory": {
-          "A": 110,
+          "A": 109,
           "B": 21,
           "C": 140,
           "D": 206
@@ -445,17 +445,30 @@
       },
       "longform": {
         "lane": {
-          "cycleId": "2026-W45",
+          "cycleId": "2026-W46",
           "due": false,
-          "reason": "cycle 2026-W45 already QUALITY_BLOCKED",
+          "reason": "cycle 2026-W46 already QUALITY_BLOCKED",
           "lastPublished": null
         },
         "lastCycle": {
-          "cycleId": "2026-W45",
+          "cycleId": "2026-W46",
           "channel": "impossible-brief",
-          "startedAt": "2026-11-02T07:10:07.238Z",
+          "startedAt": "2026-11-09T07:11:28.723Z",
           "status": "QUALITY_BLOCKED",
           "evaluated": [
+            {
+              "slug": "could-earth-survive-one-day-without-earth-s-magnetic-field",
+              "mode": "A_LONG_FIRST",
+              "LongFormPotentialScore": 83,
+              "bucket": "A",
+              "decision": "BLOCK",
+              "score": 81,
+              "hardFails": [
+                "unsupported central claim/number: 24",
+                "INSUFFICIENT_DEPTH: evidence supports ~1.6 min; target 8–12 min — not padded"
+              ],
+              "generationStatus": "QUALITY_REVIEW"
+            },
             {
               "slug": "what-if-we-mined-a-metal-asteroid",
               "mode": "B_SHORT_PROVES_DEMAND",
@@ -470,35 +483,21 @@
               "generationStatus": "FAILED"
             },
             {
-              "slug": "what-if-the-tunguska-blast-happened-over-a-city",
+              "slug": "what-if-we-swam-in-europas-ocean",
               "mode": "A_LONG_FIRST",
               "LongFormPotentialScore": 82,
               "bucket": "A",
               "decision": "BLOCK",
-              "score": 88,
+              "score": 84,
               "hardFails": [
-                "INSUFFICIENT_DEPTH: evidence supports ~2 min; target 8–12 min — not padded",
-                "LLM generation failed safely (REQUEST_TOO_LARGE); deterministic evidence draft retained"
-              ],
-              "generationStatus": "FAILED"
-            },
-            {
-              "slug": "could-earth-survive-one-day-without-earth-s-magnetic-field",
-              "mode": "A_LONG_FIRST",
-              "LongFormPotentialScore": 82,
-              "bucket": "A",
-              "decision": "BLOCK",
-              "score": 81,
-              "hardFails": [
-                "unsupported central claim/number: 24",
-                "INSUFFICIENT_DEPTH: evidence supports ~1.6 min; target 8–12 min — not padded"
+                "INSUFFICIENT_DEPTH: evidence supports ~0.8 min; target 8–12 min — not padded"
               ],
               "generationStatus": "QUALITY_REVIEW"
             }
           ],
           "selected": null,
           "reason": "no candidate passed the long-form quality gate; cadence does not override quality",
-          "finishedAt": "2026-11-02T07:10:18.180Z"
+          "finishedAt": "2026-11-09T07:11:29.771Z"
         },
         "episodes": 0,
         "backlog": [

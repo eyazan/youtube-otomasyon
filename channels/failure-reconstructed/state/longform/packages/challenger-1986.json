@@ -3,7 +3,7 @@
   "channel": "failure-reconstructed",
   "channelName": "Failure Reconstructed",
   "contentType": "long",
-  "createdAt": "2026-11-02T07:10:06.289Z",
+  "createdAt": "2026-11-09T07:11:27.356Z",
   "topic": {
     "id": "challenger-1986",
     "slug": "challenger-1986",
@@ -60,7 +60,7 @@
       "ShortsEvidence": {
         "value": 78,
         "basis": "measured",
-        "note": "best cluster Short 1742 views vs channel median 446; best subscriber conversion 0.0023; best growth score 76.8 — MODE B: Short proved demand"
+        "note": "best cluster Short 1742 views vs channel median 435; best subscriber conversion 0.0023; best growth score 76.2 — MODE B: Short proved demand"
       },
       "SeriesPotential": {
         "value": 95,
@@ -113,7 +113,7 @@
     "gaps": [
       "2 source(s); long-form needs ≥ 3"
     ],
-    "reuseCount": 5
+    "reuseCount": 6
   },
   "outline": {
     "structure": [
@@ -1571,70 +1571,6 @@
         "ungrammatical": false
       },
       {
-        "title": "The Failure Chain That Destroyed Challenger",
-        "source": "failure-chain",
-        "pattern": "the-x-that",
-        "scores": {
-          "clarity": 100,
-          "curiosity": 40,
-          "specificity": 77,
-          "truthfulness": 100,
-          "searchIntent": 75,
-          "channelIdentity": 74,
-          "ctrPotential": 63,
-          "novelty": 73,
-          "evergreenPotential": 85,
-          "consequence": 80,
-          "compactness": 100,
-          "recognizability": 98,
-          "nonRedundancy": 73,
-          "factualIntegrity": 100,
-          "historicalPerformanceSimilarity": 50,
-          "patternFreshness": 100
-        },
-        "total": 78,
-        "patternPenalty": 0,
-        "templateNaturalnessPenalty": 0,
-        "genericTemplatePenalty": 0,
-        "adjustedTotal": 78,
-        "unsupportedWords": [],
-        "misleading": false,
-        "grammar": [],
-        "ungrammatical": false
-      },
-      {
-        "title": "The Rubber Ring That Destroyed Challenger",
-        "source": "editorial",
-        "pattern": "the-x-that",
-        "scores": {
-          "clarity": 100,
-          "curiosity": 40,
-          "specificity": 77,
-          "truthfulness": 100,
-          "searchIntent": 75,
-          "channelIdentity": 60,
-          "ctrPotential": 63,
-          "novelty": 89,
-          "evergreenPotential": 85,
-          "consequence": 80,
-          "compactness": 100,
-          "recognizability": 98,
-          "nonRedundancy": 89,
-          "factualIntegrity": 100,
-          "historicalPerformanceSimilarity": 50,
-          "patternFreshness": 100
-        },
-        "total": 77,
-        "patternPenalty": 0,
-        "templateNaturalnessPenalty": 0,
-        "genericTemplatePenalty": 0,
-        "adjustedTotal": 77,
-        "unsupportedWords": [],
-        "misleading": false,
-        "grammar": [],
-        "ungrammatical": false
-      },
-      {
         "title": "Engineers Said Don't Launch. Challenger Launched",
         "source": "editorial",
         "pattern": "two-beat",
@@ -1864,6 +1800,38 @@
         "ungrammatical": false
       },
       {
+        "title": "The Failure Chain That Destroyed Challenger",
+        "source": "failure-chain",
+        "pattern": "the-x-that",
+        "scores": {
+          "clarity": 100,
+          "curiosity": 40,
+          "specificity": 77,
+          "truthfulness": 100,
+          "searchIntent": 75,
+          "channelIdentity": 74,
+          "ctrPotential": 63,
+          "novelty": 73,
+          "evergreenPotential": 85,
+          "consequence": 80,
+          "compactness": 100,
+          "recognizability": 98,
+          "nonRedundancy": 73,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 70
+        },
+        "total": 78,
+        "patternPenalty": 4,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 74,
+        "unsupportedWords": [],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
         "title": "Challenger — A Forensic Engineering Documentary",
         "source": "documentary",
         "pattern": "two-beat",
@@ -1898,6 +1866,38 @@
         "ungrammatical": false
       },
       {
+        "title": "The Rubber Ring That Destroyed Challenger",
+        "source": "editorial",
+        "pattern": "the-x-that",
+        "scores": {
+          "clarity": 100,
+          "curiosity": 40,
+          "specificity": 77,
+          "truthfulness": 100,
+          "searchIntent": 75,
+          "channelIdentity": 60,
+          "ctrPotential": 63,
+          "novelty": 89,
+          "evergreenPotential": 85,
+          "consequence": 80,
+          "compactness": 100,
+          "recognizability": 98,
+          "nonRedundancy": 89,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 70
+        },
+        "total": 77,
+        "patternPenalty": 4,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 73,
+        "unsupportedWords": [],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
         "title": "The Hidden Weakness Inside Challenger",
         "source": "hidden-weakness",
         "pattern": "statement",
@@ -1917,13 +1917,13 @@
           "nonRedundancy": 77,
           "factualIntegrity": 100,
           "historicalPerformanceSimilarity": 50,
-          "patternFreshness": 10
+          "patternFreshness": 40
         },
         "total": 81,
-        "patternPenalty": 12,
+        "patternPenalty": 11,
         "templateNaturalnessPenalty": 0,
         "genericTemplatePenalty": 0,
-        "adjustedTotal": 69,
+        "adjustedTotal": 70,
         "unsupportedWords": [],
         "misleading": false,
         "grammar": [],
@@ -1949,13 +1949,13 @@
           "nonRedundancy": 91,
           "factualIntegrity": 85,
           "historicalPerformanceSimilarity": 50,
-          "patternFreshness": 10
+          "patternFreshness": 40
         },
         "total": 77,
-        "patternPenalty": 12,
+        "patternPenalty": 11,
         "templateNaturalnessPenalty": 0,
         "genericTemplatePenalty": 0,
-        "adjustedTotal": 65,
+        "adjustedTotal": 66,
         "unsupportedWords": [
           "mistakes"
         ],
@@ -1983,13 +1983,13 @@
           "nonRedundancy": 89,
           "factualIntegrity": 85,
           "historicalPerformanceSimilarity": 50,
-          "patternFreshness": 10
+          "patternFreshness": 40
         },
         "total": 76,
-        "patternPenalty": 12,
+        "patternPenalty": 11,
         "templateNaturalnessPenalty": 0,
         "genericTemplatePenalty": 0,
-        "adjustedTotal": 64,
+        "adjustedTotal": 65,
         "unsupportedWords": [
           "disaster"
         ],

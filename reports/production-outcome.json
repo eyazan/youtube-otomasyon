@@ -1,25 +1,27 @@
 {
-  "at": "2026-11-08T20:39:51.501Z",
-  "runId": "42521147007",
+  "at": "2026-11-09T07:11:52.846Z",
+  "runId": "42577041832",
   "rows": [
     {
       "channel": "failure-reconstructed",
-      "outcome": "NOT_DUE",
-      "category": "NOT_DUE",
-      "scheduled": false,
-      "publication": "NOT_SCHEDULED",
-      "publishAt": null,
-      "reason": "today's Short already exists (iroquois-theatre-1903)",
-      "slug": null,
+      "outcome": "UPLOADED",
+      "category": "SCHEDULED",
+      "scheduled": true,
+      "publication": "SCHEDULED",
+      "publishAt": "2026-11-09T18:00:00.000Z",
+      "reason": "premium FR-moore-tornado-2013 SvU6IS84aXk",
+      "slug": "moore-tornado-2013",
       "videoId": null,
-      "targetDay": null,
+      "targetDay": "2026-11-09",
       "trigger": {
-        "event": "schedule",
-        "correlationId": null
+        "event": "repository_dispatch",
+        "correlationId": "production-1-20261109T070505Z-31f22e51"
       },
       "stages": {
         "RESEARCH": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "FR-moore-tornado-2013",
+          "at": "2026-11-09T07:08:31.887Z"
         },
         "SCRIPT": {
           "status": "not-reached"
@@ -31,36 +33,46 @@
           "status": "not-reached"
         },
         "RENDER": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "premium final",
+          "at": "2026-11-09T07:08:31.887Z"
         },
         "QA": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
+          "at": "2026-11-09T07:08:31.888Z"
         },
         "UPLOAD": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "SvU6IS84aXk",
+          "at": "2026-11-09T07:08:31.888Z"
         },
         "SCHEDULE": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "2026-11-09T18:00:00.000Z",
+          "at": "2026-11-09T07:08:31.889Z"
         },
         "PUBLISH": {
-          "status": "not-reached"
+          "status": "scheduled",
+          "detail": "YouTube makes it public at 2026-11-09T18:00:00.000Z",
+          "at": "2026-11-09T07:08:31.889Z"
         }
       }
     },
     {
       "channel": "impossible-brief",
-      "outcome": "NOT_DUE",
-      "category": "NOT_DUE",
+      "outcome": "BLOCKED",
+      "category": "QUALITY_REJECTED",
       "scheduled": false,
       "publication": "NOT_SCHEDULED",
       "publishAt": null,
-      "reason": "production window closed at 21:00 Europe/Istanbul minus 60 min",
+      "reason": "premium publication refused (see the premium publish log); nothing uploaded, legacy renderer not used",
       "slug": null,
       "videoId": null,
-      "targetDay": null,
+      "targetDay": "2026-11-09",
       "trigger": {
-        "event": "schedule",
-        "correlationId": null
+        "event": "repository_dispatch",
+        "correlationId": "production-1-20261109T070505Z-31f22e51"
       },
       "stages": {
         "RESEARCH": {

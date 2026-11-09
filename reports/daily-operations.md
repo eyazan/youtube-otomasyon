@@ -1,6 +1,6 @@
 # Daily operations report
 
-Generated: 2026-11-08T21:06:06.990Z
+Generated: 2026-11-09T07:11:52.646Z
 
 Missing API-only metrics are reported as `unavailable`, never as zero.
 
@@ -8,23 +8,23 @@ Missing API-only metrics are reported as `unavailable`, never as zero.
 
 | Signal | Status |
 |---|---|
-| Today topic | unavailable |
-| Short | not-due |
+| Today topic | moore-tornado-2013 |
+| Short | scheduled |
 | Long | due-not-produced |
-| Quality | unavailable / unavailable |
-| YouTube | not-uploaded |
-| Publish time | unavailable |
-| Video ID | unavailable |
+| Quality | PUBLISH / unavailable |
+| YouTube | scheduled |
+| Publish time | 2026-11-09T18:00:00.000Z |
+| Video ID | SvU6IS84aXk |
 | Analytics | measured |
-| Scheduler | pending-before-deadline |
-| Ready topic backlog | 345 |
+| Scheduler | healthy |
+| Ready topic backlog | 344 |
 | Errors/review/blocks | 20 |
-| TikTok today | NO_TODAY_VIDEO |
-| TikTok backlog | 32 |
-| Analytics warehouse | through 2026-11-06 (lag 2 d) |
-| Ops (24 h) | publish.success 1, publish.scheduled_verified 1, analytics.load 1, publish.public 1 |
-| Scheduler queue | 2 queued, oldest 2026-11-08 (0 d) |
-| API quota today | 0 / 9800 units (project channel:failure-reconstructed) |
+| TikTok today | NOT_SENT |
+| TikTok backlog | 33 |
+| Analytics warehouse | through 2026-11-06 (lag 3 d) |
+| Ops (24 h) | analytics.load 1, publish.public 1, publish.success 1, publish.scheduled_verified 1 |
+| Scheduler queue | 2 queued, oldest 2026-11-09 (0 d) |
+| API quota today | 1717 / 9800 units (project 1012165386949) |
 | YPP readiness (estimate) | subs 31/1,000 · long-form watch h (365 d) unavailable/4,000 · Shorts views (90 d) unavailable/10M |
 
 ## ImpossibleBrief
@@ -32,7 +32,7 @@ Missing API-only metrics are reported as `unavailable`, never as zero.
 | Signal | Status |
 |---|---|
 | Today topic | unavailable |
-| Short | not-due |
+| Short | due-not-produced |
 | Long | due-not-produced |
 | Quality | unavailable / unavailable |
 | YouTube | not-uploaded |
@@ -42,9 +42,9 @@ Missing API-only metrics are reported as `unavailable`, never as zero.
 | Scheduler | pending-before-deadline |
 | Ready topic backlog | 472 |
 | Errors/review/blocks | 6 |
-| Analytics warehouse | through 2026-11-06 (lag 2 d) |
+| Analytics warehouse | through 2026-11-06 (lag 3 d) |
 | Ops (24 h) | analytics.load 1 |
-| Scheduler queue | 2 queued, oldest 2026-11-08 (0 d) |
-| API quota today | 97 / 9800 units (project 684098966511) |
+| Scheduler queue | 2 queued, oldest 2026-11-09 (0 d) |
+| API quota today | 101 / 9800 units (project 684098966511) |
 | YPP readiness (estimate) | subs 13/1,000 · long-form watch h (365 d) unavailable/4,000 · Shorts views (90 d) unavailable/10M |
 
