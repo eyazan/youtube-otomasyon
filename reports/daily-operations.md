@@ -1,6 +1,6 @@
 # Daily operations report
 
-Generated: 2026-11-09T15:54:57.169Z
+Generated: 2026-11-09T16:35:52.127Z
 
 Missing API-only metrics are reported as `unavailable`, never as zero.
 
@@ -24,7 +24,7 @@ Missing API-only metrics are reported as `unavailable`, never as zero.
 | Analytics warehouse | through 2026-11-07 (lag 2 d) |
 | Ops (24 h) | publish.public 1, publish.success 1, publish.scheduled_verified 1, analytics.load 1 |
 | Scheduler queue | 2 queued, oldest 2026-11-09 (0 d) |
-| API quota today | 15 / 9800 units (project 1012165386949) |
+| API quota today | 20 / 9800 units (project 1012165386949) |
 | YPP readiness (estimate) | subs 31/1,000 · long-form watch h (365 d) unavailable/4,000 · Shorts views (90 d) unavailable/10M |
 
 ## ImpossibleBrief
@@ -39,12 +39,12 @@ Missing API-only metrics are reported as `unavailable`, never as zero.
 | Publish time | unavailable |
 | Video ID | unavailable |
 | Analytics | measured |
-| Scheduler | pending-before-deadline |
+| Scheduler | sla-missed-or-channel-disabled |
 | Ready topic backlog | 472 |
 | Errors/review/blocks | 6 |
 | Analytics warehouse | through 2026-11-07 (lag 2 d) |
 | Ops (24 h) | analytics.load 1 |
 | Scheduler queue | 2 queued, oldest 2026-11-09 (0 d) |
-| API quota today | 13 / 9800 units (project 684098966511) |
+| API quota today | 0 / 9800 units (project channel:impossible-brief) |
 | YPP readiness (estimate) | subs 13/1,000 · long-form watch h (365 d) unavailable/4,000 · Shorts views (90 d) unavailable/10M |
 
