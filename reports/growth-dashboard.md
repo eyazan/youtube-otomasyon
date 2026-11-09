@@ -1,10 +1,10 @@
 # Growth dashboard
 
-Generated 2026-11-09T17:43:57.802Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-11-09T18:56:58.173Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
-**Shorts health** — last published 2026-11-09T18:00:00.000Z · 44 published · inventory A54/B146/C56/D86 · next: columbia-2003 (EXPLOIT (0.75): best A topic by SelectionScore)
+**Shorts health** — last published 2026-11-09T18:00:00.000Z · 44 published · inventory A58/B150/C58/D76 · next: columbia-2003 (EXPLOIT (0.75): best A topic by SelectionScore)
 
 **Long-form health** — cycle 2026-W46: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W46 already QUALITY_BLOCKED)
 
@@ -21,9 +21,9 @@ Generated 2026-11-09T17:43:57.802Z. Per-channel baselines are computed separatel
 **Research/source enrichment tasks**
 
 - apollo-1-1967 (C): VideoPotential 86 in experimental band 58–71; sources 41 < 62
+- castle-bravo-1954 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
 - skylab-1973 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
 - munich-1958 (C): VideoPotential 85 in experimental band 58–71; sources 41 < 62
-- castle-bravo-1954 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
 - new-london-school-1937 (C): VideoPotential 83 in experimental band 58–71; sources 41 < 62
 
 **Recent alerts**
@@ -41,11 +41,11 @@ Generated 2026-11-09T17:43:57.802Z. Per-channel baselines are computed separatel
 
 ## ImpossibleBrief
 
-**Shorts health** — last published 2026-11-05T18:00:00.000Z · 22 published · inventory A110/B21/C140/D206 · next: what-if-we-tried-to-drill-through-the-earth (EXPLOIT (0.75): best A topic by SelectionScore)
+**Shorts health** — last published 2026-11-05T18:00:00.000Z · 22 published · inventory A106/B25/C140/D206 · next: what-if-we-tried-to-drill-through-the-earth (EXPLOIT (0.75): best A topic by SelectionScore)
 
 **Long-form health** — cycle 2026-W46: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W46 already QUALITY_BLOCKED)
 
-**Long-form backlog** — could-earth-survive-one-day-without-earth-s-magnetic-field 83/A, what-if-we-mined-a-metal-asteroid 83/A, what-if-we-swam-in-europas-ocean 82/A, what-if-you-visited-io-the-volcano-moon 82/A, what-if-the-dinosaur-killing-asteroid-hit-today 82/A
+**Long-form backlog** — could-earth-survive-one-day-without-earth-s-magnetic-field 83/A, what-if-we-mined-a-metal-asteroid 83/A, what-if-synthetic-fertilizer-disappeared 83/A, what-if-we-swam-in-europas-ocean 82/A, what-if-you-visited-io-the-volcano-moon 82/A
 
 **Content clusters** — 7 · integrity OK
 

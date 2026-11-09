@@ -10,10 +10,11 @@ https://youtu.be/d_xBJEX6QJ8
 | 3d | 2026-10-13 | 984 | 23 | 1 | 61.11 | 1 | Shorts feed 84%, Search 15% |
 | 7d | 2026-10-17 | 1013 | 24 | 3 | 58.78 | 2 | Shorts feed 70%, Search 29% |
 | 14d | 2026-10-24 | 1022 | 24 | 3 | 58.379999999999995 | 2 | Shorts feed 68%, Search 30% |
+| 30d | 2026-11-09 | 1038 | 24 | 3 | 58.84 | 2 | Shorts feed 67%, Search 32% |
 
-## Diagnosis at 14d
+## Diagnosis at 30d
 
-- **OUTPERFORMER** (medium) — 1022 views vs channel median 457 (n=30 videos).
+- **OUTPERFORMER** (medium) — 1038 views vs channel median 397.5 (n=42 videos).
 
 ## Suggested interventions
 
@@ -26,4 +27,4 @@ https://youtu.be/d_xBJEX6QJ8
 - Visual type: REAL ARCHIVAL IMAGE
 - This is an observed alignment, not proof that the sentence or visual caused the drop.
 
-Views gained between 7d and 14d: 9.
+Views gained between 14d and 30d: 16.
