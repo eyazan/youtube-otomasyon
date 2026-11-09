@@ -2,62 +2,6 @@
   "channel": "failure-reconstructed",
   "runs": [
     {
-      "runId": "42457321709",
-      "attempt": "1",
-      "startedAt": "2026-11-08T07:06:12.965Z",
-      "publish": true,
-      "trigger": {
-        "event": "repository_dispatch",
-        "correlationId": "production-1-20261108T070505Z-e51d9557"
-      },
-      "targetDay": "2026-11-08",
-      "slug": "iroquois-theatre-1903",
-      "outcome": "UPLOADED",
-      "reason": "premium FR-iroquois-theatre-1903 qGH3aDGsY9E",
-      "stages": {
-        "RESEARCH": {
-          "status": "done",
-          "detail": "FR-iroquois-theatre-1903",
-          "at": "2026-11-08T07:09:00.258Z"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "done",
-          "detail": "premium final",
-          "at": "2026-11-08T07:09:00.258Z"
-        },
-        "QA": {
-          "status": "done",
-          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
-          "at": "2026-11-08T07:09:00.259Z"
-        },
-        "UPLOAD": {
-          "status": "done",
-          "detail": "qGH3aDGsY9E",
-          "at": "2026-11-08T07:09:00.259Z"
-        },
-        "SCHEDULE": {
-          "status": "done",
-          "detail": "2026-11-08T18:00:00.000Z",
-          "at": "2026-11-08T07:09:00.259Z"
-        },
-        "PUBLISH": {
-          "status": "scheduled",
-          "detail": "YouTube makes it public at 2026-11-08T18:00:00.000Z",
-          "at": "2026-11-08T07:09:00.260Z"
-        }
-      },
-      "finishedAt": "2026-11-08T07:09:00.260Z"
-    },
-    {
       "runId": "42483246272",
       "attempt": "1",
       "startedAt": "2026-11-08T13:06:22.875Z",
@@ -1344,6 +1288,50 @@
         }
       },
       "finishedAt": "2026-11-09T23:29:35.872Z"
+    },
+    {
+      "runId": "42723397238",
+      "attempt": "1",
+      "startedAt": "2026-11-09T23:49:18.386Z",
+      "publish": true,
+      "trigger": {
+        "event": "schedule",
+        "correlationId": null
+      },
+      "targetDay": null,
+      "slug": null,
+      "outcome": "NOT_DUE",
+      "reason": "before production slot 09:00 Europe/Istanbul",
+      "stages": {
+        "RESEARCH": {
+          "status": "not-reached"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "not-reached"
+        },
+        "QA": {
+          "status": "not-reached"
+        },
+        "UPLOAD": {
+          "status": "not-reached"
+        },
+        "SCHEDULE": {
+          "status": "not-reached"
+        },
+        "PUBLISH": {
+          "status": "not-reached"
+        }
+      },
+      "finishedAt": "2026-11-09T23:49:18.399Z"
     }
   ]
 }
