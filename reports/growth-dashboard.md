@@ -1,10 +1,10 @@
 # Growth dashboard
 
-Generated 2026-11-09T18:56:58.173Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-11-09T19:56:31.031Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
-**Shorts health** — last published 2026-11-09T18:00:00.000Z · 44 published · inventory A58/B150/C58/D76 · next: columbia-2003 (EXPLOIT (0.75): best A topic by SelectionScore)
+**Shorts health** — last published 2026-11-09T18:00:00.000Z · 44 published · inventory A54/B146/C56/D86 · next: columbia-2003 (EXPLOIT (0.75): best A topic by SelectionScore)
 
 **Long-form health** — cycle 2026-W46: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W46 already QUALITY_BLOCKED)
 
@@ -12,18 +12,18 @@ Generated 2026-11-09T18:56:58.173Z. Per-channel baselines are computed separatel
 
 **Content clusters** — 12 · integrity OK
 
-**Growth / subscriber conversion** — tracked 43 · subs/1k Shorts 0 · subs/1k long n/a
+**Growth / subscriber conversion** — tracked 44 · subs/1k Shorts 0 · subs/1k long n/a
 
-**Learning** — Shorts adaptive (n=42, adopted 0) · Long-form heuristics-only (n=0)
+**Learning** — Shorts adaptive (n=43, adopted 0) · Long-form heuristics-only (n=0)
 
 **Short → Long funnel** — 0 link(s), 0 long→long, 0 pending RELATED_VIDEO_MANUAL_ACTION_REQUIRED
 
 **Research/source enrichment tasks**
 
 - apollo-1-1967 (C): VideoPotential 86 in experimental band 58–71; sources 41 < 62
-- castle-bravo-1954 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
 - skylab-1973 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
 - munich-1958 (C): VideoPotential 85 in experimental band 58–71; sources 41 < 62
+- castle-bravo-1954 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
 - new-london-school-1937 (C): VideoPotential 83 in experimental band 58–71; sources 41 < 62
 
 **Recent alerts**
