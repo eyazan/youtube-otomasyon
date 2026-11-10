@@ -1,6 +1,6 @@
 {
-  "at": "2026-11-10T16:32:52.433Z",
-  "runId": "42854821606",
+  "at": "2026-11-10T17:11:10.926Z",
+  "runId": "42862021597",
   "rows": [
     {
       "channel": "failure-reconstructed",
@@ -49,15 +49,15 @@
     },
     {
       "channel": "impossible-brief",
-      "outcome": "BLOCKED",
-      "category": "QUALITY_REJECTED",
+      "outcome": "NOT_DUE",
+      "category": "NOT_DUE",
       "scheduled": false,
       "publication": "NOT_SCHEDULED",
       "publishAt": null,
-      "reason": "premium publication refused (see the premium publish log); nothing uploaded, legacy renderer not used",
+      "reason": "production window closed at 21:00 Europe/Istanbul minus 60 min",
       "slug": null,
       "videoId": null,
-      "targetDay": "2026-11-10",
+      "targetDay": null,
       "trigger": {
         "event": "schedule",
         "correlationId": null
