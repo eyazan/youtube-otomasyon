@@ -1,10 +1,10 @@
 # Growth dashboard
 
-Generated 2026-11-10T17:55:42.333Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-11-10T18:43:53.698Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
-**Shorts health** — last published 2026-11-10T18:00:00.000Z · 45 published · inventory A53/B146/C56/D86 · next: columbia-2003 (EXPLOIT (0.75): best A topic by SelectionScore)
+**Shorts health** — last published 2026-11-10T18:00:00.000Z · 45 published · inventory A57/B150/C58/D76 · next: columbia-2003 (EXPLOIT (0.75): best A topic by SelectionScore)
 
 **Long-form health** — cycle 2026-W46: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W46 already QUALITY_BLOCKED)
 
@@ -41,7 +41,7 @@ Generated 2026-11-10T17:55:42.333Z. Per-channel baselines are computed separatel
 
 ## ImpossibleBrief
 
-**Shorts health** — last published 2026-11-05T18:00:00.000Z · 22 published · inventory A106/B25/C140/D206 · next: what-if-we-tried-to-drill-through-the-earth (EXPLOIT (0.75): best A topic by SelectionScore)
+**Shorts health** — last published 2026-11-05T18:00:00.000Z · 22 published · inventory A108/B23/C140/D206 · next: what-if-we-tried-to-drill-through-the-earth (EXPLOIT (0.75): best A topic by SelectionScore)
 
 **Long-form health** — cycle 2026-W46: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W46 already QUALITY_BLOCKED)
 

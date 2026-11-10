@@ -10,8 +10,9 @@ https://youtu.be/9oMvT2-bE9E
 | 3d | 2026-10-14 | 398 | 7 | 1 | 70.16 | 1 | Shorts feed 87%, Search 11% |
 | 7d | 2026-10-18 | 398 | 7 | 1 | 68.85 | 1 | Shorts feed 80%, Search 17% |
 | 14d | 2026-10-25 | 400 | 7 | 1 | 69.04 | 1 | Shorts feed 80%, Search 18% |
+| 30d | 2026-11-10 | 401 | 7 | 1 | 68.84 | 1 | Shorts feed 80%, Search 18% |
 
-## Diagnosis at 14d
+## Diagnosis at 30d
 
 - **HEALTHY** (low) — No problem pattern detected with available data.
 
@@ -19,11 +20,4 @@ https://youtu.be/9oMvT2-bE9E
 
 - HEALTHY → no action.
 
-## First major observed retention drop
-
-- Timestamp: 7s; magnitude: 18 percentage points.
-- Active sentence: fuel capsule implosion sequence
-- Visual type: AI-GENERATED VISUAL
-- This is an observed alignment, not proof that the sentence or visual caused the drop.
-
-Views gained between 7d and 14d: 2.
+Views gained between 14d and 30d: 1.
