@@ -1,27 +1,25 @@
 {
-  "at": "2026-11-10T07:12:59.863Z",
-  "runId": "42772822633",
+  "at": "2026-11-10T13:09:28.678Z",
+  "runId": "42821301503",
   "rows": [
     {
       "channel": "failure-reconstructed",
-      "outcome": "UPLOADED",
-      "category": "SCHEDULED",
-      "scheduled": true,
-      "publication": "SCHEDULED",
-      "publishAt": "2026-11-10T18:00:00.000Z",
-      "reason": "premium FR-amtrak-188-2015 mWrXTVkepQo",
-      "slug": "amtrak-188-2015",
+      "outcome": "NOT_DUE",
+      "category": "NOT_DUE",
+      "scheduled": false,
+      "publication": "NOT_SCHEDULED",
+      "publishAt": null,
+      "reason": "today's Short already exists (amtrak-188-2015)",
+      "slug": null,
       "videoId": null,
-      "targetDay": "2026-11-10",
+      "targetDay": null,
       "trigger": {
         "event": "repository_dispatch",
-        "correlationId": "production-1-20261110T070505Z-51934942"
+        "correlationId": "production-2-20261110T130505Z-83bdfe9c"
       },
       "stages": {
         "RESEARCH": {
-          "status": "done",
-          "detail": "FR-amtrak-188-2015",
-          "at": "2026-11-10T07:09:45.924Z"
+          "status": "not-reached"
         },
         "SCRIPT": {
           "status": "not-reached"
@@ -33,29 +31,19 @@
           "status": "not-reached"
         },
         "RENDER": {
-          "status": "done",
-          "detail": "premium final",
-          "at": "2026-11-10T07:09:45.925Z"
+          "status": "not-reached"
         },
         "QA": {
-          "status": "done",
-          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
-          "at": "2026-11-10T07:09:45.925Z"
+          "status": "not-reached"
         },
         "UPLOAD": {
-          "status": "done",
-          "detail": "mWrXTVkepQo",
-          "at": "2026-11-10T07:09:45.926Z"
+          "status": "not-reached"
         },
         "SCHEDULE": {
-          "status": "done",
-          "detail": "2026-11-10T18:00:00.000Z",
-          "at": "2026-11-10T07:09:45.926Z"
+          "status": "not-reached"
         },
         "PUBLISH": {
-          "status": "scheduled",
-          "detail": "YouTube makes it public at 2026-11-10T18:00:00.000Z",
-          "at": "2026-11-10T07:09:45.927Z"
+          "status": "not-reached"
         }
       }
     },
@@ -72,7 +60,7 @@
       "targetDay": "2026-11-10",
       "trigger": {
         "event": "repository_dispatch",
-        "correlationId": "production-1-20261110T070505Z-51934942"
+        "correlationId": "production-2-20261110T130505Z-83bdfe9c"
       },
       "stages": {
         "RESEARCH": {
