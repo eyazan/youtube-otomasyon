@@ -1,6 +1,6 @@
 # Growth dashboard
 
-Generated 2026-11-10T15:28:42.883Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-11-10T15:44:17.070Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
