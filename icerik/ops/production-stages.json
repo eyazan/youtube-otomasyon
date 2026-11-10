@@ -2,62 +2,6 @@
   "channel": "failure-reconstructed",
   "runs": [
     {
-      "runId": "42577041832",
-      "attempt": "1",
-      "startedAt": "2026-11-09T07:06:14.047Z",
-      "publish": true,
-      "trigger": {
-        "event": "repository_dispatch",
-        "correlationId": "production-1-20261109T070505Z-31f22e51"
-      },
-      "targetDay": "2026-11-09",
-      "slug": "moore-tornado-2013",
-      "outcome": "UPLOADED",
-      "reason": "premium FR-moore-tornado-2013 SvU6IS84aXk",
-      "stages": {
-        "RESEARCH": {
-          "status": "done",
-          "detail": "FR-moore-tornado-2013",
-          "at": "2026-11-09T07:08:31.887Z"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "done",
-          "detail": "premium final",
-          "at": "2026-11-09T07:08:31.887Z"
-        },
-        "QA": {
-          "status": "done",
-          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
-          "at": "2026-11-09T07:08:31.888Z"
-        },
-        "UPLOAD": {
-          "status": "done",
-          "detail": "SvU6IS84aXk",
-          "at": "2026-11-09T07:08:31.888Z"
-        },
-        "SCHEDULE": {
-          "status": "done",
-          "detail": "2026-11-09T18:00:00.000Z",
-          "at": "2026-11-09T07:08:31.889Z"
-        },
-        "PUBLISH": {
-          "status": "scheduled",
-          "detail": "YouTube makes it public at 2026-11-09T18:00:00.000Z",
-          "at": "2026-11-09T07:08:31.889Z"
-        }
-      },
-      "finishedAt": "2026-11-09T07:08:31.890Z"
-    },
-    {
       "runId": "42622370516",
       "attempt": "1",
       "startedAt": "2026-11-09T13:06:26.895Z",
@@ -1344,6 +1288,50 @@
         }
       },
       "finishedAt": "2026-11-10T20:53:18.644Z"
+    },
+    {
+      "runId": "42904136326",
+      "attempt": "1",
+      "startedAt": "2026-11-10T21:21:55.330Z",
+      "publish": true,
+      "trigger": {
+        "event": "schedule",
+        "correlationId": null
+      },
+      "targetDay": null,
+      "slug": null,
+      "outcome": "NOT_DUE",
+      "reason": "before production slot 09:00 Europe/Istanbul",
+      "stages": {
+        "RESEARCH": {
+          "status": "not-reached"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "not-reached"
+        },
+        "QA": {
+          "status": "not-reached"
+        },
+        "UPLOAD": {
+          "status": "not-reached"
+        },
+        "SCHEDULE": {
+          "status": "not-reached"
+        },
+        "PUBLISH": {
+          "status": "not-reached"
+        }
+      },
+      "finishedAt": "2026-11-10T21:21:55.350Z"
     }
   ]
 }
