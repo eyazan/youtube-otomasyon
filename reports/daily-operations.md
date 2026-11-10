@@ -1,6 +1,6 @@
 # Daily operations report
 
-Generated: 2026-11-10T00:40:03.471Z
+Generated: 2026-11-10T07:12:59.663Z
 
 Missing API-only metrics are reported as `unavailable`, never as zero.
 
@@ -8,23 +8,23 @@ Missing API-only metrics are reported as `unavailable`, never as zero.
 
 | Signal | Status |
 |---|---|
-| Today topic | unavailable |
-| Short | not-due |
+| Today topic | amtrak-188-2015 |
+| Short | scheduled |
 | Long | due-not-produced |
-| Quality | unavailable / unavailable |
-| YouTube | not-uploaded |
-| Publish time | unavailable |
-| Video ID | unavailable |
+| Quality | PUBLISH / unavailable |
+| YouTube | scheduled |
+| Publish time | 2026-11-10T18:00:00.000Z |
+| Video ID | mWrXTVkepQo |
 | Analytics | measured |
-| Scheduler | pending-before-deadline |
-| Ready topic backlog | 344 |
+| Scheduler | healthy |
+| Ready topic backlog | 343 |
 | Errors/review/blocks | 20 |
-| TikTok today | NO_TODAY_VIDEO |
-| TikTok backlog | 33 |
+| TikTok today | NOT_SENT |
+| TikTok backlog | 34 |
 | Analytics warehouse | through 2026-11-07 (lag 3 d) |
-| Ops (24 h) | publish.success 1, publish.scheduled_verified 1, analytics.load 1, publish.public 1 |
-| Scheduler queue | 1 queued, oldest 2026-11-10 (0 d) |
-| API quota today | 101 / 9800 units (project 1012165386949) |
+| Ops (24 h) | analytics.load 1, publish.public 1, publish.success 1, publish.scheduled_verified 1 |
+| Scheduler queue | 2 queued, oldest 2026-11-10 (0 d) |
+| API quota today | 1709 / 9800 units (project 1012165386949) |
 | YPP readiness (estimate) | subs 31/1,000 · long-form watch h (365 d) unavailable/4,000 · Shorts views (90 d) unavailable/10M |
 
 ## ImpossibleBrief
@@ -32,7 +32,7 @@ Missing API-only metrics are reported as `unavailable`, never as zero.
 | Signal | Status |
 |---|---|
 | Today topic | unavailable |
-| Short | not-due |
+| Short | due-not-produced |
 | Long | due-not-produced |
 | Quality | unavailable / unavailable |
 | YouTube | not-uploaded |
@@ -44,7 +44,7 @@ Missing API-only metrics are reported as `unavailable`, never as zero.
 | Errors/review/blocks | 6 |
 | Analytics warehouse | through 2026-11-07 (lag 3 d) |
 | Ops (24 h) | analytics.load 1 |
-| Scheduler queue | 1 queued, oldest 2026-11-10 (0 d) |
-| API quota today | 0 / 9800 units (project channel:impossible-brief) |
+| Scheduler queue | 2 queued, oldest 2026-11-10 (0 d) |
+| API quota today | 99 / 9800 units (project 684098966511) |
 | YPP readiness (estimate) | subs 13/1,000 · long-form watch h (365 d) unavailable/4,000 · Shorts views (90 d) unavailable/10M |
 

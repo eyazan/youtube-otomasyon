@@ -2,50 +2,6 @@
   "channel": "failure-reconstructed",
   "runs": [
     {
-      "runId": "42483349558",
-      "attempt": "1",
-      "startedAt": "2026-11-08T13:11:08.357Z",
-      "publish": true,
-      "trigger": {
-        "event": "schedule",
-        "correlationId": null
-      },
-      "targetDay": null,
-      "slug": null,
-      "outcome": "NOT_DUE",
-      "reason": "today's Short already exists (iroquois-theatre-1903)",
-      "stages": {
-        "RESEARCH": {
-          "status": "not-reached"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "not-reached"
-        },
-        "QA": {
-          "status": "not-reached"
-        },
-        "UPLOAD": {
-          "status": "not-reached"
-        },
-        "SCHEDULE": {
-          "status": "not-reached"
-        },
-        "PUBLISH": {
-          "status": "not-reached"
-        }
-      },
-      "finishedAt": "2026-11-08T13:11:08.370Z"
-    },
-    {
       "runId": "42486259076",
       "attempt": "1",
       "startedAt": "2026-11-08T13:43:48.445Z",
@@ -1332,6 +1288,62 @@
         }
       },
       "finishedAt": "2026-11-10T00:20:53.919Z"
+    },
+    {
+      "runId": "42772822633",
+      "attempt": "1",
+      "startedAt": "2026-11-10T07:06:14.529Z",
+      "publish": true,
+      "trigger": {
+        "event": "repository_dispatch",
+        "correlationId": "production-1-20261110T070505Z-51934942"
+      },
+      "targetDay": "2026-11-10",
+      "slug": "amtrak-188-2015",
+      "outcome": "UPLOADED",
+      "reason": "premium FR-amtrak-188-2015 mWrXTVkepQo",
+      "stages": {
+        "RESEARCH": {
+          "status": "done",
+          "detail": "FR-amtrak-188-2015",
+          "at": "2026-11-10T07:09:45.924Z"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "done",
+          "detail": "premium final",
+          "at": "2026-11-10T07:09:45.925Z"
+        },
+        "QA": {
+          "status": "done",
+          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
+          "at": "2026-11-10T07:09:45.925Z"
+        },
+        "UPLOAD": {
+          "status": "done",
+          "detail": "mWrXTVkepQo",
+          "at": "2026-11-10T07:09:45.926Z"
+        },
+        "SCHEDULE": {
+          "status": "done",
+          "detail": "2026-11-10T18:00:00.000Z",
+          "at": "2026-11-10T07:09:45.926Z"
+        },
+        "PUBLISH": {
+          "status": "scheduled",
+          "detail": "YouTube makes it public at 2026-11-10T18:00:00.000Z",
+          "at": "2026-11-10T07:09:45.927Z"
+        }
+      },
+      "finishedAt": "2026-11-10T07:09:45.927Z"
     }
   ]
 }
