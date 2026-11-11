@@ -1,6 +1,6 @@
 {
   "schema": "feedback-loop-health/1",
-  "generatedAt": "2026-11-11T06:13:27.644Z",
+  "generatedAt": "2026-11-11T14:30:23.098Z",
   "verdict": "CLOSED_LOOP_WORKING",
   "channels": [
     {
@@ -9,9 +9,9 @@
       "mode": "adaptive",
       "publishedVideos": 45,
       "performanceRows": 45,
-      "diagnosisRows": 246,
+      "diagnosisRows": 247,
       "learning": {
-        "updatedAt": "2026-11-11T06:13:23.020Z",
+        "updatedAt": "2026-11-11T14:30:18.721Z",
         "sampleSize": 44,
         "status": "adaptive",
         "observations": 35,
@@ -76,16 +76,9 @@
         }
       ],
       "timing": {
-        "lateCheckpointCount": 106,
+        "lateCheckpointCount": 107,
         "note": "Historical late collections are retained for audit, but performance math uses their real collection age.",
         "examples": [
-          {
-            "videoId": "PlQYe5W0szE",
-            "label": "6h",
-            "scheduledHours": 6,
-            "collectedAgeHours": 19.1,
-            "driftHours": 13.1
-          },
           {
             "videoId": "aGG5f0Q2B9c",
             "label": "12h",
@@ -148,6 +141,13 @@
             "scheduledHours": 6,
             "collectedAgeHours": 21.91,
             "driftHours": 15.91
+          },
+          {
+            "videoId": "mWrXTVkepQo",
+            "label": "6h",
+            "scheduledHours": 6,
+            "collectedAgeHours": 19.18,
+            "driftHours": 13.18
           }
         ]
       },
@@ -162,7 +162,7 @@
       "performanceRows": 21,
       "diagnosisRows": 133,
       "learning": {
-        "updatedAt": "2026-11-11T06:13:24.396Z",
+        "updatedAt": "2026-11-11T14:30:19.874Z",
         "sampleSize": 20,
         "status": "adaptive",
         "observations": 30,
@@ -313,7 +313,7 @@
       "performanceRows": 7,
       "diagnosisRows": 27,
       "learning": {
-        "updatedAt": "2026-11-11T06:13:25.539Z",
+        "updatedAt": "2026-11-11T14:30:20.832Z",
         "sampleSize": 6,
         "status": "observing",
         "observations": 25,
