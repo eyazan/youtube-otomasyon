@@ -1,98 +1,24 @@
 {
-  "at": "2026-11-11T13:11:28.274Z",
-  "runId": "43026075254",
+  "at": "2026-11-11T14:29:44.600Z",
+  "runId": "43033643285",
   "rows": [
     {
       "channel": "failure-reconstructed",
-      "outcome": "NO_TOPIC",
-      "category": "CONTENT_BLOCKED",
+      "outcome": "MISSING",
+      "category": "PRODUCTION_FAILED",
       "scheduled": false,
       "publication": "NOT_SCHEDULED",
-      "publishAt": null,
-      "reason": "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)",
-      "slug": null,
-      "videoId": null,
-      "targetDay": "2026-11-11",
-      "trigger": {
-        "event": "repository_dispatch",
-        "correlationId": "production-2-20261111T130554Z-0c7313ca"
-      },
-      "stages": {
-        "RESEARCH": {
-          "status": "skipped",
-          "detail": "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)",
-          "at": "2026-11-11T13:07:54.748Z"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "not-reached"
-        },
-        "QA": {
-          "status": "not-reached"
-        },
-        "UPLOAD": {
-          "status": "not-reached"
-        },
-        "SCHEDULE": {
-          "status": "not-reached"
-        },
-        "PUBLISH": {
-          "status": "not-reached"
-        }
-      }
+      "reason": "no stage record for this run (the step crashed before tracking or did not run)",
+      "stages": null
     },
     {
       "channel": "impossible-brief",
-      "outcome": "BLOCKED",
-      "category": "QUALITY_REJECTED",
+      "outcome": "MISSING",
+      "category": "PRODUCTION_FAILED",
       "scheduled": false,
       "publication": "NOT_SCHEDULED",
-      "publishAt": null,
-      "reason": "premium publication refused (see the premium publish log); nothing uploaded, legacy renderer not used",
-      "slug": null,
-      "videoId": null,
-      "targetDay": "2026-11-11",
-      "trigger": {
-        "event": "repository_dispatch",
-        "correlationId": "production-2-20261111T130554Z-0c7313ca"
-      },
-      "stages": {
-        "RESEARCH": {
-          "status": "not-reached"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "not-reached"
-        },
-        "QA": {
-          "status": "not-reached"
-        },
-        "UPLOAD": {
-          "status": "not-reached"
-        },
-        "SCHEDULE": {
-          "status": "not-reached"
-        },
-        "PUBLISH": {
-          "status": "not-reached"
-        }
-      }
+      "reason": "no stage record for this run (the step crashed before tracking or did not run)",
+      "stages": null
     }
   ]
 }
