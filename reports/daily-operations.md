@@ -1,6 +1,6 @@
 # Daily operations report
 
-Generated: 2026-11-11T22:04:53.711Z
+Generated: 2026-11-11T22:53:30.109Z
 
 Missing API-only metrics are reported as `unavailable`, never as zero.
 
@@ -24,7 +24,7 @@ Missing API-only metrics are reported as `unavailable`, never as zero.
 | Analytics warehouse | through 2026-11-09 (lag 2 d) |
 | Ops (24 h) | analytics.load 1 |
 | Scheduler queue | 1 queued, oldest 2026-11-12 (-1 d) |
-| API quota today | 82 / 9800 units (project 1012165386949) |
+| API quota today | 88 / 9800 units (project 1012165386949) |
 | YPP readiness (estimate) | subs 31/1,000 · long-form watch h (365 d) unavailable/4,000 · Shorts views (90 d) unavailable/10M |
 
 ## ImpossibleBrief
@@ -45,6 +45,6 @@ Missing API-only metrics are reported as `unavailable`, never as zero.
 | Analytics warehouse | through 2026-11-09 (lag 2 d) |
 | Ops (24 h) | analytics.load 1 |
 | Scheduler queue | 1 queued, oldest 2026-11-12 (-1 d) |
-| API quota today | 74 / 9800 units (project 684098966511) |
+| API quota today | 80 / 9800 units (project 684098966511) |
 | YPP readiness (estimate) | subs 13/1,000 · long-form watch h (365 d) unavailable/4,000 · Shorts views (90 d) unavailable/10M |
 
