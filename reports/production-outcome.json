@@ -1,24 +1,53 @@
 {
-  "at": "2026-11-11T16:53:26.515Z",
-  "runId": "43056970520",
+  "at": "2026-11-11T16:55:39.165Z",
+  "runId": "43060498598",
   "rows": [
     {
       "channel": "failure-reconstructed",
-      "outcome": "MISSING",
-      "category": "PRODUCTION_FAILED",
+      "outcome": "NO_TOPIC",
+      "category": "CONTENT_BLOCKED",
       "scheduled": false,
       "publication": "NOT_SCHEDULED",
-      "reason": "no stage record for this run (the step crashed before tracking or did not run)",
-      "stages": null
-    },
-    {
-      "channel": "impossible-brief",
-      "outcome": "MISSING",
-      "category": "PRODUCTION_FAILED",
-      "scheduled": false,
-      "publication": "NOT_SCHEDULED",
-      "reason": "no stage record for this run (the step crashed before tracking or did not run)",
-      "stages": null
+      "publishAt": null,
+      "reason": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [45 unused A topic(s), best viral score 74 < minimum 75; 10 topic(s) at the minimum are bucket B/C, not selectable]",
+      "slug": null,
+      "videoId": null,
+      "targetDay": "2026-11-11",
+      "trigger": {
+        "event": "schedule",
+        "correlationId": null
+      },
+      "stages": {
+        "RESEARCH": {
+          "status": "failed",
+          "detail": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [45 unused A topic(s), best viral score 74 < minimum 75; 10 topic(s) at the minimum are bucket B/C, not selectable]",
+          "at": "2026-11-11T16:55:39.111Z"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "not-reached"
+        },
+        "QA": {
+          "status": "not-reached"
+        },
+        "UPLOAD": {
+          "status": "not-reached"
+        },
+        "SCHEDULE": {
+          "status": "not-reached"
+        },
+        "PUBLISH": {
+          "status": "not-reached"
+        }
+      }
     }
   ]
 }
