@@ -1,6 +1,6 @@
 {
-  "at": "2026-11-12T07:10:18.018Z",
-  "runId": "43172715219",
+  "at": "2026-11-12T13:07:35.145Z",
+  "runId": "43223987471",
   "rows": [
     {
       "channel": "failure-reconstructed",
@@ -15,13 +15,13 @@
       "targetDay": "2026-11-12",
       "trigger": {
         "event": "repository_dispatch",
-        "correlationId": "production-1-20261112T070531Z-35f5b195"
+        "correlationId": "production-2-20261112T130531Z-050f018c"
       },
       "stages": {
         "RESEARCH": {
           "status": "skipped",
           "detail": "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)",
-          "at": "2026-11-12T07:06:54.173Z"
+          "at": "2026-11-12T13:07:03.936Z"
         },
         "SCRIPT": {
           "status": "not-reached"
@@ -51,24 +51,22 @@
     },
     {
       "channel": "impossible-brief",
-      "outcome": "UPLOADED",
-      "category": "SCHEDULED",
-      "scheduled": true,
-      "publication": "SCHEDULED",
-      "publishAt": "2026-11-12T18:00:00.000Z",
-      "reason": "premium IB-OTH-020 93dyfZ6S4Iw",
-      "slug": "what-if-synthetic-fertilizer-disappeared",
+      "outcome": "NOT_DUE",
+      "category": "NOT_DUE",
+      "scheduled": false,
+      "publication": "NOT_SCHEDULED",
+      "publishAt": null,
+      "reason": "today's Short already exists (what-if-synthetic-fertilizer-disappeared)",
+      "slug": null,
       "videoId": null,
-      "targetDay": "2026-11-12",
+      "targetDay": null,
       "trigger": {
         "event": "repository_dispatch",
-        "correlationId": "production-1-20261112T070531Z-35f5b195"
+        "correlationId": "production-2-20261112T130531Z-050f018c"
       },
       "stages": {
         "RESEARCH": {
-          "status": "done",
-          "detail": "IB-OTH-020",
-          "at": "2026-11-12T07:10:03.359Z"
+          "status": "not-reached"
         },
         "SCRIPT": {
           "status": "not-reached"
@@ -80,29 +78,19 @@
           "status": "not-reached"
         },
         "RENDER": {
-          "status": "done",
-          "detail": "premium final",
-          "at": "2026-11-12T07:10:03.360Z"
+          "status": "not-reached"
         },
         "QA": {
-          "status": "done",
-          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
-          "at": "2026-11-12T07:10:03.361Z"
+          "status": "not-reached"
         },
         "UPLOAD": {
-          "status": "done",
-          "detail": "93dyfZ6S4Iw",
-          "at": "2026-11-12T07:10:03.361Z"
+          "status": "not-reached"
         },
         "SCHEDULE": {
-          "status": "done",
-          "detail": "2026-11-12T18:00:00.000Z",
-          "at": "2026-11-12T07:10:03.362Z"
+          "status": "not-reached"
         },
         "PUBLISH": {
-          "status": "scheduled",
-          "detail": "YouTube makes it public at 2026-11-12T18:00:00.000Z",
-          "at": "2026-11-12T07:10:03.362Z"
+          "status": "not-reached"
         }
       }
     }
