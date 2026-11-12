@@ -1,6 +1,6 @@
 # Growth dashboard
 
-Generated 2026-11-12T19:00:18.536Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-11-12T20:07:59.071Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
@@ -45,13 +45,13 @@ Generated 2026-11-12T19:00:18.536Z. Per-channel baselines are computed separatel
 
 **Long-form health** — cycle 2026-W46: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W46 already QUALITY_BLOCKED)
 
-**Long-form backlog** — could-earth-survive-one-day-without-earth-s-magnetic-field 83/A, what-if-we-mined-a-metal-asteroid 83/A, what-if-synthetic-fertilizer-disappeared 83/A, what-if-the-ozone-hole-never-closed 82/A, what-if-yellowstone-erupted-again 82/A
+**Long-form backlog** — what-if-we-mined-a-metal-asteroid 84/A, what-if-all-fungi-disappeared 84/A, what-if-synthetic-fertilizer-disappeared 84/A, what-if-gps-went-dark-for-a-day 84/A, what-if-the-tunguska-blast-happened-over-a-city 83/A
 
 **Content clusters** — 7 · integrity OK
 
-**Growth / subscriber conversion** — tracked 21 · subs/1k Shorts 0 · subs/1k long n/a
+**Growth / subscriber conversion** — tracked 22 · subs/1k Shorts 0 · subs/1k long n/a
 
-**Learning** — Shorts adaptive (n=20, adopted 0) · Long-form heuristics-only (n=0)
+**Learning** — Shorts adaptive (n=21, adopted 0) · Long-form heuristics-only (n=0)
 
 **Short → Long funnel** — 0 link(s), 0 long→long, 0 pending RELATED_VIDEO_MANUAL_ACTION_REQUIRED
 

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-12T19:00:18.536Z",
+  "generatedAt": "2026-11-12T20:07:59.071Z",
   "note": "Per-channel baselines are computed separately and never blended.",
   "channels": [
     {
@@ -435,8 +435,8 @@
           "reason": "EXPLORE (0.25): under-sampled cluster EXTREME SCIENCE"
         },
         "baseline": {
-          "n": 20,
-          "views": 781,
+          "n": 21,
+          "views": 622,
           "averagePercentageViewed": 64.54,
           "subscribersPer1000Views": 0,
           "engagementPer1000Views": 19.95,
@@ -502,32 +502,32 @@
         "episodes": 0,
         "backlog": [
           {
-            "slug": "could-earth-survive-one-day-without-earth-s-magnetic-field",
-            "LongFormPotentialScore": 83,
+            "slug": "what-if-we-mined-a-metal-asteroid",
+            "LongFormPotentialScore": 84,
             "bucket": "A",
-            "mode": "A_LONG_FIRST"
+            "mode": "B_SHORT_PROVES_DEMAND"
           },
           {
-            "slug": "what-if-we-mined-a-metal-asteroid",
-            "LongFormPotentialScore": 83,
+            "slug": "what-if-all-fungi-disappeared",
+            "LongFormPotentialScore": 84,
             "bucket": "A",
             "mode": "B_SHORT_PROVES_DEMAND"
           },
           {
             "slug": "what-if-synthetic-fertilizer-disappeared",
+            "LongFormPotentialScore": 84,
+            "bucket": "A",
+            "mode": "B_SHORT_PROVES_DEMAND"
+          },
+          {
+            "slug": "what-if-gps-went-dark-for-a-day",
+            "LongFormPotentialScore": 84,
+            "bucket": "A",
+            "mode": "B_SHORT_PROVES_DEMAND"
+          },
+          {
+            "slug": "what-if-the-tunguska-blast-happened-over-a-city",
             "LongFormPotentialScore": 83,
-            "bucket": "A",
-            "mode": "A_LONG_FIRST"
-          },
-          {
-            "slug": "what-if-the-ozone-hole-never-closed",
-            "LongFormPotentialScore": 82,
-            "bucket": "A",
-            "mode": "A_LONG_FIRST"
-          },
-          {
-            "slug": "what-if-yellowstone-erupted-again",
-            "LongFormPotentialScore": 82,
             "bucket": "A",
             "mode": "A_LONG_FIRST"
           }
@@ -558,7 +558,7 @@
         "pendingRelatedVideoManualActions": 0
       },
       "growth": {
-        "trackedVideos": 21,
+        "trackedVideos": 22,
         "subscriberConversion": {
           "shorts": 0,
           "longform": null
@@ -567,9 +567,9 @@
       "learning": {
         "shorts": {
           "status": "adaptive",
-          "sampleSize": 20,
+          "sampleSize": 21,
           "adopted": 0,
-          "hypotheses": 2
+          "hypotheses": 5
         },
         "longform": {
           "status": "heuristics-only",
@@ -605,11 +605,6 @@
           "reason": "VideoPotential 72 in experimental band 58–71; boilerplate 0.5"
         },
         {
-          "slug": "would-doubling-all-synthetic-fertilizers-help-or-harm-us",
-          "bucket": "C",
-          "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
-        },
-        {
           "slug": "could-we-function-with-half-human-muscle-efficiency",
           "bucket": "C",
           "reason": "VideoPotential 68 in experimental band 58–71; boilerplate 0.5"
@@ -626,6 +621,11 @@
         },
         {
           "slug": "what-happens-if-the-global-ocean-doubles",
+          "bucket": "C",
+          "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
+        },
+        {
+          "slug": "would-doubling-all-synthetic-fertilizers-help-or-harm-us",
           "bucket": "C",
           "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
         }
