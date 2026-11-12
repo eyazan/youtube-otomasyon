@@ -2,50 +2,6 @@
   "channel": "impossible-brief",
   "runs": [
     {
-      "runId": "42772822633",
-      "attempt": "1",
-      "startedAt": "2026-11-10T07:09:48.904Z",
-      "publish": true,
-      "trigger": {
-        "event": "repository_dispatch",
-        "correlationId": "production-1-20261110T070505Z-51934942"
-      },
-      "targetDay": "2026-11-10",
-      "slug": null,
-      "outcome": "BLOCKED",
-      "reason": "premium publication refused (see the premium publish log); nothing uploaded, legacy renderer not used",
-      "stages": {
-        "RESEARCH": {
-          "status": "not-reached"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "not-reached"
-        },
-        "QA": {
-          "status": "not-reached"
-        },
-        "UPLOAD": {
-          "status": "not-reached"
-        },
-        "SCHEDULE": {
-          "status": "not-reached"
-        },
-        "PUBLISH": {
-          "status": "not-reached"
-        }
-      },
-      "finishedAt": "2026-11-10T07:12:41.451Z"
-    },
-    {
       "runId": "42821301503",
       "attempt": "1",
       "startedAt": "2026-11-10T13:06:36.359Z",
@@ -1332,6 +1288,50 @@
         }
       },
       "finishedAt": "2026-11-12T14:58:24.956Z"
+    },
+    {
+      "runId": "43248150157",
+      "attempt": "1",
+      "startedAt": "2026-11-12T15:29:29.562Z",
+      "publish": true,
+      "trigger": {
+        "event": "schedule",
+        "correlationId": null
+      },
+      "targetDay": null,
+      "slug": null,
+      "outcome": "NOT_DUE",
+      "reason": "today's Short already exists (what-if-synthetic-fertilizer-disappeared)",
+      "stages": {
+        "RESEARCH": {
+          "status": "not-reached"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "not-reached"
+        },
+        "QA": {
+          "status": "not-reached"
+        },
+        "UPLOAD": {
+          "status": "not-reached"
+        },
+        "SCHEDULE": {
+          "status": "not-reached"
+        },
+        "PUBLISH": {
+          "status": "not-reached"
+        }
+      },
+      "finishedAt": "2026-11-12T15:29:29.574Z"
     }
   ]
 }
