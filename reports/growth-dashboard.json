@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-12T17:40:42.859Z",
+  "generatedAt": "2026-11-12T18:23:53.678Z",
   "note": "Per-channel baselines are computed separately and never blended.",
   "channels": [
     {
@@ -28,10 +28,10 @@
         "baseline": {
           "n": 44,
           "views": 358,
-          "averagePercentageViewed": 63.9,
+          "averagePercentageViewed": 63.470000000000006,
           "subscribersPer1000Views": 0,
           "engagementPer1000Views": 20.83,
-          "watchHoursPer1000Views": 2.02
+          "watchHoursPer1000Views": 2.01
         }
       },
       "longform": {
@@ -161,7 +161,7 @@
           "status": "adaptive",
           "sampleSize": 44,
           "adopted": 0,
-          "hypotheses": 16
+          "hypotheses": 19
         },
         "longform": {
           "status": "heuristics-only",
@@ -177,6 +177,11 @@
           "reason": "VideoPotential 86 in experimental band 58–71; sources 41 < 62"
         },
         {
+          "slug": "munich-1958",
+          "bucket": "C",
+          "reason": "VideoPotential 85 in experimental band 58–71; sources 41 < 62"
+        },
+        {
           "slug": "castle-bravo-1954",
           "bucket": "C",
           "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
@@ -187,9 +192,9 @@
           "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
         },
         {
-          "slug": "munich-1958",
+          "slug": "controlled-impact-1984",
           "bucket": "C",
-          "reason": "VideoPotential 85 in experimental band 58–71; sources 41 < 62"
+          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
         },
         {
           "slug": "new-london-school-1937",
@@ -202,6 +207,11 @@
           "reason": "VideoPotential 82 in experimental band 58–71; sources 41 < 62"
         },
         {
+          "slug": "b2-guam-2008",
+          "bucket": "C",
+          "reason": "VideoPotential 82 in experimental band 58–71; sources 41 < 62"
+        },
+        {
           "slug": "eastland-1915",
           "bucket": "C",
           "reason": "VideoPotential 82 in experimental band 58–71; sources 41 < 62"
@@ -210,16 +220,6 @@
           "slug": "uss-forrestal-1967",
           "bucket": "C",
           "reason": "VideoPotential 82 in experimental band 58–71; sources 41 < 62"
-        },
-        {
-          "slug": "boston-molasses-1919",
-          "bucket": "C",
-          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
-        },
-        {
-          "slug": "controlled-impact-1984",
-          "bucket": "C",
-          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
         }
       ],
       "alerts": [
@@ -418,8 +418,8 @@
         "lastPublished": "2026-11-12T18:00:00.000Z",
         "published": 23,
         "inventory": {
-          "A": 109,
-          "B": 21,
+          "A": 107,
+          "B": 23,
           "C": 140,
           "D": 206
         },
@@ -569,7 +569,7 @@
           "status": "adaptive",
           "sampleSize": 20,
           "adopted": 0,
-          "hypotheses": 1
+          "hypotheses": 2
         },
         "longform": {
           "status": "heuristics-only",
@@ -590,22 +590,22 @@
           "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
         },
         {
-          "slug": "what-if-human-muscle-efficiency-doubled-overnight",
-          "bucket": "C",
-          "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
-        },
-        {
           "slug": "what-if-the-brain-s-energy-use-doubled-overnight",
           "bucket": "C",
           "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
         },
         {
-          "slug": "if-a-rogue-planet-vanished-right-now-what-would-change-first",
+          "slug": "what-if-human-muscle-efficiency-doubled-overnight",
           "bucket": "C",
-          "reason": "VideoPotential 73 in experimental band 58–71; boilerplate 0.5"
+          "reason": "VideoPotential 70 in experimental band 58–71; boilerplate 0.5"
         },
         {
-          "slug": "what-happens-if-the-global-ocean-doubles",
+          "slug": "if-a-rogue-planet-vanished-right-now-what-would-change-first",
+          "bucket": "C",
+          "reason": "VideoPotential 72 in experimental band 58–71; boilerplate 0.5"
+        },
+        {
+          "slug": "would-doubling-all-synthetic-fertilizers-help-or-harm-us",
           "bucket": "C",
           "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
         },
@@ -625,7 +625,7 @@
           "reason": "VideoPotential 72 in experimental band 58–71; boilerplate 0.5"
         },
         {
-          "slug": "would-doubling-all-synthetic-fertilizers-help-or-harm-us",
+          "slug": "what-happens-if-the-global-ocean-doubles",
           "bucket": "C",
           "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
         }

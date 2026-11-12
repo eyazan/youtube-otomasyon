@@ -1,6 +1,6 @@
 # Growth dashboard
 
-Generated 2026-11-12T17:40:42.859Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-11-12T18:23:53.678Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
@@ -21,10 +21,10 @@ Generated 2026-11-12T17:40:42.859Z. Per-channel baselines are computed separatel
 **Research/source enrichment tasks**
 
 - apollo-1-1967 (C): VideoPotential 86 in experimental band 58–71; sources 41 < 62
+- munich-1958 (C): VideoPotential 85 in experimental band 58–71; sources 41 < 62
 - castle-bravo-1954 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
 - skylab-1973 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
-- munich-1958 (C): VideoPotential 85 in experimental band 58–71; sources 41 < 62
-- new-london-school-1937 (C): VideoPotential 83 in experimental band 58–71; sources 41 < 62
+- controlled-impact-1984 (C): VideoPotential 83 in experimental band 58–71; sources 41 < 62
 
 **Recent alerts**
 
@@ -41,7 +41,7 @@ Generated 2026-11-12T17:40:42.859Z. Per-channel baselines are computed separatel
 
 ## ImpossibleBrief
 
-**Shorts health** — last published 2026-11-12T18:00:00.000Z · 23 published · inventory A109/B21/C140/D206 · next: what-if-earth-spun-like-the-fastest-pulsar (EXPLORE (0.25): under-sampled cluster EXTREME SCIENCE)
+**Shorts health** — last published 2026-11-12T18:00:00.000Z · 23 published · inventory A107/B23/C140/D206 · next: what-if-earth-spun-like-the-fastest-pulsar (EXPLORE (0.25): under-sampled cluster EXTREME SCIENCE)
 
 **Long-form health** — cycle 2026-W46: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W46 already QUALITY_BLOCKED)
 
@@ -59,9 +59,9 @@ Generated 2026-11-12T17:40:42.859Z. Per-channel baselines are computed separatel
 
 - what-if-human-heat-tolerance-doubled-overnight (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
 - could-we-function-with-half-human-heat-tolerance (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
-- what-if-human-muscle-efficiency-doubled-overnight (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
 - what-if-the-brain-s-energy-use-doubled-overnight (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
-- if-a-rogue-planet-vanished-right-now-what-would-change-first (C): VideoPotential 73 in experimental band 58–71; boilerplate 0.5
+- what-if-human-muscle-efficiency-doubled-overnight (C): VideoPotential 70 in experimental band 58–71; boilerplate 0.5
+- if-a-rogue-planet-vanished-right-now-what-would-change-first (C): VideoPotential 72 in experimental band 58–71; boilerplate 0.5
 
 **Recent alerts**
 

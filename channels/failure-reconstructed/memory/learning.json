@@ -2,13 +2,13 @@
   "channel": "failure-reconstructed",
   "status": "sample-floor-met",
   "minimumSample": 5,
-  "sampleSize": 40,
+  "sampleSize": 41,
   "learnedRules": [
     {
       "key": "hookType",
       "value": "consequence",
       "weakValue": "statement",
-      "evidenceVideos": 40,
+      "evidenceVideos": 41,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
@@ -18,13 +18,13 @@
         },
         {
           "value": "number-or-countdown",
-          "sample": 4,
-          "averagePercentageViewed": 73.57
+          "sample": 5,
+          "averagePercentageViewed": 70.26
         },
         {
           "value": "statement",
           "sample": 28,
-          "averagePercentageViewed": 61.56
+          "averagePercentageViewed": 61.55
         }
       ]
     },
@@ -32,7 +32,7 @@
       "key": "durationRange",
       "value": "over-35s",
       "weakValue": "under-25s",
-      "evidenceVideos": 40,
+      "evidenceVideos": 41,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
@@ -42,8 +42,8 @@
         },
         {
           "value": "25-35s",
-          "sample": 31,
-          "averagePercentageViewed": 73.72
+          "sample": 32,
+          "averagePercentageViewed": 73.19
         },
         {
           "value": "under-25s",
@@ -56,7 +56,7 @@
       "key": "secondBeat",
       "value": "countdown",
       "weakValue": "escalation",
-      "evidenceVideos": 40,
+      "evidenceVideos": 41,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
@@ -71,13 +71,13 @@
         },
         {
           "value": "event",
-          "sample": 16,
-          "averagePercentageViewed": 66.32
+          "sample": 17,
+          "averagePercentageViewed": 65.72
         },
         {
           "value": "emergency",
           "sample": 13,
-          "averagePercentageViewed": 62.39
+          "averagePercentageViewed": 62.43
         },
         {
           "value": "escalation",
@@ -90,18 +90,18 @@
       "key": "visualChangeFrequency",
       "value": "fast",
       "weakValue": "measured",
-      "evidenceVideos": 40,
+      "evidenceVideos": 41,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
           "value": "fast",
-          "sample": 24,
-          "averagePercentageViewed": 82.78
+          "sample": 25,
+          "averagePercentageViewed": 81.74
         },
         {
           "value": "measured",
           "sample": 15,
-          "averagePercentageViewed": 61.57
+          "averagePercentageViewed": 61.54
         }
       ]
     },
@@ -109,13 +109,13 @@
       "key": "questionStyle",
       "value": "question",
       "weakValue": null,
-      "evidenceVideos": 40,
+      "evidenceVideos": 41,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
           "value": "question",
-          "sample": 39,
-          "averagePercentageViewed": 74.62
+          "sample": 40,
+          "averagePercentageViewed": 74.17
         },
         {
           "value": "statement",
@@ -128,7 +128,7 @@
       "key": "category",
       "value": "nuclear-accidents",
       "weakValue": "materials-failures",
-      "evidenceVideos": 40,
+      "evidenceVideos": 41,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
@@ -163,13 +163,13 @@
         },
         {
           "value": "natural-hazards",
-          "sample": 6,
-          "averagePercentageViewed": 61.84
+          "sample": 7,
+          "averagePercentageViewed": 61.23
         },
         {
           "value": "bridge-failures",
           "sample": 4,
-          "averagePercentageViewed": 61.23
+          "averagePercentageViewed": 61
         },
         {
           "value": "infrastructure-failures",
@@ -202,17 +202,17 @@
       "key": "ctaStyle",
       "value": "adaptive after payoff",
       "weakValue": null,
-      "evidenceVideos": 40,
+      "evidenceVideos": 41,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
           "value": "adaptive after payoff",
-          "sample": 40,
-          "averagePercentageViewed": 74.25
+          "sample": 41,
+          "averagePercentageViewed": 73.82
         }
       ]
     }
   ],
-  "lastUpdated": "2026-11-12T17:40:30.147Z",
+  "lastUpdated": "2026-11-12T18:23:27.487Z",
   "caveat": "Observed associations only; topic, timing and packaging can confound retention. No causal claim."
 }

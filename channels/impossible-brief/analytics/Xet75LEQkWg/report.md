@@ -8,8 +8,9 @@ https://youtu.be/Xet75LEQkWg
 |---|---|---:|---:|---:|---:|---:|---|
 | 1d | 2026-11-06 | 202 | 0 | 1 | — | — |  |
 | 3d | 2026-11-08 | 283 | 0 | 1 | 52.37 | 0 | Search 65%, Shorts feed 35% |
+| 7d | 2026-11-12 | 282 | 0 | 1 | 57.440000000000005 | 0 | Search 65%, Shorts feed 34% |
 
-## Diagnosis at 3d
+## Diagnosis at 7d
 
 - **SEARCH_DEPENDENT** (medium) — 65% of views from Search.
 - **SHORTS_FEED_NOT_PICKED_UP** (low) — Most views are not from the Shorts feed.
@@ -21,9 +22,9 @@ https://youtu.be/Xet75LEQkWg
 
 ## First major observed retention drop
 
-- Timestamp: 5s; magnitude: 16 percentage points.
+- Timestamp: 8s; magnitude: 13 percentage points.
 - Active sentence: track map across Missouri, Illinois and Indiana
 - Visual type: AI-GENERATED VISUAL
 - This is an observed alignment, not proof that the sentence or visual caused the drop.
 
-Views gained between 1d and 3d: 81.
+Views gained between 3d and 7d: -1.

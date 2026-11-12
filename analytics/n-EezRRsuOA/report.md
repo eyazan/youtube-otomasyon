@@ -8,10 +8,11 @@ https://youtu.be/n-EezRRsuOA
 |---|---|---:|---:|---:|---:|---:|---|
 | 1d | 2026-11-06 | 904 | 7 | 1 | — | — |  |
 | 3d | 2026-11-08 | 1093 | 8 | 1 | 46.11 | 3 | Shorts feed 96%, Browse/other YouTube 3% |
+| 7d | 2026-11-12 | 1093 | 8 | 1 | 46.68 | 3 | Shorts feed 95%, Search 2% |
 
-## Diagnosis at 3d
+## Diagnosis at 7d
 
-- **OUTPERFORMER** (medium) — 1093 views vs channel median 437 (n=41 videos).
+- **OUTPERFORMER** (medium) — 1093 views vs channel median 358 (n=43 videos).
 
 ## Suggested interventions
 
@@ -24,4 +25,4 @@ https://youtu.be/n-EezRRsuOA
 - Visual type: REAL ARCHIVAL IMAGE
 - This is an observed alignment, not proof that the sentence or visual caused the drop.
 
-Views gained between 1d and 3d: 189.
+Views gained between 3d and 7d: 0.

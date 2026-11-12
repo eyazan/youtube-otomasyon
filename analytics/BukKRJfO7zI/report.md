@@ -10,8 +10,9 @@ https://youtu.be/BukKRJfO7zI
 | 3d | 2026-10-16 | 430 | 6 | 1 | 47.78 | 0 | Shorts feed 62%, Search 36% |
 | 7d | 2026-10-20 | 429 | 6 | 1 | 52.239999999999995 | 0 | Search 50%, Shorts feed 49% |
 | 14d | 2026-10-27 | 435 | 6 | 1 | 53.2 | 0 | Search 51%, Shorts feed 48% |
+| 30d | 2026-11-12 | 437 | 7 | 1 | 53.2 | 0 | Search 51%, Shorts feed 48% |
 
-## Diagnosis at 14d
+## Diagnosis at 30d
 
 - **SEARCH_DEPENDENT** (medium) — 51% of views from Search.
 - **SHORTS_FEED_NOT_PICKED_UP** (low) — Most views are not from the Shorts feed.
@@ -30,4 +31,4 @@ https://youtu.be/BukKRJfO7zI
 - Visual type: REAL ARCHIVAL IMAGE
 - This is an observed alignment, not proof that the sentence or visual caused the drop.
 
-Views gained between 7d and 14d: 6.
+Views gained between 14d and 30d: 2.

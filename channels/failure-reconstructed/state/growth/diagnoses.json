@@ -4660,5 +4660,118 @@
       }
     ],
     "at": "2026-11-11T18:45:48.728Z"
+  },
+  {
+    "videoId": "mWrXTVkepQo",
+    "channel": "failure-reconstructed",
+    "contentType": "short",
+    "checkpoint": "48h",
+    "diagnoses": [
+      {
+        "code": "INSUFFICIENT_DATA",
+        "confidence": "high",
+        "evidence": "23 views < 100",
+        "recommendation": "No intervention; wait for the next checkpoint.",
+        "specCode": "INSUFFICIENT_DATA"
+      }
+    ],
+    "at": "2026-11-12T18:23:25.621Z"
+  },
+  {
+    "videoId": "n-EezRRsuOA",
+    "channel": "failure-reconstructed",
+    "contentType": "short",
+    "checkpoint": "7d",
+    "diagnoses": [
+      {
+        "code": "BREAKOUT",
+        "confidence": "medium",
+        "evidence": "view velocity in channel p100",
+        "recommendation": "Nominate adjacent same-cluster topics without duplicating this event.",
+        "specCode": "POTENTIAL_BREAKOUT"
+      },
+      {
+        "code": "EARLY_DISTRIBUTION_PLATEAU",
+        "confidence": "medium",
+        "evidence": "875 → 1093 views; later/early velocity 0.019",
+        "recommendation": "Treat listed causes as hypotheses; change one opening, duration or topic variable on a future upload.",
+        "specCode": "EARLY_DISTRIBUTION_PLATEAU"
+      },
+      {
+        "code": "RETENTION_FAILURE",
+        "confidence": "medium",
+        "evidence": "average viewed 46.68% < 65%",
+        "recommendation": "Cut setup sentences; move the mechanism earlier.",
+        "specCode": "RETENTION_WEAK"
+      },
+      {
+        "code": "LOW_ENGAGEMENT",
+        "confidence": "low",
+        "evidence": "8.23 engagements / 1,000 views",
+        "recommendation": "Contextual comment prompt after the payoff.",
+        "specCode": "LOW_ENGAGEMENT"
+      },
+      {
+        "code": "STRONG_DISCOVERY",
+        "confidence": "medium",
+        "evidence": "1093 views vs channel Shorts median 358",
+        "recommendation": "Study the opening and topic; replicate one variable at a time.",
+        "specCode": "STRONG_DISCOVERY"
+      }
+    ],
+    "at": "2026-11-12T18:23:25.621Z"
+  },
+  {
+    "videoId": "8eb8nuVkMrE",
+    "channel": "failure-reconstructed",
+    "contentType": "short",
+    "checkpoint": "14d",
+    "diagnoses": [
+      {
+        "code": "LOW_ENGAGEMENT",
+        "confidence": "low",
+        "evidence": "15.2 engagements / 1,000 views",
+        "recommendation": "Contextual comment prompt after the payoff.",
+        "specCode": "LOW_ENGAGEMENT"
+      }
+    ],
+    "at": "2026-11-12T18:23:25.621Z"
+  },
+  {
+    "videoId": "BukKRJfO7zI",
+    "channel": "failure-reconstructed",
+    "contentType": "short",
+    "checkpoint": "30d",
+    "diagnoses": [
+      {
+        "code": "RETENTION_FAILURE",
+        "confidence": "medium",
+        "evidence": "average viewed 53.2% < 65%",
+        "recommendation": "Cut setup sentences; move the mechanism earlier.",
+        "specCode": "RETENTION_WEAK"
+      },
+      {
+        "code": "LOW_ENGAGEMENT",
+        "confidence": "low",
+        "evidence": "18.31 engagements / 1,000 views",
+        "recommendation": "Contextual comment prompt after the payoff.",
+        "specCode": "LOW_ENGAGEMENT"
+      },
+      {
+        "code": "TOPIC_FAILURE",
+        "confidence": "low",
+        "evidence": "Shorts feed share 48% and weak retention",
+        "recommendation": "Lower this cluster's topic weight until more evidence.",
+        "specCode": "TOPIC_REACH_LIMITED"
+      },
+      {
+        "code": "SEARCH_DEPENDENT",
+        "confidence": "medium",
+        "evidence": "52% of views from YouTube search",
+        "recommendation": "Evergreen search demand: keep the searchable subject in the title; consider a long-form companion.",
+        "specCode": "SEARCH_DEPENDENT"
+      }
+    ],
+    "at": "2026-11-12T18:23:25.621Z"
   }
 ]
