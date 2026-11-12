@@ -1,6 +1,6 @@
 # Growth dashboard
 
-Generated 2026-11-11T22:53:28.062Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-11-12T07:10:15.787Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
@@ -41,7 +41,7 @@ Generated 2026-11-11T22:53:28.062Z. Per-channel baselines are computed separatel
 
 ## ImpossibleBrief
 
-**Shorts health** — last published 2026-11-05T18:00:00.000Z · 22 published · inventory A110/B21/C140/D206 · next: what-if-you-stopped-eating-for-a-year (EXPLORE (0.25): under-sampled cluster HUMAN)
+**Shorts health** — last published 2026-11-12T18:00:00.000Z · 23 published · inventory A109/B21/C140/D206 · next: what-if-earth-spun-like-the-fastest-pulsar (EXPLORE (0.25): under-sampled cluster EXTREME SCIENCE)
 
 **Long-form health** — cycle 2026-W46: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W46 already QUALITY_BLOCKED)
 

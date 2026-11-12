@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-11T23:26:10.155Z",
+  "generatedAt": "2026-11-12T07:10:17.862Z",
   "date": "2026-11-12",
   "channels": [
     {
@@ -7,7 +7,7 @@
       "name": "Failure Reconstructed",
       "date": "2026-11-12",
       "todayTopic": null,
-      "shortStatus": "not-due",
+      "shortStatus": "due-not-produced",
       "longStatus": "due-not-produced",
       "qualityScore": null,
       "qualityGate": null,
@@ -21,7 +21,7 @@
       "inventory": {
         "channel": "failure-reconstructed",
         "channelName": "Failure Reconstructed",
-        "calculatedAt": "2026-11-11T23:26:10.219Z",
+        "calculatedAt": "2026-11-12T07:10:17.897Z",
         "qualifiedTopics": 388,
         "validatedCandidates": 0,
         "researchBacklog": 0,
@@ -840,22 +840,22 @@
       },
       "platform": {
         "queue": {
-          "depth": 1,
+          "depth": 2,
           "oldestDate": "2026-11-12",
-          "oldestAgeDays": -1
+          "oldestAgeDays": 0
         },
         "analyticsFreshness": {
           "channel": "failure-reconstructed",
           "lastSyncAt": "2026-11-11T13:11:09.791Z",
           "newestDay": "2026-11-09",
-          "lagDays": 2,
+          "lagDays": 3,
           "errors": []
         },
         "ops24h": {
           "analytics.load": 1
         },
         "quota": {
-          "usedToday": 92,
+          "usedToday": 94,
           "budget": 9800,
           "project": "1012165386949"
         },
@@ -864,7 +864,7 @@
           "estimate": true,
           "note": "Estimate from the YouTube Analytics API; YouTube decides eligibility.",
           "subscribers": 31,
-          "subscribersAt": "2026-11-11T22:53:17.698Z",
+          "subscribersAt": "2026-11-12T07:10:03.910Z",
           "longWatchHours365": null,
           "shortsViews90": null,
           "percent": {
@@ -897,22 +897,22 @@
       "channel": "impossible-brief",
       "name": "ImpossibleBrief",
       "date": "2026-11-12",
-      "todayTopic": null,
-      "shortStatus": "not-due",
+      "todayTopic": "what-if-synthetic-fertilizer-disappeared",
+      "shortStatus": "scheduled",
       "longStatus": "due-not-produced",
       "qualityScore": null,
-      "qualityGate": null,
-      "youtubeStatus": "not-uploaded",
-      "publishTime": null,
-      "videoId": null,
+      "qualityGate": "PUBLISH",
+      "youtubeStatus": "scheduled",
+      "publishTime": "2026-11-12T18:00:00.000Z",
+      "videoId": "93dyfZ6S4Iw",
       "analyticsHealth": "measured",
-      "schedulerHealth": "pending-before-deadline",
+      "schedulerHealth": "healthy",
       "backlog": 472,
       "errors": 6,
       "inventory": {
         "channel": "impossible-brief",
         "channelName": "ImpossibleBrief",
-        "calculatedAt": "2026-11-11T23:26:10.310Z",
+        "calculatedAt": "2026-11-12T07:10:17.961Z",
         "qualifiedTopics": 500,
         "validatedCandidates": 0,
         "researchBacklog": 0,
@@ -996,31 +996,33 @@
       },
       "platform": {
         "queue": {
-          "depth": 1,
+          "depth": 2,
           "oldestDate": "2026-11-12",
-          "oldestAgeDays": -1
+          "oldestAgeDays": 0
         },
         "analyticsFreshness": {
           "channel": "impossible-brief",
           "lastSyncAt": "2026-11-11T13:11:23.953Z",
           "newestDay": "2026-11-09",
-          "lagDays": 2,
+          "lagDays": 3,
           "errors": []
         },
         "ops24h": {
-          "analytics.load": 1
+          "analytics.load": 1,
+          "publish.success": 1,
+          "publish.scheduled_verified": 1
         },
         "quota": {
-          "usedToday": 0,
+          "usedToday": 1692,
           "budget": 9800,
-          "project": "channel:impossible-brief"
+          "project": "684098966511"
         },
         "monetization": {
           "channel": "impossible-brief",
           "estimate": true,
           "note": "Estimate from the YouTube Analytics API; YouTube decides eligibility.",
           "subscribers": 13,
-          "subscribersAt": "2026-11-11T22:53:26.340Z",
+          "subscribersAt": "2026-11-12T07:10:12.229Z",
           "longWatchHours365": null,
           "shortsViews90": null,
           "percent": {
@@ -1038,7 +1040,7 @@
       "tiktok": null,
       "stateCounts": {
         "generated": 20,
-        "published": 22,
+        "published": 23,
         "failed": 0
       }
     }
