@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-11-12T20:55:16.157Z",
-  "date": "2026-11-12",
+  "generatedAt": "2026-11-12T21:30:31.187Z",
+  "date": "2026-11-13",
   "channels": [
     {
       "channel": "failure-reconstructed",
       "name": "Failure Reconstructed",
-      "date": "2026-11-12",
+      "date": "2026-11-13",
       "todayTopic": null,
       "shortStatus": "not-due",
       "longStatus": "due-not-produced",
@@ -15,13 +15,13 @@
       "publishTime": null,
       "videoId": null,
       "analyticsHealth": "measured",
-      "schedulerHealth": "sla-missed-or-channel-disabled",
+      "schedulerHealth": "pending-before-deadline",
       "backlog": 343,
       "errors": 20,
       "inventory": {
         "channel": "failure-reconstructed",
         "channelName": "Failure Reconstructed",
-        "calculatedAt": "2026-11-12T20:55:16.201Z",
+        "calculatedAt": "2026-11-12T21:30:31.234Z",
         "qualifiedTopics": 388,
         "validatedCandidates": 0,
         "researchBacklog": 0,
@@ -840,9 +840,9 @@
       },
       "platform": {
         "queue": {
-          "depth": 2,
-          "oldestDate": "2026-11-12",
-          "oldestAgeDays": 0
+          "depth": 1,
+          "oldestDate": "2026-11-13",
+          "oldestAgeDays": -1
         },
         "analyticsFreshness": {
           "channel": "failure-reconstructed",
@@ -855,7 +855,7 @@
           "analytics.load": 1
         },
         "quota": {
-          "usedToday": 81,
+          "usedToday": 87,
           "budget": 9800,
           "project": "1012165386949"
         },
@@ -864,7 +864,7 @@
           "estimate": true,
           "note": "Estimate from the YouTube Analytics API; YouTube decides eligibility.",
           "subscribers": 31,
-          "subscribersAt": "2026-11-12T20:55:00.329Z",
+          "subscribersAt": "2026-11-12T21:30:15.723Z",
           "longWatchHours365": null,
           "shortsViews90": null,
           "percent": {
@@ -896,23 +896,23 @@
     {
       "channel": "impossible-brief",
       "name": "ImpossibleBrief",
-      "date": "2026-11-12",
-      "todayTopic": "what-if-synthetic-fertilizer-disappeared",
-      "shortStatus": "scheduled",
+      "date": "2026-11-13",
+      "todayTopic": null,
+      "shortStatus": "not-due",
       "longStatus": "due-not-produced",
       "qualityScore": null,
-      "qualityGate": "PUBLISH",
-      "youtubeStatus": "scheduled",
-      "publishTime": "2026-11-12T18:00:00.000Z",
-      "videoId": "93dyfZ6S4Iw",
+      "qualityGate": null,
+      "youtubeStatus": "not-uploaded",
+      "publishTime": null,
+      "videoId": null,
       "analyticsHealth": "measured",
-      "schedulerHealth": "healthy",
+      "schedulerHealth": "pending-before-deadline",
       "backlog": 472,
       "errors": 6,
       "inventory": {
         "channel": "impossible-brief",
         "channelName": "ImpossibleBrief",
-        "calculatedAt": "2026-11-12T20:55:16.280Z",
+        "calculatedAt": "2026-11-12T21:30:31.316Z",
         "qualifiedTopics": 500,
         "validatedCandidates": 0,
         "researchBacklog": 0,
@@ -996,9 +996,9 @@
       },
       "platform": {
         "queue": {
-          "depth": 2,
-          "oldestDate": "2026-11-12",
-          "oldestAgeDays": 0
+          "depth": 1,
+          "oldestDate": "2026-11-13",
+          "oldestAgeDays": -1
         },
         "analyticsFreshness": {
           "channel": "impossible-brief",
@@ -1014,7 +1014,7 @@
           "publish.public": 1
         },
         "quota": {
-          "usedToday": 83,
+          "usedToday": 89,
           "budget": 9800,
           "project": "684098966511"
         },
@@ -1023,7 +1023,7 @@
           "estimate": true,
           "note": "Estimate from the YouTube Analytics API; YouTube decides eligibility.",
           "subscribers": 13,
-          "subscribersAt": "2026-11-12T20:55:10.849Z",
+          "subscribersAt": "2026-11-12T21:30:25.985Z",
           "longWatchHours365": null,
           "shortsViews90": null,
           "percent": {
