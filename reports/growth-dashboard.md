@@ -1,6 +1,6 @@
 # Growth dashboard
 
-Generated 2026-11-12T22:21:29.561Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-11-13T07:11:06.576Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
@@ -41,11 +41,11 @@ Generated 2026-11-12T22:21:29.561Z. Per-channel baselines are computed separatel
 
 ## ImpossibleBrief
 
-**Shorts health** — last published 2026-11-12T18:00:00.000Z · 23 published · inventory A107/B23/C140/D206 · next: what-if-earth-spun-like-the-fastest-pulsar (EXPLORE (0.25): under-sampled cluster EXTREME SCIENCE)
+**Shorts health** — last published 2026-11-13T18:00:00.000Z · 24 published · inventory A106/B23/C140/D206 · next: what-if-we-tried-to-drill-through-the-earth (EXPLOIT (0.75): best A topic by SelectionScore)
 
 **Long-form health** — cycle 2026-W46: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W46 already QUALITY_BLOCKED)
 
-**Long-form backlog** — what-if-we-mined-a-metal-asteroid 84/A, what-if-all-fungi-disappeared 84/A, what-if-synthetic-fertilizer-disappeared 84/A, what-if-gps-went-dark-for-a-day 84/A, what-if-the-tunguska-blast-happened-over-a-city 83/A
+**Long-form backlog** — what-if-we-mined-a-metal-asteroid 84/A, what-if-synthetic-fertilizer-disappeared 84/A, what-if-gps-went-dark-for-a-day 84/A, what-if-the-tunguska-blast-happened-over-a-city 83/A, could-earth-survive-one-day-without-earth-s-magnetic-field 83/A
 
 **Content clusters** — 7 · integrity OK
 

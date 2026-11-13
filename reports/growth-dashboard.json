@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-12T22:21:29.561Z",
+  "generatedAt": "2026-11-13T07:11:06.576Z",
   "note": "Per-channel baselines are computed separately and never blended.",
   "channels": [
     {
@@ -415,10 +415,10 @@
       "channel": "impossible-brief",
       "name": "ImpossibleBrief",
       "shorts": {
-        "lastPublished": "2026-11-12T18:00:00.000Z",
-        "published": 23,
+        "lastPublished": "2026-11-13T18:00:00.000Z",
+        "published": 24,
         "inventory": {
-          "A": 107,
+          "A": 106,
           "B": 23,
           "C": 140,
           "D": 206
@@ -431,8 +431,8 @@
           "used": 0
         },
         "nextSelection": {
-          "slug": "what-if-earth-spun-like-the-fastest-pulsar",
-          "reason": "EXPLORE (0.25): under-sampled cluster EXTREME SCIENCE"
+          "slug": "what-if-we-tried-to-drill-through-the-earth",
+          "reason": "EXPLOIT (0.75): best A topic by SelectionScore"
         },
         "baseline": {
           "n": 21,
@@ -508,12 +508,6 @@
             "mode": "B_SHORT_PROVES_DEMAND"
           },
           {
-            "slug": "what-if-all-fungi-disappeared",
-            "LongFormPotentialScore": 84,
-            "bucket": "A",
-            "mode": "B_SHORT_PROVES_DEMAND"
-          },
-          {
             "slug": "what-if-synthetic-fertilizer-disappeared",
             "LongFormPotentialScore": 84,
             "bucket": "A",
@@ -527,6 +521,12 @@
           },
           {
             "slug": "what-if-the-tunguska-blast-happened-over-a-city",
+            "LongFormPotentialScore": 83,
+            "bucket": "A",
+            "mode": "A_LONG_FIRST"
+          },
+          {
+            "slug": "could-earth-survive-one-day-without-earth-s-magnetic-field",
             "LongFormPotentialScore": 83,
             "bucket": "A",
             "mode": "A_LONG_FIRST"
@@ -569,7 +569,7 @@
           "status": "adaptive",
           "sampleSize": 21,
           "adopted": 0,
-          "hypotheses": 5
+          "hypotheses": 6
         },
         "longform": {
           "status": "heuristics-only",
