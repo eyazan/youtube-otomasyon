@@ -1,6 +1,6 @@
 # Growth dashboard
 
-Generated 2026-11-13T07:11:06.576Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-11-13T13:07:29.417Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
@@ -45,7 +45,7 @@ Generated 2026-11-13T07:11:06.576Z. Per-channel baselines are computed separatel
 
 **Long-form health** — cycle 2026-W46: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W46 already QUALITY_BLOCKED)
 
-**Long-form backlog** — what-if-we-mined-a-metal-asteroid 84/A, what-if-synthetic-fertilizer-disappeared 84/A, what-if-gps-went-dark-for-a-day 84/A, what-if-the-tunguska-blast-happened-over-a-city 83/A, could-earth-survive-one-day-without-earth-s-magnetic-field 83/A
+**Long-form backlog** — what-if-we-mined-a-metal-asteroid 84/A, what-if-the-tunguska-blast-happened-over-a-city 83/A, could-earth-survive-one-day-without-earth-s-magnetic-field 83/A, what-if-the-permafrost-thawed 83/A, what-if-we-built-a-star-on-earth 83/A
 
 **Content clusters** — 7 · integrity OK
 

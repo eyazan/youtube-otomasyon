@@ -1,6 +1,6 @@
 {
-  "at": "2026-11-13T07:11:09.441Z",
-  "runId": "43383250183",
+  "at": "2026-11-13T13:07:31.193Z",
+  "runId": "43430665963",
   "rows": [
     {
       "channel": "failure-reconstructed",
@@ -15,13 +15,13 @@
       "targetDay": "2026-11-13",
       "trigger": {
         "event": "repository_dispatch",
-        "correlationId": "production-1-20261113T070531Z-fe050da1"
+        "correlationId": "production-2-20261113T130531Z-4a81d363"
       },
       "stages": {
         "RESEARCH": {
           "status": "skipped",
           "detail": "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)",
-          "at": "2026-11-13T07:07:50.093Z"
+          "at": "2026-11-13T13:07:07.496Z"
         },
         "SCRIPT": {
           "status": "not-reached"
@@ -51,24 +51,22 @@
     },
     {
       "channel": "impossible-brief",
-      "outcome": "UPLOADED",
-      "category": "SCHEDULED",
-      "scheduled": true,
-      "publication": "SCHEDULED",
-      "publishAt": "2026-11-13T18:00:00.000Z",
-      "reason": "premium IB-HUM-050 tR0IYVb1pg8",
-      "slug": "what-if-your-microbes-disappeared",
+      "outcome": "NOT_DUE",
+      "category": "NOT_DUE",
+      "scheduled": false,
+      "publication": "NOT_SCHEDULED",
+      "publishAt": null,
+      "reason": "today's Short already exists (what-if-your-microbes-disappeared)",
+      "slug": null,
       "videoId": null,
-      "targetDay": "2026-11-13",
+      "targetDay": null,
       "trigger": {
         "event": "repository_dispatch",
-        "correlationId": "production-1-20261113T070531Z-fe050da1"
+        "correlationId": "production-2-20261113T130531Z-4a81d363"
       },
       "stages": {
         "RESEARCH": {
-          "status": "done",
-          "detail": "IB-HUM-050",
-          "at": "2026-11-13T07:10:49.814Z"
+          "status": "not-reached"
         },
         "SCRIPT": {
           "status": "not-reached"
@@ -80,29 +78,19 @@
           "status": "not-reached"
         },
         "RENDER": {
-          "status": "done",
-          "detail": "premium final",
-          "at": "2026-11-13T07:10:49.818Z"
+          "status": "not-reached"
         },
         "QA": {
-          "status": "done",
-          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
-          "at": "2026-11-13T07:10:49.819Z"
+          "status": "not-reached"
         },
         "UPLOAD": {
-          "status": "done",
-          "detail": "tR0IYVb1pg8",
-          "at": "2026-11-13T07:10:49.820Z"
+          "status": "not-reached"
         },
         "SCHEDULE": {
-          "status": "done",
-          "detail": "2026-11-13T18:00:00.000Z",
-          "at": "2026-11-13T07:10:49.821Z"
+          "status": "not-reached"
         },
         "PUBLISH": {
-          "status": "scheduled",
-          "detail": "YouTube makes it public at 2026-11-13T18:00:00.000Z",
-          "at": "2026-11-13T07:10:49.821Z"
+          "status": "not-reached"
         }
       }
     }
