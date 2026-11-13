@@ -1,6 +1,6 @@
 # Growth dashboard
 
-Generated 2026-11-13T18:36:38.625Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-11-13T19:53:17.742Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
@@ -49,9 +49,9 @@ Generated 2026-11-13T18:36:38.625Z. Per-channel baselines are computed separatel
 
 **Content clusters** — 7 · integrity OK
 
-**Growth / subscriber conversion** — tracked 22 · subs/1k Shorts 0 · subs/1k long n/a
+**Growth / subscriber conversion** — tracked 23 · subs/1k Shorts 0 · subs/1k long n/a
 
-**Learning** — Shorts adaptive (n=21, adopted 0) · Long-form heuristics-only (n=0)
+**Learning** — Shorts adaptive (n=22, adopted 0) · Long-form heuristics-only (n=0)
 
 **Short → Long funnel** — 0 link(s), 0 long→long, 0 pending RELATED_VIDEO_MANUAL_ACTION_REQUIRED
 
@@ -59,9 +59,9 @@ Generated 2026-11-13T18:36:38.625Z. Per-channel baselines are computed separatel
 
 - what-if-human-heat-tolerance-doubled-overnight (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
 - could-we-function-with-half-human-heat-tolerance (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
-- what-if-the-brain-s-energy-use-doubled-overnight (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
 - what-if-human-muscle-efficiency-doubled-overnight (C): VideoPotential 70 in experimental band 58–71; boilerplate 0.5
 - if-a-rogue-planet-vanished-right-now-what-would-change-first (C): VideoPotential 72 in experimental band 58–71; boilerplate 0.5
+- what-if-the-brain-s-energy-use-doubled-overnight (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
 
 **Recent alerts**
 
