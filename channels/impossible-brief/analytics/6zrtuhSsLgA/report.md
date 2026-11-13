@@ -10,11 +10,12 @@ https://youtu.be/6zrtuhSsLgA
 | 3d | 2026-10-17 | 1732 | 20 | 1 | 100.63 | 0 | Shorts feed 93%, Search 5% |
 | 7d | 2026-10-21 | 1816 | 20 | 1 | 98.24 | 1 | Shorts feed 88%, Search 9% |
 | 14d | 2026-10-28 | 1850 | 20 | 1 | 98.3 | 1 | Shorts feed 86%, Search 11% |
+| 30d | 2026-11-13 | 1957 | 20 | 1 | 97.48 | 1 | Shorts feed 82%, Search 16% |
 
-## Diagnosis at 14d
+## Diagnosis at 30d
 
 - **HIGH_VIEWS_LOW_SUB_CONVERSION** (medium) — 0.5 subscribers per 1,000 views.
-- **OUTPERFORMER** (medium) — 1850 views vs channel median 920 (n=17 videos).
+- **OUTPERFORMER** (medium) — 1957 views vs channel median 618.5 (n=22 videos).
 
 ## Suggested interventions
 
@@ -28,4 +29,4 @@ https://youtu.be/6zrtuhSsLgA
 - Visual type: AI-GENERATED VISUAL
 - This is an observed alignment, not proof that the sentence or visual caused the drop.
 
-Views gained between 7d and 14d: 34.
+Views gained between 14d and 30d: 107.
