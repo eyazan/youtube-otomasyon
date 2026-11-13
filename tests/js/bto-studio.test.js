@@ -216,7 +216,12 @@ test("GoalLore Lab: registered successor of CriticalThread, publishing closed; r
   assert.equal(cfg.replaces.channel, "critical-thread"); assert.equal(cfg.voice.status.startsWith("CANDIDATE"), true, "the voice is not approved by code");
   // only the research check, the pilot render check and the one production step name the channel; none holds GLL_ secrets or pushes to main
   const named = fs.readdirSync(path.join(ROOT, ".github/workflows")).filter((f) => /goal-lore-lab|GoalLore/.test(read(`.github/workflows/${f}`))).sort();
-  assert.deepEqual(named, ["gll-research.yml", "gll-voice-review.yml", "portfolio-production.yml", "premium-render-check.yml"]);
+  assert.deepEqual(named, ["gll-research.yml", "gll-voice-review.yml", "portfolio-production.yml", "premium-render-check.yml", "variables-check.yml"]);
+  // the read-only YouTube audit holds the channel's credentials but runs only the audit script and pushes only a review branch
+  const va = read(".github/workflows/variables-check.yml");
+  assert.doesNotMatch(va, /HEAD:main|origin main|youtube-yukle|youtube-guncelle|PUBLISH: '1'/);
+  assert.deepEqual([...va.matchAll(/run: node (\S+)/g)].map((m) => m[1]).filter((v, i, a) => a.indexOf(v) === i), ["scripts/growth/youtube-audit.js"]);
+  assert.doesNotMatch(read("scripts/growth/youtube-audit.js"), /api\.(post|put)\(|method: "(POST|PUT|DELETE)"/, "the audit never writes to YouTube");
   // the voice review only copies samples to a review branch: no secrets, never main
   const vr = read(".github/workflows/gll-voice-review.yml"); assert.doesNotMatch(vr, /GLL_|_YT_|secrets\.|HEAD:main|origin main/); assert.match(vr, /git push -q -f origin review\/goal-lore-lab/);
   const rc = read(".github/workflows/premium-render-check.yml"); assert.doesNotMatch(rc, /GLL_|_YT_|git push|PUBLISH: '1'/); assert.match(rc, /--pilot/); assert.match(rc, /contents: read/);
@@ -369,4 +374,18 @@ test("captions: a short fast cue stays up into the following pause until it read
   assert.ok(cps(a) <= 22 + 1e-9, `first cue ${cps(a).toFixed(1)} chars/s`); assert.ok(a.end <= b.start, "no overlap with the next cue");
   assert.equal(b.end, c.start, "a cue with no pause after it ends where the next begins");
   assert.equal(c.end, 2.5 + 0.4, "the last cue keeps its end");
+});
+
+test("primary-source facts (P1..) are citable evidence; a credit line's revision id is attribution, not a claim (BTO-156)", () => {
+  const Adapter = require("../../scripts/bto-studio/adapter"); const V = require("../../scripts/bto-studio/validate");
+  const Gen = require("../../scripts/bto-studio/auto/behind-the-ordinary");
+  const st = require("../../channels/behind-the-ordinary/premium/style-pack.json"); const prof = require("../../scripts/bto-studio/profiles/behind-the-ordinary.json");
+  const { channel, topic } = Adapter.loadTopic("behind-the-ordinary", "BTO-156"); const script = Adapter.studioScript(channel, topic);
+  const sb = Gen.build(script, st, topic);
+  let t = 0; const words = [], lines = []; for (const l of script.lines) { const s = t; for (const w of l.text.split(/\s+/)) { words.push({ line: l.id, text: w, start: t, end: t + 0.3 }); t += 0.38; } lines.push({ id: l.id, start: s, end: t }); t += 0.25; }
+  const v = V.validateStoryboard(sb, { script, timeline: { duration: t, words, lines }, style: st, policy: prof.evidencePolicy.validator });
+  assert.deepEqual(v.errors, []);
+  assert.ok(sb.scenes.some((s) => s.evidence.some((id) => /^P\d+$/.test(id))), "a primary-source fact is cited");
+  // an unknown id is still refused by the validator
+  sb.scenes[1].evidence = ["P99"]; assert.ok(V.validateStoryboard(sb, { script, timeline: { duration: t, words, lines }, style: st, policy: prof.evidencePolicy.validator }).errors.some((e) => /unknown fact P99/.test(e)));
 });

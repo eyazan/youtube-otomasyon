@@ -1,0 +1,139 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-EAR-007",
+ "checkedAt": "2026-11-03T18:27:14.166Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "44e45182b1e76854",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "By mole fraction, dry air contains 78.08% nitrogen and 20.95% oxygen.",
+   "url": "https://en.wikipedia.org/wiki/Atmosphere_of_Earth",
+   "sourceTitle": "Wikipedia — Atmosphere of Earth",
+   "revision": 1381726987,
+   "passage": "By mole fraction (i.e., by quantity of molecules), dry air contains 78.08% nitrogen, 20.95% oxygen, 0.93% argon, 0.04% carbon dioxide, and small amounts of other trace gases (see Composition below for more detail).",
+   "numbers": {
+    "claim": [
+     "78.08",
+     "20.95"
+    ],
+    "inPassage": [
+     "78.08",
+     "20.95"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "Carboniferous oxygen levels rose from low levels at the beginning of the period to highs of 25–30%.",
+   "url": "https://en.wikipedia.org/wiki/Carboniferous",
+   "sourceTitle": "Wikipedia — Carboniferous",
+   "revision": 1383259332,
+   "passage": "However, whilst exact numbers vary, all models show an overall increase in atmospheric oxygen levels from a low of between 15 and 20% at the beginning of the Carboniferous to highs of 25–30% during the Period.",
+   "numbers": {
+    "claim": [
+     "25",
+     "30"
+    ],
+    "inPassage": [
+     "25",
+     "30"
+    ],
+    "missing": []
+   },
+   "support": 0.86,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "Meganeura had a single wing length reaching 32 centimetres and a wingspan around 65–75 cm.",
+   "url": "https://en.wikipedia.org/wiki/Meganeura",
+   "sourceTitle": "Wikipedia — Meganeura",
+   "revision": 1374813430,
+   "passage": "With a single-wing length of 32 centimetres (13 in), a wingspan about 65–75 cm (2.13–2.46 ft), and an estimated body length of up to 60–75 cm (1.97–2.46 ft), Meganeura monyi is one of the largest-known flying insect species, five times the length and twice the thoracic width of the largest modern dragonflies.",
+   "numbers": {
+    "claim": [
+     "32",
+     "65",
+     "75"
+    ],
+    "inPassage": [
+     "32",
+     "65",
+     "75"
+    ],
+    "missing": []
+   },
+   "support": 0.75,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "In 1911 Édouard Harlé proposed that Meganeura could fly only because the atmosphere then contained more oxygen.",
+   "url": "https://en.wikipedia.org/wiki/Meganeura",
+   "sourceTitle": "Wikipedia — Meganeura",
+   "revision": 1374813430,
+   "passage": "Railway engineer Édouard Harlé originally proposed in 1911 that Meganeura was able to fly only because the atmosphere of Earth at that time contained more oxygen than the current 20%.",
+   "numbers": {
+    "claim": [
+     "1911"
+    ],
+    "inPassage": [
+     "1911"
+    ],
+    "missing": []
+   },
+   "support": 0.91,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Double Earth's oxygen, and fire changes first.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Today, dry air is about 20.95% oxygen.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "With twice that, fires would start easier and spread faster.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "In the Carboniferous, oxygen reached highs of 25 to 30%.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Dragonflies like Meganeura spanned up to 75 centimetres.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Doubling today's air goes far beyond even that world.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "SPECULATIVE SCENARIO",
+   "text": "Giant insects would take many generations to evolve, if ever.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the first thing you'd notice is fire, not bugs.",
+   "status": "HUMAN"
+  }
+ ]
+}

@@ -1,0 +1,128 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-EXT-039",
+ "checkedAt": "2026-11-03T18:27:19.827Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "9b1104e8220c6e88",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "It lies in the general direction of the Norma Cluster and the Hydra–Centaurus Supercluster, approximately 150–250 million light-years from the Milky Way.",
+   "url": "https://en.wikipedia.org/wiki/Great_Attractor",
+   "sourceTitle": "Wikipedia — Great Attractor",
+   "revision": 1379068633,
+   "passage": "It lies in the general direction of the Norma Cluster and the Hydra–Centaurus Supercluster, approximately 150–250 million light-years from the Milky Way.",
+   "numbers": {
+    "claim": [
+     "150",
+     "250"
+    ],
+    "inPassage": [
+     "150",
+     "250"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "Measured values vary with position and can range from approximately +700 km/s to −700 km/s relative to a model of uniform cosmic expansion.",
+   "url": "https://en.wikipedia.org/wiki/Great_Attractor",
+   "sourceTitle": "Wikipedia — Great Attractor",
+   "revision": 1379068633,
+   "passage": "Measured values vary with position and can range from approximately +700 km/s to −700 km/s relative to a model of uniform cosmic expansion.",
+   "numbers": {
+    "claim": [
+     "700"
+    ],
+    "inPassage": [
+     "700"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "The group studied approximately 400 elliptical galaxies using the Dn–sigma relation.",
+   "url": "https://en.wikipedia.org/wiki/Great_Attractor",
+   "sourceTitle": "Wikipedia — Great Attractor",
+   "revision": 1379068633,
+   "passage": "The group studied approximately 400 elliptical galaxies using the Dn–sigma relation, which links the physical size of an elliptical galaxy with the motions of its stars.",
+   "numbers": {
+    "claim": [
+     "400"
+    ],
+    "inPassage": [
+     "400"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "Infrared surveys identified galaxies whose visible light was obscured by Galactic dust, while radio observations detected the 21-centimeter line emitted by neutral hydrogen.",
+   "url": "https://en.wikipedia.org/wiki/Great_Attractor",
+   "sourceTitle": "Wikipedia — Great Attractor",
+   "revision": 1379068633,
+   "passage": "Infrared surveys identified galaxies whose visible light was obscured by Galactic dust, while radio observations detected the 21-centimeter line emitted by neutral hydrogen.",
+   "numbers": {
+    "claim": [
+     "21"
+    ],
+    "inPassage": [
+     "21"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why galaxies drift toward one hidden region of space.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Astronomers call it the Great Attractor.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It lies about 150 to 250 million light-years away.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Galaxy motions there differ by up to 700 kilometres per second.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Our own galaxy's dust hides it from ordinary telescopes.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Infrared and radio surveys had to peer through.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So even galaxies get tugged by unseen neighbours.",
+   "status": "HUMAN"
+  }
+ ]
+}

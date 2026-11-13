@@ -1,0 +1,148 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-SPA-081",
+ "checkedAt": "2026-11-03T18:27:11.890Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "de289e43436cd600",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "The comet was later observed as a series of fragments ranging up to 2 km (1.2 mi) in diameter.",
+   "url": "https://en.wikipedia.org/wiki/Comet_Shoemaker–Levy_9",
+   "sourceTitle": "Wikipedia — Comet Shoemaker–Levy 9",
+   "revision": 1382215710,
+   "passage": "The comet was later observed as a series of fragments ranging up to 2 km (1.2 mi) in diameter.",
+   "numbers": {
+    "claim": [
+     "2",
+     "1.2"
+    ],
+    "inPassage": [
+     "2",
+     "1.2"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "These fragments collided with Jupiter's southern hemisphere between July 16 and 22, 1994 at a speed of approximately 60 km/s (37 mi/s) or 216,000 km/h.",
+   "url": "https://en.wikipedia.org/wiki/Comet_Shoemaker–Levy_9",
+   "sourceTitle": "Wikipedia — Comet Shoemaker–Levy 9",
+   "revision": 1382215710,
+   "passage": "These fragments collided with Jupiter's southern hemisphere between July 16 and 22, 1994 at a speed of approximately 60 km/s (37 mi/s) (Jupiter's escape velocity) or 216,000 km/h (134,000 mph).",
+   "numbers": {
+    "claim": [
+     "16",
+     "22",
+     "1994",
+     "60",
+     "37",
+     "216000"
+    ],
+    "inPassage": [
+     "16",
+     "22",
+     "1994",
+     "60",
+     "37",
+     "216000"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "Calculations showed that its unusual fragmented form was due to a previous closer approach to Jupiter in July 1992.",
+   "url": "https://en.wikipedia.org/wiki/Comet_Shoemaker–Levy_9",
+   "sourceTitle": "Wikipedia — Comet Shoemaker–Levy 9",
+   "revision": 1382215710,
+   "passage": "Calculations showed that its unusual fragmented form was due to a previous closer approach to Jupiter in July 1992.",
+   "numbers": {
+    "claim": [
+     "1992"
+    ],
+    "inPassage": [
+     "1992"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "The plume from the fireball quickly reached a height of over 3,000 km (1,900 mi) and was observed by the HST.",
+   "url": "https://en.wikipedia.org/wiki/Comet_Shoemaker–Levy_9",
+   "sourceTitle": "Wikipedia — Comet Shoemaker–Levy 9",
+   "revision": 1382215710,
+   "passage": "The plume from the fireball quickly reached a height of over 3,000 km (1,900 mi) and was observed by the HST.",
+   "numbers": {
+    "claim": [
+     "3000",
+     "1900"
+    ],
+    "inPassage": [
+     "3000",
+     "1900"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why a comet hit Jupiter at 60 km/s.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "In 1994, Shoemaker–Levy 9 struck as a string of fragments.",
+   "status": "FAIL",
+   "missing": [
+    "9"
+   ]
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Jupiter's gravity had torn it apart in 1992.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Some pieces were up to 2 kilometres wide.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "One fireball plume rose over 3,000 kilometres.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The impacts ran from July 16 to 22.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Each hit left dark scars visible from Earth.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So Jupiter works as a shredder, not just a shield.",
+   "status": "HUMAN"
+  }
+ ]
+}

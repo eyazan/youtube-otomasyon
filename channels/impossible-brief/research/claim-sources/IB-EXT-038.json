@@ -1,0 +1,132 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-EXT-038",
+ "checkedAt": "2026-11-03T18:27:19.747Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "1fc5b87c3b69a57c",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "It contains one of the most massive black holes ever found, at roughly 40.7 billion times the Sun's mass, though some older, more frequently-cited estimates yield 66 billion M☉.",
+   "url": "https://en.wikipedia.org/wiki/TON_618",
+   "sourceTitle": "Wikipedia — TON 618",
+   "revision": 1383065653,
+   "passage": "It contains one of the most massive black holes ever found, with its mass variously reported as 40.7 billion times the Sun's mass (M☉)  or 66 billion M☉.",
+   "numbers": {
+    "claim": [
+     "40.7",
+     "66"
+    ],
+    "inPassage": [
+     "40.7",
+     "66"
+    ],
+    "missing": []
+   },
+   "support": 0.53,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "The light travel time of TON 618 is estimated to be approximately 10.8 billion years.",
+   "url": "https://en.wikipedia.org/wiki/TON_618",
+   "sourceTitle": "Wikipedia — TON 618",
+   "revision": 1383065653,
+   "passage": "Given its observed redshift of 2.219, the light travel time of TON 618 is estimated to be approximately 10.8 billion years, which is directly proportional to its distance in light-years.",
+   "numbers": {
+    "claim": [
+     "618",
+     "10.8"
+    ],
+    "inPassage": [
+     "618",
+     "10.8"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "The enormous Lyman-alpha nebula surrounding it has the diameter of at least 100 kiloparsecs (330,000 light-years), triple the size of the Milky Way.",
+   "url": "https://en.wikipedia.org/wiki/TON_618",
+   "sourceTitle": "Wikipedia — TON 618",
+   "revision": 1383065653,
+   "passage": "In the case of TON 618, the enormous Lyman-alpha nebula surrounding it has the diameter of at least 100 kiloparsecs (330,000 light-years), triple the size of the Milky Way.",
+   "numbers": {
+    "claim": [
+     "100",
+     "330000"
+    ],
+    "inPassage": [
+     "100",
+     "330000"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "Its observed redshift is 2.219.",
+   "url": "https://en.wikipedia.org/wiki/TON_618",
+   "sourceTitle": "Wikipedia — TON 618",
+   "revision": 1383065653,
+   "passage": "Given its observed redshift of 2.219, the light travel time of TON 618 is estimated to be approximately 10.8 billion years, which is directly proportional to its distance in light-years.",
+   "numbers": {
+    "claim": [
+     "2.219"
+    ],
+    "inPassage": [
+     "2.219"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why one black hole weighs 66 billion Suns.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Newer estimates put TON 618 at 40.7 billion.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Its light took about 10.8 billion years to reach us.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "A glowing nebula around it spans 330,000 light-years.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "That's triple the size of the Milky Way.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Our galaxy's black hole is tiny by comparison.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the biggest black holes shine brighter than whole galaxies.",
+   "status": "HUMAN"
+  }
+ ]
+}

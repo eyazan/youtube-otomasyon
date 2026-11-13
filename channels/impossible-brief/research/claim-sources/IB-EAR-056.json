@@ -1,0 +1,141 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-EAR-056",
+ "checkedAt": "2026-11-03T18:27:15.605Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "e53f1dc302346e89",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "Though often referenced as producing more than a quarter of the Earth's oxygen, this often stated, but misused statistic actually refers to oxygen turnover.",
+   "url": "https://en.wikipedia.org/wiki/Amazon_rainforest",
+   "sourceTitle": "Wikipedia — Amazon rainforest",
+   "revision": 1383154506,
+   "passage": "Though often referenced as producing more than a quarter of the Earth's oxygen, this often stated, but misused statistic actually refers to oxygen turnover.",
+   "numbers": {
+    "claim": [],
+    "inPassage": [],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "This basin encompasses 7 million km2 (2.7 million sq mi), of which 6 million km2 (2.3 million sq mi) are covered by the rainforest.",
+   "url": "https://en.wikipedia.org/wiki/Amazon_rainforest",
+   "sourceTitle": "Wikipedia — Amazon rainforest",
+   "revision": 1383154506,
+   "passage": "This basin encompasses 7 million km2 (2.7 million sq mi), of which 6 million km2 (2.3 million sq mi) are covered by the rainforest.",
+   "numbers": {
+    "claim": [
+     "7",
+     "2",
+     "2.7",
+     "6",
+     "2.3"
+    ],
+    "inPassage": [
+     "7",
+     "2",
+     "2.7",
+     "6",
+     "2.3"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "The majority of the forest, 60%, is in Brazil, followed by Peru with 13%, Colombia with 10%.",
+   "url": "https://en.wikipedia.org/wiki/Amazon_rainforest",
+   "sourceTitle": "Wikipedia — Amazon rainforest",
+   "revision": 1383154506,
+   "passage": "The majority of the forest, 60%, is in Brazil, followed by Peru with 13%, Colombia with 10%, and with minor amounts in Bolivia, Ecuador, French Guiana, Guyana, Suriname, and Venezuela.",
+   "numbers": {
+    "claim": [
+     "60",
+     "13",
+     "10"
+    ],
+    "inPassage": [
+     "60",
+     "13",
+     "10"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "The region is home to about 2.5 million insect species, tens of thousands of plants, and some 2,000 birds and mammals.",
+   "url": "https://en.wikipedia.org/wiki/Amazon_rainforest",
+   "sourceTitle": "Wikipedia — Amazon rainforest",
+   "revision": 1383154506,
+   "passage": "The region is home to about 2.5 million insect species, tens of thousands of plants, and some 2,000 birds and mammals.",
+   "numbers": {
+    "claim": [
+     "2.5",
+     "2000"
+    ],
+    "inPassage": [
+     "2.5",
+     "2000"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why the Amazon isn't really the planet's lungs.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The famous quarter-of-oxygen figure is really turnover.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The forest covers about 6 million square kilometres.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "About 60% of it lies in Brazil.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It holds around 2.5 million insect species.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Losing it wouldn't suffocate us, but it would release huge carbon stores.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "It would also erase species found nowhere else.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the Amazon's real value is carbon and life, not air.",
+   "status": "HUMAN"
+  }
+ ]
+}

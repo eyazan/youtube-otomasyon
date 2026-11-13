@@ -1,0 +1,145 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-SPA-066",
+ "checkedAt": "2026-11-03T18:27:11.495Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "3c7ae84bd2b2aead",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "Halley's Comet is the only known short-period comet that is consistently visible to the naked eye from Earth, appearing roughly every 74–79 years.",
+   "url": "https://en.wikipedia.org/wiki/Halley's_Comet",
+   "sourceTitle": "Wikipedia — Halley's Comet",
+   "revision": 1383420369,
+   "passage": "Halley's Comet is the only known short-period comet that is consistently visible to the naked eye from Earth, appearing roughly every 74–79 years.",
+   "numbers": {
+    "claim": [
+     "74",
+     "79"
+    ],
+    "inPassage": [
+     "74",
+     "79"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "It last appeared in the inner parts of the Solar System in 1986 and will next appear in mid-2061.",
+   "url": "https://en.wikipedia.org/wiki/Halley's_Comet",
+   "sourceTitle": "Wikipedia — Halley's Comet",
+   "revision": 1383420369,
+   "passage": "It last appeared in the inner parts of the Solar System in 1986 and will next appear in mid-2061.",
+   "numbers": {
+    "claim": [
+     "1986",
+     "2061"
+    ],
+    "inPassage": [
+     "1986",
+     "2061"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "Halley concluded that all three comets were the same object returning about every 76 years, a period that has since been found to vary between 72 and 80 years.",
+   "url": "https://en.wikipedia.org/wiki/Halley's_Comet",
+   "sourceTitle": "Wikipedia — Halley's Comet",
+   "revision": 1383420369,
+   "passage": "Halley thus concluded that all three comets were the same object returning about every 76 years, a period that has since been found to vary between 72 and 80 years.",
+   "numbers": {
+    "claim": [
+     "76",
+     "72",
+     "80"
+    ],
+    "inPassage": [
+     "76",
+     "72",
+     "80"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "Probes went as close as 8,890 km (5,520 mi), and 8,030 km (4,990 mi), providing data on Halley's dimensions, shape, temperature, and surface properties.",
+   "url": "https://en.wikipedia.org/wiki/Halley's_Comet",
+   "sourceTitle": "Wikipedia — Halley's Comet",
+   "revision": 1383420369,
+   "passage": "They went as close as 8,890 km (5,520 mi), and 8,030 km (4,990 mi), providing data on Halley's dimensions, shape, temperature, and surface properties.",
+   "numbers": {
+    "claim": [
+     "8890",
+     "5520",
+     "8030",
+     "4990"
+    ],
+    "inPassage": [
+     "8890",
+     "5520",
+     "8030",
+     "4990"
+    ],
+    "missing": []
+   },
+   "support": 0.91,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Halley's Comet returns roughly every 74 to 79 years.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It last appeared in 1986 and returns in 2061.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It's the only short-period comet reliably seen by eye.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Edmond Halley linked three sightings as one returning comet.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Its period varies between 72 and 80 years.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Planets' gravity tugs it, shifting each return.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "In 1986, probes flew within 8,030 kilometres of it.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So for most people, it's a once-in-a-lifetime sight.",
+   "status": "HUMAN"
+  }
+ ]
+}

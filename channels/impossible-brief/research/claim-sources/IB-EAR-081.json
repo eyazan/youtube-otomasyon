@@ -1,0 +1,137 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-EAR-081",
+ "checkedAt": "2026-11-03T18:27:15.847Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "3bf460dfa516094d",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "In keeping with the supercontinent cycle, Pangaea Proxima could form within the next 250 million years.",
+   "url": "https://en.wikipedia.org/wiki/Pangaea_Proxima",
+   "sourceTitle": "Wikipedia — Pangaea Proxima",
+   "revision": 1381871944,
+   "passage": "In keeping with the supercontinent cycle, Pangaea Proxima could form within the next 250 million years.",
+   "numbers": {
+    "claim": [
+     "250"
+    ],
+    "inPassage": [
+     "250"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "About 125 million years from now, the Atlantic Ocean is predicted to stop widening and to begin to shrink, as seafloor spreading gives way to subduction.",
+   "url": "https://en.wikipedia.org/wiki/Pangaea_Proxima",
+   "sourceTitle": "Wikipedia — Pangaea Proxima",
+   "revision": 1381871944,
+   "passage": "About 125 million years from now, the Atlantic Ocean is predicted to stop widening and to begin to shrink, as the Mid-Atlantic Ridge seafloor spreading gives way to subduction.",
+   "numbers": {
+    "claim": [
+     "125"
+    ],
+    "inPassage": [
+     "125"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "Rifts will form, and Pangaea Proxima will split up once more in 400 to 500 million years.",
+   "url": "https://en.wikipedia.org/wiki/Pangaea_Proxima",
+   "sourceTitle": "Wikipedia — Pangaea Proxima",
+   "revision": 1381871944,
+   "passage": "Rifts will form, and Pangaea Proxima will split up once more in 400 to 500 million years.",
+   "numbers": {
+    "claim": [
+     "400",
+     "500"
+    ],
+    "inPassage": [
+     "400",
+     "500"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "Research published in 2022 supports an Amasia scenario within 200 to 300 million years.",
+   "url": "https://en.wikipedia.org/wiki/Pangaea_Proxima",
+   "sourceTitle": "Wikipedia — Pangaea Proxima",
+   "revision": 1381871944,
+   "passage": "Research from Curtin University in Australia and Peking University in China published in 2022 supports an Amasia scenario within 200 to 300 million years.",
+   "numbers": {
+    "claim": [
+     "2022",
+     "200",
+     "300"
+    ],
+    "inPassage": [
+     "2022",
+     "200",
+     "300"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why the Atlantic may vanish in 250 million years.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The continents could fuse into Pangaea Proxima.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "In about 125 million years, the Atlantic stops widening.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Its seafloor would then start sinking back into Earth.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Another study favours a merger across the Pacific, within 200 to 300 million years.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Either way, it could split again after 400 to 500 million years.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Its interior would sit thousands of kilometres from any ocean.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the map you know is one frame in a slow cycle.",
+   "status": "HUMAN"
+  }
+ ]
+}

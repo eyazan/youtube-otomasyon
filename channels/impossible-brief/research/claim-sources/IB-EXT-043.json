@@ -1,0 +1,135 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-EXT-043",
+ "checkedAt": "2026-11-03T18:27:20.178Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "f38c8b054484628a",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "It contains just 60 galaxies, which is significantly fewer than the approximately 2,000 galaxies expected for an area of comparable size.",
+   "url": "https://en.wikipedia.org/wiki/Boötes_void",
+   "sourceTitle": "Wikipedia — Boötes Void",
+   "revision": 1380995549,
+   "passage": "It contains just 60 galaxies, which is significantly fewer than the approximately 2,000 galaxies expected for an area of comparable size.",
+   "numbers": {
+    "claim": [
+     "60",
+     "2000"
+    ],
+    "inPassage": [
+     "60",
+     "2000"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "With a radius of 62 megaparsecs (nearly 200 million light-years), it is one of the largest known voids in the visible universe.",
+   "url": "https://en.wikipedia.org/wiki/Boötes_void",
+   "sourceTitle": "Wikipedia — Boötes Void",
+   "revision": 1380995549,
+   "passage": "With a radius of 62 megaparsecs (nearly 200 million light-years), it is one of the largest known voids in the visible universe, and is often referred to as a \"supervoid\".",
+   "numbers": {
+    "claim": [
+     "62",
+     "200"
+    ],
+    "inPassage": [
+     "62",
+     "200"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "It was discovered in 1981 by astronomer Robert Kirshner as part of a survey of galactic redshift.",
+   "url": "https://en.wikipedia.org/wiki/Boötes_void",
+   "sourceTitle": "Wikipedia — Boötes Void",
+   "revision": 1380995549,
+   "passage": "It was discovered in 1981 by astronomer Robert Kirshner as part of a survey of galactic redshift to map the large-scale structure of the universe.",
+   "numbers": {
+    "claim": [
+     "1981"
+    ],
+    "inPassage": [
+     "1981"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "Its center is located 700 million light-years from Earth.",
+   "url": "https://en.wikipedia.org/wiki/Boötes_void",
+   "sourceTitle": "Wikipedia — Boötes Void",
+   "revision": 1380995549,
+   "passage": "Its center is located 700 million light-years from Earth, at right ascension 14h 50m and declination 46°.",
+   "numbers": {
+    "claim": [
+     "700"
+    ],
+    "inPassage": [
+     "700"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why one region holds 60 galaxies instead of 2,000.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It's the Boötes void, found in 1981.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Its radius is nearly 200 million light-years.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Its center sits 700 million light-years away.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "SPECULATIVE SCENARIO",
+   "text": "From inside, the night sky would hold almost no other galaxies.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Astronomers might not have discovered other galaxies until much later.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Galaxies gather along filaments, leaving vast gaps between.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the universe is less a cloud than a web with holes.",
+   "status": "HUMAN"
+  }
+ ]
+}

@@ -1,0 +1,139 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-FUT-043",
+ "checkedAt": "2026-11-03T18:27:18.473Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "6c45c3780f091a03",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "In 2013, the concept was published by businessman Elon Musk in a white paper, where the hyperloop was described as a transportation system using capsules within a low-pressure tube.",
+   "url": "https://en.wikipedia.org/wiki/Hyperloop",
+   "sourceTitle": "Wikipedia — Hyperloop",
+   "revision": 1383606580,
+   "passage": "In 2013, the concept was published by businessman Elon Musk in a white paper, where the hyperloop was described as a transportation system using capsules supported by an air-bearing surface within a low-pressure tube.",
+   "numbers": {
+    "claim": [
+     "2013"
+    ],
+    "inPassage": [
+     "2013"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "A Technical University of Munich hyperloop set a speed record of 463 km/h (288 mph) in July 2019.",
+   "url": "https://en.wikipedia.org/wiki/Hyperloop",
+   "sourceTitle": "Wikipedia — Hyperloop",
+   "revision": 1383606580,
+   "passage": "The TUM Hyperloop team had won four competitions in a row, achieving a record speed of 463 km/h (288 mph) in 2019.",
+   "numbers": {
+    "claim": [
+     "463",
+     "288",
+     "2019"
+    ],
+    "inPassage": [
+     "463",
+     "288",
+     "2019"
+    ],
+    "missing": []
+   },
+   "support": 0.5,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "Virgin Hyperloop conducted the first human trial in November 2020 at its test site in Las Vegas, reaching a top speed of 172 km/h (107 mph).",
+   "url": "https://en.wikipedia.org/wiki/Hyperloop",
+   "sourceTitle": "Wikipedia — Hyperloop",
+   "revision": 1383606580,
+   "passage": "Virgin Hyperloop conducted the first human trial in November 2020 at its test site in Las Vegas, reaching a top speed of 172 km/h (107 mph).",
+   "numbers": {
+    "claim": [
+     "2020",
+     "172",
+     "107"
+    ],
+    "inPassage": [
+     "2020",
+     "172",
+     "107"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "In 2023, a new European effort to standardize hyperloop systems released a draft standard.",
+   "url": "https://en.wikipedia.org/wiki/Hyperloop",
+   "sourceTitle": "Wikipedia — Hyperloop",
+   "revision": 1383606580,
+   "passage": "In 2023, a new European effort to standardize \"hyperloop systems\" released a draft standard.",
+   "numbers": {
+    "claim": [
+     "2023"
+    ],
+    "inPassage": [
+     "2023"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why hyperloop's first riders only hit 172 km/h.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Elon Musk published the idea in 2013.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Pods were meant to race through near-vacuum tubes.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "A student pod hit 463 kilometres per hour in 2019.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The first human ride came in 2020, at a Las Vegas test track.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Keeping hundreds of kilometres of tube airtight is the hard part.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Europe released a draft hyperloop standard in 2023.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the physics is simple. The engineering is not.",
+   "status": "HUMAN"
+  }
+ ]
+}

@@ -1,0 +1,138 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-EAR-046",
+ "checkedAt": "2026-11-03T18:27:15.373Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "db6905de62520f7c",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "The snowball Earth hypothesis postulates that the planet's surface froze more than 650 Ma.",
+   "url": "https://en.wikipedia.org/wiki/Snowball_Earth",
+   "sourceTitle": "Wikipedia — Snowball Earth",
+   "revision": 1380491304,
+   "passage": "His studies of phosphorus deposits and banded iron formations in sedimentary rocks made him an early adherent of the snowball Earth hypothesis postulating that the planet's surface froze more than 650 Ma.",
+   "numbers": {
+    "claim": [
+     "650"
+    ],
+    "inPassage": [
+     "650"
+    ],
+    "missing": []
+   },
+   "support": 0.86,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "According to modelling, an ice–albedo feedback would result in glacial ice rapidly advancing to the equator once the glaciers spread to within 25° to 30° of the equator.",
+   "url": "https://en.wikipedia.org/wiki/Snowball_Earth",
+   "sourceTitle": "Wikipedia — Snowball Earth",
+   "revision": 1380491304,
+   "passage": "According to modelling, an ice–albedo feedback would result in glacial ice rapidly advancing to the equator once the glaciers spread to within 25° to 30° of the equator.",
+   "numbers": {
+    "claim": [
+     "25",
+     "30"
+    ],
+    "inPassage": [
+     "25",
+     "30"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "Palaeomagnetic measurements have indicated that some sediments of glacial origin were deposited within 10 degrees of the equator, although the accuracy of this reconstruction is in question.",
+   "url": "https://en.wikipedia.org/wiki/Snowball_Earth",
+   "sourceTitle": "Wikipedia — Snowball Earth",
+   "revision": 1380491304,
+   "passage": "Palaeomagnetic measurements have indicated that some sediments of glacial origin in the Neoproterozoic rock record were deposited within 10 degrees of the equator, although the accuracy of this reconstruction is in question.",
+   "numbers": {
+    "claim": [
+     "10"
+    ],
+    "inPassage": [
+     "10"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "A record from Oman covers the period from 712 to 545 million years ago, a time span containing the Sturtian and Marinoan glaciations.",
+   "url": "https://en.wikipedia.org/wiki/Snowball_Earth",
+   "sourceTitle": "Wikipedia — Snowball Earth",
+   "revision": 1380491304,
+   "passage": "A longer record from Oman, constrained to 13°N, covers the period from 712 to 545 million years ago—a time span containing the Sturtian and Marinoan glaciations—and shows both glacial and ice-free deposition.",
+   "numbers": {
+    "claim": [
+     "712",
+     "545"
+    ],
+    "inPassage": [
+     "712",
+     "545"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Earth may have frozen to the equator before.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Scientists call it Snowball Earth, over 650 million years ago.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Ice reflects sunlight, which cools the planet further.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Models show ice runs away once it reaches 25 to 30 degrees of the equator.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Some glacial rocks may have formed within 10 degrees of the equator.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Escaping it would need volcanic CO2 to build up for ages.",
+   "status": "FAIL",
+   "missing": [
+    "2"
+   ]
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Life survived anyway, in pockets we still debate.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So Earth's climate has a freezing tipping point, not just a warming one.",
+   "status": "HUMAN"
+  }
+ ]
+}

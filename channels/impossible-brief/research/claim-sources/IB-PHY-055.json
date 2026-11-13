@@ -1,0 +1,164 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-PHY-055",
+ "checkedAt": "2026-11-03T18:27:17.365Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "9c4edd27514f3832",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "At 0 °C (32 °F), the speed of sound in dry air (sea level 14.7 psi) is about 331 m/s (1,086 ft/s; 1,192 km/h; 740 mph; 643 kn).",
+   "url": "https://en.wikipedia.org/wiki/Speed_of_sound",
+   "sourceTitle": "Wikipedia — Speed of sound",
+   "revision": 1383448277,
+   "passage": "At 0 °C (32 °F), the speed of sound in dry air (sea level 14.7 psi) is about 331 m/s (1,086 ft/s; 1,192 km/h; 740 mph; 643 kn).",
+   "numbers": {
+    "claim": [
+     "0",
+     "32",
+     "14.7",
+     "331",
+     "1086",
+     "1192",
+     "740",
+     "643"
+    ],
+    "inPassage": [
+     "0",
+     "32",
+     "14.7",
+     "331",
+     "1086",
+     "1192",
+     "740",
+     "643"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "In 1826, Colladon and Sturm found a value of 1437.8 m/s in water at 8 C.",
+   "url": "https://en.wikipedia.org/wiki/Speed_of_sound",
+   "sourceTitle": "Wikipedia — Speed of sound",
+   "revision": 1383448277,
+   "passage": null,
+   "numbers": {
+    "claim": [
+     "1826",
+     "1437.8",
+     "8"
+    ],
+    "inPassage": [],
+    "missing": [
+     "1826",
+     "1437.8",
+     "8"
+    ]
+   },
+   "support": 0,
+   "status": "UNVERIFIED",
+   "reason": "a sentence has the terms but not every claim number (1826, 1437.8, 8), is not 5-80 words of prose, or shares under 50% of the claim's content words"
+  },
+  {
+   "fact": "F3",
+   "claim": "For a typical steel alloy, K = 170 GPa, G = 80 GPa and p = 7700 kg/m3, yielding a compressional speed of 6,000 m/s.",
+   "url": "https://en.wikipedia.org/wiki/Speed_of_sound",
+   "sourceTitle": "Wikipedia — Speed of sound",
+   "revision": 1383448277,
+   "passage": "For example, for a typical steel alloy, K = 170 GPa, G = 80 GPa and p = 7700 kg/m3, yielding a compressional speed csolid,p of 6,000 m/s.",
+   "numbers": {
+    "claim": [
+     "170",
+     "80",
+     "7700",
+     "3",
+     "6000"
+    ],
+    "inPassage": [
+     "170",
+     "80",
+     "7700",
+     "3",
+     "6000"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "In an exceptionally stiff material such as diamond, sound travels at 12,000 m/s (39,000 ft/s), about 35 times its speed in air.",
+   "url": "https://en.wikipedia.org/wiki/Speed_of_sound",
+   "sourceTitle": "Wikipedia — Speed of sound",
+   "revision": 1383448277,
+   "passage": "In an exceptionally stiff material such as diamond, sound travels at 12,000 m/s (39,000 ft/s), –  about 35 times its speed in air and about the fastest it can travel under normal conditions.",
+   "numbers": {
+    "claim": [
+     "12000",
+     "39000",
+     "35"
+    ],
+    "inPassage": [
+     "12000",
+     "39000",
+     "35"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why explosions in space make no sound.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Sound needs matter, and space has almost none.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "In air at 0 °C, sound moves about 331 metres per second.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "In water, it's about 1,438 metres per second.",
+   "status": "FAIL",
+   "missing": [
+    "1438"
+   ]
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "In steel, around 6,000.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "In diamond, up to 12,000 metres per second.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Stiffer materials carry sound faster.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So space isn't loud. It's the quietest place there is.",
+   "status": "HUMAN"
+  }
+ ]
+}

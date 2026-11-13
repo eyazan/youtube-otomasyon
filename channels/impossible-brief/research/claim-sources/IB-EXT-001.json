@@ -1,0 +1,139 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-EXT-001",
+ "checkedAt": "2026-11-03T18:27:19.331Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "85e15f095e05df02",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "The Sun has a Schwarzschild radius of approximately 3.0 km (1.9 mi), whereas Earth's is approximately 9 mm (0.35 in) and the Moon's is approximately 0.1 mm (0.004 in).",
+   "url": "https://en.wikipedia.org/wiki/Schwarzschild_radius",
+   "sourceTitle": "Wikipedia — Schwarzschild radius",
+   "revision": 1382039408,
+   "passage": "Accordingly, the Sun has a Schwarzschild radius of approximately 3.0 km (1.9 mi), whereas Earth's is approximately 9 mm (0.35 in) and the Moon's is approximately 0.1 mm (0.004 in).",
+   "numbers": {
+    "claim": [
+     "3.0",
+     "1.9",
+     "9",
+     "0.35",
+     "0.1",
+     "0.004"
+    ],
+    "inPassage": [
+     "3.0",
+     "1.9",
+     "9",
+     "0.35",
+     "0.1",
+     "0.004"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "The Schwarzschild radius was named after the German astronomer Karl Schwarzschild, who calculated this solution for the theory of general relativity in 1916.",
+   "url": "https://en.wikipedia.org/wiki/Schwarzschild_radius",
+   "sourceTitle": "Wikipedia — Schwarzschild radius",
+   "revision": 1382039408,
+   "passage": "The Schwarzschild radius was named after the German astronomer Karl Schwarzschild, who calculated this solution for the theory of general relativity in 1916.",
+   "numbers": {
+    "claim": [
+     "1916"
+    ],
+    "inPassage": [
+     "1916"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "Supermassive black holes up to 21 billion solar masses have been detected, such as NGC 4889.",
+   "url": "https://en.wikipedia.org/wiki/Schwarzschild_radius",
+   "sourceTitle": "Wikipedia — Schwarzschild radius",
+   "revision": 1382039408,
+   "passage": "(Supermassive black holes up to 21 billion (2.1 × 1010) M☉ have been detected, such as NGC 4889.) Unlike stellar mass black holes, supermassive black holes have comparatively low average densities.",
+   "numbers": {
+    "claim": [
+     "21",
+     "4889"
+    ],
+    "inPassage": [
+     "21",
+     "4889"
+    ],
+    "missing": []
+   },
+   "support": 0.78,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "Supermassive black holes, unlike stellar mass black holes, have comparatively low average densities.",
+   "url": "https://en.wikipedia.org/wiki/Schwarzschild_radius",
+   "sourceTitle": "Wikipedia — Schwarzschild radius",
+   "revision": 1382039408,
+   "passage": "Stellar black holes have much greater average densities than supermassive black holes.",
+   "numbers": {
+    "claim": [],
+    "inPassage": [],
+    "missing": []
+   },
+   "support": 0.67,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Earth would become a black hole at 9 millimetres.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "That's its Schwarzschild radius, about a marble's size.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The Sun's is about 3 kilometres.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The Moon's is just 0.1 millimetres.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "From far away, the same mass pulls just as hard.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "The Moon would keep orbiting exactly as before.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "SPECULATIVE SCENARIO",
+   "text": "But we'd have no ground left to stand on.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So a black hole isn't a cosmic vacuum cleaner. It's just dense.",
+   "status": "HUMAN"
+  }
+ ]
+}

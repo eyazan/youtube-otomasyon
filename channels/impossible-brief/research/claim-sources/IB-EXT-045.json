@@ -1,0 +1,141 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-EXT-045",
+ "checkedAt": "2026-11-03T18:27:20.315Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "4cb795994574fc3b",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "He is known for having survived a radiation accident in 1978, when a high-energy proton beam from a particle accelerator passed through his head.",
+   "url": "https://en.wikipedia.org/wiki/Anatoli_Bugorski",
+   "sourceTitle": "Wikipedia — Anatoli Bugorski",
+   "revision": 1378397350,
+   "passage": "He is known for having survived a radiation accident in 1978, when a high-energy proton beam from a particle accelerator passed through his head.",
+   "numbers": {
+    "claim": [
+     "1978"
+    ],
+    "inPassage": [
+     "1978"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "Bugorski was leaning over the equipment when he stuck his head in the path of the 76 GeV (12.2 nJ) proton beam.",
+   "url": "https://en.wikipedia.org/wiki/Anatoli_Bugorski",
+   "sourceTitle": "Wikipedia — Anatoli Bugorski",
+   "revision": 1378397350,
+   "passage": "Bugorski was leaning over the equipment when he stuck his head in the path of the 76 GeV (12.2 nJ) proton beam.",
+   "numbers": {
+    "claim": [
+     "76",
+     "12.2"
+    ],
+    "inPassage": [
+     "76",
+     "12.2"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "The exposed parts of his head received a local dose of 200,000 to 300,000 roentgens (2,000 to 3,000 sieverts).",
+   "url": "https://en.wikipedia.org/wiki/Anatoli_Bugorski",
+   "sourceTitle": "Wikipedia — Anatoli Bugorski",
+   "revision": 1378397350,
+   "passage": "The exposed parts of his head received a local dose of 200,000 to 300,000 roentgens (2,000 to 3,000 sieverts).",
+   "numbers": {
+    "claim": [
+     "200000",
+     "300000",
+     "2000",
+     "3000"
+    ],
+    "inPassage": [
+     "200000",
+     "300000",
+     "2000",
+     "3000"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "On 3 June 1978, he was checking a malfunctioning piece of equipment when the safety mechanisms failed.",
+   "url": "https://en.wikipedia.org/wiki/Anatoli_Bugorski",
+   "sourceTitle": "Wikipedia — Anatoli Bugorski",
+   "revision": 1378397350,
+   "passage": "On 3 June 1978, he was checking a malfunctioning piece of equipment when the safety mechanisms failed.",
+   "numbers": {
+    "claim": [
+     "3",
+     "1978"
+    ],
+    "inPassage": [
+     "3",
+     "1978"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why one man survived 2,000 sieverts to the head.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "In 1978, a proton beam passed through his skull.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Anatoli Bugorski was checking faulty equipment.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The safety mechanisms had failed.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The beam carried 76 GeV protons.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The dose along its path was 2,000 to 3,000 sieverts.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Because it was so narrow, most of his body was spared.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So where radiation lands matters as much as how much.",
+   "status": "HUMAN"
+  }
+ ]
+}

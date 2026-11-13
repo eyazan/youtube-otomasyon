@@ -1,0 +1,132 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-SPA-116",
+ "checkedAt": "2026-11-03T18:27:13.459Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "0873e971f87889d7",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "Opportunity is a robotic rover that was active on Mars from 2004 until 2018.",
+   "url": "https://en.wikipedia.org/wiki/Opportunity_(rover)",
+   "sourceTitle": "Wikipedia — Opportunity (rover)",
+   "revision": 1376471857,
+   "passage": "Opportunity, also known as MER-B (Mars Exploration Rover – B) or MER-1, and nicknamed Oppy, is a robotic rover that was active on Mars from 2004 until 2018.",
+   "numbers": {
+    "claim": [
+     "2004",
+     "2018"
+    ],
+    "inPassage": [
+     "2004",
+     "2018"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "Opportunity was operational on Mars for 5111 sols (14 years, 138 days on Earth).",
+   "url": "https://en.wikipedia.org/wiki/Opportunity_(rover)",
+   "sourceTitle": "Wikipedia — Opportunity (rover)",
+   "revision": 1376471857,
+   "passage": "Opportunity was operational on Mars for 5111 sols (14 years, 138 days on Earth).",
+   "numbers": {
+    "claim": [
+     "5111",
+     "14",
+     "138"
+    ],
+    "inPassage": [
+     "5111",
+     "14",
+     "138"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "This careful operation allowed Opportunity to operate for 57 times its designed lifespan.",
+   "url": "https://en.wikipedia.org/wiki/Opportunity_(rover)",
+   "sourceTitle": "Wikipedia — Opportunity (rover)",
+   "revision": 1376471857,
+   "passage": "This careful operation allowed Opportunity to operate for 57 times its designed lifespan, exceeding the initial plan by 14 years, 47 days (in Earth time).",
+   "numbers": {
+    "claim": [
+     "57"
+    ],
+    "inPassage": [
+     "57"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "Mission highlights included the initial 90-sol mission, finding meteorites, and over two years of exploring and studying Victoria crater.",
+   "url": "https://en.wikipedia.org/wiki/Opportunity_(rover)",
+   "sourceTitle": "Wikipedia — Opportunity (rover)",
+   "revision": 1376471857,
+   "passage": "Mission highlights included the initial 90-sol mission, finding meteorites such as Heat Shield Rock (Meridiani Planum meteorite), and over two years of exploring and studying Victoria crater.",
+   "numbers": {
+    "claim": [
+     "90"
+    ],
+    "inPassage": [
+     "90"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why a 90-sol rover kept going 14 years.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Opportunity lasted 57 times its designed lifespan.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It stayed active on Mars from 2004 all the way to 2018.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "That's 5111 sols of work.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Winds sometimes cleaned dust off its solar panels.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "In 2018, a planet-wide dust storm starved it of power.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So careful engineering can outlast every plan.",
+   "status": "HUMAN"
+  }
+ ]
+}
