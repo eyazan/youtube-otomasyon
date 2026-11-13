@@ -1,6 +1,6 @@
 {
   "schema": "feedback-loop-health/1",
-  "generatedAt": "2026-11-13T00:21:13.781Z",
+  "generatedAt": "2026-11-13T07:55:38.317Z",
   "verdict": "CLOSED_LOOP_WORKING",
   "channels": [
     {
@@ -11,7 +11,7 @@
       "performanceRows": 45,
       "diagnosisRows": 255,
       "learning": {
-        "updatedAt": "2026-11-13T00:21:08.959Z",
+        "updatedAt": "2026-11-13T07:55:33.749Z",
         "sampleSize": 44,
         "status": "adaptive",
         "observations": 35,
@@ -158,15 +158,15 @@
       "channel": "impossible-brief",
       "verdict": "CLOSED_LOOP_WORKING",
       "mode": "adaptive",
-      "publishedVideos": 23,
+      "publishedVideos": 24,
       "performanceRows": 22,
-      "diagnosisRows": 139,
+      "diagnosisRows": 140,
       "learning": {
-        "updatedAt": "2026-11-13T00:21:09.926Z",
+        "updatedAt": "2026-11-13T07:55:34.693Z",
         "sampleSize": 21,
         "status": "adaptive",
         "observations": 30,
-        "hypotheses": 5,
+        "hypotheses": 2,
         "adopted": 0,
         "suppressed": 0
       },
@@ -227,16 +227,9 @@
         }
       ],
       "timing": {
-        "lateCheckpointCount": 46,
+        "lateCheckpointCount": 47,
         "note": "Historical late collections are retained for audit, but performance math uses their real collection age.",
         "examples": [
-          {
-            "videoId": "sielLySz6r8",
-            "label": "6h",
-            "scheduledHours": 6,
-            "collectedAgeHours": 18.8,
-            "driftHours": 12.8
-          },
           {
             "videoId": "Wqu8Cdg5PCc",
             "label": "12h",
@@ -299,6 +292,13 @@
             "scheduledHours": 6,
             "collectedAgeHours": 18.21,
             "driftHours": 12.21
+          },
+          {
+            "videoId": "93dyfZ6S4Iw",
+            "label": "6h",
+            "scheduledHours": 6,
+            "collectedAgeHours": 13.92,
+            "driftHours": 7.92
           }
         ]
       },
@@ -313,7 +313,7 @@
       "performanceRows": 7,
       "diagnosisRows": 27,
       "learning": {
-        "updatedAt": "2026-11-13T00:21:11.200Z",
+        "updatedAt": "2026-11-13T07:55:36.044Z",
         "sampleSize": 6,
         "status": "observing",
         "observations": 25,
