@@ -2,62 +2,6 @@
   "channel": "impossible-brief",
   "runs": [
     {
-      "runId": "43172715219",
-      "attempt": "1",
-      "startedAt": "2026-11-12T07:06:56.686Z",
-      "publish": true,
-      "trigger": {
-        "event": "repository_dispatch",
-        "correlationId": "production-1-20261112T070531Z-35f5b195"
-      },
-      "targetDay": "2026-11-12",
-      "slug": "what-if-synthetic-fertilizer-disappeared",
-      "outcome": "UPLOADED",
-      "reason": "premium IB-OTH-020 93dyfZ6S4Iw",
-      "stages": {
-        "RESEARCH": {
-          "status": "done",
-          "detail": "IB-OTH-020",
-          "at": "2026-11-12T07:10:03.359Z"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "done",
-          "detail": "premium final",
-          "at": "2026-11-12T07:10:03.360Z"
-        },
-        "QA": {
-          "status": "done",
-          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
-          "at": "2026-11-12T07:10:03.361Z"
-        },
-        "UPLOAD": {
-          "status": "done",
-          "detail": "93dyfZ6S4Iw",
-          "at": "2026-11-12T07:10:03.361Z"
-        },
-        "SCHEDULE": {
-          "status": "done",
-          "detail": "2026-11-12T18:00:00.000Z",
-          "at": "2026-11-12T07:10:03.362Z"
-        },
-        "PUBLISH": {
-          "status": "scheduled",
-          "detail": "YouTube makes it public at 2026-11-12T18:00:00.000Z",
-          "at": "2026-11-12T07:10:03.362Z"
-        }
-      },
-      "finishedAt": "2026-11-12T07:10:03.363Z"
-    },
-    {
       "runId": "43223987471",
       "attempt": "1",
       "startedAt": "2026-11-12T13:07:06.341Z",
@@ -1344,6 +1288,50 @@
         }
       },
       "finishedAt": "2026-11-13T20:55:46.619Z"
+    },
+    {
+      "runId": "43510837845",
+      "attempt": "1",
+      "startedAt": "2026-11-13T21:28:29.704Z",
+      "publish": true,
+      "trigger": {
+        "event": "schedule",
+        "correlationId": null
+      },
+      "targetDay": null,
+      "slug": null,
+      "outcome": "NOT_DUE",
+      "reason": "before production slot 09:30 Europe/Istanbul",
+      "stages": {
+        "RESEARCH": {
+          "status": "not-reached"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "not-reached"
+        },
+        "QA": {
+          "status": "not-reached"
+        },
+        "UPLOAD": {
+          "status": "not-reached"
+        },
+        "SCHEDULE": {
+          "status": "not-reached"
+        },
+        "PUBLISH": {
+          "status": "not-reached"
+        }
+      },
+      "finishedAt": "2026-11-13T21:28:29.735Z"
     }
   ]
 }
