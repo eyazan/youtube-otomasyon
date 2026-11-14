@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-11-14T20:50:59.812Z",
-  "date": "2026-11-14",
+  "generatedAt": "2026-11-14T21:23:32.801Z",
+  "date": "2026-11-15",
   "channels": [
     {
       "channel": "failure-reconstructed",
       "name": "Failure Reconstructed",
-      "date": "2026-11-14",
+      "date": "2026-11-15",
       "todayTopic": null,
       "shortStatus": "not-due",
       "longStatus": "due-not-produced",
@@ -15,13 +15,13 @@
       "publishTime": null,
       "videoId": null,
       "analyticsHealth": "measured",
-      "schedulerHealth": "sla-missed-or-channel-disabled",
+      "schedulerHealth": "pending-before-deadline",
       "backlog": 343,
       "errors": 20,
       "inventory": {
         "channel": "failure-reconstructed",
         "channelName": "Failure Reconstructed",
-        "calculatedAt": "2026-11-14T20:50:59.842Z",
+        "calculatedAt": "2026-11-14T21:23:32.845Z",
         "qualifiedTopics": 388,
         "validatedCandidates": 0,
         "researchBacklog": 0,
@@ -860,9 +860,9 @@
           "analytics.partial": 1
         },
         "quota": {
-          "usedToday": 107,
+          "usedToday": 0,
           "budget": 9800,
-          "project": "1012165386949"
+          "project": "channel:failure-reconstructed"
         },
         "monetization": {
           "channel": "failure-reconstructed",
@@ -901,7 +901,7 @@
     {
       "channel": "impossible-brief",
       "name": "ImpossibleBrief",
-      "date": "2026-11-14",
+      "date": "2026-11-15",
       "todayTopic": null,
       "shortStatus": "not-due",
       "longStatus": "due-not-produced",
@@ -911,13 +911,13 @@
       "publishTime": null,
       "videoId": null,
       "analyticsHealth": "measured",
-      "schedulerHealth": "sla-missed-or-channel-disabled",
+      "schedulerHealth": "pending-before-deadline",
       "backlog": 471,
       "errors": 6,
       "inventory": {
         "channel": "impossible-brief",
         "channelName": "ImpossibleBrief",
-        "calculatedAt": "2026-11-14T20:50:59.896Z",
+        "calculatedAt": "2026-11-14T21:23:32.925Z",
         "qualifiedTopics": 500,
         "validatedCandidates": 0,
         "researchBacklog": 0,
@@ -1016,7 +1016,7 @@
           "analytics.load": 1
         },
         "quota": {
-          "usedToday": 93,
+          "usedToday": 97,
           "budget": 9800,
           "project": "684098966511"
         },
