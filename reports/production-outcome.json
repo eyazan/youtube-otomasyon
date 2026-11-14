@@ -1,6 +1,6 @@
 {
-  "at": "2026-11-14T16:36:40.626Z",
-  "runId": "43616405367",
+  "at": "2026-11-14T16:41:58.006Z",
+  "runId": "43616608709",
   "rows": [
     {
       "channel": "failure-reconstructed",
@@ -9,19 +9,64 @@
       "scheduled": false,
       "publication": "NOT_SCHEDULED",
       "publishAt": null,
-      "reason": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [45 unused A topic(s), best viral score 74 < minimum 75; 11 topic(s) at the minimum are bucket B/C, not selectable]",
+      "reason": "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)",
       "slug": null,
       "videoId": null,
       "targetDay": "2026-11-14",
       "trigger": {
-        "event": "repository_dispatch",
+        "event": "schedule",
         "correlationId": null
       },
       "stages": {
         "RESEARCH": {
-          "status": "failed",
-          "detail": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [45 unused A topic(s), best viral score 74 < minimum 75; 11 topic(s) at the minimum are bucket B/C, not selectable]",
-          "at": "2026-11-14T16:36:40.572Z"
+          "status": "skipped",
+          "detail": "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)",
+          "at": "2026-11-14T16:39:57.837Z"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "not-reached"
+        },
+        "QA": {
+          "status": "not-reached"
+        },
+        "UPLOAD": {
+          "status": "not-reached"
+        },
+        "SCHEDULE": {
+          "status": "not-reached"
+        },
+        "PUBLISH": {
+          "status": "not-reached"
+        }
+      }
+    },
+    {
+      "channel": "impossible-brief",
+      "outcome": "BLOCKED",
+      "category": "QUALITY_REJECTED",
+      "scheduled": false,
+      "publication": "NOT_SCHEDULED",
+      "publishAt": null,
+      "reason": "premium publication refused (see the premium publish log); nothing uploaded, legacy renderer not used",
+      "slug": null,
+      "videoId": null,
+      "targetDay": "2026-11-14",
+      "trigger": {
+        "event": "schedule",
+        "correlationId": null
+      },
+      "stages": {
+        "RESEARCH": {
+          "status": "not-reached"
         },
         "SCRIPT": {
           "status": "not-reached"
