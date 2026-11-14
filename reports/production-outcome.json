@@ -1,25 +1,27 @@
 {
-  "at": "2026-11-13T22:03:59.293Z",
-  "runId": "43515910273",
+  "at": "2026-11-14T07:08:52.998Z",
+  "runId": "43569443531",
   "rows": [
     {
       "channel": "failure-reconstructed",
-      "outcome": "NOT_DUE",
-      "category": "NOT_DUE",
+      "outcome": "NO_TOPIC",
+      "category": "CONTENT_BLOCKED",
       "scheduled": false,
       "publication": "NOT_SCHEDULED",
       "publishAt": null,
-      "reason": "before production slot 09:00 Europe/Istanbul",
+      "reason": "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)",
       "slug": null,
       "videoId": null,
-      "targetDay": null,
+      "targetDay": "2026-11-14",
       "trigger": {
-        "event": "schedule",
-        "correlationId": null
+        "event": "repository_dispatch",
+        "correlationId": "production-1-20261114T070531Z-faa33e52"
       },
       "stages": {
         "RESEARCH": {
-          "status": "not-reached"
+          "status": "skipped",
+          "detail": "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)",
+          "at": "2026-11-14T07:06:45.631Z"
         },
         "SCRIPT": {
           "status": "not-reached"
@@ -49,18 +51,18 @@
     },
     {
       "channel": "impossible-brief",
-      "outcome": "NOT_DUE",
-      "category": "NOT_DUE",
+      "outcome": "BLOCKED",
+      "category": "QUALITY_REJECTED",
       "scheduled": false,
       "publication": "NOT_SCHEDULED",
       "publishAt": null,
-      "reason": "before production slot 09:30 Europe/Istanbul",
+      "reason": "premium publication refused (see the premium publish log); nothing uploaded, legacy renderer not used",
       "slug": null,
       "videoId": null,
-      "targetDay": null,
+      "targetDay": "2026-11-14",
       "trigger": {
-        "event": "schedule",
-        "correlationId": null
+        "event": "repository_dispatch",
+        "correlationId": "production-1-20261114T070531Z-faa33e52"
       },
       "stages": {
         "RESEARCH": {
