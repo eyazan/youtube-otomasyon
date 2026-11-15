@@ -16,8 +16,8 @@ Kaynaklar: `origin/main` durum dosyaları (`channels/*/state/ops/production-stag
 
 ## Faz 0 deneme render'ları (dry_run, yükleme yok)
 - `IB-EAR-006` Yellowstone (run 43747336956): görsel ön kontrolünü geçti, render alındı, ama kalite doğrulamasında **reddedildi**: `timing` (açılış cümleleri süre sınırını aşıyor) ve `growthReadiness` (hazırlık BLOCK: viral puanı 71 < 75). Yayınlanabilir değil; yerine aynı türden konu gerekir. Video `portfolio-preview` artifact'inde (7 gün).
-- `IB-EAR-071` Atlantik akıntısı: sürüyor. Yerel hazırlık ölçümü PUBLISH 88.
-- `IB-SPA-006` 1859 güneş fırtınası: sırada. Yerel hazırlık ölçümü PUBLISH 90.
+- `IB-EAR-071` Atlantik akıntısı (run 43747776340): **tüm doğrulamalardan geçti**, render alındı, yükleme yapılmadı. Video `portfolio-preview` artifact'inde (7 gün). Sahip izleyebilir.
+- `IB-SPA-006` 1859 güneş fırtınası: sürüyor. Yerel hazırlık ölçümü PUBLISH 90.
 
 ## Yarım
 - **Oturum 0b (Task 3–4) yapılmadı.** Engel: IB'de `premiumOnlyUploads: true` (`channels/impossible-brief/config.json`, 28 Ekim). Stok hat `PUBLISH=1` ile çalışmıyor, yükleyici de premium hattın hazırlamadığı her MP4'ü reddediyor (`LEGACY_UPLOAD_REFUSED`). Faz 1'in yükleme adımı bu ayar değişmeden imkânsız. Bu bir yayın güvenlik ayarı, karar sahibin.
