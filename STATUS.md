@@ -1,51 +1,45 @@
-# STATUS — 2026-11-15
+# STATUS — 2026-11-15 (Faz 0, Oturum 0a)
 
-Kaynaklar:
-- Yayın kayıtları: `origin/main` `5e1381e7` içindeki `icerik/yayinlananlar.json` ve `channels/*/state/published.json`.
-- İzlenme sayıları: kanalların herkese açık listesi (vidIQ, 15 Kasım).
-- Bu not yazılırken hiçbir şey çalıştırılmadı.
+Kaynaklar: `origin/main` durum dosyaları (`channels/*/state/ops/production-stages.json`, `premium/approvals/`), üretim çalışması günlükleri (14–15 Kasım), herkese açık izlenmeler (vidIQ, 15 Kasım).
 
 ## Biten
-- **Pipeline Remotion değil.** Kendi stüdyomuz: Chromium'da SVG sahneler, ffmpeg ve Edge TTS (`scripts/bto-studio`). Yanında eski stok-görüntü hattı da var (`shorts-yap.js`). İkisi de cron ile render alıp YouTube'a yüklüyor.
-- **Uçtan uca çalışıyor.** Son yüklemeler FR'de 10 Kasım, IB'de 13 Kasım. Animasyonlu (premium) hat FR'ye 13 video yükledi (`channels/failure-reconstructed/premium/approvals/*.json`).
-- **Toplam 82 Short yüklendi:**
+- **82 Short yüklendi** (FR 45, IB 24, BTO 5, CT→GLL 8). Son yükleme: FR 10 Kasım, IB 13 Kasım.
+- **Faz 0 Task 1:** Elle başlatmada `topic` girişi (`08c93851`). Yalnızca `channel=impossible-brief` ve `engine=legacy` ile çalışır. Bilinmeyen konu açık hata verir. Lisanslı görseli 4'ten az olan konu nedeniyle reddedilir, yerine başka konu seçilmez. Testler 1064/1064, actionlint temiz.
+- **Faz 0 Task 2:** Yüklemelerin neden durduğu bulundu (aşağıda). Hiçbir ayar değişmedi.
 
-  | Kanal | Short | Not |
-  |---|---|---|
-  | Failure Reconstructed (FR) | 45 | 28 Ekim'den beri animasyonlu |
-  | ImpossibleBrief (IB) | 24 | 29 Ekim'den beri animasyonlu |
-  | Hidden Logic (BTO) | 5 | Herkese açık görünen 1 |
-  | CriticalThread → GoalLore Lab | 8 | Kanal şimdi 0 video gösteriyor |
+## Yükleme durma nedeni (salt-okunur bulgu)
+- **IB:** 14 Kasım'dan beri her zamanlanmış çalışma aynı konuyu, `IB-FUT-042`'yi, premium yayın yolunda yeniden render ediyor. Render sert QA'dan geçemiyor (`package verdict BLOCKED`), video yüklenmiyor. Günde yaklaşık 10 deneme oluyor.
+  - Kod "konu reddedildi, bir daha seçilmez" diyor, ama IB'nin `premium/` klasörü git'e girmiyor (`channels/impossible-brief/premium/.gitignore` `/*/`). Ret kaydı çalışmayla birlikte kayboluyor ve konu sonsuza kadar tekrar seçiliyor.
+  - Bu, IB'de premium yayın yolunun **açık** olduğunu gösteriyor (`IB_PREMIUM_PUBLISH` etkin). Tasarım `IB_PREMIUM_PUBLISH=0` varsayıyor.
+- **FR:** Her çalışma "publication policy signed, but no qualified topic" diyor. Premium hat için uygun konu kalmamış. Son otomatik rezervasyon 10 Kasım (`FR-amtrak-188-2015`). Hangi filtrenin konuları elediği **bilinmiyor**.
+- **Önerilen düzeltme (sahibin kararı, uygulanmadı):** `IB_PREMIUM_PUBLISH=0` yapılırsa döngü durur ve tasarımla uyumlu olur. FR için Faz 1 sonucu beklenir.
 
-  Uzun video yok, hepsi Short.
+## Faz 0 deneme render'ları (dry_run, yükleme yok)
+- Sürüyor: `IB-EAR-006` (run 43747336956). `IB-SPA-006` ve `IB-EAR-071` sırada (aynı concurrency grubu, birer birer).
 
 ## Yarım
-- **PR #411 ve #416** açık, birleştirilmedi. CI yeşil, ana dala çakışma yok. Main hâlâ eski çizim kodunu kullanıyor.
-- **Sahip onayları bekliyor:** IB-EAR-001, FR Costa Concordia, BTO-156, GLL-021. Paketler `docs/review/final-2026-11-04/` içinde.
-- **Studio düzeltmeleri yapılmadı:** El Faro açıklaması, FR ve GLL kanal açıklamaları, dil ve anahtar kelimeler (`docs/premium-studio/youtube-settings-2026-11-04.md`).
-- **Neden durdu, bilinmiyor:** FR 10 Kasım'dan, IB 13 Kasım'dan beri yükleme yok. Günlük rapor "not-due" diyor.
+- **Oturum 0b (Task 3–4) yapılmadı.** Engel: IB'de `premiumOnlyUploads: true` (`channels/impossible-brief/config.json`, 28 Ekim). Stok hat `PUBLISH=1` ile çalışmıyor, yükleyici de premium hattın hazırlamadığı her MP4'ü reddediyor (`LEGACY_UPLOAD_REFUSED`). Faz 1'in yükleme adımı bu ayar değişmeden imkânsız. Bu bir yayın güvenlik ayarı, karar sahibin.
+- PR #411 ve #416 açık. Dört videonun sahip onayı bekliyor (`docs/review/final-2026-11-04/`). Studio düzeltmeleri yapılmadı.
 
 ## Sıradaki TEK adım
-Tasarım (revize, 2. tur): `docs/plans/2026-11-15-kanal-toparlama-tasarim.md`. Sahip onaylarsa **Faz 0**, tek oturum:
-- Elle başlatmada `topic` alanı eklenir.
-- FR ve IB'nin neden durduğu salt-okunur kontrolle netleşir.
-- "Onaylanan video = yüklenen video" için yol seçilir (2. tur notu).
+Sahip iki karar verir:
+1. `IB_PREMIUM_PUBLISH=0` (IB-FUT-042 döngüsünü durdurur).
+2. IB'de stok videoların yüklenmesine izin (`premiumOnlyUploads`), yalnızca elle başlatılan, onaylı deneme videosu için.
 
-Ayarlar değişmez: `IB_PREMIUM_PRIMARY=1`, `IB_PREMIUM_PUBLISH=0`.
+İkisi onaylanırsa: Oturum 0b (Task 3: onaylı artifact'i yükleme, Task 4: `publishAt` kontrolü).
 
 ## Bloklar
-- **BTO OAuth `INVALID_CLIENT`:** BTO yükleyemiyor ve analitik okunamıyor.
-- **İzlenim ve CTR verisi yok.** API vermiyor; Studio'dan `analytics/<id>/studio-manual.json` olarak elle girilmesi gerekiyor.
-- **Her onay ve birleştirme sahipte.** Kod onay kaydı yazmaz.
+- `premiumOnlyUploads` kararı (yukarıda).
+- BTO OAuth `INVALID_CLIENT`.
+- İzlenim ve CTR verisi yok; sahip Studio'dan girmeli.
+- Her onay ve birleştirme sahipte. Kod onay kaydı yazmaz.
 
 ## Sayılar (herkese açık, 15 Kasım)
-| Kanal / dönem | Video | Medyan izlenme | Toplam |
-|---|---|---|---|
-| FR stok görüntü (22 Eyl–23 Eki) | 30 | 465 | 19.936 |
-| FR animasyon (28 Eki–10 Kas) | 13 | 66 | 4.164 |
-| IB stok görüntü (2–19 Eki) | 17 | 922 | 14.545 |
-| IB animasyon (29 Eki–13 Kas) | 5 | 82 | 519 |
-| BTO | 1 açık | 20 | — |
-| GoalLore Lab | 0 | — | — |
+| Kanal / dönem | Video | Medyan izlenme |
+|---|---|---|
+| FR stok (22 Eyl–23 Eki) | 30 | 465 |
+| FR animasyon (28 Eki–10 Kas) | 13 | 66 |
+| IB stok (2–19 Eki) | 17 | 922 |
+| IB animasyon (29 Eki–13 Kas) | 5 | 82 |
 
-Abone sayıları: FR 31, IB 13. YouTube Studio verileri henüz eklenmedi; izlenim ve CTR **bilinmiyor**.
+Abone: FR 31, IB 13. İzlenim ve CTR **bilinmiyor**.
