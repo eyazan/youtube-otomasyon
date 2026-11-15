@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-15T17:51:27.395Z",
+  "generatedAt": "2026-11-15T18:59:17.903Z",
   "note": "Per-channel baselines are computed separately and never blended.",
   "channels": [
     {
@@ -9,10 +9,10 @@
         "lastPublished": "2026-11-10T18:00:00.000Z",
         "published": 45,
         "inventory": {
-          "A": 56,
-          "B": 151,
-          "C": 58,
-          "D": 76
+          "A": 82,
+          "B": 139,
+          "C": 61,
+          "D": 59
         },
         "durableInventory": {
           "total": 501,
@@ -22,16 +22,16 @@
           "used": 10
         },
         "nextSelection": {
-          "slug": "columbia-2003",
+          "slug": "titanic-1912",
           "reason": "EXPLOIT (0.75): best A topic by SelectionScore"
         },
         "baseline": {
           "n": 44,
           "views": 358,
-          "averagePercentageViewed": 63.9,
+          "averagePercentageViewed": 63.470000000000006,
           "subscribersPer1000Views": 0,
           "engagementPer1000Views": 20.83,
-          "watchHoursPer1000Views": 2.02
+          "watchHoursPer1000Views": 2.01
         }
       },
       "longform": {
@@ -161,7 +161,7 @@
           "status": "adaptive",
           "sampleSize": 44,
           "adopted": 0,
-          "hypotheses": 18
+          "hypotheses": 15
         },
         "longform": {
           "status": "heuristics-only",
@@ -174,7 +174,7 @@
         {
           "slug": "apollo-1-1967",
           "bucket": "C",
-          "reason": "VideoPotential 86 in experimental band 58–71; sources 41 < 62"
+          "reason": "VideoPotential 87 in experimental band 58–71; sources 41 < 62"
         },
         {
           "slug": "munich-1958",
@@ -192,6 +192,11 @@
           "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
         },
         {
+          "slug": "boston-molasses-1919",
+          "bucket": "C",
+          "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
+        },
+        {
           "slug": "controlled-impact-1984",
           "bucket": "C",
           "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
@@ -205,11 +210,6 @@
           "slug": "vanguard-1957",
           "bucket": "C",
           "reason": "VideoPotential 82 in experimental band 58–71; sources 41 < 62"
-        },
-        {
-          "slug": "boston-molasses-1919",
-          "bucket": "C",
-          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
         },
         {
           "slug": "b2-guam-2008",
@@ -569,7 +569,7 @@
           "status": "adaptive",
           "sampleSize": 22,
           "adopted": 0,
-          "hypotheses": 2
+          "hypotheses": 4
         },
         "longform": {
           "status": "heuristics-only",
@@ -590,6 +590,16 @@
           "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
         },
         {
+          "slug": "if-a-rogue-planet-vanished-right-now-what-would-change-first",
+          "bucket": "C",
+          "reason": "VideoPotential 72 in experimental band 58–71; boilerplate 0.5"
+        },
+        {
+          "slug": "if-a-rogue-planet-moved-twice-as-close-when-would-earth-notice",
+          "bucket": "C",
+          "reason": "VideoPotential 72 in experimental band 58–71; boilerplate 0.5"
+        },
+        {
           "slug": "what-if-human-muscle-efficiency-doubled-overnight",
           "bucket": "C",
           "reason": "VideoPotential 70 in experimental band 58–71; boilerplate 0.5"
@@ -600,27 +610,17 @@
           "reason": "VideoPotential 68 in experimental band 58–71; boilerplate 0.67"
         },
         {
-          "slug": "if-a-rogue-planet-vanished-right-now-what-would-change-first",
-          "bucket": "C",
-          "reason": "VideoPotential 72 in experimental band 58–71; boilerplate 0.5"
-        },
-        {
           "slug": "what-breaks-first-if-a-rogue-planet-suddenly-doubles-in-mass",
           "bucket": "C",
           "reason": "VideoPotential 72 in experimental band 58–71; boilerplate 0.5"
         },
         {
-          "slug": "if-a-rogue-planet-moved-twice-as-close-when-would-earth-notice",
-          "bucket": "C",
-          "reason": "VideoPotential 72 in experimental band 58–71; boilerplate 0.5"
-        },
-        {
-          "slug": "what-happens-if-the-global-ocean-doubles",
+          "slug": "what-if-the-brain-s-energy-use-doubled-overnight",
           "bucket": "C",
           "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
         },
         {
-          "slug": "what-if-the-brain-s-energy-use-doubled-overnight",
+          "slug": "what-happens-if-the-global-ocean-doubles",
           "bucket": "C",
           "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
         },

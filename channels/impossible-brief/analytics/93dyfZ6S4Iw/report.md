@@ -7,11 +7,14 @@ https://youtu.be/93dyfZ6S4Iw
 | Checkpoint | Collected | Views | Likes | Comments | Avg % viewed | Subs (net) | Top traffic |
 |---|---|---:|---:|---:|---:|---:|---|
 | 1d | 2026-11-13 | 11 | 2 | 1 | — | — |  |
+| 3d | 2026-11-15 | 14 | 2 | 1 | 39.26 | 0 | Shorts feed 100%, Direct/unknown 0% |
 
-## Diagnosis at 1d
+## Diagnosis at 3d
 
-- **INSUFFICIENT_DATA** (high) — 11 views after 1 days — too early/small for rate-based conclusions.
+- **INSUFFICIENT_DATA** (high) — 14 views after 3 days — too early/small for rate-based conclusions.
 
 ## Suggested interventions
 
 - INSUFFICIENT DATA → no intervention; wait for the next checkpoint.
+
+Views gained between 1d and 3d: 3.

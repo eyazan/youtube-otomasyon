@@ -9,14 +9,15 @@ https://youtu.be/PlQYe5W0szE
 | 1d | 2026-11-02 | 504 | 7 | 1 | — | — |  |
 | 3d | 2026-11-04 | 850 | 7 | 1 | 53.29999999999999 | 0 | Shorts feed 94%, Search 4% |
 | 7d | 2026-11-08 | 854 | 7 | 1 | 50.93 | 0 | Shorts feed 95%, Search 4% |
+| 14d | 2026-11-15 | 854 | 7 | 1 | 50.85999999999999 | 0 | Shorts feed 94%, Search 5% |
 
-## Diagnosis at 7d
+## Diagnosis at 14d
 
-- **WEAK_TOPIC_PACKAGING** (low) — Current title scores 27.8/100 in the title engine; best editorial option scores 39.5.
+- **OUTPERFORMER** (medium) — 854 views vs channel median 358 (n=43 videos).
 
 ## Suggested interventions
 
-- WEAK PACKAGING (heuristic) → candidate for a logged title experiment once data exists.
+- OUTPERFORMER → keep as is; reuse its subject/hook shape in the next episode.
 
 ## First major observed retention drop
 
@@ -25,4 +26,4 @@ https://youtu.be/PlQYe5W0szE
 - Visual type: REAL ARCHIVAL IMAGE
 - This is an observed alignment, not proof that the sentence or visual caused the drop.
 
-Views gained between 3d and 7d: 4.
+Views gained between 7d and 14d: 0.

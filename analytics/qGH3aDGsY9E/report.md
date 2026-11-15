@@ -8,13 +8,14 @@ https://youtu.be/qGH3aDGsY9E
 |---|---|---:|---:|---:|---:|---:|---|
 | 1d | 2026-11-09 | 34 | 0 | 1 | — | — |  |
 | 3d | 2026-11-11 | 51 | 0 | 1 | 52.67000000000001 | 0 | unavailable |
+| 7d | 2026-11-15 | 53 | 0 | 1 | 52.67000000000001 | 0 | Shorts feed 88%, Search 8% |
 
-## Diagnosis at 3d
+## Diagnosis at 7d
 
-- **INSUFFICIENT_DATA** (high) — 51 views after 3 days — too early/small for rate-based conclusions.
+- **INSUFFICIENT_DATA** (high) — 53 views after 7 days — too early/small for rate-based conclusions.
 
 ## Suggested interventions
 
 - INSUFFICIENT DATA → no intervention; wait for the next checkpoint.
 
-Views gained between 1d and 3d: 17.
+Views gained between 3d and 7d: 2.
