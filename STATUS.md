@@ -26,7 +26,11 @@ Kaynaklar:
 - **Neden durdu, bilinmiyor:** FR 10 Kasım'dan, IB 13 Kasım'dan beri yükleme yok. Günlük rapor "not-due" diyor.
 
 ## Sıradaki TEK adım
-İzlenme düşüşünün ana şüphelisini (animasyonlu formata geçiş) tek kanalda 3 videoluk testle doğrulamak. Plan oturum yanıtında. Önce sahip kararı: IB için hangi hat kullanılacak?
+Tasarım: `docs/plans/2026-11-15-kanal-toparlama-tasarim.md`. Sahip onaylarsa ilk oturum şu:
+- `portfolio-production.yml`'e elle çalıştırmada `topic` girişi eklemek.
+- IB zamanlanmış yayını kapalı kalır: `IB_PREMIUM_PRIMARY=1`, `IB_PREMIUM_PUBLISH=0`.
+
+Neden: tek başına `IB_PREMIUM_PRIMARY=0` yapılırsa IB her gün kendi seçtiği konuyu onaysız yükler (inceleme notu 1).
 
 ## Bloklar
 - **BTO OAuth `INVALID_CLIENT`:** BTO yükleyemiyor ve analitik okunamıyor.
