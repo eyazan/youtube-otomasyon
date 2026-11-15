@@ -55,6 +55,10 @@ on:
         type: choice
         options: [default, premium, legacy]
         default: default
+      topic:
+        description: ImpossibleBrief topic id or slug (e.g. IB-EAR-006); needs channel=impossible-brief and engine=legacy. Empty = automatic choice
+        type: string
+        default: ''
 
 concurrency:
   group: portfolio-production
@@ -182,6 +186,21 @@ jobs:
         with:
           path: kokoro-model
           key: kokoro-onnx-model-files-v1.0
+      # A named topic is a manual ImpossibleBrief stock-lane run only (docs/plans/2026-11-15-faz-0-plan.md). Fails before
+      # anything renders; inputs reach the shell only through the environment.
+      - name: Manual topic check
+        if: github.event_name == 'workflow_dispatch' && inputs.topic != ''
+        env:
+          IB_TOPIC: ${{ inputs.topic }}
+          RUN_CHANNEL: ${{ inputs.channel }}
+          RUN_ENGINE: ${{ inputs.engine }}
+        run: |
+          if [ "$RUN_CHANNEL" != "impossible-brief" ] || [ "$RUN_ENGINE" != "legacy" ]; then
+            echo "::error::topic needs channel=impossible-brief and engine=legacy (got channel=$RUN_CHANNEL engine=$RUN_ENGINE)"; exit 1
+          fi
+          if ! printf '%s' "$IB_TOPIC" | grep -Eq '^(IB-[A-Z]{3}-[0-9]{3}|[a-z0-9][a-z0-9-]{0,79})$'; then
+            echo "::error::topic is not an ImpossibleBrief id or slug: $IB_TOPIC"; exit 1
+          fi
       - name: Portfolio plan
         run: node portfolio-scheduler.js --enqueue
 
@@ -213,6 +232,8 @@ jobs:
           # renderer then does not run. IB_PREMIUM_PUBLISH passes the repository variable through, never a literal.
           IB_PREMIUM_PRIMARY: ${{ inputs.engine == 'premium' && '1' || (inputs.engine != 'legacy' && vars.IB_PREMIUM_PRIMARY == '1') && '1' || 'off' }}
           IB_PREMIUM_PUBLISH: ${{ vars.IB_PREMIUM_PUBLISH == '1' && '1' || 'off' }}
+          # Manual named topic (checked by "Manual topic check"); empty on scheduled runs
+          IB_TOPIC: ${{ inputs.topic }}
           PD_CHROMIUM: /usr/bin/google-chrome
           EDGE_RATE_LIMIT_RETRIES: '6'
           EDGE_TRANSIENT_RETRIES: '5'
@@ -220,7 +241,7 @@ jobs:
           if [ "${{ inputs.dry_run }}" = "true" ]; then export PUBLISH=0; fi
           if [ "$IB_PREMIUM_PRIMARY" = "1" ]; then python -m pip install --quiet -r scripts/bto-studio/requirements.txt && node scripts/bto-studio/preflight-deps.js; fi
           node saglik.js --channel impossible-brief || true
-          node shorts-sira.js --channel impossible-brief
+          node shorts-sira.js --channel impossible-brief ${IB_TOPIC:+"$IB_TOPIC"}
 
       # GoalLore Lab: premium-only lane, successor of the retired CriticalThread on the same YouTube channel
       # (config/channels.json). Scheduled runs produce it only when GLL_ACTIVE=1; a manual run is a dry run unless
