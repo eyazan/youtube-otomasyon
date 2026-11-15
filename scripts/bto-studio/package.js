@@ -17,7 +17,7 @@ function build({ channel, topic, script, storyboard, timeline, qa, perf, master,
   const facts = new Map(script.facts.map((f) => [f.id, f]));
   const pkg = {
     schema: "bto-studio.review-package.v1", channel: channel.slug, topicId: topic.id, slug: topic.slug, title: topic.title,
-    verdict, pilot: pilot || null, researchPending: researchPending || null, shadow: !!shadow, autoPublish: false, uploadAttempted: false, mode, quality, createdAt: new Date().toISOString(),
+    verdict, layers: require("../../core/pipeline/validation-layers").packageLayers({ qa }), pilot: pilot || null, researchPending: researchPending || null, shadow: !!shadow, autoPublish: false, uploadAttempted: false, mode, quality, createdAt: new Date().toISOString(),
     video: path.relative(ROOT, final),
     voice: { used: timeline.voice, approved: timeline.approved === true, approvedVoice: script.voice.approved, note: timeline.approvalNote || null, wordTiming: timeline.wordTiming },
     narrationUnchanged: { sourceHash: script.sourceHash, lines: script.lines.map((l) => l.text) },

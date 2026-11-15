@@ -129,10 +129,17 @@ function build(script, style, topic) {
       // the payoff replays the moment from the higher camera (GLL-021: hook and payoff frames were 0.936 alike); its tally
       // of beaten defenders stays off, the tagline owns that band
       if (last) ev.layers = ev.layers.filter((l) => l.component !== "tally-tokens");
-      layers = [stadium(first ? 0 : -1), ...ev.layers, ...(last ? [type(`${L.id}+0.3`, tagline, 470, S.title, "amber")] : [])];
+      // the tagline clears before the camera pushes back in to the frame-0 framing, so the last frame matches the first and
+      // the goal frame never runs through it (#416 review: the crossbar struck through the tagline in the last frame)
+      const tag = last ? type(`${L.id}+0.3`, tagline, 470, S.title, "amber") : null; if (tag) tag.props.items[0].outAt = "end-1.3";
+      layers = [stadium(first ? 0 : -1), ...ev.layers, ...(tag ? [tag] : [])];
       purpose = first ? `Hook: the record's own kind of goal (${primary}) on the floodlit pitch within the first second, so the moment is on screen before it is named. ${ev.purpose}`
         : `Payoff: the same ${primary} at night, where the hook started, and the channel tagline lands over the stands so the Short loops.`;
-      camera = [{ at: start, x: 540, y: 800, z: 1.0 }, { at: end, x: 540, y: 800, z: 1.04 }];
+      // motion-first hook (2026-11-04 opening review: frame 0 was a wide pitch with tiny players): frame 0 is tight on the
+      // ball-carrier already running, and the camera pulls back to the whole play over the first ~2.3 s
+      // the payoff ends pushed in to the hook's frame-0 framing, so the Short still loops (QA loop continuity)
+      camera = first ? [{ at: start, x: 540, y: 1000, z: 1.75 }, { at: off(start, 2.3), x: 540, y: 820, z: 1.0 }, { at: end, x: 540, y: 800, z: 1.04 }]
+        : [{ at: start, x: 540, y: 800, z: 1.0 }, { at: "end-1.2", x: 540, y: 820, z: 1.08 }, { at: "end-0.3", x: 540, y: 1000, z: 1.75 }];
     } else if (year && eventYear && year.value > eventYear) {
       kind = "year"; evidence.unshift(...year.facts.filter((f) => !evidence.includes(f)).slice(0, 1)); chips = ["illustrationLabel"];
       layers = [stadium(-1, 1180, 41), { component: "timeline-ruler", screen: true, props: { y: 900, fromYear: eventYear, year: year.value, pxPerYear: 70, enterAt: `${L.id}-0.1`, arriveAt: `${L.id}+0.7`, outAt: end } }];

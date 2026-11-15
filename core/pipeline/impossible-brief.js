@@ -141,10 +141,24 @@ function premiumShadow(channel, topic, env = process.env, spawn = cp.spawnSync, 
   return require("./premium-shadow").run(channel, topic, env, spawn, live);
 }
 
+// A manual run's named topic (workflow input `topic`, by id or slug) is the only candidate: unknown is an error.
+function explicitTopic(channel, explicit, universe) {
+  const topic = universe.find((item) => item.slug === explicit || item.id === explicit);
+  if (!topic) throw new Error(`${channel.name} topic not found: ${explicit}`);
+  return topic;
+}
+
+// Licensed-picture pre-check outcome. A named topic that falls short is refused with the reason (no other topic is
+// picked in its place); the automatic choice records the block and moves to the next topic.
+function precheckAction(explicit, shortfall) {
+  if (!shortfall) return { action: "render" };
+  if (explicit) return { action: "reject", reason: `${explicit}: visual pre-check ${shortfall}; no other topic was chosen` };
+  return { action: "skip" };
+}
+
 function chooseTopic(channel, explicit, universe) {
   if (explicit) {
-    const topic = universe.find((item) => item.slug === explicit || item.id === explicit);
-    if (!topic) throw new Error(`${channel.name} topic not found: ${explicit}`);
+    const topic = explicitTopic(channel, explicit, universe);
     return { topic, plan: Growth.planShort(channel, topic.id, { legacyTitles: Scripting.titleCandidates(topic), skipDuplicate: true, assignExperiment: true, write: true }), reason: "explicit topic" };
   }
   const exclude = [...Discovery.usedIds(channel)];
@@ -234,7 +248,13 @@ function runChannel(slug, argv = []) {
     topic = choice.topic;
     run.reset().topic(topic.slug).done("RESEARCH", choice.reason).done("SCRIPT", `pre-render readiness ${choice.plan.readiness.decision} ${choice.plan.readiness.ProductionReadinessScore}`);
     output = path.join(channel.paths.production, topic.slug);
-    const shortfall = !noRender && !explicit ? visualShortfall(topic, output) : null;
+    const shortfall = !noRender ? visualShortfall(topic, output) : null;
+    const gate = precheckAction(explicit, shortfall);
+    if (gate.action === "reject") {
+      run.fail("ASSETS", `visual pre-check: ${shortfall}`).outcome("BLOCKED", gate.reason);
+      console.error(`::error::[${channel.name}] ${gate.reason}`);
+      return 1;
+    }
     if (shortfall) {
       run.fail("ASSETS", `visual pre-check: ${shortfall}`).outcome("BLOCKED", `${topic.slug}: visual pre-check ${shortfall}`);
       recordBlocked(channel, topic, `visual pre-check: ${shortfall}`);
@@ -372,4 +392,4 @@ function recordGenerated(channel, topic, uploaded) {
 
 function main(argv = []) { return runChannel("impossible-brief", argv); }
 
-module.exports = { llmShadow, premiumShadow, MIN_PRECHECK_VISUALS, MAX_VISUAL_PRECHECKS, visualShortfall, writeCompatibilityFiles, writeValidationEvidence, visualRejection, runChannel, main };
+module.exports = { explicitTopic, precheckAction, llmShadow, premiumShadow, MIN_PRECHECK_VISUALS, MAX_VISUAL_PRECHECKS, visualShortfall, writeCompatibilityFiles, writeValidationEvidence, visualRejection, runChannel, main };

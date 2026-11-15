@@ -23,13 +23,19 @@
   const LBL = () => BTO.style.type.scale.label;
 
   // generic cargo ship side profile, bow to the right, waterline at y = 0, length 1 = 600 px
-  function shipProfile(L, { stroke, fill, lights = 1, op = 1 } = {}) {
+  // profile: "cargo" (container stacks, default), "passenger" (cruise ship / liner / ferry: tiers of lit decks along the
+  // hull, no containers), "bulk" (lake or ore carrier: flat hatch covers, no containers)
+  function shipProfile(L, { stroke, fill, lights = 1, op = 1, profile = "cargo" } = {}) {
     const C = P(); const s = L / 600; const p = (pts) => "M" + pts.map(([x, y]) => `${n1(x * s)} ${n1(y * s)}`).join(" L") + " Z";
     const hull = p([[-300, -46], [270, -46], [305, -70], [300, -40], [272, 30], [-262, 30], [-300, -10]]);
     const house = p([[-270, -46], [-270, -150], [-170, -150], [-170, -46]]);
     const bridge = p([[-280, -150], [-280, -178], [-150, -178], [-150, -150]]);
     const stack = p([[-235, -178], [-232, -230], [-196, -230], [-200, -178]]);
-    let boxes = ""; for (let i = 0; i < 7; i += 1) { const x0 = -150 + i * 58; boxes += `<rect x="${n1(x0 * s)}" y="${n1(-46 * s - (i % 3 === 1 ? 64 : 46) * s)}" width="${n1(54 * s)}" height="${n1((i % 3 === 1 ? 64 : 46) * s)}" fill="${i % 2 ? "#3b5566" : "#4a3f36"}" stroke="${stroke || C.text}" stroke-width="2" opacity="0.95"/>`; }
+    let boxes = ""; if (profile === "passenger") { for (let d = 0; d < 3; d += 1) { const y0 = -46 - (d + 1) * 34; const xa = -250 + d * 20, xb = 230 - d * 30;
+        boxes += `<rect x="${n1(xa * s)}" y="${n1(y0 * s)}" width="${n1((xb - xa) * s)}" height="${n1(34 * s)}" fill="#d8dde0" stroke="${stroke || C.text}" stroke-width="2"/>`;
+        for (let x = xa + 14; x < xb - 10; x += 26) boxes += `<rect x="${n1(x * s)}" y="${n1((y0 + 12) * s)}" width="${n1(12 * s)}" height="${n1(9 * s)}" fill="${C.amber}" opacity="${(0.8 * lights).toFixed(2)}"/>`; } }
+    else if (profile === "bulk") { for (let i = 0; i < 9; i += 1) boxes += `<rect x="${n1((-150 + i * 46) * s)}" y="${n1(-56 * s)}" width="${n1(38 * s)}" height="${n1(10 * s)}" fill="#4a5a64" stroke="${stroke || C.text}" stroke-width="2"/>`; }
+    else for (let i = 0; i < 7; i += 1) { const x0 = -150 + i * 58; boxes += `<rect x="${n1(x0 * s)}" y="${n1(-46 * s - (i % 3 === 1 ? 64 : 46) * s)}" width="${n1(54 * s)}" height="${n1((i % 3 === 1 ? 64 : 46) * s)}" fill="${i % 2 ? "#3b5566" : "#4a3f36"}" stroke="${stroke || C.text}" stroke-width="2" opacity="0.95"/>`; }
     let win = ""; for (let i = 0; i < 4; i += 1) win += `<rect x="${n1((-268 + i * 30) * s)}" y="${n1(-170 * s)}" width="${n1(18 * s)}" height="${n1(10 * s)}" fill="${C.amber}" opacity="${(0.85 * lights).toFixed(2)}"/>`;
     return `<g opacity="${op}">${boxes}<path d="${hull}" fill="${fill || "#1c2b36"}" stroke="${stroke || C.text}" stroke-width="4" stroke-linejoin="round"/>`
       + `<path d="${p([[-298, 6], [282, 6], [276, 30], [-262, 30]])}" fill="#7a2e2a" opacity="0.9"/>`
@@ -39,7 +45,8 @@
 
   // ---- heavy-seas -----------------------------------------------------------------------------------------------
   // props: x (ship x), y (mean sea level, default 980), L (ship length px), swell (wave height px), storm (bool),
-  //   heading (1 = into the sea from the left), hitAt, powerlessAt, sinkAt, sinkDur, sunk, lights, enterAt, outAt, seed
+  //   heading (1 = into the sea from the left), hitAt, powerlessAt, sinkAt, sinkDur, sunk, lights, enterAt, outAt, seed,
+//   rockAt (grounding: a rock under the bow, a gash opens; approachDur: how long she comes on), heel + heelAt
   BTO.def("heavy-seas", (o) => {
     const r = BTO.rng(o.seed || 11); const drops = Array.from({ length: 90 }, () => ({ x: r() * 1400 - 160, y: r() * 1920, v: 1600 + r() * 900, l: 40 + r() * 50 }));
     if (o.hitAt != null) { BTO.cue(o.hitAt, "whoosh", 0.7); BTO.cue(o.hitAt + 0.05, "drop", 0.5); }
@@ -59,20 +66,27 @@
       // ship state
       const sinkK = o.sunk ? 1 : o.sinkAt != null ? BTO.ep(t, o.sinkAt, o.sinkAt + (o.sinkDur || 2.6), "inOut") : 0;
       const beam = o.powerlessAt != null ? BTO.ep(t, o.powerlessAt, o.powerlessAt + 1.6, "inOut") : 0;
-      const sx = X + (o.heading === -1 ? -1 : 1) * 18 * Math.sin(t * 0.5) * (1 - sinkK);
+      // rockAt: a grounding. The ship comes on from the left and stops with its bow section over a rock just under the
+      // surface; at rockAt a gash opens along the hull below the waterline. heel (deg, from heelAt over 1.6 s): a list
+      const appr = o.rockAt != null ? 1 - BTO.ep(t, o.rockAt - (o.approachDur || 1.4), o.rockAt, "out") : 0;
+      const sx = X - appr * 120 + (o.heading === -1 ? -1 : 1) * 18 * Math.sin(t * 0.5) * (1 - sinkK) * (o.rockAt != null ? 0 : 1);
       const sy = wave(sx, t, 1); const slope = (wave(sx + 30, t, 1) - wave(sx - 30, t, 1)) / 60;
       // broadside to the sea the ship rolls (seen end-on it would roll; side-on we see the pitch shrink and the heave grow)
       const pitch = Math.atan(slope) * 57.3 * 0.42 * (1 - beam * 0.5) + beam * 7 * Math.sin(t * 1.9);
-      const heel = sinkK * (o.sinkTilt == null ? 24 : o.sinkTilt);
+      const heel = sinkK * (o.sinkTilt == null ? 24 : o.sinkTilt) + (o.heel ? o.heel * (o.heelAt == null ? 1 : BTO.ep(t, o.heelAt, o.heelAt + 1.6, "inOut")) : 0);
       const depth = sinkK * (o.sunk ? 300 : 360); const shrink = 1 - beam * 0.18; // broadside: the hull shortens as she turns toward us
       g += sea(t, 0, "#203644", 0.95);
-      g += `<g transform="translate(${n1(sx)} ${n1(sy + depth - 6)}) rotate(${n1(pitch + heel)}) scale(${n1(shrink)} 1)">${shipProfile(L, { lights: (o.lights == null ? 1 : o.lights) * (o.powerlessAt != null && t > o.powerlessAt ? 0.15 : 1) * (1 - sinkK), op: o.sunk ? 0.35 : 1 })}</g>`;
+      g += `<g transform="translate(${n1(sx)} ${n1(sy + depth - 6)}) rotate(${n1(pitch + heel)}) scale(${n1(shrink)} 1)">${shipProfile(L, { profile: o.profile, lights: (o.lights == null ? 1 : o.lights) * (o.powerlessAt != null && t > o.powerlessAt ? 0.15 : 1) * (1 - sinkK), op: o.sunk ? 0.35 : 1 })}</g>`;
+      if (o.rockAt != null) { const gk = BTO.ep(t, o.rockAt, o.rockAt + 0.7, "out"), s6 = L / 600;
+        if (gk > 0) g += `<g transform="translate(${n1(sx)} ${n1(sy - 6)}) rotate(${n1(pitch + heel)})"><path d="M${n1(120 * s6)} ${n1(14 * s6)} l${n1(30 * s6 * gk)} ${n1(6 * s6)} l${n1(30 * s6 * gk)} ${n1(-5 * s6)} l${n1(30 * s6 * gk)} ${n1(7 * s6)} l${n1(30 * s6 * gk)} ${n1(-4 * s6)}" fill="none" stroke="${C.red || "#e0483e"}" stroke-width="7" stroke-linecap="round"/></g>`; }
       // spray burst over the bow
       if (o.hitAt != null && t >= o.hitAt && t < o.hitAt + 1.4) { const u = (t - o.hitAt) / 1.4; for (let i = 0; i < 26; i += 1) { const a = -1.9 + (i / 26) * 1.5, v = 260 + (i % 5) * 70;
         g += `<circle cx="${n1(sx + L * 0.4 + Math.cos(a) * v * u)}" cy="${n1(sy - 40 + Math.sin(a) * v * u + 420 * u * u)}" r="${n1(10 + (i % 4) * 5)}" fill="#dfe8ee" opacity="${n1(0.8 * (1 - u))}"/>`; } }
       g += sea(t, 1, "#16303e", o.sunk ? 0.72 : 0.92) + sea(t, 2, "#0f2531", 0.96);
+      // the rock: a dark outcrop just breaking the surface under the bow section (drawn over the sea so it reads)
+      if (o.rockAt != null) { const rx = X + L * 0.27, ry = wave(rx, t, 2); g += `<path d="M${n1(rx - 90)} ${n1(ry + 60)} L${n1(rx - 50)} ${n1(ry - 4)} L${n1(rx - 10)} ${n1(ry - 22)} L${n1(rx + 30)} ${n1(ry - 8)} L${n1(rx + 80)} ${n1(ry + 60)} Z" fill="#3a3530" stroke="#8a8078" stroke-width="3" stroke-linejoin="round"/>`; }
       // a sunk ship stays readable as a faint outline under the surface (the toll scene)
-      if (o.sunk) g += `<g transform="translate(${n1(sx)} ${n1(sy + depth)}) rotate(${n1(heel)})" opacity="0.32">${shipProfile(L, { lights: 0, fill: "none" })}</g>`;
+      if (o.sunk) g += `<g transform="translate(${n1(sx)} ${n1(sy + depth)}) rotate(${n1(heel)})" opacity="0.32">${shipProfile(L, { profile: o.profile, lights: 0, fill: "none" })}</g>`;
       // foam lines on the crests
       for (let x = -20; x < 1100; x += 60) { const y = wave(x, t, 2); g += `<path d="M${x} ${n1(y)} q15 -8 30 0" stroke="#cfe0ea" stroke-width="3" fill="none" opacity="0.35"/>`; }
       // bubbles once she is under
@@ -169,7 +183,8 @@
       g += `<g transform="translate(${ix} ${iy})"><g transform="rotate(${n1(ang)})"><path d="M-90 0 A90 90 0 0 0 90 0" fill="#0b1e2b" stroke="${C.text}" stroke-width="4"/>`;
       for (let a = -60; a <= 60; a += 15) g += `<line x1="${n1(Math.sin(a / 57.3) * 78)}" y1="${n1(Math.cos(a / 57.3) * 78)}" x2="${n1(Math.sin(a / 57.3) * 90)}" y2="${n1(Math.cos(a / 57.3) * 90)}" stroke="${C.text}" stroke-width="${a ? 2 : 4}"/>`;
       g += `</g><line x1="0" y1="0" x2="0" y2="84" stroke="${f > 0.3 ? C.coral : C.amber}" stroke-width="6"/><circle r="9" fill="${C.text}"/></g>`;
-      if (o.listLabel) g += BTO.text(ix, iy + 150, o.listLabel, { size: LBL(), weight: 800, ls: 2, fill: C.text, op: clamp(f * 3) });
+      // the caption sits above the dial's pivot, clear of the heeling hull (#416 review: the hull covered "LIST")
+      if (o.listLabel) g += BTO.text(ix, iy - 36, o.listLabel, { size: LBL(), weight: 800, ls: 2, fill: C.text, op: clamp(f * 3) });
       if (o.label) { const k = clamp((t - o.label.at) / 0.5); const a = ang / 57.3; const wx = X + Math.cos(a) * ox - Math.sin(a) * oy, wy = Y + Math.sin(a) * ox + Math.cos(a) * oy;
         g += BTO.label(wx, wy, wx + side * 20, wy - 200, o.label.text, k, { size: LBL(), pill: true, color: C.amber, anchor: side > 0 ? "end" : "start" }); }
       return `<g opacity="${op.toFixed(3)}">${g}</g>`;
