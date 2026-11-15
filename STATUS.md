@@ -26,11 +26,12 @@ Kaynaklar:
 - **Neden durdu, bilinmiyor:** FR 10 Kasım'dan, IB 13 Kasım'dan beri yükleme yok. Günlük rapor "not-due" diyor.
 
 ## Sıradaki TEK adım
-Tasarım: `docs/plans/2026-11-15-kanal-toparlama-tasarim.md`. Sahip onaylarsa ilk oturum şu:
-- `portfolio-production.yml`'e elle çalıştırmada `topic` girişi eklemek.
-- IB zamanlanmış yayını kapalı kalır: `IB_PREMIUM_PRIMARY=1`, `IB_PREMIUM_PUBLISH=0`.
+Tasarım (revize, 2. tur): `docs/plans/2026-11-15-kanal-toparlama-tasarim.md`. Sahip onaylarsa **Faz 0**, tek oturum:
+- Elle başlatmada `topic` alanı eklenir.
+- FR ve IB'nin neden durduğu salt-okunur kontrolle netleşir.
+- "Onaylanan video = yüklenen video" için yol seçilir (2. tur notu).
 
-Neden: tek başına `IB_PREMIUM_PRIMARY=0` yapılırsa IB her gün kendi seçtiği konuyu onaysız yükler (inceleme notu 1).
+Ayarlar değişmez: `IB_PREMIUM_PRIMARY=1`, `IB_PREMIUM_PUBLISH=0`.
 
 ## Bloklar
 - **BTO OAuth `INVALID_CLIENT`:** BTO yükleyemiyor ve analitik okunamıyor.
