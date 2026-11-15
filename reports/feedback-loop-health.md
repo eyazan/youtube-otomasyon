@@ -1,6 +1,6 @@
 # Growth Feedback Loop Health
 
-Generated: 2026-11-14T21:28:44.495Z
+Generated: 2026-11-15T01:53:46.265Z
 Portfolio verdict: **CLOSED_LOOP_WORKING**
 
 | Channel | Verdict | Mode | Samples | Performance rows | Diagnoses | Late checkpoints |
