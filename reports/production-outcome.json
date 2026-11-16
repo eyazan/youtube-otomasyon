@@ -1,27 +1,25 @@
 {
-  "at": "2026-11-16T07:10:42.309Z",
-  "runId": "43821280515",
+  "at": "2026-11-16T13:09:31.139Z",
+  "runId": "43872425719",
   "rows": [
     {
       "channel": "failure-reconstructed",
-      "outcome": "UPLOADED",
-      "category": "SCHEDULED",
-      "scheduled": true,
-      "publication": "SCHEDULED",
-      "publishAt": "2026-11-16T18:00:00.000Z",
-      "reason": "premium FR-adam-air-574-2007 3LP2gm1cx4k",
-      "slug": "adam-air-574-2007",
+      "outcome": "NOT_DUE",
+      "category": "NOT_DUE",
+      "scheduled": false,
+      "publication": "NOT_SCHEDULED",
+      "publishAt": null,
+      "reason": "today's Short already exists (adam-air-574-2007)",
+      "slug": null,
       "videoId": null,
-      "targetDay": "2026-11-16",
+      "targetDay": null,
       "trigger": {
         "event": "repository_dispatch",
-        "correlationId": "production-1-20261116T070504Z-37cd9749"
+        "correlationId": "production-2-20261116T130504Z-932b8b29"
       },
       "stages": {
         "RESEARCH": {
-          "status": "done",
-          "detail": "FR-adam-air-574-2007",
-          "at": "2026-11-16T07:08:33.259Z"
+          "status": "not-reached"
         },
         "SCRIPT": {
           "status": "not-reached"
@@ -33,29 +31,19 @@
           "status": "not-reached"
         },
         "RENDER": {
-          "status": "done",
-          "detail": "premium final",
-          "at": "2026-11-16T07:08:33.259Z"
+          "status": "not-reached"
         },
         "QA": {
-          "status": "done",
-          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
-          "at": "2026-11-16T07:08:33.260Z"
+          "status": "not-reached"
         },
         "UPLOAD": {
-          "status": "done",
-          "detail": "3LP2gm1cx4k",
-          "at": "2026-11-16T07:08:33.260Z"
+          "status": "not-reached"
         },
         "SCHEDULE": {
-          "status": "done",
-          "detail": "2026-11-16T18:00:00.000Z",
-          "at": "2026-11-16T07:08:33.260Z"
+          "status": "not-reached"
         },
         "PUBLISH": {
-          "status": "scheduled",
-          "detail": "YouTube makes it public at 2026-11-16T18:00:00.000Z",
-          "at": "2026-11-16T07:08:33.261Z"
+          "status": "not-reached"
         }
       }
     },
@@ -72,7 +60,7 @@
       "targetDay": "2026-11-16",
       "trigger": {
         "event": "repository_dispatch",
-        "correlationId": "production-1-20261116T070504Z-37cd9749"
+        "correlationId": "production-2-20261116T130504Z-932b8b29"
       },
       "stages": {
         "RESEARCH": {
