@@ -3,7 +3,7 @@
   "channel": "failure-reconstructed",
   "channelName": "Failure Reconstructed",
   "contentType": "long",
-  "createdAt": "2026-11-09T07:11:27.356Z",
+  "createdAt": "2026-11-16T07:10:24.336Z",
   "topic": {
     "id": "columbia-2003",
     "slug": "columbia-2003",
@@ -60,7 +60,7 @@
       "ShortsEvidence": {
         "value": 78,
         "basis": "measured",
-        "note": "best cluster Short 1742 views vs channel median 435; best subscriber conversion 0.0023; best growth score 76.2 — MODE B: Short proved demand"
+        "note": "best cluster Short 1742 views vs channel median 358; best subscriber conversion 0.0023; best growth score 78 — MODE B: Short proved demand"
       },
       "SeriesPotential": {
         "value": 95,
@@ -113,7 +113,7 @@
     "gaps": [
       "2 source(s); long-form needs ≥ 3"
     ],
-    "reuseCount": 4
+    "reuseCount": 5
   },
   "outline": {
     "structure": [
@@ -1471,6 +1471,38 @@
         "ungrammatical": false
       },
       {
+        "title": "The Failure Chain That Destroyed Columbia",
+        "source": "failure-chain",
+        "pattern": "the-x-that",
+        "scores": {
+          "clarity": 100,
+          "curiosity": 40,
+          "specificity": 77,
+          "truthfulness": 100,
+          "searchIntent": 75,
+          "channelIdentity": 74,
+          "ctrPotential": 63,
+          "novelty": 73,
+          "evergreenPotential": 85,
+          "consequence": 80,
+          "compactness": 100,
+          "recognizability": 100,
+          "nonRedundancy": 73,
+          "factualIntegrity": 100,
+          "historicalPerformanceSimilarity": 50,
+          "patternFreshness": 100
+        },
+        "total": 78,
+        "patternPenalty": 0,
+        "templateNaturalnessPenalty": 0,
+        "genericTemplatePenalty": 0,
+        "adjustedTotal": 78,
+        "unsupportedWords": [],
+        "misleading": false,
+        "grammar": [],
+        "ungrammatical": false
+      },
+      {
         "title": "How One Weakness Brought Down Columbia",
         "source": "one-weakness",
         "pattern": "how",
@@ -1635,38 +1667,6 @@
         "ungrammatical": false
       },
       {
-        "title": "The Failure Chain That Destroyed Columbia",
-        "source": "failure-chain",
-        "pattern": "the-x-that",
-        "scores": {
-          "clarity": 100,
-          "curiosity": 40,
-          "specificity": 77,
-          "truthfulness": 100,
-          "searchIntent": 75,
-          "channelIdentity": 74,
-          "ctrPotential": 63,
-          "novelty": 73,
-          "evergreenPotential": 85,
-          "consequence": 80,
-          "compactness": 100,
-          "recognizability": 100,
-          "nonRedundancy": 73,
-          "factualIntegrity": 100,
-          "historicalPerformanceSimilarity": 50,
-          "patternFreshness": 70
-        },
-        "total": 78,
-        "patternPenalty": 4,
-        "templateNaturalnessPenalty": 0,
-        "genericTemplatePenalty": 0,
-        "adjustedTotal": 74,
-        "unsupportedWords": [],
-        "misleading": false,
-        "grammar": [],
-        "ungrammatical": false
-      },
-      {
         "title": "Columbia — A Forensic Engineering Documentary",
         "source": "documentary",
         "pattern": "two-beat",
@@ -1755,13 +1755,13 @@
           "nonRedundancy": 77,
           "factualIntegrity": 100,
           "historicalPerformanceSimilarity": 50,
-          "patternFreshness": 40
+          "patternFreshness": 10
         },
         "total": 81,
-        "patternPenalty": 11,
+        "patternPenalty": 12,
         "templateNaturalnessPenalty": 0,
         "genericTemplatePenalty": 0,
-        "adjustedTotal": 70,
+        "adjustedTotal": 69,
         "unsupportedWords": [],
         "misleading": false,
         "grammar": [],
@@ -1787,13 +1787,13 @@
           "nonRedundancy": 91,
           "factualIntegrity": 100,
           "historicalPerformanceSimilarity": 50,
-          "patternFreshness": 40
+          "patternFreshness": 10
         },
         "total": 77,
-        "patternPenalty": 11,
+        "patternPenalty": 12,
         "templateNaturalnessPenalty": 0,
         "genericTemplatePenalty": 0,
-        "adjustedTotal": 66,
+        "adjustedTotal": 65,
         "unsupportedWords": [],
         "misleading": false,
         "grammar": [],
@@ -1819,13 +1819,13 @@
           "nonRedundancy": 100,
           "factualIntegrity": 85,
           "historicalPerformanceSimilarity": 50,
-          "patternFreshness": 40
+          "patternFreshness": 10
         },
         "total": 77,
-        "patternPenalty": 11,
+        "patternPenalty": 12,
         "templateNaturalnessPenalty": 0,
         "genericTemplatePenalty": 0,
-        "adjustedTotal": 66,
+        "adjustedTotal": 65,
         "unsupportedWords": [
           "mistakes"
         ],
@@ -1853,13 +1853,13 @@
           "nonRedundancy": 89,
           "factualIntegrity": 85,
           "historicalPerformanceSimilarity": 50,
-          "patternFreshness": 40
+          "patternFreshness": 10
         },
         "total": 76,
-        "patternPenalty": 11,
+        "patternPenalty": 12,
         "templateNaturalnessPenalty": 0,
         "genericTemplatePenalty": 0,
-        "adjustedTotal": 65,
+        "adjustedTotal": 64,
         "unsupportedWords": [
           "disaster"
         ],
@@ -1887,13 +1887,13 @@
           "nonRedundancy": 91,
           "factualIntegrity": 100,
           "historicalPerformanceSimilarity": 50,
-          "patternFreshness": 40
+          "patternFreshness": 10
         },
         "total": 65,
-        "patternPenalty": 11,
+        "patternPenalty": 12,
         "templateNaturalnessPenalty": 0,
         "genericTemplatePenalty": 0,
-        "adjustedTotal": 54,
+        "adjustedTotal": 53,
         "unsupportedWords": [],
         "misleading": false,
         "grammar": [],

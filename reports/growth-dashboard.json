@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-11-15T21:08:40.914Z",
+  "generatedAt": "2026-11-16T07:10:40.611Z",
   "note": "Per-channel baselines are computed separately and never blended.",
   "channels": [
     {
       "channel": "failure-reconstructed",
       "name": "Failure Reconstructed",
       "shorts": {
-        "lastPublished": "2026-11-10T18:00:00.000Z",
-        "published": 45,
+        "lastPublished": "2026-11-16T18:00:00.000Z",
+        "published": 46,
         "inventory": {
-          "A": 82,
+          "A": 81,
           "B": 139,
           "C": 61,
           "D": 59
@@ -36,15 +36,15 @@
       },
       "longform": {
         "lane": {
-          "cycleId": "2026-W46",
+          "cycleId": "2026-W47",
           "due": false,
-          "reason": "cycle 2026-W46 already QUALITY_BLOCKED",
+          "reason": "cycle 2026-W47 already QUALITY_BLOCKED",
           "lastPublished": null
         },
         "lastCycle": {
-          "cycleId": "2026-W46",
+          "cycleId": "2026-W47",
           "channel": "failure-reconstructed",
-          "startedAt": "2026-11-09T07:11:27.356Z",
+          "startedAt": "2026-11-16T07:10:24.336Z",
           "status": "QUALITY_BLOCKED",
           "evaluated": [
             {
@@ -89,7 +89,7 @@
           ],
           "selected": null,
           "reason": "no candidate passed the long-form quality gate; cadence does not override quality",
-          "finishedAt": "2026-11-09T07:11:28.664Z"
+          "finishedAt": "2026-11-16T07:10:25.101Z"
         },
         "episodes": 0,
         "backlog": [
@@ -418,7 +418,7 @@
         "lastPublished": "2026-11-13T18:00:00.000Z",
         "published": 24,
         "inventory": {
-          "A": 101,
+          "A": 100,
           "B": 28,
           "C": 140,
           "D": 206
@@ -431,8 +431,8 @@
           "used": 0
         },
         "nextSelection": {
-          "slug": "what-if-earth-spun-like-the-fastest-pulsar",
-          "reason": "EXPLORE (0.25): under-sampled cluster EXTREME SCIENCE"
+          "slug": "what-if-we-tried-to-drill-through-the-earth",
+          "reason": "EXPLOIT (0.75): best A topic by SelectionScore"
         },
         "baseline": {
           "n": 22,
@@ -445,34 +445,21 @@
       },
       "longform": {
         "lane": {
-          "cycleId": "2026-W46",
+          "cycleId": "2026-W47",
           "due": false,
-          "reason": "cycle 2026-W46 already QUALITY_BLOCKED",
+          "reason": "cycle 2026-W47 already QUALITY_BLOCKED",
           "lastPublished": null
         },
         "lastCycle": {
-          "cycleId": "2026-W46",
+          "cycleId": "2026-W47",
           "channel": "impossible-brief",
-          "startedAt": "2026-11-09T07:11:28.723Z",
+          "startedAt": "2026-11-16T07:10:25.148Z",
           "status": "QUALITY_BLOCKED",
           "evaluated": [
             {
-              "slug": "could-earth-survive-one-day-without-earth-s-magnetic-field",
-              "mode": "A_LONG_FIRST",
-              "LongFormPotentialScore": 83,
-              "bucket": "A",
-              "decision": "BLOCK",
-              "score": 81,
-              "hardFails": [
-                "unsupported central claim/number: 24",
-                "INSUFFICIENT_DEPTH: evidence supports ~1.6 min; target 8–12 min — not padded"
-              ],
-              "generationStatus": "QUALITY_REVIEW"
-            },
-            {
               "slug": "what-if-we-mined-a-metal-asteroid",
               "mode": "B_SHORT_PROVES_DEMAND",
-              "LongFormPotentialScore": 83,
+              "LongFormPotentialScore": 84,
               "bucket": "A",
               "decision": "BLOCK",
               "score": 87,
@@ -483,21 +470,35 @@
               "generationStatus": "FAILED"
             },
             {
-              "slug": "what-if-we-swam-in-europas-ocean",
-              "mode": "A_LONG_FIRST",
-              "LongFormPotentialScore": 82,
+              "slug": "what-if-synthetic-fertilizer-disappeared",
+              "mode": "B_SHORT_PROVES_DEMAND",
+              "LongFormPotentialScore": 84,
               "bucket": "A",
               "decision": "BLOCK",
-              "score": 84,
+              "score": 86,
               "hardFails": [
-                "INSUFFICIENT_DEPTH: evidence supports ~0.8 min; target 8–12 min — not padded"
+                "INSUFFICIENT_DEPTH: evidence supports ~1.8 min; target 8–12 min — not padded",
+                "LLM generation failed safely (REQUEST_TOO_LARGE); deterministic evidence draft retained"
               ],
-              "generationStatus": "QUALITY_REVIEW"
+              "generationStatus": "FAILED"
+            },
+            {
+              "slug": "what-if-the-tunguska-blast-happened-over-a-city",
+              "mode": "A_LONG_FIRST",
+              "LongFormPotentialScore": 83,
+              "bucket": "A",
+              "decision": "BLOCK",
+              "score": 88,
+              "hardFails": [
+                "INSUFFICIENT_DEPTH: evidence supports ~2 min; target 8–12 min — not padded",
+                "LLM generation failed safely (REQUEST_TOO_LARGE); deterministic evidence draft retained"
+              ],
+              "generationStatus": "FAILED"
             }
           ],
           "selected": null,
           "reason": "no candidate passed the long-form quality gate; cadence does not override quality",
-          "finishedAt": "2026-11-09T07:11:29.771Z"
+          "finishedAt": "2026-11-16T07:10:26.254Z"
         },
         "episodes": 0,
         "backlog": [
