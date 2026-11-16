@@ -10,8 +10,9 @@ https://youtu.be/nyUpI3aKSNE
 | 3d | 2026-10-20 | 921 | 7 | 1 | 38.58 | 0 | Shorts feed 97%, Search 2% |
 | 7d | 2026-10-24 | 920 | 7 | 1 | 39.01 | 0 | Shorts feed 97%, Search 3% |
 | 14d | 2026-10-31 | 922 | 7 | 1 | 39.01 | 0 | Shorts feed 97%, Search 3% |
+| 30d | 2026-11-16 | 922 | 7 | 1 | 39.2 | 0 | Shorts feed 96%, Search 3% |
 
-## Diagnosis at 14d
+## Diagnosis at 30d
 
 - **HEALTHY** (low) — No problem pattern detected with available data.
 
@@ -21,9 +22,9 @@ https://youtu.be/nyUpI3aKSNE
 
 ## First major observed retention drop
 
-- Timestamp: 7s; magnitude: 16 percentage points.
+- Timestamp: 6s; magnitude: 16 percentage points.
 - Active sentence: ice crystal nucleation diagram
 - Visual type: AI-GENERATED VISUAL
 - This is an observed alignment, not proof that the sentence or visual caused the drop.
 
-Views gained between 7d and 14d: 2.
+Views gained between 14d and 30d: 0.

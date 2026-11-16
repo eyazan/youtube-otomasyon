@@ -19,19 +19,19 @@
         {
           "value": "number-or-countdown",
           "sample": 5,
-          "averagePercentageViewed": 70.26
+          "averagePercentageViewed": 69.56
         },
         {
           "value": "statement",
           "sample": 29,
-          "averagePercentageViewed": 62.85
+          "averagePercentageViewed": 65.28
         }
       ]
     },
     {
       "key": "durationRange",
       "value": "over-35s",
-      "weakValue": "25-35s",
+      "weakValue": "under-25s",
       "evidenceVideos": 42,
       "confidence": "SUPPORTED",
       "aggregates": [
@@ -41,14 +41,14 @@
           "averagePercentageViewed": 91.36
         },
         {
+          "value": "25-35s",
+          "sample": 33,
+          "averagePercentageViewed": 73.27
+        },
+        {
           "value": "under-25s",
           "sample": 7,
           "averagePercentageViewed": 71.7
-        },
-        {
-          "value": "25-35s",
-          "sample": 33,
-          "averagePercentageViewed": 71.24
         }
       ]
     },
@@ -70,14 +70,14 @@
           "averagePercentageViewed": 74.29
         },
         {
-          "value": "event",
-          "sample": 17,
-          "averagePercentageViewed": 65.73
-        },
-        {
           "value": "emergency",
           "sample": 14,
-          "averagePercentageViewed": 64.11
+          "averagePercentageViewed": 69.14
+        },
+        {
+          "value": "event",
+          "sample": 17,
+          "averagePercentageViewed": 65.53
         },
         {
           "value": "escalation",
@@ -96,7 +96,7 @@
         {
           "value": "fast",
           "sample": 26,
-          "averagePercentageViewed": 78.42
+          "averagePercentageViewed": 81
         },
         {
           "value": "measured",
@@ -115,7 +115,7 @@
         {
           "value": "question",
           "sample": 41,
-          "averagePercentageViewed": 72.57
+          "averagePercentageViewed": 74.2
         },
         {
           "value": "statement",
@@ -126,7 +126,7 @@
     },
     {
       "key": "category",
-      "value": "nuclear-accidents",
+      "value": "rail-disasters",
       "weakValue": "materials-failures",
       "evidenceVideos": 42,
       "confidence": "SUPPORTED",
@@ -137,14 +137,14 @@
           "averagePercentageViewed": 375.01
         },
         {
+          "value": "rail-disasters",
+          "sample": 3,
+          "averagePercentageViewed": 97.28
+        },
+        {
           "value": "nuclear-accidents",
           "sample": 2,
           "averagePercentageViewed": 87.57
-        },
-        {
-          "value": "rail-disasters",
-          "sample": 3,
-          "averagePercentageViewed": 73.81
         },
         {
           "value": "maritime-disasters",
@@ -162,11 +162,6 @@
           "averagePercentageViewed": 72.33
         },
         {
-          "value": "natural-hazards",
-          "sample": 7,
-          "averagePercentageViewed": 61.23
-        },
-        {
           "value": "bridge-failures",
           "sample": 4,
           "averagePercentageViewed": 61.04
@@ -175,6 +170,11 @@
           "value": "infrastructure-failures",
           "sample": 4,
           "averagePercentageViewed": 60.95
+        },
+        {
+          "value": "natural-hazards",
+          "sample": 7,
+          "averagePercentageViewed": 60.73
         },
         {
           "value": "software-and-control-failures",
@@ -208,11 +208,11 @@
         {
           "value": "adaptive after payoff",
           "sample": 42,
-          "averagePercentageViewed": 72.27
+          "averagePercentageViewed": 73.87
         }
       ]
     }
   ],
-  "lastUpdated": "2026-11-16T17:14:32.937Z",
+  "lastUpdated": "2026-11-16T18:41:27.627Z",
   "caveat": "Observed associations only; topic, timing and packaging can confound retention. No causal claim."
 }

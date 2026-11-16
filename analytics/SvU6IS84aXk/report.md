@@ -8,13 +8,21 @@ https://youtu.be/SvU6IS84aXk
 |---|---|---:|---:|---:|---:|---:|---|
 | 1d | 2026-11-10 | 17 | 0 | 1 | — | — |  |
 | 3d | 2026-11-12 | 18 | 0 | 1 | 56.99000000000001 | 0 | Shorts feed 65%, Search 29% |
+| 7d | 2026-11-16 | 24 | 0 | 1 | 53.510000000000005 | 0 | Shorts feed 52%, Search 43% |
 
-## Diagnosis at 3d
+## Diagnosis at 7d
 
-- **INSUFFICIENT_DATA** (high) — 18 views after 3 days — too early/small for rate-based conclusions.
+- **INSUFFICIENT_DATA** (high) — 24 views after 7 days — too early/small for rate-based conclusions.
 
 ## Suggested interventions
 
 - INSUFFICIENT DATA → no intervention; wait for the next checkpoint.
 
-Views gained between 1d and 3d: 1.
+## First major observed retention drop
+
+- Timestamp: 6s; magnitude: 30 percentage points.
+- Active sentence: Two schools were destroyed, and seven children were killed at one of them.
+- Visual type: REAL ARCHIVAL IMAGE
+- This is an observed alignment, not proof that the sentence or visual caused the drop.
+
+Views gained between 3d and 7d: 6.
