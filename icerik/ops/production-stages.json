@@ -2,52 +2,6 @@
   "channel": "failure-reconstructed",
   "runs": [
     {
-      "runId": "43732404214",
-      "attempt": "1",
-      "startedAt": "2026-11-15T15:54:38.533Z",
-      "publish": true,
-      "trigger": {
-        "event": "schedule",
-        "correlationId": null
-      },
-      "targetDay": "2026-11-15",
-      "slug": null,
-      "outcome": "NO_TOPIC",
-      "reason": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [44 unused A topic(s), best viral score 74 < minimum 75; 11 topic(s) at the minimum are bucket B/C, not selectable]",
-      "stages": {
-        "RESEARCH": {
-          "status": "failed",
-          "detail": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [44 unused A topic(s), best viral score 74 < minimum 75; 11 topic(s) at the minimum are bucket B/C, not selectable]",
-          "at": "2026-11-15T15:54:39.719Z"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "not-reached"
-        },
-        "QA": {
-          "status": "not-reached"
-        },
-        "UPLOAD": {
-          "status": "not-reached"
-        },
-        "SCHEDULE": {
-          "status": "not-reached"
-        },
-        "PUBLISH": {
-          "status": "not-reached"
-        }
-      },
-      "finishedAt": "2026-11-15T15:54:39.720Z"
-    },
-    {
       "runId": "43735602035",
       "attempt": "1",
       "startedAt": "2026-11-15T16:29:04.268Z",
@@ -1350,6 +1304,50 @@
         }
       },
       "finishedAt": "2026-11-17T16:20:08.459Z"
+    },
+    {
+      "runId": "44128266789",
+      "attempt": "1",
+      "startedAt": "2026-11-17T16:40:40.181Z",
+      "publish": true,
+      "trigger": {
+        "event": "schedule",
+        "correlationId": null
+      },
+      "targetDay": null,
+      "slug": null,
+      "outcome": "NOT_DUE",
+      "reason": "today's Short already exists (mill-river-flood-1874)",
+      "stages": {
+        "RESEARCH": {
+          "status": "not-reached"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "not-reached"
+        },
+        "QA": {
+          "status": "not-reached"
+        },
+        "UPLOAD": {
+          "status": "not-reached"
+        },
+        "SCHEDULE": {
+          "status": "not-reached"
+        },
+        "PUBLISH": {
+          "status": "not-reached"
+        }
+      },
+      "finishedAt": "2026-11-17T16:40:40.193Z"
     }
   ]
 }

@@ -2,50 +2,6 @@
   "channel": "impossible-brief",
   "runs": [
     {
-      "runId": "43736298887",
-      "attempt": "1",
-      "startedAt": "2026-11-15T16:37:17.723Z",
-      "publish": true,
-      "trigger": {
-        "event": "repository_dispatch",
-        "correlationId": null
-      },
-      "targetDay": "2026-11-15",
-      "slug": null,
-      "outcome": "BLOCKED",
-      "reason": "LEGACY_UPLOAD_RETIRED: this channel publishes premium Shorts only (premium publish path); the legacy renderer does not run with PUBLISH=1",
-      "stages": {
-        "RESEARCH": {
-          "status": "not-reached"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "not-reached"
-        },
-        "QA": {
-          "status": "not-reached"
-        },
-        "UPLOAD": {
-          "status": "not-reached"
-        },
-        "SCHEDULE": {
-          "status": "not-reached"
-        },
-        "PUBLISH": {
-          "status": "not-reached"
-        }
-      },
-      "finishedAt": "2026-11-15T16:37:19.251Z"
-    },
-    {
       "runId": "43739921666",
       "attempt": "1",
       "startedAt": "2026-11-15T17:14:48.616Z",
@@ -1320,6 +1276,50 @@
         }
       },
       "finishedAt": "2026-11-17T16:36:06.648Z"
+    },
+    {
+      "runId": "44128266789",
+      "attempt": "1",
+      "startedAt": "2026-11-17T16:40:42.833Z",
+      "publish": true,
+      "trigger": {
+        "event": "schedule",
+        "correlationId": null
+      },
+      "targetDay": "2026-11-17",
+      "slug": null,
+      "outcome": "BLOCKED",
+      "reason": "premium publication refused (see the premium publish log); nothing uploaded, legacy renderer not used",
+      "stages": {
+        "RESEARCH": {
+          "status": "not-reached"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "not-reached"
+        },
+        "QA": {
+          "status": "not-reached"
+        },
+        "UPLOAD": {
+          "status": "not-reached"
+        },
+        "SCHEDULE": {
+          "status": "not-reached"
+        },
+        "PUBLISH": {
+          "status": "not-reached"
+        }
+      },
+      "finishedAt": "2026-11-17T16:42:34.699Z"
     }
   ]
 }
