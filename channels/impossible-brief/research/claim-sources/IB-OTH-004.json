@@ -1,0 +1,130 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-OTH-004",
+ "checkedAt": "2026-10-30T04:54:54.506Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "25b2699b6677b97b",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "More than 13,800 of an estimated total of 22,000 species have been described.",
+   "url": "https://en.wikipedia.org/wiki/Ant",
+   "sourceTitle": "Wikipedia — Ant",
+   "revision": 1380954385,
+   "passage": "More than 13,800 of an estimated total of 22,000 species have been described.",
+   "numbers": {
+    "claim": [
+     "13800",
+     "22000"
+    ],
+    "inPassage": [
+     "13800",
+     "22000"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "Ants diversified extensively during the Angiosperm Terrestrial Revolution and assumed ecological dominance around 60 million years ago.",
+   "url": "https://en.wikipedia.org/wiki/Ant",
+   "sourceTitle": "Wikipedia — Ant",
+   "revision": 1380954385,
+   "passage": "Ants diversified extensively during the Angiosperm Terrestrial Revolution and assumed ecological dominance around 60 million years ago.",
+   "numbers": {
+    "claim": [
+     "60"
+    ],
+    "inPassage": [
+     "60"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "By the Oligocene and Miocene, ants had come to represent 20–40% of all insects found in major fossil deposits.",
+   "url": "https://en.wikipedia.org/wiki/Ant",
+   "sourceTitle": "Wikipedia — Ant",
+   "revision": 1380954385,
+   "passage": "By the Oligocene and Miocene, ants had come to represent 20–40% of all insects found in major fossil deposits.",
+   "numbers": {
+    "claim": [
+     "20",
+     "40"
+    ],
+    "inPassage": [
+     "20",
+     "40"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "The specimen, trapped in amber dating back to around 92 million years ago, has features found in some wasps, but not found in modern ants.",
+   "url": "https://en.wikipedia.org/wiki/Ant",
+   "sourceTitle": "Wikipedia — Ant",
+   "revision": 1380954385,
+   "passage": "The specimen, trapped in amber dating back to around 92 million years ago, has features found in some wasps, but not found in modern ants.",
+   "numbers": {
+    "claim": [
+     "92"
+    ],
+    "inPassage": [
+     "92"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why there may be 22,000 species of ants.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Only about 13,800 have been described so far.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Ants became ecologically dominant around 60 million years ago.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "They later made up 20 to 40% of fossil insects.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "They churn soil and carry seeds into the ground.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Without them, dead matter and pests would pile up.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So some of Earth's key engineers are only millimetres long.",
+   "status": "HUMAN"
+  }
+ ]
+}

@@ -1,0 +1,145 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-FUT-045",
+ "checkedAt": "2026-11-03T18:27:18.710Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "743e374d240a92b4",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "LK-99, also called PCPOSOS, is a gray–black, polycrystalline compound, identified as a copper-doped lead‒oxyapatite.",
+   "url": "https://en.wikipedia.org/wiki/LK-99",
+   "sourceTitle": "Wikipedia — LK-99",
+   "revision": 1381916516,
+   "passage": "LK-99, also called PCPOSOS, is a gray–black (or purple), polycrystalline compound, identified as a copper-doped lead‒oxyapatite.",
+   "numbers": {
+    "claim": [
+     "99"
+    ],
+    "inPassage": [
+     "99"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "By mid-August 2023, the consensus was that LK-99 is not a superconductor at room temperature, and is an insulator in pure form.",
+   "url": "https://en.wikipedia.org/wiki/LK-99",
+   "sourceTitle": "Wikipedia — LK-99",
+   "revision": 1381916516,
+   "passage": "By mid-August 2023, the consensus was that LK-99 is not a superconductor at room temperature, and is an insulator in pure form.",
+   "numbers": {
+    "claim": [
+     "2023",
+     "99"
+    ],
+    "inPassage": [
+     "2023",
+     "99"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "Lanarkite is produced from a 1:1 molar mixing of lead(II) oxide and lead(II) sulfate powders, heated at 725 °C (1,000 K; 1,340 °F) for 24 hours.",
+   "url": "https://en.wikipedia.org/wiki/LK-99",
+   "sourceTitle": "Wikipedia — LK-99",
+   "revision": 1381916516,
+   "passage": null,
+   "numbers": {
+    "claim": [
+     "1",
+     "725",
+     "1000",
+     "1340",
+     "24"
+    ],
+    "inPassage": [],
+    "missing": [
+     "1",
+     "725",
+     "1000",
+     "1340",
+     "24"
+    ]
+   },
+   "support": 0,
+   "status": "UNVERIFIED",
+   "reason": "a sentence has the terms but not every claim number (1, 725, 1000, 1340, 24), is not 5-80 words of prose, or shares under 50% of the claim's content words"
+  },
+  {
+   "fact": "F4",
+   "claim": "The authors provide a method for chemical synthesis of LK-99 in three steps.",
+   "url": "https://en.wikipedia.org/wiki/LK-99",
+   "sourceTitle": "Wikipedia — LK-99",
+   "revision": 1381916516,
+   "passage": "Lee et al. provide a method for chemical synthesis of LK-99 in three steps.",
+   "numbers": {
+    "claim": [
+     "99"
+    ],
+    "inPassage": [
+     "99"
+    ],
+    "missing": []
+   },
+   "support": 0.86,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "LK-99 went viral as a room-temperature superconductor.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "By mid-August 2023, the consensus was clear: it isn't.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "In pure form, it's actually an insulator.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It's a copper-doped lead apatite, made in three steps.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "One step heats powders to 725 °C for 24 hours.",
+   "status": "FAIL",
+   "missing": [
+    "725",
+    "24"
+   ]
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "A real one would let power lines and magnets waste almost nothing.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "That's why the claim spread so fast.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So extraordinary materials need replication, not just hype.",
+   "status": "HUMAN"
+  }
+ ]
+}

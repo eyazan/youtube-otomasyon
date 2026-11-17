@@ -1,0 +1,153 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-HUM-024",
+ "checkedAt": "2026-10-30T04:54:53.223Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "24dd46f72cfb4d02",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "Wadlow's height was 8 ft 11.1 in (2.72 m) while his weight reached 439 lb (199 kg) at his death at age 22.",
+   "url": "https://en.wikipedia.org/wiki/Robert_Wadlow",
+   "sourceTitle": "Wikipedia — Robert Wadlow",
+   "revision": 1361084715,
+   "passage": "Wadlow's height was 8 ft 11.1 in (2.72 m) while his weight reached 439 lb (199 kg) at his death at age 22.",
+   "numbers": {
+    "claim": [
+     "8",
+     "11.1",
+     "2.72",
+     "439",
+     "199",
+     "22"
+    ],
+    "inPassage": [
+     "8",
+     "11.1",
+     "2.72",
+     "439",
+     "199",
+     "22"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "By the time of his graduation in 1936, he was 8 ft 4 in (254 cm).",
+   "url": "https://en.wikipedia.org/wiki/Robert_Wadlow",
+   "sourceTitle": "Wikipedia — Robert Wadlow",
+   "revision": 1361084715,
+   "passage": "By the time of his graduation in 1936, he was 8 ft 4 in (254 cm).",
+   "numbers": {
+    "claim": [
+     "1936",
+     "8",
+     "4",
+     "254"
+    ],
+    "inPassage": [
+     "1936",
+     "8",
+     "4",
+     "254"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "On June 27, 1940 (18 days before his death), he was measured by doctors at 8 ft 11.1 in (2.72 m).",
+   "url": "https://en.wikipedia.org/wiki/Robert_Wadlow",
+   "sourceTitle": "Wikipedia — Robert Wadlow",
+   "revision": 1361084715,
+   "passage": "On June 27, 1940 (18 days before his death), he was measured by doctors at 8 ft 11.1 in (2.72 m).",
+   "numbers": {
+    "claim": [
+     "27",
+     "1940",
+     "18",
+     "8",
+     "11.1",
+     "2.72"
+    ],
+    "inPassage": [
+     "27",
+     "1940",
+     "18",
+     "8",
+     "11.1",
+     "2.72"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "Robert Wadlow was the tallest person in recorded history.",
+   "url": "https://en.wikipedia.org/wiki/Robert_Wadlow",
+   "sourceTitle": "Wikipedia — Robert Wadlow",
+   "revision": 1361084715,
+   "passage": "Trijntje Keever, the alleged tallest woman in recorded history",
+   "numbers": {
+    "claim": [],
+    "inPassage": [],
+    "missing": []
+   },
+   "support": 0.5,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why one man reached 2.72 metres tall.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Robert Wadlow never stopped growing.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "By 1936, he was already 254 centimetres.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "He weighed 199 kilograms.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Excess growth hormone kept his bones lengthening.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "In later years, he needed leg braces to walk.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "He died at 22, just 18 days after his last measurement.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the body has a size limit for good reasons.",
+   "status": "HUMAN"
+  }
+ ]
+}

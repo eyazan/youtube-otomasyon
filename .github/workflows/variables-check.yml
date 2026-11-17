@@ -2,11 +2,16 @@ name: Repository variables check (read-only)
 
 # Diagnostic only: prints whether the premium repository variables evaluate to '1' exactly as
 # portfolio-production.yml reads them. No checkout, no secrets' values, no render, no upload.
+# The `youtube-audit` job (input audit=1) reads each premium channel's live settings, latest uploads and their
+# YouTube Analytics through that channel's own credentials (scripts/growth/youtube-audit.js). It never writes to
+# YouTube; the report goes to an artifact and to the review/youtube-audit-<run id> branch (never main).
 on:
   workflow_dispatch:
+    inputs:
+      audit: { description: "also run the read-only YouTube audit (1/0)", required: false, default: '0' }
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   check:
@@ -21,3 +26,65 @@ jobs:
           echo "a secret named FR_PREMIUM_PUBLISH exists: ${{ secrets.FR_PREMIUM_PUBLISH != '' }}"
           echo "vars.IB_PREMIUM_PRIMARY == '1': ${{ vars.IB_PREMIUM_PRIMARY == '1' }}"
           echo "vars.IB_PREMIUM_PUBLISH == '1': ${{ vars.IB_PREMIUM_PUBLISH == '1' }}"
+
+  youtube-audit:
+    if: ${{ inputs.audit == '1' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      QUOTA_LEDGER: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci --no-audit --no-fund
+      # one process per channel, each with only its own credentials
+      - name: ImpossibleBrief
+        env:
+          IB_CLIENT_ID: ${{ secrets.IB_CLIENT_ID }}
+          IB_CLIENT_SECRET: ${{ secrets.IB_CLIENT_SECRET }}
+          IB_YT_REFRESH_TOKEN: ${{ secrets.IB_YT_REFRESH_TOKEN }}
+          IB_YT_CHANNEL_ID: ${{ vars.IB_YT_CHANNEL_ID }}
+        run: node scripts/growth/youtube-audit.js --channels impossible-brief --out audit-out/ib || true
+      - name: Failure Reconstructed
+        env:
+          FR_YT_CLIENT_ID: ${{ secrets.FR_YT_CLIENT_ID }}
+          FR_YT_CLIENT_SECRET: ${{ secrets.FR_YT_CLIENT_SECRET }}
+          FR_YT_REFRESH_TOKEN: ${{ secrets.FR_YT_REFRESH_TOKEN }}
+          FR_YT_CHANNEL_ID: ${{ vars.FR_YT_CHANNEL_ID }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          YT_CHANNEL_ID: ${{ vars.YT_CHANNEL_ID }}
+        run: node scripts/growth/youtube-audit.js --channels failure-reconstructed --out audit-out/fr || true
+      - name: The Hidden Logic of Things
+        env:
+          BTO_YT_CLIENT_ID: ${{ secrets.BTO_YT_CLIENT_ID }}
+          BTO_YT_CLIENT_SECRET: ${{ secrets.BTO_YT_CLIENT_SECRET }}
+          BTO_YT_REFRESH_TOKEN: ${{ secrets.BTO_YT_REFRESH_TOKEN }}
+          BTO_YT_CHANNEL_ID: ${{ vars.BTO_YT_CHANNEL_ID }}
+        run: node scripts/growth/youtube-audit.js --channels behind-the-ordinary --out audit-out/bto || true
+      - name: GoalLore Lab
+        env:
+          GLL_YT_CLIENT_ID: ${{ secrets.GLL_YT_CLIENT_ID }}
+          GLL_YT_CLIENT_SECRET: ${{ secrets.GLL_YT_CLIENT_SECRET }}
+          GLL_YT_REFRESH_TOKEN: ${{ secrets.GLL_YT_REFRESH_TOKEN }}
+          GLL_YT_CHANNEL_ID: ${{ vars.GLL_YT_CHANNEL_ID }}
+          CT_CLIENT_ID: ${{ secrets.CT_CLIENT_ID }}
+          CT_CLIENT_SECRET: ${{ secrets.CT_CLIENT_SECRET }}
+          CT_YT_REFRESH_TOKEN: ${{ secrets.CT_YT_REFRESH_TOKEN }}
+          CT_YT_CHANNEL_ID: ${{ vars.CT_YT_CHANNEL_ID }}
+        run: node scripts/growth/youtube-audit.js --channels goal-lore-lab --out audit-out/gll || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: youtube-audit
+          path: audit-out
+          retention-days: 30
+      - name: Report to the review branch (never main)
+        run: |
+          cat audit-out/*/README.md >> "$GITHUB_STEP_SUMMARY" || true
+          git config user.name "youtube-audit-bot"; git config user.email "actions@users.noreply.github.com"
+          B="review/youtube-audit-${{ github.run_id }}"
+          git checkout -q -B "$B"; mkdir -p review; mv audit-out "review/youtube-audit-${{ github.run_id }}"
+          git add -f review; git commit -q -m "review: YouTube audit (run ${{ github.run_id }})"; git push -q -f origin "$B"

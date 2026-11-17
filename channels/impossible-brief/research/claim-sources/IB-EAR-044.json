@@ -1,0 +1,138 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-EAR-044",
+ "checkedAt": "2026-10-30T04:54:56.106Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "9806c58dc73b0996",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "According to the USGS, permanent summer ice covered around 8% of Earth's surface and 25% of the land area during the last glacial maximum.",
+   "url": "https://en.wikipedia.org/wiki/Last_Glacial_Maximum",
+   "sourceTitle": "Wikipedia — Last Glacial Maximum",
+   "revision": 1382686571,
+   "passage": "According to the United States Geological Survey (USGS), permanent summer ice covered around 8% of Earth's surface and 25% of the land area during the last glacial maximum.",
+   "numbers": {
+    "claim": [
+     "8",
+     "25"
+    ],
+    "inPassage": [
+     "8",
+     "25"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "The USGS also states that sea level was about 125 meters (410 ft) lower than today (2012).",
+   "url": "https://en.wikipedia.org/wiki/Last_Glacial_Maximum",
+   "sourceTitle": "Wikipedia — Last Glacial Maximum",
+   "revision": 1382686571,
+   "passage": "The USGS also states that sea level was about 125 meters (410 ft) lower than today (2012).",
+   "numbers": {
+    "claim": [
+     "125",
+     "410",
+     "2012"
+    ],
+    "inPassage": [
+     "125",
+     "410",
+     "2012"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "Glacier fluctuations around the Strait of Magellan suggest the peak in glacial surface area was constrained to between 25,200 and 23,100 years ago.",
+   "url": "https://en.wikipedia.org/wiki/Last_Glacial_Maximum",
+   "sourceTitle": "Wikipedia — Last Glacial Maximum",
+   "revision": 1382686571,
+   "passage": "Glacier fluctuations around the Strait of Magellan suggest the peak in glacial surface area was constrained to between 25,200 and 23,100 years ago.",
+   "numbers": {
+    "claim": [
+     "25200",
+     "23100"
+    ],
+    "inPassage": [
+     "25200",
+     "23100"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "Decline of the West Antarctica ice sheet occurred between 15,000 and 14,000 years ago, consistent with evidence for another abrupt rise in the sea level around 14,500 years ago.",
+   "url": "https://en.wikipedia.org/wiki/Last_Glacial_Maximum",
+   "sourceTitle": "Wikipedia — Last Glacial Maximum",
+   "revision": 1382686571,
+   "passage": "Decline of the West Antarctica ice sheet occurred between 15,000 and 14,000 years ago, consistent with evidence for another abrupt rise in the sea level around 14,500 years ago.",
+   "numbers": {
+    "claim": [
+     "15000",
+     "14000",
+     "14500"
+    ],
+    "inPassage": [
+     "15000",
+     "14000",
+     "14500"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why Ice Age seas sat 125 metres lower.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "So much water was locked in ice sheets.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Ice covered about 25% of the land.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The peak came between 25,200 and 23,100 years ago.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "SPECULATIVE SCENARIO",
+   "text": "Bring it back, and today's ports would sit far inland.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Land bridges would reappear between continents.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So coastlines are just where the ice happens to leave the sea.",
+   "status": "HUMAN"
+  }
+ ]
+}

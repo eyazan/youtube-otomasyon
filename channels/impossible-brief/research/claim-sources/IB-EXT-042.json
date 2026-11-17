@@ -1,0 +1,130 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-EXT-042",
+ "checkedAt": "2026-11-03T18:27:20.081Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "fd8bddf9285e3a51",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "The Oh-My-God particle was an ultra-high-energy cosmic ray detected on 15 October 1991 by the Fly's Eye camera in Dugway Proving Ground, Utah.",
+   "url": "https://en.wikipedia.org/wiki/Oh-My-God_particle",
+   "sourceTitle": "Wikipedia — Oh-My-God particle",
+   "revision": 1383204077,
+   "passage": "The Oh-My-God particle (as physicists dubbed it) was an ultra-high-energy cosmic ray detected on 15 October 1991 by the Fly's Eye camera in Dugway Proving Ground, Utah, United States.",
+   "numbers": {
+    "claim": [
+     "15",
+     "1991"
+    ],
+    "inPassage": [
+     "15",
+     "1991"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "As of 2026, it is the highest-energy cosmic ray ever observed.",
+   "url": "https://en.wikipedia.org/wiki/Oh-My-God_particle",
+   "sourceTitle": "Wikipedia — Oh-My-God particle",
+   "revision": 1383204077,
+   "passage": "As of 2026, it is the highest-energy cosmic ray ever observed.",
+   "numbers": {
+    "claim": [
+     "2026"
+    ],
+    "inPassage": [
+     "2026"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "Its energy was estimated as 320 exaelectronvolt.",
+   "url": "https://en.wikipedia.org/wiki/Oh-My-God_particle",
+   "sourceTitle": "Wikipedia — Oh-My-God particle",
+   "revision": 1383204077,
+   "passage": "Its energy was estimated as (3.2±0.9)×1020 eV (320 exaelectronvolt).",
+   "numbers": {
+    "claim": [
+     "320"
+    ],
+    "inPassage": [
+     "320"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "Its energy was 20 million times greater than the highest photon energy measured in electromagnetic radiation emitted by an extragalactic object, the blazar Markarian 501.",
+   "url": "https://en.wikipedia.org/wiki/Oh-My-God_particle",
+   "sourceTitle": "Wikipedia — Oh-My-God particle",
+   "revision": 1383204077,
+   "passage": "Its energy was 20 million times greater than the highest photon energy measured in electromagnetic radiation emitted by an extragalactic object, the blazar Markarian 501.",
+   "numbers": {
+    "claim": [
+     "20",
+     "501"
+    ],
+    "inPassage": [
+     "20",
+     "501"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why one particle carried 320 exaelectronvolts.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Physicists nicknamed it the Oh-My-God particle.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "A detector in Utah caught it in 1991.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It remains the highest-energy cosmic ray ever observed.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It beat the top blazar photon energy 20 million times over.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "That's roughly the energy of a thrown ball, in one particle.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So something in the universe accelerates particles beyond our machines.",
+   "status": "HUMAN"
+  }
+ ]
+}

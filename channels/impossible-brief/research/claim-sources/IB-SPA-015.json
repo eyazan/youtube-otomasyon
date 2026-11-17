@@ -1,0 +1,140 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-SPA-015",
+ "checkedAt": "2026-11-03T18:27:09.927Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "dd2c57a88906e073",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "Although total solar eclipses occur somewhere on Earth every 18 months on average, they recur at any given place only once every 360 to 410 years.",
+   "url": "https://en.wikipedia.org/wiki/Solar_eclipse",
+   "sourceTitle": "Wikipedia — Solar eclipse",
+   "revision": 1383567264,
+   "passage": "As such, although total solar eclipses occur somewhere on Earth every 18 months on average, they recur at any given place only once every 360 to 410 years.",
+   "numbers": {
+    "claim": [
+     "18",
+     "360",
+     "410"
+    ],
+    "inPassage": [
+     "18",
+     "360",
+     "410"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "Typically, the umbra is 100–160 km wide, while the penumbral diameter is in excess of 6400 km.",
+   "url": "https://en.wikipedia.org/wiki/Solar_eclipse",
+   "sourceTitle": "Wikipedia — Solar eclipse",
+   "revision": 1383567264,
+   "passage": "Typically, the umbra is 100–160 km wide, while the penumbral diameter is in excess of 6400 km.",
+   "numbers": {
+    "claim": [
+     "100",
+     "160",
+     "6400"
+    ],
+    "inPassage": [
+     "100",
+     "160",
+     "6400"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "The longest eclipse that has been calculated thus far is the eclipse of July 16, 2186 (with a maximum duration of 7 minutes 29 seconds over northern Guyana).",
+   "url": "https://en.wikipedia.org/wiki/Solar_eclipse",
+   "sourceTitle": "Wikipedia — Solar eclipse",
+   "revision": 1383567264,
+   "passage": "The longest eclipse that has been calculated thus far is the eclipse of July 16, 2186 (with a maximum duration of 7 minutes 29 seconds over northern Guyana).",
+   "numbers": {
+    "claim": [
+     "16",
+     "2186",
+     "7",
+     "29"
+    ],
+    "inPassage": [
+     "16",
+     "2186",
+     "7",
+     "29"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "The Moon's perigee makes a complete circuit in 8.85 years.",
+   "url": "https://en.wikipedia.org/wiki/Solar_eclipse",
+   "sourceTitle": "Wikipedia — Solar eclipse",
+   "revision": 1383567264,
+   "passage": "Finally, the Moon's perigee is moving forwards or precessing in its orbit and makes a complete circuit in 8.85 years.",
+   "numbers": {
+    "claim": [
+     "8.85"
+    ],
+    "inPassage": [
+     "8.85"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why one town waits 360–410 years for totality.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Somewhere on Earth, one happens every 18 months.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "But the Moon's full shadow is only 100 to 160 kilometres wide.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "So each eclipse touches just a thin strip of the planet.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Totality lasts minutes; the longest calculated reaches 7 minutes 29 seconds.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "That's why eclipse chasers travel to the path.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So total eclipses are common for Earth, and rare for you.",
+   "status": "HUMAN"
+  }
+ ]
+}

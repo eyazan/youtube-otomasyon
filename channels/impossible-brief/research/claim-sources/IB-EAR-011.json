@@ -1,0 +1,177 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-EAR-011",
+ "checkedAt": "2026-11-03T18:27:14.475Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "dcc1b0f00ad8aaf0",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "The event is attributed to a meteor air burst, the atmospheric explosion of a stony asteroid about 50–60 m (160–200 ft) wide.",
+   "url": "https://en.wikipedia.org/wiki/Tunguska_event",
+   "sourceTitle": "Wikipedia — Tunguska event",
+   "revision": 1383578996,
+   "passage": null,
+   "numbers": {
+    "claim": [
+     "50",
+     "60",
+     "160",
+     "200"
+    ],
+    "inPassage": [],
+    "missing": [
+     "50",
+     "60",
+     "160",
+     "200"
+    ]
+   },
+   "support": 0,
+   "status": "UNVERIFIED",
+   "reason": "a sentence has the terms but not every claim number (50, 60, 160, 200), is not 5-80 words of prose, or shares under 50% of the claim's content words"
+  },
+  {
+   "fact": "F2",
+   "claim": "Occurring over an area of 2,150 km2 (830 sq mi) in the sparsely populated East Siberian taiga, the explosion felled a significant amount of trees.",
+   "url": "https://en.wikipedia.org/wiki/Tunguska_event",
+   "sourceTitle": "Wikipedia — Tunguska event",
+   "revision": 1383578996,
+   "passage": null,
+   "numbers": {
+    "claim": [
+     "2150",
+     "2",
+     "830"
+    ],
+    "inPassage": [],
+    "missing": [
+     "2150",
+     "2",
+     "830"
+    ]
+   },
+   "support": 0,
+   "status": "UNVERIFIED",
+   "reason": "a sentence has the terms but not every claim number (2150, 2, 830), is not 5-80 words of prose, or shares under 50% of the claim's content words"
+  },
+  {
+   "fact": "F3",
+   "claim": "The object is thought to have exploded at an altitude of 5–10 km (3–6 mi) rather than hitting the Earth's surface, leaving no impact crater.",
+   "url": "https://en.wikipedia.org/wiki/Tunguska_event",
+   "sourceTitle": "Wikipedia — Tunguska event",
+   "revision": 1383578996,
+   "passage": null,
+   "numbers": {
+    "claim": [
+     "5",
+     "10",
+     "3",
+     "6"
+    ],
+    "inPassage": [],
+    "missing": [
+     "5",
+     "10",
+     "3",
+     "6"
+    ]
+   },
+   "support": 0,
+   "status": "UNVERIFIED",
+   "reason": "a sentence has the terms but not every claim number (5, 10, 3, 6), is not 5-80 words of prose, or shares under 50% of the claim's content words"
+  },
+  {
+   "fact": "F4",
+   "claim": "Estimates of its energy have ranged from 3–30 megatons of TNT (13–126 PJ).",
+   "url": "https://en.wikipedia.org/wiki/Tunguska_event",
+   "sourceTitle": "Wikipedia — Tunguska event",
+   "revision": 1383578996,
+   "passage": "Estimates of its energy have ranged from 3–30 megatons of TNT (13–126 PJ).",
+   "numbers": {
+    "claim": [
+     "3",
+     "30",
+     "13",
+     "126"
+    ],
+    "inPassage": [
+     "3",
+     "30",
+     "13",
+     "126"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F5",
+   "claim": "Investigators found a zone, roughly 8 km (5.0 mi) across, where the trees were scorched and devoid of branches, but still standing upright.",
+   "url": "https://en.wikipedia.org/wiki/Tunguska_event",
+   "sourceTitle": "Wikipedia — Tunguska event",
+   "revision": 1383578996,
+   "passage": "Instead, they found a zone, roughly 8 km (5.0 mi) across, where the trees were scorched and devoid of branches, but still standing upright.",
+   "numbers": {
+    "claim": [
+     "8",
+     "5.0"
+    ],
+    "inPassage": [
+     "8",
+     "5.0"
+    ],
+    "missing": []
+   },
+   "support": 0.92,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "A 50-metre rock flattened 2,150 square kilometres of forest.",
+   "status": "FAIL",
+   "missing": [
+    "50",
+    "2150"
+   ]
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It exploded in mid-air, leaving no crater.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The blast came 5 to 10 kilometres above Siberia.",
+   "status": "FAIL",
+   "missing": [
+    "10"
+   ]
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Estimates put its energy at 3 to 30 megatons.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "SPECULATIVE SCENARIO",
+   "text": "Over a city, windows and roofs would fail across that whole area.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Right below the blast, trees stayed upright but were stripped bare.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the danger isn't the impact. It's the shockwave from above.",
+   "status": "HUMAN"
+  }
+ ]
+}

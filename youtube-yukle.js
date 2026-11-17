@@ -230,7 +230,11 @@ async function main() {
     title: temizle(metin.baslik) || IS,
     description: temizle(metin.aciklama),
     tags: metin.etiketler.slice(0, 30),
-    categoryId: env("YT_CATEGORY_ID") || "27",
+    // channel-scoped upload defaults (channels/<c>/config.json "upload"): YouTube Studio's upload defaults do not apply
+    // to API uploads, so language and category are sent explicitly. An env override still wins for a one-off.
+    categoryId: env("YT_CATEGORY_ID") || String((CHANNEL.config.upload || {}).categoryId || "27"),
+    ...((CHANNEL.config.upload || {}).defaultLanguage ? { defaultLanguage: CHANNEL.config.upload.defaultLanguage } : {}),
+    ...((CHANNEL.config.upload || {}).defaultAudioLanguage ? { defaultAudioLanguage: CHANNEL.config.upload.defaultAudioLanguage } : {}),
   };
   // Gercekci sentetik/yeniden kurgu goruntu varsa YouTube'a beyan edilir (gizlenmez).
   let sentetik = false;

@@ -1,0 +1,1250 @@
+{
+ "schema": "bto-studio.storyboard.v1",
+ "channel": "goal-lore-lab",
+ "topicId": "GLL-021",
+ "slug": "hand-of-god-and-goal-of-the-century",
+ "version": 1,
+ "author": "auto/goal-lore-lab (deterministic football grammar; needs creative review before publication)",
+ "licensingNote": "all drawn in-house from code (SVG): stadium, pitch, generic standing tokens (no likeness, kits or crests), boot and ball drawings, physics models; no broadcast footage, no photographs",
+ "treatment": {
+  "educationalObjective": "Tell, from the record's sources: How did the 'Hand of God' and the 'Goal of the Century' happen four minutes apart?",
+  "visualHook": "Frame 0: the record's own kind of goal (dribble) on a floodlit pitch; the ball moves within the first second.",
+  "mechanismsToAnimate": [
+   "hook",
+   "when",
+   "hand",
+   "dribble",
+   "payoff"
+  ],
+  "factualRisks": [
+   "the kick is one illustrative model (drag + Magnus), not tracking data of the real goal (RECONSTRUCTION + PHYSICS MODEL chips)",
+   "players are generic tokens: positions are illustrative"
+  ]
+ },
+ "tail": 0.4,
+ "scenes": [
+  {
+   "id": "s1-hook",
+   "lines": [
+    "L1"
+   ],
+   "start": 0,
+   "env": "desk",
+   "evidence": [
+    "F3"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "conceptualLabel",
+    "modelLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Hook: the record's own kind of goal (dribble) on the floodlit pitch within the first second, so the moment is on screen before it is named. Solo run: a generic forward token carries the ball from midfield past five defender tokens, the ball at his feet, then finishes; the run's line is left on the pitch (illustrative positions).",
+   "camera": [
+    {
+     "at": 0,
+     "x": 540,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L1.end",
+     "x": 540,
+     "y": 800,
+     "z": 1.04
+    }
+   ],
+   "layers": [
+    {
+     "component": "stadium",
+     "props": {
+      "horizonY": 700,
+      "seed": 23,
+      "lightsOnAt": 0
+     }
+    },
+    {
+     "component": "football-pitch",
+     "props": {
+      "tokenStyle": "standing",
+      "id": "p0-dribble",
+      "x": 540,
+      "y": 980,
+      "rx": 64,
+      "rz": -6,
+      "D": 3800,
+      "pxPerMetre": 44,
+      "focusKeys": [
+       [
+        "0+0.05",
+        -2.4000000000000004,
+        -7
+       ],
+       [
+        "0+0.8",
+        1.6,
+        -17
+       ],
+       [
+        "0+1.55",
+        -3.2,
+        -27
+       ],
+       [
+        "0+2.3",
+        2.4000000000000004,
+        -36
+       ],
+       [
+        "0+3.05",
+        0.8,
+        -45
+       ]
+      ],
+      "players": [
+       {
+        "id": "att",
+        "team": "home",
+        "pathKeys": [
+         [
+          "0+0.05",
+          -3,
+          -4
+         ],
+         [
+          "0+0.8",
+          2,
+          -14
+         ],
+         [
+          "0+1.55",
+          -4,
+          -24
+         ],
+         [
+          "0+2.3",
+          3,
+          -33
+         ],
+         [
+          "0+3.05",
+          1,
+          -42
+         ]
+        ]
+       },
+       {
+        "id": "d0",
+        "team": "away",
+        "pathKeys": [
+         [
+          "0+0.05",
+          0,
+          -10
+         ],
+         [
+          "0+0.45",
+          0,
+          -10
+         ],
+         [
+          "0+0.95",
+          -1.8,
+          -11.5
+         ]
+        ]
+       },
+       {
+        "id": "d1",
+        "team": "away",
+        "pathKeys": [
+         [
+          "0+0.05",
+          -1,
+          -19
+         ],
+         [
+          "0+1.15",
+          -1,
+          -19
+         ],
+         [
+          "0+1.65",
+          0.8,
+          -20.5
+         ]
+        ]
+       },
+       {
+        "id": "d2",
+        "team": "away",
+        "pathKeys": [
+         [
+          "0+0.05",
+          1.5,
+          -28
+         ],
+         [
+          "0+1.95",
+          1.5,
+          -28
+         ],
+         [
+          "0+2.45",
+          -0.30000000000000004,
+          -29.5
+         ]
+        ]
+       },
+       {
+        "id": "d3",
+        "team": "away",
+        "pathKeys": [
+         [
+          "0+0.05",
+          -2,
+          -37
+         ],
+         [
+          "0+2.65",
+          -2,
+          -37
+         ],
+         [
+          "0+3.15",
+          -0.19999999999999996,
+          -38.5
+         ]
+        ]
+       },
+       {
+        "id": "d4",
+        "team": "away",
+        "pathKeys": [
+         [
+          "0+0.05",
+          4,
+          -40
+         ],
+         [
+          "0+2.95",
+          4,
+          -40
+         ],
+         [
+          "0+3.45",
+          2.2,
+          -41.5
+         ]
+        ]
+       },
+       {
+        "id": "gk",
+        "team": "away",
+        "path": [
+         [
+          0,
+          -0.4,
+          -52
+         ]
+        ]
+       }
+      ],
+      "ball": [
+       {
+        "at": "0+0.05",
+        "dur": 0.75,
+        "src": "att",
+        "dst": "att"
+       },
+       {
+        "at": "0+0.8",
+        "dur": 0.75,
+        "src": "att",
+        "dst": "att"
+       },
+       {
+        "at": "0+1.55",
+        "dur": 0.75,
+        "src": "att",
+        "dst": "att"
+       },
+       {
+        "at": "0+2.3",
+        "dur": 0.75,
+        "src": "att",
+        "dst": "att"
+       }
+      ],
+      "ballOutAt": "0+3.05",
+      "kicks": [
+       {
+        "x0": 1,
+        "y0": -42,
+        "speed": 22,
+        "elevation": 5,
+        "azimuth": -3,
+        "spinRps": 0,
+        "at": "0+3.05",
+        "timeScale": 1,
+        "hideBefore": true
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s2-when",
+   "lines": [
+    "L2"
+   ],
+   "start": "L2-0.2",
+   "env": "spot",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1",
+    "F3"
+   ],
+   "chips": [
+    "illustrationLabel"
+   ],
+   "conceptual": false,
+   "visualPurpose": "Place and date on the stadium's dot-matrix board, spelled from the line's own words over the floodlit stands.",
+   "camera": [
+    {
+     "at": "L2-0.2",
+     "x": 540,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L2.end",
+     "x": 540,
+     "y": 780,
+     "z": 1.06
+    }
+   ],
+   "layers": [
+    {
+     "component": "stadium",
+     "props": {
+      "horizonY": 1180,
+      "seed": 23,
+      "lightsOnAt": "L2-0.2"
+     }
+    },
+    {
+     "component": "dot-board",
+     "screen": true,
+     "props": {
+      "x": 540,
+      "y": 760,
+      "dot": 8,
+      "gap": 3,
+      "enterAt": "L2-0.1",
+      "rows": [
+       {
+        "text": "THE 1986 WORLD",
+        "at": "L2+0.15",
+        "color": "paper"
+       },
+       {
+        "text": "CUP",
+        "at": "L2+0.6",
+        "color": "amber"
+       },
+       {
+        "text": "QUARTER-FINAL",
+        "at": "L2+1.05",
+        "color": "paper"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s3-hand",
+   "lines": [
+    "L3"
+   ],
+   "start": "L3-0.2",
+   "env": "desk",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F2",
+    "F3"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "conceptualLabel",
+    "modelLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "The ball loops up near goal; the forward token and the keeper token meet it together and it drops into the net (the moment the line names; positions illustrative).",
+   "camera": [
+    {
+     "at": "L3-0.2",
+     "x": 540,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L3.end",
+     "x": 540,
+     "y": 800,
+     "z": 1.06
+    }
+   ],
+   "layers": [
+    {
+     "component": "stadium",
+     "props": {
+      "horizonY": 640,
+      "seed": 33,
+      "lightsOnAt": -1
+     }
+    },
+    {
+     "component": "football-pitch",
+     "props": {
+      "tokenStyle": "standing",
+      "id": "p2-hand",
+      "x": 540,
+      "y": 1160,
+      "rx": 72,
+      "rz": -8,
+      "D": 4200,
+      "pxPerMetre": 56,
+      "focusKeys": [
+       [
+        "L3-0.05",
+        0,
+        -40
+       ],
+       [
+        "L3+1.35",
+        0,
+        -46
+       ]
+      ],
+      "players": [
+       {
+        "id": "def",
+        "team": "away",
+        "path": [
+         [
+          0,
+          1,
+          -30
+         ]
+        ]
+       },
+       {
+        "id": "att",
+        "team": "home",
+        "pathKeys": [
+         [
+          "L3-0.05",
+          -1,
+          -38
+         ],
+         [
+          "L3+1.35",
+          0,
+          -46.6
+         ]
+        ]
+       },
+       {
+        "id": "gk",
+        "team": "away",
+        "pathKeys": [
+         [
+          "L3-0.05",
+          0,
+          -51.5
+         ],
+         [
+          "L3+1.35",
+          0.3,
+          -47.6
+         ]
+        ]
+       }
+      ],
+      "ball": [
+       {
+        "at": "L3+0.15",
+        "dur": 1.2,
+        "src": [
+         1,
+         -30
+        ],
+        "dst": [
+         0,
+         -47
+        ],
+        "height": 7
+       },
+       {
+        "at": "L3+1.35",
+        "dur": 0.5,
+        "src": [
+         0,
+         -47
+        ],
+        "dst": [
+         -1.5,
+         -52.6
+        ],
+        "height": 0.6
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s4-hand",
+   "lines": [
+    "L4"
+   ],
+   "start": "L4-0.2",
+   "env": "spot",
+   "transition": {
+    "type": "dissolve",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F2",
+    "F3"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "conceptualLabel",
+    "modelLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "The ball loops up near goal; the forward token and the keeper token meet it together and it drops into the net (the moment the line names; positions illustrative).",
+   "camera": [
+    {
+     "at": "L4-0.2",
+     "x": 540,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L4.end",
+     "x": 540,
+     "y": 800,
+     "z": 1.06
+    }
+   ],
+   "layers": [
+    {
+     "component": "stadium",
+     "props": {
+      "horizonY": 640,
+      "seed": 34,
+      "lightsOnAt": -1
+     }
+    },
+    {
+     "component": "football-pitch",
+     "props": {
+      "tokenStyle": "standing",
+      "id": "p3-hand",
+      "x": 540,
+      "y": 1160,
+      "rx": 58,
+      "rz": -8,
+      "D": 4200,
+      "pxPerMetre": 40,
+      "focusKeys": [
+       [
+        "L4-0.05",
+        0,
+        -40
+       ],
+       [
+        "L4+1.35",
+        0,
+        -46
+       ]
+      ],
+      "players": [
+       {
+        "id": "def",
+        "team": "away",
+        "path": [
+         [
+          0,
+          1,
+          -30
+         ]
+        ]
+       },
+       {
+        "id": "att",
+        "team": "home",
+        "pathKeys": [
+         [
+          "L4-0.05",
+          -1,
+          -38
+         ],
+         [
+          "L4+1.35",
+          0,
+          -46.6
+         ]
+        ]
+       },
+       {
+        "id": "gk",
+        "team": "away",
+        "pathKeys": [
+         [
+          "L4-0.05",
+          0,
+          -51.5
+         ],
+         [
+          "L4+1.35",
+          0.3,
+          -47.6
+         ]
+        ]
+       }
+      ],
+      "ball": [
+       {
+        "at": "L4+0.15",
+        "dur": 1.2,
+        "src": [
+         1,
+         -30
+        ],
+        "dst": [
+         0,
+         -47
+        ],
+        "height": 7
+       },
+       {
+        "at": "L4+1.35",
+        "dur": 0.5,
+        "src": [
+         0,
+         -47
+        ],
+        "dst": [
+         -1.5,
+         -52.6
+        ],
+        "height": 0.6
+       }
+      ]
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L4+0.3",
+        "text": "HAND OF GOD",
+        "x": 540,
+        "y": 470,
+        "size": 60,
+        "family": "sans",
+        "style": "pop"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s5-dribble",
+   "lines": [
+    "L5"
+   ],
+   "start": "L5-0.2",
+   "env": "spot",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F3",
+    "F1",
+    "F2"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "conceptualLabel",
+    "modelLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Solo run: a generic forward token carries the ball from midfield past five defender tokens, the ball at his feet, then finishes; the run's line is left on the pitch (illustrative positions).",
+   "camera": [
+    {
+     "at": "L5-0.2",
+     "x": 540,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L5.end",
+     "x": 540,
+     "y": 800,
+     "z": 1.06
+    }
+   ],
+   "layers": [
+    {
+     "component": "stadium",
+     "props": {
+      "horizonY": 640,
+      "seed": 35,
+      "lightsOnAt": -1
+     }
+    },
+    {
+     "component": "football-pitch",
+     "props": {
+      "tokenStyle": "standing",
+      "id": "p4-dribble",
+      "x": 540,
+      "y": 980,
+      "rx": 64,
+      "rz": -6,
+      "D": 3800,
+      "pxPerMetre": 44,
+      "focusKeys": [
+       [
+        "L5-0.05",
+        -2.4000000000000004,
+        -7
+       ],
+       [
+        "L5+0.7",
+        1.6,
+        -17
+       ],
+       [
+        "L5+1.45",
+        -3.2,
+        -27
+       ],
+       [
+        "L5+2.2",
+        2.4000000000000004,
+        -36
+       ],
+       [
+        "L5+2.95",
+        0.8,
+        -45
+       ]
+      ],
+      "players": [
+       {
+        "id": "att",
+        "team": "home",
+        "pathKeys": [
+         [
+          "L5-0.05",
+          -3,
+          -4
+         ],
+         [
+          "L5+0.7",
+          2,
+          -14
+         ],
+         [
+          "L5+1.45",
+          -4,
+          -24
+         ],
+         [
+          "L5+2.2",
+          3,
+          -33
+         ],
+         [
+          "L5+2.95",
+          1,
+          -42
+         ]
+        ]
+       },
+       {
+        "id": "d0",
+        "team": "away",
+        "pathKeys": [
+         [
+          "L5-0.05",
+          0,
+          -10
+         ],
+         [
+          "L5+0.35",
+          0,
+          -10
+         ],
+         [
+          "L5+0.85",
+          -1.8,
+          -11.5
+         ]
+        ]
+       },
+       {
+        "id": "d1",
+        "team": "away",
+        "pathKeys": [
+         [
+          "L5-0.05",
+          -1,
+          -19
+         ],
+         [
+          "L5+1.05",
+          -1,
+          -19
+         ],
+         [
+          "L5+1.55",
+          0.8,
+          -20.5
+         ]
+        ]
+       },
+       {
+        "id": "d2",
+        "team": "away",
+        "pathKeys": [
+         [
+          "L5-0.05",
+          1.5,
+          -28
+         ],
+         [
+          "L5+1.85",
+          1.5,
+          -28
+         ],
+         [
+          "L5+2.35",
+          -0.30000000000000004,
+          -29.5
+         ]
+        ]
+       },
+       {
+        "id": "d3",
+        "team": "away",
+        "pathKeys": [
+         [
+          "L5-0.05",
+          -2,
+          -37
+         ],
+         [
+          "L5+2.55",
+          -2,
+          -37
+         ],
+         [
+          "L5+3.05",
+          -0.19999999999999996,
+          -38.5
+         ]
+        ]
+       },
+       {
+        "id": "d4",
+        "team": "away",
+        "pathKeys": [
+         [
+          "L5-0.05",
+          4,
+          -40
+         ],
+         [
+          "L5+2.85",
+          4,
+          -40
+         ],
+         [
+          "L5+3.35",
+          2.2,
+          -41.5
+         ]
+        ]
+       },
+       {
+        "id": "gk",
+        "team": "away",
+        "path": [
+         [
+          0,
+          -0.4,
+          -52
+         ]
+        ]
+       }
+      ],
+      "ball": [
+       {
+        "at": "L5-0.05",
+        "dur": 0.75,
+        "src": "att",
+        "dst": "att"
+       },
+       {
+        "at": "L5+0.7",
+        "dur": 0.75,
+        "src": "att",
+        "dst": "att"
+       },
+       {
+        "at": "L5+1.45",
+        "dur": 0.75,
+        "src": "att",
+        "dst": "att"
+       },
+       {
+        "at": "L5+2.2",
+        "dur": 0.75,
+        "src": "att",
+        "dst": "att"
+       }
+      ],
+      "ballOutAt": "L5+2.95",
+      "kicks": [
+       {
+        "x0": 1,
+        "y0": -42,
+        "speed": 22,
+        "elevation": 5,
+        "azimuth": -3,
+        "spinRps": 0,
+        "at": "L5+2.95",
+        "timeScale": 1,
+        "hideBefore": true
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s6-payoff",
+   "lines": [
+    "L6"
+   ],
+   "start": "L6-0.2",
+   "env": "desk",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F4",
+    "F3",
+    "F2"
+   ],
+   "chips": [
+    "illustrationLabel",
+    "conceptualLabel",
+    "modelLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Payoff: the same dribble at night, where the hook started, and the channel tagline lands over the stands so the Short loops.",
+   "camera": [
+    {
+     "at": "L6-0.2",
+     "x": 540,
+     "y": 800,
+     "z": 1
+    },
+    {
+     "at": "L6.end",
+     "x": 540,
+     "y": 800,
+     "z": 1.04
+    }
+   ],
+   "layers": [
+    {
+     "component": "stadium",
+     "props": {
+      "horizonY": 700,
+      "seed": 23,
+      "lightsOnAt": -1
+     }
+    },
+    {
+     "component": "football-pitch",
+     "props": {
+      "tokenStyle": "standing",
+      "id": "p5-dribble",
+      "x": 540,
+      "y": 980,
+      "rx": 64,
+      "rz": -6,
+      "D": 3800,
+      "pxPerMetre": 44,
+      "focusKeys": [
+       [
+        "L6-0.1",
+        -2.4000000000000004,
+        -7
+       ],
+       [
+        "L6+0.65",
+        1.6,
+        -17
+       ],
+       [
+        "L6+1.4",
+        -3.2,
+        -27
+       ],
+       [
+        "L6+2.15",
+        2.4000000000000004,
+        -36
+       ],
+       [
+        "L6+2.9",
+        0.8,
+        -45
+       ]
+      ],
+      "players": [
+       {
+        "id": "att",
+        "team": "home",
+        "pathKeys": [
+         [
+          "L6-0.1",
+          -3,
+          -4
+         ],
+         [
+          "L6+0.65",
+          2,
+          -14
+         ],
+         [
+          "L6+1.4",
+          -4,
+          -24
+         ],
+         [
+          "L6+2.15",
+          3,
+          -33
+         ],
+         [
+          "L6+2.9",
+          1,
+          -42
+         ]
+        ]
+       },
+       {
+        "id": "d0",
+        "team": "away",
+        "pathKeys": [
+         [
+          "L6-0.1",
+          0,
+          -10
+         ],
+         [
+          "L6+0.3",
+          0,
+          -10
+         ],
+         [
+          "L6+0.8",
+          -1.8,
+          -11.5
+         ]
+        ]
+       },
+       {
+        "id": "d1",
+        "team": "away",
+        "pathKeys": [
+         [
+          "L6-0.1",
+          -1,
+          -19
+         ],
+         [
+          "L6+1",
+          -1,
+          -19
+         ],
+         [
+          "L6+1.5",
+          0.8,
+          -20.5
+         ]
+        ]
+       },
+       {
+        "id": "d2",
+        "team": "away",
+        "pathKeys": [
+         [
+          "L6-0.1",
+          1.5,
+          -28
+         ],
+         [
+          "L6+1.8",
+          1.5,
+          -28
+         ],
+         [
+          "L6+2.3",
+          -0.30000000000000004,
+          -29.5
+         ]
+        ]
+       },
+       {
+        "id": "d3",
+        "team": "away",
+        "pathKeys": [
+         [
+          "L6-0.1",
+          -2,
+          -37
+         ],
+         [
+          "L6+2.5",
+          -2,
+          -37
+         ],
+         [
+          "L6+3",
+          -0.19999999999999996,
+          -38.5
+         ]
+        ]
+       },
+       {
+        "id": "d4",
+        "team": "away",
+        "pathKeys": [
+         [
+          "L6-0.1",
+          4,
+          -40
+         ],
+         [
+          "L6+2.8",
+          4,
+          -40
+         ],
+         [
+          "L6+3.3",
+          2.2,
+          -41.5
+         ]
+        ]
+       },
+       {
+        "id": "gk",
+        "team": "away",
+        "path": [
+         [
+          0,
+          -0.4,
+          -52
+         ]
+        ]
+       }
+      ],
+      "ball": [
+       {
+        "at": "L6-0.1",
+        "dur": 0.75,
+        "src": "att",
+        "dst": "att"
+       },
+       {
+        "at": "L6+0.65",
+        "dur": 0.75,
+        "src": "att",
+        "dst": "att"
+       },
+       {
+        "at": "L6+1.4",
+        "dur": 0.75,
+        "src": "att",
+        "dst": "att"
+       },
+       {
+        "at": "L6+2.15",
+        "dur": 0.75,
+        "src": "att",
+        "dst": "att"
+       }
+      ],
+      "ballOutAt": "L6+2.9",
+      "kicks": [
+       {
+        "x0": 1,
+        "y0": -42,
+        "speed": 22,
+        "elevation": 5,
+        "azimuth": -3,
+        "spinRps": 0,
+        "at": "L6+2.9",
+        "timeScale": 1,
+        "hideBefore": true
+       }
+      ]
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L6+0.3",
+        "text": "EVERY GOAL HAS A STORY",
+        "x": 540,
+        "y": 470,
+        "size": 55,
+        "family": "sans",
+        "style": "pop",
+        "color": "amber"
+       }
+      ]
+     }
+    }
+   ]
+  }
+ ]
+}

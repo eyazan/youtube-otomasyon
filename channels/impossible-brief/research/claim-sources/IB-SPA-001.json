@@ -1,0 +1,159 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-SPA-001",
+ "checkedAt": "2026-11-03T18:27:08.532Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "0ce03678409198b8",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "The lunar distance is approximately 385,000 km, or 1.3 light-seconds.",
+   "url": "https://en.wikipedia.org/wiki/Moon",
+   "sourceTitle": "Wikipedia — Moon",
+   "revision": 1383347965,
+   "passage": "The semi-major axis of the geocentric lunar orbit, called the lunar distance, is approximately 385,000 km (239,000 mi), or 1.3 light-seconds, comparable to going around Earth approximately 9.6 times.",
+   "numbers": {
+    "claim": [
+     "385000",
+     "1.3"
+    ],
+    "inPassage": [
+     "385000",
+     "1.3"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "The speed of gravitational waves equals the speed of light, confirmed by observation of the GW170817 neutron star merger.",
+   "url": "https://en.wikipedia.org/wiki/Speed_of_gravity",
+   "sourceTitle": "Wikipedia — Speed of gravity",
+   "revision": 1378756458,
+   "passage": "In the relativistic sense, the \"speed of gravity\" refers to the speed of a gravitational wave, which, as predicted by general relativity and confirmed by observation of the GW170817 neutron star merger, is equal to the speed of light (c).",
+   "numbers": {
+    "claim": [
+     "170817"
+    ],
+    "inPassage": [
+     "170817"
+    ],
+    "missing": []
+   },
+   "support": 0.82,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "The Sun's tides have a theoretical amplitude of about 25 centimetres, 46% of that of the Moon.",
+   "url": "https://en.wikipedia.org/wiki/Tide",
+   "sourceTitle": "Wikipedia — Tide",
+   "revision": 1381187363,
+   "passage": "The Sun similarly causes tides, of which the theoretical amplitude is about 25 centimetres (9.8 in) (46% of that of the Moon) with a cycle time of 12 hours.",
+   "numbers": {
+    "claim": [
+     "25",
+     "46"
+    ],
+    "inPassage": [
+     "25",
+     "46"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "Earth currently has an axial tilt of about 23.44°.",
+   "url": "https://en.wikipedia.org/wiki/Axial_tilt",
+   "sourceTitle": "Wikipedia — Axial tilt",
+   "revision": 1383299661,
+   "passage": "Earth currently has an axial tilt of about 23.44°.",
+   "numbers": {
+    "claim": [
+     "23.44"
+    ],
+    "inPassage": [
+     "23.44"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F5",
+   "claim": "Numerical simulations in 2011 indicated that even without the Moon, Earth's obliquity might vary only by about 20–25°.",
+   "url": "https://en.wikipedia.org/wiki/Axial_tilt",
+   "sourceTitle": "Wikipedia — Axial tilt",
+   "revision": 1383299661,
+   "passage": "However, more recent numerical simulations made in 2011 indicated that even in the absence of the Moon, Earth's obliquity might not be quite so unstable; varying only by about 20–25°.",
+   "numbers": {
+    "claim": [
+     "2011",
+     "20",
+     "25"
+    ],
+    "inPassage": [
+     "2011",
+     "20",
+     "25"
+    ],
+    "missing": []
+   },
+   "support": 0.83,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "If the Moon vanished, tides wouldn't stop.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The Sun still raises tides about 46% as strong.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "And gravity's news travels only at light speed.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "The Moon is 1.3 light-seconds away, so Earth notices 1.3 seconds later.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Then the big lunar tides fade, leaving the smaller solar ones.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Earth's tilt, now 23.44 degrees, loses a stabilizer.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "But 2011 simulations suggest it might only wander between 20 and 25 degrees.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the first change you'd see is darker nights.",
+   "status": "HUMAN"
+  }
+ ]
+}

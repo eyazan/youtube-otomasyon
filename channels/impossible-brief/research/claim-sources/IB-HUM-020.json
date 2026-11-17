@@ -1,0 +1,145 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-HUM-020",
+ "checkedAt": "2026-11-03T18:27:17.874Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "fa63e3de01a7c16a",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "Reaching 1,357.64 km/h (843.6 mph), Mach 1.25, Baumgartner broke the sound barrier on his descent, becoming the first human being to do so without any form of engine power.",
+   "url": "https://en.wikipedia.org/wiki/Red_Bull_Stratos",
+   "sourceTitle": "Wikipedia — Red Bull Stratos",
+   "revision": 1383319371,
+   "passage": "Reaching 1,357.64 km/h (843.6 mph)—Mach 1.25—Baumgartner broke the sound barrier on his descent, becoming the first human being to do so without any form of engine power.",
+   "numbers": {
+    "claim": [
+     "1357.64",
+     "843.6",
+     "1.25"
+    ],
+    "inPassage": [
+     "1357.64",
+     "843.6",
+     "1.25"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "With a final altitude of 38,969 m (127,851 ft; 24 mi), Baumgartner broke the unofficial record for the highest manned balloon flight.",
+   "url": "https://en.wikipedia.org/wiki/Red_Bull_Stratos",
+   "sourceTitle": "Wikipedia — Red Bull Stratos",
+   "revision": 1383319371,
+   "passage": "With a final altitude of 38,969 m (127,851 ft; 24 mi), Baumgartner broke the unofficial record for the highest manned balloon flight of 37,640 m (123,491 ft) previously set by Nick Piantanida.",
+   "numbers": {
+    "claim": [
+     "38969",
+     "127851",
+     "24"
+    ],
+    "inPassage": [
+     "38969",
+     "127851",
+     "24"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "The normal terminal velocity of a skydiver freeflying is about 320 km/h (200 mph or 90 m/s), but the high altitude with less-dense atmosphere would decrease drag.",
+   "url": "https://en.wikipedia.org/wiki/Red_Bull_Stratos",
+   "sourceTitle": "Wikipedia — Red Bull Stratos",
+   "revision": 1383319371,
+   "passage": "This would be possible because while the normal terminal velocity of a skydiver freeflying is about 320 km/h (200 mph or 90 m/s), the high altitude with less-dense atmosphere would decrease drag.",
+   "numbers": {
+    "claim": [
+     "320",
+     "200",
+     "90"
+    ],
+    "inPassage": [
+     "320",
+     "200",
+     "90"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "Baumgartner deployed his parachute after 4 minutes and 19 seconds.",
+   "url": "https://en.wikipedia.org/wiki/Red_Bull_Stratos",
+   "sourceTitle": "Wikipedia — Red Bull Stratos",
+   "revision": 1383319371,
+   "passage": "While the free fall was initially expected to last between five and six minutes, Baumgartner deployed his parachute after 4 minutes and 19 seconds.",
+   "numbers": {
+    "claim": [
+     "4",
+     "19"
+    ],
+    "inPassage": [
+     "4",
+     "19"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why one skydiver broke the sound barrier.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Felix Baumgartner jumped from 38,969 metres up.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "He reached 1,357.64 kilometres per hour, Mach 1.25.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Thin air meant little drag, so he kept accelerating.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "A normal skydiver tops out near 320 kilometres per hour.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "He opened his parachute after 4 minutes and 19 seconds.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Without a pressure suit, the low pressure would have been fatal.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the edge of space lets a human outrun sound.",
+   "status": "HUMAN"
+  }
+ ]
+}

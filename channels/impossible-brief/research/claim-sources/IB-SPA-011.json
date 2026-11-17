@@ -1,0 +1,141 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-SPA-011",
+ "checkedAt": "2026-11-03T18:27:09.683Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "c2e6928b3ed41365",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "As measured by the Mars Orbiter Laser Altimeter, it is 21.287 kilometres (69,840 ft) high, about 2.5 times the elevation of Mount Everest above sea level.",
+   "url": "https://en.wikipedia.org/wiki/Olympus_Mons",
+   "sourceTitle": "Wikipedia — Olympus Mons",
+   "revision": 1383585803,
+   "passage": "As measured by the Mars Orbiter Laser Altimeter (MOLA), it is 21.287 kilometres (69,840 ft) high, about 2.5 times the elevation of Mount Everest above sea level.",
+   "numbers": {
+    "claim": [
+     "21.287",
+     "69840",
+     "2.5"
+    ],
+    "inPassage": [
+     "21.287",
+     "69840",
+     "2.5"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "The edifice is about 600 km (370 mi) wide.",
+   "url": "https://en.wikipedia.org/wiki/Olympus_Mons",
+   "sourceTitle": "Wikipedia — Olympus Mons",
+   "revision": 1383585803,
+   "passage": "The edifice is about 600 km (370 mi) wide.",
+   "numbers": {
+    "claim": [
+     "600",
+     "370"
+    ],
+    "inPassage": [
+     "600",
+     "370"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "Olympus Mons covers an area of about 300,000 km2, which is approximately the size of Italy or the Philippines, and it is supported by a 70 km thick lithosphere.",
+   "url": "https://en.wikipedia.org/wiki/Olympus_Mons",
+   "sourceTitle": "Wikipedia — Olympus Mons",
+   "revision": 1383585803,
+   "passage": "Olympus Mons covers an area of about 300,000 km2 (120,000 sq mi), which is approximately the size of Italy or the Philippines, and it is supported by a 70 km (43 mi) thick lithosphere.",
+   "numbers": {
+    "claim": [
+     "300000",
+     "2",
+     "70"
+    ],
+    "inPassage": [
+     "300000",
+     "2",
+     "70"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "The average slope on the volcano's flanks is only 5%.",
+   "url": "https://en.wikipedia.org/wiki/Olympus_Mons",
+   "sourceTitle": "Wikipedia — Olympus Mons",
+   "revision": 1383585803,
+   "passage": "The average slope on the volcano's flanks is only 5%.",
+   "numbers": {
+    "claim": [
+     "5"
+    ],
+    "inPassage": [
+     "5"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Why Earth couldn't hold a volcano 2.5 times Everest.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Mars's Olympus Mons stands about 21 kilometres high.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It's about 600 kilometres wide, the size of Italy in area.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Its average slope is only 5%.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So standing on it, you'd barely notice you're on a mountain.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "SPECULATIVE SCENARIO",
+   "text": "On Earth, crust this tall would sink and crumble under its weight.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Mars' weaker gravity and still crust let it grow.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the Solar System's giant volcano needed a smaller planet.",
+   "status": "HUMAN"
+  }
+ ]
+}

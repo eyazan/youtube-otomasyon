@@ -1,0 +1,158 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-SPA-006",
+ "checkedAt": "2026-11-03T18:27:09.230Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "dc960f4840e76215",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "The Carrington Event was the most intense geomagnetic storm in recorded history, peaking on 1–2 September 1859 during solar cycle 10.",
+   "url": "https://en.wikipedia.org/wiki/Carrington_Event",
+   "sourceTitle": "Wikipedia — Carrington Event",
+   "revision": 1373617252,
+   "passage": "The Carrington Event was the most intense geomagnetic storm in recorded history, peaking on 1–2 September 1859 during solar cycle 10.",
+   "numbers": {
+    "claim": [
+     "1",
+     "2",
+     "1859",
+     "10"
+    ],
+    "inPassage": [
+     "1",
+     "2",
+     "1859",
+     "10"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "It created strong auroral displays that were reported globally and caused sparking and even fires in telegraph stations.",
+   "url": "https://en.wikipedia.org/wiki/Carrington_Event",
+   "sourceTitle": "Wikipedia — Carrington Event",
+   "revision": 1373617252,
+   "passage": "It created strong auroral displays that were reported globally and caused sparking and even fires in telegraph stations.",
+   "numbers": {
+    "claim": [],
+    "inPassage": [],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "Telegraph systems all over Europe and North America failed, in some cases giving their operators electric shocks.",
+   "url": "https://en.wikipedia.org/wiki/Carrington_Event",
+   "sourceTitle": "Wikipedia — Carrington Event",
+   "revision": 1373617252,
+   "passage": "Because of the geomagnetically induced current from the electromagnetic field, telegraph systems all over Europe and North America failed, in some cases giving their operators electric shocks.",
+   "numbers": {
+    "claim": [],
+    "inPassage": [],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "On 23 July 2012, a Carrington-class solar superstorm was observed, but its trajectory narrowly missed Earth by a margin of roughly nine days.",
+   "url": "https://en.wikipedia.org/wiki/Carrington_Event",
+   "sourceTitle": "Wikipedia — Carrington Event",
+   "revision": 1373617252,
+   "passage": "On 23 July 2012, a \"Carrington-class\" solar superstorm (solar flare, CME, solar electromagnetic pulse) was observed, but its trajectory narrowly missed Earth by a margin of roughly nine days.",
+   "numbers": {
+    "claim": [
+     "23",
+     "2012"
+    ],
+    "inPassage": [
+     "23",
+     "2012"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F5",
+   "claim": "In June 2013, researchers at Lloyd's of London and AER estimated the cost of a similar event in the present to the US alone at US$600 billion to $2.6 trillion.",
+   "url": "https://en.wikipedia.org/wiki/Carrington_Event",
+   "sourceTitle": "Wikipedia — Carrington Event",
+   "revision": 1373617252,
+   "passage": "In June 2013, a joint venture from researchers at Lloyd's of London and Atmospheric and Environmental Research (AER) in the US used data from the Carrington Event to estimate the cost of a similar event in the present to the US alone at US$600 billion to $2.6 trillion (equivalent to $817 billion to $3.54 trillion in 2025), which, at the time, equated to roughly 3.6 to 15.5 percent of annual GDP.",
+   "numbers": {
+    "claim": [
+     "2013",
+     "600",
+     "2.6"
+    ],
+    "inPassage": [
+     "2013",
+     "600",
+     "2.6"
+    ],
+    "missing": []
+   },
+   "support": 0.92,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why a repeat of 1859 could cost $2.6 trillion.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The 1859 Carrington storm set telegraph stations on fire.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Telegraph systems across Europe and North America failed.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Some operators even got electric shocks.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "In 2012, a similar storm missed Earth by about 9 days.",
+   "status": "FAIL",
+   "missing": [
+    "9"
+   ]
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "A 2013 estimate put a repeat's U.S. cost at $600 billion to $2.6 trillion.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Today, long power lines and satellites would take the hit.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the same storm would cost far more now than then.",
+   "status": "HUMAN"
+  }
+ ]
+}

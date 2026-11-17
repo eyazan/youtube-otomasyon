@@ -84,9 +84,16 @@ jobs:
           IB_PREMIUM_RENDER: preview
           IB_PREMIUM_QUALITY: final
         run: |
+          set -o pipefail
           node shorts-sira.js --channel impossible-brief 2>&1 | tee ib-dry-run.log
           # green only when the premium shadow actually rendered and passed its objective QA
-          node scripts/bto-studio/tools/shadow-check.js channels/impossible-brief/state/production
+          if ! node scripts/bto-studio/tools/shadow-check.js channels/impossible-brief/state/production; then
+            # the live lane's topic was refused by a premium gate (no ledger / no declared mechanism): render the
+            # premium lane's best qualified topic instead, so the dry run still proves one real premium render
+            T=$(node scripts/bto-studio/tools/shadow-check.js --gate-refusal channels/impossible-brief/state/production impossible-brief)
+            node scripts/bto-studio/studio.js --channel impossible-brief --topic "$T" --shadow --shadow-dir "channels/impossible-brief/premium/qualified-$T" --quality final --voice edge 2>&1 | tail -25
+            node scripts/bto-studio/tools/shadow-check.js --package "channels/impossible-brief/premium/qualified-$T/out/review-package.json"
+          fi
       - name: Premium gate and creative review
         if: always()
         run: |

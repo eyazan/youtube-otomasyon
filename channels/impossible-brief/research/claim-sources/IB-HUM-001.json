@@ -1,0 +1,145 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-HUM-001",
+ "checkedAt": "2026-11-03T18:27:17.624Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "3e49b522cfb90a75",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "The sleep cycle of alternating NREM and REM sleep takes an average of 90 minutes, occurring 4–6 times in a good night's sleep.",
+   "url": "https://en.wikipedia.org/wiki/Sleep",
+   "sourceTitle": "Wikipedia — Sleep",
+   "revision": 1381269321,
+   "passage": "The sleep cycle of alternate NREM and REM sleep takes an average of 90 minutes, occurring 4–6 times in a good night's sleep.",
+   "numbers": {
+    "claim": [
+     "90",
+     "4",
+     "6"
+    ],
+    "inPassage": [
+     "90",
+     "4",
+     "6"
+    ],
+    "missing": []
+   },
+   "support": 0.91,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "Isolated from daylight, humans keep a circadian rhythm with a period slightly exceeding 24 hours.",
+   "url": "https://en.wikipedia.org/wiki/Sleep",
+   "sourceTitle": "Wikipedia — Sleep",
+   "revision": 1381269321,
+   "passage": null,
+   "numbers": {
+    "claim": [
+     "24"
+    ],
+    "inPassage": [],
+    "missing": [
+     "24"
+    ]
+   },
+   "support": 0,
+   "status": "UNVERIFIED",
+   "reason": "a sentence has the terms but not every claim number (24), is not 5-80 words of prose, or shares under 50% of the claim's content words"
+  },
+  {
+   "fact": "F3",
+   "claim": "Short sleep duration of less than seven hours is correlated with coronary heart disease.",
+   "url": "https://en.wikipedia.org/wiki/Sleep",
+   "sourceTitle": "Wikipedia — Sleep",
+   "revision": 1381269321,
+   "passage": "Sleep duration greater than nine hours is also correlated with coronary heart disease, as well as stroke and cardiovascular events.",
+   "numbers": {
+    "claim": [],
+    "inPassage": [],
+    "missing": []
+   },
+   "support": 0.7,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "Sleep duration greater than nine hours is also correlated with coronary heart disease, stroke and cardiovascular events.",
+   "url": "https://en.wikipedia.org/wiki/Sleep",
+   "sourceTitle": "Wikipedia — Sleep",
+   "revision": 1381269321,
+   "passage": "Sleep duration greater than nine hours is also correlated with coronary heart disease, as well as stroke and cardiovascular events.",
+   "numbers": {
+    "claim": [],
+    "inPassage": [],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F5",
+   "claim": "Humans seem to reach maximum sleepiness 30 hours after waking.",
+   "url": "https://en.wikipedia.org/wiki/Sleep",
+   "sourceTitle": "Wikipedia — Sleep",
+   "revision": 1381269321,
+   "passage": "Subjectively, however, humans seem to reach maximum sleepiness 30 hours after waking.",
+   "numbers": {
+    "claim": [
+     "30"
+    ],
+    "inPassage": [
+     "30"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Your sleep runs in 90-minute cycles.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Most nights, you go through four to six of them.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "SPECULATIVE SCENARIO",
+   "text": "Now double the sleep your body demands, overnight.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Your clock still runs on a cycle of about 24 hours.",
+   "status": "FAIL",
+   "missing": [
+    "24"
+   ]
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So waking hours shrink, and daylight gets wasted.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "And oddly, sleeping over nine hours is linked to heart disease today.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the first thing to break isn't your body. It's the schedule.",
+   "status": "HUMAN"
+  }
+ ]
+}

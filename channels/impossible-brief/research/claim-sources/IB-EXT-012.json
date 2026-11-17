@@ -1,0 +1,132 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-EXT-012",
+ "checkedAt": "2026-11-03T18:27:19.587Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "47f1d7cc2578f9a7",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "If a GRB were to occur within the Milky Way within 5,000 to 8,000 light-years and its emission were beamed straight towards Earth, the effects could be harmful and potentially devastating for its ecosystems.",
+   "url": "https://en.wikipedia.org/wiki/Gamma-ray_burst",
+   "sourceTitle": "Wikipedia — Gamma-ray burst",
+   "revision": 1383570122,
+   "passage": "If a GRB were to occur within the Milky Way within 5,000 to 8,000 light-years and its emission were beamed straight towards Earth, the effects could be harmful and potentially devastating for its ecosystems.",
+   "numbers": {
+    "claim": [
+     "5000",
+     "8000"
+    ],
+    "inPassage": [
+     "5000",
+     "8000"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "GRBs deplete ozone, with models showing a possible global reduction of 25–35%, with as much as 75% in certain locations, an effect that would last for years.",
+   "url": "https://en.wikipedia.org/wiki/Gamma-ray_burst",
+   "sourceTitle": "Wikipedia — Gamma-ray burst",
+   "revision": 1383570122,
+   "passage": "First, they deplete ozone, with models showing a possible global reduction of 25–35%, with as much as 75% in certain locations, an effect that would last for years.",
+   "numbers": {
+    "claim": [
+     "25",
+     "35",
+     "75"
+    ],
+    "inPassage": [
+     "25",
+     "35",
+     "75"
+    ],
+    "missing": []
+   },
+   "support": 0.93,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "The Ordovician mass extinction 450 million years ago may have been caused by a GRB.",
+   "url": "https://en.wikipedia.org/wiki/Gamma-ray_burst",
+   "sourceTitle": "Wikipedia — Gamma-ray burst",
+   "revision": 1383570122,
+   "passage": "The Ordovician mass extinction 450 million years ago may have been caused by a GRB.",
+   "numbers": {
+    "claim": [
+     "450"
+    ],
+    "inPassage": [
+     "450"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "A GRB could potentially vaporize anything in its beams' paths within a range of around 200 light-years.",
+   "url": "https://en.wikipedia.org/wiki/Gamma-ray_burst",
+   "sourceTitle": "Wikipedia — Gamma-ray burst",
+   "revision": 1383570122,
+   "passage": "A GRB could potentially vaporize anything in its beams' paths within a range of around 200 light-years.",
+   "numbers": {
+    "claim": [
+     "200"
+    ],
+    "inPassage": [
+     "200"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "A gamma-ray burst 8,000 light-years away could devastate Earth.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "It wouldn't burn us. It would strip our ozone.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Models show a global ozone loss of 25 to 35%.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "In places, losses could reach 75%, lasting for years.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Unfiltered ultraviolet light would then hit plankton and crops.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "One may have triggered the Ordovician extinction, 450 million years ago.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the deadliest light in the universe works through the sky.",
+   "status": "HUMAN"
+  }
+ ]
+}

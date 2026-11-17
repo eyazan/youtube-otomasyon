@@ -1,0 +1,153 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-OTH-020",
+ "checkedAt": "2026-11-03T18:27:20.805Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "4829aaecef7e9b25",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "The Haber process enabled the global population to increase from 1.6 billion in 1900 to 7.7 billion by November 2018.",
+   "url": "https://en.wikipedia.org/wiki/Haber_process",
+   "sourceTitle": "Wikipedia — Haber process",
+   "revision": 1383169253,
+   "passage": "Thus, the Haber process serves as the \"detonator of the population explosion\", enabling the global population to increase from 1.6 billion in 1900 to 7.7 billion by November 2018.",
+   "numbers": {
+    "claim": [
+     "1.6",
+     "1900",
+     "7.7",
+     "2018"
+    ],
+    "inPassage": [
+     "1.6",
+     "1900",
+     "7.7",
+     "2018"
+    ],
+    "missing": []
+   },
+   "support": 0.9,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "Although atmospheric nitrogen (N2) is abundant, comprising ~78% of the air, it is exceptionally stable and does not readily react with other chemicals.",
+   "url": "https://en.wikipedia.org/wiki/Haber_process",
+   "sourceTitle": "Wikipedia — Haber process",
+   "revision": 1383169253,
+   "passage": "Although atmospheric nitrogen (N2) is abundant, comprising ~78% of the air, it is exceptionally stable and does not readily react with other chemicals.",
+   "numbers": {
+    "claim": [
+     "2",
+     "78"
+    ],
+    "inPassage": [
+     "2",
+     "78"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "On each pass, only about 15% conversion occurs; due to the recycling of leftover reactants, eventually conversion of 97% is achieved.",
+   "url": "https://en.wikipedia.org/wiki/Haber_process",
+   "sourceTitle": "Wikipedia — Haber process",
+   "revision": 1383169253,
+   "passage": null,
+   "numbers": {
+    "claim": [
+     "15",
+     "97"
+    ],
+    "inPassage": [],
+    "missing": [
+     "15",
+     "97"
+    ]
+   },
+   "support": 0,
+   "status": "UNVERIFIED",
+   "reason": "a sentence has the terms but not every claim number (15, 97), is not 5-80 words of prose, or shares under 50% of the claim's content words"
+  },
+  {
+   "fact": "F4",
+   "claim": "The Haber process consumes 3–5% of the world's natural gas production (around 1–2% of the world's energy supply).",
+   "url": "https://en.wikipedia.org/wiki/Haber_process",
+   "sourceTitle": "Wikipedia — Haber process",
+   "revision": 1383169253,
+   "passage": "The Haber process consumes 3–5% of the world's natural gas production (around 1–2% of the world's energy supply).",
+   "numbers": {
+    "claim": [
+     "3",
+     "5",
+     "1",
+     "2"
+    ],
+    "inPassage": [
+     "3",
+     "5",
+     "1",
+     "2"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why 7.7 billion people depend on air-made fertilizer.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The Haber process pulls nitrogen from the air.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Air is about 78% nitrogen, but it barely reacts.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Each pass converts only about 15% into ammonia.",
+   "status": "FAIL",
+   "missing": [
+    "15"
+   ]
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Recycling the gases eventually reaches 97% conversion.",
+   "status": "FAIL",
+   "missing": [
+    "97"
+   ]
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It uses 3 to 5% of the world's natural gas.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Without it, today's harvests couldn't feed today's population.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So much of the food on your plate began as air.",
+   "status": "HUMAN"
+  }
+ ]
+}

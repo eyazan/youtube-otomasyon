@@ -1,0 +1,161 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-SPA-106",
+ "checkedAt": "2026-11-03T18:27:13.165Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "84a415c74fc0dd7e",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "In 2006, the International Astronomical Union (IAU) formally redefined the term planet to exclude dwarf planets such as Pluto.",
+   "url": "https://en.wikipedia.org/wiki/Pluto",
+   "sourceTitle": "Wikipedia — Pluto",
+   "revision": 1383195184,
+   "passage": "In 2006, the International Astronomical Union (IAU) formally redefined the term planet to exclude dwarf planets such as Pluto.",
+   "numbers": {
+    "claim": [
+     "2006"
+    ],
+    "inPassage": [
+     "2006"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "Doubts increased following the discovery of additional objects in the Kuiper belt starting in the 1990s, particularly the more massive scattered disk object Eris in 2005.",
+   "url": "https://en.wikipedia.org/wiki/Pluto",
+   "sourceTitle": "Wikipedia — Pluto",
+   "revision": 1383195184,
+   "passage": "These doubts increased following the discovery of additional objects in the Kuiper belt starting in the 1990s, particularly the more massive scattered disk object Eris in 2005.",
+   "numbers": {
+    "claim": [
+     "1990",
+     "2005"
+    ],
+    "inPassage": [
+     "1990",
+     "2005"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "Light from the Sun takes 5.5 hours to reach Pluto at its orbital distance of 39.5 AU (5.91 billion km).",
+   "url": "https://en.wikipedia.org/wiki/Pluto",
+   "sourceTitle": "Wikipedia — Pluto",
+   "revision": 1383195184,
+   "passage": "Light from the Sun takes 5.5 hours to reach Pluto at its orbital distance of 39.5 AU (5.91 billion km; 3.67 billion mi).",
+   "numbers": {
+    "claim": [
+     "5.5",
+     "39.5",
+     "5.91"
+    ],
+    "inPassage": [
+     "5.5",
+     "39.5",
+     "5.91"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "New Horizons was the first spacecraft to visit Pluto and its moons, making a flyby on July 14, 2015.",
+   "url": "https://en.wikipedia.org/wiki/Pluto",
+   "sourceTitle": "Wikipedia — Pluto",
+   "revision": 1383195184,
+   "passage": "New Horizons was the first spacecraft to visit Pluto and its moons, making a flyby on July 14, 2015, and taking detailed measurements and observations.",
+   "numbers": {
+    "claim": [
+     "14",
+     "2015"
+    ],
+    "inPassage": [
+     "14",
+     "2015"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F5",
+   "claim": "Pluto has a moderately eccentric and inclined orbit, ranging from 30 to 49 astronomical units from the Sun.",
+   "url": "https://en.wikipedia.org/wiki/Pluto",
+   "sourceTitle": "Wikipedia — Pluto",
+   "revision": 1383195184,
+   "passage": "Pluto has a moderately eccentric and inclined orbit, ranging from 30 to 49 astronomical units (4.5 to 7.3 billion kilometres; 2.8 to 4.6 billion miles) from the Sun.",
+   "numbers": {
+    "claim": [
+     "30",
+     "49"
+    ],
+    "inPassage": [
+     "30",
+     "49"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why Pluto lost its planet status in 2006.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The discovery of Eris in 2005 forced the question.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Eris is more massive than Pluto.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Planets must clear their orbits, and Pluto shares the Kuiper belt.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Keep Pluto a planet, and many Kuiper worlds would join it.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Sunlight takes 5.5 hours to reach it.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "New Horizons flew past it in 2015.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So Pluto didn't shrink. Our definition grew up.",
+   "status": "HUMAN"
+  }
+ ]
+}

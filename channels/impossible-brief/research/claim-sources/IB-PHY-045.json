@@ -1,0 +1,143 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-PHY-045",
+ "checkedAt": "2026-11-03T18:27:17.047Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "997b5c447445aa1d",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "At 2,438.4 metres (8,000 ft) in elevation, water boils at just 92 °C (198 °F).",
+   "url": "https://en.wikipedia.org/wiki/High-altitude_cooking",
+   "sourceTitle": "Wikipedia — High-altitude cooking",
+   "revision": 1359633061,
+   "passage": "At 2,438.4 metres (8,000 ft) in elevation, water boils at just 92 °C (198 °F).",
+   "numbers": {
+    "claim": [
+     "2438.4",
+     "8000",
+     "92",
+     "198"
+    ],
+    "inPassage": [
+     "2438.4",
+     "8000",
+     "92",
+     "198"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "For every 152.4-metre (500 ft) increase in elevation, water's boiling point is lowered by approximately 1°F.",
+   "url": "https://en.wikipedia.org/wiki/High-altitude_cooking",
+   "sourceTitle": "Wikipedia — High-altitude cooking",
+   "revision": 1359633061,
+   "passage": "For every 152.4-metre (500 ft) increase in elevation, water's boiling point is lowered by approximately 1°F.",
+   "numbers": {
+    "claim": [
+     "152.4",
+     "500",
+     "1"
+    ],
+    "inPassage": [
+     "152.4",
+     "500",
+     "1"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "The effect starts to become relevant at altitudes above approximately 2,000 feet (610 m).",
+   "url": "https://en.wikipedia.org/wiki/High-altitude_cooking",
+   "sourceTitle": "Wikipedia — High-altitude cooking",
+   "revision": 1359633061,
+   "passage": "The effect starts to become relevant at altitudes above approximately 2,000 feet (610 m).",
+   "numbers": {
+    "claim": [
+     "2000",
+     "610"
+    ],
+    "inPassage": [
+     "2000",
+     "610"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "Water boils at temperatures significantly below 100 °C and, without the use of a pressure cooker, may leave boiled foods undercooked.",
+   "url": "https://en.wikipedia.org/wiki/High-altitude_cooking",
+   "sourceTitle": "Wikipedia — High-altitude cooking",
+   "revision": 1359633061,
+   "passage": "Under these circumstances, water boils at temperatures significantly below 100 °C and, without the use of a pressure cooker, may leave boiled foods undercooked.",
+   "numbers": {
+    "claim": [
+     "100"
+    ],
+    "inPassage": [
+     "100"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "At 2,438 metres, water boils at just 92 °C.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Lower air pressure lets it boil sooner.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Boiling drops about 1 °F for every 152.4 metres you climb.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The effect matters above roughly 610 metres.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Water that boils cooler cooks food more slowly.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "So pasta and eggs can stay undercooked at altitude.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Pressure cookers fix this by raising the pressure again.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So a boiling pot is really a barometer.",
+   "status": "HUMAN"
+  }
+ ]
+}

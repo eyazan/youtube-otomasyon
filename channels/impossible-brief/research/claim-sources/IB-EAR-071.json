@@ -1,0 +1,162 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-EAR-071",
+ "checkedAt": "2026-10-30T04:54:52.232Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "4b4ad1e210c82c69",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "The AMOC carries up to 25% of the total heat toward the northern hemisphere, and plays an important role in the climate around northwest Europe.",
+   "url": "https://en.wikipedia.org/wiki/Atlantic_meridional_overturning_circulation",
+   "sourceTitle": "Wikipedia — Atlantic meridional overturning circulation",
+   "revision": 1382497676,
+   "passage": "Thus, the AMOC carries up to 25% of the total heat toward the northern hemisphere, and plays an important role in the climate around northwest Europe.",
+   "numbers": {
+    "claim": [
+     "25"
+    ],
+    "inPassage": [
+     "25"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "There is a consensus the AMOC keeps northern and western Europe warmer than it would be otherwise, with the difference of 4 °C (7.2 °F) and 10 °C (18 °F) depending on the area.",
+   "url": "https://en.wikipedia.org/wiki/Atlantic_meridional_overturning_circulation",
+   "sourceTitle": "Wikipedia — Atlantic meridional overturning circulation",
+   "revision": 1382497676,
+   "passage": "There is a consensus the AMOC keeps northern and western Europe warmer than it would be otherwise, with the difference of 4 °C (7.2 °F) and 10 °C (18 °F) depending on the area.",
+   "numbers": {
+    "claim": [
+     "4",
+     "7.2",
+     "10",
+     "18"
+    ],
+    "inPassage": [
+     "4",
+     "7.2",
+     "10",
+     "18"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "Climate models predict the AMOC will further weaken during the 21st century.",
+   "url": "https://en.wikipedia.org/wiki/Atlantic_meridional_overturning_circulation",
+   "sourceTitle": "Wikipedia — Atlantic meridional overturning circulation",
+   "revision": 1382497676,
+   "passage": "Climate models predict the AMOC will further weaken during the 21st century.",
+   "numbers": {
+    "claim": [
+     "21"
+    ],
+    "inPassage": [
+     "21"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "A cooling of up to 15–20 °C (27–36 °F) is generally considered incorrect.",
+   "url": "https://en.wikipedia.org/wiki/Atlantic_meridional_overturning_circulation",
+   "sourceTitle": "Wikipedia — Atlantic meridional overturning circulation",
+   "revision": 1382497676,
+   "passage": "Because atmospheric patterns also play a large role in heat transfer, the idea the climate in northern Europe would be as cold as that in northern North America without heat transport via ocean currents (i.e. up to 15–20 °C (27–36 °F) colder) is generally considered incorrect.",
+   "numbers": {
+    "claim": [
+     "15",
+     "20",
+     "27",
+     "36"
+    ],
+    "inPassage": [
+     "15",
+     "20",
+     "27",
+     "36"
+    ],
+    "missing": []
+   },
+   "support": 0.75,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F5",
+   "claim": "D-O events are best known for the rapid warming of between 8 °C (15 °F) and 15 °C (27 °F) that occurred in Greenland over several decades.",
+   "url": "https://en.wikipedia.org/wiki/Atlantic_meridional_overturning_circulation",
+   "sourceTitle": "Wikipedia — Atlantic meridional overturning circulation",
+   "revision": 1382497676,
+   "passage": "D-O events are best known for the rapid warming of between 8 °C (15 °F) and 15 °C (27 °F) that occurred in Greenland over several decades.",
+   "numbers": {
+    "claim": [
+     "8",
+     "15",
+     "27"
+    ],
+    "inPassage": [
+     "8",
+     "15",
+     "27"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Up to 25% of northern heat rides one current.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Climate models say it will weaken this century.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It keeps parts of Europe 4 to 10 °C warmer.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Claims of a 15 to 20 °C crash are considered incorrect.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "But winters would harden, and rain belts would shift south.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "In Greenland's past, similar swings brought 8 to 15 °C within decades.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the danger isn't an ice age. It's speed.",
+   "status": "HUMAN"
+  }
+ ]
+}

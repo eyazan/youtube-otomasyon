@@ -173,10 +173,13 @@ test("a policy that requires research review publishes only topics whose exact n
 test("premium applies the channel's own topic bar (viral minimum, selectable buckets): never a topic the legacy lane would refuse for quality", () => {
   const Config = require("../../core/growth/config"); const Context = require("../../core/growth/context");
   for (const slug of ["failure-reconstructed", "impossible-brief"]) {
-    const ch = Channel.getChannel(slug); const cfg = Config.forChannel(ch); const min = Number(cfg.viralScoring.minimumToProduce || 68);
+    // a channel that opted into the calibration-aware gate (premiumSelection) keeps a floor while its viral score does
+    // not predict outcomes; otherwise the hard minimum applies exactly as in the legacy lane
+    const ch = Channel.getChannel(slug); const cfg = Config.forChannel(ch); const soft = Lane.softViralGate(ch, cfg);
+    const min = soft ? soft.floor : Number(cfg.viralScoring.minimumToProduce || 68);
     const by = new Map(Context.rank(ch, {}).rows.map((r) => [r.topic.slug, r]));
     for (const r of Lane.qualified(ch).ok) { const s = by.get(r.topic.slug).score; assert.ok(s.ViralPotentialScore >= min && s.bucket !== "D", `${slug} ${r.topic.id}`); }
-    assert.ok(Lane.qualified(ch).refused.some((r) => r.why.some((w) => /below the channel minimum/.test(w))), `${slug}: the bar refuses topics`);
+    assert.ok(Lane.qualified(ch).refused.some((r) => r.why.some((w) => /below the channel (minimum|floor)/.test(w))), `${slug}: the bar refuses topics`);
   }
   assert.equal(Lane.growthBar(Channel.getChannel("goal-lore-lab")), null, "GoalLore Lab's bar is its verified research");
 });

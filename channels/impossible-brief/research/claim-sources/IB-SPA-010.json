@@ -1,0 +1,145 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-SPA-010",
+ "checkedAt": "2026-11-03T18:27:09.607Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "5792e53500275a11",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "They found no auroras below 70 km (43 mi) and only 6.5% above 150 km (93 mi), with a maximum in the height distribution around 100 km (62 mi).",
+   "url": "https://en.wikipedia.org/wiki/Aurora",
+   "sourceTitle": "Wikipedia — Aurora",
+   "revision": 1382287719,
+   "passage": "They found no auroras below 70 km (43 mi) and only 6.5% above 150 km (93 mi), with a maximum in the height distribution around 100 km (62 mi).",
+   "numbers": {
+    "claim": [
+     "70",
+     "43",
+     "6.5",
+     "150",
+     "93",
+     "100",
+     "62"
+    ],
+    "inPassage": [
+     "70",
+     "43",
+     "6.5",
+     "150",
+     "93",
+     "100",
+     "62"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "At lower altitudes, the more frequent collisions suppress the 630 nm (red) mode: rather the 557.7 nm emission (green) dominates.",
+   "url": "https://en.wikipedia.org/wiki/Aurora",
+   "sourceTitle": "Wikipedia — Aurora",
+   "revision": 1382287719,
+   "passage": "Green: At lower altitudes, the more frequent collisions suppress the 630 nm (red) mode: rather the 557.7 nm emission (green) dominates.",
+   "numbers": {
+    "claim": [
+     "630",
+     "557.7"
+    ],
+    "inPassage": [
+     "630",
+     "557.7"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "Both the 557.7 and 630.0 nm wavelengths correspond to forbidden transitions of atomic oxygen.",
+   "url": "https://en.wikipedia.org/wiki/Aurora",
+   "sourceTitle": "Wikipedia — Aurora",
+   "revision": 1382287719,
+   "passage": "Both the 557.7 and 630.0 nm wavelengths correspond to forbidden transitions of atomic oxygen, a slow mechanism responsible for the graduality (0.7 s and 107 s respectively) of flaring and fading.",
+   "numbers": {
+    "claim": [
+     "557.7",
+     "630.0"
+    ],
+    "inPassage": [
+     "557.7",
+     "630.0"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "The term entered the English language in 1828.",
+   "url": "https://en.wikipedia.org/wiki/Aurora",
+   "sourceTitle": "Wikipedia — Aurora",
+   "revision": 1382287719,
+   "passage": "The term entered the English language in 1828.",
+   "numbers": {
+    "claim": [
+     "1828"
+    ],
+    "inPassage": [
+     "1828"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why auroras glow about 100 kilometres above you.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "None have been found below 70 kilometres.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Solar particles excite oxygen atoms high in the air.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Lower down, oxygen glows green at 557.7 nanometres.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Higher up, it glows red at 630 nanometres.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Airliners cruise far below, around 10 kilometres up.",
+   "status": "FAIL",
+   "missing": [
+    "10"
+   ]
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the northern lights happen at the edge of space.",
+   "status": "HUMAN"
+  }
+ ]
+}
