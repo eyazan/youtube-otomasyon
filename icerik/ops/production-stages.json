@@ -2,62 +2,6 @@
   "channel": "failure-reconstructed",
   "runs": [
     {
-      "runId": "43821280515",
-      "attempt": "1",
-      "startedAt": "2026-11-16T07:06:09.743Z",
-      "publish": true,
-      "trigger": {
-        "event": "repository_dispatch",
-        "correlationId": "production-1-20261116T070504Z-37cd9749"
-      },
-      "targetDay": "2026-11-16",
-      "slug": "adam-air-574-2007",
-      "outcome": "UPLOADED",
-      "reason": "premium FR-adam-air-574-2007 3LP2gm1cx4k",
-      "stages": {
-        "RESEARCH": {
-          "status": "done",
-          "detail": "FR-adam-air-574-2007",
-          "at": "2026-11-16T07:08:33.259Z"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "done",
-          "detail": "premium final",
-          "at": "2026-11-16T07:08:33.259Z"
-        },
-        "QA": {
-          "status": "done",
-          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
-          "at": "2026-11-16T07:08:33.260Z"
-        },
-        "UPLOAD": {
-          "status": "done",
-          "detail": "3LP2gm1cx4k",
-          "at": "2026-11-16T07:08:33.260Z"
-        },
-        "SCHEDULE": {
-          "status": "done",
-          "detail": "2026-11-16T18:00:00.000Z",
-          "at": "2026-11-16T07:08:33.260Z"
-        },
-        "PUBLISH": {
-          "status": "scheduled",
-          "detail": "YouTube makes it public at 2026-11-16T18:00:00.000Z",
-          "at": "2026-11-16T07:08:33.261Z"
-        }
-      },
-      "finishedAt": "2026-11-16T07:08:33.261Z"
-    },
-    {
       "runId": "43872425719",
       "attempt": "1",
       "startedAt": "2026-11-16T13:06:33.481Z",
@@ -1344,6 +1288,50 @@
         }
       },
       "finishedAt": "2026-11-17T22:28:05.091Z"
+    },
+    {
+      "runId": "44195258252",
+      "attempt": "1",
+      "startedAt": "2026-11-17T23:00:17.509Z",
+      "publish": true,
+      "trigger": {
+        "event": "schedule",
+        "correlationId": null
+      },
+      "targetDay": null,
+      "slug": null,
+      "outcome": "NOT_DUE",
+      "reason": "before production slot 09:00 Europe/Istanbul",
+      "stages": {
+        "RESEARCH": {
+          "status": "not-reached"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "not-reached"
+        },
+        "QA": {
+          "status": "not-reached"
+        },
+        "UPLOAD": {
+          "status": "not-reached"
+        },
+        "SCHEDULE": {
+          "status": "not-reached"
+        },
+        "PUBLISH": {
+          "status": "not-reached"
+        }
+      },
+      "finishedAt": "2026-11-17T23:00:17.528Z"
     }
   ]
 }
