@@ -1,27 +1,25 @@
 {
-  "at": "2026-11-17T07:13:33.350Z",
-  "runId": "44035982486",
+  "at": "2026-11-17T13:09:26.976Z",
+  "runId": "44089206352",
   "rows": [
     {
       "channel": "failure-reconstructed",
-      "outcome": "UPLOADED",
-      "category": "SCHEDULED",
-      "scheduled": true,
-      "publication": "SCHEDULED",
-      "publishAt": "2026-11-17T18:00:00.000Z",
-      "reason": "premium FR-mill-river-flood-1874 n-H4LJkvT1Q",
-      "slug": "mill-river-flood-1874",
+      "outcome": "NOT_DUE",
+      "category": "NOT_DUE",
+      "scheduled": false,
+      "publication": "NOT_SCHEDULED",
+      "publishAt": null,
+      "reason": "today's Short already exists (mill-river-flood-1874)",
+      "slug": null,
       "videoId": null,
-      "targetDay": "2026-11-17",
+      "targetDay": null,
       "trigger": {
         "event": "repository_dispatch",
-        "correlationId": "production-1-20261117T070500Z-780c8423"
+        "correlationId": "production-2-20261117T130500Z-fbadb136"
       },
       "stages": {
         "RESEARCH": {
-          "status": "done",
-          "detail": "FR-mill-river-flood-1874",
-          "at": "2026-11-17T07:10:34.213Z"
+          "status": "not-reached"
         },
         "SCRIPT": {
           "status": "not-reached"
@@ -33,29 +31,19 @@
           "status": "not-reached"
         },
         "RENDER": {
-          "status": "done",
-          "detail": "premium final",
-          "at": "2026-11-17T07:10:34.214Z"
+          "status": "not-reached"
         },
         "QA": {
-          "status": "done",
-          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
-          "at": "2026-11-17T07:10:34.214Z"
+          "status": "not-reached"
         },
         "UPLOAD": {
-          "status": "done",
-          "detail": "n-H4LJkvT1Q",
-          "at": "2026-11-17T07:10:34.215Z"
+          "status": "not-reached"
         },
         "SCHEDULE": {
-          "status": "done",
-          "detail": "2026-11-17T18:00:00.000Z",
-          "at": "2026-11-17T07:10:34.215Z"
+          "status": "not-reached"
         },
         "PUBLISH": {
-          "status": "scheduled",
-          "detail": "YouTube makes it public at 2026-11-17T18:00:00.000Z",
-          "at": "2026-11-17T07:10:34.216Z"
+          "status": "not-reached"
         }
       }
     },
@@ -72,7 +60,7 @@
       "targetDay": "2026-11-17",
       "trigger": {
         "event": "repository_dispatch",
-        "correlationId": "production-1-20261117T070500Z-780c8423"
+        "correlationId": "production-2-20261117T130500Z-fbadb136"
       },
       "stages": {
         "RESEARCH": {
