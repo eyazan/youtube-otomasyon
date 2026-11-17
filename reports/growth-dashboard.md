@@ -1,6 +1,6 @@
 # Growth dashboard
 
-Generated 2026-11-16T23:47:11.177Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-11-17T00:21:20.924Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
@@ -8,7 +8,7 @@ Generated 2026-11-16T23:47:11.177Z. Per-channel baselines are computed separatel
 
 **Long-form health** — cycle 2026-W47: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W47 already QUALITY_BLOCKED)
 
-**Long-form backlog** — challenger-1986 86/A, chernobyl-1986 86/A, air-france-447-2009 85/A, columbia-2003 85/A, tam-3054-2007 85/A
+**Long-form backlog** — challenger-1986 86/A, chernobyl-1986 86/A, air-france-447-2009 85/A, columbia-2003 85/A, air-canada-759-2017 84/A
 
 **Content clusters** — 12 · integrity OK
 
