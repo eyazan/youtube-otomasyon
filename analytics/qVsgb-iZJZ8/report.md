@@ -10,8 +10,9 @@ https://youtu.be/qVsgb-iZJZ8
 | 3d | 2026-10-21 | 277 | 6 | 1 | 70.53 | 0 | Shorts feed 90%, Search 7% |
 | 7d | 2026-10-25 | 277 | 6 | 1 | 66.72 | 0 | Shorts feed 82%, Search 15% |
 | 14d | 2026-11-01 | 278 | 6 | 1 | 66.72 | 0 | Shorts feed 82%, Search 15% |
+| 30d | 2026-11-17 | 278 | 6 | 1 | 66.72 | 0 | Shorts feed 82%, Search 15% |
 
-## Diagnosis at 14d
+## Diagnosis at 30d
 
 - **WEAK_TOPIC_PACKAGING** (low) — Current title scores 24.1/100 in the title engine; best editorial option scores 42.3.
 
@@ -26,4 +27,4 @@ https://youtu.be/qVsgb-iZJZ8
 - Visual type: REAL ARCHIVAL IMAGE
 - This is an observed alignment, not proof that the sentence or visual caused the drop.
 
-Views gained between 7d and 14d: 1.
+Views gained between 14d and 30d: 0.

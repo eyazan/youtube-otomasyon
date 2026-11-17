@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-17T17:41:57.494Z",
+  "generatedAt": "2026-11-17T18:41:24.059Z",
   "note": "Per-channel baselines are computed separately and never blended.",
   "channels": [
     {
@@ -28,10 +28,10 @@
         "baseline": {
           "n": 45,
           "views": 329,
-          "averagePercentageViewed": 63.470000000000006,
+          "averagePercentageViewed": 63.28,
           "subscribersPer1000Views": 0,
           "engagementPer1000Views": 20,
-          "watchHoursPer1000Views": 2.02
+          "watchHoursPer1000Views": 2
         }
       },
       "longform": {
@@ -161,7 +161,7 @@
           "status": "adaptive",
           "sampleSize": 45,
           "adopted": 0,
-          "hypotheses": 14
+          "hypotheses": 10
         },
         "longform": {
           "status": "heuristics-only",
@@ -177,6 +177,11 @@
           "reason": "VideoPotential 87 in experimental band 58–71; sources 41 < 62"
         },
         {
+          "slug": "munich-1958",
+          "bucket": "C",
+          "reason": "VideoPotential 85 in experimental band 58–71; sources 41 < 62"
+        },
+        {
           "slug": "castle-bravo-1954",
           "bucket": "C",
           "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
@@ -185,11 +190,6 @@
           "slug": "skylab-1973",
           "bucket": "C",
           "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
-        },
-        {
-          "slug": "munich-1958",
-          "bucket": "C",
-          "reason": "VideoPotential 85 in experimental band 58–71; sources 41 < 62"
         },
         {
           "slug": "boston-molasses-1919",
@@ -515,6 +515,12 @@
             "mode": "B_SHORT_PROVES_DEMAND"
           },
           {
+            "slug": "what-if-the-ozone-hole-never-closed",
+            "LongFormPotentialScore": 83,
+            "bucket": "A",
+            "mode": "A_LONG_FIRST"
+          },
+          {
             "slug": "what-if-the-tunguska-blast-happened-over-a-city",
             "LongFormPotentialScore": 83,
             "bucket": "A",
@@ -522,12 +528,6 @@
           },
           {
             "slug": "could-earth-survive-one-day-without-earth-s-magnetic-field",
-            "LongFormPotentialScore": 83,
-            "bucket": "A",
-            "mode": "A_LONG_FIRST"
-          },
-          {
-            "slug": "what-if-the-permafrost-thawed",
             "LongFormPotentialScore": 83,
             "bucket": "A",
             "mode": "A_LONG_FIRST"
@@ -606,6 +606,11 @@
           "reason": "VideoPotential 72 in experimental band 58–71; boilerplate 0.5"
         },
         {
+          "slug": "what-happens-if-the-global-ocean-doubles",
+          "bucket": "C",
+          "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
+        },
+        {
           "slug": "what-if-human-muscle-efficiency-doubled-overnight",
           "bucket": "C",
           "reason": "VideoPotential 70 in experimental band 58–71; boilerplate 0.5"
@@ -617,11 +622,6 @@
         },
         {
           "slug": "what-if-the-brain-s-energy-use-doubled-overnight",
-          "bucket": "C",
-          "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
-        },
-        {
-          "slug": "what-happens-if-the-global-ocean-doubles",
           "bucket": "C",
           "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
         },

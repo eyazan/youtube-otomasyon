@@ -10,8 +10,9 @@ https://youtu.be/N0k8S0IMwlU
 | 3d | 2026-10-21 | 1020 | 21 | 1 | 95.79 | 1 | Shorts feed 97%, Search 2% |
 | 7d | 2026-10-25 | 1025 | 21 | 1 | 95.95 | 1 | Shorts feed 97%, Search 2% |
 | 14d | 2026-11-01 | 1025 | 21 | 1 | 95.95 | 1 | Shorts feed 97%, Search 2% |
+| 30d | 2026-11-17 | 1027 | 21 | 1 | 95.95 | 1 | Shorts feed 96%, Search 3% |
 
-## Diagnosis at 14d
+## Diagnosis at 30d
 
 - **HIGH_VIEWS_LOW_SUB_CONVERSION** (medium) — 1.0 subscribers per 1,000 views.
 
@@ -26,4 +27,4 @@ https://youtu.be/N0k8S0IMwlU
 - Visual type: AI-GENERATED VISUAL
 - This is an observed alignment, not proof that the sentence or visual caused the drop.
 
-Views gained between 7d and 14d: 0.
+Views gained between 14d and 30d: 2.

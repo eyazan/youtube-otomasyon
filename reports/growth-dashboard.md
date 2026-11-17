@@ -1,6 +1,6 @@
 # Growth dashboard
 
-Generated 2026-11-17T17:41:57.494Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-11-17T18:41:24.059Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
@@ -21,9 +21,9 @@ Generated 2026-11-17T17:41:57.494Z. Per-channel baselines are computed separatel
 **Research/source enrichment tasks**
 
 - apollo-1-1967 (C): VideoPotential 87 in experimental band 58–71; sources 41 < 62
+- munich-1958 (C): VideoPotential 85 in experimental band 58–71; sources 41 < 62
 - castle-bravo-1954 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
 - skylab-1973 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
-- munich-1958 (C): VideoPotential 85 in experimental band 58–71; sources 41 < 62
 - boston-molasses-1919 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
 
 **Recent alerts**
@@ -45,7 +45,7 @@ Generated 2026-11-17T17:41:57.494Z. Per-channel baselines are computed separatel
 
 **Long-form health** — cycle 2026-W47: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W47 already QUALITY_BLOCKED)
 
-**Long-form backlog** — what-if-we-mined-a-metal-asteroid 84/A, what-if-synthetic-fertilizer-disappeared 84/A, what-if-the-tunguska-blast-happened-over-a-city 83/A, could-earth-survive-one-day-without-earth-s-magnetic-field 83/A, what-if-the-permafrost-thawed 83/A
+**Long-form backlog** — what-if-we-mined-a-metal-asteroid 84/A, what-if-synthetic-fertilizer-disappeared 84/A, what-if-the-ozone-hole-never-closed 83/A, what-if-the-tunguska-blast-happened-over-a-city 83/A, could-earth-survive-one-day-without-earth-s-magnetic-field 83/A
 
 **Content clusters** — 7 · integrity OK
 
