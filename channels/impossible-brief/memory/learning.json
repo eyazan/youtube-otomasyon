@@ -2,19 +2,19 @@
   "channel": "impossible-brief",
   "status": "sample-floor-met",
   "minimumSample": 5,
-  "sampleSize": 21,
+  "sampleSize": 22,
   "learnedRules": [
     {
       "key": "hookType",
       "value": "number-or-countdown",
       "weakValue": "statement",
-      "evidenceVideos": 21,
+      "evidenceVideos": 22,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
           "value": "number-or-countdown",
-          "sample": 17,
-          "averagePercentageViewed": 70.24
+          "sample": 18,
+          "averagePercentageViewed": 72.91
         },
         {
           "value": "statement",
@@ -25,28 +25,28 @@
     },
     {
       "key": "durationRange",
-      "value": "over-35s",
-      "weakValue": "25-35s",
-      "evidenceVideos": 21,
+      "value": "25-35s",
+      "weakValue": "over-35s",
+      "evidenceVideos": 22,
       "confidence": "SUPPORTED",
       "aggregates": [
+        {
+          "value": "25-35s",
+          "sample": 19,
+          "averagePercentageViewed": 70.88
+        },
         {
           "value": "over-35s",
           "sample": 3,
           "averagePercentageViewed": 70.54
-        },
-        {
-          "value": "25-35s",
-          "sample": 18,
-          "averagePercentageViewed": 68.24
         }
       ]
     },
     {
       "key": "secondBeat",
-      "value": "technical",
-      "weakValue": "context",
-      "evidenceVideos": 21,
+      "value": "context",
+      "weakValue": "technical",
+      "evidenceVideos": 22,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
@@ -55,14 +55,14 @@
           "averagePercentageViewed": 95.95
         },
         {
+          "value": "context",
+          "sample": 19,
+          "averagePercentageViewed": 69.72
+        },
+        {
           "value": "technical",
           "sample": 2,
           "averagePercentageViewed": 68.85
-        },
-        {
-          "value": "context",
-          "sample": 18,
-          "averagePercentageViewed": 67.02
         }
       ]
     },
@@ -70,7 +70,7 @@
       "key": "visualChangeFrequency",
       "value": null,
       "weakValue": null,
-      "evidenceVideos": 21,
+      "evidenceVideos": 22,
       "confidence": "INSUFFICIENT_DATA",
       "aggregates": []
     },
@@ -78,13 +78,13 @@
       "key": "questionStyle",
       "value": "question",
       "weakValue": null,
-      "evidenceVideos": 21,
+      "evidenceVideos": 22,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
           "value": "question",
-          "sample": 21,
-          "averagePercentageViewed": 68.57
+          "sample": 22,
+          "averagePercentageViewed": 70.83
         }
       ]
     },
@@ -92,7 +92,7 @@
       "key": "category",
       "value": "EARTH",
       "weakValue": "OTHER",
-      "evidenceVideos": 21,
+      "evidenceVideos": 22,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
@@ -106,6 +106,11 @@
           "averagePercentageViewed": 75.25
         },
         {
+          "value": "SPACE",
+          "sample": 5,
+          "averagePercentageViewed": 71.43
+        },
+        {
           "value": "HUMAN",
           "sample": 2,
           "averagePercentageViewed": 66.64
@@ -114,11 +119,6 @@
           "value": "EXTREME SCIENCE",
           "sample": 1,
           "averagePercentageViewed": 66.34
-        },
-        {
-          "value": "SPACE",
-          "sample": 4,
-          "averagePercentageViewed": 59.71
         },
         {
           "value": "PHYSICS",
@@ -136,17 +136,17 @@
       "key": "ctaStyle",
       "value": "optional curiosity bridge after the scientific payoff",
       "weakValue": null,
-      "evidenceVideos": 21,
+      "evidenceVideos": 22,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
           "value": "optional curiosity bridge after the scientific payoff",
-          "sample": 21,
-          "averagePercentageViewed": 68.57
+          "sample": 22,
+          "averagePercentageViewed": 70.83
         }
       ]
     }
   ],
-  "lastUpdated": "2026-11-18T17:21:54.870Z",
+  "lastUpdated": "2026-11-18T18:15:20.014Z",
   "caveat": "Observed associations only; topic, timing and packaging can confound retention. No causal claim."
 }

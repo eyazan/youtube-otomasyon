@@ -10,8 +10,9 @@ https://youtu.be/SjJHvPtSvcg
 | 3d | 2026-10-22 | 113 | 3 | 1 | 53.12 | 0 | Shorts feed 78%, Search 20% |
 | 7d | 2026-10-26 | 125 | 3 | 1 | 64.65 | 0 | Shorts feed 76%, Search 23% |
 | 14d | 2026-11-02 | 126 | 3 | 1 | 63.470000000000006 | 0 | Shorts feed 71%, Search 29% |
+| 30d | 2026-11-18 | 135 | 3 | 1 | 62.470000000000006 | 0 | Shorts feed 66%, Search 33% |
 
-## Diagnosis at 14d
+## Diagnosis at 30d
 
 - **WEAK_TOPIC_PACKAGING** (low) — Current title scores 44.7/100 in the title engine; best editorial option scores 48.1.
 
@@ -21,9 +22,9 @@ https://youtu.be/SjJHvPtSvcg
 
 ## First major observed retention drop
 
-- Timestamp: 2s; magnitude: 9 percentage points.
-- Active sentence: A bulk carrier crashed into the piers of Hobart's Tasman Bridge.
+- Timestamp: 7s; magnitude: 9 percentage points.
+- Active sentence: Two spans fell onto the ship, and it sank.
 - Visual type: REAL ARCHIVAL IMAGE
 - This is an observed alignment, not proof that the sentence or visual caused the drop.
 
-Views gained between 7d and 14d: 1.
+Views gained between 14d and 30d: 9.
