@@ -2,50 +2,6 @@
   "channel": "failure-reconstructed",
   "runs": [
     {
-      "runId": "43942195363",
-      "attempt": "1",
-      "startedAt": "2026-11-16T19:44:04.316Z",
-      "publish": true,
-      "trigger": {
-        "event": "schedule",
-        "correlationId": null
-      },
-      "targetDay": null,
-      "slug": null,
-      "outcome": "NOT_DUE",
-      "reason": "today's Short already exists (adam-air-574-2007)",
-      "stages": {
-        "RESEARCH": {
-          "status": "not-reached"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "not-reached"
-        },
-        "QA": {
-          "status": "not-reached"
-        },
-        "UPLOAD": {
-          "status": "not-reached"
-        },
-        "SCHEDULE": {
-          "status": "not-reached"
-        },
-        "PUBLISH": {
-          "status": "not-reached"
-        }
-      },
-      "finishedAt": "2026-11-16T19:44:04.330Z"
-    },
-    {
       "runId": "43950527022",
       "attempt": "1",
       "startedAt": "2026-11-16T20:31:35.390Z",
@@ -1344,6 +1300,52 @@
         }
       },
       "finishedAt": "2026-11-18T16:34:48.365Z"
+    },
+    {
+      "runId": "44349036093",
+      "attempt": "1",
+      "startedAt": "2026-11-18T16:38:52.958Z",
+      "publish": true,
+      "trigger": {
+        "event": "repository_dispatch",
+        "correlationId": null
+      },
+      "targetDay": "2026-11-18",
+      "slug": null,
+      "outcome": "NO_TOPIC",
+      "reason": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [56 unused A topic(s), best viral score 74 < minimum 75; 11 topic(s) at the minimum are bucket B/C, not selectable]",
+      "stages": {
+        "RESEARCH": {
+          "status": "failed",
+          "detail": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [56 unused A topic(s), best viral score 74 < minimum 75; 11 topic(s) at the minimum are bucket B/C, not selectable]",
+          "at": "2026-11-18T16:38:54.539Z"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "not-reached"
+        },
+        "QA": {
+          "status": "not-reached"
+        },
+        "UPLOAD": {
+          "status": "not-reached"
+        },
+        "SCHEDULE": {
+          "status": "not-reached"
+        },
+        "PUBLISH": {
+          "status": "not-reached"
+        }
+      },
+      "finishedAt": "2026-11-18T16:38:54.540Z"
     }
   ]
 }
