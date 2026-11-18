@@ -1,6 +1,6 @@
 # Growth dashboard
 
-Generated 2026-11-17T23:36:10.143Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-11-18T07:09:16.512Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
@@ -8,7 +8,7 @@ Generated 2026-11-17T23:36:10.143Z. Per-channel baselines are computed separatel
 
 **Long-form health** — cycle 2026-W47: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W47 already QUALITY_BLOCKED)
 
-**Long-form backlog** — challenger-1986 86/A, chernobyl-1986 86/A, air-france-447-2009 85/A, columbia-2003 85/A, apollo-13-1970 84/A
+**Long-form backlog** — challenger-1986 86/A, chernobyl-1986 86/A, columbia-2003 85/A, air-france-447-2009 84/A, apollo-13-1970 84/A
 
 **Content clusters** — 12 · integrity OK
 
@@ -21,9 +21,9 @@ Generated 2026-11-17T23:36:10.143Z. Per-channel baselines are computed separatel
 **Research/source enrichment tasks**
 
 - apollo-1-1967 (C): VideoPotential 87 in experimental band 58–71; sources 41 < 62
-- munich-1958 (C): VideoPotential 85 in experimental band 58–71; sources 41 < 62
 - castle-bravo-1954 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
 - skylab-1973 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
+- munich-1958 (C): VideoPotential 85 in experimental band 58–71; sources 41 < 62
 - boston-molasses-1919 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
 
 **Recent alerts**
@@ -41,7 +41,7 @@ Generated 2026-11-17T23:36:10.143Z. Per-channel baselines are computed separatel
 
 ## ImpossibleBrief
 
-**Shorts health** — last published 2026-11-13T18:00:00.000Z · 24 published · inventory A103/B26/C140/D206 · next: what-if-we-tried-to-drill-through-the-earth (EXPLOIT (0.75): best A topic by SelectionScore)
+**Shorts health** — last published 2026-11-13T18:00:00.000Z · 24 published · inventory A102/B26/C140/D206 · next: what-if-we-tried-to-drill-through-the-earth (EXPLOIT (0.75): best A topic by SelectionScore)
 
 **Long-form health** — cycle 2026-W47: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W47 already QUALITY_BLOCKED)
 

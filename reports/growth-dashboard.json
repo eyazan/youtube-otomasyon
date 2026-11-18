@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-17T23:36:10.143Z",
+  "generatedAt": "2026-11-18T07:09:16.512Z",
   "note": "Per-channel baselines are computed separately and never blended.",
   "channels": [
     {
@@ -30,7 +30,7 @@
           "views": 329,
           "averagePercentageViewed": 63.28,
           "subscribersPer1000Views": 0,
-          "engagementPer1000Views": 20,
+          "engagementPer1000Views": 20.83,
           "watchHoursPer1000Views": 2
         }
       },
@@ -106,14 +106,14 @@
             "mode": "B_SHORT_PROVES_DEMAND"
           },
           {
-            "slug": "air-france-447-2009",
+            "slug": "columbia-2003",
             "LongFormPotentialScore": 85,
             "bucket": "A",
             "mode": "B_SHORT_PROVES_DEMAND"
           },
           {
-            "slug": "columbia-2003",
-            "LongFormPotentialScore": 85,
+            "slug": "air-france-447-2009",
+            "LongFormPotentialScore": 84,
             "bucket": "A",
             "mode": "B_SHORT_PROVES_DEMAND"
           },
@@ -161,7 +161,7 @@
           "status": "adaptive",
           "sampleSize": 46,
           "adopted": 0,
-          "hypotheses": 10
+          "hypotheses": 13
         },
         "longform": {
           "status": "heuristics-only",
@@ -177,11 +177,6 @@
           "reason": "VideoPotential 87 in experimental band 58–71; sources 41 < 62"
         },
         {
-          "slug": "munich-1958",
-          "bucket": "C",
-          "reason": "VideoPotential 85 in experimental band 58–71; sources 41 < 62"
-        },
-        {
           "slug": "castle-bravo-1954",
           "bucket": "C",
           "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
@@ -190,6 +185,11 @@
           "slug": "skylab-1973",
           "bucket": "C",
           "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
+        },
+        {
+          "slug": "munich-1958",
+          "bucket": "C",
+          "reason": "VideoPotential 85 in experimental band 58–71; sources 41 < 62"
         },
         {
           "slug": "boston-molasses-1919",
@@ -418,7 +418,7 @@
         "lastPublished": "2026-11-13T18:00:00.000Z",
         "published": 24,
         "inventory": {
-          "A": 103,
+          "A": 102,
           "B": 26,
           "C": 140,
           "D": 206
