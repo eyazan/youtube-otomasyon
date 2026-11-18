@@ -2,62 +2,6 @@
   "channel": "failure-reconstructed",
   "runs": [
     {
-      "runId": "44035982486",
-      "attempt": "1",
-      "startedAt": "2026-11-17T07:06:12.718Z",
-      "publish": true,
-      "trigger": {
-        "event": "repository_dispatch",
-        "correlationId": "production-1-20261117T070500Z-780c8423"
-      },
-      "targetDay": "2026-11-17",
-      "slug": "mill-river-flood-1874",
-      "outcome": "UPLOADED",
-      "reason": "premium FR-mill-river-flood-1874 n-H4LJkvT1Q",
-      "stages": {
-        "RESEARCH": {
-          "status": "done",
-          "detail": "FR-mill-river-flood-1874",
-          "at": "2026-11-17T07:10:34.213Z"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "done",
-          "detail": "premium final",
-          "at": "2026-11-17T07:10:34.214Z"
-        },
-        "QA": {
-          "status": "done",
-          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
-          "at": "2026-11-17T07:10:34.214Z"
-        },
-        "UPLOAD": {
-          "status": "done",
-          "detail": "n-H4LJkvT1Q",
-          "at": "2026-11-17T07:10:34.215Z"
-        },
-        "SCHEDULE": {
-          "status": "done",
-          "detail": "2026-11-17T18:00:00.000Z",
-          "at": "2026-11-17T07:10:34.215Z"
-        },
-        "PUBLISH": {
-          "status": "scheduled",
-          "detail": "YouTube makes it public at 2026-11-17T18:00:00.000Z",
-          "at": "2026-11-17T07:10:34.216Z"
-        }
-      },
-      "finishedAt": "2026-11-17T07:10:34.217Z"
-    },
-    {
       "runId": "44089206352",
       "attempt": "1",
       "startedAt": "2026-11-17T13:06:16.518Z",
@@ -1348,6 +1292,50 @@
         }
       },
       "finishedAt": "2026-11-18T21:28:27.970Z"
+    },
+    {
+      "runId": "44407713043",
+      "attempt": "1",
+      "startedAt": "2026-11-18T22:04:10.332Z",
+      "publish": true,
+      "trigger": {
+        "event": "schedule",
+        "correlationId": null
+      },
+      "targetDay": null,
+      "slug": null,
+      "outcome": "NOT_DUE",
+      "reason": "before production slot 09:00 Europe/Istanbul",
+      "stages": {
+        "RESEARCH": {
+          "status": "not-reached"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "not-reached"
+        },
+        "QA": {
+          "status": "not-reached"
+        },
+        "UPLOAD": {
+          "status": "not-reached"
+        },
+        "SCHEDULE": {
+          "status": "not-reached"
+        },
+        "PUBLISH": {
+          "status": "not-reached"
+        }
+      },
+      "finishedAt": "2026-11-18T22:04:10.352Z"
     }
   ]
 }
