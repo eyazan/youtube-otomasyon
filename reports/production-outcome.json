@@ -1,25 +1,27 @@
 {
-  "at": "2026-11-18T23:00:07.755Z",
-  "runId": "44416614458",
+  "at": "2026-11-19T07:12:02.772Z",
+  "runId": "44476967911",
   "rows": [
     {
       "channel": "failure-reconstructed",
-      "outcome": "NOT_DUE",
-      "category": "NOT_DUE",
+      "outcome": "NO_TOPIC",
+      "category": "CONTENT_BLOCKED",
       "scheduled": false,
       "publication": "NOT_SCHEDULED",
       "publishAt": null,
-      "reason": "before production slot 09:00 Europe/Istanbul",
+      "reason": "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)",
       "slug": null,
       "videoId": null,
-      "targetDay": null,
+      "targetDay": "2026-11-19",
       "trigger": {
-        "event": "schedule",
-        "correlationId": null
+        "event": "repository_dispatch",
+        "correlationId": "production-1-20261119T070537Z-6a9bbe2e"
       },
       "stages": {
         "RESEARCH": {
-          "status": "not-reached"
+          "status": "skipped",
+          "detail": "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)",
+          "at": "2026-11-19T07:09:15.527Z"
         },
         "SCRIPT": {
           "status": "not-reached"
@@ -49,18 +51,18 @@
     },
     {
       "channel": "impossible-brief",
-      "outcome": "NOT_DUE",
-      "category": "NOT_DUE",
+      "outcome": "BLOCKED",
+      "category": "QUALITY_REJECTED",
       "scheduled": false,
       "publication": "NOT_SCHEDULED",
       "publishAt": null,
-      "reason": "before production slot 09:30 Europe/Istanbul",
+      "reason": "premium publication refused (see the premium publish log); nothing uploaded, legacy renderer not used",
       "slug": null,
       "videoId": null,
-      "targetDay": null,
+      "targetDay": "2026-11-19",
       "trigger": {
-        "event": "schedule",
-        "correlationId": null
+        "event": "repository_dispatch",
+        "correlationId": "production-1-20261119T070537Z-6a9bbe2e"
       },
       "stages": {
         "RESEARCH": {
