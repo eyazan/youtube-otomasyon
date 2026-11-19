@@ -1,6 +1,6 @@
 # Growth dashboard
 
-Generated 2026-11-19T17:28:09.700Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-11-19T18:26:03.164Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
@@ -21,9 +21,9 @@ Generated 2026-11-19T17:28:09.700Z. Per-channel baselines are computed separatel
 **Research/source enrichment tasks**
 
 - apollo-1-1967 (C): VideoPotential 87 in experimental band 58–71; sources 41 < 62
+- munich-1958 (C): VideoPotential 85 in experimental band 58–71; sources 41 < 62
 - castle-bravo-1954 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
 - skylab-1973 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
-- munich-1958 (C): VideoPotential 85 in experimental band 58–71; sources 41 < 62
 - boston-molasses-1919 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
 
 **Recent alerts**
@@ -41,11 +41,11 @@ Generated 2026-11-19T17:28:09.700Z. Per-channel baselines are computed separatel
 
 ## ImpossibleBrief
 
-**Shorts health** — last published 2026-11-13T18:00:00.000Z · 24 published · inventory A104/B25/C140/D206 · next: what-if-we-tried-to-drill-through-the-earth (EXPLOIT (0.75): best A topic by SelectionScore)
+**Shorts health** — last published 2026-11-13T18:00:00.000Z · 24 published · inventory A103/B26/C140/D206 · next: what-if-we-tried-to-drill-through-the-earth (EXPLOIT (0.75): best A topic by SelectionScore)
 
 **Long-form health** — cycle 2026-W47: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W47 already QUALITY_BLOCKED)
 
-**Long-form backlog** — what-if-we-mined-a-metal-asteroid 84/A, what-if-synthetic-fertilizer-disappeared 84/A, what-if-the-ozone-hole-never-closed 83/A, what-if-the-tunguska-blast-happened-over-a-city 83/A, could-earth-survive-one-day-without-earth-s-magnetic-field 83/A
+**Long-form backlog** — what-if-we-mined-a-metal-asteroid 84/A, what-if-the-ozone-hole-never-closed 83/A, what-if-the-tunguska-blast-happened-over-a-city 83/A, could-earth-survive-one-day-without-earth-s-magnetic-field 83/A, what-if-the-permafrost-thawed 83/A
 
 **Content clusters** — 7 · integrity OK
 

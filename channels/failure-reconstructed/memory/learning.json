@@ -2,19 +2,19 @@
   "channel": "failure-reconstructed",
   "status": "sample-floor-met",
   "minimumSample": 5,
-  "sampleSize": 42,
+  "sampleSize": 43,
   "learnedRules": [
     {
       "key": "hookType",
       "value": "consequence",
       "weakValue": "statement",
-      "evidenceVideos": 42,
+      "evidenceVideos": 43,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
           "value": "consequence",
           "sample": 8,
-          "averagePercentageViewed": 107.69
+          "averagePercentageViewed": 107.67
         },
         {
           "value": "number-or-countdown",
@@ -23,8 +23,8 @@
         },
         {
           "value": "statement",
-          "sample": 29,
-          "averagePercentageViewed": 64
+          "sample": 30,
+          "averagePercentageViewed": 63.8
         }
       ]
     },
@@ -32,7 +32,7 @@
       "key": "durationRange",
       "value": "over-35s",
       "weakValue": "under-25s",
-      "evidenceVideos": 42,
+      "evidenceVideos": 43,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
@@ -42,13 +42,13 @@
         },
         {
           "value": "25-35s",
-          "sample": 33,
-          "averagePercentageViewed": 72.13
+          "sample": 34,
+          "averagePercentageViewed": 71.72
         },
         {
           "value": "under-25s",
           "sample": 7,
-          "averagePercentageViewed": 71.56
+          "averagePercentageViewed": 71.54
         }
       ]
     },
@@ -56,7 +56,7 @@
       "key": "secondBeat",
       "value": "countdown",
       "weakValue": "escalation",
-      "evidenceVideos": 42,
+      "evidenceVideos": 43,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
@@ -71,8 +71,8 @@
         },
         {
           "value": "emergency",
-          "sample": 14,
-          "averagePercentageViewed": 66.47
+          "sample": 15,
+          "averagePercentageViewed": 65.9
         },
         {
           "value": "event",
@@ -90,13 +90,13 @@
       "key": "visualChangeFrequency",
       "value": "fast",
       "weakValue": "measured",
-      "evidenceVideos": 42,
+      "evidenceVideos": 43,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
           "value": "fast",
-          "sample": 26,
-          "averagePercentageViewed": 79.52
+          "sample": 27,
+          "averagePercentageViewed": 78.72
         },
         {
           "value": "measured",
@@ -109,13 +109,13 @@
       "key": "questionStyle",
       "value": "question",
       "weakValue": null,
-      "evidenceVideos": 42,
+      "evidenceVideos": 43,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
           "value": "question",
-          "sample": 41,
-          "averagePercentageViewed": 73.27
+          "sample": 42,
+          "averagePercentageViewed": 72.9
         },
         {
           "value": "statement",
@@ -128,7 +128,7 @@
       "key": "category",
       "value": "nuclear-accidents",
       "weakValue": "materials-failures",
-      "evidenceVideos": 42,
+      "evidenceVideos": 43,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
@@ -158,8 +158,8 @@
         },
         {
           "value": "aviation-failures",
-          "sample": 5,
-          "averagePercentageViewed": 72.33
+          "sample": 6,
+          "averagePercentageViewed": 69.94
         },
         {
           "value": "infrastructure-failures",
@@ -202,17 +202,17 @@
       "key": "ctaStyle",
       "value": "adaptive after payoff",
       "weakValue": null,
-      "evidenceVideos": 42,
+      "evidenceVideos": 43,
       "confidence": "SUPPORTED",
       "aggregates": [
         {
           "value": "adaptive after payoff",
-          "sample": 42,
-          "averagePercentageViewed": 72.95
+          "sample": 43,
+          "averagePercentageViewed": 72.6
         }
       ]
     }
   ],
-  "lastUpdated": "2026-11-19T17:28:01.818Z",
+  "lastUpdated": "2026-11-19T18:25:40.451Z",
   "caveat": "Observed associations only; topic, timing and packaging can confound retention. No causal claim."
 }
