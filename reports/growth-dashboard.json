@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-20T17:55:27.725Z",
+  "generatedAt": "2026-11-20T18:39:40.601Z",
   "note": "Per-channel baselines are computed separately and never blended.",
   "channels": [
     {
@@ -9,8 +9,8 @@
         "lastPublished": "2026-11-20T18:00:00.000Z",
         "published": 48,
         "inventory": {
-          "A": 76,
-          "B": 141,
+          "A": 75,
+          "B": 142,
           "C": 61,
           "D": 59
         },
@@ -28,10 +28,10 @@
         "baseline": {
           "n": 46,
           "views": 329,
-          "averagePercentageViewed": 62.470000000000006,
+          "averagePercentageViewed": 62.13000000000001,
           "subscribersPer1000Views": 0,
           "engagementPer1000Views": 19.8,
-          "watchHoursPer1000Views": 2
+          "watchHoursPer1000Views": 1.96
         }
       },
       "longform": {
@@ -161,7 +161,7 @@
           "status": "adaptive",
           "sampleSize": 46,
           "adopted": 0,
-          "hypotheses": 6
+          "hypotheses": 7
         },
         "longform": {
           "status": "heuristics-only",
@@ -197,6 +197,11 @@
           "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
         },
         {
+          "slug": "controlled-impact-1984",
+          "bucket": "C",
+          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
+        },
+        {
           "slug": "new-london-school-1937",
           "bucket": "C",
           "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
@@ -205,11 +210,6 @@
           "slug": "vanguard-1957",
           "bucket": "C",
           "reason": "VideoPotential 82 in experimental band 58–71; sources 41 < 62"
-        },
-        {
-          "slug": "controlled-impact-1984",
-          "bucket": "C",
-          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
         },
         {
           "slug": "b2-guam-2008",
@@ -437,7 +437,7 @@
         "baseline": {
           "n": 22,
           "views": 622,
-          "averagePercentageViewed": 62.29,
+          "averagePercentageViewed": 64.54,
           "subscribersPer1000Views": 0,
           "engagementPer1000Views": 20.08,
           "watchHoursPer1000Views": 2.53
@@ -570,7 +570,7 @@
           "status": "adaptive",
           "sampleSize": 22,
           "adopted": 0,
-          "hypotheses": 4
+          "hypotheses": 5
         },
         "longform": {
           "status": "heuristics-only",
@@ -611,22 +611,22 @@
           "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
         },
         {
-          "slug": "what-if-human-muscle-efficiency-doubled-overnight",
-          "bucket": "C",
-          "reason": "VideoPotential 70 in experimental band 58–71; boilerplate 0.5"
-        },
-        {
           "slug": "what-breaks-first-if-a-rogue-planet-suddenly-doubles-in-mass",
           "bucket": "C",
           "reason": "VideoPotential 72 in experimental band 58–71; boilerplate 0.5"
         },
         {
-          "slug": "what-if-the-brain-s-energy-use-doubled-overnight",
+          "slug": "would-doubling-all-synthetic-fertilizers-help-or-harm-us",
           "bucket": "C",
           "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
         },
         {
-          "slug": "would-doubling-all-synthetic-fertilizers-help-or-harm-us",
+          "slug": "what-if-human-muscle-efficiency-doubled-overnight",
+          "bucket": "C",
+          "reason": "VideoPotential 70 in experimental band 58–71; boilerplate 0.5"
+        },
+        {
+          "slug": "what-if-the-brain-s-energy-use-doubled-overnight",
           "bucket": "C",
           "reason": "VideoPotential 71 in experimental band 58–71; boilerplate 0.5"
         }

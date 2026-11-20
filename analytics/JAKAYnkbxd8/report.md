@@ -10,10 +10,11 @@ https://youtu.be/JAKAYnkbxd8
 | 3d | 2026-10-24 | 35 | 0 | 1 | 54.53 | 0 | Shorts feed 100%, Direct/unknown 0% |
 | 7d | 2026-10-28 | 40 | 0 | 1 | 55.2 | 0 | Shorts feed 64%, Search 36% |
 | 14d | 2026-11-04 | 54 | 0 | 1 | 56.279999999999994 | 0 | Shorts feed 51%, Search 49% |
+| 30d | 2026-11-20 | 66 | 0 | 1 | 57.50999999999999 | 0 | Search 62%, Shorts feed 38% |
 
-## Diagnosis at 14d
+## Diagnosis at 30d
 
-- **INSUFFICIENT_DATA** (high) — 54 views after 14 days — too early/small for rate-based conclusions.
+- **INSUFFICIENT_DATA** (high) — 66 views after 30 days — too early/small for rate-based conclusions.
 - **WEAK_TOPIC_PACKAGING** (low) — Current title scores 43.3/100 in the title engine; best editorial option scores 43.3.
 
 ## Suggested interventions
@@ -23,9 +24,9 @@ https://youtu.be/JAKAYnkbxd8
 
 ## First major observed retention drop
 
-- Timestamp: 6s; magnitude: 16 percentage points.
+- Timestamp: 6s; magnitude: 13 percentage points.
 - Active sentence: A reservoir wall at a Hungarian alumina plant suddenly broke.
 - Visual type: REAL ARCHIVAL IMAGE
 - This is an observed alignment, not proof that the sentence or visual caused the drop.
 
-Views gained between 7d and 14d: 14.
+Views gained between 14d and 30d: 12.
