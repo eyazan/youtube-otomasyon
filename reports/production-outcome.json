@@ -1,27 +1,25 @@
 {
-  "at": "2026-11-20T15:19:15.180Z",
-  "runId": "44761071456",
+  "at": "2026-11-20T15:43:53.914Z",
+  "runId": "44765444489",
   "rows": [
     {
       "channel": "failure-reconstructed",
-      "outcome": "UPLOADED",
-      "category": "SCHEDULED",
-      "scheduled": true,
-      "publication": "SCHEDULED",
-      "publishAt": "2026-11-20T18:00:00.000Z",
-      "reason": "premium FR-liberty-ships-brittle-fracture ZMUBp0hfJLk",
-      "slug": "liberty-ships-brittle-fracture",
+      "outcome": "NOT_DUE",
+      "category": "NOT_DUE",
+      "scheduled": false,
+      "publication": "NOT_SCHEDULED",
+      "publishAt": null,
+      "reason": "today's Short already exists (liberty-ships-brittle-fracture)",
+      "slug": null,
       "videoId": null,
-      "targetDay": "2026-11-20",
+      "targetDay": null,
       "trigger": {
         "event": "schedule",
         "correlationId": null
       },
       "stages": {
         "RESEARCH": {
-          "status": "done",
-          "detail": "FR-liberty-ships-brittle-fracture",
-          "at": "2026-11-20T15:17:07.884Z"
+          "status": "not-reached"
         },
         "SCRIPT": {
           "status": "not-reached"
@@ -33,29 +31,19 @@
           "status": "not-reached"
         },
         "RENDER": {
-          "status": "done",
-          "detail": "premium final",
-          "at": "2026-11-20T15:17:07.884Z"
+          "status": "not-reached"
         },
         "QA": {
-          "status": "done",
-          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
-          "at": "2026-11-20T15:17:07.885Z"
+          "status": "not-reached"
         },
         "UPLOAD": {
-          "status": "done",
-          "detail": "ZMUBp0hfJLk",
-          "at": "2026-11-20T15:17:07.885Z"
+          "status": "not-reached"
         },
         "SCHEDULE": {
-          "status": "done",
-          "detail": "2026-11-20T18:00:00.000Z",
-          "at": "2026-11-20T15:17:07.885Z"
+          "status": "not-reached"
         },
         "PUBLISH": {
-          "status": "scheduled",
-          "detail": "YouTube makes it public at 2026-11-20T18:00:00.000Z",
-          "at": "2026-11-20T15:17:07.886Z"
+          "status": "not-reached"
         }
       }
     },
