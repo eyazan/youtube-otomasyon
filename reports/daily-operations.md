@@ -1,6 +1,6 @@
 # Daily operations report
 
-Generated: 2026-11-20T20:32:41.313Z
+Generated: 2026-11-20T21:16:01.518Z
 
 Missing API-only metrics are reported as `unavailable`, never as zero.
 
@@ -8,23 +8,23 @@ Missing API-only metrics are reported as `unavailable`, never as zero.
 
 | Signal | Status |
 |---|---|
-| Today topic | liberty-ships-brittle-fracture |
-| Short | scheduled |
+| Today topic | unavailable |
+| Short | not-due |
 | Long | due-not-produced |
-| Quality | PUBLISH / unavailable |
-| YouTube | scheduled |
-| Publish time | 2026-11-20T18:00:00.000Z |
-| Video ID | ZMUBp0hfJLk |
+| Quality | unavailable / unavailable |
+| YouTube | not-uploaded |
+| Publish time | unavailable |
+| Video ID | unavailable |
 | Analytics | measured |
-| Scheduler | healthy |
+| Scheduler | pending-before-deadline |
 | Ready topic backlog | 340 |
 | Errors/review/blocks | 20 |
-| TikTok today | NOT_SENT |
+| TikTok today | NO_TODAY_VIDEO |
 | TikTok backlog | 37 |
 | Analytics warehouse | through 2026-11-18 (lag 2 d) |
 | Ops (24 h) | analytics.load 1, publish.success 1, publish.scheduled_verified 1, publish.public 1 |
-| Scheduler queue | 2 queued, oldest 2026-11-20 (0 d) |
-| API quota today | 1680 / 9800 units (project 1012165386949) |
+| Scheduler queue | 1 queued, oldest 2026-11-21 (-1 d) |
+| API quota today | 1686 / 9800 units (project 1012165386949) |
 | YPP readiness (estimate) | subs 32/1,000 · long-form watch h (365 d) unavailable/4,000 · Shorts views (90 d) unavailable/10M |
 
 ## ImpossibleBrief
@@ -39,12 +39,12 @@ Missing API-only metrics are reported as `unavailable`, never as zero.
 | Publish time | unavailable |
 | Video ID | unavailable |
 | Analytics | measured |
-| Scheduler | sla-missed-or-channel-disabled |
+| Scheduler | pending-before-deadline |
 | Ready topic backlog | 471 |
 | Errors/review/blocks | 6 |
 | Analytics warehouse | through 2026-11-18 (lag 2 d) |
 | Ops (24 h) | analytics.load 1 |
-| Scheduler queue | 2 queued, oldest 2026-11-20 (0 d) |
-| API quota today | 69 / 9800 units (project 684098966511) |
+| Scheduler queue | 1 queued, oldest 2026-11-21 (-1 d) |
+| API quota today | 75 / 9800 units (project 684098966511) |
 | YPP readiness (estimate) | subs 13/1,000 · long-form watch h (365 d) unavailable/4,000 · Shorts views (90 d) unavailable/10M |
 
