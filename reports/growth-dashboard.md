@@ -1,10 +1,10 @@
 # Growth dashboard
 
-Generated 2026-11-20T07:11:16.013Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-11-20T13:11:40.629Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
-**Shorts health** — last published 2026-11-17T18:00:00.000Z · 47 published · inventory A77/B141/C61/D59 · next: liberty-ships-brittle-fracture (EXPLORE (0.25): under-sampled cluster materials-failures)
+**Shorts health** — last published 2026-11-17T18:00:00.000Z · 47 published · inventory A76/B141/C61/D59 · next: delta-1288-1996 (EXPLORE (0.25): under-sampled cluster materials-failures)
 
 **Long-form health** — cycle 2026-W47: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W47 already QUALITY_BLOCKED)
 
