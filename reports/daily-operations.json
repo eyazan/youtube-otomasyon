@@ -1,33 +1,33 @@
 {
-  "generatedAt": "2026-11-20T13:11:42.764Z",
+  "generatedAt": "2026-11-20T15:19:15.047Z",
   "date": "2026-11-20",
   "channels": [
     {
       "channel": "failure-reconstructed",
       "name": "Failure Reconstructed",
       "date": "2026-11-20",
-      "todayTopic": null,
-      "shortStatus": "due-not-produced",
+      "todayTopic": "liberty-ships-brittle-fracture",
+      "shortStatus": "scheduled",
       "longStatus": "due-not-produced",
       "qualityScore": null,
-      "qualityGate": null,
-      "youtubeStatus": "not-uploaded",
-      "publishTime": null,
-      "videoId": null,
+      "qualityGate": "PUBLISH",
+      "youtubeStatus": "scheduled",
+      "publishTime": "2026-11-20T18:00:00.000Z",
+      "videoId": "ZMUBp0hfJLk",
       "analyticsHealth": "measured",
-      "schedulerHealth": "pending-before-deadline",
-      "backlog": 341,
+      "schedulerHealth": "healthy",
+      "backlog": 340,
       "errors": 20,
       "inventory": {
         "channel": "failure-reconstructed",
         "channelName": "Failure Reconstructed",
-        "calculatedAt": "2026-11-20T13:11:42.798Z",
+        "calculatedAt": "2026-11-20T15:19:15.077Z",
         "qualifiedTopics": 388,
         "validatedCandidates": 0,
         "researchBacklog": 0,
-        "readyShorts": 341,
-        "readyLongForm": 339,
-        "daysOfInventory": 341,
+        "readyShorts": 340,
+        "readyLongForm": 338,
+        "daysOfInventory": 340,
         "monthsOfInventory": 11.2,
         "categoryDistribution": {
           "software-and-control-failures": 20,
@@ -852,10 +852,12 @@
           "errors": []
         },
         "ops24h": {
-          "analytics.load": 1
+          "analytics.load": 1,
+          "publish.success": 1,
+          "publish.scheduled_verified": 1
         },
         "quota": {
-          "usedToday": 7,
+          "usedToday": 1619,
           "budget": 9800,
           "project": "1012165386949"
         },
@@ -864,7 +866,7 @@
           "estimate": true,
           "note": "Estimate from the YouTube Analytics API; YouTube decides eligibility.",
           "subscribers": 32,
-          "subscribersAt": "2026-11-20T13:11:15.142Z",
+          "subscribersAt": "2026-11-20T15:19:02.492Z",
           "longWatchHours365": null,
           "shortsViews90": null,
           "percent": {
@@ -881,15 +883,15 @@
       },
       "tiktok": {
         "mode": "SEND_TO_USER_INBOX",
-        "todayStatus": "NO_TODAY_VIDEO",
+        "todayStatus": "NOT_SENT",
         "sent": 10,
         "publicationStateAvailable": false,
-        "backlog": 36,
+        "backlog": 37,
         "failures": 0
       },
       "stateCounts": {
         "generated": 31,
-        "published": 47,
+        "published": 48,
         "failed": 1
       }
     },
@@ -912,7 +914,7 @@
       "inventory": {
         "channel": "impossible-brief",
         "channelName": "ImpossibleBrief",
-        "calculatedAt": "2026-11-20T13:11:42.865Z",
+        "calculatedAt": "2026-11-20T15:19:15.130Z",
         "qualifiedTopics": 500,
         "validatedCandidates": 0,
         "researchBacklog": 0,
@@ -1011,7 +1013,7 @@
           "analytics.load": 1
         },
         "quota": {
-          "usedToday": 7,
+          "usedToday": 13,
           "budget": 9800,
           "project": "684098966511"
         },
@@ -1020,7 +1022,7 @@
           "estimate": true,
           "note": "Estimate from the YouTube Analytics API; YouTube decides eligibility.",
           "subscribers": 13,
-          "subscribersAt": "2026-11-20T13:11:33.202Z",
+          "subscribersAt": "2026-11-20T15:19:11.567Z",
           "longWatchHours365": null,
           "shortsViews90": null,
           "percent": {

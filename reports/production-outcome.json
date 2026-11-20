@@ -1,25 +1,27 @@
 {
-  "at": "2026-11-20T13:11:42.923Z",
-  "runId": "44741301349",
+  "at": "2026-11-20T15:19:15.180Z",
+  "runId": "44761071456",
   "rows": [
     {
       "channel": "failure-reconstructed",
-      "outcome": "BLOCKED",
-      "category": "QUALITY_REJECTED",
-      "scheduled": false,
-      "publication": "NOT_SCHEDULED",
-      "publishAt": null,
-      "reason": "premium publication refused (see the premium publish log); nothing uploaded, legacy renderer not used",
-      "slug": null,
+      "outcome": "UPLOADED",
+      "category": "SCHEDULED",
+      "scheduled": true,
+      "publication": "SCHEDULED",
+      "publishAt": "2026-11-20T18:00:00.000Z",
+      "reason": "premium FR-liberty-ships-brittle-fracture ZMUBp0hfJLk",
+      "slug": "liberty-ships-brittle-fracture",
       "videoId": null,
       "targetDay": "2026-11-20",
       "trigger": {
-        "event": "repository_dispatch",
-        "correlationId": "production-2-20261120T130543Z-cbe75b76"
+        "event": "schedule",
+        "correlationId": null
       },
       "stages": {
         "RESEARCH": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "FR-liberty-ships-brittle-fracture",
+          "at": "2026-11-20T15:17:07.884Z"
         },
         "SCRIPT": {
           "status": "not-reached"
@@ -31,19 +33,29 @@
           "status": "not-reached"
         },
         "RENDER": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "premium final",
+          "at": "2026-11-20T15:17:07.884Z"
         },
         "QA": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
+          "at": "2026-11-20T15:17:07.885Z"
         },
         "UPLOAD": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "ZMUBp0hfJLk",
+          "at": "2026-11-20T15:17:07.885Z"
         },
         "SCHEDULE": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "2026-11-20T18:00:00.000Z",
+          "at": "2026-11-20T15:17:07.885Z"
         },
         "PUBLISH": {
-          "status": "not-reached"
+          "status": "scheduled",
+          "detail": "YouTube makes it public at 2026-11-20T18:00:00.000Z",
+          "at": "2026-11-20T15:17:07.886Z"
         }
       }
     },
@@ -59,8 +71,8 @@
       "videoId": null,
       "targetDay": "2026-11-20",
       "trigger": {
-        "event": "repository_dispatch",
-        "correlationId": "production-2-20261120T130543Z-cbe75b76"
+        "event": "schedule",
+        "correlationId": null
       },
       "stages": {
         "RESEARCH": {

@@ -2,52 +2,6 @@
   "channel": "failure-reconstructed",
   "runs": [
     {
-      "runId": "44349036093",
-      "attempt": "1",
-      "startedAt": "2026-11-18T16:38:52.958Z",
-      "publish": true,
-      "trigger": {
-        "event": "repository_dispatch",
-        "correlationId": null
-      },
-      "targetDay": "2026-11-18",
-      "slug": null,
-      "outcome": "NO_TOPIC",
-      "reason": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [56 unused A topic(s), best viral score 74 < minimum 75; 11 topic(s) at the minimum are bucket B/C, not selectable]",
-      "stages": {
-        "RESEARCH": {
-          "status": "failed",
-          "detail": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [56 unused A topic(s), best viral score 74 < minimum 75; 11 topic(s) at the minimum are bucket B/C, not selectable]",
-          "at": "2026-11-18T16:38:54.539Z"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "not-reached"
-        },
-        "QA": {
-          "status": "not-reached"
-        },
-        "UPLOAD": {
-          "status": "not-reached"
-        },
-        "SCHEDULE": {
-          "status": "not-reached"
-        },
-        "PUBLISH": {
-          "status": "not-reached"
-        }
-      },
-      "finishedAt": "2026-11-18T16:38:54.540Z"
-    },
-    {
       "runId": "44349515345",
       "attempt": "1",
       "startedAt": "2026-11-18T16:41:34.933Z",
@@ -1340,6 +1294,62 @@
         }
       },
       "finishedAt": "2026-11-20T13:08:45.801Z"
+    },
+    {
+      "runId": "44761071456",
+      "attempt": "1",
+      "startedAt": "2026-11-20T15:14:13.642Z",
+      "publish": true,
+      "trigger": {
+        "event": "schedule",
+        "correlationId": null
+      },
+      "targetDay": "2026-11-20",
+      "slug": "liberty-ships-brittle-fracture",
+      "outcome": "UPLOADED",
+      "reason": "premium FR-liberty-ships-brittle-fracture ZMUBp0hfJLk",
+      "stages": {
+        "RESEARCH": {
+          "status": "done",
+          "detail": "FR-liberty-ships-brittle-fracture",
+          "at": "2026-11-20T15:17:07.884Z"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "done",
+          "detail": "premium final",
+          "at": "2026-11-20T15:17:07.884Z"
+        },
+        "QA": {
+          "status": "done",
+          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
+          "at": "2026-11-20T15:17:07.885Z"
+        },
+        "UPLOAD": {
+          "status": "done",
+          "detail": "ZMUBp0hfJLk",
+          "at": "2026-11-20T15:17:07.885Z"
+        },
+        "SCHEDULE": {
+          "status": "done",
+          "detail": "2026-11-20T18:00:00.000Z",
+          "at": "2026-11-20T15:17:07.885Z"
+        },
+        "PUBLISH": {
+          "status": "scheduled",
+          "detail": "YouTube makes it public at 2026-11-20T18:00:00.000Z",
+          "at": "2026-11-20T15:17:07.886Z"
+        }
+      },
+      "finishedAt": "2026-11-20T15:17:07.887Z"
     }
   ]
 }
