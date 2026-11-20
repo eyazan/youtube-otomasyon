@@ -1,21 +1,21 @@
 {
-  "at": "2026-11-19T23:08:56.474Z",
-  "runId": "44634879524",
+  "at": "2026-11-20T07:11:17.783Z",
+  "runId": "44692437828",
   "rows": [
     {
       "channel": "failure-reconstructed",
-      "outcome": "NOT_DUE",
-      "category": "NOT_DUE",
+      "outcome": "BLOCKED",
+      "category": "QUALITY_REJECTED",
       "scheduled": false,
       "publication": "NOT_SCHEDULED",
       "publishAt": null,
-      "reason": "before production slot 09:00 Europe/Istanbul",
+      "reason": "premium publication refused (see the premium publish log); nothing uploaded, legacy renderer not used",
       "slug": null,
       "videoId": null,
-      "targetDay": null,
+      "targetDay": "2026-11-20",
       "trigger": {
-        "event": "schedule",
-        "correlationId": null
+        "event": "repository_dispatch",
+        "correlationId": "production-1-20261120T070543Z-6833c58c"
       },
       "stages": {
         "RESEARCH": {
@@ -49,18 +49,18 @@
     },
     {
       "channel": "impossible-brief",
-      "outcome": "NOT_DUE",
-      "category": "NOT_DUE",
+      "outcome": "BLOCKED",
+      "category": "QUALITY_REJECTED",
       "scheduled": false,
       "publication": "NOT_SCHEDULED",
       "publishAt": null,
-      "reason": "before production slot 09:30 Europe/Istanbul",
+      "reason": "premium publication refused (see the premium publish log); nothing uploaded, legacy renderer not used",
       "slug": null,
       "videoId": null,
-      "targetDay": null,
+      "targetDay": "2026-11-20",
       "trigger": {
-        "event": "schedule",
-        "correlationId": null
+        "event": "repository_dispatch",
+        "correlationId": "production-1-20261120T070543Z-6833c58c"
       },
       "stages": {
         "RESEARCH": {

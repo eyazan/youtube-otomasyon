@@ -1,10 +1,10 @@
 # Growth dashboard
 
-Generated 2026-11-19T23:08:53.544Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-11-20T07:11:16.013Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
-**Shorts health** — last published 2026-11-17T18:00:00.000Z · 47 published · inventory A78/B141/C61/D59 · next: swissair-111-1998 (EXPLOIT (0.75): best A topic by SelectionScore)
+**Shorts health** — last published 2026-11-17T18:00:00.000Z · 47 published · inventory A77/B141/C61/D59 · next: liberty-ships-brittle-fracture (EXPLORE (0.25): under-sampled cluster materials-failures)
 
 **Long-form health** — cycle 2026-W47: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W47 already QUALITY_BLOCKED)
 
@@ -41,7 +41,7 @@ Generated 2026-11-19T23:08:53.544Z. Per-channel baselines are computed separatel
 
 ## ImpossibleBrief
 
-**Shorts health** — last published 2026-11-13T18:00:00.000Z · 24 published · inventory A103/B26/C140/D206 · next: what-if-we-tried-to-drill-through-the-earth (EXPLOIT (0.75): best A topic by SelectionScore)
+**Shorts health** — last published 2026-11-13T18:00:00.000Z · 24 published · inventory A102/B26/C140/D206 · next: what-if-we-tried-to-drill-through-the-earth (EXPLOIT (0.75): best A topic by SelectionScore)
 
 **Long-form health** — cycle 2026-W47: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W47 already QUALITY_BLOCKED)
 
