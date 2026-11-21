@@ -2,62 +2,6 @@
   "channel": "failure-reconstructed",
   "runs": [
     {
-      "runId": "44761071456",
-      "attempt": "1",
-      "startedAt": "2026-11-20T15:14:13.642Z",
-      "publish": true,
-      "trigger": {
-        "event": "schedule",
-        "correlationId": null
-      },
-      "targetDay": "2026-11-20",
-      "slug": "liberty-ships-brittle-fracture",
-      "outcome": "UPLOADED",
-      "reason": "premium FR-liberty-ships-brittle-fracture ZMUBp0hfJLk",
-      "stages": {
-        "RESEARCH": {
-          "status": "done",
-          "detail": "FR-liberty-ships-brittle-fracture",
-          "at": "2026-11-20T15:17:07.884Z"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "done",
-          "detail": "premium final",
-          "at": "2026-11-20T15:17:07.884Z"
-        },
-        "QA": {
-          "status": "done",
-          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
-          "at": "2026-11-20T15:17:07.885Z"
-        },
-        "UPLOAD": {
-          "status": "done",
-          "detail": "ZMUBp0hfJLk",
-          "at": "2026-11-20T15:17:07.885Z"
-        },
-        "SCHEDULE": {
-          "status": "done",
-          "detail": "2026-11-20T18:00:00.000Z",
-          "at": "2026-11-20T15:17:07.885Z"
-        },
-        "PUBLISH": {
-          "status": "scheduled",
-          "detail": "YouTube makes it public at 2026-11-20T18:00:00.000Z",
-          "at": "2026-11-20T15:17:07.886Z"
-        }
-      },
-      "finishedAt": "2026-11-20T15:17:07.887Z"
-    },
-    {
       "runId": "44765444489",
       "attempt": "1",
       "startedAt": "2026-11-20T15:40:33.953Z",
@@ -1354,6 +1298,50 @@
         }
       },
       "finishedAt": "2026-11-21T20:35:03.965Z"
+    },
+    {
+      "runId": "44948850857",
+      "attempt": "1",
+      "startedAt": "2026-11-21T20:56:51.265Z",
+      "publish": true,
+      "trigger": {
+        "event": "schedule",
+        "correlationId": null
+      },
+      "targetDay": null,
+      "slug": null,
+      "outcome": "NOT_DUE",
+      "reason": "production window closed at 21:00 Europe/Istanbul minus 60 min",
+      "stages": {
+        "RESEARCH": {
+          "status": "not-reached"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "not-reached"
+        },
+        "QA": {
+          "status": "not-reached"
+        },
+        "UPLOAD": {
+          "status": "not-reached"
+        },
+        "SCHEDULE": {
+          "status": "not-reached"
+        },
+        "PUBLISH": {
+          "status": "not-reached"
+        }
+      },
+      "finishedAt": "2026-11-21T20:56:51.281Z"
     }
   ]
 }
