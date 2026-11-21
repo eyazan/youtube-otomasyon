@@ -1,6 +1,6 @@
 {
   "schema": "feedback-loop-health/1",
-  "generatedAt": "2026-11-21T01:32:03.191Z",
+  "generatedAt": "2026-11-21T09:47:45.311Z",
   "verdict": "CLOSED_LOOP_WORKING",
   "channels": [
     {
@@ -9,13 +9,13 @@
       "mode": "adaptive",
       "publishedVideos": 48,
       "performanceRows": 48,
-      "diagnosisRows": 286,
+      "diagnosisRows": 287,
       "learning": {
-        "updatedAt": "2026-11-21T01:31:59.641Z",
+        "updatedAt": "2026-11-21T09:47:32.026Z",
         "sampleSize": 47,
         "status": "adaptive",
         "observations": 35,
-        "hypotheses": 7,
+        "hypotheses": 8,
         "adopted": 0,
         "suppressed": 0
       },
@@ -76,16 +76,9 @@
         }
       ],
       "timing": {
-        "lateCheckpointCount": 108,
+        "lateCheckpointCount": 109,
         "note": "Historical late collections are retained for audit, but performance math uses their real collection age.",
         "examples": [
-          {
-            "videoId": "A-IgHh6J_ZU",
-            "label": "6h",
-            "scheduledHours": 6,
-            "collectedAgeHours": 19.2,
-            "driftHours": 13.2
-          },
           {
             "videoId": "SjJHvPtSvcg",
             "label": "12h",
@@ -148,6 +141,13 @@
             "scheduledHours": 6,
             "collectedAgeHours": 18.23,
             "driftHours": 12.23
+          },
+          {
+            "videoId": "ZMUBp0hfJLk",
+            "label": "6h",
+            "scheduledHours": 6,
+            "collectedAgeHours": 15.79,
+            "driftHours": 9.79
           }
         ]
       },
@@ -162,7 +162,7 @@
       "performanceRows": 23,
       "diagnosisRows": 157,
       "learning": {
-        "updatedAt": "2026-11-21T01:32:00.745Z",
+        "updatedAt": "2026-11-21T09:47:39.093Z",
         "sampleSize": 22,
         "status": "adaptive",
         "observations": 30,
@@ -313,7 +313,7 @@
       "performanceRows": 7,
       "diagnosisRows": 27,
       "learning": {
-        "updatedAt": "2026-11-21T01:32:01.556Z",
+        "updatedAt": "2026-11-21T09:47:43.686Z",
         "sampleSize": 6,
         "status": "observing",
         "observations": 25,
