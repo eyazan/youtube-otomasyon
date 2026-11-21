@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-20T22:44:01.550Z",
+  "generatedAt": "2026-11-21T07:08:12.510Z",
   "note": "Per-channel baselines are computed separately and never blended.",
   "channels": [
     {
@@ -22,15 +22,15 @@
           "used": 10
         },
         "nextSelection": {
-          "slug": "columbia-2003",
-          "reason": "EXPLORE (0.25): under-sampled cluster spaceflight-disasters"
+          "slug": "swissair-111-1998",
+          "reason": "EXPLOIT (0.75): best A topic by SelectionScore"
         },
         "baseline": {
           "n": 47,
           "views": 278,
           "averagePercentageViewed": 62.13000000000001,
           "subscribersPer1000Views": 0,
-          "engagementPer1000Views": 18.87,
+          "engagementPer1000Views": 19.8,
           "watchHoursPer1000Views": 1.96
         }
       },
@@ -161,7 +161,7 @@
           "status": "adaptive",
           "sampleSize": 47,
           "adopted": 0,
-          "hypotheses": 7
+          "hypotheses": 11
         },
         "longform": {
           "status": "heuristics-only",
@@ -197,11 +197,6 @@
           "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
         },
         {
-          "slug": "controlled-impact-1984",
-          "bucket": "C",
-          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
-        },
-        {
           "slug": "new-london-school-1937",
           "bucket": "C",
           "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
@@ -210,6 +205,11 @@
           "slug": "vanguard-1957",
           "bucket": "C",
           "reason": "VideoPotential 82 in experimental band 58–71; sources 41 < 62"
+        },
+        {
+          "slug": "controlled-impact-1984",
+          "bucket": "C",
+          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
         },
         {
           "slug": "b2-guam-2008",
@@ -418,7 +418,7 @@
         "lastPublished": "2026-11-13T18:00:00.000Z",
         "published": 24,
         "inventory": {
-          "A": 103,
+          "A": 102,
           "B": 26,
           "C": 140,
           "D": 206
