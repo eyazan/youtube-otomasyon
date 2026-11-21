@@ -10,8 +10,9 @@ https://youtu.be/zq07sKTZmCs
 | 3d | 2026-10-25 | 158 | 3 | 1 | 69.12 | 0 | Shorts feed 84%, Search 14% |
 | 7d | 2026-10-29 | 165 | 3 | 1 | 67.2 | 1 | Shorts feed 68%, Search 31% |
 | 14d | 2026-11-05 | 167 | 3 | 1 | 67.49 | 2 | Shorts feed 66%, Search 33% |
+| 30d | 2026-11-21 | 178 | 4 | 1 | 65.51 | 2 | Shorts feed 63%, Search 36% |
 
-## Diagnosis at 14d
+## Diagnosis at 30d
 
 - **WEAK_TOPIC_PACKAGING** (low) — Current title scores 20.4/100 in the title engine; best editorial option scores 44.
 
@@ -21,9 +22,9 @@ https://youtu.be/zq07sKTZmCs
 
 ## First major observed retention drop
 
-- Timestamp: 5s; magnitude: 15 percentage points.
+- Timestamp: 5s; magnitude: 14 percentage points.
 - Active sentence: The captain first tried to help the other ship.
 - Visual type: REAL ARCHIVAL IMAGE
 - This is an observed alignment, not proof that the sentence or visual caused the drop.
 
-Views gained between 7d and 14d: 2.
+Views gained between 14d and 30d: 11.

@@ -5348,5 +5348,37 @@
       }
     ],
     "at": "2026-11-21T13:08:10.324Z"
+  },
+  {
+    "videoId": "ZMUBp0hfJLk",
+    "channel": "failure-reconstructed",
+    "contentType": "short",
+    "checkpoint": "24h",
+    "diagnoses": [
+      {
+        "code": "INSUFFICIENT_DATA",
+        "confidence": "high",
+        "evidence": "38 views < 100",
+        "recommendation": "No intervention; wait for the next checkpoint.",
+        "specCode": "INSUFFICIENT_DATA"
+      }
+    ],
+    "at": "2026-11-21T18:04:33.896Z"
+  },
+  {
+    "videoId": "zq07sKTZmCs",
+    "channel": "failure-reconstructed",
+    "contentType": "short",
+    "checkpoint": "30d",
+    "diagnoses": [
+      {
+        "code": "HEALTHY",
+        "confidence": "low",
+        "evidence": "no problem pattern in available metrics",
+        "recommendation": "Keep; revisit at next checkpoint.",
+        "specCode": "HEALTHY"
+      }
+    ],
+    "at": "2026-11-21T18:04:33.896Z"
   }
 ]
