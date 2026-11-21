@@ -2,50 +2,6 @@
   "channel": "failure-reconstructed",
   "runs": [
     {
-      "runId": "44612232532",
-      "attempt": "1",
-      "startedAt": "2026-11-19T20:49:01.995Z",
-      "publish": true,
-      "trigger": {
-        "event": "schedule",
-        "correlationId": null
-      },
-      "targetDay": null,
-      "slug": null,
-      "outcome": "NOT_DUE",
-      "reason": "production window closed at 21:00 Europe/Istanbul minus 60 min",
-      "stages": {
-        "RESEARCH": {
-          "status": "not-reached"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "not-reached"
-        },
-        "QA": {
-          "status": "not-reached"
-        },
-        "UPLOAD": {
-          "status": "not-reached"
-        },
-        "SCHEDULE": {
-          "status": "not-reached"
-        },
-        "PUBLISH": {
-          "status": "not-reached"
-        }
-      },
-      "finishedAt": "2026-11-19T20:49:02.009Z"
-    },
-    {
       "runId": "44620874635",
       "attempt": "1",
       "startedAt": "2026-11-19T21:40:33.349Z",
@@ -1350,6 +1306,52 @@
         }
       },
       "finishedAt": "2026-11-21T16:26:57.720Z"
+    },
+    {
+      "runId": "44925376324",
+      "attempt": "1",
+      "startedAt": "2026-11-21T16:36:34.885Z",
+      "publish": true,
+      "trigger": {
+        "event": "repository_dispatch",
+        "correlationId": null
+      },
+      "targetDay": "2026-11-21",
+      "slug": null,
+      "outcome": "NO_TOPIC",
+      "reason": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [53 unused A topic(s), best viral score 74 < minimum 75; 10 topic(s) at the minimum are bucket B/C, not selectable]",
+      "stages": {
+        "RESEARCH": {
+          "status": "failed",
+          "detail": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [53 unused A topic(s), best viral score 74 < minimum 75; 10 topic(s) at the minimum are bucket B/C, not selectable]",
+          "at": "2026-11-21T16:36:35.964Z"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "not-reached"
+        },
+        "QA": {
+          "status": "not-reached"
+        },
+        "UPLOAD": {
+          "status": "not-reached"
+        },
+        "SCHEDULE": {
+          "status": "not-reached"
+        },
+        "PUBLISH": {
+          "status": "not-reached"
+        }
+      },
+      "finishedAt": "2026-11-21T16:36:35.965Z"
     }
   ]
 }
