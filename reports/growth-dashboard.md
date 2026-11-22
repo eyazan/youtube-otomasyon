@@ -1,10 +1,10 @@
 # Growth dashboard
 
-Generated 2026-11-22T17:52:57.582Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-11-22T18:35:06.847Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
-**Shorts health** — last published 2026-11-22T18:00:00.000Z · 49 published · inventory A74/B142/C61/D59 · next: imperial-foods-fire-1991 (EXPLORE (0.25): under-sampled cluster fire-and-explosions)
+**Shorts health** — last published 2026-11-22T18:00:00.000Z · 49 published · inventory A77/B139/C61/D59 · next: imperial-foods-fire-1991 (EXPLORE (0.25): under-sampled cluster fire-and-explosions)
 
 **Long-form health** — cycle 2026-W47: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W47 already QUALITY_BLOCKED)
 
