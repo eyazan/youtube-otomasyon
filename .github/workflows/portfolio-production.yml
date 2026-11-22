@@ -234,6 +234,8 @@ jobs:
           IB_PREMIUM_PUBLISH: ${{ vars.IB_PREMIUM_PUBLISH == '1' && '1' || 'off' }}
           # Manual named topic (checked by "Manual topic check"); empty on scheduled runs
           IB_TOPIC: ${{ inputs.topic }}
+          # Faz 1 stock test: only a manual, named-topic, non-dry legacy run may upload that one stock render
+          IB_MANUAL_STOCK_UPLOAD: ${{ github.event_name == 'workflow_dispatch' && inputs.topic != '' && inputs.engine == 'legacy' && !inputs.dry_run && '1' || '' }}
           PD_CHROMIUM: /usr/bin/google-chrome
           EDGE_RATE_LIMIT_RETRIES: '6'
           EDGE_TRANSIENT_RETRIES: '5'

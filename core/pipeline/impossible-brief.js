@@ -216,7 +216,9 @@ function runChannel(slug, argv = []) {
   // A premium-only channel (config premiumOnlyUploads: ImpossibleBrief) never uploads from this legacy lane, whatever
   // started it (scheduler, SLA watchdog recovery, a manual dispatch with engine=legacy): only the premium publish path
   // above takes the day. The uploader refuses a non-premium MP4 as well (youtube-yukle.js LEGACY_UPLOAD_REFUSED).
-  if (channel.config.premiumOnlyUploads && process.env.PUBLISH === "1") {
+  // Faz 1 stock test: a manual dispatch naming one topic (workflow sets IB_MANUAL_STOCK_UPLOAD only then) may upload it.
+  const manualStock = !!explicit && process.env.IB_MANUAL_STOCK_UPLOAD === "1";
+  if (channel.config.premiumOnlyUploads && process.env.PUBLISH === "1" && !manualStock) {
     const why = "LEGACY_UPLOAD_RETIRED: this channel publishes premium Shorts only (premium publish path); the legacy renderer does not run with PUBLISH=1";
     run.outcome("BLOCKED", why); console.log(`[${channel.name}] ${why}`); return 0;
   }
@@ -335,7 +337,7 @@ function runChannel(slug, argv = []) {
     }
     if (!budget("upload")) return 1;
     const upload = cp.spawnSync(process.execPath, [path.join(Channel.ROOT, "youtube-yukle.js"), "--channel", channel.slug, topic.slug], { cwd: Channel.ROOT, stdio: "inherit",
-      env: { ...process.env, ...(targetDay ? { SHORTS_TARGET_DAY: targetDay } : {}) } });
+      env: { ...process.env, ...(targetDay ? { SHORTS_TARGET_DAY: targetDay } : {}), ...(manualStock ? { IB_MANUAL_STOCK_SLUG: topic.slug } : {}) } });
     if (upload.status === 15 || upload.status === 16) {
       // 15: uploaded, but YouTube did not confirm private + publishAt (never re-uploaded).
       // 16: the target day's slot is taken or missed (never moved to another day). Topic kept.

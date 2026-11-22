@@ -216,7 +216,10 @@ async function main() {
   // staged (core/pipeline/premium-publish.js stage(): PREMIUM-STAGED.json carrying this file's sha256), whatever started
   // the run (scheduler, SLA watchdog recovery, manual dispatch, a local call). A legacy render is refused before any API
   // call; --dogrula still reports.
-  if (CHANNEL.config.premiumOnlyUploads && !kuru) {
+  // One exception (Faz 1 stock test): a manual dispatch that named this topic (core/pipeline/impossible-brief.js sets
+  // IB_MANUAL_STOCK_SLUG to that one slug; the scheduler and SLA watchdog never do) may upload its stock render.
+  const manualStock = !!process.env.IB_MANUAL_STOCK_SLUG && process.env.IB_MANUAL_STOCK_SLUG === IS;
+  if (CHANNEL.config.premiumOnlyUploads && !kuru && !manualStock) {
     let staged = null; try { staged = JSON.parse(fs.readFileSync(path.join(BASE, "PREMIUM-STAGED.json"), "utf8")); } catch (e) {}
     const sha = require("crypto").createHash("sha256").update(fs.readFileSync(dosya)).digest("hex");
     if (!staged || staged.mediaSha256 !== sha) {

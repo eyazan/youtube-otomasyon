@@ -34,7 +34,7 @@ test("uploader refuses an ImpossibleBrief MP4 the premium publish path did not s
 
 test("legacy IB lane never uploads with PUBLISH=1, so the SLA watchdog recovery cannot upload a legacy render", () => {
   const lane = fs.readFileSync(path.join(ROOT, "core", "pipeline", "impossible-brief.js"), "utf8");
-  assert.match(lane, /if \(channel\.config\.premiumOnlyUploads && process\.env\.PUBLISH === "1"\) \{\n[^\n]*LEGACY_UPLOAD_RETIRED[^\n]*\n +run\.outcome\("BLOCKED", why\);[^\n]*return 0;/);
+  assert.match(lane, /if \(channel\.config\.premiumOnlyUploads && process\.env\.PUBLISH === "1" && !manualStock\) \{\n[^\n]*LEGACY_UPLOAD_RETIRED[^\n]*\n +run\.outcome\("BLOCKED", why\);[^\n]*return 0;/);
   // the guard sits after the premium publish hook (which may take the day) and before any topic is selected or rendered
   assert.ok(lane.indexOf("premium-publish\").run(channel") < lane.indexOf("LEGACY_UPLOAD_RETIRED") && lane.indexOf("LEGACY_UPLOAD_RETIRED") < lane.indexOf("Discovery.universe(channel)"));
   // the SLA watchdog's IB recovery runs this legacy lane with PUBLISH=1 and never receives the premium variables (only the
