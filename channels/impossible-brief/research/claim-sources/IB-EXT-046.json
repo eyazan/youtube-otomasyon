@@ -1,0 +1,137 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-EXT-046",
+ "checkedAt": "2026-10-30T04:54:54.155Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "f84b9d9f27f434d1",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "It is the innermost planet in its planetary system, taking less than 18 hours to complete an orbit.",
+   "url": "https://en.wikipedia.org/wiki/55_Cancri_e",
+   "sourceTitle": "Wikipedia — 55 Cancri Ae",
+   "revision": 1382409263,
+   "passage": "It is the innermost planet in its planetary system, taking less than 18 hours to complete an orbit.",
+   "numbers": {
+    "claim": [
+     "18"
+    ],
+    "inPassage": [
+     "18"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "Due to its proximity to its star, 55 Cancri Ae is extremely hot, with temperatures on the day side exceeding 3,000 Kelvin.",
+   "url": "https://en.wikipedia.org/wiki/55_Cancri_e",
+   "sourceTitle": "Wikipedia — 55 Cancri Ae",
+   "revision": 1382409263,
+   "passage": "Due to its proximity to its star, 55 Cancri Ae is extremely hot, with temperatures on the day side exceeding 3,000 Kelvin.",
+   "numbers": {
+    "claim": [
+     "55",
+     "3000"
+    ],
+    "inPassage": [
+     "55",
+     "3000"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "55 Cancri Ae was announced in 2004, making it the first super-Earth discovered around a main sequence star.",
+   "url": "https://en.wikipedia.org/wiki/55_Cancri_e",
+   "sourceTitle": "Wikipedia — 55 Cancri Ae",
+   "revision": 1382409263,
+   "passage": "55 Cancri Ae was discovered in data taken during 2003–2004 and announced in 2004, thus making it the first super-Earth discovered around a main sequence star, predating Gliese 876 d by a year.",
+   "numbers": {
+    "claim": [
+     "55",
+     "2004"
+    ],
+    "inPassage": [
+     "55",
+     "2004"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "Until the 2010 observations and recalculations, this planet had been thought to take about 2.8 days to orbit the star.",
+   "url": "https://en.wikipedia.org/wiki/55_Cancri_e",
+   "sourceTitle": "Wikipedia — 55 Cancri Ae",
+   "revision": 1382409263,
+   "passage": "However, until the 2010 observations and recalculations, this planet had been thought to take about 2.8 days to orbit the star.",
+   "numbers": {
+    "claim": [
+     "2010",
+     "2.8"
+    ],
+    "inPassage": [
+     "2010",
+     "2.8"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "One planet completes a year in under 18 hours.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It's 55 Cancri e, a super-Earth hugging its star.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Its day side tops 3,000 kelvin.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Announced in 2004, it was the first super-Earth around a main-sequence star.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Until 2010, astronomers thought its year lasted 2.8 days.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "At that distance, rock itself may melt.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Life as we know it couldn't survive there.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So a planet's year length can tell you how hellish it is.",
+   "status": "HUMAN"
+  }
+ ]
+}

@@ -39,6 +39,9 @@
     sun: { base: "#ffb43c", land: "#ffd36b", land2: "#ff8a2a", atm: "#ffcf6b", glow: true },
   };
   let pid = 0;
+  // spinKeys [[t, rate], ...]: the rotation angle is the integral of a keyed rate (fixed 1/60 s steps, deterministic), so
+  // a planet can slow down and stop without its surface jumping back (IB-EAR-001: "Earth stops spinning for one second")
+  const spunAngle = (keys, t) => { let a = 0; const dt = 1 / 60; for (let x = 0; x < t; x += dt) a += BTO.keys(Math.min(x + dt / 2, t), keys) * Math.min(dt, t - x); return a; };
   BTO.def("planet", (o) => {
     const id = `pl${pid += 1}`; const K = { ...(KINDS[o.kind || "earth"] || KINDS.earth), ...(o.colors || {}) }; const r0 = BTO.rng(o.seed || 9);
     const blobs = []; for (let i = 0; i < (o.blobs || 26); i += 1) blobs.push({ u: r0() * 6.283, v: (r0() - 0.5) * 2.6, s: 0.12 + r0() * 0.3, c: r0() < 0.7 ? K.land : K.land2 });
@@ -46,7 +49,7 @@
     return { draw: (t) => {
       const op = fade(t, o.enterAt, o.outAt, 0.4); if (op <= 0) return "";
       const R = o.rKeys ? BTO.keys(t, o.rKeys, "camera") : (o.r || 300); const X = o.xKeys ? BTO.keys(t, o.xKeys, "camera") : (o.x || 540), Y = o.yKeys ? BTO.keys(t, o.yKeys, "camera") : (o.y || 800);
-      const L = o.light || [-0.6, -0.5]; const rot = (o.spin == null ? 0.12 : o.spin) * t; const ent = o.enterAt == null ? 1 : BTO.sp(t, o.enterAt, "soft"); const Rs = R * lerp(0.9, 1, ent);
+      const L = o.light || [-0.6, -0.5]; const rot = o.spinKeys ? spunAngle(o.spinKeys, t) : (o.spin == null ? 0.12 : o.spin) * t; const ent = o.enterAt == null ? 1 : BTO.sp(t, o.enterAt, "soft"); const Rs = R * lerp(0.9, 1, ent);
       let defs = `<clipPath id="${id}c"><circle cx="${n1(X)}" cy="${n1(Y)}" r="${n1(Rs)}"/></clipPath>
         <radialGradient id="${id}s" cx="${50 + L[0] * 32}%" cy="${50 + L[1] * 32}%" r="78%"><stop offset="0" stop-color="#fff" stop-opacity="${K.glow ? 0.35 : 0.18}"/><stop offset="0.55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="${K.glow ? 0.05 : 0.78}"/></radialGradient>
         <radialGradient id="${id}a" cx="50%" cy="50%" r="50%"><stop offset="0.82" stop-color="${K.atm || "#fff"}" stop-opacity="0"/><stop offset="0.9" stop-color="${K.atm || "#fff"}" stop-opacity="${K.glow ? 0.55 : 0.32}"/><stop offset="1" stop-color="${K.atm || "#fff"}" stop-opacity="0"/></radialGradient>`;
@@ -57,6 +60,10 @@
       if (K.bands) for (let i = -5; i <= 5; i += 1) surf += `<rect x="${n1(X - Rs)}" y="${n1(Y + i * Rs * 0.19 - Rs * 0.05 + Math.sin(rot * 2 + i) * 4)}" width="${n1(Rs * 2)}" height="${n1(Rs * 0.09)}" fill="${i % 2 ? K.land : K.land2}" opacity="0.55"/>`;
       else blobs.forEach((b) => { const u = ((b.u + rot) % 6.283 + 6.283) % 6.283; if (u > 3.14) return; const px = X - Math.cos(u) * Rs * 0.98, py = Y + b.v * Rs * 0.36; const sq = Math.sin(u);
         surf += `<ellipse cx="${n1(px)}" cy="${n1(py)}" rx="${n1(b.s * Rs * sq + 2)}" ry="${n1(b.s * Rs * 0.7)}" fill="${b.c}" opacity="0.9"/>`; });
+      // spot: a storm oval in the southern belt that turns with the planet (Jupiter's Great Red Spot topics)
+      if (o.spot) { // it drifts across the visible hemisphere but never turns away: the topic is about the spot, so it stays in view
+        const u = 1.57 + 0.55 * Math.sin(rot * 0.8); if (u < 3.14) { const sq = Math.sin(u); const px = X - Math.cos(u) * Rs * 0.8, py = Y + Rs * 0.32;
+        surf += `<ellipse cx="${n1(px)}" cy="${n1(py)}" rx="${n1(Rs * 0.2 * (o.spotScale || 1) * sq + 2)}" ry="${n1(Rs * 0.11 * (o.spotScale || 1))}" fill="#b5462e" stroke="#e8a27a" stroke-width="3" opacity="0.95"/>`; } }
       if ((o.kind || "earth") === "earth" && o.ice !== false) surf += `<ellipse cx="${n1(X)}" cy="${n1(Y - Rs * 0.93)}" rx="${n1(Rs * 0.42)}" ry="${n1(Rs * 0.12)}" fill="${K.ice}" opacity="0.85"/>`;
       // grid: latitude chords + meridians that turn with the planet (reads as motion even on a featureless close-up)
       if (o.grid) { for (let la = -75; la <= 75; la += 15) { const yy = Y + Math.sin(la * Math.PI / 180) * Rs; const hw = Math.cos(la * Math.PI / 180) * Rs; surf += `<line x1="${n1(X - hw)}" y1="${n1(yy)}" x2="${n1(X + hw)}" y2="${n1(yy)}" stroke="${P().teal}" stroke-width="2.5" opacity="0.35"/>`; }
@@ -128,7 +135,10 @@
       items.forEach((it, i) => { const yy = y0 + i * gap; const k = t < it.at ? 0 : BTO.ep(t, it.at, it.at + 0.8, "decelerate"); const bw = Math.max(6, w * clamp(f(it.value)) * k); const col = (it.color && C[it.color]) || it.color || (i === items.length - 1 ? C.amber : C.teal);
         if (it.label) g += BTO.text(x0, yy - 18, it.label, { size: o.labelSize || T().scale.small, anchor: "start", weight: 700, fill: C.muted, ls: 1.5, op: clamp((t - it.at + 0.3) / 0.3) });
         g += `<rect x="${x0}" y="${yy}" width="${n1(bw)}" height="${bh}" rx="10" fill="${col}" opacity="${clamp((t - it.at) / 0.15).toFixed(3)}"/>`;
-        if (it.valueText) g += BTO.text(Math.min(x0 + bw + 20, x0 + w - 10), yy + bh * 0.7, it.valueText, { size: o.valueSize || T().scale.label, anchor: x0 + bw + 20 > x0 + w - 220 ? "end" : "start", weight: 800, family: T().num, op: clamp((t - it.at - 0.5) / 0.3), fill: x0 + bw + 20 > x0 + w - 220 ? C.desk : C.text }); });
+        // the value sits after the bar when it fits, otherwise inside the bar's own end (never past it: "1,184.2 km/h"
+        // ran 20 px over a shorter bar, IB-EAR-001 review render 41006538761)
+        const inside = x0 + bw + 20 > x0 + w - 220;
+        if (it.valueText) g += BTO.text(inside ? x0 + bw - 16 : x0 + bw + 20, yy + bh * 0.7, it.valueText, { size: o.valueSize || T().scale.label, anchor: inside ? "end" : "start", weight: 800, family: T().num, op: clamp((t - it.at - 0.5) / 0.3), fill: inside ? C.desk : C.text }); });
       return `<g opacity="${op.toFixed(3)}">${g}</g>`;
     } };
   });

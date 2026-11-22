@@ -1,0 +1,135 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-SPA-061",
+ "checkedAt": "2026-11-03T18:27:11.374Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "c825ae5c1f3e072e",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "With over 400 active volcanoes, Io is the most geologically active object in the Solar System.",
+   "url": "https://en.wikipedia.org/wiki/Io_(moon)",
+   "sourceTitle": "Wikipedia — Io (moon)",
+   "revision": 1383471933,
+   "passage": "With over 400 active volcanoes, Io is the most geologically active object in the Solar System.",
+   "numbers": {
+    "claim": [
+     "400"
+    ],
+    "inPassage": [
+     "400"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "Several volcanoes produce plumes of sulfur and sulfur dioxide as high as 500 km (300 mi) above the surface.",
+   "url": "https://en.wikipedia.org/wiki/Io_(moon)",
+   "sourceTitle": "Wikipedia — Io (moon)",
+   "revision": 1383471933,
+   "passage": "Several volcanoes produce plumes of sulfur and sulfur dioxide as high as 500 km (300 mi) above the surface.",
+   "numbers": {
+    "claim": [
+     "500",
+     "300"
+    ],
+    "inPassage": [
+     "500",
+     "300"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "Numerous extensive lava flows, several more than 500 km (300 mi) in length, also mark the surface.",
+   "url": "https://en.wikipedia.org/wiki/Io_(moon)",
+   "sourceTitle": "Wikipedia — Io (moon)",
+   "revision": 1383471933,
+   "passage": "Numerous extensive lava flows, several more than 500 km (300 mi) in length, also mark the surface.",
+   "numbers": {
+    "claim": [
+     "500",
+     "300"
+    ],
+    "inPassage": [
+     "500",
+     "300"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "In 1979, the two Voyager spacecraft revealed Io to be a geologically active world, with numerous volcanic features, large mountains, and a young surface with no obvious impact craters.",
+   "url": "https://en.wikipedia.org/wiki/Io_(moon)",
+   "sourceTitle": "Wikipedia — Io (moon)",
+   "revision": 1383471933,
+   "passage": "In 1979, the two Voyager spacecraft revealed Io to be a geologically active world, with numerous volcanic features, large mountains, and a young surface with no obvious impact craters.",
+   "numbers": {
+    "claim": [
+     "1979"
+    ],
+    "inPassage": [
+     "1979"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why one moon has over 400 active volcanoes.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Io, orbiting Jupiter, is the most volcanic place known.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Some plumes rise 500 kilometres above its surface.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Some lava flows run more than 500 kilometres.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Jupiter's tides flex Io, heating its interior.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Voyager revealed the activity in 1979.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Its surface is constantly repaved, leaving no obvious craters.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So a moon can be hotter inside than its distance suggests.",
+   "status": "HUMAN"
+  }
+ ]
+}

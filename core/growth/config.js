@@ -92,6 +92,7 @@ function forChannel(channel = Channel.getChannel()) {
     merged.topic.bucketRequirements.A.sourceMinimum = Math.max(merged.topic.bucketRequirements.A.sourceMinimum, thresholds.sourceQualityMinimum);
   }
   applyViralMinimumException(merged, override.viralMinimumException, channel);
+  applyHookCandidateGate(merged, override.hookCandidateGate, channel);
   validate(merged);
   const frozen = Object.freeze(merged);
   cache.set(key, frozen);
@@ -124,6 +125,29 @@ function applyViralMinimumException(merged, exception, channel, env = process.en
   return merged.viralScoring.exception;
 }
 
+// Channel-scoped, reviewed replacement of the portfolio hook-count minimum (config/viral-quality-v2.json
+// hooks.minimumCandidates, 20). The hook generator has a fixed set of families and drops cosmetic repeats, so a researched
+// ImpossibleBrief record yields 10-21 candidates (1 of 154 reached 20; every published IB Short had 10-17). A count it
+// cannot reach is no quality signal: it blocks new research and costs every record 8 HookPotential points. The gate asks
+// for real variety instead: at least minimumCandidates valid (unblocked) candidates, minimumFamilies distinct families
+// and minimumStrong candidates scoring >= strongScore. Padding with repeats cannot pass it (cosmetic repeats are merged
+// before counting). It only applies when enabled AND approved by a named person; the viral minimum, the selected hook's
+// minimum score and every research, source and readiness gate are unchanged.
+//   channels/<slug>/growth-engine.json: "hookCandidateGate": { "minimumCandidates": 16, "minimumFamilies": 7,
+//     "minimumStrong": 8, "strongScore": 70, "enabled": false, "approvedBy": null }
+function applyHookCandidateGate(merged, gate, channel) {
+  if (!gate || gate.enabled !== true) return null;
+  const fail = (message) => { throw new Error(`INVALID_GROWTH_CONFIG: hookCandidateGate for ${channel.slug}: ${message}`); };
+  if (!gate.approvedBy) fail("enabled without approvedBy");
+  const n = Number(gate.minimumCandidates), f = Number(gate.minimumFamilies), k = Number(gate.minimumStrong), sc = Number(gate.strongScore);
+  if (!(n >= 14)) fail("minimumCandidates must be >= 14"); if (!(f >= 6)) fail("minimumFamilies must be >= 6");
+  if (!(k >= 6)) fail("minimumStrong must be >= 6"); if (!(sc >= 65)) fail("strongScore must be >= 65");
+  merged.hooks.portfolioMinimumCandidates = merged.hooks.minimumCandidates;
+  merged.hooks.minimumCandidates = n;
+  merged.hooks.gate = { minimumCandidates: n, minimumFamilies: f, minimumStrong: k, strongScore: sc, approvedBy: gate.approvedBy };
+  return merged.hooks.gate;
+}
+
 function clearCache() { cache.clear(); }
 
-module.exports = { DEFAULTS_PATH, VIRAL_V2_PATH, deepMerge, validate, forChannel, channelOverridePath, clearCache, readJson, applyViralMinimumException };
+module.exports = { DEFAULTS_PATH, VIRAL_V2_PATH, deepMerge, validate, forChannel, channelOverridePath, clearCache, readJson, applyViralMinimumException, applyHookCandidateGate };

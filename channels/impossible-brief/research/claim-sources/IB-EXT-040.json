@@ -1,0 +1,156 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-EXT-040",
+ "checkedAt": "2026-11-03T18:27:19.923Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "08874d67cd36f43d",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "1I/ʻOumuamua is the first confirmed interstellar object detected passing through the Solar System.",
+   "url": "https://en.wikipedia.org/wiki/ʻOumuamua",
+   "sourceTitle": "Wikipedia — 1I/ʻOumuamua",
+   "revision": 1382078162,
+   "passage": "1I/ʻOumuamua is the first confirmed interstellar object detected passing through the Solar System.",
+   "numbers": {
+    "claim": [
+     "1"
+    ],
+    "inPassage": [
+     "1"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "When it was first observed, it was about 33 million km from Earth (about 85 times as far away as the Moon) and already heading away from the Sun.",
+   "url": "https://en.wikipedia.org/wiki/ʻOumuamua",
+   "sourceTitle": "Wikipedia — 1I/ʻOumuamua",
+   "revision": 1382078162,
+   "passage": "When it was first observed, it was about 33 million km (21 million mi; 0.22 AU) from Earth (about 85 times as far away as the Moon) and already heading away from the Sun.",
+   "numbers": {
+    "claim": [
+     "33",
+     "85"
+    ],
+    "inPassage": [
+     "33",
+     "85"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "ʻOumuamua is a small object estimated to be between 100 and 1,000 metres long, with its width and thickness both estimated between 35 and 167 metres.",
+   "url": "https://en.wikipedia.org/wiki/ʻOumuamua",
+   "sourceTitle": "Wikipedia — 1I/ʻOumuamua",
+   "revision": 1382078162,
+   "passage": "ʻOumuamua is a small object estimated to be between 100 and 1,000 metres (300 and 3,000 ft) long, with its width and thickness both estimated between 35 and 167 metres (115 and 548 ft).",
+   "numbers": {
+    "claim": [
+     "100",
+     "1000",
+     "35",
+     "167"
+    ],
+    "inPassage": [
+     "100",
+     "1000",
+     "35",
+     "167"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "Its speed relative to the Sun when in interstellar space was about 94,800 km/h.",
+   "url": "https://en.wikipedia.org/wiki/ʻOumuamua",
+   "sourceTitle": "Wikipedia — 1I/ʻOumuamua",
+   "revision": 1382078162,
+   "passage": ") of 26.33 km/s (94,800 km/h; 58,900 mph), its speed relative to the Sun when in interstellar space.",
+   "numbers": {
+    "claim": [
+     "94800"
+    ],
+    "inPassage": [
+     "94800"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F5",
+   "claim": "Originally classified as comet C/2017 U1, it was later reclassified as asteroid A/2017 U1 due to the absence of a coma.",
+   "url": "https://en.wikipedia.org/wiki/ʻOumuamua",
+   "sourceTitle": "Wikipedia — 1I/ʻOumuamua",
+   "revision": 1382078162,
+   "passage": "Originally classified as comet C/2017 U1, it was later reclassified as asteroid A/2017 U1 due to the absence of a coma.",
+   "numbers": {
+    "claim": [
+     "2017",
+     "1"
+    ],
+    "inPassage": [
+     "2017",
+     "1"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why the first interstellar visitor was already leaving.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "ʻOumuamua was spotted in 2017, heading away from the Sun.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It was 33 million kilometres away when first seen.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It travels about 94,800 kilometres per hour in interstellar space.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It may be 100 to 1,000 metres long.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It showed no comet tail, so it was reclassified.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So visitors from other stars pass by, and we barely notice.",
+   "status": "HUMAN"
+  }
+ ]
+}

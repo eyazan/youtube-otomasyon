@@ -100,11 +100,125 @@ test("auto storyboard: the subject picks the visual, plates never repeat back to
   assert.deepEqual(Generator.numbersIn("Its basins reach 900, 1,600 and 1,400 metres deep.").map((n) => n.unit), ["m", "m", "m"]);
 });
 
+test("units keep their meaning: an angle or a latitude is never a temperature (IB-EAR-001: 45 degrees latitude drawn as 45 °C)", () => {
+  const n = (t) => Generator.numbersIn(t).map((x) => [x.raw, x.unit, x.quantity]);
+  assert.deepEqual(n("At 45 degrees latitude, it's still about 1,184 kilometres per hour."), [["45", "°", "latitude"], ["1,184", "km/h", "speed"]]);
+  assert.deepEqual(n("At 30° north the trade winds blow."), [["30", "°", "latitude"]]);
+  assert.deepEqual(n("Its longitude is 120 degrees east."), [["120", "°", "longitude"]]);
+  assert.deepEqual(n("The axis tilts 23.4 degrees."), [["23.4", "°", "angle"]]);
+  assert.deepEqual(n("Water boils at 100 degrees Celsius."), [["100", "°C", "temperature"]]);
+  assert.deepEqual(n("Peaks reach 120°F and 5,700 kelvin."), [["120", "°F", "temperature"], ["5,700", "K", "temperature"]]);
+  assert.deepEqual(n("Between 4 to 10 °C."), [["4", "°C", "temperature"], ["10", "°C", "temperature"]]);
+  assert.deepEqual(n("Gravity pulls down at 9.8 metres per second squared."), [["9.8", "m/s²", "acceleration"]]);
+  assert.deepEqual(n("You keep moving at 465 metres per second, about 1,675 kilometres per hour."), [["465", "m/s", "speed"], ["1,675", "km/h", "speed"]]);
+  assert.deepEqual(n("It is 900 metres deep."), [["900", "m", "length"]]);
+  // the storyboard of the latitude line shows a latitude readout and no heat scene
+  const ear = Adapter.loadTopic("impossible-brief", "IB-EAR-001"); const sb = Generator.build(Adapter.studioScript(ear.channel, ear.topic), style, ear.topic);
+  const texts = sb.scenes.flatMap((s) => s.layers.filter((l) => l.component === "kinetic-type").flatMap((l) => l.props.items.map((it) => it.text)));
+  assert.ok(!texts.some((t) => /°C/.test(t)), `no temperature on screen: ${texts.join(" | ")}`);
+  assert.ok(!sb.scenes.some((s) => /heat/.test(s.id)), "no heat scene for a latitude");
+  // the latitude places the measured speed on the real globe: the 45th parallel beside the equator, each with an east
+  // arrow labelled with its own cited speed; a thousands number with decimals is read whole ("1,184.2", not "2 km/h")
+  const g = sb.scenes.find((sc) => sc.lines.includes("L6")).layers.find((l) => l.component === "globe");
+  assert.deepEqual(g.props.parallels.map((p) => p.lat), [0, 45]);
+  assert.deepEqual(g.props.speeds.labels, { 0: "1,674.7 km/h", 45: "1,184.2 km/h AT 45°" });
+  assert.deepEqual(n("about 1,674.7 km/h"), [["1,674.7", "km/h", "speed"]]);
+});
+
+test("planet-rotation grammar: each line gets a view that shows its mechanism (IB-EAR-001 Creative Director review)", () => {
+  const ear = Adapter.loadTopic("impossible-brief", "IB-EAR-001"); const sb = Generator.build(Adapter.studioScript(ear.channel, ear.topic), style, ear.topic);
+  const kinds = sb.scenes.map((s) => s.id.replace(/^s\d+-/, ""));
+  // the reviewer counted 6 of 9 shots on the same globe: now the hook, inertia from the ground, the equator, the forces,
+  // the slide, the latitudes and the pole tilt are seven different views
+  assert.deepEqual(kinds, ["hook", "inertia", "equator", "forces", "slide", "latitudes", "payoff"]);
+  const layer = (k, c) => sb.scenes.find((s) => s.id.endsWith(k)).layers.find((l) => l.component === c);
+  // the gravity line has its own visual: a force diagram with gravity labelled by its cited unit
+  assert.equal(layer("forces", "ground-frame").props.gravity.label, "GRAVITY 9.8 m/s²");
+  assert.equal(layer("inertia", "ground-frame").props.velocity.label, "465 m/s");
+  // the poles payoff shows its claim: the camera tilts over the pole and the arrows reach high latitudes (length cos(lat))
+  const pay = layer("payoff", "globe"); assert.ok(pay.props.viewLatKeys[pay.props.viewLatKeys.length - 1][1] >= 60);
+  assert.ok(Math.max(...pay.props.speeds.lats) >= 75);
+  assert.equal(layer("payoff", "kinetic-type").props.items[0].text, "NEAR THE POLES");
+  // drawn surface-frame scenes are conceptual and say so
+  for (const s of sb.scenes.filter((x) => x.layers.some((l) => l.component === "ground-frame"))) assert.ok(s.conceptual && s.chips.includes("conceptualLabel"), s.id);
+  const script = Adapter.studioScript(ear.channel, ear.topic);
+  assert.deepEqual(Validator.validateStoryboard(sb, { script, timeline: fakeTimeline(script), style, policy: profile.evidencePolicy.validator }).errors, []);
+});
+
+test("a number on a new component is evidence-checked like any other on-screen number", () => {
+  const ear = Adapter.loadTopic("impossible-brief", "IB-EAR-001"); const script = Adapter.studioScript(ear.channel, ear.topic);
+  const sb = Generator.build(script, style, ear.topic); const g = sb.scenes.find((s) => s.id.endsWith("latitudes")).layers.find((l) => l.component === "globe");
+  g.props.speeds.labels[45] = "1,999 km/h";
+  const v = Validator.validateStoryboard(sb, { script, timeline: fakeTimeline(script), style, policy: profile.evidencePolicy.validator });
+  assert.ok(v.errors.some((e) => /1999|"1"|999/.test(e)), v.errors.join("; "));
+});
+
+test("headlines never cut an inverted clause from its modal; spans of time are never one ladder", () => {
+  assert.equal(Generator.keyPhrase("Only near the poles would the stop feel gentle.", 4), "NEAR THE POLES");
+  const ear19 = Adapter.loadTopic("impossible-brief", "IB-EAR-019"); const sb19 = Generator.build(Adapter.studioScript(ear19.channel, ear19.topic), style, ear19.topic);
+  const texts19 = sb19.scenes.flatMap((s) => s.layers.filter((l) => l.component === "kinetic-type").flatMap((l) => l.props.items.map((it) => it.text)));
+  assert.ok(texts19.includes("780,000 years ago") && !texts19.includes("780,000 years"), texts19.join(" | "));
+  // the source says "at least 183 reversals": a lower bound never shows as an exact count
+  assert.ok(texts19.includes("AT LEAST 183 TIMES"), texts19.join(" | "));
+  // the air line shows the atmosphere itself, labelled, while the particles arrive (Creative Director, render 41007360726)
+  const air = sb19.scenes.find((s) => /air/i.test(ear19.topic.narration[s.lines[0].slice(1) - 1].text));
+  assert.ok(air.layers.some((l) => l.component === "globe" && l.props.atmosphere && l.props.atmosphere.label === "ATMOSPHERE"));
+  assert.ok(air.layers.some((l) => l.component === "magnetosphere" && l.props.wind));
+  const t = { id: "IB-EAR-900", title: "field", topic: "magnetic field reversal", visualMechanism: "magnetic-field" };
+  const script = { facts: [{ id: "F1", claim: "Reversals come every 450,000 years on average." }, { id: "F2", claim: "The last reversal was 780,000 years ago." }, { id: "F3", claim: "One calm stretch lasted 83 million years." }],
+    lines: [{ id: "L1", text: "The field flips.", layer: "SPECULATIVE SCENARIO", facts: [] }, { id: "L2", text: "The last one was 780,000 years ago.", layer: "KNOWN SCIENCE", facts: ["F2"] }, { id: "L3", text: "Reversals come every 450,000 years.", layer: "KNOWN SCIENCE", facts: ["F1"] }, { id: "L4", text: "The field returns.", layer: "ESTIMATED CONSEQUENCE", facts: [] }] };
+  const sb = Generator.build(script, style, t);
+  assert.ok(!sb.scenes.some((s) => s.layers.some((l) => l.component === "scale-ladder")), "an age and an interval are not bars of one scale");
+});
+
+test("the declared visual mechanism decides the drawing: a planet's rotation is not an orbit (IB-EAR-001)", () => {
+  const ear = Adapter.loadTopic("impossible-brief", "IB-EAR-001");
+  assert.equal(ear.topic.visualMechanism, "planet-rotation");
+  assert.equal(Generator.world({ ...ear.topic, visualMechanism: undefined }, { inferOnly: true }), "orbit", "the word match alone would have drawn an orbit");
+  const sb = Generator.build(Adapter.studioScript(ear.channel, ear.topic), style, ear.topic);
+  assert.deepEqual([sb.visualMechanism.id, sb.visualMechanism.world, sb.visualMechanism.declared, sb.visualMechanism.supported], ["planet-rotation", "rotation", true, true]);
+  const comps = sb.scenes.flatMap((s) => s.layers.map((l) => l.component));
+  assert.ok(!comps.includes("orbit"), "no orbit diagram");
+  // the line that stops the Earth keys the globe's spin to zero, east arrows appear after the stop, and every later
+  // globe stays stopped (the planet never restarts mid-story)
+  const stop = sb.scenes.find((s) => s.lines.includes("L1")); const globe = stop.layers.find((l) => l.component === "globe");
+  assert.equal(globe.props.spinKeys[globe.props.spinKeys.length - 1][1], 0);
+  assert.ok(globe.props.speeds && globe.props.speeds.lats.includes(0));
+  for (const s of sb.scenes.slice(1)) for (const l of s.layers.filter((x) => x.component === "globe")) assert.ok(!l.props.spinKeys && !l.props.spin, `${s.id}: stopped`);
+  const script = Adapter.studioScript(ear.channel, ear.topic);
+  assert.deepEqual(Validator.validateStoryboard(sb, { script, timeline: fakeTimeline(script), style, policy: profile.evidencePolicy.validator }).errors, []);
+});
+
 test("IB readiness: researched records pass without stored quotes (warned); visual pre-check blocks are tolerated, others are not", () => {
   // IB-PHY-065 was published on 2026-10-29 (5cNecwSkYDo), so an unpublished researched record with a visual pre-check block stands in
-  const { channel, topic } = Adapter.loadTopic("impossible-brief", "IB-OTH-020");
-  const r = Adapter.readiness(channel, topic);
-  assert.equal(r.ready, true);
+  const { channel, topic: undeclared } = Adapter.loadTopic("impossible-brief", "IB-OTH-020");
+  // a record that declares no visual mechanism is a creative review item, never a word-matched guess
+  assert.ok(Adapter.readiness(channel, undeclared).errors.some((e) => /^CREATIVE_REVIEW_REQUIRED: .*declares no visual mechanism/.test(e)));
+  assert.ok(Adapter.readiness(channel, { ...undeclared, visualMechanism: "organism-microscope" }).errors.some((e) => /^CREATIVE_REVIEW_REQUIRED: .*not supported/.test(e)), "a declared mechanism with no drawing is refused");
+  const topic = { ...undeclared, visualMechanism: "earth-surface" };
+  // the test writes its own ledgers at the record's path; a committed ledger there (IB-OTH-020 has one since CI run
+  // 41688494398, which the old version of this test deleted) is set aside first and always put back
+  const CS0 = require("../../core/research/claim-sources"); const lf0 = CS0.file(channel, topic.id); const fs0 = require("fs");
+  const saved = fs0.existsSync(lf0) ? fs0.readFileSync(lf0) : null; if (saved) fs0.rmSync(lf0);
+  let r;
+  try {
+  // no claim-source ledger: no fact has a verified passage, so the record is held
+  assert.ok(Adapter.readiness(channel, topic).errors.some((e) => /^SOURCE_UNVERIFIED: no claim-source ledger/.test(e)));
+  // with a ledger of VERIFIED records for exactly these facts it is ready, and the description lists only those pages
+  const CS = require("../../core/research/claim-sources"); const lf = CS.file(channel, topic.id); const fsm = require("fs");
+  const records = topic.facts.map((f, i) => ({ fact: `F${i + 1}`, claim: f.claim, url: f.url, sourceTitle: "Wikipedia — Test", passage: f.claim, status: "VERIFIED" }));
+  fsm.mkdirSync(path.dirname(lf), { recursive: true }); fsm.writeFileSync(lf, JSON.stringify({ topicId: topic.id, factsHash: CS.factsHash(topic), records }));
+  try {
+    r = Adapter.readiness(channel, topic);
+    assert.ok(r.warnings.some((w) => /topic-level sources are generic pages/.test(w)), "the generator's agency front pages are named and never listed");
+    const meta = require("../../core/pipeline/premium-publish").metadata(channel, topic);
+    assert.doesNotMatch(meta.description, /nih\.gov\/research-training|nist\.gov\/topics\/physics|science\.nasa\.gov\/\n/);
+    assert.ok(records.every((x) => meta.description.includes(x.url)));
+    fsm.writeFileSync(lf, JSON.stringify({ topicId: topic.id, factsHash: CS.factsHash(topic), records: records.map((x, i) => (i ? x : { ...x, status: "UNVERIFIED", reason: "no supporting passage" })) }));
+    assert.ok(Adapter.readiness(channel, topic).errors.some((e) => /^SOURCE_UNVERIFIED: F1/.test(e)), "one unverified fact holds the topic");
+  } finally { fsm.rmSync(lf, { force: true }); }
+  assert.equal(r.ready, true, r.errors.join("; "));
+  } finally { if (saved) fs0.writeFileSync(lf0, saved); }
   // a content hold (claim check 2026-10-28: unsourced narration lines) keeps a topic out of production
   const held = Adapter.loadTopic("impossible-brief", "IB-EXT-050");
   assert.ok(Adapter.readiness(held.channel, held.topic).errors.some((e) => /claim check/.test(e)), "IB-EXT-050 is held until its narration is corrected");
@@ -170,4 +284,22 @@ test("no tracked file under channels/impossible-brief/premium/<id>/: a shadow ru
   assert.deepEqual(tracked.filter((f) => /premium\/[^/]+\//.test(f)), [], "evidence lives in docs/premium-studio/evidence/impossible-brief/");
   const probe = "channels/impossible-brief/premium/IB-NEW-001/out/review-package.json";
   assert.equal(require("child_process").spawnSync("git", ["check-ignore", "-q", probe], { cwd: path.join(__dirname, "../..") }).status, 0, "new shadow output is ignored");
+});
+
+test("IB automatic publication waits for a person's claim review and a named Creative Director PASS bound to the facts", () => {
+  const CS = require("../../core/research/claim-sources");
+  const ear = Adapter.loadTopic("impossible-brief", "IB-EAR-001"); const f = CS.reviewFile(ear.channel, "IB-EAR-001");
+  const fs = require("fs"); const had = fs.existsSync(f) ? fs.readFileSync(f) : null;
+  try {
+    if (had) fs.unlinkSync(f);
+    assert.deepEqual(CS.publicationHolds(ear.channel, ear.topic).map((w) => w.split(":")[0]), ["CLAIM_REVIEW_REQUIRED", "CREATIVE_PASS_REQUIRED"]);
+    fs.mkdirSync(require("path").dirname(f), { recursive: true });
+    const rec = { topicId: "IB-EAR-001", factsHash: CS.factsHash(ear.topic), narration: { reviewedBy: "owner", at: "2026-10-30" }, creative: { verdict: "PASS", by: "owner", at: "2026-10-30" } };
+    fs.writeFileSync(f, JSON.stringify(rec)); assert.deepEqual(CS.publicationHolds(ear.channel, ear.topic), []);
+    // a review made for other facts does not carry over; an automated or unnamed verdict is not a PASS
+    fs.writeFileSync(f, JSON.stringify({ ...rec, factsHash: "0000000000000000" })); assert.equal(CS.publicationHolds(ear.channel, ear.topic).length, 2);
+    fs.writeFileSync(f, JSON.stringify({ ...rec, creative: { verdict: "PASS" } })); assert.deepEqual(CS.publicationHolds(ear.channel, ear.topic).map((w) => w.split(":")[0]), ["CREATIVE_PASS_REQUIRED"]);
+    // other channels are not held by this rule
+    assert.deepEqual(CS.publicationHolds({ slug: "failure-reconstructed" }, ear.topic), []);
+  } finally { fs.rmSync(f, { force: true }); if (had) fs.writeFileSync(f, had); }
 });

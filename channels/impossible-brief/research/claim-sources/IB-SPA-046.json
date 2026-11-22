@@ -1,0 +1,133 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-SPA-046",
+ "checkedAt": "2026-11-03T18:27:10.994Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "594f4b8e3e4c9773",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "The Kessler syndrome describes a situation in which the density of objects in low Earth orbit becomes so high that collisions between these objects cascade, exponentially increasing the amount of space debris over time.",
+   "url": "https://en.wikipedia.org/wiki/Kessler_syndrome",
+   "sourceTitle": "Wikipedia — Kessler syndrome",
+   "revision": 1383311325,
+   "passage": "It describes a situation in which the density of objects in low Earth orbit (LEO) becomes so high due to space pollution that collisions between these objects cascade, exponentially increasing the amount of space debris over time.",
+   "numbers": {
+    "claim": [],
+    "inPassage": [],
+    "missing": []
+   },
+   "support": 0.89,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "In 1978, Kessler found that 42 percent of cataloged debris was the result of 19 events, primarily explosions of spent rocket stages.",
+   "url": "https://en.wikipedia.org/wiki/Kessler_syndrome",
+   "sourceTitle": "Wikipedia — Kessler syndrome",
+   "revision": 1383311325,
+   "passage": "In 1978, Kessler found that 42 percent of cataloged debris was the result of 19 events, primarily explosions of spent rocket stages (especially US Delta rockets).",
+   "numbers": {
+    "claim": [
+     "1978",
+     "42",
+     "19"
+    ],
+    "inPassage": [
+     "1978",
+     "42",
+     "19"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "Optical telescopes and short-wavelength radar measurements demonstrated that the published population count was at least 50% too low.",
+   "url": "https://en.wikipedia.org/wiki/Kessler_syndrome",
+   "sourceTitle": "Wikipedia — Kessler syndrome",
+   "revision": 1383311325,
+   "passage": "Optical telescopes and short-wavelength radar were used to measure the number and size of space objects, and these measurements demonstrated that the published population count was at least 50% too low.",
+   "numbers": {
+    "claim": [
+     "50"
+    ],
+    "inPassage": [
+     "50"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "The list could not easily account for objects under 20 cm (8 in) in size.",
+   "url": "https://en.wikipedia.org/wiki/Kessler_syndrome",
+   "sourceTitle": "Wikipedia — Kessler syndrome",
+   "revision": 1383311325,
+   "passage": "The list could not easily account for objects under 20 cm (8 in) in size—in particular, debris from exploding rocket stages and several 1960s anti-satellite tests.",
+   "numbers": {
+    "claim": [
+     "20",
+     "8"
+    ],
+    "inPassage": [
+     "20",
+     "8"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Why one crash in orbit could close space.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Scientists call this cascade the Kessler syndrome.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Kessler proposed it in 1978.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Then, 42% of tracked debris came from just 19 events.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Radar later showed debris counts were at least 50% too low.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Objects under 20 centimetres were hard to track at all.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "A runaway cascade could make some orbits unusable for years.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the biggest threat to satellites may be other satellites.",
+   "status": "HUMAN"
+  }
+ ]
+}

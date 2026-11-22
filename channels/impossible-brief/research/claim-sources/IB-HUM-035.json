@@ -1,0 +1,137 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-HUM-035",
+ "checkedAt": "2026-11-03T18:27:18.041Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "9bf655ecf9c02e84",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "The brain consumes up to 20% of the energy used by the human body, more than any other organ.",
+   "url": "https://en.wikipedia.org/wiki/Human_brain",
+   "sourceTitle": "Wikipedia — Human brain",
+   "revision": 1380939970,
+   "passage": "The brain consumes up to 20% of the energy used by the human body, more than any other organ.",
+   "numbers": {
+    "claim": [
+     "20"
+    ],
+    "inPassage": [
+     "20"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "Although the human brain represents only 2% of the body weight, it receives 15% of the cardiac output, 20% of total body oxygen consumption, and 25% of total body glucose utilization.",
+   "url": "https://en.wikipedia.org/wiki/Human_brain",
+   "sourceTitle": "Wikipedia — Human brain",
+   "revision": 1380939970,
+   "passage": "Although the human brain represents only 2% of the body weight, it receives 15% of the cardiac output, 20% of total body oxygen consumption, and 25% of total body glucose utilization.",
+   "numbers": {
+    "claim": [
+     "2",
+     "15",
+     "20",
+     "25"
+    ],
+    "inPassage": [
+     "2",
+     "15",
+     "20",
+     "25"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "There are more than 86 billion neurons in the brain, and a more or less equal number of other cells.",
+   "url": "https://en.wikipedia.org/wiki/Human_brain",
+   "sourceTitle": "Wikipedia — Human brain",
+   "revision": 1380939970,
+   "passage": "There are more than 86 billion neurons in the brain, and a more or less equal number of other cells.",
+   "numbers": {
+    "claim": [
+     "86"
+    ],
+    "inPassage": [
+     "86"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "The human brain consumes approximately 60% of blood glucose in fasted, sedentary individuals.",
+   "url": "https://en.wikipedia.org/wiki/Human_brain",
+   "sourceTitle": "Wikipedia — Human brain",
+   "revision": 1380939970,
+   "passage": "The human brain consumes approximately 60% of blood glucose in fasted, sedentary individuals.",
+   "numbers": {
+    "claim": [
+     "60"
+    ],
+    "inPassage": [
+     "60"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Your brain uses 20% of your body's energy.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Yet it's only about 2% of your weight.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It holds more than 86 billion neurons.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It takes 15% of the heart's output.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "In a fasted, resting body, it consumes about 60% of blood glucose.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Much of that energy keeps neurons ready to fire.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Starve it briefly, and thinking suffers first.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So your most expensive organ is the one doing the thinking.",
+   "status": "HUMAN"
+  }
+ ]
+}

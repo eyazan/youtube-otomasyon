@@ -1,0 +1,485 @@
+{
+ "schema": "bto-studio.storyboard.v1",
+ "channel": "behind-the-ordinary",
+ "topicId": "BTO-156",
+ "slug": "microwave-doors-what-explains-metal-mesh",
+ "version": 1,
+ "author": "auto/behind-the-ordinary (deterministic documentary-desk grammar; needs creative review before publication)",
+ "licensingNote": "all visuals drawn in-house from code (SVG): desk, greeked printed matter, rulers and quote cards; quotes are verbatim from the cited sources; no photographs or third-party media",
+ "treatment": {
+  "educationalObjective": "Answer, in the sources' own words: Microwave doors: what explains metal mesh?",
+  "visualHook": "Frame 0: MICROWAVE DOORS in large type over printed matter on the desk.",
+  "mechanismsToAnimate": [
+   "hook",
+   "quote",
+   "detail",
+   "payoff"
+  ],
+  "factualRisks": [
+   "printed matter is greeked and generic (ILLUSTRATION chip)",
+   "the automatic grammar draws no mechanism: a directed storyboard is needed for cutaways and exploded views"
+  ]
+ },
+ "tail": 0.6,
+ "scenes": [
+  {
+   "id": "s1-hook",
+   "lines": [
+    "L1"
+   ],
+   "start": 0,
+   "env": "desk",
+   "evidence": [
+    "F2",
+    "F1",
+    "F3"
+   ],
+   "chips": [
+    "conceptualLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Hook: frame 0 sets the object (MICROWAVE DOORS) in large type over printed matter on the desk, so the detail in question is named before it is explained.",
+   "camera": [
+    {
+     "at": 0,
+     "x": 540,
+     "y": 820,
+     "z": 1.14
+    },
+    {
+     "at": "L1.end",
+     "x": 568,
+     "y": 820,
+     "z": 1
+    }
+   ],
+   "layers": [
+    {
+     "component": "desk-grain",
+     "screen": true,
+     "props": {
+      "seed": 3
+     }
+    },
+    {
+     "component": "print-surface",
+     "props": {
+      "kind": "label",
+      "x": 190,
+      "y": 560,
+      "w": 700,
+      "h": 560,
+      "rotate": -4,
+      "seed": 11
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L1+0.2",
+        "text": "MICROWAVE DOORS",
+        "x": 540,
+        "y": 420,
+        "size": 78,
+        "family": "sans",
+        "style": "pop"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s2-quote",
+   "lines": [
+    "L2"
+   ],
+   "start": "L2-0.15",
+   "env": "desk",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F1"
+   ],
+   "chips": [
+    "conceptualLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Source: the record's own evidence on a quote card (verbatim from F1, attributed), so the claim in the line is shown in the source's words, not the narrator's.",
+   "camera": [
+    {
+     "at": "L2-0.15",
+     "x": 520,
+     "y": 900,
+     "z": 1
+    },
+    {
+     "at": "L2.end",
+     "x": 560,
+     "y": 940,
+     "z": 1.14
+    }
+   ],
+   "layers": [
+    {
+     "component": "desk-grain",
+     "screen": true,
+     "props": {
+      "seed": 8
+     }
+    },
+    {
+     "component": "print-surface",
+     "props": {
+      "kind": "form",
+      "x": 190,
+      "y": 560,
+      "w": 700,
+      "h": 560,
+      "rotate": -6,
+      "seed": 61
+     }
+    },
+    {
+     "component": "quote-card",
+     "screen": true,
+     "props": {
+      "at": "L2+0.1",
+      "lines": [
+       "The oven door usually",
+       "has a window for easy",
+       "viewing, with a layer of",
+       "conductive mesh some"
+      ],
+      "quoteOf": "F1",
+      "attribution": "WIKIPEDIA: MICROWAVE OVEN (REVISION 1381",
+      "y": 560,
+      "size": 52
+     }
+    }
+   ]
+  },
+  {
+   "id": "s3-quote",
+   "lines": [
+    "L3"
+   ],
+   "start": "L3-0.15",
+   "env": "spot",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F3",
+    "P2",
+    "P1"
+   ],
+   "chips": [
+    "conceptualLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Source: the record's own evidence on a quote card (verbatim from F3, attributed), so the claim in the line is shown in the source's words, not the narrator's.",
+   "camera": [
+    {
+     "at": "L3-0.15",
+     "x": 520,
+     "y": 900,
+     "z": 1
+    },
+    {
+     "at": "L3.end",
+     "x": 560,
+     "y": 940,
+     "z": 1.14
+    }
+   ],
+   "layers": [
+    {
+     "component": "desk-grain",
+     "screen": true,
+     "props": {
+      "seed": 9
+     }
+    },
+    {
+     "component": "print-surface",
+     "props": {
+      "kind": "box",
+      "x": 190,
+      "y": 560,
+      "w": 700,
+      "h": 560,
+      "rotate": 7,
+      "seed": 62
+     }
+    },
+    {
+     "component": "quote-card",
+     "screen": true,
+     "props": {
+      "at": "L3+0.1",
+      "lines": [
+       "A microwave oven uses a",
+       "partial Faraday shield",
+       "(on five of its interior",
+       "six sides) and a partial"
+      ],
+      "quoteOf": "F3",
+      "attribution": "WIKIPEDIA: FARADAY CAGE (REVISION 137509",
+      "y": 660,
+      "size": 52
+     }
+    }
+   ]
+  },
+  {
+   "id": "s4-detail",
+   "lines": [
+    "L4"
+   ],
+   "start": "L4-0.15",
+   "env": "desk",
+   "transition": {
+    "type": "dissolve",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F2",
+    "F1",
+    "P1"
+   ],
+   "chips": [
+    "conceptualLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Detail: the line's key phrase over a different piece of printed matter while the camera drifts across it, so each step of the explanation has its own object on the desk.",
+   "camera": [
+    {
+     "at": "L4-0.15",
+     "x": 568,
+     "y": 820,
+     "z": 1
+    },
+    {
+     "at": "L4.end",
+     "x": 512,
+     "y": 800,
+     "z": 1.14
+    }
+   ],
+   "layers": [
+    {
+     "component": "desk-grain",
+     "screen": true,
+     "props": {
+      "seed": 14
+     }
+    },
+    {
+     "component": "print-surface",
+     "props": {
+      "kind": "magazine",
+      "x": 190,
+      "y": 560,
+      "w": 700,
+      "h": 560,
+      "rotate": 5,
+      "seed": 43
+     }
+    }
+   ]
+  },
+  {
+   "id": "s5-detail",
+   "lines": [
+    "L5"
+   ],
+   "start": "L5-0.15",
+   "env": "desk",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F2",
+    "F1",
+    "P1"
+   ],
+   "chips": [
+    "conceptualLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Detail: the line's key phrase over a different piece of printed matter while the camera drifts across it, so each step of the explanation has its own object on the desk.",
+   "camera": [
+    {
+     "at": "L5-0.15",
+     "x": 512,
+     "y": 820,
+     "z": 1
+    },
+    {
+     "at": "L5.end",
+     "x": 568,
+     "y": 800,
+     "z": 1.14
+    }
+   ],
+   "layers": [
+    {
+     "component": "desk-grain",
+     "screen": true,
+     "props": {
+      "seed": 15
+     }
+    },
+    {
+     "component": "print-surface",
+     "props": {
+      "kind": "flyer",
+      "x": 190,
+      "y": 560,
+      "w": 700,
+      "h": 560,
+      "rotate": -5,
+      "seed": 44
+     }
+    }
+   ]
+  },
+  {
+   "id": "s6-detail",
+   "lines": [
+    "L6"
+   ],
+   "start": "L6-0.15",
+   "env": "desk",
+   "transition": {
+    "type": "iris",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F2"
+   ],
+   "chips": [
+    "conceptualLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Detail: the line's key phrase over a different piece of printed matter while the camera drifts across it, so each step of the explanation has its own object on the desk.",
+   "camera": [
+    {
+     "at": "L6-0.15",
+     "x": 568,
+     "y": 820,
+     "z": 1
+    },
+    {
+     "at": "L6.end",
+     "x": 512,
+     "y": 800,
+     "z": 1.14
+    }
+   ],
+   "layers": [
+    {
+     "component": "desk-grain",
+     "screen": true,
+     "props": {
+      "seed": 16
+     }
+    },
+    {
+     "component": "print-surface",
+     "props": {
+      "kind": "label",
+      "x": 190,
+      "y": 560,
+      "w": 700,
+      "h": 560,
+      "rotate": 5,
+      "seed": 45
+     }
+    },
+    {
+     "component": "kinetic-type",
+     "screen": true,
+     "props": {
+      "items": [
+       {
+        "at": "L6+0.25",
+        "text": "FAR SHORTER WAVELENGTH",
+        "x": 540,
+        "y": 420,
+        "size": 60,
+        "family": "sans",
+        "style": "pop"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "s7-payoff",
+   "lines": [
+    "L7"
+   ],
+   "start": "L7-0.15",
+   "env": "desk",
+   "transition": {
+    "type": "scan-wipe",
+    "dur": 0.5
+   },
+   "evidence": [
+    "F2",
+    "F3",
+    "P2"
+   ],
+   "chips": [
+    "conceptualLabel"
+   ],
+   "conceptual": true,
+   "visualPurpose": "Payoff: the answer in a few of the line's words over the opening composition, so the Short loops on its first image.",
+   "camera": [
+    {
+     "at": "L7-0.15",
+     "x": 540,
+     "y": 820,
+     "z": 1
+    },
+    {
+     "at": "end-0.6",
+     "x": 540,
+     "y": 820,
+     "z": 1.12
+    }
+   ],
+   "layers": [
+    {
+     "component": "desk-grain",
+     "screen": true,
+     "props": {
+      "seed": 3
+     }
+    },
+    {
+     "component": "print-surface",
+     "props": {
+      "kind": "label",
+      "x": 190,
+      "y": 560,
+      "w": 700,
+      "h": 560,
+      "rotate": -4,
+      "seed": 11
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,148 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-HUM-014",
+ "checkedAt": "2026-11-03T18:27:17.787Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "bea6a5cd1b1bf3d1",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "Bolt improved upon his second 100 m world record of 9.69 with 9.58 seconds in 2009 – the biggest improvement since the start of electronic timing.",
+   "url": "https://en.wikipedia.org/wiki/Usain_Bolt",
+   "sourceTitle": "Wikipedia — Usain Bolt",
+   "revision": 1382643075,
+   "passage": "Bolt improved upon his second 100 m world record of 9.69 with 9.58 seconds in 2009 – the biggest improvement since the start of electronic timing.",
+   "numbers": {
+    "claim": [
+     "100",
+     "9.69",
+     "9.58",
+     "2009"
+    ],
+    "inPassage": [
+     "100",
+     "9.69",
+     "9.58",
+     "2009"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "He has twice broken the 200 metres world record, setting 19.30 in 2008 and 19.19 in 2009.",
+   "url": "https://en.wikipedia.org/wiki/Usain_Bolt",
+   "sourceTitle": "Wikipedia — Usain Bolt",
+   "revision": 1382643075,
+   "passage": "He has twice broken the 200 metres world record, setting 19.30 in 2008 and 19.19 in 2009.",
+   "numbers": {
+    "claim": [
+     "200",
+     "19.30",
+     "2008",
+     "19.19",
+     "2009"
+    ],
+    "inPassage": [
+     "200",
+     "19.30",
+     "2008",
+     "19.19",
+     "2009"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "He has helped Jamaica to three 4 × 100 metres relay world records, with the current record being 36.84 seconds set in 2012.",
+   "url": "https://en.wikipedia.org/wiki/Usain_Bolt",
+   "sourceTitle": "Wikipedia — Usain Bolt",
+   "revision": 1382643075,
+   "passage": "He has helped Jamaica to three 4 × 100 metres relay world records, with the current record being 36.84 seconds set in 2012.",
+   "numbers": {
+    "claim": [
+     "4",
+     "100",
+     "36.84",
+     "2012"
+    ],
+    "inPassage": [
+     "4",
+     "100",
+     "36.84",
+     "2012"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "He became the first junior sprinter to run the 200 m in under twenty seconds, taking the world junior record outright with a time of 19.93 s.",
+   "url": "https://en.wikipedia.org/wiki/Usain_Bolt",
+   "sourceTitle": "Wikipedia — Usain Bolt",
+   "revision": 1382643075,
+   "passage": "He became the first junior sprinter to run the 200 m in under twenty seconds, taking the world junior record outright with a time of 19.93 s.",
+   "numbers": {
+    "claim": [
+     "200",
+     "19.93"
+    ],
+    "inPassage": [
+     "200",
+     "19.93"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why 9.58 seconds still stands as the 100-metre record.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Usain Bolt ran it in 2009.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "He cut his own record from 9.69 seconds.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It was the biggest jump since electronic timing began.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "That same year, he ran 200 metres in 19.19.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Most people would need well over twice as long.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So world records show where human biology tops out.",
+   "status": "HUMAN"
+  }
+ ]
+}

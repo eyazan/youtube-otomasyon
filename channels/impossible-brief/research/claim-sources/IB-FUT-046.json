@@ -1,0 +1,127 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-FUT-046",
+ "checkedAt": "2026-11-03T18:27:18.828Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "37495f508453b67d",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "Artemis II sent four astronauts on a lunar flyby in 2026, becoming the only crewed flight beyond low Earth orbit not part of the Apollo program.",
+   "url": "https://en.wikipedia.org/wiki/Artemis_program",
+   "sourceTitle": "Wikipedia — Artemis program",
+   "revision": 1382585154,
+   "passage": "Artemis II sent four astronauts on a lunar flyby in 2026, becoming the only crewed flight beyond low Earth orbit not part of the Apollo program.",
+   "numbers": {
+    "claim": [
+     "2026"
+    ],
+    "inPassage": [
+     "2026"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "The uncrewed Artemis I mission sent an Orion spacecraft to lunar orbit in 2022.",
+   "url": "https://en.wikipedia.org/wiki/Artemis_program",
+   "sourceTitle": "Wikipedia — Artemis program",
+   "revision": 1382585154,
+   "passage": "The uncrewed Artemis I mission sent an Orion spacecraft to lunar orbit in 2022.",
+   "numbers": {
+    "claim": [
+     "2022"
+    ],
+    "inPassage": [
+     "2022"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "Artemis IV, targeted for 2028, is planned to be the first crewed lunar landing since Apollo.",
+   "url": "https://en.wikipedia.org/wiki/Artemis_program",
+   "sourceTitle": "Wikipedia — Artemis program",
+   "revision": 1382585154,
+   "passage": "Artemis V (late 2028) is planned to be the second crewed lunar landing.",
+   "numbers": {
+    "claim": [
+     "2028"
+    ],
+    "inPassage": [
+     "2028"
+    ],
+    "missing": []
+   },
+   "support": 0.6,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "Beginning with Artemis V, NASA intends yearly lunar landings to develop a permanent lunar base, as a step toward human missions to Mars.",
+   "url": "https://en.wikipedia.org/wiki/Artemis_program",
+   "sourceTitle": "Wikipedia — Artemis program",
+   "revision": 1382585154,
+   "passage": "Beginning with Artemis V, scheduled for no earlier than late 2028, NASA intends yearly lunar landings to develop a permanent lunar base, as a step toward human missions to Mars.",
+   "numbers": {
+    "claim": [],
+    "inPassage": [],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Humans flew around the Moon again in 2026.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Artemis II carried four astronauts on a lunar flyby.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Artemis IV, targeted for 2028, aims to land a crew.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "From Artemis V, NASA plans yearly landings.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "The goal is a permanent base, then Mars.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Every kilogram of supplies must be launched or made on site.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So a Moon base is really a supply chain problem.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "The Moon becomes a rehearsal for living farther away.",
+   "status": "HUMAN"
+  }
+ ]
+}

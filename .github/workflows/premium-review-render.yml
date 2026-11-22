@@ -4,12 +4,12 @@ name: Premium review render (real MP4s, never publishable)
 # voice, as SHADOW packages (studio.js --shadow: preview mode, the publish gate always blocks them, nothing is uploaded
 # or reserved), so a visual change can be judged on real frames before it reaches production. Per topic it keeps the
 # MP4, the QA report and the storyboard; frames, a contact sheet and motion/loudness measurements go to the
-# review/render-<run id> branch (never main). Already-published topics render too (shadow tolerates "already published").
+# review/render-<run id>-<topic> branch (never main); each MP4 is its own artifact premium-<topic>. Already-published topics render too (shadow tolerates "already published").
 on:
   workflow_dispatch:
     inputs:
       channel: { description: "channel slug", required: true, default: failure-reconstructed }
-      topics: { description: "space-separated topic ids (e.g. FR-gemini-8-1966 FR-silver-bridge-1967)", required: true }
+      topics: { description: "space-separated topic ids (e.g. FR-gemini-8-1966 FR-silver-bridge-1967); a channel:topic token renders that topic on its own channel, so one run covers several channels", required: true }
 
 permissions:
   contents: write
@@ -19,7 +19,23 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # one matrix job per topic: topics render in parallel, and each MP4 is its own artifact (premium-<topic>), so every
+  # channel's render has its own link; frames go to review/render-<run id>-<topic>
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      tokens: ${{ steps.p.outputs.tokens }}
+    steps:
+      - id: p
+        env:
+          TOPICS: ${{ inputs.topics }}
+        run: echo "tokens=$(printf '%s\n' $TOPICS | jq -R . | jq -cs .)" >> "$GITHUB_OUTPUT"
   render:
+    needs: plan
+    strategy:
+      fail-fast: false
+      matrix:
+        token: ${{ fromJSON(needs.plan.outputs.tokens) }}
     runs-on: ubuntu-latest
     timeout-minutes: 90
     env:
@@ -55,15 +71,16 @@ jobs:
       - name: Render each topic (shadow, final picture quality, approved voice)
         env:
           CHANNEL: ${{ inputs.channel }}
-          TOPICS: ${{ inputs.topics }}
+          TOPICS: ${{ matrix.token }}
         run: |
           set -o pipefail
           mkdir -p review-out
-          for T in $TOPICS; do
+          for TOK in $TOPICS; do
+            CH="$CHANNEL"; T="$TOK"; case "$TOK" in *:*) CH="${TOK%%:*}"; T="${TOK#*:}";; esac
             D="$RUNNER_TEMP/review/$T"
             echo "### $T" | tee -a "$GITHUB_STEP_SUMMARY"
-            node scripts/bto-studio/studio.js --channel "$CHANNEL" --topic "$T" --shadow --shadow-dir "$D" --regenerate --quality final --voice edge 2>&1 | tail -25 || echo "render failed: $T" | tee -a "$GITHUB_STEP_SUMMARY"
-            MP4=$(find "$D/out" -maxdepth 1 -name "*.mp4" | head -1)
+            node scripts/bto-studio/studio.js --channel "$CH" --topic "$T" --shadow --shadow-dir "$D" --regenerate --quality final --voice edge 2>&1 | tail -25 || echo "render failed: $T" | tee -a "$GITHUB_STEP_SUMMARY"
+            MP4=$(find "$D/out" -maxdepth 1 -name "*.mp4" 2>/dev/null | head -1 || true)
             [ -n "$MP4" ] || { echo "no MP4 for $T" | tee -a "$GITHUB_STEP_SUMMARY"; continue; }
             O="review-out/$T"; mkdir -p "$O/frames"
             (cd "$(dirname "$MP4")" && sha256sum "$(basename "$MP4")") | tee "$O/mp4.sha256" | tee -a "$GITHUB_STEP_SUMMARY"
@@ -73,21 +90,31 @@ jobs:
             ffmpeg -hide_banner -loglevel error -i "$MP4" -t 2 -vf "fps=6,scale=270:-2,tile=6x2" -frames:v 1 "$O/first-2s.jpg"
             grep -E "^\| (s[0-9]|Scene)" "$D/out/qa-report.md" | head -14 | tee -a "$GITHUB_STEP_SUMMARY" || true
             grep -E "Objective verdict|WARN|FAIL" "$D/out/qa-report.md" | head -8 | tee -a "$GITHUB_STEP_SUMMARY" || true
+            # creative verdict, separate from the objective QA above (a technical PASS is never a creative approval)
+            echo "#### Creative Director ($T)" | tee -a "$GITHUB_STEP_SUMMARY"
+            node scripts/bto-studio/creative-director.js review --out "$D/out" > "$O/creative-director.txt" 2>&1 || true
+            cp "$D/out"/creative-*.json "$D/out"/creative-*.md "$O/" 2>/dev/null || true
+            tail -16 "$O/creative-director.txt" | tee -a "$GITHUB_STEP_SUMMARY"
           done
+      - id: name
+        if: always()
+        env:
+          TOK: ${{ matrix.token }}
+        run: echo "topic=${TOK#*:}" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: premium-review-render
+          name: premium-${{ steps.name.outputs.topic }}
           path: review-out
           retention-days: 30
           if-no-files-found: warn
       - name: Frames to the review branch (never main)
         if: always()
         run: |
-          [ -d review-out ] || exit 0
+          [ -n "$(ls -A review-out 2>/dev/null)" ] || exit 0
           find review-out -name "*.mp4" -delete
           git config user.name "premium-review-bot"; git config user.email "actions@users.noreply.github.com"
-          B="review/render-${{ github.run_id }}"
+          B="review/render-${{ github.run_id }}-${{ steps.name.outputs.topic }}"
           git checkout -q -B "$B"; mkdir -p review; rm -rf "review/render-${{ github.run_id }}"; mv review-out "review/render-${{ github.run_id }}"
           git add -f "review/render-${{ github.run_id }}"; git commit -q -m "review: premium render frames (run ${{ github.run_id }})"
           git push -q -f origin "$B"

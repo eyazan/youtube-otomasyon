@@ -1,0 +1,148 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-EXT-002",
+ "checkedAt": "2026-11-03T18:27:19.478Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "c31c8aea4e539361",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "Spaghettification is the vertical stretching and horizontal compression of objects into long thin shapes in a very strong, non-homogeneous gravitational field.",
+   "url": "https://en.wikipedia.org/wiki/Spaghettification",
+   "sourceTitle": "Wikipedia — Spaghettification",
+   "revision": 1376271770,
+   "passage": "In astrophysics, spaghettification, or noodle effect is the vertical stretching and horizontal compression of objects into long thin shapes in a very strong, non-homogeneous gravitational field.",
+   "numbers": {
+    "claim": [],
+    "inPassage": [],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "If a person were to fall into a black hole feet first, the gravity at their feet would be much stronger than at their head, causing them to be vertically stretched.",
+   "url": "https://en.wikipedia.org/wiki/Spaghettification",
+   "sourceTitle": "Wikipedia — Spaghettification",
+   "revision": 1376271770,
+   "passage": "If a person were to fall into a black hole feet first, the gravity at their feet would be much stronger than at their head, causing them to be vertically stretched.",
+   "numbers": {
+    "claim": [],
+    "inPassage": [],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "The current best estimate of the mass of Sagittarius A* is 4.297 million solar masses.",
+   "url": "https://en.wikipedia.org/wiki/Sagittarius_A*",
+   "sourceTitle": "Wikipedia — Sagittarius A*",
+   "revision": 1383604466,
+   "passage": "The current best estimate of its mass is 4.297±0.012 million solar masses.",
+   "numbers": {
+    "claim": [
+     "4.297"
+    ],
+    "inPassage": [
+     "4.297"
+    ],
+    "missing": []
+   },
+   "support": 0.88,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "The Schwarzschild radius of Sagittarius A* is 0.08 AU (12 million km).",
+   "url": "https://en.wikipedia.org/wiki/Sagittarius_A*",
+   "sourceTitle": "Wikipedia — Sagittarius A*",
+   "revision": 1383604466,
+   "passage": "For comparison, the Schwarzschild radius is 0.08 AU (12 million km; 7.4 million mi).",
+   "numbers": {
+    "claim": [
+     "0.08",
+     "12"
+    ],
+    "inPassage": [
+     "0.08",
+     "12"
+    ],
+    "missing": []
+   },
+   "support": 0.75,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F5",
+   "claim": "Sagittarius A* lies at a distance of 26,000 light-years.",
+   "url": "https://en.wikipedia.org/wiki/Sagittarius_A*",
+   "sourceTitle": "Wikipedia — Sagittarius A*",
+   "revision": 1383604466,
+   "passage": null,
+   "numbers": {
+    "claim": [
+     "26000"
+    ],
+    "inPassage": [],
+    "missing": [
+     "26000"
+    ]
+   },
+   "support": 0,
+   "status": "UNVERIFIED",
+   "reason": "a sentence has the terms but not every claim number (26000), is not 5-80 words of prose, or shares under 50% of the claim's content words"
+  }
+ ],
+ "narration": [
+  {
+   "layer": "SPECULATIVE SCENARIO",
+   "text": "Fall into a black hole feet first. Then what?",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Your feet feel far more pull than your head.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Physicists call it spaghettification: stretched lengthwise, squeezed sideways.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Our galaxy's central black hole weighs 4.3 million Suns.",
+   "status": "FAIL",
+   "missing": [
+    "4.3"
+   ]
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Its point of no return sits about 12 million kilometres out.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "At that size, the stretch at the edge is surprisingly gentle.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Small black holes shred you long before the horizon.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the biggest black holes let you cross intact, then never leave.",
+   "status": "HUMAN"
+  }
+ ]
+}

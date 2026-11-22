@@ -1,0 +1,155 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-SPA-031",
+ "checkedAt": "2026-10-30T04:54:52.732Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "a092fa8eab3e91a5",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "Venus has a diameter of 12,103.6 km, only 638.4 km less than Earth's, and its mass is 81.5% of Earth's.",
+   "url": "https://en.wikipedia.org/wiki/Venus",
+   "sourceTitle": "Wikipedia — Venus",
+   "revision": 1381544099,
+   "passage": "It has a diameter of 12,103.6 km (7,520.8 mi)—only 638.4 km (396.7 mi) less than Earth's—and its mass is 81.5% of Earth's, making it the third-smallest planet in the Solar System.",
+   "numbers": {
+    "claim": [
+     "12103.6",
+     "638.4",
+     "81.5"
+    ],
+    "inPassage": [
+     "12103.6",
+     "638.4",
+     "81.5"
+    ],
+    "missing": []
+   },
+   "support": 0.83,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "Venus's dense atmosphere is 96.5% carbon dioxide, causing an intense greenhouse effect, with most of the remaining 3.5% being nitrogen.",
+   "url": "https://en.wikipedia.org/wiki/Venus",
+   "sourceTitle": "Wikipedia — Venus",
+   "revision": 1381544099,
+   "passage": "Conditions on the surface of Venus differ radically from those on Earth because its dense atmosphere is 96.5% carbon dioxide, causing an intense greenhouse effect, with most of the remaining 3.5% being nitrogen.",
+   "numbers": {
+    "claim": [
+     "96.5",
+     "3.5"
+    ],
+    "inPassage": [
+     "96.5",
+     "3.5"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "The CO2-rich atmosphere generates the strongest greenhouse effect in the Solar System, creating surface temperatures of at least 735 K (462 °C; 864 °F).",
+   "url": "https://en.wikipedia.org/wiki/Venus",
+   "sourceTitle": "Wikipedia — Venus",
+   "revision": 1381544099,
+   "passage": "The CO2-rich atmosphere generates the strongest greenhouse effect in the Solar System, creating surface temperatures of at least 735 K (462 °C; 864 °F).",
+   "numbers": {
+    "claim": [
+     "2",
+     "735",
+     "462",
+     "864"
+    ],
+    "inPassage": [
+     "2",
+     "735",
+     "462",
+     "864"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "The density at the surface is 65 kg/m3, 6.5% that of water or 50 times as dense as Earth's atmosphere at 293 K (20 °C; 68 °F) at sea level.",
+   "url": "https://en.wikipedia.org/wiki/Venus",
+   "sourceTitle": "Wikipedia — Venus",
+   "revision": 1381544099,
+   "passage": "The density at the surface is 65 kg/m3 (4.1 lb/cu ft), 6.5% that of water or 50 times as dense as Earth's atmosphere at 293 K (20 °C; 68 °F) at sea level.",
+   "numbers": {
+    "claim": [
+     "65",
+     "3",
+     "6.5",
+     "50",
+     "293",
+     "20",
+     "68"
+    ],
+    "inPassage": [
+     "65",
+     "3",
+     "6.5",
+     "50",
+     "293",
+     "20",
+     "68"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Earth's near-twin Venus has a 462 °C surface.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "That's hotter than Mercury, which is closer to the Sun.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Venus has 81.5% of Earth's mass.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "But its atmosphere is 96.5% carbon dioxide.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "That traps heat in the strongest greenhouse effect in the Solar System.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Its air at the surface is 50 times denser than ours.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Earth's carbon is mostly locked in rocks and oceans instead.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the difference between the twins is where the carbon lives.",
+   "status": "HUMAN"
+  }
+ ]
+}

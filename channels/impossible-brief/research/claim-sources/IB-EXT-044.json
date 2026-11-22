@@ -1,0 +1,137 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-EXT-044",
+ "checkedAt": "2026-11-03T18:27:20.242Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "5e48d65375a14d4b",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "S5-HVS1 is an A-type main-sequence star notable as the fastest one detected as of November 2019, traveling with a peculiar velocity of 1,755 km/s, almost 0.6% of the speed of light.",
+   "url": "https://en.wikipedia.org/wiki/S5-HVS1",
+   "sourceTitle": "Wikipedia — S5-HVS1",
+   "revision": 1381892643,
+   "passage": "S5-HVS1 is an A-type main-sequence star notable as the fastest one detected as of November 2019, and has been determined to be traveling with a peculiar velocity of 1,755 km/s (3,930,000 mph), almost 0.6% of the speed of light.",
+   "numbers": {
+    "claim": [
+     "5",
+     "1",
+     "2019",
+     "1755",
+     "0.6"
+    ],
+    "inPassage": [
+     "5",
+     "1",
+     "2019",
+     "1755",
+     "0.6"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "The star is in the Grus (or Crane) constellation in the southern sky, and about 29,000 light-years from Earth.",
+   "url": "https://en.wikipedia.org/wiki/S5-HVS1",
+   "sourceTitle": "Wikipedia — S5-HVS1",
+   "revision": 1381892643,
+   "passage": "The star is in the southern constellation Grus, and about 29,000 light-years from Earth.",
+   "numbers": {
+    "claim": [
+     "29000"
+    ],
+    "inPassage": [
+     "29000"
+    ],
+    "missing": []
+   },
+   "support": 0.88,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "S5-HVS1 was ejected from the Milky Way galaxy after interacting with Sagittarius A*, the supermassive black hole at the center of the galaxy.",
+   "url": "https://en.wikipedia.org/wiki/S5-HVS1",
+   "sourceTitle": "Wikipedia — S5-HVS1",
+   "revision": 1381892643,
+   "passage": "According to astronomers, S5-HVS1 was ejected from the Milky Way galaxy after interacting with Sagittarius A*, the supermassive black hole at the center of the galaxy.",
+   "numbers": {
+    "claim": [
+     "5",
+     "1"
+    ],
+    "inPassage": [
+     "5",
+     "1"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "It is possible that it was originally part of a binary system that was tidally disrupted by the supermassive black hole, causing it to be ejected.",
+   "url": "https://en.wikipedia.org/wiki/S5-HVS1",
+   "sourceTitle": "Wikipedia — S5-HVS1",
+   "revision": 1381892643,
+   "passage": "It is possible that it was originally part of a binary system that was tidally disrupted by the supermassive black hole, causing it to be ejected.",
+   "numbers": {
+    "claim": [],
+    "inPassage": [],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why one star flees at 1,755 km/s.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "That's almost 0.6% of the speed of light.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "S5-HVS1 was flung out by our galaxy's central black hole.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It may have been half of a binary pair.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "One star was captured, and its partner was launched.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It's now about 29,000 light-years from Earth.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "It will never return to the Milky Way.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So black holes don't just swallow stars. They throw them.",
+   "status": "HUMAN"
+  }
+ ]
+}

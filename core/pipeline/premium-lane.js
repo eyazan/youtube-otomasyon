@@ -36,6 +36,9 @@ function legacySlugs() {
 }
 
 // channel-specific refusals on top of the studio readiness
+// automatic publication also waits for a person's claim review and creative PASS (IB: core/research/claim-sources.js)
+const publicationHolds = (channel, topic) => require("../research/claim-sources").publicationHolds(channel, topic);
+
 function extraRefusals(channel, topic) {
   if (channel.slug !== "goal-lore-lab") return [];
   const why = [];
@@ -70,14 +73,28 @@ function growthBar(channel) {
   const cfg = Config.forChannel(channel); const min = Number(cfg.viralScoring.minimumToProduce || 68);
   const allowed = new Set([...cfg.selection.exploitBuckets, ...cfg.selection.exploreBuckets].filter((b) => b !== "D"));
   const by = new Map(); for (const r of Context.rank(channel, {}).rows) { by.set(r.topic.id, r); by.set(r.topic.slug, r); }
+  const soft = softViralGate(channel, cfg);
   return (t) => {
     const r = by.get(t.id) || by.get(t.slug) || by.get(String(t.id).replace(/^FR-/, ""));
     if (!r) return { why: "not ranked by the channel's topic scoring", score: 0 };
     const v = r.score.ViralPotentialScore;
-    if (!Number.isFinite(v) || v < min) return { why: `viral score ${v} below the channel minimum ${min}`, score: v || 0 };
+    if (!Number.isFinite(v) || v < (soft ? soft.floor : min)) return { why: `viral score ${v} below the channel ${soft ? `floor ${soft.floor} (minimum ${min} is a ranking signal while the score is uncalibrated)` : `minimum ${min}`}`, score: v || 0 };
     if (!allowed.has(r.score.bucket)) return { why: `bucket ${r.score.bucket} is not selectable (${[...allowed].join("/")})`, score: v };
     return { why: null, score: Number(r.score.SelectionScore) || v };
   };
+}
+
+// The viral score is a model prediction. When the channel's own calibration against published outcomes
+// (state/growth/predictions.json, Spearman per predictor) says it does not predict performance, a hard minimum only
+// starves production: IB 2026-11-03, viralScore rho 0.05 (n 17, WEAK) while the minimum 75 refused 130 of 135 researched
+// topics. A channel can opt in (growth-engine.json premiumSelection.viralScore = "rank-when-uncalibrated"): the score then
+// orders topics and only a floor excludes. Research, claim ledger, visual mechanism, QA and human approvals are unchanged.
+function softViralGate(channel, cfg) {
+  const sel = cfg.premiumSelection || {}; if (sel.viralScore !== "rank-when-uncalibrated") return null;
+  const cal = readJson(path.join(channel.paths.state, "growth", "predictions.json"), {});
+  const status = (((cal.calibration || {}).short || {}).viralScore || {}).status || "INSUFFICIENT_SAMPLE";
+  if (status === "PREDICTIVE") return null;
+  return { floor: Number.isFinite(Number(sel.floor)) ? Math.max(55, Number(sel.floor)) : 62, status };
 }
 
 // qualified, studio-ready, unpublished topics that pass the channel's quality bar, best first
@@ -133,7 +150,7 @@ function runChannel(slug, argv = [], { env = process.env, spawn = cp.spawnSync, 
   }
   // 1. an approved premium Short (owner sign-offs, or the owner-signed publication policy) through the existing uploader
   if (!explicit) {
-    const p = premium.run(channel, { env, targetDay, log, nextTopic: (accept) => (qualified(channel, { bar }).ok.find((r) => !accept || accept(r.topic)) || {}).topic || null });
+    const p = premium.run(channel, { env, targetDay, log, nextTopic: (accept) => (qualified(channel, { bar }).ok.find((r) => (!accept || accept(r.topic)) && !publicationHolds(channel, r.topic).length) || {}).topic || null });
     if (p && p.noTopic) { const why = "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)"; run.skip("RESEARCH", why).outcome("NO_TOPIC", why); return 0; }
     if (p && (p.uploaded || p.dryRun)) {
       run.topic(p.slug).done("RESEARCH", p.topicId).done("RENDER", "premium final").done("QA", "objective PASS, publish gate PUBLISH_APPROVED")
@@ -173,4 +190,4 @@ function runChannel(slug, argv = [], { env = process.env, spawn = cp.spawnSync, 
   return 0;
 }
 
-module.exports = { runChannel, primary, qualified, growthBar, legacySlugs, renderCandidate, reviewDir, ledger, universeTopics };
+module.exports = { softViralGate, runChannel, primary, qualified, growthBar, legacySlugs, renderCandidate, reviewDir, ledger, universeTopics };

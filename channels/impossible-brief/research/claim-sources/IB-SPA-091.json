@@ -1,0 +1,165 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-SPA-091",
+ "checkedAt": "2026-11-03T18:27:12.792Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "331552d1c5e471e8",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "These weather patterns are driven by the strongest sustained winds of any planet in the Solar System, as high as 2,100 km/h (580 m/s; 1,300 mph).",
+   "url": "https://en.wikipedia.org/wiki/Neptune",
+   "sourceTitle": "Wikipedia — Neptune",
+   "revision": 1383316293,
+   "passage": "These weather patterns are driven by the strongest sustained winds of any planet in the Solar System, as high as 2,100 km/h (580 m/s; 1,300 mph).",
+   "numbers": {
+    "claim": [
+     "2100",
+     "580",
+     "1300"
+    ],
+    "inPassage": [
+     "2100",
+     "580",
+     "1300"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "Neptune's outer atmosphere is one of the coldest places in the Solar System, with temperatures at its cloud tops approaching 55 K (−218 °C).",
+   "url": "https://en.wikipedia.org/wiki/Neptune",
+   "sourceTitle": "Wikipedia — Neptune",
+   "revision": 1383316293,
+   "passage": "Because of its great distance from the Sun, Neptune's outer atmosphere is one of the coldest places in the Solar System, with temperatures at its cloud tops approaching 55 K (−218 °C; −361 °F).",
+   "numbers": {
+    "claim": [
+     "55",
+     "218"
+    ],
+    "inPassage": [
+     "55",
+     "218"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "Neptune orbits the Sun once every 164.8 years at an orbital distance of 30.1 astronomical units (4.5 billion kilometres).",
+   "url": "https://en.wikipedia.org/wiki/Neptune",
+   "sourceTitle": "Wikipedia — Neptune",
+   "revision": 1383316293,
+   "passage": "Neptune orbits the Sun once every 164.8 years at an orbital distance of 30.1 astronomical units (4.5 billion kilometres; 2.8 billion miles).",
+   "numbers": {
+    "claim": [
+     "164.8",
+     "30.1",
+     "4.5"
+    ],
+    "inPassage": [
+     "164.8",
+     "30.1",
+     "4.5"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "At the time of the Voyager 2 flyby in 1989, the planet's southern hemisphere had a Great Dark Spot comparable to the Great Red Spot on Jupiter.",
+   "url": "https://en.wikipedia.org/wiki/Neptune",
+   "sourceTitle": "Wikipedia — Neptune",
+   "revision": 1383316293,
+   "passage": "At the time of the Voyager 2 flyby in 1989, the planet's southern hemisphere had a Great Dark Spot comparable to the Great Red Spot on Jupiter.",
+   "numbers": {
+    "claim": [
+     "2",
+     "1989"
+    ],
+    "inPassage": [
+     "2",
+     "1989"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F5",
+   "claim": "Temperatures at the planet's centre are approximately 5,400 K (5,100 °C).",
+   "url": "https://en.wikipedia.org/wiki/Neptune",
+   "sourceTitle": "Wikipedia — Neptune",
+   "revision": 1383316293,
+   "passage": "Temperatures at the planet's centre are approximately 5,400 K (5,100 °C; 9,300 °F).",
+   "numbers": {
+    "claim": [
+     "5400",
+     "5100"
+    ],
+    "inPassage": [
+     "5400",
+     "5100"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Why Neptune's winds reach 2,100 kilometres per hour.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "They're the strongest sustained winds of any planet.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Yet its cloud tops sit near −218 °C.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Its centre is about 5,400 kelvin, driving the weather.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "In 1989, Voyager 2 saw a Great Dark Spot there.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "One Neptune year lasts 164.8 Earth years.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "Standing in those winds, nothing on Earth could hold you.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the coldest planets can have the wildest weather.",
+   "status": "HUMAN"
+  }
+ ]
+}

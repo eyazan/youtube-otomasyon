@@ -1,0 +1,151 @@
+{
+ "schema": "ib.claim-sources.v1",
+ "topicId": "IB-SPA-012",
+ "checkedAt": "2026-11-03T18:27:09.823Z",
+ "method": "scripts/ib-research/claim-check.js: the passage is copied verbatim from the live source text at the pinned revision; VERIFIED = every claim number in one sentence that shares >= 50% of the claim's content words",
+ "factsHash": "2ab90f56ceab9dd6",
+ "records": [
+  {
+   "fact": "F1",
+   "claim": "Jupiter has a mass nearly 2.5 times that of all the other planets in the Solar System combined.",
+   "url": "https://en.wikipedia.org/wiki/Jupiter",
+   "sourceTitle": "Wikipedia — Jupiter",
+   "revision": 1383322969,
+   "passage": "It is a gas giant with a mass nearly 2.5 times that of all the other planets in the Solar System combined and slightly less than one-thousandth the mass of the Sun.",
+   "numbers": {
+    "claim": [
+     "2.5"
+    ],
+    "inPassage": [
+     "2.5"
+    ],
+    "missing": []
+   },
+   "support": 0.89,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F2",
+   "claim": "Jupiter's mass is slightly less than one-thousandth the mass of the Sun.",
+   "url": "https://en.wikipedia.org/wiki/Jupiter",
+   "sourceTitle": "Wikipedia — Jupiter",
+   "revision": 1383322969,
+   "passage": "It is a gas giant with a mass nearly 2.5 times that of all the other planets in the Solar System combined and slightly less than one-thousandth the mass of the Sun.",
+   "numbers": {
+    "claim": [],
+    "inPassage": [],
+    "missing": []
+   },
+   "support": 0.8,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F3",
+   "claim": "The diameter of Jupiter is 11 times that of Earth and a tenth that of the Sun.",
+   "url": "https://en.wikipedia.org/wiki/Jupiter",
+   "sourceTitle": "Wikipedia — Jupiter",
+   "revision": 1383322969,
+   "passage": "The diameter of Jupiter is 11 times that of Earth and a tenth that of the Sun.",
+   "numbers": {
+    "claim": [
+     "11"
+    ],
+    "inPassage": [
+     "11"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F4",
+   "claim": "Jupiter's atmosphere is 76% hydrogen and 24% helium by mass.",
+   "url": "https://en.wikipedia.org/wiki/Jupiter",
+   "sourceTitle": "Wikipedia — Jupiter",
+   "revision": 1383322969,
+   "passage": "The atmosphere of Jupiter is approximately 76% hydrogen and 24% helium by mass.",
+   "numbers": {
+    "claim": [
+     "76",
+     "24"
+    ],
+    "inPassage": [
+     "76",
+     "24"
+    ],
+    "missing": []
+   },
+   "support": 1,
+   "status": "VERIFIED",
+   "reason": null
+  },
+  {
+   "fact": "F5",
+   "claim": "The growing Jupiter reached its final mass in 3–4 million years.",
+   "url": "https://en.wikipedia.org/wiki/Jupiter",
+   "sourceTitle": "Wikipedia — Jupiter",
+   "revision": 1383322969,
+   "passage": "Thereafter, the growing planet reached its final mass in 3–4 million years.",
+   "numbers": {
+    "claim": [
+     "3",
+     "4"
+    ],
+    "inPassage": [
+     "3",
+     "4"
+    ],
+    "missing": []
+   },
+   "support": 0.86,
+   "status": "VERIFIED",
+   "reason": null
+  }
+ ],
+ "narration": [
+  {
+   "layer": "SPECULATIVE SCENARIO",
+   "text": "If Jupiter vanished, why wouldn't Earth notice?",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "It outweighs every other planet combined.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "About 2.5 times all the others together.",
+   "status": "VERIFIED-NUMBERS"
+  },
+  {
+   "layer": "KNOWN SCIENCE",
+   "text": "Yet it's under one-thousandth of the Sun's mass.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So Earth's orbit would barely change at first.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "The Sun's small wobble around Jupiter would fade.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "SPECULATIVE SCENARIO",
+   "text": "Asteroid and comet orbits would slowly rearrange over ages.",
+   "status": "HUMAN"
+  },
+  {
+   "layer": "ESTIMATED CONSEQUENCE",
+   "text": "So the loss is felt in deep time, not tomorrow.",
+   "status": "HUMAN"
+  }
+ ]
+}
