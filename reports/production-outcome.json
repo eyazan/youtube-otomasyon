@@ -1,27 +1,25 @@
 {
-  "at": "2026-11-22T07:10:41.991Z",
-  "runId": "44996605537",
+  "at": "2026-11-22T13:09:31.940Z",
+  "runId": "45025604995",
   "rows": [
     {
       "channel": "failure-reconstructed",
-      "outcome": "UPLOADED",
-      "category": "SCHEDULED",
-      "scheduled": true,
-      "publication": "SCHEDULED",
-      "publishAt": "2026-11-22T18:00:00.000Z",
-      "reason": "premium FR-sewol-2014 WuutOhaDkZI",
-      "slug": "sewol-2014",
+      "outcome": "NOT_DUE",
+      "category": "NOT_DUE",
+      "scheduled": false,
+      "publication": "NOT_SCHEDULED",
+      "publishAt": null,
+      "reason": "today's Short already exists (sewol-2014)",
+      "slug": null,
       "videoId": null,
-      "targetDay": "2026-11-22",
+      "targetDay": null,
       "trigger": {
         "event": "repository_dispatch",
-        "correlationId": "production-1-20261122T070503Z-e26f9f40"
+        "correlationId": "production-2-20261122T130503Z-194a2c09"
       },
       "stages": {
         "RESEARCH": {
-          "status": "done",
-          "detail": "FR-sewol-2014",
-          "at": "2026-11-22T07:08:40.482Z"
+          "status": "not-reached"
         },
         "SCRIPT": {
           "status": "not-reached"
@@ -33,29 +31,19 @@
           "status": "not-reached"
         },
         "RENDER": {
-          "status": "done",
-          "detail": "premium final",
-          "at": "2026-11-22T07:08:40.486Z"
+          "status": "not-reached"
         },
         "QA": {
-          "status": "done",
-          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
-          "at": "2026-11-22T07:08:40.489Z"
+          "status": "not-reached"
         },
         "UPLOAD": {
-          "status": "done",
-          "detail": "WuutOhaDkZI",
-          "at": "2026-11-22T07:08:40.491Z"
+          "status": "not-reached"
         },
         "SCHEDULE": {
-          "status": "done",
-          "detail": "2026-11-22T18:00:00.000Z",
-          "at": "2026-11-22T07:08:40.491Z"
+          "status": "not-reached"
         },
         "PUBLISH": {
-          "status": "scheduled",
-          "detail": "YouTube makes it public at 2026-11-22T18:00:00.000Z",
-          "at": "2026-11-22T07:08:40.492Z"
+          "status": "not-reached"
         }
       }
     },
@@ -72,7 +60,7 @@
       "targetDay": "2026-11-22",
       "trigger": {
         "event": "repository_dispatch",
-        "correlationId": "production-1-20261122T070503Z-e26f9f40"
+        "correlationId": "production-2-20261122T130503Z-194a2c09"
       },
       "stages": {
         "RESEARCH": {
