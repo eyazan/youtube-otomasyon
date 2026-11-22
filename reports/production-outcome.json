@@ -1,94 +1,74 @@
 {
-  "at": "2026-11-22T20:48:00.194Z",
-  "runId": "45068148122",
+  "at": "2026-11-22T20:51:32.093Z",
+  "runId": "45068521477",
   "rows": [
     {
       "channel": "failure-reconstructed",
-      "outcome": "NOT_DUE",
-      "category": "NOT_DUE",
+      "outcome": "MISSING",
+      "category": "PRODUCTION_FAILED",
       "scheduled": false,
       "publication": "NOT_SCHEDULED",
-      "publishAt": null,
-      "reason": "today's Short already exists (sewol-2014)",
-      "slug": null,
-      "videoId": null,
-      "targetDay": null,
-      "trigger": {
-        "event": "schedule",
-        "correlationId": null
-      },
-      "stages": {
-        "RESEARCH": {
-          "status": "not-reached"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "not-reached"
-        },
-        "QA": {
-          "status": "not-reached"
-        },
-        "UPLOAD": {
-          "status": "not-reached"
-        },
-        "SCHEDULE": {
-          "status": "not-reached"
-        },
-        "PUBLISH": {
-          "status": "not-reached"
-        }
-      }
+      "reason": "no stage record for this run (the step crashed before tracking or did not run)",
+      "stages": null
     },
     {
       "channel": "impossible-brief",
-      "outcome": "NOT_DUE",
-      "category": "NOT_DUE",
-      "scheduled": false,
-      "publication": "NOT_SCHEDULED",
-      "publishAt": null,
-      "reason": "today's Short already exists (what-if-antarcticas-ice-sheet-melted)",
-      "slug": null,
-      "videoId": null,
+      "outcome": "UPLOADED",
+      "category": "SCHEDULED",
+      "scheduled": true,
+      "publication": "SCHEDULED",
+      "publishAt": "2026-11-25T18:00:00.000Z",
+      "reason": null,
+      "slug": "what-if-it-never-rained-again",
+      "videoId": "UQmcPc4keRo",
       "targetDay": null,
       "trigger": {
-        "event": "schedule",
+        "event": "workflow_dispatch",
         "correlationId": null
       },
       "stages": {
         "RESEARCH": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "explicit topic",
+          "at": "2026-11-22T20:49:51.367Z"
         },
         "SCRIPT": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "pre-render readiness PUBLISH 87",
+          "at": "2026-11-22T20:49:51.368Z"
         },
         "ASSETS": {
-          "status": "not-reached"
+          "status": "done",
+          "at": "2026-11-22T20:51:08.227Z"
         },
         "NARRATION": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "Microsoft Edge neural TTS (claim-timed)",
+          "at": "2026-11-22T20:51:08.227Z"
         },
         "RENDER": {
-          "status": "not-reached"
+          "status": "done",
+          "at": "2026-11-22T20:51:08.228Z"
         },
         "QA": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "validations passed",
+          "at": "2026-11-22T20:51:08.380Z"
         },
         "UPLOAD": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "UQmcPc4keRo",
+          "at": "2026-11-22T20:51:12.864Z"
         },
         "SCHEDULE": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "2026-11-25T18:00:00.000Z",
+          "at": "2026-11-22T20:51:12.864Z"
         },
         "PUBLISH": {
-          "status": "not-reached"
+          "status": "scheduled",
+          "detail": "YouTube makes it public at 2026-11-25T18:00:00.000Z",
+          "at": "2026-11-22T20:51:12.865Z"
         }
       }
     }
