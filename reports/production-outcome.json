@@ -1,6 +1,6 @@
 {
-  "at": "2026-11-22T20:42:45.884Z",
-  "runId": "45067748458",
+  "at": "2026-11-22T20:46:35.603Z",
+  "runId": "45068070924",
   "rows": [
     {
       "channel": "failure-reconstructed",
@@ -13,14 +13,14 @@
     },
     {
       "channel": "impossible-brief",
-      "outcome": "BLOCKED",
-      "category": "QUALITY_REJECTED",
-      "scheduled": false,
-      "publication": "NOT_SCHEDULED",
-      "publishAt": null,
-      "reason": "what-if-the-1859-solar-superstorm-hit-today: validations growthReadiness",
-      "slug": "what-if-the-1859-solar-superstorm-hit-today",
-      "videoId": null,
+      "outcome": "UPLOADED",
+      "category": "SCHEDULED",
+      "scheduled": true,
+      "publication": "SCHEDULED",
+      "publishAt": "2026-11-24T18:00:00.000Z",
+      "reason": null,
+      "slug": "what-if-antarcticas-ice-sheet-melted",
+      "videoId": "in0IM-aEs3A",
       "targetDay": null,
       "trigger": {
         "event": "workflow_dispatch",
@@ -30,39 +30,45 @@
         "RESEARCH": {
           "status": "done",
           "detail": "explicit topic",
-          "at": "2026-11-22T20:41:22.183Z"
+          "at": "2026-11-22T20:44:44.378Z"
         },
         "SCRIPT": {
           "status": "done",
-          "detail": "pre-render readiness BLOCK 90",
-          "at": "2026-11-22T20:41:22.184Z"
+          "detail": "pre-render readiness PUBLISH 88",
+          "at": "2026-11-22T20:44:44.379Z"
         },
         "ASSETS": {
           "status": "done",
-          "at": "2026-11-22T20:42:28.622Z"
+          "at": "2026-11-22T20:46:13.643Z"
         },
         "NARRATION": {
           "status": "done",
           "detail": "Microsoft Edge neural TTS (claim-timed)",
-          "at": "2026-11-22T20:42:28.622Z"
+          "at": "2026-11-22T20:46:13.643Z"
         },
         "RENDER": {
           "status": "done",
-          "at": "2026-11-22T20:42:28.623Z"
+          "at": "2026-11-22T20:46:13.644Z"
         },
         "QA": {
-          "status": "failed",
-          "detail": "growthReadiness",
-          "at": "2026-11-22T20:42:28.767Z"
+          "status": "done",
+          "detail": "validations passed",
+          "at": "2026-11-22T20:46:13.790Z"
         },
         "UPLOAD": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "in0IM-aEs3A",
+          "at": "2026-11-22T20:46:16.999Z"
         },
         "SCHEDULE": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "2026-11-24T18:00:00.000Z",
+          "at": "2026-11-22T20:46:17.000Z"
         },
         "PUBLISH": {
-          "status": "not-reached"
+          "status": "scheduled",
+          "detail": "YouTube makes it public at 2026-11-24T18:00:00.000Z",
+          "at": "2026-11-22T20:46:17.000Z"
         }
       }
     }
