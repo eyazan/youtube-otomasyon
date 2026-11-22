@@ -1,6 +1,6 @@
 {
-  "at": "2026-11-22T20:39:59.688Z",
-  "runId": "45067525344",
+  "at": "2026-11-22T20:42:45.884Z",
+  "runId": "45067748458",
   "rows": [
     {
       "channel": "failure-reconstructed",
@@ -13,14 +13,14 @@
     },
     {
       "channel": "impossible-brief",
-      "outcome": "UPLOADED",
-      "category": "SCHEDULED",
-      "scheduled": true,
-      "publication": "SCHEDULED",
-      "publishAt": "2026-11-23T18:00:00.000Z",
-      "reason": null,
-      "slug": "what-if-the-atlantic-ocean-current-shut-down",
-      "videoId": "h3v8MvQS-ZU",
+      "outcome": "BLOCKED",
+      "category": "QUALITY_REJECTED",
+      "scheduled": false,
+      "publication": "NOT_SCHEDULED",
+      "publishAt": null,
+      "reason": "what-if-the-1859-solar-superstorm-hit-today: validations growthReadiness",
+      "slug": "what-if-the-1859-solar-superstorm-hit-today",
+      "videoId": null,
       "targetDay": null,
       "trigger": {
         "event": "workflow_dispatch",
@@ -30,45 +30,39 @@
         "RESEARCH": {
           "status": "done",
           "detail": "explicit topic",
-          "at": "2026-11-22T20:39:02.207Z"
+          "at": "2026-11-22T20:41:22.183Z"
         },
         "SCRIPT": {
           "status": "done",
-          "detail": "pre-render readiness PUBLISH 88",
-          "at": "2026-11-22T20:39:02.247Z"
+          "detail": "pre-render readiness BLOCK 90",
+          "at": "2026-11-22T20:41:22.184Z"
         },
         "ASSETS": {
           "status": "done",
-          "at": "2026-11-22T20:39:36.422Z"
+          "at": "2026-11-22T20:42:28.622Z"
         },
         "NARRATION": {
           "status": "done",
           "detail": "Microsoft Edge neural TTS (claim-timed)",
-          "at": "2026-11-22T20:39:36.423Z"
+          "at": "2026-11-22T20:42:28.622Z"
         },
         "RENDER": {
           "status": "done",
-          "at": "2026-11-22T20:39:36.423Z"
+          "at": "2026-11-22T20:42:28.623Z"
         },
         "QA": {
-          "status": "done",
-          "detail": "validations passed",
-          "at": "2026-11-22T20:39:36.555Z"
+          "status": "failed",
+          "detail": "growthReadiness",
+          "at": "2026-11-22T20:42:28.767Z"
         },
         "UPLOAD": {
-          "status": "done",
-          "detail": "h3v8MvQS-ZU",
-          "at": "2026-11-22T20:39:40.829Z"
+          "status": "not-reached"
         },
         "SCHEDULE": {
-          "status": "done",
-          "detail": "2026-11-23T18:00:00.000Z",
-          "at": "2026-11-22T20:39:40.830Z"
+          "status": "not-reached"
         },
         "PUBLISH": {
-          "status": "scheduled",
-          "detail": "YouTube makes it public at 2026-11-23T18:00:00.000Z",
-          "at": "2026-11-22T20:39:40.831Z"
+          "status": "not-reached"
         }
       }
     }
