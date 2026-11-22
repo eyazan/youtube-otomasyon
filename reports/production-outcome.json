@@ -1,94 +1,74 @@
 {
-  "at": "2026-11-22T20:24:37.208Z",
-  "runId": "45066152630",
+  "at": "2026-11-22T20:39:59.688Z",
+  "runId": "45067525344",
   "rows": [
     {
       "channel": "failure-reconstructed",
-      "outcome": "NOT_DUE",
-      "category": "NOT_DUE",
+      "outcome": "MISSING",
+      "category": "PRODUCTION_FAILED",
       "scheduled": false,
       "publication": "NOT_SCHEDULED",
-      "publishAt": null,
-      "reason": "today's Short already exists (sewol-2014)",
-      "slug": null,
-      "videoId": null,
-      "targetDay": null,
-      "trigger": {
-        "event": "schedule",
-        "correlationId": null
-      },
-      "stages": {
-        "RESEARCH": {
-          "status": "not-reached"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "not-reached"
-        },
-        "QA": {
-          "status": "not-reached"
-        },
-        "UPLOAD": {
-          "status": "not-reached"
-        },
-        "SCHEDULE": {
-          "status": "not-reached"
-        },
-        "PUBLISH": {
-          "status": "not-reached"
-        }
-      }
+      "reason": "no stage record for this run (the step crashed before tracking or did not run)",
+      "stages": null
     },
     {
       "channel": "impossible-brief",
-      "outcome": "NOT_DUE",
-      "category": "NOT_DUE",
-      "scheduled": false,
-      "publication": "NOT_SCHEDULED",
-      "publishAt": null,
-      "reason": "production window closed at 21:00 Europe/Istanbul minus 60 min",
-      "slug": null,
-      "videoId": null,
+      "outcome": "UPLOADED",
+      "category": "SCHEDULED",
+      "scheduled": true,
+      "publication": "SCHEDULED",
+      "publishAt": "2026-11-23T18:00:00.000Z",
+      "reason": null,
+      "slug": "what-if-the-atlantic-ocean-current-shut-down",
+      "videoId": "h3v8MvQS-ZU",
       "targetDay": null,
       "trigger": {
-        "event": "schedule",
+        "event": "workflow_dispatch",
         "correlationId": null
       },
       "stages": {
         "RESEARCH": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "explicit topic",
+          "at": "2026-11-22T20:39:02.207Z"
         },
         "SCRIPT": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "pre-render readiness PUBLISH 88",
+          "at": "2026-11-22T20:39:02.247Z"
         },
         "ASSETS": {
-          "status": "not-reached"
+          "status": "done",
+          "at": "2026-11-22T20:39:36.422Z"
         },
         "NARRATION": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "Microsoft Edge neural TTS (claim-timed)",
+          "at": "2026-11-22T20:39:36.423Z"
         },
         "RENDER": {
-          "status": "not-reached"
+          "status": "done",
+          "at": "2026-11-22T20:39:36.423Z"
         },
         "QA": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "validations passed",
+          "at": "2026-11-22T20:39:36.555Z"
         },
         "UPLOAD": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "h3v8MvQS-ZU",
+          "at": "2026-11-22T20:39:40.829Z"
         },
         "SCHEDULE": {
-          "status": "not-reached"
+          "status": "done",
+          "detail": "2026-11-23T18:00:00.000Z",
+          "at": "2026-11-22T20:39:40.830Z"
         },
         "PUBLISH": {
-          "status": "not-reached"
+          "status": "scheduled",
+          "detail": "YouTube makes it public at 2026-11-23T18:00:00.000Z",
+          "at": "2026-11-22T20:39:40.831Z"
         }
       }
     }
