@@ -242,7 +242,7 @@ test("visual pre-check skips picture-poor topics before a render, but never on a
     assert.match(Pipeline.visualShortfall(explained, dir, fake(1)), /1 licensed pictures\/clips < 2/, "still needs two real pictures");
     assert.ok(fs.existsSync(path.join(dir, "topic.json")), "the render reuses the same topic file and picture cache");
     const source = fs.readFileSync(path.join(__dirname, "../../core/pipeline/impossible-brief.js"), "utf8");
-    assert.match(source, /const shortfall = !noRender && !explicit \? visualShortfall\(topic, output\) : null;/);
+    assert.match(source, /const shortfall = !noRender \? visualShortfall\(topic, output\) : null;/);
     assert.match(source, /attempt -= 1;\n      continue;/, "pre-check skips do not use up render attempts");
   } finally { fs.rmSync(dir, { recursive: true, force: true }); }
 });

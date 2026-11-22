@@ -193,9 +193,9 @@ test("upload metadata always has a title from the record itself, on every channe
 });
 
 test("premium descriptions never claim archival or stock footage", () => {
-  for (const slug of ["failure-reconstructed", "impossible-brief", "goal-lore-lab"]) {
+  for (const slug of ["failure-reconstructed", "impossible-brief", "goal-lore-lab", "behind-the-ordinary"]) {
     const ch = Channel.getChannel(slug);
-    for (const r of Lane.qualified(ch).ok) { const d = Publish.metadata(ch, r.topic).description; assert.doesNotMatch(d, /real archival film|licensed stock|Stock footage: Pexels/, `${slug} ${r.topic.id}`); assert.match(d, /synthetic voice/i); }
+    for (const r of Lane.qualified(ch).ok) { const d = Publish.metadata(ch, r.topic).description; assert.doesNotMatch(d, /real archival film|Archival film|licensed stock|Stock footage: Pexels|&[a-z]+;/, `${slug} ${r.topic.id}`); assert.match(d, /synthetic voice/i); }
   }
 });
 
