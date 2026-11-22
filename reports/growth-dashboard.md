@@ -1,6 +1,6 @@
 # Growth dashboard
 
-Generated 2026-11-22T18:35:06.847Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-11-22T19:51:18.166Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
@@ -12,9 +12,9 @@ Generated 2026-11-22T18:35:06.847Z. Per-channel baselines are computed separatel
 
 **Content clusters** — 12 · integrity OK
 
-**Growth / subscriber conversion** — tracked 48 · subs/1k Shorts 0 · subs/1k long n/a
+**Growth / subscriber conversion** — tracked 49 · subs/1k Shorts 0 · subs/1k long n/a
 
-**Learning** — Shorts adaptive (n=47, adopted 0) · Long-form heuristics-only (n=0)
+**Learning** — Shorts adaptive (n=48, adopted 0) · Long-form heuristics-only (n=0)
 
 **Short → Long funnel** — 0 link(s), 0 long→long, 0 pending RELATED_VIDEO_MANUAL_ACTION_REQUIRED
 
