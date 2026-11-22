@@ -1,74 +1,94 @@
 {
-  "at": "2026-11-22T20:46:35.603Z",
-  "runId": "45068070924",
+  "at": "2026-11-22T20:48:00.194Z",
+  "runId": "45068148122",
   "rows": [
     {
       "channel": "failure-reconstructed",
-      "outcome": "MISSING",
-      "category": "PRODUCTION_FAILED",
+      "outcome": "NOT_DUE",
+      "category": "NOT_DUE",
       "scheduled": false,
       "publication": "NOT_SCHEDULED",
-      "reason": "no stage record for this run (the step crashed before tracking or did not run)",
-      "stages": null
-    },
-    {
-      "channel": "impossible-brief",
-      "outcome": "UPLOADED",
-      "category": "SCHEDULED",
-      "scheduled": true,
-      "publication": "SCHEDULED",
-      "publishAt": "2026-11-24T18:00:00.000Z",
-      "reason": null,
-      "slug": "what-if-antarcticas-ice-sheet-melted",
-      "videoId": "in0IM-aEs3A",
+      "publishAt": null,
+      "reason": "today's Short already exists (sewol-2014)",
+      "slug": null,
+      "videoId": null,
       "targetDay": null,
       "trigger": {
-        "event": "workflow_dispatch",
+        "event": "schedule",
         "correlationId": null
       },
       "stages": {
         "RESEARCH": {
-          "status": "done",
-          "detail": "explicit topic",
-          "at": "2026-11-22T20:44:44.378Z"
+          "status": "not-reached"
         },
         "SCRIPT": {
-          "status": "done",
-          "detail": "pre-render readiness PUBLISH 88",
-          "at": "2026-11-22T20:44:44.379Z"
+          "status": "not-reached"
         },
         "ASSETS": {
-          "status": "done",
-          "at": "2026-11-22T20:46:13.643Z"
+          "status": "not-reached"
         },
         "NARRATION": {
-          "status": "done",
-          "detail": "Microsoft Edge neural TTS (claim-timed)",
-          "at": "2026-11-22T20:46:13.643Z"
+          "status": "not-reached"
         },
         "RENDER": {
-          "status": "done",
-          "at": "2026-11-22T20:46:13.644Z"
+          "status": "not-reached"
         },
         "QA": {
-          "status": "done",
-          "detail": "validations passed",
-          "at": "2026-11-22T20:46:13.790Z"
+          "status": "not-reached"
         },
         "UPLOAD": {
-          "status": "done",
-          "detail": "in0IM-aEs3A",
-          "at": "2026-11-22T20:46:16.999Z"
+          "status": "not-reached"
         },
         "SCHEDULE": {
-          "status": "done",
-          "detail": "2026-11-24T18:00:00.000Z",
-          "at": "2026-11-22T20:46:17.000Z"
+          "status": "not-reached"
         },
         "PUBLISH": {
-          "status": "scheduled",
-          "detail": "YouTube makes it public at 2026-11-24T18:00:00.000Z",
-          "at": "2026-11-22T20:46:17.000Z"
+          "status": "not-reached"
+        }
+      }
+    },
+    {
+      "channel": "impossible-brief",
+      "outcome": "NOT_DUE",
+      "category": "NOT_DUE",
+      "scheduled": false,
+      "publication": "NOT_SCHEDULED",
+      "publishAt": null,
+      "reason": "today's Short already exists (what-if-antarcticas-ice-sheet-melted)",
+      "slug": null,
+      "videoId": null,
+      "targetDay": null,
+      "trigger": {
+        "event": "schedule",
+        "correlationId": null
+      },
+      "stages": {
+        "RESEARCH": {
+          "status": "not-reached"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "not-reached"
+        },
+        "QA": {
+          "status": "not-reached"
+        },
+        "UPLOAD": {
+          "status": "not-reached"
+        },
+        "SCHEDULE": {
+          "status": "not-reached"
+        },
+        "PUBLISH": {
+          "status": "not-reached"
         }
       }
     }
