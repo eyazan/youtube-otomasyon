@@ -141,10 +141,24 @@ function premiumShadow(channel, topic, env = process.env, spawn = cp.spawnSync, 
   return require("./premium-shadow").run(channel, topic, env, spawn, live);
 }
 
+// A manual run's named topic (workflow input `topic`, by id or slug) is the only candidate: unknown is an error.
+function explicitTopic(channel, explicit, universe) {
+  const topic = universe.find((item) => item.slug === explicit || item.id === explicit);
+  if (!topic) throw new Error(`${channel.name} topic not found: ${explicit}`);
+  return topic;
+}
+
+// Licensed-picture pre-check outcome. A named topic that falls short is refused with the reason (no other topic is
+// picked in its place); the automatic choice records the block and moves to the next topic.
+function precheckAction(explicit, shortfall) {
+  if (!shortfall) return { action: "render" };
+  if (explicit) return { action: "reject", reason: `${explicit}: visual pre-check ${shortfall}; no other topic was chosen` };
+  return { action: "skip" };
+}
+
 function chooseTopic(channel, explicit, universe) {
   if (explicit) {
-    const topic = universe.find((item) => item.slug === explicit || item.id === explicit);
-    if (!topic) throw new Error(`${channel.name} topic not found: ${explicit}`);
+    const topic = explicitTopic(channel, explicit, universe);
     return { topic, plan: Growth.planShort(channel, topic.id, { legacyTitles: Scripting.titleCandidates(topic), skipDuplicate: true, assignExperiment: true, write: true }), reason: "explicit topic" };
   }
   const exclude = [...Discovery.usedIds(channel)];
@@ -202,7 +216,9 @@ function runChannel(slug, argv = []) {
   // A premium-only channel (config premiumOnlyUploads: ImpossibleBrief) never uploads from this legacy lane, whatever
   // started it (scheduler, SLA watchdog recovery, a manual dispatch with engine=legacy): only the premium publish path
   // above takes the day. The uploader refuses a non-premium MP4 as well (youtube-yukle.js LEGACY_UPLOAD_REFUSED).
-  if (channel.config.premiumOnlyUploads && process.env.PUBLISH === "1") {
+  // Faz 1 stock test: a manual dispatch naming one topic (workflow sets IB_MANUAL_STOCK_UPLOAD only then) may upload it.
+  const manualStock = !!explicit && process.env.IB_MANUAL_STOCK_UPLOAD === "1";
+  if (channel.config.premiumOnlyUploads && process.env.PUBLISH === "1" && !manualStock) {
     const why = "LEGACY_UPLOAD_RETIRED: this channel publishes premium Shorts only (premium publish path); the legacy renderer does not run with PUBLISH=1";
     run.outcome("BLOCKED", why); console.log(`[${channel.name}] ${why}`); return 0;
   }
@@ -234,7 +250,13 @@ function runChannel(slug, argv = []) {
     topic = choice.topic;
     run.reset().topic(topic.slug).done("RESEARCH", choice.reason).done("SCRIPT", `pre-render readiness ${choice.plan.readiness.decision} ${choice.plan.readiness.ProductionReadinessScore}`);
     output = path.join(channel.paths.production, topic.slug);
-    const shortfall = !noRender && !explicit ? visualShortfall(topic, output) : null;
+    const shortfall = !noRender ? visualShortfall(topic, output) : null;
+    const gate = precheckAction(explicit, shortfall);
+    if (gate.action === "reject") {
+      run.fail("ASSETS", `visual pre-check: ${shortfall}`).outcome("BLOCKED", gate.reason);
+      console.error(`::error::[${channel.name}] ${gate.reason}`);
+      return 1;
+    }
     if (shortfall) {
       run.fail("ASSETS", `visual pre-check: ${shortfall}`).outcome("BLOCKED", `${topic.slug}: visual pre-check ${shortfall}`);
       recordBlocked(channel, topic, `visual pre-check: ${shortfall}`);
@@ -315,7 +337,7 @@ function runChannel(slug, argv = []) {
     }
     if (!budget("upload")) return 1;
     const upload = cp.spawnSync(process.execPath, [path.join(Channel.ROOT, "youtube-yukle.js"), "--channel", channel.slug, topic.slug], { cwd: Channel.ROOT, stdio: "inherit",
-      env: { ...process.env, ...(targetDay ? { SHORTS_TARGET_DAY: targetDay } : {}) } });
+      env: { ...process.env, ...(targetDay ? { SHORTS_TARGET_DAY: targetDay } : {}), ...(manualStock ? { IB_MANUAL_STOCK_SLUG: topic.slug } : {}) } });
     if (upload.status === 15 || upload.status === 16) {
       // 15: uploaded, but YouTube did not confirm private + publishAt (never re-uploaded).
       // 16: the target day's slot is taken or missed (never moved to another day). Topic kept.
@@ -372,4 +394,4 @@ function recordGenerated(channel, topic, uploaded) {
 
 function main(argv = []) { return runChannel("impossible-brief", argv); }
 
-module.exports = { llmShadow, premiumShadow, MIN_PRECHECK_VISUALS, MAX_VISUAL_PRECHECKS, visualShortfall, writeCompatibilityFiles, writeValidationEvidence, visualRejection, runChannel, main };
+module.exports = { explicitTopic, precheckAction, llmShadow, premiumShadow, MIN_PRECHECK_VISUALS, MAX_VISUAL_PRECHECKS, visualShortfall, writeCompatibilityFiles, writeValidationEvidence, visualRejection, runChannel, main };
