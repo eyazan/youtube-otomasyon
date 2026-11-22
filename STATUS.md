@@ -1,4 +1,4 @@
-# STATUS — 2026-11-15 (Faz 0, Oturum 0a)
+# STATUS — 2026-11-22 (son şans testi hazır)
 
 Kaynaklar: `origin/main` durum dosyaları (`channels/*/state/ops/production-stages.json`, `premium/approvals/`), üretim çalışması günlükleri (14–15 Kasım), herkese açık izlenmeler (vidIQ, 15 Kasım).
 
@@ -25,14 +25,12 @@ Kaynaklar: `origin/main` durum dosyaları (`channels/*/state/ops/production-stag
 - PR #411 ve #416 açık. Dört videonun sahip onayı bekliyor (`docs/review/final-2026-11-04/`). Studio düzeltmeleri yapılmadı.
 
 ## Sıradaki TEK adım
-Sahip iki karar verir:
-1. `IB_PREMIUM_PUBLISH=0` (IB-FUT-042 döngüsünü durdurur).
-2. IB'de stok videoların yüklenmesine izin (`premiumOnlyUploads`), yalnızca elle başlatılan, onaylı deneme videosu için.
-
-İkisi onaylanırsa: Oturum 0b (Task 3: onaylı artifact'i yükleme, Task 4: `publishAt` kontrolü).
+**Karar (22 Kasım): son şans testi.** 3 stok görüntülü IB videosu (`IB-EAR-071`, `IB-SPA-006`, `IB-EAR-086`), günde biri 21:00'de, 7 gün ölçüm. En az 2 video 400+ izlenme → devam. Üçü de 150 altı → dur (2. yol). Arada → bir tur daha.
+- Kod hazır, `claude/ib-stock-test` dalında (yerelde; push için sahip izni bekleniyor). Ana dala küçük bir PR: elle seçilen tek konunun stok videosu yüklenebilir, zamanlanmış çalışmalar ve watchdog yükleyemez.
+- Sahip: PR'ı birleştirir, `IB_PREMIUM_PUBLISH=0` yapar, `IB_PUBLISH=1` olduğunu doğrular. Sonra 3 yükleme çalışması başlatılır.
 
 ## Bloklar
-- `premiumOnlyUploads` kararı (yukarıda).
+- `tests/js/ib-premium.test.js` "IB readiness" testi ana dalda da başarısız (IB-OTH-020 artık hazır değil; durum verisi kayması). Bu değişiklikle ilgisi yok.
 - BTO OAuth `INVALID_CLIENT`.
 - İzlenim ve CTR verisi yok; sahip Studio'dan girmeli.
 - Her onay ve birleştirme sahipte. Kod onay kaydı yazmaz.
