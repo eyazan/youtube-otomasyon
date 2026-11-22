@@ -1,4 +1,4 @@
-# STATUS — 2026-11-22 (son şans testi hazır)
+# STATUS — 2026-11-22 (son şans testi yayında)
 
 Kaynaklar: `origin/main` durum dosyaları (`channels/*/state/ops/production-stages.json`, `premium/approvals/`), üretim çalışması günlükleri (14–15 Kasım), herkese açık izlenmeler (vidIQ, 15 Kasım).
 
@@ -25,9 +25,16 @@ Kaynaklar: `origin/main` durum dosyaları (`channels/*/state/ops/production-stag
 - PR #411 ve #416 açık. Dört videonun sahip onayı bekliyor (`docs/review/final-2026-11-04/`). Studio düzeltmeleri yapılmadı.
 
 ## Sıradaki TEK adım
-**Karar (22 Kasım): son şans testi.** 3 stok görüntülü IB videosu (`IB-EAR-071`, `IB-SPA-006`, `IB-EAR-086`), günde biri 21:00'de, 7 gün ölçüm. En az 2 video 400+ izlenme → devam. Üçü de 150 altı → dur (2. yol). Arada → bir tur daha.
-- Kod hazır, `claude/ib-stock-test` dalında (yerelde; push için sahip izni bekleniyor). Ana dala küçük bir PR: elle seçilen tek konunun stok videosu yüklenebilir, zamanlanmış çalışmalar ve watchdog yükleyemez.
-- Sahip: PR'ı birleştirir, `IB_PREMIUM_PUBLISH=0` yapar, `IB_PUBLISH=1` olduğunu doğrular. Sonra 3 yükleme çalışması başlatılır.
+**Son şans testi başladı (22 Kasım).** PR #491 birleşti, `IB_PREMIUM_PUBLISH=0`. 3 stok IB videosu yüklendi, otomatik yayın 21:00 TR:
+
+| Yayın | Konu | Video |
+|---|---|---|
+| 23 Kasım | IB-EAR-071 Atlantik akıntısı | https://youtu.be/h3v8MvQS-ZU |
+| 24 Kasım | IB-EAR-029 Antarktika buz örtüsü | https://youtu.be/in0IM-aEs3A |
+| 25 Kasım | IB-EAR-049 Hiç yağmur yağmasa | https://youtu.be/UQmcPc4keRo |
+
+IB-SPA-006 ve IB-EAR-086 yayından önce hazırlık eşiğine takıldı (viral puanı 74 < 75), yerlerine yukarıdakiler girdi.
+**2 Aralık:** her videonun 7. gün izlenmesi okunur. En az 2'si 400+ → devam. Üçü de 150 altı → dur. Arada → bir tur daha. O güne kadar yeni geliştirme yok.
 
 ## Bloklar
 - `tests/js/ib-premium.test.js` "IB readiness" testi ana dalda da başarısız (IB-OTH-020 artık hazır değil; durum verisi kayması). Bu değişiklikle ilgisi yok.
