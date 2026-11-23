@@ -1380,5 +1380,287 @@
       "resetTokensMs": 1,
       "remainingRequests": 1000
     }
+  },
+  {
+    "at": "2026-11-23T07:07:26.517Z",
+    "channel": "impossible-brief",
+    "event": "request",
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "stage": "narrative-angle",
+    "attempt": 1
+  },
+  {
+    "at": "2026-11-23T07:07:26.517Z",
+    "channel": "impossible-brief",
+    "event": "failed",
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "stage": "narrative-angle",
+    "attempt": 1,
+    "code": "REQUEST_TOO_LARGE",
+    "status": 413,
+    "retryable": false,
+    "retryAfterMs": null,
+    "retryClass": "fail",
+    "providerCode": "rate_limit_exceeded",
+    "providerMessage": "Request too large for model `openai/gpt-oss-120b` in organization [redacted] service tier `on_demand` on tokens per minute (TPM): Limit 8000, Requested 10917, please reduce your message size and try again. Need more tokens? Upgrade to Dev T",
+    "requestBytes": 47030,
+    "estimatedTokens": 11758,
+    "rate": {
+      "limitTokens": 8000,
+      "remainingTokens": 8000,
+      "resetTokensMs": 1,
+      "remainingRequests": 1000
+    }
+  },
+  {
+    "at": "2026-11-23T07:07:26.517Z",
+    "channel": "impossible-brief",
+    "event": "request",
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "stage": "narrative-angle",
+    "attempt": 1
+  },
+  {
+    "at": "2026-11-23T07:07:26.517Z",
+    "channel": "impossible-brief",
+    "event": "success",
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "stage": "narrative-angle",
+    "attempt": 1,
+    "usage": {
+      "input_tokens": 1439,
+      "output_tokens": 1276,
+      "total_tokens": 2715,
+      "reasoning_tokens": 639
+    },
+    "finishReason": "stop",
+    "promptTokens": 1439,
+    "completionTokens": 1276,
+    "totalTokens": 2715,
+    "reasoningTokens": 639,
+    "contentChars": 2622,
+    "rate": {
+      "limitTokens": 8000,
+      "remainingTokens": 6241,
+      "resetTokensMs": 13192,
+      "remainingRequests": 999
+    }
+  },
+  {
+    "at": "2026-11-23T07:07:26.517Z",
+    "channel": "impossible-brief",
+    "event": "request",
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "stage": "section:IMPOSSIBLE_QUESTION",
+    "attempt": 1
+  },
+  {
+    "at": "2026-11-23T07:07:26.517Z",
+    "channel": "impossible-brief",
+    "event": "success",
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "stage": "section:IMPOSSIBLE_QUESTION",
+    "attempt": 1,
+    "usage": {
+      "input_tokens": 418,
+      "output_tokens": 327,
+      "total_tokens": 745,
+      "reasoning_tokens": 261
+    },
+    "finishReason": "stop",
+    "promptTokens": 418,
+    "completionTokens": 327,
+    "totalTokens": 745,
+    "reasoningTokens": 261,
+    "contentChars": 248,
+    "rate": {
+      "limitTokens": 8000,
+      "remainingTokens": 4930,
+      "resetTokensMs": 23025,
+      "remainingRequests": 998
+    }
+  },
+  {
+    "at": "2026-11-23T07:07:26.517Z",
+    "channel": "impossible-brief",
+    "event": "request",
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "stage": "section:INITIAL_CONDITIONS",
+    "attempt": 1
+  },
+  {
+    "at": "2026-11-23T07:07:26.517Z",
+    "channel": "impossible-brief",
+    "event": "success",
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "stage": "section:INITIAL_CONDITIONS",
+    "attempt": 1,
+    "usage": {
+      "input_tokens": 427,
+      "output_tokens": 408,
+      "total_tokens": 835,
+      "reasoning_tokens": 340
+    },
+    "finishReason": "stop",
+    "promptTokens": 427,
+    "completionTokens": 408,
+    "totalTokens": 835,
+    "reasoningTokens": 340,
+    "contentChars": 291,
+    "rate": {
+      "limitTokens": 8000,
+      "remainingTokens": 4296,
+      "resetTokensMs": 27780,
+      "remainingRequests": 997
+    }
+  },
+  {
+    "at": "2026-11-23T07:07:26.517Z",
+    "channel": "impossible-brief",
+    "event": "request",
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "stage": "section:FIRST_EFFECT",
+    "attempt": 1
+  },
+  {
+    "at": "2026-11-23T07:07:26.517Z",
+    "channel": "impossible-brief",
+    "event": "success",
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "stage": "section:FIRST_EFFECT",
+    "attempt": 1,
+    "usage": {
+      "input_tokens": 1041,
+      "output_tokens": 959,
+      "total_tokens": 2000,
+      "reasoning_tokens": 842
+    },
+    "finishReason": "stop",
+    "promptTokens": 1041,
+    "completionTokens": 959,
+    "totalTokens": 2000,
+    "reasoningTokens": 842,
+    "contentChars": 479,
+    "rate": {
+      "limitTokens": 8000,
+      "remainingTokens": 2981,
+      "resetTokensMs": 37642,
+      "remainingRequests": 996
+    }
+  },
+  {
+    "at": "2026-11-23T07:07:26.517Z",
+    "channel": "impossible-brief",
+    "event": "request",
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "stage": "section:SCIENCE_EXPLANATION",
+    "attempt": 1
+  },
+  {
+    "at": "2026-11-23T07:07:26.517Z",
+    "channel": "impossible-brief",
+    "event": "success",
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "stage": "section:SCIENCE_EXPLANATION",
+    "attempt": 1,
+    "usage": {
+      "input_tokens": 406,
+      "output_tokens": 363,
+      "total_tokens": 769,
+      "reasoning_tokens": 287
+    },
+    "finishReason": "stop",
+    "promptTokens": 406,
+    "completionTokens": 363,
+    "totalTokens": 769,
+    "reasoningTokens": 287,
+    "contentChars": 302,
+    "rate": {
+      "limitTokens": 8000,
+      "remainingTokens": 1865,
+      "resetTokensMs": 46012,
+      "remainingRequests": 995
+    }
+  },
+  {
+    "at": "2026-11-23T07:07:26.517Z",
+    "channel": "impossible-brief",
+    "event": "request",
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "stage": "section:LIMITS_UNCERTAINTIES",
+    "attempt": 1
+  },
+  {
+    "at": "2026-11-23T07:07:26.517Z",
+    "channel": "impossible-brief",
+    "event": "success",
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "stage": "section:LIMITS_UNCERTAINTIES",
+    "attempt": 1,
+    "usage": {
+      "input_tokens": 452,
+      "output_tokens": 478,
+      "total_tokens": 930,
+      "reasoning_tokens": 400
+    },
+    "finishReason": "stop",
+    "promptTokens": 452,
+    "completionTokens": 478,
+    "totalTokens": 930,
+    "reasoningTokens": 400,
+    "contentChars": 338,
+    "rate": {
+      "limitTokens": 8000,
+      "remainingTokens": 1182,
+      "resetTokensMs": 51135,
+      "remainingRequests": 994
+    }
+  },
+  {
+    "at": "2026-11-23T07:07:26.517Z",
+    "channel": "impossible-brief",
+    "event": "request",
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "stage": "narrative-angle",
+    "attempt": 1
+  },
+  {
+    "at": "2026-11-23T07:07:26.517Z",
+    "channel": "impossible-brief",
+    "event": "failed",
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "stage": "narrative-angle",
+    "attempt": 1,
+    "code": "REQUEST_TOO_LARGE",
+    "status": 413,
+    "retryable": false,
+    "retryAfterMs": null,
+    "retryClass": "fail",
+    "providerCode": "rate_limit_exceeded",
+    "providerMessage": "Request too large for model `openai/gpt-oss-120b` in organization [redacted] service tier `on_demand` on tokens per minute (TPM): Limit 8000, Requested 11223, please reduce your message size and try again. Need more tokens? Upgrade to Dev T",
+    "requestBytes": 47358,
+    "estimatedTokens": 11840,
+    "rate": {
+      "limitTokens": 8000,
+      "remainingTokens": 1237,
+      "resetTokensMs": 50722,
+      "remainingRequests": 994
+    }
   }
 ]

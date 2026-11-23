@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-22T21:55:43.834Z",
+  "generatedAt": "2026-11-23T07:07:51.299Z",
   "note": "Per-channel baselines are computed separately and never blended.",
   "channels": [
     {
@@ -22,29 +22,29 @@
           "used": 10
         },
         "nextSelection": {
-          "slug": "imperial-foods-fire-1991",
-          "reason": "EXPLORE (0.25): under-sampled cluster fire-and-explosions"
+          "slug": "three-mile-island-1979",
+          "reason": "EXPLORE (0.25): under-sampled cluster nuclear-accidents"
         },
         "baseline": {
           "n": 48,
           "views": 278,
           "averagePercentageViewed": 62.13000000000001,
           "subscribersPer1000Views": 0,
-          "engagementPer1000Views": 19.8,
+          "engagementPer1000Views": 20,
           "watchHoursPer1000Views": 1.96
         }
       },
       "longform": {
         "lane": {
-          "cycleId": "2026-W47",
+          "cycleId": "2026-W48",
           "due": false,
-          "reason": "cycle 2026-W47 already QUALITY_BLOCKED",
+          "reason": "cycle 2026-W48 already QUALITY_BLOCKED",
           "lastPublished": null
         },
         "lastCycle": {
-          "cycleId": "2026-W47",
+          "cycleId": "2026-W48",
           "channel": "failure-reconstructed",
-          "startedAt": "2026-11-16T07:10:24.336Z",
+          "startedAt": "2026-11-23T07:07:25.870Z",
           "status": "QUALITY_BLOCKED",
           "evaluated": [
             {
@@ -89,7 +89,7 @@
           ],
           "selected": null,
           "reason": "no candidate passed the long-form quality gate; cadence does not override quality",
-          "finishedAt": "2026-11-16T07:10:25.101Z"
+          "finishedAt": "2026-11-23T07:07:26.472Z"
         },
         "episodes": 0,
         "backlog": [
@@ -161,7 +161,7 @@
           "status": "adaptive",
           "sampleSize": 48,
           "adopted": 0,
-          "hypotheses": 8
+          "hypotheses": 12
         },
         "longform": {
           "status": "heuristics-only",
@@ -197,11 +197,6 @@
           "reason": "VideoPotential 84 in experimental band 58–71; sources 41 < 62"
         },
         {
-          "slug": "controlled-impact-1984",
-          "bucket": "C",
-          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
-        },
-        {
           "slug": "new-london-school-1937",
           "bucket": "C",
           "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
@@ -210,6 +205,11 @@
           "slug": "vanguard-1957",
           "bucket": "C",
           "reason": "VideoPotential 82 in experimental band 58–71; sources 41 < 62"
+        },
+        {
+          "slug": "controlled-impact-1984",
+          "bucket": "C",
+          "reason": "VideoPotential 83 in experimental band 58–71; sources 41 < 62"
         },
         {
           "slug": "b2-guam-2008",
@@ -432,7 +432,7 @@
         },
         "nextSelection": {
           "slug": "what-if-we-tried-to-drill-through-the-earth",
-          "reason": "EXPLORE (0.25): under-sampled cluster EXTREME SCIENCE"
+          "reason": "EXPLOIT (0.75): best A topic by SelectionScore"
         },
         "baseline": {
           "n": 22,
@@ -445,15 +445,15 @@
       },
       "longform": {
         "lane": {
-          "cycleId": "2026-W47",
+          "cycleId": "2026-W48",
           "due": false,
-          "reason": "cycle 2026-W47 already QUALITY_BLOCKED",
+          "reason": "cycle 2026-W48 already QUALITY_BLOCKED",
           "lastPublished": null
         },
         "lastCycle": {
-          "cycleId": "2026-W47",
+          "cycleId": "2026-W48",
           "channel": "impossible-brief",
-          "startedAt": "2026-11-16T07:10:25.148Z",
+          "startedAt": "2026-11-23T07:07:26.517Z",
           "status": "QUALITY_BLOCKED",
           "evaluated": [
             {
@@ -470,17 +470,16 @@
               "generationStatus": "FAILED"
             },
             {
-              "slug": "what-if-synthetic-fertilizer-disappeared",
-              "mode": "B_SHORT_PROVES_DEMAND",
-              "LongFormPotentialScore": 84,
+              "slug": "what-if-the-ozone-hole-never-closed",
+              "mode": "A_LONG_FIRST",
+              "LongFormPotentialScore": 83,
               "bucket": "A",
               "decision": "BLOCK",
-              "score": 86,
+              "score": 84,
               "hardFails": [
-                "INSUFFICIENT_DEPTH: evidence supports ~1.8 min; target 8–12 min — not padded",
-                "LLM generation failed safely (REQUEST_TOO_LARGE); deterministic evidence draft retained"
+                "INSUFFICIENT_DEPTH: evidence supports ~0.8 min; target 8–12 min — not padded"
               ],
-              "generationStatus": "FAILED"
+              "generationStatus": "QUALITY_REVIEW"
             },
             {
               "slug": "what-if-the-tunguska-blast-happened-over-a-city",
@@ -488,7 +487,7 @@
               "LongFormPotentialScore": 83,
               "bucket": "A",
               "decision": "BLOCK",
-              "score": 88,
+              "score": 87,
               "hardFails": [
                 "INSUFFICIENT_DEPTH: evidence supports ~2 min; target 8–12 min — not padded",
                 "LLM generation failed safely (REQUEST_TOO_LARGE); deterministic evidence draft retained"
@@ -498,7 +497,7 @@
           ],
           "selected": null,
           "reason": "no candidate passed the long-form quality gate; cadence does not override quality",
-          "finishedAt": "2026-11-16T07:10:26.254Z"
+          "finishedAt": "2026-11-23T07:07:36.509Z"
         },
         "episodes": 0,
         "backlog": [

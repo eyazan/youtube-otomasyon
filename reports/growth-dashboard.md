@@ -1,12 +1,12 @@
 # Growth dashboard
 
-Generated 2026-11-22T21:55:43.834Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-11-23T07:07:51.299Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
-**Shorts health** — last published 2026-11-22T18:00:00.000Z · 49 published · inventory A77/B139/C61/D59 · next: imperial-foods-fire-1991 (EXPLORE (0.25): under-sampled cluster fire-and-explosions)
+**Shorts health** — last published 2026-11-22T18:00:00.000Z · 49 published · inventory A77/B139/C61/D59 · next: three-mile-island-1979 (EXPLORE (0.25): under-sampled cluster nuclear-accidents)
 
-**Long-form health** — cycle 2026-W47: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W47 already QUALITY_BLOCKED)
+**Long-form health** — cycle 2026-W48: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W48 already QUALITY_BLOCKED)
 
 **Long-form backlog** — challenger-1986 86/A, chernobyl-1986 86/A, columbia-2003 85/A, air-france-447-2009 84/A, apollo-13-1970 84/A
 
@@ -41,9 +41,9 @@ Generated 2026-11-22T21:55:43.834Z. Per-channel baselines are computed separatel
 
 ## ImpossibleBrief
 
-**Shorts health** — last published 2026-11-25T18:00:00.000Z · 27 published · inventory A102/B24/C140/D206 · next: what-if-we-tried-to-drill-through-the-earth (EXPLORE (0.25): under-sampled cluster EXTREME SCIENCE)
+**Shorts health** — last published 2026-11-25T18:00:00.000Z · 27 published · inventory A102/B24/C140/D206 · next: what-if-we-tried-to-drill-through-the-earth (EXPLOIT (0.75): best A topic by SelectionScore)
 
-**Long-form health** — cycle 2026-W47: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W47 already QUALITY_BLOCKED)
+**Long-form health** — cycle 2026-W48: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W48 already QUALITY_BLOCKED)
 
 **Long-form backlog** — what-if-we-mined-a-metal-asteroid 84/A, what-if-the-ozone-hole-never-closed 83/A, what-if-the-tunguska-blast-happened-over-a-city 83/A, could-earth-survive-one-day-without-earth-s-magnetic-field 83/A, what-if-the-permafrost-thawed 83/A
 

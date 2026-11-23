@@ -386,6 +386,55 @@
       "selected": null,
       "reason": "no candidate passed the long-form quality gate; cadence does not override quality",
       "finishedAt": "2026-11-16T07:10:26.254Z"
+    },
+    {
+      "cycleId": "2026-W48",
+      "channel": "impossible-brief",
+      "startedAt": "2026-11-23T07:07:26.517Z",
+      "status": "QUALITY_BLOCKED",
+      "evaluated": [
+        {
+          "slug": "what-if-we-mined-a-metal-asteroid",
+          "mode": "B_SHORT_PROVES_DEMAND",
+          "LongFormPotentialScore": 84,
+          "bucket": "A",
+          "decision": "BLOCK",
+          "score": 87,
+          "hardFails": [
+            "INSUFFICIENT_DEPTH: evidence supports ~1.9 min; target 8–12 min — not padded",
+            "LLM generation failed safely (REQUEST_TOO_LARGE); deterministic evidence draft retained"
+          ],
+          "generationStatus": "FAILED"
+        },
+        {
+          "slug": "what-if-the-ozone-hole-never-closed",
+          "mode": "A_LONG_FIRST",
+          "LongFormPotentialScore": 83,
+          "bucket": "A",
+          "decision": "BLOCK",
+          "score": 84,
+          "hardFails": [
+            "INSUFFICIENT_DEPTH: evidence supports ~0.8 min; target 8–12 min — not padded"
+          ],
+          "generationStatus": "QUALITY_REVIEW"
+        },
+        {
+          "slug": "what-if-the-tunguska-blast-happened-over-a-city",
+          "mode": "A_LONG_FIRST",
+          "LongFormPotentialScore": 83,
+          "bucket": "A",
+          "decision": "BLOCK",
+          "score": 87,
+          "hardFails": [
+            "INSUFFICIENT_DEPTH: evidence supports ~2 min; target 8–12 min — not padded",
+            "LLM generation failed safely (REQUEST_TOO_LARGE); deterministic evidence draft retained"
+          ],
+          "generationStatus": "FAILED"
+        }
+      ],
+      "selected": null,
+      "reason": "no candidate passed the long-form quality gate; cadence does not override quality",
+      "finishedAt": "2026-11-23T07:07:36.509Z"
     }
   ]
 }
