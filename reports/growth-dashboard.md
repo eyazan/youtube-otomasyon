@@ -1,6 +1,6 @@
 # Growth dashboard
 
-Generated 2026-11-23T18:58:38.694Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-11-23T19:21:36.169Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
@@ -41,25 +41,25 @@ Generated 2026-11-23T18:58:38.694Z. Per-channel baselines are computed separatel
 
 ## ImpossibleBrief
 
-**Shorts health** — last published 2026-11-25T18:00:00.000Z · 27 published · inventory A102/B24/C140/D206 · next: what-if-we-tried-to-drill-through-the-earth (EXPLOIT (0.75): best A topic by SelectionScore)
+**Shorts health** — last published 2026-11-25T18:00:00.000Z · 27 published · inventory A100/B26/C140/D206 · next: what-if-we-tried-to-drill-through-the-earth (EXPLOIT (0.75): best A topic by SelectionScore)
 
 **Long-form health** — cycle 2026-W48: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W48 already QUALITY_BLOCKED)
 
-**Long-form backlog** — what-if-we-mined-a-metal-asteroid 84/A, what-if-the-ozone-hole-never-closed 83/A, what-if-the-tunguska-blast-happened-over-a-city 83/A, could-earth-survive-one-day-without-earth-s-magnetic-field 83/A, what-if-the-permafrost-thawed 83/A
+**Long-form backlog** — could-earth-survive-one-day-without-earth-s-magnetic-field 84/A, what-if-we-mined-a-metal-asteroid 84/A, what-if-the-ozone-hole-never-closed 83/A, what-if-yellowstone-erupted-again 83/A, what-if-the-tunguska-blast-happened-over-a-city 83/A
 
 **Content clusters** — 7 · integrity OK
 
 **Growth / subscriber conversion** — tracked 26 · subs/1k Shorts 0 · subs/1k long n/a
 
-**Learning** — Shorts adaptive (n=22, adopted 0) · Long-form heuristics-only (n=0)
+**Learning** — Shorts adaptive (n=23, adopted 0) · Long-form heuristics-only (n=0)
 
 **Short → Long funnel** — 0 link(s), 0 long→long, 0 pending RELATED_VIDEO_MANUAL_ACTION_REQUIRED
 
 **Research/source enrichment tasks**
 
 - what-if-human-heat-tolerance-doubled-overnight (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
+- if-a-rogue-planet-vanished-right-now-what-would-change-first (C): VideoPotential 73 in experimental band 58–71; boilerplate 0.5
 - could-we-function-with-half-human-heat-tolerance (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
-- if-a-rogue-planet-vanished-right-now-what-would-change-first (C): VideoPotential 72 in experimental band 58–71; boilerplate 0.5
 - could-commercial-fusion-power-scale-worldwide-in-ten-years (C): VideoPotential 68 in experimental band 58–71; boilerplate 0.67
 - if-a-rogue-planet-moved-twice-as-close-when-would-earth-notice (C): VideoPotential 72 in experimental band 58–71; boilerplate 0.5
 
