@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-11-23T20:21:17.453Z",
-  "date": "2026-11-23",
+  "generatedAt": "2026-11-23T21:34:01.172Z",
+  "date": "2026-11-24",
   "channels": [
     {
       "channel": "failure-reconstructed",
       "name": "Failure Reconstructed",
-      "date": "2026-11-23",
+      "date": "2026-11-24",
       "todayTopic": null,
       "shortStatus": "not-due",
       "longStatus": "due-not-produced",
@@ -15,13 +15,13 @@
       "publishTime": null,
       "videoId": null,
       "analyticsHealth": "measured",
-      "schedulerHealth": "sla-missed-or-channel-disabled",
+      "schedulerHealth": "pending-before-deadline",
       "backlog": 339,
       "errors": 20,
       "inventory": {
         "channel": "failure-reconstructed",
         "channelName": "Failure Reconstructed",
-        "calculatedAt": "2026-11-23T20:21:17.478Z",
+        "calculatedAt": "2026-11-23T21:34:01.199Z",
         "qualifiedTopics": 388,
         "validatedCandidates": 0,
         "researchBacklog": 0,
@@ -840,9 +840,9 @@
       },
       "platform": {
         "queue": {
-          "depth": 2,
-          "oldestDate": "2026-11-23",
-          "oldestAgeDays": 0
+          "depth": 1,
+          "oldestDate": "2026-11-24",
+          "oldestAgeDays": -1
         },
         "analyticsFreshness": {
           "channel": "failure-reconstructed",
@@ -855,7 +855,7 @@
           "analytics.load": 1
         },
         "quota": {
-          "usedToday": 51,
+          "usedToday": 57,
           "budget": 9800,
           "project": "1012165386949"
         },
@@ -864,7 +864,7 @@
           "estimate": true,
           "note": "Estimate from the YouTube Analytics API; YouTube decides eligibility.",
           "subscribers": 32,
-          "subscribersAt": "2026-11-23T20:21:07.908Z",
+          "subscribersAt": "2026-11-23T21:33:50.957Z",
           "longWatchHours365": null,
           "shortsViews90": null,
           "percent": {
@@ -896,15 +896,15 @@
     {
       "channel": "impossible-brief",
       "name": "ImpossibleBrief",
-      "date": "2026-11-23",
-      "todayTopic": "what-if-the-atlantic-ocean-current-shut-down",
+      "date": "2026-11-24",
+      "todayTopic": "what-if-antarcticas-ice-sheet-melted",
       "shortStatus": "scheduled",
       "longStatus": "due-not-produced",
       "qualityScore": null,
       "qualityGate": "PUBLISH",
       "youtubeStatus": "scheduled",
-      "publishTime": "2026-11-23T18:00:00.000Z",
-      "videoId": "h3v8MvQS-ZU",
+      "publishTime": "2026-11-24T18:00:00.000Z",
+      "videoId": "in0IM-aEs3A",
       "analyticsHealth": "measured",
       "schedulerHealth": "healthy",
       "backlog": 468,
@@ -912,7 +912,7 @@
       "inventory": {
         "channel": "impossible-brief",
         "channelName": "ImpossibleBrief",
-        "calculatedAt": "2026-11-23T20:21:17.526Z",
+        "calculatedAt": "2026-11-23T21:34:01.249Z",
         "qualifiedTopics": 500,
         "validatedCandidates": 0,
         "researchBacklog": 0,
@@ -997,8 +997,8 @@
       "platform": {
         "queue": {
           "depth": 1,
-          "oldestDate": "2026-11-23",
-          "oldestAgeDays": 0
+          "oldestDate": "2026-11-24",
+          "oldestAgeDays": -1
         },
         "analyticsFreshness": {
           "channel": "impossible-brief",
@@ -1008,14 +1008,11 @@
           "errors": []
         },
         "ops24h": {
-          "publish.success": 3,
-          "publish.scheduled_verified": 3,
-          "growth.decision": 3,
           "analytics.load": 1,
           "publish.public": 1
         },
         "quota": {
-          "usedToday": 52,
+          "usedToday": 59,
           "budget": 9800,
           "project": "684098966511"
         },
@@ -1024,7 +1021,7 @@
           "estimate": true,
           "note": "Estimate from the YouTube Analytics API; YouTube decides eligibility.",
           "subscribers": 13,
-          "subscribersAt": "2026-11-23T20:21:14.035Z",
+          "subscribersAt": "2026-11-23T21:33:57.247Z",
           "longWatchHours365": null,
           "shortsViews90": null,
           "percent": {
