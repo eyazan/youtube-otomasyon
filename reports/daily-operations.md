@@ -1,6 +1,6 @@
 # Daily operations report
 
-Generated: 2026-11-23T13:07:04.847Z
+Generated: 2026-11-23T16:37:34.134Z
 
 Missing API-only metrics are reported as `unavailable`, never as zero.
 
@@ -16,15 +16,15 @@ Missing API-only metrics are reported as `unavailable`, never as zero.
 | Publish time | unavailable |
 | Video ID | unavailable |
 | Analytics | measured |
-| Scheduler | pending-before-deadline |
+| Scheduler | sla-missed-or-channel-disabled |
 | Ready topic backlog | 339 |
 | Errors/review/blocks | 20 |
 | TikTok today | NO_TODAY_VIDEO |
 | TikTok backlog | 38 |
 | Analytics warehouse | through 2026-11-21 (lag 2 d) |
-| Ops (24 h) | analytics.load 2, publish.public 1 |
+| Ops (24 h) | publish.public 1, analytics.load 1 |
 | Scheduler queue | 2 queued, oldest 2026-11-23 (0 d) |
-| API quota today | 7 / 9800 units (project 1012165386949) |
+| API quota today | 15 / 9800 units (project 1012165386949) |
 | YPP readiness (estimate) | subs 32/1,000 · long-form watch h (365 d) unavailable/4,000 · Shorts views (90 d) unavailable/10M |
 
 ## ImpossibleBrief
@@ -43,8 +43,8 @@ Missing API-only metrics are reported as `unavailable`, never as zero.
 | Ready topic backlog | 468 |
 | Errors/review/blocks | 6 |
 | Analytics warehouse | through 2026-11-21 (lag 2 d) |
-| Ops (24 h) | analytics.load 2, publish.success 3, publish.scheduled_verified 3, growth.decision 3 |
+| Ops (24 h) | publish.success 3, publish.scheduled_verified 3, growth.decision 3, analytics.load 1 |
 | Scheduler queue | 1 queued, oldest 2026-11-23 (0 d) |
-| API quota today | 8 / 9800 units (project 684098966511) |
+| API quota today | 0 / 9800 units (project channel:impossible-brief) |
 | YPP readiness (estimate) | subs 13/1,000 · long-form watch h (365 d) unavailable/4,000 · Shorts views (90 d) unavailable/10M |
 

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-23T13:07:04.847Z",
+  "generatedAt": "2026-11-23T16:37:34.134Z",
   "date": "2026-11-23",
   "channels": [
     {
@@ -15,13 +15,13 @@
       "publishTime": null,
       "videoId": null,
       "analyticsHealth": "measured",
-      "schedulerHealth": "pending-before-deadline",
+      "schedulerHealth": "sla-missed-or-channel-disabled",
       "backlog": 339,
       "errors": 20,
       "inventory": {
         "channel": "failure-reconstructed",
         "channelName": "Failure Reconstructed",
-        "calculatedAt": "2026-11-23T13:07:04.872Z",
+        "calculatedAt": "2026-11-23T16:37:34.179Z",
         "qualifiedTopics": 388,
         "validatedCandidates": 0,
         "researchBacklog": 0,
@@ -852,11 +852,11 @@
           "errors": []
         },
         "ops24h": {
-          "analytics.load": 2,
-          "publish.public": 1
+          "publish.public": 1,
+          "analytics.load": 1
         },
         "quota": {
-          "usedToday": 7,
+          "usedToday": 15,
           "budget": 9800,
           "project": "1012165386949"
         },
@@ -865,7 +865,7 @@
           "estimate": true,
           "note": "Estimate from the YouTube Analytics API; YouTube decides eligibility.",
           "subscribers": 32,
-          "subscribersAt": "2026-11-23T13:06:37.938Z",
+          "subscribersAt": "2026-11-23T16:37:23.114Z",
           "longWatchHours365": null,
           "shortsViews90": null,
           "percent": {
@@ -913,7 +913,7 @@
       "inventory": {
         "channel": "impossible-brief",
         "channelName": "ImpossibleBrief",
-        "calculatedAt": "2026-11-23T13:07:04.919Z",
+        "calculatedAt": "2026-11-23T16:37:34.260Z",
         "qualifiedTopics": 500,
         "validatedCandidates": 0,
         "researchBacklog": 0,
@@ -1009,15 +1009,15 @@
           "errors": []
         },
         "ops24h": {
-          "analytics.load": 2,
           "publish.success": 3,
           "publish.scheduled_verified": 3,
-          "growth.decision": 3
+          "growth.decision": 3,
+          "analytics.load": 1
         },
         "quota": {
-          "usedToday": 8,
+          "usedToday": 0,
           "budget": 9800,
-          "project": "684098966511"
+          "project": "channel:impossible-brief"
         },
         "monetization": {
           "channel": "impossible-brief",
