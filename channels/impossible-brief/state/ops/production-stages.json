@@ -2,67 +2,6 @@
   "channel": "impossible-brief",
   "runs": [
     {
-      "runId": "45067525344",
-      "attempt": "1",
-      "startedAt": "2026-11-22T20:38:59.656Z",
-      "publish": true,
-      "trigger": {
-        "event": "workflow_dispatch",
-        "correlationId": null
-      },
-      "targetDay": null,
-      "slug": "what-if-the-atlantic-ocean-current-shut-down",
-      "outcome": "UPLOADED",
-      "reason": null,
-      "stages": {
-        "RESEARCH": {
-          "status": "done",
-          "detail": "explicit topic",
-          "at": "2026-11-22T20:39:02.207Z"
-        },
-        "SCRIPT": {
-          "status": "done",
-          "detail": "pre-render readiness PUBLISH 88",
-          "at": "2026-11-22T20:39:02.247Z"
-        },
-        "ASSETS": {
-          "status": "done",
-          "at": "2026-11-22T20:39:36.422Z"
-        },
-        "NARRATION": {
-          "status": "done",
-          "detail": "Microsoft Edge neural TTS (claim-timed)",
-          "at": "2026-11-22T20:39:36.423Z"
-        },
-        "RENDER": {
-          "status": "done",
-          "at": "2026-11-22T20:39:36.423Z"
-        },
-        "QA": {
-          "status": "done",
-          "detail": "validations passed",
-          "at": "2026-11-22T20:39:36.555Z"
-        },
-        "UPLOAD": {
-          "status": "done",
-          "detail": "h3v8MvQS-ZU",
-          "at": "2026-11-22T20:39:40.829Z"
-        },
-        "SCHEDULE": {
-          "status": "done",
-          "detail": "2026-11-23T18:00:00.000Z",
-          "at": "2026-11-22T20:39:40.830Z"
-        },
-        "PUBLISH": {
-          "status": "scheduled",
-          "detail": "YouTube makes it public at 2026-11-23T18:00:00.000Z",
-          "at": "2026-11-22T20:39:40.831Z"
-        }
-      },
-      "finishedAt": "2026-11-22T20:39:40.831Z",
-      "videoId": "h3v8MvQS-ZU"
-    },
-    {
       "runId": "45067748458",
       "attempt": "1",
       "startedAt": "2026-11-22T20:41:19.790Z",
@@ -1381,6 +1320,50 @@
         }
       },
       "finishedAt": "2026-11-24T19:00:56.936Z"
+    },
+    {
+      "runId": "45471435953",
+      "attempt": "1",
+      "startedAt": "2026-11-24T19:34:22.233Z",
+      "publish": true,
+      "trigger": {
+        "event": "schedule",
+        "correlationId": null
+      },
+      "targetDay": null,
+      "slug": null,
+      "outcome": "NOT_DUE",
+      "reason": "today's Short already exists (what-if-antarcticas-ice-sheet-melted)",
+      "stages": {
+        "RESEARCH": {
+          "status": "not-reached"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "not-reached"
+        },
+        "QA": {
+          "status": "not-reached"
+        },
+        "UPLOAD": {
+          "status": "not-reached"
+        },
+        "SCHEDULE": {
+          "status": "not-reached"
+        },
+        "PUBLISH": {
+          "status": "not-reached"
+        }
+      },
+      "finishedAt": "2026-11-24T19:34:22.253Z"
     }
   ]
 }
