@@ -1,10 +1,10 @@
 # Growth dashboard
 
-Generated 2026-11-23T22:44:43.695Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-11-24T00:03:35.902Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
-**Shorts health** — last published 2026-11-22T18:00:00.000Z · 49 published · inventory A77/B139/C61/D59 · next: three-mile-island-1979 (EXPLORE (0.25): under-sampled cluster nuclear-accidents)
+**Shorts health** — last published 2026-11-22T18:00:00.000Z · 49 published · inventory A77/B139/C61/D59 · next: swissair-111-1998 (EXPLOIT (0.75): best A topic by SelectionScore)
 
 **Long-form health** — cycle 2026-W48: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W48 already QUALITY_BLOCKED)
 
@@ -41,11 +41,11 @@ Generated 2026-11-23T22:44:43.695Z. Per-channel baselines are computed separatel
 
 ## ImpossibleBrief
 
-**Shorts health** — last published 2026-11-25T18:00:00.000Z · 27 published · inventory A100/B26/C140/D206 · next: what-if-we-tried-to-drill-through-the-earth (EXPLOIT (0.75): best A topic by SelectionScore)
+**Shorts health** — last published 2026-11-25T18:00:00.000Z · 27 published · inventory A99/B27/C140/D206 · next: what-if-we-tried-to-drill-through-the-earth (EXPLOIT (0.75): best A topic by SelectionScore)
 
 **Long-form health** — cycle 2026-W48: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W48 already QUALITY_BLOCKED)
 
-**Long-form backlog** — could-earth-survive-one-day-without-earth-s-magnetic-field 84/A, what-if-we-mined-a-metal-asteroid 84/A, what-if-the-ozone-hole-never-closed 83/A, what-if-yellowstone-erupted-again 83/A, what-if-the-tunguska-blast-happened-over-a-city 83/A
+**Long-form backlog** — what-if-we-mined-a-metal-asteroid 84/A, what-if-the-ozone-hole-never-closed 83/A, what-if-the-tunguska-blast-happened-over-a-city 83/A, could-earth-survive-one-day-without-earth-s-magnetic-field 83/A, what-if-the-permafrost-thawed 83/A
 
 **Content clusters** — 7 · integrity OK
 
@@ -58,7 +58,7 @@ Generated 2026-11-23T22:44:43.695Z. Per-channel baselines are computed separatel
 **Research/source enrichment tasks**
 
 - what-if-human-heat-tolerance-doubled-overnight (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
-- if-a-rogue-planet-vanished-right-now-what-would-change-first (C): VideoPotential 73 in experimental band 58–71; boilerplate 0.5
+- if-a-rogue-planet-vanished-right-now-what-would-change-first (C): VideoPotential 72 in experimental band 58–71; boilerplate 0.5
 - could-we-function-with-half-human-heat-tolerance (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
 - could-commercial-fusion-power-scale-worldwide-in-ten-years (C): VideoPotential 68 in experimental band 58–71; boilerplate 0.67
 - if-a-rogue-planet-moved-twice-as-close-when-would-earth-notice (C): VideoPotential 72 in experimental band 58–71; boilerplate 0.5
