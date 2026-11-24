@@ -2,62 +2,6 @@
   "channel": "failure-reconstructed",
   "runs": [
     {
-      "runId": "44996605537",
-      "attempt": "1",
-      "startedAt": "2026-11-22T07:06:08.248Z",
-      "publish": true,
-      "trigger": {
-        "event": "repository_dispatch",
-        "correlationId": "production-1-20261122T070503Z-e26f9f40"
-      },
-      "targetDay": "2026-11-22",
-      "slug": "sewol-2014",
-      "outcome": "UPLOADED",
-      "reason": "premium FR-sewol-2014 WuutOhaDkZI",
-      "stages": {
-        "RESEARCH": {
-          "status": "done",
-          "detail": "FR-sewol-2014",
-          "at": "2026-11-22T07:08:40.482Z"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "done",
-          "detail": "premium final",
-          "at": "2026-11-22T07:08:40.486Z"
-        },
-        "QA": {
-          "status": "done",
-          "detail": "objective PASS, publish gate PUBLISH_APPROVED",
-          "at": "2026-11-22T07:08:40.489Z"
-        },
-        "UPLOAD": {
-          "status": "done",
-          "detail": "WuutOhaDkZI",
-          "at": "2026-11-22T07:08:40.491Z"
-        },
-        "SCHEDULE": {
-          "status": "done",
-          "detail": "2026-11-22T18:00:00.000Z",
-          "at": "2026-11-22T07:08:40.491Z"
-        },
-        "PUBLISH": {
-          "status": "scheduled",
-          "detail": "YouTube makes it public at 2026-11-22T18:00:00.000Z",
-          "at": "2026-11-22T07:08:40.492Z"
-        }
-      },
-      "finishedAt": "2026-11-22T07:08:40.492Z"
-    },
-    {
       "runId": "45025604995",
       "attempt": "1",
       "startedAt": "2026-11-22T13:06:12.674Z",
@@ -1338,6 +1282,50 @@
         }
       },
       "finishedAt": "2026-11-24T01:00:38.992Z"
+    },
+    {
+      "runId": "45306957592",
+      "attempt": "1",
+      "startedAt": "2026-11-24T01:43:02.054Z",
+      "publish": true,
+      "trigger": {
+        "event": "schedule",
+        "correlationId": null
+      },
+      "targetDay": null,
+      "slug": null,
+      "outcome": "NOT_DUE",
+      "reason": "before production slot 09:00 Europe/Istanbul",
+      "stages": {
+        "RESEARCH": {
+          "status": "not-reached"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "not-reached"
+        },
+        "QA": {
+          "status": "not-reached"
+        },
+        "UPLOAD": {
+          "status": "not-reached"
+        },
+        "SCHEDULE": {
+          "status": "not-reached"
+        },
+        "PUBLISH": {
+          "status": "not-reached"
+        }
+      },
+      "finishedAt": "2026-11-24T01:43:02.070Z"
     }
   ]
 }
