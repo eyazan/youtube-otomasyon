@@ -1,6 +1,6 @@
 # Growth dashboard
 
-Generated 2026-11-24T18:59:14.437Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-11-24T19:01:13.709Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
@@ -51,7 +51,7 @@ Generated 2026-11-24T18:59:14.437Z. Per-channel baselines are computed separatel
 
 **Growth / subscriber conversion** — tracked 26 · subs/1k Shorts 0 · subs/1k long n/a
 
-**Learning** — Shorts adaptive (n=23, adopted 0) · Long-form heuristics-only (n=0)
+**Learning** — Shorts adaptive (n=24, adopted 0) · Long-form heuristics-only (n=0)
 
 **Short → Long funnel** — 0 link(s), 0 long→long, 0 pending RELATED_VIDEO_MANUAL_ACTION_REQUIRED
 
@@ -60,8 +60,8 @@ Generated 2026-11-24T18:59:14.437Z. Per-channel baselines are computed separatel
 - what-if-human-heat-tolerance-doubled-overnight (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
 - if-a-rogue-planet-vanished-right-now-what-would-change-first (C): VideoPotential 72 in experimental band 58–71; boilerplate 0.5
 - could-we-function-with-half-human-heat-tolerance (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
-- could-commercial-fusion-power-scale-worldwide-in-ten-years (C): VideoPotential 68 in experimental band 58–71; boilerplate 0.67
 - if-a-rogue-planet-moved-twice-as-close-when-would-earth-notice (C): VideoPotential 72 in experimental band 58–71; boilerplate 0.5
+- could-commercial-fusion-power-scale-worldwide-in-ten-years (C): VideoPotential 68 in experimental band 58–71; boilerplate 0.67
 
 **Recent alerts**
 
