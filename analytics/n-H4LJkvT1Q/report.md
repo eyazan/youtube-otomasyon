@@ -8,10 +8,11 @@ https://youtu.be/n-H4LJkvT1Q
 |---|---|---:|---:|---:|---:|---:|---|
 | 1d | 2026-11-18 | 50 | 0 | 1 | — | — |  |
 | 3d | 2026-11-20 | 74 | 0 | 1 | 46.16 | 0 | Shorts feed 60%, Search 37% |
+| 7d | 2026-11-24 | 78 | 0 | 1 | 45.25 | 0 | Search 53%, Shorts feed 45% |
 
-## Diagnosis at 3d
+## Diagnosis at 7d
 
-- **INSUFFICIENT_DATA** (high) — 74 views after 3 days — too early/small for rate-based conclusions.
+- **INSUFFICIENT_DATA** (high) — 78 views after 7 days — too early/small for rate-based conclusions.
 
 ## Suggested interventions
 
@@ -19,9 +20,9 @@ https://youtu.be/n-H4LJkvT1Q
 
 ## First major observed retention drop
 
-- Timestamp: 15s; magnitude: 25 percentage points.
-- Active sentence: Its design had been changed to save money.
+- Timestamp: 3s; magnitude: 15 percentage points.
+- Active sentence: A dam above Williamsburg, Massachusetts, burst one morning.
 - Visual type: REAL ARCHIVAL IMAGE
 - This is an observed alignment, not proof that the sentence or visual caused the drop.
 
-Views gained between 1d and 3d: 24.
+Views gained between 3d and 7d: 4.
