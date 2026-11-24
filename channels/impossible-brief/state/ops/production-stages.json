@@ -2,67 +2,6 @@
   "channel": "impossible-brief",
   "runs": [
     {
-      "runId": "45068521477",
-      "attempt": "1",
-      "startedAt": "2026-11-22T20:49:48.705Z",
-      "publish": true,
-      "trigger": {
-        "event": "workflow_dispatch",
-        "correlationId": null
-      },
-      "targetDay": null,
-      "slug": "what-if-it-never-rained-again",
-      "outcome": "UPLOADED",
-      "reason": null,
-      "stages": {
-        "RESEARCH": {
-          "status": "done",
-          "detail": "explicit topic",
-          "at": "2026-11-22T20:49:51.367Z"
-        },
-        "SCRIPT": {
-          "status": "done",
-          "detail": "pre-render readiness PUBLISH 87",
-          "at": "2026-11-22T20:49:51.368Z"
-        },
-        "ASSETS": {
-          "status": "done",
-          "at": "2026-11-22T20:51:08.227Z"
-        },
-        "NARRATION": {
-          "status": "done",
-          "detail": "Microsoft Edge neural TTS (claim-timed)",
-          "at": "2026-11-22T20:51:08.227Z"
-        },
-        "RENDER": {
-          "status": "done",
-          "at": "2026-11-22T20:51:08.228Z"
-        },
-        "QA": {
-          "status": "done",
-          "detail": "validations passed",
-          "at": "2026-11-22T20:51:08.380Z"
-        },
-        "UPLOAD": {
-          "status": "done",
-          "detail": "UQmcPc4keRo",
-          "at": "2026-11-22T20:51:12.864Z"
-        },
-        "SCHEDULE": {
-          "status": "done",
-          "detail": "2026-11-25T18:00:00.000Z",
-          "at": "2026-11-22T20:51:12.864Z"
-        },
-        "PUBLISH": {
-          "status": "scheduled",
-          "detail": "YouTube makes it public at 2026-11-25T18:00:00.000Z",
-          "at": "2026-11-22T20:51:12.865Z"
-        }
-      },
-      "finishedAt": "2026-11-22T20:51:12.866Z",
-      "videoId": "UQmcPc4keRo"
-    },
-    {
       "runId": "45070215160",
       "attempt": "1",
       "startedAt": "2026-11-22T21:08:02.952Z",
@@ -1337,6 +1276,50 @@
         }
       },
       "finishedAt": "2026-11-24T21:22:45.195Z"
+    },
+    {
+      "runId": "45502377730",
+      "attempt": "1",
+      "startedAt": "2026-11-24T22:37:07.600Z",
+      "publish": true,
+      "trigger": {
+        "event": "schedule",
+        "correlationId": null
+      },
+      "targetDay": null,
+      "slug": null,
+      "outcome": "NOT_DUE",
+      "reason": "today's Short already exists (what-if-it-never-rained-again)",
+      "stages": {
+        "RESEARCH": {
+          "status": "not-reached"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "not-reached"
+        },
+        "QA": {
+          "status": "not-reached"
+        },
+        "UPLOAD": {
+          "status": "not-reached"
+        },
+        "SCHEDULE": {
+          "status": "not-reached"
+        },
+        "PUBLISH": {
+          "status": "not-reached"
+        }
+      },
+      "finishedAt": "2026-11-24T22:37:07.613Z"
     }
   ]
 }
