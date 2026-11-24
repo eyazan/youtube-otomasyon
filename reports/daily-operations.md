@@ -1,6 +1,6 @@
 # Daily operations report
 
-Generated: 2026-11-24T20:42:36.466Z
+Generated: 2026-11-24T21:23:02.451Z
 
 Missing API-only metrics are reported as `unavailable`, never as zero.
 
@@ -16,35 +16,35 @@ Missing API-only metrics are reported as `unavailable`, never as zero.
 | Publish time | unavailable |
 | Video ID | unavailable |
 | Analytics | measured |
-| Scheduler | sla-missed-or-channel-disabled |
+| Scheduler | pending-before-deadline |
 | Ready topic backlog | 339 |
 | Errors/review/blocks | 20 |
 | TikTok today | NO_TODAY_VIDEO |
 | TikTok backlog | 38 |
 | Analytics warehouse | through 2026-11-22 (lag 2 d) |
 | Ops (24 h) | analytics.load 1 |
-| Scheduler queue | 2 queued, oldest 2026-11-24 (0 d) |
-| API quota today | 63 / 9800 units (project 1012165386949) |
+| Scheduler queue | 1 queued, oldest 2026-11-25 (-1 d) |
+| API quota today | 69 / 9800 units (project 1012165386949) |
 | YPP readiness (estimate) | subs 32/1,000 · long-form watch h (365 d) unavailable/4,000 · Shorts views (90 d) unavailable/10M |
 
 ## ImpossibleBrief
 
 | Signal | Status |
 |---|---|
-| Today topic | what-if-antarcticas-ice-sheet-melted |
+| Today topic | what-if-it-never-rained-again |
 | Short | scheduled |
 | Long | due-not-produced |
 | Quality | PUBLISH / unavailable |
 | YouTube | scheduled |
-| Publish time | 2026-11-24T18:00:00.000Z |
-| Video ID | in0IM-aEs3A |
+| Publish time | 2026-11-25T18:00:00.000Z |
+| Video ID | UQmcPc4keRo |
 | Analytics | measured |
 | Scheduler | healthy |
 | Ready topic backlog | 468 |
 | Errors/review/blocks | 6 |
 | Analytics warehouse | through 2026-11-22 (lag 2 d) |
 | Ops (24 h) | analytics.load 1, publish.public 1 |
-| Scheduler queue | 1 queued, oldest 2026-11-24 (0 d) |
-| API quota today | 66 / 9800 units (project 684098966511) |
+| Scheduler queue | 1 queued, oldest 2026-11-25 (-1 d) |
+| API quota today | 73 / 9800 units (project 684098966511) |
 | YPP readiness (estimate) | subs 14/1,000 · long-form watch h (365 d) unavailable/4,000 · Shorts views (90 d) unavailable/10M |
 
