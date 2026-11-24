@@ -2,60 +2,6 @@
   "channel": "impossible-brief",
   "runs": [
     {
-      "runId": "45067748458",
-      "attempt": "1",
-      "startedAt": "2026-11-22T20:41:19.790Z",
-      "publish": true,
-      "trigger": {
-        "event": "workflow_dispatch",
-        "correlationId": null
-      },
-      "targetDay": null,
-      "slug": "what-if-the-1859-solar-superstorm-hit-today",
-      "outcome": "BLOCKED",
-      "reason": "what-if-the-1859-solar-superstorm-hit-today: validations growthReadiness",
-      "stages": {
-        "RESEARCH": {
-          "status": "done",
-          "detail": "explicit topic",
-          "at": "2026-11-22T20:41:22.183Z"
-        },
-        "SCRIPT": {
-          "status": "done",
-          "detail": "pre-render readiness BLOCK 90",
-          "at": "2026-11-22T20:41:22.184Z"
-        },
-        "ASSETS": {
-          "status": "done",
-          "at": "2026-11-22T20:42:28.622Z"
-        },
-        "NARRATION": {
-          "status": "done",
-          "detail": "Microsoft Edge neural TTS (claim-timed)",
-          "at": "2026-11-22T20:42:28.622Z"
-        },
-        "RENDER": {
-          "status": "done",
-          "at": "2026-11-22T20:42:28.623Z"
-        },
-        "QA": {
-          "status": "failed",
-          "detail": "growthReadiness",
-          "at": "2026-11-22T20:42:28.767Z"
-        },
-        "UPLOAD": {
-          "status": "not-reached"
-        },
-        "SCHEDULE": {
-          "status": "not-reached"
-        },
-        "PUBLISH": {
-          "status": "not-reached"
-        }
-      },
-      "finishedAt": "2026-11-22T20:42:28.768Z"
-    },
-    {
       "runId": "45068070924",
       "attempt": "1",
       "startedAt": "2026-11-22T20:44:42.231Z",
@@ -1364,6 +1310,50 @@
         }
       },
       "finishedAt": "2026-11-24T19:34:22.253Z"
+    },
+    {
+      "runId": "45478707694",
+      "attempt": "1",
+      "startedAt": "2026-11-24T20:15:31.788Z",
+      "publish": true,
+      "trigger": {
+        "event": "schedule",
+        "correlationId": null
+      },
+      "targetDay": null,
+      "slug": null,
+      "outcome": "NOT_DUE",
+      "reason": "today's Short already exists (what-if-antarcticas-ice-sheet-melted)",
+      "stages": {
+        "RESEARCH": {
+          "status": "not-reached"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "not-reached"
+        },
+        "QA": {
+          "status": "not-reached"
+        },
+        "UPLOAD": {
+          "status": "not-reached"
+        },
+        "SCHEDULE": {
+          "status": "not-reached"
+        },
+        "PUBLISH": {
+          "status": "not-reached"
+        }
+      },
+      "finishedAt": "2026-11-24T20:15:31.808Z"
     }
   ]
 }
