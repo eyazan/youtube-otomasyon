@@ -1,6 +1,6 @@
 {
-  "at": "2026-11-25T13:07:22.095Z",
-  "runId": "45620111172",
+  "at": "2026-11-25T16:36:48.660Z",
+  "runId": "45655521900",
   "rows": [
     {
       "channel": "failure-reconstructed",
@@ -9,64 +9,19 @@
       "scheduled": false,
       "publication": "NOT_SCHEDULED",
       "publishAt": null,
-      "reason": "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)",
+      "reason": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [55 unused A topic(s), best viral score 74 < minimum 75; 9 topic(s) at the minimum are bucket B/C, not selectable]",
       "slug": null,
       "videoId": null,
       "targetDay": "2026-11-25",
       "trigger": {
         "event": "repository_dispatch",
-        "correlationId": "production-2-20261125T130540Z-198efdd0"
+        "correlationId": null
       },
       "stages": {
         "RESEARCH": {
-          "status": "skipped",
-          "detail": "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)",
-          "at": "2026-11-25T13:06:54.186Z"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "not-reached"
-        },
-        "QA": {
-          "status": "not-reached"
-        },
-        "UPLOAD": {
-          "status": "not-reached"
-        },
-        "SCHEDULE": {
-          "status": "not-reached"
-        },
-        "PUBLISH": {
-          "status": "not-reached"
-        }
-      }
-    },
-    {
-      "channel": "impossible-brief",
-      "outcome": "NOT_DUE",
-      "category": "NOT_DUE",
-      "scheduled": false,
-      "publication": "NOT_SCHEDULED",
-      "publishAt": null,
-      "reason": "today's Short already exists (what-if-it-never-rained-again)",
-      "slug": null,
-      "videoId": null,
-      "targetDay": null,
-      "trigger": {
-        "event": "repository_dispatch",
-        "correlationId": "production-2-20261125T130540Z-198efdd0"
-      },
-      "stages": {
-        "RESEARCH": {
-          "status": "not-reached"
+          "status": "failed",
+          "detail": "NO_QUALIFIED_TOPIC: 0 A/B, 0 C (C fallback disabled); skipping is better than publishing weak content [55 unused A topic(s), best viral score 74 < minimum 75; 9 topic(s) at the minimum are bucket B/C, not selectable]",
+          "at": "2026-11-25T16:36:48.609Z"
         },
         "SCRIPT": {
           "status": "not-reached"

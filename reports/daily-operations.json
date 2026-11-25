@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-25T13:07:21.960Z",
+  "generatedAt": "2026-11-25T16:37:00.622Z",
   "date": "2026-11-25",
   "channels": [
     {
@@ -15,13 +15,13 @@
       "publishTime": null,
       "videoId": null,
       "analyticsHealth": "measured",
-      "schedulerHealth": "pending-before-deadline",
+      "schedulerHealth": "sla-missed-or-channel-disabled",
       "backlog": 339,
       "errors": 20,
       "inventory": {
         "channel": "failure-reconstructed",
         "channelName": "Failure Reconstructed",
-        "calculatedAt": "2026-11-25T13:07:21.990Z",
+        "calculatedAt": "2026-11-25T16:37:00.664Z",
         "qualifiedTopics": 388,
         "validatedCandidates": 0,
         "researchBacklog": 0,
@@ -855,7 +855,7 @@
           "analytics.load": 1
         },
         "quota": {
-          "usedToday": 7,
+          "usedToday": 15,
           "budget": 9800,
           "project": "1012165386949"
         },
@@ -864,7 +864,7 @@
           "estimate": true,
           "note": "Estimate from the YouTube Analytics API; YouTube decides eligibility.",
           "subscribers": 32,
-          "subscribersAt": "2026-11-25T13:06:56.927Z",
+          "subscribersAt": "2026-11-25T16:36:49.170Z",
           "longWatchHours365": null,
           "shortsViews90": null,
           "percent": {
@@ -912,7 +912,7 @@
       "inventory": {
         "channel": "impossible-brief",
         "channelName": "ImpossibleBrief",
-        "calculatedAt": "2026-11-25T13:07:22.046Z",
+        "calculatedAt": "2026-11-25T16:37:00.746Z",
         "qualifiedTopics": 500,
         "validatedCandidates": 0,
         "researchBacklog": 0,
@@ -1008,13 +1008,13 @@
           "errors": []
         },
         "ops24h": {
-          "analytics.load": 2,
-          "publish.public": 1
+          "publish.public": 1,
+          "analytics.load": 1
         },
         "quota": {
-          "usedToday": 8,
+          "usedToday": 0,
           "budget": 9800,
-          "project": "684098966511"
+          "project": "channel:impossible-brief"
         },
         "monetization": {
           "channel": "impossible-brief",
