@@ -1,6 +1,6 @@
 # Growth dashboard
 
-Generated 2026-11-25T18:42:46.395Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-11-25T19:27:46.938Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
@@ -41,7 +41,7 @@ Generated 2026-11-25T18:42:46.395Z. Per-channel baselines are computed separatel
 
 ## ImpossibleBrief
 
-**Shorts health** — last published 2026-11-25T18:00:00.000Z · 27 published · inventory A100/B26/C140/D206 · next: what-if-we-tried-to-drill-through-the-earth (EXPLOIT (0.75): best A topic by SelectionScore)
+**Shorts health** — last published 2026-11-25T18:00:00.000Z · 27 published · inventory A103/B23/C140/D206 · next: what-if-we-tried-to-drill-through-the-earth (EXPLOIT (0.75): best A topic by SelectionScore)
 
 **Long-form health** — cycle 2026-W48: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W48 already QUALITY_BLOCKED)
 
@@ -51,7 +51,7 @@ Generated 2026-11-25T18:42:46.395Z. Per-channel baselines are computed separatel
 
 **Growth / subscriber conversion** — tracked 26 · subs/1k Shorts 0 · subs/1k long n/a
 
-**Learning** — Shorts adaptive (n=24, adopted 0) · Long-form heuristics-only (n=0)
+**Learning** — Shorts adaptive (n=25, adopted 0) · Long-form heuristics-only (n=0)
 
 **Short → Long funnel** — 0 link(s), 0 long→long, 0 pending RELATED_VIDEO_MANUAL_ACTION_REQUIRED
 
