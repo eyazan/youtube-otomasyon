@@ -2,50 +2,6 @@
   "channel": "impossible-brief",
   "runs": [
     {
-      "runId": "45461354373",
-      "attempt": "1",
-      "startedAt": "2026-11-24T18:37:33.532Z",
-      "publish": true,
-      "trigger": {
-        "event": "schedule",
-        "correlationId": null
-      },
-      "targetDay": null,
-      "slug": null,
-      "outcome": "NOT_DUE",
-      "reason": "today's Short already exists (what-if-antarcticas-ice-sheet-melted)",
-      "stages": {
-        "RESEARCH": {
-          "status": "not-reached"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "not-reached"
-        },
-        "QA": {
-          "status": "not-reached"
-        },
-        "UPLOAD": {
-          "status": "not-reached"
-        },
-        "SCHEDULE": {
-          "status": "not-reached"
-        },
-        "PUBLISH": {
-          "status": "not-reached"
-        }
-      },
-      "finishedAt": "2026-11-24T18:37:33.551Z"
-    },
-    {
       "runId": "45465089171",
       "attempt": "1",
       "startedAt": "2026-11-24T18:59:05.181Z",
@@ -1320,6 +1276,50 @@
         }
       },
       "finishedAt": "2026-11-26T13:09:21.141Z"
+    },
+    {
+      "runId": "45860165130",
+      "attempt": "1",
+      "startedAt": "2026-11-26T16:39:25.366Z",
+      "publish": true,
+      "trigger": {
+        "event": "repository_dispatch",
+        "correlationId": null
+      },
+      "targetDay": "2026-11-26",
+      "slug": null,
+      "outcome": "BLOCKED",
+      "reason": "LEGACY_UPLOAD_RETIRED: this channel publishes premium Shorts only (premium publish path); the legacy renderer does not run with PUBLISH=1",
+      "stages": {
+        "RESEARCH": {
+          "status": "not-reached"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "not-reached"
+        },
+        "QA": {
+          "status": "not-reached"
+        },
+        "UPLOAD": {
+          "status": "not-reached"
+        },
+        "SCHEDULE": {
+          "status": "not-reached"
+        },
+        "PUBLISH": {
+          "status": "not-reached"
+        }
+      },
+      "finishedAt": "2026-11-26T16:39:27.286Z"
     }
   ]
 }
