@@ -7,11 +7,21 @@ https://youtu.be/in0IM-aEs3A
 | Checkpoint | Collected | Views | Likes | Comments | Avg % viewed | Subs (net) | Top traffic |
 |---|---|---:|---:|---:|---:|---:|---|
 | 1d | 2026-11-25 | 761 | 8 | 1 | — | — |  |
+| 3d | 2026-11-27 | 895 | 9 | 1 | 82.99 | 1 | Shorts feed 96%, Search 3% |
 
-## Diagnosis at 1d
+## Diagnosis at 3d
 
-- **INSUFFICIENT_DATA** (high) — 761 views after 1 days — too early/small for rate-based conclusions.
+- **HEALTHY** (low) — No problem pattern detected with available data.
 
 ## Suggested interventions
 
-- INSUFFICIENT DATA → no intervention; wait for the next checkpoint.
+- HEALTHY → no action.
+
+## First major observed retention drop
+
+- Timestamp: 7s; magnitude: 10 percentage points.
+- Active sentence: ice thickness cross-section
+- Visual type: AI-GENERATED VISUAL
+- This is an observed alignment, not proof that the sentence or visual caused the drop.
+
+Views gained between 1d and 3d: 134.

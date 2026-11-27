@@ -10,13 +10,21 @@ https://youtu.be/QLSnrXyCJgw
 | 3d | 2026-10-31 | 916 | 11 | 1 | 78.97 | 0 | Shorts feed 97%, Search 1% |
 | 7d | 2026-11-04 | 915 | 11 | 1 | 110.76000000000002 | 0 | Shorts feed 97%, Search 2% |
 | 14d | 2026-11-11 | 920 | 11 | 1 | — | — | unavailable |
+| 30d | 2026-11-27 | 923 | 11 | 1 | 111.11999999999999 | 0 | Shorts feed 96%, Search 3% |
 
-## Diagnosis at 14d
+## Diagnosis at 30d
 
-- **OUTPERFORMER** (medium) — 920 views vs channel median 358 (n=43 videos).
+- **OUTPERFORMER** (medium) — 923 views vs channel median 308 (n=47 videos).
 
 ## Suggested interventions
 
 - OUTPERFORMER → keep as is; reuse its subject/hook shape in the next episode.
 
-Views gained between 7d and 14d: 5.
+## First major observed retention drop
+
+- Timestamp: 5s; magnitude: 16 percentage points.
+- Active sentence: Suddenly, it rolled faster and faster, close to making the crew black out.
+- Visual type: REAL ARCHIVAL IMAGE
+- This is an observed alignment, not proof that the sentence or visual caused the drop.
+
+Views gained between 14d and 30d: 3.

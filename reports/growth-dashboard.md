@@ -1,10 +1,10 @@
 # Growth dashboard
 
-Generated 2026-11-27T17:36:09.549Z. Per-channel baselines are computed separately and never blended.
+Generated 2026-11-27T18:18:14.079Z. Per-channel baselines are computed separately and never blended.
 
 ## Failure Reconstructed
 
-**Shorts health** — last published 2026-11-22T18:00:00.000Z · 49 published · inventory A77/B139/C61/D59 · next: swissair-111-1998 (EXPLOIT (0.75): best A topic by SelectionScore)
+**Shorts health** — last published 2026-11-22T18:00:00.000Z · 49 published · inventory A76/B141/C60/D59 · next: swissair-111-1998 (EXPLOIT (0.75): best A topic by SelectionScore)
 
 **Long-form health** — cycle 2026-W48: QUALITY_BLOCKED — no candidate passed the long-form quality gate; cadence does not override quality · episodes 0 · lane not due (cycle 2026-W48 already QUALITY_BLOCKED)
 
@@ -22,9 +22,9 @@ Generated 2026-11-27T17:36:09.549Z. Per-channel baselines are computed separatel
 
 - apollo-1-1967 (C): VideoPotential 87 in experimental band 58–71; sources 41 < 62
 - munich-1958 (C): VideoPotential 85 in experimental band 58–71; sources 41 < 62
-- castle-bravo-1954 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
 - skylab-1973 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
-- boston-molasses-1919 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
+- castle-bravo-1954 (C): VideoPotential 84 in experimental band 58–71; sources 41 < 62
+- vanguard-1957 (C): VideoPotential 83 in experimental band 58–71; sources 41 < 62
 
 **Recent alerts**
 
@@ -58,10 +58,10 @@ Generated 2026-11-27T17:36:09.549Z. Per-channel baselines are computed separatel
 **Research/source enrichment tasks**
 
 - what-if-human-heat-tolerance-doubled-overnight (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
-- if-a-rogue-planet-vanished-right-now-what-would-change-first (C): VideoPotential 73 in experimental band 58–71; boilerplate 0.5
 - could-we-function-with-half-human-heat-tolerance (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
+- if-a-rogue-planet-vanished-right-now-what-would-change-first (C): VideoPotential 73 in experimental band 58–71; boilerplate 0.5
 - if-a-rogue-planet-moved-twice-as-close-when-would-earth-notice (C): VideoPotential 72 in experimental band 58–71; boilerplate 0.5
-- could-commercial-fusion-power-scale-worldwide-in-ten-years (C): VideoPotential 68 in experimental band 58–71; boilerplate 0.67
+- what-if-human-muscle-efficiency-doubled-overnight (C): VideoPotential 71 in experimental band 58–71; boilerplate 0.5
 
 **Recent alerts**
 
