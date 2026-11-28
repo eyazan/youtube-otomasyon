@@ -2,50 +2,6 @@
   "channel": "failure-reconstructed",
   "runs": [
     {
-      "runId": "45868293457",
-      "attempt": "1",
-      "startedAt": "2026-11-26T17:31:47.198Z",
-      "publish": true,
-      "trigger": {
-        "event": "schedule",
-        "correlationId": null
-      },
-      "targetDay": null,
-      "slug": null,
-      "outcome": "NOT_DUE",
-      "reason": "production window closed at 21:00 Europe/Istanbul minus 60 min",
-      "stages": {
-        "RESEARCH": {
-          "status": "not-reached"
-        },
-        "SCRIPT": {
-          "status": "not-reached"
-        },
-        "ASSETS": {
-          "status": "not-reached"
-        },
-        "NARRATION": {
-          "status": "not-reached"
-        },
-        "RENDER": {
-          "status": "not-reached"
-        },
-        "QA": {
-          "status": "not-reached"
-        },
-        "UPLOAD": {
-          "status": "not-reached"
-        },
-        "SCHEDULE": {
-          "status": "not-reached"
-        },
-        "PUBLISH": {
-          "status": "not-reached"
-        }
-      },
-      "finishedAt": "2026-11-26T17:31:47.212Z"
-    },
-    {
       "runId": "45870640438",
       "attempt": "1",
       "startedAt": "2026-11-26T17:48:11.406Z",
@@ -1332,6 +1288,52 @@
         }
       },
       "finishedAt": "2026-11-28T07:06:37.083Z"
+    },
+    {
+      "runId": "46147868500",
+      "attempt": "1",
+      "startedAt": "2026-11-28T13:06:58.734Z",
+      "publish": true,
+      "trigger": {
+        "event": "repository_dispatch",
+        "correlationId": "production-2-20261128T130528Z-3eb3f963"
+      },
+      "targetDay": "2026-11-28",
+      "slug": null,
+      "outcome": "NO_TOPIC",
+      "reason": "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)",
+      "stages": {
+        "RESEARCH": {
+          "status": "skipped",
+          "detail": "publication policy signed, but no qualified topic (research below the channel standard, published or reserved)",
+          "at": "2026-11-28T13:07:00.894Z"
+        },
+        "SCRIPT": {
+          "status": "not-reached"
+        },
+        "ASSETS": {
+          "status": "not-reached"
+        },
+        "NARRATION": {
+          "status": "not-reached"
+        },
+        "RENDER": {
+          "status": "not-reached"
+        },
+        "QA": {
+          "status": "not-reached"
+        },
+        "UPLOAD": {
+          "status": "not-reached"
+        },
+        "SCHEDULE": {
+          "status": "not-reached"
+        },
+        "PUBLISH": {
+          "status": "not-reached"
+        }
+      },
+      "finishedAt": "2026-11-28T13:07:00.894Z"
     }
   ]
 }
